@@ -1,0 +1,103 @@
+---
+title: "How to Get More FPS in Minecraft (2026 Guide)"
+description: "Two free Fabric mods do most of the work: Sodium for rendering and Lithium for game logic. Here is the setup, the settings that matter, and the Opal compatibility note."
+excerpt: "The fastest FPS win in Minecraft is two mods plus three settings. Here is the whole setup, and the one mod to skip if you run Opal."
+date: "2026-05-12"
+lastUpdated: "2026-06-03"
+category: "Guides"
+author: "Opal Team"
+faqs:
+  - q: "What gives the biggest FPS boost in Minecraft?"
+    a: "Sodium. It rewrites the renderer and is the single largest gain for most setups, often on its own."
+  - q: "Do I need both Sodium and Lithium?"
+    a: "They fix different things. Sodium handles rendering, Lithium handles game logic. Run both for the smoothest result, unless you run Opal, which is not compatible with Lithium. In that case use Sodium and skip Lithium."
+  - q: "Is Lithium compatible with Opal?"
+    a: "No. Lithium is not compatible with Opal. If you run Opal, pair it with Sodium and leave Lithium out."
+  - q: "Do these mods work with shaders?"
+    a: "Yes. Add Iris for shaders; it is built to run with Sodium so you keep most of the framerate. See the shader install guide."
+---
+
+The biggest FPS win in Minecraft is [Sodium](https://modrinth.com/mod/sodium), a free [Fabric](https://fabricmc.net) mod that rewrites rendering, and [Lithium](https://modrinth.com/mod/lithium), which speeds up game logic. Together they often double frame rates on weaker machines. One heads-up up front: Lithium is not compatible with Opal, so if you run Opal, lean on Sodium instead.
+
+<KeyTakeaways>
+
+- Sodium is the single biggest FPS win. Install it first.
+- Lithium smooths game logic, but it is not compatible with Opal. Skip it if you run Opal.
+- Three vanilla settings (render distance, VSync, graphics) finish the job.
+- Sodium gives you headroom; that is what makes room for a client like Opal.
+
+</KeyTakeaways>
+
+## Install the mods
+
+<Steps>
+
+<Step number={1} title="Install Sodium">
+[Sodium](https://modrinth.com/mod/sodium) replaces Minecraft's renderer with a far faster one, the biggest jump on its own. Put the [Fabric](https://fabricmc.net) loader and the [Fabric API](https://modrinth.com/mod/fabric-api) in place first, then drop Sodium in your `mods` folder. Sodium works fine alongside Opal.
+</Step>
+
+<Step number={2} title="Add Lithium (if you are not running Opal)">
+[Lithium](https://modrinth.com/mod/lithium) optimizes mob AI, physics, and block ticking with no visual change. It is a great add on a vanilla-plus setup, but it does not play nicely with Opal, so leave it out if Opal is installed.
+</Step>
+
+</Steps>
+
+<Callout variant="warning" title="Running Opal? Skip Lithium">
+Lithium is not compatible with Opal. Use Sodium for your framerate and leave Lithium out of the folder. Sodium alone covers the rendering side, which is the larger win anyway.
+</Callout>
+
+## Tune three settings
+
+<Checklist>
+<ChecklistItem>Render distance: drop it a chunk or two if your GPU is the bottleneck.</ChecklistItem>
+<ChecklistItem>VSync: off for uncapped frames.</ChecklistItem>
+<ChecklistItem>Graphics: set to Fast for an easy extra boost.</ChecklistItem>
+</Checklist>
+
+<Callout variant="tip" title="Quick win">
+Lower render distance is the single biggest in-game lever after Sodium. Going from 16 to 12 chunks can hand back a large chunk of your framerate with almost no visual cost in close-range PvP.
+</Callout>
+
+## Adding a client
+
+Opal installs into the same `mods` folder as Sodium. It is a full client with 200+ features, so like any large mod it uses some resources while it runs. That is exactly why Sodium matters: it gives you the headroom to run a feature set like Opal's and still play smoothly. Keep Sodium in, leave Lithium out, and Opal has room to work.
+
+## At a glance
+
+| Want | Install |
+| :--- | :--- |
+| Higher FPS (rendering) | Sodium |
+| Smoother game logic (not with Opal) | Lithium |
+| Required base | Fabric API |
+| Shaders | Iris |
+| 200+ features | Opal |
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What gives the biggest FPS boost?">
+Sodium. It rewrites rendering and is the largest single gain for most setups.
+</FAQItem>
+
+<FAQItem question="Is Lithium compatible with Opal?">
+No. Lithium does not work with Opal. Pair Opal with Sodium and leave Lithium out.
+</FAQItem>
+
+<FAQItem question="Will Opal lower my FPS?">
+Opal is a full client, so like any large mod it uses some resources while it runs. Keep Sodium installed for headroom and you will be fine on most machines.
+</FAQItem>
+
+<FAQItem question="Do these work with shaders?">
+Yes. Add Iris and see [how to install shaders](/en/blog/how-to-install-shaders-in-minecraft).
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/blog/how-to-install-shaders-in-minecraft", label: "How to install shaders in Minecraft", description: "Add Iris on top of Sodium without losing the frames." },
+  { href: "/en/blog/best-mods-for-performance-and-shaders", label: "Best mods for performance and shaders", description: "The full free performance stack in one place." },
+  { href: "/en/blog/essential-fabric-mods-every-player-should-have", label: "Essential Fabric mods", description: "The starter pack every Fabric setup begins with." },
+]} />
+
+<CTA href="/en/purchase">Get Opal for $8.99 lifetime</CTA>

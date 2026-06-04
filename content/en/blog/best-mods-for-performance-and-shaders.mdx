@@ -1,0 +1,95 @@
+---
+title: "Best Mods for Performance and Shaders in 2026"
+description: "High FPS and good shaders on Fabric: Sodium for framerate, Iris for shaders, Lithium for game logic. What each does, how they stack, and the Opal compatibility note."
+excerpt: "Run shaders and a high framerate on the same setup. Here are the mods that do it, how they stack, and the one to skip if you run Opal."
+date: "2026-05-20"
+lastUpdated: "2026-06-03"
+category: "Guides"
+author: "Opal Team"
+faqs:
+  - q: "Do Sodium and Iris work together?"
+    a: "Yes. Iris is built specifically to run alongside Sodium, so you get shaders and the FPS boost at the same time."
+  - q: "Is Lithium compatible with Opal?"
+    a: "No. Lithium is not compatible with Opal. Run Sodium for your framerate and leave Lithium out if Opal is installed."
+  - q: "Do I need the Fabric API?"
+    a: "For most of these, yes. Install the Fabric API alongside them as the shared base library."
+  - q: "Which mod gives the biggest performance gain?"
+    a: "Sodium. It rewrites rendering and is the largest single FPS gain for most machines."
+---
+
+Want a high framerate and good shaders at the same time? On [Fabric](https://fabricmc.net) the stack is short: Sodium for the frames, Iris for the shaders, Lithium for game logic. All free and built to run together. One caveat for Opal users: Lithium is not compatible with Opal, so build around Sodium and Iris instead.
+
+<KeyTakeaways>
+
+- Sodium gives the framerate, Iris gives the shaders, and they are built to run together.
+- Lithium helps game logic but is not compatible with Opal.
+- Install order: Fabric loader, Fabric API, then the rest.
+- Opal is the feature layer; Sodium gives the headroom to run it.
+
+</KeyTakeaways>
+
+## The stack
+
+<ModSection title="Performance and shaders" badge="Free" badgeColor="emerald" description="Sodium and Iris are the core. Fabric API is the base. Lithium is great on non-Opal setups only.">
+<ModList>
+<ModLink href="https://modrinth.com/mod/sodium">Sodium (rendering FPS, works with Opal)</ModLink>
+<ModLink href="https://modrinth.com/mod/iris">Iris (shaders, pairs with Sodium)</ModLink>
+<ModLink href="https://modrinth.com/mod/fabric-api">Fabric API (required base)</ModLink>
+<IncompatibleMod>Lithium (game logic, not compatible with Opal)</IncompatibleMod>
+</ModList>
+</ModSection>
+
+## Sodium: the framerate
+
+[Sodium](https://modrinth.com/mod/sodium) rewrites Minecraft's rendering to be faster and smoother, and the gap is widest on weaker GPUs. It is the base every modern performance setup starts from, and it runs fine alongside Opal. Install it, then layer shaders on top with Iris.
+
+## Iris: the shaders
+
+[Iris](https://modrinth.com/mod/iris) runs shader packs on Fabric and is engineered to work with Sodium, so the shaders do not cost you the framerate you just gained. If you have only ever run shaders the old way, this is the modern route that plays nicely with the rest of the ecosystem.
+
+## Lithium: the game-logic one (not for Opal)
+
+[Lithium](https://modrinth.com/mod/lithium) speeds up game logic, mob AI, physics, and ticking, with zero visual change. It is a strong add on a vanilla-plus setup. It is not compatible with Opal, though, so if you run Opal, leave it out and rely on Sodium.
+
+## At a glance
+
+| Mod | Job | Works with Opal |
+| :--- | :--- | :--- |
+| Sodium | Rendering FPS | Yes |
+| Iris | Shaders | Yes |
+| Fabric API | Required base | Yes |
+| Lithium | Game-logic performance | No |
+
+<Callout variant="info" title="Install order">
+Fabric loader, then Fabric API, then the rest. Most mods refuse to load without the API, so it goes in before Sodium, Iris, or Opal.
+</Callout>
+
+## Where Opal fits
+
+Opal is a Fabric mod for Minecraft 1.21.10, so it lives in the same `mods` folder as Sodium and Iris. You get a shader-lit game plus a full client: combat, movement, visual, and utility modules, a glass UI, and a scripting engine. Opal is a large mod, so keep Sodium in for headroom and leave Lithium out, and the whole setup holds together.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Do Sodium and Iris work together?">
+Yes. Iris is built to run alongside Sodium, so you get shaders and the FPS boost at once.
+</FAQItem>
+
+<FAQItem question="Is Lithium compatible with Opal?">
+No. Run Sodium for your framerate and leave Lithium out when Opal is installed.
+</FAQItem>
+
+<FAQItem question="Do I need the Fabric API?">
+For most of these, yes. Install it alongside them.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/blog/how-to-get-more-fps-in-minecraft", label: "How to get more FPS in Minecraft", description: "The settings that finish what the mods start." },
+  { href: "/en/blog/how-to-install-shaders-in-minecraft", label: "How to install shaders in Minecraft", description: "Step-by-step Iris setup, no OptiFine." },
+  { href: "/en/blog/essential-fabric-mods-every-player-should-have", label: "Essential Fabric mods", description: "The starter pack every setup begins with." },
+]} />
+
+<CTA href="/en/purchase">Add Opal on top for $8.99</CTA>

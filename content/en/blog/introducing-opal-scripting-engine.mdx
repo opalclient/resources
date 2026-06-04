@@ -1,44 +1,47 @@
 ---
 title: "Introducing Opal's GraalVM Scripting Engine"
-description: "Write custom JavaScript scripts that interact with Opal's internal APIs. Automate, customize, and extend your client."
-excerpt: "Opal's scripting engine runs on GraalVM — a full JavaScript runtime inside Minecraft. Here's what you can do with it."
+description: "Write custom JavaScript that interacts with Opal's internal APIs. Automate tasks, react to game events, draw your own HUD, and extend the client at runtime."
+excerpt: "Opal's scripting engine runs on GraalVM, a full JavaScript runtime inside Minecraft. Here is what you can build with it."
 date: "2026-03-15"
-lastUpdated: "2026-03-15"
+lastUpdated: "2026-06-03"
 category: "Features"
 author: "Opal Team"
 faqs:
   - q: "What scripting engine does Opal use?"
-    a: "Opal uses GraalVM, an enterprise-grade JavaScript runtime by Oracle, embedded directly inside Minecraft with thread-safe bindings to the client's APIs."
+    a: "Opal uses GraalVM, an enterprise-grade JavaScript runtime by Oracle, embedded inside Minecraft with thread-safe bindings to the client's APIs."
   - q: "Can scripts access my files or network?"
-    a: "No. Scripts run in a sandboxed GraalVM environment. They can interact with Opal's APIs but cannot access your filesystem, network, or other applications."
+    a: "No. Scripts run in a sandboxed GraalVM environment. They can interact with Opal's APIs but cannot reach your filesystem, network, or other applications."
   - q: "Do I need to restart Minecraft to load scripts?"
-    a: "No. Scripts are loaded at runtime — create a .js file in the scripts directory and it's available immediately without restarting."
+    a: "No. Scripts load at runtime. Drop a .js file in the scripts directory and it is available immediately."
   - q: "Does any other Minecraft client have a scripting engine like this?"
-    a: "No. Opal is the only Minecraft client with a full GraalVM JavaScript runtime. Other clients offer basic macro systems but none provide a real JS engine with thread-safe game bindings."
+    a: "Most stop at basic macros. Opal ships a full GraalVM JavaScript runtime with thread-safe game bindings, which is a different thing entirely."
 ---
 
-*Last updated: March 2026*
+Opal ships a GraalVM JavaScript engine, a full JS runtime running inside the Minecraft client. You write scripts that talk to Opal's internal APIs while the game is live. This is not a macro recorder or a keybind system. It is a real programming environment with access to the client's event system, module configs, and game state.
 
-## What is the Scripting Engine?
+<KeyTakeaways>
 
-Opal includes a **GraalVM JavaScript engine** — a full JS runtime embedded inside the Minecraft client. This lets you write custom scripts that interact with Opal's internal APIs at runtime.
+- A full GraalVM JavaScript runtime, not a macro recorder.
+- React to game events, change module settings, and draw your own HUD.
+- Scripts load at runtime, no restart, and run sandboxed to Opal's APIs.
+- Most other clients stop at basic macros.
 
-This isn't a simple macro recorder or keybind system. It's a real programming environment with access to the client's event system, module configurations, and game state.
+</KeyTakeaways>
 
-## Why GraalVM?
+## Why GraalVM
 
-GraalVM is an enterprise-grade polyglot runtime developed by Oracle. We chose it because:
+GraalVM is a polyglot runtime from Oracle. We picked it for concrete reasons:
 
-- **Performance:** Near-native execution speed through JIT compilation
-- **JavaScript:** The most widely known programming language — low learning curve
-- **Thread safety:** Built-in bindings between JS and Java that handle concurrency properly
-- **Ecosystem:** Access to standard JavaScript APIs and patterns
+- Speed: JIT compilation keeps scripts fast enough to run every tick.
+- JavaScript: most people already know it, so the learning curve is short.
+- Thread safety: the JS-to-Java bindings handle concurrency properly instead of leaving you to trip over it.
+- Familiar patterns: standard JavaScript APIs behave the way you expect.
 
-## What You Can Do
+## What you can build
 
-### Custom Automation
+### Custom automation
 
-Write scripts that respond to in-game events:
+Respond to in-game events:
 
 ```javascript
 // Auto-respond to certain chat messages
@@ -49,9 +52,9 @@ on('chat', (event) => {
 });
 ```
 
-### Dynamic Module Configuration
+### Dynamic module configuration
 
-Adjust module settings based on game state:
+Change module settings based on game state:
 
 ```javascript
 // Increase reach when health is low
@@ -65,12 +68,12 @@ on('tick', () => {
 });
 ```
 
-### Custom HUD Elements
+### Custom HUD elements
 
-Create your own display overlays:
+Draw your own overlays:
 
 ```javascript
-// Display combo counter on screen
+// Display a combo counter on screen
 let combo = 0;
 on('attackEntity', () => { combo++; });
 on('damage', () => { combo = 0; });
@@ -79,9 +82,9 @@ on('render2d', (ctx) => {
 });
 ```
 
-### Server-Specific Profiles
+### Server-specific profiles
 
-Auto-switch configurations when joining different servers:
+Switch configs automatically when you join different servers:
 
 ```javascript
 on('serverJoin', (event) => {
@@ -93,34 +96,58 @@ on('serverJoin', (event) => {
 });
 ```
 
-## Getting Started
+## Getting started
 
-1. **Open the scripts directory** — located in your Opal config folder
-2. **Create a `.js` file** — any name works
-3. **Write your script** — use the API reference in the dashboard docs
-4. **Load it in-game** — scripts are loaded at runtime, no restart needed
+<Steps>
 
-The scripting documentation on the dashboard covers the full API reference, including available events, module access, player state, and rendering utilities.
+<Step number={1} title="Open the scripts directory">
+Find the scripts directory in your Opal config folder.
+</Step>
 
-## Safety
+<Step number={2} title="Create a .js file">
+Any name works. This is your script.
+</Step>
 
-Scripts run in a **sandboxed environment** within GraalVM. They can interact with Opal's APIs but cannot access your filesystem, network, or other applications. Your scripts stay local to your client.
+<Step number={3} title="Write against the API">
+Use the API reference in the dashboard docs: events, module access, player state, and rendering.
+</Step>
 
-## Community Scripts
+<Step number={4} title="Save and play">
+Scripts load at runtime, so there is no restart.
+</Step>
 
-The scripting community is growing. Check the Discord for shared scripts, examples, and help with writing your own. Popular community scripts include:
+</Steps>
 
-- Auto-game scripts for server minigames
-- Custom statistics trackers
-- Advanced combo detection and response
-- Server-specific config switchers
+<Callout variant="info" title="Scripts run sandboxed">
+Scripts execute inside GraalVM and can call Opal's APIs, but they cannot touch your filesystem, network, or other apps. Your scripts stay local and your machine stays yours.
+</Callout>
 
-## No Other Client Has This
+## Community scripts
 
-Opal is the only Minecraft client with a full GraalVM JavaScript runtime. Other clients offer basic macro systems or simple scripting — none provide the depth and flexibility of a real JS engine with thread-safe game bindings.
+The scripting community is growing. The Discord has shared scripts and people to help you write your own. Common ones include auto-game scripts for minigames, stat trackers, combo detection, and server-specific config switchers.
 
-This is one of the features that sets Opal apart. At $8.99, you get a programmable client that can be customized far beyond its built-in modules.
+## FAQ
 
----
+<FAQList>
 
-*Explore Opal's scripting engine — check the docs on your dashboard.*
+<FAQItem question="What engine does Opal use?">
+GraalVM, Oracle's enterprise JavaScript runtime, with thread-safe game bindings.
+</FAQItem>
+
+<FAQItem question="Can scripts read my files?">
+No. They are sandboxed to Opal's APIs only.
+</FAQItem>
+
+<FAQItem question="Do I need to restart to load a script?">
+No. Drop the file in and it loads at runtime.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/blog/opal-config-sharing-guide", label: "Opal's config sharing system", description: "Auto-load the right config per server with a script." },
+  { href: "/en/blog/why-opal-is-the-best-value-minecraft-client", label: "Why Opal is the best value client", description: "Everything $8.99 includes." },
+  { href: "/en/compare/opal-vs-liquidbounce", label: "Opal vs LiquidBounce", description: "Scripting vs the open-source route." },
+]} />
+
+<CTA href="/en/purchase" note="Lifetime license · instant delivery · no subscription">Get a client you can script, $8.99</CTA>
