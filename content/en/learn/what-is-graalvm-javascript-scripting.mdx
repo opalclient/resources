@@ -1,0 +1,71 @@
+---
+title: "What Is GraalVM JavaScript Scripting? (2026)"
+description: "GraalVM JavaScript is a fast JS engine that runs on the JVM. Apps embed it so users can script in JavaScript and hot-reload it without recompiling Java."
+excerpt: "GraalVM JavaScript lets a Java app run user scripts in JavaScript and reload them on the fly. It is how a client adds features without compiling a mod."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Concepts"
+author: "Opal Team"
+faqs:
+  - q: "Is GraalVM JavaScript the same as Node.js?"
+    a: "No. Both run JavaScript, but GraalVM's engine is meant to be embedded inside a JVM application, while Node.js is a standalone runtime built on V8."
+  - q: "Do I need to know Java to write a script?"
+    a: "Not usually. You write JavaScript against the objects the host app exposes. Knowing what those objects map to helps for advanced use."
+  - q: "Why use scripting instead of a full mod?"
+    a: "Speed of iteration. A script reloads instantly, while a compiled mod has to be rebuilt and relaunched."
+---
+
+<KeyTakeaways>
+
+- GraalVM JavaScript is a fast, standards-compliant JS engine that runs on the JVM.
+- Java apps embed it so users can write JavaScript that calls into the host program.
+- Scripts hot-reload, so you change behavior without recompiling the Java code.
+- The host decides exactly which objects and classes a script can touch.
+
+</KeyTakeaways>
+
+GraalVM JavaScript is a fast, standards-compliant JavaScript engine that runs on the JVM, part of the [GraalVM](https://www.graalvm.org/) project. Java applications embed it so users can write JavaScript that calls into the host program and reloads on the fly. In a Java application, that means adding or changing behavior in JavaScript without recompiling the Java code.
+
+<Callout variant="info" title="Where Opal fits">
+Opal's scripting engine runs on GraalVM JavaScript. To start writing scripts, see the [scripting guide](/en/docs/scripting).
+</Callout>
+
+## GraalVM and GraalVM JavaScript
+
+GraalVM is a high-performance runtime that can run several languages on the JVM. Its JavaScript engine is modern enough to support recent ECMAScript features. An app ships the engine, hands scripts a set of objects to work with, and runs them.
+
+## Why apps embed it
+
+- **Hot reload**: change a script and see the effect without restarting or rebuilding.
+- **A safe surface**: the host decides exactly which objects and Java classes a script can touch.
+- **Java interop**: scripts can call into the application's own code through the objects it exposes.
+
+## How it shows up in a client
+
+A program that embeds the engine usually gives scripts an entry point to register themselves, then a small set of "proxy" objects that bridge JavaScript to the program's internals. Users write a script, drop it in a scripts folder, and the engine loads it. This is how a client can let users add features in JavaScript instead of compiling a mod.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is GraalVM JavaScript the same as Node.js?">
+No. Both run JavaScript, but GraalVM's engine is meant to be embedded inside a JVM application, while Node.js is a standalone runtime built on V8.
+</FAQItem>
+
+<FAQItem question="Do I need to know Java to write a script?">
+Not usually. You write JavaScript against the objects the host app exposes. Knowing what those objects map to helps for advanced use.
+</FAQItem>
+
+<FAQItem question="Why use scripting instead of a full mod?">
+Speed of iteration. A script reloads instantly, while a compiled mod has to be rebuilt and relaunched.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-the-jvm", label: "What is the JVM?", description: "The runtime GraalVM JavaScript rides on." },
+  { href: "/en/learn/what-is-jni", label: "What is JNI?", description: "A lower-level way to extend a Java program." },
+  { href: "/en/blog/introducing-opal-scripting-engine", label: "Opal's scripting engine", description: "What GraalVM scripting looks like in practice." },
+]} />
+
+<CTA href="/en/purchase">Get Opal, a Fabric client, for $8.99</CTA>

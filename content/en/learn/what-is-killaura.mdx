@@ -1,0 +1,90 @@
+---
+title: "What is KillAura in Minecraft? Module Explained"
+description: "KillAura is a combat module that auto-attacks nearby entities for the player. Here is how it works, why anticheats detect it, and how it differs from an aimbot."
+excerpt: "KillAura auto-attacks entities near you without aiming or clicking. Here is how the module works and why it is one of the easiest to detect."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Modules"
+author: "Opal Team"
+faqs:
+  - q: "Is KillAura a hack or a mod?"
+    a: "KillAura is a cheat module. It automates combat for the player, which breaks the rules of essentially every multiplayer server, so it counts as cheating rather than a fair-play mod."
+  - q: "Why is KillAura so easy to detect?"
+    a: "Automated aiming creates movement and timing patterns a real player cannot reproduce. Anticheats look for impossible rotations, excessive reach, and hits on targets the player is not facing."
+  - q: "What is the difference between KillAura and an aimbot?"
+    a: "KillAura both aims and attacks for the player in melee range, while an aimbot usually only aligns the crosshair, often for ranged combat. KillAura is the melee, auto-attacking variant."
+  - q: "Does smoothing make KillAura undetectable?"
+    a: "No. Smoothing makes rotations look more human, but it does not hide reach, target selection, or timing anomalies that anticheats still measure."
+---
+
+<KeyTakeaways>
+
+- KillAura is a combat module that auto-attacks entities near the player.
+- It scans for a target, rotates toward it, and sends the attack on its own.
+- It is one of the easiest cheats to detect because of impossible rotations and timing.
+- KillAura is the melee auto-attacker; an aimbot mainly aligns the crosshair.
+
+</KeyTakeaways>
+
+KillAura is a combat module that automatically attacks entities near the player without the player aiming or clicking. It picks a target, turns toward it, and sends attack packets on its own. The name combines "kill" with "aura," the radius around the player inside which it strikes. It is one of the oldest and most recognizable combat cheats.
+
+## How KillAura works
+
+KillAura runs a short loop every game tick. First it scans for entities inside a configured reach distance. Then it chooses one, usually the closest or the one the player is most facing. Finally it rotates the player's view toward that target and sends an attack interaction, the same packet the game sends on a normal click.
+
+The player does nothing. They walk near an enemy and KillAura handles aiming and hitting. Most versions add a swing animation and respect the attack cooldown so the hits look like ordinary combat to other clients.
+
+## Common settings
+
+KillAura modules expose a handful of knobs that change how aggressive and how obvious the behavior is.
+
+| Setting | What it controls |
+|---|---|
+| Range | How far away a target can be and still get hit |
+| Targets | Which entity kinds to attack (players, mobs, animals) |
+| Rotations | How the view snaps or eases toward the target |
+| Attack speed | How often it sends hits, often tied to the cooldown |
+| Field of view | How wide an angle counts as "in front of" the player |
+| Switch delay | How long before it moves to a new target |
+
+The rotation settings matter most. Instant snaps to a target are easy to flag, so many implementations smooth the turn or hold a believable angle.
+
+## Why it gets detected
+
+KillAura is detected because it produces movement a human cannot. Server-side anticheats watch for impossible rotations, hits on targets behind the player, [reach](/en/learn/what-is-reach) that exceeds the normal limit, and attack timing that is too perfect. Each of these is a signature of automated aiming rather than a real mouse.
+
+The hard part of writing KillAura is not the attacking. It is making the rotations and timing look human enough that a modern anticheat does not notice. That is why so many versions add randomness, smoothing, and reach caps.
+
+## KillAura vs aimbot
+
+The two overlap but are not the same. KillAura both aims and attacks for the player in melee range. An [aimbot](/en/learn/what-is-an-aimbot) usually only aligns the crosshair and leaves the click to you, and it is more associated with ranged combat. KillAura is the melee, auto-attacking variant of the same idea.
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the module generically so you know what the term means. Naming and exact behavior vary by client, and any combat automation breaks the rules on essentially every server.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is KillAura a hack or a mod?">
+KillAura is a cheat module. It automates combat for the player, which breaks the rules of essentially every multiplayer server, so it counts as cheating rather than a fair-play mod.
+</FAQItem>
+
+<FAQItem question="Why is KillAura so easy to detect?">
+Automated aiming creates movement and timing patterns a real player cannot reproduce. Anticheats look for impossible rotations, excessive reach, and hits on targets the player is not facing.
+</FAQItem>
+
+<FAQItem question="What is the difference between KillAura and an aimbot?">
+KillAura both aims and attacks for the player in melee range, while an aimbot usually only aligns the crosshair, often for ranged combat. KillAura is the melee, auto-attacking variant.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "The aim-only cousin of KillAura." },
+  { href: "/en/learn/what-is-reach", label: "What is Reach?", description: "The hit-distance module anticheats watch closely." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category these modules belong to." },
+]} />
+
+<CTA href="/en/purchase">See what Opal ships for $8.99</CTA>

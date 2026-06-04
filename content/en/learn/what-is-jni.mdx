@@ -1,0 +1,100 @@
+---
+title: "What Is JNI? Java Native Interface Explained"
+description: "JNI (Java Native Interface) is the bridge that lets Java code call native C or C++ functions and lets native code call back into the JVM."
+excerpt: "JNI is the built-in bridge between Java and native C or C++ code. Here is how the boundary works and what it costs to cross it."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Concepts"
+author: "Opal Team"
+faqs:
+  - q: "Is JNI part of standard Java?"
+    a: "Yes. JNI ships with the JDK and the JVM. You do not install anything extra on the Java side, though you do need a native toolchain to compile the C or C++ part."
+  - q: "Does using JNI make my code platform-independent?"
+    a: "No. The Java side stays portable, but the native library is compiled for one operating system and CPU, so you ship a separate native build per platform."
+  - q: "Is JNI the only way to call native code from Java?"
+    a: "No. It is the original, built-in way. Newer Java versions add a more modern foreign-function API that aims to be safer and easier, but JNI is still widely used and well understood."
+  - q: "Why would a Minecraft client use JNI?"
+    a: "A client written largely in Java sometimes needs a native library for something the JVM cannot do directly. JNI is the standard bridge for loading and calling that library."
+---
+
+<KeyTakeaways>
+
+- JNI is the built-in interface that lets JVM code call native C or C++ functions, and lets native code call back into Java.
+- A `native` method has no Java body; the JVM links it to a compiled function at runtime.
+- Programs use it to reuse native libraries, reach the OS, speed up hot paths, or touch hardware.
+- The boundary is sharp: native crashes can take down the JVM, and native builds are platform-specific.
+
+</KeyTakeaways>
+
+JNI is the Java Native Interface, a built-in part of Java that lets code running on the JVM call functions written in C or C++, and lets that native code call back into Java. It is how a Java program reaches outside the JVM to use a platform library or a chunk of compiled machine code.
+
+<Callout variant="info" title="Where Opal fits">
+Opal is a [Fabric](https://fabricmc.net/) mod, so most of it is plain Java and you script it in JavaScript rather than touching native code. If you are getting started, see the [setup guide](/en/docs/setup).
+</Callout>
+
+## What JNI does
+
+JNI connects two worlds: managed Java code on the JVM and native code compiled to machine instructions. A Java method is marked `native` and has no body in Java. At runtime the JVM loads a native library and links that method to a matching C or C++ function. From there the two sides pass arguments and return values back and forth.
+
+The native side gets a `JNIEnv` pointer. That handle is the gateway: it exposes functions for reading Java fields, calling Java methods, creating objects, and throwing exceptions. So the bridge runs both directions, not just Java reaching out.
+
+## Why a program uses it
+
+Most Java code never needs JNI. A program reaches for it in a few situations:
+
+- **Reuse existing native code.** A mature C or C++ library already does the job and rewriting it in Java is not worth it.
+- **Reach the operating system.** Some platform features have no pure-Java API, so a native call is the only way in.
+- **Speed for a hot path.** A tight numeric or low-level routine can run faster as compiled native code than on the JVM.
+- **Touch hardware or drivers.** Graphics, audio, and device access often live behind native libraries.
+
+## How a JNI call works
+
+The steps are the same on every platform.
+
+| Step | What happens |
+|------|--------------|
+| Declare | A Java method is written with the `native` keyword and no body. |
+| Build | A C or C++ function is compiled into a shared library (`.dll`, `.so`, `.dylib`). |
+| Load | Java calls `System.loadLibrary` to load that library at runtime. |
+| Link | The JVM matches the `native` method to the C function by name. |
+| Call | Java invokes the method; control crosses into native code and back. |
+
+The function names follow a fixed pattern so the JVM can find them, and the generated header tells you the exact signature to implement.
+
+## Costs and risks
+
+JNI is powerful but it has sharp edges. A crash in native code can take down the whole JVM, because that code runs outside the JVM's safety net. Memory the native side allocates is not garbage-collected, so leaks are easy. Each crossing between Java and native has overhead, so calling across the boundary in a tight loop can be slow. And native libraries are platform-specific: a build for Windows will not run on Linux without a separate compile.
+
+<Callout variant="warning" title="Use it sparingly">
+Because the native boundary bypasses the JVM's safety guarantees, JNI is the kind of tool you reach for only when there is no pure-Java path. Most mods, Opal included, never need it.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is JNI part of standard Java?">
+Yes. JNI ships with the JDK and the JVM. You do not install anything extra on the Java side, though you do need a native toolchain to compile the C or C++ part.
+</FAQItem>
+
+<FAQItem question="Does using JNI make my code platform-independent?">
+No. The Java side stays portable, but the native library is compiled for one operating system and CPU, so you ship a separate native build per platform.
+</FAQItem>
+
+<FAQItem question="Is JNI the only way to call native code from Java?">
+No. It is the original, built-in way. Newer Java versions add a more modern foreign-function API that aims to be safer and easier, but JNI is still widely used and well understood.
+</FAQItem>
+
+<FAQItem question="Why would a Minecraft client use JNI?">
+A client written largely in Java sometimes needs a native library for something the JVM cannot do directly. JNI is the standard bridge for loading and calling that library.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-the-jvm", label: "What is the JVM?", description: "The runtime JNI calls out of and back into." },
+  { href: "/en/learn/what-is-graalvm-javascript-scripting", label: "What is GraalVM JavaScript scripting?", description: "A higher-level way to extend a Java app." },
+  { href: "/en/learn/what-is-a-minecraft-mod-loader", label: "What is a Minecraft mod loader?", description: "How code gets wired into the game at launch." },
+]} />
+
+<CTA href="/en/purchase">Get Opal, a Fabric client, for $8.99</CTA>

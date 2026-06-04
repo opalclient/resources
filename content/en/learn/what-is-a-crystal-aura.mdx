@@ -1,0 +1,93 @@
+---
+title: "What Is a Crystal Aura in Minecraft? Module Explainer"
+description: "A Crystal Aura is a combat module that auto-places and detonates end crystals to deal burst damage. Here is how it works and why it gets detected."
+excerpt: "A Crystal Aura places end crystals next to a target and detonates them automatically for huge burst damage. Here is how the loop works and what gives it away."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Modules"
+author: "Opal Team"
+faqs:
+  - q: "What is the difference between Crystal Aura and AutoCrystal?"
+    a: "They are the same module. AutoCrystal and Crystal Aura are alternate names for the combat module that automatically places and detonates end crystals against a target."
+  - q: "Is a Crystal Aura a hack or a mod?"
+    a: "It is a cheat module. It automates combat by placing and breaking crystals on its own, which breaks the rules of essentially every multiplayer server, so it counts as cheating."
+  - q: "Why does a Crystal Aura get detected?"
+    a: "Because the place-and-break loop is faster and more precise than a human can manage. Anticheats look for impossible timing, hits on crystals the player never faced, and excess reach."
+  - q: "Does a Crystal Aura hurt the player too?"
+    a: "It can. End crystal explosions damage everyone near the blast, so most versions add a damage check that only places when the target takes more harm than the attacker."
+---
+
+<KeyTakeaways>
+
+- A Crystal Aura auto-places and detonates end crystals near a target for heavy burst damage.
+- It runs a place-and-break loop tied to the game tick, with no aiming or clicking by the player.
+- It is also known as AutoCrystal, and it is the automated form of crystal PvP.
+- It gets detected through timing, rotation, and reach that no human input can match.
+
+</KeyTakeaways>
+
+A Crystal Aura is a combat module that automatically places end crystals near a target and detonates them to deal heavy burst damage. The player does not aim, place, or hit anything. The module finds a valid block, puts the crystal down, and breaks it on its own. It is a cheat feature, and servers treat it as one.
+
+## How a Crystal Aura works
+
+A Crystal Aura runs a place-and-break loop tied to the game tick. First it looks for a nearby enemy. Then it searches the blocks around that enemy for a spot where an end crystal can sit, usually on top of obsidian or bedrock. It places the crystal there, then immediately attacks it so it explodes against the target.
+
+End crystals do a large amount of explosion damage in vanilla, which is what makes the loop dangerous. A human doing this by hand has to place a block, swap to the crystal, place it, and then click it, all in well under a second. The module does every step automatically and far faster than a person can, so a target takes burst damage with no warning.
+
+This style of fighting is often called crystal PvP. The Crystal Aura is the automated version of it.
+
+## Common settings
+
+A Crystal Aura exposes knobs that trade speed for how obvious the behavior looks.
+
+| Setting | What it controls |
+|---|---|
+| Place range | How far from the player a crystal can be placed |
+| Break range | How far away the module will detonate a placed crystal |
+| Target range | How close an enemy must be to trigger the loop |
+| Place delay | How long it waits between placing crystals |
+| Break delay | How long it waits before detonating |
+| Rotations | Whether the view turns toward the place or break point |
+| Damage check | A minimum damage to the target before it places, to avoid self-harm |
+
+The damage check matters because end crystals hurt whoever stands near the blast, including the attacker. A safe configuration only places a crystal when the target takes more damage than the player would.
+
+## Why it gets detected
+
+A Crystal Aura is detected because it places and breaks faster and more precisely than a human can. Server-side anticheats watch for place-and-break timing that is too tight, interactions on crystals the player never looked at, and reach on the place or break that exceeds the normal limit. Each of these is a signature of an automated loop rather than a real mouse and keyboard.
+
+Placing the crystals is the easy part. The real engineering problem is disguising the loop, because the place-and-break cadence and the way the view swings have to pass for human input or a modern anticheat flags the pattern. That is why many versions add delays, randomness, and a reach cap that stays inside the distance the server already allows.
+
+## Crystal Aura vs other combat modules
+
+A Crystal Aura differs from a melee auto-attacker like [KillAura](/en/learn/what-is-killaura) in what it automates. KillAura aims and swings at an entity directly. A Crystal Aura fights through an item, the end crystal, by placing it and detonating it for explosion damage. Both run the same place, aim, and timing loop without player input, which is why anticheats apply similar timing and rotation checks to each. The module is also tracked under the name AutoCrystal across different clients.
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the module generically so you know what the term means. Naming and exact behavior vary by client, and automating combat this way breaks the rules on essentially every server.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What is the difference between Crystal Aura and AutoCrystal?">
+They are the same module. AutoCrystal and Crystal Aura are alternate names for the combat module that automatically places and detonates end crystals against a target.
+</FAQItem>
+
+<FAQItem question="Is a Crystal Aura a hack or a mod?">
+It is a cheat module. It automates combat for the player by placing and breaking crystals on its own, which breaks the rules of essentially every multiplayer server, so it counts as cheating rather than a fair-play mod.
+</FAQItem>
+
+<FAQItem question="Why does a Crystal Aura get detected?">
+Because the place-and-break loop is faster and more precise than a human can manage. Server-side anticheats look for impossible timing, hits on crystals the player never faced, and reach beyond the normal limit.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The melee auto-attacker this loop resembles." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "The aim-only combat module." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category these modules belong to." },
+]} />
+
+<CTA href="/en/purchase">See what Opal ships for $8.99</CTA>

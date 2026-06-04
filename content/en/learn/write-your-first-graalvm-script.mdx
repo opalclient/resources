@@ -1,0 +1,119 @@
+---
+title: "Write Your First GraalVM JavaScript Script (2026)"
+description: "Write your first GraalVM JavaScript script: register an entry point, hook an event, and hot-reload it without recompiling Java. With a working example."
+excerpt: "Three small steps get a script running: register it, hook an event, save it into the scripts folder. It is real JavaScript and reloads in seconds, no rebuild."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Guides"
+author: "Opal Team"
+faqs:
+  - q: "Do I need to install GraalVM to write a script?"
+    a: "No. The host program bundles GraalVM and its JavaScript engine. You only write the JavaScript file and drop it in the scripts folder."
+  - q: "Can I use modern JavaScript syntax?"
+    a: "Yes. The engine supports recent ECMAScript features, including modules with import and export, so you are not stuck with an old subset."
+  - q: "Why is my script not loading?"
+    a: "Check that the file is in the host's scripts folder, has the extension the host expects, and registers itself with the host's entry point. A typo in the register call is the usual cause."
+  - q: "Is this the same as writing a Node.js script?"
+    a: "No. The engine is embedded inside the host JVM, so your script talks to the host program, not to a standalone Node.js runtime."
+---
+
+<KeyTakeaways>
+
+- A first script is three steps: register, hook an event, save it into the scripts folder.
+- The host bundles [GraalVM](https://www.graalvm.org/), so you write real JavaScript and never install it yourself.
+- Scripts hot-reload in seconds with no Java rebuild.
+- A script can only call the objects the host exposes through its host-access whitelist.
+
+</KeyTakeaways>
+
+Writing a first GraalVM JavaScript script means three small steps: register the script with the host's entry point, attach it to an event or module, and save it into the scripts folder so the engine loads it. The engine runs on the [GraalVM](https://www.graalvm.org/) Polyglot API, so the script is real JavaScript and reloads without recompiling any Java.
+
+<Callout variant="info" title="Where Opal fits">
+Opal is a [Fabric](https://fabricmc.net/) mod with a [GraalVM JavaScript scripting engine](/en/learn/what-is-graalvm-javascript-scripting), so these steps apply directly. To get started, see the [scripting docs](/en/docs/scripting).
+</Callout>
+
+## What you need first
+
+A host program that embeds the engine. The host ships GraalVM JavaScript, exposes a set of objects for scripts to call, and watches a scripts folder. You do not install GraalVM yourself; the host bundles it. You write plain JavaScript against the objects the host hands you.
+
+Knowing what those objects map to helps, but you do not need to write any Java to get started.
+
+## The three steps
+
+<Steps>
+
+<Step number={1} title="Find the scripts folder">
+The host loads scripts from a known directory on startup. Check the host's documentation for the exact path.
+</Step>
+
+<Step number={2} title="Create a script file">
+Make a new `.js` (or `.mjs`) file in that folder. The host picks it up the next time it loads scripts.
+</Step>
+
+<Step number={3} title="Register and hook">
+Inside the file, register the script with the host's entry point, then attach behavior to an event or define a module.
+</Step>
+
+</Steps>
+
+## A minimal example
+
+Most hosts give a script one entry point to register itself and a few proxy objects that bridge JavaScript to the program. The exact names depend on the host, but the shape is the same. A first script usually just announces itself and reacts to one event:
+
+```js
+// Register the script with the host (names vary by host).
+script.register({
+  name: "hello-world",
+  version: "1.0.0",
+});
+
+// React to an event the host exposes.
+script.on("enable", () => {
+  client.print("Hello from my first script.");
+});
+```
+
+Read the host's own API reference for the real object and method names. The point is the pattern: register, then hook an event or define a module.
+
+## Hot reload while you work
+
+Save the file and reload scripts (or restart the host if it does not support live reload). The change takes effect with no rebuild. This fast loop is the main reason to script instead of compiling a mod: a script reloads in seconds, while a compiled mod has to be rebuilt and relaunched.
+
+| Approach | Iteration loop | Language | When it fits |
+|----------|----------------|----------|--------------|
+| GraalVM JavaScript script | Edit, save, reload | JavaScript | Quick tweaks, custom behavior |
+| Compiled mod | Rebuild, relaunch | Java or Kotlin | Larger features, deeper hooks |
+
+## What scripts can and cannot do
+
+A script can call into the objects the host exposes and nothing else. The host declares which classes and methods scripts may touch through the GraalVM Polyglot host-access whitelist, and the default is deny. That keeps scripts safe and predictable. If the object you want is not exposed, the host has to add it; you cannot reach past the whitelist from the script side.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Do I need to install GraalVM to write a script?">
+No. The host program bundles GraalVM and its JavaScript engine. You only write the JavaScript file and drop it in the scripts folder.
+</FAQItem>
+
+<FAQItem question="Can I use modern JavaScript syntax?">
+Yes. The engine supports recent ECMAScript features, including modules with `import` and `export`, so you are not stuck with an old subset.
+</FAQItem>
+
+<FAQItem question="Why is my script not loading?">
+Check that the file is in the host's scripts folder, has the extension the host expects, and registers itself with the host's entry point. A typo in the register call is the usual cause.
+</FAQItem>
+
+<FAQItem question="Is this the same as writing a Node.js script?">
+No. The engine is embedded inside the host JVM, so your script talks to the host program, not to a standalone Node.js runtime.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-graalvm-javascript-scripting", label: "What is GraalVM JavaScript scripting?", description: "The runtime behind these scripts, explained." },
+  { href: "/en/learn/what-is-the-jvm", label: "What is the JVM?", description: "The platform the engine is embedded in." },
+  { href: "/en/blog/introducing-opal-scripting-engine", label: "The Opal scripting engine", description: "What you can build with scripts in Opal." },
+]} />
+
+<CTA href="/en/purchase">Get Opal, a Fabric client, for $8.99</CTA>

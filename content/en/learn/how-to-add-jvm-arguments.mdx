@@ -1,0 +1,134 @@
+---
+title: "How to Add JVM Arguments to Minecraft (Guide)"
+description: "Add JVM arguments to Minecraft by editing the JVM arguments field in your launcher's profile. Step by step, with the safe -Xmx heap setting and common fixes."
+excerpt: "JVM arguments tune the Java runtime that hosts Minecraft, not the game. Here is where to set them, the heap flag most players want, and the safe limits."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Guides"
+author: "Opal Team"
+faqs:
+  - q: "What does -Xmx do in Minecraft?"
+    a: "It sets the maximum heap the Java runtime is allowed to use. -Xmx4G caps the game at 4 gigabytes. It is the flag behind every allocate more RAM guide."
+  - q: "How much RAM should I give Minecraft?"
+    a: "For most players 4 to 6 gigabytes is plenty. Allocating far more rarely helps and can make garbage-collection pauses longer, so do not give the JVM all your memory."
+  - q: "Do mods change which JVM arguments I need?"
+    a: "Usually not. Mods load inside the same Java process, so they share the heap you already set. A few mods document a specific system property, but the heap flags cover most cases."
+  - q: "Are JVM arguments the same as game settings?"
+    a: "No. JVM arguments configure the Java runtime before the game loads and live in the launcher. Game settings live in the in-game options menu."
+---
+
+<KeyTakeaways>
+
+- JVM arguments live in your launcher's profile, not in the in-game options.
+- They configure the [Java runtime](/en/learn/what-is-the-jvm) that hosts the game, so a typo affects startup, not your world.
+- The flag most players want is `-Xmx`, which caps how much memory the game can use.
+- For most setups, 4 to 6 gigabytes is plenty. More can make stutter worse.
+
+</KeyTakeaways>
+
+You add JVM arguments to Minecraft in your launcher's profile settings. Open the profile you launch with, find the JVM arguments field, and edit the space separated list of flags there. These flags configure the [Java virtual machine](/en/learn/what-is-the-jvm) that hosts the game, not the game itself, so a typo affects startup, not your world.
+
+<Callout variant="info" title="Where Opal fits">
+Opal is a [Fabric](https://fabricmc.net/) mod, so it shares the same JVM arguments as the game it runs inside. For the version it targets and the exact setup, follow the [setup guide](/en/docs/setup).
+</Callout>
+
+## What a JVM argument is
+
+A JVM argument is a flag you pass to the Java runtime when it starts the game. The launcher builds a long command line every time you press play, and the JVM arguments are the part of that line that tunes the runtime. The most common one sets how much memory the game can use.
+
+These flags are not Minecraft settings. They are read by the JVM before the game even loads, which is why you set them in the launcher and not in the in-game options menu.
+
+## Where to put them
+
+Almost every launcher keeps a JVM arguments field inside each profile. The label varies, but the location is consistent.
+
+| Launcher type | Where the field lives |
+| :--- | :--- |
+| The official launcher | Installations, edit a profile, More Options, JVM Arguments |
+| A third-party launcher | Profile or instance settings, often under a Java or Advanced tab |
+| Command line / scripts | The `java` command you run, before `-jar` |
+
+Edit the existing list rather than replacing it. Launchers ship sensible defaults, and wiping them can break startup.
+
+## Step by step in the official launcher
+
+<Steps>
+
+<Step number={1} title="Open Installations">
+Open the launcher and go to **Installations**.
+</Step>
+
+<Step number={2} title="Edit your profile">
+Hover the profile you use and click the edit (pencil) icon.
+</Step>
+
+<Step number={3} title="Open More Options">
+Open **More Options**. A **JVM Arguments** box appears.
+</Step>
+
+<Step number={4} title="Edit the flags">
+Edit the flags in that box. They are separated by spaces.
+</Step>
+
+<Step number={5} title="Save and launch">
+Save, then launch that profile.
+</Step>
+
+</Steps>
+
+## The argument most people want: heap size
+
+The flag most players come for is `-Xmx`, which caps the maximum heap the JVM may use. `-Xmx4G` allows up to 4 gigabytes. There is also `-Xms`, the starting heap.
+
+```
+-Xmx4G -Xms2G
+```
+
+Two rules keep this safe. Do not allocate more than you have free, because the Java process needs headroom and the operating system needs the rest. More is also not always better; very large heaps can make garbage collection pauses worse, not smaller. For most setups, 4 to 6 gigabytes is plenty.
+
+## Common flags you will see
+
+- `-Xmx<size>` sets the maximum heap, for example `-Xmx4G`.
+- `-Xms<size>` sets the starting heap, for example `-Xms2G`.
+- `-XX:+UseG1GC` selects the G1 garbage collector, a common default.
+- `-Dproperty=value` sets a system property the game or a mod reads at startup.
+
+You rarely need more than the heap flags. Long copy-pasted argument lists from old guides often hurt more than they help on a modern Java runtime.
+
+## When something goes wrong
+
+<Checklist>
+<ChecklistItem>Game will not start after editing: a typo in the flags. Restore the default arguments and re-add changes one at a time.</ChecklistItem>
+<ChecklistItem>`-Xmx` is ignored or errors out: wrong unit or syntax. Use `G` or `M` with no space, as in `-Xmx4G`, not `-Xmx 4 GB`.</ChecklistItem>
+<ChecklistItem>Stutter got worse after raising memory: too large a heap can lengthen garbage-collection pauses. Lower `-Xmx` back toward 4 to 6 gigabytes.</ChecklistItem>
+</Checklist>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does -Xmx do in Minecraft?">
+It sets the maximum heap the Java runtime is allowed to use. `-Xmx4G` caps the game at 4 gigabytes. It is the flag behind every "allocate more RAM" guide.
+</FAQItem>
+
+<FAQItem question="How much RAM should I give Minecraft?">
+For most players 4 to 6 gigabytes is plenty. Allocating far more rarely helps and can make garbage-collection pauses longer, so do not give the JVM all your memory.
+</FAQItem>
+
+<FAQItem question="Do mods change which JVM arguments I need?">
+Usually not. Mods load inside the same Java process, so they share the heap you already set. A few mods document a specific system property, but the heap flags cover most cases.
+</FAQItem>
+
+<FAQItem question="Are JVM arguments the same as game settings?">
+No. JVM arguments configure the Java runtime before the game loads and live in the launcher. Game settings live in the in-game options menu.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-the-jvm", label: "What is the JVM?", description: "The runtime these flags actually configure." },
+  { href: "/en/learn/how-to-install-a-fabric-mod", label: "How to install a Fabric mod", description: "Get your mods loading first." },
+  { href: "/en/blog/how-to-get-more-fps-in-minecraft", label: "How to get more FPS", description: "Performance gains beyond the heap flag." },
+]} />
+
+<CTA href="/en/purchase">Get Opal, a Fabric client, for $8.99</CTA>

@@ -1,0 +1,93 @@
+---
+title: "What Is ImGui? Dear ImGui Explained (2026)"
+description: "ImGui (Dear ImGui) is an immediate-mode GUI library for C++. It draws menus every frame with no retained widget tree, common in game tools and native clients."
+excerpt: "Dear ImGui draws a menu fresh every frame from plain function calls. Here is what immediate-mode means and why native clients reach for it."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Libraries"
+author: "Opal Team"
+faqs:
+  - q: "Is ImGui only for C++?"
+    a: "The core library is C++ and that is where most projects use it; community bindings exist for other languages, but the original and most common use is in C++ game tools and native applications."
+  - q: "Does ImGui make the actual UI look like a game menu?"
+    a: "Out of the box it has a plain developer-tool look, so projects that want a custom style theme it heavily or draw their own widgets on top until the menu looks nothing like the default."
+  - q: "Can a Fabric mod use ImGui?"
+    a: "Not in the usual way. A Fabric mod runs in Java and uses the game's GUI system, while a native C++ client is the typical home for ImGui."
+  - q: "Is ImGui slow because it redraws every frame?"
+    a: "No. Rebuilding the UI is cheap, and the program already renders every frame, so the menu rides along on work that is happening anyway."
+---
+
+<KeyTakeaways>
+
+- ImGui (Dear ImGui) is a small immediate-mode GUI library for C++.
+- It draws the menu fresh every frame from function calls, with no widget tree to maintain.
+- Native clients and tools pick it for low-latency overlays over a 3D scene.
+- It is a C++ pattern; a Java Fabric mod uses the game's own GUI hooks instead.
+
+</KeyTakeaways>
+
+ImGui, short for Dear ImGui, is a small immediate-mode GUI library for C++. It draws a menu fresh every frame from plain function calls instead of keeping a tree of widget objects around. That makes it fast to wire up and easy to drop on top of a game's existing render loop, which is why tooling and native clients use it for low-latency overlays.
+
+<Callout variant="info" title="Where Opal fits">
+Opal is a [Fabric](https://fabricmc.net/) mod, so it builds its interface through the game's own GUI hooks rather than ImGui. If you want to add features without touching native code, the GraalVM JavaScript scripting engine is the place to start. See the [setup guide](/en/docs/setup) and the [scripting guide](/en/docs/scripting).
+</Callout>
+
+## What immediate-mode means
+
+ImGui rebuilds the interface on every frame. You do not create a button object and store it. You call a function that says "draw a button here," and that call both draws the button and tells you whether it was clicked this frame.
+
+A retained-mode toolkit works the other way. It keeps a long-lived widget tree in memory, and you update that tree when state changes. Immediate-mode trades that persistent structure for code that reads top to bottom and lives next to your own state.
+
+## Why tools and clients pick it
+
+ImGui is popular for menus that sit over a 3D scene. The reasons are practical.
+
+- **Low latency**: it hooks into a frame the program already renders, so the menu reacts right away.
+- **Little glue**: a window and a few controls are a handful of function calls. There is no layout file and no separate UI thread to manage.
+- **Self-contained**: the library has few dependencies and slots into common graphics backends, so it does not pull in a heavy framework.
+- **Debug-friendly**: the same calls that build a release menu also build the throwaway debug panels developers use while building a feature.
+
+## Immediate-mode vs retained-mode
+
+| Aspect | Immediate-mode (ImGui) | Retained-mode toolkit |
+| :--- | :--- | :--- |
+| State ownership | Your code holds the data | The toolkit holds a widget tree |
+| Per-frame work | Rebuild the UI each frame | Update the tree on change |
+| Setup cost | A few function calls | More structure up front |
+| Best fit | Overlays, tools, game menus | Large document-style apps |
+
+## How it fits a native client
+
+A native utility client built in C++ often draws its menu with ImGui over the game's frame. The menu code runs inside the render loop, reads the client's own settings, and writes changes straight back. There is no separate UI process, so toggling a feature is one function call against a value the client already owns.
+
+This is a C++ pattern. A [Fabric](https://fabricmc.net/) mod written in Java reaches its interface through the game's own GUI hooks instead, so ImGui mostly shows up in clients that ship as native code rather than as Java mods.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is ImGui only for C++?">
+The core library is C++, and that is where most projects use it. Community bindings exist for other languages, but the original and most common use is in C++ game tools and native applications.
+</FAQItem>
+
+<FAQItem question="Does ImGui make the actual UI look like a game menu?">
+Out of the box it has a plain developer-tool look. Projects that want a custom style theme it heavily or draw their own widgets on top, so a shipped menu can look nothing like the default.
+</FAQItem>
+
+<FAQItem question="Can a Fabric mod use ImGui?">
+Not in the usual way. A Fabric mod runs in Java and uses the game's GUI system. A native C++ client is the typical home for ImGui.
+</FAQItem>
+
+<FAQItem question="Is ImGui slow because it redraws every frame?">
+No. Rebuilding the UI is cheap, and the program already renders every frame, so the menu rides along on work that is happening anyway.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-nanovg", label: "What is NanoVG?", description: "The vector library Java clients draw their UI with." },
+  { href: "/en/learn/what-is-graalvm-javascript-scripting", label: "What is GraalVM JavaScript scripting?", description: "How Opal lets you extend it without native code." },
+  { href: "/en/learn/what-is-the-fabric-api", label: "What is the Fabric API?", description: "The shared layer most Fabric mods build on." },
+]} />
+
+<CTA href="/en/purchase">Get Opal, a Fabric client, for $8.99</CTA>

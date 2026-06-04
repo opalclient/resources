@@ -1,0 +1,90 @@
+---
+title: "What Is ASM (Java Bytecode)? Library Explained"
+description: "ASM is a Java library for reading and writing JVM bytecode at runtime. Here is what it does, how it works, and why Minecraft mods rely on it."
+excerpt: "The game ships compiled, not as source you can rebuild. ASM is how mods reach in and patch that bytecode at load time."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Libraries"
+author: "Opal Team"
+faqs:
+  - q: "Is ASM the same as a decompiler?"
+    a: "No. A decompiler turns bytecode back into readable source, while ASM works on the bytecode itself and is built to change it, not to recover source code."
+  - q: "Do I need to learn ASM to make a mod?"
+    a: "Usually not. Most Fabric mods use Mixin, which hides the ASM details behind annotations, so you only reach for raw ASM when you need fine control."
+  - q: "Is ASM specific to Minecraft?"
+    a: "No. ASM is a general Java library used across many tools that work with bytecode; Minecraft modding is one common use, not its only one."
+  - q: "Why not just edit the source?"
+    a: "You cannot. The game ships compiled, not as source you can change and rebuild, so editing bytecode is the practical way to patch code you do not own."
+---
+
+<KeyTakeaways>
+
+- ASM is a Java library for reading, changing, and writing JVM bytecode.
+- It works on compiled .class files, so it can rewrite a class without recompiling.
+- Mods use it to patch the already-compiled game at load time.
+- Most modders use Mixin, which sits on top of ASM and hides the detail.
+
+</KeyTakeaways>
+
+ASM is a Java library for reading, changing, and writing JVM bytecode. It works on compiled `.class` files instead of source code, so it can inspect or rewrite a class without recompiling. Minecraft mods lean on it because it lets them patch the game at load time, after the game is already compiled.
+
+<Callout variant="info" title="Where Opal fits">
+Opal is a [Fabric](https://fabricmc.net/) mod, and Fabric mods reach into game code through this bytecode layer. You do not touch it directly: the [scripting engine](/en/docs/scripting) gives you a clean way to extend Opal without writing bytecode.
+</Callout>
+
+## What ASM actually does
+
+ASM turns a compiled class into something a program can edit. A `.class` file is just bytecode, the instructions the Java Virtual Machine runs. ASM parses that bytecode, hands you the methods and fields, and lets you add, remove, or change instructions. Then it writes a new valid class back out.
+
+Plain Java cannot do this on its own. The compiler turns your source into bytecode once, and after that the bytecode is fixed. ASM reaches in at the bytecode level, which is the layer below the source you normally write.
+
+## How it works
+
+ASM reads a class with a `ClassReader` and writes one with a `ClassWriter`. Between the two, your code visits the parts of the class and decides what to change. There are two ways to do this.
+
+The visitor approach streams through the class one element at a time. It is fast and uses little memory because it never holds the whole class at once. The tree approach loads the class into objects you can walk and edit freely, which is easier to reason about for bigger changes but uses more memory.
+
+| Approach | How it works | Best for |
+| :--- | :--- | :--- |
+| Visitor API | Streams class events as they are read | Small, fast edits with low memory |
+| Tree API | Builds an editable object model of the class | Larger or more complex rewrites |
+
+## Why Minecraft mods use it
+
+Mods need to change game code they did not write and cannot recompile. The game ships as compiled classes, so the only way in is at the bytecode level, and that is what ASM provides. A mod can inject a hook into a game method, redirect a call, or add a field, all at launch.
+
+Most modders do not call ASM by hand. They use [Mixin](/en/learn/what-is-mixin), a higher-level framework that sits on top of ASM and turns simple annotations into the bytecode edits underneath. You write a small Java class describing the change, and the framework does the low-level work with ASM for you. [Fabric](https://fabricmc.net/) mods in particular rely on this chain.
+
+## When you would touch ASM directly
+
+You rarely write raw ASM as a mod author. It shows up when a tool needs more control than an annotation can express, such as a loader, an obfuscator, or a patcher that rewrites classes wholesale. For everyday mods, the annotation layer on top is enough, and it is far less error-prone.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is ASM the same as a decompiler?">
+No. A decompiler turns bytecode back into readable source. ASM works on the bytecode itself and is built to change it, not to recover source code.
+</FAQItem>
+
+<FAQItem question="Do I need to learn ASM to make a mod?">
+Usually not. Most Fabric mods use Mixin, which hides the ASM details behind annotations. You only reach for raw ASM when you need fine control.
+</FAQItem>
+
+<FAQItem question="Is ASM specific to Minecraft?">
+No. ASM is a general Java library used across many tools that work with bytecode. Minecraft modding is one common use, not its only one.
+</FAQItem>
+
+<FAQItem question="Why not just edit the source?">
+You cannot. The game ships compiled, not as source you can change and rebuild. Editing bytecode is the practical way to patch code you do not own.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-mixin", label: "What is Mixin?", description: "The annotation framework that sits on top of ASM." },
+  { href: "/en/learn/what-is-jvm-bytecode", label: "What is JVM bytecode?", description: "The instruction set ASM reads and rewrites." },
+  { href: "/en/learn/what-is-a-minecraft-mod-loader", label: "What is a Minecraft mod loader?", description: "How patched classes get wired into the game." },
+]} />
+
+<CTA href="/en/purchase">Get Opal, a Fabric client, for $8.99</CTA>

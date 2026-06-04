@@ -1,0 +1,76 @@
+---
+title: "What Is the Fabric API? (Minecraft, 2026)"
+description: "The Fabric API is the shared library most Fabric mods depend on. Here is what it does, why it is separate from the loader, and why nearly every mod needs it."
+excerpt: "The Fabric API is the shared library almost every Fabric mod is built against. If a mod crashes on launch, a missing or outdated Fabric API is the usual cause."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Frameworks"
+author: "Opal Team"
+faqs:
+  - q: "Is Fabric API required?"
+    a: "For most mods, yes. A mod that depends on it will not load without it. A few self-contained mods do not need it, but installing it is the safe default."
+  - q: "Where do I get it?"
+    a: "From the official Fabric channels and the usual mod hosts. Always pick the build that matches your Minecraft version."
+  - q: "Why is it not built into the loader?"
+    a: "So the loader can stay small and update fast while the shared API evolves separately. It is a deliberate design choice in Fabric."
+---
+
+<KeyTakeaways>
+
+- The Fabric API is a shared library of hooks and helpers that most Fabric mods are built against.
+- It is separate from the loader on purpose: a tiny loader updates fast, the API evolves on its own.
+- It provides events, networking, registry, and rendering helpers many mods rely on.
+- A missing or outdated Fabric API is the usual cause of a mod crashing on launch.
+
+</KeyTakeaways>
+
+The Fabric API is a shared library of hooks and helpers that most [Fabric](https://fabricmc.net/) mods are built against. Fabric's core loader is deliberately small, so the API fills the gaps: events, networking, registry helpers, rendering utilities. If a Fabric mod crashes on launch with a missing-class error, an absent or outdated Fabric API is the usual cause.
+
+<Callout variant="info" title="Where Opal fits">
+Opal is a Fabric mod, so it needs the Fabric API too. The [setup guide](/en/docs/setup) covers installing both.
+</Callout>
+
+## Why it is separate from the loader
+
+Fabric splits the system in two on purpose. The loader stays tiny and stable, and the Fabric API ships the larger, faster-moving set of shared interfaces. That split lets the loader update to a new Minecraft version quickly while the API evolves on its own cadence.
+
+## What it provides
+
+The API gives mods a common, version-stable way to do the things many mods need:
+
+- Lifecycle and gameplay events to hook into.
+- Networking helpers for custom packets.
+- Registry and content helpers for adding items, blocks, and entities.
+- Rendering and resource helpers shared across mods.
+
+Without it, every mod would reinvent these pieces and break each other.
+
+## Do you need it?
+
+Almost always, yes. Most Fabric mods list the Fabric API as a dependency, so you install it once as a mod alongside the others. Match its version to your Minecraft version.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Fabric API required?">
+For most mods, yes. A mod that depends on it will not load without it. A few self-contained mods do not need it, but installing it is the safe default.
+</FAQItem>
+
+<FAQItem question="Where do I get it?">
+From the official Fabric channels and the usual mod hosts. Always pick the build that matches your Minecraft version.
+</FAQItem>
+
+<FAQItem question="Why is it not built into the loader?">
+So the loader can stay small and update fast while the shared API evolves separately. It is a deliberate design choice in Fabric.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "How the two mod loaders compare." },
+  { href: "/en/learn/how-to-install-a-fabric-mod", label: "How to install a Fabric mod", description: "Where the Fabric API fits in the install steps." },
+  { href: "/en/learn/what-is-a-minecraft-mod-loader", label: "What is a Minecraft mod loader?", description: "The loader the API sits on top of." },
+]} />
+
+<CTA href="/en/purchase">Get Opal, a Fabric client, for $8.99</CTA>

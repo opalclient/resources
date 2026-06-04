@@ -1,0 +1,90 @@
+---
+title: "Quilt vs Fabric: Which Minecraft Mod Loader (2026)"
+description: "Quilt vs Fabric explained: how the community fork differs from the original loader on compatibility, APIs, and adoption, and which one to run."
+excerpt: "Quilt is a fork of Fabric that runs Fabric mods unchanged. Here is how the two loaders differ on compatibility, APIs, and adoption, and which to pick."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Frameworks"
+author: "Opal Team"
+faqs:
+  - q: "Is Quilt compatible with Fabric mods?"
+    a: "Yes. Quilt loads Fabric mods through its Quilted Fabric API layer, but the reverse is not true: Fabric cannot run mods that need Quilt-only QSL APIs."
+  - q: "Why does Quilt exist if Fabric already works?"
+    a: "Quilt split from FabricMC in 2021 over governance disagreements, aiming to stay Fabric-compatible while offering its own API design through QSL."
+  - q: "Should a utility client target Fabric or Quilt?"
+    a: "Most target Fabric because its user base and version support are larger, and a Fabric build also runs on Quilt, so building Quilt-only gains little."
+  - q: "Is one faster than the other?"
+    a: "No meaningful difference. Quilt inherits Fabric's mixin model, so performance comes from the mods you install, not the loader."
+---
+
+<KeyTakeaways>
+
+- Quilt is a 2021 community fork of [Fabric](https://fabricmc.net/) that runs Fabric mods unchanged.
+- Fabric is the original loader with the far larger mod ecosystem and user base.
+- Compatibility runs one way: Quilt loads Fabric mods, but Fabric cannot load Quilt-only mods.
+- For most players Fabric is the safe default; Quilt suits people who want its extra APIs.
+
+</KeyTakeaways>
+
+Quilt is a community fork of [Fabric](https://fabricmc.net/) that keeps binary compatibility with Fabric mods while adding its own libraries on top. Fabric is the original loader and has the far larger mod ecosystem and user base. For most players, Fabric is the safe default. Quilt suits people who want its extra APIs or back the fork on principle.
+
+<Callout variant="info" title="Where Opal fits">
+Opal is a Fabric mod, so Fabric is the loader you want for it. A Fabric build also runs on Quilt if you prefer that fork. See the [setup guide](/en/docs/setup).
+</Callout>
+
+## What each one is
+
+Fabric is a lightweight, modular mod loader maintained by FabricMC. It pairs a small core with the separately versioned [Fabric API](/en/learn/what-is-the-fabric-api) and uses a mixin-based patching model. It updates to new Minecraft releases quickly and holds the largest catalog of performance and utility mods.
+
+Quilt is a fork of Fabric that started in 2021 after governance disputes inside FabricMC. It runs Fabric mods unchanged, ships its own Quilted Fabric API as a Fabric API compatibility layer, and adds QSL, the Quilt Standard Libraries, for its own APIs. Its adoption is small next to Fabric proper.
+
+## How they differ
+
+The big practical point is direction of compatibility. Quilt can load Fabric mods, but Fabric cannot load mods that depend on Quilt-only QSL features. So a mod written for plain Fabric reaches both audiences, while a QSL-dependent mod only reaches Quilt users.
+
+| | Fabric | Quilt |
+| :--- | :--- | :--- |
+| Origin | Original loader by FabricMC | 2021 community fork of Fabric |
+| Mod ecosystem | Largest on modern Minecraft | Runs Fabric mods plus QSL mods |
+| Own API | Fabric API | Quilted Fabric API (compat) + QSL |
+| Compatibility | Cannot load Quilt-only mods | Loads Fabric mods unchanged |
+| Adoption | Very large | Small relative to Fabric |
+| Patching model | Mixins | Mixins (inherited from Fabric) |
+
+## Which to choose
+
+<Checklist>
+<ChecklistItem>Choose Fabric if you want the widest mod selection, fastest version support, and the loader most clients and mods target by default.</ChecklistItem>
+<ChecklistItem>Choose Quilt if you want its QSL features, run a specific Quilt-only mod, or prefer the fork's governance. Your existing Fabric mods still work.</ChecklistItem>
+<ChecklistItem>You do not run both at once. Pick one loader per profile, and since Quilt reads Fabric mods, switching costs little either way.</ChecklistItem>
+</Checklist>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Quilt compatible with Fabric mods?">
+Yes. Quilt keeps binary compatibility and loads Fabric mods through its Quilted Fabric API layer. The reverse is not true: Fabric cannot run mods that need Quilt-only QSL APIs.
+</FAQItem>
+
+<FAQItem question="Why does Quilt exist if Fabric already works?">
+Quilt split from FabricMC in 2021 over governance disagreements. It aims to stay compatible with Fabric while offering its own API design through QSL.
+</FAQItem>
+
+<FAQItem question="Should a utility client target Fabric or Quilt?">
+Most target Fabric because its user base and version support are larger, and a Fabric build also runs on Quilt. Building Quilt-only would shrink the audience for no gain in most cases.
+</FAQItem>
+
+<FAQItem question="Is one faster than the other?">
+No meaningful difference. Quilt inherits Fabric's mixin model, so performance comes from the mods you install, not the loader.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "The other big mod-loader split." },
+  { href: "/en/learn/what-is-the-fabric-api", label: "What is the Fabric API?", description: "The library both loaders build on." },
+  { href: "/en/learn/what-is-a-minecraft-mod-loader", label: "What is a Minecraft mod loader?", description: "How loaders wire mods into the game." },
+]} />
+
+<CTA href="/en/purchase">Get Opal, a Fabric client, for $8.99</CTA>

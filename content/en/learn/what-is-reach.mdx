@@ -1,0 +1,88 @@
+---
+title: "What Is Reach in Minecraft? (Combat Module Explained)"
+description: "Reach is a combat module that extends how far you can hit a target past the vanilla limit. Here is how it works, why anticheats catch it, and the risks."
+excerpt: "Reach lets you land hits before an opponent is in true melee range. Here is how the module stretches the attack distance and why servers measure it so closely."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Modules"
+author: "Opal Team"
+faqs:
+  - q: "What is the normal reach in Minecraft?"
+    a: "Survival melee attack reach is three blocks. A Reach module raises that limit so the client attacks targets that are farther away than vanilla permits."
+  - q: "Is Reach a client-side or server-side feature?"
+    a: "The cheat is client-side: a modified client claims hits beyond the normal range. Detection is server-side, where the anticheat recomputes the distance and flags hits that are too long."
+  - q: "Why is small Reach harder to detect than big Reach?"
+    a: "Servers allow a tolerance for latency and lag compensation. A tiny amount of extra reach can hide inside that tolerance, while a large value clearly exceeds any believable distance."
+  - q: "Is using Reach against the rules?"
+    a: "Yes. Reach is a combat cheat. Using it violates the terms of service of essentially every server and typically results in a ban when detected."
+---
+
+<KeyTakeaways>
+
+- Reach is a combat module that lets you hit targets past the vanilla attack distance.
+- Vanilla survival caps melee at three blocks; Reach replaces that check with a larger number.
+- Detection is server-side: the server recomputes the hit distance and flags long hits.
+- Small Reach is harder to catch because it hides inside the latency tolerance servers already grant.
+
+</KeyTakeaways>
+
+Reach is a combat module that lets a player hit a target from farther away than the game normally allows. Vanilla Minecraft caps the attack distance at a fixed range. A Reach module raises that cap so attacks land before the opponent is in true melee range. It is a cheat feature, and servers treat it as one.
+
+## How Reach works
+
+Reach changes the distance at which the client will register and send an attack. Vanilla survival combat uses an attack reach of three blocks, and the client refuses to attack anything past it. A Reach module replaces that check with a larger number, so the client tells the server "I hit that entity" while the entity is still several blocks out.
+
+The server is what makes this matter. Because the attacking player's client decides who got hit, a modified client can claim hits the server did not expect. A naive server accepts the hit. A stricter server recomputes the distance itself and rejects anything beyond a small tolerance.
+
+## Why people use it
+
+The appeal is winning fights you should lose. Extra reach means landing the first hit, kiting an opponent who can never close the gap, and trading favorably in melee. In a one-versus-one fight, even a small distance advantage decides who hits first and who gets comboed.
+
+Aim assistance and hit-timing modules chase the same goal from a different angle: they tilt the fight by a margin too small to notice, so the victim experiences a normal duel while quietly losing one they should have won.
+
+## How anticheats catch Reach
+
+Anticheats catch Reach by recomputing the hit distance on the server and comparing it against a believable maximum. The math is the core of the check, but real detection has to account for noise.
+
+| Factor the anticheat weighs | Why it matters |
+|---|---|
+| Player and target positions at hit time | The raw distance being claimed |
+| Network latency and tick timing | Lag can make a legitimate hit look long |
+| Entity hitbox size and lag compensation | Servers rewind positions to be fair to high-ping players |
+| Movement and momentum | Both fighters are moving when the hit lands |
+
+A modern anticheat sets a threshold a little above the real limit to absorb that noise, then flags hits that exceed it. Subtle Reach, a fraction of a block over the cap, is harder to catch than a large value because it hides inside the latency tolerance the server already grants. That is why obvious large-reach settings get caught quickly while small ones can slip through weaker checks.
+
+## Reach as a combat module
+
+Reach sits in the same family as aim and timing modules. As a concept it is one of the oldest and simplest combat cheats, which is exactly why server-side anticheats treat distance checks as a baseline thing they must get right. It pairs naturally with [KillAura](/en/learn/what-is-killaura), which automates the attack itself while Reach extends how far that attack lands.
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the module generically so you know what the term means. Naming and exact behavior vary by client, and any reach beyond the vanilla limit breaks the rules on essentially every server.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What is the normal reach in Minecraft?">
+Survival melee attack reach is three blocks. A Reach module raises that limit so the client attacks targets that are farther away than vanilla permits.
+</FAQItem>
+
+<FAQItem question="Is Reach a client-side or server-side feature?">
+The cheat is client-side: a modified client claims hits beyond the normal range. Detection is server-side, where the anticheat recomputes the distance and rejects or flags hits that are too long.
+</FAQItem>
+
+<FAQItem question="Why is small Reach harder to detect than big Reach?">
+Servers allow a tolerance for latency and lag compensation. A tiny amount of extra reach can hide inside that tolerance, while a large value clearly exceeds any believable distance and is flagged fast.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The auto-attacker Reach often pairs with." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "The aim-only combat module." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category these modules belong to." },
+]} />
+
+<CTA href="/en/purchase">See what Opal ships for $8.99</CTA>

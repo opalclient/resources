@@ -2,28 +2,33 @@
 title: "How to Install Fabric Mods in Minecraft"
 description: "Step-by-step guide to installing Fabric Loader and mods for Minecraft, including Opal Client."
 excerpt: "A beginner-friendly guide to setting up Fabric Loader and installing mods on Minecraft 1.21.10."
-category: "Setup"
 date: "2026-04-06"
-lastUpdated: "2026-04-06"
+lastUpdated: "2026-06-04"
+category: "Setup"
 author: "Opal Team"
 faqs:
   - q: "Do I need Fabric to use Opal Client?"
-    a: "Yes — Opal is a Fabric mod. The Opal Launcher handles Fabric installation automatically, but if installing manually, you need Fabric Loader first."
+    a: "Yes, Opal is a Fabric mod. The Opal Launcher handles Fabric installation automatically, but if installing manually, you need Fabric Loader first."
   - q: "Can I use Fabric mods with Forge?"
     a: "No. Fabric and Forge are separate mod loaders with incompatible formats. Opal requires Fabric specifically."
   - q: "What Java version do I need for Minecraft 1.21?"
-    a: "Java 21 or newer. Older versions (Java 8, 17) won't work with modern Minecraft. Download Java 21 from Adoptium or Oracle."
+    a: "Java 21 or newer. Older versions (Java 8, 17) will not work with modern Minecraft. Download Java 21 from Adoptium or Oracle."
   - q: "Will Fabric mods break my Minecraft installation?"
     a: "No. Fabric mods are isolated to the mods folder. If something goes wrong, remove the mod's JAR file and launch vanilla. Your worlds and saves are unaffected."
   - q: "Can I run Opal alongside other Fabric mods?"
-    a: "Generally yes, as long as the other mods don't conflict. Opal is designed to work as a standalone client mod on Fabric 1.21.10."
+    a: "Generally yes, as long as the other mods do not conflict. Opal is designed to work as a standalone client mod on Fabric 1.21.10."
 ---
 
-*Last updated: April 2026*
+<KeyTakeaways>
 
-## What is Fabric?
+- Fabric is a lightweight mod loader; install Fabric Loader first, then drop mod JARs into the mods folder.
+- You need Java 21 or newer for Minecraft 1.21, and Minecraft launched at least once before installing.
+- Mod JARs go in %appdata%\.minecraft\mods on Windows (with macOS and Linux equivalents).
+- Opal uses a loader system: the Opal Launcher handles Fabric, authentication, install, and updates for you.
 
-Fabric is a lightweight mod loader for Minecraft. It's fast, actively maintained, and supports modern Minecraft versions. Many utility clients — including Opal — run on Fabric.
+</KeyTakeaways>
+
+Fabric is a lightweight [mod loader](/en/learn/what-is-a-minecraft-mod-loader) for Minecraft. It is fast, actively maintained, and supports modern Minecraft versions. Many utility clients, including Opal, run on Fabric. This guide walks through installing Fabric Loader, adding mods, and setting up Opal.
 
 ## Prerequisites
 
@@ -33,32 +38,32 @@ Before you start, make sure you have:
 - **Java 21** or newer installed (required for MC 1.21+)
 - A working internet connection
 
-## Step 1: Download Fabric Loader
+## Install Fabric Loader
 
-1. Go to the official Fabric website at **fabricmc.net**
-2. Click **Download** and select the **Installer** option
-3. Download the Universal JAR installer
+<Steps>
 
-## Step 2: Install Fabric
+<Step title="Download the Fabric installer">
+Go to the official Fabric website at **fabricmc.net**, click **Download**, select the **Installer** option, and download the Universal JAR installer.
+</Step>
 
-1. Run the Fabric installer JAR you downloaded
-2. Make sure these settings are correct:
-   - **Client** tab is selected
-   - **Minecraft Version:** 1.21.10 (or your target version)
-   - **Loader Version:** Latest stable (0.17.x recommended)
-   - **Install Location:** Your default `.minecraft` directory
-3. Click **Install**
-4. You should see a success message
+<Step title="Run the installer and confirm settings">
+Run the Fabric installer JAR you downloaded, then make sure these settings are correct:
 
-## Step 3: Verify the Installation
+- **Client** tab is selected
+- **Minecraft Version:** 1.21.10 (or your target version)
+- **Loader Version:** Latest stable (0.17.x recommended)
+- **Install Location:** Your default `.minecraft` directory
 
-1. Open the Minecraft Launcher
-2. Click the **Installations** tab
-3. You should see a new profile called **fabric-loader-1.21.10** (or similar)
-4. Select it and click **Play**
-5. If Minecraft launches successfully with the Fabric logo on the title screen, you're good
+Click **Install**. You should see a success message.
+</Step>
 
-## Step 4: Install Mods
+<Step title="Verify the installation">
+Open the Minecraft Launcher, click the **Installations** tab, and look for a new profile called **fabric-loader-1.21.10** (or similar). Select it and click **Play**. If Minecraft launches with the Fabric logo on the title screen, you are good.
+</Step>
+
+</Steps>
+
+## Install Mods
 
 Fabric mods go in your `mods` folder:
 
@@ -66,23 +71,45 @@ Fabric mods go in your `mods` folder:
 - **macOS:** `~/Library/Application Support/minecraft/mods`
 - **Linux:** `~/.minecraft/mods`
 
-If the `mods` folder doesn't exist, create it.
+If the `mods` folder does not exist, create it. To install a mod:
 
-To install a mod:
-1. Download the mod's `.jar` file
-2. Place it in the `mods` folder
-3. Launch Minecraft with the Fabric profile
+<Steps>
+
+<Step title="Download the mod JAR">
+Download the mod's `.jar` file from its source.
+</Step>
+
+<Step title="Place it in the mods folder">
+Move the `.jar` into the `mods` folder for your platform.
+</Step>
+
+<Step title="Launch with the Fabric profile">
+Start Minecraft using the Fabric profile, not vanilla.
+</Step>
+
+</Steps>
 
 ## Installing Opal Client
 
-Opal uses a **loader system** — you don't drop the full client into the mods folder. Instead:
+Opal uses a **loader system**: you do not drop the full client into the mods folder. Instead:
 
-1. Purchase Opal from the dashboard ($8.99 lifetime)
-2. Download the **Opal Launcher** from the downloads page
-3. The launcher handles authentication, installation, and updates automatically
-4. Alternatively, download the Opal Loader JAR and place it in your `mods` folder — it will authenticate and download the client at runtime
+<Steps>
 
-The launcher is the recommended approach — it manages everything for you.
+<Step title="Purchase Opal">
+Buy Opal from the dashboard ($8.99 lifetime).
+</Step>
+
+<Step title="Download the Opal Launcher">
+Grab the **Opal Launcher** from the downloads page. It handles authentication, installation, and updates automatically.
+</Step>
+
+<Step title="Or use the loader JAR">
+Alternatively, download the Opal Loader JAR and place it in your `mods` folder. It will authenticate and download the client at runtime.
+</Step>
+
+</Steps>
+
+The launcher is the recommended approach: it manages everything for you.
 
 ## Troubleshooting
 
@@ -96,41 +123,54 @@ Make sure you installed Fabric for the correct Minecraft version. Re-run the ins
 
 ### "Mods aren't loading"
 - Verify the `.jar` files are in the correct `mods` folder
-- Make sure you're launching with the **Fabric profile**, not vanilla
+- Make sure you are launching with the **Fabric profile**, not vanilla
 - Check that the mod version matches your Minecraft version
 
 ### "Opal won't authenticate"
 - Make sure you have an active internet connection
 - Verify your license key is activated on the dashboard
-- Check that your HWID hasn't changed (reset available every 30 days on the dashboard)
-- Users in regions with internet restrictions may need a proxy — check the purchase page for details
+- Check that your HWID has not changed (reset available every 30 days on the dashboard)
+- Users in regions with internet restrictions may need a proxy: check the purchase page for details
 
 ## Next Steps
 
 Once you have Fabric and Opal installed:
 
-- **Browse configs** — discover community-shared module presets on the dashboard
-- **Explore modules** — check the documentation for a full list of features
-- **Join Discord** — get support, share configs, and connect with the community
-- **Try scripting** — use the GraalVM engine to create custom automation
+- **Browse configs:** discover community-shared module presets on the dashboard
+- **Explore modules:** check the documentation for a full list of features
+- **Join Discord:** get support, share configs, and connect with the community
+- **Try scripting:** use the GraalVM engine to create custom automation
 
-## Frequently Asked Questions
+## FAQ
 
-**Do I need Fabric to use Opal?**
-Yes — Opal is a Fabric mod. The Opal Launcher handles Fabric installation automatically, but if you're installing manually, you need Fabric Loader installed first.
+<FAQList>
 
-**Can I use Fabric mods with Forge?**
+<FAQItem question="Do I need Fabric to use Opal?">
+Yes, Opal is a Fabric mod. The Opal Launcher handles Fabric installation automatically, but if you are installing manually, you need Fabric Loader installed first.
+</FAQItem>
+
+<FAQItem question="Can I use Fabric mods with Forge?">
 No. Fabric and Forge are separate mod loaders with incompatible mod formats. Opal requires Fabric specifically.
+</FAQItem>
 
-**What Java version do I need for Minecraft 1.21?**
-Java 21 or newer. Older Java versions (8, 17) won't work with modern Minecraft. Download Java 21 from Adoptium or Oracle.
+<FAQItem question="What Java version do I need for Minecraft 1.21?">
+Java 21 or newer. Older Java versions (8, 17) will not work with modern Minecraft. Download Java 21 from Adoptium or Oracle.
+</FAQItem>
 
-**Will Fabric mods break my Minecraft installation?**
+<FAQItem question="Will Fabric mods break my Minecraft installation?">
 No. Fabric mods are isolated to the `mods` folder. If something goes wrong, just remove the mod's JAR file and launch vanilla. Your worlds and saves are unaffected.
+</FAQItem>
 
-**Can I run Opal alongside other Fabric mods?**
-Generally yes, as long as the other mods don't conflict. Opal is designed to work as a standalone client mod on Fabric 1.21.10.
+<FAQItem question="Can I run Opal alongside other Fabric mods?">
+Generally yes, as long as the other mods do not conflict. Opal is designed to work as a standalone client mod on Fabric 1.21.10.
+</FAQItem>
 
----
+</FAQList>
 
-*Need help? Join our Discord for setup support.*
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-mod-loader", label: "What is a mod loader?", description: "What Fabric actually does at launch." },
+  { href: "/en/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "Why Opal targets Fabric specifically." },
+  { href: "/en/blog/essential-fabric-mods-every-player-should-have", label: "Essential Fabric mods", description: "What to put in your mods folder next." },
+]} />
+
+<CTA href="/en/purchase">Get Opal for Fabric 1.21.10 for $8.99</CTA>

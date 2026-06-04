@@ -1,0 +1,92 @@
+---
+title: "What Is NanoVG? Vector Graphics for OpenGL"
+description: "NanoVG is a small antialiased 2D vector graphics library for OpenGL. Minecraft clients use it through LWJGL to draw crisp HUDs, menus, and shapes."
+excerpt: "NanoVG draws smooth 2D shapes and text on the GPU from one compact API. Here is why Minecraft clients reach for it to paint their interface."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Libraries"
+author: "Opal Team"
+faqs:
+  - q: "Is NanoVG a Minecraft mod?"
+    a: "No. NanoVG is a general C graphics library for OpenGL and is not Minecraft specific; a client embeds it through LWJGL to draw its own interface."
+  - q: "What language is NanoVG written in?"
+    a: "C. Java programs use it through native bindings such as the ones LWJGL provides, rather than calling the C code by hand."
+  - q: "Does NanoVG draw the game world?"
+    a: "No. It draws 2D overlays like HUDs, menus, shapes, and text; the game world itself is rendered by Minecraft's own engine."
+  - q: "Why not just use images for the UI?"
+    a: "Images blur or alias when scaled and each one costs memory, while NanoVG builds shapes from math so they stay sharp at any GUI scale and cost little."
+---
+
+<KeyTakeaways>
+
+- NanoVG is a small antialiased 2D vector graphics library for OpenGL, written in C.
+- It draws shapes, text, and gradients from paths, with smooth edges at any size.
+- Minecraft clients reach it through LWJGL bindings to paint HUDs and menus.
+- Vector drawing wins for resizable UI; bitmaps still win for fixed artwork.
+
+</KeyTakeaways>
+
+NanoVG is a small antialiased vector graphics library for OpenGL, written in C. It draws 2D shapes, text, and gradients with smooth edges from one compact API. In a Minecraft client, it is reached through [LWJGL](https://www.lwjgl.org/) bindings so Java code can paint crisp HUDs and menus on top of the game.
+
+<Callout variant="info" title="Where Opal fits">
+Opal is a [Fabric](https://fabricmc.net/) mod that draws its own interface over the game. If you want to add features yourself, the [scripting guide](/en/docs/scripting) shows how to do it in JavaScript.
+</Callout>
+
+## What NanoVG does
+
+NanoVG renders 2D vector graphics on the GPU through OpenGL. You describe shapes with paths (lines, curves, rectangles, circles), then fill or stroke them. The library handles antialiasing, so edges stay smooth at any size instead of going blocky the way a stretched bitmap would.
+
+It is deliberately small. The whole library is a single C file with a focused API, which is part of why it shows up in graphics demos and lightweight UI layers rather than heavy engine code.
+
+## Why a Minecraft client uses it
+
+A client draws its own interface over Minecraft: arraylists, menus, shape indicators, custom HUD elements. NanoVG gives that interface a clean way to draw vector shapes and text that scale to any resolution without looking jagged.
+
+Because the rendering is path-based, a developer can build rounded panels, gradients, and outlines from primitives instead of pre-baked images. That keeps the look consistent across GUI scales and display sizes.
+
+## NanoVG and LWJGL
+
+Minecraft and its mods run on the JVM, but NanoVG is a C library. [LWJGL](/en/learn/what-is-lwjgl) bridges the gap. It ships Java bindings to native libraries like NanoVG and OpenGL, so Java code can call the native functions directly.
+
+A client links against the LWJGL NanoVG module, opens a drawing context, and issues path and paint calls inside the game's render loop. The native side does the actual rasterizing on the GPU.
+
+## NanoVG vs bitmap drawing
+
+| Aspect | NanoVG (vector) | Bitmap textures |
+| :--- | :--- | :--- |
+| Edges | Antialiased at any size | Blur or alias when scaled |
+| Shapes | Built from paths at runtime | Pre-made image assets |
+| Memory | Light, no large textures | Grows with image count |
+| Best for | UI, shapes, dynamic text | Photos, fixed art, icons |
+
+Vector drawing wins for interface elements that change size or color. Bitmaps still win for detailed, fixed artwork.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is NanoVG a Minecraft mod?">
+No. NanoVG is a general C graphics library for OpenGL. It is not Minecraft specific. A client embeds it through LWJGL to draw its own interface.
+</FAQItem>
+
+<FAQItem question="What language is NanoVG written in?">
+C. Java programs use it through native bindings such as the ones LWJGL provides, rather than calling the C code by hand.
+</FAQItem>
+
+<FAQItem question="Does NanoVG draw the game world?">
+No. It draws 2D overlays: HUDs, menus, shapes, and text. The game world itself is rendered by Minecraft's own engine.
+</FAQItem>
+
+<FAQItem question="Why not just use images for the UI?">
+Images blur or alias when scaled, and each one costs memory. NanoVG builds shapes from math, so they stay sharp at any GUI scale and cost little.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-lwjgl", label: "What is LWJGL?", description: "The bindings that let Java reach NanoVG." },
+  { href: "/en/learn/what-is-graalvm-javascript-scripting", label: "What is GraalVM JavaScript scripting?", description: "How Opal lets you extend it in JavaScript." },
+  { href: "/en/learn/what-is-the-fabric-api", label: "What is the Fabric API?", description: "The shared layer most Fabric mods build on." },
+]} />
+
+<CTA href="/en/purchase">Get Opal, a Fabric client, for $8.99</CTA>

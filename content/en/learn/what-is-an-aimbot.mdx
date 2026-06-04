@@ -1,0 +1,103 @@
+---
+title: "What Is an Aimbot in Minecraft? Module Explainer"
+description: "An aimbot is a cheat module that auto-aligns your crosshair onto a target. Here is how it works, how it differs from aim assist, and why it gets detected."
+excerpt: "An aimbot snaps your crosshair onto an enemy so every hit lands, while you still click. Here is how it rewrites your view angles and why it sits on a spectrum with aim assist."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Modules"
+author: "Opal Team"
+faqs:
+  - q: "Is an aimbot a hack or a mod?"
+    a: "An aimbot is a cheat module. It aims for the player, which violates the rules of essentially every multiplayer server, so it counts as cheating rather than a fair-play mod."
+  - q: "What is the difference between an aimbot and KillAura?"
+    a: "An aimbot only aligns the crosshair and leaves the clicking to the player. KillAura both aims and sends the attacks on its own. An aimbot is the aim-only variant."
+  - q: "What is the difference between an aimbot and aim assist?"
+    a: "They are points on the same spectrum. Aim assist nudges the view gently and leaves most aiming to the player; an aimbot pulls hard and does almost all of it."
+  - q: "Can an aimbot be undetectable?"
+    a: "No. Smoothing and randomness make the aiming look more human, but the rotation data a client sends still carries patterns that anticheats measure. Strong aiming stays detectable."
+---
+
+<KeyTakeaways>
+
+- An aimbot is a combat module that moves the crosshair onto a target for the player.
+- A pure aimbot only aims; the player still clicks to attack, which is the line versus KillAura.
+- Aim assist and aimbot sit on one spectrum, often controlled by a single strength slider.
+- It is detected through view-angle data: rotations too precise or too fast to be human.
+
+</KeyTakeaways>
+
+An aimbot is a cheat module that aims for the player. It picks a target, then moves the crosshair onto that target without the player adjusting their mouse. The word is short for "automatic aiming." In Minecraft the term usually means a module that locks the view onto an enemy so every hit lands.
+
+## How an aimbot works
+
+An aimbot runs a small loop while the player is in combat. First it scans for valid targets within range. Then it picks one, usually the closest enemy or the one nearest the current crosshair. Finally it rotates the player's view so the crosshair sits on that target.
+
+The key difference from auto-attacking modules is what the aimbot controls. A pure aimbot only handles aiming. The player still clicks to attack. That makes it feel less obviously automated than a module that also fires the hits, because the human is still pressing the button.
+
+Most implementations work by editing the player's yaw and pitch values, the two angles that describe where the view points. The module computes the angle from the player's eyes to the target, then writes those angles back into the game so the next attack packet carries them.
+
+## Aimbot vs aim assist
+
+These two terms describe a spectrum, not two unrelated things. The split is how much the software does and how strong the pull is.
+
+| Term | What it does | Player input | Feel |
+|---|---|---|---|
+| Aim assist | Nudges the view gently toward a target | Player still aims most of the way | Subtle, "sticky" |
+| Aimbot | Locks the view directly onto a target | Player barely aims | Hard lock |
+
+Aim assist applies a soft correction. The player does most of the aiming and the module bends the last few degrees so the crosshair sticks near the enemy. An aimbot removes almost all of the player's aiming work and snaps straight to the target. Many modules sit between the two and let a slider control the strength, so the same code can behave like either one.
+
+## Common settings
+
+Aimbot and aim assist modules expose knobs that change how strong and how obvious the aiming is.
+
+| Setting | What it controls |
+|---|---|
+| Range | How far a target can be and still get aimed at |
+| Field of view | How wide an angle counts as "in front of" the player |
+| Strength | How hard the view is pulled toward the target |
+| Smoothing | How gradually the crosshair eases onto the target |
+| Targets | Which entity kinds count as valid (players, mobs) |
+| Target priority | Whether to lock the closest, lowest-health, or most-facing target |
+
+Strength and smoothing matter most. A strength of 100 percent with no smoothing is a hard lock that snaps instantly. Lower strength with heavy smoothing looks closer to a skilled human, which is the whole point of the aim-assist end of the range.
+
+## Why it gets detected
+
+An aimbot is detected because it produces aiming patterns a human cannot reproduce. Server-side anticheats watch the stream of view angles a client sends. Automated aiming leaves marks: rotations that are too precise, turns faster than a hand can move a mouse, and a crosshair that tracks a moving target with no error.
+
+The hard part of writing this kind of module is not the math. It is making the rotations look human. That is why so many versions add randomness, acceleration curves, and a small constant offset so the crosshair lands near the target instead of dead center. A modern anticheat still measures the underlying signal, so heavy correction stays risky no matter how it is smoothed.
+
+## Aimbot vs other combat modules
+
+An aimbot only writes the view angles and leaves the attack to the player. [KillAura](/en/learn/what-is-killaura) goes one step further and sends the hits too, so it both aims and attacks in melee range. [Reach](/en/learn/what-is-reach) takes a different axis entirely, extending how far an attack lands rather than where the crosshair points. The aimbot is the aim-only member of that family, which is why a single strength slider can slide it toward the gentler aim-assist behavior or toward a hard lock.
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the module generically so you know what the term means. Naming and exact behavior vary by client, and automated aiming breaks the rules on essentially every server.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is an aimbot a hack or a mod?">
+An aimbot is a cheat module. It aims for the player, which violates the rules of essentially every multiplayer server, so it counts as cheating rather than a fair-play mod.
+</FAQItem>
+
+<FAQItem question="What is the difference between an aimbot and KillAura?">
+An aimbot only aligns the crosshair and leaves the clicking to the player. KillAura both aims and sends the attacks on its own. An aimbot is the aim-only variant; KillAura is the full auto-attacking one.
+</FAQItem>
+
+<FAQItem question="What is the difference between an aimbot and aim assist?">
+They are points on the same spectrum. Aim assist nudges the view gently and leaves most aiming to the player. An aimbot pulls the view hard and does almost all of the aiming. A single strength slider often turns one into the other.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The auto-attacking cousin of an aimbot." },
+  { href: "/en/learn/what-is-reach", label: "What is Reach?", description: "The hit-distance combat module." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category these modules belong to." },
+]} />
+
+<CTA href="/en/purchase">See what Opal ships for $8.99</CTA>

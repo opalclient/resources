@@ -1,0 +1,127 @@
+---
+title: "How to Install the Fabric Loader (Step by Step, 2026)"
+description: "Install the Fabric loader in minutes: run the official installer, pick your Minecraft version, then start the new Fabric profile. Full guide with fixes."
+excerpt: "The Fabric loader is the one piece every Fabric mod rides on. Here is how to install it with the official installer and switch back to vanilla any time."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Guides"
+author: "Opal Team"
+faqs:
+  - q: "Do I need Forge to install Fabric?"
+    a: "No. Fabric is a separate mod loader. You install one or the other per profile, not both at once."
+  - q: "Does installing the loader change vanilla Minecraft?"
+    a: "No. The installer adds a new profile and leaves your vanilla game untouched. Switch profiles to go back."
+  - q: "Where do mods go after I install the loader?"
+    a: "In the mods folder inside your Minecraft directory. It is created the first time you launch the Fabric profile."
+  - q: "Can I install the loader without the official installer?"
+    a: "Yes. Some launchers add Fabric support for you and skip the standalone installer entirely."
+---
+
+<KeyTakeaways>
+
+- The Fabric loader installs with one tool: the official Fabric installer.
+- It adds a new launch profile and never touches your vanilla game.
+- The `mods` folder appears after you launch the Fabric profile once.
+- Match the loader to the exact Minecraft version you plan to play.
+
+</KeyTakeaways>
+
+Installing the [Fabric](https://fabricmc.net/) loader takes one tool and a few clicks. Download the official Fabric installer, run it, pick the Minecraft version you want, and let it write a new launch profile. Open your launcher, select that Fabric profile, and start the game once. The loader is now active and ready for mods.
+
+<Callout variant="info" title="Where Opal fits">
+Opal is a Fabric mod, so it rides on the same loader you install here. Once the loader is in place, follow the [setup guide](/en/docs/setup) for the exact version and recommended JVM arguments.
+</Callout>
+
+## Steps
+
+<Steps>
+
+<Step number={1} title="Download the installer">
+Get the official [Fabric](https://fabricmc.net/) installer from the Fabric project site. It is a small Java program.
+</Step>
+
+<Step number={2} title="Run it">
+Double-click the jar, or run it from a terminal if double-click does nothing.
+</Step>
+
+<Step number={3} title="Pick your Minecraft version">
+Choose the exact version you plan to play, such as a recent release or an older one you still use.
+</Step>
+
+<Step number={4} title="Install">
+The installer writes a new profile into your launcher and downloads the matching loader files.
+</Step>
+
+<Step number={5} title="Select the Fabric profile">
+Open your Minecraft launcher and switch to the profile the installer created.
+</Step>
+
+<Step number={6} title="Launch once">
+Start the game on that profile so the loader sets up its files and a `mods` folder.
+</Step>
+
+</Steps>
+
+## What the installer actually does
+
+The installer does not patch the game jar. It adds a launch profile that boots the [Fabric](https://fabricmc.net/) loader before Minecraft starts. That loader reads your `mods` folder at startup and loads each mod. Because the profile sits next to the vanilla one, your unmodded game stays intact and you can switch back any time.
+
+## Installer vs launcher support
+
+You have two ways to get the loader in place. Pick whichever fits your setup.
+
+| Method | When to use it | Notes |
+|--------|----------------|-------|
+| Official Fabric installer | Default for the standard launcher | Writes a profile, downloads the loader, done in minutes |
+| Launcher with built-in Fabric support | You already use a third-party launcher | The launcher handles version matching for you |
+
+Both end the same way: a Fabric profile you select before launching.
+
+## Where files land
+
+| OS | Path |
+| :--- | :--- |
+| Windows | `%appdata%\.minecraft` |
+| macOS | `~/Library/Application Support/minecraft` |
+| Linux | `~/.minecraft` |
+
+The `mods` folder appears inside that directory after the first Fabric launch. Drop mod jars there once it exists.
+
+## When the loader will not install
+
+<Checklist>
+<ChecklistItem>Installer will not open: Java may be missing or the jar opens with the wrong program. Install a current Java runtime and try again.</ChecklistItem>
+<ChecklistItem>No Fabric profile in the launcher: refresh or restart the launcher, then look for the new profile in the version dropdown.</ChecklistItem>
+<ChecklistItem>Game crashes after adding mods: the loader is fine, but a mod targets a different Minecraft version. Match every mod to the version you installed.</ChecklistItem>
+<ChecklistItem>Wrong Minecraft version: re-run the installer and pick the correct version. It can write more than one profile.</ChecklistItem>
+</Checklist>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Do I need Forge to install Fabric?">
+No. Fabric is a separate mod loader. You install one or the other per profile, not both at once.
+</FAQItem>
+
+<FAQItem question="Does installing the loader change vanilla Minecraft?">
+No. The installer adds a new profile and leaves your vanilla game untouched. Switch profiles to go back.
+</FAQItem>
+
+<FAQItem question="Where do mods go after I install the loader?">
+In the `mods` folder inside your Minecraft directory. It is created the first time you launch the Fabric profile.
+</FAQItem>
+
+<FAQItem question="Can I install the loader without the official installer?">
+Yes. Some launchers add Fabric support for you and skip the standalone installer entirely.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/how-to-install-a-fabric-mod", label: "How to install a Fabric mod", description: "The next step once the loader is in place." },
+  { href: "/en/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "How the two mod loaders differ." },
+  { href: "/en/learn/what-is-a-minecraft-mod-loader", label: "What is a mod loader?", description: "What the loader does at launch." },
+]} />
+
+<CTA href="/en/purchase">Get Opal, a Fabric client, for $8.99</CTA>

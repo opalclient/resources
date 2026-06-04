@@ -1,0 +1,95 @@
+---
+title: "What Are Minecraft Mappings? Names Explained"
+description: "Minecraft mappings explained: how MCP, Yarn, and Mojmap turn obfuscated class names into readable code so mods and clients can hook the game."
+excerpt: "Mojang ships Minecraft with scrambled names like a.a.a. Mappings are the dictionary that turns them back into readable code mods can hook."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Mappings"
+author: "Opal Team"
+faqs:
+  - q: "Do mappings change how the game runs?"
+    a: "No. A mapping only renames things for the developer, and the compiled mod is remapped to match the obfuscated game, so coding names never ship to players."
+  - q: "Why are there several mapping systems?"
+    a: "History. MCP came first for pre-1.14 Minecraft, Yarn grew with Fabric as an open alternative, and Mojang mappings arrived once Mojang began publishing official names in 1.14.4."
+  - q: "Which mapping should a new project use?"
+    a: "For modern Minecraft, Mojang mappings or Yarn are the standard picks. MCP is relevant mainly for legacy 1.8.9-era work where the old toolchain is still in play."
+  - q: "Are mappings the same as a mod loader?"
+    a: "No. A mapping is a name table; a mod loader like Fabric is the runtime that loads mods into the game. They work together but solve different problems."
+---
+
+<KeyTakeaways>
+
+- Mappings are name tables that translate Minecraft's obfuscated code into readable names.
+- Mojang scrambles class, field, and method names, and they change every version.
+- The three you will hear about are MCP, Yarn, and Mojang mappings (Mojmap).
+- A mapping is applied at compile time, not at runtime, so it never ships to players.
+
+</KeyTakeaways>
+
+Minecraft mappings are name tables that translate the game's obfuscated code into readable names. Mojang ships Minecraft with scrambled class and field names like `a.a.a`, so mod and client developers apply a mapping set such as MCP, Yarn, or Mojang mappings to get names they can actually read and hook into.
+
+<Callout variant="info" title="Where Opal fits">
+Opal is a [Fabric](https://fabricmc.net/) mod, so it builds against modern mappings under the hood and exposes a clean GraalVM JavaScript scripting API instead. You write scripts against readable names without touching mappings yourself. See the [scripting guide](/en/docs/scripting).
+</Callout>
+
+## Why mappings exist
+
+Mojang obfuscates Minecraft before release. The shipped jar renames classes, methods, and fields to short, meaningless strings to shrink the file and to make the code hard to read. That scrambling is why you cannot just open the game and start editing it.
+
+A mapping is the dictionary that undoes this. It pairs each obfuscated name with a human-readable one, so a field called `field_70181_x` becomes `motionY`. With a mapping applied, a developer sees a normal-looking codebase and can write mods against it.
+
+One catch matters here. The obfuscated names change every Minecraft version, so the same field can be `a` in one release and `bk` in the next. Mappings absorb that churn, which is why they are the backbone of every mod toolchain.
+
+## The three you will hear about
+
+MCP (the Mod Coder Pack) is the community mapping that made pre-1.14 modding possible. It used a two-layer scheme: the Searge project produced stable but ugly intermediate names like `field_70181_x`, and MCP wrapped those with friendly names like `motionY`. Most older 1.8.9 standalone clients compile against an MCP-mapped source tree and key their reflection on the MCP and Searge names.
+
+Yarn is the open-source mapping maintained by FabricMC for the [Fabric](https://fabricmc.net/) ecosystem. It is community-driven, freely licensed, and updates quickly when a new Minecraft version drops, which is part of why Fabric mods reach new versions fast.
+
+Mojang mappings, often called Mojmap, are Mojang's own first-party mapping, published alongside every official release since 1.14.4. Because they come straight from Mojang, the names match what the developers actually call things. They effectively replaced MCP and Searge as the default for any new client targeting 1.21 or later.
+
+## How they compare
+
+| | MCP | Yarn | Mojang mappings |
+| :--- | :--- | :--- | :--- |
+| Maintained by | Community (Searge + MCP) | FabricMC | Mojang |
+| Era | Pre-1.14 (1.7-1.12) | 1.14+ | 1.14.4+ |
+| Source | Community-derived | Community-derived | Official |
+| Used with | Legacy clients, old modding | Fabric | Fabric, Forge |
+| Status | Retired by Mojang mappings | Active | Active default |
+
+## How mappings fit a mod toolchain
+
+A mapping is applied at compile time, not at runtime. The build tool takes the obfuscated game, runs the mapping over it, and hands you a readable version to write code against. Your finished mod is then remapped back so it lines up with the obfuscated names the player's game actually uses.
+
+Different loaders handle this in different ways. [Fabric](https://fabricmc.net/) builds against Yarn or a Mojang-mapping base depending on the project. Forge historically split the job, using one mapping for the source you read and another for what runs. The licensing on Mojang mappings is permissive enough to use at build time, which is why modern toolchains lean on it.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Do mappings change how the game runs?">
+No. A mapping only renames things for the developer. The compiled mod is remapped to match the obfuscated game, so the names you see while coding never ship to players.
+</FAQItem>
+
+<FAQItem question="Why are there several mapping systems?">
+History. MCP came first and carried the community through pre-1.14 Minecraft. Yarn grew with Fabric as an open alternative, and Mojang mappings arrived once Mojang began publishing official names in 1.14.4.
+</FAQItem>
+
+<FAQItem question="Which mapping should a new project use?">
+For modern Minecraft, Mojang mappings or Yarn are the standard picks. MCP is relevant mainly for legacy 1.8.9-era work where the old toolchain is still in play.
+</FAQItem>
+
+<FAQItem question="Are mappings the same as a mod loader?">
+No. A mapping is a name table; a mod loader like Fabric is the runtime that loads mods into the game. They work together but solve different problems.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-intermediary", label: "What is Intermediary?", description: "The stable name layer that compiled mods ship against." },
+  { href: "/en/learn/yarn-vs-mojmap", label: "Yarn vs Mojmap", description: "Which readable mapping to pick for a Fabric mod." },
+  { href: "/en/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "The loaders these mappings serve." },
+]} />
+
+<CTA href="/en/purchase">Get Opal, a Fabric client, for $8.99</CTA>

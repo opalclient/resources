@@ -1,0 +1,127 @@
+---
+title: "How to Set Up a Fabric Dev Environment (2026)"
+description: "Set up a Fabric mod dev environment: install a JDK, clone the example mod template, pick Yarn mappings, then run gradle genSources and runClient. Full guide."
+excerpt: "Four steps get you from nothing to a running development client: a JDK, the example mod template, your mappings, then two Gradle tasks. The build plugin does the rest."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Guides"
+author: "Opal Team"
+faqs:
+  - q: "Do I need to install Gradle myself?"
+    a: "No. The Fabric example template includes a Gradle wrapper that fetches the correct Gradle version on first run. Use the gradlew script instead of a system Gradle."
+  - q: "Should I start from scratch or use the template?"
+    a: "Use the official example mod template. It has the build plugin, Yarn mappings, and run tasks already wired, so you skip the fiddly setup and start writing code."
+  - q: "Do I have to use Yarn mappings?"
+    a: "Yarn is the Fabric default and ships documented names, so it is the easy choice. You can build against official Mojang mappings instead, but the template is set up for Yarn out of the box."
+  - q: "Which JDK version do I install?"
+    a: "The one your target Minecraft version requires. Newer releases need newer JDKs, so check the version before installing and point your IDE at that JDK."
+  - q: "What does genSources do?"
+    a: "It decompiles Minecraft using your chosen Yarn mappings so you can read the game's code and reference its classes by readable names while you develop."
+---
+
+<KeyTakeaways>
+
+- Setup is four steps: a JDK, the example mod template, your mappings, then Gradle.
+- The Fabric build plugin downloads Minecraft and wires up run tasks for you.
+- You never install Gradle yourself: the template ships a wrapper.
+- A version mismatch in `gradle.properties` is the most common reason a fresh project fails.
+
+</KeyTakeaways>
+
+Setting up a [Fabric](https://fabricmc.net/) development environment takes four steps: install a JDK, start from the official example mod template, pick your mappings (usually [Yarn](/en/learn/yarn-vs-mojmap)), then run the Gradle tasks that download Minecraft and launch a test client. The build plugin handles the heavy lifting. Match your JDK and Minecraft version up front and the rest follows.
+
+<Callout variant="info" title="Where Opal fits">
+Opal is a Fabric mod with a [GraalVM JavaScript scripting engine](/en/learn/what-is-graalvm-javascript-scripting), so you can extend it with scripts without setting up a full mod toolchain. If you just want to install and run it, follow the [setup guide](/en/docs/setup); to start writing scripts, see the [scripting docs](/en/docs/scripting).
+</Callout>
+
+## What you need first
+
+You need three things before you write any code: a Java Development Kit, an IDE, and Git.
+
+- **A JDK.** Match it to the Minecraft version you target. Newer Minecraft releases need a newer JDK, so check the version's requirement before you start.
+- **An IDE.** IntelliJ IDEA or Eclipse both work. Most Fabric developers use IntelliJ because the Gradle and decompiler integration is smoother.
+- **Git.** You will clone the template repository and track your own changes.
+
+You do not install [Gradle](https://gradle.org/) yourself. The template ships a Gradle wrapper script that downloads the right version on first run.
+
+## Step by step
+
+<Steps>
+
+<Step number={1} title="Install a JDK">
+Install a JDK that matches your target Minecraft version, and point your IDE at it.
+</Step>
+
+<Step number={2} title="Get the example mod template">
+[Fabric](https://fabricmc.net/) publishes an official starter repository. Clone it or use it as a template, then rename the package and mod id to your own.
+</Step>
+
+<Step number={3} title="Choose your mappings">
+The template uses [Yarn](/en/learn/yarn-vs-mojmap) by default. Yarn gives readable, documented names for Minecraft's classes and methods. Set the Minecraft version, the loader version, and the Yarn mappings version in `gradle.properties`.
+</Step>
+
+<Step number={4} title="Generate sources and run">
+Open the project in your IDE, let Gradle sync, then run `genSources` to decompile Minecraft against Yarn names. Run the `runClient` task to launch a development client with your mod loaded.
+</Step>
+
+</Steps>
+
+## What the build plugin does for you
+
+The Gradle build plugin for [Fabric](https://fabricmc.net/) downloads Minecraft, remaps it to your chosen mappings, and wires up the run configurations. You configure it through a small block in `build.gradle`.
+
+| You set | Where | What it controls |
+|---|---|---|
+| Minecraft version | `gradle.properties` | Which game build you compile against |
+| Loader version | `gradle.properties` | The Fabric loader your mod runs on |
+| Yarn version | `gradle.properties` | The mapping names used in your source |
+| Dependencies | `build.gradle` | The [Fabric API](/en/learn/what-is-the-fabric-api) and any libraries |
+
+Keep the three versions in `gradle.properties` consistent. A mismatch between the Minecraft version and the Yarn mappings version is the most common reason a fresh project fails to sync.
+
+## Why mappings matter here
+
+Minecraft ships obfuscated, so its classes have names like `a.a.a`. [Yarn](/en/learn/yarn-vs-mojmap) maps those to readable names and sits on top of the stable [intermediary](/en/learn/what-is-intermediary) layer. When you run `genSources`, the build plugin decompiles the game using Yarn names so you can read and reference Minecraft code directly. When it compiles your mod, it remaps your Yarn-named code back down to intermediary so the finished jar runs on any matching install regardless of mapping renames.
+
+## When the project will not build
+
+<Checklist>
+<ChecklistItem>Gradle sync fails right after import: usually the Minecraft, loader, and Yarn versions in `gradle.properties` do not line up. Set them to a known matching set.</ChecklistItem>
+<ChecklistItem>Wrong Java version: the build complains about an unsupported class file version when your JDK is older than the Minecraft version needs. Install a newer JDK and point the project at it.</ChecklistItem>
+<ChecklistItem>No decompiled sources to read: run `genSources` and reload. The first run takes a while because it decompiles the whole game.</ChecklistItem>
+<ChecklistItem>`runClient` does nothing: let the initial Gradle sync finish before you run any task. The run configurations are generated during sync.</ChecklistItem>
+</Checklist>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Do I need to install Gradle myself?">
+No. The Fabric example template includes a Gradle wrapper that fetches the correct Gradle version on first run. Use `./gradlew` instead of a system Gradle.
+</FAQItem>
+
+<FAQItem question="Should I start from scratch or use the template?">
+Use the official example mod template. It has the build plugin, Yarn mappings, and run tasks already wired, so you skip the fiddly setup and start writing code.
+</FAQItem>
+
+<FAQItem question="Do I have to use Yarn mappings?">
+Yarn is the Fabric default and ships documented names, so it is the easy choice. You can build against official Mojang mappings instead, but the template is set up for Yarn out of the box.
+</FAQItem>
+
+<FAQItem question="Which JDK version do I install?">
+The one your target Minecraft version requires. Newer releases need newer JDKs, so check the version before installing and point your IDE at that JDK.
+</FAQItem>
+
+<FAQItem question="What does genSources do?">
+It decompiles Minecraft using your chosen Yarn mappings so you can read the game's code and reference its classes by readable names while you develop.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/how-to-install-a-fabric-mod", label: "How to install a Fabric mod", description: "The player-side counterpart to building one." },
+  { href: "/en/learn/what-is-the-fabric-api", label: "What is the Fabric API?", description: "The dependency almost every mod declares." },
+  { href: "/en/learn/yarn-vs-mojmap", label: "Yarn vs Mojmap", description: "Choosing the mappings your source reads." },
+]} />
+
+<CTA href="/en/purchase">Get Opal, a Fabric client, for $8.99</CTA>

@@ -1,0 +1,78 @@
+---
+title: "What Is a Minecraft Mod Loader? (2026 Explainer)"
+description: "A Minecraft mod loader patches the game at launch so mods can run. Here is what a loader does and the main options: Fabric, Forge, NeoForge, Quilt."
+excerpt: "Vanilla Minecraft cannot run mods on its own. A mod loader is the layer that patches the game at launch and gives mods a way to hook in."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Concepts"
+author: "Opal Team"
+faqs:
+  - q: "Do I need a mod loader to use mods?"
+    a: "Yes. Mods that change the game require a loader. Resource packs and shaders are a separate thing and do not always need one."
+  - q: "Can I run a mod without a loader?"
+    a: "No. The game will not load a mod jar on its own."
+  - q: "Which loader should I pick?"
+    a: "The one your chosen mods are built for. If you are starting fresh and want speed plus the newest version early, Fabric is a common pick."
+---
+
+<KeyTakeaways>
+
+- A mod loader is the layer that lets Minecraft run mods; vanilla has no mod support.
+- It patches the game at launch and gives each mod a way to hook into the code.
+- You install it once for your Minecraft version, then drop mod jars in the mods folder.
+- The main options are Fabric, Forge, NeoForge, and Quilt; pick the one your mods target.
+
+</KeyTakeaways>
+
+A mod loader is the layer that lets Minecraft run mods. Vanilla Minecraft has no mod support, so a loader patches the game at launch and gives mods a way to hook into it. You install the loader once for your Minecraft version, then drop mod jars into the mods folder and they load on startup.
+
+<Callout variant="info" title="Where Opal fits">
+Opal is a [Fabric](https://fabricmc.net/) mod, so Fabric is the loader you want. The [setup guide](/en/docs/setup) walks through it.
+</Callout>
+
+## Why you need one
+
+Mods change how the game behaves, which means they have to run inside the game's code. The loader is what makes that possible. Without one, a mod jar is just a file the game ignores.
+
+## How it works
+
+At launch the loader inserts itself before the game starts, reads the mods folder, and wires each mod into the right hooks. [Fabric](https://fabricmc.net/) does this with mixins, a targeted bytecode-patching approach. Forge uses its own larger hook system. Either way, the game ends up running with the mods stitched in.
+
+## The main loaders
+
+| Loader | Known for |
+| :--- | :--- |
+| Fabric | Lightweight, fast to update, performance and utility mods |
+| Forge | Large content mods and long-standing modpacks |
+| NeoForge | A community-driven fork of Forge |
+| Quilt | A fork of Fabric with extra features |
+
+## Picking one
+
+Use the loader your mods target. Most mods ship for one loader, not both, so the mods you want usually decide it for you. For a deeper split, see [Fabric vs Forge](/en/learn/fabric-vs-forge).
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Do I need a mod loader to use mods?">
+Yes. Mods that change the game require a loader. Resource packs and shaders are a separate thing and do not always need one.
+</FAQItem>
+
+<FAQItem question="Can I run a mod without a loader?">
+No. The game will not load a mod jar on its own.
+</FAQItem>
+
+<FAQItem question="Which loader should I pick?">
+The one your chosen mods are built for. If you are starting fresh and want speed plus the newest version early, [Fabric](https://fabricmc.net/) is a common pick.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "The two main loaders, compared in detail." },
+  { href: "/en/learn/what-is-the-fabric-api", label: "What is the Fabric API?", description: "The shared library most Fabric mods depend on." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "What runs on top of a loader once it is installed." },
+]} />
+
+<CTA href="/en/purchase">Get Opal, a Fabric client, for $8.99</CTA>

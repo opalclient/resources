@@ -1,0 +1,96 @@
+---
+title: "What Is Intermediary? Minecraft Mappings Explained"
+description: "Intermediary is Fabric's stable naming layer for obfuscated Minecraft code, so mods keep working across versions without breaking on renamed fields."
+excerpt: "Obfuscated names change every release. Intermediary freezes them, so a compiled Fabric mod keeps finding the code it patches after the game updates."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Mappings"
+author: "Opal Team"
+faqs:
+  - q: "Is Intermediary the same as Yarn?"
+    a: "No. Yarn is a readable mapping developers code against; Intermediary is the stable, machine-generated layer that compiled mods actually ship against, and Yarn names compile down to it."
+  - q: "Why are Intermediary names so ugly?"
+    a: "They are generated, not written. Names like class_1234 only need to be unique and permanent, not pretty, and readability is handled by Yarn or Mojmap on top."
+  - q: "Does Intermediary mean a mod works on every version forever?"
+    a: "No. It keeps names stable, but if Mojang removes or rewrites a method the underlying code is gone regardless of the name, so it reduces breakage rather than eliminating it."
+  - q: "Do I need to think about Intermediary as a player?"
+    a: "Not really. It works under the hood inside Fabric; you only meet it as a developer or when reading a crash log that mentions an intermediary symbol."
+---
+
+<KeyTakeaways>
+
+- Intermediary is the stable naming layer Fabric puts over Minecraft's obfuscated code.
+- It gives each obfuscated symbol a fixed name that stays the same across versions.
+- Compiled Fabric mods ship against Intermediary names, not readable ones.
+- It reduces breakage on updates but cannot save a mod from removed game code.
+
+</KeyTakeaways>
+
+Intermediary is the stable naming layer [Fabric](https://fabricmc.net/) puts over Minecraft's obfuscated code. Mojang ships the game with scrambled class, field, and method names that change every release. Intermediary gives each of those a fixed name that stays the same across versions, so a compiled mod keeps finding the code it patches even after the game updates underneath it.
+
+<Callout variant="info" title="Where Opal fits">
+Opal is a Fabric mod, so it relies on this mapping layer just like any other Fabric mod. You do not configure it by hand; the [setup guide](/en/docs/setup) gets you running.
+</Callout>
+
+## What Intermediary actually is
+
+Intermediary is a set of mappings: a lookup table that pairs each obfuscated Minecraft symbol with a stable, machine-generated name. A class the game calls `a` might become `class_1234` in Intermediary. The name is ugly, but it is permanent for that symbol across releases.
+
+Mojang obfuscates the game on every build. Names like `field_5678` would otherwise shift release to release, which is why a mod compiled against raw obfuscated names breaks the moment the game updates. Intermediary freezes those names so the mapping, not the mod, absorbs the churn.
+
+## Why Fabric mods need it
+
+Mods are distributed compiled against Intermediary names, not the readable names a developer writes against. That one decision is why a [Fabric](https://fabricmc.net/) mod can keep running on a new game build without a recompile in many cases.
+
+When the game launches, Fabric loads the Intermediary mapping for that version and remaps the obfuscated game classes to the stable names the mod expects. The mod and the game meet in the middle on a name set neither of them ships raw.
+
+## Intermediary vs developer mappings
+
+Developers do not read or write `class_1234`. They work against a human-readable mapping like Yarn or Mojmap, which give symbols descriptive names. At build time those readable names are compiled down to Intermediary for distribution.
+
+| Layer | Example name | Who uses it | Stable across versions |
+| :--- | :--- | :--- | :--- |
+| Obfuscated | `a`, `field_5678` | Nobody by hand | No |
+| Intermediary | `class_1234` | Shipped mod binaries | Yes |
+| Yarn / Mojmap | `MinecraftClient` | Developers at build time | Readable, version-tracked |
+
+The split lets developers code against friendly names while the thing that actually ships stays version-stable. Readable mappings can be swapped out; Intermediary is the common floor everyone agrees on.
+
+## How it fits a mod's lifecycle
+
+- A developer writes code against a readable mapping such as Yarn or Mojmap.
+- The build compiles those names down to Intermediary names.
+- The mod ships as a jar that references Intermediary symbols.
+- At launch, Fabric remaps the running game from its obfuscated names into Intermediary so the mod and the game line up.
+
+This is why mappings are a quiet but load-bearing part of [Fabric](https://fabricmc.net/) modding: they are the contract that keeps mods pointing at the right code after every update.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Intermediary the same as Yarn?">
+No. Yarn is a readable mapping developers code against. Intermediary is the stable, machine-generated layer that compiled mods actually ship against. Yarn names compile down to Intermediary at build time.
+</FAQItem>
+
+<FAQItem question="Why are Intermediary names so ugly?">
+They are generated, not written. Names like `class_1234` only need to be unique and permanent, not pretty. Readability is handled by Yarn or Mojmap on top.
+</FAQItem>
+
+<FAQItem question="Does Intermediary mean a mod works on every version forever?">
+No. Intermediary keeps names stable, but if Mojang removes or rewrites a method, the underlying code is gone regardless of the name. It reduces breakage, it does not eliminate it.
+</FAQItem>
+
+<FAQItem question="Do I need to think about Intermediary as a player?">
+Not really. It works under the hood inside Fabric. You only meet it as a developer or when reading a crash log that mentions an intermediary symbol.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-are-minecraft-mappings", label: "What are Minecraft mappings?", description: "The wider topic Intermediary sits inside." },
+  { href: "/en/learn/yarn-vs-mojmap", label: "Yarn vs Mojmap", description: "The readable mappings that layer over Intermediary." },
+  { href: "/en/learn/what-is-the-fabric-api", label: "What is the Fabric API?", description: "The shared layer most Fabric mods build on." },
+]} />
+
+<CTA href="/en/purchase">Get Opal, a Fabric client, for $8.99</CTA>

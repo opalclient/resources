@@ -1,0 +1,94 @@
+---
+title: "What Is Velocity (Anti-Knockback) in Minecraft?"
+description: "Velocity, or anti-knockback, is a combat module that reduces or cancels the pushback you take when hit. Here is how it works and why it gets detected."
+excerpt: "Velocity shrinks the knockback you take after a hit, so you hold your ground and keep swinging. Here is how the module rewrites that pushback and why servers notice."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Modules"
+author: "Opal Team"
+faqs:
+  - q: "What does Velocity mean in a Minecraft client?"
+    a: "In a client menu, Velocity is the anti-knockback module. It reduces the pushback the player takes when hit, so they stay closer to their target during a fight."
+  - q: "Is anti-knockback the same as Velocity?"
+    a: "Yes. Anti-knockback is the plain-language name and Velocity is the common module name for the same behavior: cutting the pushback a player receives from attacks."
+  - q: "Why can't I just set knockback to zero percent?"
+    a: "You can, but a full cancel is the easiest version to detect. The server knows how far you should have flown back, so taking no knockback at all is an obvious mismatch."
+  - q: "Does Velocity help in PvP?"
+    a: "It can, by keeping a player in melee range instead of being shoved away each hit. That advantage is also why anticheats measure knockback application so closely."
+---
+
+<KeyTakeaways>
+
+- Velocity, also called anti-knockback, reduces or cancels the pushback you take when hit.
+- The server sends a knockback vector after a hit; Velocity scales it down before the player moves.
+- A full cancel is trivial to catch; partial values blend in better with lag and normal trades.
+- Detection is server-side because the server already knows how far the player should have moved.
+
+</KeyTakeaways>
+
+Velocity is a combat module that reduces or cancels the knockback a player takes when an attack lands on them. The server tells the client how far to fly back after a hit. Velocity intercepts that instruction and shrinks it, so the player barely moves. It is also called anti-knockback.
+
+## How Velocity works
+
+Velocity edits the pushback the server sends after a hit. When an entity is struck in Minecraft, the server sends the client a velocity update: a vector that says which way and how fast to move. The vanilla client applies that vector in full. Velocity catches the update first and scales it down before the player moves.
+
+The scaling is usually a percentage on each axis. Horizontal pushback gets cut so the player does not slide backward, while vertical pushback often stays closer to normal so jumps and falls still look right. At zero percent the player takes no knockback at all. At a partial value they take some, which is harder to notice.
+
+The same effect can be reached two ways. Some implementations modify the velocity packet as it arrives. Others let the vanilla movement run and then correct the position the next tick. Both end with the player holding ground they should have lost.
+
+## Common settings
+
+Velocity modules expose a few values that trade safety against effect.
+
+| Setting | What it controls |
+|---|---|
+| Horizontal | Percent of sideways pushback the player still takes |
+| Vertical | Percent of upward pushback the player still takes |
+| Mode | Packet edit vs position correction |
+| Chance | How often a given hit gets reduced, instead of every hit |
+
+A full cancel is the strongest and the most obvious. Partial values, or a chance that skips some hits, look more like lag or a normal trade and draw less attention.
+
+## Why players use it
+
+Velocity gives a melee advantage by keeping the player in range. Knockback normally breaks up a fight: each hit shoves both players apart, so they have to close the gap again. A player who takes less pushback stays on top of the target and keeps swinging while the other player drifts away. In a straight melee duel that is a large edge.
+
+## Why it gets detected
+
+Velocity is detected because the server already knows how far the player should have moved. The server sends the knockback vector, so it can compare the position it expects against the position the client reports. When a player keeps absorbing hits without moving the predicted distance, the gap stands out.
+
+Server-side anticheats track this directly. They watch how much of each knockback the player actually applied across many hits. A player who consistently keeps more ground than physics allows is flagged. A full cancel is trivial to catch. Partial reduction is harder, which is why many implementations never go to zero.
+
+## Velocity vs other combat modules
+
+Velocity is unusual among combat modules because it changes what happens to the player rather than what the player does to a target. [KillAura](/en/learn/what-is-killaura) and an [aimbot](/en/learn/what-is-an-aimbot) act on the enemy, automating aiming and attacks. Velocity acts on the player's own position, overriding a server instruction about how far they should move after a hit. The shared trait is that both override something the server expects to control.
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the module generically so you know what the term means. Naming and exact behavior vary by client, and overriding server knockback breaks the rules on essentially every server.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does Velocity mean in a Minecraft client?">
+In a client menu, Velocity is the anti-knockback module. It reduces the pushback the player takes when hit, so they stay closer to their target during a fight. It has nothing to do with the proxy software of the same name.
+</FAQItem>
+
+<FAQItem question="Is anti-knockback the same as Velocity?">
+Yes. Anti-knockback is the plain-language name and Velocity is the common module name for the same behavior: cutting the pushback a player receives from attacks.
+</FAQItem>
+
+<FAQItem question="Why can't I just set knockback to zero percent?">
+You can, but a full cancel is the easiest version to detect. The server knows how far you should have flown back, so taking no knockback at all is an obvious mismatch. Partial values exist because they blend in better.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The auto-attacking combat module." },
+  { href: "/en/learn/what-is-reach", label: "What is Reach?", description: "The hit-distance module anticheats watch closely." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category these modules belong to." },
+]} />
+
+<CTA href="/en/purchase">See what Opal ships for $8.99</CTA>

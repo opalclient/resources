@@ -1,0 +1,97 @@
+---
+title: "How to Install a Fabric Mod (2026 Guide)"
+description: "Installing a Fabric mod takes three steps: install the Fabric loader for your Minecraft version, add the Fabric API, then drop the mod jar in your mods folder."
+excerpt: "Three steps to install any Fabric mod: loader, Fabric API, then the mod jar. Here is the full walkthrough and the fixes for when it does not load."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Guides"
+author: "Opal Team"
+faqs:
+  - q: "Do I need the Fabric API for every mod?"
+    a: "Most Fabric mods depend on it, so install it by default. A few self-contained mods do not need it, but adding it never hurts."
+  - q: "Why does my mod crash on startup?"
+    a: "Usually a version mismatch or a missing Fabric API. Confirm the loader, the Fabric API, and the mod all target the same Minecraft version."
+  - q: "Where do Fabric mods go?"
+    a: "In the mods folder inside your Minecraft directory. On Windows that is %appdata%\\.minecraft\\mods. Run the Fabric profile once if the folder is not there yet."
+  - q: "Can I run several Fabric mods at once?"
+    a: "Yes. Drop each jar in the same mods folder. As long as they target your Minecraft version and do not conflict, the loader runs them together."
+---
+
+<KeyTakeaways>
+
+- Installing a Fabric mod is three steps: loader, Fabric API, then the mod jar.
+- Every piece (loader, API, mod) must target the same Minecraft version.
+- Mods live in the mods folder inside your Minecraft directory.
+- Most install failures are a version mismatch or a missing Fabric API.
+
+</KeyTakeaways>
+
+Installing a [Fabric](https://fabricmc.net/) mod takes three steps: install the Fabric loader for your exact Minecraft version, put the Fabric API in your mods folder, then drop the mod's jar in beside it. Launch the Fabric profile and the mod loads. Most install problems come from a version mismatch, so match every piece to the same Minecraft version.
+
+<Callout variant="info" title="Installing Opal">
+Opal follows these same steps: it is a Fabric mod. For the exact version and recommended JVM arguments, use the [setup guide](/en/docs/setup).
+</Callout>
+
+## The three steps
+
+<Steps>
+
+<Step number={1} title="Install the Fabric loader">
+Install the [Fabric](https://fabricmc.net/) loader for your Minecraft version, using the official Fabric installer or a launcher that supports Fabric. See [how to install the Fabric loader](/en/learn/how-to-install-fabric-loader) for the full walkthrough.
+</Step>
+
+<Step number={2} title="Add the Fabric API">
+Place the [Fabric API](/en/learn/what-is-the-fabric-api) jar in your mods folder. Most mods depend on it.
+</Step>
+
+<Step number={3} title="Add the mod">
+Place the mod's jar in the same mods folder, next to the Fabric API.
+</Step>
+
+</Steps>
+
+Then launch the Fabric profile and the mod loads on startup. If it does not appear, check the troubleshooting list below.
+
+## Where the mods folder is
+
+| OS | Path |
+| :--- | :--- |
+| Windows | `%appdata%\.minecraft\mods` |
+| macOS | `~/Library/Application Support/minecraft/mods` |
+| Linux | `~/.minecraft/mods` |
+
+If the `mods` folder does not exist yet, run the Fabric profile once and it gets created for you.
+
+## When a mod will not load
+
+<Checklist>
+<ChecklistItem>Mod does not appear: the jar is in the wrong folder, or you launched a non-Fabric profile.</ChecklistItem>
+<ChecklistItem>Crash on launch with a missing-class error: the Fabric API is missing or the wrong version.</ChecklistItem>
+<ChecklistItem>Version mismatch: the loader, the Fabric API, and the mod must all target the same Minecraft version.</ChecklistItem>
+</Checklist>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Do I need the Fabric API for every mod?">
+Most Fabric mods depend on it, so install it by default. A few self-contained mods do not need it, but adding it never hurts.
+</FAQItem>
+
+<FAQItem question="Why does my mod crash on startup?">
+Usually a version mismatch or a missing Fabric API. Confirm the loader, the Fabric API, and the mod all target the same Minecraft version.
+</FAQItem>
+
+<FAQItem question="Where do Fabric mods go?">
+In the `mods` folder inside your Minecraft directory (paths above). Run the Fabric profile once if the folder is not there yet.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/how-to-install-fabric-loader", label: "How to install the Fabric loader", description: "The first step, in full detail." },
+  { href: "/en/learn/what-is-the-fabric-api", label: "What is the Fabric API?", description: "Why almost every mod needs it." },
+  { href: "/en/blog/essential-fabric-mods-every-player-should-have", label: "Essential Fabric mods", description: "A solid base to install once you are set up." },
+]} />
+
+<CTA href="/en/purchase">Get Opal, a Fabric client, for $8.99</CTA>

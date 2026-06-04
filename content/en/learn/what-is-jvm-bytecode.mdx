@@ -1,0 +1,97 @@
+---
+title: "What Is JVM Bytecode? Java Class Files Explained"
+description: "JVM bytecode is the compact instruction set the Java Virtual Machine runs. Learn how .class files work, why mods rewrite bytecode, and where ASM fits in."
+excerpt: "Bytecode is the portable instruction set the JVM runs, not native machine code. Here is how .class files work and why mods rewrite them."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Concepts"
+author: "Opal Team"
+faqs:
+  - q: "Is JVM bytecode the same as machine code?"
+    a: "No. Machine code is native instructions for a specific CPU. Bytecode is the JVM's own instruction set, which the JVM translates to machine code at runtime. That extra layer is what makes a .class file run on any platform."
+  - q: "Can you read bytecode back into source?"
+    a: "Partly. Decompilers reconstruct readable Java from bytecode, and they get close for ordinary code. The result is not always identical to the original, and comments and some local names are gone, but it is usually enough to follow."
+  - q: "Why not just edit the Java source?"
+    a: "Because mods usually do not have the source. They ship against the compiled game. Rewriting bytecode lets a mod change behavior without ever touching, or even having, the original Java files."
+  - q: "Do I need to learn bytecode to write a mod?"
+    a: "Usually not. Modding frameworks and scripting layers handle the bytecode work for you. Knowing how it works helps when you debug a tricky patch or build tooling."
+---
+
+<KeyTakeaways>
+
+- JVM bytecode is the compact instruction set the Java Virtual Machine executes.
+- The Java compiler produces bytecode in `.class` files, not native machine code.
+- The same `.class` file runs on any platform with a Java runtime, which is the point of the format.
+- Mods rewrite bytecode to change the compiled game without ever having its source.
+
+</KeyTakeaways>
+
+JVM bytecode is the instruction set the Java Virtual Machine executes. When you compile Java source, the compiler does not produce machine code for your CPU. It produces bytecode, a compact, portable format stored in `.class` files. The JVM reads those instructions at runtime and turns them into native code as it goes.
+
+<Callout variant="info" title="Where Opal fits">
+Opal is a [Fabric](https://fabricmc.net/) mod, and the modding tools it builds on do the bytecode work for you, so you do not have to touch opcodes by hand. If you want to add behavior in plain JavaScript instead, see the [scripting introduction](/en/docs/scripting).
+</Callout>
+
+## How source becomes bytecode
+
+A `.java` file is text a person writes. A `.class` file is the compiled output the JVM runs. The compiler reads your source, checks it, and writes one `.class` file per class, each holding bytecode instructions plus a constant pool, method tables, and other metadata.
+
+Bytecode is not tied to any one processor. The same `.class` file runs on Windows, macOS, Linux, or anything with a Java runtime, because the JVM is the layer that knows how to execute the instructions on the local machine. That portability is the whole point of the format.
+
+## What the instructions look like
+
+Bytecode is a stack-based instruction set. Most operations push values onto an operand stack, pop them off, and push a result. There is no register allocation to reason about; the model is deliberately simple so the JVM can verify and execute it quickly.
+
+A few example opcodes give the flavor:
+
+| Opcode | What it does |
+| :--- | :--- |
+| `iload` | Push an int local variable onto the stack |
+| `iadd` | Pop two ints, push their sum |
+| `invokevirtual` | Call an instance method |
+| `getfield` | Read an instance field |
+| `return` | Return from a method |
+
+You rarely read or write these by hand. Tools generate and consume them, which is where a library like [ASM](/en/learn/what-is-asm) comes in.
+
+## Why bytecode matters for mods
+
+Bytecode matters because it lets you change behavior without the original source. A Minecraft mod almost never has the game's source code. What it has is the compiled game on disk. To add or alter a feature, a mod reads the existing bytecode, rewrites it, and feeds the result back to the JVM as the classes load.
+
+This is how patching frameworks insert hooks into methods they do not own. They find the right spot in a compiled method and splice in a call to the mod's code. Working at the bytecode level means a mod can attach to the game even though it never sees a line of the original Java.
+
+## Where ASM fits
+
+[ASM](/en/learn/what-is-asm) is a Java library for reading, writing, and transforming bytecode. It parses a `.class` file into events or a tree, lets code modify the instructions, and emits a valid `.class` file back out. It is small, fast, and works close to the raw format, which is why higher-level modding tools build on top of it rather than parsing class files themselves.
+
+Most modders never call [ASM](/en/learn/what-is-asm) directly. They use a higher-level layer that hides the opcodes and exposes a friendlier way to say "run my code at the start of this method." Underneath, that layer is editing bytecode, often through ASM.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is JVM bytecode the same as machine code?">
+No. Machine code is native instructions for a specific CPU. Bytecode is the JVM's own instruction set, which the JVM translates to machine code at runtime. That extra layer is what makes a `.class` file run on any platform.
+</FAQItem>
+
+<FAQItem question="Can you read bytecode back into source?">
+Partly. Decompilers reconstruct readable Java from bytecode, and they get close for ordinary code. The result is not always identical to the original, and comments and some local names are gone, but it is usually enough to follow.
+</FAQItem>
+
+<FAQItem question="Why not just edit the Java source?">
+Because mods usually do not have the source. They ship against the compiled game. Rewriting bytecode lets a mod change behavior without ever touching, or even having, the original Java files.
+</FAQItem>
+
+<FAQItem question="Do I need to learn bytecode to write a mod?">
+Usually not. Modding frameworks and scripting layers handle the bytecode work for you. Knowing how it works helps when you debug a tricky patch or build tooling.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-the-jvm", label: "What is the JVM?", description: "The runtime that executes this bytecode." },
+  { href: "/en/learn/what-is-asm", label: "What is ASM?", description: "The library that reads and rewrites class files." },
+  { href: "/en/learn/what-is-graalvm-javascript-scripting", label: "What is GraalVM JavaScript scripting?", description: "Adding behavior without touching bytecode." },
+]} />
+
+<CTA href="/en/purchase">Get Opal, a Fabric client, for $8.99</CTA>

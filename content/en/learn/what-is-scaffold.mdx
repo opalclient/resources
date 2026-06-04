@@ -1,0 +1,96 @@
+---
+title: "What Is Scaffold in Minecraft? (Module Explained)"
+description: "Scaffold is a movement module that auto-places blocks under you as you walk so you bridge without aiming. Here is how it works and why anticheats flag it."
+excerpt: "Scaffold lays a floor under your feet as you walk, so you bridge across gaps hands-free. Here is how the module places blocks and why rotation gives it away."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Modules"
+author: "Opal Team"
+faqs:
+  - q: "What is the difference between Scaffold and a bridge macro?"
+    a: "A bridge macro replays fixed key presses on a timer. Scaffold reacts to your live position and rotation each tick, so it adapts to turns and speed changes instead of repeating one canned motion."
+  - q: "Why does Scaffold get caught so easily?"
+    a: "The usual giveaway is rotation: the module places blocks at an angle the visible camera is not pointing at, and server-side anticheats compare those two values. Perfect timing is a second tell."
+  - q: "Is Scaffold a movement or a world module?"
+    a: "It is categorized as a movement module because its purpose is to keep the player moving across gaps. The block placement is the means, not the goal."
+  - q: "Can Scaffold be made undetectable?"
+    a: "No. Adding delay and fake rotations makes it harder to flag, but a modern anticheat still has many signals to compare, and any consistent automation eventually leaves a pattern."
+---
+
+<KeyTakeaways>
+
+- Scaffold is a movement module that auto-places blocks under your feet as you walk.
+- It picks a hotbar block, rotates toward the open space behind you, and places before you fall.
+- The hard part is rotation, which is also the main tell anticheats look for.
+- It keeps you bridging hands-free instead of looking down and timing each block by hand.
+
+</KeyTakeaways>
+
+Scaffold is a movement module that places blocks under your feet automatically as you walk, so you bridge across gaps without aiming the camera down. It picks a block from your hotbar, rotates toward the open space behind you, and places it the instant you would step off an edge. The result is hands-free bridging.
+
+## What Scaffold does
+
+Scaffold turns manual bridging into an automatic action. Normal bridging requires you to look down, hold the place key, and walk backward at a steady pace. Scaffold handles the timing and the placement for you. You hold a movement key and the module keeps a floor under you.
+
+Most implementations expose a few options:
+
+| Option | What it controls |
+|--------|------------------|
+| Tower mode | Whether it also places blocks straight down while you jump in place |
+| Rotation handling | Whether it snaps your view or fakes the placement angle silently |
+| Placement delay | How long it waits between blocks, to look less mechanical |
+| Sprint allowance | Whether you can keep sprint speed while it places |
+| Block selection | Which hotbar slot it pulls from |
+
+Because it is a movement-category behavior, Scaffold sits alongside other modules that change how the player traverses the world rather than how they fight.
+
+## How it works under the hood
+
+Scaffold watches your position and velocity each tick. When it predicts your next step lands on air, it sends a block-placement to the server before you fall. The hard part is the rotation. The game normally places a block against the face you are looking at, so the module has to point the player's facing at the empty spot behind and below them, place, and then often restore the original view.
+
+Two broad styles exist. One snaps the real camera to the placement angle for a frame, which is fast but visible. The other sends placement packets with a fabricated rotation while leaving the on-screen camera alone, which looks cleaner to other players but is exactly the pattern detectors hunt for.
+
+## Why anticheats flag it
+
+Scaffold produces movement and rotation patterns that humans rarely make. Server-side anticheats look for several tells:
+
+- Block placements whose rotation does not match the visible camera angle.
+- Perfectly timed placements that never miss and never overlap.
+- Walking backward at a constant speed while placing on every block boundary.
+- Placing against a block face the player could not realistically see.
+
+A modern anticheat does not need to "see" the module. It only needs to notice that the placement angles and the look angles disagree, or that the bridging cadence is too consistent to be human. That is why Scaffold settings often trade speed for believable randomness.
+
+## Legitimate vs cheat context
+
+Auto-bridging exists in vanilla-adjacent forms too. Some practice servers and training maps include a bridging trainer, and certain creative tools place rows of blocks for builders. The Scaffold module differs because it runs during normal survival or competitive play to gain an unfair edge, which is why it appears in cheat-detection material rather than in build tooling.
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the module generically so you know what the term means. Naming and exact behavior vary by client, and auto-placing blocks to bridge breaks the rules on essentially every competitive server.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What is the difference between Scaffold and a bridge macro?">
+A bridge macro replays fixed key presses on a timer. Scaffold reacts to your live position and rotation each tick, so it adapts to turns and speed changes instead of repeating one canned motion.
+</FAQItem>
+
+<FAQItem question="Why does Scaffold get caught so easily?">
+The usual giveaway is rotation. The module places blocks at an angle the visible camera is not pointing at, and server-side anticheats compare those two values. Perfect, never-missing placement timing is a second tell.
+</FAQItem>
+
+<FAQItem question="Is Scaffold a movement or a world module?">
+It is categorized as a movement module because its purpose is to keep the player moving across gaps. The block placement is the means, not the goal.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity (anti-knockback)?", description: "Another movement-adjacent combat module." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The stealth category that hides modules like this." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category these modules belong to." },
+]} />
+
+<CTA href="/en/purchase">See what Opal ships for $8.99</CTA>

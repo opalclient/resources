@@ -1,0 +1,93 @@
+---
+title: "What is the JVM? Java Virtual Machine Explained"
+description: "The JVM runs Java bytecode on any operating system. It is why Minecraft Java Edition and every Fabric mod run the same on Windows, macOS, and Linux."
+excerpt: "The JVM runs the compiled bytecode behind Minecraft Java Edition and every mod built for it. Here is what it does and why it matters."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Concepts"
+author: "Opal Team"
+faqs:
+  - q: "Is the JVM the same as Java?"
+    a: "No. Java is the language; the JVM is the runtime that executes the compiled output. Other languages such as Kotlin also compile to bytecode and run on the same JVM."
+  - q: "Do I need to install the JVM to play Minecraft?"
+    a: "You need a Java runtime, which includes the JVM. Many launchers bundle one for you, so you may already have it without installing anything separately."
+  - q: "What is the difference between the JVM and the JDK?"
+    a: "The JVM runs bytecode. The JDK is the full developer kit, including the compiler and tools, that you use to build Java programs in the first place."
+  - q: "Why is the JVM slow to start but fast later?"
+    a: "It interprets bytecode at first, then the JIT compiler converts the hottest code to native machine code as the program runs. That warm-up is the start-up cost; the speed-up comes after."
+---
+
+<KeyTakeaways>
+
+- The JVM (Java Virtual Machine) is the program that runs compiled Java bytecode.
+- Same bytecode runs on Windows, macOS, and Linux, so mods do not need recompiling.
+- Players need a Java runtime (JRE); modders need the full JDK with the compiler.
+- Minecraft Java Edition and every Fabric mod, including Opal, run on the JVM.
+
+</KeyTakeaways>
+
+The JVM, or Java Virtual Machine, is the program that runs Java code. You write Java, a compiler turns it into bytecode, and the JVM runs that bytecode on any operating system. This is why Minecraft Java Edition and the mods built for it behave the same on Windows, macOS, and Linux without recompiling.
+
+<Callout variant="info" title="Where Opal fits">
+Opal is a [Fabric](https://fabricmc.net/) mod, so it runs on the same JVM as the game. If you are setting it up, the [setup guide](/en/docs/setup) walks through it.
+</Callout>
+
+## What the JVM actually does
+
+The JVM runs bytecode, not source code. When you compile a Java program you do not get a Windows or Mac executable. You get class files full of bytecode, a compact instruction set the JVM understands. The JVM reads those instructions and executes them on your machine.
+
+That extra layer is the point. The same bytecode runs anywhere a JVM exists, so "write once, run anywhere" is the short version of why Java spread so widely. The JVM is the part that makes the promise true.
+
+## JVM, JRE, and JDK
+
+These three terms get mixed up a lot, so here is the split.
+
+| Term | What it is | When you need it |
+| :--- | :--- | :--- |
+| JVM | The engine that runs bytecode | Always, to run any Java program |
+| JRE | The JVM plus the standard libraries | To run Java programs |
+| JDK | The JRE plus the compiler and dev tools | To build Java programs |
+
+A player only needs a runtime to launch the game. A developer building a mod needs the full JDK so they can compile Java into bytecode in the first place.
+
+## How the JVM runs your code fast
+
+The JVM starts by interpreting bytecode one instruction at a time. As it runs, it watches which methods get called the most. Those hot paths get handed to the JIT compiler, which turns them into native machine code on the fly. After warm-up, the busiest code runs at close to native speed.
+
+The JVM also manages memory for you. A garbage collector reclaims objects you stop using, so you do not free memory by hand the way you would in C. This is one reason Java is forgiving to write and a common first language for modders.
+
+## Why it matters for Minecraft
+
+Minecraft Java Edition runs on the JVM, and so does every utility client and mod that targets it. A client's own code can be Java, Kotlin, or another JVM language, because they all compile to the same bytecode the JVM runs. A [Fabric](https://fabricmc.net/) mod ships as a jar of bytecode, the loader wires it into the game at launch, and the JVM runs the whole thing as one process.
+
+This is also why launchers let you tune things like the heap size and which Java version to use. You are configuring the JVM that hosts the game, not the game itself.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is the JVM the same as Java?">
+No. Java is the language; the JVM is the runtime that executes the compiled output. Other languages such as Kotlin also compile to bytecode and run on the same JVM.
+</FAQItem>
+
+<FAQItem question="Do I need to install the JVM to play Minecraft?">
+You need a Java runtime, which includes the JVM. Many launchers bundle one for you, so you may already have it without installing anything separately.
+</FAQItem>
+
+<FAQItem question="What is the difference between the JVM and the JDK?">
+The JVM runs bytecode. The JDK is the full developer kit, including the compiler and tools, that you use to build Java programs in the first place.
+</FAQItem>
+
+<FAQItem question="Why is the JVM slow to start but fast later?">
+It interprets bytecode at first, then the JIT compiler converts the hottest code to native machine code as the program runs. That warm-up is the start-up cost; the speed-up comes after.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-jvm-bytecode", label: "What is JVM bytecode?", description: "The instruction set the JVM actually runs." },
+  { href: "/en/learn/what-is-graalvm-javascript-scripting", label: "What is GraalVM JavaScript scripting?", description: "A JavaScript runtime that rides on the JVM." },
+  { href: "/en/learn/what-is-a-minecraft-mod-loader", label: "What is a Minecraft mod loader?", description: "How mods get wired into the game at launch." },
+]} />
+
+<CTA href="/en/purchase">Get Opal, a Fabric client, for $8.99</CTA>

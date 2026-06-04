@@ -1,0 +1,87 @@
+---
+title: "NeoForge vs Forge: Minecraft Mod Loaders (2026)"
+description: "NeoForge vs Forge explained: how the community fork differs from the original loader on governance, version support, and mods, and which to pick."
+excerpt: "NeoForge is the community fork of Forge that now leads the Forge-lineage scene on current Minecraft. Here is how the two differ and which one to run."
+date: "2026-06-04"
+lastUpdated: "2026-06-04"
+category: "Frameworks"
+author: "Opal Team"
+faqs:
+  - q: "Is NeoForge a replacement for Forge?"
+    a: "On current Minecraft versions most of the community treats NeoForge as the successor, but Forge still exists and supports older versions, so neither has erased the other."
+  - q: "Can I run Forge mods on NeoForge?"
+    a: "Not reliably. The two share roots but the APIs have diverged, so a mod targeting one is not guaranteed to load on the other; install the matching build."
+  - q: "Are NeoForge and Fabric the same thing?"
+    a: "No. NeoForge comes from the Forge family with an event-bus and registry model, while Fabric is a separate, lighter loader with its own mixin-based patching."
+---
+
+<KeyTakeaways>
+
+- NeoForge is a 2023 community fork of Forge that now leads the Forge-lineage scene on current Minecraft.
+- Forge is the original loader that carried the modded ecosystem for years and still serves older modpacks.
+- The split was about governance, not a rewrite; the two share core ideas but have since diverged.
+- Pick NeoForge for new versions and active mods; pick Forge for older packs built against it.
+
+</KeyTakeaways>
+
+NeoForge is the community-run fork of Forge that started in 2023 and is now the default loader for the Forge-lineage modding scene on current Minecraft versions. Forge is the original loader that carried the modded ecosystem for years. Pick NeoForge for new versions and active mods; pick Forge for older modpacks built against it.
+
+<Callout variant="info" title="Where Opal fits">
+Opal runs on [Fabric](https://fabricmc.net/), not the Forge family, so neither of these is the loader you set up for Opal. If you are getting started, the [setup guide](/en/docs/setup) walks through the Fabric install.
+</Callout>
+
+## What each one is
+
+Forge is the original Minecraft mod loader. It ran most of the large modpack scene from the 1.6 era forward, with an annotation-based event bus, an opinionated lifecycle, and ASM class transformers under the hood.
+
+NeoForge is a fork of Forge that split off in 2023 when a leadership conflict in the Forge project came to a head. It keeps the same broad architecture (registries, capabilities, an event bus) but runs under community governance with a more open contribution model.
+
+## Why the fork happened
+
+The split was about governance, not a rewrite. A group of Forge contributors moved to a community-owned project after disagreements over how Forge was being run. Because NeoForge started from the Forge codebase, the two loaders share most of their core ideas, and mod authors familiar with Forge find NeoForge immediately recognizable.
+
+Over time the two have drifted apart. NeoForge has reworked parts of the API and ships its own conventions, so a mod built for current NeoForge is not guaranteed to load on Forge and the reverse is also true.
+
+## How they differ
+
+| | NeoForge | Forge |
+| :--- | :--- | :--- |
+| Origin | 2023 community fork of Forge | The original loader |
+| Governance | Community-owned, open contribution | Traditional Forge project leadership |
+| Architecture | Same base (registries, capabilities, event bus) | Registries, capabilities, event bus |
+| New-version focus | Current Minecraft versions | Carries the older modded scene |
+| Mod catalog | Growing on modern versions | Deep catalog on older versions |
+
+## Which to choose
+
+<Checklist>
+<ChecklistItem>Choose NeoForge if you play current Minecraft versions and your mods have moved to it. Most actively maintained Forge-style mods now target NeoForge on newer releases.</ChecklistItem>
+<ChecklistItem>Choose Forge if you run an older modpack or a content mod that only ships for Forge. Plenty of long-standing packs are still built on it.</ChecklistItem>
+<ChecklistItem>Check the version page for each mod. The same author may ship a Forge build for old versions and a NeoForge build for new ones.</ChecklistItem>
+</Checklist>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is NeoForge a replacement for Forge?">
+On current Minecraft versions, most of the community treats NeoForge as the successor for Forge-lineage mods. Forge still exists and still supports older versions, so neither one has fully erased the other.
+</FAQItem>
+
+<FAQItem question="Can I run Forge mods on NeoForge?">
+Not reliably. The two share roots, so some simple mods may work, but the APIs have diverged. A mod that targets one loader is not guaranteed to load on the other. Install the build that matches your loader.
+</FAQItem>
+
+<FAQItem question="Are NeoForge and Fabric the same thing?">
+No. NeoForge comes from the Forge family and shares its event-bus and registry model. [Fabric](https://fabricmc.net/) is a separate, lighter loader with its own mixin-based patching model. They are different ecosystems.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "The lighter ecosystem next to the Forge family." },
+  { href: "/en/learn/what-is-a-minecraft-mod-loader", label: "What is a Minecraft mod loader?", description: "What a loader does in the first place." },
+  { href: "/en/learn/what-is-asm", label: "What is ASM?", description: "The bytecode toolkit Forge transformers use." },
+]} />
+
+<CTA href="/en/purchase">Get Opal, a Fabric client, for $8.99</CTA>
