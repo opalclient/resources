@@ -1,0 +1,110 @@
+---
+title: "Best Minecraft Mods for Low-End PCs (2026)"
+description: "The best Minecraft mods for low-end PCs and laptops: Sodium, FerriteCore, Entity Culling, and Dynamic FPS, plus the settings that squeeze out extra frames."
+excerpt: "On weak hardware, draw less and manage less memory. Here is the free stack that does it, and how a client still fits."
+date: "2026-06-13"
+lastUpdated: "2026-06-13"
+category: "Guides"
+author: "trq"
+faqs:
+  - q: "Will these run on an integrated GPU?"
+    a: "Yes. Sodium in particular helps integrated graphics the most. Keep render distance low."
+  - q: "Can I run a client like Opal on a low-end PC?"
+    a: "Yes, if your performance base is solid. Install Sodium for headroom and leave Lithium out, since it is not compatible with Opal."
+  - q: "How much RAM should a low-end setup use?"
+    a: "Enough to run, not more. Over-allocating hurts and can make pauses longer."
+  - q: "Do I need shaders?"
+    a: "No, and you should skip them on weak hardware. Frames first, looks later."
+---
+
+On a weak PC or laptop, the goal is fewer things to draw and less memory to manage. [Sodium](https://modrinth.com/mod/sodium) does the heavy lifting on rendering, a couple of memory and culling mods finish the job, and [Dynamic FPS](https://modrinth.com/mod/dynamic-fps) stops the game cooking your laptop when you tab out. All free on [Fabric](https://fabricmc.net). One note for Opal users: Lithium is not compatible with Opal, so build around Sodium.
+
+<KeyTakeaways>
+
+- Sodium is the biggest win on weak hardware. Install it first.
+- FerriteCore lowers RAM pressure; Entity Culling skips hidden mobs.
+- Dynamic FPS stops the game wasting power in the background.
+- Lithium is not compatible with Opal. Use Sodium if you run Opal.
+
+</KeyTakeaways>
+
+## The stack
+
+<ModSection title="Low-end performance mods" badge="Free" badgeColor="emerald" description="Sodium does the most. FerriteCore, Entity Culling, and Dynamic FPS finish it. Lithium is for non-Opal setups only.">
+<ModList>
+<ModLink href="https://modrinth.com/mod/sodium">Sodium (rendering FPS, works with Opal)</ModLink>
+<ModLink href="https://modrinth.com/mod/ferritecore">FerriteCore (lower RAM use)</ModLink>
+<ModLink href="https://modrinth.com/mod/entityculling">Entity Culling (skip hidden mobs)</ModLink>
+<ModLink href="https://modrinth.com/mod/dynamic-fps">Dynamic FPS (idle in the background)</ModLink>
+<IncompatibleMod>Lithium (game logic, not compatible with Opal)</IncompatibleMod>
+</ModList>
+</ModSection>
+
+## Sodium
+
+The biggest win on weak hardware. The rendering rewrite is where most of your frames come back, and it helps integrated GPUs the most. Install [Fabric API](https://modrinth.com/mod/fabric-api) first.
+
+## FerriteCore
+
+Lowers RAM use so the game pauses less for garbage collection. Important when you only have a few gigabytes to spare.
+
+## Entity Culling
+
+Skips rendering entities you cannot see. On a low-end GPU, not drawing hidden mobs is an easy gain.
+
+## Dynamic FPS
+
+Drops the frame rate when the window is in the background, so the game stops working hard while you are tabbed out. Kind to laptops.
+
+## Settings that still matter
+
+<Checklist>
+<ChecklistItem>Render distance: 6 to 8 chunks is plenty on weak hardware.</ChecklistItem>
+<ChecklistItem>Graphics: Fast.</ChecklistItem>
+<ChecklistItem>Smooth lighting: off or minimum.</ChecklistItem>
+<ChecklistItem>Particles: minimal.</ChecklistItem>
+</Checklist>
+
+<Callout variant="warning" title="Running Opal? Skip Lithium">
+Lithium is not compatible with Opal. On a low-end setup, lean on Sodium for performance and leave Lithium out.
+</Callout>
+
+## Can a low-end PC run a client?
+
+Yes, if the base is solid. Opal is a Fabric mod for Minecraft 1.21.10 and installs into the same `mods` folder as Sodium. It is a full client with 200+ features, so it asks for some resources, which is why the headroom from Sodium matters most on weak hardware. Get the performance stack in, keep render distance low, leave Lithium out, and Opal can run on modest machines.
+
+## At a glance
+
+| Mod | Job | Works with Opal |
+| :--- | :--- | :--- |
+| Sodium | Rendering FPS | Yes |
+| FerriteCore | Lower RAM use | Yes |
+| Entity Culling | Skip hidden mobs | Yes |
+| Dynamic FPS | Idle in background | Yes |
+| Lithium | Game-logic performance | No |
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Will these run on an integrated GPU?">
+Yes. Sodium helps integrated graphics the most. Keep render distance low.
+</FAQItem>
+
+<FAQItem question="Can I run Opal on a low-end PC?">
+Yes, with a solid performance base. Install Sodium for headroom and leave Lithium out.
+</FAQItem>
+
+<FAQItem question="Do I need shaders on a weak PC?">
+No. Skip them on weak hardware. Frames first, looks later.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/blog/best-performance-mods-for-minecraft", label: "Best performance mods for Minecraft", description: "The full performance stack explained." },
+  { href: "/en/blog/how-to-fix-minecraft-lag", label: "How to fix Minecraft lag", description: "Find which kind of lag is hurting you." },
+  { href: "/en/blog/how-to-get-more-fps-in-minecraft", label: "How to get more FPS in Minecraft", description: "Two mods and three settings." },
+]} />
+
+<CTA href="/en/purchase">Get Opal for $8.99 lifetime</CTA>

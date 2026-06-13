@@ -1,0 +1,93 @@
+---
+title: "How to Get Stable FPS for Minecraft PvP (2026)"
+description: "For PvP, steady frame timing beats a high peak. Here is how Sodium, a frame cap, and the right settings deliver it, plus where a PvP client like Opal fits."
+excerpt: "Consistency wins fights, not peak FPS. Here is the setup for steady frames, and where a PvP client like Opal fits on top."
+date: "2026-06-13"
+lastUpdated: "2026-06-13"
+category: "Guides"
+author: "trq"
+faqs:
+  - q: "Is higher FPS always better for PvP?"
+    a: "No. Consistency wins. A stable capped frame rate feels more responsive in a fight than a higher one that spikes and dips."
+  - q: "Do I need a special client for PvP FPS?"
+    a: "For raw FPS, no. Sodium plus the right settings cover it. A PvP client like Opal adds the combat, movement, and utility features on top; keep Sodium installed for the headroom."
+  - q: "Is Lithium compatible with Opal?"
+    a: "No. Lithium is not compatible with Opal. Run Sodium for your framerate and leave Lithium out if Opal is installed."
+  - q: "What FPS should I cap at?"
+    a: "Whatever your machine can hold at all times without dropping. Steadiness over peak."
+---
+
+In PvP, a steady frame rate matters more than a high one. A game that holds a consistent number feels far more responsive than one that spikes and dips mid-fight. The recipe is [Sodium](https://modrinth.com/mod/sodium) for raw performance, a sensible frame cap for consistency, and a few settings tuned for clarity over eye candy. One note up front: Lithium is not compatible with Opal, so if you run Opal, lean on Sodium for the headroom instead.
+
+<KeyTakeaways>
+
+- Steady frametime beats peak FPS in a fight. Aim for a number you always hold.
+- Sodium is the base; it gives the headroom stable frames need.
+- Lithium smooths game logic but is not compatible with Opal. Skip it if you run Opal.
+- A frame cap plus clarity settings finishes the job.
+
+</KeyTakeaways>
+
+## Build the performance core
+
+[Sodium](https://modrinth.com/mod/sodium) rewrites Minecraft's renderer and is the single biggest gain for stable frames. Put the [Fabric](https://fabricmc.net) loader and [Fabric API](https://modrinth.com/mod/fabric-api) in place, then drop Sodium in your `mods` folder. It runs fine alongside Opal.
+
+<Callout variant="warning" title="Running Opal? Skip Lithium">
+Lithium is not compatible with Opal. Use Sodium for your framerate and leave Lithium out of the folder. Sodium covers the rendering side, which is the larger win for PvP anyway.
+</Callout>
+
+## Cap your frame rate
+
+A frame that arrives on a steady schedule feels better than a faster but erratic one. Set a cap your machine can hold comfortably at all times rather than chasing the highest possible number. Consistent frametime is the goal, not a big number in the corner.
+
+## Tune for clarity
+
+<Checklist>
+<ChecklistItem>Render distance: moderate, so distant chunks do not cause dips mid-fight.</ChecklistItem>
+<ChecklistItem>Graphics: Fast.</ChecklistItem>
+<ChecklistItem>Particles: minimal, so effects do not clutter the screen or cost frames.</ChecklistItem>
+<ChecklistItem>Smooth lighting: low.</ChecklistItem>
+</Checklist>
+
+<Callout variant="tip" title="Quick win">
+Dropping render distance from 16 to 12 chunks hands back a large chunk of your framerate with almost no visual cost in close-range PvP.
+</Callout>
+
+## Where a PvP client fits
+
+Stable frames are the foundation; the client is what you do with them. Opal is a Fabric mod for Minecraft 1.21.10, so it installs into the same `mods` folder as Sodium and adds 200+ features across combat, movement, visual, and utility, behind a glass UI. It is a full client, so like any large mod it uses some resources while it runs. That is exactly why Sodium matters: it gives you the headroom to run a feature set like Opal's and still hold steady frames in a fight.
+
+## At a glance
+
+| Want | Install |
+| :--- | :--- |
+| Higher, steadier FPS | Sodium |
+| Smoother game logic (not with Opal) | Lithium |
+| Required base | Fabric API |
+| 200+ PvP and utility features | Opal |
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is higher FPS always better for PvP?">
+No. Consistency wins. A stable capped frame rate beats a spiky higher one.
+</FAQItem>
+
+<FAQItem question="Is Lithium compatible with Opal?">
+No. Run Sodium for your framerate and leave Lithium out when Opal is installed.
+</FAQItem>
+
+<FAQItem question="Will Opal lower my FPS?">
+Opal is a full client, so like any large mod it uses some resources. Keep Sodium installed for headroom and you will hold steady frames on most machines.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/blog/how-to-get-more-fps-in-minecraft", label: "How to get more FPS in Minecraft", description: "The mods and settings behind the headroom." },
+  { href: "/en/blog/best-performance-mods-for-minecraft", label: "Best performance mods for Minecraft", description: "The full free performance stack." },
+  { href: "/en/blog/sodium-or-optifine-which-should-you-use", label: "Sodium or OptiFine?", description: "Why a Fabric client wants Sodium." },
+]} />
+
+<CTA href="/en/purchase">Get Opal for $8.99 lifetime</CTA>

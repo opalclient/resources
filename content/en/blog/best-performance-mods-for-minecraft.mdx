@@ -1,0 +1,101 @@
+---
+title: "Best Performance Mods for Minecraft (2026)"
+description: "The best Minecraft performance mods in 2026: Sodium for rendering, plus memory and culling mods. The short list that fixes lag, and the one to skip if you run Opal."
+excerpt: "Sodium does most of the work; a few memory and culling mods finish it. Here is the short list, and the one mod to skip if you run Opal."
+date: "2026-06-13"
+lastUpdated: "2026-06-13"
+category: "Guides"
+author: "trq"
+faqs:
+  - q: "What is the single best performance mod?"
+    a: "Sodium. It rewrites rendering and is the biggest single FPS gain for most machines."
+  - q: "Is Lithium compatible with Opal?"
+    a: "No. Lithium is not compatible with Opal. Run Sodium for your framerate and leave Lithium out if Opal is installed."
+  - q: "Do these mods change how the game looks?"
+    a: "No. These are speed mods. For shaders, add Iris separately."
+  - q: "Are they safe to run together?"
+    a: "Yes, these are designed to coexist. Install Fabric API first, then add the rest."
+---
+
+If you install one thing, install [Sodium](https://modrinth.com/mod/sodium). It rewrites Minecraft's renderer and is the single biggest frame-rate win for most setups. Pair it with a memory mod or two and a culling mod, and you have covered the real causes of lag. All of these are free [Fabric](https://fabricmc.net) mods. One note for Opal users: Lithium is a common pick that is not compatible with Opal, so it is the one to leave out.
+
+<KeyTakeaways>
+
+- Sodium is the single biggest FPS win. Install it first.
+- FerriteCore and ModernFix cut memory; Entity Culling skips hidden mobs.
+- Lithium smooths game logic but is not compatible with Opal. Skip it if you run Opal.
+- Sodium gives the headroom that makes room for a client like Opal.
+
+</KeyTakeaways>
+
+## The stack
+
+<ModSection title="Free performance mods" badge="Free" badgeColor="emerald" description="Sodium is the core. FerriteCore, Entity Culling, and ModernFix finish it. Lithium is great on non-Opal setups only.">
+<ModList>
+<ModLink href="https://modrinth.com/mod/sodium">Sodium (rendering FPS, works with Opal)</ModLink>
+<ModLink href="https://modrinth.com/mod/ferritecore">FerriteCore (lower memory use)</ModLink>
+<ModLink href="https://modrinth.com/mod/entityculling">Entity Culling (skip hidden entities)</ModLink>
+<ModLink href="https://modrinth.com/mod/modernfix">ModernFix (load time and memory)</ModLink>
+<IncompatibleMod>Lithium (game logic, not compatible with Opal)</IncompatibleMod>
+</ModList>
+</ModSection>
+
+## Sodium
+
+The rendering rewrite. It replaces the vanilla render path with a faster one and usually makes the largest single difference, especially on weaker GPUs. Needs the [Fabric](https://fabricmc.net) loader and [Fabric API](https://modrinth.com/mod/fabric-api) first. Runs fine alongside Opal.
+
+## FerriteCore
+
+Cuts Minecraft's memory use by reworking how data is stored in RAM. Lower memory pressure means fewer garbage-collection pauses, one of the quiet causes of stutter.
+
+## Entity Culling
+
+Stops the game from rendering entities you cannot actually see, behind walls or underground. On busy worlds with lots of mobs or item frames, it claws back frames for free.
+
+## ModernFix
+
+A broad fixes-and-performance mod that speeds up load times and trims memory. A safe catch-all once the core mods are in.
+
+<Callout variant="warning" title="Running Opal? Skip Lithium">
+Lithium is the usual game-logic pick, but it is not compatible with Opal. Rely on Sodium for performance and leave Lithium out of the folder.
+</Callout>
+
+## At a glance
+
+| Mod | What it fixes | Works with Opal |
+| :--- | :--- | :--- |
+| Sodium | Rendering FPS | Yes |
+| FerriteCore | Memory use | Yes |
+| Entity Culling | Wasted entity rendering | Yes |
+| ModernFix | Load time and memory | Yes |
+| Lithium | Game-logic performance | No |
+
+## Where Opal fits
+
+Opal is a Fabric mod for Minecraft 1.21.10, so it installs into the same `mods` folder as the performance stack. You keep your framerate and add a full client on top: 200+ features across combat, movement, visual, and utility, a glass UI, and a scripting engine. Opal is a large mod, so keep Sodium in for headroom and leave Lithium out, and the setup holds together.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What is the single best performance mod?">
+Sodium. It rewrites rendering and is the biggest single gain for most machines.
+</FAQItem>
+
+<FAQItem question="Is Lithium compatible with Opal?">
+No. Use Sodium for performance and leave Lithium out when Opal is installed.
+</FAQItem>
+
+<FAQItem question="Do these change how the game looks?">
+No. These are speed mods. For shaders, add Iris separately.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/blog/how-to-get-more-fps-in-minecraft", label: "How to get more FPS in Minecraft", description: "The settings that finish what the mods start." },
+  { href: "/en/blog/best-mods-for-low-end-pcs", label: "Best mods for low-end PCs", description: "The same stack tuned for weak hardware." },
+  { href: "/en/blog/how-to-fix-minecraft-lag", label: "How to fix Minecraft lag", description: "Diagnose which kind of lag you have." },
+]} />
+
+<CTA href="/en/purchase">Add Opal on top for $8.99</CTA>

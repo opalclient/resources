@@ -1,0 +1,97 @@
+---
+title: "How to Run Shaders Without Losing FPS (2026)"
+description: "Shaders cost frames, but Iris plus Sodium and a lighter pack keep them playable. Here is the setup and the settings that recover the most FPS with shaders on."
+excerpt: "Shaders always cost frames, but you can keep them playable. Here is the Iris and Sodium setup, and how a client still fits on top."
+date: "2026-06-13"
+lastUpdated: "2026-06-13"
+category: "Guides"
+author: "trq"
+faqs:
+  - q: "Why are shaders smoother with Iris and Sodium?"
+    a: "Sodium's fast renderer does the heavy lifting and Iris adds shaders on top, rather than the older single-jar approach."
+  - q: "What setting recovers the most FPS?"
+    a: "Shadow distance and resolution, plus volumetric lighting. Lower those first."
+  - q: "Do Iris and Sodium work with Opal?"
+    a: "Yes. Sodium and Iris both run alongside Opal. Only Lithium is the exception, since it is not compatible with Opal."
+  - q: "Can low-end PCs run shaders at all?"
+    a: "Yes, with light packs and low settings. On weak hardware, frames usually come first."
+---
+
+Shaders always cost some frames, but you can keep them playable. The foundation is [Iris](https://modrinth.com/mod/iris) for shaders running on top of [Sodium](https://modrinth.com/mod/sodium) for performance, which is far faster than the old way. Then you pick a lighter pack and trim the most expensive effects. Both Iris and Sodium run alongside Opal, so a shader-lit game and a full client live on the same setup.
+
+<KeyTakeaways>
+
+- Iris on top of Sodium is the single most important step for playable shaders.
+- A lighter pack and trimmed effects recover most of the lost frames.
+- Iris and Sodium both run with Opal; only Lithium is incompatible.
+- Keep render distance moderate; shaders multiply its cost.
+
+</KeyTakeaways>
+
+## Step 1: Use Iris with Sodium
+
+<Steps>
+
+<Step number={1} title="Install Sodium">
+[Sodium](https://modrinth.com/mod/sodium) is the fast renderer that does the heavy lifting. Put the [Fabric](https://fabricmc.net) loader and [Fabric API](https://modrinth.com/mod/fabric-api) in first, then drop Sodium in your `mods` folder. It runs fine alongside Opal.
+</Step>
+
+<Step number={2} title="Add Iris">
+[Iris](https://modrinth.com/mod/iris) runs shader packs and is built to sit on top of Sodium, so you keep the framerate you just gained. This combination is the whole trick.
+</Step>
+
+</Steps>
+
+## Step 2: Pick a lighter pack
+
+Heavy realistic packs cost the most. A balanced pack, or a low profile of a heavier one, recovers a lot of frames while keeping most of the look.
+
+## Step 3: Trim the expensive effects
+
+Inside the shader's settings, the big costs are usually:
+
+<Checklist>
+<ChecklistItem>Volumetric lighting and fog.</ChecklistItem>
+<ChecklistItem>Reflections, screen-space or water.</ChecklistItem>
+<ChecklistItem>Shadow resolution and distance.</ChecklistItem>
+</Checklist>
+
+Lowering these keeps most of the look for a fraction of the cost.
+
+## Step 4: Mind render distance
+
+Shaders multiply the cost of every chunk drawn, so a high render distance hurts twice. Keep it moderate.
+
+<Callout variant="tip" title="Opal users">
+Sodium and Iris both run with Opal, so you can have shaders and the client at once. Lithium is the only common mod that does not work with Opal, so leave it out and let Sodium handle performance.
+</Callout>
+
+## Where Opal fits
+
+Opal is a Fabric mod for Minecraft 1.21.10 and installs into the same `mods` folder as Sodium and Iris. You get a shader-lit world plus a full client: 200+ features, a glass UI, and a scripting engine. The glass interface is built to look right over a shader-lit game, so the two complement each other rather than fight. Keep Sodium in for headroom and leave Lithium out.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Why are shaders smoother with Iris and Sodium?">
+Sodium's fast renderer does the heavy lifting and Iris adds shaders on top, rather than the older single-jar approach.
+</FAQItem>
+
+<FAQItem question="Do Iris and Sodium work with Opal?">
+Yes. Both run alongside Opal. Only Lithium is not compatible with Opal.
+</FAQItem>
+
+<FAQItem question="What setting recovers the most FPS?">
+Shadow distance and resolution, plus volumetric lighting. Lower those first.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/blog/best-minecraft-shaders", label: "Best Minecraft shaders", description: "Which packs to run, from light to heavy." },
+  { href: "/en/blog/how-to-install-shaders-in-minecraft", label: "How to install shaders in Minecraft", description: "The full Iris setup, step by step." },
+  { href: "/en/blog/how-to-get-more-fps-in-minecraft", label: "How to get more FPS in Minecraft", description: "Recover frames before adding shaders." },
+]} />
+
+<CTA href="/en/purchase">Add Opal on top for $8.99</CTA>
