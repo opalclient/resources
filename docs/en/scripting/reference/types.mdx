@@ -1,0 +1,169 @@
+# Types
+
+Bound Java and wrapper types available to every script. These are injected as
+globals — you do not need to import them.
+
+<Callout type="info">
+    Wrapper types (`BlockPos`, `Vec2f`, `Direction`, `RaytracedRotation`) expose
+    stable, readable method names. The raw Minecraft types (`Vec3d`, `Vec3i`)
+    and `MathHelper` use Fabric intermediary names at runtime, so their methods
+    are **not** callable by readable name — use them for construction and for
+    passing into proxy methods, and do the math through the proxy globals.
+</Callout>
+
+---
+
+## BlockPos
+
+An integer block position. Bound as `BlockPos`; backed by the
+`ScriptBlockPos` wrapper around `net.minecraft.core.BlockPos`. Construct with
+`new BlockPos(x, y, z)`. Returned by proxies such as
+`player.getBlockPosition()`.
+
+```javascript
+const pos = player.getBlockPosition();
+const below = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
+```
+
+<Method name="getX" signature="int getX()" description="Returns the X coordinate." returns={{ type: "int", desc: "X coordinate." }} />
+<Method name="getY" signature="int getY()" description="Returns the Y coordinate." returns={{ type: "int", desc: "Y coordinate." }} />
+<Method name="getZ" signature="int getZ()" description="Returns the Z coordinate." returns={{ type: "int", desc: "Z coordinate." }} />
+<Method name="offset" signature="BlockPos offset(Direction direction)" description="Returns a new BlockPos shifted one block in the given direction." params={[{ name: "direction", type: "Direction", desc: "Direction to offset toward." }]} returns={{ type: "BlockPos", desc: "Offset position." }} />
+
+---
+
+## Vec2f
+
+A yaw/pitch rotation pair. Bound as `Vec2f`; backed by the `ScriptVec2f`
+wrapper around `net.minecraft.world.phys.Vec2`. Construct with
+`new Vec2f(yaw, pitch)`. Returned by rotation proxy methods such as
+`rotation.getRotation()` and `rotation.getRotationFromPosition(pos)`.
+
+```javascript
+const rot = rotation.getRotation();
+client.print("Yaw: " + rot.getYaw() + " Pitch: " + rot.getPitch());
+```
+
+<Method name="getYaw" signature="float getYaw()" description="Returns the yaw angle (horizontal rotation) in degrees." returns={{ type: "float", desc: "Yaw in degrees." }} />
+<Method name="getPitch" signature="float getPitch()" description="Returns the pitch angle (vertical rotation) in degrees." returns={{ type: "float", desc: "Pitch in degrees." }} />
+
+---
+
+## Direction
+
+A cardinal or vertical facing direction. Backed by the `ScriptDirection`
+wrapper around `net.minecraft.core.Direction`. Scripts do not construct this
+directly — obtain one from `world.getAdjacentDirections(pos)`.
+
+```javascript
+const dirs = world.getAdjacentDirections(pos);
+if (!dirs.isEmpty()) {
+    const side = dirs.get(0);
+    const neighbor = pos.offset(side.getOpposite());
+}
+```
+
+<Method name="getOpposite" signature="Direction getOpposite()" description="Returns the direction opposite to this one (e.g. NORTH to SOUTH, UP to DOWN)." returns={{ type: "Direction", desc: "Opposite direction." }} />
+<Method name="getName" signature="String getName()" description="Returns the lowercase direction name." returns={{ type: "String", desc: "One of north, south, east, west, up, down." }} />
+
+---
+
+## RaytracedRotation
+
+A validated rotation paired with the hit result needed for block or entity
+interaction. Backed by the `ScriptRaytracedRotation` wrapper. Returned by
+`rotation.getRotationFromRaycastedBlock()` and
+`rotation.getRotationFromRaycastedEntity()`. May be `null` when no valid
+rotation reaches the target.
+
+```javascript
+const raytrace = rotation.getRotationFromRaycastedBlock(
+    neighbor, side.getOpposite(), rotation.getRotation(), player.getEyePosition()
+);
+if (raytrace === null) return;
+
+rotation.set(raytrace.getYaw(), raytrace.getPitch());
+mc.interactionManager.interactBlock(MAIN_HAND, raytrace.getHitResult());
+```
+
+<Method name="getYaw" signature="float getYaw()" description="Returns the yaw angle in degrees to aim at the target." returns={{ type: "float", desc: "Yaw in degrees." }} />
+<Method name="getPitch" signature="float getPitch()" description="Returns the pitch angle in degrees to aim at the target." returns={{ type: "float", desc: "Pitch in degrees." }} />
+<Method name="getHitResult" signature="HitResult getHitResult()" description="Returns the raw hit result to pass to mc.interactionManager.interactBlock()." returns={{ type: "HitResult", desc: "Hit result." }} />
+
+---
+
+## Vec3d
+
+The raw `net.minecraft.world.phys.Vec3` (double-precision world vector), bound
+as `Vec3d`. Construct with `new Vec3d(x, y, z)`. Returned by proxies such as
+`player.getPosition()`, `player.getEyePosition()`, and
+`esp.getInterpolatedPosition()`, and accepted by `esp.projectVec(pos)` and
+`rotation.getRotationFromPosition(pos)`.
+
+```javascript
+const eye = player.getEyePosition();
+const screen = esp.projectVec(eye, client.getTickDelta());
+```
+
+<Callout type="warning">
+    `Vec3d` is a raw Minecraft type. Its instance methods are intermediary-named
+    at runtime and cannot be called by readable name from a script. Use it to
+    construct vectors and to pass into proxy methods; read coordinates through
+    the proxy that produced it.
+</Callout>
+
+---
+
+## Vec3i
+
+The raw `net.minecraft.core.Vec3i` (integer vector), bound as `Vec3i`.
+Construct with `new Vec3i(x, y, z)`. The same intermediary-name caveat as
+`Vec3d` applies — treat it as a construction and pass-through type. For block
+positions, prefer the `BlockPos` wrapper, which exposes readable
+`getX()`/`getY()`/`getZ()`.
+
+---
+
+## MathHelper
+
+The raw `net.minecraft.util.Mth` math utility, bound as `MathHelper`.
+
+<Callout type="warning">
+    `MathHelper` (`Mth`) is a raw Minecraft type. Its static methods are
+    intermediary-named at runtime, so they are not callable by readable name
+    from a script. For interpolation use `esp.lerp(start, end, tickDelta)`; for
+    general math prefer JavaScript's built-in `Math`.
+</Callout>
+
+---
+
+## Color
+
+The standard `java.awt.Color`, bound as `Color`. Unlike the Minecraft types
+above, its methods are **not** intermediary-mapped, so they are callable
+directly. Use it as an alternative to `renderer.color(r, g, b, a)` for building
+packed ARGB integers.
+
+```javascript
+const c = new Color(255, 80, 0, 200);
+renderer.rect(10, 10, 40, 40, c.getRGB());
+```
+
+<Method name="getRGB" signature="int getRGB()" description="Returns the packed ARGB integer for this color, suitable for any renderer color parameter." returns={{ type: "int", desc: "Packed ARGB color." }} />
+
+---
+
+## Hand Constants
+
+`MAIN_HAND` and `OFF_HAND` are bound `net.minecraft.world.InteractionHand`
+constants. Pass them to interaction calls such as `player.swingHand(hand)` and
+`mc.interactionManager.interactBlock(hand, hitResult)`.
+
+| Constant | Description |
+|---|---|
+| `MAIN_HAND` | The player's main hand. |
+| `OFF_HAND` | The player's off hand. |
+
+```javascript
+player.swingHand(MAIN_HAND);
+```

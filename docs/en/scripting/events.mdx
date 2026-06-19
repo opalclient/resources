@@ -92,6 +92,161 @@ module.on("receivePacket", (event) => {
 });
 ```
 
+## World & Lifecycle Events
+
+| Event Name | Callback Args | Description |
+| :--- | :--- | :--- |
+| `postGameTick` | None | Fired at the end of a game tick (20 TPS). Symmetric with `preGameTick`. |
+| `joinWorld` | `JoinWorldEvent` | Fired when the local player joins a world, after the client world is initialised. |
+| `blockUpdate` | `BlockUpdateEvent` | Fired when a loaded block changes state. Carries the position and old/new states. |
+| `serverConnect` | `ServerConnectEvent` | **Cancellable.** Fired before connecting to a multiplayer server. |
+| `serverDisconnect` | `ServerDisconnectEvent` | Fired when the client disconnects from a server. |
+
+```javascript
+// Logic that runs after vanilla tick processing
+module.on("postGameTick", () => {
+    // end-of-tick cleanup
+});
+
+// React to the player loading into a world
+module.on("joinWorld", (event) => {
+    client.print("Joined a world!");
+});
+
+// Watch for block changes near the player
+module.on("blockUpdate", (event) => {
+    const pos = event.getPos();
+    const oldState = event.getOldState();
+    const newState = event.getNewState();
+});
+
+// Block a connection to a specific server
+module.on("serverConnect", (event) => {
+    const address = event.getServerAddress();
+    // event.setCancelled() aborts the connection (see Cancellable events)
+});
+
+module.on("serverDisconnect", (event) => {
+    client.print("Disconnected.");
+});
+```
+
+## Chat Events
+
+| Event Name | Callback Args | Description |
+| :--- | :--- | :--- |
+| `chatReceived` | `ChatReceivedEvent` | **Cancellable.** Fired when a chat message is received, before it is shown. |
+
+```javascript
+module.on("chatReceived", (event) => {
+    const text = event.getText();        // Component
+    if (event.isOverlay()) return;       // action-bar message
+    // event.setOverlay(true) reroutes it to the action bar
+    // event.setCancelled() suppresses the message (see Cancellable events)
+});
+```
+
+## Input Events
+
+| Event Name | Callback Args | Description |
+| :--- | :--- | :--- |
+| `keyPress` | `KeyPressEvent` | Fired when a keyboard key is pressed. Carries the GLFW key code. |
+| `mousePress` | `MousePressEvent` | Fired when a mouse button is pressed. Carries the GLFW button code. |
+| `resolutionChange` | `ResolutionChangeEvent` | Fired when the GUI is resized (the "screen resize" hook). |
+
+Both `keyPress` and `mousePress` expose the raw GLFW code via `getInteractionCode()`.
+
+```javascript
+module.on("keyPress", (event) => {
+    const keyCode = event.getInteractionCode();   // GLFW key code
+});
+
+module.on("mousePress", (event) => {
+    const button = event.getInteractionCode();    // GLFW mouse button code
+});
+
+module.on("resolutionChange", () => {
+    // recompute layout that depends on screen size
+});
+```
+
+## Interaction Events
+
+| Event Name | Callback Args | Description |
+| :--- | :--- | :--- |
+| `attack` | `AttackEvent` | Fired when the player attacks an entity, before the interaction is processed. |
+| `swing` | `SwingEvent` | Fired when the player swings an arm, before the swing is sent. |
+| `itemUse` | `ItemUseEvent` | Fired when the player uses (right-clicks) the held item. |
+| `jump` | `JumpEvent` | **Cancellable.** Fired before the jump impulse is applied. |
+
+```javascript
+module.on("attack", (event) => {
+    const target = event.getTarget();    // Entity
+});
+
+// SwingEvent is a record — use hand() not getHand()
+module.on("swing", (event) => {
+    const hand = event.hand();           // InteractionHand
+});
+
+module.on("itemUse", (event) => {
+    // no arguments
+});
+
+module.on("jump", (event) => {
+    if (event.isSprinting()) {
+        event.setSprinting(false);       // drop the sprint-jump boost
+    }
+    // event.setCancelled() suppresses the jump (see Cancellable events)
+});
+```
+
+## Bloom Rendering (Advanced)
+
+| Event Name | Callback Args | Description |
+| :--- | :--- | :--- |
+| `renderBloom` | `RenderBloomEvent` | Advanced. Shapes drawn here feed the HUD glow/bloom pass. |
+
+`renderBloom` is a record event. Draw into the bloom-target canvas it carries; anything drawn here is fed through the glow/bloom pass rather than shown directly.
+
+```javascript
+// SwingEvent/RenderBloomEvent are records — use field() accessors, no get prefix
+module.on("renderBloom", (event) => {
+    const ctx = event.drawContext();     // GuiGraphicsExtractor
+    const delta = event.tickDelta();     // float
+    const canvas = event.canvas();       // RenderCanvas
+    // draw glowing shapes into the bloom target here
+});
+```
+
+## Cancellable Events
+
+Some events extend the client's cancellable base, letting a handler suppress the vanilla behaviour: `chatReceived` (suppress the message), `jump` (suppress the jump), and `serverConnect` (abort the connection).
+
+Cancel with `event.setCancelled()` — there is no argument and the flag cannot be cleared once set. Read the current state with `event.isCancelled()`.
+
+```javascript
+// Hide messages containing a phrase
+module.on("chatReceived", (event) => {
+    const raw = event.getText().getString();
+    if (raw.includes("spam")) {
+        event.setCancelled();            // message is suppressed
+    }
+});
+```
+
+## Record-Type Events
+
+A few events are Java **records**. Their data is read through bare field accessors — `event.hand()`, not `event.getHand()`:
+
+| Event | Accessors |
+| :--- | :--- |
+| `swing` | `event.hand()` |
+| `renderWorld` | `event.tickDelta()` |
+| `renderBloom` | `event.drawContext()`, `event.tickDelta()`, `event.canvas()` |
+
+All other events documented here use `getField()` getters (for example `event.getTarget()`, `event.getPos()`).
+
 ## Error Handling
 
 If a callback throws an error, the error is printed to chat and the handler is **removed** to prevent spam. Fix the error and `.script reload`.

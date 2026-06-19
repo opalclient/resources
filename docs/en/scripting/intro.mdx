@@ -93,12 +93,13 @@ Specific Java classes are exposed globally. You do not need to import these.
 
 | Class | Description |
 | :--- | :--- |
-| `Vec3d` | `net.minecraft.util.math.Vec3d` |
-| `Vec3i` | `net.minecraft.util.math.Vec3i` |
-| `BlockPos` | `net.minecraft.util.math.BlockPos` (wrapped as `ScriptBlockPos`) |
-| `MathHelper` | `net.minecraft.util.math.MathHelper` |
+| `Vec3d` | `net.minecraft.world.phys.Vec3` |
+| `Vec3i` | `net.minecraft.core.Vec3i` |
+| `Vec2f` | 2D float vector (wrapped as `ScriptVec2f`) |
+| `BlockPos` | `net.minecraft.core.BlockPos` (wrapped as `ScriptBlockPos`) |
+| `MathHelper` | `net.minecraft.util.Mth` |
 | `Color` | `java.awt.Color` |
-| `MAIN_HAND` / `OFF_HAND` | Hand enum constants |
+| `MAIN_HAND` / `OFF_HAND` | `InteractionHand` enum constants |
 
 <Callout type="warning">
     Accessing properties directly on `mc.player` or `mc.world` requires knowledge of Fabric's intermediary mappings — those calls will fail at runtime. Use the provided proxy globals (`player`, `world`, `inventory`, etc.) for all method calls. Use `mc.player` and `mc.world` only for null checks.
@@ -114,7 +115,7 @@ Specific Java classes are exposed globally. You do not need to import these.
 | `rotation` | Rotation math, smooth aiming, FOV checks |
 | `world` | Blocks, entities, time, dimension |
 | `inventory` | Slots, items, searching, silent switching |
-| `renderer` | 2D shapes, text, gradients, paths (NanoVG) |
+| `renderer` | 2D shapes, text, gradients, paths, images, and composite effects (shadows, blur fills, glows) |
 | `overlay` | Dynamic Island HUD creation |
 | `esp` | 3D to 2D projection for ESP rendering |
 | `modules` | Query, toggle, and list all modules |

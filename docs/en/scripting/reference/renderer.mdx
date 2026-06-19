@@ -2,7 +2,7 @@
 
 **Global Binding:** `renderer`
 
-The renderer provides a complete 2D drawing API backed by **NanoVG**. All drawing calls must be made inside a `renderScreen` event callback, where the NVG frame is active.
+The renderer provides a complete 2D drawing API drawn through the **divinity-backed canvas**. All drawing calls must be made inside a `renderScreen` event callback, where the canvas frame is active.
 
 <Callout type="info">
     All color parameters expect a packed **ARGB Integer**. Create these using `renderer.color(r, g, b, a)` or the `Color` Java class.
@@ -22,8 +22,6 @@ The renderer provides a complete 2D drawing API backed by **NanoVG**. All drawin
 
 <Method name="rainbowRect" signature="void rainbowRect(double x, double y, double width, double height)" description="Draws a rectangle with a dynamic vertical rainbow gradient." params={[{ name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "width", type: "double", desc: "Width." }, { name: "height", type: "double", desc: "Height." }]} />
 
-<Method name="image" signature="void image(long handle, double x, double y, double width, double height, double radius)" description="Draws a NanoVG image." params={[{ name: "handle", type: "long", desc: "NVG image handle." }, { name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "width", type: "double", desc: "Width." }, { name: "height", type: "double", desc: "Height." }, { name: "radius", type: "double", desc: "Corner radius." }]} />
-
 ---
 
 ## Gradients
@@ -42,9 +40,79 @@ The renderer provides a complete 2D drawing API backed by **NanoVG**. All drawin
 
 <Method name="roundedRectOutline" signature="void roundedRectOutline(double x, double y, double w, double h, double radius, double thickness, double color)" description="Draws a hollow rounded rectangular border." params={[{ name: "radius", type: "double", desc: "Corner radius." }, { name: "thickness", type: "double", desc: "Line thickness." }, { name: "color", type: "double", desc: "ARGB color." }]} />
 
+<Method name="roundedRectOutlineVarying" signature="void roundedRectOutlineVarying(double x, double y, double w, double h, double tl, double tr, double br, double bl, double thickness, double color)" description="Draws a hollow rounded rectangular border with individually specified corner radii." params={[{ name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "w", type: "double", desc: "Width." }, { name: "h", type: "double", desc: "Height." }, { name: "tl", type: "double", desc: "Top-left radius." }, { name: "tr", type: "double", desc: "Top-right radius." }, { name: "br", type: "double", desc: "Bottom-right radius." }, { name: "bl", type: "double", desc: "Bottom-left radius." }, { name: "thickness", type: "double", desc: "Line thickness." }, { name: "color", type: "double", desc: "ARGB color." }]} />
+
 <Method name="rectStroke" signature="void rectStroke(double x, double y, double w, double h, double strokeThick, double fillC, double strokeC)" description="Draws a filled rectangle with an outer border." params={[{ name: "strokeThick", type: "double", desc: "Stroke thickness." }, { name: "fillC", type: "double", desc: "Fill color." }, { name: "strokeC", type: "double", desc: "Stroke color." }]} />
 
 <Method name="rectOutlineStroke" signature="void rectOutlineStroke(double x, double y, double w, double h, double outlineThick, double strokeThick, double outlineC, double strokeC)" description="Draws a hollow outline with an outer stroke." params={[{ name: "outlineThick", type: "double", desc: "Outline thickness." }, { name: "strokeThick", type: "double", desc: "Stroke thickness." }, { name: "outlineC", type: "double", desc: "Outline color." }, { name: "strokeC", type: "double", desc: "Stroke color." }]} />
+
+---
+
+## Composite Effects
+
+Higher-level fills the canvas composites from blur, shadow, and bloom passes. These are the same effects the native Opal UI draws with, now reachable from scripts. Like all draw calls they must run inside a `renderScreen` callback.
+
+<Method name="shadow" signature="void shadow(double x, double y, double w, double h, double radius, double blur, double offX, double offY, double color)" description="Draws a soft box shadow behind a rounded-rectangle footprint. Use it under panels and cards for depth." params={[{ name: "x", type: "double", desc: "X coordinate of the casting rect." }, { name: "y", type: "double", desc: "Y coordinate of the casting rect." }, { name: "w", type: "double", desc: "Width of the casting rect." }, { name: "h", type: "double", desc: "Height of the casting rect." }, { name: "radius", type: "double", desc: "Corner radius of the casting rect." }, { name: "blur", type: "double", desc: "Blur spread in pixels." }, { name: "offX", type: "double", desc: "Horizontal shadow offset." }, { name: "offY", type: "double", desc: "Vertical shadow offset." }, { name: "color", type: "double", desc: "Shadow ARGB color." }]} />
+
+<Method name="blurFill" signature="void blurFill(double x, double y, double w, double h, double radius)" description="Fills a rounded rectangle with a backdrop blur of whatever is already drawn behind it (frosted-glass effect)." params={[{ name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "w", type: "double", desc: "Width." }, { name: "h", type: "double", desc: "Height." }, { name: "radius", type: "double", desc: "Corner radius applied to all four corners." }]} />
+
+<Method name="blurFillVarying" signature="void blurFillVarying(double x, double y, double w, double h, double tl, double tr, double br, double bl)" description="Backdrop-blur fill with an individually specified radius per corner. Corners follow CSS order (top-left, top-right, bottom-right, bottom-left)." params={[{ name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "w", type: "double", desc: "Width." }, { name: "h", type: "double", desc: "Height." }, { name: "tl", type: "double", desc: "Top-left radius." }, { name: "tr", type: "double", desc: "Top-right radius." }, { name: "br", type: "double", desc: "Bottom-right radius." }, { name: "bl", type: "double", desc: "Bottom-left radius." }]} />
+
+<Method name="glowFill" signature="void glowFill(double x, double y, double w, double h, double radius)" description="Fills a rounded rectangle that feeds the bloom pass, producing a soft glow around bright content." params={[{ name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "w", type: "double", desc: "Width." }, { name: "h", type: "double", desc: "Height." }, { name: "radius", type: "double", desc: "Corner radius applied to all four corners." }]} />
+
+<Callout type="warning">
+    `innerGlow` is **advanced and visually unverified** — it has no native Opal UI users yet. The binding is present and stable, but its exact appearance has not been confirmed in-game. Treat it as experimental.
+</Callout>
+
+<Method name="innerGlow" signature="void innerGlow(double x, double y, double w, double h, double radius, double spread, double color)" description="Draws a rim glow / inner shadow inset from the edges of a rounded rectangle. Advanced and visually unverified." params={[{ name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "w", type: "double", desc: "Width." }, { name: "h", type: "double", desc: "Height." }, { name: "radius", type: "double", desc: "Corner radius." }, { name: "spread", type: "double", desc: "How far the glow reaches inward from the edge." }, { name: "color", type: "double", desc: "Glow ARGB color." }]} />
+
+```javascript
+// Frosted-glass panel with a drop shadow
+const x = 20, y = 20, w = 160, h = 80;
+renderer.shadow(x, y, w, h, 8, 16, 0, 4, renderer.color(0, 0, 0, 140));
+renderer.blurFill(x, y, w, h, 8);
+renderer.roundedRect(x, y, w, h, 8, renderer.color(20, 20, 28, 120));
+```
+
+---
+
+## Images
+
+Images are loaded once into a handle and drawn by that handle. Loaded images are cached by the renderer, so calling `loadImage` repeatedly with the same path is cheap.
+
+<Callout type="warning">
+    The old raw-integer `image(handle, ...)` form has been **removed** — there was never a way to obtain a valid raw id, so it never worked. Load images with `loadImage` and pass the returned `ImageHandle` instead.
+</Callout>
+
+<Method name="loadImage" signature="ImageHandle loadImage(String path)" description="Loads an image and returns a handle to it. The handle is cached by the renderer. Returns ImageHandle.INVALID on failure — check validity before drawing." params={[{ name: "path", type: "String", desc: "Resource path to the image." }]} returns={{ type: "ImageHandle", desc: "Handle to the loaded image, or ImageHandle.INVALID on failure." }} />
+
+<Method name="image" signature="void image(ImageHandle handle, double x, double y, double width, double height, double radius)" description="Draws a previously loaded image at the given bounds with optional corner rounding." params={[{ name: "handle", type: "ImageHandle", desc: "Handle returned by loadImage." }, { name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "width", type: "double", desc: "Destination width." }, { name: "height", type: "double", desc: "Destination height." }, { name: "radius", type: "double", desc: "Corner radius applied to the image." }]} />
+
+<Method name="imageTinted" signature="void imageTinted(ImageHandle handle, double x, double y, double width, double height, double radius, double tint)" description="Draws a loaded image multiplied by a tint color — useful for recoloring icons or fading images." params={[{ name: "handle", type: "ImageHandle", desc: "Handle returned by loadImage." }, { name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "width", type: "double", desc: "Destination width." }, { name: "height", type: "double", desc: "Destination height." }, { name: "radius", type: "double", desc: "Corner radius applied to the image." }, { name: "tint", type: "double", desc: "ARGB tint color multiplied over the image." }]} />
+
+<Method name="destroyImage" signature="void destroyImage(ImageHandle handle)" description="Releases a previously loaded image handle." params={[{ name: "handle", type: "ImageHandle", desc: "Handle returned by loadImage." }]} />
+
+<Callout type="info">
+    `image` and `imageTinted` work inside the `renderScreen` callback. Drawing images from the GPU/extract render path is not supported from scripts.
+</Callout>
+
+```javascript
+let icon = null;
+
+module.on("enable", () => {
+    icon = renderer.loadImage("opal:textures/logo.png");
+});
+
+module.on("renderScreen", (event) => {
+    if (icon == null || !icon.isValid()) return;
+    renderer.image(icon, 10, 10, 32, 32, 4);
+    renderer.imageTinted(icon, 50, 10, 32, 32, 4, renderer.color(255, 120, 120));
+});
+
+module.on("disable", () => {
+    if (icon != null) renderer.destroyImage(icon);
+});
+```
 
 ---
 
@@ -61,6 +129,10 @@ The renderer provides a complete 2D drawing API backed by **NanoVG**. All drawin
 <Method name="textWidth" signature="double textWidth(String font, String text, double size)" description="Calculates the display width of a string." params={[{ name: "font", type: "String", desc: "Font name." }, { name: "text", type: "String", desc: "Text to measure." }, { name: "size", type: "double", desc: "Font size." }]} returns={{ type: "double", desc: "Width in pixels." }} />
 
 <Method name="textHeight" signature="double textHeight(String font, String text, double size)" description="Calculates the display height of a string." params={[{ name: "font", type: "String", desc: "Font name." }, { name: "text", type: "String", desc: "Text to measure." }, { name: "size", type: "double", desc: "Font size." }]} returns={{ type: "double", desc: "Height in pixels." }} />
+
+<Method name="wrapText" signature="String[] wrapText(String font, String text, double width, double size)" description="Wraps text to a maximum pixel width, returning each line. The result is a JS-iterable array (.length and indexing work)." params={[{ name: "font", type: "String", desc: "Font name." }, { name: "text", type: "String", desc: "Text to wrap." }, { name: "width", type: "double", desc: "Maximum line width in pixels." }, { name: "size", type: "double", desc: "Font size." }]} returns={{ type: "String[]", desc: "The wrapped lines." }} />
+
+<Method name="trimText" signature="String trimText(String font, String text, double width, double size)" description="Trims text to fit within a maximum pixel width, appending an ellipsis when truncated." params={[{ name: "font", type: "String", desc: "Font name." }, { name: "text", type: "String", desc: "Text to trim." }, { name: "width", type: "double", desc: "Maximum width in pixels." }, { name: "size", type: "double", desc: "Font size." }]} returns={{ type: "String", desc: "The trimmed text." }} />
 
 ---
 
@@ -99,6 +171,8 @@ For custom vector shapes. Begin a path, add segments, then stroke it.
 <Method name="beginPath" signature="void beginPath()" description="Starts a new path." />
 <Method name="moveTo" signature="void moveTo(double x, double y)" description="Moves the cursor without drawing." params={[{ name: "x", type: "double", desc: "X." }, { name: "y", type: "double", desc: "Y." }]} />
 <Method name="lineTo" signature="void lineTo(double x, double y)" description="Draws a line from cursor to target." params={[{ name: "x", type: "double", desc: "X." }, { name: "y", type: "double", desc: "Y." }]} />
+<Method name="quadTo" signature="void quadTo(double cx, double cy, double x, double y)" description="Adds a quadratic Bézier curve from the cursor to (x, y) using one control point." params={[{ name: "cx", type: "double", desc: "Control point X." }, { name: "cy", type: "double", desc: "Control point Y." }, { name: "x", type: "double", desc: "End X." }, { name: "y", type: "double", desc: "End Y." }]} />
+<Method name="cubicTo" signature="void cubicTo(double c1x, double c1y, double c2x, double c2y, double x, double y)" description="Adds a cubic Bézier curve from the cursor to (x, y) using two control points." params={[{ name: "c1x", type: "double", desc: "First control point X." }, { name: "c1y", type: "double", desc: "First control point Y." }, { name: "c2x", type: "double", desc: "Second control point X." }, { name: "c2y", type: "double", desc: "Second control point Y." }, { name: "x", type: "double", desc: "End X." }, { name: "y", type: "double", desc: "End Y." }]} />
 <Method name="closePath" signature="void closePath()" description="Closes the path by connecting last point to start." />
 <Method name="strokeColor" signature="void strokeColor(double color)" description="Sets stroke color." params={[{ name: "color", type: "double", desc: "ARGB color." }]} />
 <Method name="strokeWidth" signature="void strokeWidth(double width)" description="Sets stroke thickness." params={[{ name: "width", type: "double", desc: "Line thickness." }]} />
@@ -111,6 +185,15 @@ renderer.moveTo(100, 100);
 renderer.lineTo(150, 50);
 renderer.lineTo(200, 100);
 renderer.closePath();
+renderer.strokeColor(0xFFFFFFFF);
+renderer.strokeWidth(2);
+renderer.stroke();
+
+// Draw a curve
+renderer.beginPath();
+renderer.moveTo(100, 150);
+renderer.quadTo(150, 100, 200, 150);
+renderer.cubicTo(220, 170, 260, 130, 300, 150);
 renderer.strokeColor(0xFFFFFFFF);
 renderer.strokeWidth(2);
 renderer.stroke();
@@ -127,8 +210,10 @@ module.on("renderScreen", (event) => {
     const x = sw - panelWidth - 10;
     const y = 10;
 
-    // Background
-    renderer.roundedRect(x, y, panelWidth, 60, 6, renderer.color(15, 15, 20, 200));
+    // Soft shadow under the panel, then a frosted-glass background
+    renderer.shadow(x, y, panelWidth, 60, 6, 12, 0, 3, renderer.color(0, 0, 0, 130));
+    renderer.blurFill(x, y, panelWidth, 60, 6);
+    renderer.roundedRect(x, y, panelWidth, 60, 6, renderer.color(15, 15, 20, 160));
 
     // Title with theme color
     renderer.textShadow("productsans-bold", "Status", x + 10, y + 16, 9, client.getThemePrimary());

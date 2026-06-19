@@ -1,0 +1,179 @@
+# Module Settings
+
+When you define a module with `script.registerModule`, the `module` object passed to your callback exposes a settings API. Settings you define appear in the ClickGUI **identically to native module settings** — toggles, sliders, and dropdowns — and persist with the rest of the client config.
+
+There are four setting types and a grouping helper:
+
+| Method | UI element |
+|---|---|
+| `addBool` | Toggle switch |
+| `addNumber` | Numeric slider |
+| `addMode` | Dropdown selector |
+| `addGroup` | Collapsible group of existing settings |
+
+<Callout type="info">
+    Define all settings synchronously inside the `registerModule` callback. They are finalized and registered with the ClickGUI once the callback returns.
+</Callout>
+
+---
+
+## Defining settings
+
+### Boolean
+
+<Method
+    name="addBool"
+    signature="void addBool(String name, boolean defaultValue)"
+    description="Adds a boolean (toggle) setting. Appears as a switch in the ClickGUI."
+    params={[
+        { name: "name", type: "String", desc: "The setting display name." },
+        { name: "defaultValue", type: "boolean", desc: "The default value." }
+    ]}
+/>
+
+### Number
+
+<Method
+    name="addNumber"
+    signature="void addNumber(String name, double defaultValue, double min, double max, double step)"
+    description="Adds a numeric (slider) setting. Appears as a slider in the ClickGUI."
+    params={[
+        { name: "name", type: "String", desc: "The setting display name." },
+        { name: "defaultValue", type: "double", desc: "The default value." },
+        { name: "min", type: "double", desc: "The minimum allowed value." },
+        { name: "max", type: "double", desc: "The maximum allowed value." },
+        { name: "step", type: "double", desc: "The step increment for the slider." }
+    ]}
+/>
+
+### Mode
+
+<Method
+    name="addMode"
+    signature="void addMode(String name, String[] options)"
+    description="Adds a mode (dropdown) setting. Pass a JavaScript array of strings — no Java enum is required. The first option is the default."
+    params={[
+        { name: "name", type: "String", desc: "The setting display name." },
+        { name: "options", type: "String[]", desc: "A JavaScript array of option strings." }
+    ]}
+/>
+
+### Group
+
+<Method
+    name="addGroup"
+    signature="void addGroup(String name, String[] settingNames)"
+    description="Groups one or more previously defined settings under a collapsible header. Each name must match a setting added earlier; grouped settings are moved out of the top level and nested inside the group."
+    params={[
+        { name: "name", type: "String", desc: "The group display name." },
+        { name: "settingNames", type: "String[]", desc: "A JavaScript array of names of settings already added to this module." }
+    ]}
+/>
+
+<Callout type="warning">
+    Call `addGroup` **after** the settings it references. Names that do not match a previously added setting are ignored, and if none match, the group is not created.
+</Callout>
+
+---
+
+## Reading and writing settings
+
+<Method
+    name="getBool"
+    signature="boolean getBool(String name)"
+    description="Returns the current value of a boolean setting."
+    params={[
+        { name: "name", type: "String", desc: "The setting name." }
+    ]}
+    returns={{ type: "boolean", desc: "The current value, or false if the setting does not exist." }}
+/>
+
+<Method
+    name="setBool"
+    signature="void setBool(String name, boolean value)"
+    description="Sets the value of a boolean setting programmatically. No-ops if the setting does not exist."
+    params={[
+        { name: "name", type: "String", desc: "The setting name." },
+        { name: "value", type: "boolean", desc: "The new value." }
+    ]}
+/>
+
+<Method
+    name="getNumber"
+    signature="double getNumber(String name)"
+    description="Returns the current value of a numeric setting."
+    params={[
+        { name: "name", type: "String", desc: "The setting name." }
+    ]}
+    returns={{ type: "double", desc: "The current value, or 0.0 if the setting does not exist." }}
+/>
+
+<Method
+    name="setNumber"
+    signature="void setNumber(String name, double value)"
+    description="Sets the value of a numeric setting programmatically. No-ops if the setting does not exist."
+    params={[
+        { name: "name", type: "String", desc: "The setting name." },
+        { name: "value", type: "double", desc: "The new value." }
+    ]}
+/>
+
+<Method
+    name="getMode"
+    signature="String getMode(String name)"
+    description="Returns the currently selected option of a mode setting as a string."
+    params={[
+        { name: "name", type: "String", desc: "The setting name." }
+    ]}
+    returns={{ type: "String", desc: "The selected option, or an empty string if the setting does not exist." }}
+/>
+
+<Method
+    name="isModeEqual"
+    signature="boolean isModeEqual(String name, String option)"
+    description="Checks whether a mode setting is currently set to a specific option. The comparison is case-insensitive."
+    params={[
+        { name: "name", type: "String", desc: "The setting name." },
+        { name: "option", type: "String", desc: "The option to check against." }
+    ]}
+    returns={{ type: "boolean", desc: "True if the mode equals the given option." }}
+/>
+
+<Callout type="info">
+    Mode settings are string-based, so there is no `setMode`. To change a mode from a script, drive it through the UI or with `addMode` defaults; reads are done with `getMode` and `isModeEqual`.
+</Callout>
+
+---
+
+## Worked example
+
+This module defines a toggle, a slider, and a dropdown, groups two of them, then reads every value back inside a tick handler.
+
+```javascript
+script.registerModule({
+    name: "MyModule",
+    description: "Example with settings"
+}, (module) => {
+    // Define settings.
+    module.addBool("Tower", false);
+    module.addNumber("Speed", 1.0, 0.1, 5.0, 0.1);
+    module.addMode("Mode", ["Vanilla", "Hypixel", "NCP"]);
+
+    // Group the two movement settings under one collapsible header.
+    module.addGroup("Movement", ["Tower", "Speed"]);
+
+    module.on("preGameTick", () => {
+        // Read settings back.
+        if (module.getBool("Tower")) {
+            const speed = module.getNumber("Speed");
+            const mode = module.getMode("Mode");
+            client.print("Mode: " + mode + " Speed: " + speed);
+        }
+
+        // Branch on a specific mode (case-insensitive).
+        if (module.isModeEqual("Mode", "Hypixel")) {
+            module.setNumber("Speed", 2.0);
+        }
+    });
+});
+```
