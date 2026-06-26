@@ -8,7 +8,7 @@ Translations and localized content for Opal, served as a public repository.
   translations (properties-style `key=value`; `module.<id>.name`,
   `module.<id>.<prop>.name`, `module.<id>.description`, …). Served per released
   build (`{stream}` ∈ `stable|canary|nightly`; `{version}` e.g.
-  `v2.1.0-stable`). Current: `lang/opal/stable/v2.1.0-stable/{locale}.lang`,
+  `2.1.0`). Current: `lang/opal/stable/2.1.0/{locale}.lang`,
   locales `en`, `de`, `ru`, `zh`, plus a per-version `manifest.json`.
 - `theme/{name}.lang` — locale-independent module/property display-name overrides.
   `default` is empty (names come from `lang/`); alternate themes rebrand names.
