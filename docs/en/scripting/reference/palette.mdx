@@ -1,0 +1,198 @@
+# Palette Views
+
+Contribute a custom command-palette view — a full surface your script draws and drives itself, hosted inside the palette like a mini-app or game.
+
+---
+
+## Palette Proxy
+
+**Global Binding:** `palette`
+
+A palette view is a canvas-backed surface registered under an id. Once registered it behaves like any other palette entry: the user can search for it by title and press Enter to open it, or your script can open it directly. While the view is open it owns the whole content region between the search row and the footer — the palette routes per-frame rendering plus raw keyboard and mouse input to your callbacks instead of drawing the normal result list.
+
+<Callout type="info">
+    Every callback runs on the Minecraft render thread, once per frame for `render` and on demand for input. The drawing surface is the same `renderer` global used in `renderScreen` events — see the [Renderer reference](/scripting/reference/renderer).
+</Callout>
+
+### Creating a view
+
+<Method
+    name="createView"
+    signature="String createView(Object config)"
+    description="Creates and registers a custom palette view from a config object. Requires at least { id, render }; returns the view id, or null if the config was invalid."
+    params={[
+        { name: "config", type: "Object", desc: "The view configuration (see the table below)." }
+    ]}
+    returns={{ type: "String", desc: "The registered view id, or null on an invalid config." }}
+/>
+
+The `config` object accepts these members:
+
+| Member | Type | Required | Description |
+|---|---|---|---|
+| `id` | `String` | **yes** | Unique view id. Passed to `openView` / `removeView`. |
+| `render` | `function(x, y, w, h, dt)` | **yes** | Draws one frame into the content rectangle. |
+| `title` | `String` | no | Display title shown in the palette list (searchable). Defaults to `id`. |
+| `description` | `String` | no | Sub-text shown beside the title. Defaults to `"Script view"`. |
+| `placeholder` | `String` | no | Placeholder text shown in the search row while the view is open. |
+| `footer` | `Array<{key, label}>` | no | Footer key hints, e.g. `[{ key: "Space", label: "Start" }]`. |
+| `keyPressed` | `function(keyCode, mods)` | no | Handles a key press. Return `true` to consume. |
+| `charTyped` | `function(codepoint)` | no | Handles a typed character. Return `true` to consume. |
+| `mouseClicked` | `function(localX, localY, button)` | no | Handles a click in content-local coordinates. Return `true` to consume. |
+
+<Callout type="info">
+    A callback that throws is reported to chat **once** and then suppressed — a misbehaving script can never tear down the palette frame. Returning a non-boolean from an input callback is treated as not-consumed.
+</Callout>
+
+### Opening and removing
+
+<Method
+    name="openView"
+    signature="void openView(String id)"
+    description="Opens the command palette directly into a previously registered view. Enables the command-palette module if it is not already on. Logs an error if no view with that id is registered."
+    params={[
+        { name: "id", type: "String", desc: "The view id returned by createView." }
+    ]}
+/>
+
+<Method
+    name="removeView"
+    signature="void removeView(String id)"
+    description="Unregisters a previously registered view so it no longer appears in the palette."
+    params={[
+        { name: "id", type: "String", desc: "The view id to remove." }
+    ]}
+/>
+
+---
+
+## The render callback
+
+`render(x, y, w, h, dt)` is called once per frame while your view is open.
+
+| Param | Type | Description |
+|---|---|---|
+| `x` | `number` | Left edge of the content rectangle, in the palette's logical coordinate space. |
+| `y` | `number` | Top edge of the content rectangle. |
+| `w` | `number` | Content width. |
+| `h` | `number` | Content height. |
+| `dt` | `number` | Wall-clock seconds elapsed since the previous frame. |
+
+Draw through the `renderer` global exactly as you would in a `renderScreen` event. When `render` is called the canvas frame is **already open and scissor-clipped** to `[x, y, x + w, y + h]`, so drawing outside those bounds is harmless — it is simply clipped away. Treat `(x, y)` as your origin and lay everything out relative to it (the content rectangle is not anchored at `0, 0`).
+
+`dt` is the real elapsed time since the last frame, not a fixed tick — multiply your velocities by it so motion is framerate-independent. It is clamped to a maximum of `0.1` seconds, so a backgrounded or paused tab never produces a giant time step, and it is `0.0` on the very first frame after the view opens.
+
+<Callout type="warning">
+    JavaScript numbers are all doubles, and colors are packed **ARGB ints**. Build colors with `renderer.color(r, g, b[, a])` rather than raw `0xAARRGGBB` literals — a JS double above 2³¹ truncates to the wrong value when it is narrowed to a Java int, so a literal like `0xFFFF0000` will not give you the color you expect.
+</Callout>
+
+---
+
+## Input callbacks
+
+All three input callbacks are optional and return a boolean — return `true` when you handle the event so it stops propagating.
+
+<Method
+    name="keyPressed"
+    signature="boolean keyPressed(int keyCode, int mods)"
+    description="Called when a key is pressed while the view is focused. Compare keyCode against the keys global. Return true to consume the event."
+    params={[
+        { name: "keyCode", type: "int", desc: "The GLFW key code (compare with keys.UP, keys.SPACE, etc.)." },
+        { name: "mods", type: "int", desc: "Modifier bitmask: bit 0 = shift, bit 1 = ctrl." }
+    ]}
+    returns={{ type: "boolean", desc: "True if the event was consumed." }}
+/>
+
+<Method
+    name="charTyped"
+    signature="boolean charTyped(int codepoint)"
+    description="Called for a typed character (text input). Return true to consume the event."
+    params={[
+        { name: "codepoint", type: "int", desc: "The Unicode code point of the typed character." }
+    ]}
+    returns={{ type: "boolean", desc: "True if the event was consumed." }}
+/>
+
+<Method
+    name="mouseClicked"
+    signature="boolean mouseClicked(double localX, double localY, int button)"
+    description="Called on a mouse click inside the view. Coordinates are content-local — the origin is the top-left of the content rectangle, not the window. Return true to consume the event."
+    params={[
+        { name: "localX", type: "double", desc: "Click X relative to the content rectangle." },
+        { name: "localY", type: "double", desc: "Click Y relative to the content rectangle." },
+        { name: "button", type: "int", desc: "Mouse button: 0 = left, 1 = right, 2 = middle." }
+    ]}
+    returns={{ type: "boolean", desc: "True if the event was consumed." }}
+/>
+
+<Callout type="warning">
+    **Esc always closes the view.** The palette intercepts it before your handlers run, so `Esc` is never delivered to `keyPressed` — a surface can never trap the user. Do not rely on `keys.ESCAPE` reaching your view.
+</Callout>
+
+---
+
+## Key Codes
+
+**Global Binding:** `keys`
+
+Scripts cannot reference `org.lwjgl.*` classes directly, so the GLFW key codes a `keyPressed` handler needs are surfaced as plain integer fields on the `keys` global. The values match the codes the palette delivers.
+
+| Group | Constants |
+|---|---|
+| Arrows | `keys.UP`, `keys.DOWN`, `keys.LEFT`, `keys.RIGHT` |
+| Action | `keys.SPACE`, `keys.ENTER`, `keys.ESCAPE`, `keys.TAB`, `keys.BACKSPACE`, `keys.LEFT_SHIFT`, `keys.LEFT_CONTROL` |
+| Letters | `keys.A` … `keys.Z` |
+| Digit row | `keys.NUM_0` … `keys.NUM_9` |
+
+```javascript
+keyPressed: function (keyCode, mods) {
+    if (keyCode === keys.LEFT || keyCode === keys.A) { /* move left */ }
+    else if (keyCode === keys.SPACE) { /* start / restart */ }
+    return true; // we handled it
+}
+```
+
+---
+
+## Worked example
+
+A self-contained bouncing-ball mini-view. It animates from `dt`, draws into the clipped content rectangle, and recenters on `Space`.
+
+```javascript
+// Position is tracked in content-local coordinates (0,0 = top-left of the rect).
+const ball = { x: 40, y: 40, vx: 90, vy: 70, r: 10, w: 0, h: 0 };
+const INK = renderer.color(120, 220, 255); // build colors, never 0xAARRGGBB
+const BG = renderer.color(10, 10, 18);
+
+palette.createView({
+    id: "bouncer",
+    title: "Bouncing Ball",
+    description: "A tiny dt-driven animation demo",
+    placeholder: "Bouncing Ball — Space to recenter, Esc to quit",
+    footer: [{ key: "Space", label: "Recenter" }],
+    render: function (x, y, w, h, dt) {
+        ball.w = w; ball.h = h;            // remember size for keyPressed
+        ball.x += ball.vx * dt;            // dt = wall-clock seconds this frame
+        ball.y += ball.vy * dt;
+        if (ball.x < ball.r || ball.x > w - ball.r) ball.vx *= -1;
+        if (ball.y < ball.r || ball.y > h - ball.r) ball.vy *= -1;
+        ball.x = Math.max(ball.r, Math.min(w - ball.r, ball.x));
+        ball.y = Math.max(ball.r, Math.min(h - ball.r, ball.y));
+
+        renderer.roundedRect(x, y, w, h, 10, BG);          // fills the content rect
+        renderer.circle(x + ball.x, y + ball.y, ball.r, INK); // offset by the origin
+    },
+    keyPressed: function (keyCode, mods) {
+        if (keyCode === keys.SPACE) { ball.x = ball.w / 2; ball.y = ball.h / 2; }
+        return true;                       // consume every key
+    },
+});
+
+palette.openView("bouncer"); // jump straight into it
+```
+
+---
+
+## Full example
+
+The flagship reference is **Pac-Man** — a complete, playable clone that registers a palette view and draws an animated maze, ghosts, and scoring entirely from the `palette`, `renderer`, and `keys` APIs. It ships in the bundled scripts as `Pacman.js` and is the canonical end-to-end demonstration of a palette view: a shared game engine, `dt`-driven updates, footer hints, and `keys`-based input.

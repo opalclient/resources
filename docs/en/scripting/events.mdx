@@ -1,71 +1,174 @@
-# Event Reference
+# Events
 
-Events are registered using `module.on(eventName, callback)`. The callback receives the Java event object as its argument (except lifecycle events which receive no argument).
+A script module registers behaviour by attaching JavaScript handlers to named events with `module.on(...)`. This page lists every event a script module can subscribe to, the payload object each handler receives, and which events can be cancelled.
 
-## Lifecycle Events
+---
 
-| Event Name | Callback Args | Description |
-| :--- | :--- | :--- |
-| `enable` | None | Fired when the module is toggled on. |
-| `disable` | None | Fired when the module is toggled off. |
+## Registering Handlers
+
+Inside a `registerModule` callback, call `module.on(eventName, handler)` for each event you want to react to. The handler is invoked with the Java event object as its only argument — except `enable` and `disable`, which receive no argument.
+
+<Method
+    name="on"
+    signature="void on(String event, Function handler)"
+    description="Registers a JavaScript callback for the named event. The callback receives the event object as its only argument (lifecycle events receive nothing)."
+    params={[
+        { name: "event", type: "String", desc: "The event name (e.g. 'preGameTick'). See the tables below." },
+        { name: "handler", type: "Function", desc: "The JS function to run when the event fires." }
+    ]}
+/>
+
+<Callout type="info">
+    There is one handler slot per event name per module. Calling `on` again with the same event name replaces the previous handler, it does not stack. Register a given event once.
+</Callout>
 
 ```javascript
-module.on("enable", () => {
-    client.print("Module enabled!");
-});
+script.registerModule({ name: "Example", description: "Event demo" }, (module) => {
+    module.on("enable", () => {
+        client.print("Module enabled!");
+    });
 
-module.on("disable", () => {
-    client.print("Module disabled!");
+    module.on("preGameTick", (event) => {
+        if (mc.player === null || mc.world === null) return;
+        // logic runs 20 times per second
+    });
+
+    module.on("disable", () => {
+        client.print("Module disabled!");
+    });
 });
 ```
 
-## Game Loop Events
+<Callout type="info">
+    Most events are plain Java objects whose fields are read through `getX()` getters (`event.getTarget()`, `event.getPos()`). A few are Java **records** whose fields are read through bare accessors with no `get` prefix (`event.hand()`, `event.tickDelta()`). The record events are `renderScreen`, `renderWorld`, `renderBloom`, and `swing`.
+</Callout>
 
-| Event Name | Callback Args | Description |
+## Lifecycle Events
+
+Fired when the module itself is toggled. These are the only events whose handler receives no argument.
+
+| Event | Payload | Fires when |
 | :--- | :--- | :--- |
-| `preGameTick` | `PreGameTickEvent` | Fired at the start of a game tick (20 TPS). Ideal for logic updates. |
-| `renderScreen` | `RenderScreenEvent` | Fired every frame while the 2D HUD is rendering. Use `renderer` here. |
-| `renderWorld` | `RenderWorldEvent` | Fired every frame while the 3D world is rendering. |
+| `enable` | _(none)_ | The module is toggled on. Error reporting is reset here (see Error Handling). |
+| `disable` | _(none)_ | The module is toggled off. Any owned Dynamic Islands are cleaned up. |
 
 ```javascript
-// Game logic — runs 20 times per second
+module.on("enable", () => notification.info("Example", "Started"));
+module.on("disable", () => notification.info("Example", "Stopped"));
+```
+
+## Game Tick Events
+
+Fired around the 20 TPS client tick. Both pass an event object, but neither object carries any data — they are timing hooks for game logic.
+
+| Event | Payload | Fires when |
+| :--- | :--- | :--- |
+| `preGameTick` | `PreGameTickEvent` | At the start of a tick, before vanilla tick logic runs. Ideal for logic updates. |
+| `postGameTick` | `PostGameTickEvent` | At the end of a tick, after vanilla tick logic has run. Symmetric with `preGameTick`. |
+
+```javascript
 module.on("preGameTick", (event) => {
-    if (mc.player === null) return;
-    
-    const health = player.getHealth();
-    if (health < 5) {
+    if (mc.player === null || mc.world === null) return;
+    if (player.getHealth() < 5) {
         notification.warn("Low HP", "Health below 5!");
     }
 });
 
-// 2D HUD rendering — runs every frame
+module.on("postGameTick", (event) => {
+    // end-of-tick cleanup
+});
+```
+
+## Render Events
+
+Fired every frame. Draw with the `renderer` proxy here. All three are records — read their fields with bare accessors.
+
+| Event | Payload | Fires when |
+| :--- | :--- | :--- |
+| `renderScreen` | `RenderScreenEvent` | During the 2D HUD pass. Use for screen-space overlays. |
+| `renderWorld` | `RenderWorldEvent` | During the 3D world pass. Use for world-space drawing (`esp.*` projection). |
+| `renderBloom` | `RenderBloomEvent` | During the HUD bloom pass. Shapes drawn here feed the glow/bloom effect rather than showing directly. |
+
+<Method name="drawContext" signature="GuiGraphicsExtractor drawContext()" description="renderScreen / renderBloom: the GUI graphics extractor for the current frame." returns={{ type: "GuiGraphicsExtractor", desc: "Frame draw context." }} />
+
+<Method name="canvas" signature="RenderCanvas canvas()" description="renderScreen / renderBloom: the render canvas for the pass (the bloom target for renderBloom)." returns={{ type: "RenderCanvas", desc: "Render canvas." }} />
+
+<Method name="mouseX" signature="double mouseX()" description="renderScreen: the cursor X position in GUI-scaled coordinates." returns={{ type: "double", desc: "Cursor X." }} />
+
+<Method name="mouseY" signature="double mouseY()" description="renderScreen: the cursor Y position in GUI-scaled coordinates." returns={{ type: "double", desc: "Cursor Y." }} />
+
+<Method name="matrixStack" signature="PoseStack matrixStack()" description="renderWorld: the camera-relative transform stack (pre-multiplied by the camera view rotation)." returns={{ type: "PoseStack", desc: "Camera-space pose stack." }} />
+
+<Method name="tickDelta" signature="float tickDelta()" description="renderScreen / renderWorld / renderBloom: fractional progress through the current tick, for smooth interpolation." returns={{ type: "float", desc: "Partial tick (0.0–1.0)." }} />
+
+<Callout type="warning">
+    Colors are 32-bit ARGB ints, but JavaScript has only one number type: the IEEE-754 `double`. A literal like `0xFF1a1a1a` is `4278190080`, which is larger than `2^31`; narrowing that double to a Java `int` truncates to the wrong value. Build colors with `renderer.color(r, g, b)` or `renderer.color(r, g, b, a)` instead of raw `0xAARRGGBB` literals.
+</Callout>
+
+```javascript
 module.on("renderScreen", (event) => {
     renderer.roundedRect(10, 10, 120, 24, 4, renderer.color(0, 0, 0, 180));
-    renderer.text("productsans-bold", "FPS: " + client.getFPS(), 18, 24, 8, 0xFFFFFFFF);
+    renderer.text("productsans-bold", "FPS: " + client.getFPS(), 18, 24, 8, renderer.color(255, 255, 255));
 });
 
-// 3D world rendering — runs every frame
 module.on("renderWorld", (event) => {
-    // Use esp.* for 3D-to-2D projection here
+    const delta = event.tickDelta();
+    // use esp.* for 3D-to-2D projection here
 });
 ```
 
 ## Movement Events
 
-| Event Name | Callback Args | Description |
-| :--- | :--- | :--- |
-| `preMovementPacket` | `PreMovementPacketEvent` | Fired before the client sends the movement packet (motion update). |
-| `postMovementPacket` | `PostMovementPacketEvent` | Fired after the movement packet is sent. |
-| `preMove` | `PreMoveEvent` | Fired before player movement calculations are applied. |
-| `postMove` | `PostMoveEvent` | Fired after player movement is calculated. |
+Fired around the player's per-tick movement and the movement packet sent to the server. `preMove` and `preMovementPacket` are **cancellable**; the `pre`-packet variant also lets you rewrite the server-visible position, rotation, and flags to spoof movement.
+
+| Event | Payload | Cancellable | Fires when |
+| :--- | :--- | :--- | :--- |
+| `preMove` | `PreMoveEvent` | Yes | Before the player's movement is applied for the tick. |
+| `postMove` | `PostMoveEvent` | No | After the player's movement has been applied. |
+| `preMovementPacket` | `PreMovementPacketEvent` | Yes | Before the movement packet is sent (position/rotation update). |
+| `postMovementPacket` | `PostMovementPacketEvent` | No | After the movement packet has been sent. |
+
+### Move payload (`preMove` / `postMove`)
+
+<Method name="getSpeed" signature="float getSpeed()" description="The movement speed for the step." returns={{ type: "float", desc: "Movement speed." }} />
+
+<Method name="getMovementInput" signature="Vec3 getMovementInput()" description="The directional movement vector for the step." returns={{ type: "Vec3", desc: "Directional input vector." }} />
+
+### Movement-packet payload (`preMovementPacket`)
+
+Getters read the values about to be sent; setters rewrite them before the packet leaves.
+
+<Method name="getX" signature="double getX()" description="The X coordinate reported to the server." returns={{ type: "double", desc: "X." }} />
+<Method name="getY" signature="double getY()" description="The Y coordinate reported to the server." returns={{ type: "double", desc: "Y." }} />
+<Method name="getZ" signature="double getZ()" description="The Z coordinate reported to the server." returns={{ type: "double", desc: "Z." }} />
+<Method name="setX" signature="void setX(double x)" description="Overrides the X coordinate to report." params={[{ name: "x", type: "double", desc: "New X." }]} />
+<Method name="setY" signature="void setY(double y)" description="Overrides the Y coordinate to report." params={[{ name: "y", type: "double", desc: "New Y." }]} />
+<Method name="setZ" signature="void setZ(double z)" description="Overrides the Z coordinate to report." params={[{ name: "z", type: "double", desc: "New Z." }]} />
+<Method name="getYaw" signature="float getYaw()" description="The yaw rotation reported to the server." returns={{ type: "float", desc: "Yaw." }} />
+<Method name="getPitch" signature="float getPitch()" description="The pitch rotation reported to the server." returns={{ type: "float", desc: "Pitch." }} />
+<Method name="setYaw" signature="void setYaw(float yaw)" description="Overrides the yaw rotation (server-side rotation spoofing)." params={[{ name: "yaw", type: "float", desc: "New yaw." }]} />
+<Method name="setPitch" signature="void setPitch(float pitch)" description="Overrides the pitch rotation (server-side rotation spoofing)." params={[{ name: "pitch", type: "float", desc: "New pitch." }]} />
+<Method name="isOnGround" signature="boolean isOnGround()" description="Whether the player is reported as on the ground." returns={{ type: "boolean", desc: "On-ground flag." }} />
+<Method name="setOnGround" signature="void setOnGround(boolean onGround)" description="Overrides the on-ground flag." params={[{ name: "onGround", type: "boolean", desc: "New on-ground flag." }]} />
+<Method name="isSprinting" signature="boolean isSprinting()" description="Whether the player is reported as sprinting." returns={{ type: "boolean", desc: "Sprint flag." }} />
+<Method name="setSprinting" signature="void setSprinting(boolean sprinting)" description="Overrides the sprinting flag." params={[{ name: "sprinting", type: "boolean", desc: "New sprint flag." }]} />
+<Method name="isHorizontalCollision" signature="boolean isHorizontalCollision()" description="Whether the player collided horizontally this tick." returns={{ type: "boolean", desc: "Collision flag." }} />
+<Method name="setHorizontalCollision" signature="void setHorizontalCollision(boolean horizontalCollision)" description="Overrides the horizontal-collision flag." params={[{ name: "horizontalCollision", type: "boolean", desc: "New collision flag." }]} />
+<Method name="isForceInput" signature="boolean isForceInput()" description="Whether the packet is sent even when no movement occurred." returns={{ type: "boolean", desc: "Force flag." }} />
+<Method name="setForceInput" signature="void setForceInput(boolean forceInput)" description="Forces the packet to be sent even when no movement occurred." params={[{ name: "forceInput", type: "boolean", desc: "New force flag." }]} />
+
+<Callout type="info">
+    `postMovementPacket` exposes the read-only subset of the same getters (`getX`/`getY`/`getZ`, `getYaw`/`getPitch`, `isOnGround`, `isSprinting`) describing what was actually sent. It has no setters and cannot be cancelled.
+</Callout>
 
 ```javascript
-// Rotation spoofing — set server-side rotation before packet
+// Server-side rotation spoof: report a custom yaw/pitch
 module.on("preMovementPacket", (event) => {
-    rotation.set(targetYaw, targetPitch);
+    event.setYaw(targetYaw);
+    event.setPitch(targetPitch);
 });
 
-// Speed modification — adjust motion before it's applied
+// Speed modification before movement is applied
 module.on("preMove", (event) => {
     if (movement.isMoving()) {
         movement.setSpeed(0.5);
@@ -75,189 +178,205 @@ module.on("preMove", (event) => {
 
 ## Packet Events
 
-| Event Name | Callback Args | Description |
-| :--- | :--- | :--- |
-| `sendPacket` | `SendPacketEvent` | Fired when a packet is about to be sent to the server. |
-| `receivePacket` | `ReceivePacketEvent` | Fired when a packet is received from the server. |
-| `instantaneousSendPacket` | `InstantaneousSendPacketEvent` | Fired when an immediate packet is sent (no queue). |
-| `instantaneousReceivePacket` | `InstantaneousReceivePacketEvent` | Fired when an immediate packet is received (no queue). |
+Fired for raw network packets. All four are **cancellable** — cancelling drops the packet so vanilla never sends/handles it. The `instantaneous` pair runs synchronously on the network thread; the plain pair runs on the main thread.
+
+| Event | Payload | Cancellable | Fires when |
+| :--- | :--- | :--- | :--- |
+| `sendPacket` | `SendPacketEvent` | Yes | A packet is about to be sent to the server. |
+| `receivePacket` | `ReceivePacketEvent` | Yes | A packet is received from the server, before it is handled. |
+| `instantaneousSendPacket` | `InstantaneousSendPacketEvent` | Yes | An outbound packet is sent immediately on the network thread. |
+| `instantaneousReceivePacket` | `InstantaneousReceivePacketEvent` | Yes | An inbound packet is received on the network thread, before main-thread queueing. |
+
+<Method name="getPacket" signature="Packet getPacket()" description="Returns the raw Minecraft packet this event wraps (inbound or outbound depending on the event)." returns={{ type: "Packet", desc: "The wrapped packet." }} />
 
 ```javascript
 module.on("sendPacket", (event) => {
-    // event.getPacket() returns the raw Minecraft packet object
+    const packet = event.getPacket();   // outbound packet
 });
 
 module.on("receivePacket", (event) => {
-    // event.getPacket() returns the incoming packet
+    const packet = event.getPacket();   // incoming packet
+    // event.setCancelled() drops it (see Cancelling Events)
 });
 ```
 
-## World & Lifecycle Events
+## Player Interaction Events
 
-| Event Name | Callback Args | Description |
-| :--- | :--- | :--- |
-| `postGameTick` | None | Fired at the end of a game tick (20 TPS). Symmetric with `preGameTick`. |
-| `joinWorld` | `JoinWorldEvent` | Fired when the local player joins a world, after the client world is initialised. |
-| `blockUpdate` | `BlockUpdateEvent` | Fired when a loaded block changes state. Carries the position and old/new states. |
-| `serverConnect` | `ServerConnectEvent` | **Cancellable.** Fired before connecting to a multiplayer server. |
-| `serverDisconnect` | `ServerDisconnectEvent` | Fired when the client disconnects from a server. |
+Fired around the player's combat and item interactions. Only `jump` is cancellable.
+
+| Event | Payload | Cancellable | Fires when |
+| :--- | :--- | :--- | :--- |
+| `attack` | `AttackEvent` | No | The player attacks an entity, before the interaction is processed. |
+| `swing` | `SwingEvent` _(record)_ | No | The player swings an arm, before the swing is sent. |
+| `itemUse` | `ItemUseEvent` | No | The player uses (right-clicks) the held item. Carries no data. |
+| `jump` | `JumpEvent` | Yes | Before the jump impulse is applied. |
+
+<Method name="getTarget" signature="Entity getTarget()" description="attack: the entity being attacked." returns={{ type: "Entity", desc: "The targeted entity." }} />
+
+<Method name="hand" signature="InteractionHand hand()" description="swing: the hand performing the swing (record accessor, no get prefix)." returns={{ type: "InteractionHand", desc: "Swinging hand." }} />
+
+<Method name="isSprinting" signature="boolean isSprinting()" description="jump: whether the player is sprinting while jumping." returns={{ type: "boolean", desc: "Sprint state." }} />
+
+<Method name="setSprinting" signature="void setSprinting(boolean sprinting)" description="jump: override whether the jump is treated as a sprint jump, changing the forward boost applied." params={[{ name: "sprinting", type: "boolean", desc: "True to apply the sprint-jump boost." }]} />
 
 ```javascript
-// Logic that runs after vanilla tick processing
-module.on("postGameTick", () => {
-    // end-of-tick cleanup
+module.on("attack", (event) => {
+    const target = event.getTarget();   // Entity
 });
 
-// React to the player loading into a world
+module.on("swing", (event) => {
+    const hand = event.hand();          // record accessor
+});
+
+module.on("jump", (event) => {
+    if (event.isSprinting()) {
+        event.setSprinting(false);      // drop the sprint-jump boost
+    }
+    // event.setCancelled() suppresses the jump entirely
+});
+```
+
+## World & Connection Events
+
+Fired around world loading, block changes, and server connection lifecycle. Only `serverConnect` is cancellable.
+
+| Event | Payload | Cancellable | Fires when |
+| :--- | :--- | :--- | :--- |
+| `joinWorld` | `JoinWorldEvent` | No | The local player joins a world, after the client world is initialised. Carries no data. |
+| `blockUpdate` | `BlockUpdateEvent` | No | A loaded block changes state. Carries position plus old/new states. |
+| `serverConnect` | `ServerConnectEvent` | Yes | Before connecting to a multiplayer server. Cancel to abort the connection. |
+| `serverDisconnect` | `ServerDisconnectEvent` | No | The client disconnects from a server. Carries no data. |
+
+<Method name="getPos" signature="BlockPos getPos()" description="blockUpdate: the position where the block change occurred." returns={{ type: "BlockPos", desc: "Block position." }} />
+
+<Method name="getOldState" signature="BlockState getOldState()" description="blockUpdate: the block state before the update." returns={{ type: "BlockState", desc: "Previous state." }} />
+
+<Method name="getNewState" signature="BlockState getNewState()" description="blockUpdate: the block state after the update." returns={{ type: "BlockState", desc: "New state." }} />
+
+<Method name="getServerAddress" signature="ServerAddress getServerAddress()" description="serverConnect: the address being connected to." returns={{ type: "ServerAddress", desc: "Target server address." }} />
+
+```javascript
 module.on("joinWorld", (event) => {
     client.print("Joined a world!");
 });
 
-// Watch for block changes near the player
 module.on("blockUpdate", (event) => {
     const pos = event.getPos();
-    const oldState = event.getOldState();
-    const newState = event.getNewState();
+    const before = event.getOldState();
+    const after = event.getNewState();
 });
 
-// Block a connection to a specific server
 module.on("serverConnect", (event) => {
     const address = event.getServerAddress();
-    // event.setCancelled() aborts the connection (see Cancellable events)
-});
-
-module.on("serverDisconnect", (event) => {
-    client.print("Disconnected.");
+    // event.setCancelled() aborts the connection (see Cancelling Events)
 });
 ```
 
 ## Chat Events
 
-| Event Name | Callback Args | Description |
-| :--- | :--- | :--- |
-| `chatReceived` | `ChatReceivedEvent` | **Cancellable.** Fired when a chat message is received, before it is shown. |
+| Event | Payload | Cancellable | Fires when |
+| :--- | :--- | :--- | :--- |
+| `chatReceived` | `ChatReceivedEvent` | Yes | A chat message is received from the server, before it is shown. Cancel to suppress it. |
+
+<Method name="getText" signature="Component getText()" description="The received chat message as a text Component. Use .getString() for plain text." returns={{ type: "Component", desc: "Message component." }} />
+
+<Method name="isOverlay" signature="boolean isOverlay()" description="Whether the message is an action-bar overlay message rather than a chat-line message." returns={{ type: "boolean", desc: "True for action-bar messages." }} />
+
+<Method name="setOverlay" signature="void setOverlay(boolean overlay)" description="Reroutes the message to (true) or away from (false) the action bar." params={[{ name: "overlay", type: "boolean", desc: "True to render as an action-bar message." }]} />
 
 ```javascript
 module.on("chatReceived", (event) => {
-    const text = event.getText();        // Component
-    if (event.isOverlay()) return;       // action-bar message
-    // event.setOverlay(true) reroutes it to the action bar
-    // event.setCancelled() suppresses the message (see Cancellable events)
+    if (event.isOverlay()) return;               // skip action-bar messages
+    const raw = event.getText().getString();
+    if (raw.includes("spam")) {
+        event.setCancelled();                    // suppress the message
+    }
 });
 ```
 
 ## Input Events
 
-| Event Name | Callback Args | Description |
-| :--- | :--- | :--- |
-| `keyPress` | `KeyPressEvent` | Fired when a keyboard key is pressed. Carries the GLFW key code. |
-| `mousePress` | `MousePressEvent` | Fired when a mouse button is pressed. Carries the GLFW button code. |
-| `resolutionChange` | `ResolutionChangeEvent` | Fired when the GUI is resized (the "screen resize" hook). |
+Raw keyboard and mouse input, plus the screen-resize hook. None are cancellable.
 
-Both `keyPress` and `mousePress` expose the raw GLFW code via `getInteractionCode()`.
+| Event | Payload | Fires when |
+| :--- | :--- | :--- |
+| `keyPress` | `KeyPressEvent` | A keyboard key is pressed. Carries the GLFW key code. |
+| `mousePress` | `MousePressEvent` | A mouse button is pressed. Carries the GLFW button code. |
+| `resolutionChange` | `ResolutionChangeEvent` | The GUI is resized (the framebuffer resolution changed). Carries no data. |
+
+Both `keyPress` and `mousePress` expose the raw GLFW code through the same accessor:
+
+<Method name="getInteractionCode" signature="int getInteractionCode()" description="Returns the GLFW code of the key (keyPress) or mouse button (mousePress) that triggered the event." returns={{ type: "int", desc: "The GLFW key or mouse-button code." }} />
 
 ```javascript
 module.on("keyPress", (event) => {
-    const keyCode = event.getInteractionCode();   // GLFW key code
+    const keyCode = event.getInteractionCode();    // GLFW key code
 });
 
 module.on("mousePress", (event) => {
-    const button = event.getInteractionCode();    // GLFW mouse button code
+    const button = event.getInteractionCode();     // GLFW mouse-button code
 });
 
-module.on("resolutionChange", () => {
+module.on("resolutionChange", (event) => {
     // recompute layout that depends on screen size
 });
 ```
 
-## Interaction Events
+## Cancelling Events
 
-| Event Name | Callback Args | Description |
-| :--- | :--- | :--- |
-| `attack` | `AttackEvent` | Fired when the player attacks an entity, before the interaction is processed. |
-| `swing` | `SwingEvent` | Fired when the player swings an arm, before the swing is sent. |
-| `itemUse` | `ItemUseEvent` | Fired when the player uses (right-clicks) the held item. |
-| `jump` | `JumpEvent` | **Cancellable.** Fired before the jump impulse is applied. |
+Cancellable events extend the client's cancellable base, letting a handler suppress the vanilla behaviour the event precedes.
 
-```javascript
-module.on("attack", (event) => {
-    const target = event.getTarget();    // Entity
-});
-
-// SwingEvent is a record — use hand() not getHand()
-module.on("swing", (event) => {
-    const hand = event.hand();           // InteractionHand
-});
-
-module.on("itemUse", (event) => {
-    // no arguments
-});
-
-module.on("jump", (event) => {
-    if (event.isSprinting()) {
-        event.setSprinting(false);       // drop the sprint-jump boost
-    }
-    // event.setCancelled() suppresses the jump (see Cancellable events)
-});
-```
-
-## Bloom Rendering (Advanced)
-
-| Event Name | Callback Args | Description |
-| :--- | :--- | :--- |
-| `renderBloom` | `RenderBloomEvent` | Advanced. Shapes drawn here feed the HUD glow/bloom pass. |
-
-`renderBloom` is a record event. Draw into the bloom-target canvas it carries; anything drawn here is fed through the glow/bloom pass rather than shown directly.
-
-```javascript
-// SwingEvent/RenderBloomEvent are records — use field() accessors, no get prefix
-module.on("renderBloom", (event) => {
-    const ctx = event.drawContext();     // GuiGraphicsExtractor
-    const delta = event.tickDelta();     // float
-    const canvas = event.canvas();       // RenderCanvas
-    // draw glowing shapes into the bloom target here
-});
-```
-
-## Cancellable Events
-
-Some events extend the client's cancellable base, letting a handler suppress the vanilla behaviour: `chatReceived` (suppress the message), `jump` (suppress the jump), and `serverConnect` (abort the connection).
-
-Cancel with `event.setCancelled()` — there is no argument and the flag cannot be cleared once set. Read the current state with `event.isCancelled()`.
-
-```javascript
-// Hide messages containing a phrase
-module.on("chatReceived", (event) => {
-    const raw = event.getText().getString();
-    if (raw.includes("spam")) {
-        event.setCancelled();            // message is suppressed
-    }
-});
-```
-
-## Record-Type Events
-
-A few events are Java **records**. Their data is read through bare field accessors — `event.hand()`, not `event.getHand()`:
-
-| Event | Accessors |
+| Cancellable event | Cancelling effect |
 | :--- | :--- |
-| `swing` | `event.hand()` |
-| `renderWorld` | `event.tickDelta()` |
-| `renderBloom` | `event.drawContext()`, `event.tickDelta()`, `event.canvas()` |
+| `chatReceived` | Suppresses the message. |
+| `jump` | Suppresses the jump. |
+| `serverConnect` | Aborts the connection. |
+| `preMove` | Suppresses the vanilla movement step for the tick. |
+| `preMovementPacket` | Suppresses the movement packet. |
+| `sendPacket` | Prevents the outbound packet from being sent. |
+| `receivePacket` | Drops the inbound packet before vanilla handles it. |
+| `instantaneousSendPacket` | Prevents the outbound packet from being sent. |
+| `instantaneousReceivePacket` | Drops the inbound packet. |
 
-All other events documented here use `getField()` getters (for example `event.getTarget()`, `event.getPos()`).
+<Method name="setCancelled" signature="void setCancelled()" description="Marks the event cancelled. Takes no argument, and the flag cannot be cleared once set." />
+
+<Method name="isCancelled" signature="boolean isCancelled()" description="Returns whether the event has already been cancelled by another handler." returns={{ type: "boolean", desc: "True once setCancelled() has been called." }} />
+
+<Callout type="warning">
+    Calling `setCancelled()` on a non-cancellable event (for example `attack`, `swing`, `postMove`, or any render event) throws, since the method does not exist on those payloads. Only call it on the events listed above.
+</Callout>
+
+```javascript
+// Drop a specific outbound packet
+module.on("sendPacket", (event) => {
+    if (someCondition) {
+        event.setCancelled();        // packet is never sent
+    }
+});
+```
+
+## Number & Color Notes
+
+<Callout type="info">
+    JavaScript has a single number type — the 64-bit `double`. Java accessors that return `int`, `float`, or `long` arrive as ordinary JS numbers, and JS numbers you pass back are narrowed to the Java parameter type. Two consequences worth remembering:
+
+    - **Colors:** build ARGB ints with `renderer.color(r, g, b[, a])`. A raw `0xAARRGGBB` literal above `2^31` (any color with alpha ≥ 0x80) is a positive double that truncates to the wrong `int` when narrowed.
+    - **Codes:** `getInteractionCode()` returns an `int` GLFW code; compare it against numeric constants directly.
+</Callout>
 
 ## Error Handling
 
-If a callback throws an error, the error is printed to chat and the handler is **removed** to prevent spam. Fix the error and `.script reload`.
+If a callback throws, the client prints the **first** error for that event name to chat (with internal class paths sanitized) and then suppresses further errors from that same event until the module is re-enabled. The handler is **not** removed — it keeps running, so a transient per-tick error does not silently disable your script.
+
+To reset error reporting after a fix, toggle the module off and on (the `enable` event clears the suppressed-error set), or reload the script.
 
 ## Null Safety
 
-Always check `mc.player` and `mc.world` before accessing game state — they're null in menus and loading screens:
+Always check `mc.player` and `mc.world` before touching game state — they are `null` in menus and loading screens:
 
 ```javascript
 module.on("preGameTick", (event) => {
     if (mc.player === null || mc.world === null) return;
-    // Safe to use player/world proxies here
+    // safe to use the player / world / inventory proxies here
 });
 ```

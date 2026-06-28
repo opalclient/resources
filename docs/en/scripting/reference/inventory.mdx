@@ -1,0 +1,211 @@
+# Inventory Proxy
+
+Slot switching (including silent/spoof variants), item searching, and stack inspection for the local player's inventory.
+
+---
+
+## Inventory Proxy
+**Global Binding:** `inventory`
+
+Wraps the internal `SlotHelper` system used by Scaffold and other modules for server-side slot manipulation, plus convenience helpers for searching the hotbar and full inventory and inspecting individual stacks.
+
+<Callout type="info">
+    Hotbar slots are indexed `0`–`8`. The full inventory uses slots `0`–`35` (hotbar `0`–`8`, main inventory `9`–`35`). Search and count helpers match an item's display name as a case-insensitive substring.
+</Callout>
+
+<Callout type="warning">
+    All methods read `mc.player` without a null guard. Always confirm the player exists before calling — e.g. `if (mc.player === null) return;` — to avoid errors when not in a world.
+</Callout>
+
+### Slot Switching
+
+<Method
+    name="setSlot"
+    signature="void setSlot(int slot)"
+    description="Switches the selected hotbar slot normally, visible to both the client and the server."
+    params={[
+        { name: "slot", type: "int", desc: "The hotbar slot index (0-8)." }
+    ]}
+/>
+
+<Method
+    name="setSlotSilent"
+    signature="void setSlotSilent(int slot)"
+    description="Switches the selected hotbar slot using the default silent mode. The server receives the slot change while the client-side held item render may be preserved."
+    params={[
+        { name: "slot", type: "int", desc: "The hotbar slot index (0-8)." }
+    ]}
+/>
+
+<Method
+    name="setSlotFullSilent"
+    signature="void setSlotFullSilent(int slot)"
+    description="Switches the selected hotbar slot using full silent mode. The switch is completely spoofed: the server sees the new slot while the client keeps rendering the original slot's item."
+    params={[
+        { name: "slot", type: "int", desc: "The hotbar slot index (0-8)." }
+    ]}
+/>
+
+<Method
+    name="sendSlotPacket"
+    signature="void sendSlotPacket(int slot)"
+    description="Sends a raw selected-slot update packet to the server for the given slot. Useful for forcing a slot switch for a single action within one tick. No-op if no player is present."
+    params={[
+        { name: "slot", type: "int", desc: "The hotbar slot index (0-8)." }
+    ]}
+/>
+
+<Method
+    name="getSelectedSlot"
+    signature="int getSelectedSlot()"
+    description="Returns the currently selected hotbar slot index."
+    returns={{ type: "int", desc: "The selected slot index (0-8)." }}
+/>
+
+```javascript
+module.on("preGameTick", (event) => {
+    if (mc.player === null) return;
+
+    const blockSlot = inventory.findBlock();
+    if (blockSlot !== -1) {
+        inventory.setSlotSilent(blockSlot);
+        client.print("Switched to blocks in slot " + blockSlot);
+    }
+});
+```
+
+### Item Searching
+
+<Method
+    name="findBlock"
+    signature="int findBlock()"
+    description="Searches the hotbar (slots 0-8) for a placeable block, using the same block validation as the Scaffold module (excludes containers, non-full blocks, etc.)."
+    returns={{ type: "int", desc: "The slot index (0-8) of the first valid block, or -1 if none found." }}
+/>
+
+<Method
+    name="findItem"
+    signature="int findItem(String itemName)"
+    description="Searches the hotbar (slots 0-8) for an item whose display name contains the given substring (case-insensitive)."
+    params={[
+        { name: "itemName", type: "String", desc: "The search string." }
+    ]}
+    returns={{ type: "int", desc: "The hotbar slot index (0-8), or -1 if not found." }}
+/>
+
+<Method
+    name="findItemInInventory"
+    signature="int findItemInInventory(String itemName)"
+    description="Searches the full inventory (slots 0-35) for an item whose display name contains the given substring (case-insensitive)."
+    params={[
+        { name: "itemName", type: "String", desc: "The search string." }
+    ]}
+    returns={{ type: "int", desc: "The inventory slot index (0-35), or -1 if not found." }}
+/>
+
+```javascript
+if (mc.player === null) return;
+
+const swordSlot = inventory.findItem("sword");
+if (swordSlot !== -1) {
+    inventory.setSlot(swordSlot);
+}
+
+const totemSlot = inventory.findItemInInventory("totem");
+client.print("Totem at inventory slot " + totemSlot);
+```
+
+### Stack Inspection
+
+<Method
+    name="getStack"
+    signature="ItemStack getStack(int slot)"
+    description="Returns the ItemStack in the specified hotbar slot."
+    params={[
+        { name: "slot", type: "int", desc: "The hotbar slot index (0-8)." }
+    ]}
+    returns={{ type: "ItemStack", desc: "The item stack in the slot." }}
+/>
+
+<Method
+    name="getMainHandStack"
+    signature="ItemStack getMainHandStack()"
+    description="Returns the ItemStack in the player's main hand, resolved through SlotHelper so it accounts for silent switching."
+    returns={{ type: "ItemStack", desc: "The main hand item stack." }}
+/>
+
+<Method
+    name="getOffHandStack"
+    signature="ItemStack getOffHandStack()"
+    description="Returns the ItemStack in the player's off hand."
+    returns={{ type: "ItemStack", desc: "The off hand item stack." }}
+/>
+
+<Method
+    name="isHeldItemBlock"
+    signature="boolean isHeldItemBlock()"
+    description="Returns whether the item in the player's main hand is a placeable block."
+    returns={{ type: "boolean", desc: "True if the main hand holds a block." }}
+/>
+
+<Method
+    name="isBlock"
+    signature="boolean isBlock(int slot)"
+    description="Returns whether the item in the specified hotbar slot is a placeable block."
+    params={[
+        { name: "slot", type: "int", desc: "The hotbar slot index (0-8)." }
+    ]}
+    returns={{ type: "boolean", desc: "True if the slot contains a block item." }}
+/>
+
+<Method
+    name="getItemName"
+    signature="String getItemName(int slot)"
+    description="Returns the display name of the item in the specified slot."
+    params={[
+        { name: "slot", type: "int", desc: "The inventory slot index." }
+    ]}
+    returns={{ type: "String", desc: "The item's display name, or an empty string if the slot is empty." }}
+/>
+
+<Method
+    name="getItemCount"
+    signature="int getItemCount(int slot)"
+    description="Returns the stack count of the item in the specified slot."
+    params={[
+        { name: "slot", type: "int", desc: "The inventory slot index." }
+    ]}
+    returns={{ type: "int", desc: "The item count in the slot." }}
+/>
+
+<Method
+    name="countItem"
+    signature="int countItem(String itemName)"
+    description="Counts the total number of a specific item across the entire inventory (slots 0-35) by matching display name (case-insensitive substring)."
+    params={[
+        { name: "itemName", type: "String", desc: "The item name to search for." }
+    ]}
+    returns={{ type: "int", desc: "The total count across the inventory." }}
+/>
+
+<Method
+    name="countBlocks"
+    signature="int countBlocks()"
+    description="Counts the total number of placeable blocks across the hotbar (slots 0-8) and the off hand, using the Scaffold block validation."
+    returns={{ type: "int", desc: "The total block count." }}
+/>
+
+```javascript
+module.on("preGameTick", (event) => {
+    if (mc.player === null) return;
+
+    const blocks = inventory.countBlocks();
+    if (blocks < 16) {
+        notification.warn("Low Blocks", "Only " + blocks + " blocks left", 2000);
+    }
+});
+```
+
+<Callout type="info">
+    Numbers in scripts are always JavaScript doubles. Slot indices and counts are narrowed back to `int` on the Java side, so pass whole-number values. When working with ItemStack colors or any ARGB value elsewhere, build colors with `renderer.color(r, g, b[, a])` rather than raw `0xAARRGGBB` literals — a JS double above 2^31 truncates incorrectly when narrowed to an `int`.
+</Callout>

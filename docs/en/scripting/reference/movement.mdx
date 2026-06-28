@@ -1,0 +1,212 @@
+# Movement Proxy
+
+Read and manipulate the local player's movement: query speed, set velocity, and resolve movement direction from input.
+
+---
+
+## Movement Proxy
+**Global Binding:** `movement`
+
+Provides scripts with access to movement utilities including speed manipulation, direction calculation, and movement state queries.
+
+<Callout type="info">
+    JavaScript has only one number type (a 64-bit double). The Java methods below distinguish between `float` and `double` parameters, but from a script you just pass plain numbers — the engine narrows them as needed. Angles are always in degrees unless the method name ends in `Radians`.
+</Callout>
+
+```javascript
+module.on("preGameTick", (event) => {
+    if (movement.isMoving()) {
+        client.print("Speed: " + movement.getSpeed().toFixed(2));
+        movement.setSpeed(0.5);
+    }
+});
+```
+
+### Speed queries
+
+<Method
+    name="getBlocksPerSecond"
+    signature="double getBlocksPerSecond()"
+    description="Returns the local player's current horizontal speed in blocks per second."
+    returns={{ type: "double", desc: "The speed in blocks/second." }}
+/>
+
+<Method
+    name="getSpeed"
+    signature="double getSpeed()"
+    description="Returns the local player's current horizontal speed as a raw velocity magnitude (blocks per tick)."
+    returns={{ type: "double", desc: "The speed in blocks/tick." }}
+/>
+
+<Callout type="info">
+    There are 20 ticks per second, so `getBlocksPerSecond()` is roughly `getSpeed() * 20`. Use blocks/tick (`getSpeed`) when matching values fed back into `setSpeed`, and blocks/second for human-readable HUD output.
+</Callout>
+
+### Speed manipulation
+
+<Method
+    name="yawPos"
+    signature="double[] yawPos(float yaw, double value)"
+    description="Computes the X and Z offsets for a given yaw direction and distance."
+    params={[
+        { name: "yaw", type: "float", desc: "The direction angle in degrees." },
+        { name: "value", type: "double", desc: "The distance to project." }
+    ]}
+    returns={{ type: "double[]", desc: "A two-element array [deltaX, deltaZ]." }}
+/>
+
+```javascript
+// Project 1 block forward along the player's movement yaw.
+const offset = movement.yawPos(movement.getMoveYaw(), 1.0);
+client.print("dX=" + offset[0].toFixed(3) + " dZ=" + offset[1].toFixed(3));
+```
+
+<Method
+    name="setEntitySpeed"
+    signature="void setEntitySpeed(Entity entity, double speed, double yaw)"
+    description="Sets the velocity of an arbitrary entity to the specified speed along a given yaw direction."
+    params={[
+        { name: "entity", type: "Entity", desc: "The entity to modify." },
+        { name: "speed", type: "double", desc: "The target speed in blocks/tick." },
+        { name: "yaw", type: "double", desc: "The direction angle in degrees." }
+    ]}
+/>
+
+<Method
+    name="setSpeed"
+    signature="void setSpeed(double speed)"
+    description="Sets the local player's horizontal speed using the current movement input direction."
+    params={[
+        { name: "speed", type: "double", desc: "The target speed in blocks/tick." }
+    ]}
+/>
+
+<Method
+    name="setSpeed"
+    signature="void setSpeed(double speed, double strafePercentage)"
+    description="Sets the local player's horizontal speed with a strafe percentage blend between forward and sideways motion."
+    params={[
+        { name: "speed", type: "double", desc: "The target speed in blocks/tick." },
+        { name: "strafePercentage", type: "double", desc: "The strafe blend (0.0 = pure forward, 1.0 = pure strafe)." }
+    ]}
+/>
+
+<Method
+    name="setSpeed"
+    signature="void setSpeed(double speed, float yaw)"
+    description="Sets the local player's horizontal speed along a specific yaw direction."
+    params={[
+        { name: "speed", type: "double", desc: "The target speed in blocks/tick." },
+        { name: "yaw", type: "float", desc: "The direction angle in degrees." }
+    ]}
+/>
+
+<Callout type="warning">
+    `setSpeed(speed, strafePercentage)` and `setSpeed(speed, yaw)` are different overloads that both take two numbers. Because JavaScript has a single number type, the engine cannot tell a strafe blend (`0.0`–`1.0`) apart from a yaw angle (degrees) purely by value — both resolve to the same call site. If you need an explicit yaw, prefer building the offset with `yawPos(...)` and applying it, or pass a value that is unambiguous for your intent. Test both behaviors in-game before shipping a script.
+</Callout>
+
+<Method
+    name="getSwiftnessSpeed"
+    signature="double getSwiftnessSpeed(double speed, double swiftnessMultiplier)"
+    description="Adjusts a base speed by the local player's Swiftness potion effect level."
+    params={[
+        { name: "speed", type: "double", desc: "The base speed." },
+        { name: "swiftnessMultiplier", type: "double", desc: "The multiplier applied per Swiftness level." }
+    ]}
+    returns={{ type: "double", desc: "The adjusted speed." }}
+/>
+
+<Method
+    name="getSwiftnessSpeed"
+    signature="double getSwiftnessSpeed(double speed)"
+    description="Adjusts a base speed by the local player's Swiftness potion effect level using the default multiplier."
+    params={[
+        { name: "speed", type: "double", desc: "The base speed." }
+    ]}
+    returns={{ type: "double", desc: "The adjusted speed." }}
+/>
+
+```javascript
+// Scale a base speed up while a Swiftness effect is active, then apply it.
+const base = 0.28;
+movement.setSpeed(movement.getSwiftnessSpeed(base));
+```
+
+### Direction
+
+<Method
+    name="getMoveYaw"
+    signature="float getMoveYaw(Vector2d from, Vector2d to)"
+    description="Calculates the movement yaw between two 2D positions."
+    params={[
+        { name: "from", type: "Vector2d", desc: "The starting position." },
+        { name: "to", type: "Vector2d", desc: "The ending position." }
+    ]}
+    returns={{ type: "float", desc: "The yaw angle in degrees." }}
+/>
+
+<Method
+    name="getMoveYaw"
+    signature="float getMoveYaw()"
+    description="Returns the local player's current movement yaw based on WASD input and camera rotation."
+    returns={{ type: "float", desc: "The movement yaw in degrees." }}
+/>
+
+<Method
+    name="getDirectionDegrees"
+    signature="float getDirectionDegrees()"
+    description="Returns the local player's current movement direction in degrees, accounting for strafe and forward input."
+    returns={{ type: "float", desc: "The direction in degrees." }}
+/>
+
+<Method
+    name="getDirectionRadians"
+    signature="double getDirectionRadians()"
+    description="Returns the local player's current movement direction in radians."
+    returns={{ type: "double", desc: "The direction in radians." }}
+/>
+
+<Method
+    name="getDirectionDegrees"
+    signature="float getDirectionDegrees(float yaw)"
+    description="Returns the movement direction in degrees for a specific yaw."
+    params={[
+        { name: "yaw", type: "float", desc: "The base yaw angle." }
+    ]}
+    returns={{ type: "float", desc: "The direction in degrees." }}
+/>
+
+<Method
+    name="getDirectionRadians"
+    signature="double getDirectionRadians(float yaw)"
+    description="Returns the movement direction in radians for a specific yaw."
+    params={[
+        { name: "yaw", type: "float", desc: "The base yaw angle." }
+    ]}
+    returns={{ type: "double", desc: "The direction in radians." }}
+/>
+
+<Method
+    name="getDirection"
+    signature="double getDirection(float rotationYaw, double moveForward, double moveStrafing)"
+    description="Calculates the exact movement direction from raw input values."
+    params={[
+        { name: "rotationYaw", type: "float", desc: "The player's yaw rotation." },
+        { name: "moveForward", type: "double", desc: "The forward input value (-1 to 1)." },
+        { name: "moveStrafing", type: "double", desc: "The strafe input value (-1 to 1)." }
+    ]}
+    returns={{ type: "double", desc: "The movement direction in radians." }}
+/>
+
+### State queries
+
+<Method
+    name="isMoving"
+    signature="boolean isMoving()"
+    description="Returns whether the local player is currently providing movement input (any of WASD or equivalent keys are pressed)."
+    returns={{ type: "boolean", desc: "True if the player has active movement input." }}
+/>
+
+<Callout type="info">
+    `isMoving()` reflects input keys, not actual velocity. A player held still against a wall while pressing W still counts as moving; a player sliding on ice after releasing the keys does not.
+</Callout>

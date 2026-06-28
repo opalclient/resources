@@ -1,0 +1,320 @@
+# Rotation Proxy
+
+Server-side rotation submission plus stateless angle math, raycasting, and FOV checks.
+
+---
+
+**Global Binding:** `rotation`
+
+The rotation proxy has two halves. The **stateful** methods (`set`, `setSmooth`)
+submit a target rotation to the client's internal rotation handler — the same
+system KillAura and Scaffold drive — which manages server-side yaw/pitch,
+movement correction, and anti-cheat compliance for you. The **stateless**
+methods compute rotation angles, look vectors, differences, and
+sensitivity-corrected values without touching any client state.
+
+<Callout type="info">
+    Rotation values are yaw/pitch in degrees. Methods return and accept the
+    `Vec2f` wrapper (read it with `getYaw()` / `getPitch()`), the `Vec3d` world
+    vector, and the `RaytracedRotation` wrapper. JavaScript has only one number
+    type (double); when you pass a plain number into a `float` parameter it is
+    narrowed automatically, so just pass numbers normally.
+</Callout>
+
+---
+
+## Stateful Submission
+
+These submit a target rotation to the rotation handler. They return nothing —
+the handler applies the rotation on the next movement packet and corrects
+movement automatically.
+
+<Method
+    name="set"
+    signature="void set(float yaw, float pitch)"
+    description="Submits a target rotation using an instant (snap) rotation model, applied on the next movement packet."
+    params={[
+        { name: "yaw", type: "float", desc: "Target yaw in degrees." },
+        { name: "pitch", type: "float", desc: "Target pitch in degrees." }
+    ]}
+/>
+
+<Method
+    name="setSmooth"
+    signature="void setSmooth(float yaw, float pitch, float speed)"
+    description="Submits a target rotation using a linear (smooth) model that caps the turn to a maximum number of degrees per tick."
+    params={[
+        { name: "yaw", type: "float", desc: "Target yaw in degrees." },
+        { name: "pitch", type: "float", desc: "Target pitch in degrees." },
+        { name: "speed", type: "float", desc: "Maximum degrees of rotation per tick." }
+    ]}
+/>
+
+<Callout type="warning">
+    `set` and `setSmooth` go through the client's shared rotation handler, so they
+    interact with native modules (KillAura, Scaffold) that also submit rotations.
+    Submit your target every tick (e.g. from `preGameTick`) rather than once — the
+    handler resolves the active target per tick.
+</Callout>
+
+```javascript
+// Smoothly aim at the closest living entity each tick
+module.on("preGameTick", (event) => {
+    if (mc.player === null || mc.world === null) return;
+
+    const targets = world.getLivingEntitiesInRange(5.0);
+    if (targets.isEmpty()) return;
+
+    const target = targets.get(0);
+    const point = player.getClosestPoint(target);
+    const rot = rotation.getRotationFromPosition(point);
+
+    rotation.setSmooth(rot.getYaw(), rot.getPitch(), 60.0);
+});
+```
+
+---
+
+## Rotation Calculation
+
+Stateless helpers that derive a rotation (or look vector) from a target. None of
+them alter client state.
+
+<Method
+    name="getRotationFromPosition"
+    signature="Vec2f getRotationFromPosition(Vec3d pos)"
+    description="Calculates the yaw and pitch needed to look at a world position from the local player's current eye position."
+    params={[
+        { name: "pos", type: "Vec3d", desc: "Target position in world space." }
+    ]}
+    returns={{ type: "Vec2f", desc: "Yaw/pitch pair (x = yaw, y = pitch)." }}
+/>
+
+<Method
+    name="getRotationFromBlock"
+    signature="Vec2f getRotationFromBlock(BlockPos blockPos, Direction direction)"
+    description="Calculates the yaw and pitch needed to look at the center of a specific face of a block."
+    params={[
+        { name: "blockPos", type: "BlockPos", desc: "Block position." },
+        { name: "direction", type: "Direction", desc: "Face direction to aim at." }
+    ]}
+    returns={{ type: "Vec2f", desc: "Yaw/pitch pair." }}
+/>
+
+<Method
+    name="getRotationFromRaycastedBlock"
+    signature="RaytracedRotation getRotationFromRaycastedBlock(BlockPos blockPos, Direction side, Vec2f priorityRotations, Vec3d playerPos)"
+    description="Computes a raytraced rotation to a specific block face, validating that the rotation would actually hit the intended face within reach. This is the method Scaffold uses to find valid placement rotations."
+    params={[
+        { name: "blockPos", type: "BlockPos", desc: "Block position to target." },
+        { name: "side", type: "Direction", desc: "Face of the block to aim at." },
+        { name: "priorityRotations", type: "Vec2f", desc: "Rotation bias used to sort candidate hit points (e.g. the current rotation)." },
+        { name: "playerPos", type: "Vec3d", desc: "Player eye position to raycast from." }
+    ]}
+    returns={{ type: "RaytracedRotation", desc: "Yaw/pitch and hit result, or null if the face cannot be reached." }}
+/>
+
+<Method
+    name="getRotationFromRaycastedEntity"
+    signature="RaytracedRotation getRotationFromRaycastedEntity(LivingEntity entity, Vec3d closestVector, double entityInteractionRange)"
+    description="Computes a raytraced rotation to a living entity, validating that the rotation would land a hit within the given interaction range. This is the method KillAura uses internally."
+    params={[
+        { name: "entity", type: "LivingEntity", desc: "Target entity." },
+        { name: "closestVector", type: "Vec3d", desc: "Closest point on the entity's bounding box to the player's eyes." },
+        { name: "entityInteractionRange", type: "double", desc: "Maximum interaction range." }
+    ]}
+    returns={{ type: "RaytracedRotation", desc: "Yaw/pitch and hit result, or null if the entity cannot be reached." }}
+/>
+
+<Method
+    name="getRotationVector"
+    signature="Vec3d getRotationVector(float pitch, float yaw)"
+    description="Returns the unit look (direction) vector for the given pitch and yaw."
+    params={[
+        { name: "pitch", type: "float", desc: "Pitch angle in degrees." },
+        { name: "yaw", type: "float", desc: "Yaw angle in degrees." }
+    ]}
+    returns={{ type: "Vec3d", desc: "Unit vector pointing in the specified direction." }}
+/>
+
+<Callout type="warning">
+    `getRotationFromRaycastedBlock` and `getRotationFromRaycastedEntity` return
+    `null` when no valid rotation reaches the target. Always null-check the result
+    before using it.
+</Callout>
+
+```javascript
+// Scaffold-style: raycast the block below, aim at it, and place
+module.on("preGameTick", (event) => {
+    if (mc.player === null || mc.world === null) return;
+
+    const feet = player.getBlockPosition();
+    const below = new BlockPos(feet.getX(), feet.getY() - 1, feet.getZ());
+    if (!world.isReplaceable(below)) return;
+
+    const dirs = world.getAdjacentDirections(below);
+    if (dirs.isEmpty()) return;
+
+    const side = dirs.get(0);
+    const neighbor = below.offset(side);
+
+    const raytrace = rotation.getRotationFromRaycastedBlock(
+        neighbor,
+        side.getOpposite(),
+        rotation.getRotation(),
+        player.getEyePosition()
+    );
+    if (raytrace === null) return;
+
+    rotation.set(raytrace.getYaw(), raytrace.getPitch());
+    mc.interactionManager.interactBlock(MAIN_HAND, raytrace.getHitResult());
+    player.swingHand(MAIN_HAND);
+});
+```
+
+---
+
+## Rotation Queries
+
+<Method
+    name="getRotation"
+    signature="Vec2f getRotation()"
+    description="Returns the local player's current server-side rotation as managed by the rotation handler."
+    returns={{ type: "Vec2f", desc: "Yaw/pitch pair (x = yaw, y = pitch)." }}
+/>
+
+---
+
+## Rotation Math
+
+Stateless utilities for comparing rotations, converting between rotation and
+cursor deltas, and shaping rotations to match legitimate mouse input.
+
+<Method
+    name="getRotationDifference"
+    signature="float getRotationDifference(Vec2f a, Vec2f b)"
+    description="Calculates the total angular difference between two rotations, accounting for wrapping."
+    params={[
+        { name: "a", type: "Vec2f", desc: "First rotation." },
+        { name: "b", type: "Vec2f", desc: "Second rotation." }
+    ]}
+    returns={{ type: "float", desc: "Total angular difference in degrees." }}
+/>
+
+<Method
+    name="getCursorDelta"
+    signature="double getCursorDelta(double rotationDelta, double sensitivityMultiplier)"
+    description="Computes the raw cursor delta needed to achieve a given rotation delta, accounting for Minecraft's sensitivity multiplier."
+    params={[
+        { name: "rotationDelta", type: "double", desc: "Desired rotation change in degrees." },
+        { name: "sensitivityMultiplier", type: "double", desc: "Sensitivity scale factor." }
+    ]}
+    returns={{ type: "double", desc: "Cursor movement delta." }}
+/>
+
+<Method
+    name="patchConstantRotation"
+    signature="Vec2f patchConstantRotation(Vec2f rotation, Vec2f prevRotation)"
+    description="Patches a rotation to avoid constant-delta detection by applying small random jitter that matches legitimate mouse input."
+    params={[
+        { name: "rotation", type: "Vec2f", desc: "Target rotation." },
+        { name: "prevRotation", type: "Vec2f", desc: "Previous tick's rotation." }
+    ]}
+    returns={{ type: "Vec2f", desc: "Patched rotation that appears natural." }}
+/>
+
+<Method
+    name="getSensitivityModifiedRotation"
+    signature="float getSensitivityModifiedRotation(double original)"
+    description="Snaps a single rotation value to the nearest value achievable by Minecraft's mouse sensitivity system."
+    params={[
+        { name: "original", type: "double", desc: "Desired rotation in degrees." }
+    ]}
+    returns={{ type: "float", desc: "Sensitivity-corrected rotation in degrees." }}
+/>
+
+<Method
+    name="getSentRotation"
+    signature="Vec2f getSentRotation(Vec2f original)"
+    description="Returns the sent (server-side) rotation after sensitivity correction."
+    params={[
+        { name: "original", type: "Vec2f", desc: "Original rotation." }
+    ]}
+    returns={{ type: "Vec2f", desc: "Sensitivity-modified rotation." }}
+/>
+
+<Method
+    name="getSensitivityModifiedRotationVec"
+    signature="Vec2f getSensitivityModifiedRotationVec(Vec2f original)"
+    description="Applies Minecraft's sensitivity curve to both axes of a rotation."
+    params={[
+        { name: "original", type: "Vec2f", desc: "Original rotation." }
+    ]}
+    returns={{ type: "Vec2f", desc: "Sensitivity-modified rotation." }}
+/>
+
+<Method
+    name="getVanillaRotation"
+    signature="Vec2f getVanillaRotation(Vec2f original)"
+    description="Converts a rotation to vanilla Minecraft mouse-look coordinates."
+    params={[
+        { name: "original", type: "Vec2f", desc: "Original rotation." }
+    ]}
+    returns={{ type: "Vec2f", desc: "Vanilla-equivalent rotation." }}
+/>
+
+<Method
+    name="getDuplicateWrapped"
+    signature="float getDuplicateWrapped(float value, float target)"
+    description="Wraps a rotation value toward a target to avoid duplicate-angle detection."
+    params={[
+        { name: "value", type: "float", desc: "Current rotation value." },
+        { name: "target", type: "float", desc: "Target rotation value." }
+    ]}
+    returns={{ type: "float", desc: "Wrapped value." }}
+/>
+
+---
+
+## FOV Checks
+
+<Method
+    name="getEntityFOV"
+    signature="double getEntityFOV(Entity entity)"
+    description="Returns the angular offset between the player's current look direction and the direction to the given entity."
+    params={[
+        { name: "entity", type: "Entity", desc: "Target entity." }
+    ]}
+    returns={{ type: "double", desc: "Angle in degrees from the player's look vector to the entity." }}
+/>
+
+<Method
+    name="isEntityInFOV"
+    signature="boolean isEntityInFOV(Entity entity, float fov)"
+    description="Checks whether an entity falls within a field-of-view cone centered on the player's current look direction."
+    params={[
+        { name: "entity", type: "Entity", desc: "Entity to check." },
+        { name: "fov", type: "float", desc: "Half-angle of the FOV cone in degrees (180 = full sphere)." }
+    ]}
+    returns={{ type: "boolean", desc: "True if the entity falls within the FOV." }}
+/>
+
+```javascript
+// Only aim at the nearest entity inside a 90-degree cone
+module.on("preGameTick", (event) => {
+    if (mc.player === null || mc.world === null) return;
+
+    const range = player.getEntityInteractionRange();
+    const targets = world.getLivingEntitiesInRange(range);
+    if (targets.isEmpty()) return;
+
+    const target = targets.get(0);
+    if (!rotation.isEntityInFOV(target, 90.0)) return;
+
+    const point = player.getClosestPoint(target);
+    const raytrace = rotation.getRotationFromRaycastedEntity(target, point, range);
+    if (raytrace === null) return;
+
+    rotation.setSmooth(raytrace.getYaw(), raytrace.getPitch(), 40.0);
+});
+```
