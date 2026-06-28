@@ -1,0 +1,333 @@
+# Player Proxy
+
+Local player state, position and rotation, health, and combat/entity utilities pulled from the client's own KillAura and Scaffold helpers.
+
+---
+
+## Player Proxy
+**Global Binding:** `player`
+
+Wraps the local player so scripts can read position, rotation, movement state, health, and combat context, and trigger basic actions like swinging or using the held item.
+
+<Callout type="warning">
+    Every method here reads from `mc.player`, which is `null` on the main menu, during world loads, and between disconnects. Calling a `player` method while it is `null` throws into your script and stops the handler. Guard every handler before touching `player`:
+</Callout>
+
+```javascript
+if (mc.player === null) return;
+```
+
+<Callout type="info">
+    JavaScript has a single number type (double), so every `int`, `float`, and `double` return on this page arrives as a plain JS number. The entity helpers fail soft: `getDistanceToEntity()` returns `-1.0` and `getClosestPoint()` returns `null` when handed a non-living entity, so test for those sentinels before using the result.
+</Callout>
+
+---
+
+## Position
+
+<Method
+    name="getEyePosition"
+    signature="Vec3d getEyePosition()"
+    description="Returns the player's eye position in world space — the origin point for raycasts and rotation calculations."
+    returns={{ type: "Vec3d", desc: "Eye position." }}
+/>
+
+<Method
+    name="getPosition"
+    signature="Vec3d getPosition()"
+    description="Returns the player's eye position in world space (an alias of getEyePosition)."
+    returns={{ type: "Vec3d", desc: "Eye position." }}
+/>
+
+<Method
+    name="getBlockPosition"
+    signature="BlockPos getBlockPosition()"
+    description="Returns the player's block position with floored coordinates, exposing readable getX()/getY()/getZ()."
+    returns={{ type: "BlockPos", desc: "Floored block position." }}
+/>
+
+<Method
+    name="getVelocity"
+    signature="Vec3d getVelocity()"
+    description="Returns the player's current per-tick velocity (delta movement) vector."
+    returns={{ type: "Vec3d", desc: "Velocity vector." }}
+/>
+
+<Method
+    name="getYaw"
+    signature="float getYaw()"
+    description="Returns the player's current yaw (horizontal) rotation in degrees."
+    returns={{ type: "float", desc: "Yaw in degrees." }}
+/>
+
+<Method
+    name="getPitch"
+    signature="float getPitch()"
+    description="Returns the player's current pitch (vertical) rotation in degrees."
+    returns={{ type: "float", desc: "Pitch in degrees." }}
+/>
+
+<Method
+    name="getFallDistance"
+    signature="double getFallDistance()"
+    description="Returns how far the player has fallen since last touching ground, in blocks."
+    returns={{ type: "double", desc: "Fall distance in blocks." }}
+/>
+
+<Callout type="info">
+    `getEyePosition()`, `getPosition()`, and `getVelocity()` return raw `Vec3d` values. Their instance methods are intermediary-named at runtime and are **not** callable by readable name — pass them into proxy methods (such as `rotation.getRotationFromPosition` or `esp.projectVec`), or use `getBlockPosition()` when you need readable `getX()`/`getY()`/`getZ()`. See the Types reference.
+</Callout>
+
+```javascript
+module.on("preGameTick", (event) => {
+    if (mc.player === null) return;
+
+    const pos = player.getBlockPosition();
+    client.print("Standing at Y=" + pos.getY());
+    client.print("Yaw " + player.getYaw() + " / Pitch " + player.getPitch());
+});
+```
+
+---
+
+## State
+
+<Method
+    name="isOnGround"
+    signature="boolean isOnGround()"
+    description="Returns whether the player is currently standing on the ground."
+    returns={{ type: "boolean", desc: "True if on ground." }}
+/>
+
+<Method
+    name="isInAir"
+    signature="boolean isInAir()"
+    description="Returns whether the player is currently airborne (not on the ground)."
+    returns={{ type: "boolean", desc: "True if airborne." }}
+/>
+
+<Method
+    name="getAirTicks"
+    signature="int getAirTicks()"
+    description="Returns the number of ticks the player has been continuously in the air."
+    returns={{ type: "int", desc: "Air tick count." }}
+/>
+
+<Method
+    name="getGroundTicks"
+    signature="int getGroundTicks()"
+    description="Returns the number of ticks the player has been continuously on the ground."
+    returns={{ type: "int", desc: "Ground tick count." }}
+/>
+
+<Method
+    name="isSneaking"
+    signature="boolean isSneaking()"
+    description="Returns whether the player is currently sneaking (shift held)."
+    returns={{ type: "boolean", desc: "True if sneaking." }}
+/>
+
+<Method
+    name="isSprinting"
+    signature="boolean isSprinting()"
+    description="Returns whether the player is currently sprinting."
+    returns={{ type: "boolean", desc: "True if sprinting." }}
+/>
+
+<Method
+    name="isUsingItem"
+    signature="boolean isUsingItem()"
+    description="Returns whether the player is currently using an item (eating, drinking, blocking, drawing a bow, etc.)."
+    returns={{ type: "boolean", desc: "True if using an item." }}
+/>
+
+---
+
+## Health
+
+<Method
+    name="getHealth"
+    signature="float getHealth()"
+    description="Returns the player's current health points."
+    returns={{ type: "float", desc: "Current health." }}
+/>
+
+<Method
+    name="getMaxHealth"
+    signature="float getMaxHealth()"
+    description="Returns the player's maximum health points."
+    returns={{ type: "float", desc: "Maximum health." }}
+/>
+
+<Method
+    name="getAbsorption"
+    signature="float getAbsorption()"
+    description="Returns the player's current absorption (golden hearts) amount."
+    returns={{ type: "float", desc: "Absorption amount." }}
+/>
+
+---
+
+## Combat
+
+<Method
+    name="canCrit"
+    signature="boolean canCrit()"
+    description="Returns whether the player is in a state where the next attack would land a critical hit (falling, not on ground, not in water, etc.)."
+    returns={{ type: "boolean", desc: "True if a critical hit is available." }}
+/>
+
+<Method
+    name="getAttackDamage"
+    signature="double getAttackDamage()"
+    description="Returns the attack damage of the item currently held in the main hand."
+    returns={{ type: "double", desc: "Main-hand attack damage." }}
+/>
+
+<Method
+    name="getEntityInteractionRange"
+    signature="double getEntityInteractionRange()"
+    description="Returns the maximum distance, in blocks, at which the player can attack or interact with entities."
+    returns={{ type: "double", desc: "Interaction range in blocks." }}
+/>
+
+<Method
+    name="isHoldingWeapon"
+    signature="boolean isHoldingWeapon()"
+    description="Returns whether the main-hand item is a weapon (sword, axe, or pickaxe)."
+    returns={{ type: "boolean", desc: "True if holding a weapon." }}
+/>
+
+```javascript
+module.on("preGameTick", (event) => {
+    if (mc.player === null) return;
+
+    if (player.canCrit() && player.isHoldingWeapon()) {
+        client.print("Crit window open (" + player.getAttackDamage() + " dmg)");
+    }
+});
+```
+
+---
+
+## Entity Utilities
+
+<Method
+    name="getDistanceToEntity"
+    signature="double getDistanceToEntity(Entity entity)"
+    description="Returns the distance, measured between bounding-box edges, from the player to a living entity, or -1.0 if the entity is not living."
+    params={[
+        { name: "entity", type: "Entity", desc: "Target entity (from world.getEntities() or world.getLivingEntitiesInRange())." }
+    ]}
+    returns={{ type: "double", desc: "Distance in blocks, or -1.0 for a non-living entity." }}
+/>
+
+<Method
+    name="getClosestPoint"
+    signature="Vec3d getClosestPoint(Entity entity)"
+    description="Returns the point on a living entity's bounding box closest to the player's eye position — the same target point KillAura aims at — or null if the entity is not living."
+    params={[
+        { name: "entity", type: "Entity", desc: "Target entity." }
+    ]}
+    returns={{ type: "Vec3d | null", desc: "Closest point, or null for a non-living entity." }}
+/>
+
+<Method
+    name="isBoxEmpty"
+    signature="boolean isBoxEmpty(double offsetX, double offsetY, double offsetZ)"
+    description="Returns whether the player's bounding box, shifted by the given offset, is free of collidable blocks."
+    params={[
+        { name: "offsetX", type: "double", desc: "X offset to test." },
+        { name: "offsetY", type: "double", desc: "Y offset to test." },
+        { name: "offsetZ", type: "double", desc: "Z offset to test." }
+    ]}
+    returns={{ type: "boolean", desc: "True if the offset box has no collisions." }}
+/>
+
+<Method
+    name="isBoxEmptyBelow"
+    signature="boolean isBoxEmptyBelow(double offsetY)"
+    description="Returns whether the space directly below the player, at the given vertical offset, is free of collidable blocks."
+    params={[
+        { name: "offsetY", type: "double", desc: "Vertical offset to test (typically negative)." }
+    ]}
+    returns={{ type: "boolean", desc: "True if the space below is empty." }}
+/>
+
+<Method
+    name="getBoundingBox"
+    signature="AABB getBoundingBox()"
+    description="Returns the player's current axis-aligned bounding box."
+    returns={{ type: "AABB", desc: "Player bounding box." }}
+/>
+
+<Method
+    name="getStandingEyeHeight"
+    signature="float getStandingEyeHeight()"
+    description="Returns the player's eye height above their feet, in blocks."
+    returns={{ type: "float", desc: "Eye height in blocks." }}
+/>
+
+```javascript
+// Aim at and attack the nearest reachable living entity.
+module.on("preGameTick", (event) => {
+    if (mc.player === null || mc.world === null) return;
+
+    const targets = world.getLivingEntitiesInRange(player.getEntityInteractionRange());
+    if (targets.isEmpty()) return;
+
+    const target = targets.get(0);
+    if (player.getDistanceToEntity(target) < 0) return; // non-living entity
+
+    const aim = player.getClosestPoint(target);
+    if (aim === null) return;
+
+    const rot = rotation.getRotationFromPosition(aim);
+    rotation.set(rot.getYaw(), rot.getPitch());
+
+    mc.interactionManager.attackEntity(target);
+    player.swingHand(MAIN_HAND);
+});
+```
+
+```javascript
+// Scaffold-style edge check: is there ground under the next step?
+if (mc.player !== null && player.isBoxEmptyBelow(-0.6)) {
+    client.print("No ground below — would fall");
+}
+```
+
+---
+
+## Actions
+
+<Method
+    name="swingHand"
+    signature="void swingHand(InteractionHand hand)"
+    description="Plays the hand swing animation for the given hand — call it after attacking or placing to trigger the visual swing."
+    params={[
+        { name: "hand", type: "InteractionHand", desc: "MAIN_HAND or OFF_HAND." }
+    ]}
+/>
+
+<Method
+    name="useItem"
+    signature="void useItem(InteractionHand hand)"
+    description="Uses (right-clicks) the item in the given hand and plays the swing animation."
+    params={[
+        { name: "hand", type: "InteractionHand", desc: "MAIN_HAND or OFF_HAND." }
+    ]}
+/>
+
+<Callout type="info">
+    `MAIN_HAND` and `OFF_HAND` are global `InteractionHand` constants injected into every script — see the Types reference. Both `swingHand` and `useItem` already null-check internally, but guarding the whole handler with `if (mc.player === null) return;` keeps your logic consistent.
+</Callout>
+
+```javascript
+module.on("preGameTick", (event) => {
+    if (mc.player === null) return;
+
+    // Right-click the main-hand item (eat, throw a pearl, place, ...).
+    player.useItem(MAIN_HAND);
+});
+```

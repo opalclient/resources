@@ -1,70 +1,321 @@
 # Renderer Proxy
 
+A complete 2D drawing API backed by the active **divinity canvas**, exposed to scripts as the global `renderer` binding.
+
+---
+
+## Renderer Proxy
 **Global Binding:** `renderer`
 
-The renderer provides a complete 2D drawing API drawn through the **divinity-backed canvas**. All drawing calls must be made inside a `renderScreen` event callback, where the canvas frame is active.
+Draws filled shapes, gradients, outlines, composite effects, images, vector paths, and text onto the divinity-backed canvas using the Minecraft scaled coordinate system.
+
+<Callout type="warning">
+    Every draw call must run **inside an active canvas frame** — that means from a module's `renderScreen` callback, from a command-palette view's `render`, or from a Dynamic Island `render` callback (see the Overlay Proxy). Outside an active frame the canvas is unavailable and image draws (which need a live extract context) are silently skipped.
+</Callout>
 
 <Callout type="info">
-    All color parameters expect a packed **ARGB Integer**. Create these using `renderer.color(r, g, b, a)` or the `Color` Java class.
+    **Numbers and colors.** JavaScript has a single `number` type (an IEEE‑754 `double`), so every parameter here is declared `double` and cast internally — GraalVM will not implicitly narrow. Colors are packed **ARGB integers**. Build them with `renderer.color(r, g, b[, a])` rather than raw `0xAARRGGBB` literals: a hex literal whose alpha byte is `0x80`–`0xFF` is greater than 2³¹ as a JS `double` and narrows to the wrong `int`, so `0xFFFFFFFF` does **not** round‑trip. `renderer.color(255, 255, 255)` does.
 </Callout>
 
 ---
 
 ## Basic Shapes
 
-<Method name="rect" signature="void rect(double x, double y, double width, double height, double color)" description="Draws a filled rectangle." params={[{ name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "width", type: "double", desc: "Width." }, { name: "height", type: "double", desc: "Height." }, { name: "color", type: "double", desc: "ARGB color." }]} />
+<Method
+    name="rect"
+    signature="void rect(double x, double y, double width, double height, double color)"
+    description="Draws a filled rectangle."
+    params={[
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "width", type: "double", desc: "Rectangle width." },
+        { name: "height", type: "double", desc: "Rectangle height." },
+        { name: "color", type: "double", desc: "Fill color as an ARGB integer." }
+    ]}
+/>
 
-<Method name="roundedRect" signature="void roundedRect(double x, double y, double width, double height, double radius, double color)" description="Draws a filled rectangle with uniformly rounded corners." params={[{ name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "width", type: "double", desc: "Width." }, { name: "height", type: "double", desc: "Height." }, { name: "radius", type: "double", desc: "Corner radius." }, { name: "color", type: "double", desc: "ARGB color." }]} />
+<Method
+    name="roundedRect"
+    signature="void roundedRect(double x, double y, double width, double height, double radius, double color)"
+    description="Draws a filled rectangle with uniformly rounded corners."
+    params={[
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "width", type: "double", desc: "Rectangle width." },
+        { name: "height", type: "double", desc: "Rectangle height." },
+        { name: "radius", type: "double", desc: "Corner radius applied to all four corners." },
+        { name: "color", type: "double", desc: "Fill color as an ARGB integer." }
+    ]}
+/>
 
-<Method name="roundedRectVarying" signature="void roundedRectVarying(double x, double y, double w, double h, double tl, double tr, double br, double bl, double color)" description="Draws a filled rectangle with individually specified corner radii." params={[{ name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "w", type: "double", desc: "Width." }, { name: "h", type: "double", desc: "Height." }, { name: "tl", type: "double", desc: "Top-left radius." }, { name: "tr", type: "double", desc: "Top-right radius." }, { name: "br", type: "double", desc: "Bottom-right radius." }, { name: "bl", type: "double", desc: "Bottom-left radius." }, { name: "color", type: "double", desc: "ARGB color." }]} />
-
-<Method name="circle" signature="void circle(double cx, double cy, double radius, double color)" description="Draws a filled circle." params={[{ name: "cx", type: "double", desc: "Center X." }, { name: "cy", type: "double", desc: "Center Y." }, { name: "radius", type: "double", desc: "Radius." }, { name: "color", type: "double", desc: "ARGB color." }]} />
-
-<Method name="rainbowRect" signature="void rainbowRect(double x, double y, double width, double height)" description="Draws a rectangle with a dynamic vertical rainbow gradient." params={[{ name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "width", type: "double", desc: "Width." }, { name: "height", type: "double", desc: "Height." }]} />
+<Method
+    name="circle"
+    signature="void circle(double cx, double cy, double radius, double color)"
+    description="Draws a filled circle."
+    params={[
+        { name: "cx", type: "double", desc: "Center X coordinate in scaled pixels." },
+        { name: "cy", type: "double", desc: "Center Y coordinate in scaled pixels." },
+        { name: "radius", type: "double", desc: "Circle radius." },
+        { name: "color", type: "double", desc: "Fill color as an ARGB integer." }
+    ]}
+/>
 
 ---
 
 ## Gradients
 
-<Method name="rectGradient" signature="void rectGradient(double x, double y, double w, double h, double c1, double c2, double angle)" description="Draws a rectangle filled with a linear gradient." params={[{ name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "w", type: "double", desc: "Width." }, { name: "h", type: "double", desc: "Height." }, { name: "c1", type: "double", desc: "Start color." }, { name: "c2", type: "double", desc: "End color." }, { name: "angle", type: "double", desc: "Angle in degrees." }]} />
+<Method
+    name="rectGradient"
+    signature="void rectGradient(double x, double y, double width, double height, double color1, double color2, double angleDegrees)"
+    description="Draws a rectangle filled with a linear two-color gradient."
+    params={[
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "width", type: "double", desc: "Rectangle width." },
+        { name: "height", type: "double", desc: "Rectangle height." },
+        { name: "color1", type: "double", desc: "Start color as an ARGB integer." },
+        { name: "color2", type: "double", desc: "End color as an ARGB integer." },
+        { name: "angleDegrees", type: "double", desc: "Gradient direction in degrees." }
+    ]}
+/>
 
-<Method name="roundedRectGradient" signature="void roundedRectGradient(double x, double y, double w, double h, double r, double c1, double c2, double angle)" description="Draws a rounded rectangle filled with a linear gradient." params={[{ name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "w", type: "double", desc: "Width." }, { name: "h", type: "double", desc: "Height." }, { name: "r", type: "double", desc: "Corner radius." }, { name: "c1", type: "double", desc: "Start color." }, { name: "c2", type: "double", desc: "End color." }, { name: "angle", type: "double", desc: "Angle in degrees." }]} />
+<Method
+    name="roundedRectGradient"
+    signature="void roundedRectGradient(double x, double y, double width, double height, double radius, double color1, double color2, double angleDegrees)"
+    description="Draws a rounded rectangle filled with a linear two-color gradient."
+    params={[
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "width", type: "double", desc: "Rectangle width." },
+        { name: "height", type: "double", desc: "Rectangle height." },
+        { name: "radius", type: "double", desc: "Corner radius applied to all four corners." },
+        { name: "color1", type: "double", desc: "Start color as an ARGB integer." },
+        { name: "color2", type: "double", desc: "End color as an ARGB integer." },
+        { name: "angleDegrees", type: "double", desc: "Gradient direction in degrees." }
+    ]}
+/>
 
-<Method name="roundedRectVaryingGradient" signature="void roundedRectVaryingGradient(double x, double y, double w, double h, double tl, double tr, double br, double bl, double c1, double c2, double angle)" description="Draws a per-corner rounded rectangle with a linear gradient." params={[{ name: "tl/tr/br/bl", type: "double", desc: "Corner radii." }, { name: "c1", type: "double", desc: "Start color." }, { name: "c2", type: "double", desc: "End color." }, { name: "angle", type: "double", desc: "Angle in degrees." }]} />
+---
+
+## Per-Corner Radii
+
+<Method
+    name="roundedRectVarying"
+    signature="void roundedRectVarying(double x, double y, double width, double height, double radiusTopLeft, double radiusTopRight, double radiusBottomRight, double radiusBottomLeft, double color)"
+    description="Draws a filled rectangle with an independently specified radius per corner."
+    params={[
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "width", type: "double", desc: "Rectangle width." },
+        { name: "height", type: "double", desc: "Rectangle height." },
+        { name: "radiusTopLeft", type: "double", desc: "Top-left corner radius." },
+        { name: "radiusTopRight", type: "double", desc: "Top-right corner radius." },
+        { name: "radiusBottomRight", type: "double", desc: "Bottom-right corner radius." },
+        { name: "radiusBottomLeft", type: "double", desc: "Bottom-left corner radius." },
+        { name: "color", type: "double", desc: "Fill color as an ARGB integer." }
+    ]}
+/>
+
+<Method
+    name="roundedRectVaryingGradient"
+    signature="void roundedRectVaryingGradient(double x, double y, double width, double height, double radiusTopLeft, double radiusTopRight, double radiusBottomRight, double radiusBottomLeft, double color1, double color2, double angleDegrees)"
+    description="Draws a rectangle with per-corner radii filled with a linear two-color gradient."
+    params={[
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "width", type: "double", desc: "Rectangle width." },
+        { name: "height", type: "double", desc: "Rectangle height." },
+        { name: "radiusTopLeft", type: "double", desc: "Top-left corner radius." },
+        { name: "radiusTopRight", type: "double", desc: "Top-right corner radius." },
+        { name: "radiusBottomRight", type: "double", desc: "Bottom-right corner radius." },
+        { name: "radiusBottomLeft", type: "double", desc: "Bottom-left corner radius." },
+        { name: "color1", type: "double", desc: "Start color as an ARGB integer." },
+        { name: "color2", type: "double", desc: "End color as an ARGB integer." },
+        { name: "angleDegrees", type: "double", desc: "Gradient direction in degrees." }
+    ]}
+/>
 
 ---
 
 ## Outlines & Strokes
 
-<Method name="rectOutline" signature="void rectOutline(double x, double y, double w, double h, double thickness, double color)" description="Draws a hollow rectangular border." params={[{ name: "thickness", type: "double", desc: "Line thickness." }, { name: "color", type: "double", desc: "ARGB color." }]} />
+<Method
+    name="rectOutline"
+    signature="void rectOutline(double x, double y, double width, double height, double thickness, double color)"
+    description="Draws the outline (border only) of a rectangle."
+    params={[
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "width", type: "double", desc: "Rectangle width." },
+        { name: "height", type: "double", desc: "Rectangle height." },
+        { name: "thickness", type: "double", desc: "Outline thickness." },
+        { name: "color", type: "double", desc: "Outline color as an ARGB integer." }
+    ]}
+/>
 
-<Method name="roundedRectOutline" signature="void roundedRectOutline(double x, double y, double w, double h, double radius, double thickness, double color)" description="Draws a hollow rounded rectangular border." params={[{ name: "radius", type: "double", desc: "Corner radius." }, { name: "thickness", type: "double", desc: "Line thickness." }, { name: "color", type: "double", desc: "ARGB color." }]} />
+<Method
+    name="roundedRectOutline"
+    signature="void roundedRectOutline(double x, double y, double width, double height, double radius, double thickness, double color)"
+    description="Draws the outline (border only) of a rounded rectangle."
+    params={[
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "width", type: "double", desc: "Rectangle width." },
+        { name: "height", type: "double", desc: "Rectangle height." },
+        { name: "radius", type: "double", desc: "Corner radius applied to all four corners." },
+        { name: "thickness", type: "double", desc: "Outline thickness." },
+        { name: "color", type: "double", desc: "Outline color as an ARGB integer." }
+    ]}
+/>
 
-<Method name="roundedRectOutlineVarying" signature="void roundedRectOutlineVarying(double x, double y, double w, double h, double tl, double tr, double br, double bl, double thickness, double color)" description="Draws a hollow rounded rectangular border with individually specified corner radii." params={[{ name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "w", type: "double", desc: "Width." }, { name: "h", type: "double", desc: "Height." }, { name: "tl", type: "double", desc: "Top-left radius." }, { name: "tr", type: "double", desc: "Top-right radius." }, { name: "br", type: "double", desc: "Bottom-right radius." }, { name: "bl", type: "double", desc: "Bottom-left radius." }, { name: "thickness", type: "double", desc: "Line thickness." }, { name: "color", type: "double", desc: "ARGB color." }]} />
+<Method
+    name="roundedRectOutlineVarying"
+    signature="void roundedRectOutlineVarying(double x, double y, double width, double height, double radiusTopLeft, double radiusTopRight, double radiusBottomRight, double radiusBottomLeft, double thickness, double color)"
+    description="Draws the outline of a rounded rectangle with an independently specified radius per corner."
+    params={[
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "width", type: "double", desc: "Rectangle width." },
+        { name: "height", type: "double", desc: "Rectangle height." },
+        { name: "radiusTopLeft", type: "double", desc: "Top-left corner radius." },
+        { name: "radiusTopRight", type: "double", desc: "Top-right corner radius." },
+        { name: "radiusBottomRight", type: "double", desc: "Bottom-right corner radius." },
+        { name: "radiusBottomLeft", type: "double", desc: "Bottom-left corner radius." },
+        { name: "thickness", type: "double", desc: "Outline thickness." },
+        { name: "color", type: "double", desc: "Outline color as an ARGB integer." }
+    ]}
+/>
 
-<Method name="rectStroke" signature="void rectStroke(double x, double y, double w, double h, double strokeThick, double fillC, double strokeC)" description="Draws a filled rectangle with an outer border." params={[{ name: "strokeThick", type: "double", desc: "Stroke thickness." }, { name: "fillC", type: "double", desc: "Fill color." }, { name: "strokeC", type: "double", desc: "Stroke color." }]} />
+<Method
+    name="rectStroke"
+    signature="void rectStroke(double x, double y, double width, double height, double strokeThickness, double color, double strokeColor)"
+    description="Draws a filled rectangle together with a stroke (border) of a separate color."
+    params={[
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "width", type: "double", desc: "Rectangle width." },
+        { name: "height", type: "double", desc: "Rectangle height." },
+        { name: "strokeThickness", type: "double", desc: "Stroke thickness." },
+        { name: "color", type: "double", desc: "Fill color as an ARGB integer." },
+        { name: "strokeColor", type: "double", desc: "Stroke color as an ARGB integer." }
+    ]}
+/>
 
-<Method name="rectOutlineStroke" signature="void rectOutlineStroke(double x, double y, double w, double h, double outlineThick, double strokeThick, double outlineC, double strokeC)" description="Draws a hollow outline with an outer stroke." params={[{ name: "outlineThick", type: "double", desc: "Outline thickness." }, { name: "strokeThick", type: "double", desc: "Stroke thickness." }, { name: "outlineC", type: "double", desc: "Outline color." }, { name: "strokeC", type: "double", desc: "Stroke color." }]} />
+<Method
+    name="rectOutlineStroke"
+    signature="void rectOutlineStroke(double x, double y, double width, double height, double outlineThickness, double strokeThickness, double outlineColor, double strokeColor)"
+    description="Draws a rectangle outline together with a separately colored inner stroke."
+    params={[
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "width", type: "double", desc: "Rectangle width." },
+        { name: "height", type: "double", desc: "Rectangle height." },
+        { name: "outlineThickness", type: "double", desc: "Outer outline thickness." },
+        { name: "strokeThickness", type: "double", desc: "Inner stroke thickness." },
+        { name: "outlineColor", type: "double", desc: "Outline color as an ARGB integer." },
+        { name: "strokeColor", type: "double", desc: "Stroke color as an ARGB integer." }
+    ]}
+/>
+
+---
+
+## Special Shapes
+
+<Method
+    name="rainbowRect"
+    signature="void rainbowRect(double x, double y, double width, double height)"
+    description="Draws a rectangle filled with an animated rainbow gradient."
+    params={[
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "width", type: "double", desc: "Rectangle width." },
+        { name: "height", type: "double", desc: "Rectangle height." }
+    ]}
+/>
 
 ---
 
 ## Composite Effects
 
-Higher-level fills the canvas composites from blur, shadow, and bloom passes. These are the same effects the native Opal UI draws with, now reachable from scripts. Like all draw calls they must run inside a `renderScreen` callback.
+Higher-level fills the canvas composites from its blur, shadow, and bloom passes — the same effects the native Opal UI draws with, now reachable from scripts.
 
-<Method name="shadow" signature="void shadow(double x, double y, double w, double h, double radius, double blur, double offX, double offY, double color)" description="Draws a soft box shadow behind a rounded-rectangle footprint. Use it under panels and cards for depth." params={[{ name: "x", type: "double", desc: "X coordinate of the casting rect." }, { name: "y", type: "double", desc: "Y coordinate of the casting rect." }, { name: "w", type: "double", desc: "Width of the casting rect." }, { name: "h", type: "double", desc: "Height of the casting rect." }, { name: "radius", type: "double", desc: "Corner radius of the casting rect." }, { name: "blur", type: "double", desc: "Blur spread in pixels." }, { name: "offX", type: "double", desc: "Horizontal shadow offset." }, { name: "offY", type: "double", desc: "Vertical shadow offset." }, { name: "color", type: "double", desc: "Shadow ARGB color." }]} />
+<Method
+    name="shadow"
+    signature="void shadow(double x, double y, double width, double height, double radius, double blur, double offsetX, double offsetY, double color)"
+    description="Draws a soft box shadow behind a rounded-rectangle footprint."
+    params={[
+        { name: "x", type: "double", desc: "Left edge of the casting rectangle in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge of the casting rectangle in scaled pixels." },
+        { name: "width", type: "double", desc: "Casting rectangle width." },
+        { name: "height", type: "double", desc: "Casting rectangle height." },
+        { name: "radius", type: "double", desc: "Corner radius of the casting rectangle." },
+        { name: "blur", type: "double", desc: "Shadow blur radius." },
+        { name: "offsetX", type: "double", desc: "Horizontal shadow offset." },
+        { name: "offsetY", type: "double", desc: "Vertical shadow offset." },
+        { name: "color", type: "double", desc: "Shadow color as an ARGB integer." }
+    ]}
+/>
 
-<Method name="blurFill" signature="void blurFill(double x, double y, double w, double h, double radius)" description="Fills a rounded rectangle with a backdrop blur of whatever is already drawn behind it (frosted-glass effect)." params={[{ name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "w", type: "double", desc: "Width." }, { name: "h", type: "double", desc: "Height." }, { name: "radius", type: "double", desc: "Corner radius applied to all four corners." }]} />
+<Method
+    name="blurFill"
+    signature="void blurFill(double x, double y, double width, double height, double radius)"
+    description="Fills a rounded rectangle with the blurred backdrop captured behind the UI (frosted-glass effect)."
+    params={[
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "width", type: "double", desc: "Rectangle width." },
+        { name: "height", type: "double", desc: "Rectangle height." },
+        { name: "radius", type: "double", desc: "Corner radius applied to all four corners." }
+    ]}
+/>
 
-<Method name="blurFillVarying" signature="void blurFillVarying(double x, double y, double w, double h, double tl, double tr, double br, double bl)" description="Backdrop-blur fill with an individually specified radius per corner. Corners follow CSS order (top-left, top-right, bottom-right, bottom-left)." params={[{ name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "w", type: "double", desc: "Width." }, { name: "h", type: "double", desc: "Height." }, { name: "tl", type: "double", desc: "Top-left radius." }, { name: "tr", type: "double", desc: "Top-right radius." }, { name: "br", type: "double", desc: "Bottom-right radius." }, { name: "bl", type: "double", desc: "Bottom-left radius." }]} />
+<Method
+    name="blurFillVarying"
+    signature="void blurFillVarying(double x, double y, double width, double height, double radiusTopLeft, double radiusTopRight, double radiusBottomRight, double radiusBottomLeft)"
+    description="Fills a rectangle with the blurred backdrop using an independently specified radius per corner."
+    params={[
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "width", type: "double", desc: "Rectangle width." },
+        { name: "height", type: "double", desc: "Rectangle height." },
+        { name: "radiusTopLeft", type: "double", desc: "Top-left corner radius." },
+        { name: "radiusTopRight", type: "double", desc: "Top-right corner radius." },
+        { name: "radiusBottomRight", type: "double", desc: "Bottom-right corner radius." },
+        { name: "radiusBottomLeft", type: "double", desc: "Bottom-left corner radius." }
+    ]}
+/>
 
-<Method name="glowFill" signature="void glowFill(double x, double y, double w, double h, double radius)" description="Fills a rounded rectangle that feeds the bloom pass, producing a soft glow around bright content." params={[{ name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "w", type: "double", desc: "Width." }, { name: "h", type: "double", desc: "Height." }, { name: "radius", type: "double", desc: "Corner radius applied to all four corners." }]} />
+<Method
+    name="glowFill"
+    signature="void glowFill(double x, double y, double width, double height, double radius)"
+    description="Fills a rounded rectangle with the glow (bloom) pass texture, producing a soft glow around bright content."
+    params={[
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "width", type: "double", desc: "Rectangle width." },
+        { name: "height", type: "double", desc: "Rectangle height." },
+        { name: "radius", type: "double", desc: "Corner radius applied to all four corners." }
+    ]}
+/>
 
 <Callout type="warning">
-    `innerGlow` is **advanced and visually unverified** — it has no native Opal UI users yet. The binding is present and stable, but its exact appearance has not been confirmed in-game. Treat it as experimental.
+    `innerGlow` is **advanced and visually unverified** — it has no native Opal UI callers yet. The binding is present and stable, but its rendered appearance has not been confirmed in‑game. Treat it as experimental.
 </Callout>
 
-<Method name="innerGlow" signature="void innerGlow(double x, double y, double w, double h, double radius, double spread, double color)" description="Draws a rim glow / inner shadow inset from the edges of a rounded rectangle. Advanced and visually unverified." params={[{ name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "w", type: "double", desc: "Width." }, { name: "h", type: "double", desc: "Height." }, { name: "radius", type: "double", desc: "Corner radius." }, { name: "spread", type: "double", desc: "How far the glow reaches inward from the edge." }, { name: "color", type: "double", desc: "Glow ARGB color." }]} />
+<Method
+    name="innerGlow"
+    signature="void innerGlow(double x, double y, double width, double height, double radius, double spread, double color)"
+    description="Draws an inner glow along the inside edges of a rounded rectangle; the color appears at the rim and fades to transparent toward the center. Light colors produce rim highlights, dark colors produce inner shadows."
+    params={[
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "width", type: "double", desc: "Rectangle width." },
+        { name: "height", type: "double", desc: "Rectangle height." },
+        { name: "radius", type: "double", desc: "Corner radius applied to all four corners." },
+        { name: "spread", type: "double", desc: "How far the glow extends inward from the edge." },
+        { name: "color", type: "double", desc: "Glow color at the rim as an ARGB integer." }
+    ]}
+/>
 
 ```javascript
 // Frosted-glass panel with a drop shadow
@@ -78,22 +329,58 @@ renderer.roundedRect(x, y, w, h, 8, renderer.color(20, 20, 28, 120));
 
 ## Images
 
-Images are loaded once into a handle and drawn by that handle. Loaded images are cached by the renderer, so calling `loadImage` repeatedly with the same path is cheap.
+Images load once into a GPU handle and draw by that handle. The renderer caches loaded images, so calling `loadImage` repeatedly with the same path is cheap.
 
-<Callout type="warning">
-    The old raw-integer `image(handle, ...)` form has been **removed** — there was never a way to obtain a valid raw id, so it never worked. Load images with `loadImage` and pass the returned `ImageHandle` instead.
-</Callout>
+<Method
+    name="loadImage"
+    signature="GpuImageHandle loadImage(String path)"
+    description="Loads an image from the client's resource path and returns a GPU handle for drawing. Returns GpuImageHandle.NONE on failure rather than throwing — check handle.isValid() before drawing."
+    params={[
+        { name: "path", type: "String", desc: "Resource-relative image path." }
+    ]}
+    returns={{ type: "GpuImageHandle", desc: "The loaded handle, or GpuImageHandle.NONE if it could not be loaded." }}
+/>
 
-<Method name="loadImage" signature="ImageHandle loadImage(String path)" description="Loads an image and returns a handle to it. The handle is cached by the renderer. Returns ImageHandle.INVALID on failure — check validity before drawing." params={[{ name: "path", type: "String", desc: "Resource path to the image." }]} returns={{ type: "ImageHandle", desc: "Handle to the loaded image, or ImageHandle.INVALID on failure." }} />
+<Method
+    name="image"
+    signature="void image(GpuImageHandle handle, double x, double y, double width, double height, double radius)"
+    description="Draws a loaded image within the given bounds with optional corner rounding."
+    params={[
+        { name: "handle", type: "GpuImageHandle", desc: "Handle obtained from loadImage." },
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "width", type: "double", desc: "Destination width." },
+        { name: "height", type: "double", desc: "Destination height." },
+        { name: "radius", type: "double", desc: "Corner radius applied to the image." }
+    ]}
+/>
 
-<Method name="image" signature="void image(ImageHandle handle, double x, double y, double width, double height, double radius)" description="Draws a previously loaded image at the given bounds with optional corner rounding." params={[{ name: "handle", type: "ImageHandle", desc: "Handle returned by loadImage." }, { name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "width", type: "double", desc: "Destination width." }, { name: "height", type: "double", desc: "Destination height." }, { name: "radius", type: "double", desc: "Corner radius applied to the image." }]} />
+<Method
+    name="imageTinted"
+    signature="void imageTinted(GpuImageHandle handle, double x, double y, double width, double height, double radius, double tint)"
+    description="Draws a loaded image multiplied by a tint color — useful for recoloring icons or fading images."
+    params={[
+        { name: "handle", type: "GpuImageHandle", desc: "Handle obtained from loadImage." },
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "width", type: "double", desc: "Destination width." },
+        { name: "height", type: "double", desc: "Destination height." },
+        { name: "radius", type: "double", desc: "Corner radius applied to the image." },
+        { name: "tint", type: "double", desc: "Tint color as an ARGB integer multiplied into the image." }
+    ]}
+/>
 
-<Method name="imageTinted" signature="void imageTinted(ImageHandle handle, double x, double y, double width, double height, double radius, double tint)" description="Draws a loaded image multiplied by a tint color — useful for recoloring icons or fading images." params={[{ name: "handle", type: "ImageHandle", desc: "Handle returned by loadImage." }, { name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "width", type: "double", desc: "Destination width." }, { name: "height", type: "double", desc: "Destination height." }, { name: "radius", type: "double", desc: "Corner radius applied to the image." }, { name: "tint", type: "double", desc: "ARGB tint color multiplied over the image." }]} />
-
-<Method name="destroyImage" signature="void destroyImage(ImageHandle handle)" description="Releases a previously loaded image handle." params={[{ name: "handle", type: "ImageHandle", desc: "Handle returned by loadImage." }]} />
+<Method
+    name="destroyImage"
+    signature="void destroyImage(GpuImageHandle handle)"
+    description="Releases a GPU image previously obtained from loadImage and frees its backend resources."
+    params={[
+        { name: "handle", type: "GpuImageHandle", desc: "Handle obtained from loadImage." }
+    ]}
+/>
 
 <Callout type="info">
-    `image` and `imageTinted` work inside the `renderScreen` callback. Drawing images from the GPU/extract render path is not supported from scripts.
+    `image` and `imageTinted` route through the active extract context. When no render pass is open the draw is silently skipped — call them from within `renderScreen`, a palette view's `render`, or an island `render`.
 </Callout>
 
 ```javascript
@@ -116,76 +403,100 @@ module.on("disable", () => {
 
 ---
 
-## Text Rendering
-
-**Available Fonts:** `"productsans-bold"`, `"productsans-medium"`, `"materialicons-regular"`.
-
-<Method name="text" signature="double text(String font, String text, double x, double y, double size, double color)" description="Draws a string. Returns the X position after the last character." params={[{ name: "font", type: "String", desc: "Font name." }, { name: "text", type: "String", desc: "Text to draw." }, { name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "size", type: "double", desc: "Font size." }, { name: "color", type: "double", desc: "ARGB color." }]} returns={{ type: "double", desc: "X position after text." }} />
-
-<Method name="textShadow" signature="double textShadow(String font, String text, double x, double y, double size, double color)" description="Draws a string with a drop shadow for better visibility." params={[{ name: "font", type: "String", desc: "Font name." }, { name: "text", type: "String", desc: "Text to draw." }, { name: "x", type: "double", desc: "X coordinate." }, { name: "y", type: "double", desc: "Y coordinate." }, { name: "size", type: "double", desc: "Font size." }, { name: "color", type: "double", desc: "ARGB color." }]} returns={{ type: "double", desc: "X position after text." }} />
-
-<Method name="textGradient" signature="void textGradient(String font, String text, double x, double y, double size, double c1, double c2)" description="Draws a string with a vertical gradient fill." params={[{ name: "font", type: "String", desc: "Font name." }, { name: "text", type: "String", desc: "Text to draw." }, { name: "c1", type: "double", desc: "Start color." }, { name: "c2", type: "double", desc: "End color." }]} />
-
-<Method name="textWidth" signature="double textWidth(String font, String text, double size)" description="Calculates the display width of a string." params={[{ name: "font", type: "String", desc: "Font name." }, { name: "text", type: "String", desc: "Text to measure." }, { name: "size", type: "double", desc: "Font size." }]} returns={{ type: "double", desc: "Width in pixels." }} />
-
-<Method name="textHeight" signature="double textHeight(String font, String text, double size)" description="Calculates the display height of a string." params={[{ name: "font", type: "String", desc: "Font name." }, { name: "text", type: "String", desc: "Text to measure." }, { name: "size", type: "double", desc: "Font size." }]} returns={{ type: "double", desc: "Height in pixels." }} />
-
-<Method name="wrapText" signature="String[] wrapText(String font, String text, double width, double size)" description="Wraps text to a maximum pixel width, returning each line. The result is a JS-iterable array (.length and indexing work)." params={[{ name: "font", type: "String", desc: "Font name." }, { name: "text", type: "String", desc: "Text to wrap." }, { name: "width", type: "double", desc: "Maximum line width in pixels." }, { name: "size", type: "double", desc: "Font size." }]} returns={{ type: "String[]", desc: "The wrapped lines." }} />
-
-<Method name="trimText" signature="String trimText(String font, String text, double width, double size)" description="Trims text to fit within a maximum pixel width, appending an ellipsis when truncated." params={[{ name: "font", type: "String", desc: "Font name." }, { name: "text", type: "String", desc: "Text to trim." }, { name: "width", type: "double", desc: "Maximum width in pixels." }, { name: "size", type: "double", desc: "Font size." }]} returns={{ type: "String", desc: "The trimmed text." }} />
-
----
-
-## Transformations
-
-<Method name="scale" signature="void scale(double factor, double x, double y, double w, double h, Runnable content)" description="Executes the callback with a uniform scale transform applied." params={[{ name: "factor", type: "double", desc: "Scale multiplier." }, { name: "content", type: "Runnable", desc: "Callback function with draw calls." }]} />
-
-<Method name="rotate" signature="void rotate(double degrees, double x, double y, double w, double h, Runnable content)" description="Executes the callback with a rotation applied around the center of the specified bounds." params={[{ name: "degrees", type: "double", desc: "Rotation angle." }, { name: "content", type: "Runnable", desc: "Callback function." }]} />
-
-<Method name="scissor" signature="void scissor(double x, double y, double w, double h, Runnable content)" description="Clips all rendering inside the callback to the specified rectangle." params={[{ name: "content", type: "Runnable", desc: "Callback function." }]} />
-
-<Method name="globalAlpha" signature="void globalAlpha(double alpha)" description="Sets the global transparency for all subsequent draw calls." params={[{ name: "alpha", type: "double", desc: "0.0 (invisible) to 1.0 (opaque)." }]} />
-
----
-
-## Color Utilities
-
-<Method name="color" signature="int color(double r, double g, double b, [double a])" description="Creates a packed ARGB integer from RGB or RGBA components (0-255). Alpha defaults to 255." params={[{ name: "r", type: "double", desc: "Red (0-255)." }, { name: "g", type: "double", desc: "Green (0-255)." }, { name: "b", type: "double", desc: "Blue (0-255)." }, { name: "a", type: "double", desc: "Alpha (optional, 0-255)." }]} returns={{ type: "int", desc: "ARGB color." }} />
-
-<Method name="withAlpha" signature="int withAlpha(double color, double alpha)" description="Returns a new color with the same RGB but a different alpha." params={[{ name: "color", type: "double", desc: "Original ARGB." }, { name: "alpha", type: "double", desc: "New alpha (0-255)." }]} returns={{ type: "int", desc: "Modified color." }} />
-
-<Method name="applyOpacity" signature="int applyOpacity(double color, double opacity)" description="Multiplies the alpha channel by a factor." params={[{ name: "color", type: "double", desc: "Original color." }, { name: "opacity", type: "double", desc: "Factor (0.0-1.0)." }]} returns={{ type: "int", desc: "Modified color." }} />
-
-<Method name="interpolate" signature="int interpolate(double c1, double c2, double factor)" description="Linearly interpolates between two colors." params={[{ name: "c1", type: "double", desc: "Start color." }, { name: "c2", type: "double", desc: "End color." }, { name: "factor", type: "double", desc: "0.0 (c1) to 1.0 (c2)." }]} returns={{ type: "int", desc: "Interpolated color." }} />
-
-<Method name="darker" signature="int darker(double color, double factor)" description="Darkens a color." params={[{ name: "color", type: "double", desc: "Original color." }, { name: "factor", type: "double", desc: "0.0 = black, 1.0 = unchanged." }]} returns={{ type: "int", desc: "Darkened color." }} />
-
-<Method name="brighter" signature="int brighter(double color, double factor)" description="Brightens a color." params={[{ name: "color", type: "double", desc: "Original color." }, { name: "factor", type: "double", desc: "Factor." }]} returns={{ type: "int", desc: "Brightened color." }} />
-
----
-
 ## Path API
 
-For custom vector shapes. Begin a path, add segments, then stroke it.
+For custom vector shapes: begin a path, add segments, set the stroke style, then stroke it.
 
-<Method name="beginPath" signature="void beginPath()" description="Starts a new path." />
-<Method name="moveTo" signature="void moveTo(double x, double y)" description="Moves the cursor without drawing." params={[{ name: "x", type: "double", desc: "X." }, { name: "y", type: "double", desc: "Y." }]} />
-<Method name="lineTo" signature="void lineTo(double x, double y)" description="Draws a line from cursor to target." params={[{ name: "x", type: "double", desc: "X." }, { name: "y", type: "double", desc: "Y." }]} />
-<Method name="quadTo" signature="void quadTo(double cx, double cy, double x, double y)" description="Adds a quadratic Bézier curve from the cursor to (x, y) using one control point." params={[{ name: "cx", type: "double", desc: "Control point X." }, { name: "cy", type: "double", desc: "Control point Y." }, { name: "x", type: "double", desc: "End X." }, { name: "y", type: "double", desc: "End Y." }]} />
-<Method name="cubicTo" signature="void cubicTo(double c1x, double c1y, double c2x, double c2y, double x, double y)" description="Adds a cubic Bézier curve from the cursor to (x, y) using two control points." params={[{ name: "c1x", type: "double", desc: "First control point X." }, { name: "c1y", type: "double", desc: "First control point Y." }, { name: "c2x", type: "double", desc: "Second control point X." }, { name: "c2y", type: "double", desc: "Second control point Y." }, { name: "x", type: "double", desc: "End X." }, { name: "y", type: "double", desc: "End Y." }]} />
-<Method name="closePath" signature="void closePath()" description="Closes the path by connecting last point to start." />
-<Method name="strokeColor" signature="void strokeColor(double color)" description="Sets stroke color." params={[{ name: "color", type: "double", desc: "ARGB color." }]} />
-<Method name="strokeWidth" signature="void strokeWidth(double width)" description="Sets stroke thickness." params={[{ name: "width", type: "double", desc: "Line thickness." }]} />
-<Method name="stroke" signature="void stroke()" description="Renders the current path as an outline." />
+<Method
+    name="beginPath"
+    signature="void beginPath()"
+    description="Begins a new custom path. Subsequent moveTo/lineTo/quadTo/cubicTo calls build it."
+/>
+
+<Method
+    name="moveTo"
+    signature="void moveTo(double x, double y)"
+    description="Moves the current path cursor to the given point without drawing a segment."
+    params={[
+        { name: "x", type: "double", desc: "X coordinate in scaled pixels." },
+        { name: "y", type: "double", desc: "Y coordinate in scaled pixels." }
+    ]}
+/>
+
+<Method
+    name="lineTo"
+    signature="void lineTo(double x, double y)"
+    description="Adds a straight line segment from the current path cursor to the given point."
+    params={[
+        { name: "x", type: "double", desc: "X coordinate in scaled pixels." },
+        { name: "y", type: "double", desc: "Y coordinate in scaled pixels." }
+    ]}
+/>
+
+<Method
+    name="quadTo"
+    signature="void quadTo(double cx, double cy, double x, double y)"
+    description="Adds a quadratic bézier curve from the cursor through the control point (cx, cy) to the end point (x, y)."
+    params={[
+        { name: "cx", type: "double", desc: "Control point X coordinate in scaled pixels." },
+        { name: "cy", type: "double", desc: "Control point Y coordinate in scaled pixels." },
+        { name: "x", type: "double", desc: "End point X coordinate in scaled pixels." },
+        { name: "y", type: "double", desc: "End point Y coordinate in scaled pixels." }
+    ]}
+/>
+
+<Method
+    name="cubicTo"
+    signature="void cubicTo(double c1x, double c1y, double c2x, double c2y, double x, double y)"
+    description="Adds a cubic bézier curve from the cursor through control points (c1x, c1y) and (c2x, c2y) to the end point (x, y)."
+    params={[
+        { name: "c1x", type: "double", desc: "First control point X coordinate in scaled pixels." },
+        { name: "c1y", type: "double", desc: "First control point Y coordinate in scaled pixels." },
+        { name: "c2x", type: "double", desc: "Second control point X coordinate in scaled pixels." },
+        { name: "c2y", type: "double", desc: "Second control point Y coordinate in scaled pixels." },
+        { name: "x", type: "double", desc: "End point X coordinate in scaled pixels." },
+        { name: "y", type: "double", desc: "End point Y coordinate in scaled pixels." }
+    ]}
+/>
+
+<Method
+    name="strokeColor"
+    signature="void strokeColor(double color)"
+    description="Sets the stroke color used by the next stroke() call."
+    params={[
+        { name: "color", type: "double", desc: "Stroke color as an ARGB integer." }
+    ]}
+/>
+
+<Method
+    name="strokeWidth"
+    signature="void strokeWidth(double width)"
+    description="Sets the stroke width used by the next stroke() call."
+    params={[
+        { name: "width", type: "double", desc: "Stroke width in scaled pixels." }
+    ]}
+/>
+
+<Method
+    name="stroke"
+    signature="void stroke()"
+    description="Strokes the current path using the active stroke color and width."
+/>
+
+<Method
+    name="closePath"
+    signature="void closePath()"
+    description="Closes the current path by connecting its last point back to its first."
+/>
 
 ```javascript
-// Draw a triangle
+// Draw a triangle outline
 renderer.beginPath();
 renderer.moveTo(100, 100);
 renderer.lineTo(150, 50);
 renderer.lineTo(200, 100);
 renderer.closePath();
-renderer.strokeColor(0xFFFFFFFF);
+renderer.strokeColor(renderer.color(255, 255, 255));
 renderer.strokeWidth(2);
 renderer.stroke();
 
@@ -194,10 +505,256 @@ renderer.beginPath();
 renderer.moveTo(100, 150);
 renderer.quadTo(150, 100, 200, 150);
 renderer.cubicTo(220, 170, 260, 130, 300, 150);
-renderer.strokeColor(0xFFFFFFFF);
+renderer.strokeColor(renderer.color(255, 255, 255));
 renderer.strokeWidth(2);
 renderer.stroke();
 ```
+
+---
+
+## Text Rendering
+
+**Available fonts:** `"productsans-bold"`, `"productsans-medium"`, `"materialicons-regular"`.
+
+<Method
+    name="text"
+    signature="double text(String fontName, String text, double x, double y, double size, double color)"
+    description="Draws a line of text in the named font and returns its advance width."
+    params={[
+        { name: "fontName", type: "String", desc: "Registered font name (e.g. 'productsans-bold')." },
+        { name: "text", type: "String", desc: "The text to draw." },
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Baseline-relative top in scaled pixels." },
+        { name: "size", type: "double", desc: "Font size." },
+        { name: "color", type: "double", desc: "Text color as an ARGB integer." }
+    ]}
+    returns={{ type: "double", desc: "Rendered width of the text in scaled pixels." }}
+/>
+
+<Method
+    name="textShadow"
+    signature="double textShadow(String fontName, String text, double x, double y, double size, double color)"
+    description="Draws a line of text with a drop shadow and returns its advance width."
+    params={[
+        { name: "fontName", type: "String", desc: "Registered font name." },
+        { name: "text", type: "String", desc: "The text to draw." },
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Baseline-relative top in scaled pixels." },
+        { name: "size", type: "double", desc: "Font size." },
+        { name: "color", type: "double", desc: "Text color as an ARGB integer." }
+    ]}
+    returns={{ type: "double", desc: "Rendered width of the text in scaled pixels." }}
+/>
+
+<Method
+    name="textGradient"
+    signature="void textGradient(String fontName, String text, double x, double y, double size, double color1, double color2)"
+    description="Draws a line of text filled with a horizontal two-color gradient."
+    params={[
+        { name: "fontName", type: "String", desc: "Registered font name." },
+        { name: "text", type: "String", desc: "The text to draw." },
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Baseline-relative top in scaled pixels." },
+        { name: "size", type: "double", desc: "Font size." },
+        { name: "color1", type: "double", desc: "Start color as an ARGB integer." },
+        { name: "color2", type: "double", desc: "End color as an ARGB integer." }
+    ]}
+/>
+
+<Method
+    name="textWidth"
+    signature="double textWidth(String fontName, String text, double size)"
+    description="Measures the rendered width of a string without drawing it."
+    params={[
+        { name: "fontName", type: "String", desc: "Registered font name." },
+        { name: "text", type: "String", desc: "The text to measure." },
+        { name: "size", type: "double", desc: "Font size." }
+    ]}
+    returns={{ type: "double", desc: "Width in scaled pixels." }}
+/>
+
+<Method
+    name="textHeight"
+    signature="double textHeight(String fontName, String text, double size)"
+    description="Measures the rendered height of a string without drawing it."
+    params={[
+        { name: "fontName", type: "String", desc: "Registered font name." },
+        { name: "text", type: "String", desc: "The text to measure." },
+        { name: "size", type: "double", desc: "Font size." }
+    ]}
+    returns={{ type: "double", desc: "Height in scaled pixels." }}
+/>
+
+<Method
+    name="wrapText"
+    signature="List<String> wrapText(String fontName, String text, double width, double size)"
+    description="Wraps a string into lines that each fit within the given width. The result is exposed to scripts as a JS array (.length and index access work)."
+    params={[
+        { name: "fontName", type: "String", desc: "Registered font name." },
+        { name: "text", type: "String", desc: "The text to wrap." },
+        { name: "width", type: "double", desc: "Maximum line width in scaled pixels." },
+        { name: "size", type: "double", desc: "Font size." }
+    ]}
+    returns={{ type: "List<String>", desc: "The wrapped lines in order." }}
+/>
+
+<Method
+    name="trimText"
+    signature="String trimText(String fontName, String text, double width, double size)"
+    description="Trims a string to fit within the given width, appending an ellipsis if it was truncated."
+    params={[
+        { name: "fontName", type: "String", desc: "Registered font name." },
+        { name: "text", type: "String", desc: "The text to trim." },
+        { name: "width", type: "double", desc: "Maximum width in scaled pixels." },
+        { name: "size", type: "double", desc: "Font size." }
+    ]}
+    returns={{ type: "String", desc: "The trimmed string." }}
+/>
+
+---
+
+## Transforms
+
+Each transform takes a `content` callback and brackets it with a `save`/`restore`, so the transform applies only to the draws made inside the callback.
+
+<Method
+    name="scale"
+    signature="void scale(double factor, double x, double y, double width, double height, Runnable content)"
+    description="Executes the callback with a uniform scale transform pivoted at the center of the supplied rectangle."
+    params={[
+        { name: "factor", type: "double", desc: "Uniform scale factor." },
+        { name: "x", type: "double", desc: "Left edge of the pivot rectangle in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge of the pivot rectangle in scaled pixels." },
+        { name: "width", type: "double", desc: "Pivot rectangle width." },
+        { name: "height", type: "double", desc: "Pivot rectangle height." },
+        { name: "content", type: "Runnable", desc: "Rendering callback executed under the transform." }
+    ]}
+/>
+
+<Method
+    name="rotate"
+    signature="void rotate(double degrees, double x, double y, double width, double height, Runnable content)"
+    description="Translates the origin to the center of the supplied rectangle and rotates; the callback draws relative to the new origin."
+    params={[
+        { name: "degrees", type: "double", desc: "Rotation angle in degrees." },
+        { name: "x", type: "double", desc: "Left edge of the pivot rectangle in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge of the pivot rectangle in scaled pixels." },
+        { name: "width", type: "double", desc: "Pivot rectangle width." },
+        { name: "height", type: "double", desc: "Pivot rectangle height." },
+        { name: "content", type: "Runnable", desc: "Rendering callback executed under the transform." }
+    ]}
+/>
+
+<Method
+    name="scissor"
+    signature="void scissor(double x, double y, double width, double height, Runnable content)"
+    description="Pushes a scissor region, runs the callback, then pops it so nothing the callback draws escapes the clip bounds."
+    params={[
+        { name: "x", type: "double", desc: "Left edge of the clip region in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge of the clip region in scaled pixels." },
+        { name: "width", type: "double", desc: "Clip region width." },
+        { name: "height", type: "double", desc: "Clip region height." },
+        { name: "content", type: "Runnable", desc: "Rendering callback executed inside the clip region." }
+    ]}
+/>
+
+<Method
+    name="globalAlpha"
+    signature="void globalAlpha(double alpha)"
+    description="Sets the global alpha multiplier applied to all subsequent draws this frame."
+    params={[
+        { name: "alpha", type: "double", desc: "Alpha multiplier (0.0 = fully transparent, 1.0 = opaque)." }
+    ]}
+/>
+
+---
+
+## Color Helpers
+
+<Callout type="info">
+    These return plain ARGB `int` values, safe to pass straight back into any `color` parameter. Prefer them over hand-writing hex literals.
+</Callout>
+
+<Method
+    name="color"
+    signature="int color(double r, double g, double b, double a)"
+    description="Packs red, green, blue, and alpha channels into an ARGB integer."
+    params={[
+        { name: "r", type: "double", desc: "Red channel (0-255)." },
+        { name: "g", type: "double", desc: "Green channel (0-255)." },
+        { name: "b", type: "double", desc: "Blue channel (0-255)." },
+        { name: "a", type: "double", desc: "Alpha channel (0-255)." }
+    ]}
+    returns={{ type: "int", desc: "The packed ARGB color." }}
+/>
+
+<Method
+    name="color"
+    signature="int color(double r, double g, double b)"
+    description="Packs red, green, and blue channels into a fully opaque ARGB integer (alpha 255)."
+    params={[
+        { name: "r", type: "double", desc: "Red channel (0-255)." },
+        { name: "g", type: "double", desc: "Green channel (0-255)." },
+        { name: "b", type: "double", desc: "Blue channel (0-255)." }
+    ]}
+    returns={{ type: "int", desc: "The packed ARGB color with alpha 255." }}
+/>
+
+<Method
+    name="withAlpha"
+    signature="int withAlpha(double color, double alpha)"
+    description="Replaces the alpha channel of an ARGB color, preserving its RGB channels."
+    params={[
+        { name: "color", type: "double", desc: "Source color as an ARGB integer." },
+        { name: "alpha", type: "double", desc: "New alpha channel (0-255)." }
+    ]}
+    returns={{ type: "int", desc: "The color with the new alpha applied." }}
+/>
+
+<Method
+    name="applyOpacity"
+    signature="int applyOpacity(double color, double opacity)"
+    description="Scales the alpha of an ARGB color by an opacity factor."
+    params={[
+        { name: "color", type: "double", desc: "Source color as an ARGB integer." },
+        { name: "opacity", type: "double", desc: "Opacity multiplier (0.0 to 1.0)." }
+    ]}
+    returns={{ type: "int", desc: "The color with scaled alpha." }}
+/>
+
+<Method
+    name="interpolate"
+    signature="int interpolate(double color1, double color2, double factor)"
+    description="Linearly interpolates between two ARGB colors."
+    params={[
+        { name: "color1", type: "double", desc: "Start color as an ARGB integer." },
+        { name: "color2", type: "double", desc: "End color as an ARGB integer." },
+        { name: "factor", type: "double", desc: "Interpolation factor (0.0 = color1, 1.0 = color2)." }
+    ]}
+    returns={{ type: "int", desc: "The interpolated color." }}
+/>
+
+<Method
+    name="darker"
+    signature="int darker(double color, double factor)"
+    description="Darkens an ARGB color by the given factor."
+    params={[
+        { name: "color", type: "double", desc: "Source color as an ARGB integer." },
+        { name: "factor", type: "double", desc: "Darkening factor." }
+    ]}
+    returns={{ type: "int", desc: "The darkened color." }}
+/>
+
+<Method
+    name="brighter"
+    signature="int brighter(double color, double factor)"
+    description="Brightens an ARGB color by the given factor."
+    params={[
+        { name: "color", type: "double", desc: "Source color as an ARGB integer." },
+        { name: "factor", type: "double", desc: "Brightening factor." }
+    ]}
+    returns={{ type: "int", desc: "The brightened color." }}
+/>
 
 ---
 
