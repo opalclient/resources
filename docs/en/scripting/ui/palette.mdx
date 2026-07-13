@@ -1,6 +1,6 @@
 # Palette Views
 
-Contribute a custom command-palette view — a full surface your script draws and drives itself, hosted inside the palette like a mini-app or game.
+Contribute a custom command-palette view: a full surface your script draws and drives itself, hosted inside the palette like a mini-app or game.
 
 ---
 
@@ -8,10 +8,10 @@ Contribute a custom command-palette view — a full surface your script draws an
 
 **Global Binding:** `palette`
 
-A palette view is a canvas-backed surface registered under an id. Once registered it behaves like any other palette entry: the user can search for it by title and press Enter to open it, or your script can open it directly. While the view is open it owns the whole content region between the search row and the footer — the palette routes per-frame rendering plus raw keyboard and mouse input to your callbacks instead of drawing the normal result list.
+A palette view is a canvas-backed surface registered under an id. Once registered it behaves like any other palette entry: the user can search for it by title and press Enter to open it, or your script can open it directly. While the view is open it owns the whole content region between the search row and the footer: the palette routes per-frame rendering plus raw keyboard and mouse input to your callbacks instead of drawing the normal result list.
 
 <Callout type="info">
-    Every callback runs on the Minecraft render thread, once per frame for `render` and on demand for input. The drawing surface is the same `renderer` global used in `renderScreen` events — see the [Renderer reference](/scripting/reference/renderer).
+    Every callback runs on the Minecraft render thread, once per frame for `render` and on demand for input. The drawing surface is the same `renderer` global used in `renderScreen` events. See the [Renderer reference](/scripting/ui/renderer).
 </Callout>
 
 ### Creating a view
@@ -41,7 +41,7 @@ The `config` object accepts these members:
 | `mouseClicked` | `function(localX, localY, button)` | no | Handles a click in content-local coordinates. Return `true` to consume. |
 
 <Callout type="info">
-    A callback that throws is reported to chat **once** and then suppressed — a misbehaving script can never tear down the palette frame. Returning a non-boolean from an input callback is treated as not-consumed.
+    A callback that throws is reported to chat **once** and then suppressed: a misbehaving script can never tear down the palette frame. Returning a non-boolean from an input callback is treated as not-consumed.
 </Callout>
 
 ### Opening and removing
@@ -78,19 +78,19 @@ The `config` object accepts these members:
 | `h` | `number` | Content height. |
 | `dt` | `number` | Wall-clock seconds elapsed since the previous frame. |
 
-Draw through the `renderer` global exactly as you would in a `renderScreen` event. When `render` is called the canvas frame is **already open and scissor-clipped** to `[x, y, x + w, y + h]`, so drawing outside those bounds is harmless — it is simply clipped away. Treat `(x, y)` as your origin and lay everything out relative to it (the content rectangle is not anchored at `0, 0`).
+Draw through the `renderer` global exactly as you would in a `renderScreen` event. When `render` is called the canvas frame is **already open and scissor-clipped** to `[x, y, x + w, y + h]`, so drawing outside those bounds is harmless. It is simply clipped away. Treat `(x, y)` as your origin and lay everything out relative to it (the content rectangle is not anchored at `0, 0`).
 
-`dt` is the real elapsed time since the last frame, not a fixed tick — multiply your velocities by it so motion is framerate-independent. It is clamped to a maximum of `0.1` seconds, so a backgrounded or paused tab never produces a giant time step, and it is `0.0` on the very first frame after the view opens.
+`dt` is the real elapsed time since the last frame, not a fixed tick: multiply your velocities by it so motion is framerate-independent. It is clamped to a maximum of `0.1` seconds, so a backgrounded or paused tab never produces a giant time step, and it is `0.0` on the very first frame after the view opens.
 
 <Callout type="warning">
-    JavaScript numbers are all doubles, and colors are packed **ARGB ints**. Build colors with `renderer.color(r, g, b[, a])` rather than raw `0xAARRGGBB` literals — a JS double above 2³¹ truncates to the wrong value when it is narrowed to a Java int, so a literal like `0xFFFF0000` will not give you the color you expect.
+    JavaScript numbers are all doubles, and colors are packed **ARGB ints**. Build colors with `renderer.color(r, g, b[, a])` rather than raw `0xAARRGGBB` literals: a JS double above 2³¹ truncates to the wrong value when it is narrowed to a Java int, so a literal like `0xFFFF0000` will not give you the color you expect.
 </Callout>
 
 ---
 
 ## Input callbacks
 
-All three input callbacks are optional and return a boolean — return `true` when you handle the event so it stops propagating.
+All three input callbacks are optional and return a boolean. Return `true` when you handle the event so it stops propagating.
 
 <Method
     name="keyPressed"
@@ -116,7 +116,7 @@ All three input callbacks are optional and return a boolean — return `true` wh
 <Method
     name="mouseClicked"
     signature="boolean mouseClicked(double localX, double localY, int button)"
-    description="Called on a mouse click inside the view. Coordinates are content-local — the origin is the top-left of the content rectangle, not the window. Return true to consume the event."
+    description="Called on a mouse click inside the view. Coordinates are content-local: the origin is the top-left of the content rectangle, not the window. Return true to consume the event."
     params={[
         { name: "localX", type: "double", desc: "Click X relative to the content rectangle." },
         { name: "localY", type: "double", desc: "Click Y relative to the content rectangle." },
@@ -126,7 +126,7 @@ All three input callbacks are optional and return a boolean — return `true` wh
 />
 
 <Callout type="warning">
-    **Esc always closes the view.** The palette intercepts it before your handlers run, so `Esc` is never delivered to `keyPressed` — a surface can never trap the user. Do not rely on `keys.ESCAPE` reaching your view.
+    **Esc always closes the view.** The palette intercepts it before your handlers run, so `Esc` is never delivered to `keyPressed`. A surface can never trap the user. Do not rely on `keys.ESCAPE` reaching your view.
 </Callout>
 
 ---
@@ -195,4 +195,4 @@ palette.openView("bouncer"); // jump straight into it
 
 ## Full example
 
-The flagship reference is **Pac-Man** — a complete, playable clone that registers a palette view and draws an animated maze, ghosts, and scoring entirely from the `palette`, `renderer`, and `keys` APIs. It ships in the bundled scripts as `Pacman.js` and is the canonical end-to-end demonstration of a palette view: a shared game engine, `dt`-driven updates, footer hints, and `keys`-based input.
+The flagship reference is **Pac-Man**: a complete, playable clone that registers a palette view and draws an animated maze, ghosts, and scoring entirely from the `palette`, `renderer`, and `keys` APIs. It ships in the bundled scripts as `Pacman.js` and is the canonical end-to-end demonstration of a palette view: a shared game engine, `dt`-driven updates, footer hints, and `keys`-based input.
