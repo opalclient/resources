@@ -1,0 +1,155 @@
+# Client Proxy
+
+General client interaction: module lookups, chat messages, screen metrics, and theme colors.
+
+---
+
+## Client Proxy
+**Global Binding:** `client`
+
+Provides access to high-level client functions, including module management, chat interaction, and system metrics.
+
+### Chat & Messaging
+
+<Method
+    name="print"
+    signature="void print(Object o)"
+    description="Prints a message to the in-game chat for the local player only. Calls toString() on the object."
+    params={[
+        { name: "o", type: "Object", desc: "The object or message to print." }
+    ]}
+/>
+
+<Method
+    name="success"
+    signature="void success(String message)"
+    description="Prints a success-styled (green) message to the local chat."
+    params={[
+        { name: "message", type: "String", desc: "The success message text." }
+    ]}
+/>
+
+<Method
+    name="error"
+    signature="void error(String message)"
+    description="Prints an error-styled (red) message to the local chat."
+    params={[
+        { name: "message", type: "String", desc: "The error message text." }
+    ]}
+/>
+
+### Module Access
+
+<Method
+    name="getModule"
+    signature="Module getModule(String id)"
+    description="Retrieves a registered module by its display name (case-insensitive). Throws if not found."
+    params={[
+        { name: "id", type: "String", desc: "The module name (e.g., 'KillAura')." }
+    ]}
+    returns={{ type: "Module", desc: "The module instance." }}
+/>
+
+<Method
+    name="isModuleEnabled"
+    signature="boolean isModuleEnabled(String id)"
+    description="Checks if a specific module is currently enabled."
+    params={[
+        { name: "id", type: "String", desc: "The module name." }
+    ]}
+    returns={{ type: "boolean", desc: "True if enabled, false otherwise." }}
+/>
+
+<Method
+    name="setModuleEnabled"
+    signature="void setModuleEnabled(String id, boolean enabled)"
+    description="Toggles a module on or off."
+    params={[
+        { name: "id", type: "String", desc: "The module name." },
+        { name: "enabled", type: "boolean", desc: "True to enable, false to disable." }
+    ]}
+/>
+
+<Callout type="info">
+    For metadata lookups, category listings, and bulk operations, use the [Modules Proxy](modules) instead. `client.getModule`/`isModuleEnabled`/`setModuleEnabled` cover the common single-module case.
+</Callout>
+
+### Screen & Display
+
+<Method
+    name="getScaledWidth"
+    signature="int getScaledWidth()"
+    description="Returns the width of the game window in scaled virtual pixels (affected by GUI scale)."
+    returns={{ type: "int", desc: "Scaled width." }}
+/>
+
+<Method
+    name="getScaledHeight"
+    signature="int getScaledHeight()"
+    description="Returns the height of the game window in scaled virtual pixels."
+    returns={{ type: "int", desc: "Scaled height." }}
+/>
+
+<Method
+    name="getScaleFactor"
+    signature="double getScaleFactor()"
+    description="Returns the current GUI scale factor (e.g., 1.0, 2.0)."
+    returns={{ type: "double", desc: "Scale factor." }}
+/>
+
+<Method
+    name="getFramebufferWidth"
+    signature="int getFramebufferWidth()"
+    description="Returns the raw physical width of the window in pixels."
+    returns={{ type: "int", desc: "Physical width." }}
+/>
+
+<Method
+    name="getFramebufferHeight"
+    signature="int getFramebufferHeight()"
+    description="Returns the raw physical height of the window in pixels."
+    returns={{ type: "int", desc: "Physical height." }}
+/>
+
+### Theme & Visuals
+
+<Method
+    name="getThemePrimary"
+    signature="int getThemePrimary()"
+    description="Returns the primary color of the active client theme as an ARGB integer."
+    returns={{ type: "int", desc: "ARGB color." }}
+/>
+
+<Method
+    name="getThemeSecondary"
+    signature="int getThemeSecondary()"
+    description="Returns the secondary color of the active client theme as an ARGB integer."
+    returns={{ type: "int", desc: "ARGB color." }}
+/>
+
+<Method
+    name="getAnimatedThemeColor"
+    signature="int getAnimatedThemeColor(int speed, int offset)"
+    description="Interpolates between the primary and secondary theme colors in a pulsing animation. Use offset to create gradients/waves across multiple elements."
+    params={[
+        { name: "speed", type: "int", desc: "Animation speed (lower is slower)." },
+        { name: "offset", type: "int", desc: "Offset for creating gradients/waves." }
+    ]}
+    returns={{ type: "int", desc: "Interpolated ARGB color." }}
+/>
+
+### System
+
+<Method
+    name="getTickDelta"
+    signature="float getTickDelta()"
+    description="Returns the partial tick time (0.0 to 1.0), useful for smooth rendering interpolation between ticks."
+    returns={{ type: "float", desc: "Partial tick." }}
+/>
+
+<Method
+    name="getFPS"
+    signature="int getFPS()"
+    description="Returns the current frames per second."
+    returns={{ type: "int", desc: "FPS." }}
+/>

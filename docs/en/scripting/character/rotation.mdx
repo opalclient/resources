@@ -7,8 +7,8 @@ Server-side rotation submission plus stateless angle math, raycasting, and FOV c
 **Global Binding:** `rotation`
 
 The rotation proxy has two halves. The **stateful** methods (`set`, `setSmooth`)
-submit a target rotation to the client's internal rotation handler — the same
-system KillAura and Scaffold drive — which manages server-side yaw/pitch,
+submit a target rotation to the client's internal rotation handler, the same
+system KillAura and Scaffold drive, which manages server-side yaw/pitch,
 movement correction, and anti-cheat compliance for you. The **stateless**
 methods compute rotation angles, look vectors, differences, and
 sensitivity-corrected values without touching any client state.
@@ -25,8 +25,8 @@ sensitivity-corrected values without touching any client state.
 
 ## Stateful Submission
 
-These submit a target rotation to the rotation handler. They return nothing —
-the handler applies the rotation on the next movement packet and corrects
+These submit a target rotation to the rotation handler. They return nothing.
+The handler applies the rotation on the next movement packet and corrects
 movement automatically.
 
 <Method
@@ -53,7 +53,7 @@ movement automatically.
 <Callout type="warning">
     `set` and `setSmooth` go through the client's shared rotation handler, so they
     interact with native modules (KillAura, Scaffold) that also submit rotations.
-    Submit your target every tick (e.g. from `preGameTick`) rather than once — the
+    Submit your target every tick (e.g. from `preGameTick`) rather than once. The
     handler resolves the active target per tick.
 </Callout>
 

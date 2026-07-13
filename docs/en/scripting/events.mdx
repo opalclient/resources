@@ -6,7 +6,7 @@ A script module registers behaviour by attaching JavaScript handlers to named ev
 
 ## Registering Handlers
 
-Inside a `registerModule` callback, call `module.on(eventName, handler)` for each event you want to react to. The handler is invoked with the Java event object as its only argument — except `enable` and `disable`, which receive no argument.
+Inside a `registerModule` callback, call `module.on(eventName, handler)` for each event you want to react to. The handler is invoked with the Java event object as its only argument, except for `enable` and `disable`, which receive no argument.
 
 <Method
     name="on"
@@ -59,7 +59,7 @@ module.on("disable", () => notification.info("Example", "Stopped"));
 
 ## Game Tick Events
 
-Fired around the 20 TPS client tick. Both pass an event object, but neither object carries any data — they are timing hooks for game logic.
+Fired around the 20 TPS client tick. Both pass an event object, but neither object carries any data. They are timing hooks for game logic.
 
 | Event | Payload | Fires when |
 | :--- | :--- | :--- |
@@ -81,7 +81,7 @@ module.on("postGameTick", (event) => {
 
 ## Render Events
 
-Fired every frame. Draw with the `renderer` proxy here. All three are records — read their fields with bare accessors.
+Fired every frame. Draw with the `renderer` proxy here. All three are records, so read their fields with bare accessors.
 
 | Event | Payload | Fires when |
 | :--- | :--- | :--- |
@@ -99,7 +99,7 @@ Fired every frame. Draw with the `renderer` proxy here. All three are records �
 
 <Method name="matrixStack" signature="PoseStack matrixStack()" description="renderWorld: the camera-relative transform stack (pre-multiplied by the camera view rotation)." returns={{ type: "PoseStack", desc: "Camera-space pose stack." }} />
 
-<Method name="tickDelta" signature="float tickDelta()" description="renderScreen / renderWorld / renderBloom: fractional progress through the current tick, for smooth interpolation." returns={{ type: "float", desc: "Partial tick (0.0–1.0)." }} />
+<Method name="tickDelta" signature="float tickDelta()" description="renderScreen / renderWorld / renderBloom: fractional progress through the current tick, for smooth interpolation." returns={{ type: "float", desc: "Partial tick (0.0 to 1.0)." }} />
 
 <Callout type="warning">
     Colors are 32-bit ARGB ints, but JavaScript has only one number type: the IEEE-754 `double`. A literal like `0xFF1a1a1a` is `4278190080`, which is larger than `2^31`; narrowing that double to a Java `int` truncates to the wrong value. Build colors with `renderer.color(r, g, b)` or `renderer.color(r, g, b, a)` instead of raw `0xAARRGGBB` literals.
@@ -178,7 +178,7 @@ module.on("preMove", (event) => {
 
 ## Packet Events
 
-Fired for raw network packets. All four are **cancellable** — cancelling drops the packet so vanilla never sends/handles it. The `instantaneous` pair runs synchronously on the network thread; the plain pair runs on the main thread.
+Fired for raw network packets. All four are **cancellable**: cancelling drops the packet so vanilla never sends/handles it. The `instantaneous` pair runs synchronously on the network thread; the plain pair runs on the main thread.
 
 | Event | Payload | Cancellable | Fires when |
 | :--- | :--- | :--- | :--- |
@@ -358,7 +358,7 @@ module.on("sendPacket", (event) => {
 ## Number & Color Notes
 
 <Callout type="info">
-    JavaScript has a single number type — the 64-bit `double`. Java accessors that return `int`, `float`, or `long` arrive as ordinary JS numbers, and JS numbers you pass back are narrowed to the Java parameter type. Two consequences worth remembering:
+    JavaScript has a single number type: the 64-bit `double`. Java accessors that return `int`, `float`, or `long` arrive as ordinary JS numbers, and JS numbers you pass back are narrowed to the Java parameter type. Two consequences worth remembering:
 
     - **Colors:** build ARGB ints with `renderer.color(r, g, b[, a])`. A raw `0xAARRGGBB` literal above `2^31` (any color with alpha ≥ 0x80) is a positive double that truncates to the wrong `int` when narrowed.
     - **Codes:** `getInteractionCode()` returns an `int` GLFW code; compare it against numeric constants directly.
@@ -366,13 +366,13 @@ module.on("sendPacket", (event) => {
 
 ## Error Handling
 
-If a callback throws, the client prints the **first** error for that event name to chat (with internal class paths sanitized) and then suppresses further errors from that same event until the module is re-enabled. The handler is **not** removed — it keeps running, so a transient per-tick error does not silently disable your script.
+If a callback throws, the client prints the **first** error for that event name to chat (with internal class paths sanitized) and then suppresses further errors from that same event until the module is re-enabled. The handler is **not** removed: it keeps running, so a transient per-tick error does not silently disable your script.
 
 To reset error reporting after a fix, toggle the module off and on (the `enable` event clears the suppressed-error set), or reload the script.
 
 ## Null Safety
 
-Always check `mc.player` and `mc.world` before touching game state — they are `null` in menus and loading screens:
+Always check `mc.player` and `mc.world` before touching game state, since they are `null` in menus and loading screens:
 
 ```javascript
 module.on("preGameTick", (event) => {

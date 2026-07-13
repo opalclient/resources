@@ -5,22 +5,22 @@ Opal's scripting engine runs on **GraalVM JavaScript (ES6+)**, hot-reloaded from
 ---
 
 <Callout type="warning">
-    **Scripts run full-trust — there is no sandbox.** Every `.js` file in `opal/scripts/` is evaluated with the JVM's full privileges: unrestricted filesystem read/write, thread creation, and reflective reach into the entire Minecraft client and Opal internals. A script can read or modify any file your account can touch and call any client code. Treat every script as if you wrote it yourself: **only run scripts you trust**, and read the source of anything before you load it.
+    **Scripts run full-trust: there is no sandbox.** Every `.js` file in `opal/scripts/` is evaluated with the JVM's full privileges: unrestricted filesystem read/write, thread creation, and reflective reach into the entire Minecraft client and Opal internals. A script can read or modify any file your account can touch and call any client code. Treat every script as if you wrote it yourself: **only run scripts you trust**, and read the source of anything before you load it.
 </Callout>
 
 The proxy API below is a *convenience* layer, not a security boundary. It curates a clean surface onto the client, but it does not restrict what a script is allowed to do.
 
 ### Community scripts are quarantined
 
-Scripts imported from the public gallery never auto-run. They are written to a **quarantine directory, `opal/scripts/pending/`**, which the loader skips entirely — a pending script does not execute on reload or restart. It runs only after you explicitly **Trust & run** it, at which point it is moved into `opal/scripts/` and loaded. Your explicit trust is the gate that first executes community code; review it first.
+Scripts imported from the public gallery never auto-run. They are written to a **quarantine directory** (`opal/scripts/pending/`), which the loader skips entirely: a pending script does not execute on reload or restart. It runs only after you explicitly **Trust & run** it, at which point it is moved into `opal/scripts/` and loaded. Your explicit trust is the gate that first executes community code; review it first.
 
 ## What a Script Can Do
 
 A single script can register any combination of:
 
-- **Modules** — feature toggles that appear in the ClickGUI alongside native modules, with their own settings and event handlers.
-- **HUD islands** — custom Dynamic Island overlays drawn on the HUD via the `overlay` global.
-- **Command-palette views** — interactive mini-apps and games inside the command palette via the `palette` global. See [Palette Views](reference/palette).
+- **Modules**: feature toggles that appear in the ClickGUI alongside native modules, with their own settings and event handlers.
+- **HUD islands**: custom Dynamic Island overlays drawn on the HUD via the `overlay` global.
+- **Command-palette views**: interactive mini-apps and games inside the command palette via the `palette` global. See [Palette Views](ui/palette).
 
 ## Anatomy of a Script
 
@@ -112,7 +112,7 @@ JavaScript has a single numeric type: the 64-bit `double`. There is no integer t
 Colors are packed **32-bit ARGB integers**. It is tempting to write a literal like `0xFFFF0000`, but that value (`4294901760`) is larger than the maximum signed 32-bit integer (`2147483647`). When that `double` is narrowed back to a Java `int`, the high (alpha) bit overflows and the color comes out wrong.
 
 <Callout type="warning">
-    Build colors with `renderer.color(r, g, b[, a])` (components are `0`–`255`, alpha defaults to `255`) rather than raw `0xAARRGGBB` literals. A fully opaque white is `renderer.color(255, 255, 255)`, not `0xFFFFFFFF`.
+    Build colors with `renderer.color(r, g, b[, a])` (components range from 0 to 255, alpha defaults to `255`) rather than raw `0xAARRGGBB` literals. A fully opaque white is `renderer.color(255, 255, 255)`, not `0xFFFFFFFF`.
 </Callout>
 
 ```javascript
@@ -136,7 +136,7 @@ Specific Java classes and constants are exposed globally. You do not need to imp
 | `keys` | GLFW key codes for palette-view key handlers (e.g. `keys.UP`) |
 
 <Callout type="warning">
-    Accessing methods directly on `mc.player` or `mc.world` requires knowledge of Fabric's intermediary mappings — those calls fail at runtime. Use the provided proxy globals (`player`, `world`, `inventory`, etc.) for all method calls. Use `mc.player` and `mc.world` only for null checks.
+    Accessing methods directly on `mc.player` or `mc.world` requires knowledge of Fabric's intermediary mappings, and those calls fail at runtime. Use the provided proxy globals (`player`, `world`, `inventory`, etc.) for all method calls. Use `mc.player` and `mc.world` only for null checks.
 </Callout>
 
 ## Available Globals
@@ -173,15 +173,15 @@ See the **API Reference** pages for full method documentation.
 | `.script cloud list` | List your cloud scripts |
 | `.script cloud delete <name>` | Delete a cloud script |
 
-`.script reload` performs a clean cycle: every loaded module's `disable` callback fires while its context is still alive, all contexts are closed, then the `opal/scripts/` folder is rescanned from disk — no game restart needed.
+`.script reload` performs a clean cycle: every loaded module's `disable` callback fires while its context is still alive, all contexts are closed, and then the `opal/scripts/` folder is rescanned from disk, so you don't need to restart the game.
 
 ## Tips
 
-- **Only run scripts you trust** — scripts have full filesystem and client access; community scripts stay in `scripts/pending` until you Trust & run them.
-- **Null check `mc.player`** before accessing player data — it's null in menus and loading screens.
-- **Use `renderScreen` for HUD** — renderer methods only work during render events.
-- **Use `preGameTick` for logic** — runs every tick (20 times/second).
-- **Build colors with `renderer.color(...)`** — avoid raw `0xAARRGGBB` literals (JS numbers narrow to `int` incorrectly).
-- Each script is **isolated** in its own context — scripts can't interfere with each other.
-- **Hot reload** with `.script reload` — no restart needed.
-- Max script size: **100KB**.
+- Only run scripts you trust. Scripts have full filesystem and client access; community scripts stay in `scripts/pending` until you Trust & run them.
+- Null check `mc.player` before touching player data, since it's null in menus and loading screens.
+- Use `renderScreen` for HUD drawing; renderer methods only work during render events.
+- Use `preGameTick` for logic that needs to run every tick (20 times a second).
+- Build colors with `renderer.color(...)` instead of raw `0xAARRGGBB` literals, since JS numbers narrow to `int` incorrectly.
+- Each script is isolated in its own context, so scripts can't interfere with each other.
+- Hot reload with `.script reload`; no restart needed.
+- Max script size: 100KB.

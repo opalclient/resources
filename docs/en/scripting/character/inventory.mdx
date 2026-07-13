@@ -10,11 +10,11 @@ Slot switching (including silent/spoof variants), item searching, and stack insp
 Wraps the internal `SlotHelper` system used by Scaffold and other modules for server-side slot manipulation, plus convenience helpers for searching the hotbar and full inventory and inspecting individual stacks.
 
 <Callout type="info">
-    Hotbar slots are indexed `0`–`8`. The full inventory uses slots `0`–`35` (hotbar `0`–`8`, main inventory `9`–`35`). Search and count helpers match an item's display name as a case-insensitive substring.
+    Hotbar slots are indexed `0-8`. The full inventory uses slots `0-35` (hotbar `0-8`, main inventory `9-35`). Search and count helpers match an item's display name as a case-insensitive substring.
 </Callout>
 
 <Callout type="warning">
-    All methods read `mc.player` without a null guard. Always confirm the player exists before calling — e.g. `if (mc.player === null) return;` — to avoid errors when not in a world.
+    All methods read `mc.player` without a null guard. Always confirm the player exists before calling (e.g. `if (mc.player === null) return;`) to avoid errors when not in a world.
 </Callout>
 
 ### Slot Switching
@@ -207,5 +207,5 @@ module.on("preGameTick", (event) => {
 ```
 
 <Callout type="info">
-    Numbers in scripts are always JavaScript doubles. Slot indices and counts are narrowed back to `int` on the Java side, so pass whole-number values. When working with ItemStack colors or any ARGB value elsewhere, build colors with `renderer.color(r, g, b[, a])` rather than raw `0xAARRGGBB` literals — a JS double above 2^31 truncates incorrectly when narrowed to an `int`.
+    Numbers in scripts are always JavaScript doubles. Slot indices and counts are narrowed back to `int` on the Java side, so pass whole-number values. When working with ItemStack colors or any ARGB value elsewhere, build colors with `renderer.color(r, g, b[, a])` rather than raw `0xAARRGGBB` literals: a JS double above 2^31 truncates incorrectly when narrowed to an `int`.
 </Callout>

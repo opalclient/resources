@@ -1,0 +1,59 @@
+# World Proxy
+
+Block queries, entity queries, and world info.
+
+---
+
+## World Proxy
+**Global Binding:** `world`
+
+### Block Queries
+
+<Method name="isAir" signature="boolean isAir(BlockPos pos)" description="Whether the block at the given position is air." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "boolean", desc: "True if air." }} />
+<Method name="isReplaceable" signature="boolean isReplaceable(BlockPos pos)" description="Whether the block can be replaced (air, fluid, grass, etc.)." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "boolean", desc: "True if replaceable." }} />
+<Method name="isSolid" signature="boolean isSolid(BlockPos pos)" description="Whether the block is solid." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "boolean", desc: "True if solid." }} />
+<Method name="getBlockName" signature="String getBlockName(BlockPos pos)" description="Returns the localized display name of the block." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "String", desc: "Block name." }} />
+<Method name="getBlockState" signature="BlockState getBlockState(BlockPos pos)" description="Returns the raw BlockState object." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "BlockState", desc: "Block state." }} />
+<Method name="getBlock" signature="Block getBlock(BlockPos pos)" description="Returns the Block type object." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "Block", desc: "Block." }} />
+<Method name="getBlockHardness" signature="float getBlockHardness(BlockPos pos)" description="Returns the breaking hardness. -1 means unbreakable (bedrock)." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "float", desc: "Hardness." }} />
+
+### Block Helpers
+
+<Method name="hasAdjacentBlock" signature="boolean hasAdjacentBlock(BlockPos pos)" description="Whether any face-adjacent block is solid (placeable-against)." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "boolean", desc: "True if has neighbor." }} />
+<Method name="getAdjacentDirections" signature="List&lt;Direction&gt; getAdjacentDirections(BlockPos pos)" description="Returns directions where a solid neighbour exists. Can be empty." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "List<Direction>", desc: "List of ScriptDirection." }} />
+
+```javascript
+const below = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
+
+if (!world.isReplaceable(below)) return;
+
+const dirs = world.getAdjacentDirections(below);
+if (dirs.isEmpty()) return;
+
+const side = dirs.get(0);
+const neighbor = below.offset(side);
+```
+
+### Entity Queries
+
+<Method name="getEntities" signature="Iterable getEntities()" description="Returns all entities in the world." returns={{ type: "Iterable", desc: "All entities." }} />
+<Method name="getLivingEntitiesInRange" signature="List&lt;LivingEntity&gt; getLivingEntitiesInRange(double radius)" description="Returns living entities (mobs + players) within radius of the player, excluding self." params={[{ name: "radius", type: "double", desc: "Search radius in blocks." }]} returns={{ type: "List<LivingEntity>", desc: "Nearby living entities." }} />
+
+```javascript
+// Attack closest entity
+const targets = world.getLivingEntitiesInRange(5.0);
+if (!targets.isEmpty()) {
+    mc.interactionManager.attackEntity(targets.get(0));
+    player.swingHand(MAIN_HAND);
+}
+```
+
+### World Info
+
+<Method name="getTime" signature="long getTime()" description="Returns world time in ticks." returns={{ type: "long", desc: "World ticks." }} />
+<Method name="getTimeOfDay" signature="long getTimeOfDay()" description="Time of day: 0=sunrise, 6000=noon, 12000=sunset, 18000=midnight." returns={{ type: "long", desc: "Time of day." }} />
+<Method name="getDimension" signature="String getDimension()" description="Returns the dimension identifier." returns={{ type: "String", desc: "e.g., 'minecraft:overworld'." }} />
+
+---
+
+For 3D-to-2D screen projection, see [ESP](esp). For script-safe wrapper types, see [Types](types).

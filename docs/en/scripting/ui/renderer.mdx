@@ -10,11 +10,11 @@ A complete 2D drawing API backed by the active **divinity canvas**, exposed to s
 Draws filled shapes, gradients, outlines, composite effects, images, vector paths, and text onto the divinity-backed canvas using the Minecraft scaled coordinate system.
 
 <Callout type="warning">
-    Every draw call must run **inside an active canvas frame** — that means from a module's `renderScreen` callback, from a command-palette view's `render`, or from a Dynamic Island `render` callback (see the Overlay Proxy). Outside an active frame the canvas is unavailable and image draws (which need a live extract context) are silently skipped.
+    Every draw call must run **inside an active canvas frame**: that means from a module's `renderScreen` callback, from a command-palette view's `render`, or from a Dynamic Island `render` callback (see the Overlay Proxy). Outside an active frame the canvas is unavailable and image draws (which need a live extract context) are silently skipped.
 </Callout>
 
 <Callout type="info">
-    **Numbers and colors.** JavaScript has a single `number` type (an IEEE‑754 `double`), so every parameter here is declared `double` and cast internally — GraalVM will not implicitly narrow. Colors are packed **ARGB integers**. Build them with `renderer.color(r, g, b[, a])` rather than raw `0xAARRGGBB` literals: a hex literal whose alpha byte is `0x80`–`0xFF` is greater than 2³¹ as a JS `double` and narrows to the wrong `int`, so `0xFFFFFFFF` does **not** round‑trip. `renderer.color(255, 255, 255)` does.
+    **Numbers and colors.** JavaScript has a single `number` type (an IEEE-754 `double`), so every parameter here is declared `double` and cast internally: GraalVM will not implicitly narrow it. Colors are packed **ARGB integers**. Build them with `renderer.color(r, g, b[, a])` rather than raw `0xAARRGGBB` literals: a hex literal with an alpha byte from `0x80` to `0xFF` is greater than 2³¹ as a JS `double` and narrows to the wrong `int`, so `0xFFFFFFFF` does **not** round-trip. `renderer.color(255, 255, 255)` does.
 </Callout>
 
 ---
@@ -237,7 +237,7 @@ Draws filled shapes, gradients, outlines, composite effects, images, vector path
 
 ## Composite Effects
 
-Higher-level fills the canvas composites from its blur, shadow, and bloom passes — the same effects the native Opal UI draws with, now reachable from scripts.
+Higher-level fills the canvas composites from its blur, shadow, and bloom passes: the same effects the native Opal UI draws with, now reachable from scripts.
 
 <Method
     name="shadow"
@@ -299,7 +299,7 @@ Higher-level fills the canvas composites from its blur, shadow, and bloom passes
 />
 
 <Callout type="warning">
-    `innerGlow` is **advanced and visually unverified** — it has no native Opal UI callers yet. The binding is present and stable, but its rendered appearance has not been confirmed in‑game. Treat it as experimental.
+    `innerGlow` is **advanced and visually unverified**. It has no native Opal UI callers yet. The binding is present and stable, but its rendered appearance has not been confirmed in-game. Treat it as experimental.
 </Callout>
 
 <Method
@@ -334,7 +334,7 @@ Images load once into a GPU handle and draw by that handle. The renderer caches 
 <Method
     name="loadImage"
     signature="GpuImageHandle loadImage(String path)"
-    description="Loads an image from the client's resource path and returns a GPU handle for drawing. Returns GpuImageHandle.NONE on failure rather than throwing — check handle.isValid() before drawing."
+    description="Loads an image from the client's resource path and returns a GPU handle for drawing. Returns GpuImageHandle.NONE on failure rather than throwing: check handle.isValid() before drawing."
     params={[
         { name: "path", type: "String", desc: "Resource-relative image path." }
     ]}
@@ -358,7 +358,7 @@ Images load once into a GPU handle and draw by that handle. The renderer caches 
 <Method
     name="imageTinted"
     signature="void imageTinted(GpuImageHandle handle, double x, double y, double width, double height, double radius, double tint)"
-    description="Draws a loaded image multiplied by a tint color — useful for recoloring icons or fading images."
+    description="Draws a loaded image multiplied by a tint color, useful for recoloring icons or fading images."
     params={[
         { name: "handle", type: "GpuImageHandle", desc: "Handle obtained from loadImage." },
         { name: "x", type: "double", desc: "Left edge in scaled pixels." },
@@ -380,7 +380,7 @@ Images load once into a GPU handle and draw by that handle. The renderer caches 
 />
 
 <Callout type="info">
-    `image` and `imageTinted` route through the active extract context. When no render pass is open the draw is silently skipped — call them from within `renderScreen`, a palette view's `render`, or an island `render`.
+    `image` and `imageTinted` route through the active extract context. When no render pass is open the draw is silently skipped: call them from within `renderScreen`, a palette view's `render`, or an island `render`.
 </Callout>
 
 ```javascript
