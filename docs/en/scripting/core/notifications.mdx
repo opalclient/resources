@@ -1,0 +1,72 @@
+# Notification Proxy
+
+Temporary toast notifications on the HUD.
+
+---
+
+## Notification Proxy
+**Global Binding:** `notification`
+
+Displays temporary "toast" notifications on the HUD.
+
+### Typed Notifications
+
+<Method
+    name="success"
+    signature="void success(String title, String description, [int duration])"
+    description="Displays a green success notification."
+    params={[
+        { name: "title", type: "String", desc: "Notification title." },
+        { name: "description", type: "String", desc: "Notification body text." },
+        { name: "duration", type: "int", desc: "Optional duration in ms (default 3000)." }
+    ]}
+/>
+
+<Method
+    name="error"
+    signature="void error(String title, String description, [int duration])"
+    description="Displays a red error notification."
+    params={[
+        { name: "title", type: "String", desc: "Notification title." },
+        { name: "description", type: "String", desc: "Notification body text." },
+        { name: "duration", type: "int", desc: "Optional duration in ms." }
+    ]}
+/>
+
+<Method
+    name="warn"
+    signature="void warn(String title, String description, [int duration])"
+    description="Displays a yellow warning notification."
+    params={[
+        { name: "title", type: "String", desc: "Notification title." },
+        { name: "description", type: "String", desc: "Notification body text." },
+        { name: "duration", type: "int", desc: "Optional duration in ms." }
+    ]}
+/>
+
+<Method
+    name="info"
+    signature="void info(String title, String description, [int duration])"
+    description="Displays a blue informational notification."
+    params={[
+        { name: "title", type: "String", desc: "Notification title." },
+        { name: "description", type: "String", desc: "Notification body text." },
+        { name: "duration", type: "int", desc: "Optional duration in ms." }
+    ]}
+/>
+
+<Method
+    name="show"
+    signature="void show(String type, String title, String description, [int duration])"
+    description="Displays a notification with a dynamic type."
+    params={[
+        { name: "type", type: "String", desc: "Type: 'SUCCESS', 'ERROR', 'WARN', 'INFO'." },
+        { name: "title", type: "String", desc: "Notification title." },
+        { name: "description", type: "String", desc: "Notification body text." },
+        { name: "duration", type: "int", desc: "Optional duration in ms." }
+    ]}
+/>
+
+<Callout type="info">
+    Toast notifications (this page) and [Dynamic Island overlays](overlay) both render through the client's shared overlay kit internally, but they are separate proxies with separate global bindings. Calling `notification.*` never touches an island, and calling `overlay.*` never shows a toast.
+</Callout>

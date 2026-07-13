@@ -1,0 +1,88 @@
+# Overlay Proxy
+
+Custom Dynamic Island HUD elements, registered and driven entirely from a script.
+
+---
+
+## Overlay Proxy
+**Global Binding:** `overlay`
+
+Allows scripts to register and manage custom "Dynamic Island" HUD elements.
+
+<Method
+    name="createIsland"
+    signature="String createIsland(Object config)"
+    description="Creates a new island and returns its unique ID. Config must include width, height, priority, and a render callback."
+    params={[
+        { name: "config", type: "Object", desc: "{ width, height, priority, render(posX, posY, width, height, progress) }" }
+    ]}
+    returns={{ type: "String", desc: "Unique Island ID." }}
+/>
+
+```javascript
+const island = overlay.createIsland({
+    width: 160,
+    height: 28,
+    priority: 10,
+    render: (posX, posY, width, height, progress) => {
+        renderer.roundedRect(posX, posY, width, height, 4, 0xFF1a1a1a);
+        renderer.text("productsans-bold", "Custom HUD", posX + 10, posY + 14, 8, 0xFFFFFFFF);
+    }
+});
+overlay.showIsland(island);
+```
+
+<Method name="showIsland" signature="void showIsland(String islandId)"
+    description="Activates the island, adding it to the render loop."
+    params={[{ name: "islandId", type: "String", desc: "The ID returned by createIsland." }]}
+/>
+
+<Method name="hideIsland" signature="void hideIsland(String islandId)"
+    description="Deactivates the island without destroying it."
+    params={[{ name: "islandId", type: "String", desc: "The ID returned by createIsland." }]}
+/>
+
+<Method name="destroyIsland" signature="void destroyIsland(String islandId)"
+    description="Permanently deletes the island."
+    params={[{ name: "islandId", type: "String", desc: "The ID returned by createIsland." }]}
+/>
+
+<Method
+    name="setIslandWidth"
+    signature="void setIslandWidth(String islandId, float width)"
+    description="Updates the content width dynamically."
+    params={[
+        { name: "islandId", type: "String", desc: "Island ID." },
+        { name: "width", type: "float", desc: "New width." }
+    ]}
+/>
+
+<Method
+    name="setIslandHeight"
+    signature="void setIslandHeight(String islandId, float height)"
+    description="Updates the height dynamically."
+    params={[
+        { name: "islandId", type: "String", desc: "Island ID." },
+        { name: "height", type: "float", desc: "New height." }
+    ]}
+/>
+
+<Method
+    name="setIslandPriority"
+    signature="void setIslandPriority(String islandId, int priority)"
+    description="Updates the render priority (higher renders on top)."
+    params={[
+        { name: "islandId", type: "String", desc: "Island ID." },
+        { name: "priority", type: "int", desc: "New priority." }
+    ]}
+/>
+
+<Method
+    name="cleanup"
+    signature="void cleanup()"
+    description="Destroys every island the calling script created."
+/>
+
+<Callout type="info">
+    The client already calls `cleanup()` automatically when a module disables or a script unloads, so most scripts never need to call it directly. Call it yourself only if you want to clear all your islands early, without waiting for either of those.
+</Callout>

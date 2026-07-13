@@ -28,7 +28,7 @@ if (mc.player === null) return;
 <Method
     name="getEyePosition"
     signature="Vec3d getEyePosition()"
-    description="Returns the player's eye position in world space — the origin point for raycasts and rotation calculations."
+    description="Returns the player's eye position in world space, the origin point for raycasts and rotation calculations."
     returns={{ type: "Vec3d", desc: "Eye position." }}
 />
 
@@ -75,7 +75,7 @@ if (mc.player === null) return;
 />
 
 <Callout type="info">
-    `getEyePosition()`, `getPosition()`, and `getVelocity()` return raw `Vec3d` values. Their instance methods are intermediary-named at runtime and are **not** callable by readable name — pass them into proxy methods (such as `rotation.getRotationFromPosition` or `esp.projectVec`), or use `getBlockPosition()` when you need readable `getX()`/`getY()`/`getZ()`. See the Types reference.
+    `getEyePosition()`, `getPosition()`, and `getVelocity()` return raw `Vec3d` values. Their instance methods are intermediary-named at runtime and are **not** callable by readable name. Pass them into proxy methods (such as `rotation.getRotationFromPosition` or `esp.projectVec`), or use `getBlockPosition()` when you need readable `getX()`/`getY()`/`getZ()`. See the Types reference.
 </Callout>
 
 ```javascript
@@ -225,7 +225,7 @@ module.on("preGameTick", (event) => {
 <Method
     name="getClosestPoint"
     signature="Vec3d getClosestPoint(Entity entity)"
-    description="Returns the point on a living entity's bounding box closest to the player's eye position — the same target point KillAura aims at — or null if the entity is not living."
+    description="Returns the point on a living entity's bounding box closest to the player's eye position (the same target point KillAura aims at), or null if the entity is not living."
     params={[
         { name: "entity", type: "Entity", desc: "Target entity." }
     ]}
@@ -304,7 +304,7 @@ if (mc.player !== null && player.isBoxEmptyBelow(-0.6)) {
 <Method
     name="swingHand"
     signature="void swingHand(InteractionHand hand)"
-    description="Plays the hand swing animation for the given hand — call it after attacking or placing to trigger the visual swing."
+    description="Plays the hand swing animation for the given hand. Call it after attacking or placing to trigger the visual swing."
     params={[
         { name: "hand", type: "InteractionHand", desc: "MAIN_HAND or OFF_HAND." }
     ]}
@@ -320,7 +320,7 @@ if (mc.player !== null && player.isBoxEmptyBelow(-0.6)) {
 />
 
 <Callout type="info">
-    `MAIN_HAND` and `OFF_HAND` are global `InteractionHand` constants injected into every script — see the Types reference. Both `swingHand` and `useItem` already null-check internally, but guarding the whole handler with `if (mc.player === null) return;` keeps your logic consistent.
+    `MAIN_HAND` and `OFF_HAND` are global `InteractionHand` constants injected into every script. See the Types reference. Both `swingHand` and `useItem` already null-check internally, but guarding the whole handler with `if (mc.player === null) return;` keeps your logic consistent.
 </Callout>
 
 ```javascript

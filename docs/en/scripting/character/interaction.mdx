@@ -1,0 +1,58 @@
+# Interaction Manager
+
+Block interaction, entity attacks, and block breaking, accessed through `mc.interactionManager`.
+
+---
+
+## InteractionManager
+**Access via:** `mc.interactionManager`
+
+Wraps `ClientPlayerInteractionManager`. The local player is injected automatically, and every method is null-guarded internally, so it is safe to call before the world or player are ready.
+
+### Block Interaction
+
+<Method name="interactBlock" signature="void interactBlock(InteractionHand hand, HitResult hitResult)" description="Right-clicks a block face with the given hand. The HitResult should come from rotation.getRotationFromRaycastedBlock().getHitResult()." params={[{ name: "hand", type: "InteractionHand", desc: "MAIN_HAND or OFF_HAND." }, { name: "hitResult", type: "HitResult", desc: "Block hit result from a raycasted rotation." }]} />
+
+<Method name="updateBlockBreakingProgress" signature="boolean updateBlockBreakingProgress(BlockPos blockPos, Direction direction)" description="Begins or updates block-breaking progress on the given block position and face." params={[{ name: "blockPos", type: "BlockPos", desc: "Position of the block to break." }, { name: "direction", type: "Direction", desc: "Face being targeted." }]} returns={{ type: "boolean", desc: "True if breaking progress was updated." }} />
+
+<Method name="cancelBlockBreaking" signature="void cancelBlockBreaking()" description="Cancels any in-progress block breaking." />
+
+<Method name="isBreakingBlock" signature="boolean isBreakingBlock()" description="Whether a block break is currently in progress." returns={{ type: "boolean", desc: "True if breaking a block." }} />
+
+### Entity & Item Interaction
+
+<Method name="attackEntity" signature="void attackEntity(Entity entity)" description="Attacks an entity with the local player's main hand." params={[{ name: "entity", type: "Entity", desc: "Entity to attack." }]} />
+
+<Method name="interactItem" signature="void interactItem(InteractionHand hand)" description="Uses the item in the given hand (right-click use, not on a block)." params={[{ name: "hand", type: "InteractionHand", desc: "Hand to use." }]} />
+
+<Method name="stopUsingItem" signature="void stopUsingItem()" description="Stops using an item (e.g. releasing a bow or stopping eating)." />
+
+### Example: Scaffold Pattern
+
+```javascript
+const below = new BlockPos(
+    player.getBlockPosition().getX(),
+    player.getBlockPosition().getY() - 1,
+    player.getBlockPosition().getZ()
+);
+
+if (!world.isReplaceable(below)) return;
+
+const dirs = world.getAdjacentDirections(below);
+if (dirs.isEmpty()) return;
+
+const side = dirs.get(0);
+const neighbor = below.offset(side);
+
+const raytrace = rotation.getRotationFromRaycastedBlock(
+    neighbor,
+    side.getOpposite(),
+    rotation.getRotation(),
+    player.getEyePosition()
+);
+if (raytrace === null) return;
+
+rotation.set(raytrace.getYaw(), raytrace.getPitch());
+mc.interactionManager.interactBlock(MAIN_HAND, raytrace.getHitResult());
+player.swingHand(MAIN_HAND);
+```

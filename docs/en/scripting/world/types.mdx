@@ -1,13 +1,13 @@
 # Types
 
 Bound Java and wrapper types available to every script. These are injected as
-globals — you do not need to import them.
+globals. You do not need to import them.
 
 <Callout type="info">
     Wrapper types (`BlockPos`, `Vec2f`, `Direction`, `RaytracedRotation`) expose
     stable, readable method names. The raw Minecraft types (`Vec3d`, `Vec3i`)
     and `MathHelper` use Fabric intermediary names at runtime, so their methods
-    are **not** callable by readable name — use them for construction and for
+    are **not** callable by readable name. Use them for construction and for
     passing into proxy methods, and do the math through the proxy globals.
 </Callout>
 
@@ -53,7 +53,7 @@ client.print("Yaw: " + rot.getYaw() + " Pitch: " + rot.getPitch());
 
 A cardinal or vertical facing direction. Backed by the `ScriptDirection`
 wrapper around `net.minecraft.core.Direction`. Scripts do not construct this
-directly — obtain one from `world.getAdjacentDirections(pos)`.
+directly. Obtain one from `world.getAdjacentDirections(pos)`.
 
 ```javascript
 const dirs = world.getAdjacentDirections(pos);
@@ -118,7 +118,7 @@ const screen = esp.projectVec(eye, client.getTickDelta());
 
 The raw `net.minecraft.core.Vec3i` (integer vector), bound as `Vec3i`.
 Construct with `new Vec3i(x, y, z)`. The same intermediary-name caveat as
-`Vec3d` applies — treat it as a construction and pass-through type. For block
+`Vec3d` applies. Treat it as a construction and pass-through type. For block
 positions, prefer the `BlockPos` wrapper, which exposes readable
 `getX()`/`getY()`/`getZ()`.
 

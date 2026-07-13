@@ -1,0 +1,47 @@
+# Minecraft Proxy
+
+**Global Binding:** `mc`
+
+A safe, structured facade over the Minecraft client. It exists so scripts can reach the client without touching intermediary-named fields (GraalVM JS would otherwise see `field_1724` instead of `player` under Fabric intermediary mappings).
+
+<Callout type="info">
+    `mc.player` and `mc.world` are exposed for **null checks only**. For actual player/world behavior, use the dedicated `player` and `world` proxy globals; they return script-safe wrapper types instead of raw intermediary objects.
+</Callout>
+
+---
+
+## Client Access
+
+<Method name="getPlayer" signature="LocalPlayer getPlayer()" description="Returns the local player entity, or null if not yet loaded. Intended for null-guard checks only, use the player global for state and movement methods." returns={{ type: "LocalPlayer | null", desc: "Local player, or null." }} />
+
+<Method name="getWorld" signature="ClientLevel getWorld()" description="Returns the active client world, or null if not yet loaded. Intended for null-guard checks only, use the world global for block and entity queries." returns={{ type: "ClientLevel | null", desc: "Client world, or null." }} />
+
+<Method name="getInteractionManager" signature="InteractionManagerProxy getInteractionManager()" description="Returns the interaction manager proxy. Kept for completeness; prefer the public field mc.interactionManager." returns={{ type: "InteractionManagerProxy", desc: "Interaction manager proxy." }} />
+
+<Callout type="info">
+    `mc.player`, `mc.world`, and `mc.interactionManager` are also readable as direct fields (GraalVM JS reads them via field access). `mc.player === null` is the idiomatic guard at the top of every event callback.
+</Callout>
+
+```javascript
+module.on("preGameTick", (event) => {
+    // Standard guard: always null-check before doing anything.
+    if (mc.player === null || mc.world === null) return;
+
+    client.print("Health: " + player.getHealth());
+});
+```
+
+---
+
+## Related Proxies
+
+`mc` is deliberately thin. The behavior you reach for lives on these sibling globals, all of which return script-safe wrapper types rather than raw intermediary objects.
+
+| Global | Binding | Use for |
+|---|---|---|
+| `player` | [Player](../character/player) | Position, state, health, combat, entity utilities, swinging |
+| `world` | [World](../world/world) | Block queries, entity queries, world info |
+| `movement` | [Movement](../character/movement) | Speed queries/manipulation, movement direction, input state |
+| `rotation` | [Rotation](../character/rotation) | Rotation submission, raytraced rotations, rotation math |
+| `inventory` | [Inventory](../character/inventory) | Slot switching, item searching, stack inspection |
+| `mc.interactionManager` | [Interaction](../character/interaction) | Block breaking/placing, entity attacks, item use |

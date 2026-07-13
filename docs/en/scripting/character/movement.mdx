@@ -10,7 +10,7 @@ Read and manipulate the local player's movement: query speed, set velocity, and 
 Provides scripts with access to movement utilities including speed manipulation, direction calculation, and movement state queries.
 
 <Callout type="info">
-    JavaScript has only one number type (a 64-bit double). The Java methods below distinguish between `float` and `double` parameters, but from a script you just pass plain numbers — the engine narrows them as needed. Angles are always in degrees unless the method name ends in `Radians`.
+    JavaScript has only one number type (a 64-bit double). The Java methods below distinguish between `float` and `double` parameters, but from a script you just pass plain numbers. The engine narrows them as needed. Angles are always in degrees unless the method name ends in `Radians`.
 </Callout>
 
 ```javascript
@@ -102,7 +102,7 @@ client.print("dX=" + offset[0].toFixed(3) + " dZ=" + offset[1].toFixed(3));
 />
 
 <Callout type="warning">
-    `setSpeed(speed, strafePercentage)` and `setSpeed(speed, yaw)` are different overloads that both take two numbers. Because JavaScript has a single number type, the engine cannot tell a strafe blend (`0.0`–`1.0`) apart from a yaw angle (degrees) purely by value — both resolve to the same call site. If you need an explicit yaw, prefer building the offset with `yawPos(...)` and applying it, or pass a value that is unambiguous for your intent. Test both behaviors in-game before shipping a script.
+    `setSpeed(speed, strafePercentage)` and `setSpeed(speed, yaw)` are different overloads that both take two numbers. Because JavaScript has a single number type, the engine cannot tell a strafe blend (`0.0-1.0`) apart from a yaw angle (degrees) purely by value; both resolve to the same call site. If you need an explicit yaw, prefer building the offset with `yawPos(...)` and applying it, or pass a value that is unambiguous for your intent. Test both behaviors in-game before shipping a script.
 </Callout>
 
 <Method
