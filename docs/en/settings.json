@@ -1,0 +1,59 @@
+{
+  "groups": [
+    {
+      "title": "General",
+      "icon": "general",
+      "description": "Client-wide basics.",
+      "settings": [
+        { "name": "Language", "key": "language", "type": "string", "default": "en", "description": "Language for Opal's menus and overlays. Change it any time; the client re-applies without a restart." }
+      ]
+    },
+    {
+      "title": "Graphics",
+      "icon": "graphics",
+      "description": "Quality tiers for the Liquid Glass renderer and post-processing.",
+      "note": "Blur and Bloom are edited from the in-game Post Processing panel. The per-effect quality settings inherit from Glass Quality unless you override them.",
+      "settings": [
+        { "name": "Fresnel Quality", "key": "fresnel_quality", "type": "mode", "default": "MEDIUM", "options": ["OFF", "LOW", "MEDIUM", "HIGH", "ULTRA"], "description": "Quality of the Fresnel rim-light on glass surfaces. OFF skips the shader entirely." },
+        { "name": "Glass Quality", "key": "glass_quality", "type": "mode", "default": "MEDIUM", "options": ["OFF", "LOW", "MEDIUM", "HIGH", "ULTRA"], "description": "Master quality for every Liquid Glass effect. The overrides below cascade from this." },
+        { "name": "Blur Quality", "key": "blur_quality", "type": "mode", "default": "INHERIT", "options": ["INHERIT", "OFF", "LOW", "MEDIUM", "HIGH", "ULTRA"], "description": "Per-effect blur override. INHERIT follows Glass Quality." },
+        { "name": "Refraction Quality", "key": "refraction_quality", "type": "mode", "default": "INHERIT", "options": ["INHERIT", "OFF", "LOW", "MEDIUM", "HIGH", "ULTRA"], "description": "Per-effect refraction override. INHERIT follows Glass Quality." },
+        { "name": "Shadow Quality", "key": "shadow_quality", "type": "mode", "default": "INHERIT", "options": ["INHERIT", "OFF", "LOW", "MEDIUM", "HIGH", "ULTRA"], "description": "Per-effect shadow override. INHERIT follows Glass Quality." },
+        { "name": "Liquid Glass Quality", "key": "liquid_glass_quality", "type": "mode", "default": "INHERIT", "options": ["INHERIT", "OFF", "LOW", "MEDIUM", "HIGH", "ULTRA"], "description": "Per-effect liquid-glass override. INHERIT follows Glass Quality." },
+        { "name": "Blur", "key": "post_blur", "type": "boolean", "default": "On", "description": "Screen-space blur post-processing." },
+        { "name": "Blur Radius", "key": "post_blur_radius", "type": "number", "default": "7", "range": "1-20 px", "description": "Blur radius in pixels." },
+        { "name": "Bloom", "key": "post_bloom", "type": "boolean", "default": "On", "description": "Bloom glow. Needs Blur on." },
+        { "name": "Bloom Radius", "key": "post_bloom_radius", "type": "number", "default": "7", "range": "1-20 px", "description": "Bloom radius in pixels." }
+      ]
+    },
+    {
+      "title": "Interface",
+      "icon": "interface",
+      "description": "The main menu and how big the UI draws.",
+      "settings": [
+        { "name": "Custom Main Menu", "key": "main_menu", "type": "boolean", "default": "On", "description": "Replace the vanilla title screen with Opal's own. Applies the next time the title screen opens." },
+        { "name": "Menu Shaders", "key": "menu_shaders", "type": "boolean", "default": "On", "description": "Animated shader background behind the Opal main menu." },
+        { "name": "Alt Manager Scale", "key": "alt_manager_scale", "type": "number", "default": "1.0", "range": "0.7-1.6", "description": "UI scale for the Alt Manager." },
+        { "name": "UI Scale", "key": "ui_scale", "type": "number", "default": "1.0", "range": "0.5-2.0", "description": "Global scale for Opal's HUD and menus, on top of the resolution-aware auto scale." }
+      ]
+    },
+    {
+      "title": "Chat",
+      "icon": "chat",
+      "description": "Quality-of-life tweaks for the chat box.",
+      "settings": [
+        { "name": "Chat Selection", "key": "chat_selection", "type": "boolean", "default": "On", "description": "Drag to select chat text. Ctrl+C copies; Shift or Ctrl+Shift with the arrow keys extends the selection." },
+        { "name": "Screenshot in Chat", "key": "screenshot_chat", "type": "boolean", "default": "On", "description": "Turn the screenshot-saved message into a Copy / Open / Delete line." },
+        { "name": "Clickable Links", "key": "chat_links", "type": "boolean", "default": "Off", "description": "Make http and https links in chat clickable. Opening one always shows a safety prompt first." }
+      ]
+    },
+    {
+      "title": "Integrations",
+      "icon": "integrations",
+      "description": "What Opal shares with our services.",
+      "settings": [
+        { "name": "Opt out of hardware survey", "key": "survey_opt_out", "type": "boolean", "default": "Off", "description": "Stop sending the anonymous, bucketed hardware snapshot (GPU, CPU, OS, RAM). No serials, IP addresses, or file paths are ever collected." }
+      ]
+    }
+  ]
+}
