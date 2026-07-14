@@ -4,11 +4,11 @@ Opal's scripting engine runs on **GraalVM JavaScript (ES6+)**, hot-reloaded from
 
 ---
 
-<Callout type="warning">
-    **Scripts run full-trust: there is no sandbox.** Every `.js` file in `opal/scripts/` is evaluated with the JVM's full privileges: unrestricted filesystem read/write, thread creation, and reflective reach into the entire Minecraft client and Opal internals. A script can read or modify any file your account can touch and call any client code. Treat every script as if you wrote it yourself: **only run scripts you trust**, and read the source of anything before you load it.
+<Callout type="info">
+    **Scripts run sandboxed.** Every `.js` file is evaluated in a GraalVM context locked to the proxy API documented here: no filesystem access, no thread creation, and no reflective reach into the Minecraft client or Opal internals beyond the methods each proxy explicitly exposes. A script cannot read or write files, spawn a thread, or call into client code that isn't part of the documented API surface.
 </Callout>
 
-The proxy API below is a *convenience* layer, not a security boundary. It curates a clean surface onto the client, but it does not restrict what a script is allowed to do.
+The proxy API below is the *complete* surface a script can reach. Anything not exposed by a proxy, a bound type, or an event payload is unreachable from script code, not merely discouraged.
 
 ### Community scripts are quarantined
 
@@ -177,7 +177,7 @@ See the **API Reference** pages for full method documentation.
 
 ## Tips
 
-- Only run scripts you trust. Scripts have full filesystem and client access; community scripts stay in `scripts/pending` until you Trust & run them.
+- Community scripts stay in `scripts/pending` until you Trust & run them, even though every script runs sandboxed to the proxy API.
 - Null check `mc.player` before touching player data, since it's null in menus and loading screens.
 - Use `renderScreen` for HUD drawing; renderer methods only work during render events.
 - Use `preGameTick` for logic that needs to run every tick (20 times a second).
@@ -185,3 +185,13 @@ See the **API Reference** pages for full method documentation.
 - Each script is isolated in its own context, so scripts can't interfere with each other.
 - Hot reload with `.script reload`; no restart needed.
 - Max script size: 100KB.
+
+## Editor and AI Tooling
+
+A few tools exist to make writing scripts faster, independent of this documentation:
+
+- **Example scripts**: a gallery of runnable, documented example scripts (`opal-scripts`) covering every proxy category, from a simple toast notification to full palette-view mini-games.
+- **VS Code and JetBrains extensions** (`opal-scripting-ide`): ambient type definitions for the entire proxy API, so hovering or autocompleting `player.`, `renderer.`, `world.`, etc. shows real signatures and doc text in a plain `.js` file, plus a one-command script scaffold and boilerplate snippets/live templates.
+- **AI assistant setup** (`opal-script-skills`): a portable skill package that teaches Claude Code, Codex, Copilot, Gemini, and similar tools the full scripting API, plus a `/new-opal-script` command for Claude Code that scaffolds a working script from a prompt.
+
+These are separate, independently versioned projects; check the Opal community channels for current availability and install instructions.
