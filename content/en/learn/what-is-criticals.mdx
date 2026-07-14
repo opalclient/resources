@@ -1,0 +1,85 @@
+---
+title: "What Is Criticals in Minecraft? Module Explained"
+description: "Criticals is a combat module that forces every hit to register as a critical strike, no jump timing required. Here's how it works and why it's easy to catch."
+excerpt: "Every hit lands like a perfectly timed jump attack, minus the jump. Here's what the Criticals module actually changes, and the particle burst that gives it away."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does a critical hit normally require in vanilla Minecraft?"
+    a: "The attacker has to be falling at the moment the hit lands, which usually means jumping just before the swing connects. Standing still or hitting while moving level never produces a critical in unmodified Minecraft."
+  - q: "Does Criticals change how much damage a hit deals?"
+    a: "Yes. It forces the critical damage bonus onto every attack, so hits deal more damage than they would if the game were actually checking the player's movement state."
+  - q: "Is Criticals the same as a reach or aim module?"
+    a: "No. Reach extends attack distance and aim modules handle targeting; Criticals only changes whether a landed hit counts as critical for damage. They're built to stack with each other, not replace one another."
+  - q: "Can a server tell Criticals is being used?"
+    a: "Yes. A server can compare the player's tracked position and velocity against what a real critical requires. A player who isn't falling but keeps landing critical hits is a pattern anticheats specifically watch for."
+---
+
+<KeyTakeaways>
+
+- Criticals is a combat module that forces every hit to land as a critical strike, the damage bonus vanilla Minecraft only grants while falling.
+- It skips the jump-timing requirement, so hits land critical while standing still.
+- It's a damage cheat, seen in client lineages like Fan and Tenacity.
+- Servers catch it by checking whether the attacker's movement supports a critical.
+
+</KeyTakeaways>
+
+Criticals is a combat module that forces every attack a player lands to register as a critical hit, the extra damage vanilla Minecraft normally reserves for attacks that connect while the attacker is falling. Landing a real critical takes a timed jump right before the swing. Criticals throws that timing out entirely: every hit counts as a critical whether the player is airborne, walking flat, or standing dead still. It's a small mechanical change with a loud visual tell, and it belongs to the blunter, older end of the cheat spectrum rather than anything built to survive scrutiny.
+
+## How Criticals works
+
+Vanilla Minecraft checks one thing before awarding a critical hit: is the attacker moving downward at the instant the attack lands. In practice that means jumping and hitting on the way down, a narrow window most players learn to time by feel. Land inside it and the game adds bonus damage along with the star-particle burst and critical-hit sound. Miss it and the hit is ordinary.
+
+Criticals removes the check. Instead of reading the player's actual vertical velocity, it marks every outgoing attack as a critical before the client sends it, so the damage bonus applies no matter what the player's real movement looks like. It's been documented in client lineages including Fan and Tenacity, both from an era and style of client where masking a mismatch this obvious was never really the point.
+
+## Why people use it
+
+The appeal is damage without the tradeoff. A real critical requires jumping into a fight, which briefly puts you airborne with your movement options narrowed and your hitbox easier to read. Criticals hands out that same bonus without ever leaving the ground, so a player fighting flat-footed does as much damage per swing as someone who nailed the timing on every single hit. It turns a skill into a constant.
+
+## Why it gets detected
+
+Criticals changes a combat outcome, not the game's appearance, so it carries real risk on any server running server-side checks. The signature is twofold. There's the visual one: critical hits throw a distinct particle burst and sound, and a client reporting one on nearly every swing looks wrong on its face. Then there's the one the server actually verifies: it can track the attacker's own position and velocity at the moment the hit registers, and a player who is standing on the ground, not falling, landing what the client claims is a critical hit directly contradicts how vanilla combat works. That contradiction is what server-side anticheats flag.
+
+<Callout variant="tip" title="Where Opal draws the line">
+Opal ships its own combat-side modules, the same general category Criticals lives in, but a forced-critical toggle isn't one of them. A mismatch this easy for a server to catch (critical damage landing while your own tracked velocity says you never left the ground) is exactly the kind of edge that gets a client blacklisted from server allowlists inside a week.
+</Callout>
+
+## Criticals vs Reach and aim modules
+
+Criticals doesn't touch distance or targeting, so it isn't a substitute for [Reach](/en/learn/what-is-reach) or an [aimbot](/en/learn/what-is-an-aimbot). Reach decides whether a hit can register from farther away than vanilla allows. An aimbot decides whether the crosshair lands on the target at all. Criticals only decides what happens to damage once a hit has already landed, whether it counts as critical or not. The three are commonly stacked together rather than used as alternatives, since each one solves a different part of a swing.
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the module generically so you know what the term means. Naming and exact behavior vary by client, and forcing critical hits outside of vanilla's rules breaks the terms of service on essentially every server.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does a critical hit normally require in vanilla Minecraft?">
+The attacker has to be falling at the moment of impact, which usually means jumping just before the hit lands. Standing still or attacking while moving level does not produce a critical hit in unmodified Minecraft.
+</FAQItem>
+
+<FAQItem question="Does Criticals change how much damage a hit deals?">
+Yes. It forces the critical damage bonus onto every hit, so attacks deal more damage than they would if the player's actual movement state were being checked.
+</FAQItem>
+
+<FAQItem question="Is Criticals the same as a reach or aim module?">
+No. Reach extends attack distance and aim modules handle targeting. Criticals only changes whether a landed hit counts as critical for damage purposes, and the three are usually stacked together rather than swapped for one another.
+</FAQItem>
+
+<FAQItem question="Can a server tell Criticals is being used?">
+Yes. A server can compare whether the player's tracked position and velocity actually support a critical at the moment a hit is reported. A player who isn't falling but keeps landing critical hits is a pattern anticheats look for directly.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-reach", label: "What is Reach?", description: "The distance module Criticals is often stacked with." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "The targeting module that handles a different part of the swing." },
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The auto-attacker Criticals shows up alongside in older clients." },
+]} />
+
+<CTA href="/en/purchase">Fight fair and still hit like it's timed. See Opal's combat toolkit for $8.99.</CTA>

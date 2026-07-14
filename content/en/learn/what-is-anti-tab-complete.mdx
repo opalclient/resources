@@ -1,0 +1,73 @@
+---
+title: "What Is AntiTabComplete? Minecraft Module Explained"
+description: "AntiTabComplete blocks the tab-complete requests some server plugins use to quietly fingerprint a Minecraft client. Learn how it works and why it matters."
+excerpt: "Tab complete looks harmless. On some servers it's a passive data-collection channel with no UI. AntiTabComplete just stops answering."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does AntiTabComplete actually block?"
+    a: "It blocks tab-complete requests that a server plugin sends to passively collect information about the player's client, requests that never show up in chat or anywhere else on screen."
+  - q: "Is AntiTabComplete a cheat?"
+    a: "No. It doesn't change movement, combat, or anything else a server can score as an unfair advantage. It's a privacy feature that closes a passive data-collection channel, nothing more."
+  - q: "Does AntiTabComplete give a competitive advantage?"
+    a: "No, it has zero effect on gameplay. It only changes what a server plugin can learn about the player through the tab-completion exchange, not how fast they hit or move."
+  - q: "Which client documents AntiTabComplete?"
+    a: "Tenacity is the client tracked with an AntiTabComplete module in the knowledge base."
+  - q: "Why would a server use tab completion to collect data in the first place?"
+    a: "Because the exchange happens behind the scenes and is never shown to the player, it gives a plugin a quiet channel to send requests and read responses, which is exactly the kind of passive collection AntiTabComplete shuts down."
+---
+
+<KeyTakeaways>
+- AntiTabComplete is a Minecraft module that blocks tab-complete requests some servers use to quietly profile a player's client.
+- It intercepts the client side of Minecraft's tab-completion exchange, the background traffic triggered by pressing Tab.
+- It's a privacy fix, not a competitive one; it never touches movement or combat.
+- Tenacity is the client documented with this module.
+</KeyTakeaways>
+
+AntiTabComplete is a module that stops a server from using Minecraft's tab-completion exchange to quietly pull information about a player's client. Some server plugins send tab-complete requests not to help with typing, but as a low-visibility channel for passive data collection. AntiTabComplete closes that channel from the client side, so those requests just get no answer.
+
+## How it works
+
+Tab completion is normal Minecraft behavior. Start typing a command, hit Tab, and the client and server trade messages behind the scenes so the game can suggest valid completions. None of that exchange is shown to the player, which is exactly what makes it reusable for something other than autocomplete. A plugin can fire these requests at a client to probe it, and read whatever comes back, without a single line of it appearing in chat.
+
+AntiTabComplete sits on that gap. It intercepts or ignores the requests before the client can answer them, so a plugin leaning on the tab-complete channel gets nothing useful back. Normal chat and command usage looks identical to the player the whole time. Nothing visibly changes, which is the point.
+
+## A privacy fix, not a gameplay edge
+
+This is where AntiTabComplete splits from most of what people mean when they say "Minecraft cheat." A module like [Reach](/en/learn/what-is-reach) or KillAura changes what the game physically lets you do, and anticheats exist specifically to catch the movement and timing fingerprints that leaves behind. AntiTabComplete never touches movement or combat. It only changes what a server can learn about you passively, which makes it an information problem, not a competitive one.
+
+That also makes it low-risk to run. It doesn't send falsified data or alter anything the server can verify about your combat or movement, it just withholds a response to a request the player was never meant to see in the first place. From the server's side, a client that doesn't answer a passive probe just looks like a client that lacks the probed behavior, not one caught sending fake packets. Same category as other counter-surveillance tooling: quiet, defensive, and not what anticheats are actually built to catch.
+
+<Callout variant="tip" title="Where Opal stands on this">
+Opal doesn't ship a module called AntiTabComplete. It's a narrow fix for a narrow probe, and it only matters on the specific servers that run this kind of plugin. Worth asking about by name if you're comparing utility clients on privacy grounds rather than just DPS.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="What does AntiTabComplete actually block?">
+It blocks tab-complete requests that a server plugin sends to passively collect information about the player's client, requests that never show up in chat or anywhere else on screen.
+</FAQItem>
+<FAQItem question="Is AntiTabComplete a cheat?">
+No. It doesn't change movement, combat, or anything else a server can score as an unfair advantage. It's a privacy feature that closes a passive data-collection channel, nothing more.
+</FAQItem>
+<FAQItem question="Does AntiTabComplete give a competitive advantage?">
+No, it has zero effect on gameplay. It only changes what a server plugin can learn about the player through the tab-completion exchange, not how fast they hit or move.
+</FAQItem>
+<FAQItem question="Which client documents AntiTabComplete?">
+Tenacity is the client tracked with an AntiTabComplete module in the knowledge base.
+</FAQItem>
+<FAQItem question="Why would a server use tab completion to collect data in the first place?">
+Because the exchange happens behind the scenes and is never shown to the player, it gives a plugin a quiet channel to send requests and read responses, which is exactly the kind of passive collection AntiTabComplete shuts down.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The category AntiTabComplete belongs to, and what separates utility from outright cheating." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The other end of the client spectrum, built around not being detected at all." },
+  { href: "/en/learn/what-is-reach", label: "What is reach?", description: "A genuine gameplay-affecting module, useful contrast to a privacy-only one like AntiTabComplete." }
+]} />
+
+<CTA href="/en/purchase">Opal's module list is built on what actually earns a slot, not filler. Go see it.</CTA>

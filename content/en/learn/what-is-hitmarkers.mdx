@@ -1,0 +1,73 @@
+---
+title: "What Is Hitmarkers in Minecraft? (Module Explained)"
+description: "Hitmarkers is a Minecraft module that flashes an on-screen marker the moment a hit lands, a shooter-game convention for instant on-screen combat feedback."
+excerpt: "Landing a hit and knowing you landed a hit are two different feelings in Minecraft. Hitmarkers closes that gap with a flash instead of a guess."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Hitmarkers do in Minecraft?"
+    a: "It displays an on-screen marker or crosshair flash the instant the player lands a hit, confirming the attack visually instead of making the player watch a health bar."
+  - q: "Is Hitmarkers a cheat?"
+    a: "No. It only adds a visual cue for a hit that already happened through normal means. It does not change reach, aim, or attack timing, so it gives no mechanical advantage."
+  - q: "Can Hitmarkers get a player banned?"
+    a: "Unlikely on its own. Because it does not modify how hits are calculated or sent to the server, it has nothing for a combat anticheat to flag, unlike modules that alter aim or reach."
+  - q: "Where does the hitmarker concept come from?"
+    a: "It is a convention borrowed from shooter games, where a hitmarker confirms a shot connected. Clients like Tenacity adapted the same idea for Minecraft combat feedback."
+  - q: "Is Hitmarkers the same as an aimbot or KillAura?"
+    a: "No. Hitmarkers only displays feedback after a hit already lands. It does not aim, target, or attack for the player the way an aimbot or KillAura module does."
+---
+
+<KeyTakeaways>
+- Hitmarkers is a Minecraft visual module that flashes an on-screen marker the instant an attack lands, a convention lifted straight from shooter games.
+- It reacts to a hit result the client and server already agreed happened. It doesn't calculate reach, aim, or attack timing on its own.
+- Because it only draws feedback after the fact, it's cosmetic, not a combat advantage, and leaves no unusual packets for a server to flag.
+- Documented as a visual-category module, seen in Tenacity, grouped with HUD and feedback tools rather than combat cheats.
+</KeyTakeaways>
+
+Hitmarkers is a visual module that flashes an on-screen marker or crosshair effect the instant a player lands a hit on an entity. The idea comes straight from shooter games, where a hitmarker confirms a shot connected without making you watch a health bar. In Minecraft it does the same job for melee and ranged hits: instant confirmation, zero change to how combat itself resolves.
+
+## How it works
+
+Hitmarkers reacts to a hit event the game already produces. The moment an attack registers on a target, the module briefly renders a marker, usually a small cross or flash, over the crosshair. Nothing about the attack changes. The module only draws feedback on top of an outcome the client and server already agreed happened, the same way a hit sound or a floating damage number does.
+
+Because it reads an existing hit result instead of generating one, Hitmarkers never touches reach, aim, or attack timing. That distinction matters more than it sounds: vanilla Minecraft gives almost no visual confirmation that an attack landed, especially in a chaotic fight or when the target is half-hidden behind other players. A marker removes that guesswork the instant it happens, which is most useful exactly when eyeballing a health bar mid-swing isn't realistic.
+
+## Is it safe to use
+
+Hitmarkers is cosmetic, and it doesn't carry the detection risk that combat-advantage modules do. It's a client-side overlay, not a gameplay change: it doesn't alter reach, aim, or the packets sent to the server, so a server-side anticheat has nothing anomalous to measure. The hit already happened through legitimate means. The module just adds an indicator for it after the fact.
+
+That puts Hitmarkers in the same low-risk bucket as HUD or crosshair customization, not combat-assist features. It's the kind of module you'd file next to a keystroke display or a session-stats overlay: entirely about presentation, never about outcome.
+
+<Callout variant="tip" title="Where this sits in Opal">
+Opal's visual category is built around HUD feedback: the dynamic island overlay, session stats, target info, keystrokes. A dedicated crosshair hitmarker isn't part of that lineup right now. If a flash-on-hit is specifically what you're chasing, that's a narrower ask than what Opal's visual toolkit currently covers, though the same "tell me what's happening without making me guess" instinct runs through the whole category.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="What does Hitmarkers do in Minecraft?">
+It displays an on-screen marker or crosshair flash the instant the player lands a hit, confirming the attack visually instead of making the player watch a health bar.
+</FAQItem>
+<FAQItem question="Is Hitmarkers a cheat?">
+No. It only adds a visual cue for a hit that already happened through normal means. It does not change reach, aim, or attack timing, so it gives no mechanical advantage.
+</FAQItem>
+<FAQItem question="Can Hitmarkers get a player banned?">
+Unlikely on its own. Because it does not modify how hits are calculated or sent to the server, it has nothing for a combat anticheat to flag, unlike modules that alter aim or reach.
+</FAQItem>
+<FAQItem question="Where does the hitmarker concept come from?">
+It is a convention borrowed from shooter games, where a hitmarker confirms a shot connected. Clients like Tenacity adapted the same idea for Minecraft combat feedback.
+</FAQItem>
+<FAQItem question="Is Hitmarkers the same as an aimbot or KillAura?">
+No. Hitmarkers only displays feedback after a hit already lands. It does not aim, target, or attack for the player the way an aimbot or KillAura module does.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category Hitmarkers and modules like it belong to." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "A module that acts on a target; Hitmarkers only confirms what already landed." },
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "Automated combat on the opposite end of the risk spectrum from a cosmetic overlay." }
+]} />
+
+<CTA href="/en/purchase">Opal's HUD stack keeps you reading the fight as it happens, no flash-after-the-fact required.</CTA>

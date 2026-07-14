@@ -1,0 +1,94 @@
+---
+title: "What Is the Notifications Module in Minecraft?"
+description: "The Notifications module in Minecraft clients pops up a quick on-screen alert when a module toggles or a task finishes, with zero anticheat footprint."
+excerpt: "A toggle fires, a task finishes, and a small banner tells you it worked so you don't have to go check yourself. That's the whole module."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is Notifications a cheat module?"
+    a: "No. It only displays a message when something happens in the client, like a module toggling or an automated task finishing. It doesn't act on your behalf or change any game mechanic, so it's feedback, not automation."
+  - q: "What kinds of events trigger a notification?"
+    a: "The two common ones are a module switching on or off, usually from a hotkey or the click GUI, and an automated module finishing a task on its own, such as Chest Stealer completing a pass on a chest."
+  - q: "Does Notifications get detected by anticheats?"
+    a: "No. It has no server-side footprint at all. It sends nothing and changes nothing about gameplay, and anticheats evaluate movement, combat, and packet data, none of which a purely visual pop-up touches."
+  - q: "How is Notifications different from a HUD module?"
+    a: "A HUD module is a persistent overlay shown at all times, like coordinates or FPS. Notifications only appears briefly in response to a specific event, then clears itself."
+  - q: "Which clients have a Notifications module?"
+    a: "It's seen in clients like Fan and Tenacity, usually sitting alongside a HUD and an array list as part of the same passive-display category."
+---
+
+<KeyTakeaways>
+
+- The Notifications module shows a brief on-screen pop-up when a specific in-client event fires, most often a module toggling on or off, or an automated module like Chest Stealer finishing a task.
+- It's event-driven, not persistent: the alert appears, holds for a second or two, then clears itself, unlike an always-visible HUD.
+- It draws locally only. No packets, no movement or combat changes, nothing for a server-side anticheat to measure.
+- Seen in clients like Fan and Tenacity as a quality-of-life layer, not a gameplay feature.
+
+</KeyTakeaways>
+
+The Notifications module is a small alert system in some Minecraft utility clients that throws a short pop-up on screen whenever a specific event happens, most commonly a module turning on or off, or a background task wrapping up. It doesn't change anything about how the game plays. Think of it as confirmation, not automation: the kind of feature you don't think about until you're juggling six modules at once and need to know, without stopping to check, that the one you just toggled actually landed.
+
+## How it works
+
+Notifications listens for events inside the client itself rather than anything happening on the server. The most common trigger is a hotkey or click GUI toggle: flip Killaura on and a quick banner confirms it. The other frequent trigger is an automated module completing a task on its own schedule, the clearest example being [Chest Stealer](/en/learn/what-is-chest-stealer) finishing a pass on a chest you just opened.
+
+The pop-up itself is small: a line of text or a compact banner, usually parked in a corner of the screen, visible for a second or two before it fades. It works the same way vanilla Minecraft's own toast messages do (advancement pop-ups, the recipe unlock banner), just repurposed for client-side events instead of vanilla ones. The important part is what it doesn't do: showing the notification has zero effect on the event it's reporting. The toggle already happened. The pop-up just tells you about it after the fact.
+
+## Notifications vs a HUD module
+
+It's tempting to file this under HUD, but the two solve different problems. A HUD stays on screen continuously, showing an ongoing readout like coordinates or FPS whether anything is happening or not. Notifications is the opposite: invisible by default, and only surfaces when something specific fires.
+
+| | Notifications | HUD |
+|---|---|---|
+| Visible by default | No, only on event | Yes, continuously |
+| Duration | A second or two, then clears | Stays until toggled off |
+| Shows | A single event (toggle, task done) | Ongoing stats (coordinates, FPS, combat) |
+| Server interaction | None | None |
+
+Clients like Fan and Tenacity ship both, treating them as separate pieces of the same passive-display category rather than one covering for the other. If you want the constant-readout side of that pairing, that's the [HUD module](/en/learn/what-is-hud) page.
+
+## Is it safe to use
+
+About as safe as a client feature gets. Notifications draws locally and stops there. No extra packets go out, nothing about movement or combat changes, and no input gets automated. A server-side anticheat evaluates what your client sends and how your player moves, and a pop-up that exists only on your own screen never touches either side of that. There's no rotation signature, no timing tell, nothing to correlate against.
+
+The one caveat isn't a detection risk: it's a visibility one. Since the pop-up renders directly on screen, anyone watching that screen (a moderator, a screenshare, a stream) sees exactly what it says. Worth knowing, but it has nothing to do with how an anticheat scores a player.
+
+<Callout variant="tip" title="Where this fits in Opal">
+Opal doesn't ship a module called Notifications. But the instinct behind it, telling you what's happening instead of making you dig for it, runs through the interface anyway. Module states and finished background tasks are things you should read at a glance, not hunt down in a menu.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Notifications a cheat module?">
+No. It only displays a message when something happens in the client, like a module toggling or an automated task finishing. It doesn't act on your behalf or change any game mechanic, so it's feedback, not automation.
+</FAQItem>
+
+<FAQItem question="What kinds of events trigger a notification?">
+The two common ones are a module switching on or off, usually from a hotkey or the click GUI, and an automated module finishing a task on its own, such as Chest Stealer completing a pass on a chest.
+</FAQItem>
+
+<FAQItem question="Does Notifications get detected by anticheats?">
+No. It has no server-side footprint at all. It sends nothing and changes nothing about gameplay, and anticheats evaluate movement, combat, and packet data, none of which a purely visual pop-up touches.
+</FAQItem>
+
+<FAQItem question="How is Notifications different from a HUD module?">
+A HUD module is a persistent overlay shown at all times, like coordinates or FPS. Notifications only appears briefly in response to a specific event, then clears itself.
+</FAQItem>
+
+<FAQItem question="Which clients have a Notifications module?">
+It's seen in clients like Fan and Tenacity, usually sitting alongside a HUD and an array list as part of the same passive-display category.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category Notifications is one small piece of." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "A different passive-first philosophy built around staying unseen rather than staying informed." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "One of the automated modules a Notifications pop-up might be confirming just fired." },
+]} />
+
+<CTA href="/en/purchase">Get Opal and stop wondering if your last toggle actually landed.</CTA>

@@ -1,0 +1,83 @@
+---
+title: "What Is Auto Soup in Minecraft? A Module Explained"
+description: "Auto Soup is a Minecraft module that automatically eats mushroom soup once health drops below a threshold, the go-to heal in scarcity-ruleset UHC modes."
+excerpt: "It eats the soup so you don't have to. One less inventory click between you and staying alive once golden apples are off the table."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Auto Soup work like Auto Pot?"
+    a: "Yes. Both watch your health and trigger an eat automatically. The difference is the item: Auto Pot targets golden apples or potions, Auto Soup targets mushroom soup, which is the main heal in UHC-style modes."
+  - q: "Does Auto Soup give a combat advantage?"
+    a: "Not directly. It doesn't touch reach, damage, or movement, it just removes the manual step of switching to soup and eating it, so any edge comes from saved reaction time rather than a mechanical change."
+  - q: "Can Auto Soup run out of soup?"
+    a: "Yes. Soup is a bowl item consumed on use, so once your stock is gone, Auto Soup has nothing left to trigger and you have to refill or heal another way."
+  - q: "Is Auto Soup only useful in UHC?"
+    a: "It's most useful there, since soup is usually the main healing item in UHC-style modes, but the automation works anywhere you're carrying mushroom soup as a heal."
+---
+
+<KeyTakeaways>
+
+- Auto Soup is a Minecraft module that eats mushroom soup once your health drops below a threshold.
+- It's built for UHC-style modes, where golden apples and potions are scarce and soup is the main heal.
+- Soup fires in one action, giving the module one shot at the timing.
+- It doesn't touch reach, aim, or movement, though UHC rulesets ban it.
+
+</KeyTakeaways>
+
+Auto Soup is a Minecraft module that eats mushroom soup for you the instant your health drops below a threshold you set, no hotbar switch, no click, no glance at the health bar mid-fight. It watches your HP every tick or on a short interval, and once it dips low enough it grabs a bowl of soup from your hotbar or inventory, switches to it if it isn't already selected, and fires the same use-item interaction a manual eat would send. It's the soup-specific sibling of Auto Pot: same idea, different item, built for the modes where soup is what you're actually carrying.
+
+## How it works
+
+Auto Soup doesn't hold anything down. A golden apple or a potion takes a sustained interaction to consume, so an automation eating one has to keep the button held for the right window. Soup fires in a single action instead: the bowl goes from full to empty the moment you right-click, so the module gets exactly one shot at the timing, the switch to the soup slot and the eat itself, both fired the instant your health crosses the threshold.
+
+Eating the soup also empties the bowl, and that has to be accounted for somewhere. Most implementations track how much soup is actually left, and once the count hits zero, a well-built version stops triggering rather than swinging at an empty slot: no soup, no automated eat, and you're back to healing some other way.
+
+The reason this exists at all comes down to what soup is for. Mushroom soup is the primary healing item in UHC-style modes, where golden apples and regeneration potions are scarce or removed by the ruleset entirely. Manually tracking a health bar and switching to soup mid-fight costs attention a player would rather spend on positioning. Auto Soup takes that one repetitive action off the table so the reaction is to the fight, not the inventory.
+
+## Is it safe to use
+
+Auto Soup sits closer to a convenience feature than a combat-advantage cheat. It doesn't extend reach, snap aim, or change how you move, all it does is fire an eat action you were already allowed to send yourself. That's a different category from something like an aimbot or a Crystal Aura, which fabricate actions a human physically can't perform.
+
+What servers actually key on is consistency. A player eating soup under pressure has variable delay and sometimes fumbles the switch; an automated trigger fires at the same fixed point every time, and that flat, too-perfect timing is the kind of pattern a strict anticheat can flag even without catching a specific illegal packet. It's a signature, not proof of an exploit.
+
+Whether that draws scrutiny mostly comes down to the server. UHC and other scarcity-ruleset modes tend to ban automated healing outright, since managing your own soup under pressure is part of the skill the ruleset is built to test. On a standard survival or PvP server without that constraint, auto-eating soup is a minor thing next to a module that actually changes combat mechanics.
+
+<Callout variant="tip" title="Where this sits in Opal">
+Opal doesn't ship a dedicated Auto Soup module. It's a scarcity-ruleset convenience that only matters if you're actually running UHC, and Opal's combat catalog is built around the modules that decide a standard PvP fight instead. If soup management is the thing standing between you and a clean UHC run, that's still a manual habit for now.
+</Callout>
+
+<Callout variant="warning" title="Check the ruleset before you run it">
+This page describes Auto Soup generically, not as something Opal ships. Even where the timing pattern goes unnoticed, UHC and other scarcity-focused servers often ban automated healing outright in their rules, since it removes the resource-management skill the mode is built around. A clean detection record doesn't help if the rule itself says no.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Auto Soup work like Auto Pot?">
+Yes. Both watch your health and trigger an eat automatically. The difference is the item: Auto Pot targets golden apples or potions, Auto Soup targets mushroom soup, which is the main heal in UHC-style modes.
+</FAQItem>
+
+<FAQItem question="Does Auto Soup give a combat advantage?">
+Not directly. It doesn't touch reach, damage, or movement, it just removes the manual step of switching to soup and eating it, so any edge comes from saved reaction time rather than a mechanical change.
+</FAQItem>
+
+<FAQItem question="Can Auto Soup run out of soup?">
+Yes. Soup is a bowl item consumed on use, so once your stock is gone, Auto Soup has nothing left to trigger and you have to refill or heal another way.
+</FAQItem>
+
+<FAQItem question="Is Auto Soup only useful in UHC?">
+It's most useful there, since soup is usually the main healing item in UHC-style modes, but the automation works anywhere you're carrying mushroom soup as a heal.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The broader category Auto Soup and other convenience modules live inside." },
+  { href: "/en/learn/what-is-killaura", label: "What is Killaura?", description: "A module on the opposite end of the risk spectrum: automated aim and attacks instead of automated healing." },
+  { href: "/en/learn/what-is-a-crystal-aura", label: "What is Crystal Aura?", description: "Another UHC-adjacent combat module, this one built around end crystal placement instead of soup." },
+]} />
+
+<CTA href="/en/purchase">Opal's combat modules are built for the fight, not the inventory. $8.99.</CTA>

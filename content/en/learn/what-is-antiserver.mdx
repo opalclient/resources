@@ -1,0 +1,99 @@
+---
+title: "What Is AntiServer in Minecraft? How It Works"
+description: "AntiServer is a Minecraft module that ignores or softens server corrections, like forced position resets and velocity resets, plus the detection risk."
+excerpt: "The server says snap back. AntiServer says no. Here's the module that quietly overrules server corrections, and why that's a bold thing to trust."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is AntiServer a cheat module?"
+    a: "It depends on which corrections it's set to ignore. Softening an occasional gameplay correction is a gray area, but a module built to ignore corrections that exist specifically to enforce anticheat decisions is anticheat evasion, and most servers treat that as against the rules."
+  - q: "What server corrections does AntiServer target?"
+    a: "The documented behavior covers forced position resets and velocity resets, meaning updates where the server tells the client to snap to a location or apply a pushback vector the client hadn't already agreed to."
+  - q: "How is AntiServer different from AntiDesync?"
+    a: "AntiDesync narrows the gap between client and server state so the two stay in agreement. AntiServer does close to the opposite: it deliberately keeps the client's state from matching a correction the server just sent."
+  - q: "Does AntiServer give a gameplay advantage?"
+    a: "It can, depending on which corrections it blocks. Ignoring a velocity reset after a hit works the same way anti-knockback does, keeping the player closer to a target than the server intended, so it isn't purely cosmetic."
+  - q: "Which client documents AntiServer?"
+    a: "Fan is the client documented as shipping AntiServer, listed among its player-category modules."
+---
+
+<KeyTakeaways>
+
+- AntiServer is a module that ignores or softens unwanted server corrections, like forced position resets or velocity resets.
+- It intercepts the correction before it lands, then drops, delays, or partly applies it instead of obeying outright.
+- That makes the client's state diverge from the server's, a gap movement anticheats can detect directly.
+- Fan documents shipping it as a player-category module.
+
+</KeyTakeaways>
+
+AntiServer is a Minecraft client module that pushes back against server corrections the client decides it doesn't like, most often a forced position snap or a velocity reset after a hit. Minecraft's netcode gives the server final say over where you are and how fast you're moving, and a vanilla client just accepts whatever it's told. AntiServer doesn't. It watches for that specific class of update and decides, case by case, whether to honor it, water it down, or skip it entirely. The result is a client quietly running its own version of events next to the server's.
+
+## How it works
+
+Minecraft's movement is server-authoritative. Your client predicts where you're going locally and renders that immediately, but the server holds the final word and can override the prediction at any time: snapping your position back to somewhere it considers valid, or resetting your velocity after you take a hit. A vanilla client just does what it's told.
+
+AntiServer sits between that incoming correction and the moment it would normally apply, and decides what to do with it. It can drop the correction, delay it, or let only part of it through, depending on whether the module flags the update as wanted or not. Since it has no way to know why the server sent a given correction, whether that's routine desync cleanup or an anticheat reacting to your movement, it treats all of them the same: an override to work around.
+
+The motivation is straightforward from the player's side. A position snap can undo a jump or wreck a bridge placement mid-swing. A velocity reset can erase the momentum you were counting on to close a gap or get away. AntiServer keeps your local version of events closer to what you actually did, regardless of why the server disagreed.
+
+Fan is the client documented as shipping a module under this name, filed among its player-category utilities alongside other movement and defense tools.
+
+## AntiServer vs Velocity and AntiDesync
+
+AntiServer sits in the same family as anti-knockback modules like [Velocity](/en/learn/what-is-velocity-anti-knockback), which also override a specific server instruction about your own movement. But AntiServer is broader. It doesn't just cancel knockback, it can reject any correction it decides is unwanted, which means it can interfere with resets an anticheat sends on purpose, not just ordinary gameplay corrections.
+
+That puts it on the opposite end of the spectrum from AntiDesync, a module that narrows small client-server mismatches so the two stay in agreement. AntiServer does close to the reverse: it deliberately keeps the client from matching a correction the server just sent.
+
+| Module | What it targets | Direction |
+|---|---|---|
+| AntiServer | Any correction flagged as unwanted (position resets, velocity resets) | Resists the server's correction |
+| Velocity (anti-knockback) | Knockback specifically | Resists one correction type |
+| AntiDesync | Ordinary client-server state drift | Agrees with the server |
+
+## Why it gets detected
+
+AntiServer's core problem is that it makes the client's reported state diverge from something the server already knows it sent. That's a cleaner signal than most movement cheats produce. A subtle timing or rotation exploit has to be inferred from noisy data over time. AntiServer doesn't require inference: the server issues an explicit correction, then compares what it told the client to do against what the client's next few position or velocity reports actually show. If the correction never fully lands, that's not a probabilistic flag, that's a direct contradiction.
+
+<Callout variant="tip" title="Where Opal draws the line">
+Opal doesn't ship a module built to override the server's authority over your own position, full stop. Movement and combat features get scrutinized hard before anything ships, precisely because correction-resistant behavior is the category server-side anticheats watch closest. If a feature can't be explained honestly, it doesn't make the build.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the module generically so you know what the term means. Ignoring corrections a server sends on purpose, including anticheat-driven resets, is functionally anticheat evasion, and most servers ban for it the same way they ban for anti-knockback.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is AntiServer a cheat module?">
+It depends on which corrections it's set to ignore. Softening an occasional gameplay correction is a gray area, but a module built to ignore corrections that exist specifically to enforce anticheat decisions is anticheat evasion, and most servers treat that as against the rules.
+</FAQItem>
+
+<FAQItem question="What server corrections does AntiServer target?">
+The documented behavior covers forced position resets and velocity resets: updates where the server tells the client to snap to a location or apply a pushback vector the client hadn't already agreed to.
+</FAQItem>
+
+<FAQItem question="How is AntiServer different from AntiDesync?">
+AntiDesync narrows the gap between client and server state so the two stay in agreement. AntiServer does close to the opposite: it deliberately keeps the client's state from matching a correction the server just sent.
+</FAQItem>
+
+<FAQItem question="Does AntiServer give a gameplay advantage?">
+It can, depending on which corrections it blocks. Ignoring a velocity reset after a hit works the same way anti-knockback does, keeping the player closer to a target than the server intended, so it isn't purely cosmetic.
+</FAQItem>
+
+<FAQItem question="Which client documents AntiServer?">
+Fan is the client documented as shipping AntiServer, listed among its player-category modules.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity (anti-knockback)?", description: "The narrower module that overrides one specific correction: knockback." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category these modules belong to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "How stealth-focused clients approach detection risk generally." },
+]} />
+
+<CTA href="/en/purchase">See the combat and movement tools Opal is willing to name</CTA>

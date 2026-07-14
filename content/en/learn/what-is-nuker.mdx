@@ -1,0 +1,79 @@
+---
+title: "What Is Nuker in Minecraft? Instant Block-Break Explained"
+description: "Nuker is a Minecraft module that breaks every block in a radius at once, instead of one at a time. How it works, why it's used, and why it gets flagged fast."
+excerpt: "One pass, whole radius, gone. Nuker turns block breaking into a single button press, and it's one of the easier things an anticheat will ever catch you doing."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is Nuker a hack or a legitimate mod?"
+    a: "It's a cheat. Breaking multiple blocks across a radius in one pass is not something vanilla Minecraft lets a player do, so it counts as an unfair gameplay advantage, not a cosmetic convenience."
+  - q: "Does Nuker work in survival mode?"
+    a: "That's where it matters. The rules it bypasses, block hardness timing, one-block-at-a-time interaction, and reach, only exist in survival and multiplayer. Creative mode already breaks blocks instantly, so Nuker has nothing to speed up there."
+  - q: "What's the difference between Nuker and Scaffold?"
+    a: "Nuker removes blocks in bulk. Scaffold places them in bulk, automatically bridging as you walk. Both take a slow, deliberate vanilla interaction and turn it into an instant, automated one."
+  - q: "Can server plugins block Nuker without an anticheat?"
+    a: "Some server software caps how many blocks can be broken per tick or per action, which blunts Nuker's effect on its own. But catching and banning the behavior is still an anticheat's job."
+---
+
+<KeyTakeaways>
+- Nuker is a world module that breaks every eligible block inside a radius around the player in a single pass, instead of mining one block at a time.
+- It replaces vanilla's aim-then-break loop with a scan: check every block position in range, filter out what's ineligible, break the rest at once.
+- It's used to clear terrain fast and, more often, to grief protected builds or claims before anyone can react.
+- Anticheats catch it by comparing block-break rate and spread against what a real input stream can produce.
+</KeyTakeaways>
+
+Nuker is a world-category module that breaks every eligible block inside a radius around the player in one pass, instead of the usual one-block-at-a-time mining vanilla Minecraft enforces. A patch of terrain that would take dozens of separate swings collapses into a single action. It shows up in clients like [[Wurst]], sitting alongside other bulk-automation modules as one of the more blunt tools in the world category.
+
+## How Nuker works
+
+Vanilla mining is deliberate by design. You look at one block, hold down the mouse, and wait out a break time set by that block's hardness and whatever tool you're holding. One block, one action, one wait.
+
+Nuker throws that loop out. Instead of tracking where you're looking, it scans every block position inside a set radius around you, filters out anything that doesn't qualify (air, bedrock, blocks past the edge of range), and fires a break request for everything left over in the same pass. You don't aim at each block. You don't wait out each individual break timer. The client just processes the whole area at once and moves on.
+
+That's also why the appeal is narrow but obvious: clearing a tunnel, flattening a section of terrain, or stripping a claimed base down to bedrock takes a fraction of the time normal mining requires. On servers where land is protected or resources are contested, that same speed is what makes it a griefing tool, not just a convenience.
+
+## Nuker vs. Scaffold
+
+Both modules take a slow vanilla interaction and turn it into an instant bulk version of itself. The direction is opposite.
+
+| | Nuker | Scaffold |
+|---|---|---|
+| Vanilla action it automates | Breaking blocks | Placing blocks |
+| How it triggers | One burst across a radius | Continuously, as you walk off an edge |
+| Typical use | Clearing or griefing terrain fast | Bridging gaps without looking down |
+| What it removes from the game | The wait, aim, and one-at-a-time limit on breaking | The wait, aim, and one-at-a-time limit on placing |
+
+<Callout variant="tip" title="Not part of Opal's toolkit">
+Opal doesn't ship a Nuker module, and that's not an oversight. A paid client's whole pitch is staying on a server without drawing attention, and bulk block-breaking is one of the least subtle things you can do in front of staff or an anticheat. It's not the kind of edge Opal is built around.
+</Callout>
+
+<Callout variant="warning" title="This is one of the easier cheats to catch">
+Nuker leaves a pattern a real input stream never produces: several blocks broken in the same tick, spread across a radius instead of clustered in the direction you're facing, sometimes outside normal reach entirely. Server-side anticheats measure block-break rate and spread against vanilla's hardness and reach limits, and a burst like that is a strong, easy signal. Treat it as a fast route to a ban, not a terrain-clearing shortcut.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Is Nuker a hack or a legitimate mod?">
+It's a cheat. Breaking multiple blocks across a radius in one pass is not something vanilla Minecraft lets a player do, so it counts as an unfair gameplay advantage, not a cosmetic convenience.
+</FAQItem>
+<FAQItem question="Does Nuker work in survival mode?">
+That's where it matters. The rules it bypasses, block hardness timing, one-block-at-a-time interaction, and reach, only exist in survival and multiplayer. Creative mode already breaks blocks instantly, so Nuker has nothing to speed up there.
+</FAQItem>
+<FAQItem question="What's the difference between Nuker and Scaffold?">
+Nuker removes blocks in bulk. Scaffold places them in bulk, automatically bridging as you walk. Both take a slow, deliberate vanilla interaction and turn it into an instant, automated one.
+</FAQItem>
+<FAQItem question="Can server plugins block Nuker without an anticheat?">
+Some server software caps how many blocks can be broken per tick or per action, which blunts Nuker's effect on its own. But catching and banning the behavior is still an anticheat's job.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "The block-placement counterpart to Nuker, automated bridging as you walk." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The client category built around hiding from staff, not clearing terrain." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "Where modules like Nuker fit inside the broader utility client category." }
+]} />
+
+<CTA href="/en/purchase">Opal skips the world-ending gimmicks and sharpens the modules that actually keep you alive.</CTA>

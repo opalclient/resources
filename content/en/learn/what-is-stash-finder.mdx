@@ -1,0 +1,91 @@
+---
+title: "What Is Stash Finder in Minecraft? (Module Explained)"
+description: "Stash Finder scans loaded chunks for hidden chests, barrels, and storage in Minecraft so players can spot buried loot fast. How it works and the real ban risk."
+excerpt: "Stash Finder turns every chunk you load into a loot map, no shovel required. Anarchy servers shrug at it. Claim-protected ones call it cheating."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is Stash Finder the same thing as X-ray?"
+    a: "Same principle, different target. Both reveal information the client already has but the player hasn't found normally. X-ray highlights ore and terrain, Stash Finder targets player-placed storage specifically."
+  - q: "Can Stash Finder see through walls?"
+    a: "Not visually, no rendering happens through the wall itself. It marks a location using chunk data the client already holds, but the practical outcome is the same: you know exactly where to dig before you've explored the spot."
+  - q: "Does Stash Finder work on any server?"
+    a: "Technically, anywhere chunks get loaded and sent to the client, which is most vanilla-like servers. Whether it's allowed there is a separate question every server answers differently."
+  - q: "Why is it also called StashLogger?"
+    a: "StashLogger is just an alias some clients use for the same feature. Same chest-scanning behavior, different name."
+  - q: "Is using Stash Finder against the rules?"
+    a: "Depends on the server. Anarchy servers, where it sees the most use, usually have no rule against it. Servers running claims or a stricter anticheat policy generally treat locating hidden storage this way as cheating."
+---
+
+<KeyTakeaways>
+- Stash Finder (also called StashLogger) is a world module that scans loaded chunks for player-placed storage such as chests, barrels, and shulker boxes, then marks their coordinates.
+- It reads block-entity data the client already holds the moment a chunk loads, no need to see, open, or walk near the container first.
+- Search radius and block-type filters are the settings that matter most in practice.
+- It sends nothing unusual over the network, so where it gets caught, it's through behavior, not a packet signature.
+- Mostly seen on anarchy servers, where buried loot has no claim system protecting it.
+</KeyTakeaways>
+
+Stash Finder is a world module that scans the chunks around you for player-placed storage, chests buried under stone, barrels tucked into a cave wall, shulker boxes sealed inside a base with no visible door, and marks exactly where each one sits. Some clients ship the same feature as StashLogger; it's the same behavior wearing a different name. The module doesn't need you to have seen, opened, or even walked near a container first. It's built for anarchy servers, where players bury their loot with nothing but dirt and hope standing between it and anyone who comes looking.
+
+## How it works
+
+Stash Finder filters chunk data the client already has for storage-type block entities and flags their coordinates the instant a chunk loads. That's the whole trick: the client isn't fetching anything extra from the server, it's just reading data that arrives with the chunk anyway and pulling out what it needs. Whether the chest is under ten blocks of stone, built into an unmarked cave wall, or sitting inside a base with no obvious entrance doesn't matter, because none of that changes what the chunk itself already contains.
+
+## Common settings
+
+| Setting | What it controls |
+|---|---|
+| Search radius | How far from the player the scan reaches |
+| Block types | Which containers count as a stash: chests, barrels, shulker boxes, and so on |
+| Marker or ESP style | How a found stash shows on screen, as a waypoint, a highlighted box, or similar |
+| Underground only | Whether to skip storage that's already visible above ground |
+
+Radius and block-type filters do most of the work here. Widen the radius or broaden what counts as "storage" and a single pass across a chunk turns up more hits.
+
+## Why people use it
+
+The appeal is loot without the digging. Stash Finder shows up in clients like Meteor Client and SalHack, both fixtures on anarchy servers where there's no claim system or protection plugin standing between one player and another player's chest. On a server like that, a buried stash is only as safe as it is well hidden, and Stash Finder removes the hiding part entirely: fly through a region and every piece of storage in range gets marked instead of you searching by hand. Some players run it the other way, checking whether their own base would turn up on the same scan before they trust it.
+
+<Callout variant="tip" title="Where Opal sits on this">
+Opal doesn't ship a module called Stash Finder or StashLogger, and it isn't going to. The closest thing on the roster is Block ESP, filed under Visual and marked use-at-own-risk in Opal's own module list, which highlights containers (plus resource blocks like ore) as you move through the world. It's built as a rendered overlay rather than an auto-logging waypoint scanner, so the two aren't identical, but if what you actually want is "know what's around before you dig," that's the feature doing the closest job.
+</Callout>
+
+## Is it detectable
+
+Stash Finder doesn't send anything unusual to the server and doesn't automate movement or combat, it only changes what your own client displays. That means it skips the packet and timing anomalies that give away modules like an aimbot or an automated attacker. There's no obvious server-side signature to catch, because the scanning and marking never leave your screen.
+
+That doesn't make it rule-safe everywhere. Finding and looting someone else's hidden storage without ever discovering it by exploring is the kind of unearned information advantage most servers with any anticheat policy treat as cheating, in the same category as X-ray for ore. Where it does get caught, it's through behavior: a player walking in a dead-straight line to an undug, previously unvisited chest is a pattern staff can spot without a single flagged packet. Anarchy servers, where Stash Finder sees the most use, typically don't have that rule to begin with, which is a big part of why the module lives there.
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Stash Finder does and where it sits on the rules spectrum, not an endorsement to run it. On any server with a claim system or a policy against exploiting client-side data advantages, using it to raid a base you never found honestly is grounds for a ban.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Is Stash Finder the same thing as X-ray?">
+Same principle, different target. Both reveal information the client already has but the player hasn't found normally. X-ray highlights ore and terrain, Stash Finder targets player-placed storage specifically.
+</FAQItem>
+<FAQItem question="Can Stash Finder see through walls?">
+Not visually, no rendering happens through the wall itself. It marks a location using chunk data the client already holds, but the practical outcome is the same: you know exactly where to dig before you've explored the spot.
+</FAQItem>
+<FAQItem question="Does Stash Finder work on any server?">
+Technically, anywhere chunks get loaded and sent to the client, which is most vanilla-like servers. Whether it's allowed there is a separate question every server answers differently.
+</FAQItem>
+<FAQItem question="Why is it also called StashLogger?">
+StashLogger is just an alias some clients use for the same feature. Same chest-scanning behavior, different name.
+</FAQItem>
+<FAQItem question="Is using Stash Finder against the rules?">
+Depends on the server. Anarchy servers, where it sees the most use, usually have no rule against it. Servers running claims or a stricter anticheat policy generally treat locating hidden storage this way as cheating.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The umbrella category Stash Finder and other world and visual modules belong to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The stealth-client category anarchy staples like Stash Finder are most at home in." },
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "Another anarchy-adjacent module, this one for digging in rather than finding what's already buried." }
+]} />
+
+<CTA href="/en/purchase">Block ESP and the rest of Opal's Visual category are one click away.</CTA>

@@ -1,0 +1,85 @@
+---
+title: "What Is Dragon Wings in Minecraft? (Module Explained)"
+description: "Dragon Wings is a cosmetic Minecraft module that renders a wing model on your back in place of a cape, with zero effect on movement, combat, or collision."
+excerpt: "A cape swapped for a pair of wings. Nothing about how you play changes, only what you look like doing it."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Dragon Wings let you fly or glide?"
+    a: "No. It only renders a wing model on your back. It has no effect on movement, jumping, or falling, and doesn't grant elytra-style gliding."
+  - q: "Can other players see my Dragon Wings?"
+    a: "It depends on whether their client renders the same model. It's a rendering feature, so it affects what shows on a player model rather than anything the server itself tracks or broadcasts as data."
+  - q: "Is Dragon Wings the same as wearing an elytra?"
+    a: "No. An elytra is a vanilla item with a real gliding mechanic. Dragon Wings is a cosmetic model with no mechanical effect, closer to a cape than to actual flight gear."
+  - q: "Does using Dragon Wings risk a ban?"
+    a: "No. It's a visual-only module that changes nothing the server tracks about movement or combat, so it carries no more risk than any other cosmetic display choice."
+---
+
+<KeyTakeaways>
+
+- Dragon Wings is a cosmetic module that renders a wing model on the player's back instead of a cape.
+- It only changes local rendering, not flight, gliding, movement, or hit detection.
+- Nothing sent to the server changes, so it carries no more ban risk than any cosmetic choice.
+- Seen in clients like Tenacity as a standard cosmetic option.
+
+</KeyTakeaways>
+
+Dragon Wings is a cosmetic module in Minecraft utility clients that swaps your character's cape slot for a rendered pair of wings. It works exactly like choosing a cape, just with feathers instead of cloth. Turn it on and every frame draws a wing model attached to your player's back, in the same spot vanilla renders a cape or an equipped elytra. That's the entire feature. Movement, combat, and collision stay exactly as vanilla defines them: the module never touches the server-tracked side of the game, only the client-side model you and anyone else running it get to see.
+
+## How it works
+
+Dragon Wings attaches a wing model to the player's back in the same position a vanilla cape or elytra sits, then redraws it every frame the player model gets drawn. That's a client-side render step, not a mechanic. The module hooks the same draw call vanilla uses for a cape and swaps in its own geometry.
+
+Nothing about physics changes underneath it. There's no flight, no gliding, no interaction with the game's collision or velocity code, because the wings are a visual layer over the existing player model, not a substitute for the elytra item or the mechanics behind it. The server never receives a signal saying "this player is wearing wings." It keeps sending the normal movement and equipment packets it always sends, and the client just chooses to draw something extra on top of them.
+
+## Dragon Wings vs a cape vs an elytra
+
+| | Dragon Wings | Vanilla cape | Elytra |
+|---|---|---|---|
+| What it is | Client-side cosmetic model | Vanilla cosmetic item | Vanilla gliding item |
+| Grants flight or gliding | No | No | Yes, while equipped and airborne |
+| Requires an in-game item | No | Yes, a cape | Yes, an equipped elytra |
+| Visible to other players | Only if their own client renders it | Yes, to everyone | Yes, to everyone |
+| Touches movement or collision | No | No | Yes, while gliding |
+
+The wings occupy the same visual slot as a cape without needing the item, the account flag, or the resource pack that a cape usually requires. An elytra sits in a completely different bucket: it's a real vanilla mechanic with server-tracked physics, not a look you can toggle on a whim.
+
+## Is it safe to use
+
+Dragon Wings sends nothing extra to the server, doesn't touch hitboxes, and doesn't hand the player any information the server wasn't already giving to everyone. It's a local appearance setting, the same category as picking a cape or changing a skin, not a gameplay mechanic. Because there's no gameplay effect, there's nothing for a server-side check to catch it doing, since it produces nothing the server would ever see as different from a vanilla player standing in the same spot.
+
+<Callout variant="tip" title="Where this sits in Opal">
+Opal doesn't ship a module under this name. Its cosmetic side runs on the same logic though: the Animations module, for instance, changes what you see without changing anything the server tracks. If the goal is looking different without risking anything mechanical, that's a lane Opal already covers well. Wings specifically just aren't in the current catalog.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Dragon Wings let you fly or glide?">
+No. It only renders a wing model on your back. It has no effect on movement, jumping, or falling, and doesn't grant elytra-style gliding.
+</FAQItem>
+
+<FAQItem question="Can other players see my Dragon Wings?">
+It depends on whether their client renders the same model. It's a rendering feature, so it affects what shows on a player model rather than anything the server itself tracks or broadcasts as data.
+</FAQItem>
+
+<FAQItem question="Is Dragon Wings the same as wearing an elytra?">
+No. An elytra is a vanilla item with a real gliding mechanic. Dragon Wings is a cosmetic model with no mechanical effect, closer to a cape than to actual flight gear.
+</FAQItem>
+
+<FAQItem question="Does using Dragon Wings risk a ban?">
+No. It's a visual-only module that changes nothing the server tracks about movement or combat, so it carries no more risk than any other cosmetic display choice.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The broader category cosmetic modules like Dragon Wings sit inside." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Where staying unseen matters more than how you look doing it." },
+  { href: "/en/learn/what-is-a-crystal-aura", label: "What is a crystal aura?", description: "A module on the opposite end of the risk spectrum from a purely cosmetic one." },
+]} />
+
+<CTA href="/en/purchase">Skip the pixelated cape debate. Opal handles the modules that actually change how a fight goes.</CTA>

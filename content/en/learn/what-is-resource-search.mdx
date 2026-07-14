@@ -1,0 +1,79 @@
+---
+title: "What Is Search (Resource Finder) in Minecraft?"
+description: "Search is a Minecraft module that scans chunks you already loaded for a chosen block and marks every match, an ore finder that never renders through walls."
+excerpt: "Search doesn't see through walls, it just remembers what the client already knows. Point it at a block type and get coordinates instead of a pickaxe and a hunch."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Search actually search?"
+    a: "Chunks the client has already loaded, nothing more. It looks through that data for a block type you specify and marks or lists every match, so results are limited to whatever is currently loaded around the player."
+  - q: "Does Search let you see through walls?"
+    a: "No. Search doesn't render blocks through terrain the way an X-ray texture pack or shader does. It reports coordinates or drops a marker, it never changes what's actually drawn on screen."
+  - q: "Can servers detect Search automatically?"
+    a: "Rarely through packet inspection, since the module never sends anything a normal client wouldn't. Where it does get caught, it's usually from a staff member reviewing play patterns, not an automated flag."
+  - q: "Is Search the same as X-ray?"
+    a: "They solve the same problem, finding resources without exploring for them, but by different means. X-ray typically changes rendering to see through blocks. Search scans chunk data the client already has and reports matches without touching what's drawn."
+---
+
+<KeyTakeaways>
+
+- Search is a module (seen in clients like Wurst) that scans loaded chunks for a chosen block type and marks every match.
+- It reads data the client already holds, so no extra packets go out.
+- Coverage is capped by render distance, it can't see unloaded chunks.
+- Unlike X-ray, it never renders through walls, it just reports coordinates.
+
+</KeyTakeaways>
+
+Search is a Minecraft module that scans every chunk the client has already loaded for a block type you pick and marks or lists everywhere it turns up. Instead of digging around or wandering the map hoping to stumble onto a vein, you name the block and get an instant answer. It's filed under the world category, the same bucket as other tools that read or interact with the environment rather than combat or movement.
+
+## How it works
+
+Search reads chunk data your client already holds in memory. The moment a chunk loads, the game receives the complete block layout for it, that's simply how rendering works, the client has to know what's there to draw it. Search walks that data looking for matches against whatever block you've chosen, then drops a marker, a waypoint, or a list entry for each one it finds.
+
+Nothing about that requires talking to the server again. The scan runs entirely on information the client already has, so no new packets go out and no existing packet gets modified. The one real constraint is render distance: Search can only surface blocks in chunks you've actually loaded, not the whole world. Walk further, load more chunks, find more matches. That's the whole loop.
+
+## Is it safe to use
+
+Search isn't purely cosmetic. Finding resources without exploring for them is a genuine gameplay advantage, the same category of edge as an X-ray tool, even though Search never renders through walls or changes a single pixel on screen. What separates it from a combat cheat like reach or an aimbot is the detection story. Those send packets a server can catch: an impossible rotation, a hit at a distance that shouldn't be possible. Search sends nothing unusual. It only re-reads data the server already handed the client legitimately, so there's no packet-level signature for an anticheat to flag.
+
+That doesn't make it fair game everywhere. Most servers that prohibit X-ray-style resource finding enforce it by policy, not by automated detection, and catch violations through behavior instead: a player beelining straight to an ore vein with zero prior exploration, or staff reviewing a suspicious session by hand. The risk here is social and rules-based rather than a server-side check flagging the client outright, which is exactly why it survives on servers where combat cheats get caught in minutes.
+
+<Callout variant="tip" title="Where this sits in Opal">
+Opal doesn't ship a dedicated Search or resource-finder module. This one's documented as a Wurst world-category feature specifically. Opal's own catalog leans into combat, movement, and visual modules, the categories where a single tick or a single frame decides the outcome of a fight. Reading chunk data for ore veins isn't that fight.
+</Callout>
+
+<Callout variant="warning" title="Rules can ban it even when detection can't">
+This page describes Search generically, not as something Opal ships. Even on a server that will never catch it at the packet level, a lot of rulesets ban X-ray-style resource finding outright regardless of method. A clean detection record doesn't help if the rule itself says no, so check before you point it at a diamond vein.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does Search actually search?">
+Chunks the client has already loaded, nothing more. It looks through that data for a block type you specify and marks or lists every match, so results are limited to whatever is currently loaded around the player.
+</FAQItem>
+
+<FAQItem question="Does Search let you see through walls?">
+No. Search doesn't render blocks through terrain the way an X-ray texture pack or shader does. It reports coordinates or drops a marker, it never changes what's actually drawn on screen.
+</FAQItem>
+
+<FAQItem question="Can servers detect Search automatically?">
+Rarely through packet inspection, since the module never sends anything a normal client wouldn't. Where it does get caught, it's usually from a staff member reviewing play patterns, not an automated flag.
+</FAQItem>
+
+<FAQItem question="Is Search the same as X-ray?">
+They solve the same problem, finding resources without exploring for them, but by different means. X-ray typically changes rendering to see through blocks. Search scans chunk data the client already has and reports matches without touching what's drawn.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category Search and other world modules live inside." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The stealth category built around modules that never trip a packet-level check." },
+  { href: "/en/learn/what-is-reach", label: "What is reach?", description: "A module on the opposite end of the risk spectrum: caught by the packets it sends, not the rules it breaks." },
+]} />
+
+<CTA href="/en/purchase">Opal spends its engineering budget on the fight, not the ore vein. See the catalog for $8.99.</CTA>

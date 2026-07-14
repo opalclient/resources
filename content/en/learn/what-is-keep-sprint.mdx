@@ -1,0 +1,85 @@
+---
+title: "What Is Keep Sprint in Minecraft? Module Explained"
+description: "Keep Sprint is a movement module that stops sprint from canceling when you attack or turn sharply. Here's how it works and whether it's worth the risk."
+excerpt: "Keep Sprint holds your speed through the hit or turn that should have killed it. It's not a speed hack, but the server can still tell the difference."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Keep Sprint actually change?"
+    a: "It stops sprint from canceling during actions that would normally end it, such as attacking or turning sharply, so you keep moving at sprint speed instead of dropping to a walk."
+  - q: "Is Keep Sprint the same as a speed hack?"
+    a: "No. It does not raise movement speed past the normal sprint bonus. It only keeps that existing bonus active through moments vanilla Minecraft would otherwise cancel it."
+  - q: "Why does attacking or turning sharply cancel sprint in the first place?"
+    a: "Vanilla Minecraft treats those actions as inconsistent with sprinting forward, so it resets the sprint flag and drops you to walking speed until sprint is retriggered."
+  - q: "Can Keep Sprint get flagged by anticheat?"
+    a: "It can, on servers that check whether your reported speed matches the movement your actions imply. Holding sprint through a moment that should have reset it is the kind of mismatch those checks look for."
+  - q: "Which clients have a Keep Sprint module?"
+    a: "It's tracked as seen in clients including Tenacity and Rose. Other clients may ship the same idea under a different name, and Opal ships its own version as Sprint."
+---
+
+<KeyTakeaways>
+
+- Keep Sprint is a movement module that stops sprint from canceling when you attack or turn sharply.
+- Vanilla Minecraft normally resets sprint on those triggers, plus moving backward or hitting an obstacle.
+- The effect holds continuously through a fight, not just once.
+- It never raises speed past the normal sprint bonus, it just keeps that bonus active longer.
+
+</KeyTakeaways>
+
+Keep Sprint is a movement module that stops the game from canceling your sprint during moments that would normally kill it: attacking, turning sharply, stepping backward, or clipping an obstacle. Vanilla Minecraft reads those actions as proof you've stopped sprinting and drops you back to walking speed until you retrigger it by pressing forward again. Keep Sprint catches that reset before it happens and holds the sprint flag in place instead, so the speed bonus rides through the interruption. It's filed as a movement module, but almost nobody notices it while walking in a straight line. Its real home is combat, where those interruptions happen constantly.
+
+## How Keep Sprint works
+
+Keep Sprint runs a check at exactly the moments vanilla Minecraft would normally reset your sprint flag. The vanilla client drops sprint under a short list of conditions: you attack, you turn past a certain angle relative to your direction of travel, you move backward, or you hit something solid. Each one is vanilla's way of deciding your movement no longer looks like sprinting, so it stops rewarding you with sprint speed.
+
+The module sits in front of that decision. When one of those triggers fires, Keep Sprint intercepts it and leaves the flag set instead of letting the client fall back to a walk. Because sprint controls a real, continuous speed bonus rather than a one-off animation, the effect isn't a single frame of cheating, it's held for as long as the trigger would otherwise have slowed you down. A player can spin to face an opponent, land a hit, and keep moving at full sprint speed without the beat it normally takes to retrigger sprint by tapping forward again. It's tracked as seen in clients including Tenacity and Rose, and while it's cataloged under movement, the practical use case is almost always a fight.
+
+## Is Keep Sprint safe to use
+
+Keep Sprint overrides a mechanic vanilla Minecraft enforces on purpose. Sprint is supposed to reset the moment your movement stops looking like sprinting, and a server that recomputes your expected speed from your reported actions can notice you holding sprint through a moment that should have reset it. That's the same category of check used against other sprint and speed modules: not "is your speed too high" but "does your speed match what your actions say it should be."
+
+It's a subtler tell than a flat speed increase, since Keep Sprint never claims more speed than sprint already allows on its own. Nothing about it looks like an aimbot or a scaffold spamming blocks. But it isn't cosmetic either. It changes what the server should expect your movement to look like at a specific tick, and that mismatch is exactly what a movement check exists to catch. Treat it as a use-at-own-risk feature on any server running more than the bare minimum.
+
+<Callout variant="tip" title="Opal ships this as Sprint">
+Opal's catalog lists it plainly: Sprint, "Changes the logic behind sprinting." Same classification as everywhere else on this page: use at your own risk.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the module generically so you know what the term means. Naming and exact behavior vary by client, and holding sprint through a moment that should have reset it breaks the rules on servers running real movement checks.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does Keep Sprint actually change?">
+It stops sprint from canceling during actions that would normally end it, like attacking or turning sharply, so you keep moving at sprint speed instead of dropping to a walk.
+</FAQItem>
+
+<FAQItem question="Is Keep Sprint the same as a speed hack?">
+No. It never raises movement speed past the normal sprint bonus. It only keeps that existing bonus active through moments vanilla Minecraft would otherwise cancel.
+</FAQItem>
+
+<FAQItem question="Why does attacking or turning sharply cancel sprint in the first place?">
+Vanilla Minecraft treats those actions as inconsistent with sprinting forward, so it resets the sprint flag and drops you to walking speed until sprint gets retriggered.
+</FAQItem>
+
+<FAQItem question="Can Keep Sprint get flagged by anticheat?">
+It can, on servers that check whether your reported speed matches the movement your actions imply. Holding sprint through a moment that should have reset it is exactly the kind of mismatch those checks look for.
+</FAQItem>
+
+<FAQItem question="Which clients have a Keep Sprint module?">
+It's tracked as seen in clients including Tenacity and Rose. Other clients may ship the same idea under a different name, and Opal ships its own version as Sprint.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity (anti-knockback)?", description: "Another module that overrides a server-expected physics response." },
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "A fellow movement module built for a completely different problem." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Where subtle, hard-to-notice modules like this one fit in a client's design." },
+]} />
+
+<CTA href="/en/purchase">Never break stride mid-fight. Opal ships Sprint as part of its $8.99 movement kit.</CTA>

@@ -1,0 +1,75 @@
+---
+title: "What Is an FPS Counter in Minecraft?"
+description: "An FPS counter is a HUD module that shows your Minecraft client's live frame rate on screen. Here is how it works, why players use it, and if it's safe to run."
+excerpt: "It's just a number on your screen, telling on your hardware, never on you."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does an FPS counter give any in-game advantage?"
+    a: "No. It only displays a number showing how fast your client is rendering frames. It does not change combat, movement, or anything the server processes."
+  - q: "Is showing FPS the same as boosting FPS?"
+    a: "No. A counter only measures and displays your current frame rate. Actually raising it takes separate changes, like lowering render distance or graphics settings."
+  - q: "Can servers detect or ban an FPS counter?"
+    a: "No. The module never sends anything to the server. It only reads local client data and shows it on screen, so there is nothing for a server to observe or flag."
+  - q: "Is an FPS counter built into vanilla Minecraft?"
+    a: "Vanilla has the F3 debug screen, which includes frame rate among a wall of other diagnostic data. A dedicated FPS module shows just the number, usually as a small, always-visible HUD element."
+---
+
+<KeyTakeaways>
+
+- An FPS counter is a HUD module that shows your Minecraft client's live frame rate on screen.
+- It just exposes a number the game already tracks internally, nothing new is computed.
+- Purely cosmetic: it never touches movement, combat, or anything sent to the server.
+- Nothing leaves the client, so there is nothing for a server-side anticheat to flag.
+
+</KeyTakeaways>
+
+An FPS counter is a small HUD element that shows how many frames per second your Minecraft client is currently rendering, updated continuously as you play. It is not a gameplay feature. The number moves with your hardware and settings, not with anything happening on the server, so it sits in the same bucket as a clock or a coordinate display: informational, not competitive. Most utility clients bundle one as a default HUD module, because it is the fastest way to answer "why does this feel choppy" without digging through a debug menu.
+
+## How it works
+
+Minecraft already calculates its own frame rate internally to drive the render loop. The FPS module does not do any new math: it reads that existing value each frame and prints it somewhere on screen, usually a small number tucked in a corner or folded into a wider HUD next to things like coordinates or ping.
+
+Because the readout updates continuously, it reflects real performance in real time, including dips from heavy chunk loading, dense particle effects, or crowded entity areas. Vanilla Minecraft has its own version of this in the F3 debug screen, which buries frame rate among a wall of other diagnostic data. A dedicated FPS module strips that down to the one number people actually watch, kept visible without holding a key down.
+
+## Is it safe to use
+
+Yes, without qualification. An FPS counter only reads and displays data that already lives on your machine. It does not touch movement, combat, packet timing, or anything the server processes, so there is no signal here for a server-side anticheat to catch. Detection systems watch for suspicious input and network patterns. A number rendered locally on your own screen is invisible to all of it.
+
+The only real downside is clutter. Stack an FPS counter with a ping display, a coordinate readout, and a keystroke overlay, and your screen starts looking like a cockpit. That's a taste problem, not a risk one.
+
+<Callout variant="tip" title="Why this stays low-risk">
+This whole category, read-only, screen-only, server-blind, is why it barely comes up when people talk about what's risky in a utility client. Opal's own HUD leans the same way: modules that report on your game state without ever reaching toward the server.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does an FPS counter give any in-game advantage?">
+No. It only displays a number showing how fast your client is rendering frames. It does not change combat, movement, or anything the server processes.
+</FAQItem>
+
+<FAQItem question="Is showing FPS the same as boosting FPS?">
+No. A counter only measures and displays your current frame rate. Actually raising it takes separate changes, like lowering render distance or graphics settings.
+</FAQItem>
+
+<FAQItem question="Can servers detect or ban an FPS counter?">
+No. The module never sends anything to the server. It only reads local client data and shows it on screen, so there is nothing for a server to observe or flag.
+</FAQItem>
+
+<FAQItem question="Is an FPS counter built into vanilla Minecraft?">
+Vanilla has the F3 debug screen, which includes frame rate among a wall of other diagnostic data. A dedicated FPS module shows just the number, usually as a small, always-visible HUD element.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The broader category HUD modules like this one belong to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Where subtlety actually matters, unlike a read-only HUD readout." },
+  { href: "/en/learn/what-is-reach", label: "What is reach?", description: "A module that does touch the server, and gets watched for it." },
+]} />
+
+<CTA href="/en/purchase">See what else Opal's HUD tracks, for $8.99</CTA>

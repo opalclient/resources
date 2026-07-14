@@ -1,0 +1,72 @@
+---
+title: "What Is Blur in Minecraft? Menu Blur Explained"
+description: "Blur is a client-side module that blurs the game world behind an open Click GUI, keeping the menu readable and legible without changing anything about gameplay."
+excerpt: "Blur softens whatever's behind your Click GUI so the menu does the talking. Pure cosmetics, zero server impact."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Blur affect gameplay in Minecraft?"
+    a: "No. Blur only changes how the background looks behind an open menu. It has no effect on movement, combat, or anything the server can observe."
+  - q: "Can using Blur get you banned?"
+    a: "No. It's a purely visual, client-side rendering effect with no network or gameplay impact, so it carries no detection risk."
+  - q: "Which Minecraft clients have a Blur module?"
+    a: "Blur is documented as seen in Rose. Similar background-blur effects show up in other clients under different names as a general Click GUI display option."
+  - q: "Does Blur work outside the Click GUI?"
+    a: "It's tied to whatever menu is currently open, most commonly the Click GUI, rather than running during normal gameplay."
+---
+
+<KeyTakeaways>
+
+- Blur is a cosmetic Minecraft module that blurs the game world behind an open Click GUI, then reverts the moment the menu closes.
+- It's a rendering-only effect: no network traffic, no gameplay state change, no combat or movement advantage.
+- Nothing about it leaves the client, so there's nothing for a server-side anticheat to flag.
+
+</KeyTakeaways>
+
+Blur is a Minecraft module that softens the game world behind an open Click GUI or other on-screen menu, so the menu itself stays crisp and easy to read. It doesn't touch movement, combat, or inventory. Open the menu and the background blurs; close it and the world snaps right back to normal. That's the entire feature.
+
+## How the effect works
+
+Blur renders a blur pass over the world behind whatever menu is currently open, then draws the menu on top of it. It only runs while that menu, most commonly a Click GUI, is on screen. The moment you close it, the pass stops and the world goes back to rendering normally. It's the same trick you've seen in modern software menus and pause screens: soften the layer behind the panel so the panel itself reads clearly.
+
+The reason people bother with it is legibility. A blurred background pulls visual attention onto the menu, so buttons, toggles, and sliders are easier to parse at a glance, especially over a bright or busy scene. Some players just like the look, too. A blurred backdrop makes a Click GUI feel like a finished piece of software instead of a panel stapled over raw gameplay footage.
+
+## Is Blur safe to use
+
+Yes, and it's not close. Blur only affects local rendering while a menu is open on your own screen. It sends nothing to the server, changes no game state, and gives you no edge in combat, movement, or any other system the server tracks. There's nothing for a server-side anticheat to catch, because nothing about the effect ever leaves your client. It sits in the same bucket as a brightness slider or a resource pack: a display choice, not an interaction with the game's rules.
+
+<Callout variant="tip" title="Where this sits in Opal">
+Opal doesn't ship a module called Blur. But the visual and quality-of-life side of the client runs on the same principle this effect does: local-only polish the server never sees. A blurred backdrop behind a menu is exactly the kind of change that belongs in that lane, cosmetic, zero risk, nothing to detect.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Blur affect gameplay in Minecraft?">
+No. Blur only changes how the background looks behind an open menu. It has no effect on movement, combat, or anything the server can observe.
+</FAQItem>
+
+<FAQItem question="Can using Blur get you banned?">
+No. It's a purely visual, client-side rendering effect with no network or gameplay impact, so it carries no detection risk.
+</FAQItem>
+
+<FAQItem question="Which Minecraft clients have a Blur module?">
+Blur is documented as seen in Rose. Similar background-blur effects show up in other clients under different names as a general Click GUI display option.
+</FAQItem>
+
+<FAQItem question="Does Blur work outside the Click GUI?">
+It's tied to whatever menu is currently open, most commonly the Click GUI, rather than running during normal gameplay.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category modules like Blur belong to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Where the line between cosmetic polish and detectable behavior actually sits." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "A module that lives on the opposite end of the risk spectrum from Blur." },
+]} />
+
+<CTA href="/en/purchase">A menu should look designed, not bolted on. See what Opal's interface looks like out of the box.</CTA>

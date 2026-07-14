@@ -1,0 +1,91 @@
+---
+title: "What Is Anti Void in Minecraft? Module Explained"
+description: "Anti Void is a Minecraft module that stops a fatal void fall by teleporting you to safety or dropping a catch block underneath you before you land in it."
+excerpt: "The void doesn't negotiate. Anti Void steps in a moment before the fall becomes permanent, either by yanking you back or catching you on a block that wasn't there a second ago."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Anti Void actually catch?"
+    a: "A player who is about to fall into the void, the empty space below the world's lowest playable layer. It intervenes once their height crosses a threshold the user configures."
+  - q: "Does Anti Void teleport you or place a block?"
+    a: "Depends on the implementation. Some teleport you back to a safe position, others drop a block underneath you so you land on it instead of falling further."
+  - q: "Can Anti Void trigger too early or too late?"
+    a: "Yes. It works off a configured height threshold, so setting it too high fires the module far from real danger, and setting it too low risks reacting after the fall is already unrecoverable."
+  - q: "Is Anti Void detectable by anticheats?"
+    a: "It's plausible. Any module that moves the player or places blocks without matching input creates a pattern a server-side anticheat can watch for, so treat it as use-at-own-risk rather than safe by default."
+  - q: "Which clients include Anti Void?"
+    a: "Fan and Tenacity both ship a version. Opal does too, listed in its module catalog as Anti Void: 'Stops you falling into the void.'"
+---
+
+<KeyTakeaways>
+
+- Anti Void is a Minecraft module that stops a fatal void fall by teleporting you to solid ground or dropping a catch block underneath you.
+- It watches your height every tick and reacts once you cross a threshold you set.
+- It moves you or places blocks without matching input, so treat it as use-at-own-risk.
+
+</KeyTakeaways>
+
+Anti Void is a Minecraft module that stops you from falling to your death in the void by acting before the fall finishes, either teleporting you back to solid ground or dropping a block under your feet. The void has no forgiveness in vanilla Minecraft: you fall, you die, you lose whatever you were carrying, no rewind. Anti Void exists to catch the one mistake that usually can't be undone, a missed bridge, a bad knockback near an edge, a lag spike at the wrong moment.
+
+## How Anti Void works
+
+Anti Void tracks your Y coordinate, your height, on every game tick. Once that number drops below a threshold you configure, the module assumes you're about to go into the void and reacts before the fall completes. Depending on the client, it either teleports you back to a safe position or drops a block directly beneath your feet, catching you the way a real block would. Fan and Tenacity both ship a version of this module.
+
+## Common settings
+
+| Setting | What it controls |
+|---|---|
+| Threshold | The height at which Anti Void decides you're in danger and reacts |
+| Response mode | Teleport back to solid ground, or place a catch block underneath you |
+
+The threshold is the only real judgment call here. Set it too high and the module fires on situations nowhere near real danger, yanking you around on false alarms. Set it too low and you're betting the reaction lands before the fall is already unrecoverable. There's no value that's safe in both directions at once.
+
+## Why it gets flagged
+
+Anti Void reacts to a falling player with an action they didn't perform through normal input: a teleport nobody walked into, or a block that appears with no aim-and-place sequence behind it. That's exactly the kind of mismatch a server-side anticheat is built to catch, because neither action matches what a real client sends on its own.
+
+That's what separates Anti Void from something passive like a coordinate overlay. It doesn't just show you information, it changes what happens in the world on your behalf. Anyone running it should treat it as use-at-own-risk, the same way you'd treat any module that acts for you instead of just informing you.
+
+<Callout variant="tip" title="Opal ships this">
+Opal's catalog lists it plainly: Anti Void, "Stops you falling into the void." Same classification as everywhere else on this page, use at your own risk.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the module generically so you know what the term means. Naming and exact behavior vary by client, and any client-side reaction that moves you or places blocks without matching input can get an account banned, same as on any client.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does Anti Void actually catch?">
+A player who is about to fall into the void, the empty space below the world's lowest playable layer. It intervenes once their height crosses a threshold the user configures.
+</FAQItem>
+
+<FAQItem question="Does Anti Void teleport you or place a block?">
+Depends on the implementation. Some teleport you back to a safe position, others drop a block underneath you so you land on it instead of falling further.
+</FAQItem>
+
+<FAQItem question="Can Anti Void trigger too early or too late?">
+Yes. It works off a configured height threshold, so setting it too high fires the module far from real danger, and setting it too low risks reacting after the fall is already unrecoverable.
+</FAQItem>
+
+<FAQItem question="Is Anti Void detectable by anticheats?">
+It's plausible. Any module that moves the player or places blocks without matching input creates a pattern a server-side anticheat can watch for, so treat it as use-at-own-risk rather than safe by default.
+</FAQItem>
+
+<FAQItem question="Which clients include Anti Void?">
+Fan and Tenacity both ship a version. Opal does too, listed in its module catalog as Anti Void: "Stops you falling into the void."
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category modules like Anti Void live inside." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "How subtle modules differ from ones built to be obvious." },
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "Another module that places blocks automatically, for bridging instead of catching a fall." },
+]} />
+
+<CTA href="/en/purchase">Stop losing runs to a missed bridge. Opal is $8.99.</CTA>

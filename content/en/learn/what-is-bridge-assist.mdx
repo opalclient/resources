@@ -1,0 +1,92 @@
+---
+title: "What Is Bridge Assist in Minecraft? (Module Explained)"
+description: "Bridge Assist auto-places blocks while you bridge by hand, correcting timing and angle. See how it works, light vs heavy settings, and its detection risk."
+excerpt: "Bridge Assist cleans up the timing on a bridge you're already building yourself. Push the settings too far and it starts looking a lot like Scaffold."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Bridge Assist actually do?"
+    a: "It auto-places blocks under you while you bridge, tracking your position and look direction so placements land and the timing doesn't break the bridge."
+  - q: "Is Bridge Assist the same as Scaffold?"
+    a: "Not at light settings. Bridge Assist helps with a bridge you're manually building, while Scaffold builds the bridge for you. Heavy Bridge Assist settings blur that line."
+  - q: "Does Bridge Assist get flagged by anticheats?"
+    a: "Light settings that only smooth timing on a manually built bridge carry lower risk. Heavy settings that take over placement and aiming carry the same detection risk as Scaffold or God Bridge."
+  - q: "Which clients have Bridge Assist?"
+    a: "Slinky is documented with a Bridge Assist module. Movement helpers like it show up under different names in other clients."
+  - q: "What is God Bridging?"
+    a: "God Bridge is a fast, precise bridging technique. Heavy Bridge Assist settings start to overlap with it, since both involve placing blocks quickly while moving without breaking the line."
+---
+
+<KeyTakeaways>
+
+- Bridge Assist is a movement module that auto-places blocks while you bridge by hand, correcting placement timing and angle.
+- Light settings just smooth timing on a bridge you're already building.
+- Heavy settings take over placement and aim, converging with Scaffold or God Bridge.
+- Risk scales with the setting: heavy assist reads like Scaffold to anticheats watching placement rate and rotation.
+
+</KeyTakeaways>
+
+Bridge Assist is a movement module that auto-places blocks under you while you're bridging by hand, tracking your position and look direction each tick so placements land instead of missing the edge. You still supply the direction and the intent. You hold a block, walk forward, and place like you always do. The module's job is what happens in between: queuing the next block, nudging your angle toward the support square, retiming the swing and use inputs so the bridge doesn't break under you. It sits somewhere between fully manual bridging and a full Scaffold, and it shows up in clients like Slinky.
+
+## How it works
+
+Bridge Assist runs on top of ordinary manual bridging, not instead of it. You're already holding a block and walking forward, the same setup as bridging by hand. Each tick, the module reads your position and look direction and queues a placement just behind or below your feet as you advance. When a placement is due, it can nudge your look angle toward the support block and retime the swing and use inputs so the block actually connects instead of whiffing off the edge. Squares that are already filled get skipped, so the loop doesn't waste a placement or break the line of the bridge.
+
+## Light vs heavy settings
+
+How much of the bridging Bridge Assist is actually doing for you comes down to the setting.
+
+| Setting | What it does | How it plays |
+|---|---|---|
+| Light assist | Fills in placements only while you hold a block and walk forward | Feels like normal bridging with the timing smoothed out |
+| Heavy assist | Takes over more of the placement, angle correction, and timing | Starts to overlap with a full Scaffold or fast techniques like God Bridge |
+
+At light strength you're still doing the bridging: direction, intent, and block choice are yours, the module just cleans up execution. At heavy strength it's doing more of the work your hands would otherwise be doing.
+
+## Is it safe to use
+
+Risk here tracks the setting, not just having the module installed. Light Bridge Assist corrects timing and angle on placements you're already making by walking and holding a block, which reads closer to a convenience feature than an automated cheat. Heavy Bridge Assist is a different story: it starts placing and aiming on your behalf, and at that point it's functionally the same thing as a full Scaffold or a fast technique like God Bridge. Anticheats that watch placement rate, rotation snapping, or blocks placed without a complete swing don't care what the module is called. Heavy Bridge Assist gets treated exactly like Scaffold.
+
+<Callout variant="tip" title="Where Opal draws the line">
+Opal doesn't ship a module called Bridge Assist, or anything that auto-places and auto-aims a bridge for you. Movement is very much part of what a utility client like Opal covers, but the automation that carries real ban risk isn't something worth building a module around.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what the term means generically, not how to configure it. Heavy Bridge Assist settings function the same as a full Scaffold, which is bannable on essentially every server with an anticheat worth mentioning.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does Bridge Assist actually do?">
+It auto-places blocks under you while you bridge, tracking your position and look direction tick by tick so the placements land and the timing doesn't break your line.
+</FAQItem>
+
+<FAQItem question="Is Bridge Assist the same as Scaffold?">
+Not at light settings. Bridge Assist helps with a bridge you're manually building, while Scaffold builds the bridge for you. Crank the settings up and heavy Bridge Assist starts to blur that line.
+</FAQItem>
+
+<FAQItem question="Does Bridge Assist get flagged by anticheats?">
+Light settings that just smooth timing on a bridge you're already building are lower risk. Heavy settings that take over placement and aiming get treated the same as Scaffold or God Bridge.
+</FAQItem>
+
+<FAQItem question="Which clients have Bridge Assist?">
+Slinky is documented with a Bridge Assist module. Movement helpers like it turn up under different names in other clients.
+</FAQItem>
+
+<FAQItem question="What is God Bridging?">
+God Bridge is a fast, precise bridging technique. Heavy Bridge Assist settings start to overlap with it, since both place blocks quickly while moving without breaking the line.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "The fully automated version of what Bridge Assist does by halves." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "How stealth clients try to hide modules like this one." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The broader category movement modules like this belong to." },
+]} />
+
+<CTA href="/en/purchase">Opal's movement modules are built for players who still do the bridging themselves.</CTA>

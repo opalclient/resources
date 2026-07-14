@@ -1,0 +1,83 @@
+---
+title: "What Is Streamer Mode in Minecraft?"
+description: "Streamer Mode is a Minecraft module that hides your username, coordinates, and account details on screen, so streams and recordings never leak personal info."
+excerpt: "Your base location is not content. Streamer Mode keeps it off screen before anyone hits record."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Streamer Mode hide my info from other players too?"
+    a: "No. It only changes what gets drawn on your own screen or capture. The server still sends your real username and position to everyone else exactly as before."
+  - q: "Will Streamer Mode affect my gameplay?"
+    a: "No. It is a display-only module. Movement, combat, and anything sent to the server behave the same whether it is on or off."
+  - q: "What information does Streamer Mode typically hide?"
+    a: "The common targets are your username, your account name in menus, and coordinate readouts like the F3 debug screen or a coordinates HUD element."
+  - q: "Why do some clients call it Streamer instead of Streamer Mode?"
+    a: "It is the same feature under two client-specific names. Rose documents it as Streamer Mode, Tenacity calls the equivalent module Streamer, and both hide sensitive on-screen data for content creators."
+---
+
+<KeyTakeaways>
+
+- Streamer Mode is a module that hides sensitive on-screen data, your username, account name, and coordinates, so you can stream or record without leaking it.
+- It only changes what gets rendered on your screen, not your actual position or identity.
+- Some clients swap hidden text for a placeholder instead of leaving a gap, so the rest of the HUD does not shift.
+- Purely cosmetic: nothing about it touches the server, so there is nothing for an anticheat to flag.
+
+</KeyTakeaways>
+
+Streamer Mode is a module that hides identifying information on your Minecraft screen, things like your username, account name, and coordinates, so a broadcast or recording does not expose it. It is not a cheat. It does not move you faster, hit harder, or send anything different to the server. It just changes what gets drawn to your own display before a viewer, or an OBS capture, ever sees it.
+
+## How it works
+
+Streamer Mode scans the parts of the interface that normally show identifying text and masks or blanks them before the frame is drawn. The typical targets are the username floating above your player model, the account name in menus, and coordinate readouts, whether that is the vanilla F3 debug screen or a dedicated coordinates HUD element. The underlying data never changes. Your position and account are exactly what they were, only the rendering is different.
+
+A blunt version of this would just leave a blank gap where the text used to be, which looks broken and shifts everything around it. Better implementations swap the hidden text for a placeholder instead, asterisks or a generic label, so the layout holds still. That matters more than it sounds: a HUD element that jumps every time it hides a number is its own kind of distraction, and its own kind of tell.
+
+## What Streamer Mode hides
+
+| What it hides | Where it normally appears | What the module does |
+|---|---|---|
+| Your username | Floating above your player model | Masked or blanked before the frame renders |
+| Your account name | Menus and settings screens | Swapped for a placeholder label |
+| Your coordinates | F3 debug screen or a coordinates HUD element | Blanked, or replaced with asterisks |
+
+The reason this beats editing footage after the fact is timing. If the information is hidden at render time, it is never captured in the first place, so there is no clip to scrub, no VOD to re-upload, no five minutes at 2x speed at the start of a stream making sure nothing slipped through. A visible coordinate readout can hand a viewer your base location on a public server. A visible username can get cross-referenced with other accounts or turned into harassment. Streamer Mode removes both before either becomes a problem.
+
+## Is it safe to use
+
+Yes, without any asterisk. Streamer Mode only affects local rendering. It does not touch movement, combat, or a single packet sent to the server, so from the server's side of things, nothing about how you play has changed. There is no signal here for an anticheat to catch, because there is nothing to observe.
+
+<Callout variant="tip" title="Opal ships it under the same name">
+Opal's own module catalog lists Streamer Mode as exactly that: a module that hides sensitive info for content creators. It is filed under Opal's SAFE tier, cosmetic and quality-of-life, the same bucket as anything else that never reaches toward the server. Turn it on before you go live and forget about it.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Streamer Mode hide my info from other players too?">
+No. It only changes what gets drawn on your own screen or capture. The server still sends your real username and position to everyone else exactly as before.
+</FAQItem>
+
+<FAQItem question="Will Streamer Mode affect my gameplay?">
+No. It is a display-only module. Movement, combat, and anything sent to the server behave the same whether it is on or off.
+</FAQItem>
+
+<FAQItem question="What information does Streamer Mode typically hide?">
+The common targets are your username, your account name in menus, and coordinate readouts like the F3 debug screen or a coordinates HUD element.
+</FAQItem>
+
+<FAQItem question="Why do some clients call it Streamer instead of Streamer Mode?">
+It is the same feature under two client-specific names. Rose documents it as Streamer Mode, Tenacity calls the equivalent module Streamer, and both hide sensitive on-screen data for content creators.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The broader category cosmetic modules like this one belong to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Staying unseen on a deeper level than what your own HUD shows." },
+  { href: "/en/learn/what-is-killaura", label: "What is killaura?", description: "The opposite end of the risk spectrum: a module the server absolutely can see." },
+]} />
+
+<CTA href="/en/purchase">Go live without doxxing your base, for $8.99</CTA>

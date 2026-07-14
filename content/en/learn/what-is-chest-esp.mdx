@@ -1,0 +1,78 @@
+---
+title: "What Is Chest ESP in Minecraft? (Module Explained)"
+description: "Chest ESP marks chests, barrels, and other containers through walls in Minecraft. Here's how the module renders loot, why people use it, and the ban risk."
+excerpt: "Chest ESP lights up every container in render range, wall or no wall. Great for loot runs, less great when a server notices you beelining to chests you shouldn't be able to see."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Chest ESP actually mark?"
+    a: "Chests, barrels, and other container blocks, sometimes including trapped chests and shulker boxes depending on the client. It shows you where containers are, not what's inside them."
+  - q: "Is Chest ESP the same as entity ESP?"
+    a: "No. Entity ESP marks players and mobs through walls. Chest ESP does the same job for container blocks, so the two ship as companion features rather than one module."
+  - q: "Can Chest ESP get you banned?"
+    a: "Yes, even though it carries less risk than a combat cheat. It doesn't change what your client sends to the server, but a server watching for players who repeatedly path to hidden containers can still flag or ban for it. Treat it as detectable, not safe."
+  - q: "Does Chest ESP work through any wall?"
+    a: "Anywhere the client has block data loaded, which in practice means anywhere inside render distance. Stone, terrain, and full structures between you and the container don't matter, because the render step skips the usual check for what's in the way."
+---
+
+<KeyTakeaways>
+- Chest ESP is a visual module that marks chests, barrels, and other containers through walls.
+- It uses block data the client already has, so no line of sight is needed.
+- It's the container counterpart to entity ESP, which does the same for players.
+- It sends no unusual packets, but pathing to hidden loot can still get you banned.
+</KeyTakeaways>
+
+Chest ESP is a visual module that marks chests, barrels, and other storage containers through walls and terrain, drawing an outline or a filled box over each one so it stays visible no matter what's standing in the way. It does for loot what entity ESP does for players: turns a search you'd normally do on foot into something you can see the moment the world loads in. The module doesn't need a container in view to find it. It just checks the block type at every loaded coordinate and draws a marker there, wall or no wall.
+
+## How it works
+
+Chest ESP scans the loaded world for container blocks like chests, trapped chests, barrels, and shulker boxes, then renders over each one regardless of what stands between the player and the block. This isn't wallhack magic, it's bookkeeping. The client already holds the position of every block inside render distance, because the game needs that data to draw terrain and handle collision. Chest ESP just filters that data for container types and skips the step where geometry between you and the target would normally hide it.
+
+The rendering itself works the way most ESP does: an outline, a solid box, or a text label drawn through the world's depth buffer instead of behind it. The container doesn't move and its contents don't change. The only thing that's different is whether a wall gets to hide it from you.
+
+## Why people use it
+
+The obvious reason is speed. Chests and barrels are where a Minecraft world keeps anything worth having, and clearing a base or a structure room by room is slow. Chest ESP collapses that search into a glance: every container in render range shows up at once, including the ones tucked behind a fake wall or buried under a staircase.
+
+The less innocent reason is raiding. On servers where players store loot inside a base, seeing every container's location through solid walls removes the one obstacle base security is built around, actually having to find the stuff. That's why plenty of servers treat container-visibility features as a raiding tool first and a convenience second.
+
+## Is it safe to use
+
+Chest ESP is quieter than a combat module. It doesn't touch your rotations, your attack timing, or anything that goes out over the network, so there's no packet anomaly for a server-side anticheat to catch directly. In that narrow sense it's genuinely lower-risk than something like an aimbot or KillAura.
+
+The catch is that detection doesn't need a packet. A player who walks in a straight line to a chest they never had line of sight to, or who opens a sequence of containers behind sealed walls with no reason to know they're there, is a pattern staff and behavior-based detection can pick up on. That's inference, not a hard check, which is exactly what puts Chest ESP in a gray zone: less mechanically obvious than combat cheats, but still a use-at-own-risk feature. A server that watches pathing toward unseen loot can still catch it without ever flagging a single packet.
+
+<Callout variant="tip" title="Where this sits in Opal">
+Opal ships this under a different name. Block ESP, filed in the Visual category, is marked use-at-own-risk right in Opal's own module list, and it covers the same ground as Chest ESP (containers) plus resource blocks like ore, under one broader module instead of a chest-only one. Same behavior, same honest risk label. Opal isn't going to call a wallhack for loot "safe" just because it doesn't touch your packets.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Chest ESP does and why it sits in a gray zone, not an endorsement to run it. Pathing straight to loot you shouldn't be able to see is exactly the kind of behavior staff and anticheats learn to watch for, and plenty of servers ban it under general fair-play rules even without a hard packet flag.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="What does Chest ESP actually mark?">
+Chests, barrels, and other container blocks, sometimes including trapped chests and shulker boxes depending on the client. It shows you where containers are, not what's inside them.
+</FAQItem>
+<FAQItem question="Is Chest ESP the same as entity ESP?">
+No. Entity ESP marks players and mobs through walls. Chest ESP does the same job for container blocks, so the two ship as companion features rather than one module.
+</FAQItem>
+<FAQItem question="Can Chest ESP get you banned?">
+Yes, even though it carries less risk than a combat cheat. It doesn't change what your client sends to the server, but a server watching for players who repeatedly path to hidden containers can still flag or ban for it. Treat it as detectable, not safe.
+</FAQItem>
+<FAQItem question="Does Chest ESP work through any wall?">
+Anywhere the client has block data loaded, which in practice means anywhere inside render distance. Stone, terrain, and full structures between you and the container don't matter, because the render step skips the usual check for what's in the way.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The umbrella category Chest ESP and other visual and QoL modules belong to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The client category built around staying undetected, the same gray zone Chest ESP lives in." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "The combat-cheat end of the spectrum Chest ESP is comparatively quiet next to." }
+]} />
+
+<CTA href="/en/purchase">Check out Block ESP and the rest of Opal's visual category.</CTA>

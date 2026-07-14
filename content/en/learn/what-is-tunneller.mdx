@@ -1,0 +1,82 @@
+---
+title: "What Is Tunneller in Minecraft? Module Explained"
+description: "Tunneller is a Wurst module that auto-digs a tunnel to a set width, height, and direction, clearing a straight path through blocks without touching a pickaxe."
+excerpt: "Tunneller picks a size and a direction, then chews through solid rock without you touching a pickaxe. It's automation, and it looks like automation."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is Tunneller a cheat or a utility feature?"
+    a: "It automates something a player could do by hand, digging a tunnel, which makes it a gameplay-automation feature rather than a purely cosmetic one. Whether it gets you in trouble depends entirely on the server's rules and anticheat, not on the module itself."
+  - q: "Does Tunneller work on survival multiplayer servers?"
+    a: "Technically yes. It sends the same block-break packets a normal player sends, so nothing stops it from running on a live server. Staying unnoticed is the harder part: block-break monitoring can pick up on the mechanical timing and dead-straight paths automated digging leaves behind."
+  - q: "What's the difference between Tunneller and Nuker?"
+    a: "Nuker breaks every breakable block within a radius around the player, wherever that happens to be. Tunneller instead cuts a defined shape in one direction, so it behaves more like automated excavation than area-clearing."
+  - q: "Can using Tunneller get you banned?"
+    a: "On a server running active anticheat or staff who watch block activity, yes, it can be treated the same as any other automated behavior. On singleplayer or an unmoderated server, there's no one enforcing a ban in the first place."
+---
+
+<KeyTakeaways>
+
+- Tunneller is a Wurst module that auto-digs a tunnel to a set width, height, and direction, no manual mining required.
+- It cuts a fixed cross-section forward, block by block, unlike Nuker's radius clearing.
+- Common on singleplayer and unmoderated anarchy servers where block-break monitoring is thin.
+- The mechanical, dead-straight pace is exactly what block-break anticheats are built to flag.
+
+</KeyTakeaways>
+
+Tunneller is a world-category module in Wurst that automatically digs a tunnel to whatever width, height, and direction you set, breaking every block in its path so you never touch a pickaxe. You pick the dimensions and a heading, hit enable, and the module works outward from wherever you're standing, clearing that cross-section block by block as it advances. There's no aiming, no clicking, no walking face-first into a wall to start a shaft. Some builds even patch the floor as they go, since an auto-dug tunnel that opens a hole under your feet is a hazard, not a convenience.
+
+## How it works
+
+Tunneller takes three inputs: width, height, and direction. From there it works outward from your position, breaking each block in that cross-section before stepping you forward into the cleared space. The module decides which block to look at, sends the break, and only advances once the way ahead is actually clear. You're not steering any of it, just watching it happen. Some implementations also fill gaps that open up below you mid-dig, because falling into the hole you're currently digging defeats the point of automating it.
+
+## Common settings
+
+| Setting | What it controls |
+|---|---|
+| Width and height | The cross-section of the tunnel being cut |
+| Direction | Which way the tunnel extends from your current heading |
+| Length | How far it runs before stopping on its own |
+| Block handling | Whether liquids and valuable ores get skipped or broken through like everything else |
+
+Width, height, and direction are what separate Tunneller from a plain auto-mine toggle. Instead of breaking whatever happens to be directly in front of you, it commits to a shape in advance and cuts exactly that, nothing more, nothing less.
+
+<Callout variant="tip" title="Where this sits in Opal">
+Opal doesn't ship a Tunneller module. This one's a Wurst feature, built for the anarchy-server world where clearing a mile of stone by hand is the actual chore. Opal's catalog leans combat, movement, and visual instead, the categories where a single tick decides a fight. Automated excavation isn't the problem Opal is trying to solve.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes Tunneller generically so you know what the term means, not as documentation for something Opal ships. On a server running anticheat, automated digging is easier to catch than it looks. Real players pause, backtrack, and cut the occasional off-axis block while mining, and a mechanically timed, dead-straight tunnel does none of that. Block-break logging can flag that consistency the same way it flags any other automated action, and on a moderated server that's a bannable pattern regardless of which client produced it.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Tunneller a cheat or a utility feature?">
+It automates something a player could do by hand, digging a tunnel, which makes it a gameplay-automation feature rather than a purely cosmetic one. Whether it gets you in trouble depends entirely on the server's rules and anticheat, not on the module itself.
+</FAQItem>
+
+<FAQItem question="Does Tunneller work on survival multiplayer servers?">
+Technically yes. It sends the same block-break packets a normal player sends, so nothing stops it from running on a live server. Staying unnoticed is the harder part, since block-break monitoring can pick up on the mechanical timing and dead-straight paths automated digging leaves behind.
+</FAQItem>
+
+<FAQItem question="What's the difference between Tunneller and Nuker?">
+Nuker breaks every breakable block within a radius around the player, wherever that happens to be. Tunneller instead cuts a defined shape in one direction, so it behaves more like automated excavation than area-clearing.
+</FAQItem>
+
+<FAQItem question="Can using Tunneller get you banned?">
+On a server running active anticheat or staff who watch block activity, yes, it can be treated the same as any other automated behavior. On singleplayer or an unmoderated server, there's no one enforcing a ban in the first place.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category Tunneller and modules like it live inside." },
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "Another automation module, this one placing blocks instead of clearing them." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The stealth-first category built for exactly the unmoderated servers Tunneller thrives on." },
+]} />
+
+<CTA href="/en/purchase">Opal spends its build budget on combat and movement, not pickaxes. See what's actually in it.</CTA>

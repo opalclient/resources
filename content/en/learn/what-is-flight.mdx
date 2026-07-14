@@ -1,0 +1,87 @@
+---
+title: "What Is Flight in Minecraft? The Movement Module Explained"
+description: "Flight is a movement module that overrides gravity and motion for free flight, no elytra or creative mode. Here's how it works and why it's easy to catch."
+excerpt: "Flight rewrites gravity and motion so you leave the ground on command. No wings, no game mode flip, just an override the server was never told about."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is Flight the same as using an elytra or creative mode?"
+    a: "No. An elytra and creative mode are both mechanics vanilla Minecraft actually grants under specific conditions. Flight produces the same movement without either being present, which is exactly what makes it detectable."
+  - q: "Can Flight get a player banned?"
+    a: "Yes. Sustained flight without a valid source is one of the more obvious movement anomalies a server-side anticheat can check for, and using it typically breaks the rules of any server running one."
+  - q: "Does limiting Flight's motion make it undetectable?"
+    a: "No. Easing the vertical speed or capping airtime makes detection less certain, but it doesn't remove the underlying signal: airborne movement with no elytra or creative mode behind it."
+  - q: "Why do some clients call this module Fly instead of Flight?"
+    a: "Fly is an alias for the same function: free vertical and horizontal flight through overridden motion and gravity handling. Different clients pick one name or the other for the same module."
+---
+
+<KeyTakeaways>
+- Flight is a movement module that grants free vertical and horizontal flight by overriding gravity and motion.
+- It skips the elytra and creative mode entirely, faking the same airborne result at the client level.
+- Sustained flight without a valid source is one of the most obvious anomalies a server can check for.
+- Opal catalogs it as Flight, plainly filed under use-at-own-risk, same detection story as anywhere else.
+</KeyTakeaways>
+
+Flight is a movement module that overrides Minecraft's gravity and motion handling so you rise, hover, or cross terrain without an elytra or creative mode. Vanilla only lets you leave the ground two ways: strap on wings and glide with fall momentum behind you, or flip into creative or spectator. Flight fakes that result by holding vertical velocity wherever you want it instead of letting it decay toward the ground, and by applying horizontal motion directly. Some clients label the same module Fly. Either name, it's one of the most obviously detectable movement cheats there is.
+
+## How Flight works
+
+Flight rewrites two things vanilla normally owns outright: gravity and motion. Instead of letting vertical velocity decay toward the ground the instant there's no block underfoot, the module sets that velocity and holds it, so falling stops and climbing or hovering happens on command. Horizontal motion gets applied the same direct way, so you move forward, sideways, or straight up without ever touching a surface.
+
+None of this borrows from an elytra or creative mode. The module produces the exact movement those features grant legitimately, minus the source that's supposed to unlock it. Players reach for it to skip the parts of the game gravity and terrain are meant to enforce: going straight to a destination instead of walking or falling around it, dodging fall damage entirely, or getting somewhere no ground path would allow, like hovering over a base. In a chase, staying airborne also puts distance between you and anything that only moves on the ground.
+
+## Flight vs. an actual elytra or creative mode
+
+Vanilla only explains unsupported movement through the air in two ways. Flight matches neither.
+
+| Way to leave the ground | What actually grants it | What a server sees |
+|---|---|---|
+| Elytra | Equipped chestplate plus fall momentum | A gliding entity with a matching fall state |
+| Creative or spectator | A game mode flag on the account | A player flagged as creative or spectator |
+| Flight module | Overridden gravity and motion, no source | Steady airborne movement with neither flag present |
+
+That last row is the whole problem. A server tracking position over time doesn't need to guess: it just checks whether either legitimate flag is set, and if the player is airborne without one, the pattern doesn't match anything vanilla physics produces.
+
+## Why it gets detected
+
+Because the check is straightforward, bypass-focused Flight implementations try to keep the resulting motion inside limits an anticheat already tolerates: easing vertical speed, mimicking a jump arc, or capping how long a player stays airborne at once. That narrows the gap but doesn't close it. The underlying behavior, moving through open air with no supporting mechanic, is still there for a server to notice. Clients that have shipped Flight, including Fan, Tenacity, and Silhouette, treat it as a known-risk feature rather than a safe one, and that reputation is earned rather than paranoid.
+
+<Callout variant="tip" title="Flight in Opal">
+Opal ships this module too, filed under the same name: Flight. The catalog description doesn't hedge about it: "You grow wings in real life." Same override under the hood, same tradeoff as any other client that carries it.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the module generically so you know what the term means. Naming and exact behavior vary by client, and sustained flight with no valid source breaks the rules of essentially every server. Opal classifies Flight use-at-own-risk for exactly that reason: it's detectable, and it can get an account banned like on any client that ships it.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Flight the same as using an elytra or creative mode?">
+No. An elytra and creative mode are both mechanics vanilla Minecraft actually grants under specific conditions. Flight produces the same kind of movement without either one present, which is exactly what makes it detectable.
+</FAQItem>
+
+<FAQItem question="Can Flight get a player banned?">
+Yes. Sustained flight without a valid source is one of the more obvious movement anomalies a server-side anticheat can check for, and using it typically breaks the rules of any server running one.
+</FAQItem>
+
+<FAQItem question="Does limiting Flight's motion make it undetectable?">
+No. Keeping the resulting motion inside limits an anticheat already tolerates makes detection less certain, but it doesn't remove the underlying signal: airborne movement with no elytra or creative mode behind it.
+</FAQItem>
+
+<FAQItem question="Why do some clients call this module Fly instead of Flight?">
+Fly is an alias for the same function, free vertical and horizontal flight through overridden motion and gravity handling. Different implementations use one name or the other for what is functionally the same module.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category Flight and modules like it belong to." },
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "Another movement-adjacent module that trades detection risk for traversal speed." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The client category built around staying unseen rather than just moving fast." },
+]} />
+
+<CTA href="/en/purchase">Opal's Flight module makes the wings-in-real-life claim literal. See the rest of the list.</CTA>

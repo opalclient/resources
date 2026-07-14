@@ -1,0 +1,75 @@
+---
+title: "What Is AutoAuthenticate in Minecraft?"
+description: "AutoAuthenticate is a Minecraft client module that automatically resends your saved password as a login command every time you join an auth-plugin server."
+excerpt: "It remembers your password so you don't have to type /login fifty times a week. That's the whole module."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does AutoAuthenticate give any gameplay advantage?"
+    a: "No. It only automates sending a login or register chat command with a saved password. It has no effect on combat, movement, or anything else the server tracks as gameplay."
+  - q: "Can a server ban someone for using AutoAuthenticate?"
+    a: "There's no gameplay action to detect, since the command it sends is identical to one a player types manually. Servers generally have no reason to flag it."
+  - q: "Where is my password stored?"
+    a: "The module keeps the saved password locally on your machine so it can resend it on future joins. Its safety depends entirely on the security of the device it's stored on."
+  - q: "Which clients include AutoAuthenticate?"
+    a: "It appears in Tenacity, usually filed under convenience or quality-of-life modules rather than combat or movement."
+---
+
+<KeyTakeaways>
+- AutoAuthenticate is a module that logs you into auth-plugin servers automatically by resending your saved password as a login or register command.
+- It only replaces typing, not gameplay, so it has no effect on combat, movement, or anything an anticheat tracks, and looks identical to a player typing it.
+- Found in clients like Tenacity, filed under quality-of-life rather than combat.
+</KeyTakeaways>
+
+**AutoAuthenticate** is a Minecraft utility client module that logs you into a server automatically the moment you join, by sending your saved password as a login or register chat command. If you've ever played on a cracked or offline-mode server, you know the drill: join, type `/login yourpassword`, then actually start playing. AutoAuthenticate skips the second step by doing it for you, instantly, every single time.
+
+## How it works
+
+A lot of servers running on cracked or offline-mode accounts protect themselves with an auth plugin. Before you can move, chat, or interact with anything, you're required to run a login command (existing account) or a register command (first join), each with a password attached. Miss that step and you're frozen in place until you type it correctly.
+
+AutoAuthenticate stores a password per server and watches for the exact moment your join finishes on a server that requires this. When it detects that state, it fires the matching command with your saved password on your behalf, no typing required. That's the entire mechanism. There's no packet trickery, no hidden protocol, nothing the server wouldn't already accept from a human hitting enter after typing it themselves.
+
+## What it touches versus what it doesn't
+
+| Area | Affected by AutoAuthenticate? |
+|---|---|
+| Login/register chat command | Yes, sent automatically on join |
+| Combat (reach, hit timing, aim) | No |
+| Movement (speed, jumps, pathing) | No |
+| Anything the server logs as a gameplay action | No |
+| Password storage | Local to the client and machine |
+
+That last row is the only real "settings" surface here: a saved password per server, kept locally so it can be replayed on the next join. Everything else is just automation of a chat message you were already allowed to send.
+
+Servers that lean on auth plugins ask for the same command every reconnect, and if you're someone who disconnects and rejoins often, typing a password each time adds up to a real annoyance over a session. AutoAuthenticate removes that annoyance completely without touching anything a server or anticheat cares about measuring.
+
+<Callout variant="tip" title="Where this fits in the bigger picture">
+Opal doesn't ship a module under this name, and it's not trying to. AutoAuthenticate lives in the quality-of-life corner of the module list, not the combat or movement corner where a paid client earns its price. If your priority list is "stop retyping my password," a dedicated auth helper like this is genuinely the right tool. If it's "stop dying in fights," that's a different aisle entirely.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Does AutoAuthenticate give any gameplay advantage?">
+No. It only automates sending a login or register chat command with a saved password. It has no effect on combat, movement, or anything else the server tracks as gameplay.
+</FAQItem>
+<FAQItem question="Can a server ban someone for using AutoAuthenticate?">
+There's no gameplay action to detect, since the command it sends is identical to one a player types manually. Servers generally have no reason to flag it.
+</FAQItem>
+<FAQItem question="Where is my password stored?">
+The module keeps the saved password locally on your machine so it can resend it on future joins. Its safety depends entirely on the security of the device it's stored on.
+</FAQItem>
+<FAQItem question="Which clients include AutoAuthenticate?">
+It appears in Tenacity, usually filed under convenience or quality-of-life modules rather than combat or movement.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The category AutoAuthenticate belongs to, and what else lives in it." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Undetectable by design, the same design goal AutoAuthenticate happens to meet by accident." },
+  { href: "/en/learn/what-is-killaura", label: "What is Killaura?", description: "The other end of the risk spectrum: a module that gets you banned instead of just logged in." }
+]} />
+
+<CTA href="/en/purchase">Opal handles the modules that actually decide fights. Try it for $8.99.</CTA>

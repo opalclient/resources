@@ -1,0 +1,79 @@
+---
+title: "What Is a Spectator Detector Module in Minecraft?"
+description: "Spectator Detector guesses when a moderator might be watching in Minecraft, using indirect signals instead of any confirmed spectator status. Here's how."
+excerpt: "It never sees a spectator. It sees the shadow one leaves behind, and bets accordingly."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Spectator Detector actually detect?"
+    a: "It doesn't detect spectator mode directly, Minecraft never exposes that to the client. It infers the likely presence of an observer from indirect signals, like an entity that exists on the client but never renders, or the absence of movement packets an active player would normally send."
+  - q: "Can it tell you who is spectating?"
+    a: "No. The heuristics can suggest someone might be watching, but they can't reveal an identity or confirm spectator status with any certainty. It's a probability signal, not a lookup."
+  - q: "Is Spectator Detector itself a bannable cheat?"
+    a: "It doesn't alter gameplay or hand out any in-game advantage on its own. Its job is helping hide the effects of other modules from a moderator, so it functions as a support tool for cheating rather than a standalone advantage feature, and it typically ships bundled with the modules it's protecting."
+  - q: "Why would it miss a real spectator?"
+    a: "Because it relies on indirect signals instead of a direct read of spectator status. A spectator who doesn't happen to trigger those particular signals goes unnoticed. That false negative is the more consequential failure mode, since it gives the user false confidence that nothing needs to change."
+---
+
+<KeyTakeaways>
+- Spectator Detector is a module that flags when someone might be spectating, so other modules can dial back before a moderator sees anything.
+- It never gets a direct signal, Minecraft doesn't expose spectator status. It infers from indirect clues like unrendered nearby entities and missing movement packets.
+- The result is a probability, not a fact: false positives waste caution, false negatives miss a real observer entirely.
+- On its own it changes nothing about gameplay. Its entire job is covering for other modules.
+</KeyTakeaways>
+
+A spectator detector is a client-side module that tries to guess whether another player has switched into spectator mode to watch you, so that more obvious modules can be toned down before a moderator sees anything worth screenshotting. It doesn't confirm anything. It works off local heuristics rather than a real signal, which means the guess can be wrong in either direction, and the module has no idea which way it's wrong until it's too late.
+
+## How it works
+
+The game never tells a client "a spectator just started watching you." That information doesn't exist on the wire, spectators are effectively invisible by design. So the module has to work around it, looking for side effects instead of the thing itself.
+
+Two heuristics do the work. The first watches for an entity that exists in the client's world state but is never actually rendered as visible, which is a pattern that shows up when a spectating player is nearby without being displayed like a normal one. The second watches for the absence of movement packets a normal player would be expected to generate, since a spectator's presence doesn't create the same network traffic an active player does. Neither is a direct read of who's spectating. Both are inferences built from data the client already had lying around.
+
+Where it shows up, it's paired with combat automation or other modules a moderator would recognize on sight. The detector doesn't win the fight or land the hit, it just buys a few seconds of warning so the flashier modules can go quiet first.
+
+## False positives and false negatives
+
+Because both signals are indirect, the module gets things wrong in two different directions, and they're not equally bad.
+
+| Failure mode | What happens | Consequence |
+|---|---|---|
+| False positive | Flags an ordinary player as a spectator when nobody is watching | User holds back for nothing, no real cost beyond lost tempo |
+| False negative | Misses an actual spectator entirely | User gets false confidence, doesn't back off, and is more likely to get caught |
+
+The false negative is the expensive one. A false positive just costs a little caution. A false negative tells you the coast is clear when it isn't, which is worse than having no detector at all, because it replaces genuine uncertainty with misplaced confidence.
+
+<Callout variant="info" title="Where Opal sits on this">
+Opal doesn't ship a module under this name, and it isn't trying to. Spectator detection exists to help other, more obvious modules stay hidden from a moderator's eyes, and that's a different problem than the utility and world-interaction tools Opal actually builds. If a client leans on guessing when it's being watched, that's usually a sign the rest of its module list needs the cover.
+</Callout>
+
+<Callout variant="warning" title="Bundled with what it's hiding">
+A spectator detector rarely ships alone. It exists to protect combat automation and similar modules from being seen, which means using it puts you in the same account-risk category as whatever it's covering for. The detector itself doesn't get you banned. The reason someone installed it usually will.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="What does Spectator Detector actually detect?">
+It doesn't detect spectator mode directly, Minecraft never exposes that to the client. It infers the likely presence of an observer from indirect signals, like an entity that exists on the client but never renders, or the absence of movement packets an active player would normally send.
+</FAQItem>
+<FAQItem question="Can it tell you who is spectating?">
+No. The heuristics can suggest someone might be watching, but they can't reveal an identity or confirm spectator status with any certainty. It's a probability signal, not a lookup.
+</FAQItem>
+<FAQItem question="Is Spectator Detector itself a bannable cheat?">
+It doesn't alter gameplay or hand out any in-game advantage on its own. Its job is helping hide the effects of other modules from a moderator, so it functions as a support tool for cheating rather than a standalone advantage feature, and it typically ships bundled with the modules it's protecting.
+</FAQItem>
+<FAQItem question="Why would it miss a real spectator?">
+Because it relies on indirect signals instead of a direct read of spectator status. A spectator who doesn't happen to trigger those particular signals goes unnoticed. That false negative is the more consequential failure mode, since it gives the user false confidence that nothing needs to change.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-killaura", label: "What is Killaura?", description: "The kind of module a spectator detector exists to cover for." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Clients built around staying unseen, not just uncaught." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "Where modules like this fit in the bigger picture." }
+]} />
+
+<CTA href="/en/purchase">Opal skips the guesswork modules entirely. See what actually made the cut.</CTA>

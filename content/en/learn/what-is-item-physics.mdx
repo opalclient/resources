@@ -1,0 +1,70 @@
+---
+title: "What Is Item Physics in Minecraft?"
+description: "Item Physics is a cosmetic Minecraft module that replaces vanilla's stiff dropped-item motion with smoother, custom physics, rendered entirely client-side."
+excerpt: "Vanilla lets dropped items flop around like they forgot how gravity works. Item Physics gives them some dignity, purely for your own eyes."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Item Physics affect where dropped items actually land?"
+    a: "No. It only changes how the drop motion is rendered on your own screen. Where the item actually ends up, and how the server handles it, is identical to vanilla."
+  - q: "Can other players see the custom item physics?"
+    a: "No. It's a local rendering change only. Everyone else sees drops move according to their own client, whether that's vanilla's default or their own custom physics."
+  - q: "Does using Item Physics get flagged by anticheats?"
+    a: "No. It doesn't send anything different to the server than an unmodified client would, so there's nothing for a server-side anticheat to see, let alone flag."
+  - q: "Is Item Physics the same as a resource pack or shader?"
+    a: "Not really. Resource packs and shaders change textures and lighting. Item Physics changes the actual motion path items follow, which is a code-level animation change, not an asset swap."
+---
+
+<KeyTakeaways>
+- Item Physics is a cosmetic module that replaces Minecraft's default dropped-item motion with a smoother, custom physics calculation.
+- It's rendered entirely client-side: the drop, the pickup, and everything the server tracks work exactly like vanilla.
+- Nothing about it is visible to other players or detectable by a server-side anticheat.
+- It's an animation change, not a texture or shader change, so it's unrelated to resource packs.
+</KeyTakeaways>
+
+Item Physics is a visual module found in some Minecraft utility clients that overrides how dropped items move and settle, giving them smoother or more distinct motion than vanilla's default. It doesn't touch how items drop, stack, or get picked up. It just changes what your own client draws on screen.
+
+## How it works
+
+Vanilla Minecraft drops an item with a basic velocity-and-gravity calculation, and the item comes to rest wherever that math lands it. It works, but it's stiff, and it gets noticeably stiffer the moment several items hit the ground at once, like after clearing a mob farm or dumping a full inventory onto the floor.
+
+Item Physics intercepts that motion on the client and recalculates it locally. Instead of the flat vanilla arc, drops move and settle with custom physics that reads as smoother or more distinct depending on the implementation. Because the module only changes rendering and animation, not anything the server actually tracks, the drop itself behaves identically underneath. It's a presentation layer sitting on top of unchanged server logic.
+
+You'll find it in clients like Tenacity, usually filed next to other cosmetic and quality-of-life modules rather than anything that touches combat or movement.
+
+## Is it safe to use
+
+Yes, and it's about as safe as a module gets. Item Physics never changes hit detection, movement, or any packet the server receives. It changes what gets drawn on your own screen, full stop, which means the modified motion never leaves your client. There's nothing here for a server-side anticheat to observe, because nothing about your actual gameplay data is different.
+
+The usual caveat still applies: some servers ban all client modifications on principle, regardless of what any individual module does. Worth a quick check of server rules before you install anything, even something this harmless.
+
+<Callout variant="tip" title="Where this fits in a broader client">
+Opal doesn't ship a module under this exact name, but the same instinct sits behind its visual module set: vanilla has rough edges that are safe to smooth over because they never touch what the server sees. If you want that kind of polish alongside actual gameplay tools, that's the territory Opal's visual category covers.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Does Item Physics affect where dropped items actually land?">
+No. It only changes how the drop motion is rendered on your own screen. Where the item actually ends up, and how the server handles it, is identical to vanilla.
+</FAQItem>
+<FAQItem question="Can other players see the custom item physics?">
+No. It's a local rendering change only. Everyone else sees drops move according to their own client, whether that's vanilla's default or their own custom physics.
+</FAQItem>
+<FAQItem question="Does using Item Physics get flagged by anticheats?">
+No. It doesn't send anything different to the server than an unmodified client would, so there's nothing for a server-side anticheat to see, let alone flag.
+</FAQItem>
+<FAQItem question="Is Item Physics the same as a resource pack or shader?">
+Not really. Resource packs and shaders change textures and lighting. Item Physics changes the actual motion path items follow, which is a code-level animation change, not an asset swap.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The category Item Physics and modules like it live in." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Another utility-client style built around staying unseen rather than changing combat." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "The opposite end of the spectrum: a module that does get flagged, and why." }
+]} />
+
+<CTA href="/en/purchase">Cosmetic polish is table stakes. See what Opal's full module list covers.</CTA>

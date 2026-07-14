@@ -1,0 +1,88 @@
+---
+title: "What Is Post Processing in Minecraft? Visual Module"
+description: "Post Processing is a Minecraft module that runs a screen-space shader pass, like color grading or blur, over the whole game view without touching gameplay."
+excerpt: "One shader pass, the whole screen, zero ban risk. Post Processing works like a photo filter, not a cheat."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Post Processing affect gameplay in Minecraft?"
+    a: "No. It only changes how the finished frame looks after rendering. It has no effect on movement, combat, hitboxes, or anything the server can see."
+  - q: "Can Post Processing get you banned?"
+    a: "No. It's a purely visual, client-side rendering pass with no network or gameplay impact, so it carries no detection risk."
+  - q: "Which Minecraft clients have a Post Processing module?"
+    a: "Post Processing is documented as seen in Tenacity. Similar screen-space effect passes show up in other clients under different names as a general display option."
+  - q: "What effects does Post Processing include?"
+    a: "The two effects documented for it are color grading, which shifts the color and contrast of the frame, and blur, which softens the image as a whole. Both run as part of the same shader pass."
+  - q: "Is Post Processing the same as a shader pack?"
+    a: "Not quite. A shader pack usually replaces or extends the whole rendering pipeline and needs a separate loader to install. Post Processing is a narrower, built-in effects pass toggled directly in the client."
+---
+
+<KeyTakeaways>
+
+- Post Processing is a client-side Minecraft module that runs a single screen-space shader pass, such as color grading or blur, over the entire rendered frame.
+- It fires after the world and interface are already drawn, treating the finished image as one layer instead of adjusting individual blocks or entities.
+- Nothing about it touches position, hitboxes, timing, or any value the server tracks, so there's nothing for a server-side anticheat to catch.
+- Documented as seen in Tenacity, it's a built-in stand-in for installing a full external shader pack.
+
+</KeyTakeaways>
+
+Post Processing is a Minecraft module that runs a screen-space shader pass over your entire game view, the kind of effect you'd otherwise reach for a full shader pack to get. Flip it on and the client recolors or softens the finished frame, color grading or a blur pass, right before it reaches your monitor. It doesn't touch a single game value. Blocks stay where they are, hitboxes stay the same size, and the server has no way of knowing the module exists. It's a display option, not a gameplay one, and it behaves like one from the first frame to the last.
+
+## How it works
+
+Most of what a Minecraft client draws happens object by object: a block gets its texture, an entity gets its model, the HUD gets its own pass. Post Processing works differently. It waits until the world and interface are already rendered, then applies one shader pass over the entire composited frame right before it hits the screen. Because it treats the finished image as a single unit rather than a scene full of separate pieces, it can recolor or soften everything at once instead of touching elements one at a time.
+
+The two effects documented for the module are color grading, which shifts the color and contrast of the frame to push a scene warmer, cooler, or flatter, and blur, which softens the image as a whole. Both live in the same pass, so turning the module on doesn't add a rendering step per element on screen, just one pass over the result. That's also why it's cheap to run compared to swapping in a whole new lighting model: it's recoloring pixels that already exist, not recalculating how the world is lit.
+
+People reach for it for the same reason they'd install a shader pack: they want their screenshots and clips to look like something other than default Minecraft. Color grading gives a scene a mood without a resource pack to match. A blur pass softens a busy or harsh view. Because it's a built-in toggle rather than an external loader and pack combo, there's nothing to download, configure, or keep updated.
+
+## Post Processing vs. a full shader pack
+
+| | Post Processing | Full shader pack |
+|---|---|---|
+| Install | Built into the client, one toggle | Separate loader (Iris, OptiFine) plus a pack to pick and configure |
+| Scope | One screen-space pass over the finished frame | Replaces or extends much of the rendering pipeline |
+| Effects | Color grading, blur | Lighting, shadows, reflections, and more, depending on the pack |
+| Setup | Instant | Choosing, installing, and tuning a pack |
+
+Neither approach changes anything the server sees. The difference is depth: a shader pack rebuilds how the world is lit, Post Processing recolors or softens whatever the game already rendered.
+
+<Callout variant="tip" title="Where this sits in Opal">
+Opal doesn't ship a module called Post Processing. But the client's visual side runs on the exact same principle: local-only polish that never leaves your machine and never touches a server-tracked value. If you're chasing a specific look for screenshots or clips without installing a shader pack, this is the family of feature to look for, cosmetic, zero risk, nothing an anticheat could flag even if it wanted to.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Post Processing affect gameplay in Minecraft?">
+No. It only changes how the finished frame looks after rendering. It has no effect on movement, combat, hitboxes, or anything the server can see.
+</FAQItem>
+
+<FAQItem question="Can Post Processing get you banned?">
+No. It's a purely visual, client-side rendering pass with no network or gameplay impact, so it carries no detection risk.
+</FAQItem>
+
+<FAQItem question="Which Minecraft clients have a Post Processing module?">
+Post Processing is documented as seen in Tenacity. Similar screen-space effect passes show up in other clients under different names as a general display option.
+</FAQItem>
+
+<FAQItem question="What effects does Post Processing include?">
+The two effects documented for it are color grading, which shifts the color and contrast of the frame, and blur, which softens the image as a whole. Both run as part of the same shader pass.
+</FAQItem>
+
+<FAQItem question="Is Post Processing the same as a shader pack?">
+Not quite. A shader pack usually replaces or extends the whole rendering pipeline and needs a separate loader to install. Post Processing is a narrower, built-in effects pass toggled directly in the client.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category modules like Post Processing belong to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Where the line between cosmetic polish and detectable behavior actually sits." },
+  { href: "/en/learn/what-is-a-crystal-aura", label: "What is a crystal aura?", description: "A module that lives on the opposite end of the risk spectrum from Post Processing." },
+]} />
+
+<CTA href="/en/purchase">Your clips deserve better color than vanilla gives you. See what Opal's visual side ships out of the box.</CTA>

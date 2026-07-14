@@ -1,0 +1,82 @@
+---
+title: "What Is Blink in Minecraft? The Packet-Buffer Module"
+description: "Blink is a Minecraft utility client module that buffers your outgoing packets so the server sees you frozen in place, then releases them all in one burst."
+excerpt: "Blink freezes what the server sees while you keep moving locally, then dumps every packet at once. It's not subtle, and it's not free of risk."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Blink actually do?"
+    a: "It buffers your outgoing packets and holds them, so the server sees you as stationary for a while even though the client keeps acting locally. Releasing the buffer sends everything that built up in one burst."
+  - q: "Is Blink the same thing as lag?"
+    a: "No. Real lag is uneven, and the connection keeps trying to send data the whole time. Blink deliberately suspends the outgoing packet flow and resumes it on command, which is a more consistent pattern than genuine network trouble."
+  - q: "How is Blink different from Fake Lag?"
+    a: "Fake Lag delays and releases packets in a short burst without breaking the connection, built for brief combat desyncs. Blink suspends the connection outright for longer, built to make you disappear from the server's view for a stretch."
+  - q: "Can Blink get you banned?"
+    a: "Yes. It's a use-at-own-risk feature. A frozen position followed by a sudden jump is a pattern anticheats can watch for, so using it carries real detection risk on any client that ships it, Opal included."
+  - q: "Which clients have shipped Blink?"
+    a: "It's been documented in clients like Tenacity and Opal v1, and Opal's current module list still carries it under the same name."
+---
+
+<KeyTakeaways>
+- Blink buffers your outgoing packets so the server keeps showing your last known position.
+- You keep moving and fighting locally; the server sees nothing until you release it.
+- Releasing it sends every held packet at once, landing your real position in a single jump.
+- It's a use-at-own-risk feature: detectable, and shipped in clients including Opal.
+</KeyTakeaways>
+
+Blink is a network module found in some Minecraft utility clients that buffers your outgoing packets instead of sending them the moment they're generated. While the buffer holds, the server keeps rendering you at whatever position it last actually received, even though your client is still moving, fighting, or building in real time. When the buffer releases, every packet you generated during the hold lands on the server in one shot, and your real position catches up in a single jump. It's packet manipulation, not a display trick, and servers with decent logging can tell the difference.
+
+## How Blink works
+
+A normal client sends a steady stream of movement and action packets, and the server updates your state from each one the instant it arrives. Blink intercepts that stream and stops it from leaving the client for a stretch of time. Locally, nothing changes: you keep moving, swinging, placing blocks, whatever you're doing, and your own screen renders all of it. The server just has nothing new to work with, so it keeps you pinned at the last position it actually received. Let go of the buffer, and every packet that queued up during the hold reaches the server at once, snapping your real state into place in a single jump instead of a smooth catch-up.
+
+## Blink vs. Fake Lag
+
+Both modules hold packets back, but they don't do it the same way or for the same reason.
+
+| | Fake Lag | Blink |
+|---|---|---|
+| What happens to packets | Delayed, then flushed in a burst | Suspended entirely, not trickled |
+| Connection | Stays active throughout | Held still for the duration |
+| Typical use | Short combat desyncs | Longer holds, disappearing from view |
+| Goal | A brief edge mid-fight | Vanishing from the server's read on you |
+
+The practical difference is duration and intent. Fake Lag is built to buy a half-second in a fight. Blink is built to make you not exist on the server's end for longer than that.
+
+<Callout variant="tip" title="Blink in Opal">
+Opal's own module list carries this under the exact same name. The catalog description is blunt about it: Blink holds your network connection so packets queue up. Same mechanism as above, same tradeoff, no dressing it up.
+</Callout>
+
+<Callout variant="warning" title="This one gets you caught, sometimes">
+A frozen server-side position followed by a sudden jump doesn't look like an ordinary connection hiccup, and anticheats watch for exactly that shape. A real drop produces uneven packet flow and eventually times out; a module suspending and resuming packets on command produces a cleaner, more convenient pattern, especially when the resume lines up with combat or an escape. Servers that log packet timing, or flag long position holds followed by a jump, can catch it, and repeated use is a signal on its own. Blink is use-at-own-risk on every client that ships it, Opal included: nothing about it is guaranteed to slip past a given server's checks.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="What does Blink actually do?">
+It buffers your outgoing packets and holds them so the server sees you as stationary for a while, even though your client keeps acting locally the whole time. When the buffer releases, everything that queued up arrives at once.
+</FAQItem>
+<FAQItem question="Is Blink the same thing as lag?">
+No. Real lag is uneven, and the connection keeps trying to push data through the entire time. Blink deliberately suspends the outgoing flow and resumes it on command, a far more consistent pattern than genuine network trouble.
+</FAQItem>
+<FAQItem question="How is Blink different from Fake Lag?">
+Fake Lag delays packets and releases them in a burst without breaking the connection, meant for short combat desyncs. Blink suspends the connection outright and holds it for longer, meant to make you disappear from the server's view for a stretch.
+</FAQItem>
+<FAQItem question="Can Blink get you banned?">
+Yes, it's classified use-at-own-risk. The frozen-then-jump pattern it produces is exactly what anticheats look for, so using it carries real detection risk regardless of which client ships it.
+</FAQItem>
+<FAQItem question="Which clients have shipped Blink?">
+It's been documented in clients like Tenacity and Opal v1, and it's still in Opal's current module list under the same name.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The category Blink lives in, and what these clients actually do." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Clients built around staying invisible to the server, not just outplaying it." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity / Anti-Knockback?", description: "Another module that reshapes what the server thinks is happening to your movement." }
+]} />
+
+<CTA href="/en/purchase">Blink is one line in Opal's module list. See what else queues up.</CTA>

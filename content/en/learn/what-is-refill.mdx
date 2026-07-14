@@ -1,0 +1,98 @@
+---
+title: "What Is Refill in Minecraft? How the Module Works"
+description: "Refill is a Minecraft utility client module that automatically swaps a depleted block stack, usually bridging blocks, for a fresh one from your inventory."
+excerpt: "Run out of blocks mid-bridge and Refill already fixed it before you noticed. No inventory dig, no broken stride."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Refill give a real gameplay advantage?"
+    a: "Not mechanically. It saves time and attention rather than granting anything you couldn't do by hand. A player watching their hotbar closely could restock a depleted stack themselves; Refill just does the watching and swapping for you."
+  - q: "Is Refill detectable by anticheat?"
+    a: "It's plausible. The swap is identical to a normal inventory move, but the speed and consistency of an automated restock can look different from human behavior to a server that watches inventory actions closely."
+  - q: "Which clients include Refill?"
+    a: "It's documented in Juul, grouped with other player-category convenience modules rather than combat or movement tech. Comparable auto-restock modules show up under different names elsewhere."
+  - q: "Is Refill the same as Auto Armor?"
+    a: "Same philosophy, different slot. Refill tops up a depleted hotbar stack, usually bridging blocks. Auto Armor swaps in better armor pieces as you pick them up. Both automate an inventory move you're already allowed to make."
+  - q: "Does Refill work with any item, or just blocks?"
+    a: "It's documented specifically around block stacks used for bridging. There's no indication it's built to restock every item type in your inventory."
+---
+
+<KeyTakeaways>
+
+- Refill automatically swaps a depleted block stack, usually bridging blocks, for a fresh one pulled from your inventory.
+- It fires the moment your active hotbar stack empties or runs low, instead of waiting on you to notice and restock by hand.
+- It's a convenience module, not a mechanical cheat: the swap mirrors a normal inventory transfer, just automated and faster.
+- It's documented in clients like Juul, filed under player convenience alongside modules like Auto Armor.
+
+</KeyTakeaways>
+
+Refill is a module in Minecraft utility clients that automatically swaps a used-up stack of blocks for a fresh one from your inventory. Most people run into it while bridging: you place block after block, the stack in your hand hits zero, and normally you'd stop, open your inventory, and drag a new stack into the slot by hand. Refill makes that transfer for you the moment the old stack runs out, so the only thing that changes is you never have to look away from the edge you're building toward.
+
+## How it works
+
+Refill watches whatever's sitting in your active hotbar slot, which for most players means whatever block they've selected for bridging. Once that stack empties, or drops under a low threshold, Refill scans the rest of your inventory for a matching stack and moves it into place.
+
+Mechanically there's nothing exotic happening. It's the same inventory-to-hotbar transfer you can already trigger yourself by dragging a stack over. Refill just fires that transfer the instant the slot goes empty, instead of after you've noticed, glanced at your inventory, and dragged the replacement in by hand. On a server where a whiffed bridge block costs you the whole crossing, that half-second gap is the entire point of the module.
+
+## Refill vs Auto Armor
+
+Refill gets compared to [Auto Armor](/en/learn/what-is-auto-armor) a lot, and it's a fair comparison: both are player-category convenience modules that automate an inventory action you're already allowed to do by hand. The difference is which slot each one watches.
+
+| | Refill | Auto Armor |
+|---|---|---|
+| Watches | Active hotbar slot | Four armor slots |
+| Triggers on | Stack emptying or running low | A better piece entering your inventory |
+| Typical use case | Bridging and other block-dependent movement | Any fight where gear upgrades mid-combat |
+| What gets swapped in | A matching stack from your inventory | The highest-protection piece you're carrying |
+
+Same idea, different job. One keeps your hands full, the other keeps your body covered.
+
+<Callout variant="tip" title="Where this fits in Opal">
+Opal's module catalog lives in the same player-convenience territory, Auto Armor included, without wandering into anything a human couldn't physically do by hand. A dedicated block-restock module isn't something Opal ships under its own name right now, but the underlying idea, automate the busywork so you can keep your eyes on the bridge instead of the inventory, is exactly the philosophy the rest of Opal's utility lineup is built around.
+</Callout>
+
+## Is it safe to use
+
+Refill doesn't touch reach, hit registration, or movement speed. It only automates an inventory transfer that's already legal to perform by hand, which puts it much closer to a quality-of-life feature than a mechanical cheat. Nothing about the swap itself is something a server can prove is physically impossible for a human.
+
+That said, "legal action, automated" doesn't automatically mean "invisible." Some anticheats treat rapid or unusually consistent inventory actions as worth flagging on their own, independent of what the action accomplishes. A restock that fires the exact instant a stack hits zero, every single time, reads differently from a person who occasionally fumbles the drag.
+
+<Callout variant="warning" title="Reference, not a how-to">
+Refill sits closer to Auto Armor than to detection-focused modules like Reach or KillAura, but it's still an automated action a server can catch. Treat it as detectable and use-at-your-own-risk, same as any other automation module on any client that ships it.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Refill give a real gameplay advantage?">
+Not mechanically. It saves time and attention rather than granting anything you couldn't do by hand. A player watching their hotbar closely could restock a depleted stack themselves; Refill just does the watching and swapping for you.
+</FAQItem>
+
+<FAQItem question="Is Refill detectable by anticheat?">
+It's plausible. The swap is identical to a normal inventory move, but the speed and consistency of an automated restock can look different from human behavior to a server that watches inventory actions closely.
+</FAQItem>
+
+<FAQItem question="Which clients include Refill?">
+It's documented in Juul, grouped with other player-category convenience modules rather than combat or movement tech. Comparable auto-restock modules show up under different names elsewhere.
+</FAQItem>
+
+<FAQItem question="Is Refill the same as Auto Armor?">
+Same philosophy, different slot. Refill tops up a depleted hotbar stack, usually bridging blocks. Auto Armor swaps in better armor pieces as you pick them up. Both automate an inventory move you're already allowed to make.
+</FAQItem>
+
+<FAQItem question="Does Refill work with any item, or just blocks?">
+It's documented specifically around block stacks used for bridging. There's no indication it's built to restock every item type in your inventory.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The category Refill belongs to, and what else lives inside it." },
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "The bridging tech Refill exists to support when you run dry mid-crossing." },
+  { href: "/en/learn/what-is-reach", label: "What is Reach?", description: "A detection-focused module on the opposite end of the risk spectrum from Refill." },
+]} />
+
+<CTA href="/en/purchase">Opal's utility lineup is built for players who'd rather bridge than babysit their inventory.</CTA>

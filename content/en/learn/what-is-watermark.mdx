@@ -1,0 +1,75 @@
+---
+title: "What Is a Watermark Module in Minecraft?"
+description: "A watermark module stamps a client's name or logo on screen for branding your clips. It's fully cosmetic: sends no data and can't be flagged by anticheat."
+excerpt: "It's a logo in the corner of your screen, and it never does anything else. Pure signature, zero gameplay."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does a watermark module give any gameplay advantage?"
+    a: "No. It only draws text or a logo on screen and has zero connection to movement, combat, or anything the server processes."
+  - q: "Can anticheat detect a watermark module?"
+    a: "No. It never sends anything to the server, so there's nothing for a server-side anticheat to observe about a purely local overlay."
+  - q: "Why do clients include a watermark module?"
+    a: "Mostly branding and identification: it makes clips and screenshots recognizable, and lets you confirm at a glance which client, or which build, you're running."
+  - q: "Can I move or turn off a watermark overlay?"
+    a: "Usually, yes. Most implementations let you reposition it, resize it, or disable it outright, though the exact controls depend on the client."
+---
+
+<KeyTakeaways>
+
+- A watermark module draws a client's name or logo over the game screen for branding.
+- It's a local draw call after the frame is built: no packets, no game state.
+- Players use it to brand clips and confirm which client build they're running.
+- Zero gameplay effect means zero anticheat risk, server side or client side.
+
+</KeyTakeaways>
+
+A watermark, in a Minecraft utility client, is a small piece of branding, usually a name or logo, drawn onto a fixed spot on your screen while you play. It works the same way a watermark on a photo or a video does: it stamps the source onto whatever gets recorded, without touching the actual content underneath. As a module, watermark is a HUD element and nothing more. It doesn't move your character, doesn't read the world state, and doesn't send anything extra to the server. It exists so a clip circulating online, or a screenshot dropped in a Discord, is unmistakably tied to whatever client produced it.
+
+## How it works
+
+Watermark sits in the same family as any other HUD overlay: a coordinates readout, a potion timer, a keystroke display. The client renders a piece of text or a small logo image on top of the finished game frame, usually anchored to a corner (bottom right is the common default), after everything else on screen has already been drawn.
+
+Because it's a draw call and nothing else, it has no read access to anything that matters for gameplay: no player position, no block data, no entity list. It just paints pixels in the same place every frame. Most implementations expose a handful of controls, position or offset, size, and an on/off toggle, none of which touch a single outbound packet. That last detail is what makes the next section short.
+
+## Is it safe to use
+
+Watermark is about as low-risk as a module gets. Anticheat, whether it's server-side detection on a competitive server or client-side integrity checks, works by inspecting what the client sends or how its behavior lines up with the game state: movement deltas, attack timing, packet sequencing. Watermark touches none of that. It's a local drawing operation with no network footprint and no interaction with game logic, so there's nothing for a detection system to compare against.
+
+That puts it in the same bucket as other display-only modules, HUD customization, an FPS counter, a keystroke display, rather than anything resembling an aimbot or a reach extender. If a server ever banned someone over a logo in the corner of their screen, that would be a policy call, not a detection one.
+
+<Callout variant="tip" title="Where this fits at Opal">
+Opal doesn't ship a module under this name. If branding your footage is the goal, that's a recording-software job, not a client one. What Opal's Visual category does cover is the broader HUD and overlay space: on-screen elements that report on your game, not on the client that made them.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does a watermark module give any gameplay advantage?">
+No. It only draws text or a logo on screen and has zero connection to movement, combat, or anything the server processes.
+</FAQItem>
+
+<FAQItem question="Can anticheat detect a watermark module?">
+No. It never sends anything to the server, so there's nothing for a server-side anticheat to observe about a purely local overlay.
+</FAQItem>
+
+<FAQItem question="Why do clients include a watermark module?">
+Mostly branding and identification: it makes clips and screenshots recognizable, and lets you confirm at a glance which client, or which build, you're running.
+</FAQItem>
+
+<FAQItem question="Can I move or turn off a watermark overlay?">
+Usually, yes. Most implementations let you reposition it, resize it, or disable it outright, though the exact controls depend on the client.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The broader category watermark and every other client-side module belongs to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The opposite instinct: staying invisible instead of stamping your name on every clip." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "A module built to be caught. Watermark is built to be seen, just not by the server." },
+]} />
+
+<CTA href="/en/purchase">See what else lives in Opal's Visual category</CTA>

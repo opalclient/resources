@@ -1,0 +1,81 @@
+---
+title: "What Is No Rotate in Minecraft? Module Explained"
+description: "No Rotate is a Minecraft utility module that stops the server from forcing your client's look direction, creating a desync anticheats can flag and punish."
+excerpt: "The server thinks it can turn your head whenever it wants. No Rotate is the client quietly telling it no."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does No Rotate do in Minecraft?"
+    a: "It stops the server from forcing your client's look direction. Your camera keeps facing wherever you actually point it instead of snapping to whatever rotation the server tries to set, whether that comes from a teleport, a spectator switch, or a scripted event."
+  - q: "Does No Rotate change where I'm actually looking?"
+    a: "No. Your real camera direction never changes. What changes is what the server believes your direction is, and that gap between the two is exactly why a mismatch appears."
+  - q: "Is No Rotate the same thing as a rotation spoofer like Anti-Aim?"
+    a: "Not quite. No Rotate rejects a rotation the server tries to impose rather than sending a fabricated one. Anti-Aim and similar modules actively lie about your facing on every tick; No Rotate just refuses to let the server overwrite it."
+  - q: "Can anticheat detect No Rotate?"
+    a: "Yes, in principle. Any check that compares the rotation the server assigned against what the client reports afterward can catch the discrepancy, which is why it's treated as a detectable, use-at-own-risk module rather than a safe one."
+---
+
+<KeyTakeaways>
+
+- No Rotate is a utility module that stops the server from forcing your client's look direction.
+- It discards the server's rotation packets instead of sending back a fake value of its own.
+- The result is a desync: the server's copy of your facing stops matching where you're actually looking.
+- It's detectable and use-at-own-risk, like any module that puts server and client data at odds.
+
+</KeyTakeaways>
+
+No Rotate is a Minecraft utility module that stops the server from forcing your client's look direction. Certain server actions, a teleport, a spectator switch, a scripted cutscene, normally come with the authority to snap your camera to a rotation the server picks. No Rotate makes the client ignore that instruction and keep facing wherever you're actually looking. Nothing about your local view changes. What changes is the server's own record of your rotation, which no longer has to agree with reality. That gap is the entire point of the module, and also the entire risk.
+
+## How it works
+
+No Rotate intercepts the packets the server uses to set your look direction and stops them from taking effect on your end. Your camera keeps pointing wherever you're actually aiming; the instruction that would normally have swiveled it gets discarded before it can act.
+
+The server, meanwhile, doesn't find out. As far as its own bookkeeping is concerned, it sent the rotation update and the client applied it, the same way it does for every other packet it sends. Two different numbers now exist for the same player: the real one your camera is using, and the stale one the server thinks is current. They no longer agree, and nothing forces them back into sync.
+
+This is a documented exploit-category module, and it's shown up in clients like Tenacity. It's a narrow trick, but a persistent one: any server mechanic that leans on knowing which way you're actually facing now reads a value that isn't true.
+
+## No Rotate vs. rotation spoofing
+
+No Rotate gets lumped in with modules like [Anti-Aim](/en/learn/what-is-anti-aim), and it's easy to see why. Both end with the server holding a rotation that doesn't match reality. The mechanism underneath is different, though. Anti-Aim actively sends a fabricated yaw and pitch to the server on every tick, lying about your facing on purpose. No Rotate doesn't send anything false at all. It just refuses a rotation the server tried to impose and leaves the real value untouched everywhere else.
+
+That distinction matters for how each one gets caught. Anti-Aim has to keep its fake numbers internally consistent with your movement, or the lie falls apart under scrutiny. No Rotate produces a flatter kind of mismatch: a rotation the server explicitly assigned that simply never shows up on the other end. Refusing an instruction outright tends to leave a bigger, more obvious gap than quietly nudging a number, which is part of why this one is considered easy to catch once a server bothers to check for it.
+
+<Callout variant="tip" title="Where No Rotate sits in Opal">
+Opal ships No Rotate under its Utility category, described the same way it works here: it stops the server from forcing your rotation. It's filed as use-at-own-risk in Opal's own catalog, not a safe cosmetic toggle, because the mismatch it creates is exactly the kind of thing a server-side check can flag.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what No Rotate is and how it behaves generically. It isn't instructions for running one, and it isn't a claim that it's safe. If a server compares the rotation it assigned against what the client reports later, this is the kind of gap that gets caught, and getting caught carries the same ban risk as any other detected cheat.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does No Rotate do in Minecraft?">
+It stops the server from forcing your client's look direction. Your camera keeps facing wherever you actually point it instead of snapping to whatever rotation the server tries to set, whether that comes from a teleport, a spectator switch, or a scripted event.
+</FAQItem>
+
+<FAQItem question="Does No Rotate change where I'm actually looking?">
+No. Your real camera direction never changes. What changes is what the server believes your direction is, and that gap between the two is exactly why a mismatch appears.
+</FAQItem>
+
+<FAQItem question="Is No Rotate the same thing as a rotation spoofer like Anti-Aim?">
+Not quite. No Rotate rejects a rotation the server tries to impose rather than sending a fabricated one. Anti-Aim and similar modules actively lie about your facing on every tick; No Rotate just refuses to let the server overwrite it.
+</FAQItem>
+
+<FAQItem question="Can anticheat detect No Rotate?">
+Yes, in principle. Any check that compares the rotation the server assigned against what the client reports afterward can catch the discrepancy, which is why it's treated as a detectable, use-at-own-risk module rather than a safe one.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The stealth-focused category where exploits like this one tend to live." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity (Anti-Knockback)?", description: "Another module built around quietly overriding a value the server assigned." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category No Rotate and modules like it belong to." },
+]} />
+
+<CTA href="/en/purchase">Opal's Utility tab ships No Rotate, filed under use-at-own-risk instead of dressed up as safe.</CTA>

@@ -1,0 +1,80 @@
+---
+title: "What Is Anti-Aim in Minecraft? Rotation Spoofing Explained"
+description: "Anti-Aim spoofs the yaw and pitch a Minecraft client reports to the server, hiding your real aim from anticheats and other players reading your rotation."
+excerpt: "Your camera looks one way, the server hears about another. Anti-Aim splits your real aim from the version everyone else gets to see."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is Anti-Aim the same as KillAura?"
+    a: "No. Anti-Aim only spoofs the rotation your client reports, it doesn't aim or attack for you. The two get run together sometimes, but they do different jobs: one hides your facing, the other automates the swing."
+  - q: "Can other players see my real aim direction if I use Anti-Aim?"
+    a: "No. Every other client only receives the rotation values your client sends out, so if those values are faked, everyone else sees the fake direction instead of where you're actually looking."
+  - q: "Does Anti-Aim change where my attacks land?"
+    a: "Not by itself. Anti-Aim only changes the rotation value reported to the server, it doesn't perform or redirect attacks. Landing hits is a different module's job entirely."
+  - q: "Is Anti-Aim safe to use?"
+    a: "Not in the sense of being risk-free. It's a rule-violating cheat built to hide information from anticheats and other players, and if a server's checks catch the mismatch it produces, you can get banned the same as with any other cheat."
+---
+
+<KeyTakeaways>
+
+- Anti-Aim spoofs the yaw and pitch a Minecraft client reports to the server, so nobody sees your real aim direction.
+- The local view stays normal; only the outgoing rotation data gets swapped for other players and anticheats.
+- It hides aim evidence rather than landing hits, and it is a bannable, rule-violating cheat if a server catches the mismatch.
+
+</KeyTakeaways>
+
+Anti-Aim is a combat module that spoofs the yaw and pitch a Minecraft client reports to the server, so the rotation other players and anticheats see doesn't match where you're actually looking. Your own screen behaves exactly like it always has, only the outgoing data lies. It exists purely to deny a read on where you're aiming, and it counts as a cheat for that reason alone: it makes the server's copy of a value wrong on purpose.
+
+## How it works
+
+Minecraft's netcode is built to keep the rotation value a client sends in sync with where the camera is actually pointed. Anti-Aim breaks that link on purpose. Locally, your view moves exactly like it always has, you look where you look, turn how you turn. But the yaw and pitch your client sends out over the network get substituted for different numbers before they ever leave your machine.
+
+Because rotation is server-authoritative from everyone else's point of view, that substitution is the only version of your aim anyone downstream ever sees. The server reads the fake values. Every other connected client reads the fake values. Combat logic, spectator views, and any anticheat check built on rotation all inherit the same lie, there's no second channel where the truth leaks through.
+
+The reason it's worth faking in the first place is that rotation is treated as evidence. A real player's head and body turn in ways that track a target and their own movement, while automated aiming tends to snap onto or hold unnatural angles, which is exactly what server-side anticheats are built to flag. Anti-Aim denies that evidence twice over: it hides the tell from the anticheat, and it hides your actual facing from any opponent whose own aim assist or target prediction depends on reading where you're pointed.
+
+## Anti-Aim vs KillAura
+
+The two get bundled together because they're both combat-category and both associated with the same era of PvP cheats, but they don't do the same job. Anti-Aim only touches the rotation value your client reports; it never aims at anything and never sends an attack. [KillAura](/en/learn/what-is-killaura) goes the other direction: it picks a target, turns the player toward it, and fires off the hit, all without spoofing what gets reported anywhere.
+
+Run them together and you get a client that fights for you while lying about which way it was facing while doing it. But each one works fine on its own, and neither depends on the other to function.
+
+<Callout variant="tip" title="Where Opal draws the line">
+Opal doesn't ship a dedicated Anti-Aim. Feeding the server a rotation that never matches your real one is about as direct a data-integrity violation as a combat module gets, and it's exactly the kind of mismatch a server-side anticheat is built to catch the moment your reported facing stops lining up with your movement. Opal's combat category exists, but it's built around modules a server can't tell apart from a human playing well, not around handing the server a number that's wrong by design.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Anti-Aim is and how it behaves generically. It isn't instructions for running one. Spoofing rotation data is a packet-level cheat, and every server that punishes reach or aim cheats treats faked orientation the same way, if the mismatch gets caught, expect the same ban a KillAura or reach user would get.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Anti-Aim the same as KillAura?">
+No. Anti-Aim only spoofs the rotation your client reports, it doesn't aim or attack for you. The two get run together sometimes, but they do different jobs: one hides your facing, the other automates the swing.
+</FAQItem>
+
+<FAQItem question="Can other players see my real aim direction if I use Anti-Aim?">
+No. Every other client only receives the rotation values your client sends out, so if those values are faked, everyone else sees the fake direction instead of where you're actually looking.
+</FAQItem>
+
+<FAQItem question="Does Anti-Aim change where my attacks land?">
+Not by itself. Anti-Aim only changes the rotation value reported to the server, it doesn't perform or redirect attacks. Landing hits is a different module's job entirely.
+</FAQItem>
+
+<FAQItem question="Is Anti-Aim safe to use?">
+Not in the sense of being risk-free. It's a rule-violating cheat built to hide information from anticheats and other players, and if a server's checks catch the mismatch it produces, you can get banned the same as with any other cheat.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The auto-attacker Anti-Aim gets paired with, not confused for." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "Another aim-focused module, this one changes where your crosshair actually points." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity (Anti-Knockback)?", description: "A different value the server gets fed a quietly false version of." },
+]} />
+
+<CTA href="/en/purchase">Opal's combat modules are built to survive scrutiny, not just hide from it.</CTA>

@@ -1,0 +1,81 @@
+---
+title: "What Is a Spoofer in Minecraft?"
+description: "A spoofer is a Minecraft client module that swaps a real value, like ping or an FPS counter, for a fake one before it's displayed or sent to the server."
+excerpt: "One module name, two totally different risk profiles: some spoofers never leave your screen, others ride straight into a packet."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does a spoofer module actually do?"
+    a: "It intercepts a real value somewhere in the client and substitutes a fake one the user picked, so whatever reads that value next, a display, a packet, or both, sees the fake number instead of the real one."
+  - q: "Is Spoofer the same module as Ping Spoof or FPS Spoofer?"
+    a: "No. Ping Spoof and FPS Spoofer are specific modules that each target one named value. Spoofer is a separate, more generic entry whose exact target value isn't documented."
+  - q: "Which client has a Spoofer module?"
+    a: "Spoofer is seen in Rose. No further detail on which value it overrides has been recorded."
+  - q: "Is a spoofer detectable by anticheats?"
+    a: "It depends entirely on what value it overrides. A spoofer confined to a local display can't be detected because nothing leaves the client. One that changes a value sent to the server can be, if that server checks it."
+---
+
+<KeyTakeaways>
+
+- Spoofer is a generic term for a module that overrides a real value with a fake, user-chosen one before it's displayed or sent.
+- Risk depends on the target: a local-only value (FPS) is undetectable; one sent to the server (ping, version) is not.
+- Distinct from named modules like Ping Spoof or FPS Spoofer, which each target one value.
+
+</KeyTakeaways>
+
+A spoofer, in Minecraft client terms, is any module that intercepts a value before it reaches its destination and swaps in something the user picked instead. That's the entire definition: no fixed target, no fixed effect, just a pattern applied to whatever value a given module decides to touch. Some spoofers are pure vanity, a fake FPS counter that impresses nobody but you. Others touch data the server actually reads, like a reported ping, and that's where the same word starts covering two very different things: a cosmetic toy on one end, something that can matter to fairness on the other.
+
+## How it works
+
+"Spoofer" names a pattern, not one fixed behavior. The module sits between a real value and whatever reads it next, whether that's an on-screen HUD element, a packet headed to the server, or both, and replaces the real figure with a different one before it gets there. Named implementations of the pattern, like Ping Spoof and FPS Spoofer, each lock onto one specific value and get documented on their own, because their mechanism and their effect on other players (or lack of one) differ.
+
+Spoofer, as tracked in current records, is the generic entry: a standalone module seen in Rose, with no further note of exactly which value it overrides. That gap isn't a minor detail. It's the one piece of information you'd actually need to judge the module, since a spoofer's entire risk profile hangs on what it's spoofing.
+
+## Why the risk depends on what's being spoofed
+
+| Kind of value spoofed | Where it's visible | Typical risk |
+|---|---|---|
+| Local display only (example: a fake FPS counter) | Only your own screen | None. Purely cosmetic |
+| Value reported to the server (example: ping, version string) | Server, and possibly other players | Depends on whether the server checks that value |
+
+Because Rose's Spoofer entry doesn't specify which row it falls into, the honest move is to treat it as unknown rather than assume either extreme. "Is a spoofer safe" isn't a question with one answer. It's a question about which value, specifically, is being overridden.
+
+<Callout variant="tip" title="Where Opal draws the line">
+Opal doesn't ship a module called Spoofer. Its utility catalog documents each value override by exactly what it touches, cosmetic or server-facing, rather than filing it under one generic name that could mean either. If a client's spoofer doesn't say which value it changes, that's worth asking about before you assume it's harmless.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the pattern generically, not a specific implementation. If a spoofer changes a value the server reads, like ping or a version string, that number exists somewhere in a packet the server can compare against reality, and running that comparison is exactly what anticheat systems are built to do.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does a spoofer module actually do?">
+It intercepts a real value somewhere in the client and substitutes a fake one the user picked, so whatever reads that value next, a display, a packet, or both, sees the fake number instead of the real one.
+</FAQItem>
+
+<FAQItem question="Is Spoofer the same module as Ping Spoof or FPS Spoofer?">
+No. Ping Spoof and FPS Spoofer are specific modules that each target one named value. Spoofer is a separate, more generic entry whose exact target value isn't documented.
+</FAQItem>
+
+<FAQItem question="Which client has a Spoofer module?">
+Spoofer is seen in Rose. No further detail on which value it overrides has been recorded.
+</FAQItem>
+
+<FAQItem question="Is a spoofer detectable by anticheats?">
+It depends entirely on what value it overrides. A spoofer confined to a local display can't be detected because nothing leaves the client. One that changes a value sent to the server can be, if that server checks it.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category modules like this belong to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Subtlety as a design goal, not just a single module." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity (anti-knockback)?", description: "Another module that overrides a value the server expects to control." },
+]} />
+
+<CTA href="/en/purchase">Opal names its overrides for exactly what they touch. See the list.</CTA>

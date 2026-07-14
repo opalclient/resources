@@ -1,0 +1,79 @@
+---
+title: "What Is Skeletons in Minecraft? Module Explained"
+description: "Skeletons is a Minecraft module that reskins every player and mob into a bare-bones model: a cosmetic swap with zero effect on hitboxes or detection risk."
+excerpt: "Skeletons turns every player and mob into a walking bag of bones, purely on your screen. Hitboxes, reach, and how the server sees you don't move an inch."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Skeletons change how entities behave?"
+    a: "No. It only changes the model rendered on your own screen. Movement, hitboxes, and combat behavior all come from the server and are untouched."
+  - q: "Is Skeletons the same as a resource pack?"
+    a: "Not quite. A resource pack changes textures broadly for anyone using it. Skeletons is a client module that swaps specific entity models and is toggled by the player running the client, no pack install required."
+  - q: "Can Skeletons get someone banned?"
+    a: "The module itself gives no gameplay advantage and is unlikely to be flagged by an anticheat on its own. Bans are more likely to come from a server's blanket policy against modified clients than from this feature specifically."
+  - q: "Which clients include Skeletons?"
+    a: "It's seen in Fan, a third-party utility client."
+---
+
+<KeyTakeaways>
+
+- Skeletons is a cosmetic module that reskins players and mobs as bare skeletons, rendered locally only.
+- It swaps the model drawn on screen, not hitboxes, movement, or the combat data the server tracks.
+- No extra network traffic happens; the override works like a resource pack but lives inside the client.
+- Detection risk is low since nothing measurable changes, though it's seen in the modified client Fan.
+
+</KeyTakeaways>
+
+Skeletons is a Minecraft module that redraws every player and mob you see as a plain skeleton, stripped down to bones and nothing else. It's a purely visual override: the game keeps sending your client the same position, pose, and hitbox data it always has, this module just swaps which model gets painted over that data. Nothing about how an entity moves, fights, or gets tracked by the server changes. It's a private reskin you carry with you, the kind of feature that exists because someone wanted every match to look the same regardless of who's actually standing there.
+
+## How the skeleton reskin works
+
+Minecraft's renderer already has everything it needs to draw any entity: position, rotation, pose, animation state, all of it arrives over the network because the game can't function without it. Skeletons doesn't touch any of that data. It hooks the draw call itself and substitutes a skeleton model and texture in place of whatever the entity would normally show, the same kind of override a resource pack applies, except it lives inside the client instead of a separate pack file you install and swap out.
+
+Because the underlying entity data never changes, the module adds no extra network traffic and touches no server-side state. Position, hitbox, and animation still come from wherever the server put them. The only thing different is what gets painted on top, locally, every time that entity is drawn.
+
+## Is it safe to use
+
+Skeletons carries little competitive risk on its own. It doesn't reveal anyone through walls, doesn't add outlines or markers, and doesn't touch aim, movement, or combat math in any way an anticheat measures. The entity's real position and hitbox are exactly what the server sent; only the picture on your own screen is different, so there's nothing measurable for a server-side check to flag.
+
+The catch is the client it ships in, not the module. Skeletons shows up in Fan, a third-party utility client, and plenty of servers ban any modified client outright, regardless of which individual modules happen to be switched on. A purely cosmetic feature like this doesn't create risk by itself, but running it as part of a client that also carries combat or movement modules can still end in a ban tied to the client as a whole.
+
+<Callout variant="warning" title="The ban risk is the client, not this module">
+Skeletons itself gives a server-side anticheat nothing to catch. But it doesn't run standalone, it runs inside a modified client, and plenty of servers ban modified clients on sight regardless of which modules are active. Weigh the client's reputation as a whole, not this one cosmetic toggle.
+</Callout>
+
+<Callout variant="tip" title="Cosmetics without touching the numbers">
+Opal doesn't ship a module under the Skeletons name specifically, but its visual category runs on the same principle: change what you see, never what the server measures. That's the line between a cosmetic swap and an actual gameplay module, and it's the same line Skeletons sits on.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Skeletons change how entities behave?">
+No. It only changes the model rendered on your own screen. Movement, hitboxes, and combat behavior all come from the server and are untouched.
+</FAQItem>
+
+<FAQItem question="Is Skeletons the same as a resource pack?">
+Not quite. A resource pack changes textures broadly for anyone using it. Skeletons is a client module that swaps specific entity models and is toggled by the player running the client, no pack install required.
+</FAQItem>
+
+<FAQItem question="Can Skeletons get someone banned?">
+The module itself gives no gameplay advantage and is unlikely to be flagged by an anticheat on its own. Bans are more likely to come from a server's blanket policy against modified clients than from this feature specifically.
+</FAQItem>
+
+<FAQItem question="Which clients include Skeletons?">
+It's seen in Fan, a third-party utility client.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category Skeletons and every other module belongs to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Another client-side-only distinction worth understanding." },
+  { href: "/en/learn/what-is-killaura", label: "What is Killaura?", description: "The opposite end of the spectrum: a module a server can absolutely measure." },
+]} />
+
+<CTA href="/en/purchase">Opal's visual tab is built on the same idea: change how the game looks, never how it plays.</CTA>

@@ -1,0 +1,85 @@
+---
+title: "What Is Sprint in Minecraft? Module Explained"
+description: "Sprint is a Minecraft movement module that loosens the hunger and line-of-sight checks vanilla uses to gate sprinting. Here's how it works, and the risk."
+excerpt: "Vanilla Minecraft keeps pulling you out of a sprint over hunger and sightlines. Sprint just stops asking permission."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does the Sprint module actually change?"
+    a: "It changes the conditions Minecraft checks before letting you start or hold a sprint, like requiring a full hunger bar or the check that cuts a sprint when the path ahead looks blocked."
+  - q: "Is Sprint the same as a speed module?"
+    a: "No. A speed module makes you move faster. Sprint doesn't add speed on its own, it just changes when the game lets sprinting happen in the first place."
+  - q: "Which clients have included a Sprint module?"
+    a: "Sprint-style logic changes have shown up in a number of clients over the years, including Juul, Fan, Tenacity, and Rose. Opal ships one too, listed as Sprint in its catalog."
+  - q: "Can using Sprint get a player banned?"
+    a: "Yes. The server tracks the same hunger and movement state the module manipulates, independently of the client, so a server-side anticheat verifying sprint eligibility can flag or ban an account sprinting under conditions vanilla wouldn't allow."
+  - q: "Is Sprint a serious cheat compared to combat modules?"
+    a: "It's a lower-profile change than something like automated combat, but it still alters state the server checks on its own, so it carries a real detection risk rather than being a safe cosmetic tweak."
+---
+
+<KeyTakeaways>
+
+- Sprint is a movement module that loosens vanilla's rules for starting or holding a sprint, like the hunger-bar minimum and the line-of-sight check.
+- It doesn't add speed on its own, it changes when the game allows sprinting to happen at all.
+- The server tracks that same hunger and movement state independently, so loosening it client-side is a real detection risk, not a cosmetic tweak.
+- Opal ships a Sprint module and lists it use-at-own-risk, same as anywhere else it shows up.
+
+</KeyTakeaways>
+
+Sprint is a movement module that changes the conditions Minecraft checks before it lets a player start or keep sprinting. Vanilla enforces a couple of gates on that: your hunger bar has to sit above a set level, and the game watches the space ahead of you, dropping you out of a sprint the instant the path looks obstructed. Sprint intercepts those checks and rewrites what they evaluate, so the client keeps reporting you as eligible to sprint in situations the unmodified game would refuse. It isn't a speed boost. Vanilla sprint speed stays exactly the same, Sprint just stops it from getting revoked.
+
+## How it works
+
+Under the hood, Sprint sits in front of the two checks vanilla runs while you're moving: the hunger threshold that has to be cleared before a sprint is even allowed to start, and the forward obstruction check that normally forces you back to a walk the moment the way ahead looks blocked. The module intercepts both and changes what they evaluate to, so the client keeps treating you as sprint-eligible in situations where an unmodified install would cut you off.
+
+The appeal is consistency. Sprinting is faster than walking, and every moment vanilla would force a slowdown is a moment you're moving slower than you have to be. Cutting those interruptions out means steadier speed for closing distance, keeping pace with someone, or just crossing terrain without the game second-guessing you. It's not a new idea either: sprint-style logic changes have shown up in a handful of clients over the years, including Juul, Fan, Tenacity, and Rose.
+
+## Is Sprint safe to use?
+
+Not really, and the reason is structural. The server tracks the same state vanilla uses to gate sprinting, hunger level included, independently of whatever the client reports. If a player is sprinting, or keeps sprinting, under conditions the server's own check wouldn't allow, that's a mismatch a server-side anticheat is well positioned to notice. Sprint eligibility isn't hidden information the client controls alone, it's state the server already computes for its own purposes. Loosening it client-side is a plausible thing to get caught for, not something that slips by unseen.
+
+It's also a lower-profile change than something like automated combat. Nobody's watching your character do anything visibly inhuman, you're just sprinting when you technically shouldn't be. But server-side detection doesn't care how it looks to another player, it cares whether the numbers line up, and here they don't.
+
+<Callout variant="tip" title="Opal ships a Sprint module">
+Opal's catalog lists it plainly: Sprint, described in-app as "changes the logic behind sprinting." No dressing it up. It's filed use-at-own-risk, same as anywhere else this kind of module shows up, because the detection story above doesn't change just because it's Opal running the check.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the module generically so you know what the term means. Naming and exact behavior vary by client, and altering server-tracked state like this carries a real ban risk on any anticheat-protected server.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does the Sprint module actually change?">
+It changes the conditions Minecraft checks before letting you start or hold a sprint, like requiring a full hunger bar or the check that cuts a sprint when the path ahead looks blocked.
+</FAQItem>
+
+<FAQItem question="Is Sprint the same as a speed module?">
+No. A speed module makes you move faster. Sprint doesn't add speed on its own, it just changes when the game lets sprinting happen in the first place.
+</FAQItem>
+
+<FAQItem question="Which clients have included a Sprint module?">
+Sprint-style logic changes have shown up in a number of clients over the years, including Juul, Fan, Tenacity, and Rose. Opal ships one too, listed as Sprint in its catalog.
+</FAQItem>
+
+<FAQItem question="Can using Sprint get a player banned?">
+Yes. The server tracks the same hunger and movement state the module manipulates, independently of the client, so a server-side anticheat verifying sprint eligibility can flag or ban an account sprinting under conditions vanilla wouldn't allow.
+</FAQItem>
+
+<FAQItem question="Is Sprint a serious cheat compared to combat modules?">
+It's a lower-profile change than something like automated combat, but it still alters state the server checks on its own, so it carries a real detection risk rather than being a safe cosmetic tweak.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "Another movement module that manipulates state the server tracks on its own." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity (anti-knockback)?", description: "A different piece of movement state anticheats verify independently of the client." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The broader category Sprint and modules like it belong to." },
+]} />
+
+<CTA href="/en/purchase">Check what's use-at-own-risk in Opal before you install anything.</CTA>

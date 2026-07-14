@@ -1,0 +1,79 @@
+---
+title: "What Is Spotify Integration in Minecraft?"
+description: "Spotify Integration overlays the song currently playing on your account onto the Minecraft HUD. Here's how the readout works and whether it's safe to run."
+excerpt: "A HUD overlay that shows your currently playing Spotify track and nothing else. No packets, no server interaction, just a now-playing widget for people who'd rather not alt-tab."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Spotify Integration give any in-game advantage?"
+    a: "No. It only displays the currently playing track as a HUD overlay. It doesn't change movement, combat, or anything the server processes."
+  - q: "Do I need Spotify running for it to work?"
+    a: "Yes. The module reads playback data from an active Spotify session, so Spotify has to be open and playing music for the overlay to show anything."
+  - q: "Can other players see my Spotify overlay in-game?"
+    a: "No. The overlay only renders on your own screen locally. It only becomes visible to others if you're streaming or screen sharing."
+  - q: "Can I turn the Spotify overlay off?"
+    a: "Yes. It's an optional cosmetic module, and disabling it has no effect on anything else in the client."
+  - q: "Which clients include Spotify Integration?"
+    a: "Tenacity is a known example, shipping it as part of its visual module set alongside other cosmetic HUD features."
+---
+
+<KeyTakeaways>
+
+- Spotify Integration is a cosmetic module that displays the song currently playing on your Spotify account as a text overlay inside the Minecraft window.
+- It only reads playback data (track and artist) and renders it locally. Nothing is sent to the server, and no packets change.
+- It has zero effect on movement, combat, or anything server-side, so there's nothing for an anticheat to flag.
+- The one catch: it's visible on stream or screen share, same as anything else drawn to your screen.
+
+</KeyTakeaways>
+
+Spotify Integration is a cosmetic Minecraft module that pulls the track currently playing on your Spotify account and draws it as a small overlay somewhere on the HUD, usually song title and artist. That's the entire feature. It doesn't touch combat, movement, or anything the server can see. It exists purely so you don't have to alt-tab or glance at your phone to know what's playing.
+
+## How the overlay actually works
+
+The module reads whatever your connected Spotify account is currently playing and renders that text on screen, then refreshes it whenever the track changes. It's the same idea as a phone lock screen showing the current song, just rendered inside the game window instead.
+
+The data only moves in one direction: from Spotify into the overlay. There's no packet sent to the Minecraft server, no automation of any input, nothing that could plausibly interact with gameplay. It reads, it draws text, it stops. Clients that ship this, like Tenacity, file it under visual or HUD modules next to things like a clock or an FPS counter: information you want on screen without leaving the game to get it.
+
+## Is it safe to use
+
+Yes, and there isn't much nuance to it. Because the module never sends anything to the server or alters movement or combat, there's no behavioral signature for a server-side anticheat to catch. It's not reading packets, it's not automating clicks, it's not doing anything an anticheat is built to watch for. The only "risk" is social, not technical: if you're streaming or in a screen share, your currently playing track is on display along with the rest of your HUD. Toggle it off first if that's not something you want an audience to see.
+
+<Callout variant="tip" title="Not what Opal spends its module budget on">
+Opal doesn't ship a dedicated Spotify overlay. Its module lineup is built around combat, movement, and world awareness, the categories where a client actually changes how a match plays out, not what's visible on your desktop. If a now-playing widget is the deciding feature for you, you're shopping in a different aisle than the one Opal competes in.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Spotify Integration give any in-game advantage?">
+No. It only displays the currently playing track as a HUD overlay. It doesn't change movement, combat, or anything the server processes.
+</FAQItem>
+
+<FAQItem question="Do I need Spotify running for it to work?">
+Yes. The module reads playback data from an active Spotify session, so Spotify has to be open and playing music for the overlay to show anything.
+</FAQItem>
+
+<FAQItem question="Can other players see my Spotify overlay in-game?">
+No. The overlay only renders on your own screen locally. It only becomes visible to others if you're streaming or screen sharing.
+</FAQItem>
+
+<FAQItem question="Can I turn the Spotify overlay off?">
+Yes. It's an optional cosmetic module, and disabling it has no effect on anything else in the client.
+</FAQItem>
+
+<FAQItem question="Which clients include Spotify Integration?">
+Tenacity is a known example, shipping it as part of its visual module set alongside other cosmetic HUD features.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category this kind of module belongs to." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "The opposite end of the spectrum: a module that does change gameplay." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "How cosmetic, low-footprint modules relate to detection-avoidant client design." },
+]} />
+
+<CTA href="/en/purchase">See Opal's actual module lineup for $8.99</CTA>

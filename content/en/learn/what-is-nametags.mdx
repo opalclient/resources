@@ -1,0 +1,94 @@
+---
+title: "What Is Nametags in Minecraft? Module Explained"
+description: "Nametags is a visual Minecraft module that restyles player tags with health, distance, or ping added, changing nothing the server tracks or an ESP would reveal."
+excerpt: "Nametags reskins the name floating over someone's head. It doesn't show you anything you couldn't already get from F3, it just saves you the trip."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is Nametags the same as an ESP or wallhack?"
+    a: "No. Nametags only changes how the tag looks for players already visible on your screen. An ESP or wallhack draws information for entities hidden behind walls or terrain, which Nametags never does."
+  - q: "Can Nametags see through walls?"
+    a: "No. It renders on top of the game's normal nametag draw, which only fires for entities the client would already show a tag for in the first place."
+  - q: "What information can a Nametags module show?"
+    a: "Common additions are health, distance, armor, and ping, plus style changes like a different background or font. The exact fields vary by client."
+  - q: "Does Nametags get flagged by anticheats?"
+    a: "Unlikely. It's a local rendering change that sends no extra data to the server and touches nothing the server actually checks, unlike combat or movement modules."
+  - q: "Which clients have a Nametags module?"
+    a: "Fan is documented with one. Similar customizable nametag features show up across other utility clients under different names."
+---
+
+<KeyTakeaways>
+
+- Nametags is a visual module that restyles the head tag, adding fields like health, distance, or ping.
+- It only affects players already visible on screen, not anyone hidden behind a wall.
+- It sends no extra packets, so detection risk is near zero.
+- Documented in Fan; the numbers it shows already exist on F3 or the tab list.
+
+</KeyTakeaways>
+
+Nametags is a visual Minecraft client module that changes how the name floating above a player's head renders, adding fields like health, distance, armor, or ping, or just restyling the tag's background and font. It only works on players your client is already drawing a tag for. Walk someone behind a wall and their tag disappears right along with them, same as vanilla. That's the line between Nametags and an ESP or wallhack: those modules go out of their way to draw information for entities you shouldn't be able to see at all. Nametags just makes the tag you'd already see look better, or say more.
+
+## How it works
+
+Vanilla Minecraft already draws a floating name above every nearby player, and that draw call is exactly what Nametags hooks. Instead of letting the vanilla renderer finish the job untouched, the module intercepts the call and substitutes its own version: extra fields stitched onto the string, a new background texture, a bigger or smaller font, whatever the settings ask for.
+
+Because the hook sits purely in rendering, nothing upstream of the screen changes. No packet goes out asking the server for extra data, and the module doesn't touch which entities count as visible in the first place. A player standing behind a wall still gets zero tag, because the client never had a reason to queue one up. The nametag hook only fires for entities that were already getting a vanilla tag drawn; Nametags just rewrites what shows up once that decision has already been made.
+
+## Common settings
+
+Nametags modules usually expose a handful of toggles for what shows on the tag and how it looks.
+
+| Setting | What it controls |
+|---|---|
+| Extra info | Adds fields like health, armor, ping, or distance to the tag |
+| Style | Swaps the tag's background, border, or font |
+| Scale | Makes the tag bigger or smaller |
+| Fade distance | How far away a tag stays fully visible before it starts to fade |
+
+Most of what gets added, health, distance, ping, is a number you could already pull from the F3 debug screen or the tab list. Nametags doesn't hand you new information, it just moves numbers you already had access to closer to where you're already looking.
+
+## Is Nametags safe to use
+
+Nametags reads as a cosmetic convenience rather than a gameplay-advantage cheat. It doesn't touch hit detection, movement, or any value the server verifies, and because the change lives entirely in local rendering, there's no packet pattern or server-side check for an anticheat to key on. It sits in the same bucket as HUD tweaks and other cosmetic mods, nowhere near combat or movement modules.
+
+The one asterisk: some servers ban any client modification on principle, regardless of what that modification actually does. Whether Nametags is allowed on a given server comes down to that server's rules, not to any real detection risk, since there mostly isn't one to speak of.
+
+<Callout variant="tip" title="Where this fits in Opal">
+Opal doesn't ship a module under the Nametags name specifically, but the territory it lives in, changes that exist entirely in what gets drawn and never touch anything the server checks, is exactly what Opal's visual category is built around. Same philosophy whether it's a tag, a HUD element, or how a cave looks lit up.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Nametags the same as an ESP or wallhack?">
+No. Nametags only changes how the tag looks for players already visible on your screen. An ESP or wallhack draws information for entities hidden behind walls or terrain, which Nametags never does.
+</FAQItem>
+
+<FAQItem question="Can Nametags see through walls?">
+No. It renders on top of the game's normal nametag draw, which only fires for entities the client would already show a tag for in the first place.
+</FAQItem>
+
+<FAQItem question="What information can a Nametags module show?">
+Common additions are health, distance, armor, and ping, plus style changes like a different background or font. The exact fields vary by client.
+</FAQItem>
+
+<FAQItem question="Does Nametags get flagged by anticheats?">
+Unlikely. It's a local rendering change that sends no extra data to the server and touches nothing the server actually checks, unlike combat or movement modules.
+</FAQItem>
+
+<FAQItem question="Which clients have a Nametags module?">
+Fan is documented with one. Similar customizable nametag features show up across other utility clients under different names.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category Nametags and every other module here belongs to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Built around staying unseen, the opposite instinct from a module that just relabels what's already visible." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "A module that acts on information automatically; Nametags only displays it." },
+]} />
+
+<CTA href="/en/purchase">Opal's visual category is built for changes exactly like this, see what's actually in it.</CTA>

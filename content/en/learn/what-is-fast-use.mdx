@@ -1,0 +1,86 @@
+---
+title: "What Is Fast Use in Minecraft? Module Explained"
+description: "Fast Use is a Minecraft module that shortens the vanilla delay between item uses, letting food, potions, and ender pearls fire back to back faster than normal."
+excerpt: "Fast Use skips the wait between bites, sips, and throws. It doesn't change what the item does, only how soon you get to do it again."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What items does Fast Use affect?"
+    a: "Mostly items with a vanilla use delay: food, potions, and ender pearls. Fast Use shortens the gap between uses of these items, it doesn't touch anything else."
+  - q: "Does Fast Use change what an item does?"
+    a: "No. Food restores the same hunger, potions apply the same effect, pearls teleport the same distance. Fast Use only cuts the time before you're allowed to use the item again."
+  - q: "Can servers actually detect Fast Use?"
+    a: "Yes, in principle. A server can time the gap between a player's item-use packets and compare it to the minimum interval vanilla physics allow. Whether a given server checks this rigorously varies."
+  - q: "Is Fast Use the same as Auto Eat or Auto Pot?"
+    a: "No. Auto Eat and Auto Pot decide when to use an item for you. Fast Use only changes how quickly an item can be reused once it's triggered, which is why the two are often run together."
+---
+
+<KeyTakeaways>
+
+- Fast Use is a Minecraft module that shortens or removes the vanilla delay between item uses, so food, potions, and ender pearls fire back to back faster than a normal client allows.
+- It doesn't change what an item does, only how soon it can be used again.
+- Servers catch it by timing the gap between a player's item-use packets against the vanilla minimum for that item.
+- It's a timing exploit, filed under use at your own risk, and Opal ships its own version under the same name.
+
+</KeyTakeaways>
+
+Fast Use is a Minecraft module that shortens or removes the short delay vanilla imposes right after you use an item, the gap that normally stops you from eating a second piece of food or drinking a second potion the instant the first one finishes. With Fast Use running, that gap gets compressed or skipped entirely, so food, potions, and ender pearls can be used back to back faster than a legitimate client would ever allow. It doesn't touch what the item does. It changes how soon you're allowed to do it again, and that alone is enough of an edge that servers treat it as an exploit, not a convenience.
+
+## How it works
+
+Vanilla Minecraft enforces a short cooldown after an item-use action finishes: eating, drinking, or throwing all lock you out of the next use until that window passes. Fast Use targets that exact window. It shortens the cooldown or skips it outright, so the client fires the next use packet well before a vanilla client physically could send one.
+
+That's the detail worth sitting with. The client decides when to send the next use action, but the client was never meant to be the authority on whether that timing is legal, the server is. The item itself doesn't care either way: food still restores the same hunger, a potion still applies the same effect, a pearl still lands the same distance. Fast Use only compresses the clock between one use and the next.
+
+The draw is simple. Less time spent standing still to eat mid fight. Potions that out-heal or out-buff an opponent who's stuck waiting on the normal timer. Pearls that get you out of a chase a beat sooner than they should. None of it changes what happens when the item is used, it just closes the gap between uses, and that gap adds up over a whole fight.
+
+## How servers catch it
+
+Timing exploits like this leave a signature because the server, not the client, has to be the one keeping time. A server-side anticheat can log the interval between a player's item-use packets and compare it against the minimum interval vanilla physics allow for that item. A legitimate client physically cannot send the next use early, the game itself blocks it, so an interval that's consistently shorter than the vanilla minimum is close to unmistakable.
+
+| What the server measures | Legitimate client | Fast Use |
+|---|---|---|
+| Interval between item-use packets | At or above the vanilla minimum for that item | Consistently below the vanilla minimum |
+| Pattern across a session | Varies with human timing | Flat, repeatable, too consistent to be manual |
+
+Whether a specific server actually runs this check is a separate question, plenty don't look closely at item-use timing at all. But the behavior itself is the evidence. There's no version of Fast Use that hides the fact it's using items faster than vanilla physics allow, because that's the entire point of the module and also its entire signature.
+
+<Callout variant="tip" title="Opal ships it as Fast Use">
+Opal's own catalog lists the module by the same name: Fast Use, "Uses items faster." Same trade, same tell, filed under use at your own risk like every timing-based module here.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Fast Use is and how servers catch it. It isn't instructions for running one. Item-use timing is a known anticheat signal on Opal and on any other client, and getting caught can mean a ban.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What items does Fast Use affect?">
+Mostly items with a vanilla use delay: food, potions, and ender pearls. Fast Use shortens the gap between uses of these items, it doesn't touch anything else.
+</FAQItem>
+
+<FAQItem question="Does Fast Use change what an item does?">
+No. Food restores the same hunger, potions apply the same effect, pearls teleport the same distance. Fast Use only cuts the time before you're allowed to use the item again.
+</FAQItem>
+
+<FAQItem question="Can servers actually detect Fast Use?">
+Yes, in principle. A server can time the gap between a player's item-use packets and compare it to the minimum interval vanilla physics allow. Whether a given server checks this rigorously varies.
+</FAQItem>
+
+<FAQItem question="Is Fast Use the same as Auto Eat or Auto Pot?">
+No. Auto Eat and Auto Pot decide when to use an item for you. Fast Use only changes how quickly an item can be reused once it's triggered, which is why the two are often run together.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The broader category Fast Use ships inside of." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity/Anti-Knockback?", description: "Another timing and physics tell that server-side checks are built to catch." },
+  { href: "/en/learn/what-is-a-crystal-aura", label: "What is a Crystal Aura?", description: "The burst-damage module that makes a faster heal or a faster pearl actually matter." },
+]} />
+
+<CTA href="/en/purchase">Stop waiting on the chew animation. Opal's Fast Use is $8.99.</CTA>

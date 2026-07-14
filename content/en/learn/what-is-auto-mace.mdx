@@ -1,0 +1,79 @@
+---
+title: "What Is Auto Mace in Minecraft? Module Explainer"
+description: "Auto Mace is a Minecraft combat module that automates the wind-charge launch and fall-timing swing behind the mace's bonus smash damage, no setup needed."
+excerpt: "Auto Mace turns the mace's fussy wind-charge-then-swing timing into one input, landing near-max smash damage on demand."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does the mace's bonus damage depend on?"
+    a: "Fall distance at the moment of impact. The farther the attacker fell before the hit lands, the bigger the smash-attack bonus, which is why gaining height with a wind charge before swinging matters."
+  - q: "Is the mace itself a cheat?"
+    a: "No. The mace and its fall-damage bonus are vanilla mechanics available to any player. Auto Mace is a cheat because it automates the setup and timing, not because the weapon or the bonus damage are illegitimate."
+  - q: "How is Auto Mace different from Criticals?"
+    a: "Criticals fakes a game state, forcing every hit to count as a critical even when the player isn't actually falling. Auto Mace doesn't fake anything. It automates the real inputs needed to trigger a legitimate fall-damage bonus consistently."
+  - q: "Is Auto Mace detectable?"
+    a: "It's plausible for anticheats and staff to flag it. The signal isn't an impossible game state, it's a pattern: near-maximum fall distance and tightly timed wind-charge-to-swing inputs repeated far more consistently than a human manages by hand."
+---
+
+<KeyTakeaways>
+
+- Auto Mace is a combat module that automates the wind-charge-into-swing combo behind the mace's fall-based smash damage.
+- It launches with a wind charge, tracks the fall, and swings at the moment of peak bonus damage.
+- It automates real inputs rather than faking game state, and that consistency is the detection signal.
+- It appears in mace-era clients such as Rise Nextgen.
+
+</KeyTakeaways>
+
+Auto Mace is a Minecraft combat module that automates the wind-charge-into-fall-swing combo behind the mace's bonus smash damage. Instead of the player judging height, timing a launch, and swinging at the exact moment of impact, the module runs the whole sequence itself: launch, track the fall, swing. It shows up in clients built around mace-era combat, Rise Nextgen among them, and it turns a combo that takes real practice into one that fires the same way on every attempt.
+
+## How Auto Mace works
+
+The mace deals bonus damage scaled to how far the attacker fell when the hit lands while they're still falling, a mechanic often called a smash attack. Getting that bonus normally takes two things done right: gaining height first, usually with a wind charge that launches the player upward, then swinging at the exact instant of landing on the target below. Miss the timing by a beat and the hit either whiffs or lands with less fall distance and less bonus damage to show for it.
+
+That's the part Auto Mace removes. It triggers the wind-charge launch, tracks the resulting fall in real time, and fires the mace swing at the point in that fall that produces the largest smash-attack bonus, all without separate manual inputs from the player. A wind-charge mace combo done by hand takes practice: launching to the right height, staying above the target, hitting the exact frame of impact. Miss any part of it and you lose damage, sometimes the fight. Auto Mace turns that into a hit you can count on, close to maximum smash damage, without training the timing yourself.
+
+## Is Auto Mace detectable
+
+The mace and its fall-damage bonus are ordinary game mechanics, so a hit landed through Auto Mace isn't physically impossible the way a fabricated critical hit or extra reach would be. What gives it away is consistency, not physics. A player running the combo by hand varies in launch height, positioning, and swing timing, and regularly falls short of the maximum bonus. Auto Mace lands close to peak fall distance on nearly every attempt and chains the wind-charge input to the attack input with a precision no manual player sustains across a full fight.
+
+That combination, automated input timing paired with unusually consistent damage output, is exactly what server-side anticheats and staff reviewing combat logs look for. It's also worth separating Auto Mace from something like Criticals: Criticals forces every hit to register as a critical even when the player isn't actually falling, which fakes a game state outright. Auto Mace doesn't fake anything. It automates real, legitimate inputs, wind charge then swing, with a consistency no human replicates. Most servers prohibit automating combat regardless, so the distinction matters for understanding the mechanic, not for justifying running it.
+
+<Callout variant="tip" title="Where Opal sits on this">
+Opal doesn't ship anything called Auto Mace, and we're not going to pretend otherwise. Combat automation of this kind lives in the same general category as Opal's own combat modules, but the exact behavior described here isn't part of the catalog.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Auto Mace is and how it's detected. It isn't instructions for running one. Automating combat inputs breaks the rules on essentially every multiplayer server, and the consistency it produces is a well-known flag for anticheats and staff alike.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does the mace's bonus damage depend on?">
+Fall distance at the moment of impact. The farther the attacker fell before the hit lands, the bigger the smash-attack bonus, which is why gaining height with a wind charge before swinging matters.
+</FAQItem>
+
+<FAQItem question="Is the mace itself a cheat?">
+No. The mace and its fall-damage bonus are vanilla mechanics available to any player. Auto Mace is a cheat because it automates the setup and timing, not because the weapon or the bonus damage are illegitimate.
+</FAQItem>
+
+<FAQItem question="How is Auto Mace different from Criticals?">
+Criticals fakes a game state, forcing every hit to count as a critical even when the player isn't actually falling. Auto Mace doesn't fake anything. It automates the real inputs needed to trigger a legitimate fall-damage bonus consistently.
+</FAQItem>
+
+<FAQItem question="Is Auto Mace detectable?">
+It's plausible for anticheats and staff to flag it. The signal isn't an impossible game state, it's a pattern: near-maximum fall distance and tightly timed wind-charge-to-swing inputs repeated far more consistently than a human manages by hand.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The melee auto-attacker that automates aim and swing timing the same way." },
+  { href: "/en/learn/what-is-reach", label: "What is reach?", description: "Another combat edge built on exploiting distance and timing, not fabricated hits." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The broader category combat modules like this one belong to." },
+]} />
+
+<CTA href="/en/purchase">Explore Opal's combat modules, no wind-charge math required.</CTA>

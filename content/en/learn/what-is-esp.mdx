@@ -1,0 +1,87 @@
+---
+title: "What Is ESP in Minecraft? (Module Explained)"
+description: "ESP is a visual cheat that renders players and entities through walls in Minecraft. Here's how it works, why it leaves no packet trail, and the ban risk."
+excerpt: "A wall should mean you can't see what's behind it. ESP quietly disagrees, and it does it without sending the server a single extra packet."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is ESP the same as wallhack?"
+    a: "Yes. Wallhack is the general nickname for this module family, and ESP is the specific term most utility clients use for it in their settings menu."
+  - q: "Can anticheats detect ESP directly?"
+    a: "Not through network traffic alone. ESP only changes how your own client draws data it already has, so nothing extra crosses the network. Detection instead comes from client-side integrity scans or from behavior that gives away you're seeing through walls."
+  - q: "Does ESP send extra data from the server?"
+    a: "No. The server already streams every nearby entity's position for normal gameplay, wall or no wall. ESP only changes how the client draws that existing data, it doesn't request or receive anything new."
+  - q: "Is ESP against the rules on most servers?"
+    a: "Yes. Nearly every multiplayer server treats ESP as a cheat, and getting caught, whether through client scanning or through behavior, typically ends in a ban."
+---
+
+<KeyTakeaways>
+
+- ESP renders players and entities through walls and terrain, keeping them visible regardless of what's in the way.
+- It only changes local rendering. The server already streams entity positions for normal gameplay, so nothing extra is requested or sent.
+- It leaves no packet trail, so detection relies on client-integrity scans or on behavior that gives away what you're seeing.
+- Wallhack is the general nickname for it, and ESP is the umbrella term for the whole family of related visual modules.
+
+</KeyTakeaways>
+
+ESP, short for extra-sensory perception, is a visual cheat module in Minecraft that renders other players and entities through walls and terrain, so they stay visible no matter where your camera points or what's standing between you and them. It's the umbrella term for the wallhack family: any module that draws what a normal client isn't supposed to be able to show.
+
+## How it works
+
+The server already tracks every nearby player, mob, and item and streams their positions to your client, wall or no wall. That's not a leak, it's just how the game runs: physics, hit detection, and ordinary rendering all need that data regardless of what's between you and the target. A normal client throws most of it away at the last second. Depth testing checks what's in front of what and only draws the entities your camera could plausibly see, letting solid blocks hide the rest.
+
+ESP skips that discard step for chosen entities. Instead of vanishing behind a wall the way vanilla rendering demands, the entity gets drawn as an outline, a box, or a full model on top of the world geometry, in front of anything that should be blocking it. Because the position data was already arriving for ordinary gameplay, none of this needs a new request to the server, and nothing extra goes back out. It's a decision made entirely on your machine about what to draw, not a change to what your client knows.
+
+## Why people use it
+
+The draw is early information. Spotting a geared player before they round a corner, noticing someone sneaking up from behind, or tracking mobs and loot without exploring blind, all of it comes from the same trick. In a fight, ESP removes the surprise a wall or a corner is supposed to provide, since the position of every nearby entity is visible the whole time.
+
+Fan is one client that ships a dedicated ESP module, alongside related visual features like Tracers and Nametags that lean on the same idea: seeing more of the map than a normal client would ever show you.
+
+## Why it gets flagged
+
+ESP by itself is quiet on the wire. It doesn't ask the server for anything and doesn't send anything unusual back, so a server watching packets in isolation has nothing direct to catch. Detection tends to come from two other directions instead.
+
+Some anticheats run client-side integrity checks that scan for known ESP hooks, injected rendering code, or modified game files rather than watching what you do in a match. Others watch the player: turning to face an ambush through a wall, avoiding a sneaking enemy with no line of sight, or tracking a target's movement with no visual reason to are all tells that someone is seeing more than a normal client shows.
+
+That combination is why ESP is riskier than its "just a rendering change" description makes it sound. No packet trail doesn't mean no trail. Servers that pair client scanning with behavior analysis catch it regularly, which is why it belongs in the bannable column, not the safe one.
+
+<Callout variant="tip" title="Where this sits in Opal">
+Opal ships this directly. Entity ESP lives in the visual category and does exactly what the name says: highlights players and entities through the world. It's flagged use-at-own-risk right in Opal's own module list, the same honest label every wallhack-style feature gets here, no "totally safe" spin attached.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what ESP does and why servers treat it as a violation, not an endorsement to run it. Seeing an opponent's exact position through a wall is information the vanilla game deliberately withholds, and it's a bannable feature on essentially every server that finds it, whether through client scanning or through behavior.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is ESP the same as wallhack?">
+Yes, they're the same idea under two names. Wallhack is the nickname; ESP is what most utility clients actually call the module in their settings menu.
+</FAQItem>
+
+<FAQItem question="Can anticheats detect ESP directly?">
+Not through network traffic alone, since ESP changes local rendering without sending extra data to the server. Detection usually relies on client-side integrity scans or on behavior that reveals a player is reacting to something they shouldn't be able to see.
+</FAQItem>
+
+<FAQItem question="Does ESP send extra data from the server?">
+No. The server already sends entity positions for normal gameplay. ESP only changes how the client draws that existing data; it doesn't request or receive anything new.
+</FAQItem>
+
+<FAQItem question="Is ESP against the rules on most servers?">
+Yes. Nearly every multiplayer server treats ESP as a cheat, and getting caught, whether through client scanning or through behavior, typically results in a ban.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category ESP and every other module here belongs to." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "The module that acts on a target once ESP already told you where they are." },
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "Aims and attacks on its own, the other half of the reveal-then-act combo ESP sets up." },
+]} />
+
+<CTA href="/en/purchase">See where Entity ESP sits in Opal's full visual toolkit.</CTA>

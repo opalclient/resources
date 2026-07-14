@@ -1,0 +1,96 @@
+---
+title: "What Is Chest Stealer in Minecraft? Module Explained"
+description: "Chest Stealer is a Minecraft utility client module that empties an open chest, barrel, or shulker box into your inventory in one automated pass of quick-moves."
+excerpt: "One second the chest is full. The next it's in your bag. Here's how Chest Stealer pulls that off, and why a server might notice."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Chest Stealer actually do?"
+    a: "It empties an open chest, barrel, or shulker box into your inventory in one pass, firing a quick-move on every occupied slot the instant the container opens."
+  - q: "Is Chest Stealer the same as ChestAssist?"
+    a: "No. ChestAssist is a separate, undocumented module in the same client family. Chest Stealer is the one that bulk-empties a container; what ChestAssist does isn't documented here."
+  - q: "Why do implementations add delay to Chest Stealer?"
+    a: "Because clearing a whole container in a single tick isn't something a human can do. A randomized per-move delay, a per-tick item cap, and shuffled slot order make the pattern look less mechanical to anything watching."
+  - q: "Does Chest Stealer filter what it takes?"
+    a: "Some versions do. A filter list skips the items you don't want, so junk stays behind and only useful or upgraded gear gets pulled into your inventory."
+  - q: "Which clients have shipped Chest Stealer?"
+    a: "It's documented in Fan, Tenacity, Rose, and Augustus, and Opal ships its own version too."
+---
+
+<KeyTakeaways>
+
+- Chest Stealer (also written ChestStealer) empties an open chest, barrel, or shulker box into your inventory in one pass.
+- It fires a quick-move on every filled slot the instant the container opens.
+- No human clears a container that fast, so builds add delay and shuffled order to disguise it.
+- It's separate from ChestAssist; Opal ships its own version, use-at-own-risk.
+
+</KeyTakeaways>
+
+Chest Stealer is a Minecraft utility client module that empties an entire open chest, barrel, or shulker box into your inventory in a single pass, no shift-clicking through slots one at a time, no items left behind because you scrolled past them. The instant the container screen opens, it moves everything before a human would finish reading what's inside. It's also written as one word, ChestStealer, same module, and it's easy to confuse with ChestAssist, a different feature that happens to share a client family and a similar name.
+
+## How it works
+
+Chest Stealer hooks the container screen the moment it opens and walks every filled slot on the chest side of the menu. For each one it sends a quick-move, the same action a shift-click triggers, so the server only ever sees a sequence of ordinary slot-click packets. Nothing about any single packet looks wrong on its own.
+
+What gives it away is the pace. A player shift-clicking through a full chest takes several seconds, with the odd missed slot and re-click along the way. Chest Stealer doesn't have to look at anything or move a mouse, it just walks the slot list and fires, so the whole container clears in something close to a single tick. That compression, several seconds of work into almost none, is the part no legitimate client produces on its own.
+
+## Common settings
+
+Because raw speed is the giveaway, most implementations expose a few knobs that trade completeness for looking less like a script:
+
+| Setting | What it controls |
+|---|---|
+| Move delay | Randomized pause between each quick-move so they don't land in one burst |
+| Per-tick cap | Maximum number of slots the module clears in a single game tick |
+| Slot order | Shuffles the clear order instead of running top-to-bottom like a bot would |
+| Item filter | Skips items you don't want, so only useful or upgraded gear gets pulled |
+
+<Callout variant="tip" title="Opal ships this as Chest Stealer">
+Opal's own catalog lists it in one line: "Grabs only the useful or upgraded items from chests." Same idea, same item-filter instinct, official branding. And the same honesty about the tradeoff: Opal classifies it use-at-own-risk, detectable like any other automated inventory action.
+</Callout>
+
+## Is it safe to use
+
+Chest Stealer is a use-at-own-risk feature, not a quality-of-life tweak. An instant, complete container clear isn't something a legitimate client produces, and any server or anticheat watching container interactions can plausibly flag the pattern whether or not delay and jitter are dressing it up. Randomized timing and slot shuffling make the behavior look less mechanical. They don't make the underlying action, taking every item in a sweep no human can match, invisible to a server that's actually checking.
+
+How closely a given server watches container activity varies a lot, and that variance is the real risk. Assume detection is possible rather than assume the disguising measures defeat it.
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Chest Stealer is and why it gets flagged, not instructions for running one. Automating a container clear breaks the rules on essentially every server that cares about fair play, and the speed involved is exactly the kind of signal anticheats are built to catch.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does Chest Stealer actually do?">
+It empties an open chest, barrel, or shulker box into your inventory in one pass, firing a quick-move on every occupied slot the instant the container opens.
+</FAQItem>
+
+<FAQItem question="Is Chest Stealer the same as ChestAssist?">
+No. ChestAssist is a separate, undocumented module in the same client family. Chest Stealer is the one that bulk-empties a container; what ChestAssist does isn't documented here.
+</FAQItem>
+
+<FAQItem question="Why do implementations add delay to Chest Stealer?">
+Because clearing a whole container in a single tick isn't something a human can do. A randomized per-move delay, a per-tick item cap, and shuffled slot order make the pattern look less mechanical to anything watching.
+</FAQItem>
+
+<FAQItem question="Does Chest Stealer filter what it takes?">
+Some versions do. A filter list skips the items you don't want, so junk stays behind and only useful or upgraded gear gets pulled into your inventory.
+</FAQItem>
+
+<FAQItem question="Which clients have shipped Chest Stealer?">
+It's documented in Fan, Tenacity, Rose, and Augustus, and Opal ships its own version too.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The category Chest Stealer belongs to, and what else lives inside it." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "A different philosophy: modules built to stay invisible entirely." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is velocity (anti-knockback)?", description: "Another everyday module with its own detection tradeoffs." },
+]} />
+
+<CTA href="/en/purchase">Let Opal grab the good loot while you keep fighting.</CTA>

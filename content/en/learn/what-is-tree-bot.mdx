@@ -1,0 +1,81 @@
+---
+title: "What Is Tree-bot in Minecraft? Auto Chop Explained"
+description: "Tree-bot is a Minecraft module that automatically fells trees and replants saplings for you. Here's how the auto-chop loop works and whether it's safe to run."
+excerpt: "The axe swings itself. Tree-bot walks to the tree, clears the trunk, drops a sapling on the stump, and moves on, no clicking required."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is Tree-bot a cheat?"
+    a: "It automates an action a player would normally do by hand, which counts as botting on servers that ban unattended automation. It doesn't give a combat or movement advantage the way modules like reach or fly do."
+  - q: "Can Tree-bot get you banned?"
+    a: "It comes down to the server's rules more than anticheat detection. Servers that prohibit any form of automated or macro play can ban for it. Servers that only police combat and movement exploits typically don't flag it."
+  - q: "Does Tree-bot replant trees automatically?"
+    a: "Usually, yes. Most implementations drop a sapling on the stump right after clearing the trunk, so the tree grows back without you planting it yourself."
+  - q: "What client has Tree-bot?"
+    a: "Tree-bot is a Wurst module, listed there as an automation or utility feature rather than a combat one."
+---
+
+<KeyTakeaways>
+
+- Tree-bot is a Minecraft module that fells trees automatically: it walks to the nearest log, breaks every connected block in the trunk, and moves on to the next tree.
+- Most implementations replant a sapling on the stump right after cutting, so the tree regrows without any manual planting.
+- It's a Wurst automation module, not a combat or movement cheat. No aiming, clicking, or steering required.
+- Detection risk from anticheat is low since it never touches reach, rotations, or hit registration. The real risk is server rules against automation itself.
+
+</KeyTakeaways>
+
+Tree-bot is a Minecraft module that chops down trees on its own: find the log, walk to it, break the whole trunk, replant, repeat. It's built for wood farming, the part of the game where you'd otherwise be standing in a forest holding left click for ten minutes straight. Nothing about it touches PvP or movement. It's a chore-killer, not an edge finder.
+
+## How it works
+
+Tree-bot scans the area around the player for log blocks once it's switched on. When it finds one, it walks the player to the base of the tree and breaks the trunk upward through every connected log, including the diagonal or leaning growth patterns certain tree types produce. Clear one tree and it moves straight to the next one in range, repeating the same loop for as long as trees are left standing nearby.
+
+Replanting is the second half of the cycle. Most builds place a sapling on the stump the moment the trunk comes down, so instead of walking back to a bare patch of dirt later, the player finds a tree already regrowing. The player isn't aiming, clicking, or steering any of it. Tree-bot owns the pathing, the breaking, and the placing from start to finish.
+
+The appeal is obvious if you've ever farmed wood for a build or a shop restock by hand: it's repetitive and it eats time you could spend doing literally anything else. Tree-bot turns "go chop wood" into "start Tree-bot, come back to a stack of logs." It's documented in Wurst sitting next to other utility and automation modules, not the combat ones, which tells you exactly what bucket it belongs in.
+
+## Is it safe to use
+
+Tree-bot doesn't touch reach, rotations, or hit registration, the exact mechanics most combat anticheats are built to police, so it doesn't trip the checks written to catch killaura or reach hacks. Breaking a log and placing a sapling aren't superhuman actions on their own; a server watching packet timing for combat exploits has nothing to flag here.
+
+The real exposure is automation itself, independent of anything an anticheat can see. A lot of servers ban any client-side macro or bot behavior that acts without direct player input, full stop, and wood farming doesn't get a pass just because it's harmless to everyone else in the world. A server with that kind of blanket rule treats Tree-bot as botting no matter how clean it looks in practice. A server that only writes rules around combat and movement exploits is far less likely to care what's chopping your trees.
+
+<Callout variant="tip" title="Where this sits in Opal">
+Opal doesn't ship a Tree-bot module. It's a Wurst feature specifically, and Opal's catalog leans hard into combat, movement, and visual modules, the categories where a single frame decides a fight. Auto-farming wood doesn't move that needle, so it's never been on the roadmap.
+</Callout>
+
+<Callout variant="warning" title="Detection isn't the whole story">
+This page describes Tree-bot generically, not as an Opal feature. Even on a server where the anticheat has nothing to flag, the rules themselves can still ban unattended automation outright. Read the server's stance on macros and bots before you let it run through a forest unsupervised.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Tree-bot a cheat?">
+It automates an action a player would normally do by hand, which counts as botting on servers that ban unattended automation. It doesn't give a combat or movement advantage the way modules like reach or fly do.
+</FAQItem>
+
+<FAQItem question="Can Tree-bot get you banned?">
+It comes down to the server's rules more than anticheat detection. Servers that prohibit any form of automated or macro play can ban for it. Servers that only police combat and movement exploits typically don't flag it.
+</FAQItem>
+
+<FAQItem question="Does Tree-bot replant trees automatically?">
+Usually, yes. Most implementations drop a sapling on the stump right after clearing the trunk, so the tree grows back without you planting it yourself.
+</FAQItem>
+
+<FAQItem question="What client has Tree-bot?">
+Tree-bot is a Wurst module, listed there as an automation or utility feature rather than a combat one.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category Tree-bot and other automation modules live inside." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "A different kind of module built to stay unseen by other players, not by the anticheat." },
+  { href: "/en/learn/what-is-reach", label: "What is reach?", description: "The kind of mechanic anticheats actually watch for, and exactly what Tree-bot never touches." },
+]} />
+
+<CTA href="/en/purchase">Opal spends its budget on the fight, not the forest. $8.99.</CTA>

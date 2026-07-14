@@ -1,0 +1,85 @@
+---
+title: "What Is Scoreboard in Minecraft? Module Explained"
+description: "Scoreboard is a Minecraft module that restyles the server's sidebar scoreboard or adds client-computed lines like ping, a cosmetic change no anticheat can flag."
+excerpt: "Scoreboard doesn't touch the game, just the box in the corner. Redraw it, add a line, move on with your life."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Scoreboard give an unfair advantage?"
+    a: "No. It only changes how existing scoreboard data is displayed or adds information the client can already compute locally, such as ping. It doesn't reveal anything a player couldn't otherwise see."
+  - q: "Can server admins detect a custom scoreboard?"
+    a: "Not through the scoreboard itself. The server still sends its own objectives and scores as normal. The client-side restyling and any extra lines never get transmitted back, so there's nothing for the server to notice."
+  - q: "Is Scoreboard the same as a HUD mod?"
+    a: "Not quite. Scoreboard is scoped to the sidebar specifically. A broader HUD mod might touch the hotbar, coordinates display, armor status, and more. Scoreboard just handles the one element."
+  - q: "Why would a client bundle a Scoreboard module at all?"
+    a: "Server scoreboards vary wildly in how they're styled, and a built-in module keeps the look consistent across servers or surfaces a stat like ping without opening a separate menu."
+---
+
+<KeyTakeaways>
+
+- Scoreboard is a client-side module that restyles the server's sidebar scoreboard, or appends extra lines built from data the client already has, like ping.
+- It hooks the sidebar render step: the server's real objectives and scores stay intact, the module just formats them differently or splices in local-only values.
+- Nothing gets sent back to the server, so the change is invisible to admins and irrelevant to anticheats.
+- It's filed as a HUD convenience next to things like a coordinates overlay or FPS counter, not a combat or movement feature.
+
+</KeyTakeaways>
+
+Scoreboard is a Minecraft module that changes how the server-side scoreboard sidebar looks, or what it shows. It can restyle the box the server sends, different fonts, colors, corner rounding, or it can append extra lines computed from data the client already has, like ping. Either way it stops at presentation. Nothing about how you play, move, or fight changes.
+
+## How it works
+
+The sidebar you see in the corner of the screen is server-controlled by default: the server sends objectives and scores, and the client draws them in whatever generic style Minecraft ships with. Scoreboard hooks into that render step and either redraws the box entirely or inserts additional client-side lines alongside the server's own entries. The server-provided data stays exactly as sent. The module reads it, formats it differently, and can splice in values the server never transmitted, since those extra lines are computed locally instead of pulled over the network.
+
+Restyling covers the visual layer: a different background, rounded corners instead of sharp ones, a custom font, or an animated transition when a value ticks up or down instead of just snapping to the new number. Content additions are the smaller, second half of the module: things the client can already compute on its own, ping being the obvious example, spliced in as an extra row without the server broadcasting anything new. Because nothing here originates from a packet sent back to the server, the whole thing is local to your screen and stays that way.
+
+## What Scoreboard actually touches
+
+| Setting | What it changes |
+|---|---|
+| Background | Swaps the default sidebar panel for a custom color or style |
+| Corner rounding | Softens the sharp box corners Minecraft ships with |
+| Custom fonts | Replaces the default sidebar typeface |
+| Value transitions | Animates a number when it updates instead of snapping instantly |
+| Extra lines (e.g. ping) | Appends client-computed stats the server never sent |
+
+None of these rows require server cooperation. They're all decisions the client makes after the server's objectives and scores have already arrived, which is also why the list stops where it does. Scoreboard isn't reading anything off the server it wasn't handed, it's just choosing how to draw what it already has.
+
+## Is it safe to use
+
+Yes, and it's about as safe as a module gets. Scoreboard only reformats or extends what the server already displays to you locally. It doesn't read data you shouldn't have, doesn't send extra packets, and doesn't change how your client interacts with the world. There's no information advantage over another player staring at the same vanilla scoreboard, just a different coat of paint on it. Anticheats have nothing to flag here, because the module never touches movement, combat, or anything sent over the wire.
+
+<Callout variant="tip" title="Where this sits for Opal">
+Opal doesn't ship a module called Scoreboard by that name. The territory it covers, local display tweaks that leave the server's data untouched, is the same visual category the rest of Opal's HUD and cosmetic tooling lives in. If a clean sidebar matters to you, it's worth checking what a client offers under its visual settings rather than assuming it's missing just because the name doesn't match.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Scoreboard give an unfair advantage?">
+No. It only changes how existing scoreboard data is displayed or adds information the client can already compute locally, such as ping. It doesn't reveal anything a player couldn't otherwise see.
+</FAQItem>
+
+<FAQItem question="Can server admins detect a custom scoreboard?">
+Not through the scoreboard itself. The server still sends its own objectives and scores as normal. The client-side restyling and any extra lines never get transmitted back, so there's nothing for the server to notice.
+</FAQItem>
+
+<FAQItem question="Is Scoreboard the same as a HUD mod?">
+Not quite. Scoreboard is scoped to the sidebar specifically. A broader HUD mod might touch the hotbar, coordinates display, armor status, and more. Scoreboard just handles the one element.
+</FAQItem>
+
+<FAQItem question="Why would a client bundle a Scoreboard module at all?">
+Server scoreboards vary wildly in how they're styled, and a built-in module keeps the look consistent across servers or surfaces a stat like ping without opening a separate menu.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category modules like Scoreboard belong to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The detection-focused end of the spectrum Scoreboard never has to worry about." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "A module that lives on the opposite end of the risk scale from a purely cosmetic one." },
+]} />
+
+<CTA href="/en/purchase">A cleaner sidebar is a small thing. See what else Opal cleans up.</CTA>

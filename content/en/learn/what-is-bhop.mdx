@@ -1,0 +1,78 @@
+---
+title: "What Is Bhop in Minecraft? Bunny Hop Explained"
+description: "Bhop chains jumps to hold or build speed beyond what vanilla Minecraft physics allow. Here's how the movement module works and why anticheats flag it."
+excerpt: "Bhop chains jumps to fake a speed trick Minecraft was never built to allow. Here's how the module keeps you moving, and why it won't stay a secret from the server."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Bhop stand for?"
+    a: "Bhop is short for bunny hop, a term borrowed from other game engines for chaining jumps to build or hold onto speed."
+  - q: "Does Bhop work the same way it does in other games?"
+    a: "It's aiming for the same result, sustained speed from chained jumps, but Minecraft's jump physics don't support it natively. The module has to fake the effect instead of exploiting an engine quirk that's already there."
+  - q: "Is Bhop the same thing as a speed or sprint module?"
+    a: "No. A speed module raises your movement speed directly. Bhop gets its speed gain specifically from timing chained jumps. Both sit in the movement category and both push past vanilla's limits."
+  - q: "Can using Bhop get you banned?"
+    a: "Yes, it can. Servers that check jump patterns and speed against vanilla physics can catch sustained Bhop use, and running it typically breaks the rules against movement cheats."
+---
+
+<KeyTakeaways>
+
+- Bhop (bunny hop) is a movement module that chains jumps to hold or build speed beyond vanilla Minecraft's limits.
+- Minecraft doesn't reward jump timing naturally, so the module fakes the effect by cycling jumps on a tight timer.
+- The speed boost holds as long as the jump chain continues, and anticheats treat that sustained pattern as a flag.
+
+</KeyTakeaways>
+
+Bhop, short for bunny hop, is a movement module that chains jumps together to hold onto or build speed beyond what vanilla Minecraft allows. The name comes from other game engines, where bunny hopping is a built-in quirk: players who jump at exactly the right moment keep their air-strafing momentum instead of losing it. Minecraft was never built with that quirk, so a Bhop module has to fake it, cycling jumps on a tight enough timer that the player's speed stays elevated instead of decaying back to a normal walk. The result looks like an engine feature. It isn't one.
+
+## How Bhop works
+
+In source engine games and a handful of others, bunny hopping happens because the physics reward you for jumping the instant you land. Strafe in the air, time the next jump right, and your speed climbs instead of resetting. It's a side effect of how those engines handle air control, not a designed feature, and players learned to exploit it long before anyone called it a "trick."
+
+Minecraft's movement code doesn't have that side effect. Landing resets your momentum the way you'd expect, and jumping repeatedly on its own does nothing for your speed. So a Bhop module fakes the outcome instead of exploiting a quirk that isn't there: it fires jumps on a tight, repeatable cycle, timed to keep the player's velocity above what walking or sprinting alone would produce. It doesn't need to look identical to the source-engine version to work. It just needs to keep the speed number climbing, or at least holding, instead of dropping back to normal.
+
+## Is Bhop safe to use
+
+The appeal is straightforward. Chained jumping covers ground faster than walking or sprinting, and because the effect runs continuously rather than firing once, it functions as an ongoing speed edge for as long as the jump chain keeps going. That matters for closing a gap in a fight, breaking off a chase, or crossing a map quicker than whoever's following you.
+
+None of that makes it invisible. Bhop is a gameplay-advantage feature, not a cosmetic one, and speed gains outside vanilla physics are exactly what server-side anticheats are built to catch. A server already knows what a player's speed and jump cadence should look like under normal movement, so sustained or repeated jump-chaining that keeps a player above that cap is a plausible flag. It sits in the same movement category as other speed and momentum modules, and it's been seen in clients like Juul. Treat it as detectable, not as a safe convenience.
+
+<Callout variant="tip" title="Where Opal draws the line">
+Opal's movement category covers plenty of ground, but it doesn't ship a Bhop module under that name. The module list sticks to features the client is willing to name plainly, and a jump-timing exploit built to slip past anticheat speed checks doesn't fit that approach.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Bhop means and how the effect works generically. Exact behavior varies by client, and gaining speed beyond vanilla jump physics breaks the rules on essentially every competitive or survival server.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does Bhop stand for?">
+Bhop is short for bunny hop, a term borrowed from other game engines for chaining jumps to build or hold onto speed.
+</FAQItem>
+
+<FAQItem question="Does Bhop work the same way it does in other games?">
+It's aiming for the same result, sustained speed from chained jumps, but Minecraft's jump physics don't support it natively. The module has to fake the effect instead of exploiting an engine quirk that's already there.
+</FAQItem>
+
+<FAQItem question="Is Bhop the same thing as a speed or sprint module?">
+No. A speed module raises your movement speed directly. Bhop gets its speed gain specifically from timing chained jumps. Both sit in the movement category and both push past vanilla's limits.
+</FAQItem>
+
+<FAQItem question="Can using Bhop get you banned?">
+Yes, it can. Servers that check jump patterns and speed against vanilla physics can catch sustained Bhop use, and running it typically breaks the rules against movement cheats.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "Another movement module that auto-places blocks as you walk." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity (anti-knockback)?", description: "A movement-adjacent module that fights pushback instead of gravity." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category these modules belong to." },
+]} />
+
+<CTA href="/en/purchase">See the movement tools Opal ships without the bannable shortcuts.</CTA>

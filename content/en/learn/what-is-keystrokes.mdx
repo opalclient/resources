@@ -1,0 +1,82 @@
+---
+title: "What Is Keystrokes in Minecraft? HUD Key Overlay Explained"
+description: "Keystrokes is a HUD overlay showing which keys and mouse buttons you're pressing in real time. How it tracks input, why streamers use it, and if it's bannable."
+excerpt: "Every key you press, lit up on screen the moment you press it. Zero effect on gameplay, full effect on how your stream reads."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Keystrokes give any gameplay advantage?"
+    a: "No. It only displays which keys and mouse buttons are currently pressed. It does not change input handling, movement, or combat in any way."
+  - q: "Can a server detect that I'm using Keystrokes?"
+    a: "No. The module runs entirely client side and does not send anything to the server that a normal client would not already send, so there is nothing distinguishable for an anticheat to flag."
+  - q: "Why do streamers use Keystrokes?"
+    a: "It lets viewers see what keys and mouse buttons the streamer is pressing in real time, which is useful for explaining movement, click timing, and other techniques that would otherwise be invisible off screen."
+  - q: "What is the difference between Keystrokes and Keystrokes2 or OLDKeystrokes?"
+    a: "Those are aliases or earlier variants of the same module concept found across different clients. The underlying idea, an on-screen key and mouse readout, stays the same even when the name or visual style differs."
+---
+
+<KeyTakeaways>
+- Keystrokes is a HUD overlay showing which keys and mouse buttons you're pressing, updating live as you play.
+- It only reads local input and draws it on screen, it sends nothing extra to the server.
+- Streamers use it so viewers can see input timing; it carries no gameplay advantage and isn't detectable.
+</KeyTakeaways>
+
+Keystrokes is a HUD module built into most Minecraft utility clients that shows, in real time, exactly which keyboard and mouse inputs you're holding down. Move forward and W lights up. Click, and the mouse icon reacts. Let go, and it resets. That's the whole feature. It's a display, not a modifier, it doesn't touch how the game responds to anything you press.
+
+## How it works
+
+Keystrokes reads the state of your movement keys, space, and your left and right mouse buttons, then renders a small overlay reflecting whatever's currently held. Most implementations light up or recolor a key the instant it's pressed and drop it back to resting the instant it's released, so the overlay is always a live mirror of your hands, not a delayed or summarized one.
+
+Under the hood it's strictly a read: the module inspects input state and paints pixels. It doesn't send extra packets, doesn't intercept the keys before the game sees them, and doesn't change what those keys already do. Some clients go further and ship two or three visual variants of the same idea (different shapes, different layouts) so you can pick a style instead of being stuck with one look.
+
+## What it actually tracks
+
+| Input | What it shows |
+|---|---|
+| W A S D | Movement keys, individually |
+| Space | Jump |
+| Left click | Attack / use |
+| Right click | Block / interact |
+
+That's the standard set. It's the same handful of inputs that matter in PvP and parkour footage, which is also exactly why the module exists.
+
+## Why people actually use it
+
+The obvious answer is streaming. A viewer can't see your physical keyboard, so Keystrokes hands them a live translation of your hands: when you strafed, when you clicked, whether that clutch was one click or three fast ones. It's a staple in PvP and parkour content for exactly that reason, footage reads completely differently once the audience can see input alongside the screen.
+
+The less obvious use is personal. Some players run it just to confirm a key actually registered mid combo, or to audit their own habits while grinding a technique. Cheap feedback loop, no downside.
+
+## Is it safe to use
+
+Yes, and there's no asterisk here. A server only ever sees the packets your client sends. Keystrokes doesn't add packets, doesn't change the ones you'd send anyway, and doesn't touch movement or combat logic. There's genuinely nothing for a server-side anticheat to look at, because nothing about your outgoing traffic changes whether the module is on or off. It's why clients file it next to other cosmetic HUD elements instead of anywhere near combat or movement categories, it carries zero risk because it carries zero advantage.
+
+<Callout variant="tip" title="Where this fits in Opal">
+Opal doesn't ship a module called Keystrokes. Our module list leans toward things that actually change how a fight or a movement sequence plays out, not overlays built for an audience. If you're recording for viewers, a dedicated stream overlay tool will usually serve you better than an in-client one anyway, since Keystrokes exists for whoever's watching, not for you.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Does Keystrokes give any gameplay advantage?">
+No. It only displays which keys and mouse buttons are currently pressed. It does not change input handling, movement, or combat in any way.
+</FAQItem>
+<FAQItem question="Can a server detect that I'm using Keystrokes?">
+No. The module runs entirely client side and doesn't send anything to the server that a normal client wouldn't already send, so there's nothing distinguishable for an anticheat to flag.
+</FAQItem>
+<FAQItem question="Why do streamers use Keystrokes?">
+It lets viewers see what keys and mouse buttons you're pressing in real time, which explains movement, click timing, and other techniques that would otherwise be invisible off screen.
+</FAQItem>
+<FAQItem question="What is the difference between Keystrokes and Keystrokes2 or OLDKeystrokes?">
+Those are aliases or earlier variants of the same module concept across different clients. The idea, an on-screen key and mouse readout, stays identical even when the name or the art style changes.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The category Keystrokes and every other module in this series belongs to." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "The opposite end of the spectrum: a module that changes outgoing packets and gets you banned." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Software built to stay invisible rather than to be watched, the inverse motivation of Keystrokes." }
+]} />
+
+<CTA href="/en/purchase">See the modules Opal actually plays with, not just the ones it shows off.</CTA>

@@ -1,0 +1,77 @@
+---
+title: "What Is Anti Bot in Minecraft? Module Explained"
+description: "Anti Bot is a combat module that screens fake decoy players out of auto-targeting, so your automation never wastes a hit on a planted screenshare bot."
+excerpt: "Anti Bot keeps your targeting honest: real players get attacked, planted decoys get ignored."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What counts as a decoy bot in Minecraft?"
+    a: "A decoy bot is a player-shaped entity, often spawned by a server, a plugin, or a screenshare reviewer, that looks like a real account but isn't one. It exists purely to see whether your automation reacts to it."
+  - q: "Does Anti Bot change combat, or just targeting?"
+    a: "Just targeting. Anti Bot doesn't add reach, aim, or attack speed. It only removes decoy entities from the list of things your combat automation is allowed to hit."
+  - q: "Is Anti Bot a cheat by itself?"
+    a: "No. On its own, Anti Bot doesn't attack, aim, or move you. It filters which entities your combat automation can see, so it acts as a quality-of-life check on that automation rather than automation in its own right."
+  - q: "How is Anti Bot different from an anticheat's bot detection?"
+    a: "They sit on opposite sides of the same exchange. An anticheat plants a decoy and watches how you react to it. Anti Bot is the client-side module that keeps your automation from reacting to that decoy in the first place."
+---
+
+<KeyTakeaways>
+
+- Anti Bot is a combat module that filters fake decoy player entities out of auto-targeting.
+- Servers and screenshare reviewers plant bot accounts to see how a suspected cheater's tools react.
+- It checks every nearby entity before an attack fires, skipping anything that looks like a planted decoy.
+- It only touches target selection, not aim, reach, or attack speed.
+
+</KeyTakeaways>
+
+Anti Bot is a combat module that filters fake decoy player entities out of a client's auto-targeting logic. Screenshare reviewers and some servers plant bot accounts dressed up as ordinary players specifically to see whether a suspected cheater's tools react to them. Anti Bot recognizes those decoys for what they are and keeps combat automation from wasting an attack on one, the same way an actual opponent would just ignore a character standing there doing nothing.
+
+## How Anti Bot works
+
+The module sits ahead of whatever logic picks a target for combat automation. Before an attack goes out, Anti Bot checks each nearby player-shaped entity and screens out the ones that read as planted decoys rather than genuine opponents. Entities that pass the check stay in the normal targeting pool. Entities flagged as decoys are simply skipped, so the attack never fires on them at all.
+
+That matters because a bot that gets attacked hands the reviewer exactly the reaction they were fishing for. Anti Bot doesn't try to hide anything or fake innocence. It just refuses to take the bait, which means combat automation only ever spends its attacks on entities that are actually there to fight.
+
+In practice this shows up as a layered check bolted onto whatever else a client's combat suite is doing, not a standalone feature. Rise Nextgen, a Fabric-based utility client, runs it exactly this way: filed under the combat category, quietly filtering the target list before the rest of the automation gets to act.
+
+## Anti Bot vs anticheat bot detection
+
+These two things share a name but point in opposite directions. A server-side anticheat's bot detection works by planting a decoy and watching how a suspected cheater's client reacts to it. It's a trap, and it's designed to catch automation that can't tell a fake player from a real one.
+
+Anti Bot is the other half of that exchange. It's a client-side filter that recognizes the decoy before an attack ever fires, so there's no reaction for the anticheat to watch in the first place. One is a detection method aimed at cheaters. The other is a module that quietly declines to walk into it.
+
+<Callout variant="tip" title="Opal ships this">
+Opal's own Anti Bot module does exactly this job: extra bot-detection checks so targeting ignores fake players. It's classified Safe in the module list, since it never touches aim, reach, or attack behavior, only what your combat automation is allowed to see.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What counts as a decoy bot in Minecraft?">
+A decoy bot is a player-shaped entity, often spawned by a server, a plugin, or a screenshare reviewer, that looks like a real account but isn't one. It exists purely to see whether your automation reacts to it.
+</FAQItem>
+
+<FAQItem question="Does Anti Bot change combat, or just targeting?">
+Just targeting. Anti Bot doesn't add reach, aim, or attack speed. It only removes decoy entities from the list of things your combat automation is allowed to hit.
+</FAQItem>
+
+<FAQItem question="Is Anti Bot a cheat by itself?">
+No. On its own, Anti Bot doesn't attack, aim, or move you. It filters which entities your combat automation can see, so it acts as a quality-of-life check on that automation rather than automation in its own right.
+</FAQItem>
+
+<FAQItem question="How is Anti Bot different from an anticheat's bot detection?">
+They sit on opposite sides of the same exchange. An anticheat plants a decoy and watches how you react to it. Anti Bot is the client-side module that keeps your automation from reacting to that decoy in the first place.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The auto-attacking module Anti Bot's target filter feeds into." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "Another targeting-driven module that lives or dies by its target list." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category these modules belong to." },
+]} />
+
+<CTA href="/en/purchase">Combat automation that already knows a decoy when it sees one. Opal starts at $8.99.</CTA>

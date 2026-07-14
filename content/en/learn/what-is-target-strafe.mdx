@@ -1,0 +1,87 @@
+---
+title: "What Is Target Strafe in Minecraft? Module Explained"
+description: "Target Strafe is a Minecraft movement module that auto-circles a locked combat target. Here is how it works, its silent variant, and why servers flag it."
+excerpt: "It circles you around your target automatically, no footwork required. Also one of the easier movement cheats for a server to catch."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Target Strafe actually do?"
+    a: "It automatically circles you around a locked combat target, taking over the lateral movement a player would normally handle with A and D."
+  - q: "What is the silent variant of Target Strafe?"
+    a: "A submode, documented in LiquidBounce, that changes your real movement direction on the server without rotating the camera you or anyone else sees, decoupling where you're facing from where you're actually going."
+  - q: "Is Target Strafe detectable by anticheats?"
+    a: "Yes. The regular version produces unnaturally smooth circular movement, and the silent version creates a facing-versus-movement mismatch a vanilla client cannot produce, both of which are signals anticheats can measure."
+  - q: "Which clients have shipped Target Strafe?"
+    a: "It has been documented in LiquidBounce and Fan, and Opal ships its own version under the same name, Target Strafe."
+  - q: "Is Target Strafe the same as a movement assist?"
+    a: "No. A movement assist might display information or smooth out input. Target Strafe replaces your directional input entirely, which is why it's classified as a cheat module rather than a helper."
+---
+
+<KeyTakeaways>
+
+- Target Strafe is a movement module that auto-circles you around a locked combat target, replacing manual strafing.
+- A silent variant decouples your visible facing from your real movement, something a vanilla client can't do.
+- Both variants are detectable: unnaturally smooth circling and facing/movement mismatches are real anticheat signals.
+- Opal ships its own Target Strafe module and flags it use-at-your-own-risk.
+
+</KeyTakeaways>
+
+Target Strafe is a movement module that automatically circles you around whatever you've locked as a combat target, instead of you holding A or D and walking the circle yourself. It works out a strafe direction every tick and feeds it straight into your movement, so the circle stays smooth no matter what your hands are doing. Some clients ship a silent variant on top, one that moves your character one way while your camera keeps facing another. It's a small piece of automation with an outsized reputation for getting people caught.
+
+## How Target Strafe works
+
+Target Strafe hooks into the client's combat targeting system and takes over lateral movement the moment a target is locked, usually the same moment a combat or aim module starts swinging. Instead of you pressing A or D to walk the circle, the module recalculates the strafe direction every tick and writes it directly into the movement handler. The output is a clean, mechanically consistent orbit around whatever you're fighting, at a radius and speed no manual strafing quite matches.
+
+The silent variant, documented in LiquidBounce, takes it a step further. Rather than just automating the strafe input, it changes the direction your character actually moves on the server while leaving your rendered camera rotation untouched. Anyone watching sees a player facing one way and drifting another, a combination a normal client input physically cannot produce.
+
+Paired with an aim or combat module, Target Strafe removes one more piece of manual coordination from a close-range fight: no losing your angle mid-swing, no getting flanked because your feet and your mouse weren't doing the same thing at once.
+
+<Callout variant="tip" title="Opal calls it Target Strafe too">
+Opal's catalog entry for this one does exactly what the name promises: it circles you around your target. Same module, same category, same tradeoff covered below.
+</Callout>
+
+## Is Target Strafe safe to use
+
+Two separate things get flagged here. The base version produces movement that's too smooth and too consistent to pass for a person working a keyboard, and a server tracking movement patterns can measure that consistency directly.
+
+The silent variant is the riskier of the two. A mismatch between where a player's body is facing and where it's actually moving isn't something a legitimate client input can produce, so any anticheat that cross-checks rotation against movement has a clean signal to catch it on. Whether a given server actually catches it depends on how closely that server checks movement consistency, but neither variant is a safe assumption.
+
+<Callout variant="warning" title="Reference, not a how-to">
+Target Strafe, silent or not, is detectable movement automation and breaks the rules on essentially every multiplayer server. Every client that ships it, Opal included, lists it as use at your own risk. That's not a promise you'll get banned. It's an acknowledgment that you could.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does Target Strafe actually do?">
+It automatically circles you around a locked combat target, taking over the lateral movement a player would normally handle with A and D.
+</FAQItem>
+
+<FAQItem question="What is the silent variant of Target Strafe?">
+A submode, documented in LiquidBounce, that changes your real movement direction on the server without rotating the camera you or anyone else sees, decoupling where you're facing from where you're actually going.
+</FAQItem>
+
+<FAQItem question="Is Target Strafe detectable by anticheats?">
+Yes. The regular version produces unnaturally smooth circular movement, and the silent version creates a facing-versus-movement mismatch a vanilla client cannot produce, both of which are signals anticheats can measure.
+</FAQItem>
+
+<FAQItem question="Which clients have shipped Target Strafe?">
+It has been documented in LiquidBounce and Fan, and Opal ships its own version under the same name, Target Strafe.
+</FAQItem>
+
+<FAQItem question="Is Target Strafe the same as a movement assist?">
+No. A movement assist might display information or smooth out input. Target Strafe replaces your directional input entirely, which is why it's classified as a cheat module rather than a helper.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The auto-attack module Target Strafe usually rides alongside." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "The aim-only combat module it often pairs with." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity / Anti-Knockback?", description: "Another movement module built to keep you in a fight longer." },
+]} />
+
+<CTA href="/en/purchase">Circle smarter. Opal ships Target Strafe and the rest of the combat kit around it.</CTA>

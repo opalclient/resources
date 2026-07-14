@@ -1,0 +1,86 @@
+---
+title: "What Is HClip in Minecraft? Horizontal Clip Explained"
+description: "HClip (Horizontal Clip) shifts a player sideways through a solid block to skip past a thin wall. Here's how the world module works and why it gets flagged."
+excerpt: "No hole in the wall, no broken lock, just you on the other side. That's the pitch, and it's also the giveaway."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does HClip actually do?"
+    a: "It shifts the player a short distance sideways through a solid block, so they end up on the other side without breaking or placing anything to get there."
+  - q: "Is HClip the same as breaking through a wall?"
+    a: "No. Breaking through a wall removes blocks and leaves a visible hole. HClip leaves the wall standing; the player passes through its collision instead of removing it."
+  - q: "Does HClip work over long distances?"
+    a: "No. It's built to move the player a short distance, enough to cross something like a single wall's thickness or a narrow gap, not to travel any real distance through terrain."
+  - q: "Is HClip detectable?"
+    a: "Yes, in principle. It requires the player's position to briefly overlap a solid block, which normal movement can never produce and which server-side collision checks are built to catch."
+  - q: "Which client has HClip?"
+    a: "HClip is documented as seen in Juul, alongside its vertical counterpart, VClip."
+---
+
+<KeyTakeaways>
+
+- HClip (Horizontal Clip) is a world-category module that shifts a player sideways through a solid block to get past a thin wall or into a sealed space.
+- The move is short and horizontal only, built for crossing a wall's thickness or a narrow gap, not for covering real distance.
+- No blocks are broken or placed. The player is simply on the other side.
+- It's documented as seen in Juul, alongside its vertical counterpart VClip.
+- The position report briefly overlaps solid terrain, which is exactly what collision-based anticheats watch for.
+
+</KeyTakeaways>
+
+HClip, short for Horizontal Clip, is a Minecraft world module that pushes a player sideways through a solid block instead of walking them around it. Rather than digging, jumping, or finding a door, the player's position simply moves from one side of the obstacle to the other in a single step. It's built for short crossings, a wall, a narrow gap, and it doesn't touch a single block to get there.
+
+## How HClip works
+
+Normally the game moves you one small step at a time and checks each step against the world's collision data, so you can't occupy the same space as a solid block. HClip skips that sequence. It pushes the player's position sideways past a block's collision in one move, so instead of the client walking around an obstacle over several ticks, the player just ends up on the far side of it.
+
+Because the shift is short and purely horizontal, it isn't a general teleport. It's sized for crossing something like the thickness of a single wall or a narrow gap, the kind of obstacle that would otherwise mean digging in or walking the long way around. HClip is documented as a world-category module and has been seen in Juul, the same client that carries VClip, its vertical-direction sibling, for clipping up or down through floors and ceilings instead of walls.
+
+## Is HClip safe to use
+
+The appeal is obvious: access without a trace. Digging into a base takes time, leaves broken blocks behind, and can trip a trap or tip off whoever built the place. HClip skips all of that. Nothing is placed, nothing is broken, and the wall looks untouched afterward, which makes it attractive for slipping past a thin barrier or into a sealed vault quietly.
+
+That quiet comes at a cost. Moving through a block the server considers solid isn't something normal movement physics can produce, and a position report that puts a player inside a wall, even for one tick, is illegal by definition. Being short and horizontal-only narrows the window an anticheat has to catch it, but it doesn't close it. Any server that validates reported position against world collision data is checking for exactly this shape of behavior. This is a movement exploit, not a cosmetic flex, and it carries real ban risk on anything that checks.
+
+<Callout variant="tip" title="Where Opal draws the line">
+Opal's world category covers real ground, but it doesn't ship a wall-phasing module under any name. A feature whose entire job is putting your position inside a block the server considers solid is a hard sell for anything built to last past the first strict anticheat pass.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what HClip means and how the effect works generically. Exact behavior varies by client, and moving through solid terrain the server hasn't authorized breaks the rules on essentially every server that checks movement against collision.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does HClip actually do?">
+It shifts the player a short distance sideways through a solid block, so they end up on the other side without breaking or placing anything to get there.
+</FAQItem>
+
+<FAQItem question="Is HClip the same as breaking through a wall?">
+No. Breaking through a wall removes blocks and leaves a visible hole. HClip leaves the wall standing; the player passes through its collision instead of removing it.
+</FAQItem>
+
+<FAQItem question="Does HClip work over long distances?">
+No. It's built to move the player a short distance, enough to cross something like a single wall's thickness or a narrow gap, not to travel any real distance through terrain.
+</FAQItem>
+
+<FAQItem question="Is HClip detectable?">
+Yes, in principle. It requires the player's position to briefly overlap a solid block, which normal movement can never produce and which server-side collision checks are built to catch.
+</FAQItem>
+
+<FAQItem question="Which client has HClip?">
+HClip is documented as seen in Juul, alongside its vertical counterpart, VClip.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The stealth category built around leaving no trace, same instinct HClip is chasing." },
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "Another world-adjacent module that gets caught by a specific, checkable tell." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category these modules belong to." },
+]} />
+
+<CTA href="/en/purchase">See the world tools Opal ships without putting your position inside a wall.</CTA>

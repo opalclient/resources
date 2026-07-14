@@ -1,0 +1,79 @@
+---
+title: "What Is Eagle in Minecraft? Auto-Sneak Bridging Explained"
+description: "Eagle is a Minecraft movement module that auto-sneaks at block edges, the Ninja Bridge technique, so you bridge at full speed without holding shift throughout."
+excerpt: "Eagle sneaks for you right at the edge, so you get Ninja Bridge safety without babysitting the shift key."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Eagle actually do?"
+    a: "It sneaks for you automatically, but only right at the edge of a block, giving you the fall protection of sneak-bridging without holding shift for the whole bridge."
+  - q: "Is Eagle the same as Ninja Bridge?"
+    a: "Ninja Bridge is the manual technique of holding shift near block edges while bridging. Eagle automates that exact technique so you don't have to hold the key yourself."
+  - q: "Which clients have Eagle?"
+    a: "It's documented running in Juul and Rose, and Opal ships its own Eagle module doing the same job. Other clients may implement the same auto-sneak-at-edge behavior under a different module name."
+  - q: "Can Eagle get you banned?"
+    a: "It's a detectable feature. Automatic sneak timing that fires consistently at block edges differs from manual play, and some anticheats watch for exactly that pattern, so using it carries risk depending on the server."
+---
+
+<KeyTakeaways>
+
+- Eagle auto-sneaks only at block edges, giving you Ninja Bridge safety without holding shift the whole way.
+- It checks your position against the block below every tick, sneaking at the edge and releasing once centered again.
+- Full walking speed otherwise, since sneak only fires during the edge moment.
+- Documented in clients like Juul and Rose; it's a detectable, use-at-own-risk module.
+
+</KeyTakeaways>
+
+Eagle is a Minecraft movement module that sneaks for you automatically, but only right at the edge of a block. It reproduces the safety of Ninja Bridge, the habit of holding shift while bridging so you don't walk off the edge before the next block lands, without making you actually hold the key. You walk and place blocks like normal. Eagle watches the ledge and handles the sneaking itself, engaging for the moment it matters and releasing the rest of the time.
+
+## How it works
+
+Eagle watches your position relative to the block underneath you on every tick. The moment you're close enough to an edge that a step forward would drop you, sneak engages on its own. As soon as you move back toward the center of the block, it releases and you're walking at full speed again.
+
+From the outside this looks exactly like ordinary bridging. The difference is that you never hold shift yourself, so movement only slows during the instants sneaking is actually doing something, not for the length of the whole bridge. That's the specific gap Eagle is built for: manual sneak-bridging is safe but slow, and bridging without sneaking at all risks walking off the block before the next one lands. Eagle is documented running in clients like Juul and Rose, doing the same job wherever it shows up.
+
+## Is it safe to use
+
+Automatic, conditional sneaking isn't normal client behavior. Vanilla Minecraft doesn't toggle sneak on its own based on where you're standing, so a server watching movement has something concrete to compare against. Sneak input that fires exactly at block edges, every time, faster and more consistently than a human manages by hand, is the kind of pattern a server-side check can pick up on.
+
+That doesn't put Eagle in the same league as flight or a speed hack. It's quieter, closer to the "looks like normal play from across the server" end of the spectrum. But quiet isn't invisible, and whether a given server catches it comes down to how closely that server's anticheat watches sneak timing.
+
+<Callout variant="tip" title="Opal calls this Eagle too">
+Opal ships the same module under the same name. It sneaks at block edges automatically, the Ninja Bridge technique, so the fall protection is there without babysitting the shift key. Opal classifies it use-at-own-risk, same as here: it's detectable, and running it carries the same ban risk as any client's version of the module.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Eagle is and how it behaves, not a guide to running it undetected. It's a use-at-own-risk feature by nature: sneaking automatically at edges isn't vanilla behavior, and any server watching movement closely enough can flag the pattern.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does Eagle actually do?">
+It sneaks for you automatically, but only right at the edge of a block, giving you the fall protection of sneak-bridging without holding shift for the whole bridge.
+</FAQItem>
+
+<FAQItem question="Is Eagle the same as Ninja Bridge?">
+Ninja Bridge is the manual technique of holding shift near block edges while bridging. Eagle automates that exact technique so you don't have to hold the key yourself.
+</FAQItem>
+
+<FAQItem question="Which clients have Eagle?">
+It's documented running in Juul and Rose, and Opal ships its own Eagle module doing the same job. Other clients may implement the same auto-sneak-at-edge behavior under a different module name.
+</FAQItem>
+
+<FAQItem question="Can Eagle get you banned?">
+It's a detectable feature. Automatic sneak timing that fires consistently at block edges differs from manual play, and some anticheats watch for exactly that pattern, so using it carries risk depending on the server.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "The other auto-bridging module, this one placing blocks for you instead of sneaking." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The stealth-focused category quieter modules like this one belong to." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category Eagle and modules like it live inside." },
+]} />
+
+<CTA href="/en/purchase">Bridge at full speed. Opal's Eagle covers the edges.</CTA>

@@ -1,0 +1,84 @@
+---
+title: "What Is ESP 2D in Minecraft? Module Explained"
+description: "ESP 2D is a Minecraft module that marks players and entities with a flat on-screen box instead of a 3D world outline. How it renders and its ban risk."
+excerpt: "Box over glow. ESP 2D pins a flat marker over every entity on your screen instead of wrapping a 3D outline around them, so it never gets lost behind a wall."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What is the difference between ESP 2D and Glow ESP?"
+    a: "ESP 2D draws a flat box or marker in screen space that doesn't follow the entity's shape. Glow ESP outlines the entity itself in the game world, so it moves and scales like a real in-world effect as the camera turns."
+  - q: "Does ESP 2D see through walls?"
+    a: "Yes. It draws a marker for every tracked entity regardless of whether a wall or terrain sits between you and them, which is exactly what makes it a wallhack-class feature."
+  - q: "Can anticheats detect ESP 2D specifically?"
+    a: "There's no detection method built just for the box shape. Anticheats capable of catching ESP generally don't care whether it rendered as a 2D box or a 3D outline. The risk comes from having and acting on information you shouldn't have, not from the marker's geometry."
+  - q: "Which clients include ESP 2D?"
+    a: "It has shown up in clients like Fan and Tenacity, usually sitting next to Glow ESP as a second rendering option for the same entity data. Opal takes a different approach and ships one unified Entity ESP module instead of splitting the two styles."
+---
+
+<KeyTakeaways>
+
+- ESP 2D is a visual module that marks players and entities with a flat box or marker drawn in screen space, not a 3D outline wrapped around the entity in the world.
+- It's one of two common ESP render styles, the other being Glow ESP; clients that ship both let you pick.
+- Screen-space drawing means the marker isn't occluded by terrain and reads at a consistent size regardless of distance.
+- It reveals entity positions through walls, so anticheats treat it as a wallhack-class feature no matter which render style drew the box.
+
+</KeyTakeaways>
+
+ESP 2D is a visual module that marks other players and entities with a flat box, dot, or label drawn directly on your screen, rather than a 3D outline wrapped around the entity out in the world. It's one of two common ways clients render entity ESP, the other being Glow ESP, and any client that ships both lets you choose which one you'd rather look at. The point either way is the same: know where everyone is without turning your camera to check.
+
+## How ESP 2D renders
+
+ESP 2D projects each tracked entity's real position onto your screen space every frame and draws a marker at that point, a box outline, a dot, or a small label. This is different from a 3D or "world" ESP, which draws its outline directly on the entity itself, so it moves and scales with the model in three dimensions as your camera swings around. A 2D marker behaves more like a name tag pinned above someone's head: flat, screen-locked, and indifferent to how the actual model is angled or animated underneath it.
+
+Because the draw call happens in screen space instead of world space, a 2D box doesn't get occluded by a wall or a hillside the way a world-space outline sometimes does, and it can hold a constant size on screen no matter how far away the entity is. Some implementations scale the box with distance anyway, so a target standing next to you reads bigger than one across the map. Either way, the underlying entity position drives the marker, so the read survives them ducking behind a rock or your camera landing at an awkward angle.
+
+## ESP 2D vs Glow ESP
+
+| Aspect | ESP 2D | Glow ESP |
+|---|---|---|
+| Where it draws | Flat box, dot, or label in screen space | Outline wrapped on the entity in world space |
+| Occlusion by terrain | Stays visible through walls and blocks | Also sees through terrain, but reads as an in-world glow |
+| Size at distance | Often constant; some builds scale it with range | Scales naturally like a real in-game effect |
+| Visual read | Uniform and easy to scan across the whole map | Closer to how a normal glow potion or spectral effect looks |
+
+Both styles pull from the same entity tracking underneath. The choice is purely about legibility versus immersion: 2D for a clean, consistent HUD-style read at every distance, Glow when you want the information without it looking quite so much like a HUD.
+
+<Callout variant="tip" title="Where Opal lands on this">
+Opal doesn't split entity ESP into a 2D toggle and a Glow toggle. Its catalog lists one Visual-category module, Entity ESP, described plainly as highlighting players and entities through the world. One switch, no render-style decision to make before you can see anyone.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+No form of entity ESP is safe to assume undetectable, box or glow. It hands you information you shouldn't have without actual visual contact, and an anticheat built to catch ESP generally doesn't care which shape drew the marker. Wallhack and X-ray rules apply to ESP 2D the same as any 3D outline. Treat it as use-at-own-risk on anticheat-protected servers.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What is the difference between ESP 2D and Glow ESP?">
+ESP 2D draws a flat box or marker in screen space that doesn't follow the entity's shape. Glow ESP outlines the entity itself in the game world, so it moves and scales like a real in-world effect as the camera turns.
+</FAQItem>
+
+<FAQItem question="Does ESP 2D see through walls?">
+Yes. It draws a marker for every tracked entity regardless of whether a wall or terrain sits between you and them, which is exactly what makes it a wallhack-class feature.
+</FAQItem>
+
+<FAQItem question="Can anticheats detect ESP 2D specifically?">
+There's no detection method built just for the box shape. Anticheats capable of catching ESP generally don't care whether it rendered as a 2D box or a 3D outline. The risk comes from having and acting on information you shouldn't have, not from the marker's geometry.
+</FAQItem>
+
+<FAQItem question="Which clients include ESP 2D?">
+It has shown up in clients like Fan and Tenacity, usually sitting next to Glow ESP as a second rendering option for the same entity data. Opal takes a different approach and ships one unified Entity ESP module instead of splitting the two styles.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category ESP and other awareness modules live inside." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Why quiet information advantages like ESP get built to stay subtle." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "The module ESP usually feeds once you know exactly where to look." },
+]} />
+
+<CTA href="/en/purchase">Know where everyone is before you round the corner. Opal is $8.99.</CTA>

@@ -1,0 +1,75 @@
+---
+title: "What Is FPS Spoofer in Minecraft?"
+description: "FPS Spoofer replaces Minecraft's on-screen frame counter with a fake number, while real rendering, input, and network traffic stay completely untouched."
+excerpt: "The number in the corner can lie without your game ever knowing about it. FPS Spoofer only touches the label, never the frame rate underneath."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does FPS Spoofer actually change my frame rate?"
+    a: "No. It only changes the number displayed on screen. The game keeps rendering at its real frame rate, nothing about actual performance is altered."
+  - q: "Can a server or anticheat detect FPS Spoofer?"
+    a: "No. The fake number only exists on your local display and never touches anything sent to the server, like movement packets or timing data, so there's nothing for an anticheat to observe."
+  - q: "Why would someone want a fake FPS number?"
+    a: "Mostly for streaming or recording, either to show a higher number for appearances or to hide a low one. It's a presentation choice, not a gameplay one."
+  - q: "Is FPS Spoofer the same as an FPS booster?"
+    a: "No. An FPS booster changes actual rendering to run faster. FPS Spoofer only changes the displayed number and leaves real performance exactly as it was."
+---
+
+<KeyTakeaways>
+
+- FPS Spoofer swaps the on-screen FPS counter for a number you pick, or one that drifts near a target.
+- Real rendering speed, input handling, tick timing, and network traffic never change, only the label lies.
+- Used mostly for streaming and recording, to look faster than you are or hide a rough number.
+- Purely cosmetic, so there's no gameplay signal for a server anticheat to catch.
+
+</KeyTakeaways>
+
+FPS Spoofer is a Minecraft utility client module that overrides the on-screen frame-rate counter with a number you choose, or one that drifts around a target, instead of showing your real FPS. It's a display trick and nothing else. The client keeps rendering at whatever speed it actually manages underneath, only the digits in the corner of your screen change. That makes it one of the more honest cheats to talk about, since it never claims to touch gameplay in the first place.
+
+## How it works
+
+FPS Spoofer hooks the exact point where the client reads or formats its frame-rate figure, usually the F3 debug overlay or a HUD counter bolted on by whatever utility client you're running, and swaps in a fake number right before it reaches the screen. Everything upstream of that hook, the actual render loop, texture uploads, GPU calls, is left completely alone. The game renders at whatever speed it renders at. The module just lies about the label.
+
+The fake number comes in two flavors. Lock it to a fixed value and it never moves, or let it drift slightly around a target so it reads like a real, fluctuating FPS instead of a suspiciously static one glued to the corner of your screen. Either way, the render pipeline itself never changes. This is a label edit, not a performance edit.
+
+<Callout variant="tip" title="A gimmick we skipped">
+Opal doesn't ship a fake FPS counter. If you want your real frame rate, the F3 overlay already tells you for free. We'd rather spend a module slot on something that changes what happens on screen, not what a screenshot claims happened.
+</Callout>
+
+## Is it safe to use
+
+Yes, about as safely as a cosmetic feature can be. Anticheats work by sampling things a client actually sends back to the server: movement packets, timing between actions, rotation data, that sort of thing. FPS Spoofer never touches any of it. The number changes on your local overlay and nothing else, so there's no packet, no tick discrepancy, no behavioral pattern for a server to notice, because the server was never part of the conversation to begin with.
+
+That puts it in the same bucket as any other purely cosmetic HUD toggle: the detection risk isn't just low, it's structurally zero. There's nothing to disclose because there's nothing happening outside your own client.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does FPS Spoofer actually change my frame rate?">
+No. It only changes the number displayed on screen. The game keeps rendering at its real frame rate, nothing about actual performance is altered.
+</FAQItem>
+
+<FAQItem question="Can a server or anticheat detect FPS Spoofer?">
+No. The fake number only exists on your local display and never touches anything sent to the server, like movement packets or timing data, so there's nothing for an anticheat to observe.
+</FAQItem>
+
+<FAQItem question="Why would someone want a fake FPS number?">
+Mostly for streaming or recording, either to show a higher number for appearances or to hide a low one. It's a presentation choice, not a gameplay one.
+</FAQItem>
+
+<FAQItem question="Is FPS Spoofer the same as an FPS booster?">
+No. An FPS booster changes actual rendering to run faster. FPS Spoofer only changes the displayed number and leaves real performance exactly as it was.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category FPS Spoofer's cosmetic tools live inside." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Where a display trick stops and a real detection risk starts." },
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The opposite end of the risk spectrum from a cosmetic overlay tweak." },
+]} />
+
+<CTA href="/en/purchase">Real modules, not a fake number in the corner. Opal is $8.99.</CTA>

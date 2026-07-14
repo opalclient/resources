@@ -1,0 +1,73 @@
+---
+title: "What Is Lightning Tracker in Minecraft?"
+description: "Lightning Tracker is a Minecraft module that marks every lightning strike as it lands, helping you spot trial chambers, ancient cities, and redstone builds."
+excerpt: "Every lightning bolt already flashes on your screen. This module just makes sure you never miss one."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Lightning Tracker actually do?"
+    a: "It watches for lightning strikes in the loaded world and marks each one the instant it lands, so you notice a strike even if it happened somewhere you weren't looking."
+  - q: "Is Lightning Tracker a cheat?"
+    a: "No. It only calls attention to something the game already shows every nearby player, a lightning bolt, rather than granting a combat or movement advantage, so it doesn't belong in the same category as modules like Killaura or Flight."
+  - q: "Why do trial chambers and ancient cities matter for a lightning tracker?"
+    a: "Because those structures, along with various redstone builds, use lightning rods or lightning-triggered contraptions, tracking strikes gives you a passive way to notice them instead of stumbling onto them by chance."
+  - q: "Which clients have Lightning Tracker?"
+    a: "Lightning Tracker is documented as a feature of Tenacity."
+  - q: "Does using Lightning Tracker risk a ban?"
+    a: "It's not expected to. The module works entirely from information already visible to every client and doesn't change anything the server receives from your game."
+---
+
+<KeyTakeaways>
+- Lightning Tracker is a world-awareness module that marks every lightning strike the moment it lands, even ones outside your field of view.
+- It's used to locate trial chambers, ancient cities, and other builds that run on lightning rods or lightning-triggered redstone.
+- It only surfaces information vanilla Minecraft already broadcasts to nearby players, so it carries essentially no anticheat risk.
+- Tenacity is documented as a client that ships it.
+</KeyTakeaways>
+
+Lightning Tracker is a world-awareness module that catches every lightning strike in the loaded world and marks it the instant it happens, instead of leaving you to catch the flash and thunder yourself. Vanilla Minecraft already renders every bolt for anyone standing nearby: the module doesn't add new information, it just makes sure a strike happening behind you, off to the side, or three chunks away doesn't slip past unnoticed. That's the whole pitch. No new packets, no new textures, just a nudge toward something the game was already showing you.
+
+## How it works
+
+The module hooks into the game's lightning strike events and drops a marker the moment a bolt lands, whether you're looking at it or not. Minecraft already spawns a lightning entity with a visible flash and audible thunder for every player in render distance, so the module isn't intercepting anything hidden from other players, isn't predicting where a bolt will land, and isn't creating strikes that wouldn't otherwise happen. It's closer to a highlighter than a wallhack: it circles what's already on the page.
+
+That distinction is what makes it useful. Trial chambers, ancient cities, and a fair number of custom redstone builds lean on lightning rods or lightning-triggered contraptions as part of their design. Walking a region on foot hoping to catch a strike out of the corner of your eye is slow, and easy to miss entirely. Running the module while you explore turns every strike, including the ones you'd normally walk right past, into a pointer toward a structure you'd otherwise find by luck.
+
+## Is it safe to use
+
+Short answer: yes. Lightning Tracker doesn't touch anything the server cares about. It doesn't move your character, doesn't change what packets your client sends, and doesn't alter hit detection the way a combat module like [Killaura](/en/learn/what-is-killaura) does, or send you flying the way a movement module like Flight does. Every strike it marks is already broadcast to every client in range, so the module is reading data your game already has rather than asking the server for anything extra.
+
+Server-side anticheats look for the fingerprints of an unfair advantage: impossible movement, suspicious swing timing, position desync. None of that applies here. It behaves more like a rendering convenience than a gameplay edge, the kind of feature you could explain to a server admin without flinching.
+
+<Callout variant="tip" title="Where this fits in Opal">
+Opal doesn't ship a module under this exact name. But the category it lives in, passive world-awareness that turns things the game already renders into something you physically can't miss, is the same territory Opal's own world and utility modules cover. If structure-hunting efficiency is what you're after, that's the shelf to check.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="What does Lightning Tracker actually do?">
+It watches for lightning strikes in the loaded world and marks each one the instant it lands, so you notice a strike even if it happened somewhere you weren't looking.
+</FAQItem>
+<FAQItem question="Is Lightning Tracker a cheat?">
+No. It only calls attention to something the game already shows every nearby player, a lightning bolt, rather than granting a combat or movement advantage, so it doesn't belong in the same category as modules like Killaura or Flight.
+</FAQItem>
+<FAQItem question="Why do trial chambers and ancient cities matter for a lightning tracker?">
+Because those structures, along with various redstone builds, use lightning rods or lightning-triggered contraptions, tracking strikes gives you a passive way to notice them instead of stumbling onto them by chance.
+</FAQItem>
+<FAQItem question="Which clients have Lightning Tracker?">
+Lightning Tracker is documented as a feature of Tenacity.
+</FAQItem>
+<FAQItem question="Does using Lightning Tracker risk a ban?">
+It's not expected to. The module works entirely from information already visible to every client and doesn't change anything the server receives from your game.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The category Lightning Tracker belongs to, and what utility clients actually change." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "How stealth-focused clients differ from modules built for convenience, not concealment." },
+  { href: "/en/learn/what-is-killaura", label: "What is Killaura?", description: "The other end of the risk spectrum: a combat module anticheats actively hunt for." }
+]} />
+
+<CTA href="/en/purchase">Structure-finding is one small corner of what a utility client can do. See the rest of Opal's toolkit for $8.99.</CTA>

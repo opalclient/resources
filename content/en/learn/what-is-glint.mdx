@@ -1,0 +1,67 @@
+---
+title: "What Is Glint? The Fake Enchant Shimmer Module"
+description: "Glint is a Minecraft client module that adds or edits the enchantment shimmer on any item, purely cosmetic and invisible to anticheats and other players."
+excerpt: "Make a plain stick shimmer like a fully enchanted sword. Nobody else ever sees it, and nothing about the item actually changes."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Glint change whether an item is actually enchanted?"
+    a: "No. Glint only changes the shimmer rendered over the item on your own client. The item's real enchantments, stats, and server-side data stay exactly what they were."
+  - q: "Can other players see my custom glint effect?"
+    a: "No. Item rendering, glint included, happens independently on each client. Everyone else sees the item exactly as the server's real data describes it, shimmer or no shimmer."
+  - q: "Does using Glint get flagged by anticheats?"
+    a: "No. Glint changes only what gets drawn locally and never sends different data to the server, so there is nothing server-side for an anticheat to catch."
+  - q: "Is Glint the same as a resource pack that recolors the enchant effect?"
+    a: "Not quite. A resource pack restyles the glint texture for every enchanted item at once. A client module can force the shimmer onto specific unenchanted items or toggle it per item."
+---
+
+<KeyTakeaways>
+- Glint is a cosmetic Minecraft client module that fakes or removes the enchantment shimmer on any item, whether or not it's actually enchanted.
+- It works entirely in the render pipeline, so item data, stats, and server-side enchantments never change.
+- Other players and anticheats never see the effect, since every client renders items independently from the server's real data.
+</KeyTakeaways>
+
+Glint is the module that lets you slap Minecraft's enchantment shimmer onto an item that has zero enchantments, or strip the shimmer off one that has plenty. It's a purely cosmetic setting, the kind of thing that changes how your gear looks without touching how it plays. If you've ever wanted a bare wooden sword to gleam like it just came off a grindstone with three max-level enchants, this is the module doing that.
+
+## How the shimmer gets faked
+
+Vanilla Minecraft renders the glint effect as a shader overlay drawn on top of an item's texture, and it only draws that overlay when the item's data actually contains an enchantment. No enchantment, no shimmer. That check happens at render time, which is exactly where Glint steps in: it intercepts the render call and applies, removes, or restyles the shimmer independent of what the item's enchantment data actually says.
+
+Nothing upstream of the render step changes. The item's NBT, its stats, what damage it deals, what the server has on record, none of it moves. An unenchanted sword can shimmer like a maxed-out one, or a genuinely enchanted item can go completely matte, and in both cases the item still functions exactly as its real data dictates. It's the same category of change as picking a resource pack or a skin: local, visual, and invisible to anyone who isn't you.
+
+## Is it safe to use
+
+Yes, and it's about as safe as client modifications get. Glint never touches the item's real enchantment data, never sends anything to the server that an unmodified client wouldn't send, and never gives another player a different view of your inventory than the server's actual state provides. Rendering is local and per-client, so there's no packet an anticheat could inspect that would reveal a fake shimmer, because the shimmer never left your machine.
+
+The one caveat that applies to every client modification still applies here: some servers ban modified clients outright as a blanket policy, regardless of what any individual module does. Worth a rules check before you run anything modified, Glint included.
+
+<Callout variant="tip" title="Where this fits in Opal">
+Opal doesn't ship a module called Glint specifically, but this is squarely the kind of client-side-only visual tweak its cosmetic and render customization settings are built around: things that change what you see on your own screen without touching a single byte of what the server tracks.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Does Glint change whether an item is actually enchanted?">
+No. Glint only changes the shimmer rendered over the item on your own client. The item's real enchantments, stats, and server-side data stay exactly what they were.
+</FAQItem>
+<FAQItem question="Can other players see my custom glint effect?">
+No. Item rendering, glint included, happens independently on each client. Everyone else sees the item exactly as the server's real data describes it, shimmer or no shimmer.
+</FAQItem>
+<FAQItem question="Does using Glint get flagged by anticheats?">
+No. Glint changes only what gets drawn locally and never sends different data to the server, so there is nothing server-side for an anticheat to catch.
+</FAQItem>
+<FAQItem question="Is Glint the same as a resource pack that recolors the enchant effect?">
+Not quite. A resource pack restyles the glint texture for every enchanted item at once. A client module can force the shimmer onto specific unenchanted items or toggle it per item.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The category Glint and modules like it belong to, and what separates a utility client from a hacked client." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Another client style built around what renders locally versus what the server ever finds out about." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "A module on the opposite end of the risk spectrum, one that does change what the server sees." }
+]} />
+
+<CTA href="/en/purchase">Opal's visual settings are all client-side by design. See what's in the panel for $8.99.</CTA>

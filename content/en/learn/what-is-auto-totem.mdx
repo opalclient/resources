@@ -1,0 +1,79 @@
+---
+title: "What Is Auto Totem in Minecraft? Module Explained"
+description: "Auto Totem is a Minecraft combat module that refills your offhand with a totem of undying the moment it is missing or used, keeping death protection active."
+excerpt: "A totem only saves you if it's actually in your hand. Auto Totem makes sure one always is."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Auto Totem give a real combat advantage?"
+    a: "Mostly it saves reaction time and attention rather than doing anything a skilled player couldn't already manage by hand. A good player can keep their offhand stocked manually. Auto Totem just does the watching and swapping so the player can focus on the fight instead."
+  - q: "Is Auto Totem the same as just holding a totem?"
+    a: "No. Vanilla Minecraft already pops a totem sitting in the offhand when a hit would otherwise kill you, that part is built into the game. Auto Totem's job is refilling that offhand slot from the inventory after a totem is used or if it was never there, the part a player would otherwise have to manage by hand."
+  - q: "Which clients include Auto Totem?"
+    a: "It shows up in general-purpose utility clients like Meteor Client and Impact, usually grouped with other combat-support modules rather than anything that touches reach or aim."
+  - q: "Can servers detect Auto Totem?"
+    a: "There is nothing at the packet level that looks different from a normal inventory swap. What can get flagged instead is the pattern: swaps that land faster and more consistently than a human manages under pressure."
+---
+
+<KeyTakeaways>
+
+- Auto Totem is a combat module that refills the offhand with a totem of undying when it's empty or just used.
+- It checks constantly, so a fresh totem is usually in place before the next hit.
+- It does not change reach, hit registration, or movement, only an inventory swap.
+- It appears in utility clients like Meteor Client and Impact.
+
+</KeyTakeaways>
+
+Auto Totem is a Minecraft combat module that automatically moves a totem of undying into your offhand slot the moment it is empty or has just been consumed, so death protection is never something you have to think about mid fight. It is documented in general-purpose utility clients like Meteor Client and Impact, usually sitting next to other combat-support tools rather than anything that changes reach or aim. Keeping a totem stocked during a real fight means watching for the pop, digging into the inventory, and reselecting a totem while also dodging and swinging. Auto Totem takes that one job off the player's plate.
+
+## How it works
+
+Auto Totem watches two things: the offhand slot and the rest of the inventory. The instant the offhand comes up empty, whether because a totem in it just triggered or because there was never one there to begin with, the module scans the inventory for another totem of undying and moves it into place. The move itself is not special. It is the same inventory-to-offhand action a player would perform by hand, just fired by the module instead of a keypress.
+
+Timing is the whole point. A totem only saves a player if it is sitting in the offhand at the exact instant a lethal hit lands, so a module that checks constantly and swaps immediately beats a player who has to notice the pop animation and react to it. Auto Totem runs that check often enough that a fresh totem is usually back in place before the next hit has a chance to land, instead of relying on human reflexes to catch the gap.
+
+## Is Auto Totem detectable
+
+Auto Totem sits closer to the quality-of-life end of the spectrum than to a mechanical cheat. Every action it performs, moving an item from inventory to offhand, is something a player is already allowed to do by hand. The module does not touch reach, hit registration, movement, or anything else a server can measure as physically impossible. It automates a legal click, it does not fabricate an illegal one.
+
+What can stand out is speed and consistency. A manual totem swap carries human reaction delay and sometimes just fails under pressure. An automated one happens at close to the same speed every time the offhand empties, hit after hit, fight after fight. Some servers with strict anticheat policy treat any automated inventory action as against the rules regardless of what it actually does, so whether Auto Totem is acceptable comes down to server policy more than to what the module is mechanically capable of.
+
+<Callout variant="tip" title="Where this sits in Opal">
+Opal does not ship a module called Auto Totem. What it does ship is a combat suite built for the same close-quarters fights this kind of tool exists for, KillAura with modular targeting and aim assist among them, so the surrounding toolkit is there even if this specific piece of inventory management is not part of the catalog.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Auto Totem is and how servers might read it, not instructions for running one. Even where the underlying action is legal on its own, automated combat-support tools break plenty of server rulesets outright, and the consistency they produce is exactly the kind of pattern staff and anticheats are trained to notice.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Auto Totem give a real combat advantage?">
+Mostly it saves reaction time and attention rather than doing anything a skilled player couldn't already manage by hand. A good player can keep their offhand stocked manually. Auto Totem just does the watching and swapping so the player can focus on the fight instead.
+</FAQItem>
+
+<FAQItem question="Is Auto Totem the same as just holding a totem?">
+No. Vanilla Minecraft already pops a totem sitting in the offhand when a hit would otherwise kill you, that part is built into the game. Auto Totem's job is refilling that offhand slot from the inventory after a totem is used or if it was never there, the part a player would otherwise have to manage by hand.
+</FAQItem>
+
+<FAQItem question="Which clients include Auto Totem?">
+It shows up in general-purpose utility clients like Meteor Client and Impact, usually grouped with other combat-support modules rather than anything that touches reach or aim.
+</FAQItem>
+
+<FAQItem question="Can servers detect Auto Totem?">
+There is nothing at the packet level that looks different from a normal inventory swap. What can get flagged instead is the pattern: swaps that land faster and more consistently than a human manages under pressure.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The melee auto-attacker that Auto Totem usually keeps company with in a combat-module list." },
+  { href: "/en/learn/what-is-a-crystal-aura", label: "What is a crystal aura?", description: "Another combat-support automation built around timing and consistency rather than fabricated hits." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The broader category Auto Totem and other combat-support modules live inside." },
+]} />
+
+<CTA href="/en/purchase">Opal's combat suite is built for what happens after the totem pop.</CTA>

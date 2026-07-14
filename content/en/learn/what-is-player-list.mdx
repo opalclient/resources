@@ -1,0 +1,85 @@
+---
+title: "What Is Player List in Minecraft? Tab List Explained"
+description: "Player List is a Minecraft client module that reformats the tab-key overlay of online players with extra info. Here's how it works and whether it's safe."
+excerpt: "The tab-key overlay everyone already checks, reformatted and carrying more than vanilla ever showed you. Nothing about the match changes, just what you can read off the screen."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Player List affect gameplay?"
+    a: "No. It only changes how the tab list looks on your own screen and has zero interaction with combat, movement, or anything the server actually tracks."
+  - q: "Can anticheat detect Player List?"
+    a: "No. The tab list is a purely client-side display, and since nothing about the customization is sent to the server, there's nothing for a server-side anticheat to flag."
+  - q: "What is the tab list in Minecraft?"
+    a: "It's the vanilla overlay that appears while holding the tab key, listing every player currently connected to the server you're on."
+  - q: "Is Player List the same as Array List?"
+    a: "No. Array List shows which client modules are currently active, while Player List reformats the tab-key overlay of online players. Both are cosmetic HUD-adjacent modules, they just cover different vanilla screens."
+---
+
+<KeyTakeaways>
+
+- Player List is a visual module that reformats Minecraft's tab-key overlay, restyling player names or adding extra info to each entry.
+- It changes only how the overlay renders on the client, not the data the server actually sends.
+- Purely cosmetic: nothing about it leaves the client, so there's no anticheat signal to catch.
+- Distinct from Array List, which shows active modules instead of online players.
+- Seen in clients including Tenacity.
+
+</KeyTakeaways>
+
+Player List is a module in Minecraft utility clients that reformats the tab list, the overlay of connected players you see while holding tab. Instead of leaving vanilla's plain column of names alone, it restyles each entry or appends extra information next to it. It's a display change and nothing more: what you see is different, but nothing about how the match actually plays changes underneath it. That puts it in the same bucket as any other module that reskins a screen the game already draws for you, just applied here to the tab overlay instead of, say, the chat window or the hotbar.
+
+## How it works
+
+Vanilla Minecraft already builds the tab list: hold tab and a column of connected players appears, built from data the server sends about who's online. Player List hooks into that existing overlay and changes how it gets rendered, it doesn't touch the data underneath. Names might get recolored or relaid out, or entries get extra fields appended, ping is already vanilla, but a client can bolt on rank tags, group markers, or whatever else it wants surfaced.
+
+Because the change happens purely at render time, after the server has already sent what it's going to send, it doesn't affect what other players see or how anyone is actually tracked. The module reads information the client already has and chooses to present it differently. That's the same category of change as any HUD module reskinning an existing vanilla screen, just aimed at the tab-key overlay specifically.
+
+The appeal is straightforward. The tab list is something you check constantly, to see who's online, count a team, or glance at a name mid-fight. A cleaner or more informative version of a screen you're already opening dozens of times a session is a readability upgrade, not something that changes an outcome in a match.
+
+## Player List vs. Array List
+
+The two get confused constantly because both are cosmetic, HUD-adjacent modules living in the same visual category. They're not the same screen, though.
+
+| | Player List | Array List |
+|---|---|---|
+| Screen it touches | The tab-key online-players overlay | A dedicated corner-of-screen readout |
+| What it shows | Reformatted or extended player entries | Currently active client modules |
+| Vanilla equivalent | Yes, it extends an existing menu | No, this overlay doesn't exist in vanilla |
+| Server-side detection risk | None, purely client-side rendering | None, purely client-side rendering |
+
+Different job, same underlying idea: take information the client already has and present it more usefully than the default does.
+
+<Callout variant="tip" title="Where this fits in Opal">
+Opal doesn't ship a module called Player List under that exact name. Reformatting an existing vanilla screen like the tab list falls squarely in the visual category any utility client covers, so if a cleaner tab overlay is what you're after, it's worth checking a client's actual module list rather than assuming the naming lines up.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Player List affect gameplay?">
+No. It only changes how the tab list looks on your own screen. Combat, movement, anything the server actually tracks, none of that gets touched.
+</FAQItem>
+
+<FAQItem question="Can anticheat detect Player List?">
+No. The tab list is a purely client-side display, and since none of the customization ever gets sent to the server, there's nothing for a server-side anticheat to see, let alone flag.
+</FAQItem>
+
+<FAQItem question="What is the tab list in Minecraft?">
+It's the vanilla overlay that pops up while you're holding tab, listing everyone currently connected to the server you're on.
+</FAQItem>
+
+<FAQItem question="Is Player List the same as Array List?">
+No. Array List shows which of a client's modules are currently switched on. Player List reformats the tab-key overlay of online players. Different screens, same general idea of a cosmetic HUD-adjacent module.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category a tab-list overlay module is one small piece of." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Where the goal shifts from restyling a screen to disappearing from it entirely." },
+  { href: "/en/learn/what-is-killaura", label: "What is Killaura?", description: "A module on the opposite end of the risk spectrum from a cosmetic overlay tweak." },
+]} />
+
+<CTA href="/en/purchase">A restyled tab list is a nice touch. Opal's visual lineup goes a lot further than that.</CTA>

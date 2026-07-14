@@ -1,0 +1,83 @@
+---
+title: "What Is Array List in Minecraft? Module Explained"
+description: "Array List is the HUD overlay that lists a Minecraft utility client's active modules in real time, letting you check what's toggled on without opening a menu."
+excerpt: "Array List turns whatever modules you've got switched on into a running list in the corner of the screen. No menu-diving required."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Array List affect gameplay?"
+    a: "No. It only renders text over your own screen and never touches game logic or talks to the server, so it has zero effect on gameplay."
+  - q: "Can anticheat detect Array List?"
+    a: "No. It never sends anything to the server, so there's nothing for a server-side anticheat to see or flag in the first place."
+  - q: "What is a hidden module in an Array List?"
+    a: "A module that's flagged to keep running normally in the background while being left off the visible list, so it stays active even though it never shows up on screen."
+  - q: "Is Array List the same in every client?"
+    a: "Not exactly. Position, styling, and whether a hidden-module option even exists all vary by client, but the core idea, listing whatever's currently active, stays consistent."
+  - q: "Why would a client hide modules from its own list?"
+    a: "So the visible readout doesn't reveal every enabled module to someone else looking at the screen, most commonly during a screen share."
+---
+
+<KeyTakeaways>
+
+- Array List is a HUD overlay that lists a client's currently active modules in a screen corner, updating live as modules toggle.
+- It renders client-side only, so it never touches the server and anticheat can't see it.
+- Some clients let modules run hidden: active, but left off the list.
+- Found in clients including Fan, Tenacity, and Rose.
+
+</KeyTakeaways>
+
+Array List is a HUD element in Minecraft utility clients that displays the name of every module currently switched on, typically stacked down one corner of the screen. Toggle a module and its name shows up; turn it off and it's gone, no menu required. It appears in clients like Fan, Tenacity, and Rose, and while position and styling differ between them, the job stays the same everywhere: a constant, at-a-glance readout of what's actually running.
+
+## How it works
+
+Every frame, the client checks which modules are currently flagged as enabled and draws their names as a short stack of text, anchored to a corner of the screen. Enable a module and a line gets added. Disable it and the line disappears. That's the whole mechanic. The list is drawn locally over the game view, so it never touches the server, never sends a packet, and has no bearing on how the game actually plays out. It's a readout, not an action.
+
+The appeal is mostly convenience. Once a client ships more than a handful of modules, keeping track of what's toggled by memory stops being reliable, and reopening a full click GUI just to check gets old fast. Glancing at a corner of the screen solves that in half a second.
+
+Some clients pair the list with a hidden-module category. A module flagged this way keeps running exactly as normal, it's just left off the rendered text. That means the on-screen Array List isn't always a complete inventory of what's active, which matters more for how a screen looks to somebody watching than for anything happening server-side.
+
+## Is it safe to use
+
+Array List itself carries none of the risk attached to modules that actually change how the game plays. It renders text locally and never talks to the server, so a server-side anticheat has nothing to observe, let alone flag. Compare that to something like an aimbot or reach, where the server can measure hit angles and distances and catch the gap between what should be physically possible and what just happened. There's no equivalent signal here, because there's no server interaction at all.
+
+The hidden-module pairing is a different kind of consideration. Its purpose is concealing information from a person looking at the screen, most relevantly during a screen share, rather than evading a detection system. Worth knowing if you're treating an Array List as a complete picture of what's running: it might not be one.
+
+<Callout variant="tip" title="Where Opal stands on this">
+Opal doesn't ship a feature called Array List. A running module readout is such a baseline convenience across this category that whether a client has one matters less than what's actually listed on it, whether the names behind it add up to a real toolkit or just a long menu.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Array List affect gameplay?">
+No. It only renders text over your own screen and never touches game logic or talks to the server, so it has zero effect on gameplay.
+</FAQItem>
+
+<FAQItem question="Can anticheat detect Array List?">
+No. It never sends anything to the server, so there's nothing for a server-side anticheat to see or flag in the first place.
+</FAQItem>
+
+<FAQItem question="What is a hidden module in an Array List?">
+A module that's flagged to keep running normally in the background while being left off the visible list, so it stays active even though it never shows up on screen.
+</FAQItem>
+
+<FAQItem question="Is Array List the same in every client?">
+Not exactly. Position, styling, and whether a hidden-module option even exists all vary by client, but the core idea, listing whatever's currently active, stays consistent.
+</FAQItem>
+
+<FAQItem question="Why would a client hide modules from its own list?">
+So the visible readout doesn't reveal every enabled module to someone else looking at the screen, most commonly during a screen share.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category an Array List is a fixture of." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Where concealment stops being about a HUD list and starts being the whole point." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "A module on the opposite end of the risk spectrum from a cosmetic HUD readout." },
+]} />
+
+<CTA href="/en/purchase">A module list is only as good as what's on it. See what's actually on Opal's.</CTA>

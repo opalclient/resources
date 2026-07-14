@@ -1,0 +1,93 @@
+---
+title: "What Is Safe Walk in Minecraft? (Movement Module)"
+description: "Safe Walk is a movement module that stops you walking off block edges at full walking speed, without holding shift or the slowdown vanilla sneaking requires."
+excerpt: "Sneaking keeps you off the ledge. Safe Walk gives you the same protection minus the speed hit and the held key."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What is the difference between Safe Walk and vanilla sneaking?"
+    a: "Vanilla sneaking stops you falling off edges but slows your movement and requires holding shift the entire time. Safe Walk gives the same edge protection at full walking speed with no key held down."
+  - q: "Can anticheats detect Safe Walk?"
+    a: "It's plausible. Anticheats can compare your sneak state to your movement outcome, and a player who never falls off an edge yet is never seen sneaking is exactly the mismatch a server-side check looks for."
+  - q: "Which clients include Safe Walk?"
+    a: "Safe Walk appears in clients like Tenacity and Rose. Opal ships its own version under the same name."
+  - q: "Is Safe Walk a combat module?"
+    a: "No. It's strictly a movement module that watches block edges. It doesn't touch aim, reach, or anything combat related."
+  - q: "Does Safe Walk slow you down like sneaking does?"
+    a: "No, and that's the entire point of the module. It keeps your normal walking speed while still stopping you from stepping into open air."
+---
+
+<KeyTakeaways>
+
+- Safe Walk is a movement module that stops you from walking off the edge of a block, the same protection vanilla sneaking gives.
+- It runs the edge check automatically, on its own, so you keep full walking speed and a normal camera the whole time.
+- Unlike sneaking, there's no key to hold and no animation to give it away, which is also what makes it detectable.
+- Opal ships it as "Safe Walk," classified use-at-own-risk like any client-side movement feature that changes core behavior.
+
+</KeyTakeaways>
+
+Safe Walk is a movement module that stops you from walking off the edge of a block into open air, the same effect vanilla sneaking has, minus the parts that make sneaking annoying. No held key, no reduced speed, no lowered camera. It just quietly refuses to let your next step carry you off a ledge.
+
+## How it works
+
+Vanilla Minecraft already has this check built in. While you hold shift, the game tests whether your next step would put you over open air, and if it would, it cancels the move. That's the entire mechanism behind sneak-edge protection. The catch is that holding shift also slows you down and drops your camera, because sneaking is meant to be a deliberate, careful state.
+
+Safe Walk lifts that edge check out of the sneak key entirely and runs it on every step, all the time, independent of whatever else you're doing. You walk at normal speed with a normal camera, and the module silently cancels any move that would send you off a block edge. It's the same math vanilla runs for sneaking, just decoupled from the penalty that used to come attached to it.
+
+That decoupling is the whole feature. Sneaking already solved fall-offs decades ago. Safe Walk just removes the tax.
+
+## Safe Walk vs. vanilla sneaking
+
+| | Vanilla sneaking | Safe Walk |
+|---|---|---|
+| Edge fall-off protection | Yes, while shift is held | Yes, always on |
+| Movement speed | Reduced | Normal |
+| Camera height | Lowered | Normal |
+| Key required | Shift, held continuously | None |
+| Sneak animation visible | Yes | No |
+
+The gap in that last row is the interesting one. A player who never falls off a ledge but is never actually seen sneaking is producing an outcome that, in vanilla, should require a visible state change. That mismatch is what makes Safe Walk a module worth being deliberate about rather than something to flip on without thinking.
+
+<Callout variant="tip" title="Opal ships Safe Walk">
+Opal's catalog lists it plainly: Safe Walk "keeps you from walking off the edge of blocks." Same idea, no surprises, no extra behavior bolted on beyond what the name says.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+Safe Walk changes core movement in a way server-side anticheats can check for, since edge protection is normally tied to a visible sneak state. Opal classifies it use-at-own-risk: it's detectable, and using it can get an account banned, same as on any client that ships it.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What is the difference between Safe Walk and vanilla sneaking?">
+Vanilla sneaking stops you falling off edges but slows your movement and requires holding shift the entire time. Safe Walk gives the same edge protection at full walking speed with no key held down.
+</FAQItem>
+
+<FAQItem question="Can anticheats detect Safe Walk?">
+It's plausible. Anticheats can compare your sneak state to your movement outcome, and a player who never falls off an edge yet is never seen sneaking is exactly the mismatch a server-side check looks for.
+</FAQItem>
+
+<FAQItem question="Which clients include Safe Walk?">
+Safe Walk appears in clients like Tenacity and Rose. Opal ships its own version under the same name.
+</FAQItem>
+
+<FAQItem question="Is Safe Walk a combat module?">
+No. It's strictly a movement module that watches block edges. It doesn't touch aim, reach, or anything combat related.
+</FAQItem>
+
+<FAQItem question="Does Safe Walk slow you down like sneaking does?">
+No, and that's the entire point of the module. It keeps your normal walking speed while still stopping you from stepping into open air.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "Another movement module, this one builds the floor under you instead of just protecting the edge." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The stealth category built to make modules like this harder to spot." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The broader category Safe Walk and every other module here belongs to." },
+]} />
+
+<CTA href="/en/purchase">Bridge and build without babysitting the shift key</CTA>

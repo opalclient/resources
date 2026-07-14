@@ -1,0 +1,84 @@
+---
+title: "What Is Glow ESP in Minecraft? (Module Explained)"
+description: "Glow ESP is a Minecraft module that outlines players and mobs through walls in a solid color, the same render path vanilla uses for its Glowing effect."
+excerpt: "A wall is supposed to keep your position hidden. Glow ESP just outlines you through it anyway, no server involved."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Glow ESP actually show?"
+    a: "A colored outline around each entity that's visible through walls, shaped to match that entity's model. It doesn't show items, inventory, or anything beyond position and outline."
+  - q: "Is Glow ESP the same as vanilla's Glowing effect?"
+    a: "The render path is the same one vanilla uses for the Glowing status effect, like the glow a spectral arrow applies on a timer. Glow ESP just applies that outline to entities directly, outside of any in-game effect."
+  - q: "Is Glow ESP safer than Killaura or Reach?"
+    a: "It doesn't touch movement, rotations, or attack packets, so it avoids the packet-level checks that catch combat cheats like those. It can still get flagged through behavior analysis if your actions clearly depend on information you shouldn't have."
+  - q: "Can Glow ESP get you banned?"
+    a: "Yes, it's possible. It carries less risk than combat modules since it never changes what your client sends, but a server or staff team watching for players who consistently react to unseen targets can still catch it."
+---
+
+<KeyTakeaways>
+- Glow ESP is a Minecraft visual module that outlines players and mobs in a solid color, visible through walls, floors, and anything else in the way.
+- It renders that outline by skipping the depth test, the same path vanilla Minecraft uses for the Glowing status effect, just applied to every relevant entity on demand.
+- The outline tracks each entity's actual model instead of drawing a flat box, and its color often varies by entity type or team.
+- It sends no extra packets and never touches movement or combat, so there's no clean packet signature, though consistent wall-tracking behavior can still get it flagged.
+</KeyTakeaways>
+
+Glow ESP is a Minecraft visual module that outlines players and mobs in a solid color and keeps that outline visible through walls, floors, and anything else standing in the way. It's the same rendering path as vanilla's Glowing status effect, the glow a spectral arrow applies on a timer, just switched on for every relevant entity around you instead of one target for a few seconds. Clients typically ship it next to a second style, a flat 2D box overlay, and let you pick whichever reads faster mid fight. Either way the result is identical: you know exactly where someone is before you'd ever see them normally.
+
+## How it works
+
+Glow ESP renders each target entity with a colored outline that skips the depth test, so it keeps drawing even when a wall, floor, or another mob sits between you and the target. Vanilla Minecraft already has this exact rendering path built in for the Glowing effect, which is why the look is so familiar: the module just applies that outline to entities on demand instead of waiting for the game to grant it through normal means.
+
+Most implementations let the outline color vary by entity type or team, so a player and a hostile mob don't read as the same threat at a glance. And because the outline tracks the entity's actual model rather than a flat box, it moves and turns with the target instead of just its coordinate.
+
+## Glow ESP vs ESP 2D
+
+Glow ESP and ESP 2D solve the identical problem, seeing an entity through terrain, with different rendering choices.
+
+| | Glow ESP | ESP 2D |
+|---|---|---|
+| What renders | An outline that follows the entity's 3D model | A flat rectangle drawn at the entity's screen position |
+| Behaves more like | An in-world highlight glued to the target's shape | A UI marker sitting on top of the game |
+| Shipped together in | Tenacity (pick either style) | Tenacity (pick either style) |
+
+Neither sends anything extra over the network, so the choice comes down to preference. Outline if you want the silhouette and rotation, box if you want something a quick glance at the screen catches instantly.
+
+## Why it gets flagged
+
+Glow ESP only changes what's rendered locally. It doesn't send extra packets, alter movement, or touch combat timing, so there's no packet-level signature the way there is for a module like [Reach](/en/learn/what-is-reach), which changes what the client actually claims to the server.
+
+Detection comes down to behavior instead. A player who tracks a target through a wall, pre-aims a corner before anyone rounds it, or reacts to an enemy before there's any legitimate line of sight gives staff and some anticheats a pattern worth noticing. That kind of detection depends on watching what you do, not catching a packet, which is exactly why Glow ESP stays a use-at-own-risk feature: quieter on the wire than a combat cheat, not invisible to a human reviewing the recording.
+
+<Callout variant="tip" title="Where this sits in Opal">
+Opal's visual category ships Entity ESP, tagged use-at-own-risk like everything else in that lane. It's the same idea Glow ESP represents: revealing where an entity is through terrain rather than changing anything your client sends to the server. The exact rendering style is a client-by-client detail, but if you're deciding whether that kind of information belongs in your setup at all, Entity ESP is where Opal draws that line.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Glow ESP does and why it's use-at-own-risk, not an endorsement to run it. It never touches packets, so there's nothing clean for an anticheat to catch on the wire, but staff review and behavior-pattern detection still catch players who consistently react to targets they shouldn't be able to see.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="What does Glow ESP actually show?">
+A colored outline around each entity that's visible through walls, shaped to match that entity's model. It doesn't show items, inventory, or anything beyond position and outline.
+</FAQItem>
+<FAQItem question="Is Glow ESP the same as vanilla's Glowing effect?">
+The render path is the same one vanilla uses for the Glowing status effect, like the glow a spectral arrow applies on a timer. Glow ESP just applies that outline to entities directly, outside of any in-game effect.
+</FAQItem>
+<FAQItem question="Is Glow ESP safer than Killaura or Reach?">
+It doesn't touch movement, rotations, or attack packets, so it avoids the packet-level checks that catch combat cheats like those. It can still get flagged through behavior analysis if your actions clearly depend on information you shouldn't have.
+</FAQItem>
+<FAQItem question="Can Glow ESP get you banned?">
+Yes, it's possible. It carries less risk than combat modules since it never changes what your client sends, but a server or staff team watching for players who consistently react to unseen targets can still catch it.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category Glow ESP and modules like it belong to." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "A module that acts on information Glow ESP only reveals." },
+  { href: "/en/learn/what-is-reach", label: "What is Reach?", description: "The packet-level cheat Glow ESP avoids by staying purely visual." }
+]} />
+
+<CTA href="/en/purchase">Opal's visual lineup runs on the same tradeoff as Glow ESP: more information, your call on the risk.</CTA>

@@ -1,0 +1,79 @@
+---
+title: "What Is AntiKB in Minecraft?"
+description: "AntiKB is a Minecraft module that reduces or cancels knockback from hits. See how it intercepts the vector, compares to Velocity, and why servers catch it."
+excerpt: "AntiKB rewrites what happens after a hit lands, so getting punched barely moves you. Here is the mechanism behind it, and why the server always notices anyway."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is AntiKB the same as a Velocity module?"
+    a: "Yes. AntiKB and a Velocity module describe the same behavior, reducing or canceling the knockback a player takes when hit. Some clients file it under Player instead of Combat, but the mechanism underneath is identical."
+  - q: "Does AntiKB remove knockback completely?"
+    a: "It depends on the setup. AntiKB can cancel knockback outright or just take the edge off it, but either setting means less push than the hit is supposed to apply."
+  - q: "Is using AntiKB against the rules?"
+    a: "Yes. It gives a real combat advantage by letting a player ignore a mechanic every other player is bound by, so servers treat it the same as any other combat manipulation cheat."
+  - q: "Can other players tell someone is using AntiKB?"
+    a: "Sometimes an opponent notices a target barely moving after a hit that should have sent them flying, but the reliable catch is server-side, comparing the movement a hit should cause to the movement the server actually receives."
+---
+
+<KeyTakeaways>
+
+- AntiKB reduces or cancels the knockback a player takes from being hit.
+- It intercepts Minecraft's knockback vector, so the hit lands but the pushback shrinks or disappears.
+- It's mechanically the same as a Velocity module, just filed under a different menu on some clients.
+- Anticheats catch it server-side, comparing the hit's expected movement to what the player actually sends.
+
+</KeyTakeaways>
+
+AntiKB is a Minecraft module that reduces or outright cancels the knockback a player takes when they get hit, whether that hit comes from a sword swing, an arrow, an explosion, or the Knockback enchantment. Vanilla Minecraft shoves a hit player backward for a moment, taking their movement out of their hands for that instant. AntiKB steps in front of that shove and shrinks or zeroes it, so the hit still registers but the fight doesn't get interrupted by a launch across the arena. Some clients group the feature with combat tools; others file it under general player settings instead, even though the effect is identical either way.
+
+## How it works
+
+Vanilla knockback is a vector, not a suggestion. Get hit and the game shoves you away from the source of the damage for a beat, overriding whatever direction you were actually moving in. AntiKB intercepts that vector before it reaches your character's motion and scales it down, sometimes all the way to zero. The attack still connects, damage still applies, the swing still counts, but the physical response to being hit gets dialed back or removed entirely.
+
+The appeal is straightforward. Without knockback, a player can hold melee range and keep trading hits instead of getting bumped away after every swing, which normally forces a chase to close the distance again. It also kills the risk of getting knocked off a ledge, into a hole, or off a bridge, moments where vanilla knockback can end a fight on its own regardless of who's actually winning the exchange. Against someone not running it, the mismatch is obvious: one player eats hits and holds ground, the other gets shoved every time.
+
+## AntiKB vs Velocity: same trick, different menu
+
+AntiKB and a [Velocity module](/en/learn/what-is-velocity-anti-knockback) aren't cousins, they're the same feature under two names. Both intercept the same server-controlled knockback vector, both scale or zero it before it reaches player motion, and both get caught by the exact same detection method. The only real difference is packaging. Some clients bucket the effect with combat tools, where it obviously belongs next to things like reach or an aimbot. Others tuck it into a general Player category instead, which is a menu decision by whoever built the client, not a difference in what the code actually does.
+
+If you see either name on a feature list, read it the same way: this client can turn down how far getting hit knocks you around.
+
+<Callout variant="tip" title="Where Opal draws the line">
+Opal's combat and movement modules are built for BedWars and SkyWars-style fights: aim assist, movement tools, the usual kit for winning a trade. A dedicated knockback canceler isn't part of that lineup. It's exactly the kind of movement manipulation that leaves a clean signature in a server's hit log, which makes it a strange thing to gamble an account on.
+</Callout>
+
+<Callout variant="warning" title="This is a server-side giveaway">
+AntiKB isn't cosmetic. It changes how your position responds to combat, and that's precisely what a server-authoritative anticheat is built to check. When the server applies knockback to a hit, it has an expectation for how far you should move over the next few ticks. Barely moving after a hit that should have sent you flying is a mismatch the anticheat doesn't have to guess about. Dialing the effect down instead of canceling it outright only narrows that gap, it doesn't close it.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is AntiKB the same as a Velocity module?">
+Yes. AntiKB and a Velocity module describe the same behavior, reducing or canceling the knockback a player takes when hit. Some clients file it under Player instead of Combat, but the mechanism underneath is identical.
+</FAQItem>
+
+<FAQItem question="Does AntiKB remove knockback completely?">
+It depends on the setup. AntiKB can cancel knockback outright or just take the edge off it, but either setting means less push than the hit is supposed to apply.
+</FAQItem>
+
+<FAQItem question="Is using AntiKB against the rules?">
+Yes. It gives a real combat advantage by letting a player ignore a mechanic every other player is bound by, so servers treat it the same as any other combat manipulation cheat.
+</FAQItem>
+
+<FAQItem question="Can other players tell someone is using AntiKB?">
+Sometimes an opponent notices a target barely moving after a hit that should have sent them flying, but the reliable catch is server-side, comparing the movement a hit should cause to the movement the server actually receives.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity (anti-knockback)?", description: "The module AntiKB is functionally identical to, under its more common name." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Where subtle, hard-to-notice modules like this one fit in a client's overall design." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The broader category of client that AntiKB and modules like it belong to." },
+]} />
+
+<CTA href="/en/purchase">Get the combat edge that doesn't need a knockback exploit to work.</CTA>

@@ -1,0 +1,79 @@
+---
+title: "What Is High Jump in Minecraft? Module Explained"
+description: "High Jump is a movement module that raises jump height past vanilla Minecraft's limit by editing movement packets, not the jump input. Here's how it works."
+excerpt: "High Jump turns one ordinary keypress into a jump vanilla physics never produces. Here's how the packet trick works, and why it's an easy one for a server to catch."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does High Jump actually change?"
+    a: "It raises the maximum height a player reaches when jumping, past the fixed limit vanilla Minecraft physics normally enforce."
+  - q: "How does High Jump work technically?"
+    a: "It manipulates the movement packets sent to the server so the reported position is higher than a vanilla jump would produce, rather than altering the jump input itself."
+  - q: "Is High Jump the same as flight?"
+    a: "No. High Jump only affects the height of a single jump. It doesn't let a player sustain altitude or move freely through the air the way a flight module does."
+  - q: "Can High Jump get a player flagged or banned?"
+    a: "It can. Jump height is a value a server can measure and compare against vanilla physics, so unusually high jumps are a plausible basis for detection, and using the module typically breaks server rules against movement cheats."
+---
+
+<KeyTakeaways>
+
+- High Jump is a movement module that raises a player's jump above vanilla Minecraft's height limit.
+- It edits the movement packets sent to the server instead of the jump input, so the server sees a peak no normal jump reaches.
+- Used to clear obstacles or skip terrain without placing a single block.
+- Because jump height is easy to measure, it's a common target for anticheat detection.
+
+</KeyTakeaways>
+
+High Jump is a movement module that lets a player jump higher than vanilla Minecraft's physics allow. It doesn't change what happens when you press the jump key. It changes what the server sees afterward: the client edits the outgoing movement packets so the reported position peaks above anywhere a normal jump could ever land. It's one of the older tricks in the packet-manipulation playbook, cheap to build and just as cheap for a server to catch if it's paying attention.
+
+## How High Jump works
+
+Vanilla jump height is fixed. The game applies a set upward velocity the instant you leave the ground, gravity pulls you back down on schedule, and that's the whole budget. High Jump doesn't touch that formula, and it doesn't touch your input either. You press space exactly the way you always have.
+
+What changes is the position the client hands the server afterward. The module rewrites the movement packets so the coordinates reported mid-jump sit higher than the physics engine would ever produce on its own. From the server's side, nothing about your keypress looked unusual. Your character just went somewhere a legitimate jump can't.
+
+## Is High Jump safe to use
+
+The appeal is straightforward once you picture it. A few extra blocks of height clears ledges and gaps a normal jump can't touch, skips terrain that would otherwise cost time and blocks to path around, and in a fight it buys a beat of separation, enough to break an opponent's line of sight or step out of their swing range before they can follow up.
+
+None of that makes it quiet. High Jump is a gameplay advantage, not a cosmetic one, and jump height happens to be one of the easier things a server can check. Every legitimate jump has a known ceiling set by vanilla physics, so a server logging vertical position only has to compare what it sees against that ceiling. High Jump sits in the same movement category as other packet-based tricks like [Bhop](/en/learn/what-is-bhop) and [Velocity](/en/learn/what-is-velocity-anti-knockback), and it should be treated the same way: detectable, not a safe convenience.
+
+<Callout variant="tip" title="Where Opal draws the line">
+Opal's movement category covers a lot of ground, but it doesn't ship a High Jump module under that name. A feature whose entire job is inflating a number the server can trivially check against physics isn't the kind of shortcut that fits how Opal builds movement tools.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what High Jump means and how the effect generally works. Exact implementation varies by client, and jumping past vanilla's height limit breaks the rules on essentially every server that takes movement seriously.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does High Jump actually change?">
+It raises the maximum height a player reaches when jumping, past the fixed limit vanilla Minecraft physics normally enforce.
+</FAQItem>
+
+<FAQItem question="How does High Jump work technically?">
+It manipulates the movement packets sent to the server so the reported position is higher than a vanilla jump would produce, rather than altering the jump input itself.
+</FAQItem>
+
+<FAQItem question="Is High Jump the same as flight?">
+No. High Jump only affects the height of a single jump. It doesn't let a player sustain altitude or move freely through the air the way a flight module does.
+</FAQItem>
+
+<FAQItem question="Can High Jump get a player flagged or banned?">
+It can. Jump height is a value a server can measure and compare against vanilla physics, so unusually high jumps are a plausible basis for detection, and using the module typically breaks server rules against movement cheats.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "A movement module that auto-places blocks as you walk." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity (anti-knockback)?", description: "A movement-adjacent module that fights pushback instead of gravity." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The category built around not tripping checks like this one." },
+]} />
+
+<CTA href="/en/purchase">See how Opal handles movement without leaning on a number the server can just measure.</CTA>

@@ -1,0 +1,75 @@
+---
+title: "What Is No Hurt Cam in Minecraft?"
+description: "No Hurt Cam stops the camera tilt Minecraft plays when you take damage, keeping your view steady through a fight without touching hit detection or knockback."
+excerpt: "Vanilla jerks your view every time you get hit. No Hurt Cam keeps the camera level, so the only thing shaking is your opponent's aim."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does No Hurt Cam give you a combat advantage?"
+    a: "No. It only removes a visual distraction, not anything mechanical. Hit registration, reach, and timing all work exactly as they do in vanilla, so any edge you get comes from a steadier view, not from changed game logic."
+  - q: "Is No Hurt Cam considered cheating?"
+    a: "No. It's a cosmetic, client-side setting comparable to turning off a screen effect. It doesn't touch packets or any interaction the server relies on, so it falls well outside what anticheats are built to catch."
+  - q: "What does vanilla Minecraft's hurt-cam animation actually do?"
+    a: "It briefly tilts your camera angle whenever you take damage, as visual feedback that a hit landed. No Hurt Cam suppresses that tilt while leaving the actual damage and knockback untouched."
+  - q: "Which clients include No Hurt Cam?"
+    a: "Tenacity documents shipping it as a quality-of-life setting, and Opal ships its own version under the same name. Other utility clients often offer a similar camera-tilt toggle under a different label."
+---
+
+<KeyTakeaways>
+
+- No Hurt Cam is a cosmetic module that stops Minecraft's camera-tilt animation when you take damage.
+- It only changes what renders locally. Damage, knockback, and hit registration still process on the server exactly like vanilla.
+- The result is a level view through repeated hits, which matters most in fights where the vanilla tilt throws off your aim.
+- Nothing sent to the server changes, so there's no anticheat risk. Opal classifies it SAFE.
+
+</KeyTakeaways>
+
+No Hurt Cam is a cosmetic module that stops the camera-tilt animation vanilla Minecraft plays whenever you take damage. Normally getting hit jerks your view for a fraction of a second, vanilla's way of selling the impact. With the module on, the camera holds its angle straight through the hit. It doesn't touch combat itself, only how the screen behaves while combat is happening, which sounds trivial right up until you're mid-fight and realize your screen hasn't twitched once.
+
+## How it works
+
+No Hurt Cam hooks the short camera-tilt animation Minecraft triggers on the client the moment your hurt state activates. That animation nudges your view angle for a fraction of a second, vanilla's visual cue that a hit landed. The module suppresses the nudge, so the rendered view stays exactly where you left it. Nothing about what the server sees changes: damage applies, health drops, knockback pushes you the same amount it always would. The module only intercepts the part of the pipeline that draws the tilt, not the part that calculates it.
+
+The practical upside shows up in scrappy fights. Vanilla tilts the camera on every hit, and taking three or four in a row turns your screen into something close to a snow globe, right when you need to track a target or line up the next swing. Removing the tilt keeps the crosshair and the surroundings visually still, so you're reading the fight instead of fighting the camera.
+
+## Is it safe to use
+
+Yes. No Hurt Cam changes a rendering animation and nothing else. It doesn't alter hit registration, movement, or timing, none of the values a server-side anticheat actually inspects. The tilt it removes is feedback layered on top of combat, not a piece of the combat calculation, so there's nothing here for detection logic to catch.
+
+The one caveat has nothing to do with the module itself: some servers ban modified clients outright, regardless of what any individual feature does. That's a rules question, not a technical one, and worth checking before you run any modified client on a server you care about.
+
+<Callout variant="tip" title="Opal's version is exactly this">
+Opal's catalog entry for No Hurt Cam reads like the spec above: stops the camera tilt when you take damage. Nothing more claimed, nothing more needed. It sits in Opal's SAFE tier, the same bucket as its other cosmetic and quality-of-life modules that change how the game feels without changing how it plays.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does No Hurt Cam give you a combat advantage?">
+No. It only removes a visual distraction, not anything mechanical. Hit registration, reach, and timing all work exactly as they do in vanilla, so any edge you get comes from a steadier view, not from changed game logic.
+</FAQItem>
+
+<FAQItem question="Is No Hurt Cam considered cheating?">
+No. It's a cosmetic, client-side setting comparable to turning off a screen effect. It doesn't touch packets or any interaction the server relies on, so it falls well outside what anticheats are built to catch.
+</FAQItem>
+
+<FAQItem question="What does vanilla Minecraft's hurt-cam animation actually do?">
+It briefly tilts your camera angle whenever you take damage, as visual feedback that a hit landed. No Hurt Cam suppresses that tilt while leaving the actual damage and knockback untouched.
+</FAQItem>
+
+<FAQItem question="Which clients include No Hurt Cam?">
+Tenacity documents shipping it as a quality-of-life setting, and Opal ships its own version under the same name. Other utility clients often offer a similar camera-tilt toggle under a different label.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category cosmetic modules like this belong to." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "A module that actually changes where your shots land, for contrast." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity / Anti-Knockback?", description: "A combat-adjacent setting anticheats do watch, unlike this one." },
+]} />
+
+<CTA href="/en/purchase">Take the hit without losing the target. No Hurt Cam ships standard in Opal for $8.99.</CTA>

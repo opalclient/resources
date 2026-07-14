@@ -1,0 +1,84 @@
+---
+title: "What Is Fast Bow in Minecraft? Module Explained"
+description: "Fast Bow is a combat module that skips the vanilla bow draw delay, firing arrows at full power almost instantly. Here's how it works and why it gets flagged."
+excerpt: "Vanilla makes you wait almost a second for a full-power shot. Fast Bow just decides you already waited."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Fast Bow actually change?"
+    a: "It shortens or removes the time a bow needs to be held drawn before it fires at full power, so shots that should be weak and slow arrive as fully charged arrows almost instantly."
+  - q: "Is Fast Bow the same as an aimbot?"
+    a: "No. Fast Bow only affects charge timing and shot power, not aim. It doesn't point your crosshair at a target the way an aimbot does, it just makes every release act like a full draw."
+  - q: "Can servers detect Fast Bow?"
+    a: "Many can, by comparing how long a bow was visibly held drawn against the power of the arrow that came out. A shot at full power with almost no draw time is a clear mismatch, though smaller reductions in delay are harder to catch than removing it entirely."
+  - q: "Which clients have Fast Bow?"
+    a: "It's documented as seen in Tenacity, filed under its combat modules alongside other timing-based shortcuts."
+---
+
+<KeyTakeaways>
+
+- Fast Bow is a combat module that skips or shortens the vanilla bow draw delay, so arrows fire at full power almost the instant you release.
+- Vanilla ties a bow's damage and range to draw time, close to a full second for max charge; Fast Bow reports that state early.
+- It only changes charge timing and power, not aim, so it isn't an aimbot.
+- Servers infer draw time from packet history, and a full-power shot with almost no real draw time is an easy anticheat flag.
+- Documented as seen in Tenacity's combat category.
+
+</KeyTakeaways>
+
+Fast Bow is a combat module that strips out the vanilla delay for drawing a bow, so a shot lands at full power almost the moment you draw it. In normal survival, a bow needs close to a full second held at full draw before it does real damage or flies straight. Let go early and the arrow is weak and wanders off target. Fast Bow either shortens that window or tells the game the bow was already fully charged, collapsing a mechanic Mojang built as a deliberate tradeoff into something close to instant fire. Your aim stays exactly what it was. Only the charge state changes.
+
+## How Fast Bow works
+
+Vanilla ties a bow's damage and velocity to how long it's been held drawn. Let go early and the shot is weak and drifts off target. Hold for close to a second and it releases fully charged, hitting harder and flying straighter. Fast Bow intercepts that charge timer on the client and either shortens it or reports a full charge from the moment the bow comes up, so the arrow that fires carries full power well before a legitimate draw could have produced it.
+
+The client still sends a normal-looking shoot packet to the server. Nothing about the packet itself looks wrong. What changes is the timing behind it: the player draws and releases almost immediately, and the game treats the shot as though it had been held the whole time.
+
+The appeal is straightforward. A fully charged arrow hits harder and travels straighter, so cutting the charge time turns nearly every shot into a near-instant, near-maximum hit. In an archery exchange, that's the difference between landing the first solid hit and eating one while your own shot is still charging.
+
+## Is Fast Bow safe to use
+
+No. Fast Bow changes a combat outcome in the shooter's favor, and any server that cares about fair fights treats it as a cheat, not a convenience.
+
+The charge state lives on the client before the shot packet ever reaches the server, so the server can't just read it off the player. Anticheats infer draw time indirectly instead: they track how long a player has visibly held a bow drawn based on prior packets, then compare that against the power of the arrow that comes out. A shot arriving at full power far sooner than any legitimate draw could produce is a mismatch that's easy to catch.
+
+How reliably that happens depends on the server. Some setups only sanity-check the obvious case, a shot fired the instant the bow is raised. A subtler configuration that trims only part of the delay is harder to separate from lag or a player who's just genuinely fast on the draw, which is why some implementations offer a partial-delay option instead of removing the wait outright.
+
+<Callout variant="tip" title="Where Opal draws the line">
+Opal doesn't ship a dedicated Fast Bow module. Draw-timing exploits are one of the easier categories for a server to catch, because the server is already tracking how long a bow's been held; forcing a mismatch there just hands an anticheat a clean signal to act on. Opal's combat lineup covers the same ranged fights, but it's built around staying inside behavior a server can't cleanly tell apart from a fast, legitimate player, not around faking a charge state the server can measure you against.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Fast Bow is and how it behaves in general terms. It isn't a guide to running one. Firing full-power arrows before a legitimate draw could produce them breaks the rules on any server that checks combat timing, and it's one of the easier patterns for an anticheat to catch.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does Fast Bow actually change?">
+It shortens or removes the time a bow needs to be held drawn before it fires at full power, so shots that should be weak and slow arrive as fully charged arrows almost instantly.
+</FAQItem>
+
+<FAQItem question="Is Fast Bow the same as an aimbot?">
+No. Fast Bow only affects charge timing and shot power, not aim. It doesn't point your crosshair at a target the way an aimbot does, it just makes every release act like a full draw.
+</FAQItem>
+
+<FAQItem question="Can servers detect Fast Bow?">
+Many can, by comparing how long a bow was visibly held drawn against the power of the arrow that came out. A shot at full power with almost no draw time is a clear mismatch, though smaller reductions in delay are harder to catch than removing it entirely.
+</FAQItem>
+
+<FAQItem question="Which clients have Fast Bow?">
+It's documented as seen in Tenacity, filed under its combat modules alongside other timing-based shortcuts.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The melee auto-attacker in the same combat module family." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "How aim automation differs from a timing shortcut like Fast Bow." },
+  { href: "/en/learn/what-is-reach", label: "What is Reach?", description: "Another combat module built around bending a single vanilla number." },
+]} />
+
+<CTA href="/en/purchase">Opal's ranged combat is built to win the draw, not fake it.</CTA>

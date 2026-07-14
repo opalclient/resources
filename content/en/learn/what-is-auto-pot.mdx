@@ -1,0 +1,91 @@
+---
+title: "What Is Auto Pot in Minecraft? Module Explained"
+description: "Auto Pot is a Minecraft combat module that drinks or throws a healing potion automatically once your health drops, and the timing is what gives it away."
+excerpt: "Auto Pot notices you're low before you do, and heals before you can reach for the hotbar. Here's how the trigger works, and why it's a timing tell."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Auto Pot only work with splash potions?"
+    a: "No. Depending on the setting and what you're carrying, it can drink a held potion directly or throw a splash potion, usually aimed at your own feet for an area heal."
+  - q: "Does Auto Pot give a mechanical combat advantage?"
+    a: "Not directly. It doesn't touch reach, damage, or movement, it just removes the manual step of selecting and using a potion, so any edge comes from saved reaction time, not a changed mechanic."
+  - q: "How would a server detect Auto Pot?"
+    a: "Mainly through timing. A potion used at a near-constant, very short delay after taking damage looks automated rather than reactive, and that pattern is what anticheats and observant staff watch for."
+  - q: "Is Auto Pot the same as Auto Soup?"
+    a: "They work the same way, watching health and triggering an item automatically, but target different items. Auto Pot targets healing or splash potions, Auto Soup targets mushroom soup."
+  - q: "Which clients have Auto Pot?"
+    a: "It's documented as seen in Fan and Tenacity. Opal ships its own version too, listed in its catalog as Auto Potion: 'Throws splash potions at your feet for you.'"
+---
+
+<KeyTakeaways>
+
+- Auto Pot drinks or throws a healing potion automatically once your health drops below a set threshold.
+- It watches health every tick, switches to the potion, and fires the action instantly.
+- Splash throws land at your own feet so the heal radius still catches you.
+- It doesn't touch reach or movement, just reaction speed, which is what anticheats key on.
+
+</KeyTakeaways>
+
+Auto Pot is a Minecraft combat module that drinks or throws a healing potion for you the instant your health crosses a set threshold, so you don't have to break focus on a fight to dig through your hotbar. It watches your health in the background and fires the moment the number is hit, no manual switch, no clicking under pressure. It shows up under the same idea, different name, across a handful of combat clients, and it pairs naturally with anything that keeps a fight going longer: crystal trades, extended duels, anywhere healing on time matters more than healing eventually.
+
+## How it works
+
+Auto Pot checks your current health on a short interval, usually every tick, against a threshold you configure. The moment health drops under that number, it picks a potion and uses it. If you're holding a healing potion, it switches your hotbar to that slot and drinks. If you're carrying splash potions, it switches, aims at your own feet, and throws.
+
+The aiming isn't an accident. A drunk potion only heals whoever drinks it. A thrown splash potion breaks on impact and heals everyone caught in the blast, including the thrower, which is exactly why the throw lands at your own feet instead of anywhere near an enemy. Get the switch and the throw right once, and the heal is done.
+
+Drinking is the slightly messier path. It's still switch, then use, but the potion takes a moment to finish, and health can keep dropping while the animation plays out. That's part of why splash potions tend to be the preferred implementation in modules built around serious PvP.
+
+## Why people use it
+
+The pitch isn't extra power, it's not missing a heal in a fight that's already going badly. Noticing low health, opening the hotbar, and getting the right potion selected costs attention a player fighting for their life would rather spend on positioning or aim. Auto Pot removes that one repetitive step, so healing happens the instant the threshold is crossed instead of whenever you get around to it.
+
+## Is it safe to use
+
+Auto Pot sits closer to a convenience feature than a mechanic-altering cheat. It doesn't change reach, aim, or movement, and it doesn't do anything a server can measure as physically impossible, it only automates an item use you were already allowed to perform by hand. What draws scrutiny is timing: a human drinking or throwing a potion under pressure has a variable delay and sometimes fumbles the hotbar switch, while an automated trigger reacts at a fixed, near-instant point every time. That consistency is a pattern a strict anticheat, or just a suspicious opponent, can notice without ever proving anything happened client-side.
+
+Whether it matters depends on the server. A ruleset that already tolerates fast potion switching treats Auto Pot as a minor edge at most. A server built around resource scarcity, where managing your own healing is part of the challenge, or one that bans automated item use outright, is far more likely to come looking, and detection comes down to that same reaction-time signature.
+
+<Callout variant="tip" title="Opal calls it Auto Potion">
+Opal's catalog lists it plainly: Auto Potion, "Throws splash potions at your feet for you." Same mechanic, same tradeoff, filed under use at your own risk like everything else here.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Auto Pot is and how it's detected. It isn't instructions for running one. Automated item use like this is a known anticheat signal, and getting caught can mean a ban, same as on any client.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Auto Pot only work with splash potions?">
+No. Depending on the setting and what you're carrying, it can drink a held potion directly or throw a splash potion, usually aimed at your own feet for an area heal.
+</FAQItem>
+
+<FAQItem question="Does Auto Pot give a mechanical combat advantage?">
+Not directly. It doesn't touch reach, damage, or movement, it just removes the manual step of selecting and using a potion, so any edge comes from saved reaction time, not a changed mechanic.
+</FAQItem>
+
+<FAQItem question="How would a server detect Auto Pot?">
+Mainly through timing. A potion used at a near-constant, very short delay after taking damage looks automated rather than reactive, and that pattern is what anticheats and observant staff watch for.
+</FAQItem>
+
+<FAQItem question="Is Auto Pot the same as Auto Soup?">
+They work the same way, watching health and triggering an item automatically, but target different items. Auto Pot targets healing or splash potions, Auto Soup targets mushroom soup.
+</FAQItem>
+
+<FAQItem question="Which clients have Auto Pot?">
+It's documented as seen in Fan and Tenacity. Opal ships its own version too, listed in its catalog as Auto Potion: "Throws splash potions at your feet for you."
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The broader category Auto Pot ships inside of." },
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The auto-attacker that often fights alongside an automated heal." },
+  { href: "/en/learn/what-is-a-crystal-aura", label: "What is a Crystal Aura?", description: "The burst-damage module that makes automated healing worth having." },
+]} />
+
+<CTA href="/en/purchase">Missing a heal shouldn't be what ends a fight. Opal ships Auto Potion for $8.99.</CTA>

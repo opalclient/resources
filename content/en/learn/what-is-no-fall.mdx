@@ -1,0 +1,85 @@
+---
+title: "What Is No Fall in Minecraft? Module Explained"
+description: "No Fall stops the server from registering fall damage in Minecraft. Here's how packet cancellation, ground spoofing, and detection actually work in practice."
+excerpt: "The module that turns a twelve-heart fall into a shrug. Here's the mechanics, and the risk nobody puts on the box."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does No Fall actually do?"
+    a: "It stops the server from registering fall damage on your character, so a drop that would normally hurt or kill you does nothing at all."
+  - q: "How does No Fall avoid triggering fall damage?"
+    a: "Three documented approaches: cancelling the movement packet the server would use to calculate the fall, spoofing an on-ground state so no fall is ever registered, or manipulating predicted position data so the server's fall tracking never accumulates enough to apply damage."
+  - q: "Is No Fall detectable?"
+    a: "Yes. The server expects fall damage to follow from tracked vertical movement, and a mismatch between your reported state and the damage that should have happened is a signal anticheats can reasonably check for."
+  - q: "Is No Fall the same on every client?"
+    a: "No. It's a general module concept that shows up across multiple clients, but the exact method (packet cancellation, ground spoofing, or predicted-state manipulation) varies by implementation."
+  - q: "Does No Fall affect anything besides fall damage?"
+    a: "Not by design. It targets the fall-damage check specifically, though ground spoofing in particular can bleed into other movement-related checks depending on how it's built."
+---
+
+<KeyTakeaways>
+- No Fall stops the server from registering fall damage, so drops from any height cost nothing.
+- It works by breaking the fall check: packet cancellation, ground-state spoofing, or faking predicted position.
+- A mismatch between reported movement and expected damage is exactly what anticheats look for.
+- Opal ships it as No Fall, classified use-at-own-risk like every detectable module.
+</KeyTakeaways>
+
+No Fall is a Minecraft module that stops the server from ever registering fall damage on your character. Instead of letting the game's normal damage math run its course, it interferes with the server-side check that would otherwise decide you just ate twelve hearts off a cliff. Jump off a tower, bail out of a fight mid-air, drop straight down a mineshaft: none of it costs you health. It's a small piece of code doing a big job, and it's also one of the more casually detectable tricks in the utility-client toolbox, which is worth knowing before you lean on it.
+
+## How it works
+
+The server tracks your vertical position constantly. When it detects a landing after a drop past a certain distance, it applies damage scaled to how far you fell. No Fall's whole job is interfering with that process before the damage lands.
+
+There are three common ways it gets done:
+
+**Packet cancellation.** The client simply withholds the movement packet the server would use to calculate the fall, so the server never gets the data it needs to charge you for it.
+
+**Ground spoofing.** The client tells the server it's standing on solid ground when it isn't. No landing means no fall to register in the first place.
+
+**Predicted-state manipulation.** The client quietly adjusts the position data it reports so the server's own fall-distance tracker never accumulates enough to cross the damage threshold.
+
+Same goal, three different lies told to the server. Which one a client uses shapes how obvious it is.
+
+## Is it safe to use
+
+No, not in any absolute sense. No Fall is a client-side workaround for a server-side check, and that mismatch is exactly the kind of thing anticheats are built to look for. The server expects fall damage to follow from your tracked movement. When your reported position or state stops lining up with the damage that should have occurred, that gap is a plausible detection signal, and a reasonable anticheat will flag it.
+
+Whether it actually gets caught comes down to the server and the method. Packet cancellation and ground spoofing tend to leave more obvious traces in movement logs than the subtler predicted-state approach, but none of the three is invisible by default. Treat No Fall as use-at-own-risk, and expect a strict anticheat to catch it more often than a lenient one.
+
+<Callout variant="tip" title="Opal ships this">
+Opal's module catalog lists it plainly: **No Fall**, "Removes your fall damage." No dressing it up, no separate marketing name. It's filed under use-at-own-risk in the client, same bucket as anything else a server can plausibly detect.
+</Callout>
+
+<Callout variant="warning" title="This can get you banned">
+No Fall leaves a mechanical fingerprint: damage that should have happened and didn't. Anticheats look for exactly that gap. Using it carries real ban risk on any server that checks for it, same as it would on any other client.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="What does No Fall actually do?">
+It stops the server from registering fall damage on your character, so a drop that would normally hurt or kill you does nothing at all.
+</FAQItem>
+<FAQItem question="How does No Fall avoid triggering fall damage?">
+Three documented approaches: cancelling the movement packet the server would use to calculate the fall, spoofing an on-ground state so no fall is ever registered, or manipulating predicted position data so the server's fall tracking never accumulates enough to apply damage.
+</FAQItem>
+<FAQItem question="Is No Fall detectable?">
+Yes. The server expects fall damage to follow from tracked vertical movement, and a mismatch between your reported state and the damage that should have happened is a signal anticheats can reasonably check for.
+</FAQItem>
+<FAQItem question="Is No Fall the same on every client?">
+No. It's a general module concept that shows up across multiple clients, but the exact method (packet cancellation, ground spoofing, or predicted-state manipulation) varies by implementation.
+</FAQItem>
+<FAQItem question="Does No Fall affect anything besides fall damage?">
+Not by design. It targets the fall-damage check specifically, though ground spoofing in particular can bleed into other movement-related checks depending on how it's built.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The category No Fall lives in, and what separates a utility client from a full-blown cheat client." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Where modules like No Fall get built to hide from more than just the server." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is velocity/anti-knockback?", description: "Another module that erases a cost the game normally makes you pay." }
+]} />
+
+<CTA href="/en/purchase">No Fall is one line in Opal's module list. Go see what else made the cut.</CTA>

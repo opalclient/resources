@@ -1,0 +1,87 @@
+---
+title: "What Is AntiAura in Minecraft? Module Explained"
+description: "AntiAura predicts an opponent's crystal, anchor, or totem timing and repositions you clear of the blast. Here is how it works and whether it counts as cheating."
+excerpt: "AntiAura reads your opponent's crystal or anchor setup and gets you out of the blast radius before it detonates, no reflexes required. It is a dodge that never misses, which is exactly the problem."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does AntiAura affect the opponent's client?"
+    a: "No. AntiAura only changes the movement of the player running it. It reads the opponent's crystal, anchor, or totem timing and dodges the blast, it never touches or interferes with anything on the other player's side."
+  - q: "Is AntiAura the same as a disabler?"
+    a: "No. A disabler interferes with the target's client or connection directly. AntiAura never touches the opponent at all, it just times the user's own movement around an attack that is already going to happen."
+  - q: "Which clients have AntiAura?"
+    a: "It is documented as seen in Tenacity, where it sits in the exploit category alongside other modules that read and react to opponent state."
+  - q: "Can AntiAura be detected the same way as CrystalAura?"
+    a: "Not really. CrystalAura and Anchor Aura leave a trail of block placements and interactions a server can check directly in its logs. AntiAura only produces movement, so catching it means spotting evasive timing that is more consistent than any human dodge, a much harder signal to isolate."
+  - q: "Is AntiAura considered a cheat?"
+    a: "On most servers that ban crystal or anchor PvP automation, yes. It automates a reactive skill, dodging a timed explosion, that manual players have to train for themselves, and that counts as a gameplay advantage even though it works defensively rather than offensively."
+---
+
+<KeyTakeaways>
+
+- AntiAura is a defensive module that predicts an opponent's crystal, anchor, or totem timing and repositions the player clear of the blast.
+- It calculates the blast timing the same way vanilla Minecraft resolves it.
+- It changes only the player's own movement, never the opponent's client.
+- It is documented in Tenacity, and most crystal-PvP bans cover it too.
+
+</KeyTakeaways>
+
+AntiAura is a defensive Minecraft module that predicts when an opponent's end crystal, respawn anchor, or totem attack is about to explode and moves the player out of the blast radius before it lands. It does not touch the enemy's client, place a block, or throw a punch. All it changes is the wearer's own movement, timed to a precision no set of human reflexes reaches on its own. Where a module like Crystal Aura automates the offense, AntiAura automates the read: notice the setup, calculate the blast, step clear.
+
+## How AntiAura works
+
+AntiAura watches for the exact setup each offensive Aura module relies on: an end crystal about to be struck, a charged respawn anchor about to be hit, or a totem-triggered attack about to fire. Once it spots that setup, it calculates the moment the explosion will land using the same timing math vanilla Minecraft already uses to resolve the blast. Nothing exotic, just the client running the numbers faster than a person can.
+
+From there it repositions the player, stepping, strafing, or jumping, so they are standing outside the blast radius the instant the explosion actually happens. That is the key distinction: this is a prediction executed ahead of the hit, not a reaction to damage already taken. It is documented as seen in Tenacity, where it lives in the exploit category next to other modules that read and act on opponent state instead of the player's own inputs.
+
+## AntiAura vs the modules it counters
+
+AntiAura exists because of modules like [Crystal Aura](/en/learn/what-is-a-crystal-aura) and Anchor Aura, which automatically place and detonate an explosive next to a target. A player without any assistance has to spot the crystal or anchor, judge the timing, and move before it goes off, all inside a fraction of a second. AntiAura automates that read-and-dodge sequence the same way the offensive modules automate the place-and-detonate sequence on the other side of the fight.
+
+The two are not identical in what they touch, though. An offensive Aura module sends placement and interaction packets a server can inspect directly, block by block. AntiAura only changes movement, the same category of input the client is already sending every tick, which is exactly what makes its output blend in with ordinary play at a glance.
+
+## Is it safe to use
+
+Mostly no, even though the risk profile looks different from an offensive Aura module. AntiAura does not place blocks, does not attack, and does not exceed any vanilla movement limit on its own, so it lacks the obvious tells, impossible reach, interactions with a block the player never faced, that make something like Crystal Aura easy to flag from server logs alone.
+
+What it still automates is a dodge that lands with a consistency and reaction speed no human matches by eye. Servers running anticheats built around crystal or anchor PvP tend to treat that kind of tick-perfect evasive movement as a gameplay advantage rather than a lucky coincidence, especially once it repeats across a full match's worth of explosions. Catching it takes movement analysis instead of a simple packet check, but on servers that ban automated combat assistance in general, it falls under the same rule as the modules it is dodging.
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what AntiAura is and how it behaves, not how to run one. Naming and exact implementation vary by client, and automating a crystal or anchor dodge like this breaks the rules on essentially every server that allows that style of PvP.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does AntiAura affect the opponent's client?">
+No. AntiAura only changes the movement of the player running it. It reads the opponent's crystal, anchor, or totem timing and dodges the blast, it never touches or interferes with anything on the other player's side.
+</FAQItem>
+
+<FAQItem question="Is AntiAura the same as a disabler?">
+No. A disabler interferes with the target's client or connection directly. AntiAura never touches the opponent at all, it just times the user's own movement around an attack that is already going to happen.
+</FAQItem>
+
+<FAQItem question="Which clients have AntiAura?">
+It is documented as seen in Tenacity, where it sits in the exploit category alongside other modules that read and react to opponent state.
+</FAQItem>
+
+<FAQItem question="Can AntiAura be detected the same way as CrystalAura?">
+Not really. CrystalAura and Anchor Aura leave a trail of block placements and interactions a server can check directly in its logs. AntiAura only produces movement, so catching it means spotting evasive timing that is more consistent than any human dodge, a much harder signal to isolate.
+</FAQItem>
+
+<FAQItem question="Is AntiAura considered a cheat?">
+On most servers that ban crystal or anchor PvP automation, yes. It automates a reactive skill, dodging a timed explosion, that manual players have to train for themselves, and that counts as a gameplay advantage even though it works defensively rather than offensively.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-crystal-aura", label: "What is a Crystal Aura?", description: "The auto-place-and-detonate module AntiAura is built to dodge." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The detection-evasion end of the same exploit family." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category modules like this one belong to." },
+]} />
+
+<CTA href="/en/purchase">See what Opal builds when it isn't chasing bans</CTA>

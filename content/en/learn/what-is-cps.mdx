@@ -1,0 +1,80 @@
+---
+title: "What Is CPS in Minecraft? Clicks-Per-Second Explained"
+description: "CPS is the HUD module that counts your mouse clicks per second and displays the live number while you play, with zero server impact and zero ban risk."
+excerpt: "Ever wondered exactly how fast you're clicking? This is the module that puts a number on it, no external site required."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does CPS give any gameplay advantage?"
+    a: "No. It only displays a number on the HUD based on clicks you already made. It does not change click timing, damage, or anything the server processes."
+  - q: "Is a CPS counter the same as an autoclicker?"
+    a: "No, they are opposites. A CPS counter measures input you already generated. An autoclicker generates input on its own. Autoclicking is a cheat, a CPS display just does math on clicks you made yourself."
+  - q: "Can a CPS module get me banned?"
+    a: "No. It only reads local input and renders it on your own screen, so there is nothing for a server or anticheat to detect or flag in the first place."
+  - q: "Where does the CPS number usually show up on screen?"
+    a: "Most commonly as a small readout near the crosshair or tucked into a HUD corner, updating continuously while you click. Exact placement depends on the client's HUD layout."
+  - q: "Why do PvP players care about their CPS?"
+    a: "Higher legitimate click speed matters in click-based combat, so players use the counter to track technique, like butterfly or jitter clicking, and measure progress in real time instead of alt-tabbing to a website."
+---
+
+<KeyTakeaways>
+
+- CPS (clicks per second) is a HUD module that counts your mouse clicks in real time and shows the number on screen as you play.
+- It only reads local input and draws text, so there is nothing for an anticheat to flag.
+- It is the opposite of an autoclicker: it measures clicks you already made, not new ones it manufactures.
+
+</KeyTakeaways>
+
+CPS stands for clicks per second, and as a Minecraft module it is a small HUD readout that counts how fast you are clicking and prints the number on screen in real time. Instead of alt-tabbing to some external click-counter website mid-game, you get a live number anchored near your crosshair or sitting in a HUD corner, refreshing every second you keep clicking. It is a measurement tool, not a mechanic. The module watches input you are already generating and reports it back to you. It does not touch the input itself.
+
+## How it works
+
+CPS counts mouse-button presses inside a rolling one-second window and writes the running total to the HUD. Every click bumps the counter for whichever window is currently open. Once a second elapses, the display swaps to the new total and starts counting again. Because the window keeps resetting instead of averaging over some longer stretch, the number tracks your actual clicking pace, not a smoothed-out figure from ten seconds ago.
+
+The module never gets between your mouse and the server. Read an input event, increment a counter, draw a string, that is the entire pipeline. A click that fires still reaches the server as exactly one click: same timing, same packet, same everything. Rose is one client documented shipping a CPS readout, and it lives in the visual category next to other on-screen displays rather than anywhere near combat or movement, because it does not do anything to combat or movement.
+
+## Is it safe to use
+
+Yes, cleanly. A CPS counter reads local mouse input and renders a number on your own HUD, full stop. It never sends an extra packet, never alters what the server receives, never touches a value the server would use to resolve an action. There is simply nothing here for a server-side anticheat to evaluate, because the feature never leaves your machine.
+
+The confusion with autoclickers is understandable since both terms involve click speed, but they sit on opposite ends of the same idea. An autoclicker generates clicks on its own and is a genuine, bannable cheat. A CPS counter does the reverse: it measures clicks a human already made. One produces input, the other just reports on it.
+
+<Callout variant="tip" title="Where Opal spends its module budget">
+Opal does not ship a dedicated CPS counter. That is not an oversight so much as a budget decision: the module reports a number and changes nothing about the fight itself, it does not land an extra hit or shave a millisecond off anything the server measures. Opal's combat and movement modules exist to move the needle in an actual fight. A click counter is more stream flex than edge, and Opal spends its module count on the latter.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does CPS give any gameplay advantage?">
+No. It only displays a number on the HUD based on clicks you already made. It does not change click timing, damage, or anything the server processes.
+</FAQItem>
+
+<FAQItem question="Is a CPS counter the same as an autoclicker?">
+No, they are opposites. A CPS counter measures input you already generated, while an autoclicker generates input on its own. Autoclicking is a cheat. A CPS display just does math on clicks you made yourself.
+</FAQItem>
+
+<FAQItem question="Can a CPS module get me banned?">
+No. It only reads local input and renders it on your own screen, so there is nothing for a server or anticheat to detect or flag in the first place.
+</FAQItem>
+
+<FAQItem question="Where does the CPS number usually show up on screen?">
+Most commonly as a small readout near the crosshair or tucked into a HUD corner, updating continuously while you click. Exact placement depends on the client's HUD layout.
+</FAQItem>
+
+<FAQItem question="Why do PvP players care about their CPS?">
+Higher legitimate click speed matters in click-based combat, so players use the counter to track technique, like butterfly or jitter clicking, and measure progress in real time instead of alt-tabbing to a website.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category a CPS readout is a small fixture of." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "A module on the opposite end of the risk spectrum from a cosmetic HUD counter." },
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The automated version of clicking fast, and why that crosses into cheating." },
+]} />
+
+<CTA href="/en/purchase">A CPS counter tells you how fast you clicked. Opal's modules are built for what happens next, for $8.99.</CTA>

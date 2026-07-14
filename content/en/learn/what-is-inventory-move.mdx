@@ -1,0 +1,87 @@
+---
+title: "What Is Inventory Move in Minecraft? Module Explained"
+description: "Inventory Move lets you keep moving while a chest, furnace, or crafting screen stays open instead of freezing solid. Here's how it works, and why it's risky."
+excerpt: "Vanilla freezes you the second an inventory screen opens. Inventory Move refuses, and that refusal is exactly what gives it away."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Inventory Move actually change?"
+    a: "It stops the client from freezing your movement the moment an inventory-type screen, like a chest or crafting table, opens. Movement input keeps being processed instead of getting ignored."
+  - q: "Does Inventory Move work on every server?"
+    a: "Not necessarily. Whether the resulting movement gets accepted depends on how the server, and any anticheat it runs, validates player position while an inventory screen is open."
+  - q: "Is Inventory Move detectable?"
+    a: "It's plausible for anticheats to flag it, since moving while a container is open isn't something an unmodified client can do. Detection depends on the specific server and anticheat in use."
+  - q: "Which clients have shipped Inventory Move?"
+    a: "It's been documented in Fan, Tenacity, and Rose, among others."
+  - q: "Is Inventory Move a combat module?"
+    a: "No, it's categorized as movement. It matters in fights because it removes the forced stillness of opening a container, but what it changes is your movement, not your attacks."
+---
+
+<KeyTakeaways>
+
+- Inventory Move is a movement module that lets you keep walking, sprinting, or repositioning while a chest, furnace, or crafting screen is open, instead of freezing like vanilla forces.
+- It overrides the client's inventory-screen movement lock so your position keeps updating while the screen stays open.
+- Whether that movement gets accepted, ignored, or flagged depends entirely on how the server and any anticheat validate position during an open screen.
+- Opal ships it as Inventory Move, filed use-at-own-risk because it's detectable.
+
+</KeyTakeaways>
+
+Inventory Move is a movement module that keeps you moving while an inventory-type screen, a chest, a furnace, a crafting table, stays open. Vanilla Minecraft locks you in place the instant one of those screens opens; you don't walk again until you close it. Inventory Move removes that lock at the client level, so movement input keeps getting processed no matter what's open in front of you. Sort a chest without standing still and exposed. Restock from a crafting table mid-fight. Keep strafing while you check what you're carrying. Whether that movement survives contact with the server is a separate question entirely.
+
+## How Inventory Move works
+
+Inventory Move overrides the client's movement lock for inventory-type screens. In vanilla play, opening a chest, furnace, or crafting table drops the game into a state where movement input is ignored until the screen closes. The module intercepts that state and keeps processing movement input anyway, so your position keeps updating on the client the whole time the screen is up.
+
+None of that guarantees anything past your own machine. Movement while a container is open isn't a state vanilla servers expect, since the base game assumes it flatly can't happen. What the server does with the resulting position updates, accept them, ignore them, or flag them, comes down entirely to how it, and whatever anticheat it's running, validates movement against open-screen state. That's server-dependent by design, not a settings toggle inside the module itself. The behavior has shown up in clients including Fan, Tenacity, and Rose.
+
+The appeal is straightforward: vanilla forces a moment of total stillness every time you open a container, and in PvP or a chase, standing still is exactly when you get hit. Inventory Move just refuses to give up that window.
+
+## Is it safe to use
+
+Inventory Move sits closer to the risky end of the spectrum than a cosmetic, client-side-only tweak. It changes behavior vanilla treats as fixed: no movement while a container screen is open. Any server or anticheat that checks whether a player's position changed during that window can reasonably treat the change as suspicious, since a legitimate vanilla client shouldn't be able to produce it at all.
+
+Whether a given anticheat actually catches it, and how strictly, varies by implementation. There's no universal answer here. Players who use it should assume it can be flagged rather than assume it goes unseen.
+
+<Callout variant="tip" title="Inventory Move in Opal">
+Opal ships this module too, filed under the same name: Inventory Move. The catalog description is exactly as plain as the module is: "Lets you move while an inventory is open." Same freeze-defeating override, same use-at-own-risk tradeoff as anywhere else it's shipped.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the module generically so you know what the term means. Naming and exact behavior vary by client, and moving during an inventory screen is a pattern no unmodified client can produce, which is exactly what servers watch for. Opal classifies Inventory Move use-at-own-risk for that reason: it's detectable, and it can get an account banned like on any client that ships it.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does Inventory Move actually change?">
+It stops the client from freezing your movement the moment an inventory-type screen, like a chest or crafting table, opens. Movement input keeps being processed instead of getting ignored.
+</FAQItem>
+
+<FAQItem question="Does Inventory Move work on every server?">
+Not necessarily. Whether the resulting movement gets accepted depends on how the server, and any anticheat it runs, validates player position while an inventory screen is open.
+</FAQItem>
+
+<FAQItem question="Is Inventory Move detectable?">
+It's plausible for anticheats to flag it, since moving while a container is open isn't something an unmodified client can do. Detection depends on the specific server and anticheat in use.
+</FAQItem>
+
+<FAQItem question="Which clients have shipped Inventory Move?">
+It's been documented in Fan, Tenacity, and Rose, among others.
+</FAQItem>
+
+<FAQItem question="Is Inventory Move a combat module?">
+No, it's categorized as movement. It matters in fights because it removes the forced stillness of opening a container, but what it changes is your movement, not your attacks.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "Another movement module built around overriding what vanilla normally forbids." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The stealth category built around staying unseen while running modules like this." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category these modules belong to." },
+]} />
+
+<CTA href="/en/purchase">Opal's Inventory Move does exactly what it says: move while an inventory is open. See the rest of the kit.</CTA>

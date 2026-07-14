@@ -1,0 +1,70 @@
+---
+title: "What Is Entity Effects in Minecraft? Module Explained"
+description: "Entity Effects is a cosmetic Minecraft client module that swaps your hit particle effect on every landed strike. Here's how it works and why it's safe."
+excerpt: "Vanilla gives everyone the same tiny particle poof on every hit. Entity Effects swaps it for something worth looking at, and it never leaves your screen."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Entity Effects change combat in any way?"
+    a: "No. It only changes the visual effect shown when a hit lands. Hit detection, damage, and timing all stay exactly as they are in vanilla."
+  - q: "How is Entity Effects different from Kill Effects?"
+    a: "Entity Effects fires on every hit that connects. Kill Effects only fires when that hit ends the target's life. Entity Effects is the broader module of the two and triggers far more often."
+  - q: "Can other players see my custom hit effects?"
+    a: "No. The effect renders locally, on your own client only. Everyone else still sees the standard vanilla hit particles no matter what you've set yours to."
+  - q: "Does using Entity Effects get flagged by anticheats?"
+    a: "No. It doesn't change anything sent to the server, so there's nothing for a server-side anticheat to evaluate. The effect never leaves your client."
+---
+
+<KeyTakeaways>
+- Entity Effects is a cosmetic module that swaps the particle effect shown when a hit connects.
+- It triggers on every landed hit, not just kills, unlike the narrower Kill Effects module.
+- It only changes local rendering: reach, timing, damage, and server data all stay untouched.
+- Nothing about it is server-visible, so there's nothing for an anticheat to flag.
+</KeyTakeaways>
+
+Entity Effects is a cosmetic module found in some Minecraft utility clients that replaces the particle burst you see when you land a hit on an entity. Vanilla shows the same small white puff no matter what you're hitting, a zombie, a skeleton, another player. This module swaps that default for something else, anything from a different particle shape to a more elaborate visual, and it plays on every successful hit rather than saving itself for something rarer. That's the part worth remembering: it changes how the game looks, not how it plays.
+
+## How it works
+
+The module hooks into the moment your client registers a landed hit and layers a custom effect on top of it, in place of the vanilla particle burst. That hook fires for every hit, so if you're running a client that ships this feature, you'll notice it constantly in the middle of a fight rather than once in a while.
+
+That's also the entire difference between Entity Effects and Kill Effects, a module some of the same clients ship alongside it. Kill Effects only triggers when the hit ends the target's life. Entity Effects triggers on any hit that connects, win or lose, so it shows up throughout ordinary combat instead of once per elimination. Clients that bundle it, like Tenacity, list it as one option among several cosmetic hit customizations, not as anything tied to how hits get detected or resolved.
+
+The appeal is simple. Everyone throws the same punches, but not everyone's hits have to look the same. It's customization that changes nothing about who wins a fight and everything about how it feels to land one.
+
+## Is it safe to use
+
+Yes, and it's one of the more clear-cut yeses in this space. Entity Effects only changes what gets rendered on your own screen when a hit lands. It doesn't touch reach, timing, damage calculation, or anything else the server tracks, and it doesn't change what gets sent over the network for an attack. There is no packet difference between a vanilla hit and a hit wrapped in a custom effect, which means there is nothing for a server-side anticheat to evaluate in the first place.
+
+The one real caveat has nothing to do with the module itself: some servers ban modified clients outright, regardless of what any individual feature does. Check server rules before running any modified client, Entity Effects included.
+
+<Callout variant="tip" title="Where this fits with Opal">
+Opal doesn't ship a module called Entity Effects specifically. But this is squarely the kind of thing a paid utility client is supposed to get right: cosmetic, client-side polish that never touches anything the server can see. If that category is what you care about, judge a client on its full visual customization set, not one named module.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Does Entity Effects change combat in any way?">
+No. It only changes the visual effect shown when a hit lands. Hit detection, damage, and timing all stay exactly as they are in vanilla.
+</FAQItem>
+<FAQItem question="How is Entity Effects different from Kill Effects?">
+Entity Effects fires on every hit that connects. Kill Effects only fires when that hit ends the target's life. Entity Effects is the broader module of the two and triggers far more often.
+</FAQItem>
+<FAQItem question="Can other players see my custom hit effects?">
+No. The effect renders locally, on your own client only. Everyone else still sees the standard vanilla hit particles no matter what you've set yours to.
+</FAQItem>
+<FAQItem question="Does using Entity Effects get flagged by anticheats?">
+No. It doesn't change anything sent to the server, so there's nothing for a server-side anticheat to evaluate. The effect never leaves your client.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What Is a Minecraft Utility Client?", description: "The category Entity Effects lives inside, and what separates a utility client from a plain resource pack." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What Is an Aimbot?", description: "A module on the opposite end of the spectrum: one that changes combat outcomes instead of just how they look." },
+  { href: "/en/learn/what-is-reach", label: "What Is Reach?", description: "One of the actual gameplay values Entity Effects leaves untouched, and why that distinction matters for detection." }
+]} />
+
+<CTA href="/en/purchase">Opal's cosmetic layer goes well past a hit particle. See what ships in the full build.</CTA>

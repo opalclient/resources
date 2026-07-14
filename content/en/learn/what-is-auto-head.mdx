@@ -1,0 +1,85 @@
+---
+title: "What Is Auto Head in Minecraft? Module Explained"
+description: "Auto Head is a Minecraft combat module that eats a golden apple or golden head automatically once your health drops, and yes, servers can catch it happening."
+excerpt: "Auto Head eats the golden apple so you don't have to remember to under pressure. Here's how the auto-eat loop works, and why the timing gives it away."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Auto Head actually eat?"
+    a: "Golden apples and golden heads, the same items you'd eat by hand to heal during a fight."
+  - q: "Does Auto Head aim or move the player?"
+    a: "No. It only handles selecting and eating food. It doesn't touch aim, movement, or attacks, those are separate modules."
+  - q: "Can servers detect Auto Head?"
+    a: "Yes, it's plausible. Anticheats that track interaction timing relative to health changes can flag eating that happens faster or more consistently than a human player would manage."
+  - q: "Is Auto Head the same as auto-eat features in survival mods?"
+    a: "The mechanic is similar, both eat automatically instead of by hand. The difference is context: a survival quality-of-life mod eats ordinary food to stop starvation, while a combat module like Auto Head eats golden apples specifically to heal through a fight, which is the part servers object to."
+  - q: "Which clients have Auto Head?"
+    a: "It's documented as seen in Tenacity. Opal ships its own version too, listed in its catalog as Auto Head: 'Eats golden heads automatically.'"
+---
+
+<KeyTakeaways>
+
+- Auto Head is a combat module that eats a golden apple or golden head once your health drops below a threshold.
+- It swaps to the item, eats, then swaps back without touching the hotbar.
+- Documented in Tenacity; Opal ships its own version too.
+- Detection comes down to timing: too consistent or too fast to be human.
+
+</KeyTakeaways>
+
+Auto Head is a Minecraft combat module that eats a golden apple or golden head on your behalf the moment your health drops below a threshold you set, instead of you stopping mid-fight to right-click food by hand. It reacts faster than manual eating and keeps you topped up without breaking your aim or your movement. The name comes from the item it targets, the golden head, the enchanted golden apple substitute that became a PvP staple on servers that restrict Notch apples. Auto Head handles the panic-eat instinct for you, and it does it more reliably than you would under pressure.
+
+## How it works
+
+Auto Head watches your health every game tick and compares it against a configured threshold. The moment health falls below that number, it finds a golden apple or golden head sitting in your inventory, switches your hotbar to it, sends the same right-click interaction a real player would send by hand, and switches back to whatever you were holding before the interruption. All of this can run while you're still moving or still swinging at someone, since the eat sequence happens in the background instead of pulling your attention off the fight.
+
+## Why people use it
+
+The point isn't convenience, it's not missing a heal. Noticing low health, opening the hotbar, finding the right food item, and holding right-click all cost time, and in a close fight that time is often the difference between winning and dying. Auto Head removes the delay and the chance of fumbling the food slot with an enemy on top of you. It matters most in prolonged fights where health swings quickly, crystal PvP, anchor trades, extended duels, and matters a lot less in casual survival where nobody's racing a clock to heal.
+
+## Why it gets detected
+
+The risk lives in how the eat action looks to a server. A real player has to interrupt whatever else they're doing to hold right-click and sit through the eating animation, and the gap between taking damage and actually eating varies person to person: hesitation, a missed window, food chewed a beat too early or too late. An automated version tends to start eating at a suspiciously consistent health threshold, or completes the interaction faster and more reliably than a human reasonably would. Server-side anticheats that log interaction timing and cross-reference it against health changes are built to catch exactly that pattern. Auto Head is documented as seen in Tenacity, and it carries the same use-at-own-risk profile as any other automated combat module: it works, right up until a server that's watching for it catches it.
+
+<Callout variant="tip" title="Opal ships this">
+Opal's catalog lists it plainly: Auto Head, "Eats golden heads automatically." Same classification as everywhere else on this page, use at your own risk.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Auto Head is and how it behaves generically. It isn't instructions for running one. Automating an eat sequence this way is detectable, and getting caught can mean a ban, same as on any client.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does Auto Head actually eat?">
+Golden apples and golden heads, the same items you'd eat by hand to heal during a fight.
+</FAQItem>
+
+<FAQItem question="Does Auto Head aim or move the player?">
+No. It only handles selecting and eating food. It doesn't touch aim, movement, or attacks, those are separate modules.
+</FAQItem>
+
+<FAQItem question="Can servers detect Auto Head?">
+Yes, it's plausible. Anticheats that track interaction timing relative to health changes can flag eating that happens faster or more consistently than a human player would manage.
+</FAQItem>
+
+<FAQItem question="Is Auto Head the same as auto-eat features in survival mods?">
+The mechanic is similar, both eat automatically instead of by hand. The difference is context: a survival quality-of-life mod eats ordinary food to stop starvation, while a combat module like Auto Head eats golden apples specifically to heal through a fight, which is the part servers object to.
+</FAQItem>
+
+<FAQItem question="Which clients have Auto Head?">
+It's documented as seen in Tenacity. Opal ships its own version too, listed in its catalog as Auto Head: "Eats golden heads automatically."
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The broader category Auto Head ships inside of." },
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The auto-attacker that often fights alongside an automated heal." },
+  { href: "/en/learn/what-is-a-crystal-aura", label: "What is a Crystal Aura?", description: "The burst-damage module Auto Head is frequently paired against." },
+]} />
+
+<CTA href="/en/purchase">Your food slot doesn't need a delay. Opal ships Auto Head for $8.99.</CTA>

@@ -1,0 +1,85 @@
+---
+title: "What Is Hacker Detector in Minecraft? Module Explained"
+description: "Hacker Detector is a Minecraft module that scores opponents for reach, KillAura-style attacks, and aimbot rotations, then flags likely cheaters mid-fight."
+excerpt: "It watches every fight for the tells, reach, KillAura, aimbot smoothness, and keeps score so you don't have to guess who's cheating. Not proof. Just a very informed hunch."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is Hacker Detector a cheat?"
+    a: "No. It only reads information already visible to the client, like opponent position and hit timing, and never changes how the user's own character moves or attacks. It flags other players, it doesn't act on their behalf or take any action for the user."
+  - q: "What clients include Hacker Detector?"
+    a: "Tenacity ships a HackerDetector module, and the same pattern shows up under different names in several paid clients built for competitive 1.8-era PvP. Opal ships its own version too, cataloged as a Safe module."
+  - q: "Can using Hacker Detector get me banned?"
+    a: "No. Because it only observes state the client already receives and never alters movement, combat, or the packets sent to the server, running it carries none of the risk that the cheats it's looking for do."
+  - q: "Is Hacker Detector's flagging reliable?"
+    a: "It's an estimate, not a verdict. It reasons from client-visible state instead of authoritative server data, so both false positives, a legitimate player tripping a check, and false negatives, a tuned bypass sitting under the threshold, happen."
+  - q: "Why do some clients that ship cheats also ship a Hacker Detector?"
+    a: "Because the detector doubles as a test bench for the client's own bypasses. Developers run it locally against their own offensive modules and tune them until the detector stops flagging, which is close to the same loop a server-side anticheat runs."
+---
+
+<KeyTakeaways>
+
+- Hacker Detector is a client-side module that scores opposing players for cheat-like behavior: reach past the vanilla limit, KillAura-style auto-attacking, aimbot rotation curves, and anti-knockback suppression.
+- It scores suspicion over a window of ticks, not a single hit, so a lag spike or a lucky click doesn't trip a flag on its own.
+- It only reads state the client already receives. It never changes the user's own aim, movement, or attacks.
+- Opal ships its own version, cataloged Safe since flagging other players never touches your inputs.
+
+</KeyTakeaways>
+
+Hacker Detector is a Minecraft module that watches everyone else in a fight and keeps a running suspicion score on who might be cheating. Every tick it checks nearby opponents against a set of known signatures: reach stretching past the vanilla limit, KillAura-style auto-attacking, aimbot-smooth rotation curves, anti-knockback suppression, click patterns too clean to be a hand. Cross the threshold and the module raises a flag. It's the same read every experienced PvPer already makes when a fight feels off, just turned into a number instead of a hunch you talk yourself out of.
+
+## How it works
+
+Each tick, Hacker Detector samples the opposing players nearby and runs their movement, rotation, and combat behavior against known cheat signatures: reach past the vanilla limit, KillAura-style auto-attacking, aimbot rotation curves, velocity or anti-knockback suppression, and click intervals that don't look like a person clicking. A match against any signature adds to that player's running suspicion score. Cross the threshold and the module flags them.
+
+The scoring runs over a window of ticks rather than reacting to any single moment. A stray lag spike, one lucky click, or a coincidental frame of movement isn't enough on its own, real cheat behavior tends to repeat consistently across a fight, and a fluke doesn't. That window is the difference between a module that's actually useful and one that cries wolf at the first weird packet.
+
+## A built-in bypass test bench
+
+Clients that ship offensive modules, KillAura, an aimbot, extended reach, tend to ship Hacker Detector too, and that's not a coincidence. Running your own detector against your own client while a bypass is active shows a developer exactly which checks trip and which don't. Tune the bypass until the local detector goes quiet and you've run something close to the same loop a server-side anticheat runs on you. Clients that build both pieces side by side tend to end up with cleaner offensive modules for it, the detector doubles as QA.
+
+## Is it safe to use
+
+Yes, running it carries none of the risk of the cheats it's looking for. Hacker Detector only reads information the client already has, positions, rotations, hit timing, click intervals, never authoritative server data, and it never changes what the user's own account sends. No altered hits, no altered movement, no different packets. There's nothing for a server-side anticheat to catch, because there's nothing it did.
+
+Whether it's right about the other guy is a separate question. Since it reasons from client-visible state instead of the server's actual truth, its scoring is an estimate, not a verdict. A high-ping opponent, an unusual mouse setup, or a run of coincidental timing can still trip a flag, and a well-tuned bypass can sit under every threshold without lighting one up. Treat a flag as a reason to watch closer, not as a report you'd stake an account on.
+
+<Callout variant="tip" title="Opal ships this">
+Opal's own Hacker Detector does the same job: flags players who look like they're cheating. It's cataloged Safe, the same bucket as the rest of Opal's quality-of-life reads, because scoring an opponent doesn't touch your own inputs and leaves nothing for an anticheat to catch.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Hacker Detector a cheat?">
+No. It only reads information already visible to the client, like opponent position and hit timing, and never changes how the user's own character moves or attacks. It flags other players, it doesn't act on their behalf or take any action for the user.
+</FAQItem>
+
+<FAQItem question="What clients include Hacker Detector?">
+Tenacity ships a HackerDetector module, and the same pattern shows up under different names in several paid clients built for competitive 1.8-era PvP. Opal ships its own version too, cataloged as a Safe module.
+</FAQItem>
+
+<FAQItem question="Can using Hacker Detector get me banned?">
+No. Because it only observes state the client already receives and never alters movement, combat, or the packets sent to the server, running it carries none of the risk that the cheats it's looking for do.
+</FAQItem>
+
+<FAQItem question="Is Hacker Detector's flagging reliable?">
+It's an estimate, not a verdict. It reasons from client-visible state instead of authoritative server data, so both false positives, a legitimate player tripping a check, and false negatives, a tuned bypass sitting under the threshold, happen.
+</FAQItem>
+
+<FAQItem question="Why do some clients that ship cheats also ship a Hacker Detector?">
+Because the detector doubles as a test bench for the client's own bypasses. Developers run it locally against their own offensive modules and tune them until the detector stops flagging, which is close to the same loop a server-side anticheat runs.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "One of the signatures Hacker Detector's suspicion score is built to catch." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "Smooth rotation curves are another tell the module scores against." },
+  { href: "/en/learn/what-is-reach", label: "What is Reach?", description: "Distance past the vanilla limit, the easiest signature to flag." },
+]} />
+
+<CTA href="/en/purchase">Know who you're fighting before the third hit lands. Opal starts at $8.99.</CTA>

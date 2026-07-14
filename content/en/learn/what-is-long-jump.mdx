@@ -1,0 +1,79 @@
+---
+title: "What Is Long Jump in Minecraft? Module Explained"
+description: "Long Jump stretches how far a single jump carries by altering movement packets mid-air, covering ground vanilla physics never allows, and it's a bannable risk."
+excerpt: "One jump, longer than it should be. Long Jump rewrites the numbers mid-flight, and no server-side check stays fooled forever."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Long Jump actually change?"
+    a: "It extends the horizontal distance a jump covers by altering the movement packets sent while the jump is already in progress, not how high or how often the player jumps."
+  - q: "Is Long Jump the same as Bhop?"
+    a: "No. Bhop chains repeated jumps to build or hold speed over time, while Long Jump stretches the distance of one single jump. Both are movement modules and both exceed vanilla physics, but the mechanism is different."
+  - q: "Can Long Jump get a player banned?"
+    a: "Yes. It produces jump distances vanilla physics doesn't allow, a server checking movement against expected values can detect that, and using it typically breaks the movement-cheat rules most servers enforce."
+  - q: "Does manipulating movement packets make Long Jump hard to catch?"
+    a: "Not inherently. Packet manipulation can avoid one obviously impossible frame, but the resulting distance is still measurable against what the reported velocity and position should produce, which is exactly what server-side checks compare against."
+---
+
+<KeyTakeaways>
+
+- Long Jump is a movement module that extends how far a single jump carries past vanilla Minecraft's normal distance.
+- It works by altering the movement packets sent while a jump is already in progress, not by changing how the jump is triggered.
+- The gain is small on any one jump but adds up over repeated use crossing terrain or breaking off a chase.
+- It changes measurable movement, so a server that recomputes expected jump distance can flag it as easily as any other physics violation.
+
+</KeyTakeaways>
+
+Long Jump is a movement module that stretches how far a single jump carries past what vanilla Minecraft's physics allow. Instead of changing how a jump gets triggered, it works on the data describing the jump while it's already happening: the packets reporting the player's position and motion mid-arc. The result is a jump that lands farther than gravity, starting velocity, and existing momentum should permit. It sits in the movement category alongside things like speed and momentum modules, and it's exactly the kind of measurable deviation a server-side anticheat is built to catch.
+
+## How Long Jump works
+
+Vanilla Minecraft works out a jump's horizontal distance from a small set of physics inputs: how fast you were moving when you left the ground, gravity pulling you back down, and whatever momentum you already had going into it. There's no hidden "jump further" setting sitting in the client waiting to be flipped. The distance falls out of those numbers every time, the same way, for every player.
+
+Long Jump doesn't touch how the jump starts. It intervenes after that, in the packets describing the player's position and motion while the jump is already in the air, stretching the horizontal distance covered before landing. Servers generally trust a client's reported position within some tolerance, nobody wants a false flag every time someone's connection hiccups, and that tolerance is what the module leans on. It can carry a player past where a legitimate jump would end without one obviously broken frame that stands out on its own.
+
+## Is Long Jump safe to use
+
+The appeal is straightforward: clear a gap a normal jump can't, cut the time spent crossing open terrain, or put a few extra blocks between you and whoever's chasing you. On any single jump the gain looks minor. Used every crossing or every disengage, it adds up.
+
+None of that makes it invisible. Long Jump is a gameplay-advantage feature, not a cosmetic one, and it moves something a server can measure directly: horizontal distance per jump. A server that recomputes what a jump should cover from a player's reported velocity and position can flag one that lands farther than physics allows, regardless of how clean the individual packets look. It's turned up in clients including Fan and Tenacity. Treat it as detectable, not as a safe shortcut.
+
+<Callout variant="tip" title="Opal ships it, labeled honestly">
+Opal's own catalog carries a Long Jump module, described about as plainly as a description gets: lets you jump further. It's filed under use at your own risk, the same as it would be on any client, because a jump distance vanilla physics doesn't produce is precisely the kind of thing a server-side check is watching for.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Long Jump means and how the effect generally works, not how to configure it. Extending jump distance past vanilla physics breaks the movement-cheat rules on effectively every server that enforces them, and getting caught costs the account.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does Long Jump actually change?">
+It extends the horizontal distance a jump covers by altering the movement packets sent while the jump is already in progress, not how high or how often the player jumps.
+</FAQItem>
+
+<FAQItem question="Is Long Jump the same as Bhop?">
+No. Bhop chains repeated jumps to build or hold speed over time, while Long Jump stretches the distance of one single jump. Both are movement modules and both exceed vanilla physics, but the mechanism is different.
+</FAQItem>
+
+<FAQItem question="Can Long Jump get a player banned?">
+Yes. It produces jump distances vanilla physics doesn't allow, a server checking movement against expected values can detect that, and using it typically breaks the movement-cheat rules most servers enforce.
+</FAQItem>
+
+<FAQItem question="Does manipulating movement packets make Long Jump hard to catch?">
+Not inherently. Packet manipulation can avoid one obviously impossible frame, but the resulting distance is still measurable against what the reported velocity and position should produce, which is exactly what server-side checks compare against.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "Another movement module, auto-placing blocks under you as you walk off ledges." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity (anti-knockback)?", description: "A movement-adjacent module that fights pushback instead of gravity." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Where modules built to stay under the radar, like this one, tend to live." },
+]} />
+
+<CTA href="/en/purchase">See Long Jump and the rest of Opal's movement modules, risk labels included.</CTA>

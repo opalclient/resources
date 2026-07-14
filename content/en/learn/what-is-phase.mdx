@@ -1,0 +1,79 @@
+---
+title: "What Is Phase in Minecraft? The Noclip Module Explained"
+description: "Phase is a movement module that lets you pass through solid blocks by desyncing your position from what real collision would allow. Here's how it works."
+excerpt: "Phase feeds the server a position collision could never produce, and for a second the wall just isn't there. It's also one of the easiest cheats in the game to catch."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Phase actually do?"
+    a: "It lets a player pass through solid blocks by reporting a position to the server that real collision detection would never produce, in effect a short noclip through a wall."
+  - q: "Is Phase the same as a fly hack?"
+    a: "No. A fly hack removes gravity so you can move freely through open air. Phase specifically defeats collision against solid blocks so you can pass through terrain that should stop you outright."
+  - q: "Can Phase get you banned?"
+    a: "Yes. There's no legitimate way to end up on the far side of a solid block, and server-side anticheats check position against world collision independently of the client, which makes this kind of movement easy to catch and act on."
+  - q: "Which clients have shipped Phase?"
+    a: "It's documented as seen in Fan and Opal v1, filed as a movement module in both. Other clients may ship similar noclip behavior under a different module name."
+---
+
+<KeyTakeaways>
+- Phase is a movement module that lets a player pass through solid blocks by desyncing their position from real collision.
+- It doesn't delete collision from the world, it feeds the server a position collision would never produce.
+- The desync only has to hold until the wall is cleared, then movement returns to normal.
+- Anticheats catch it by checking position against world geometry directly, one of the more reliable detections there is.
+</KeyTakeaways>
+
+Phase is a movement module that lets a player pass through solid blocks, a short-range noclip built by lying to the server about where you are. Vanilla collision keeps you on one side of a wall no matter what buttons you press. Phase gets around that by reporting a position on the other side, one that normal collision detection could never generate on its own. The server generally trusts the coordinates a client sends within some tolerance, so it updates your location past the block that should have stopped you cold. Clip through, and movement can go right back to normal like nothing happened.
+
+## How Phase works
+
+Phase doesn't touch the world's collision boxes. The blocks are still solid, the hitbox math hasn't changed, and a player with nothing running who walks into that same wall stops right at it like always. What changes is what the client reports. The module tracks where the player is actually standing relative to the block grid, then sends the server coordinates that step past the wall instead of stopping at it. Because the server generally trusts the position it's handed, within some tolerance, it updates the player's location on the far side of a block that should have blocked them outright.
+
+The lie only has to hold for a moment. Once the player is clear of the wall, movement goes back to normal, which is part of what makes the module hard to catch from a quick glance: there's no sustained weirdness to spot, just one tick where someone was standing somewhere they shouldn't have been able to reach.
+
+The appeal is straightforward. It skips terrain that would otherwise cost a detour: a wall, a fence, a one-block gap a map was built around on purpose. It shows up most in movement-focused play, where cutting straight through solid geometry saves distance or opens up a spot the map was never meant to allow. It's documented as a movement-category module seen in clients including Fan and Opal v1.
+
+## Is it safe to use
+
+No, not in any way that holds up under scrutiny. There is no legitimate sequence of vanilla inputs that puts a player on the far side of a solid block without going around it, over it, or through an actual opening. That makes Phase one of the more conspicuous cheats out there rather than one of the subtler ones. There's no gray-area version of it and no legitimate explanation a server has to rule out first.
+
+Server-side anticheats check movement against the world's collision boxes independently of whatever the client claims. A player who's outside a block on one tick and past it on the next, with no valid route between those two points, fails that check outright. It's a geometry problem, not a statistical judgment about how human someone's mouse looks, which is exactly why detection for this kind of noclip tends to be reliable. The timing tricks and randomization that soften detection on other cheats do very little here, since the check only cares where a player ended up relative to the grid, not how they got there.
+
+<Callout variant="tip" title="Phase in Opal">
+Opal ships this module too, filed under the same name: Phase. The catalog description doesn't dress it up: "Lets you walk through walls." Same short-range noclip as anywhere else, same detection story.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the module generically so you know what the term means. Naming and exact behavior vary by client, and passing through solid blocks has no legitimate explanation on any server running an anticheat. Opal classifies Phase use-at-own-risk for exactly that reason: it's detectable, and it can get an account banned like on any client that ships it.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does Phase actually do?">
+It lets a player move through solid blocks by reporting a position to the server that normal collision detection would never allow, effectively a short noclip through a wall.
+</FAQItem>
+
+<FAQItem question="Is Phase the same as a fly hack?">
+No. A fly hack removes gravity and lets a player move freely through open space. Phase specifically defeats collision against solid blocks so the player can pass through terrain that should stop them.
+</FAQItem>
+
+<FAQItem question="Can Phase get you banned?">
+Yes. Passing through solid blocks has no legitimate explanation, and server-side anticheats check player position against world collision independently of the client, which makes this kind of movement easy to catch and act on.
+</FAQItem>
+
+<FAQItem question="Which clients have shipped Phase?">
+It's documented as seen in Fan and Opal v1. Other clients may implement similar noclip behavior under a different module name.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "Another movement module built around exploiting what a server has to trust about position." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The client category built on staying unseen rather than just moving fast." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is velocity (anti-knockback)?", description: "A different movement-category module with the same use-at-own-risk profile." },
+]} />
+
+<CTA href="/en/purchase">Opal's Phase module makes the walk-through-walls claim literal. See the rest of the list.</CTA>

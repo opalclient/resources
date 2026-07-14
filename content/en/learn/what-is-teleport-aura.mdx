@@ -1,0 +1,79 @@
+---
+title: "What Is Teleport Aura in Minecraft? Module Explained"
+description: "Teleport Aura is a Minecraft combat cheat that teleports a player next to a target, then attacks automatically. Here's how it works and why it's easy to flag."
+excerpt: "Teleport Aura turns KillAura into a gap closer: it teleports you into range, then swings for you. That extra movement step is also what gets it caught twice as fast."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is Teleport Aura the same thing as KillAura?"
+    a: "Not exactly. KillAura automates aiming and attacking on nearby targets. Teleport Aura adds a movement step in front of that, closing the distance to a target before the attack happens, so it plays like a KillAura built around a gap closer."
+  - q: "Does Teleport Aura only work on targets that are already close?"
+    a: "No, that's the opposite of the point. It repositions the player toward a target that's out of normal melee range, then attacks once it's in range. Reaching targets that aren't already close is the entire reason the module exists."
+  - q: "Is there a legitimate use for Teleport Aura?"
+    a: "No. Moving faster than input allows and auto-attacking without the player aiming or clicking are both gameplay advantages, not convenience features, so it counts as cheating on any server that enforces normal movement and combat rules."
+  - q: "Why does Teleport Aura get detected faster than regular KillAura?"
+    a: "Because it creates two anomalies instead of one. A sudden position jump is exactly what movement-based anticheats already check for, on top of whatever the combat side is doing with rotation, reach, and timing."
+---
+
+<KeyTakeaways>
+
+- Teleport Aura is a combat module that teleports or rapidly repositions a player next to a target, then auto-attacks, covering ground a normal client cannot.
+- It's a gap-closer variant of KillAura: the automation extends into movement, not just aim and swing.
+- It's easier to catch than plain KillAura because it stacks a movement anomaly on top of a combat anomaly in the same short window.
+- Seen in clients like Rise Nextgen.
+
+</KeyTakeaways>
+
+Teleport Aura is a combat module that closes the distance to a target by teleporting or rapidly repositioning the player toward it, then attacks automatically once it's in range. It runs on the same target-and-swing loop as KillAura, but bolts a movement step onto the front of it: instead of waiting for you to walk into range, it moves you there itself. That's what makes it a gap closer rather than a plain auto-attacker, and it's also what gives a server a second thing to notice.
+
+## How it works
+
+Teleport Aura scans for a target the same way KillAura does, picking an entity within some configured window and locking onto it. The difference shows up before the swing. If the target is out of melee range, the module shifts the player's position toward it, either as one large jump or a burst of fast repositioning, until it's close enough to hit. Once in range, it attacks the same way an ordinary auto-attack module would, no different from a regular KillAura swing.
+
+Seen in Rise Nextgen, it plays out like KillAura with a gap closer welded onto the front. The automation isn't confined to aim and timing anymore. It's baked into the movement that gets the player there in the first place.
+
+## Why it's easier to catch than plain KillAura
+
+This is a gameplay-advantage cheat, not a cosmetic one, and it's a faster catch than plain KillAura because it hands a server two anomalies instead of one. A legitimate player's position changes at a bounded speed each tick, capped by ordinary movement mechanics: walking, sprinting, jumping. A teleport or a burst of repositioning covers ground that no legal input sequence can produce in that window.
+
+Server-side anticheats already track position deltas between ticks to catch speed and flight hacks. A sudden jump toward a combat target lands right inside that same check, stacked on top of whatever the anticheat is already doing with rotation, reach, and attack timing. A movement anomaly and a combat anomaly showing up together in the same short window is about as strong a signal as it gets, which is why this style of module tends to get flagged fast on anything with basic movement validation.
+
+<Callout variant="tip" title="Where Opal draws the line">
+Opal ships combat modules, but a teleport-based gap closer isn't one of them. Layering a movement anomaly on top of a combat anomaly gives a server two reasons to ban you in the same tick instead of one, and that's not a trade worth making.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Teleport Aura is and why it gets caught, not how to configure one. Movement automation stacked on combat automation breaks the rules on essentially every server running basic anticheat, and it's one of the fastest bans on the list.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Teleport Aura the same thing as KillAura?">
+Not exactly. KillAura automates aiming and attacking on nearby targets. Teleport Aura adds a movement step in front of that, closing the distance to a target before the attack happens, so it plays like a KillAura built around a gap closer.
+</FAQItem>
+
+<FAQItem question="Does Teleport Aura only work on targets that are already close?">
+No, that's the opposite of the point. It repositions the player toward a target that's out of normal melee range, then attacks once it's in range. Reaching targets that aren't already close is the entire reason the module exists.
+</FAQItem>
+
+<FAQItem question="Is there a legitimate use for Teleport Aura?">
+No. Moving faster than input allows and auto-attacking without the player aiming or clicking are both gameplay advantages, not convenience features, so it counts as cheating on any server that enforces normal movement and combat rules.
+</FAQItem>
+
+<FAQItem question="Why does Teleport Aura get detected faster than regular KillAura?">
+Because it creates two anomalies instead of one. A sudden position jump is exactly what movement-based anticheats already check for, on top of whatever the combat side is doing with rotation, reach, and timing.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The auto-attack module Teleport Aura is built on top of." },
+  { href: "/en/learn/what-is-reach", label: "What is Reach?", description: "The hit-distance anomaly anticheats check alongside movement." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category these combat modules belong to." },
+]} />
+
+<CTA href="/en/purchase">Opal's combat suite skips the two-anomaly bets. See the full build for $8.99.</CTA>

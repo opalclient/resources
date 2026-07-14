@@ -1,0 +1,83 @@
+---
+title: "What Is Jump Circle in Minecraft? Ring Effect Explained"
+description: "Jump Circle is a cosmetic Minecraft client module that draws a ring under your feet on every jump: purely visual, with zero effect on gameplay or detection."
+excerpt: "A ring appears under your feet every time you jump. It looks great on camera and means absolutely nothing to a server-side anticheat."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Jump Circle change how high or how often I can jump?"
+    a: "No. It only adds a visual ring where your feet land when you jump. Jump height, timing, and cooldown all stay exactly what vanilla Minecraft computes."
+  - q: "Can other players see my Jump Circle effect?"
+    a: "No. The ring renders locally, only on the client running the module. Everyone else sees you jump normally, with no ring, unless they're running the same or a similar module themselves."
+  - q: "Does Jump Circle get flagged by anticheats?"
+    a: "No. It doesn't send anything to the server and doesn't alter any value the server tracks, so there's nothing a server-side check could ever detect."
+  - q: "Is Jump Circle the same as a particle trail?"
+    a: "Similar idea, different trigger. Both are cosmetic and tied to movement, but a particle trail runs continuously while you move, and Jump Circle fires specifically on the jump."
+---
+
+<KeyTakeaways>
+- Jump Circle is a cosmetic module that draws a ring on the ground beneath a player on every jump.
+- It only changes local rendering, so jump height, timing, and physics stay pure vanilla.
+- The server never sees the effect, meaning zero detection risk.
+- Other players don't see it unless they run the same module.
+</KeyTakeaways>
+
+Jump Circle is a cosmetic Minecraft client module that draws a ring or circle on the ground beneath the player each time they jump. It changes only what shows up on the local screen: no effect on movement, hit detection, or anything the server processes. Think of it in the same category as a particle trail or a custom cape, a visual flourish, not a gameplay feature.
+
+## How it works
+
+Jump Circle listens for the player's jump and, the moment it fires, renders a ring or circle shape at the player's feet. The effect draws client-side only, on top of the normal world geometry, and fades out shortly after. Nothing about the jump itself changes: height, timing, and physics stay exactly what vanilla computes, and the server sees the same jump packet it would see with the module off.
+
+Because the ring is a rendering addition rather than a change to any value the game logic actually depends on, it doesn't interact with collision, hitboxes, or anything another player's client is calculating. It exists to be seen, not to be processed.
+
+The appeal is straightforward: a ring on every jump gives plain vanilla movement a bit of flair, the same reason people pick a custom animation set or a particle trail. It's the kind of detail that reads well in clips, where a visible cue on each jump adds a bit of polish that vanilla alone doesn't have. Clients that ship it, like Tenacity, group it with other cosmetic display options rather than with movement or combat modules.
+
+## Jump Circle vs. particle trails
+
+Both are decorative, both are tied to movement, and both are frequently sorted into the same visual settings tab. The difference is when they fire.
+
+| | Jump Circle | Particle trail |
+|---|---|---|
+| Trigger | Fires on the jump action | Runs continuously while moving |
+| Duration | Brief, fades after landing | Persistent, follows every step |
+| Category | Visual / cosmetic | Visual / cosmetic |
+| Visible to others | No, local render only | No, local render only |
+| Affects gameplay | None | None |
+
+Neither touches anything a server tracks. The choice between them is purely aesthetic: constant flair versus a punctuation mark on every jump.
+
+<Callout variant="tip" title="Where Opal draws the line">
+Opal doesn't ship a Jump Circle module by that name. But the split it represents, decorative effects kept in their own lane, separate from anything that touches movement or combat, is exactly how Opal organizes its own visual category: look how you want without quietly changing how you play.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Jump Circle change how high or how often I can jump?">
+No. It only adds a visual ring where your feet land when you jump. Jump height, timing, and cooldown all stay exactly what vanilla Minecraft computes.
+</FAQItem>
+
+<FAQItem question="Can other players see my Jump Circle effect?">
+No. The ring renders locally, only on the client running the module. Everyone else sees you jump normally, with no ring, unless they're running the same or a similar module themselves.
+</FAQItem>
+
+<FAQItem question="Does Jump Circle get flagged by anticheats?">
+No. It doesn't send anything to the server and doesn't alter any value the server tracks, so there's nothing a server-side check could ever detect.
+</FAQItem>
+
+<FAQItem question="Is Jump Circle the same as a particle trail?">
+Similar idea, different trigger. Both are cosmetic and tied to movement, but a particle trail runs continuously while you move, and Jump Circle fires specifically on the jump.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category Jump Circle and hundreds of other modules belong to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "How client-side-only behavior can range from decoration to detection evasion." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "The other end of the spectrum: a module that actually changes how the game plays." },
+]} />
+
+<CTA href="/en/purchase">Cosmetics are the easy part. See what Opal ships everywhere else.</CTA>

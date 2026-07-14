@@ -1,0 +1,71 @@
+---
+title: "What Is Motion Graph in Minecraft?"
+description: "Motion Graph turns a player's speed and velocity into a live scrolling chart instead of one static number, and it's purely cosmetic with no detection risk."
+excerpt: "A live chart of your speed instead of a number on a HUD. Motion Graph doesn't change how you move, it just finally lets you see it."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Motion Graph actually show?"
+    a: "A live, scrolling chart of the player's movement or velocity over time. Instead of one instantaneous speed reading, you see the trend: how speed or acceleration rises and falls as you move."
+  - q: "Does Motion Graph affect how I move in the game?"
+    a: "No. It only reads and displays movement data the client already has locally. It doesn't modify your movement and doesn't send anything different to the server."
+  - q: "Is Motion Graph a cheat?"
+    a: "No. It's a cosmetic, informational overlay, the same category as an FPS counter or a coordinate display, not a feature that changes gameplay outcomes."
+  - q: "Which client is Motion Graph found in?"
+    a: "It's documented as part of Tenacity, where it sits alongside that client's other visual modules."
+---
+
+<KeyTakeaways>
+- Motion Graph is a cosmetic HUD module that charts a player's speed or velocity as a live, scrolling line instead of a single number.
+- It samples movement data the client already has and draws it locally: nothing about how you move changes, and nothing extra reaches the server.
+- Players use it to see how jumps, landings, and turns affect momentum over time, mainly for movement testing and tuning.
+- It carries no meaningful detection risk since it's read-only and purely cosmetic, the same category as an FPS counter.
+- It's documented as part of Tenacity's visual module set.
+</KeyTakeaways>
+
+Motion Graph is a visual Minecraft module that turns a player's speed or velocity into a live, scrolling line chart instead of a single flat number. Instead of glancing at "6.2 m/s" and guessing whether that's fast for the situation, you watch the line climb on a jump, dip on a landing, and flatten out once you're back to a steady sprint. It's a read-only overlay: nothing about how the player moves changes, and nothing extra gets sent to the server. Think of it as a heart-rate monitor for your character's momentum, not a boost pedal.
+
+## How it works
+
+The module samples the player's velocity or speed on a fixed interval and plots each sample as a point on a scrolling chart. As new samples arrive, the oldest ones scroll off the edge, so you're always looking at a recent window of motion rather than a full match history. Read the shape of the line the way you'd read any line chart: a climbing line means you're speeding up, a falling line means you're slowing down, and a flat line means you're holding a steady pace.
+
+Because it only reads data the client already has locally, sampling velocity and drawing it to the screen, it never touches your actual movement. No extra packets, no altered physics, no server-side footprint. It's instrumentation layered on top of ordinary Minecraft movement, not a mechanic that changes it.
+
+The practical use case is spotting trends a single readout hides. A number tells you your speed right now; a graph tells you whether a jump technique is actually gaining you momentum, whether a landing is bleeding speed you didn't expect, or how a settings change plays out over several seconds instead of one frozen instant. That makes it more of a tuning tool than a flex.
+
+## Is it safe to use
+
+Motion Graph sits in the same bucket as an FPS counter or a coordinate overlay: informational, not functional. It reads values the client already has and draws them to the screen, full stop. There's no packet manipulation, no physics override, nothing a server-side anticheat has any reason to flag, because nothing is happening except a chart being rendered.
+
+The only real risk with a module like this is the company it keeps. A HUD element bundled into an otherwise ordinary-looking client doesn't make the rest of that client's module list safe, so it's worth knowing what else ships alongside a visual feature like this before judging a whole build by it.
+
+<Callout variant="tip" title="Where this fits in a real module list">
+Opal doesn't ship a module called Motion Graph. If live movement instrumentation is what you're after, though, it's exactly the territory a paid utility client is supposed to cover, visual and diagnostic tooling sitting next to the combat and movement modules, not bolted on as an afterthought. A speed graph by itself is a small feature. Whether a client treats visual diagnostics as a first-class category at all is the bigger tell.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="What does Motion Graph actually show?">
+A live, scrolling chart of the player's movement or velocity over time. Instead of one instantaneous speed reading, you see the trend: how speed or acceleration rises and falls as you move.
+</FAQItem>
+<FAQItem question="Does Motion Graph affect how I move in the game?">
+No. It only reads and displays movement data the client already has locally. It doesn't modify your movement and doesn't send anything different to the server.
+</FAQItem>
+<FAQItem question="Is Motion Graph a cheat?">
+No. It's a cosmetic, informational overlay, the same category as an FPS counter or a coordinate display, not a feature that changes gameplay outcomes.
+</FAQItem>
+<FAQItem question="Which client is Motion Graph found in?">
+It's documented as part of Tenacity, where it sits alongside that client's other visual modules.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What Is a Minecraft Utility Client?", description: "The category Motion Graph and every module in this guide actually belongs to." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What Is Velocity (Anti-Knockback)?", description: "Another module built on movement data, this one changes physics instead of just charting it." },
+  { href: "/en/learn/what-is-reach", label: "What Is Reach?", description: "A combat-side diagnostic in the same spirit: turning a hidden number into something you can see." }
+]} />
+
+<CTA href="/en/purchase">Want a HUD that tells you the truth about your movement instead of a single flat number? See what Opal's visual tooling looks like.</CTA>

@@ -1,0 +1,79 @@
+---
+title: "What Is Surround in Minecraft? Combat Module Explained"
+description: "Surround is a Minecraft combat module that auto-places blocks around you to block crystal and anchor explosions in PvP. How it works, and the detection risk."
+excerpt: "Surround boxes you in with blocks faster than you ever could by hand, so a retaliatory crystal or anchor explosion has nothing left to detonate against."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Surround do in Minecraft?"
+    a: "It automatically places blocks around the player to block incoming attacks. It shows up most in crystal PvP, where it stops retaliatory end crystal or respawn anchor explosions while the player keeps fighting instead of placing blocks by hand."
+  - q: "Is Surround the same as boxing in crystal PvP?"
+    a: "It automates the same idea. Boxing in by hand, placing blocks around yourself mid-fight, is a normal manual technique. Surround does it automatically and on every open side at once, faster than a person physically can."
+  - q: "Why does Surround get flagged by anticheats?"
+    a: "Because it places blocks on several sides of the player almost simultaneously, which would require facing multiple directions at once. Anticheats compare placement angle against player rotation and placement timing against a human look-and-click cycle, and this pattern fails both."
+  - q: "Which clients have a Surround module?"
+    a: "It appears in Meteor Client and SalHack, among other clients built around crystal PvP style combat automation."
+---
+
+<KeyTakeaways>
+
+- Surround is a combat module that auto-places blocks around the player to block incoming attacks, mainly retaliatory end crystal and respawn anchor explosions in crystal PvP.
+- It scans every open side of the player on a loop and fills gaps instantly, including ones that reopen mid-fight.
+- It automates a legitimate manual technique (boxing in), and the automation itself is what gets it flagged.
+- Found in clients including Meteor Client and SalHack.
+
+</KeyTakeaways>
+
+Surround is a combat module that automatically places blocks around the player to block incoming attacks. It shows up almost exclusively in crystal PvP, where it walls the player in so a retaliatory end crystal or respawn anchor explosion has nothing solid to detonate against near their hitbox. Instead of stopping mid-fight to place blocks by hand, the player just keeps swinging.
+
+## How it works
+
+Surround checks the space immediately around the player on a loop. Wherever a side is open, it places a block there straight from the player's inventory. The important part is that it acts on every open side at once rather than the one direction a player can actually look toward and place against, so it walls someone in far faster than manual play allows. It keeps re-checking too, so if a block gets broken mid-fight and a gap opens back up, Surround fills it again on the next pass.
+
+## Manual boxing vs the automated module
+
+Boxing yourself in during a fight is not, on its own, against the rules anywhere. It is a well-known crystal PvP technique that players do by hand constantly: look at a gap, place a block, look at the next one, place again. Surround does the exact same thing, just without the looking part.
+
+That is the whole gap between "legitimate technique" and "cheat module." A human can only face and place against one block face at a time. Surround places on every open face in the same instant, which is not a speed upgrade so much as a different category of action entirely. It is the automation, not the boxing, that turns a normal fight habit into a detectable one.
+
+## Is Surround safe to use?
+
+Not really, and the reasons are mechanical, not just policy. When a player places blocks on multiple sides of themselves within the same short window, an anticheat that checks placement rotation against the block face being placed on will find a mismatch no legitimate player could produce. Placement timing tighter than a human look-and-click cycle is the other tell. And because Surround keeps firing for the whole fight rather than as a single action, that pattern repeats often enough for server-side checks to catch it on more than one hit.
+
+<Callout variant="warning" title="Reference, not a how-to">
+Surround is a cheat feature on every server that runs anticheat, full stop. This page explains what the term means and why detection works the way it does, not how to configure one.
+</Callout>
+
+Opal does not ship a module under this name. What Opal does build is combat tooling for the same fights Surround is meant for, which means the design questions (timing, rotation, how much automation is worth the risk) are ones we think about constantly even when the answer for a given feature is "don't."
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does Surround do in Minecraft?">
+It automatically places blocks around the player to block incoming attacks. It shows up most in crystal PvP, where it stops retaliatory end crystal or respawn anchor explosions while the player keeps fighting instead of placing blocks by hand.
+</FAQItem>
+
+<FAQItem question="Is Surround the same as boxing in crystal PvP?">
+It automates the same idea. Boxing in by hand, placing blocks around yourself mid-fight, is a normal manual technique. Surround does it automatically and on every open side at once, faster than a person physically can.
+</FAQItem>
+
+<FAQItem question="Why does Surround get flagged by anticheats?">
+Because it places blocks on several sides of the player almost simultaneously, which would require facing multiple directions at once. Anticheats compare placement angle against player rotation and placement timing against a human look-and-click cycle, and this pattern fails both.
+</FAQItem>
+
+<FAQItem question="Which clients have a Surround module?">
+It appears in Meteor Client and SalHack, among other clients built around crystal PvP style combat automation.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-crystal-aura", label: "What is a Crystal Aura?", description: "The module Surround is usually paired against, in the same crystal PvP fights." },
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The melee auto-attacker in the same combat category." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category these modules belong to." },
+]} />
+
+<CTA href="/en/purchase">See how Opal's combat suite handles the fights Surround is built for</CTA>

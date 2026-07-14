@@ -1,0 +1,73 @@
+---
+title: "What Is Boat Fly? The Minecraft Vehicle Flight Exploit"
+description: "Boat Fly is a Minecraft movement module that hijacks a boat's vehicle packets to make it climb and hover, turning a slow drift into unrestricted flight."
+excerpt: "A boat that climbs straight up isn't lag. It's Boat Fly, and vanilla physics never signed off on it."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Boat Fly work outside of a boat?"
+    a: "No. It only functions while you're seated in a boat, since the whole trick depends on manipulating the boat's vehicle movement packets. On foot there's no vehicle channel to exploit, so the module does nothing."
+  - q: "Is Boat Fly the same as a regular fly hack?"
+    a: "The result looks similar, unrestricted flight, but the mechanism is different. A standard fly hack rewrites the player's own movement packets. Boat Fly rewrites the boat's vehicle movement packets while you're riding it."
+  - q: "Can Boat Fly be used over land?"
+    a: "Yes. Vanilla boats can already scoot a short distance over land near water, but Boat Fly stretches that into full flight, letting the boat travel well past anywhere normal boat physics would ever take it, land included."
+  - q: "Is Boat Fly detectable on any server?"
+    a: "Only on servers that check vehicle movement against expected boat physics. Anticheats that only watch the player entity and ignore the vehicle it's riding can miss it entirely."
+---
+
+<KeyTakeaways>
+- Boat Fly is a movement module that rewrites a boat's packets so it climbs and flies instead of floating.
+- It exploits boats' separate vehicle-movement packet channel, since vanilla physics never expects a boat to produce lift on its own.
+- It's a bannable flight exploit tracked in clients like Wurst, and vehicle-physics checks catch it fast.
+</KeyTakeaways>
+
+Boat Fly is a movement module built around one narrow target: the vanilla Minecraft boat. A boat's whole design brief is to float on water and nudge a little over land near the shore, nothing more. Boat Fly throws that brief out by rewriting the vehicle movement packets a boat sends while a player rides it, so the boat climbs, holds altitude, and travels anywhere a flying entity could go. The player never leaves the seat. From outside, it just looks like a boat that forgot it isn't a plane.
+
+## How the boat's packets get hijacked
+
+Vanilla boats aren't independent actors. A boat's position updates come from vehicle movement packets tied to water buoyancy and gravity, a separate channel from the packets that move a player standing on solid ground. Left alone, that channel can't produce lift: no water under the hull, no upward force, no reason for the boat to leave the surface.
+
+Boat Fly targets that channel directly. It rewrites or injects the vehicle movement values the boat reports, so the server sees a boat rising, holding altitude, or drifting sideways in ways real water and gravity physics would never produce. The server trusts what the client sends and updates the player's position based on it.
+
+The player staying seated the whole time is what makes this read as strange rather than obviously hacked. Nobody sees a person floating in the sky. They see a boat somewhere a boat has no business being, which is a quieter kind of wrong until you know what to look for.
+
+## Why it gets flagged, on servers that bother checking
+
+Boat Fly isn't a cosmetic override or a convenience shortcut. It hands out movement no legitimate player can match: climbing past terrain, skipping the map's normal traversal rules, or leaving a fight by going somewhere nobody can follow. That puts it in the same bracket as other flight and no-clip exploits, nowhere near a reskinned HUD element.
+
+Server-side anticheats that model expected boat behavior, how fast a boat should move, how it should sit on water, how gravity should pull it back down, catch this quickly once they check for it. A boat climbing or hovering breaks that pattern the moment it happens. The gap is that a lot of servers only validate player-entity movement and never build a separate check for vehicles, and that's exactly where Boat Fly survives.
+
+<Callout variant="warning" title="This is a bannable exploit, not a hidden feature">
+Boat Fly falls squarely under movement cheating. Any server that catches a boat holding altitude or shrugging off gravity has grounds to act on it, and clients that ship it get tracked and named for exactly that (Wurst is the one most commonly cited). Treat this as background on how the exploit works, not a suggestion to run it.
+</Callout>
+
+<Callout variant="tip" title="Where Opal draws the line">
+Opal's movement lineup is built to hold up under real physics, not packet-forged vehicle states. If a trick only works because a server never bothered checking vehicle movement separately from player movement, it's not something we put in the client. Same category as Boat Fly in spirit, different bet entirely: push the edges of what physics allows, don't fake the packets that report it.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Does Boat Fly work outside of a boat?">
+No. It only functions while you're seated in a boat, since the whole trick depends on manipulating the boat's vehicle movement packets. Step out onto solid ground and there's no vehicle channel left to exploit, so the module simply does nothing.
+</FAQItem>
+<FAQItem question="Is Boat Fly the same as a regular fly hack?">
+The result looks similar, unrestricted flight either way, but the mechanism isn't. A standard fly hack rewrites the player's own movement packets directly. Boat Fly instead rewrites the boat's vehicle movement packets while you're riding in it.
+</FAQItem>
+<FAQItem question="Can Boat Fly be used over land?">
+Yes. Vanilla boats can already scoot a short distance over land near the shoreline, but Boat Fly stretches that into full, sustained flight, letting the boat travel far past anywhere normal boat physics would ever take it, land included.
+</FAQItem>
+<FAQItem question="Is Boat Fly detectable on any server?">
+Only on servers that check vehicle movement against expected boat physics. Anticheats that watch the player entity but ignore the vehicle underneath it can miss this entirely.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "Another movement module that turns a normal Minecraft mechanic into unrestricted traversal." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity (Anti-Knockback)?", description: "A movement module that rewrites how a player's client responds to knockback packets." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The category Boat Fly and modules like it belong to, and where the line to cheat clients gets drawn." }
+]} />
+
+<CTA href="/en/purchase">See the movement modules Opal actually ships, physics intact.</CTA>

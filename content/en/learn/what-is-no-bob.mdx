@@ -1,0 +1,82 @@
+---
+title: "What Is No Bob in Minecraft? Module Explained"
+description: "No Bob is a Minecraft module that cancels the camera's up-and-down sway while walking, producing the same fixed view as vanilla's own View Bobbing setting."
+excerpt: "Vanilla Minecraft rocks your camera with every step you take. No Bob holds it still, using the same trick as a checkbox already sitting in your video settings."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is No Bob the same as vanilla's View Bobbing option?"
+    a: "Functionally, yes. Vanilla's video settings already include a toggle that removes camera bobbing. No Bob reproduces that same fixed-camera effect as a client module."
+  - q: "Does No Bob give an advantage in PvP?"
+    a: "Not a meaningful one. Since every player can already turn off view bobbing from vanilla settings, having it off through a module doesn't put you ahead of someone who just flipped the checkbox themselves."
+  - q: "Can a server detect No Bob?"
+    a: "No. View bobbing is rendered entirely on your client and never reported to the server, so there's nothing in any packet for a server-side check to notice."
+  - q: "Does No Bob change movement or only the camera?"
+    a: "Only the camera. Walking speed, jump height, and collision are untouched. The module changes what you see, not how your character actually moves."
+---
+
+<KeyTakeaways>
+
+- No Bob is a cosmetic Minecraft module that cancels view bobbing, the camera sway from walking.
+- It only changes rendering. Movement speed, hitboxes, and server data stay untouched.
+- Carries zero detection risk: view bobbing never reaches the server at all.
+- Vanilla already offers the same fix under Options > Video Settings > View Bobbing.
+
+</KeyTakeaways>
+
+No Bob is a Minecraft module that cancels the view-bobbing motion vanilla plays every time you take a step, the small side-to-side sway and dip synced to your walk animation. Turn it on and the camera locks to a level, steady height no matter how fast you're moving. It's a rendering change, not a gameplay one: your character walks at the same speed, gets hit the same way, and sends the server the exact same data it always did. The only thing that changes is what you personally see.
+
+## How it works
+
+Vanilla applies a small periodic offset to the camera on every step taken while walking, that's the built-in bob: a rhythmic sway and dip tied directly to the walk cycle. No Bob sits in the render path and cancels that offset before the frame draws, holding the camera at a fixed head-height position regardless of movement.
+
+Because view bobbing is purely a rendering step, there's nothing underneath it to interact with. Nothing about it touches movement speed, collision, or hit detection, and none of it is part of anything the server tracks. The server has no concept of "bobbing" to begin with. It receives position updates same as always and leaves each client to draw the walk cycle however it wants.
+
+The appeal is mostly comfort and clarity. A steady picture is easier on the eyes over a long session, cuts down on the motion-sickness some players get from constant screen sway, and records cleaner if you're streaming or making footage. A smaller group just likes having one less thing jostling on screen during movement-heavy fights.
+
+## No Bob vs. vanilla's View Bobbing toggle
+
+| | Vanilla View Bobbing | No Bob module |
+|---|---|---|
+| Where it lives | Options > Video Settings | Client's module list |
+| Effect | Removes camera sway | Removes camera sway |
+| Detection risk | None | None |
+| Cost | Free, built into the game | Bundled with whatever client ships it |
+
+The two produce the same picture. The only real difference is where you go to flip the switch, and whether it sits next to a client's other visual options instead of buried in a settings menu.
+
+<Callout variant="tip" title="Where this lives in Opal">
+Opal doesn't ship a dedicated No Bob toggle, and there's not much reason to. Mojang already built the fix, it's sitting in Options > Video Settings > View Bobbing right now, free, no download required. A paid client's module slots are better spent on things vanilla genuinely can't do, which is where Opal's own visual and movement work is aimed instead.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is No Bob the same as vanilla's View Bobbing option?">
+Functionally, yes. Vanilla's video settings already include a toggle that removes camera bobbing. No Bob reproduces that same fixed-camera effect as a client module.
+</FAQItem>
+
+<FAQItem question="Does No Bob give an advantage in PvP?">
+Not a meaningful one. Since every player can already turn off view bobbing from vanilla settings, having it off through a module doesn't put you ahead of someone who just flipped the checkbox themselves.
+</FAQItem>
+
+<FAQItem question="Can a server detect No Bob?">
+No. View bobbing is rendered entirely on your client and never reported to the server, so there's nothing in any packet for a server-side check to notice.
+</FAQItem>
+
+<FAQItem question="Does No Bob change movement or only the camera?">
+Only the camera. Walking speed, jump height, and collision are untouched. The module changes what you see, not how your character actually moves.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category modules like No Bob belong to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Where the line between subtle and detectable actually sits." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is velocity (anti-knockback)?", description: "A module on the opposite end of the risk spectrum from a cosmetic fix like No Bob." },
+]} />
+
+<CTA href="/en/purchase">Vanilla already steadied your camera. See what Opal builds for everything vanilla can't.</CTA>

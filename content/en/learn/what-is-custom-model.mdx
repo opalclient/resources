@@ -1,0 +1,75 @@
+---
+title: "What Is Custom Model in Minecraft? Module Explainer"
+description: "Custom Model is a visual Minecraft module that swaps your skin or player model on your own screen only, with zero effect on hitboxes, reach, or detection."
+excerpt: "Custom Model swaps how your character looks on your own screen, nothing else. No hitbox changes, no extra packets, just a different skin than the one Mojang gave you."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Custom Model give a gameplay advantage?"
+    a: "No. It only changes how your player model or skin renders locally. It doesn't touch hitboxes, reach, movement, or anything the server tracks, so it carries no combat or movement advantage."
+  - q: "Can other players see my custom model?"
+    a: "Usually not. Minecraft renders skins per client, so changing your own rendering doesn't push that change to anyone else's screen. The effect is generally visible only to you."
+  - q: "Is Custom Model detectable by anticheats?"
+    a: "Barely, if at all. Since it doesn't alter movement, combat, or the packets sent to the server, a server-side anticheat has almost nothing to flag. Detection risk is far lower than for combat or movement modules."
+  - q: "Is Custom Model the same as a resource pack?"
+    a: "Not quite. A resource pack comes from the server and changes what every connected player sees. Custom Model is a client-side module that swaps rendering locally, no resource pack required."
+---
+
+<KeyTakeaways>
+
+- Custom Model is a visual module that swaps a player's in-game model or skin for a custom one.
+- It changes only what's drawn locally, not hitboxes, movement, or data sent to the server.
+- Other players can't see the swap since Minecraft renders skins per client, not server-wide.
+- Detection risk is minimal: no gameplay values change, no extra packets sent.
+
+</KeyTakeaways>
+
+Custom Model is a visual module that lets a player swap their in-game model or skin rendering for something else entirely, on their own client, without touching anything the server can see. It sits in the same bucket as other cosmetic and rendering options: no combat math, no movement math, just a different picture drawn where your character used to be. Where a resource pack changes what everyone at the table sees, Custom Model only changes your own view. It's the module for players who care what they look like on camera and don't feel like waiting on a server to hand them a new skin.
+
+## How Custom Model works
+
+Minecraft's skin system is normally per-account. Your client fetches the skin tied to your account from Mojang, or pulls it from local cache, and hands that texture to the renderer every time it draws a player, including you. Custom Model steps into that render call and substitutes something else: a different texture, a different model shape, sometimes proportions the vanilla player model was never built to handle.
+
+The swap happens entirely inside the local rendering pipeline. Nothing about the packets you send changes. Movement packets, attack packets, and inventory state all go out exactly as they would without the module. The server still sees the same player entity, with the same hitbox and the same real skin data attached to your account. Only the picture your own client draws locally is different.
+
+## Is it safe to use
+
+Custom Model doesn't touch anything a server-side anticheat is built to catch. It doesn't change reach, movement speed, hitbox size, or timing, and it adds no new packets to the stream between client and server. There's functionally nothing for an anticheat to measure, because the numbers it measures never move.
+
+That puts it in a different bucket from something like ESP or X-ray, which reveal information the vanilla client is designed to hide and get banned specifically because they hand out an information advantage. Custom Model doesn't touch information, only appearance, so it reads a lot closer to a cosmetic feature than a gameplay one. Some servers do run a blanket policy against any modified client regardless of what the modification does, so the rules still depend on where you play. The mechanism itself just doesn't carry the detection risk that a combat or movement module does.
+
+<Callout variant="tip" title="Where cosmetics fit in a client like Opal">
+Opal's visual category is built around exactly this kind of tradeoff: changes that affect what you see and nothing the server does. It doesn't ship a module under the Custom Model name specifically, but the same principle runs through that whole category. Look how you want without touching the combat or movement numbers a server actually tracks.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Custom Model give a gameplay advantage?">
+No. It only changes how your player model or skin renders locally. It doesn't touch hitboxes, reach, movement, or anything the server tracks, so it carries no combat or movement advantage.
+</FAQItem>
+
+<FAQItem question="Can other players see my custom model?">
+Usually not. Minecraft renders skins per client, so changing your own rendering doesn't push that change to anyone else's screen. The effect is generally visible only to you, unless a specific implementation shares it some other way.
+</FAQItem>
+
+<FAQItem question="Is Custom Model detectable by anticheats?">
+Barely, if at all. Since it doesn't alter movement, combat, or the packets sent to the server, a server-side anticheat has almost nothing to flag. Detection risk is far lower than for combat or movement modules.
+</FAQItem>
+
+<FAQItem question="Is Custom Model the same as a resource pack?">
+Not quite. A resource pack comes from the server and changes what every connected player sees. Custom Model is a client-side module that swaps rendering locally, no resource pack required.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category Custom Model and every other module belongs to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Another client-side-only distinction worth understanding." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "The other end of the spectrum: a module the server absolutely can measure." },
+]} />
+
+<CTA href="/en/purchase">See how Opal's visual tab handles the rest of your look for $8.99</CTA>

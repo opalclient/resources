@@ -1,0 +1,83 @@
+---
+title: "What Is XRay in Minecraft? Ore Vision Explained"
+description: "XRay is a Minecraft module that renders ore through terrain by changing what the client draws, not what the server sends, and why servers still ban for it."
+excerpt: "Stone is supposed to hide what's inside it. XRay just stops going along with that, turning every mountain into a diagram of exactly where the ore sits."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is XRay considered cheating?"
+    a: "Yes, on any server where mining or a resource economy matters. It gives a direct advantage over players finding ore the normal way, and it's treated as a bannable exploit, not a cosmetic feature."
+  - q: "Does XRay need anything extra from the server?"
+    a: "No. The server already sends full chunk data, ore included, the moment a chunk loads. XRay only changes how the client draws blocks it already has. It doesn't request or receive anything new."
+  - q: "How is XRay different from ESP?"
+    a: "ESP reveals entities like players and mobs through walls. XRay applies the same trick to blocks, revealing ore and other resources through terrain. Both work by changing local rendering rather than pulling in new data from the server."
+  - q: "Can XRay be detected without watching how someone plays?"
+    a: "Sometimes. Client-side integrity scans can catch known XRay hooks or modified rendering files, but a build made to dodge those checks is usually only caught through a review of mining patterns."
+---
+
+<KeyTakeaways>
+
+- XRay is a visual module that renders ore and other valuable blocks through terrain, so players can see a vein without digging toward it first.
+- It works entirely client-side: the server already sent full chunk data when the chunk loaded, XRay just stops normal rendering from hiding the ore.
+- No extra network traffic goes out, so detection usually comes from mining patterns and client-integrity scans, not packet logs.
+- On any server with a mining economy, XRay is treated as a bannable exploit, not a cosmetic setting.
+
+</KeyTakeaways>
+
+XRay is a visual module that renders ore and other valuable blocks through solid terrain, so a player can see exactly where a vein sits without ever swinging a pickaxe to look for it. It doesn't ask the server for anything special. It just changes what the client chooses to draw. Blind mining means tunneling on a hunch and hoping something turns up nearby. XRay skips that step and turns the map into a diagram of what's actually underground.
+
+## How it works
+
+When a chunk loads, the server sends the client the full block data for that chunk, ore included, whether or not any of it is currently exposed to open air. Normal rendering throws most of that away. It only draws the outer surface, the blocks that actually touch a visible face, because a real camera could never see through solid rock anyway.
+
+An XRay module breaks that rule for whatever block types it targets. Depending on the build, it either stops the surrounding stone and dirt from rendering at all, or draws the target ore directly on top of the terrain that would otherwise bury it. Either way, a diamond vein three layers into a mountain shows up exactly like one already exposed in a cave. Tunneling stops being exploration and starts being a straight line.
+
+The appeal is speed, not sophistication. On any server where mining feeds an economy, whether through selling ore directly or crafting it into gear, cutting out the exploration is a direct edge over everyone still digging on a hunch.
+
+## Is XRay safe to use
+
+XRay doesn't send anything extra over the network. Every block it reveals was already delivered to the client the moment the chunk loaded, the same principle a module like ESP uses to show entities through walls. A server watching packets in isolation has almost nothing to catch.
+
+Detection comes from behavior instead. A player who tunnels in a dead straight line to a vein, mines only the valuable blocks and ignores everything else, or dodges a hazard they'd have no way of knowing about is producing a mining pattern a blind player simply wouldn't. Some servers also run client-side integrity scans that look for the modified rendering code XRay depends on, the same approach used against other visual cheats.
+
+Because the trail is behavioral rather than a single obvious packet, XRay can go unnoticed longer than a combat cheat does. That's not the same as being safe. Servers that review mining statistics or investigate suspicious digging treat it like any other exploit: full ban, no warning shot.
+
+<Callout variant="tip" title="Where this sits in Opal">
+Opal doesn't ship a dedicated XRay module. Its own catalog leans into combat, movement, and visual modules built for PvP, the categories where a single frame or a single tick decides a fight. Reading ore through stone is a different game entirely, closer to a survival-economy grind than anything Opal is built around.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what XRay does and why servers ban for it, not an endorsement to run it. On any server where mining is tied to an economy, XRay is treated the same as a combat exploit: a bannable offense, whether staff catch it through client scanning or by reading a suspicious mining history.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is XRay considered cheating?">
+Yes, on any server where mining or a resource economy matters. It gives a direct advantage over players finding ore the normal way, and it's treated as a bannable exploit, not a cosmetic feature.
+</FAQItem>
+
+<FAQItem question="Does XRay need anything extra from the server?">
+No. The server already sends full chunk data, ore included, the moment a chunk loads. XRay only changes how the client draws blocks it already has. It doesn't request or receive anything new.
+</FAQItem>
+
+<FAQItem question="How is XRay different from ESP?">
+ESP reveals entities like players and mobs through walls. XRay applies the same trick to blocks, revealing ore and other resources through terrain. Both work by changing local rendering rather than pulling in new data from the server.
+</FAQItem>
+
+<FAQItem question="Can XRay be detected without watching how someone plays?">
+Sometimes. Client-side integrity scans can catch known XRay hooks or modified rendering files, but a build made to dodge those checks is usually only caught through a review of mining patterns.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category XRay and every other module here belongs to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The stealth-first category built around modules that never trip a packet-level check, XRay included." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "A cheat on the opposite end of the spectrum: caught by the packets it sends, not the pattern it leaves behind." },
+]} />
+
+<CTA href="/en/purchase">If digging up loot isn't the goal, see what Opal actually builds for the fight.</CTA>

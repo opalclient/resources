@@ -1,0 +1,84 @@
+---
+title: "What Is Bad Scaffold in Minecraft? (Module Explained)"
+description: "Bad Scaffold is a rougher build of the Scaffold auto-bridge module, skipping rotation checks and timing variance that make it harder for anticheats to catch."
+excerpt: "Same auto-bridge idea as Scaffold, built in a hurry. Looser timing and fewer checks get you across the gap and onto a ban list faster."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is Bad Scaffold the same as Scaffold?"
+    a: "No. Scaffold is the general auto-bridging module, and Bad Scaffold is a rougher build of the same idea, with looser placement timing and fewer legitimacy checks."
+  - q: "Why would a client include a rougher Scaffold variant?"
+    a: "It's faster to build. Skipping rotation-matching and timing variance means less code to write and tune, so some clients ship it as a quick option even though a more careful version would be harder to detect."
+  - q: "Is Bad Scaffold safe to use?"
+    a: "No. It automates block placement to bridge gaps, which breaks the rules on any server that checks for it, and the looser timing and missing checks make it easier to flag than a refined Scaffold implementation."
+  - q: "Which client documents Bad Scaffold?"
+    a: "Fan lists Bad Scaffold in its movement category, alongside its other bridging and traversal tools."
+---
+
+<KeyTakeaways>
+
+- Bad Scaffold is a rougher build of Scaffold, the auto-bridge module, dropping blocks under your feet with looser timing and fewer legitimacy checks.
+- It skips rotation-matching and timing variance that a refined Scaffold uses to look human, trading believability for speed.
+- Fan lists it in the movement category; like any auto-placer, it's bannable wherever anticheat checks for it.
+
+</KeyTakeaways>
+
+Bad Scaffold is a rougher build of the Scaffold auto-bridge module. It places blocks under your feet as you walk toward a gap, same as any Scaffold, but with looser timing and fewer checks on whether the placement would look legitimate. It isn't broken, it still bridges. The "bad" refers to how carefully it hides what it's doing. A polished Scaffold implementation puts real work into looking human. Bad Scaffold skips most of that work, which makes it quicker to build and use, and considerably easier for a server to catch.
+
+## How it differs from standard Scaffold
+
+A refined Scaffold module runs three checks before it drops a block: does the placement rotation match where the camera is actually pointed, is the delay between blocks varied enough to avoid a mechanical rhythm, and is the target face one the player could plausibly see. Bad Scaffold cuts corners on some or all three. It still tracks your position every tick and throws a block under your feet before you fall. It just doesn't bother disguising the process.
+
+That's less work for whoever's writing it: fewer checks, less tuning, no need to model believable delay between placements. Fan lists Bad Scaffold in its movement category, next to its other bridging and traversal tools, as the fast option rather than the careful one.
+
+## Standard Scaffold vs Bad Scaffold
+
+| Check | Standard Scaffold | Bad Scaffold |
+|---|---|---|
+| Rotation matched to camera | Yes | Rare or skipped |
+| Placement timing | Varied, tuned to avoid patterns | Fixed or minimal delay |
+| Face-visibility filtering | Filters unrealistic placements | Skipped |
+| Effort to build and tune | Higher | Lower |
+| How easy it is to flag | Lower, but still real | Higher |
+
+The tradeoff is the whole story. Less code and less tuning on one side, more evidence on the other. Placement timing that never varies and rotation that ignores where you're actually looking are exactly the patterns anticheats compare against normal play, and Bad Scaffold hands them both over for free.
+
+<Callout variant="tip" title="Opal ships Scaffold too">
+Opal's own catalog lists Scaffold in one line: places blocks under you automatically. Same category of module as the one described here. Opal flags it the same way any client should, as use at your own risk, because auto-placement is auto-placement. Whichever build is running, it's a detectable pattern the moment a server looks for one.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains the term so you know what it means when you see it in a module list, not how to build or configure one. Auto-placing blocks to bridge gaps breaks the rules on any server that checks for it, and Bad Scaffold's looser timing and missing checks make it easier to catch than a refined implementation.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Bad Scaffold the same as Scaffold?">
+No. Scaffold is the general auto-bridging module. Bad Scaffold is a rougher build of the same idea, with looser placement timing and fewer legitimacy checks.
+</FAQItem>
+
+<FAQItem question="Why would a client include a rougher Scaffold variant?">
+Because it's faster to build. Skipping rotation-matching and timing variance means less code to write and tune, so some clients ship it as a quick option, even though a more careful version would be harder to detect.
+</FAQItem>
+
+<FAQItem question="Is Bad Scaffold safe to use?">
+No. It automates block placement to bridge gaps, which breaks the rules on any server that checks for it. The looser timing and missing checks just make it easier to flag than a refined Scaffold build.
+</FAQItem>
+
+<FAQItem question="Which client documents Bad Scaffold?">
+Fan lists it in the movement category, right alongside its other bridging and traversal tools.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "The standard module this is a rougher variant of." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The stealth category built around hiding modules like this one." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The broader category Scaffold and its variants belong to." },
+]} />
+
+<CTA href="/en/purchase">Skip the rough draft, see what Opal ships for $8.99</CTA>

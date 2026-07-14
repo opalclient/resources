@@ -1,0 +1,79 @@
+---
+title: "What Is No Slow in Minecraft?"
+description: "No Slow is a Minecraft movement module that cancels vanilla speed penalties from eating, blocking, and crossing cobwebs. Here's how it works, and the risk."
+excerpt: "No Slow deletes the vanilla tax on eating, blocking, and wading through cobwebs, so you never lose a step doing any of it. Here's the mechanism, and why servers can still catch it."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What actions does No Slow affect?"
+    a: "Drawing a bow, eating, drinking potions, blocking, and moving through blocks like soul sand, cobwebs, or water. Vanilla Minecraft slows you down in each of those situations, and No Slow cancels the reduction."
+  - q: "Does No Slow change what items or blocks do?"
+    a: "No. Food still restores the same hunger, blocking still cuts incoming damage the same way, and soul sand is still soul sand. No Slow only removes the speed penalty tied to interacting with them."
+  - q: "Is No Slow considered a cheat?"
+    a: "Yes. It produces a movement speed a vanilla client can't produce in the same state, which makes it a gameplay-advantage module rather than a cosmetic one, and any server that checks movement treats it that way."
+  - q: "Is No Slow the same as a Speed module?"
+    a: "No. A Speed module raises your movement speed above the vanilla maximum everywhere. No Slow only cancels specific situational penalties, so without a Speed module running too, you still move at ordinary vanilla speed the rest of the time."
+---
+
+<KeyTakeaways>
+
+- No Slow is a movement module that cancels Minecraft's vanilla speed penalties for eating, drinking, blocking, and walking through soul sand or cobwebs.
+- It works because movement is client-authoritative: the client just reports a faster position than a vanilla client would in the same state.
+- Servers catch it by comparing reported speed to the vanilla maximum for that state.
+- It's classified as use-at-own-risk on the clients that ship it, Opal included.
+
+</KeyTakeaways>
+
+No Slow is a movement module that stops vanilla Minecraft from cutting your speed while you're eating, drinking, drawing a bow, blocking, or wading through soul sand, cobwebs, and water. The game normally treats every one of those as a reason to slow you down, on the logic that using an item or fighting through terrain should cost you ground. No Slow removes that cost entirely. You keep your normal walking or sprinting pace no matter what you're doing, which sounds small until you're the one not getting caught mid-swing.
+
+## How it works
+
+Vanilla Minecraft slows you down in a specific, known set of situations: drawing a bow, eating food, drinking a potion, blocking, and walking through soul sand, cobwebs, or water each cut your speed by a fixed amount. No Slow intercepts that calculation on the client and stops the reduction from applying, so your reported speed sits at the normal walking or sprinting rate regardless of which of those states you're in.
+
+This works because movement in Minecraft is largely client-authoritative. Your client computes its own position every tick and sends it to the server, which generally trusts that position unless it's running its own checks. No Slow doesn't touch what the bow, the potion, or the cobweb actually does, it just changes what position your client reports while you're dealing with them.
+
+The appeal is obvious in a fight. Blocking is the clearest case: vanilla slows a player who's actively blocking, with a shield in modern versions or a sword in older ones, so an opponent can just walk away and reset the distance. No Slow lets you block a hit and keep pace at the same time. Eating mid-fight, chugging a potion while chasing someone down, crossing a cobweb without losing ground, same trick, same effect. It shows up in clients like Fan and Tenacity, usually bundled alongside other movement and combat modules rather than shipped as a standalone toggle.
+
+## No Slow vs a Speed module
+
+People sometimes mix the two up, but they solve different problems. A Speed module raises your movement speed above the vanilla maximum across the board, you sprint faster than the game allows, full stop. No Slow never touches your baseline speed. It only cancels the specific penalties tied to specific states: eating, blocking, standing in a cobweb. Turn off whatever's triggering one of those states and a No Slow user moves exactly like a vanilla player, because outside those moments there's nothing for the module to do.
+
+<Callout variant="tip" title="No Slow in Opal">
+Opal's own catalog description for this one is refreshingly unglamorous: "Removes vanilla slowdowns such as item use." That's the whole feature, no dressed-up marketing behind it. It's filed under use-at-own-risk, the same bucket as anything else that leaves a movement signature a server can go looking for.
+</Callout>
+
+<Callout variant="warning" title="Detectable by design">
+No Slow's entire value proposition is deviating from vanilla physics, and that deviation is exactly what a server-authoritative movement check is built to catch. A server that tracks whether an item is in use, whether a player is blocking, or whether they're standing in a cobweb can work out the maximum speed a vanilla client would report in that state and compare it to what actually arrives. Stay at full speed while one of those states is active, and you've handed it a clean mismatch. Whether a given server enforces that rigorously varies, but the trace is always there to find, on Opal or any other client.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What actions does No Slow affect?">
+Drawing a bow, eating, drinking potions, blocking, and moving through blocks like soul sand, cobwebs, or water. Vanilla Minecraft slows you down in each of those situations, and No Slow cancels the reduction.
+</FAQItem>
+
+<FAQItem question="Does No Slow change what items or blocks do?">
+No. Food still restores the same hunger, blocking still cuts incoming damage the same way, and soul sand is still soul sand. No Slow only removes the speed penalty tied to interacting with them.
+</FAQItem>
+
+<FAQItem question="Is No Slow considered a cheat?">
+Yes. It produces a movement speed a vanilla client can't produce in the same state, which makes it a gameplay-advantage module rather than a cosmetic one, and any server that checks movement treats it that way.
+</FAQItem>
+
+<FAQItem question="Is No Slow the same as a Speed module?">
+No. A Speed module raises your movement speed above the vanilla maximum everywhere. No Slow only cancels specific situational penalties, so without a Speed module running too, you still move at ordinary vanilla speed the rest of the time.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity (anti-knockback)?", description: "Another module that cancels a vanilla penalty instead of adding a new ability." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Where quieter, easy-to-miss modules like this one fit in a client's design." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The broader category of client that No Slow and modules like it belong to." },
+]} />
+
+<CTA href="/en/purchase">Stop losing ground to soul sand. See what else Opal ships for $8.99.</CTA>

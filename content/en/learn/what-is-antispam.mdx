@@ -1,0 +1,70 @@
+---
+title: "What Is AntiSpam in Minecraft? (Chat Filter Explained)"
+description: "AntiSpam filters repeated and flooding chat messages out of your Minecraft chat window automatically, keeping real conversation readable during spam bursts."
+excerpt: "Spam bots don't get a vote in your chat window. AntiSpam quietly filters the flood so you can actually read what people are typing."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does AntiSpam get you banned?"
+    a: "No. AntiSpam only changes how chat messages you've already received are displayed on your own screen. Nothing gets sent to the server differently, so there's no packet or action for an anticheat to flag."
+  - q: "What counts as spam to AntiSpam?"
+    a: "Lines repeated in quick succession or fired off as part of a flood, the kind of chat spam bots and macros use to bury real conversation, are what the module filters out of view."
+  - q: "Does AntiSpam block messages from ever arriving?"
+    a: "No. The chat messages still come in from the server exactly as normal. AntiSpam just decides which ones are worth rendering in your visible chat window."
+  - q: "Is AntiSpam only found in Wurst?"
+    a: "It's documented as a Wurst feature specifically. Chat filtering like this is simple enough that other clients could build the same thing, but this is the one we can confirm it in."
+---
+
+<KeyTakeaways>
+- AntiSpam is a chat module that filters repeated or flooding messages out of your Minecraft chat window so real conversation doesn't get buried.
+- It's client-side only, deciding what renders after the server delivered the message.
+- It sends nothing back to the server and never touches movement or combat, so there's no detection risk.
+- Documented as a Wurst feature.
+</KeyTakeaways>
+
+AntiSpam is a chat module that filters repeated or flooding messages out of a player's chat window so spam doesn't bury the messages you actually care about. It's a display filter, not a network feature: it decides what gets shown to you locally, not what gets sent to the server or seen by anyone else. Wurst is the client where this is documented as a named module.
+
+If you've ever watched a busy server's chat get flooded by a bot spamming the same line twenty times a second, you already know the problem AntiSpam exists to solve.
+
+## How it works
+
+AntiSpam sits on the stream of chat messages arriving in the client and holds back the ones that look like spam: lines repeated in quick succession, or a flood of messages sent close enough together to be obviously automated. The filtering happens after the server has already delivered the message and before it renders in the chat window. Nothing about the underlying data changes, only what gets drawn on your screen.
+
+Because it's purely a rendering decision, AntiSpam never sends anything back to the server. There's no packet to inspect, no timing to fingerprint, and no interaction with the game world at all. It's the same category of feature as a mute button, just smarter about deciding what to mute.
+
+## Is it safe to use
+
+AntiSpam carries no meaningful detection risk. It never alters what the client sends, never times an action, and never touches movement or combat, so a server-side anticheat has nothing to compare it against because there's nothing it did that the server can even observe. It belongs with the other quiet, display-only convenience features, not with anything built to manipulate what actually happens in the game world.
+
+That's a genuinely different risk category from modules that change your inputs or outputs. If a feature only edits what renders locally, there's no server-visible action for a screenshare or anticheat log to point at.
+
+<Callout variant="tip" title="Where this sits in Opal">
+Opal doesn't ship a dedicated AntiSpam module right now, this one's a Wurst-documented feature specifically. Opal's own module list leans hard into combat, movement, and visual utility, the categories where a millisecond actually matters. A cleaner chat window is a nice-to-have; it's just not the fight Opal is picking.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Does AntiSpam get you banned?">
+No. AntiSpam only changes how chat messages you've already received are displayed on your own screen. Nothing gets sent to the server differently, so there's no packet or action for an anticheat to flag.
+</FAQItem>
+<FAQItem question="What counts as spam to AntiSpam?">
+Lines repeated in quick succession or fired off as part of a flood, the kind of chat spam bots and macros use to bury real conversation, are what the module filters out of view.
+</FAQItem>
+<FAQItem question="Does AntiSpam block messages from ever arriving?">
+No. The chat messages still come in from the server exactly as normal. AntiSpam just decides which ones are worth rendering in your visible chat window.
+</FAQItem>
+<FAQItem question="Is AntiSpam only found in Wurst?">
+It's documented as a Wurst feature specifically. Chat filtering like this is simple enough that other clients could build the same thing, but this is the one we can confirm it in.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The category AntiSpam and features like it live in." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "A different flavor of utility client, built around staying unseen." },
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "A module on the opposite end of the risk spectrum: server-visible and detectable." }
+]} />
+
+<CTA href="/en/purchase">See what actually ships in Opal's module list.</CTA>

@@ -1,0 +1,82 @@
+---
+title: "What Is VClip (Vertical Clip) in Minecraft?"
+description: "VClip is a movement module that lets a player clip vertically through solid blocks, phasing through a floor or ceiling before collision resumes as normal."
+excerpt: "VClip punches a player straight through a floor or ceiling for a second, then lets collision snap back like nothing happened."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is VClip the same as noclip?"
+    a: "Not exactly. Full noclip disables collision in every direction, so the player can move through anything. VClip only works on the vertical axis, and only long enough to cross the floor, ceiling, or thin wall in front of it before collision resumes."
+  - q: "Does VClip work sideways too?"
+    a: "No. The name is literal. VClip only clips vertically, up or down through terrain. It will not carry a player through a wall standing next to them."
+  - q: "Can anticheats actually detect VClip?"
+    a: "Yes. The player ends up on the far side of solid terrain without ever occupying a legal, open space in between, which continuous, collision-checked movement does not produce. Server-side anticheats that validate position against the world map are built to catch exactly that jump."
+  - q: "Which client documents VClip as a module?"
+    a: "Juul documents VClip as a module, filed alongside its other movement and world tools rather than anything combat-related."
+---
+
+<KeyTakeaways>
+
+- VClip (Vertical Clip) is a movement module that lets a player pass briefly through solid blocks, moving straight up or down through a floor, ceiling, or thin wall.
+- It only works on the vertical axis. No sideways clipping, unlike full noclip.
+- Collision comes back the instant the player is through, so nothing about the world stays broken.
+- It gets used to skip floors or drop into rooms without doors, not to gain a fighting edge.
+- Anticheats catch it because the resulting position is one continuous, collision-checked movement could never produce.
+
+</KeyTakeaways>
+
+VClip, short for Vertical Clip, is a movement module that lets a player pass straight through solid blocks for a moment, moving up or down through a floor, ceiling, or thin wall that would otherwise stop them cold. Picture noclip with a single axis: collision drops out just long enough to cross whatever is in the way, then switches back on like it never left. It does not touch combat or aim. It just relocates the player through terrain the engine was built to keep them out of.
+
+## How VClip actually moves you
+
+Every tick, the client checks a player's hitbox against the blocks around it and stops movement the instant it would overlap something solid. That check is what keeps a player from walking into a wall or dropping through their own floor. VClip works by briefly overriding it, not everywhere, only on the vertical axis, and only for as long as it takes to cross whatever is directly above or below.
+
+The player moves through the block as if it were air. Once they are clear on the other side, collision resumes and the game treats them as though they were never anywhere else. No block gets broken, no ladder or elytra is involved, nothing about the terrain itself changes. The position just updates to a spot that should have been physically unreachable from where the player started.
+
+That is mostly used to skip a floor between levels or drop straight into a room without going through doors and corridors, a shortcut through the map rather than a fight-winning tool. It is also exactly what gives it away.
+
+## Is VClip detectable
+
+Yes, and easily. Moving through solid blocks leaves a trace a server can check for: the player's hitbox ends up on one side of a floor or wall without ever having occupied a legal, open space in between. Vanilla movement is continuous, so a position update that puts a player inside solid blocks, or that jumps across a barrier with no valid path around it, is not something normal play produces.
+
+That makes VClip a genuine movement exploit rather than a cosmetic convenience. Unlike a HUD tweak or a color setting, it changes where the player is actually allowed to be, and server-side anticheats that validate position and collision every tick are built specifically to catch that kind of jump.
+
+<Callout variant="tip" title="Where Opal draws the line">
+Opal does not ship VClip, or anything built to fake a position vanilla collision would never produce. A module that lets you move faster or hold a tighter angle is still an advantage inside the physics the server checks. A module that teleports your hitbox through a floor is a different category of risk, and Opal's module set stays on the first side of that line.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+VClip moves a player's hitbox through positions vanilla collision physically prevents, which is exactly the class of movement anticheats are built to flag first. This page explains the mechanic, not the implementation. Running it on any server with a competent anticheat is a fast way to lose the account.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is VClip the same as noclip?">
+Not exactly. Full noclip disables collision in every direction, so the player can move through anything. VClip only works on the vertical axis, and only long enough to cross the floor, ceiling, or thin wall in front of it before collision resumes.
+</FAQItem>
+
+<FAQItem question="Does VClip work sideways too?">
+No. The name is literal. VClip only clips vertically, up or down through terrain. It will not carry a player through a wall standing next to them.
+</FAQItem>
+
+<FAQItem question="Can anticheats actually detect VClip?">
+Yes. The player ends up on the far side of solid terrain without ever occupying a legal, open space in between, which continuous, collision-checked movement does not produce. Server-side anticheats that validate position against the world map are built to catch exactly that jump.
+</FAQItem>
+
+<FAQItem question="Which client documents VClip as a module?">
+Juul documents VClip as a module, filed alongside its other movement and world tools rather than anything combat-related.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category VClip and modules like it belong to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The stealth-first client category built to hide exploits like this one." },
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "Another movement module that trades legal positioning for a shortcut, and pays for it in detectability." },
+]} />
+
+<CTA href="/en/purchase">Get movement modules built to hold up under scrutiny, not fold under it.</CTA>

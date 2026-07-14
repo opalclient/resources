@@ -1,0 +1,77 @@
+---
+title: "What Is Ping Spoof in Minecraft?"
+description: "Ping Spoof swaps the ping number in a Minecraft tab list for a fake value you set, a purely cosmetic tweak that never touches your real connection or latency."
+excerpt: "It's a cosmetic swap, not a lag fix. The number in the tab list lies; your actual connection never does."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Ping Spoof affect your actual ping?"
+    a: "No. It only changes the number shown in the tab list. Your real connection to the server and the round-trip time the server measures stay exactly the same."
+  - q: "Does Ping Spoof give you a combat advantage?"
+    a: "No. It doesn't touch hit registration, movement, or attack timing, the things that actually decide a fight. It changes a number other players see, not how the game processes combat."
+  - q: "Can a low ping alone prove someone is cheating?"
+    a: "Not by itself. Low ping is normal for players with a good connection or one close to the server. It only gets suspicious next to other signals, like reaction times that shouldn't be physically possible, which Ping Spoof doesn't create."
+  - q: "Is Ping Spoof the same as fixing lag?"
+    a: "No. It doesn't improve or worsen your actual connection at all. A player with 200ms of real latency stays at 200ms; only the number shown to everyone else changes."
+  - q: "Why would someone fake their ping?"
+    a: "Mostly to control what other players read off them: hiding a rough connection, toning down a suspiciously low number, or just running a joke value to see who notices."
+---
+
+<KeyTakeaways>
+- Ping Spoof is a player module that swaps the tab list's ping number for a fake value you set.
+- It's cosmetic only: your real connection and server-measured round-trip time never change.
+- It doesn't touch hit registration, movement, or attack timing, the surfaces anticheats actually watch.
+- Used to mask a bad connection, tone down a suspiciously low ping, or just prank people.
+</KeyTakeaways>
+
+Ping Spoof is a player module found in Minecraft utility clients that overrides the ping number displayed next to your name in the tab list, replacing the real figure with whatever value you choose. Open the tab list on any public server and you're reading numbers that assume good faith: nothing forces that display to match what your connection is actually doing. Ping Spoof is what happens when someone decides not to extend that good faith. It changes what other players read off you. It does not change what your client and the server are actually doing to each other.
+
+## How it works
+
+The module hooks the tab list entry that gets rendered for your player and substitutes a configured number for the real one, the same figure everyone else glances at as a rough proxy for your connection quality. That's the whole mechanism. It doesn't touch packet timing, doesn't touch the latency measurement the server actually runs, and doesn't change how fast your inputs reach the server or how fast the world updates on your screen. The spoof lives entirely in the label, not the pipe.
+
+Movement, combat, and every other packet exchange happen exactly as they would with the module switched off. Real ping of 140ms stays 140ms server-side no matter what number the tab list is showing everyone else.
+
+<Callout variant="tip" title="Not on Opal's module list">
+We don't ship a dedicated Ping Spoof module. Faking one number in the tab list is a small ask on paper, but it's not where we spend engineering time. Opal's utility side leans toward modules that change what you can actually do in a match, not just what other players see about you.
+</Callout>
+
+## Is Ping Spoof detectable?
+
+Short answer: not really, and that's by design. Anticheats built to catch combat cheats watch hit registration, attack intervals, and movement, the exact surfaces modules like killaura and reach abuse to win fights they shouldn't win. Ping Spoof never goes near any of that. Server-measured latency stays untouched, so there's no gameplay-affecting mismatch for a server-side check to flag. Nothing about how the client talks to the server changes, just a label the client renders locally.
+
+That makes it about as low-risk as a utility-client feature gets. The catch is that the number other players see is still a lie, a cosmetic one instead of a competitive one, but a server that treats any modified client as a violation on principle would still count it against you if you're caught running one.
+
+<Callout variant="warning" title="Cosmetic doesn't mean invisible">
+Ping Spoof doesn't create the kind of mismatch anticheats built for combat cheats are designed to catch. But it's still a client modification, and a server that bans any modified client on principle won't care that yours only changed a label instead of your hitbox.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Does Ping Spoof affect your actual ping?">
+No. It only changes the number shown in the tab list. Your real connection to the server and the round-trip time the server measures stay exactly the same.
+</FAQItem>
+<FAQItem question="Does Ping Spoof give you a combat advantage?">
+No. It doesn't touch hit registration, movement, or attack timing, the things that actually decide a fight. It changes a number other players see, not how the game processes combat.
+</FAQItem>
+<FAQItem question="Can a low ping alone prove someone is cheating?">
+Not by itself. Low ping is normal for players with a good connection or one close to the server. It only gets suspicious next to other signals, like reaction times that shouldn't be physically possible, which Ping Spoof doesn't create.
+</FAQItem>
+<FAQItem question="Is Ping Spoof the same as fixing lag?">
+No. It doesn't improve or worsen your actual connection at all. A player with 200ms of real latency stays at 200ms; only the number shown to everyone else changes.
+</FAQItem>
+<FAQItem question="Why would someone fake their ping?">
+Mostly to control what other players read off them: hiding a rough connection, toning down a suspiciously low number, or just running a joke value to see who notices.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The concealment end of the utility-client spectrum, and how it differs from a cosmetic tweak like Ping Spoof." },
+  { href: "/en/learn/what-is-killaura", label: "What is killaura?", description: "The combat module anticheats are actually built to catch, and why it sits on the opposite end of the risk scale." },
+  { href: "/en/learn/what-is-reach", label: "What is reach?", description: "Another combat-affecting module that leaves the server-side evidence Ping Spoof never does." }
+]} />
+
+<CTA href="/en/purchase">See the modules Opal actually ships</CTA>

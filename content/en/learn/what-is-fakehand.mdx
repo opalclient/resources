@@ -1,0 +1,81 @@
+---
+title: "What Is FakeHand in Minecraft? Module Explained"
+description: "FakeHand is a Minecraft exploit module that desyncs your visible held item from what the server registers, hiding item swaps from anyone watching your screen."
+excerpt: "Your hand shows one item. The server logs another. FakeHand is the whole module built around that gap."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does FakeHand give a gameplay advantage?"
+    a: "No. FakeHand doesn't touch hit distance, timing, or movement. It only changes what item appears to be in a player's hand relative to what the server has actually registered, so it's a concealment tool, not a combat module."
+  - q: "Is FakeHand considered a cosmetic module?"
+    a: "Not in the usual sense. Cosmetic modules change appearance for its own sake. FakeHand is filed as exploit-category because the desync exists to mask an action from a viewer, not to make the client look different."
+  - q: "Can server-side anticheat detect FakeHand?"
+    a: "Not directly through packets. FakeHand operates on the client's visual output rather than the data the server relies on for its own state, so a packet-level check has little to catch. The mismatch is far more likely to be noticed by a human reviewing footage or a live screenshare."
+  - q: "Has Opal ever shipped a FakeHand module?"
+    a: "Yes, historically. It's documented in Opal v1's module history. Current Opal doesn't carry a dedicated module under that name forward."
+---
+
+<KeyTakeaways>
+
+- FakeHand desyncs a player's visible held item from the server's actual record.
+- It works only on the render layer; the real interaction still reaches the server unchanged.
+- It gives no combat or movement edge on its own, it just hides an item swap from a viewer.
+- Packet checks catch little; a human reviewing footage notices the mismatch far more easily.
+
+</KeyTakeaways>
+
+FakeHand is an exploit-category module in Minecraft that breaks the link between what a player's hand shows on screen and what the item interaction the server has actually recorded. Normally the two stay glued together: switch items, and the client's render and the server's equipped-item state update in lockstep. FakeHand holds the displayed hand steady, or shows a different item entirely, while the real interaction underneath goes through exactly as it would without the module running. The server never sees anything different. Only the person watching the screen does.
+
+## How it works
+
+FakeHand only touches the visual layer. It doesn't rewrite packets or delay inputs, it decouples the rendered hand model from the equipped-item state the server is actually tracking.
+
+Say a player switches from a sword to a totem mid-fight. Server-side, that switch and everything that follows happens exactly like it would on a clean client with no modules running at all. FakeHand's only job is to keep the rendered hand showing the sword, or showing nothing changing, while the totem-out interaction the server records completes underneath it.
+
+That's the whole mechanism. No hitbox math, no timing tricks, no server desync. Just a gap between what actually happened and what's on screen while it happens.
+
+## Is FakeHand detectable
+
+Packet-level anticheats have almost nothing to key off here. FakeHand doesn't touch hit distance, doesn't add or drop ticks, doesn't change how fast an interaction resolves. The server-side data is identical to what a clean client would send. A check built around consistency between client-reported state and server state has no discrepancy to find, because there isn't one on that side of the equation.
+
+The catch runs the opposite direction from most exploit modules. FakeHand exists specifically to make the visible hand disagree with what actually happened, so the mismatch that gives it away shows up in footage, not packets. A screenshare reviewer, a spectator, or anyone rewatching a clip who knows what a normal item swap looks like has exactly the kind of eye built to catch it. It trades server-side risk for visual risk. It doesn't avoid risk altogether.
+
+<Callout variant="info" title="Opal's history with FakeHand">
+It shipped once, in Opal v1, before the client got rebuilt from the ground up. Current Opal doesn't carry a dedicated module under that name forward, so if you're hunting for it by this exact label, it isn't in the present catalog.
+</Callout>
+
+<Callout variant="warning" title="Still an exploit, seen or not">
+FakeHand won't trip a hit-distance or timing check, since it never touches either. That doesn't make it allowed. Any server that forbids modified clients treats an exploit-category module the same way whether staff catch it live or not.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does FakeHand give a gameplay advantage?">
+No. FakeHand doesn't touch hit distance, timing, or movement. It only changes what item appears to be in a player's hand relative to what the server has actually registered, so it's a concealment tool, not a combat module.
+</FAQItem>
+
+<FAQItem question="Is FakeHand considered a cosmetic module?">
+Not in the usual sense. Cosmetic modules change appearance for its own sake. FakeHand is filed as exploit-category because the desync exists to mask an action from a viewer, not to make the client look different.
+</FAQItem>
+
+<FAQItem question="Can server-side anticheat detect FakeHand?">
+Not directly through packets. FakeHand operates on the client's visual output rather than the data the server relies on for its own state, so a packet-level check has little to catch. The mismatch is far more likely to get noticed by a human reviewing footage or a live screenshare.
+</FAQItem>
+
+<FAQItem question="Has Opal ever shipped a FakeHand module?">
+Yes, historically. It's documented in Opal v1's module history. Current Opal doesn't carry a dedicated module under that name forward.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The concealment-first client category FakeHand belongs to." },
+  { href: "/en/learn/what-is-reach", label: "What is Reach?", description: "A combat module that actually changes hit distance, unlike FakeHand." },
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The automated combat module FakeHand gives no advantage over." },
+]} />
+
+<CTA href="/en/purchase">See what Opal actually ships today, from $8.99</CTA>

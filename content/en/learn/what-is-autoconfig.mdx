@@ -1,0 +1,79 @@
+---
+title: "What Is AutoConfig in Minecraft Clients?"
+description: "AutoConfig is a LiquidBounce module that detects your server or anticheat and auto-loads matching settings. Here's how the profile system actually works."
+excerpt: "AutoConfig picks your anticheat's poison for you. Connect to a server, and it quietly loads whatever settings already work against Watchdog, Grim, or whatever else is watching."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does AutoConfig actually change?"
+    a: "It writes new values into the settings of a client's other modules, things like reach distance, rotation smoothing, or timing, based on a profile matched to the server or anticheat it detects. You never touch those numbers by hand."
+  - q: "Does AutoConfig work against any anticheat?"
+    a: "Only anticheats with a maintained profile behind them. LiquidBounce is known to keep profiles for anticheats including Watchdog, Grim, Vulcan, Intave, and Polar, plus presets tuned to specific servers."
+  - q: "Is AutoConfig itself a cheat module?"
+    a: "Not in the sense of doing anything an anticheat can flag directly. It's a configuration layer. The reach or rotation module it tunes is what actually produces the gameplay behavior that gets flagged."
+  - q: "Why not just hardcode good settings into each module?"
+    a: "Because a setting that's safe against one anticheat can trip detection on another. Keeping the tuning external means one module codebase works across servers, and only the profile needs updating when an anticheat changes its thresholds."
+---
+
+<KeyTakeaways>
+
+- AutoConfig is a LiquidBounce module that detects your server or anticheat and auto-loads matching settings.
+- It writes values like reach, rotation smoothing, and timing into other modules from a fetched profile.
+- Maintained profiles exist for anticheats including Watchdog, Grim, Vulcan, Intave, and Polar.
+- AutoConfig sends no extra packets itself, so detection risk sits with the modules it configures.
+
+</KeyTakeaways>
+
+AutoConfig is a module in LiquidBounce that detects which server or anticheat you're connected to and automatically loads a matching settings profile into the client's other modules. Instead of hand-tuning reach, rotation smoothing, or timing every time you change servers, it pulls a profile keyed to what it finds (Watchdog, Grim, Vulcan, Intave, Polar, whatever's running) and writes those values in for you. It isn't a cheat in its own right so much as the plumbing that keeps everything else correctly tuned.
+
+## How it works
+
+AutoConfig starts by figuring out where you are. That can mean reading the server address directly, or fingerprinting which anticheat is actually active once you're connected. Either way, it pulls a matching profile from a remote source and writes the values straight into your other modules' settings: the reach distance a combat module uses, the smoothing a rotation module applies, the timing offsets a movement bypass leans on.
+
+The reasoning behind splitting things this way is simple. A rotation helper or movement bypass gets written once, as generic code with adjustable parameters. The actual numbers that make those parameters survive against Watchdog are not the numbers that survive against Grim or Polar, and LiquidBounce keeps that difference out of the module code entirely, living instead in the profile AutoConfig fetches. When an anticheat shifts its detection thresholds, the fix is a profile update, not a new client build shipped to every user.
+
+## Is AutoConfig itself detectable?
+
+No, and that's the whole point of building it this way. AutoConfig doesn't move your character, alter your rotations, or send anything unusual over the wire. It writes configuration values into other modules before or during a session, and a server-side anticheat has no way to tell whether a number was typed in by hand or dropped in by a fetched profile.
+
+The actual risk lives one layer down, in whatever AutoConfig configures. If a profile tunes a combat module to sit right at the edge of a detection threshold, that module carries exactly the risk it would carry with any other set of numbers. AutoConfig is a maintenance and convenience layer sitting on top of a cheat client, not a bypass on its own, and it doesn't add or remove risk beyond what the modules it touches already have.
+
+<Callout variant="info" title="Where Opal sits on this">
+Opal doesn't ship a module called AutoConfig. That's worth being upfront about rather than hand-waving: LiquidBounce's remote-profile architecture exists largely because it's open source and has to keep several different anticheat-specific tunings in sync across one shared codebase. A paid client with a fixed, maintained module set is solving a different problem. If you're comparing utility clients specifically on "does it auto-swap settings per detected anticheat," that's a LiquidBounce mechanic, not something to expect from Opal.
+</Callout>
+
+<Callout variant="warning" title="The risk isn't AutoConfig, it's what it configures">
+AutoConfig itself won't get you banned, it's invisible to a server. The reach module, rotation module, or movement bypass it quietly tunes might, at exactly the rate they would if you'd set the numbers yourself. Treat a profile-driven setting with the same caution you'd give a manually configured one.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does AutoConfig actually change?">
+It writes new values into the settings of a client's other modules, things like reach distance, rotation smoothing, or timing, based on a profile matched to the server or anticheat it detects. You never touch those numbers by hand.
+</FAQItem>
+
+<FAQItem question="Does AutoConfig work against any anticheat?">
+Only anticheats with a maintained profile behind them. LiquidBounce is known to keep profiles for anticheats including Watchdog, Grim, Vulcan, Intave, and Polar, plus presets tuned to specific servers.
+</FAQItem>
+
+<FAQItem question="Is AutoConfig itself a cheat module?">
+Not in the sense of doing anything an anticheat can flag directly. It's a configuration layer. The reach or rotation module it tunes is what actually produces the gameplay behavior that gets flagged.
+</FAQItem>
+
+<FAQItem question="Why not just hardcode good settings into each module?">
+Because a setting that's safe against one anticheat can trip detection on another. Keeping the tuning external means one module codebase works across servers, and only the profile needs updating when an anticheat changes its thresholds.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category AutoConfig and the modules it tunes belong to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Staying subtle is a different strategy than swapping profiles per anticheat." },
+  { href: "/en/learn/what-is-reach", label: "What is reach?", description: "One of the exact settings AutoConfig adjusts, and why the safe number moves anticheat to anticheat." },
+]} />
+
+<CTA href="/en/purchase">Skip the profile hunting. See what Opal ships for $8.99.</CTA>

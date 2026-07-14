@@ -1,0 +1,81 @@
+---
+title: "What Is Kill Effects in Minecraft? (Cosmetic Module)"
+description: "Kill Effects is a cosmetic module that plays a custom animation the moment your hit kills a player, separate from Entity Effects and purely client-side."
+excerpt: "A finishing blow gets its own animation. Everything before it looks exactly like vanilla."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Kill Effects change how combat plays out?"
+    a: "No. It only swaps the visual shown at the moment of a kill. Hit detection, damage, and timing stay identical to vanilla."
+  - q: "How is Kill Effects different from Entity Effects?"
+    a: "Kill Effects only fires when a hit ends the target. Entity Effects fires on every hit that connects, kill or not. Kill Effects is the narrower, finish-only version of the same idea."
+  - q: "Can other players see my kill effect?"
+    a: "No. It renders locally on your client only. Everyone else on the server sees the standard vanilla death, whatever effect you have configured."
+  - q: "Does using Kill Effects risk a ban?"
+    a: "No. It changes what your client draws, not what it sends. There's no packet difference for a server-side anticheat to catch. Any risk comes from a server's blanket stance on modified clients, not from this module."
+---
+
+<KeyTakeaways>
+- Kill Effects is a cosmetic module that plays a custom animation or particle burst the instant your hit finishes off a target.
+- It triggers on the kill only, not on every hit, which is what separates it from the broader Entity Effects module.
+- It's purely a client-side render. No packets change, no values the server tracks are touched, so there's nothing for an anticheat to see.
+- Clients like Tenacity ship it as one option in a wider set of visual flourishes, not as anything tied to aim or damage.
+</KeyTakeaways>
+
+Kill Effects is a cosmetic module in Minecraft utility clients that replaces (or layers on top of) the vanilla death animation with a custom one, but only when your hit is the one that ends the fight. Land ten hits that don't kill and nothing happens. Land the eleventh that does, and the effect plays. It's a reward for the finishing blow, not a coat of paint over every swing.
+
+## How it works
+
+The module watches combat for one specific event: a hit that reduces a target's health to zero. It ignores everything else. When that kill condition fires, it plays whatever animation or particle effect you've picked, either replacing the plain vanilla death or stacking alongside it, depending on the client's implementation.
+
+Because the trigger is "kill," not "hit," the effect shows up far less often than you'd expect from a combat module. Most swings in a real fight don't end anything. Kill Effects stays quiet through all of them and only speaks up on the one that counts.
+
+That narrow trigger is also the entire difference between Kill Effects and its closest relative, Entity Effects. Entity Effects fires on any connecting hit regardless of outcome, so it reads as a constant visual layer over combat. Kill Effects reserves itself for the outcome, so it reads as a flourish tied to winning the exchange rather than fighting it.
+
+## Kill Effects vs. Entity Effects
+
+| | Kill Effects | Entity Effects |
+|---|---|---|
+| Fires on | The killing hit only | Every connecting hit |
+| Frequency in a fight | Rare (once, if at all) | Constant |
+| Feels like | A payoff for the kill | An ambient combat layer |
+| Changes gameplay | No | No |
+
+Neither module touches reach, timing, damage, or hit registration. The only thing either one changes is what renders on your own screen.
+
+## Is it safe to use
+
+Yes, and it's about as safe as cosmetic modules get. Kill Effects doesn't alter anything the server tracks and sends nothing different than a normal kill already would. There's no reach extension, no timing manipulation, no packet spam, nothing for a server-side anticheat to flag, because the effect never leaves your client.
+
+The only caveat that ever applies to cosmetic modules still applies here: some servers ban modified clients outright as a blanket rule, independent of what any specific module does. Check server policy before running one, not because Kill Effects is risky, but because "any modified client" sometimes is the policy.
+
+<Callout variant="tip" title="Where Opal fits">
+Opal doesn't ship a module called Kill Effects specifically, but the same idea, cosmetic layers that dress up a moment without touching how the fight was actually fought, is exactly what Opal's visual category is for. If you want your kills to look like yours without changing a single hitbox, that's the philosophy the whole client runs on.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Does Kill Effects change how combat plays out?">
+No. It only swaps the visual shown at the moment of a kill. Hit detection, damage, and timing stay identical to vanilla.
+</FAQItem>
+<FAQItem question="How is Kill Effects different from Entity Effects?">
+Kill Effects only fires when a hit ends the target. Entity Effects fires on every hit that connects, kill or not. Kill Effects is the narrower, finish-only version of the same idea.
+</FAQItem>
+<FAQItem question="Can other players see my kill effect?">
+No. It renders locally on your client only. Everyone else on the server sees the standard vanilla death, whatever effect you have configured.
+</FAQItem>
+<FAQItem question="Does using Kill Effects risk a ban?">
+No. It changes what your client draws, not what it sends. There's no packet difference for a server-side anticheat to catch. Any risk comes from a server's blanket stance on modified clients, not from this module.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The category Kill Effects and every other module in this glossary belongs to." },
+  { href: "/en/learn/what-is-killaura", label: "What is Killaura?", description: "The combat module Kill Effects gets confused for but has nothing to do with." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "Where the actual aim-assisting modules live, for contrast with purely cosmetic ones." }
+]} />
+
+<CTA href="/en/purchase">Browse Opal's full visual module set and make every kill look like yours.</CTA>

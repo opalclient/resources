@@ -1,0 +1,79 @@
+---
+title: "What Is Timer in Minecraft? Tick Speed Module Explained"
+description: "Timer is a module that speeds up or slows down how fast your client processes game ticks, from attacks to block placement, and it's easy for servers to catch."
+excerpt: "Timer doesn't make you faster, it makes your clock lie. Here's how tick speed manipulation works, and why the server always notices."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does the Timer module actually change?"
+    a: "It changes how fast the client advances through game ticks, which speeds up or slows down anything tied to tick timing, such as attack cooldowns, item use, and block placement."
+  - q: "Does Timer affect the server's tick rate?"
+    a: "No. It only changes how quickly the client processes and sends its own tick-based actions. The server keeps its own tick rate and can still measure the pace of what it receives."
+  - q: "Is Timer safe to use?"
+    a: "It carries real detection risk. Because the server can measure action rate directly against the expected tick pace, a Timer value that pushes actions out noticeably faster than normal is a plausible flag point for anticheats, and use is at the player's own risk."
+  - q: "Why would someone slow Timer down instead of speeding it up?"
+    a: "A lower setting is sometimes used for finer control over the timing of a single action rather than for raw speed, trading throughput for precision."
+---
+
+<KeyTakeaways>
+
+- Timer is a module that speeds up or slows down how fast the client advances through game ticks.
+- That changes anything tied to tick timing: attack cooldowns, item use, block placement, and bow charging.
+- The server's own tick rate never changes, only the pace of what the client sends.
+- It's easy to catch, since servers can measure action rate directly against the normal 20-tick pace.
+
+</KeyTakeaways>
+
+Timer is a module that changes the rate at which your client processes Minecraft's game ticks, the fixed twenty-per-second clock the game runs on. Push it above normal and everything tied to tick timing, attacks, item use, block placement, and bow charging, happens more often per second than an unmodified client allows. Pull it below normal and those same actions slow down instead. It's sometimes called TimerMod, and it shows up in clients like Fan and Tenacity. The server doesn't run any faster or slower: the client decides its own pace, and the server just watches what arrives.
+
+## How it works
+
+Minecraft runs on fixed ticks, twenty a second by default. Most timed actions, attack cooldowns, eating, block breaking, bow charging, advance one step per tick instead of by a wall clock. Timer hooks into the rate at which the client walks through those ticks and scales it by a multiplier. Set it above normal and the client races through more ticks per real-world second than the server expects. Set it below normal and it crawls through fewer.
+
+The catch is whose ticks these actually are. The client processing ticks faster doesn't make the server run faster too, it just changes what the client sends. A Timer set well above normal can attempt to attack, place blocks, or use items more often than the tick rate is supposed to allow. Running it below normal does the opposite, and some players use it that way on purpose, not for extra speed but for finer control over the exact tick an action lands on.
+
+## Why servers catch it so easily
+
+Timer leaves a signature that's hard to hide: a stream of tick-driven actions arriving faster, or slower, than a real player's client would produce them. The server is authoritative over game time. It doesn't have to take the client's pace on faith, it can count how many ticks worth of actions arrived in a given stretch of real time and compare that against what twenty ticks per second should look like.
+
+That makes Timer one of the more clear-cut categories of client modification to flag, at least in principle. The deviation shows up as a raw rate, not a subtle positional error buried in noise. Anticheats commonly log or flag players whose action rate consistently runs ahead of the expected tick pace. Whether a specific value gets caught on a specific server depends on how closely that server checks, but the mechanism itself isn't hidden. A faster-than-normal stream of tick-driven actions is the whole signal, by design, not an accident of implementation.
+
+<Callout variant="tip" title="Opal ships this">
+Opal's own catalog entry keeps it blunt: "Changes your game tick speed." It's filed under Opal's use-at-own-risk tier, same as it would be on any client, because a client that's deciding its own pace is exactly the kind of signal a server-side check is built to measure.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the module generically so you know what the term means. Naming and exact behavior vary by client, and pushing your action rate past what the server expects breaks the rules on essentially every server that checks for it.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does the Timer module actually change?">
+It changes how fast the client advances through game ticks, which speeds up or slows down anything tied to tick timing: attack cooldowns, item use, bow charging, block placement.
+</FAQItem>
+
+<FAQItem question="Does Timer affect the server's tick rate?">
+No. It only changes how quickly the client processes and sends its own tick-based actions. The server keeps its own tick rate the whole time and can still measure the pace of what it receives.
+</FAQItem>
+
+<FAQItem question="Is Timer safe to use?">
+It carries real detection risk. The server can measure action rate directly against the expected tick pace, so a Timer value that pushes actions out noticeably faster than normal is a plausible flag point for anticheats. Use is at the player's own risk.
+</FAQItem>
+
+<FAQItem question="Why would someone slow Timer down instead of speeding it up?">
+A lower setting is sometimes used for finer control over when exactly a single action lands, trading raw throughput for precision.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "An auto-attack module whose output Timer can multiply." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The stealth-first approach, a contrast to a signal this loud." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category Timer and modules like it belong to." },
+]} />
+
+<CTA href="/en/purchase">Push your tick rate past what the server expects. Opal ships Timer, eyes open about the risk.</CTA>

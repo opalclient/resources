@@ -1,0 +1,81 @@
+---
+title: "What Is Fake Lag in Minecraft? Packet Delay Explained"
+description: "Fake Lag delays a player's movement packets and releases them in a burst, desyncing their position from the server. Here's how it works and why it's bannable."
+excerpt: "Fake Lag doesn't make you laggy. It makes the server think you are, while you're already somewhere else."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Fake Lag actually change?"
+    a: "It changes when movement packets are sent, not how the player moves on their own screen. Packets get held back and released together in a burst, so the server's record of the position falls behind the real one."
+  - q: "Is Fake Lag the same thing as having high ping?"
+    a: "No. High ping is a real network delay outside the player's control. Fake Lag is a deliberate, client-side hold-and-burst pattern that a normal connection would never produce on its own."
+  - q: "Does Fake Lag make a player impossible to hit?"
+    a: "No. It opens a temporary gap between the real position and what the server has recorded, which can make the player harder to hit during the hold, but it doesn't block damage outright, and the burst itself is an easy detection signal."
+  - q: "How is Fake Lag different from Blink?"
+    a: "Fake Lag keeps sending packets on a delay and bursts them later. Blink suspends the connection outright and resumes it after. Both desync position, just through different packet-level mechanisms."
+---
+
+# What Is Fake Lag in Minecraft?
+
+<KeyTakeaways>
+- Fake Lag delays a player's outgoing movement packets and releases them in one burst instead of every tick.
+- The server keeps recording the old position while the player has already moved, then sees a stutter or snap when the burst lands.
+- It's a bannable position-desync exploit, not cosmetic, distinct from Blink, which suspends the connection instead of delaying packets.
+</KeyTakeaways>
+
+Fake Lag is a combat module found in some Minecraft cheat clients that holds a player's outgoing movement packets instead of sending them on every tick, then releases the whole queue at once. A normal connection reports position constantly, so the server's copy of where a player stands tracks their real position closely. Fake Lag breaks that link on purpose: the player keeps walking and fighting normally on their own screen while the server is stuck holding an older position, and when the queue finally flushes, everyone else sees a stutter or a short teleport instead of smooth movement.
+
+## How it works
+
+A vanilla client sends a movement packet roughly once per tick, so the server's record of a player's position rarely falls more than a fraction of a second behind reality. Fake Lag intercepts those outgoing packets, queues them, and holds the queue closed for a short window instead of letting them out immediately. The technique shows up in clients like Raven B++, usually bundled alongside other packet-manipulation modules rather than shipped alone.
+
+While the hold runs, nothing about the player's own experience changes. They still walk, jump, and swing normally on their own screen. What's frozen is everyone else's view: the server, and any player watching, is stuck on the last position that actually made it out before the hold started. When the hold ends, the queued packets release together, and the player appears to jump or stutter into their real spot instead of walking there.
+
+Most implementations cap how long a hold can run. Let the gap between real and reported position grow too far and the server either rubber-bands the player back to a sane position or flags the movement outright, so the module is really trading how much desync it buys against how obvious the burst looks.
+
+## Fake Lag vs Blink
+
+Fake Lag gets lumped in with Blink because both are packet-manipulation modules that open a gap between a player's real position and what the server has been told. The mechanism underneath is different, and so is what it looks like on someone else's screen.
+
+| | Fake Lag | Blink |
+|---|---|---|
+| Packet behavior | Delays movement packets, then releases them in a burst | Suspends the connection, then resumes it |
+| Visual effect | Stutter or short teleport | Freeze, then a snap to a new position |
+| What it exploits | Server holding a stale position while the client keeps moving | Server receiving no updates during the suspension |
+
+Same category of problem, different lever. Fake Lag never stops talking to the server, it just talks late and all at once. Blink stops talking altogether and picks the conversation back up when it decides to.
+
+<Callout variant="tip" title="Where Opal draws the line">
+Opal ships combat modules, but a dedicated hold-and-burst desync feature like Fake Lag isn't one of them. Trading a few hundred milliseconds of positional lying for a wide-open detection signal isn't a trade the client is built to make.
+</Callout>
+
+<Callout variant="warning" title="This is a bannable cheat, not a network fix">
+Fake Lag exists to pull a player's real position away from what the server has recorded, and a burst of movement right after a hold is exactly the pattern server-side anticheats are built to catch. Treat it as a detectable, gameplay-advantage cheat carrying the same ban risk as any other position-desync exploit, not as something that fixes or hides a bad connection.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="What does Fake Lag actually change?">
+It changes when movement packets are sent, not how the player moves on their own screen. Packets get held back and released together in a burst, so the server's record of the position falls behind the real one.
+</FAQItem>
+<FAQItem question="Is Fake Lag the same thing as having high ping?">
+No. High ping is a real network delay outside the player's control. Fake Lag is a deliberate, client-side hold-and-burst pattern that a normal connection would never produce on its own.
+</FAQItem>
+<FAQItem question="Does Fake Lag make a player impossible to hit?">
+No. It opens a temporary gap between the real position and what the server has recorded, which can make the player harder to hit during the hold, but it doesn't block damage outright, and the burst itself is an easy detection signal.
+</FAQItem>
+<FAQItem question="How is Fake Lag different from Blink?">
+Fake Lag keeps sending packets on a delay and bursts them later. Blink suspends the connection outright and resumes it after. Both desync position, just through different packet-level mechanisms.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "Where modules like Fake Lag fit inside the broader utility client category." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The client category built around staying invisible to other players and staff." },
+  { href: "/en/learn/what-is-killaura", label: "What is Killaura?", description: "The combat module Fake Lag usually gets paired with in cheat packages." }
+]} />
+
+<CTA href="/en/purchase">Combat that doesn't need to lie to the server. Try Opal.</CTA>

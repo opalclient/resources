@@ -1,0 +1,87 @@
+---
+title: "What Is ResetVL in Minecraft? Module Explained"
+description: "ResetVL is an exploit module that tries to reset or lower a server anti-cheat's violation-level counter before it triggers a flag or a ban. Here's how it works."
+excerpt: "ResetVL doesn't clean up your play, it cleans up the anti-cheat's memory of it, and only for as long as the exploit underneath stays unpatched."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is ResetVL a cheat module?"
+    a: "Yes. It's documented as an exploit-category module, and its entire purpose is interfering with a server-side anti-cheat's ability to flag or punish a player."
+  - q: "What is a violation level in an anti-cheat?"
+    a: "It's a running score a server-side anti-cheat keeps per player and often per check, rising when it sees suspicious behavior and normally decaying if the player behaves. Crossing a threshold triggers a flag, a staff alert, or a kick."
+  - q: "Does ResetVL give a direct gameplay advantage?"
+    a: "No. It doesn't change movement or combat by itself. It works indirectly, keeping the anti-cheat's internal suspicion score from reaching the point where it acts against the modules that do give an advantage."
+  - q: "How is ResetVL different from a disabler?"
+    a: "A disabler tries to stop a check from registering suspicious behavior in the first place. ResetVL instead targets the score that check has already accumulated, after the behavior was seen."
+  - q: "Is ResetVL reliable across servers?"
+    a: "No. It depends on a specific weakness in how one anti-cheat build tracks its own counters, so it can stop working the moment that anti-cheat gets updated or patched."
+---
+
+<KeyTakeaways>
+
+- ResetVL is an exploit module that tries to reset or lower a server-side anti-cheat's internal violation-level (VL) counter for the player running it.
+- VL is a per-player, per-check score that rises on suspicious behavior and normally decays when a player looks clean; crossing a threshold triggers a flag, an alert, or a kick.
+- ResetVL adds no combat or movement advantage on its own. It just keeps other modules' accumulated suspicion from reaching that threshold.
+- Documented as shipped in Tenacity; it depends on a specific anti-cheat implementation gap, so it tends to break the moment that gap gets patched.
+
+</KeyTakeaways>
+
+ResetVL is an exploit-category module in Minecraft cheat clients that tries to reset or lower a server-side anti-cheat's internal violation-level counter, usually shortened to VL, for the player running it. Most anti-cheats don't act on one bad-looking packet. They keep a running score instead, adding to it when a player's movement or combat looks wrong and letting it fall back down when the player looks clean again. Crossing a set threshold is what actually triggers a response. ResetVL doesn't touch how a player moves or fights. It goes straight for that score, trying to push it back down before it ever reaches the point where the anti-cheat acts.
+
+## How it works
+
+Server-side anti-cheats generally don't convict on a single suspicious packet. Each check keeps its own running score per player, adding to it when behavior looks wrong and typically letting it decay if the player looks clean again. Once the score crosses a threshold, the anti-cheat escalates: it alerts staff, flags the account for review, or kicks the player outright. ResetVL targets that score directly rather than the behavior that produces it, attempting to push the counter back down before it reaches the point where the anti-cheat would respond.
+
+It's documented in the knowledge base as shipping in Tenacity, filed under that client's exploit-category modules alongside other anti-cheat-facing tools.
+
+## Why people run it
+
+The appeal is buying time for everything else in the loadout. A player running combat or movement cheats is going to trip several checks over a session, and every trip raises that check's violation level. If the level climbs toward a kick or ban threshold, ResetVL gives the accumulated suspicion nowhere to land, so the modules doing the actual cheating can keep running without the anti-cheat's internal count ever reaching the point where it acts. ResetVL isn't the thing winning the fight or closing the gap. It's the thing making sure the anti-cheat forgets it should care.
+
+<Callout variant="tip" title="Not part of Opal's catalog">
+Opal doesn't ship a module under the ResetVL name. Manipulating an anti-cheat's own internal counters is about as short a shelf life as an exploit gets: the value only exists until a vendor notices its counters can be moved from the outside, and closing that gap tends to get treated as a priority the moment it's found, because it undermines the entire mechanism the anti-cheat relies on to punish anyone.
+</Callout>
+
+## Is it safe to use
+
+No, not reliably, and that's by design rather than accident. ResetVL targets the anti-cheat's own decision-making state directly, which is a more direct form of evasion than smoothing a rotation or padding a timer. Because the violation counter lives on the server, a module that can move it has to be exploiting a specific gap or bug in one anti-cheat's implementation rather than using a general technique, the same way a disabler depends on a quirk in one server-side check. That kind of exploit tends to be short-lived. Once a vendor notices its own counters can be manipulated from outside, patching it usually jumps to the top of the list.
+
+<Callout variant="warning" title="Reference, not a how-to">
+ResetVL is documented as an exploit-category module built to interfere with a server-side anti-cheat's ability to flag or punish a player, the same ban-risk category as any other anti-cheat exploit. This page explains what the module is and how it behaves, not how to run one.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is ResetVL a cheat module?">
+Yes. It's documented as an exploit-category module, and its entire purpose is interfering with a server-side anti-cheat's ability to flag or punish a player.
+</FAQItem>
+
+<FAQItem question="What is a violation level in an anti-cheat?">
+It's a running score a server-side anti-cheat keeps per player and often per check, rising when it sees suspicious behavior and normally decaying if the player behaves. Crossing a threshold triggers a flag, a staff alert, or a kick.
+</FAQItem>
+
+<FAQItem question="Does ResetVL give a direct gameplay advantage?">
+No. It doesn't change movement or combat by itself. It works indirectly, keeping the anti-cheat's internal suspicion score from reaching the point where it acts against the modules that do give an advantage.
+</FAQItem>
+
+<FAQItem question="How is ResetVL different from a disabler?">
+A disabler tries to stop a check from registering suspicious behavior in the first place. ResetVL instead targets the score that check has already accumulated, after the behavior was seen.
+</FAQItem>
+
+<FAQItem question="Is ResetVL reliable across servers?">
+No. It depends on a specific weakness in how one anti-cheat build tracks its own counters, so it can stop working the moment that anti-cheat gets updated or patched.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The detection-evasion end of the same exploit family ResetVL belongs to." },
+  { href: "/en/learn/what-is-killaura", label: "What is Killaura?", description: "A combat module that trips checks fast, exactly the kind of loadout ResetVL is built to cover for." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity / Anti-Knockback?", description: "Another module that leans on the anti-cheat layer instead of the game itself." },
+]} />
+
+<CTA href="/en/purchase">Opal doesn't need to erase what the anti-cheat remembers. See what actually ships.</CTA>

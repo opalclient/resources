@@ -1,0 +1,93 @@
+---
+title: "What Is Anchor Aura in Minecraft? Module Explainer"
+description: "Anchor Aura is a combat module that auto-places and detonates respawn anchors next to a target for explosive damage, and it's an easy way to get banned."
+excerpt: "Anchor Aura turns a Nether-only vanilla mechanic into a PvP weapon: place a respawn anchor next to someone, trigger it, watch the damage land automatically."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is Anchor Aura the same as Crystal Aura?"
+    a: "No, but they work the same way. Both auto-place an explosive next to a target and detonate it. Anchor Aura uses respawn anchors, Crystal Aura uses end crystals."
+  - q: "Is Anchor Aura a cheat?"
+    a: "Yes. It automates placing and detonating an explosive against a target without the player aiming or timing anything by hand, which is a gameplay advantage almost every server's rules forbid."
+  - q: "Which clients have Anchor Aura?"
+    a: "It's documented as seen in Wurst and Meteor Client, filed under their combat categories alongside other auto-explosive modules."
+  - q: "Can respawn anchors even explode outside the Nether?"
+    a: "Yes. That's the underlying vanilla mechanic the module relies on: a charged respawn anchor struck outside the Nether detonates. Anchor Aura just automates the striking."
+  - q: "Why does Anchor Aura get banned so fast?"
+    a: "Because the place-and-detonate timing is tighter and more consistent than manual play, and the placement itself often targets a spot the player never looked at. Both are exactly what server-side anticheats watch for."
+---
+
+<KeyTakeaways>
+
+- Anchor Aura auto-places a respawn anchor beside a target and detonates it for explosive damage, no manual placing or timing.
+- It runs the same place-and-detonate loop as a Crystal Aura, swapping end crystals for anchors.
+- Seen in Wurst and Meteor Client, filed under combat with other auto-explosive modules.
+- Its speed and off-angle placement are exactly what anticheats watch for.
+
+</KeyTakeaways>
+
+Anchor Aura is a combat module that automatically places a respawn anchor next to a target and detonates it, turning a block most players only ever see in the Nether into a PvP weapon anywhere in the world. The player doesn't place the anchor, doesn't charge it, and doesn't swing at it. The module runs the entire sequence itself, faster than a hand ever could.
+
+## How it works
+
+Anchor Aura runs a place-and-detonate loop against a nearby target, and the loop is a near-copy of what a [Crystal Aura](/en/learn/what-is-a-crystal-aura) does with end crystals. It picks a target, scans for a valid spot to drop a respawn anchor next to that target, places the anchor, and then triggers it so the blast lands on the enemy.
+
+The mechanic underneath all of this is vanilla: a charged respawn anchor explodes if it's struck outside the Nether. Normally that means placing the block, filling it with glowstone charges, and hitting it at the right moment, three separate actions a person has to land in sequence. Anchor Aura collapses all three into one automated step, and it does it more consistently than someone managing the inputs by hand ever will.
+
+You'll find it in Wurst and Meteor Client, where it lives in the combat category next to the other automated explosive modules.
+
+## Anchor Aura vs Crystal Aura
+
+Strip away the block name and these are the same module. Both auto-place an explosive beside a target and detonate it on a loop with zero manual input. The only real difference is the explosive itself. A [Crystal Aura](/en/learn/what-is-a-crystal-aura) uses end crystals, which can be placed on obsidian or bedrock almost anywhere on the map. Anchor Aura is stuck with a Nether-specific rule: the anchor has to be struck outside the Nether to go off, which is exactly the loophole the module exploits to weaponize it in the Overworld or the End.
+
+Pick whichever block is available and the underlying automation doesn't care. Anticheats treat them the same way too.
+
+## Why it gets detected
+
+Anchor Aura is a gameplay-advantage cheat, not a cosmetic one, so servers police it the same way they police a Crystal Aura or any other auto-combat module. The place-and-detonate timing runs faster than manual play allows, and the anchor frequently goes down at a spot the player's camera never actually pointed at.
+
+Server-side anticheats are built to catch exactly that shape of pattern: blocks placed and triggered in rapid succession near an entity, interactions with no matching player rotation, and explosion damage that lines up with a loop instead of a human sequence of place, charge, and strike. Trip enough of those and the account gets flagged for review or banned outright, depending on the server.
+
+<Callout variant="tip" title="Where Opal draws the line">
+Opal doesn't ship a dedicated Anchor Aura. Auto-explosive loops like this are about as loud as combat automation gets: the timing signature and off-angle placements are the first thing a server-side anticheat looks for, which makes the module a fast way to lose an account. Opal's combat modules exist, but they're built around staying inside what a server can't distinguish from a human, not around detonating blocks nobody aimed at.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Anchor Aura is and how it behaves generically. It isn't instructions for running one. Automating combat this way breaks the rules on essentially every server, and it's built to get caught.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Anchor Aura the same as Crystal Aura?">
+No, but they work the same way. Both auto-place an explosive next to a target and detonate it. Anchor Aura uses respawn anchors, Crystal Aura uses end crystals.
+</FAQItem>
+
+<FAQItem question="Is Anchor Aura a cheat?">
+Yes. It automates placing and detonating an explosive against a target without the player aiming or timing anything by hand, which is a gameplay advantage almost every server's rules forbid.
+</FAQItem>
+
+<FAQItem question="Which clients have Anchor Aura?">
+It's documented as seen in Wurst and Meteor Client, filed under their combat categories alongside other auto-explosive modules.
+</FAQItem>
+
+<FAQItem question="Can respawn anchors even explode outside the Nether?">
+Yes. That's the underlying vanilla mechanic the module relies on: a charged respawn anchor struck outside the Nether detonates. Anchor Aura just automates the striking.
+</FAQItem>
+
+<FAQItem question="Why does Anchor Aura get banned so fast?">
+Because the place-and-detonate timing is tighter and more consistent than manual play, and the placement itself often targets a spot the player never looked at. Both are exactly what server-side anticheats watch for.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-crystal-aura", label: "What is a Crystal Aura?", description: "The end-crystal version of the same place-and-detonate loop." },
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The melee auto-attacker in the same combat family." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The broader category these combat modules ship inside of." },
+]} />
+
+<CTA href="/en/purchase">Opal's combat modules are built to stay unreadable, not just deal damage.</CTA>

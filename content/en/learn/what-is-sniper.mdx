@@ -1,0 +1,79 @@
+---
+title: "What Is Sniper in Minecraft? Bow Aim Assist Explained"
+description: "Sniper is a Minecraft module documented as showing a drop and lead indicator for long-range bow and crossbow shots. Here's what it does and its risk profile."
+excerpt: "A module built around one question: where do I aim? Sniper does the drop and lead math for a long-range bow or crossbow shot so you don't have to guess."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Sniper actually do?"
+    a: "It's documented as helping line up long-range bow and crossbow shots, most likely by showing a predicted drop and lead indicator over the target. The exact mechanism beyond that isn't confirmed."
+  - q: "Does Sniper aim or fire the bow automatically?"
+    a: "Not as far as the public record shows. It's described as an assist, which points to an on-screen overlay rather than a module that takes over aiming or releases the shot on its own."
+  - q: "Is Sniper the same as an aimbot?"
+    a: "No, based on what's documented. An aimbot aims and fires on the player's behalf. Sniper is described as showing where to aim, not aiming for you."
+  - q: "Can anticheats detect Sniper?"
+    a: "If it works as a pure visual overlay, there's little for a server-side anticheat to catch, since it wouldn't need to touch rotation or attack packets. It can still get caught through a screenshare or a mod list check."
+  - q: "Which Minecraft client has Sniper?"
+    a: "Sniper is documented as shipping in Tenacity. No other client is confirmed to carry a module by this name."
+---
+
+<KeyTakeaways>
+- Sniper is a Minecraft module documented as showing a drop and lead indicator for long-range bow and crossbow shots.
+- You still draw and release the shot yourself. It answers where to aim, not when to fire.
+- It's confirmed to exist in Tenacity. Nothing beyond its name and long-range bow and crossbow focus is publicly documented.
+- As a screen overlay it likely leaves no rotation or packet trail, though most servers still ban it as non-vanilla assistance.
+</KeyTakeaways>
+
+Sniper is a Minecraft module built for one specific problem: landing a bow or crossbow shot at a range where gravity and target movement actually matter. Arrows drop as they travel, and a target that's strafing keeps shifting where the shot needs to land, so a bare, skill-only shot at distance is mostly a guess. Sniper is documented as showing a predicted drop and lead indicator on screen so the player knows where to point before releasing. The public record on it is thin: confirmed to exist, confirmed to target long-range bow and crossbow shots, and not much else.
+
+## How it works
+
+Long-range bow and crossbow shots have two variables working against you: drop and lead. The arrow falls as it flies, and if the target is moving, the spot you need to aim at isn't the spot where they're currently standing. Sniper is documented as solving both by tracking the target's position and movement, projecting the arrow's flight under gravity, and drawing a marker at the point you'd need to aim to land the shot.
+
+What it isn't documented as doing matters just as much. You still draw the bow or crossbow. You still release. Sniper answers "where," not "when" or "how." That puts it in the same family as trajectory and lead-indicator overlays, not in the family of modules that take over your rotations and fire for you.
+
+The public record here stops short of a real spec. Sniper is documented as seen in Tenacity, and beyond its name and its long-range bow and crossbow focus, the mechanism above is an inference from category and naming convention, not a confirmed implementation.
+
+## Is Sniper safe to use
+
+The risk depends entirely on what Sniper actually touches, and the documented description points toward an overlay, not an automated aimer. Server-side anticheats mostly watch two things in combat: rotation data and attack packets. A module that only renders a marker on screen generates neither, which is a meaningfully lower detection surface than something that's moving your camera or clicking for you.
+
+That's not the same as safe. Almost every server with fair-play rules treats any non-vanilla combat assistance as cheating whether or not it shows up in packet logs, and a client that bundles Sniper is still a modified client. The realistic way to get caught isn't a stats-based flag, it's a mod list check, a screenshare, or a client-side scan.
+
+<Callout variant="warning" title="Still bannable even if it's undetectable">
+A pure visual overlay might not trip a packet-based anticheat, but almost every server's rules ban non-vanilla combat assistance outright. If Sniper ships in a client you're running competitively, treat it as a bannable module, not a safe one.
+</Callout>
+
+<Callout variant="tip" title="Where Opal stands on this">
+Opal doesn't ship a module called Sniper, and we're not going to invent a changelog entry to fill this page. If a drop-and-lead bow overlay is specifically what you're shopping for, that's not the shelf Opal is selling from today. Opal's combat tooling is built around modules you can verify, not overlays with an undocumented spec.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="What does Sniper actually do?">
+It's documented as helping line up long-range bow and crossbow shots, most likely by showing a predicted drop and lead indicator over the target. The exact mechanism beyond that isn't confirmed.
+</FAQItem>
+<FAQItem question="Does Sniper aim or fire the bow automatically?">
+Not as far as the public record shows. It's described as an assist, which points to an on-screen overlay rather than a module that takes over aiming or releases the shot on its own.
+</FAQItem>
+<FAQItem question="Is Sniper the same as an aimbot?">
+No, based on what's documented. An aimbot aims and fires on the player's behalf. Sniper is described as showing where to aim, not aiming for you.
+</FAQItem>
+<FAQItem question="Can anticheats detect Sniper?">
+If it works as a pure visual overlay, there's little for a server-side anticheat to catch, since it wouldn't need to touch rotation or attack packets. It can still get caught through a screenshare or a mod list check.
+</FAQItem>
+<FAQItem question="Which Minecraft client has Sniper?">
+Sniper is documented as shipping in Tenacity. No other client is confirmed to carry a module by this name.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "The full-automation version of aim assistance, and the clearest contrast to an overlay like Sniper." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The category Sniper belongs to, and where the line to outright cheating gets drawn." },
+  { href: "/en/learn/what-is-a-crystal-aura", label: "What is a crystal aura?", description: "A combat module on the opposite end of the spectrum: fully automated instead of just informational." }
+]} />
+
+<CTA href="/en/purchase">Opal's combat kit is built on modules that hold up under a screenshare. Go see it.</CTA>

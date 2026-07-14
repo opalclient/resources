@@ -1,0 +1,79 @@
+---
+title: "What Is Auto Fish in Minecraft? Module Explained"
+description: "Auto Fish is a Minecraft module that automates casting, bite detection, and reeling so you can AFK farm fish and treasure without watching the bobber."
+excerpt: "The bobber doesn't need a babysitter. Auto Fish casts, waits for the bite, and reels it in while you do literally anything else."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Auto Fish give an advantage over other players?"
+    a: "No. Fishing isn't a competition against anyone else, so Auto Fish doesn't change a PvP outcome or a race outcome. It only saves you from watching the bobber yourself."
+  - q: "Can servers detect Auto Fish?"
+    a: "In principle, yes, since a server can watch how consistently you react to a bite. In practice, few servers police fishing automation the way they police combat or movement, so the real risk depends on that server's own rules."
+  - q: "Is Auto Fish the same as an autoclicker?"
+    a: "Not really. A plain autoclicker fires on a timer with zero awareness of the game state. Auto Fish tracks the actual fishing state, cast, wait, bite, catch, so it handles the cast itself and knows exactly when a fish is on the line."
+  - q: "Does Auto Fish work while you're away from the keyboard?"
+    a: "Yes, that's the whole point. It detects bites and reels in without any input from you, which is why it's the go-to for AFK fishing sessions."
+---
+
+<KeyTakeaways>
+
+- Auto Fish is a Minecraft module that automates the fishing loop: cast, watch for a bite, reel in, cast again.
+- It's a Wurst player-category feature for AFK farming fish, treasure, and enchanted books.
+- Fishing is solo, so it never touches PvP or race outcomes against other players.
+- Detection risk is low; the only real tell is inhumanly consistent bite timing.
+
+</KeyTakeaways>
+
+Auto Fish is a Minecraft module that automates fishing: casting the rod, watching the bobber for a bite, and reeling in the catch without you tracking any of it yourself. It's documented as a player-category feature in Wurst, the same bucket of conveniences that trade manual repetition for a loop running quietly in the background. Vanilla fishing is slow by design: cast, wait, watch, click, repeat. Auto Fish exists to remove everything from that sequence except the part where you end up with fish, treasure, or an enchanted book.
+
+## How it works
+
+Auto Fish runs the same loop every time the rod hits the water: cast, watch for the splash or dip that signals a bite, reel in the instant that happens, cast again. The part that actually earns the name is the middle step. A player has to keep at least half an eye on the bobber and react by hand between whatever else they're doing; Auto Fish watches it constantly and reacts the moment the signal fires, which is exactly why it doesn't miss a bite and exactly why the timing ends up looking the way it does. Once the catch lands, the loop restarts with no re-cast, no re-watch, no attention required from anyone.
+
+It ships in Wurst next to a handful of other player-category conveniences, automations built to cut down on repetitive manual tasks rather than to change how combat or movement actually plays out.
+
+## Is it safe to use
+
+Auto Fish sits near the bottom of the detection-risk scale, for one simple reason: fishing doesn't involve anyone but you. Casting and reeling are both ordinary, vanilla-legal actions. The module just performs them without a human watching the bobber, so there's no packet or interaction an anticheat can point to and call illegitimate.
+
+The one thing that can stand out is timing. A bite answered in a near-identical interval every single time, session after session, is a pattern a server watching closely could flag as automated, even though the underlying action is completely normal. Most servers don't police fishing that tightly. Some AFK-focused servers ban automated reeling outright in their rules anyway, whether or not they can actually detect it, so it's worth a read through the rules before you leave a rig running overnight.
+
+<Callout variant="tip" title="Where this sits in Opal">
+Opal doesn't ship an Auto Fish module. This one's documented as a Wurst feature specifically. Opal's own catalog is built around combat, movement, and visual modules, the categories where a single tick decides whether you win the fight. An AFK fishing loop doesn't move that needle, so it's not a race Opal's running.
+</Callout>
+
+<Callout variant="warning" title="Rules can ban it even when detection can't">
+This page describes Auto Fish generically, not as something Opal ships. Even where the timing pattern goes unnoticed, some servers ban automated fishing and AFK farming outright in their rules. Check before you queue up an overnight session, since a clean detection record doesn't help you if the rule itself says no.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Auto Fish give an advantage over other players?">
+No. Fishing isn't a competition against anyone else, so Auto Fish doesn't change a PvP outcome or a race outcome. It only saves you from watching the bobber yourself.
+</FAQItem>
+
+<FAQItem question="Can servers detect Auto Fish?">
+In principle, yes, since a server can watch how consistently you react to a bite. In practice, few servers police fishing automation the way they police combat or movement, so the real risk depends on that server's own rules.
+</FAQItem>
+
+<FAQItem question="Is Auto Fish the same as an autoclicker?">
+Not really. A plain autoclicker fires on a timer with zero awareness of the game state. Auto Fish tracks the actual fishing state, cast, wait, bite, catch, so it handles the cast itself and knows exactly when a fish is on the line.
+</FAQItem>
+
+<FAQItem question="Does Auto Fish work while you're away from the keyboard?">
+Yes, that's the whole point. It detects bites and reels in without any input from you, which is why it's the go-to for AFK fishing sessions.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category Auto Fish and other quality-of-life modules live inside." },
+  { href: "/en/learn/what-is-killaura", label: "What is Killaura?", description: "A module on the opposite end of the risk spectrum: server-visible and squarely about PvP." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity (Anti Knockback)?", description: "Another module built around reacting instantly, this one timed against combat instead of a bobber." },
+]} />
+
+<CTA href="/en/purchase">Opal's reaction time is spent on fights, not bobbers. $8.99.</CTA>

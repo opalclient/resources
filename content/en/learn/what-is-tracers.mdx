@@ -1,0 +1,79 @@
+---
+title: "What Is Tracers in Minecraft? Module Explainer"
+description: "Tracers draws a line from your crosshair to every visible entity, not through walls. Here's how the module works and whether it's safe to run in Minecraft."
+excerpt: "A line to the player you can already see, nothing a wallhack would show you. Here's the mechanism, and why it still gets lumped in with the sketchy stuff."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is Tracers the same as ESP?"
+    a: "No. ESP renders entities through walls and terrain by skipping depth testing, which shows things a normal camera view could never reveal. Tracers only draws a line to entities the client is already rendering on screen, so it never adds hidden information."
+  - q: "Does Tracers show players through walls?"
+    a: "No. Tracers marks entities the client is already drawing on screen. If a wall blocks the line of sight to an entity, there's nothing rendered for the module to point at, so it draws nothing."
+  - q: "Can Tracers get a player banned?"
+    a: "It can, mostly because of the company it keeps. Tracers usually ships inside the same client as ESP and aimbots, and a server scanning for modified rendering code flags the hook itself regardless of which module was toggled on. On its own, the mechanism gives away very little."
+  - q: "Why do utility clients bundle Tracers with ESP modules?"
+    a: "They read from the same rendering pipeline and serve the same purpose: making entities easier to notice. Grouping them under one visual category is mostly a build decision, not proof they work the same way under the hood."
+---
+
+<KeyTakeaways>
+
+- Tracers draws a line from the crosshair to every entity the client is already rendering on screen.
+- It does not see through walls: once an entity leaves view or gets blocked, its line disappears too.
+- It differs from ESP, which renders through terrain by skipping depth testing entirely.
+- Alone it gives little functional edge, but it usually ships bundled with modules that are clearly against the rules.
+
+</KeyTakeaways>
+
+Tracers is a visual module that draws a line from the center of your screen to every entity currently visible in it, so a player or mob stops blending into the crowd and starts standing out. It only marks what the client is already drawing. Nothing hidden behind a wall gets a line, because nothing hidden behind a wall gets rendered in the first place.
+
+## How Tracers works
+
+Tracers runs every frame and checks which entities the client is currently rendering, players, mobs, or both depending on the settings. For each one on screen, it draws a straight line from the crosshair to that entity's position, then drops the line the instant the entity leaves view or gets blocked from sight. The module reads the same rendering data the game already uses to draw the entity itself. It does not pull anything extra from the server, and it does not ask the server for anything a vanilla client wouldn't.
+
+That last part is what separates Tracers from an actual wallhack. ESP renders entities through solid blocks by skipping depth testing, which shows the player things a normal camera view could never show. Tracers does none of that. It just puts a line on information that was already going to hit your monitor, so you notice it half a second faster than you would by scanning the screen yourself.
+
+The appeal is recognition speed, not new information. In a crowded fight or a forest thick with mobs, picking a moving player out of the clutter takes a beat of conscious scanning. A line pointed straight at each entity skips that beat. Fan is one client that ships Tracers, usually grouped with nametags and hitboxes under the same visual category, since all three exist to make the game world easier to read rather than easier to see through.
+
+## Is Tracers safe to use
+
+By mechanism, Tracers sits closer to a convenience feature than a gameplay-advantage cheat. It doesn't extend vision through walls, doesn't touch reach or aim, and doesn't send or receive anything the client wasn't already handling. A server judging purely on what information a player has access to has little to flag: a human paying close attention could, in theory, notice the same entity by looking at the same part of the screen.
+
+The risk is context, not mechanism. Tracers almost always ships bundled inside clients that also carry ESP, aimbots, and other modules that are unambiguous cheats, so a server running client-side scans for modified rendering code catches the injection itself, not the specific line it draws. Zero-tolerance servers treat any modified client the same regardless of which box was checked. On servers that judge behavior instead of installation, Tracers alone gives away almost nothing, because it never changes what the player is actually capable of seeing.
+
+<Callout variant="warning" title="Context, not mechanism, is the risk">
+Tracers by itself reveals nothing a human couldn't notice on their own. But it rarely ships alone. If it's bundled with ESP or an aimbot in the same client, and a server scans for the modification rather than the behavior, the module you didn't enable gets you caught just as fast as the one you did.
+</Callout>
+
+Opal's visual category is built around that same distinction: surfacing information a player already has legitimate access to, more clearly, rather than pulling in anything a normal camera view couldn't show. It's the same design instinct that keeps a line from turning into a wallhack.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Tracers the same as ESP?">
+No. ESP renders entities through walls and terrain by skipping depth testing, which shows things a normal camera view could never reveal. Tracers only draws a line to entities the client is already rendering on screen, so it never adds hidden information.
+</FAQItem>
+
+<FAQItem question="Does Tracers show players through walls?">
+No. Tracers marks entities the client is already drawing on screen. If a wall blocks the line of sight to an entity, there's nothing rendered for the module to point at, so it draws nothing.
+</FAQItem>
+
+<FAQItem question="Can Tracers get a player banned?">
+It can, mostly because of the company it keeps. Tracers usually ships inside the same client as ESP and aimbots, and a server scanning for modified rendering code flags the hook itself regardless of which module was toggled on. On its own, the mechanism gives away very little.
+</FAQItem>
+
+<FAQItem question="Why do utility clients bundle Tracers with ESP modules?">
+They read from the same rendering pipeline and serve the same purpose: making entities easier to notice. Grouping them under one visual category is mostly a build decision, not proof they work the same way under the hood.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category Tracers belongs to." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "The combat module Tracers often ships next to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Where the line between subtle and blatant actually sits." },
+]} />
+
+<CTA href="/en/purchase">See what Opal's visual toolkit covers, from $8.99</CTA>

@@ -1,0 +1,77 @@
+---
+title: "What Is AutoHeadHitter in Minecraft?"
+description: "AutoHeadHitter is a Minecraft movement module that automatically times jumps and positioning to land headshots on farmed mobs like endermen during grinding."
+excerpt: "Hitting an enderman's head by hand is a skill. AutoHeadHitter turns it into a formality."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does AutoHeadHitter work in PvP?"
+    a: "No. It targets mobs, mostly endermen during farming, not other players, and it doesn't aim at or attack people."
+  - q: "Why does hitting an enderman's head matter?"
+    a: "Landing the head hitbox specifically is what makes a kill count as an efficient headshot during a farm, so timing the jump to hit the head instead of the body is worth automating over a long grind."
+  - q: "Is AutoHeadHitter the same as KillAura?"
+    a: "No. KillAura auto-attacks nearby entities, including players, and handles targeting and rotation for general combat. AutoHeadHitter is narrower: it times jumps and positioning specifically to land mob headshots, mostly for farming."
+  - q: "Which clients have AutoHeadHitter?"
+    a: "It's documented in Tenacity, and Opal ships its own version as Auto Head."
+  - q: "Can using AutoHeadHitter get you banned?"
+    a: "It's unlikely to trigger PvP-focused anticheat checks since it never touches other players, but some servers ban automated or macro-like farming regardless of target, so it comes down to that server's specific rules. Opal marks its version use-at-own-risk for that reason."
+---
+
+<KeyTakeaways>
+- AutoHeadHitter is a movement module that times jumps so an attack lands on a mob's head instead of its body.
+- Built for farming endermen, where a head hit counts as an efficient kill.
+- It targets mobs only, skipping the reach and rotation checks anticheats use for PvP.
+- Some servers ban it as automation. Opal ships it as Auto Head, use-at-own-risk.
+</KeyTakeaways>
+
+AutoHeadHitter is a movement module in Minecraft utility clients that automatically times a jump and adjusts your position so an attack lands on a mob's head hitbox instead of somewhere lower on its body. It's a farming tool, not a combat one: nothing about it aims at or damages other players. The mob most associated with it is the enderman, whose tall, narrow shape makes a clean head hit surprisingly hard to land by hand, over and over, for an hour straight. AutoHeadHitter takes the judgment call out of it, watching the target and your position every tick so headshots land automatically whenever a mob is in range.
+
+## How it works
+
+AutoHeadHitter watches the target mob and your own position on every tick, then decides when to jump and where to stand so the swing connects with the head instead of the body. Doing this by hand means judging the mob's height, the timing of the jump, and the angle of the swing all at once, and getting it right on hit after hit during a long session. The module removes that judgment call entirely. It triggers the jump and lines up the attack on its own whenever a valid target is in range.
+
+Endermen are the mob this gets built around, and for good reason. Their tall, narrow hitbox punishes inconsistency: miss the head by a fraction and the hit either doesn't count as a headshot or doesn't land cleanly at all. Over hundreds of kills in a farming session, that adds up to real time lost, which is exactly the kind of repetitive precision task better handed to the client than to your reflexes.
+
+<Callout variant="tip" title="Opal ships this as Auto Head">
+Opal's own module catalog lists this exact idea as Auto Head: "eats golden heads automatically." Same farming instinct, official Opal branding.
+</Callout>
+
+## Is it safe to use
+
+AutoHeadHitter targets mobs, not players, so it never touches the reach, rotation, or hit-timing checks anticheats build around player-versus-player combat. That puts it well below modules like [KillAura](/en/learn/what-is-killaura) or aim assistance on the risk ladder, since those manipulate combat directly against other people and get flagged specifically for it.
+
+The remaining risk isn't about combat detection at all. It's about automation itself. Some servers ban any automated or macro-like behavior on principle, mob-targeting or not, on the theory that it's still the client acting instead of the player. Whether that matters on a given server comes down to that server's specific rules around automation, not whether an anticheat can single out headshot timing the way it singles out reach or rotation. Generally, it can't.
+
+<Callout variant="warning" title="Reference, not a how-to">
+Opal classifies Auto Head as use-at-own-risk. It's detectable, and getting caught can cost you the account, same as any automation on any client. This page explains what the module does; it isn't a promise that it's safe on your server.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Does AutoHeadHitter work in PvP?">
+No. It targets mobs, mostly endermen during farming, not other players, and it doesn't aim at or attack people.
+</FAQItem>
+<FAQItem question="Why does hitting an enderman's head matter?">
+Landing the head hitbox specifically is what makes a kill count as an efficient headshot during a farm, so timing the jump to hit the head instead of the body is worth automating over a long grind.
+</FAQItem>
+<FAQItem question="Is AutoHeadHitter the same as KillAura?">
+No. KillAura auto-attacks nearby entities, including players, and handles targeting and rotation for general combat. AutoHeadHitter is narrower: it times jumps and positioning specifically to land mob headshots, mostly for farming.
+</FAQItem>
+<FAQItem question="Which clients have AutoHeadHitter?">
+It's documented in Tenacity, and Opal ships its own version as Auto Head.
+</FAQItem>
+<FAQItem question="Can using AutoHeadHitter get you banned?">
+It's unlikely to trigger PvP-focused anticheat checks since it never touches other players, but some servers ban automated or macro-like farming regardless of target, so it comes down to that server's specific rules. Opal marks its version use-at-own-risk for that reason.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The general-combat auto-attacker AutoHeadHitter is often confused with." },
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "Another movement module that automates positioning, built for building instead of farming." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category AutoHeadHitter and Auto Head both belong to." }
+]} />
+
+<CTA href="/en/purchase">Let Opal handle the headshots. Auto Head and the rest are $8.99.</CTA>

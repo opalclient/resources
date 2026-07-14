@@ -1,0 +1,86 @@
+---
+title: "What Is Speed in Minecraft? Movement Module Explained"
+description: "Speed is a movement module that raises walking and sprint speed above Minecraft's vanilla limit. Here's how it works and why servers catch it so easily."
+excerpt: "Speed turns your legs into the fastest thing on the server, no potion required. Here's how the module gets there, and why the server always notices."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is Speed the same as a potion effect?"
+    a: "No. A vanilla swiftness potion is a temporary, server-recognized effect. A Speed module changes movement at the client level instead, so the server sees speed with no potion or other vanilla source behind it."
+  - q: "Does Speed affect walking, sprinting, or both?"
+    a: "Both. The module raises the rate for walking and for sprinting, since both come out of the same movement calculation it overrides."
+  - q: "Why is Speed easier to catch than some other modules?"
+    a: "Movement is something the server already tracks for every player on every tick, independent of anything the client claims. That makes sustained excess speed a more reliable signal than cheats that rely on subtler timing or rotation tells."
+  - q: "Is Speed safe to use on an anticheat-protected server?"
+    a: "No. Movement data is one of the most reliable signals a server has, so an account running Speed on a server with a working movement check risks getting flagged or banned."
+---
+
+<KeyTakeaways>
+
+- Speed is a movement module that raises walking and sprint speed above vanilla Minecraft's fixed rate.
+- It overrides the client's movement math directly, with no potion or block behind the extra speed.
+- The boost hits both walking and sprinting the whole time the module is on.
+- Movement checks are some of anticheat's oldest tooling, which is exactly why Speed gets caught.
+
+</KeyTakeaways>
+
+Speed is a movement module that pushes a player's walking and sprinting rate past what vanilla Minecraft allows. Turn it on and you cross terrain faster than an unmodified client ever could, with nothing in the game world explaining the extra pace. It shows up in clients like Fan and Tenacity, and servers treat it the way they treat any other movement cheat: as an unfair edge, not a setting.
+
+## How it works
+
+Vanilla Minecraft calculates a fixed walking speed and a separate, faster sprinting speed for every player. Nothing normally touches those numbers outside of things like a swiftness potion or standing on a speed-affecting block. A Speed module skips all of that and overrides the calculation directly, raising it so the player covers more ground per tick while walking and while sprinting, with no potion, block, or other vanilla explanation behind it.
+
+Because the change happens entirely on the client, the player's own screen shows smooth, faster movement with no glitch or stutter to give it away visually. What the server receives is a different story: a stream of position updates covering more distance per tick than the player's known state should allow. That gap between what's plausible and what's arriving is exactly what a movement check is built to notice.
+
+## Why it gets detected
+
+Speed is one of the easier cheats for a server to catch, because the server already knows how fast a player is allowed to move regardless of what the client claims.
+
+| Factor the anticheat weighs | Why it matters |
+|---|---|
+| Distance moved per tick against the player's known baseline | Direct evidence of moving faster than the game permits |
+| Active potion effects and speed-affecting blocks | Legitimate reasons a player can be moving fast, which the server has to rule out first |
+| Sprint state and direction changes | Sprinting and turning both affect what speed the server should expect |
+| Consistency over time | A single fast tick can be lag; sustained speed above the ceiling with no explanation is a stronger signal |
+
+Server-side movement checks are some of the oldest and most mature parts of anticheat design. Running Speed for any real stretch on a server with a competent check is unlikely to go unnoticed.
+
+<Callout variant="tip" title="Opal ships this">
+Opal's own take on it doesn't pretend to be anything else: "You become a cheetah in real life." It's filed under Opal's use-at-own-risk tier, same as it would be on any client, because raw movement speed is exactly the kind of signal a server-side check is designed to catch.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the module generically so you know what the term means. Naming and exact behavior vary by client, and moving faster than vanilla physics allow breaks the rules on essentially every competitive or survival server.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Speed the same as a potion effect?">
+No. A vanilla swiftness potion is a temporary, server-recognized effect. A Speed module changes movement at the client level instead, so the server sees speed with no potion or other vanilla source behind it.
+</FAQItem>
+
+<FAQItem question="Does Speed affect walking, sprinting, or both?">
+Both. The module raises the rate for walking and for sprinting, since both come out of the same movement calculation it overrides.
+</FAQItem>
+
+<FAQItem question="Why is Speed easier to catch than some other modules?">
+Movement is something the server already tracks for every player on every tick, independent of anything the client claims. That makes sustained excess speed a more reliable signal than cheats that rely on subtler timing or rotation tells.
+</FAQItem>
+
+<FAQItem question="Is Speed safe to use on an anticheat-protected server?">
+No. Movement data is one of the most reliable signals a server has, so an account running Speed on a server with a working movement check risks getting flagged or banned.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "Another movement module built to keep you crossing ground you shouldn't." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The stealth-first approach, a contrast to a module this blunt." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category Speed and modules like it belong to." },
+]} />
+
+<CTA href="/en/purchase">Cover ground faster than the server thinks you should. Opal ships Speed, eyes open about the risk.</CTA>

@@ -1,0 +1,79 @@
+---
+title: "What Is Outline ESP in Minecraft? (Module Explained)"
+description: "Outline ESP is a Minecraft visual module that traces an entity's silhouette through walls instead of filling it with color. How it works and the ban risk."
+excerpt: "A wall stops hiding the shape, not the whole picture. Outline ESP gives you the silhouette through it and leaves everything else looking exactly like it should."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Outline ESP actually draw?"
+    a: "A thin line traced around the visible edge of an entity's model, matching that entity's shape, while the rest of the model keeps its normal texture and animation."
+  - q: "How is Outline ESP different from Glow ESP?"
+    a: "Outline ESP leaves the entity's own rendering intact and adds only a border. Glow ESP instead fills the entity in a single solid color, closer to vanilla's Glowing effect."
+  - q: "Does Outline ESP send extra data to the server?"
+    a: "No. The position and pose data it draws from is already sent to the client for normal gameplay. The module only changes how that existing data gets rendered on screen."
+  - q: "Can Outline ESP get a player banned?"
+    a: "Yes, it's possible. It carries less risk than a combat module because it never changes what the client sends, but a player whose reactions clearly depend on information they shouldn't have can still get caught by staff or behavior-based detection."
+---
+
+<KeyTakeaways>
+- Outline ESP is a Minecraft visual module that traces a thin line around an entity's silhouette and keeps it visible through walls, while the model's texture, armor, and animation render normally.
+- It draws from position and pose data vanilla already sends the client for ordinary gameplay, so no extra packets go out.
+- Unlike a solid-fill style like GlowESP, it leaves the entity's actual skin and gear visible under the outline.
+- Detection is behavioral, not packet-based: reacting to a target you shouldn't be able to see is what gets a player caught.
+</KeyTakeaways>
+
+Outline ESP is a visual module in Minecraft that traces the edge of an entity's model and keeps that outline visible through walls and terrain, instead of covering the entity in a flat highlight color. Everything else about the entity keeps rendering the way an unmodified client would, skin, armor, and animation all untouched. The only addition is a thin line tracing its shape, which is enough to tell you someone or something is on the other side of a wall well before you'd have any legitimate reason to know.
+
+## How it works
+
+Outline ESP traces the silhouette of a target entity's model and draws that line on top of the world geometry, so it survives whatever wall, floor, or terrain sits between the entity and the camera. The server already streams every nearby entity's position and pose to the client for ordinary gameplay, wall or no wall, since physics and normal rendering both depend on that data regardless of line of sight. A vanilla client throws most of it away at the last step through depth testing, which is why an entity vanishes the instant something solid passes in front of it. Outline ESP simply skips that discard step for the border it draws and nothing else.
+
+That's the entire mechanism. No new request goes to the server, no outgoing packet changes shape, it's just a different decision about what gets drawn on a frame the client was already building.
+
+## Outline ESP vs GlowESP
+
+Both modules solve the same problem, seeing an entity through terrain, with different rendering choices about how much of the model gets touched.
+
+| | Outline ESP | GlowESP |
+|---|---|---|
+| What renders | A thin line tracing the model's silhouette | A flat, solid-color fill over the whole model |
+| Texture and skin | Stay visible under the outline | Replaced by the fill color |
+| Best for | Telling entities apart by their actual skin or gear | A fast color-coded read, often by team or entity type |
+| Network signature | None, in either case, the position data is already client-side |
+
+Neither sends anything extra over the wire, so picking one over the other comes down to preference. Outline if you want the shape and the detail underneath it, solid fill if you want something a single glance catches instantly.
+
+<Callout variant="tip" title="Where this sits in Opal">
+Opal's visual category ships Entity ESP under the same use-at-own-risk label as the rest of that lane. The underlying idea is identical to what Outline ESP represents: showing you where an entity is through terrain without touching a single outgoing packet. Whether a given implementation draws a thin border or a solid fill is a rendering detail that varies client to client. What actually matters is whether that kind of information belongs in your setup at all, and that's the call Entity ESP puts in front of you.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Outline ESP does and why it's use-at-own-risk, not an endorsement to run it. It never touches packets, so there's nothing clean on the wire for a server to catch, but staff review and behavior-based detection still catch players whose reactions clearly depend on information they shouldn't have.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="What does Outline ESP actually draw?">
+A thin line traced around the visible edge of an entity's model, matching that entity's shape, while the rest of the model keeps its normal texture and animation.
+</FAQItem>
+<FAQItem question="How is Outline ESP different from Glow ESP?">
+Outline ESP leaves the entity's own rendering intact and adds only a border. Glow ESP instead fills the entity in a single solid color, closer to vanilla's Glowing effect.
+</FAQItem>
+<FAQItem question="Does Outline ESP send extra data to the server?">
+No. The position and pose data it draws from is already sent to the client for normal gameplay. The module only changes how that existing data gets rendered on screen.
+</FAQItem>
+<FAQItem question="Can Outline ESP get a player banned?">
+Yes, it's possible. It carries less risk than a combat module because it never changes what the client sends, but a player whose reactions clearly depend on information they shouldn't have can still get caught by staff or behavior-based detection.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category Outline ESP and modules like it belong to." },
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "A module that acts on a target once ESP already told you where they are." },
+  { href: "/en/learn/what-is-reach", label: "What is Reach?", description: "A packet-level cheat Outline ESP avoids entirely by staying purely visual." }
+]} />
+
+<CTA href="/en/purchase">See where Opal draws the line between information and risk in its visual category.</CTA>

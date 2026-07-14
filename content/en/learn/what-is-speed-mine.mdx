@@ -1,0 +1,83 @@
+---
+title: "What Is Speed Mine in Minecraft? Module Explained"
+description: "Speed Mine is a Minecraft module that breaks blocks faster than the vanilla formula for tool, hardness, and effects allows. Here's how servers can catch it."
+excerpt: "Speed Mine shaves time off every block you break, one swing at a time. The server doing the math behind your pickaxe tends to notice."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Speed Mine work in survival mode?"
+    a: "Yes, that's specifically what it targets. Survival is where breaking speed is normally capped by tool and block hardness. Creative mode already breaks blocks instantly, so there's nothing left for the module to speed up."
+  - q: "What is the difference between Speed Mine and Fast Break?"
+    a: "Speed Mine is scoped narrowly to the mining action. Fast Break is a more general override on block breaking speed that isn't limited to that one context. Different scope, same underlying goal."
+  - q: "Can servers detect Speed Mine?"
+    a: "Yes. A server can recompute the expected break time from the block, the tool, and any active effects, then compare that against what the client reports. A mismatch is a flaggable anomaly, though how closely any given server checks for it varies."
+  - q: "Is Speed Mine the same as a Nuker?"
+    a: "No. A Nuker breaks multiple blocks at once, often across an area. Speed Mine only changes how long a single block takes to break, not how many blocks break at a time."
+---
+
+<KeyTakeaways>
+
+- Speed Mine is a module that breaks blocks faster than Minecraft's own formula for tool, hardness, and active effects allows.
+- It's scoped specifically to mining, which is what separates it from a broader override like Fast Break.
+- It's documented as a player-category feature and has been seen in Tenacity.
+- Servers can catch it by recomputing the expected break time and comparing it to what the client reports.
+
+</KeyTakeaways>
+
+Speed Mine is a Minecraft module that shortens how long a block takes to break while you're mining, faster than the game's own formula for tool, block hardness, and active effects would normally produce. It's scoped specifically to the mining action, which is what separates it from a broader override like Fast Break. Either way, blocks pop off sooner than vanilla timing says they should.
+
+## How it works
+
+Vanilla Minecraft times a block break with a formula: the block's hardness, the tool you're holding, enchantments like Efficiency, and status effects like Haste all feed into it. Speed Mine shortens that timer directly, so the break finishes before the formula would normally allow it to.
+
+Because the change is scoped to mining rather than to block interaction generally, it behaves differently from a module like Fast Break, which applies a broader override to breaking speed regardless of context. Speed Mine is documented as a player-category feature and has been seen in Tenacity.
+
+## Why people use it
+
+Faster block breaking means faster resource gathering, plain and simple. A player mining ore, tunneling through terrain, or clearing a path spends less time watching the crack animation and more time on the next block. On servers where gathering materials quickly matters, for building, for trading, or just for not burning play time, shaving fractions of a second off every block adds up over a full session.
+
+## Is it safe to use
+
+Speed Mine isn't cosmetic. It changes how fast blocks break in survival, which is a real gameplay advantage over a player mining at the normal rate, so it sits with other speed-related exploits rather than a visual tweak or convenience feature.
+
+A server that cares can recompute the expected break time itself, from the block, the tool, and the player's active effects, then compare that against what the client reports. A block that finishes faster than the server's own math allows is an anomaly worth flagging. How aggressively any given server checks for this varies a lot, and creative mode sidesteps the whole question since blocks there already break instantly regardless of tool.
+
+<Callout variant="tip" title="Where this sits in Opal's catalog">
+Opal ships FastBreak, the broader block-breaking override this page keeps contrasting Speed Mine against, filed under its World category alongside Scaffold, Timer, and Breaker. A narrow, mining-only timer under the Speed Mine name isn't something Opal lists separately. If you want faster breaking, FastBreak is the one already in the client.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains the term so you know what it means when it shows up in a module list, not how to configure one. Breaking blocks faster than the server's own timing formula allows is a real advantage, and servers that check for it treat it as cheating.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Speed Mine work in survival mode?">
+Yes, that's specifically what it targets. Survival is where breaking speed is normally capped by tool and block hardness. Creative mode already breaks blocks instantly, so there's nothing left for the module to speed up.
+</FAQItem>
+
+<FAQItem question="What is the difference between Speed Mine and Fast Break?">
+Speed Mine is scoped narrowly to the mining action. Fast Break is a more general override on block breaking speed that isn't limited to that one context. Different scope, same underlying goal.
+</FAQItem>
+
+<FAQItem question="Can servers detect Speed Mine?">
+Yes. A server can recompute the expected break time from the block, the tool, and any active effects, then compare that against what the client reports. A mismatch is a flaggable anomaly, though how closely any given server checks for it varies.
+</FAQItem>
+
+<FAQItem question="Is Speed Mine the same as a Nuker?">
+No. A Nuker breaks multiple blocks at once, often across an area. Speed Mine only changes how long a single block takes to break, not how many blocks break at a time.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "Another World-category module that automates a normal Minecraft action past what physics allows." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The stealth category built around modules quiet enough to slip past casual detection." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category Speed Mine and modules like it belong to." },
+]} />
+
+<CTA href="/en/purchase">Opal ships FastBreak instead of a narrow miner. Get it for $8.99.</CTA>

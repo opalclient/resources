@@ -1,0 +1,81 @@
+---
+title: "What is Self-Teaming (Teams) in Minecraft?"
+description: "Self-teaming (the Teams module) makes every player on the scoreboard render as your ally, hiding friendly-fire warnings and off-team nametags on FFA servers."
+excerpt: "Self-teaming tricks your own scoreboard into thinking everyone is your friend. No exploit, no bypass, just a client lying to itself."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does self-teaming change what the server thinks my team is?"
+    a: "No. The override only happens on your own client. The server keeps its real record of team assignments and never receives anything different because of it."
+  - q: "Can other players tell I'm using self-teaming?"
+    a: "Not from their screen. The nametag colors and friendly-fire warnings it hides are rendered locally using data your client already had, so nobody else's client is affected."
+  - q: "Is self-teaming the same as a friendly-fire exploit?"
+    a: "Not on its own. It only hides your client's friendly-fire warning. Whether an attack actually lands as damage still comes down to how the server and any plugins enforce team rules."
+  - q: "Why do some clients call this the Teams module instead of self-teaming?"
+    a: "They're the same feature under two names. Teams points at the scoreboard system being manipulated, while self-teaming describes what the module does to it."
+---
+
+<KeyTakeaways>
+
+- Self-teaming (the Teams module) renders every other player as your teammate on the scoreboard.
+- It overrides team data your client already received; the server's real assignments never change.
+- That makes it invisible to other players and hard for anticheats to flag.
+- Used mainly to hide off-team nametags and friendly-fire warnings on FFA servers.
+
+</KeyTakeaways>
+
+Self-teaming, sometimes labeled Teams in a client's module list, is a Minecraft feature that overrides your client's scoreboard so every other player displays as if they're on your team. Gone are the off-team nametag color and the friendly-fire warning that would normally flag someone as an opponent. It's a display trick, not a movement or combat hack, and it lives on the quieter end of what utility clients ship.
+
+## How self-teaming works
+
+Minecraft's scoreboard team system runs on packets. The server assigns players to teams and streams that assignment to every connected client. A vanilla client uses it for a few things: coloring nametags by team, applying collision and friendly-fire rules tied to team membership, and driving whatever other team-based indicator the server or a plugin adds on top.
+
+Self-teaming intercepts that on the way in. Instead of rendering the team data it actually received, the client substitutes its own value and treats every other player as if they share your team. Because the swap happens entirely on the receiving end, the server never learns anything new. It keeps issuing the real assignments; your screen just chooses to ignore them.
+
+That's also why the module reads as such a narrow trick. It doesn't touch movement, aim, or timing. It touches exactly one thing: how your own client paints team information on your own screen. On an FFA server where everyone is technically an opponent, that's enough to strip away the visual cue that keeps reminding you of it.
+
+## Is self-teaming safe to use
+
+Server-side anticheats are built to watch outbound data: movement that shouldn't be possible, rotations that snap too cleanly, hits that land with inhuman timing. Self-teaming produces none of that. It never sends anything unusual to the server, it never touches combat packets, and there's no behavioral signature for an automated check to catch the way it would with something like [KillAura](/en/learn/what-is-killaura) or [Reach](/en/learn/what-is-reach).
+
+That's not the same as risk-free. It still changes intended game behavior around team information, and most servers ban any client modification on principle, whether or not a bot happens to notice it.
+
+<Callout variant="warning" title="Low detectability isn't the same as allowed">
+Self-teaming is hard for automated systems to catch because it never leaves your machine, but that doesn't make it sanctioned. Server rules typically cover any client-side modification, and a staff member reviewing footage can still notice a nametag that never turns red.
+</Callout>
+
+<Callout variant="tip" title="Where this sits in a broader toolkit">
+Opal doesn't ship a dedicated self-teaming or Teams module. It's a genuinely niche pick, built for one specific server meta rather than something most players reach for session to session, and it sits outside the combat and movement modules a utility client typically leads with.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does self-teaming change what the server thinks my team is?">
+No. The override only happens on your own client. The server keeps its real record of team assignments and never receives anything different because of it.
+</FAQItem>
+
+<FAQItem question="Can other players tell I'm using self-teaming?">
+Not from their screen. The nametag colors and friendly-fire warnings it hides are rendered locally using data your client already had, so nobody else's client is affected.
+</FAQItem>
+
+<FAQItem question="Is self-teaming the same as a friendly-fire exploit?">
+Not on its own. It only hides your client's friendly-fire warning. Whether an attack actually lands as damage still comes down to how the server and any plugins enforce team rules.
+</FAQItem>
+
+<FAQItem question="Why do some clients call this the Teams module instead of self-teaming?">
+They're the same feature under two names. Teams points at the scoreboard system being manipulated, while self-teaming describes what the module does to it.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The broader category of modules built to stay unnoticed." },
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "A combat module anticheats catch for the exact reasons self-teaming slips past." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider client category this module belongs to." },
+]} />
+
+<CTA href="/en/purchase">Skip the scoreboard tricks. See what Opal actually ships for $8.99.</CTA>

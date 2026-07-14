@@ -1,0 +1,81 @@
+---
+title: "What Is Piercing in Minecraft? Hitting Through Walls"
+description: "Piercing is a Minecraft combat module that skips the line-of-sight check, letting hits land through walls. Here is how it works and why it is easy to catch."
+excerpt: "Piercing turns walls into a suggestion. Here's how it breaks the raycast, and why servers catch it almost every time."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Piercing actually let you do?"
+    a: "It lets an attack land on a target even when a block, like a wall or a fence, sits directly between you and them. Vanilla Minecraft blocks that hit outright."
+  - q: "Is Piercing the same as Reach?"
+    a: "No. Reach extends how far an attack can travel. Piercing ignores whatever is physically in the way. They solve different problems, though they often get used together."
+  - q: "Which clients have shipped Piercing?"
+    a: "Slinky is one client documented with this module. Naming and exact behavior vary by client, since some implementations only loosen part of the check instead of removing it outright."
+  - q: "Can a server actually catch someone using Piercing?"
+    a: "Yes, generally. The server can run its own line-of-sight check between the two players at the moment of the hit, and a solid block in that path isn't something the client can talk its way around."
+---
+
+<KeyTakeaways>
+
+- Piercing lets an attack land through a wall or other solid block between attacker and target.
+- It works by skipping the line-of-sight raycast Minecraft normally requires before a hit registers.
+- It's not Reach: Reach extends hit distance, Piercing ignores obstacles entirely.
+- Servers can verify line of sight independently, making it one of the more reliably detected combat modules.
+
+</KeyTakeaways>
+
+Piercing is a combat module that lets an attack connect even when a solid block sits directly between the attacker and the target. Normal Minecraft combat runs a check first: the game traces a line from you to whatever you're hitting, and if that line hits terrain before it reaches the target, the attack doesn't register. Piercing skips that check. A fence, a wall, a slab of stone, none of it matters anymore. The target either has line of sight or it doesn't, and Piercing just deletes the requirement, which is exactly why it's one of the easier things for a server to catch.
+
+## How it works
+
+Vanilla Minecraft runs a raycast before it lets a hit land. The game traces a straight line from the attacking player to the target and stops at the first solid block that line touches. If that block is closer than the target, the attack whiffs, full stop. That single check is why a wall, a closed door, or even a fence post is normally enough to make a swing do nothing.
+
+Piercing removes or bypasses that raycast, so the attack goes through as if the block weren't there. The removal isn't always total. Some implementations keep block collision intact for movement but drop it specifically for combat, and a few only stop checking for entities in the way rather than terrain, a narrower version of the same idea. The end result across all of them is the same: something solid stood between two players, and the hit landed anyway.
+
+It's worth separating this from [Reach](/en/learn/what-is-reach). Reach stretches how far a hit can travel. Piercing has nothing to do with distance, it's about what's in the line between two points, not the length of that line. A player can have completely ordinary reach and still be running Piercing, and the two show up combined often enough that people mix them up.
+
+## Is Piercing safe to use
+
+Short answer: no. Treat it as a bannable feature, not a gray area. The check Piercing breaks is one of the easiest things for a server to verify independently. At the moment of the hit, the server can run its own raycast between the two players' actual positions, and if solid terrain sits in that path, there's no legitimate explanation for the swing landing anyway.
+
+Unlike reach or rotation smoothing, where a server has to allow room for latency and normal human imprecision, a wall either was there or it wasn't. That leaves very little space for false positives, which also means very little space for a player to get away with it. This is why anticheats tend to treat a confirmed through-wall hit as a hard flag rather than something that needs several data points to build a case.
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the module generically so you know what the term means. Naming and exact behavior vary by client, and hitting through solid blocks breaks the rules on essentially every server that runs a competent anticheat.
+</Callout>
+
+<Callout variant="tip" title="Opal ships Piercing">
+Opal's version does exactly what the name promises: lets you hit players through blocks. It's filed under use-at-own-risk in the module list, the same designation as anything else that leans on a check this easy for a server to verify. No pretending it's safer than it is.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does Piercing actually let you do?">
+It lets an attack land on a target even when a block, like a wall or a fence, sits directly between you and them. Vanilla Minecraft blocks that hit outright.
+</FAQItem>
+
+<FAQItem question="Is Piercing the same as Reach?">
+No. Reach extends how far an attack can travel. Piercing ignores whatever is physically in the way. They solve different problems, though they often get used together.
+</FAQItem>
+
+<FAQItem question="Which clients have shipped Piercing?">
+Slinky is one client documented with this module. Naming and exact behavior vary by client, since some implementations only loosen part of the check instead of removing it outright.
+</FAQItem>
+
+<FAQItem question="Can a server actually catch someone using Piercing?">
+Yes, generally. The server can run its own line-of-sight check between the two players at the moment of the hit, and a solid block in that path isn't something the client can talk its way around.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-reach", label: "What is Reach?", description: "The hit-distance module Piercing gets confused with." },
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The auto-attacker Piercing sometimes pairs with." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category these modules belong to." },
+]} />
+
+<CTA href="/en/purchase">Piercing is one module. Opal rates every one of them honestly.</CTA>

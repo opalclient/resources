@@ -1,0 +1,90 @@
+---
+title: "What Is a Module Indicator in Minecraft?"
+description: "A module indicator is a small HUD overlay that lists which modules are currently active in a Minecraft client, similar to an Array List but simpler to build."
+excerpt: "A module indicator turns whatever you've toggled on into a running list in the corner of the screen. Same job as an Array List, just built lighter."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does a module indicator affect gameplay?"
+    a: "No. It only draws text on your own screen and never touches movement, combat, or any other game logic, so it has zero effect on how you actually play."
+  - q: "Can anticheat detect a module indicator?"
+    a: "No. It never sends anything to the server, so there's nothing for a server-side anticheat to observe or flag in the first place."
+  - q: "What's the difference between a module indicator and an Array List?"
+    a: "They do the same job, listing whatever modules are active, but a module indicator is typically the plainer, separately coded version rather than sharing an implementation with an Array List."
+  - q: "Why would a client ship both a module indicator and an Array List?"
+    a: "Usually because the two got built as separate features at different points rather than merged into one. It's a development detail, not something that changes what you see on screen."
+  - q: "Is a module indicator visible to other players?"
+    a: "No. It renders only on your own client and is never sent to the server or shown to anyone else in the game."
+---
+
+<KeyTakeaways>
+
+- A module indicator is a compact on-screen list showing which modules are currently toggled on in a Minecraft utility client.
+- It updates live: enable a module and its name appears, disable it and the name drops off.
+- It renders entirely client-side and never contacts the server, so it carries no anticheat risk.
+- It does the same job as an Array List, just as a simpler module built separately rather than sharing code.
+- Appears in clients like Fan.
+
+</KeyTakeaways>
+
+A module indicator is the short text list, usually parked in a corner of the screen, that tells you which modules are currently running in a Minecraft utility client. Turn Killaura on and its name shows up. Turn it off and the name is gone. That's the entire feature: a live readout of your own client state, nothing more. It plays the same role as an Array List, and in clients that ship both, the two are typically written as separate, independently coded features rather than one list with two skins. You'll find it in clients like Fan, doing exactly what the name suggests.
+
+## How it works
+
+Every frame, the client checks which modules are currently flagged as enabled and draws their names as a short list, typically anchored to a corner of the screen. Enable a module and a line gets added. Disable it and the line disappears immediately. There's no more to the mechanic than that.
+
+Because the list only reads local client state and paints text over the game view, it never talks to the server. No packets go out, no gameplay logic gets touched, just a draw call layered on top of whatever you're already doing. It belongs in the same bucket as a coordinates HUD or an FPS counter: fully local, fully cosmetic, and invisible to anyone who isn't looking at your own screen.
+
+## Module indicator vs Array List
+
+The overlap here isn't an accident. Both features exist to answer the same question at a glance: what's on right now? Where they diverge is scope, not purpose.
+
+| | Module Indicator | Array List |
+|---|---|---|
+| Purpose | Lists currently active modules | Same: lists currently active modules |
+| Feature depth | Minimal, name-only list | Often fuller, with extras like sorting or styling options |
+| Build approach | Its own plain module, coded separately even in clients shipping both | Frequently the more developed, "primary" version of the two |
+| Server interaction | None | None |
+| Anticheat risk | None | None |
+
+A client can ship one, the other, or both side by side. Which one you end up looking at, or whether you get both stacked in a corner, comes down to how the dev team structured their HUD rather than any difference in what you actually see it do. If you want the deeper cut on the fuller-featured sibling, that's the [Array List](/en/learn/what-is-array-list) page.
+
+<Callout variant="tip" title="Where Opal stands on this">
+Opal doesn't ship a module called Module Indicator. A basic "what's currently on" readout is table stakes for a utility client, not a selling point, so whether one exists matters far less than what actually shows up on it. Spend the attention on the modules themselves.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does a module indicator affect gameplay?">
+No. It only draws text on your own screen and never touches movement, combat, or any other game logic, so it has zero effect on how you actually play.
+</FAQItem>
+
+<FAQItem question="Can anticheat detect a module indicator?">
+No. It never sends anything to the server, so there's nothing for a server-side anticheat to observe or flag in the first place.
+</FAQItem>
+
+<FAQItem question="What's the difference between a module indicator and an Array List?">
+They do the same job, listing whatever modules are active, but a module indicator is typically the plainer, separately coded version rather than sharing an implementation with an Array List.
+</FAQItem>
+
+<FAQItem question="Why would a client ship both a module indicator and an Array List?">
+Usually because the two got built as separate features at different points rather than merged into one. It's a development detail, not something that changes what you see on screen.
+</FAQItem>
+
+<FAQItem question="Is a module indicator visible to other players?">
+No. It renders only on your own client and is never sent to the server or shown to anyone else in the game.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category this HUD readout is a small piece of." },
+  { href: "/en/learn/what-is-killaura", label: "What is Killaura?", description: "One of the modules whose name is most likely to show up on that list." },
+  { href: "/en/learn/what-is-reach", label: "What is reach?", description: "A module the server can actually measure, unlike anything this page covers." },
+]} />
+
+<CTA href="/en/purchase">A readout is only as interesting as what it's reading. See what's on Opal's list.</CTA>

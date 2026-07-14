@@ -1,0 +1,77 @@
+---
+title: "What Is Step in Minecraft? Movement Module Explained"
+description: "Step is a movement module that lets you climb blocks taller than vanilla's auto-step height without jumping. Here is how it works and the detection risk."
+excerpt: "Step raises the block height you can walk onto without jumping, so ledges and uneven terrain stop breaking your stride. Here is what it changes and what it costs."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What counts as vanilla auto-step height?"
+    a: "Vanilla lets a walking player automatically climb short obstacles, like a slab or a stair, without jumping, but stops at anything taller and forces a jump. Step raises that ceiling so bigger blocks get crossed the same automatic way."
+  - q: "Does Step replace jumping entirely?"
+    a: "No. Step only changes what block height still counts as auto-climbable. Jumping still works normally for anything above that raised limit and for gaps that need real vertical clearance."
+  - q: "Is Step detectable by anticheats?"
+    a: "It can be. Step changes the vertical movement the client sends compared to what the blocks in front of the player would normally allow, and a server that checks step height against block geometry has a concrete signal to flag."
+  - q: "Which clients include a Step module?"
+    a: "Step is documented running in Fan and Tenacity, and Opal ships its own Step module doing the same job. Other clients implement the same behavior under different names."
+---
+
+<KeyTakeaways>
+
+- Step is a movement module that lets you walk onto blocks taller than vanilla's auto-step height without jumping.
+- It overrides the client's per-tick auto-climb check so bigger ledges get treated as walkable, not blocked.
+- No jump input is sent, which keeps aim and hitbox position steadier through the transition.
+- It changes reported vertical movement, which some anticheats can catch by comparing it to block geometry.
+
+</KeyTakeaways>
+
+Step is a movement module that lets a player walk up blocks taller than vanilla's auto-step height without jumping. Normally Minecraft only lets you climb short obstacles automatically and stops you cold at anything taller, forcing a jump. Step raises or removes that ceiling, so bigger blocks and ledges get crossed at a walking pace instead.
+
+## How Step works
+
+Every tick, vanilla checks the block edge in front of a walking player and decides whether it's short enough to climb onto automatically. If it isn't, the game blocks the movement and forces a jump instead. Step overrides that check, raising the height a block can be before the client still treats it as something you can walk straight onto. The client then hoists the player up onto the taller block, no jump packet involved.
+
+That last part is the whole appeal. A jump breaks a straight walking path and briefly shifts your vertical position and hitbox, both visible to an opponent watching for an opening. Staying grounded while stepping up a block keeps aim and momentum steady through the transition. It also smooths out stairs, fences, stacked half-blocks, and uneven terrain in general, so you cross them without losing sprint or breaking stride.
+
+## Is Step safe to use
+
+Step is a use-at-your-own-risk feature, not a guaranteed-safe one. It changes the vertical movement the client reports to the server, and a server-side anticheat that recomputes expected step height against the blocks in front of a player has a concrete data point to check it against. Whether a given server actually watches for this varies, but the behavior itself is a plausible flag point, and getting caught carries the same consequences as any other movement cheat: a ban, same as flight or a speed hack, just quieter about how it gets there.
+
+<Callout variant="tip" title="Opal calls this Step too">
+Opal ships the same module under the same name: it steps up blocks taller than vanilla allows. Opal classifies it use-at-own-risk, same as here. It's detectable, and running it carries the same ban risk as any client's version of the module.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Step is and how it behaves, not a guide to running it undetected. Changing what vertical movement the server sees isn't vanilla behavior, and any server checking step height against block geometry can flag the pattern.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What counts as vanilla auto-step height?">
+Vanilla lets a walking player automatically climb short obstacles, like a slab or a stair, without jumping, but stops at anything taller and forces a jump. Step raises that ceiling so bigger blocks get crossed the same automatic way.
+</FAQItem>
+
+<FAQItem question="Does Step replace jumping entirely?">
+No. Step only changes what block height still counts as auto-climbable. Jumping still works normally for anything above that raised limit and for gaps that need real vertical clearance.
+</FAQItem>
+
+<FAQItem question="Is Step detectable by anticheats?">
+It can be. Step changes the vertical movement the client sends compared to what the blocks in front of the player would normally allow, and a server that checks step height against block geometry has a concrete signal to flag.
+</FAQItem>
+
+<FAQItem question="Which clients include a Step module?">
+Step is documented running in Fan and Tenacity, and Opal ships its own Step module doing the same job. Other clients implement the same behavior under different names.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "The block-placing counterpart to Step's block-climbing." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity (anti-knockback)?", description: "Another movement module that changes what the server sees you do." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category these movement modules belong to." },
+]} />
+
+<CTA href="/en/purchase">Stop breaking stride on every ledge. See what Opal ships for $8.99.</CTA>

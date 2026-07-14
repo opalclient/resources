@@ -1,0 +1,75 @@
+---
+title: "What Is Discord RPC in Minecraft? Rich Presence Explained"
+description: "Discord RPC shows your Minecraft server, activity, and session length on your Discord profile in real time. Here's how the rich presence module works."
+excerpt: "Your Discord profile knows what server you're on before you've said a word about it. That's Discord RPC, and it's pure show, zero gameplay effect."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Discord RPC give any in-game advantage?"
+    a: "No. It only displays status information on your Discord profile. It doesn't change movement, combat, or anything the server processes."
+  - q: "Do I need Discord open for it to work?"
+    a: "Yes. Rich Presence requires the Discord desktop app running alongside Minecraft, since the client sends status updates to your local Discord app, which then updates your profile."
+  - q: "Can other players see my Discord Rich Presence in-game?"
+    a: "No. It only shows up on Discord, to people who can view your Discord profile or shared server presence. It has no visibility inside Minecraft itself."
+  - q: "Can I turn Discord RPC off?"
+    a: "Yes. It's an optional cosmetic module, so you can disable it any time you don't want your server or activity showing on your Discord profile."
+---
+
+<KeyTakeaways>
+
+- Discord RPC is a cosmetic module that shows your Minecraft server, activity, and session length on your Discord profile as Rich Presence.
+- It only reads and reports state, it never touches gameplay or sends anything the server can see.
+- Requires the Discord desktop app running alongside Minecraft.
+- Classified safe: there's nothing inside the game for an anticheat to catch.
+
+</KeyTakeaways>
+
+Discord RPC is the module that turns a Minecraft session into a Discord Rich Presence card, the server you're on, what you're doing, and how long you've been playing, sitting right under your username for anyone who checks your profile. It's one of the more visible pieces of Minecraft client tooling and one of the least dramatic: nothing about how you move, aim, or fight changes because of it. Enable it and Discord starts showing your status the moment you log in. Disable it and your profile goes back to whatever your last activity was.
+
+## How it works
+
+The module keeps a small background connection open between the Minecraft client and the Discord desktop app for as long as both are running. Every so often it reads a handful of values out of the game, the server address, the current activity, and how long the session has run, and forwards them to Discord's Rich Presence API. Discord takes it from there, rendering the data on your profile card so it's visible to anyone who views your profile or hovers your name in a shared server.
+
+Most clients wire this through a Discord game SDK wrapper such as discord-game-sdk4j, which handles the connection handshake and message formatting. The client's job is just supplying the status text, nothing more. Because the whole exchange runs one direction, out of the game and into Discord, Discord RPC never sends input, never touches outgoing packets, and never changes anything the Minecraft server sees. It's a side channel to Discord, not a hook into the game.
+
+<Callout variant="tip" title="Opal ships this">
+Opal's Discord RPC module does exactly what the name says: shows rich presence in Discord. It sits in the same bucket as the rest of Opal's cosmetic, quality-of-life features, not the combat or movement side of the client.
+</Callout>
+
+## Is it safe to use
+
+Yes, without qualification. Discord RPC only reads and reports status. It doesn't alter movement, combat, or anything the server processes, and it never opens a channel back into the game. There's nothing here for a server-side anticheat to catch, because the feature has no footprint inside Minecraft at all. Every byte of it lives in the conversation between your client and your local Discord app.
+
+The one thing worth thinking about isn't detection, it's privacy. Anyone who can see your Discord profile, friends, server members, randoms if your presence is public, can also see which Minecraft server you're on and what you're doing there. If that's not something you want broadcast, turn the module off before you log in.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Discord RPC give any in-game advantage?">
+No. It only displays status information on your Discord profile. It doesn't change movement, combat, or anything the server processes.
+</FAQItem>
+
+<FAQItem question="Do I need Discord open for it to work?">
+Yes. Rich Presence requires the Discord desktop app running alongside Minecraft, since the client sends status updates to your local Discord app, which then updates your profile.
+</FAQItem>
+
+<FAQItem question="Can other players see my Discord Rich Presence in-game?">
+No. It only shows up on Discord, to people who can view your Discord profile or shared server presence. It has no visibility inside Minecraft itself.
+</FAQItem>
+
+<FAQItem question="Can I turn Discord RPC off?">
+Yes. It's an optional cosmetic module, so you can disable it any time you don't want your server or activity showing on your Discord profile.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category Discord RPC's cosmetic features live inside." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The opposite goal: staying invisible instead of broadcasting your status." },
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "A module Discord RPC has nothing in common with: a bannable movement cheat." },
+]} />
+
+<CTA href="/en/purchase">Turn on Discord RPC and the rest of Opal's cosmetic layer for $8.99.</CTA>

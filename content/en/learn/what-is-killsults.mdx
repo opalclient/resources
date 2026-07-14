@@ -1,0 +1,81 @@
+---
+title: "What Is Killsults in Minecraft? Module Explained"
+description: "Killsults is a Minecraft client module that auto-sends a taunting chat message the instant you get a kill. Here's how the trigger works and if it's worth it."
+excerpt: "One kill, one auto-taunt. Killsults fires a preset insult in chat the second the kill lands: no typing, no combat edge, just an extra jab."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Killsults affect combat in any way?"
+    a: "No. Killsults only sends a chat message after a kill already happens. It does not change hit registration, reach, or timing."
+  - q: "Can an anticheat detect Killsults?"
+    a: "Not directly. The message it sends is an ordinary chat packet, indistinguishable at the protocol level from one typed by hand, so there is nothing for a packet-level check to catch."
+  - q: "What does the Killsults taunt message look like?"
+    a: "It comes from a preset list built into the module rather than something typed live in the moment. Exact wording depends on the client's implementation."
+  - q: "Is Killsults the same as a kill-streak announcer?"
+    a: "They are close cousins. Both are automated chat modules tied to a kill event, but Killsults is framed as an insult aimed at the player who died rather than a neutral streak counter."
+  - q: "Which client documents Killsults?"
+    a: "Tenacity, a ghost client built around a large combat-focused module roster, documents Killsults as part of that lineup."
+---
+
+<KeyTakeaways>
+
+- Killsults is a client module that fires a preset taunting chat message the instant you land a kill, no typing required.
+- It hooks the same kill event the client already tracks, then sends the taunt as an ordinary chat packet.
+- It's purely social: it changes nothing about reach, rotation, or timing, so it adds no combat edge.
+- Anticheats can't flag it at the packet level. The real risk is a human, or a chat filter, noticing the pattern.
+
+</KeyTakeaways>
+
+Killsults is a Minecraft client module that automatically sends a taunting chat message the moment you get a kill. The name is exactly what it sounds like: "kill" plus "insult." Nothing to type, nothing to click. The client picks a preset line and drops it in chat the instant the kill registers, before you've even let go of the mouse.
+
+## How the trigger works
+
+Killsults listens for the same kill event the client already tracks internally: the moment your damage ends another player's life. When that event fires, the module grabs a message from a preset list of taunts and sends it straight to chat. You don't type it and you don't click anything to send it. What reaches the server is an ordinary chat packet, the same kind any player produces by hand, because structurally that's exactly what it is.
+
+Killsults is documented as one of the modules in Tenacity, a ghost client built around a deep, combat-focused roster rather than one flagship feature. It sits there as a small, single-purpose addition next to modules that actually change how a fight goes. The appeal is entirely social: a jab that lands the second the kill does hits differently than one typed a few seconds later, after the moment's already passed. On its own, Killsults gives no edge in the fight itself. A kill still has to happen before it has anything to say.
+
+## Is it safe to use
+
+Killsults carries none of the detection risk a combat or movement module carries. It doesn't touch reach, rotations, timing, or pathing, the stuff a server-side anticheat is actually built to inspect, so there's nothing at the packet level to flag. The message it sends is indistinguishable from one you typed yourself, because it's built from the same chat pipeline.
+
+The risk that does exist is social, not technical. A taunt that fires instantly after every kill, worded the same way each time, starts to read as automated to anyone paying attention. On a server that bans modified clients outright, that kind of attention can prompt a closer look at everything else you're doing. Some servers also run their own chat-spam or toxicity filters against repeated kill messages, regardless of how those messages got sent. Neither of those is an anticheat catching Killsults itself. Both are a person, or a filter, noticing a pattern.
+
+<Callout variant="tip" title="Not on Opal's roster, on purpose">
+Opal doesn't ship a Killsults-style taunt module, and it's not a gap that keeps anyone up at night. The module adds zero combat or movement edge; the whole point is needling whoever you just killed. Opal's module list leans toward things that change the outcome of a fight, not things that change the vibe of one.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does Killsults affect combat in any way?">
+No. It only sends a chat message after a kill already happens. It doesn't change hit registration, reach, or timing in any way.
+</FAQItem>
+
+<FAQItem question="Can an anticheat detect Killsults?">
+Not directly. The message it sends is an ordinary chat packet, indistinguishable at the protocol level from one you typed yourself, so there's nothing automated for a packet-level check to catch.
+</FAQItem>
+
+<FAQItem question="What does the Killsults taunt message look like?">
+It's pulled from a preset list built into the module rather than typed live in the moment. Exact wording depends on the client's implementation.
+</FAQItem>
+
+<FAQItem question="Is Killsults the same as a kill-streak announcer?">
+They're close cousins. Both are automated chat modules tied to a kill event, but Killsults is framed as an insult aimed at whoever died, not a neutral streak counter.
+</FAQItem>
+
+<FAQItem question="Which client documents Killsults?">
+Tenacity, a ghost client built around a large combat-focused module roster, documents Killsults as part of that lineup.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The client category Killsults ships in." },
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The combat module that actually decides the fight Killsults comments on." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category these modules belong to." },
+]} />
+
+<CTA href="/en/purchase">Skip the taunt, take the modules that actually win the fight.</CTA>

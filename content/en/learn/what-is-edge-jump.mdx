@@ -1,0 +1,90 @@
+---
+title: "What Is Edge Jump in Minecraft? Jump Distance Explained"
+description: "Edge Jump is a movement module that stretches jump distance off a block's edge, closing gaps a normally timed jump would miss and drawing anticheat attention."
+excerpt: "One frame of perfect edge timing, available on every single jump. That's the whole pitch of Edge Jump."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Edge Jump actually change?"
+    a: "It extends the distance a jump covers when the takeoff point is the very edge of a block, so gaps a normally timed jump would fall short on get cleared instead."
+  - q: "Is Edge Jump the same as flight or a jump boost that ignores gravity?"
+    a: "No. It only affects the horizontal distance of an otherwise normal jump. It doesn't remove gravity, add extra jumps in the air, or keep the player airborne longer than a vanilla jump would."
+  - q: "Which clients include Edge Jump?"
+    a: "Edge Jump is documented as seen in Juul and Rose."
+  - q: "Can Edge Jump be detected?"
+    a: "It depends on how far past the vanilla maximum the boosted jump lands. A distance beyond what's physically reachable is something server-side movement checks can catch. A distance that only matches what a well-timed manual edge jump could already produce is much harder to distinguish from legitimate play."
+  - q: "Is using Edge Jump considered cheating?"
+    a: "Generally yes. It's bundled as a module in hacked clients and gives a traversal advantage over manual timing, which puts it in the same rule category as other movement modules, even though it's less conspicuous than something like flight."
+---
+
+<KeyTakeaways>
+
+- Edge Jump is a movement module that extends jump distance off a block's edge, automating a timing trick vanilla physics already rewards.
+- It only changes horizontal distance, not gravity, and it's seen in clients like Juul and Rose.
+- Detection depends on distance: past vanilla's maximum is flaggable, matching well-timed manual play is much harder to catch.
+
+</KeyTakeaways>
+
+Edge Jump is a movement module that stretches how far a jump carries when the takeoff happens at the very edge of a block, rather than a step or two back from it. The payoff is a jump that clears gaps a normally timed jump would come up short on, without needing to land the exact frame that produces that extra distance by hand. It's a small module with an outsized effect on how a map plays.
+
+## How Edge Jump works
+
+Minecraft already rewards edge timing. Take off a step back from an edge and your character has started decelerating before it leaves the block, so less forward momentum carries into the jump. Take off right at the lip of the block and that momentum is still close to full, and the jump goes noticeably farther as a result. Good players already know this and time their jumps to the edge on purpose, it's just hard to hit consistently under pressure.
+
+Edge Jump removes the need to hit it. The module extends that edge-timed distance so it's available on demand rather than depending on the player nailing the precise takeoff point every time. The mechanical trick isn't invented from nothing, it's an existing physics quirk turned into a setting instead of a skill.
+
+## Why people actually use it
+
+The core use case is terrain a normal jump can't reach: gaps between platforms, awkward parkour, obstacles where a short jump means falling or backtracking. Cross-map traversal gets faster because fewer jumps require a run-up or a backtrack to line up.
+
+It also matters in a chase. Closing distance on a target, or putting distance between yourself and one, across broken terrain in a single jump instead of two changes how that encounter plays out. The real appeal isn't raw distance so much as consistency: the extended range is there on every jump, not just the ones where a player's manual timing happened to land right.
+
+## Is Edge Jump safe to use
+
+Edge Jump is a real gameplay advantage, not a cosmetic module. It changes what terrain a player can physically cross compared to someone jumping without it, which puts it in the same broad risk category as other movement modules rather than something purely visual.
+
+How much attention it draws comes down to distance. A server that recomputes player movement and checks jump distance against a maximum reachable value can flag a jump that lands beyond what vanilla physics allows, full stop. A jump that only matches what a precisely timed manual edge jump can already achieve is a different story: the resulting distance isn't impossible, it's just more consistent than a person can reliably produce run after run. That consistency is exactly what a pattern-based check is built to notice, even if a single instance looks clean.
+
+<Callout variant="tip" title="Where Opal draws the line">
+Opal's movement lineup covers real ground, but it doesn't ship a module named Edge Jump. If a traversal feature is going on the module list, it's one the client is willing to describe plainly, and an edge-timing exploit built to quietly beat manual play doesn't fit that bar.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page explains what Edge Jump means and how the underlying effect works in general terms. Exact behavior varies by client, and traversal that goes past vanilla jump physics breaks the rules on effectively every competitive or survival server.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does Edge Jump actually change?">
+It extends the distance a jump covers when the takeoff point is the very edge of a block, so gaps a normally timed jump would fall short on get cleared instead.
+</FAQItem>
+
+<FAQItem question="Is Edge Jump the same as flight or a jump boost that ignores gravity?">
+No. It only affects the horizontal distance of an otherwise normal jump. It doesn't remove gravity, add extra jumps in the air, or keep the player airborne longer than a vanilla jump would.
+</FAQItem>
+
+<FAQItem question="Which clients include Edge Jump?">
+Edge Jump is documented as seen in Juul and Rose.
+</FAQItem>
+
+<FAQItem question="Can Edge Jump be detected?">
+It depends on how far past the vanilla maximum the boosted jump lands. A distance beyond what's physically reachable is something server-side movement checks can catch. A distance that only matches what a well-timed manual edge jump could already produce is much harder to distinguish from legitimate play.
+</FAQItem>
+
+<FAQItem question="Is using Edge Jump considered cheating?">
+Generally yes. It's bundled as a module in hacked clients and gives a traversal advantage over manual timing, which puts it in the same rule category as other movement modules, even though it's less conspicuous than something like flight.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "Another movement module built for crossing terrain a normal player couldn't." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity (anti-knockback)?", description: "A movement-adjacent module that fights pushback instead of gravity." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The broader category these movement modules ship inside." },
+]} />
+
+<CTA href="/en/purchase">See how Opal handles movement without leaning on quiet exploits.</CTA>

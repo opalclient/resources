@@ -1,0 +1,69 @@
+---
+title: "What Is the Jesus Module in Minecraft?"
+description: "Jesus is a Minecraft client module that lets you walk across water instead of sinking, overriding fluid physics for fast crossings, and it's detectable."
+excerpt: "Walk on water like it's solid ground. Jesus overrides Minecraft's fluid physics, and yes, servers can see you doing it."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Jesus work on lava too?"
+    a: "Sometimes. The core behavior is walking on water. Some implementations extend the same override to lava, though it's documented less consistently than the water case and tends to be less reliable."
+  - q: "Is Jesus the same as flight?"
+    a: "No. Jesus keeps you at the surface of a fluid instead of letting you move freely through open air. You still can't leave the ground or the fluid surface the way a flight module would let you."
+  - q: "Can servers detect Jesus?"
+    a: "Yes, in principle. A server checking whether your position matches expected fluid physics can notice you staying above water instead of sinking, which is exactly why the module carries detection risk."
+  - q: "Which clients include a Jesus module?"
+    a: "Jesus has been seen in clients including Fan and Tenacity, among others that ship movement modules."
+---
+
+<KeyTakeaways>
+- Jesus is a movement module that lets you walk on water instead of sinking, overriding the game's normal fluid physics.
+- It holds your vertical position at the surface, so crossing water plays out like crossing solid ground. Some builds extend it to lava.
+- It's detectable: servers watching fluid physics can flag it, so treat it as use-at-your-own-risk.
+</KeyTakeaways>
+
+Jesus is a movement module built into Minecraft utility clients that lets you walk across the surface of water instead of falling into it. Where vanilla physics would drag you under the moment you step off dry land, Jesus holds you at the surface, turning an ocean, river, or flooded ravine into just another patch of ground you can cross on foot. Some implementations push the same trick onto lava, letting you cross without sinking or taking damage, though that side of it works less reliably than the water case. It's a traversal shortcut, not a flight hack, and it's a module server-side anticheat is specifically built to catch.
+
+## How it works
+
+Jesus intercepts the collision and movement handling Minecraft normally applies the instant you step into a fluid block. Vanilla physics kick in gravity and buoyancy the moment you enter water, which is why you sink unless you're actively swimming. Jesus overrides that handoff and pins your vertical position at the surface instead, so every step across water resolves the same way a step across grass would. The lava version works on the same principle, but it's built and maintained less consistently across clients, since lava also carries its own damage and rendering logic that has to be worked around separately.
+
+People reach for it for the obvious reason: oceans, rivers, and lava lakes are obstacles that cost time or force a detour, and Jesus lets you cross them in a straight line instead. On big maps that matters for travel. In a chase, it matters more, since it lets you follow (or lose) someone across terrain they assumed was safe.
+
+## Is it safe to use
+
+No, and it was never trying to be. Walking on water is not something vanilla Minecraft can produce on its own, and any server logging player positions can see it happen: you stay at the surface instead of dropping into the fluid the way physics says you should. Whether that gets you banned on a given run depends on how closely that server checks fluid collision, but the behavior itself is a flag waiting to happen. Treat Jesus as use-at-your-own-risk on anything running real anticheat, the same way you would scaffold, killaura, or any other module that visibly rewrites how your character interacts with the world.
+
+## Jesus, the Opal way
+
+Opal ships this one under the name it deserves: Jesus. Lets you walk on water. That's the whole pitch, and the module does exactly what the name promises, nothing dressed up. It carries the same classification as everywhere else in Opal's catalog for this kind of behavior: use at your own risk. Water walking is a clean physics violation, and Opal doesn't pretend a clean physics violation is invisible.
+
+<Callout variant="warning" title="Bannable on anticheat servers">
+Jesus is a detectable movement override, not a stealth feature. Any server checking your position against expected fluid physics can catch you standing on water instead of sinking into it. Run it on an anticheat-protected server and you're gambling with the account, same as any other client, any other implementation.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Does Jesus work on lava too?">
+Sometimes. The core behavior is walking on water. Some implementations extend the same override to lava, though it's documented less consistently and tends to be less reliable than the water case.
+</FAQItem>
+<FAQItem question="Is Jesus the same as flight?">
+No. Jesus keeps you at the surface of a fluid instead of letting you move freely through open air. You still can't leave the ground or the fluid surface the way a flight module would let you.
+</FAQItem>
+<FAQItem question="Can servers detect Jesus?">
+Yes, in principle. A server checking whether your position matches expected fluid physics can notice you staying above water instead of sinking, which is exactly why the module carries detection risk.
+</FAQItem>
+<FAQItem question="Which clients include a Jesus module?">
+Jesus has been seen in clients including Fan and Tenacity, among others that ship movement modules.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The category Jesus, and every other module on this page, belongs to." },
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "Another movement module that rewrites how you interact with terrain, this time by placing blocks under your feet." },
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is velocity (anti-knockback)?", description: "A different flavor of physics override: one that fights how combat pushes you, not how fluid pulls you down." }
+]} />
+
+<CTA href="/en/purchase">Opal ships Jesus and the rest of the movement suite. Come see what's under the hood.</CTA>

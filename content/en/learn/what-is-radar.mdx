@@ -1,0 +1,70 @@
+---
+title: "What Is Radar in Minecraft?"
+description: "Radar is a Minecraft client module that plots nearby players and entities on a top-down overlay, revealing position through walls without a full ESP render."
+excerpt: "A dot on a screen that tells you someone's coming before you ever turn around. Convenient for awareness, expensive if a server catches it."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is Radar the same as ESP?"
+    a: "They're related but not identical. ESP renders full entity models or outlines through walls in the 3D world, while Radar abstracts that same awareness into a 2D top-down overlay that just shows direction and distance."
+  - q: "Does Radar work through walls?"
+    a: "Yes. Because it's built from position data the server already sends for nearby entities, it doesn't depend on line of sight, so it can show players and entities that are behind walls or terrain."
+  - q: "Can anticheats detect Radar?"
+    a: "Radar itself doesn't send extra network traffic, so detection usually comes down to client-side integrity scans or the player's own behavior giving away that they're reacting to something outside their normal view."
+  - q: "Which clients have a Radar module?"
+    a: "Tenacity is documented as shipping one. Radar-style overlays show up in other clients under different names too, since the idea of plotting nearby entities on a HUD map isn't unique to any single client."
+---
+
+<KeyTakeaways>
+- Radar plots nearby players and entities on a top-down overlay, showing direction and distance no matter where the camera points.
+- It reuses position data the server already sends, so it needs no extra network traffic.
+- It works through walls, since it never depended on line of sight, which is why most servers ban it.
+- Tenacity ships a documented Radar module.
+</KeyTakeaways>
+
+Radar is a Minecraft client module that draws a top-down, minimap-style overlay showing where nearby players and entities sit relative to you, no matter which way the camera is pointed. Instead of rendering full models through walls the way ESP does, it compresses that same awareness down to a scatter of dots: direction, distance, done. You get a warning that someone is closing in from around a corner or over a ridge, without the visual clutter of watching a body clip through terrain. It reads less like a hack and more like a sonar ping, which is exactly why players like it, and exactly why servers don't.
+
+## How it works
+
+Every entity near you already has a position the server is tracking and sending to your client. That's how normal rendering, hit detection, and the tab list all function. Radar takes that same relative position data, direction and distance from you, and plots it as a dot on a flat overlay laid over the HUD, instead of feeding it only into normal, occlusion-respecting rendering.
+
+The overlay is typically oriented either to true north or to the direction you're currently facing, so a dot's angle on the radar maps to a real angle in the world. Face a different way and the dots rotate with you if it's facing-relative, or hold still if it's north-locked. Either way, Radar never asks the server for anything a vanilla client wouldn't already receive. It just visualizes data that's normally invisible to you.
+
+## Is Radar safe to use
+
+Radar sits in the same family as ESP and other awareness modules. It shows you positions a normal client would never render, through walls, outside your field of view, so most servers classify it as a cheat rather than a cosmetic feature, and it carries the same ban risk.
+
+Because it only redraws data the client already has, it doesn't generate the kind of unusual network traffic a server can flag on its own. Detection instead tends to come from two places: your own behavior, and client-side scans. Turning toward a player before they're visible, repositioning to dodge someone with no line of sight to them, or reacting to entities that should be off-screen are all tells that you're working off information a legitimate client doesn't have. Anticheats that scan the client binary or memory for known Radar or ESP signatures add a second layer on top of that.
+
+<Callout variant="warning" title="Bannable on nearly every ruleset">
+Radar reveals information a vanilla client can't show you. That puts it in the same enforcement bucket as ESP on most servers: not a gray area, a bannable module. Treat it as a reference for how the feature works, not a how-to.
+</Callout>
+
+Opal doesn't currently ship a dedicated Radar module. Worth knowing if you're comparing utility clients on this specific feature: "radar" branding gets used loosely across the space, and it doesn't always mean the same thing under the hood from client to client.
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Is Radar the same as ESP?">
+They're related but not identical. ESP renders full entity models or outlines through walls in the 3D world, while Radar abstracts that same awareness into a 2D top-down overlay that just shows direction and distance.
+</FAQItem>
+<FAQItem question="Does Radar work through walls?">
+Yes. Because it's built from position data the server already sends for nearby entities, it doesn't depend on line of sight, so it can show players and entities that are behind walls or terrain.
+</FAQItem>
+<FAQItem question="Can anticheats detect Radar?">
+Radar itself doesn't send extra network traffic, so detection usually comes down to client-side integrity scans or the player's own behavior giving away that they're reacting to something outside their normal view.
+</FAQItem>
+<FAQItem question="Which clients have a Radar module?">
+Tenacity is documented as shipping one. Radar-style overlays show up in other clients under different names too, since the idea of plotting nearby entities on a HUD map isn't unique to any single client.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The category Radar and modules like it belong to, and how utility clients differ from vanilla." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "A different flavor of awareness-focused client built around staying unseen rather than seeing more." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "Another module that trades legitimate play for an unfair edge, and why it gets caught differently than Radar." }
+]} />
+
+<CTA href="/en/purchase">Opal's module list is public. See exactly what's in it before you spend $8.99 on the wrong client.</CTA>

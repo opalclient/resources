@@ -1,0 +1,89 @@
+---
+title: "What Is Target HUD in Minecraft? (Module Explained)"
+description: "Target HUD is a Minecraft combat overlay that shows a locked target's name, health, and distance, without ever touching your aim, input, or network traffic."
+excerpt: "Name, health, distance, all in one glance. Target HUD is about as spicy as a nutrition label, which is exactly why it's safe to run."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Is Target HUD a cheat?"
+    a: "No. It only displays information the client already has about your current target, things like name, health, and distance. It doesn't aim, attack, or move for you, so it carries none of the risk that automated combat modules do."
+  - q: "What does Target HUD show?"
+    a: "Typically the name, current health, and distance of whichever entity you're locked onto in combat. Some versions swap the number for a health bar graphic or icon, and the exact layout varies by client and by which visual style you pick."
+  - q: "Can Target HUD get you banned?"
+    a: "Not on its own. It doesn't change any packet or movement pattern sent to the server, so there's nothing for an anticheat to flag. It only changes what's rendered on your screen."
+  - q: "Is TargetInfo the same thing as Target HUD?"
+    a: "Yes. TargetInfo is just an alternate name some clients use for the same idea: an on-screen readout of your current combat target."
+  - q: "Which clients have shipped Target HUD?"
+    a: "It's appeared in several clients over the years, including Fan, Tenacity, and Opal v1, usually as one of a handful of HUD-style visual modules a player can choose between."
+---
+
+<KeyTakeaways>
+
+- Target HUD is a combat overlay showing your current target's name, health, and distance on screen.
+- It only reads data the client already has: no extra packets, no changed input, no automation.
+- Because it changes what you see rather than what you do, anticheats have nothing to flag.
+- Also called TargetInfo, and it's shipped in Fan, Tenacity, and Opal v1.
+
+</KeyTakeaways>
+
+Target HUD is an on-screen combat display that shows information about whatever entity you're currently locked onto in a fight, usually its name, current health, and distance from you. Vanilla Minecraft's attack indicator gives you a rough health readout in the crosshair and nothing else: no name, no distance, no way to tell who you're actually fighting when three players are swinging at once. Target HUD collapses all of that into one panel. It's a pure information module, sometimes called TargetInfo, that reads data the client already has and puts it somewhere you can actually use it mid fight.
+
+## How it works
+
+Target HUD watches whichever entity currently counts as your combat target, usually whoever you're looking at or whoever you most recently hit, and draws a small panel with details about it.
+
+| What it shows | Detail |
+|---|---|
+| Name | The target's in-game username |
+| Health | Current HP, updating live as the fight plays out |
+| Distance | How far away the target currently is |
+
+Some implementations swap the plain health number for a bar graphic or an icon instead. Clients that ship several visual variants of the module let you choose between a compact bar and a fuller card-style panel, while the underlying data stays the same either way.
+
+None of this pulls anything new from the server. The name, health, and position it displays are already sitting on the client as part of normal gameplay, the same data vanilla Minecraft uses to render nametags and the attack indicator. Target HUD just repackages that into one glance instead of making you read a name tag, then the crosshair bar, then guess the distance yourself. It doesn't touch your aim, your attacks, or your movement, and it sends nothing extra over the wire. It's a passive readout layered on top of combat you're already fighting.
+
+## Is it safe to use
+
+Target HUD is about as safe as a Minecraft module gets. It only renders information the client already holds locally and never touches game state, input, or network traffic, so there's nothing for a server-side anticheat to key on. It sits in the same bucket as other read-only HUD overlays: modules that change what you see, not what you or your client do.
+
+That's a real distinction, not a technicality. Compare it to something like [killaura](/en/learn/what-is-killaura) or an [aimbot](/en/learn/what-is-an-aimbot), both of which act on your behalf and leave a trail in movement or timing data an anticheat can measure. Target HUD never sends an attack, never rotates your camera, never clicks anything. It just tells you what's already true, faster than you'd notice it yourself.
+
+<Callout variant="tip" title="Where this sits in Opal">
+Target HUD isn't unfamiliar territory here. An earlier release, Opal v1, shipped a Target HUD style panel as one of its combat HUD modules. The same read-only spirit carries into the current visual category: overlays that hand you more information about a fight without ever touching your aim, your clicks, or a single packet you send.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Target HUD a cheat?">
+No. It only displays information the client already has about your current target, things like name, health, and distance. It doesn't aim, attack, or move for you, so it carries none of the risk that automated combat modules do.
+</FAQItem>
+
+<FAQItem question="What does Target HUD show?">
+Typically the name, current health, and distance of whichever entity you're locked onto in combat. Some versions swap the number for a health bar graphic or icon, and the exact layout varies by client and by which visual style you pick.
+</FAQItem>
+
+<FAQItem question="Can Target HUD get you banned?">
+Not on its own. It doesn't change any packet or movement pattern sent to the server, so there's nothing for an anticheat to flag. It only changes what's rendered on your screen.
+</FAQItem>
+
+<FAQItem question="Is TargetInfo the same thing as Target HUD?">
+Yes. TargetInfo is just an alternate name some clients use for the same idea: an on-screen readout of your current combat target.
+</FAQItem>
+
+<FAQItem question="Which clients have shipped Target HUD?">
+It's appeared in several clients over the years, including Fan, Tenacity, and Opal v1, usually as one of a handful of HUD-style visual modules a player can choose between.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category Target HUD and modules like it belong to." },
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "The automated opposite of a read-only HUD: acts for you instead of just informing you." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "Another combat module, but one that aims on your behalf instead of just showing you the fight." }
+]} />
+
+<CTA href="/en/purchase">Clear combat information without automation baked in, that's the whole idea behind Opal.</CTA>

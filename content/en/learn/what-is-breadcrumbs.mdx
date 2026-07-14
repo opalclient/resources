@@ -1,0 +1,71 @@
+---
+title: "What Is the Breadcrumbs Module in Minecraft?"
+description: "Breadcrumbs is a Minecraft client module that drops a visible trail behind your character as you move, so you can retrace your path with zero anticheat risk."
+excerpt: "A trail of markers that remembers where you've been so you don't have to. No packets changed, no risk taken, just a path home."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does Breadcrumbs affect gameplay?"
+    a: "No. Breadcrumbs only renders a trail on your own screen. It doesn't change movement, combat, or anything the server receives from your client."
+  - q: "Can anticheats detect Breadcrumbs?"
+    a: "There's nothing to detect. Breadcrumbs doesn't send different packets or grant any advantage, so it never touches the kind of behavior server-side anticheats are built to watch for."
+  - q: "Is Breadcrumbs the same as a minimap or waypoint mod?"
+    a: "It's related but simpler. A minimap or waypoint mod shows a map or lets you set destinations, while Breadcrumbs just marks the specific path you've already walked so you can retrace it."
+  - q: "Which clients have Breadcrumbs?"
+    a: "It's documented in Tenacity, a Minecraft utility client, as one of its render-category modules alongside other visual features."
+---
+
+<KeyTakeaways>
+- Breadcrumbs renders a trail of markers behind you as you move, so your recent path stays visible on screen.
+- It only draws locally: no extra packets sent, no change to movement or combat.
+- Useful for caves, sprawling bases, and reviewing a route after exploring or mining.
+- Zero anticheat risk, there's no server-visible behavior to flag in the first place.
+</KeyTakeaways>
+
+Breadcrumbs is a Minecraft client module that drops a trail of markers behind you as you walk, mine, or explore, so your recent path stays visible without opening a map. It's a rendering feature, not a movement or combat tool: the client draws markers where you've already been, and nothing about how you play changes. Think of it as the digital version of an actual trail of breadcrumbs, dropped automatically, always current, gone the moment you don't need it anymore. The appeal is obvious the first time you get turned around in a cave system or a base with too many rooms that look the same.
+
+## How it works
+
+The module hooks into your own position data, the same coordinates the client is already tracking every tick, and drops a marker as you move. Render those markers together in sequence and you get a connected line: the trail. Keep moving and the trail keeps growing behind you, always reflecting exactly the ground you just covered, not an estimate of it.
+
+Because marker placement is tied to your literal position, the trail traces the real route you took, including every backtrack, dead end, and detour. Nothing gets sent to the server, and nothing changes about what other players see when they look at you. It's a client-side overlay, full stop.
+
+## Is it safe to use
+
+Yes, on any server. Breadcrumbs doesn't touch movement speed, combat, or a single packet the client sends, so there's nothing for a server-side anticheat to tie a flag to. Compare that to a module like an aimbot, which is actively changing what gets transmitted to the server on every swing. Breadcrumbs never leaves your own render pipeline.
+
+That also means it doesn't make you better at anything. It won't make you faster, harder to hit, or more accurate. It just keeps a visual record of ground you've already covered, which is either extremely useful or completely invisible depending on whether you've ever gotten lost in your own mineshaft.
+
+<Callout variant="tip" title="Where this fits in Opal">
+Opal doesn't ship a module called Breadcrumbs specifically, but the principle behind it, render something genuinely useful, touch nothing the server can see, is exactly the bar Opal's visual category holds itself to. If a feature can't earn its place as either helpful or provably safe, it doesn't ship.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Does Breadcrumbs affect gameplay?">
+No. It only draws a trail on your own screen. Movement, combat, and everything the server sees about your client stay exactly the same.
+</FAQItem>
+
+<FAQItem question="Can anticheats detect Breadcrumbs?">
+There's nothing to catch. Breadcrumbs doesn't send different packets or hand you any advantage, so it never touches the behavior server-side anticheats actually watch for.
+</FAQItem>
+
+<FAQItem question="Is Breadcrumbs the same as a minimap or waypoint mod?">
+Not quite, it's simpler. A minimap or waypoint mod gives you a map or lets you set a destination. Breadcrumbs just marks the exact path you already walked so you can retrace it.
+</FAQItem>
+
+<FAQItem question="Which clients have Breadcrumbs?">
+It's documented in Tenacity, a Minecraft utility client, as one of its render-category modules alongside other visual features.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The category Breadcrumbs and modules like it belong to." },
+  { href: "/en/learn/what-is-an-aimbot", label: "What is an aimbot?", description: "The other end of the risk spectrum: a module that changes what the server sees." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "How exploration-focused clients differ from a purely visual module like this one." }
+]} />
+
+<CTA href="/en/purchase">See the rest of what Opal renders for you.</CTA>

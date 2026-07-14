@@ -1,0 +1,87 @@
+---
+title: "What Is Auto Block in Minecraft? Module Explained"
+description: "Auto Block is a combat module that lets you keep moving and fighting while blocking, or blocks for you automatically. Here's how it works and why it's risky."
+excerpt: "Blocking is supposed to cost you movement and options. Auto Block quietly refuses to pay that price, either ignoring the penalty or throwing the block up before you even react."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Auto Block change compared to normal blocking?"
+    a: "Normal blocking costs you movement speed and locks out most other actions for as long as you hold it. Auto Block removes that cost, either by ignoring the penalty while the block stays active or by triggering the block itself so you never have to hold it manually."
+  - q: "Are there two different versions of Auto Block?"
+    a: "Yes. One version keeps the block active server-side while you move and act normally. The other watches for an incoming hit and triggers the block on its own at the right moment, then releases it, instead of you holding and timing it by hand."
+  - q: "Is Auto Block the same as anti-knockback?"
+    a: "No. Anti-knockback changes how far a hit pushes you back. Auto Block changes the cost and timing of blocking itself. They're separate combat modules, and plenty of people run both at once."
+  - q: "Is Auto Block detectable by anticheats?"
+    a: "It's plausible. A reported block state that doesn't match your movement speed, sprint, or attack pattern is a concrete mismatch for a server to catch, and the automatic-trigger version can also stand out through block timing that starts and stops too consistently around incoming hits."
+  - q: "Which clients include Auto Block?"
+    a: "It's documented as seen in Slinky. Opal lists its own version too, in the catalog as Block: 'Lets you act while blocking, or blocks for you automatically.'"
+---
+
+<KeyTakeaways>
+
+- Auto Block is a combat module that removes the cost of holding a vanilla block.
+- Vanilla blocking locks you to a walk and limits other actions while held.
+- One form ignores that penalty; the other auto-triggers the block around incoming hits.
+- It's documented as seen in Slinky, and it's use-at-your-own-risk like any module that changes what the server sees.
+
+</KeyTakeaways>
+
+Auto Block is a combat module that gets rid of the tradeoff baked into vanilla sword blocking. Hold right-click to block in survival Minecraft and the game slows your movement to a walk and locks out most other actions for as long as you hold it. That's the price for the reduced damage. Auto Block erases that price. Depending on the implementation, it either keeps the block active while quietly letting you move and fight like normal, or it holds nothing at all and triggers the block itself the instant a hit is about to land.
+
+## How it works
+
+Vanilla blocking is manual and all-or-nothing. You hold right-click with a sword, your speed drops to a walking pace, and the game restricts most other inputs until you let go. That's the deal: reduced damage in exchange for standing still and doing little else.
+
+Auto Block breaks that deal one of two ways. The first form keeps the block state active on the server side while the client quietly ignores the movement and action penalty, so you keep sprinting, hitting, or repositioning as if nothing were held. The second form doesn't hold anything itself. It watches for the moment an attack is about to land, triggers the block for you, then releases it, turning blocking into a reaction you never have to time by hand. Auto Block is documented as seen in Slinky.
+
+The appeal of the automatic-trigger form goes beyond just skipping the movement penalty. A block that engages itself the instant it's needed also removes the human delay between seeing a hit coming and pressing the button for it, which is a second edge on top of the first.
+
+## Is it safe to use
+
+Blocking and full mobility aren't supposed to happen at the same time in vanilla Minecraft, so combining them is a real signal for a server to look at. A player whose movement speed, sprint state, or attack pattern doesn't match the block state they're reporting looks inconsistent with how the vanilla client behaves, and that's exactly the kind of mismatch server-side anticheats are built to compare. The automatic-trigger form has a tell of its own too: a block that starts and stops with unnatural consistency around incoming hits reads differently from a person reacting by hand.
+
+Auto Block is a use-at-your-own-risk feature. It's plausible for anticheats to flag it, and no implementation comes with a guarantee of staying undetected on any given server.
+
+<Callout variant="tip" title="Opal ships this">
+Opal's catalog lists it as Block: "Lets you act while blocking, or blocks for you automatically." Same two forms described above, same classification: use at your own risk.
+</Callout>
+
+<Callout variant="warning" title="Reference, not a how-to">
+This page describes the module generically so you know what the term means. Naming and exact behavior vary by client, and blocking while acting freely is detectable and can get an account banned, same as on any client.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="What does Auto Block change compared to normal blocking?">
+Normal blocking costs you movement speed and locks out most other actions for as long as you hold it. Auto Block removes that cost, either by ignoring the penalty while the block stays active or by triggering the block itself so you never have to hold it manually.
+</FAQItem>
+
+<FAQItem question="Are there two different versions of Auto Block?">
+Yes. One version keeps the block active server-side while you move and act normally. The other watches for an incoming hit and triggers the block on its own at the right moment, then releases it, instead of you holding and timing it by hand.
+</FAQItem>
+
+<FAQItem question="Is Auto Block the same as anti-knockback?">
+No. Anti-knockback changes how far a hit pushes you back. Auto Block changes the cost and timing of blocking itself. They're separate combat modules, and plenty of people run both at once.
+</FAQItem>
+
+<FAQItem question="Is Auto Block detectable by anticheats?">
+It's plausible. A reported block state that doesn't match your movement speed, sprint, or attack pattern is a concrete mismatch for a server to catch, and the automatic-trigger version can also stand out through block timing that starts and stops too consistently around incoming hits.
+</FAQItem>
+
+<FAQItem question="Which clients include Auto Block?">
+It's documented as seen in Slinky. Opal lists its own version too, in the catalog as Block: "Lets you act while blocking, or blocks for you automatically."
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-velocity-anti-knockback", label: "What is Velocity (anti-knockback)?", description: "The combat module Auto Block gets confused with, and how the two actually differ." },
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "Another combat module that automates something you'd otherwise have to time by hand." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category these modules belong to." },
+]} />
+
+<CTA href="/en/purchase">Blocking shouldn't mean standing still. Opal is $8.99.</CTA>

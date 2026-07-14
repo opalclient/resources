@@ -1,0 +1,73 @@
+---
+title: "What Is AutoRespawn in Minecraft? Module Explained"
+description: "AutoRespawn automatically clicks respawn the instant you die, skipping the death screen wait. Here's how it works and why it's just a convenience module."
+excerpt: "The death screen doesn't need your attention. AutoRespawn clicks past it before you've even noticed you're looking at it."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does AutoRespawn give a gameplay advantage?"
+    a: "No, not in the way combat or movement modules do. AutoRespawn only removes the wait on the death screen, it doesn't change reach, hit registration, movement speed, or anything else a server-side anticheat actually measures."
+  - q: "Can servers detect AutoRespawn?"
+    a: "There's nothing at the packet level that looks different from a player clicking respawn quickly by hand. An anticheat has no impossible action to catch, since the respawn click itself is completely ordinary. Some servers ban it anyway under blanket no-automation rules, which is a policy question, not a detection one."
+  - q: "Is AutoRespawn the same as auto-reconnect?"
+    a: "No. AutoRespawn only handles the respawn click after death within the same session. It doesn't reconnect to the server or restart the game client."
+  - q: "Which clients include AutoRespawn?"
+    a: "Tenacity ships it, usually filed under quality-of-life modules rather than anything combat or movement related."
+---
+
+<KeyTakeaways>
+
+- AutoRespawn is a module that clicks the respawn button for you the instant you die, cutting the death screen wait to zero.
+- It performs the same respawn action a player can trigger manually, just faster than human reaction time.
+- No change to reach, hit registration, or movement, and no packet trickery involved.
+- Seen in Tenacity, grouped with other quality-of-life modules.
+
+</KeyTakeaways>
+
+AutoRespawn is a Minecraft module that clicks the respawn button for you the moment you die, so you never sit on the death screen waiting to click it yourself. It doesn't change anything about how you play, it just deletes the gap between dying and being back in the world. On servers where getting back to a bed or a base fast actually matters, that gap adds up over a session even at a second or two a time. AutoRespawn is documented in Tenacity's module list, filed next to other convenience features rather than anything that touches combat or movement.
+
+## How it works
+
+AutoRespawn watches the player's death state, and the instant the death screen would normally appear, it fires the same respawn action a player triggers by clicking the Respawn button themselves. There's no packet trickery or protocol shortcut hiding underneath it. The client goes through the ordinary respawn flow exactly like it would for a manual click, the module just presses that button on your behalf immediately, instead of waiting on however long it takes a human to notice the death screen and react to it. The world reloads and you're back in as fast as the game itself allows, nothing more.
+
+## Is it safe to use
+
+AutoRespawn is a cosmetic convenience, not a gameplay-advantage cheat. It doesn't touch reach, hit registration, movement speed, or anything else a server-side anticheat is actually built to measure. Clicking respawn a moment faster than a human normally would isn't a capability the game restricts in the first place, any player can already mash that button the second it appears on screen.
+
+Because there's nothing mechanically different from a fast manual click, there's nothing distinctive for an anticheat to flag. The one wrinkle is policy rather than detection: some servers write blanket rules against any automated client action regardless of what it actually does, so whether AutoRespawn is allowed comes down to that server's rules rather than any real risk of getting caught.
+
+<Callout variant="tip" title="Where this sits in Opal">
+Opal doesn't ship a module under the AutoRespawn name. Quality-of-life clicks like this are a real category, they're just not where Opal spends its engineering attention. Opal's own modules cluster around combat, movement, and visual work, the stuff that changes what happens in a fight rather than what happens on a menu screen. If shaving a second off your respawn is genuinely what you're after, modules like this exist elsewhere; if it's winning the fight once you're back in, that's the part of the client Opal actually builds for.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does AutoRespawn give a gameplay advantage?">
+No, not in the way combat or movement modules do. AutoRespawn only removes the wait on the death screen, it doesn't change reach, hit registration, movement speed, or anything else a server-side anticheat actually measures.
+</FAQItem>
+
+<FAQItem question="Can servers detect AutoRespawn?">
+There's nothing at the packet level that looks different from a player clicking respawn quickly by hand. An anticheat has no impossible action to catch, since the respawn click itself is completely ordinary. Some servers ban it anyway under blanket no-automation rules, which is a policy question, not a detection one.
+</FAQItem>
+
+<FAQItem question="Is AutoRespawn the same as auto-reconnect?">
+No. AutoRespawn only handles the respawn click after death within the same session. It doesn't reconnect to the server or restart the game client.
+</FAQItem>
+
+<FAQItem question="Which clients include AutoRespawn?">
+Tenacity ships it, usually filed under quality-of-life modules rather than anything combat or movement related.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "The wider category AutoRespawn and other quality-of-life modules live inside." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "Where a quiet convenience feature like this fits against clients built to stay unnoticed entirely." },
+  { href: "/en/learn/what-is-a-crystal-aura", label: "What is a Crystal Aura?", description: "A module on the opposite end of the risk spectrum, built entirely around timing anticheats can catch." },
+]} />
+
+<CTA href="/en/purchase">Opal spends its engineering time on the fight, not the death screen. $8.99.</CTA>

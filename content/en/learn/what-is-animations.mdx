@@ -1,0 +1,77 @@
+---
+title: "What Is the Animations Module in Minecraft?"
+description: "The Animations module swaps Minecraft's default sword swing and item-holding pose for a custom one. Here is how it works and why it never touches gameplay."
+excerpt: "Vanilla's sword swing looks the same in every client. Animations swaps it for something that's actually yours, and the server never notices."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "Does the Animations module affect combat or gameplay?"
+    a: "No. It only changes the visual appearance of actions like sword swings and item-holding poses. Hit detection, timing, and everything the server processes stay identical to vanilla."
+  - q: "Can other players see my custom animations?"
+    a: "No. Animation rendering happens locally on your own client. Everyone else still sees the standard vanilla swing and pose, regardless of what you see on your screen."
+  - q: "Is Animations the same as a resource pack?"
+    a: "Not quite. A resource pack can also change animation timing through vanilla's file structure, but a client module handles the swap through code and can offer switchable presets a plain resource pack can't."
+  - q: "Does using Animations get flagged by anticheats?"
+    a: "No. It only changes what renders on your own screen and doesn't touch any data sent to the server, so there's nothing for a server-side anticheat to detect."
+---
+
+<KeyTakeaways>
+
+- Animations is a cosmetic module that swaps Minecraft's default sword swing and item-holding pose for a custom one.
+- It only changes what renders locally; hit detection, timing, and server packets stay identical to vanilla.
+- Other players never see your custom animations, only the standard vanilla ones.
+- It carries no detection risk, because nothing sent to the server changes.
+
+</KeyTakeaways>
+
+The Animations module is a cosmetic feature that replaces or adjusts Minecraft's built-in animations, most commonly the sword swing and the pose you hold an item in, with a custom version. It changes how actions look on your screen without touching hit detection, movement, or anything the server actually processes. Think of it as a skin for your motion, not an edge in a fight.
+
+## How it works
+
+Animations hooks into the client's rendering of specific actions and substitutes a custom motion for the vanilla one. A sword swing can arc differently, land on a different beat, or hold at a different angle depending on the preset. None of that touches the game logic underneath: the same interaction still fires, the same packet still goes to the server, on the same timing the server expects.
+
+That's the whole trick. The module only touches what gets drawn, so it never has to negotiate with hit windows, attack cooldowns, or anything else the server keeps track of. You see a different-looking swing. The server sees an ordinary attack, because that's exactly what it received.
+
+Clients that ship it, like Fan, Tenacity, and Rose, usually bundle Animations next to other appearance options such as custom HUDs rather than anything that changes how a fight actually plays out. It's the same category of feature as choosing a resource pack, just handled through code instead of a texture file.
+
+## Is it safe to use
+
+Yes, and there isn't much nuance to it. Animations only changes what gets rendered on your own client. It doesn't alter reach, timing, or any value the server uses to resolve an action, so there's nothing server-side to flag. The animation itself never leaves your machine; only the underlying interaction, sent in the exact form vanilla would send it, reaches the server.
+
+The one real caveat: some servers ban client modifications wholesale, regardless of what a given one actually does. That's a rules question, not a detection question, so it's still worth reading the server's terms before running any modified client.
+
+<Callout variant="tip" title="Opal ships it as-is">
+Opal's catalog lists Animations plainly: it tweaks in-game animations. No qualifiers, no risk tier above cosmetic. Opal classifies it SAFE, the same bucket as its other quality-of-life tweaks that change how the game feels without changing how it plays.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Does the Animations module affect combat or gameplay?">
+No. It only changes the visual appearance of actions like sword swings and item-holding poses. Hit detection, timing, and everything the server processes stay identical to vanilla.
+</FAQItem>
+
+<FAQItem question="Can other players see my custom animations?">
+No. Animation rendering happens locally on your own client. Everyone else still sees the standard vanilla swing and pose, regardless of what you see on your screen.
+</FAQItem>
+
+<FAQItem question="Is Animations the same as a resource pack?">
+Not quite. A resource pack can also change animation timing through vanilla's file structure, but a client module handles the swap through code and can offer switchable presets a plain resource pack can't.
+</FAQItem>
+
+<FAQItem question="Does using Animations get flagged by anticheats?">
+No. It only changes what renders on your own screen and doesn't touch any data sent to the server, so there's nothing for a server-side anticheat to detect.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a utility client?", description: "The wider category cosmetic modules like this belong to." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "How stealth-focused clients differ from purely cosmetic ones." },
+  { href: "/en/learn/what-is-killaura", label: "What is KillAura?", description: "A combat module anticheats actually watch for, for contrast." },
+]} />
+
+<CTA href="/en/purchase">Change how your swing looks without tripping a single flag. Opal ships Animations for $8.99.</CTA>

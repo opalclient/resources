@@ -1,0 +1,72 @@
+---
+title: "What Is Fast Place in Minecraft?"
+description: "Fast Place removes the vanilla delay between block placements, letting a client set blocks faster than clicking allows. Here's how it works and gets caught."
+excerpt: "Vanilla Minecraft won't let you place blocks as fast as you can click it. Fast Place quietly lies to the server about that limit."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Modules"
+author: "trq"
+faqs:
+  - q: "What does Fast Place actually change?"
+    a: "It removes or shortens the delay the vanilla client enforces between placing one block and the next, so blocks land at a rate faster than a legitimate client can send."
+  - q: "Is Fast Place the same as Scaffold?"
+    a: "No. Scaffold automatically places blocks under a player while they walk over open space. Fast Place only changes the timing between placements, it doesn't decide where or when to place a block on its own."
+  - q: "Does Fast Place give a real advantage?"
+    a: "Yes, in any situation where placement speed matters, such as bridging or walling off during a fight. That measurable advantage is also what makes it detectable."
+  - q: "Can Fast Place get a player banned?"
+    a: "Using it violates the rules of most servers that ban client modifications, and because the timing difference is easy for an anticheat to measure, it's a common source of detections when used carelessly."
+---
+
+<KeyTakeaways>
+- Fast Place removes the delay vanilla Minecraft enforces between block placements, so blocks land faster than normal clicking allows.
+- It's a timing change, not a targeting change: it doesn't decide where blocks go, only how quickly placement packets can be sent.
+- Used for faster building, bridging, and defensive plays like walling off or laying obsidian mid fight.
+- Anticheats catch it by timing the gap between placement packets against the fixed floor a vanilla client can physically produce.
+</KeyTakeaways>
+
+Fast Place is a module that removes or shortens the small delay Minecraft normally puts between placing one block and the next, letting a player set blocks down faster than vanilla input timing allows. It shows up most in building and bridging, where every block placed costs real time. Because it changes something the server can actually measure, packet by packet, it's a pattern anticheats specifically watch for rather than a harmless convenience toggle.
+
+## How it works
+
+Vanilla Minecraft spaces out consecutive block placements by a small margin tied to how the client processes input and fires off placement packets. Click as fast as you physically can and it doesn't matter: the client itself caps how often it will act on a placement request, before your connection or your mouse ever enter the picture.
+
+Fast Place patches that cap out on the client side. Placement requests go out back to back instead of waiting for the interval vanilla imposes, which pushes the effective block-placement rate above anything a legitimate, unmodified client can produce, no matter how good the player's reflexes are. It's not a rendering trick or a UI shortcut. It changes what the server actually receives: one placement packet after another with less time between them than vanilla allows.
+
+That's also why it's grouped as a player-category module rather than a visual one, and it turns up in clients including Juul, Fan, Tenacity, and Rose.
+
+## Is it safe to use
+
+Short answer: not really, and the mechanism explains why. Server-side anticheats time the interval between a player's block-place packets and compare it to the floor a vanilla client can produce. That floor is fixed and well known, so any placement rate that consistently beats it isn't ambiguous. It can't be waved away as a fast mouse or a lucky connection, the same way autoclicker-style timing patterns can't be explained by "I just click really fast." The anticheat isn't guessing at intent. It's checking whether the numbers are physically possible for stock Minecraft.
+
+<Callout variant="warning" title="Treated as a rule violation, not a gray area">
+Fast Place is a gameplay-affecting change with a measurable signature, not a cosmetic tweak. Most servers that ban client modifications treat it as a straightforward violation when their anticheat flags it, and the detection is a simple timing check rather than a judgment call.
+</Callout>
+
+<Callout variant="tip" title="Where Opal fits">
+Opal doesn't ship a module by this exact name. As a utility client, its player and building-adjacent modules are built around the same idea Fast Place chases (getting structures up faster) without leaning on a timing exploit that hands an anticheat a clean signal to key on.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="What does Fast Place actually change?">
+It removes or shortens the delay the vanilla client enforces between placing one block and the next, so blocks land at a rate faster than a legitimate client can send.
+</FAQItem>
+<FAQItem question="Is Fast Place the same as Scaffold?">
+No. Scaffold automatically places blocks under a player while they walk over open space. Fast Place only changes the timing between placements, it doesn't decide where or when to place a block on its own.
+</FAQItem>
+<FAQItem question="Does Fast Place give a real advantage?">
+Yes, in any situation where placement speed matters, such as bridging or walling off during a fight. That measurable advantage is also what makes it detectable.
+</FAQItem>
+<FAQItem question="Can Fast Place get a player banned?">
+Using it violates the rules of most servers that ban client modifications, and because the timing difference is easy for an anticheat to measure, it's a common source of detections when used carelessly.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/en/learn/what-is-scaffold", label: "What is Scaffold?", description: "The auto-bridging module Fast Place is most often confused with." },
+  { href: "/en/learn/what-is-a-minecraft-utility-client", label: "What is a Minecraft utility client?", description: "How modules like this one fit into the broader utility client category." },
+  { href: "/en/learn/what-is-a-ghost-client", label: "What is a ghost client?", description: "The client category built to keep timing exploits like this one off the anticheat's radar." }
+]} />
+
+<CTA href="/en/purchase">Build like the delay was never there. See what Opal ships for $8.99.</CTA>
