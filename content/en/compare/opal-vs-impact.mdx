@@ -1,0 +1,163 @@
+---
+title: "Opal vs Impact: Minigame Client vs Legacy 2b2t Client"
+description: "Opal is $8.99 and built for BedWars/SkyWars combat on MC 26.2. Impact was a free 2b2t client on MC 1.12.2, legacy since ClientAPI was archived in 2019."
+excerpt: "Impact was a free anarchy-server client that stopped moving around 2020. Opal is $8.99 and still shipping. They were never really built for the same player."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Comparison"
+type: "versus"
+author: "trq"
+competitors: ["Impact"]
+faqs:
+  - q: "Is Impact still maintained?"
+    a: "No. ClientAPI, the framework Impact was built on, was archived in 2019, and Impact's own development wound down around 2020. It stays on MC 1.12.2 and is documented as legacy."
+  - q: "Does Opal do anything like Impact's Baritone automation?"
+    a: "No. Opal's 70 modules cover combat, movement, visual, world, and utility categories built around minigame play. There is no pathfinding bot like Baritone in its feature list."
+  - q: "Is Impact actually free?"
+    a: "Yes. It was distributed free with an optional donor tier. The client itself was closed-source, but the ClientAPI framework underneath it was Apache-2.0 and public."
+  - q: "What does Opal cost?"
+    a: "$8.99, one time. No subscription."
+  - q: "Can I still get Impact today?"
+    a: "The client is documented as legacy with development stalled around 2020, so treat it as an unmaintained, period-locked build on MC 1.12.2 rather than something with active support."
+---
+
+<KeyTakeaways>
+
+- Impact was free, built on the open-source ClientAPI framework, and stopped moving around 2020. It is stuck on MC 1.12.2.
+- Opal is $8.99, closed-source, and actively shipping for MC 26.2 with 70 modules.
+- Impact's headline feature was Baritone-powered pathfinding automation for 2b2t-style anarchy servers. Opal has nothing like it.
+- Opal is tuned for BedWars/SkyWars-style minigame combat, with a quieter set built to hold up across most other servers.
+- Different tools for different jobs: automation on anarchy servers is Impact's lane, actively updated minigame combat is Opal's.
+
+</KeyTakeaways>
+
+## At a glance
+
+<ComparisonTable
+  features={[
+    "Price",
+    "Interface",
+    "Features",
+    "Tuned for",
+    "Quiet (ghost) set",
+    "Setup",
+    "Updates and support",
+    "Minecraft version",
+  ]}
+  products={[
+    {
+      name: "Opal",
+      values: [
+        "$8.99",
+        "Custom UI (NanoVG + GraalJS/Yoga)",
+        "70 modules across combat, movement, visual, world, utility",
+        "BedWars/SkyWars-style minigame combat",
+        true,
+        "Launcher, login, play",
+        "Actively maintained, 2026",
+        "MC 26.2",
+      ],
+    },
+    {
+      name: "Impact",
+      values: [
+        "Free, with an optional donor tier",
+        "GUI and command system from the ClientAPI framework",
+        "Baritone pathfinding automation plus combat/render staples, no published module count",
+        "2b2t-style anarchy servers",
+        false,
+        "Standalone launcher/tweaker, legacy build",
+        "Legacy since around 2020, ClientAPI archived 2019",
+        "MC 1.12.2",
+      ],
+    },
+  ]}
+/>
+
+<StatGrid>
+  <Stat value="$8.99" label="Opal, lifetime" sub="One payment, no subscription" />
+  <Stat value="70" label="Opal modules" sub="Combat, movement, visual, world, utility" />
+  <Stat value="Free" label="Impact" sub="Optional donor tier" />
+  <Stat value="2019" label="ClientAPI archived" sub="Read-only ever since" />
+</StatGrid>
+
+## Free framework, paid product that keeps shipping
+
+Impact cost nothing beyond an optional donor tier, and while the Impact client itself was closed-source, the ClientAPI framework it was built on is Apache-2.0 and public. That is a genuinely good deal if you want free and do not mind that nobody has touched it in years.
+
+Opal costs $8.99 and is closed-source end to end, but it is still being worked on. It shipped for MC 26.2 in 2026, carries 70 modules across combat, movement, visual, world, and utility, and comes with a launcher instead of a manual tweaker install. You are paying for a client that keeps pace with the current version of the game, not one frozen on a release from years ago.
+
+## Baritone automation vs minigame combat
+
+Impact's headline feature was bundling leijurv's Baritone pathfinding bot directly into the client, giving goal-based navigation, mining, and follow automation for grinding on 2b2t-style anarchy servers. Nothing in Opal's module list resembles that, and it never tried to. If pathfinding automation is what you are after, Impact, or its ClientAPI-based successors, is the actual reference point here, not Opal.
+
+Opal points the other way. Its loud set (flight, scaffold, aggressive combat) is built for BedWars and SkyWars-style minigame fights, and its quieter set is built to hold up across most other servers. It is a combat client, not an automation bot, and it was never trying to be one.
+
+## A client that stalled vs one that is still current
+
+Impact is legacy. ClientAPI was archived read-only in 2019, and the client's own development wound down around 2020, so it stays locked to MC 1.12.2. That is a real cost if you play current Minecraft: no updates, no new-version support, nothing changing. Six years is a long time for a version number to sit still.
+
+Opal tracks the current release, MC 26.2, and is actively maintained in 2026, with a launcher, a scripting layer built on GraalJS, and Discord Rich Presence integration. If you want a client that will still be getting updates next year, that is the side of this comparison to stand on.
+
+## Credit where it is due
+
+Building Impact on top of a separately maintained, Apache-2.0 framework was a smart piece of architecture. ClientAPI gave multiple clients a shared, stackable base, complete with its own event bus, GUI, and command system, and Impact was the client that proved the model and popularized Baritone along with it. That open-framework, closed-client split is worth crediting even where the flagship client itself did not survive.
+
+## When Impact is the better call
+
+Be honest about what you actually play.
+
+<ProsCons
+  pros={[
+    "You play 2b2t or another anarchy server and want Baritone-style pathfinding automation",
+    "You want free, full stop, and do not mind that nothing has shipped since around 2020",
+    "You want to read or build on an open modding framework rather than a closed one (ClientAPI is Apache-2.0)",
+    "You are already set up on MC 1.12.2 and have no interest in moving off it",
+  ]}
+  cons={[
+    "No updates since around 2020, and ClientAPI itself has been archived read-only since 2019",
+    "Locked to MC 1.12.2 with no path onto a current version",
+    "No published module count, no launcher, no ongoing support channel to fall back on",
+    "Built for anarchy grinding, not minigame combat, so it was never really a BedWars/SkyWars option in the first place",
+  ]}
+/>
+
+If pathfinding automation on an anarchy server is the job, Impact's lineage is still the name to know. If the job is a current client with combat tuned for BedWars/SkyWars-style minigames, a scripting layer, and a launcher that just works, and $8.99 is nothing to you, that is Opal.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Impact still maintained?">
+No. ClientAPI was archived in 2019 and Impact's own development wound down around 2020. It stays on MC 1.12.2 and is documented as legacy.
+</FAQItem>
+
+<FAQItem question="Does Opal do anything like Impact's Baritone automation?">
+No. Opal's 70 modules cover combat, movement, visual, world, and utility categories built around minigame play. There is no pathfinding bot like Baritone in its feature list.
+</FAQItem>
+
+<FAQItem question="Is Impact actually free?">
+Yes. It was distributed free with an optional donor tier. The client itself was closed-source, but the ClientAPI framework underneath it was Apache-2.0 and public.
+</FAQItem>
+
+<FAQItem question="What does Opal cost?">
+$8.99, one time.
+</FAQItem>
+
+<FAQItem question="Can I still get Impact today?">
+The client is documented as legacy with development stalled around 2020, so treat it as an unmaintained, period-locked build on MC 1.12.2 rather than something with active support.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/compare/opal-vs-meteor-client", label: "Opal vs Meteor Client", description: "Another free, Baritone-friendly anarchy client measured against Opal's minigame-tuned combat." },
+  { href: "/en/compare/best-minecraft-clients", label: "Best Minecraft PvP clients in 2026", description: "How Opal stacks up against the rest of the field, paid and free." },
+  { href: "/en/blog/why-opal-is-the-best-value-minecraft-client", label: "Why Opal is the best value client", description: "What $8.99 lifetime actually buys you." },
+]} />
+
+<CTA href="/en/purchase" note="Lifetime license, instant delivery, no subscription">Try Opal for $8.99 lifetime</CTA>
+
+<Callout variant="info" title="Disclaimer">
+Independent comparison. Impact is a trademark of its owners; its use here is nominative and implies no affiliation or endorsement. Competitor details are factual and current as of 2026.
+</Callout>

@@ -1,0 +1,154 @@
+---
+title: "Opal vs Feather: Minecraft Client Comparison (2026)"
+description: "Opal vs Feather: a documented $8.99 client with 70 modules and a custom NanoVG UI, compared against Feather's standalone client architecture."
+excerpt: "Feather goes standalone, no Fabric required. Opal is $8.99, 70 modules deep, and it's the one with a documented price tag. Here is what we can actually compare."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Comparison"
+type: "versus"
+author: "trq"
+competitors: ["Feather"]
+faqs:
+  - q: "Is Feather free or paid?"
+    a: "Not publicly documented anywhere we could verify. Check Feather's own current listing for pricing before comparing it to Opal's $8.99."
+  - q: "Does Feather run on Fabric like Opal does?"
+    a: "No. Feather ships standalone: it does not inject through Fabric or Forge. Opal is a Fabric mod distributed through its own launcher."
+  - q: "What does Opal cost?"
+    a: "$8.99, with a $24.99 list price used as the anchor."
+  - q: "Which client has more features?"
+    a: "Opal documents 70 modules across combat, movement, visual, world, and utility. Feather's module count is not publicly documented, so that comparison cannot be made honestly yet."
+  - q: "Does Opal work on the current Minecraft version?"
+    a: "Yes. Opal tracks Minecraft 26.2 on Java 25 through Fabric Loader 0.19.3. Feather's supported version range is not documented here."
+---
+
+<KeyTakeaways>
+
+- Feather ships standalone, no Fabric or Forge dependency, so it does not wait on a mod loader to catch up to a new Minecraft release.
+- Opal is $8.99 (list $24.99), documented at 70 modules across combat, movement, visual, world, and utility.
+- Opal ships as a Fabric mod wrapped inside its own launcher, so you never touch Fabric directly.
+- Feather's pricing, module list, and UI are not publicly documented anywhere we could verify, so a full feature-for-feature rundown is not possible yet.
+- Opal ships an embedded GraalJS scripting engine, so if none of the 70 built-in modules do exactly what you want, you write one.
+
+</KeyTakeaways>
+
+## At a glance
+
+<ComparisonTable
+  features={[
+    "Language",
+    "Injection / setup",
+    "Price",
+    "Modules",
+    "UI",
+    "Scripting",
+    "Updates and support",
+    "Minecraft version",
+  ]}
+  products={[
+    {
+      name: "Opal",
+      values: [
+        "Java",
+        "Fabric mod via launcher, no separate Fabric install needed",
+        "$8.99 (list $24.99)",
+        "70, across combat, movement, visual, world, utility",
+        "Custom NanoVG interface",
+        "Embedded GraalJS engine",
+        "Active",
+        "26.2",
+      ],
+    },
+    {
+      name: "Feather",
+      values: [
+        "Java",
+        "Standalone, no mod loader required",
+        "Not publicly documented",
+        "Not publicly documented",
+        "Not publicly documented",
+        "Not publicly documented",
+        "Active",
+        "Not publicly documented",
+      ],
+    },
+  ]}
+/>
+
+## Fabric mod vs standalone: what each client is actually built on
+
+Feather ships standalone: no Fabric, no Forge, it does not inject through a mod loader at all. That is a real architectural choice, not a footnote. Standalone clients are not tied to how fast a mod loader catches up to a new Minecraft release, and that is a genuine advantage worth crediting.
+
+Opal takes the opposite path. It ships as a Fabric mod (Fabric Loader 0.19.3, Fabric API 0.150.0+26.2) wrapped inside its own launcher, so you never touch Fabric yourself, but under the hood it is riding the Fabric ecosystem: mixins, an access widener, the whole toolchain. That gets Opal onto Minecraft 26.2 on Java 25 quickly, because it is building on an actively maintained loader instead of reimplementing the client from the ground up. The trade-off runs both ways: Opal updates fast because Fabric does the heavy lifting, and it is tied to Fabric's own release cadence to do it.
+
+## What we can and cannot compare
+
+Feather's public profile right now is thin: active status, Java, standalone injection. No price, module list, UI stack, or server focus that we could verify anywhere. So a feature-by-feature or dollar-for-dollar comparison against Feather is not something this page can back up with sources, and we are not going to invent one just to make a tidier table.
+
+Whether Feather serves the same crowd as Opal, a lightweight utility client versus a paid PvP hybrid, or something else entirely, is not a call the public record lets us make yet. What we can state plainly is Opal's side of the ledger.
+
+## What $8.99 buys with Opal
+
+$8.99, with a $24.99 list price used as the anchor, gets you Opal: 70 modules split across combat, movement, visual, world, and utility, run through a launcher so there is no separate Fabric install to manage. The UI is custom, built on NanoVG and a Blaze3D-based effects engine, with a GraalJS/Yoga runtime driving panels like the dynamic island overlay. The loud set, flight, scaffold, aggressive combat, is tuned for BedWars/SkyWars-style minigame combat, while a quieter set is built to hold up on most servers. On top of that, Opal ships an embedded GraalJS scripting engine, so if none of the 70 built-in modules do exactly what you want, you can write one.
+
+<StatGrid>
+<Stat value="$8.99" label="Opal price" sub="List price $24.99" />
+<Stat value="70" label="Opal modules" sub="Combat, movement, visual, world, utility" />
+<Stat value="26.2" label="Minecraft version" sub="Java 25, Fabric Loader 0.19.3" />
+</StatGrid>
+
+## When Feather is the better call
+
+Be honest with yourself about what you actually need.
+
+<ProsCons
+  pros={[
+    "You want a client that does not wait on Fabric to catch up to a new Minecraft release",
+    "You already run Feather and it covers what you need, a bigger module count on paper is not a reason to switch a tool that works",
+    "You would rather not touch a mod loader at all",
+  ]}
+  cons={[
+    "Pricing is not publicly documented anywhere we could verify, so you are comparing blind against Opal's $8.99",
+    "No public module list or UI details to weigh before you install it",
+    "No documented server focus, so you cannot tell if it is built for your game mode without trying it yourself",
+  ]}
+/>
+
+Opal is the better call once you want a known price, a documented 70-module set, a UI you can see described before you buy it, and combat already tuned for minigame formats out of the box. If Feather already does what you need and none of that matters to you, it is a perfectly reasonable standalone pick, just not one we can size up against Opal point for point yet.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Feather free or paid?">
+Not publicly documented anywhere we could verify. Check Feather's own current listing for pricing before comparing it to Opal's $8.99.
+</FAQItem>
+
+<FAQItem question="Does Feather run on Fabric like Opal does?">
+No. Feather ships standalone: it does not inject through Fabric or Forge. Opal is a Fabric mod distributed through its own launcher.
+</FAQItem>
+
+<FAQItem question="What does Opal cost?">
+$8.99, with a $24.99 list price used as the anchor.
+</FAQItem>
+
+<FAQItem question="Which client has more features?">
+Opal documents 70 modules across combat, movement, visual, world, and utility. Feather's module count is not publicly documented, so that comparison cannot be made honestly yet.
+</FAQItem>
+
+<FAQItem question="Does Opal work on the current Minecraft version?">
+Yes. Opal tracks Minecraft 26.2 on Java 25 through Fabric Loader 0.19.3. Feather's supported version range is not documented here.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/compare/best-premium-minecraft-clients", label: "Best premium Minecraft clients", description: "How Opal stacks up against the rest of the paid field." },
+  { href: "/en/compare/is-a-paid-minecraft-client-worth-it", label: "Is a paid Minecraft client worth it?", description: "The case for paying, and when free still wins." },
+  { href: "/en/blog/why-opal-is-the-best-value-minecraft-client", label: "Why Opal is the best value client", description: "What $8.99 lifetime actually buys." },
+]} />
+
+<CTA href="/en/purchase" note="Lifetime license, instant delivery, no subscription">Try Opal for $8.99 lifetime</CTA>
+
+<Callout variant="info" title="Disclaimer">
+Independent comparison. Feather is a trademark of its owners; its use here is nominative and implies no affiliation or endorsement. Competitor details are factual and current as of 2026.
+</Callout>

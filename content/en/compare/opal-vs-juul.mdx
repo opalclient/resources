@@ -1,0 +1,157 @@
+---
+title: "Opal vs Juul: Active Client vs Abandoned 1.8.9 Ghost"
+description: "Opal is an active $8.99 hybrid client for MC 26.2 with 70 modules. Juul was an 18-module 1.8.9 ghost client sold on intent.store, discontinued since 2024."
+excerpt: "Juul was a tight little 1.8.9 client that stopped shipping updates in 2024. Opal is $8.99, built for MC 26.2, and still getting them. Here is the honest breakdown."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Comparison"
+type: "versus"
+author: "trq"
+competitors: ["Juul"]
+faqs:
+  - q: "Is Juul still available to buy?"
+    a: "Not as far as its own record shows. It was sold on intent.store, and that marketplace's active window ended in 2024. There is no current storefront or price to point to."
+  - q: "Does Juul run on modern Minecraft?"
+    a: "No. It targets MC 1.8.9, with reflection wrapper support reaching back to MC 1.7.10. There is no path forward to anything near MC 26.2."
+  - q: "What does Opal cost?"
+    a: "$8.99 lifetime. One payment, no subscription."
+  - q: "Why compare an active client to an abandoned one at all?"
+    a: "If you remember Juul from the intent.store era and want to know what a similarly compact, tuned utility client looks like today, Opal is the closest current answer: a focused module set built to win minigame fights, built for the current game and still getting updates."
+---
+
+<KeyTakeaways>
+
+- Juul was a 1.8.9 ghost client sold on intent.store from 2020 to 2024; its own record marks it abandoned.
+- Opal is an actively maintained $8.99 client built for MC 26.2, with 70 modules across combat, movement, visual, world, and utility.
+- Juul shipped about 18 modules, a genuinely tight, essentials-only roster, not a smaller Opal.
+- Opal splits into a loud set for BedWars/SkyWars-style minigame combat and a quiet set built to hold up on most servers; Juul never built that second layer.
+- Only one of these two is still for sale and still getting updates.
+
+</KeyTakeaways>
+
+## At a glance
+
+<ComparisonTable
+  features={[
+    "Price",
+    "Interface",
+    "Module count",
+    "Tuned for",
+    "Quiet (ghost) set",
+    "Setup",
+    "Updates and support",
+    "Minecraft version",
+  ]}
+  products={[
+    {
+      name: "Opal",
+      values: [
+        "$8.99",
+        "Glass UI (NanoVG + Blaze3D effects)",
+        "70",
+        "BedWars/SkyWars-style minigame combat",
+        true,
+        "Launcher, login, play",
+        "Maintained, active",
+        "MC 26.2",
+      ],
+    },
+    {
+      name: "Juul",
+      values: [
+        "Sold on intent.store; no current price, marketplace inactive since 2024",
+        "Basic click GUI and HUD overlay",
+        "About 18",
+        "General 1.8-era PvP combat",
+        false,
+        "Standalone jar, custom native-extracting launcher",
+        "Abandoned, no updates since 2024",
+        "MC 1.8.9 (reflection support back to MC 1.7.10)",
+      ],
+    },
+  ]}
+/>
+
+## An active client versus one that stopped updating
+
+Juul was built by Nefarious Intent and trq, with contributions from Cedo, targeting MC 1.8.9 during intent.store's active window from 2020 to 2024. Its own record lists it as abandoned. That is not a jab, it is just what the record says: nobody has patched it for a server ruleset, or a Minecraft build, released after that window closed.
+
+Opal is built for MC 26.2, carrying a 2026 update date and active status. If you are actually deciding what to run this year, only one of these two is still on the current game version.
+
+## 70 modules versus 18, and what the smaller number bought Juul
+
+Opal ships 70 modules across combat, movement, visual, world, and utility, plus a GraalJS scripting layer if you want to build your own on top of that. Juul shipped about 18 user-facing modules across five categories: combat, movement, player, world, and render.
+
+That gap is real, and it is worth being fair about what a small roster bought Juul. Its own record calls the scope deliberately tight next to other intent.store-era clients that ran 50-plus modules. Fewer settings means less to learn and less bloat, and that is a genuine design choice, not a missing feature list. Calling a client "focused" usually means someone gave up halfway through the roadmap. In Juul's case it seems to have actually meant it.
+
+## The ghost and blatant split Opal has that Juul never built
+
+Opal's module set splits into a blatant tier (flight, scaffold, aggressive combat, tuned for BedWars and SkyWars-style minigame modes) and a ghost tier (subtle aim, reach, velocity) built to hold up on most servers without drawing attention. That split is a deliberate architecture decision, not something bolted on after the fact.
+
+Juul never built that second layer. There is no dedicated Disabler module, and its Aimbot's rotation handling is the closest thing the client has to an anticheat-relevant surface, which means whatever quiet behavior Juul had came from the module itself, not from a separate quiet mode sitting behind it. That was a reasonable place to stop in 2020. It is a bigger ask to leave the same module unattended for six years.
+
+## A clever standalone launcher from 2020 versus a maintained one in 2026
+
+Juul's InjectionAPI launcher deserves credit on its own terms: it extracted its own LWJGL and OpenAL natives on first run instead of depending on a pre-existing Minecraft launcher setup, and its reflection wrapper layer let one module roster run against MC 1.7.10 through MC 1.8.9 without hard-coding a separate build per version. That is solid engineering for a small standalone client, worth reading even if you never touch 1.8.9 again.
+
+Opal takes the same "it just works" idea and keeps it current: log into the launcher and it handles the rest. The difference is that Opal's launcher sits behind a product still being sold and updated, not a closed chapter from a marketplace that stopped selling in 2024.
+
+<StatGrid>
+<Stat value="70" label="Opal modules" sub="combat, movement, visual, world, utility" />
+<Stat value="18" label="Juul modules" sub="its own count, across five categories" />
+<Stat value="$8.99" label="Opal price" sub="lifetime license" />
+<Stat value="2024" label="Juul discontinued" sub="intent.store's active window closed" />
+</StatGrid>
+
+## When Juul is the better call
+
+Be honest with yourself about what you actually need.
+
+<ProsCons
+  pros={[
+    "You specifically play MC 1.8.9-era servers and already have a working Juul install from the intent.store days",
+    "You want to study the cross-version reflection wrapper pattern or the native-extracting launcher as a piece of client engineering",
+    "You want the smallest possible module list to learn, essentials only, not 70 options to sort through",
+  ]}
+  cons={[
+    "No updates since 2024, and no path forward to a current Minecraft version",
+    "No dedicated quiet or ghost mode, just the modules themselves",
+    "Not currently purchasable; intent.store's active window has closed",
+  ]}
+/>
+
+These two are not really competing for the same buyer today. Juul was a period client for 1.8-era PvP servers and has not been sold or updated since intent.store went quiet. Opal is a live product for the current game. If you remember Juul and want to know what a comparable, currently maintained client looks like, that is the honest comparison here, not a head-to-head between two active options.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Juul still available to buy?">
+Not as far as its own record shows. It was sold on intent.store, and that marketplace's active window ended in 2024. There is no current storefront or price to point to.
+</FAQItem>
+
+<FAQItem question="Does Juul run on modern Minecraft?">
+No. It targets MC 1.8.9, with reflection wrapper support reaching back to MC 1.7.10. There is no path forward to anything near MC 26.2.
+</FAQItem>
+
+<FAQItem question="What does Opal cost?">
+$8.99 lifetime. One payment, no subscription.
+</FAQItem>
+
+<FAQItem question="Why compare an active client to an abandoned one at all?">
+If you remember Juul from the intent.store era and want to know what a similarly compact, tuned utility client looks like today, Opal is the closest current answer: a focused module set built to win minigame fights, built for the current game and still getting updates.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/compare/opal-vs-liquidbounce", label: "Opal vs LiquidBounce", description: "The $8.99 premium client against the free open-source generalist." },
+  { href: "/en/blog/why-opal-is-the-best-value-minecraft-client", label: "Why Opal is the best value client", description: "What $8.99 lifetime actually buys." },
+  { href: "/en/compare/is-a-paid-minecraft-client-worth-it", label: "Is a paid Minecraft client worth it?", description: "The case for paying, and when free is still the right call." },
+]} />
+
+<CTA href="/en/purchase" note="Lifetime license, instant delivery, no subscription">Try Opal for $8.99 lifetime</CTA>
+
+<Callout variant="info" title="Disclaimer">
+Independent comparison. Juul is a trademark of its owners; its use here is nominative and implies no affiliation or endorsement. Competitor details are factual and current as of 2026.
+</Callout>

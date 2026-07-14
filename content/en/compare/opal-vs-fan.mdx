@@ -1,0 +1,155 @@
+---
+title: "Opal vs Fan: Active 2026 Client vs an Abandoned 1.8.9 Build"
+description: "Opal vs Fan: Opal's $8.99 MC 26.2 hybrid client with 70 modules and active updates, versus Fan, an abandoned MC 1.8.9 client from intent.store."
+excerpt: "Fan hasn't shipped an update since 2024. Opal ships on MC 26.2 today, for $8.99. Here is the honest breakdown."
+date: "2026-07-13"
+lastUpdated: "2026-07-13"
+category: "Comparison"
+type: "versus"
+author: "trq"
+competitors: ["Fan"]
+faqs:
+  - q: "Is Fan still supported?"
+    a: "No. Its record lists it as abandoned, with an active period of roughly 2020 through 2024 on intent.store. There is nothing documenting updates past that."
+  - q: "Does Opal work on 1.8.9 servers?"
+    a: "No. Opal v2 is built for MC 26.2. It does not run on MC 1.8.9."
+  - q: "What did Fan cost?"
+    a: "Not documented. The record only confirms it was sold through intent.store, not a specific price."
+  - q: "What does Opal cost?"
+    a: "$8.99, lifetime."
+  - q: "Why compare a current client to an abandoned one?"
+    a: "Anyone researching the old intent.store roster or Cedo's client work is likely to run into Fan. This page shows where the current Opal client stands relative to it: version, maintenance, and feature set included."
+---
+
+<KeyTakeaways>
+
+- Fan is a MC 1.8.9 standalone client from the old intent.store roster, abandoned since 2024.
+- Opal v2 is $8.99, built for the current MC 26.2 release, and actively maintained in 2026.
+- Opal ships 70 modules with a blatant and quiet split tuned for BedWars/SkyWars-style minigame combat. Fan shipped 55 modules across seven categories.
+- If you are still playing on legacy 1.8.9 servers, Opal is not an option at all, full stop. That is the one case where Fan wins by default.
+- Fan's hidden-module category and twin-Scaffold testing setup are genuinely clever design choices, worth studying even now.
+
+</KeyTakeaways>
+
+## At a glance
+
+<ComparisonTable
+  features={[
+    "Price",
+    "Interface",
+    "Modules",
+    "Tuned for",
+    "Setup",
+    "Updates and support",
+    "Minecraft version",
+  ]}
+  products={[
+    {
+      name: "Opal",
+      values: [
+        "$8.99",
+        "Glass UI (NanoVG)",
+        "70",
+        "BedWars/SkyWars-style minigame combat",
+        "Launcher, login, play",
+        "Active, maintained in 2026",
+        "MC 26.2",
+      ],
+    },
+    {
+      name: "Fan",
+      values: [
+        "Not documented",
+        "Dual GUI (Click GUI + TabGUI)",
+        "55",
+        "Hypixel-era Watchdog on MC 1.8.9",
+        "Standalone jar, hand-written Start entry point",
+        "Abandoned since 2024",
+        "MC 1.8.9",
+      ],
+    },
+  ]}
+/>
+
+<StatGrid>
+  <Stat value="$8.99" label="Opal price" sub="Lifetime license, launcher included" />
+  <Stat value="70" label="Opal modules" sub="Blatant and quiet sets, plus GraalJS scripting" />
+  <Stat value="55" label="Fan modules" sub="Across seven categories in the cedo/ namespace" />
+  <Stat value="2024" label="Fan's last active year" sub="Active window was roughly 2020 to 2024" />
+</StatGrid>
+
+## A decade apart in Minecraft versions
+
+Fan runs on MC 1.8.9. Opal v2 runs on MC 26.2. Those two Minecraft releases are roughly a decade apart, and a client built for one does not run on servers expecting the other. This is not really a UI-versus-UI, feature-versus-feature comparison so much as two clients from different eras of the same scene. If you are still on 1.8.9 for whatever reason, Opal is not an option for you at all.
+
+## One of these is still getting updates
+
+Fan's own record lists it as abandoned, with an active period running roughly 2020 through 2024 on the intent.store marketplace. Nothing in that record points to ongoing development past that window. Opal v2 is the opposite case: it is the current, actively maintained Opal client, tracking MC 26.2 with an update logged this year. A client that stops getting updates stops keeping up with whatever the server side changes next. That is true for any client, not just this pairing.
+
+## Module count and design philosophy
+
+Fan shipped 55 modules across seven categories under a single-author `cedo/` namespace, credited primarily to Cedo. Some of its design choices are genuinely clever: a dedicated "hidden" category that keeps certain modules off the in-client Array List HUD, and a twin Scaffold / BadScaffold pair shipped side by side for bypass A/B testing. It also ran a Click GUI and a TabGUI at once, letting the user pick their own navigation style. That is real design thinking from a single developer, not an accident.
+
+Opal v2 ships 70 modules split into a blatant set (flight, scaffold, aggressive combat tuned for BedWars/SkyWars-style minigame combat) and a quieter set built to hold up on most servers, plus an embedded GraalJS scripting runtime for anyone who wants to extend it. It is a larger, more current feature set built around a single custom NanoVG interface rather than two competing menus, if you would rather not choose between them yourself.
+
+## What you are actually getting for the money
+
+Opal v2 costs $8.99 and comes through a launcher: log in and play, no manual setup. Fan's record does not list a price, only that it was sold on intent.store, and the distributed source has no build configuration at all, just an extracted snapshot with a hand-written `Start.java` entry point. Interesting for anyone studying the client's history. Less fun if you just want to load into a game tonight.
+
+## When Fan is the better call
+
+Be honest with yourself about what you actually want out of this.
+
+<ProsCons
+  pros={[
+    "You specifically play on legacy MC 1.8.9 servers Opal cannot reach",
+    "You are researching early Cedo client design, not looking for something to play with",
+    "The hidden-module category and twin-Scaffold pattern are worth studying on their own merits",
+  ]}
+  cons={[
+    "Abandoned since 2024, with nothing documenting updates past that",
+    "No launcher: a standalone jar with a hand-written Start entry point",
+    "No build configuration in the source, so even studying it is read-only",
+    "Does not run on the Minecraft version most people are actually playing",
+  ]}
+/>
+
+Credit where it is due: Fan's hidden-module category and its twin-Scaffold testing setup are good ideas that hold up as design patterns, and the dual-GUI approach is a real answer to "let players pick their own navigation." A single-developer client that shipped that much thought into UX details is worth studying even now. None of that changes the fact that it has not been updated since 2024 and does not run on the Minecraft version most people are actually playing. If you want something maintained, on the current release, with active updates and a modern UI, that is Opal.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Is Fan still supported?">
+No. Its record lists it as abandoned, with an active period of roughly 2020 through 2024 on intent.store. There is nothing documenting updates past that.
+</FAQItem>
+
+<FAQItem question="Does Opal work on 1.8.9 servers?">
+No. Opal v2 is built for MC 26.2. It does not run on MC 1.8.9.
+</FAQItem>
+
+<FAQItem question="What did Fan cost?">
+Not documented. The record only confirms it was sold through intent.store, not a specific price.
+</FAQItem>
+
+<FAQItem question="What does Opal cost?">
+$8.99, lifetime.
+</FAQItem>
+
+<FAQItem question="Why compare a current client to an abandoned one?">
+Anyone researching the old intent.store roster or Cedo's client work is likely to run into Fan. This page shows where the current Opal client stands relative to it: version, maintenance, and feature set included.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/en/compare/opal-vs-rose", label: "Opal vs Rose", description: "Another client from the same intent.store lineage as Fan." },
+  { href: "/en/compare/opal-vs-tenacity", label: "Opal vs Tenacity", description: "The team codebase Cedo's early work fed into." },
+  { href: "/en/blog/why-opal-is-the-best-value-minecraft-client", label: "Why Opal is the best value client", description: "What $8.99 lifetime actually buys." },
+]} />
+
+<CTA href="/en/purchase" note="Lifetime license, instant delivery, no subscription">Try Opal for $8.99 lifetime</CTA>
+
+<Callout variant="info" title="Disclaimer">
+Independent comparison. Fan is a trademark of its owners; its use here is nominative and implies no affiliation or endorsement. Competitor details are factual and current as of 2026.
+</Callout>
