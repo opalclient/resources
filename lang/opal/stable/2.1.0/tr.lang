@@ -1,0 +1,987 @@
+# ============================================================
+# Combat
+# ============================================================
+
+# Anti Bot
+module.anti_bot.name=Anti Bot
+module.anti_bot.description=Hedefleme için ek bot tespit kontrolleri.
+module.anti_bot.basic_checks.name=Basic Checks
+module.anti_bot.basic_checks.description=Bir varlığı hedefleme için bot olarak işaretlemekte kullanılan hafif oyuncu başı bayraklarını gruplar.
+module.anti_bot.tablist.name=Tablist
+module.anti_bot.tablist.description=UUID'si sunucu sekme listesinde bulunmayan oyuncuyu bot olarak işaretler.
+module.anti_bot.no_gamemode.name=No GameMode
+module.anti_bot.no_gamemode.description=Sekme listesine oyun modu belirlenmeden eklenen oyuncuyu işaretler.
+module.anti_bot.no_properties.name=No Properties
+module.anti_bot.no_properties.description=Sekme listesine skin verisi gibi profil özelliği olmadan eklenen oyuncuyu işaretler.
+module.anti_bot.illegal_pitch.name=Illegal Pitch
+module.anti_bot.illegal_pitch.description=Kafa eğimi normal 90 derece sınırını aşan oyuncuyu işaretler.
+module.anti_bot.illegal_health.name=Illegal Health
+module.anti_bot.illegal_health.description=Bildirilen canı maksimum canından fazla olan oyuncuyu işaretler.
+module.anti_bot.fake_entity_id.name=Fake Entity ID
+module.anti_bot.fake_entity_id.description=Varlık ID'si negatif veya bir milyarın üzerinde olan oyuncuyu işaretler.
+module.anti_bot.duplicate_name.name=Duplicate Name
+module.anti_bot.duplicate_name.description=Adı farklı UUID'ye sahip başka bir çevrimiçi oyuncuyla eşleşen oyuncuyu işaretler.
+module.anti_bot.invalid_ground.name=Invalid Ground
+module.anti_bot.invalid_ground.description=Tutarsız yerde hareket eden oyuncuları işaretlemek için geçiş ve eşik değerini gruplar.
+module.anti_bot.invalid_ground.enabled.name=Enabled
+module.anti_bot.invalid_ground.enabled.description=Dikey konumu değişirken yerde olduğunu bildiren oyuncuların takibini açar.
+module.anti_bot.invalid_ground.threshold.name=Threshold
+module.anti_bot.invalid_ground.threshold.description=Bir oyuncunun işaretlenmesi için gereken geçersiz zemin ihlali sayısını belirler.
+module.anti_bot.not_swung.name=Not Swung
+module.anti_bot.not_swung.description=Hiç sallanma animasyonu göndermeyen oyuncuları işaretlemek için geçiş ve yaş değerini gruplar.
+module.anti_bot.not_swung.enabled.name=Enabled
+module.anti_bot.not_swung.enabled.description=Hiç el sallama animasyon paketi göndermemiş oyuncuların işaretlenmesini açar.
+module.anti_bot.not_swung.min_age.name=Min Age
+module.anti_bot.not_swung.min_age.description=Hiç sallanmamış bir oyuncunun işaretlenebilmesi için gereken minimum varlık tik yaşını belirler.
+module.anti_bot.always_in_radius.name=Always In Radius
+module.anti_bot.always_in_radius.description=Belirli bir mesafeyi hiç aşmayan oyuncuları işaretlemek için geçiş ve menzil değerini gruplar.
+module.anti_bot.always_in_radius.enabled.name=Enabled
+module.anti_bot.always_in_radius.enabled.description=Yapılandırılan menzili hiç aşmayan oyuncuların işaretlenmesini açar.
+module.anti_bot.always_in_radius.range.name=Range
+module.anti_bot.always_in_radius.range.description=Bir oyuncunun menzil bayrağından temizlenmesi için aşması gereken blok cinsinden mesafeyi belirler.
+module.anti_bot.latency_timing.name=Latency Timing
+module.anti_bot.latency_timing.description=Şüpheli gecikme güncelleme zamanlamasına göre oyuncuları işaretlemek için geçiş ve eşik değerini gruplar.
+module.anti_bot.latency_timing.enabled.name=Enabled
+module.anti_bot.latency_timing.enabled.description=Gecikme zamanı penceresi içinde sıfıra düşen oyuncuların işaretlenmesini açar.
+module.anti_bot.latency_timing.threshold_ms.name=Threshold MS
+module.anti_bot.latency_timing.threshold_ms.description=Bir oyuncunun işaretlenmesi için gecikme güncellemeleri arasındaki maksimum milisaniyeyi belirler.
+
+# Aim Assist
+module.aim_assist.name=Aim Assist
+module.aim_assist.description=Yakındaki hedeflere meşru tarzda düzeltmelerle nişanınıza yardımcı olur.
+module.aim_assist.mode.name=Mode
+module.aim_assist.mode.description=Düzeltme seviyesini seçer: Simple, Advanced, Adaptive veya Sensitivity.
+module.aim_assist.silent.name=Silent
+module.aim_assist.silent.description=Görünür kamerayı hareket ettirmeden nişan düzeltmesi uygular; kapalıyken görüşünüzü döndürür.
+module.aim_assist.targeting.name=Targeting
+module.aim_assist.targeting.description=Hedef seçim ayarlarını gruplar: vücut bölgesi, FOV, menzil, hız ve mıknatıs.
+module.aim_assist.body_part.name=Body Part
+module.aim_assist.body_part.description=Nişan alınacak vücut bölgesini seçer: en yakın, kafa, göğüs veya ayaklar.
+module.aim_assist.fov.name=FOV
+module.aim_assist.fov.description=Hedefin seçilebileceği derece cinsinden görüş alanı konisini belirler.
+module.aim_assist.range.name=Range
+module.aim_assist.range.description=Hedefin seçilebileceği maksimum blok cinsinden mesafeyi belirler.
+module.aim_assist.speed.name=Speed
+module.aim_assist.speed.description=Her tikin düzeltmesinin hedefe ne kadar çektiğini yüzde olarak belirler.
+module.aim_assist.magnet.name=Magnet
+module.aim_assist.magnet.description=İmleciniz hedefe yakınken çekme gücünü artırır.
+module.aim_assist.visible_smoothing.name=Visible Smoothing
+module.aim_assist.visible_smoothing.description=Görünür nişan ayarlarını gruplar: yumuşatma faktörü ve tik başına maksimum dönüş.
+module.aim_assist.smoothing.name=Smoothing
+module.aim_assist.smoothing.description=Görünür düzeltmelerin ne kadar kademeli yayıldığını belirler; düşük değerler daha yumuşak hareket eder.
+module.aim_assist.max_rotation/tick.name=Max Rotation/Tick
+module.aim_assist.max_rotation/tick.description=Görünür görüşün tek bir tikte kaç derece dönebileceğini sınırlar.
+module.aim_assist.curve.name=Curve
+module.aim_assist.curve.description=Gelişmiş eğri ayarlarını gruplar: eğri yumuşatma ve ivme.
+module.aim_assist.curve_smoothing.name=Curve Smoothing
+module.aim_assist.curve_smoothing.description=Düzeltme eğrisini şekillendiren böleni belirler; yüksek değerler hareketi daha çok yumuşatır.
+module.aim_assist.acceleration.name=Acceleration
+module.aim_assist.acceleration.description=Nişan açığı büyüdükçe düzeltmeyi hızlandıran eğri üssünü belirler.
+module.aim_assist.randomization.name=Randomization
+module.aim_assist.randomization.description=Tik başına varyasyon ayarlarını gruplar: hız varyansı, titreme ve aşım.
+module.aim_assist.speed_variance.name=Speed Variance
+module.aim_assist.speed_variance.description=Her tikte düzeltme hızına eklenen rastgele artı/eksi aralığını belirler.
+module.aim_assist.yaw_jitter.name=Yaw Jitter
+module.aim_assist.yaw_jitter.description=Düzeltmelere bu kadar dereceye kadar rastgele yatay varyasyon ekler.
+module.aim_assist.pitch_jitter.name=Pitch Jitter
+module.aim_assist.pitch_jitter.description=Düzeltmelere bu kadar dereceye kadar rastgele dikey varyasyon ekler.
+module.aim_assist.overshoot.name=Overshoot
+module.aim_assist.overshoot.description=Düzeltmelerin yerleşmeden önce hedefi bu kadar derece aşmasına izin verir.
+module.aim_assist.adaptive.name=Adaptive
+module.aim_assist.adaptive.description=Adaptive ayarlarını gruplar: maksimum güç ve adaptif hassasiyet.
+module.aim_assist.max_strength.name=Max Strength
+module.aim_assist.max_strength.description=Adaptive modunun düzeltme gücüne uygulayabileceği maksimum çarpanı sınırlar.
+module.aim_assist.adaptive_sensitivity.name=Adaptive Sensitivity
+module.aim_assist.adaptive_sensitivity.description=Adaptive modunun gücü maksimum tavana ne kadar hızlı ölçeklendireceğini belirler.
+module.aim_assist.sensitivity.name=Sensitivity
+module.aim_assist.sensitivity.description=Sensitivity modu ayarlarını gruplar: çarpan, aktivasyon FOV'u ve mesafe ölçeklendirme.
+module.aim_assist.sens_multiplier.name=Sens Multiplier
+module.aim_assist.sens_multiplier.description=Bir hedefe nişan alırken fare hassasiyetini bu değerle çarpar.
+module.aim_assist.activation_fov.name=Activation FOV
+module.aim_assist.activation_fov.description=Hassasiyet azaltma yalnızca hedef bu FOV konisi içindeyken uygulanır.
+module.aim_assist.scale_with_distance.name=Scale With Distance
+module.aim_assist.scale_with_distance.description=Nişanınız hedef merkezine yaklaştıkça hassasiyet azaltmayı güçlendirir.
+module.aim_assist.requirements.name=Requirements
+module.aim_assist.requirements.description=Koşulları gruplar: tıklama gerektir, silah gerektir, görünürlük kontrolü, yalnızca yatay.
+module.aim_assist.require_click.name=Require Click
+module.aim_assist.require_click.description=Aim assist'in düzeltme uygulaması için saldırı tuşunun basılı tutulmasını gerektirir.
+module.aim_assist.require_weapon.name=Require Weapon
+module.aim_assist.require_weapon.description=Aim assist'in düzeltme uygulaması için silah tutulmasını gerektirir.
+module.aim_assist.visibility_check.name=Visibility Check
+module.aim_assist.visibility_check.description=Yalnızca görüş hattınızın önünde engel olmayan hedeflere yardımcı olur.
+module.aim_assist.horizontal_only.name=Horizontal Only
+module.aim_assist.horizontal_only.description=Düzeltmeleri yalnızca yatay yaw ile sınırlar, dikey pitch değişmez.
+module.aim_assist.draw_fov.name=Draw FOV
+module.aim_assist.draw_fov.description=Yapılandırılan FOV konisini gösteren ekran içi bir daire çizer.
+module.aim_assist.targets.name=Targets
+module.aim_assist.targets.description=Hangi varlık türlerinin hedeflenebileceğini yapılandırır.
+
+# Auto Clicker
+module.auto_clicker.name=Auto Clicker
+module.auto_clicker.description=Sizin yerinize otomatik olarak tıklar.
+module.auto_clicker.mode.name=Mode
+module.auto_clicker.mode.description=Tıklama hızı modelini seçer: Simple, Advanced aralık veya Adaptive kendi kendini ayarlama.
+module.auto_clicker.cps.name=CPS
+module.auto_clicker.cps.description=Simple modda kullanılan hedef saniye başına tıklama sayısını belirler.
+module.auto_clicker.cps_range.name=CPS Range
+module.auto_clicker.cps_range.description=Her tıklama arasında rastgele belirlenen düşük ve yüksek saniye başına tıklama sınırlarını belirler.
+module.auto_clicker.variance_refresh.name=Variance Refresh
+module.auto_clicker.variance_refresh.description=Hızın değişen varyans çarpanının yeniden karıştırılmasından önce kaç tıklamanın geçeceğini belirler.
+module.auto_clicker.drops.name=Drops
+module.auto_clicker.drops.description=Hedef tıklama hızının zaman zaman kısa süre düşmesini etkinleştirir.
+module.auto_clicker.drop_chance.name=Drop Chance
+module.auto_clicker.drop_chance.description=Her tıklamada aşağı yönlü hız düşüşü uygulanma yüzdesini belirler.
+module.auto_clicker.spikes.name=Spikes
+module.auto_clicker.spikes.description=Hedef tıklama hızının zaman zaman kısa süre artmasını etkinleştirir.
+module.auto_clicker.spike_chance.name=Spike Chance
+module.auto_clicker.spike_chance.description=Her tıklamada yukarı yönlü hız artışı uygulanma yüzdesini belirler.
+module.auto_clicker.threshold.name=Threshold
+module.auto_clicker.threshold.description=Adaptive modunun tıklama hızını ayarlamadan önce ulaşması gereken isabet/ıskalama puanını belirler.
+module.auto_clicker.increment.name=Increment
+module.auto_clicker.increment.description=Adaptive modunun her ayarlamada tıklama hızını ve puanı ne kadar değiştireceğini belirler.
+module.auto_clicker.mouse_buttons.name=Mouse Buttons
+module.auto_clicker.mouse_buttons.description=Auto clicker'ın tetiklediği fare düğmelerini seçer: sol ve sağ.
+module.auto_clicker.require_pressed.name=Require Pressed
+module.auto_clicker.require_pressed.description=Yalnızca o düğmeye fiziksel olarak basılıyken otomatik tıklar.
+module.auto_clicker.weapons_only.name=Weapons Only
+module.auto_clicker.weapons_only.description=Yalnızca ana elde kılıç veya balta tutulurken tıklar.
+module.auto_clicker.block_hit.name=Block Hit
+module.auto_clicker.block_hit.description=Bloklarken auto clicker'ın çalışmaya devam etmesine izin verir.
+module.auto_clicker.requirements.name=Requirements
+module.auto_clicker.requirements.description=Tıklama koşullarını gruplar: basılı tut, yalnızca silah ve blok vuruşu.
+
+# Kill Aura
+module.kill_aura.name=Kill Aura
+module.kill_aura.description=Etrafınızdaki varlıklara otomatik olarak saldırır.
+module.kill_aura.mode.name=Mode
+module.kill_aura.mode.description=Tek bir hedefe kilitlenmeyi veya can ve yakınlığa göre hedef değiştirmeyi seçer.
+module.kill_aura.rotation_range.name=Rotation Range
+module.kill_aura.rotation_range.description=Hedefin aranacağı ve döneceği maksimum blok cinsinden mesafeyi belirler.
+module.kill_aura.swing_range.name=Swing Range
+module.kill_aura.swing_range.description=Sahte kol sallamalarının yapılacağı maksimum blok cinsinden mesafeyi belirler.
+module.kill_aura.hide_fake_swings.name=Hide Fake Swings
+module.kill_aura.hide_fake_swings.description=Bir varlığa doğrudan bakmıyorken sahte sallamaların render edilmesini atlar.
+module.kill_aura.require_attack_key.name=Require Attack Key
+module.kill_aura.require_attack_key.description=Modülü yalnızca saldırı tuşu basılıyken çalıştırır.
+module.kill_aura.require_weapon.name=Require Weapon
+module.kill_aura.require_weapon.description=Modülü yalnızca kılıç, balta veya kazma tutulurken çalıştırır.
+module.kill_aura.override_raycast.name=Override Raycast
+module.kill_aura.override_raycast.description=Saldırıların üzerinde kaydedilmesi için imleç isabet sonucunu seçilen hedefle değiştirir.
+module.kill_aura.tick_lookahead.name=Tick Lookahead
+module.kill_aura.tick_lookahead.description=Giden rotasyonu değiştirmeden bırakır ve saldırmadan önce raycast ile hedefi doğrular.
+module.kill_aura.fov.name=FOV
+module.kill_aura.fov.description=Hedeflemeyi önünüzdeki bu görüş açısı içindeki varlıklarla sınırlar.
+module.kill_aura.teams.name=Team Check
+module.kill_aura.teams.description=Kendi takımınızdaki oyuncuların hedeflenmesini hariç tutar.
+module.kill_aura.visuals.name=Visuals
+module.kill_aura.visuals.description=Mevcut herafın etrafına çizilen kutu dahil görsel göstergeleri açar/kapar.
+module.kill_aura.requirements.name=Requirements
+module.kill_aura.requirements.description=Modülü kapatan silah tutma ve saldırı tuşuna basma koşullarını gruplar.
+
+# Velocity
+module.velocity.name=Velocity
+module.velocity.description=Vurulduğunuzda oyuncu hızınızı azaltır veya sıfırlar.
+module.velocity.mode.name=Mode
+module.velocity.mode.description=Uygulanacak hız azaltma modunu seçer: Normal, Watchdog veya MushMC.
+
+# Attack Delay
+module.attack_delay.name=Attack Delay
+module.attack_delay.description=Iskalama sonrası saldırı gecikmesini kaldırır.
+module.attack_delay.max_cooldown.name=Max Cooldown
+module.attack_delay.max_cooldown.description=Iskalama sonrası saldırı bekleme süresinin sınırlandırılacağı tik sayısını belirler; 0 tamamen kaldırır.
+
+# Auto Head
+module.auto_head.name=Auto Head
+module.auto_head.description=Otomatik olarak altın kafa yer.
+module.auto_head.heal_delay.name=Heal Delay
+module.auto_head.heal_delay.description=Modülün altın kafalar arasında beklediği milisaniye cinsinden bekleme süresini belirler.
+module.auto_head.health.name=Health
+module.auto_head.health.description=İyileşmek için altın kafa yenecek can yüzdesi eşiğini belirler.
+
+# Block
+module.block.name=Block
+module.block.description=Bloklarken yasadışı eylemlere izin verir veya otomatik bloklar.
+module.block.blocking.name=Blocking
+module.block.blocking.description=Oyuncunun blok tutarken sallamaya ve saldırmaya devam etmesine izin verir.
+module.block.enabled.name=Enabled
+module.block.enabled.description=Bir hedef menzil içindeyken kılıç veya kalkanla otomatik bloklamayı açar.
+module.block.require_attack_key.name=Require Attack Key
+module.block.require_attack_key.description=Auto block'u yalnızca saldırı tuşu basılıyken tetiklemekle sınırlar.
+module.block.block_range.name=Block Range
+module.block.block_range.description=Auto block'u tetikleyen hedefin blok cinsinden mesafesini belirler.
+module.block.allow_swing_while....name=Allow Swing While...
+module.block.allow_swing_while....description=Oyuncunun bloklarken sallayıp saldırmasına izin veren geçişi gruplar.
+module.block.auto_block.name=Auto Block
+module.block.auto_block.description=Auto block geçişini ve saldırı tuşu ile menzil alt ayarlarını gruplar.
+
+# Lag Range
+module.lag_range.name=Lag Range
+module.lag_range.description=Garantili isabet için bir oyuncuya yaklaşırken paketi tamponlar.
+module.lag_range.start_buffering_at.name=Start Buffering At
+module.lag_range.start_buffering_at.description=Giden paketlerin tutulmaya başlandığı hedefe blok cinsinden mesafe.
+module.lag_range.release_range.name=Release Range
+module.lag_range.release_range.description=Tutulan paketlerin serbest bırakıldığı hedefe blok cinsinden mesafe.
+module.lag_range.release_timer.name=Release Timer
+module.lag_range.release_timer.description=Menzilden bağımsız olarak paketlerin serbest bırakılmadan önce tutulduğu maksimum milisaniye.
+module.lag_range.release_options.name=Release Options
+module.lag_range.release_options.description=Tutulan paketlerin ne zaman serbest bırakılacağını belirleyen serbest bırakma menzilini ve zamanlayıcısını gruplar.
+
+# Piercing
+module.piercing.name=Piercing
+module.piercing.description=Oyuncuları bloklardan geçirmenizi sağlar.
+
+# Reach
+module.reach.name=Reach
+module.reach.description=Daha uzaktan etkileşim kurmanıza veya saldırmanıza izin verir.
+module.reach.entity_interaction_range.name=Entity Interaction Range
+module.reach.entity_interaction_range.description=Varlıklara saldırabileceğiniz veya etkileşim kurabileceğiniz maksimum blok cinsinden mesafeyi belirler.
+module.reach.block_interaction_range.name=Block Interaction Range
+module.reach.block_interaction_range.description=Bloklarla etkileşim kurabileceğiniz maksimum blok cinsinden mesafeyi belirler.
+
+# TP Aura
+module.tp_aura.name=TP Aura
+module.tp_aura.description=Hypixel'de Teleportasyon açığını etkinleştirir.
+
+# WTap
+module.wtap.name=WTap
+module.wtap.description=Daha fazla geri itme hasarı vermek için sprint'i sıfırlar.
+module.wtap.chance.name=Chance
+module.wtap.chance.description=Belirli bir saldırının ileri tuş bırakmasını tetikleme yüzdesi.
+module.wtap.delay_ticks.name=Delay Ticks
+module.wtap.delay_ticks.description=Saldırıdan sonra ileri tuşu bırakmadan önce beklenecek tik sayısı.
+module.wtap.release_ticks.name=Release Ticks
+module.wtap.release_ticks.description=Hareket devam etmeden önce ileri tuşunun bırakılı kaldığı tik sayısı.
+module.wtap.only_sprinting.name=Only Sprinting
+module.wtap.only_sprinting.description=Yalnızca oyuncu sprint yaparken bırakmayı tetikler.
+module.wtap.only_ground.name=Only Ground
+module.wtap.only_ground.description=Yalnızca oyuncu yerdeyken bırakmayı tetikler.
+
+# ============================================================
+# Movement
+# ============================================================
+
+# Clipper
+module.clipper.name=Clipper
+module.clipper.description=Mevcut olduğunda yukarı veya aşağı geçiş yapma seçeneği sunar.
+module.clipper.limit_distance.name=Limit Distance
+module.clipper.limit_distance.description=Yukarı ve aşağı taramayı dünya yüksekliğine ulaşmak yerine yaklaşık on blokla sınırlar.
+module.clipper.upwards.name=Upwards
+module.clipper.upwards.description=Yerdeyken yukarıdaki bir sonraki platforma geçiş taramasını ve yukarı atlamayı etkinleştirir.
+
+# Flight
+module.flight.name=Flight
+module.flight.description=Gerçek hayatta kanat kazanırsınız.
+module.flight.mode.name=Mode
+module.flight.mode.description=Uçuş stratejisini seçer: Vanilla serbest uçuş, Fireball kayması veya Air Walk.
+
+# Long Jump
+module.long_jump.name=Long Jump
+module.long_jump.description=Daha uzağa zıplamanızı sağlar.
+module.long_jump.mode.name=Mode
+module.long_jump.mode.description=Modülün sizi daha ileri fırlatmak için kullandığı fırlatma tekniğini seçer.
+
+# No Slow
+module.no_slow.name=No Slow
+module.no_slow.description=Eşya kullanımı gibi vanilya yavaşlamalarını kaldırır.
+module.no_slow.mode.name=Mode
+module.no_slow.mode.description=Eşya kullanırken modülün uyguladığı yavaşlama kaldırma stratejisini seçer.
+module.no_slow.allow_sprinting.name=Allow Sprinting
+module.no_slow.allow_sprinting.description=Yürüme hızına düşmek yerine eşya kullanırken sprint yapmanızı sağlar.
+
+# Movement Recorder
+module.movement_recorder.name=Movement Recorder
+module.movement_recorder.description=Oyuncu hareketini kaydeder ve geri oynatır.
+module.movement_recorder.show_breadcrumbs.name=Show Breadcrumbs
+module.movement_recorder.show_breadcrumbs.description=Dünyada kaydedilen yolu izleyen bir ekmek kırıntısı izi çizer.
+module.movement_recorder.show_block_highlights.name=Show Block Highlights
+module.movement_recorder.show_block_highlights.description=Kaydın başlangıç ve bitiş bloklarını dünyada soluk vurgularla işaretler.
+module.movement_recorder.dynamic_island.name=Dynamic Island
+module.movement_recorder.dynamic_island.description=Kayıt veya geri oynatma sırasında kaydedicinin dinamik ada kontrol widget'ını gösterir.
+module.movement_recorder.mode.name=Mode
+module.movement_recorder.mode.description=Kaydedicinin kayıt mı yoksa geri oynatma mı yapacağını seçer.
+module.movement_recorder.loop_playback.name=Loop Playback
+module.movement_recorder.loop_playback.description=Kayıt bittiğinde geri oynatmayı baştan yeniden başlatır.
+module.movement_recorder.teleport_to_start.name=Teleport to Start
+module.movement_recorder.teleport_to_start.description=Geri oynatma başladığında konumunuzu doğrudan kaydın başlangıç noktasına ayarlar.
+module.movement_recorder.wait_for_position.name=Wait for Position
+module.movement_recorder.wait_for_position.description=Geri oynatmaya başlamadan önce başlangıç noktasına ulaşmanızı bekler.
+module.movement_recorder.rotation_speed.name=Rotation Speed
+module.movement_recorder.rotation_speed.description=Geri oynatma sırasında görüşünüzün kaydedilen açılara ne kadar hızlı döneceğini belirler.
+module.movement_recorder.default_name.name=Default Name
+module.movement_recorder.default_name.description=Yeni kaydedilen bir kayda verilen varsayılan adı belirler.
+module.movement_recorder.path_detail.name=Path Detail
+module.movement_recorder.path_detail.description=Kaydedilen yol sadeleştirilirken ne kadar ayrıntı korunacağını belirler.
+module.movement_recorder.filter_by_server.name=Filter by Server
+module.movement_recorder.filter_by_server.description=Kayıtlar listesini mevcut sunucuda kaydedilenlerle sınırlar.
+module.movement_recorder.auto_trim.name=Auto Trim
+module.movement_recorder.auto_trim.description=Kaydın sonundaki neredeyse durağan kareleri otomatik olarak kırpar.
+module.movement_recorder.trim_threshold.name=Trim Threshold
+module.movement_recorder.trim_threshold.description=Karelerin otomatik kırpma için durağan sayılacağı hareket mesafesini belirler.
+module.movement_recorder.show_info_panel.name=Show Info Panel
+module.movement_recorder.show_info_panel.description=Ekranda kaydedici HUD bilgi panelini gösterir.
+module.movement_recorder.panel_pos.name=Panel Pos
+module.movement_recorder.panel_pos.description=Kaydedici bilgi panelinin ekrandaki konumunu belirler.
+module.movement_recorder.visuals.name=Visuals
+module.movement_recorder.visuals.description=Ekmek kırıntısı, blok vurgusu ve dinamik ada görsel geçişlerini gruplar.
+module.movement_recorder.playback.name=Playback
+module.movement_recorder.playback.description=Döngü, teleport, pozisyon bekleme ve rotasyon hızı geri oynatma ayarlarını gruplar.
+module.movement_recorder.recording.name=Recording
+module.movement_recorder.recording.description=Varsayılan ad, yol ayrıntısı, sunucu filtresi ve kırpma kayıt ayarlarını gruplar.
+module.movement_recorder.overlay.name=Overlay
+module.movement_recorder.overlay.description=Bilgi paneli geçişini ve ekrandaki konum ayarlarını gruplar.
+
+# Speed
+module.speed.name=Speed
+module.speed.description=Gerçek hayatta bir çita olursunuz.
+module.speed.mode.name=Mode
+module.speed.mode.description=Yatay hareketinizi artırmak için modülün uyguladığı hız stratejisini seçer.
+
+# Eagle
+module.eagle.name=Eagle
+module.eagle.description=Blok kenarlarında otomatik olarak sinekler (Ninja Köprüsü).
+module.eagle.only_blocks.name=Only Blocks
+module.eagle.only_blocks.description=Yalnızca ana elde veya yardımcı elde yerleştirilebilir blok tutarken otomatik sinekler.
+module.eagle.only_right_click.name=Only Right Click
+module.eagle.only_right_click.description=Yalnızca kullan (sağ tık) tuşuna basılıyken otomatik sinekler.
+
+# Fast Stop
+module.fast_stop.name=Fast Stop
+module.fast_stop.description=Daha hızlı durmanızı sağlar.
+module.fast_stop.conditions.name=Conditions
+module.fast_stop.conditions.description=Daha hızlı yavaşlamanın yerde, havada veya her ikisinde de uygulanıp uygulanmayacağını seçer.
+module.fast_stop.multiplier.name=Multiplier
+module.fast_stop.multiplier.description=Hareketi bıraktığınızda yatay hızın ölçeklendirildiği 0-1 faktörünü belirler.
+
+# Inventory Move
+module.inventory_move.name=Inventory Move
+module.inventory_move.description=Envanterlerdeyken hareket etmenizi sağlar.
+
+# Jump Cooldown
+module.jump_cooldown.name=Jump Cooldown
+module.jump_cooldown.description=Vanilya zıplama bekleme süresini değiştirir.
+module.jump_cooldown.max_cooldown.name=Max Cooldown
+module.jump_cooldown.max_cooldown.description=Zıplamalar arasındaki tik sayısını belirler; 0 gecikmeyi kaldırarak her tikte zıplamanızı sağlar.
+
+# Movement Fix
+module.movement_fix.name=Movement Fix
+module.movement_fix.description=Hareketinizi rotasyonlarınıza kilitler.
+module.movement_fix.mode.name=Mode
+module.movement_fix.mode.description=Normal (girişi bakış yönüne yeniden projeksiyonla) veya yalnızca Sprint (sprint'i düzelt) seçer.
+module.movement_fix.packet_only.name=Packet Only
+module.movement_fix.packet_only.description=Yalnızca Sprint modunda istemci durumu yerine giden paketten sprint'i kaldırır.
+
+# Phase
+module.phase.name=Phase
+module.phase.description=Duvarlardan geçmenizi sağlar.
+module.phase.auto_disable.name=Auto Disable
+module.phase.auto_disable.description=Duvarı geçip bloktan çıktığınızda modülü kapatır.
+
+# Safe Walk
+module.safe_walk.name=Safe Walk
+module.safe_walk.description=Bloklardan düşmeden hareket etmenizi sağlar.
+module.safe_walk.holding_block_check.name=Holding Block Check
+module.safe_walk.holding_block_check.description=Yalnızca yerleştirilebilir blok eşyası tutarken kenardan düşmeyi engeller.
+module.safe_walk.direction_check.name=Direction Check
+module.safe_walk.direction_check.description=Yalnızca hareket tuşuna basılıyken kenardan düşmeyi engeller.
+
+# Spider
+module.spider.name=Spider
+module.spider.description=Duvarlara tırmanmanızı sağlar.
+module.spider.speed.name=Speed
+module.spider.speed.description=Bir duvarı tırmanmak için duvara basarken uygulanan yukarı yönlü hızı belirler.
+
+# Sprint
+module.sprint.name=Sprint
+module.sprint.description=Sprint mantığını değiştirir.
+module.sprint.omnidirectional.name=Omnidirectional
+module.sprint.omnidirectional.description=Yalnızca ileri hareket ederken değil, her hareket yönünde sprint yapmanızı sağlar.
+module.sprint.keep_sprint.name=Keep Sprint
+module.sprint.keep_sprint.description=Sprint'in normalde iptal edecek eylemler tarafından düşürülmesini engeller.
+
+# Strafe
+module.strafe.name=Strafe
+module.strafe.description=Daha fazla yatay hareket yapmanızı sağlar.
+module.strafe.conditions.name=Conditions
+module.strafe.conditions.description=Yatay hareket düzeltmesini yerde, havada veya her ikisinde de uygulamakla sınırlar.
+module.strafe.ncp_max.name=NCP Max
+module.strafe.ncp_max.description=Yatay hareket yaparken hareket hızınızı daha yüksek bir sabit limite yükseltir.
+module.strafe.strength.name=Strength
+module.strafe.strength.description=Hareketinizin giriş yönüne ne kadar güçlü yönlendirileceğini yüzde olarak ölçeklendirir.
+
+# Target Strafe
+module.target_strafe.name=Target Strafe
+module.target_strafe.description=Hedeflerin etrafında daireler çizmenizi sağlar.
+module.target_strafe.strafe_mode.name=Strafe Mode
+module.target_strafe.strafe_mode.description=Hareketin hedefi nasıl yörüngeleyeceğini seçer: etrafında daire çizmek veya doğrudan arkasında kalmak.
+module.target_strafe.requirements.name=Requirements
+module.target_strafe.requirements.description=Yatay hareketin ne zaman çalışacağını belirler: yalnızca zıplama tuşuna basılıyken ve yalnızca Speed modülü açıkken.
+module.target_strafe.range.name=Range
+module.target_strafe.range.description=Etrafında yatay hareket yaparken hedeften korunulan blok cinsinden mesafeyi belirler.
+module.target_strafe.show_ring.name=Show Ring
+module.target_strafe.show_ring.description=Aktif olarak yatay hareket yaparken hedefin etrafındaki zeminde bir halka çizer.
+module.target_strafe.auto_3rd_person.name=Auto 3rd Person
+module.target_strafe.auto_3rd_person.description=Yatay hareket sırasında kamerayı üçüncü şahıs görüşüne geçirir ve sonrasında birinci şahısa döner.
+
+# ============================================================
+# Utility
+# ============================================================
+
+# Disabler
+module.disabler.name=Disabler
+module.disabler.description=Anti-hile gücünü azaltır.
+module.disabler.mode.name=Mode
+module.disabler.mode.description=Disabler'ın hedeflediği anti-hileyi seçer: Watchdog veya Cubecraft modu.
+
+# Chest Stealer
+module.chest_stealer.name=Chest Stealer
+module.chest_stealer.description=Sandıklardan yalnızca yararlı veya yükseltilmiş eşyaları çalar.
+module.chest_stealer.smart.name=Smart
+module.chest_stealer.smart.description=Her şeyi almak yerine yalnızca zaten sahip olduklarınızdan daha değerli eşyaları alır.
+module.chest_stealer.highlight_items.name=Highlight Items
+module.chest_stealer.highlight_items.description=Akıllı modun almaya değer saydığı sandık slotlarını görsel olarak işaretler.
+module.chest_stealer.delay.name=Delay
+module.chest_stealer.delay.description=Sandıktan çekilen her eşya arasındaki milisaniye cinsinden rastgele bekleme süresini belirler.
+
+# Auto Armor
+module.auto_armor.name=Auto Armor
+module.auto_armor.description=Otomatik olarak mümkün olan en iyi zırhı giyer.
+module.auto_armor.delay.name=Delay
+module.auto_armor.delay.description=Her zırh giyme veya bırakma eylemi arasındaki milisaniye cinsinden bekleme süresini belirler.
+
+# Inventory Manager
+module.inventory_manager.name=Inventory Manager
+module.inventory_manager.description=Envanterinizi yönetir.
+module.inventory_manager.delay.name=Delay
+module.inventory_manager.delay.description=Envanter hareketleri arasındaki milisaniyeyi belirler; aralık içinde rastgele belirlenir.
+module.inventory_manager.slots.name=Slots
+module.inventory_manager.slots.description=Hangi eşya türlerinin tercih edilen kısayol slotlarına düzenleneceğini seçer.
+module.inventory_manager.sword_slot.name=Sword Slot
+module.inventory_manager.sword_slot.description=En iyi kılıcın taşındığı kısayol slotunu (1-9) belirler.
+module.inventory_manager.pickaxe_slot.name=Pickaxe Slot
+module.inventory_manager.pickaxe_slot.description=En iyi kazmanın taşındığı kısayol slotunu (1-9) belirler.
+module.inventory_manager.axe_slot.name=Axe Slot
+module.inventory_manager.axe_slot.description=En iyi baltanın taşındığı kısayol slotunu (1-9) belirler.
+module.inventory_manager.block_slot.name=Block Slot
+module.inventory_manager.block_slot.description=En büyük blok yığınının taşındığı kısayol slotunu (1-9) belirler.
+
+# No Fall
+module.no_fall.name=No Fall
+module.no_fall.description=Oyuncunuzun düşme hasarını kaldırır.
+module.no_fall.mode.name=Mode
+module.no_fall.mode.description=No fall stratejisini seçer: Spoof yerde olma bayrağını değiştirir veya Watchdog hareketi yeniden oynatır.
+
+# Anti Void
+module.anti_void.name=Anti Void
+module.anti_void.description=Boşluğa düşmeyi imkansız kılar.
+
+# Auto Chest
+module.auto_chest.name=Auto Chest
+module.auto_chest.description=Sandıklara kaynak bırakır ve alır.
+module.auto_chest.ticks.name=Ticks
+module.auto_chest.ticks.description=Sandıktan veya sandığa taşınan her kaynak yığını arasındaki istemci tiklerini belirler.
+module.auto_chest.auto_deposit.name=Auto Deposit
+module.auto_chest.auto_deposit.description=Sandık ekranı açıldığı anda kaynaklarınızı otomatik olarak yatırmaya başlar.
+
+# Auto Hypixel
+module.auto_hypixel.name=Auto Hypixel
+module.auto_hypixel.description=Hypixel için yararlı özellikler.
+module.auto_hypixel.enabled.name=Enabled
+module.auto_hypixel.enabled.description=Auto Hypixel modülünü açar ve Hypixel kolaylık özelliklerini etkinleştirir.
+module.auto_hypixel.message.name=Message
+module.auto_hypixel.message.description=Oyun bittikten sonra genel sohbete GG mesajı olarak gönderilecek metni belirler.
+module.auto_hypixel.delay.name=Delay
+module.auto_hypixel.delay.description=Yeniden kuyruğa girmek için /play göndermeden önce beklenecek saniye sayısını belirler; 0-8 arası.
+module.auto_hypixel.auto_leave_on_ban.name=Auto Leave on Ban
+module.auto_hypixel.auto_leave_on_ban.description=Bir oyuncu oyundan çıkarıldığında mevcut oyundan ayrılmak için /l komutunu çalıştırır.
+module.auto_hypixel.auto_gg.name=Auto GG
+module.auto_hypixel.auto_gg.description=Oyun sonu karma satırı algılandığında genel sohbete GG mesajınızı gönderir.
+module.auto_hypixel.auto_play.name=Auto Play
+module.auto_hypixel.auto_play.description=Kuyruğa girdiğinizde veya oyun bittiğinde mevcut mod için /play komutunu çalıştırır.
+
+# Auto Tool
+module.auto_tool.name=Auto Tool
+module.auto_tool.description=Kısayol çubuğunuzdaki en iyi araca otomatik olarak geçer.
+module.auto_tool.only_when_sneaking.name=Only when Sneaking
+module.auto_tool.only_when_sneaking.description=Otomatik araç geçişini yalnızca sineklerken gerçekleşecek şekilde sınırlar.
+module.auto_tool.requirements.name=Requirements
+module.auto_tool.requirements.description=Modülün araç değiştirmeden önce karşılanması gereken koşulları gruplar.
+
+# Blink
+module.blink.name=Blink
+module.blink.description=Ağ bağlantınızı engeller.
+module.blink.direction.name=Direction
+module.blink.direction.description=Gelen paketlerin mi, giden paketlerin mi yoksa her iki yönün mü tutulacağını seçer.
+module.blink.pulse.name=Pulse
+module.blink.pulse.description=Tutulan paketleri süresiz tutmak yerine düzenli aralıklarla serbest bırakır.
+module.blink.pulse_delay.name=Pulse Delay
+module.blink.pulse_delay.description=Her nabzın tutulan paketleri serbest bırakmadan önce beklediği milisaniye aralığını belirler.
+
+# Fast Use
+module.fast_use.name=Fast Use
+module.fast_use.description=Eşyaları daha hızlı kullanır.
+module.fast_use.enabled.name=Enabled
+module.fast_use.enabled.description=Vanilya yerleştirme gecikmesini kaldıran Placements davranışını açar.
+module.fast_use.placements.name=Placements
+module.fast_use.placements.description=Her tikte sağ tık bekleme süresini sıfırlar; böylece bloklar ve eşyalar vanilya gecikmesi olmadan yerleştirilir.
+
+# IRC
+module.irc.name=IRC
+module.irc.description=Diğer Opal kullanıcılarıyla sohbet etmenizi sağlar.
+
+# No Rotate
+module.no_rotate.name=No Rotate
+module.no_rotate.description=Sunucunun rotasyonunuzu ayarlamasını engeller.
+module.no_rotate.ignore_teleports.name=Ignore Teleports
+module.no_rotate.ignore_teleports.description=Uzun mesafeli ışınlanmalarda (10 veya daha fazla blok) bakış açınızı korumayı atlar.
+
+# Party Spam
+module.party_spam.name=Party Spam
+module.party_spam.description=Belirtilen oyuncuya parti davetleri spam'lar.
+module.party_spam.username.name=Username
+module.party_spam.username.description=Tekrarlanan parti daveti ve dağıtma komutlarının gönderildiği hedef oyuncu adını belirler.
+
+# Spammer
+module.spammer.name=Spammer
+module.spammer.description=Sohbeti spam'lar.
+module.spammer.delay.name=Delay
+module.spammer.delay.description=Gönderilen her sohbet mesajı arasında beklenecek milisaniye.
+module.spammer.message.name=Message
+module.spammer.message.description=Tekrar tekrar gönderilecek sohbet mesajı metni.
+module.spammer.anti_spam_bypass.name=Anti Spam Bypass
+module.spammer.anti_spam_bypass.description=Ardışık gönderilerin aynı olmaması için her mesajın başına rastgele bir sayı ekler.
+
+# ============================================================
+# World
+# ============================================================
+
+# Timer
+module.timer.name=Timer
+module.timer.description=Oyun hızınızı değiştirir.
+module.timer.game_speed.name=Game Speed
+module.timer.game_speed.description=Oyun tik hızına uygulanan çarpanı belirler; oyunu hızlandırır veya yavaşlatır.
+
+# Fast Break
+module.fast_break.name=Fast Break
+module.fast_break.description=Blokları daha hızlı kırar.
+module.fast_break.enabled.name=Enabled
+module.fast_break.enabled.description=Fast Break modülünü açar veya kapatır.
+module.fast_break.speed.name=Speed
+module.fast_break.speed.description=Blokları daha hızlı kıran madencilik hızı artışını etkinleştirir.
+module.fast_break.cooldown.name=Cooldown
+module.fast_break.cooldown.description=Madencilik hızınıza yüzde artış olarak blokların ne kadar hızlı kırılacağını belirler.
+module.fast_break.break_slowdown.name=Break Slowdown
+module.fast_break.break_slowdown.description=Havada olma, suda olma ve madencilik yorgunluğu etkisinden kaynaklanan madencilik yavaşlamalarını giderir.
+module.fast_break.spoof_ground_state.name=Spoof Ground State
+module.fast_break.spoof_ground_state.description=Havada maden kazarken hareket paketlerinde yerde olduğunuzu bildirir.
+module.fast_break.break_cooldown.name=Break Cooldown
+module.fast_break.break_cooldown.description=Ardışık blok kırmaları arasındaki tik cinsinden gecikmeyi geçersiz kılar.
+
+# Scaffold
+module.scaffold.name=Scaffold
+module.scaffold.description=Otomatik olarak altınıza blok yerleştirir.
+module.scaffold.enabled.name=Enabled
+module.scaffold.enabled.description=Hareket zekasını açar; hareket yönünüzü yerleştirilebilir bloklara doğru yönlendirir.
+module.scaffold.diagonal_movement.name=Diagonal Movement
+module.scaffold.diagonal_movement.description=Hareket zekasının yalnızca ana yönler yerine çapraz yönlerde de yönlendirme yapmasına izin verir.
+module.scaffold.snap_movement.name=Snap Movement
+module.scaffold.snap_movement.description=Yönlendirilen hareket yönünü belirli açı adımlarına kilitler.
+module.scaffold.steps.name=Steps
+module.scaffold.steps.description=Hareket kilitlemenin kullandığı belirli açı adımı sayısını belirler; birden üçe kadar.
+module.scaffold.interact_cps.name=Interact CPS
+module.scaffold.interact_cps.description=Simüle edilen blok yerleştirme etkileşimleri için saniye başına tıklama hızını belirler.
+module.scaffold.mode.name=Mode
+module.scaffold.mode.description=Yerleştirme stratejisi seçeneğini seçer: Vanilla, Anti Gaming Chair veya Watchdog.
+module.scaffold.tower.name=Tower
+module.scaffold.tower.description=Dikey olarak yükselmek için zıplama tuşuna basılıyken altınıza düz bloklar yerleştirir.
+module.scaffold.switch_mode.name=Switch Mode
+module.scaffold.switch_mode.description=Blok kısayol slotunun nasıl seçileceğini seçer: Normal, Hotbar veya Full.
+module.scaffold.swing_mode.name=Swing Mode
+module.scaffold.swing_mode.description=Yerleştirme kol sallamasının istemci tarafında mı yoksa sunucu tarafında mı render edileceğini belirler.
+module.scaffold.snap_rotations.name=Snap Rotations
+module.scaffold.snap_rotations.description=Yerleştirme rotasyonlarını interpolasyon yapmak yerine anında kilitler.
+module.scaffold.override_raycast.name=Override Raycast
+module.scaffold.override_raycast.description=İstemci raycast'ini modülün kendi yerleştirme isabet sonucuyla değiştirir.
+module.scaffold.auto_jump.name=Auto Jump
+module.scaffold.auto_jump.description=Aynı Y modunda sabit yükseklikte köprü kurarken otomatik olarak zıplar.
+module.scaffold.block_overlay.name=Block Overlay
+module.scaffold.block_overlay.description=Blokların yerleştirildiği yeri vurgulayan soluk bir overlay çizer.
+module.scaffold.dynamic_island.name=Dynamic Island
+module.scaffold.dynamic_island.description=Ekranda Scaffold dinamik ada durum overlay'ini gösterir.
+module.scaffold.hypixel_addons.name=Hypixel Addons
+module.scaffold.hypixel_addons.description=Hypixel'deyken Boost seçeneği gibi Hypixel'e özgü ekstralar etkinleştirir.
+module.scaffold.movement_intelligence.name=Movement Intelligence
+module.scaffold.movement_intelligence.description=Hareketinizi yerleştirilebilir bloklara yönlendiren hareket zekası geçişlerini gruplar.
+
+# Breaker
+module.breaker.name=Breaker
+module.breaker.description=Mini oyunlar için ilgili blokları kırar.
+module.breaker.swing_mode.name=Swing Mode
+module.breaker.swing_mode.description=Kırma sırasındaki kol sallamasının sunucuya gönderilip gönderilmeyeceğini veya yalnızca istemci tarafında gösterilip gösterilmeyeceğini belirler.
+module.breaker.range.name=Range
+module.breaker.range.description=Hedef blokların arandığı ve kırıldığı maksimum blok cinsinden mesafeyi belirler.
+module.breaker.break_surroundings.name=Break Surroundings
+module.breaker.break_surroundings.description=Yalnızca yatağın kendisi yerine en hızlı araçla en zayıf bitişik bloğu kırar.
+
+# ============================================================
+# Visual
+# ============================================================
+
+# Tab GUI
+module.tab_gui.name=Tab GUI
+module.tab_gui.description=İstemci özellikleriyle etkileşim için bir ekran.
+
+# Streamer Mode
+module.streamer_mode.name=Streamer Mode
+module.streamer_mode.description=İçerik oluşturucular için özellikler.
+module.streamer_mode.hide_server_id.name=Hide Server ID
+module.streamer_mode.hide_server_id.description=Sunucu transfer sohbet mesajlarındaki Hypixel hedef sunucu ID'sini gizler.
+module.streamer_mode.hide_username.name=Hide Username
+module.streamer_mode.hide_username.description=Görüntülenen metindeki kendi kullanıcı adınızı yapılandırılan özel kullanıcı adıyla değiştirir.
+module.streamer_mode.custom_username.name=Custom Username
+module.streamer_mode.custom_username.description=Kullanıcı adı gizleme açıkken kullanıcı adınızın yerine gösterilen değiştirme adını belirler.
+
+# Post Processing
+module.post_processing.name=Post Processing
+module.post_processing.description=Post processing efektlerini yapılandırmanıza izin verir.
+module.post_processing.enabled.name=Enabled
+module.post_processing.enabled.description=Ayrı geçişi yoktur; Blur geçişi post-processing efektleri için ana kontrol görevi görür.
+module.post_processing.radius.name=Radius
+module.post_processing.radius.description=Piksel cinsinden ekran alanı bulanıklık yarıçapını belirler; 1-20 arası ayarlanabilir.
+module.post_processing.blur.name=Blur
+module.post_processing.blur.description=UI'nin arkasında ekran alanı bulanıklığı render eder ve bloom geçişi için ana kontrol görevi görür.
+module.post_processing.bloom.name=Bloom
+module.post_processing.bloom.description=UI öğelerine parlama bloom efekti ekler; yalnızca Blur da etkinken çalışır.
+
+# No Hurt Camera
+module.no_hurt_camera.name=No Hurt Camera
+module.no_hurt_camera.description=Hasar alındığında kamera sallanmasını devre dışı bırakır.
+module.no_hurt_camera.no_player_model_hurt.name=No Player Model Hurt
+module.no_hurt_camera.no_player_model_hurt.description=Hasar aldığınızda kendi oyuncu modelinizdeki kırmızı hasar flaşını da kaldırır.
+
+# Full Bright
+module.full_bright.name=Full Bright
+module.full_bright.description=Oyun parlaklığınızı artırır.
+
+# Discord RPC
+module.discord_rpc.name=Discord RPC
+module.discord_rpc.description=Discord'da zengin varlık bilgilerini görüntüler.
+module.discord_rpc.hide_server.name=Hide Server
+module.discord_rpc.hide_server.description=Discord varlığınızdaki sunucu adını genel bir gizli etiketle değiştirir.
+
+# Click GUI
+module.click_gui.name=Click GUI
+module.click_gui.description=İstemci özellikleriyle etkileşim için bir ekran.
+module.click_gui.allow_movement.name=Allow Movement
+module.click_gui.allow_movement.description=Click GUI açıkken hareket tuşlarınızı aktif tutar; yürümeye devam edebilirsiniz.
+
+# Cape
+module.cape.name=Cape
+module.cape.description=İstediğiniz bir pelerin verir.
+module.cape.type.name=Type
+module.cape.type.description=Görüntülenen pelerin tasarımını seçer ve seçimi hesabınızla senkronize eder.
+
+# Break Progress
+module.break_progress.name=Break Progress
+module.break_progress.description=Kırdığınız bloğun ilerleme durumunu gösterir.
+
+# Attack Effects
+module.attack_effects.name=Attack Effects
+module.attack_effects.description=Bir varlığa saldırırken gerçekleşen efektleri ekler veya değiştirir.
+module.attack_effects.particles.name=Particles
+module.attack_effects.particles.description=Saldırdığınız varlıklarda kritik ve keskinlik isabet partikülleri oluşturur.
+module.attack_effects.sounds.name=Sounds
+module.attack_effects.sounds.description=Bir varlığa isabet ettiğinizde yalnızca etkinleştirdiğiniz saldırı ses türlerini çalar, geri kalanları susturur.
+
+# Animations
+module.animations.name=Animations
+module.animations.description=Oyun içi animasyonları değiştirir.
+module.animations.enabled.name=Enabled
+module.animations.enabled.description=Tutulan kılıcın bloklama pozu göstermesi için kılıç bloklama animasyonunu etkinleştirir.
+module.animations.block_animation.name=Block Animation
+module.animations.block_animation.description=Kılıç bloklama animasyon stilini seçer (1.7, 1.8, Rub, Stella, Bounce, vb.).
+module.animations.always_hidden.name=Always Hidden
+module.animations.always_hidden.description=Kalkan eşyasını her zaman birinci şahıs görüşünden gizler.
+module.animations.hide_offhand_slot.name=Hide Offhand Slot
+module.animations.hide_offhand_slot.description=Yardımcı el kalkan slotunu kısayol çubuğundan gizler.
+module.animations.old_backwards_walking.name=Old Backwards Walking
+module.animations.old_backwards_walking.description=Eski geriye yürüme animasyonunu geri yükler.
+module.animations.old_armor_damage_tint.name=Old Armor Damage Tint
+module.animations.old_armor_damage_tint.description=Hasar alındığında zırhta gösterilen eski kırmızı tonu geri yükler.
+module.animations.old_sneaking.name=Old Sneaking
+module.animations.old_sneaking.description=Eski sinekeme pozunu geri yükler.
+module.animations.fix_pose_repeat.name=Fix Pose Repeat
+module.animations.fix_pose_repeat.description=Oyuncu poz animasyonunun tekrarlanmasını önleyen bir düzeltme uygular.
+module.animations.scale.name=Scale
+module.animations.scale.description=Ana el eşyası için tekdüze bir ölçek çarpanı belirler (1 değişmeden bırakır).
+module.animations.offset_x.name=Offset X
+module.animations.offset_x.description=Ana el eşyasını birinci şahıs görüşünde sola veya sağa kaydırır.
+module.animations.offset_y.name=Offset Y
+module.animations.offset_y.description=Ana el eşyasını birinci şahıs görüşünde yukarı veya aşağı kaydırır.
+module.animations.swing_slowdown.name=Swing Slowdown
+module.animations.swing_slowdown.description=El sallama animasyonunu yavaşlatır; yüksek değerler her sallamayı daha uzun süre.
+module.animations.old_cooldown_animation.name=Old Cooldown Animation
+module.animations.old_cooldown_animation.description=Eski eşya bekleme süresi sallama animasyonunu geri yükler.
+module.animations.visual_swing_on_use.name=Visual Swing on Use
+module.animations.visual_swing_on_use.description=Bir eşya kullanılırken görsel el sallaması oynatır.
+module.animations.hide_drop_swing.name=Hide Drop Swing
+module.animations.hide_drop_swing.description=Eşya bırakıldığında oynayan el sallama animasyonunu bastırır.
+module.animations.equip_offset.name=Equip Offset
+module.animations.equip_offset.description=Eşyanın kuşanma (kaldırma) animasyonunda bir ofset etkinleştirir.
+module.animations.sword_blocking.name=Sword Blocking
+module.animations.sword_blocking.description=Kılıç bloklama geçişini ve animasyon stili seçicisini gruplar.
+module.animations.shields.name=Shields
+module.animations.shields.description=Kalkan eşyasını ve yardımcı el kısayol slotunu gizleme seçeneklerini gruplar.
+module.animations.player.name=Player
+module.animations.player.description=Eski oyuncu gövdesi animasyon geçişlerini gruplar (yürüme, sinekme, ton, poz).
+module.animations.item.name=Item
+module.animations.item.description=Tutulan eşya için ofset, ölçek, sallama ve kuşanma animasyonu seçeneklerini gruplar.
+
+# Ambience
+module.ambience.name=Ambience
+module.ambience.description=Günün saatini değiştirir.
+module.ambience.use_real_time.name=Use Real Time
+module.ambience.use_real_time.description=Her tikte dünyanın günün saatini bilgisayarınızın yerel sistem saatinden türetir.
+module.ambience.time.name=Time
+module.ambience.time.description=Dünyaya uygulanan sabit günün saatini Minecraft tiklerinde belirler (0-23450).
+module.ambience.end_sky.name=End Sky
+module.ambience.end_sky.description=Modül aktifken gökyüzünü End boyutunun yıldızlı skybox'ıyla değiştirir.
+
+# Overlay
+module.overlay.name=Overlay
+module.overlay.description=İstemcinin görünümünü render eder.
+module.overlay.theme.name=Theme
+module.overlay.theme.description=İstemcinin renk tema ön ayarını seçer veya kendi renklerinizden vurgu almak için Custom'ı seçer.
+module.overlay.primary_color.name=Primary Color
+module.overlay.primary_color.description=Custom tema seçildiğinde overlay tarafından kullanılan birincil vurgu rengini belirler.
+module.overlay.secondary_color.name=Secondary Color
+module.overlay.secondary_color.description=Custom tema seçildiğinde overlay tarafından kullanılan ikincil vurgu rengini belirler.
+module.overlay.enabled.name=Enabled
+module.overlay.enabled.description=Vanilya iksir efekti görünümünün yerine özel durum efekti overlay'ini açar.
+module.overlay.text_shadow.name=Text Shadow
+module.overlay.text_shadow.description=Özel skor tablosunun metnini gölge efektiyle çizer.
+module.overlay.left-aligned.name=Left-aligned
+module.overlay.left-aligned.description=Dinamik adayı merkez yerine ekranın sol tarafına sabitler.
+module.overlay.minecraft_elements.name=Minecraft Elements
+module.overlay.minecraft_elements.description=Yeniden stilize edilmiş vanilya HUD öğelerini gruplar: durum efektleri, skor tablosu ve bossbar.
+module.overlay.status_effect_overlay.name=Status Effect Overlay
+module.overlay.status_effect_overlay.description=Özel durum efekti overlay'inin ayarlarını gruplar.
+module.overlay.scoreboard.name=Scoreboard
+module.overlay.scoreboard.description=Özel skor tablosunun etkinleştirme, ölçek ve metin gölgesi ayarlarını gruplar.
+module.overlay.bossbar.name=Bossbar
+module.overlay.bossbar.description=Vanilya boss çubuğunun yerine özel bossbar overlay'ini etkinleştirir.
+module.overlay.dynamic_island.name=Dynamic Island
+module.overlay.dynamic_island.description=Sol hizalama geçişi dahil dinamik ada ayarlarını gruplar.
+
+# Target Information (Overlay)
+module.overlay.target_information.name=Target Information
+module.overlay.target_information.description=Savaş hedef bilgi kartının etkinleştirme, konum, ölçek ve ada yönlendirme ayarlarını gruplar.
+module.overlay.screen_position.name=Screen Position
+module.overlay.screen_position.description=Hedef bilgi kartının ekrandaki konumunu sürüklenebilir koordinatlar aracılığıyla belirler.
+
+# Spotify (Overlay)
+module.overlay.spotify.name=Spotify
+module.overlay.spotify.description=Şu an çalınan kartın etkinleştirme, konum, ölçek, ada ve albüm rengi ayarlarını gruplar.
+module.overlay.position.name=Position
+module.overlay.position.description=Overlay öğesinin ekrandaki konumunu sürüklenebilir koordinatlar aracılığıyla belirler.
+module.overlay.use_album_color.name=Use Album Color
+module.overlay.use_album_color.description=Albüm kapağının baskın rengini Spotify kartının vurgu rengi olarak kullanır.
+
+# Session Stats (Overlay)
+module.overlay.session_stats.name=Session Stats
+module.overlay.session_stats.description=Oturum istatistikleri öğesinin etkinleştirme, konum ve ölçek ayarlarını gruplar.
+
+# Notifications (Overlay)
+module.overlay.notifications.name=Notifications
+module.overlay.notifications.description=Modül geçiş açılır penceresi dahil bildirim öğesinin ayarlarını gruplar.
+module.overlay.on_module_toggle.name=On Module Toggle
+module.overlay.on_module_toggle.description=Bir modül etkinleştirildiğinde veya devre dışı bırakıldığında bildirim açılır penceresi gösterir.
+
+# Toggled Modules (Overlay)
+module.overlay.toggled_modules.name=Toggled Modules
+module.overlay.toggled_modules.description=Aktif modül listesi ayarlarını gruplar: etkinleştirme, büyük/küçük harf, sonek, ofset, kategoriler.
+module.overlay.bar_mode.name=Bar Mode
+module.overlay.bar_mode.description=Her modül satırının hangi kenarına vurgu çubuğu çizileceğini belirler veya devre dışı bırakır.
+module.overlay.lowercase.name=Lowercase
+module.overlay.lowercase.description=Aktif modül listesindeki modül adlarını küçük harfle render eder.
+module.overlay.show_suffix.name=Show Suffix
+module.overlay.show_suffix.description=Listede her modülün adının yanında aktif değer sonekini gösterir.
+module.overlay.offset_scoreboard.name=Offset Scoreboard
+module.overlay.offset_scoreboard.description=Aktif modül listesiyle çakışmaması için vanilya skor tablosunu kenara iter.
+module.overlay.visible_categories.name=Visible Categories
+module.overlay.visible_categories.description=Aktif modül listesinde hangi modül kategorilerinin görüneceğini seçer.
+
+# Keystrokes (Overlay)
+module.overlay.keystrokes.name=Keystrokes
+module.overlay.keystrokes.description=Tuş vuruşları öğesinin etkinleştirme, konum, ölçek ve tuş görüntüleme ayarlarını gruplar.
+module.overlay.spacebar.name=Spacebar
+module.overlay.spacebar.description=Tuş vuruşları görüntüsünde ara çubuğu tuşunu gösterir.
+module.overlay.show_cps.name=Show CPS
+module.overlay.show_cps.description=Tuş vuruşları görüntüsündeki fare düğmelerinde canlı saniye başına tıklama okumasını gösterir.
+module.overlay.mouse_buttons.name=Mouse Buttons
+module.overlay.mouse_buttons.description=Tuş vuruşları görüntüsünde sol ve sağ fare düğmesi tuşlarını gösterir.
+
+# Entity ESP
+module.entity_esp.name=Entity ESP
+module.entity_esp.description=Oyuncular ve varlıklar üzerinde görsel overlay'ler render eder.
+module.entity_esp.box.name=Box
+module.entity_esp.box.description=Her hedef varlığın izdüşümsel sınır kutusunun etrafına 2B kutu çizer.
+module.entity_esp.box.enabled.name=Enabled
+module.entity_esp.box.enabled.description=Hedef varlıklar için kutu overlay'ini açar.
+module.entity_esp.box.stroke.name=Stroke
+module.entity_esp.box.stroke.description=Daha keskin kenarlar için varlık kutusunun etrafına ana hat vuruşu ekler.
+module.entity_esp.health_bar.name=Health Bar
+module.entity_esp.health_bar.description=Her varlığın yanına mevcut canını gösteren dikey bir çubuk çizer.
+module.entity_esp.health_bar.enabled.name=Enabled
+module.entity_esp.health_bar.enabled.description=Hedef varlıklar için can çubuğu overlay'ini açar.
+module.entity_esp.health_bar.stroke.name=Stroke
+module.entity_esp.health_bar.stroke.description=Daha keskin kenarlar için can çubuğunun etrafına ana hat vuruşu ekler.
+module.entity_esp.skeletons.name=Skeletons
+module.entity_esp.skeletons.description=Vücut pozunu izlemek için oyuncunun uzuvlarını birbirine bağlayan çizgiler çizer.
+module.entity_esp.skeletons.enabled.name=Enabled
+module.entity_esp.skeletons.enabled.description=Oyuncu varlıkları için iskelet çizgi overlay'ini açar.
+module.entity_esp.name_tags.name=Name Tags
+module.entity_esp.name_tags.description=Her hedef varlığın üzerine kayan metin etiketi çizer.
+module.entity_esp.name_tags.enabled.name=Enabled
+module.entity_esp.name_tags.enabled.description=Hedef varlıklar için isim etiketi overlay'ini açar.
+module.entity_esp.name_tags.elements.name=Elements
+module.entity_esp.name_tags.elements.description=Etikette hangi alanların gösterileceğini seçer: isim, can, mesafe ve ekipman.
+module.entity_esp.name_tags.indicators.name=Indicators
+module.entity_esp.name_tags.indicators.description=Etiketteki durum simgelerini seçer: sinekliyor, güç, görünmez ve bloklıyor.
+module.entity_esp.glow.name=Glow
+module.entity_esp.glow.description=Hedef varlıkları renkli parlama efektiyle çerçeveler.
+module.entity_esp.glow.enabled.name=Enabled
+module.entity_esp.glow.enabled.description=Hedef varlıklar için varlık parlama ana hatını açar.
+module.entity_esp.glow.color.name=Color
+module.entity_esp.glow.color.description=Parlama renk kaynağını belirler: tema, takım rengi veya cana dayalı renk.
+module.entity_esp.glow.hurt_flash.name=Hurt Flash
+module.entity_esp.glow.hurt_flash.description=Varlık hasar aldığında parlamayı kısa süreliğine kırmızı yapar.
+
+# Item ESP
+module.item_esp.name=Item ESP
+module.item_esp.description=Düşürülen eşyalara isim etiketleri render eder.
+module.item_esp.name_tags.name=Name Tags
+module.item_esp.name_tags.description=Düşürülen eşya isim etiketi seçeneklerini gruplar: etkinleştirme, arama menzili ve hangi öğelerin gösterileceği.
+module.item_esp.name_tags.enabled.name=Enabled
+module.item_esp.name_tags.enabled.description=Düşürülen eşya isim etiketi render'ını açar veya kapatır.
+module.item_esp.name_tags.range.name=Range
+module.item_esp.name_tags.range.description=Etrafınızdaki düşürülen eşyaların arandığı ve etiketlendiği blok cinsinden mesafeyi belirler.
+module.item_esp.name_tags.elements.name=Elements
+module.item_esp.name_tags.elements.description=Hangi isim etiketi bölümlerinin gösterileceğini seçer: eşya adı, yığın sayısı ve mesafe.
+
+# Block ESP
+module.block_esp.name=Block ESP
+module.block_esp.description=Konteynerlerde ve kaynaklar üzerinde görsel overlay'ler render eder.
+module.block_esp.containers.name=Containers
+module.block_esp.containers.description=Sandıklar gibi konteyner bloklarına çizilen kutu overlay'lerini kontrol eden ayarlar grubu.
+module.block_esp.containers.enabled.name=Enabled
+module.block_esp.containers.enabled.description=Yakındaki konteyner blokları etrafına çizilen kutu overlay'lerini açar.
+module.block_esp.containers.filled.name=Filled
+module.block_esp.containers.filled.description=Her konteynerin vurgu kutusunun içine yarı saydam dolu yüz çizer.
+module.block_esp.containers.outline.name=Outline
+module.block_esp.containers.outline.description=Her konteynerin vurgu kutusunu çerçeveleyen kenar çizgilerini çizer.
+module.block_esp.containers.types.name=Types
+module.block_esp.containers.types.description=Sandıklar, variller ve huniler gibi hangi konteyner türlerinin vurgulanacağını seçer.
+module.block_esp.resources.name=Resources
+module.block_esp.resources.description=Cevherler ve mineral bloklara çizilen kutu overlay'lerini kontrol eden ayarlar grubu.
+module.block_esp.resources.enabled.name=Enabled
+module.block_esp.resources.enabled.description=Yakındaki cevherler ve mineral bloklar etrafına çizilen kutu overlay'lerini açar.
+module.block_esp.resources.filled.name=Filled
+module.block_esp.resources.filled.description=Her kaynağın vurgu kutusunun içine yarı saydam dolu yüz çizer.
+module.block_esp.resources.outline.name=Outline
+module.block_esp.resources.outline.description=Her kaynağın vurgu kutusunu çerçeveleyen kenar çizgilerini çizer.
+module.block_esp.resources.range.name=Range
+module.block_esp.resources.range.description=Kaynakların vurgulandığı maksimum blok mesafesini belirler; 16-128 arası.
+module.block_esp.resources.ores.name=Ores
+module.block_esp.resources.ores.description=Elmas, zümrüt ve eski enkaz gibi hangi cevher bloklarının vurgulanacağını seçer.
+module.block_esp.resources.blocks.name=Blocks
+module.block_esp.resources.blocks.description=Elmas veya netherite gibi hangi mineral depolama bloklarının vurgulanacağını seçer.
+
+# ==========================================================
+# Combat (added)
+# ==========================================================
+
+# Anti Fireball
+module.anti_fireball.name=Anti Fireball
+module.anti_fireball.description=Yakındaki ateş toplarını otomatik olarak savar.
+module.anti_fireball.attack_range.name=Attack Range
+module.anti_fireball.attack_range.description=Ateş topunun savulacağı maksimum blok cinsinden mesafeyi belirler.
+module.anti_fireball.rotate_range.name=Rotate Range
+module.anti_fireball.rotate_range.description=Nişanın bir ateş topuna döneceği maksimum blok cinsinden mesafeyi belirler.
+
+# Criticals
+module.criticals.name=Criticals
+module.criticals.description=Her saldırıyı kritik isabet olmaya zorlar.
+module.criticals.mode.name=Mode
+module.criticals.mode.description=Kritikler yöntemini seçer; şu anda Packet.
+
+# ==========================================================
+# Movement (added)
+# ==========================================================
+
+# Jesus
+module.jesus.name=Jesus
+module.jesus.description=Su üzerinde yürümenizi sağlar.
+
+# Keep Sprint
+module.keep_sprint.name=Keep Sprint
+module.keep_sprint.description=Sprint'i sıfırlayacak eylemler boyunca sprint'i korur.
+
+# Step
+module.step.name=Step
+module.step.description=Vanilyanın izin verdiğinden daha yüksek bloklara adım atmanızı sağlar.
+module.step.height.name=Height
+module.step.height.description=Otomatik olarak çıkabileceğiniz maksimum blok yüksekliğini belirler.
+
+# ==========================================================
+# Utility (added)
+# ==========================================================
+
+# Auto Potion
+module.auto_potion.name=Auto Potion
+module.auto_potion.description=Ayaklarınıza otomatik olarak sıçrama iksiri fırlatır.
+module.auto_potion.splash_speed.name=Splash Speed
+module.auto_potion.splash_speed.description=Mevcut olduğunda ayaklarınıza sıçrama Hız iksiri fırlatır.
+module.auto_potion.splash_health.name=Splash Health
+module.auto_potion.splash_health.description=Canınız düşük olduğunda ayaklarınıza sıçrama İyileşme iksiri fırlatır.
+module.auto_potion.heal_hp.name=Heal HP
+module.auto_potion.heal_hp.description=Sıçrama İyileşme iksirinin fırlatılacağı can seviyesini belirler.
+module.auto_potion.delay.name=Delay
+module.auto_potion.delay.description=Otomatik iksir fırlatmaları arasında beklenecek milisaniyeyi belirler.
+module.auto_potion.ignore_frog_potion.name=Ignore Frog Potion
+module.auto_potion.ignore_frog_potion.description=Fırlatılacak Hız iksiri seçilirken kurbağa iksirlerini yok sayar.
+
+# ==========================================================
+# Visual (added)
+# ==========================================================
+
+# View Clip
+module.view_clip.name=View Clip
+module.view_clip.description=Üçüncü şahıs kamerasının duvarlardan geçmesini sağlar.
+
+# ==========================================================
+# Other (added)
+# ==========================================================
+
+# Anti AFK
+module.anti_afk.name=Anti AFK
+module.anti_afk.description=Hareketsizlik nedeniyle atılmanızı engeller.
+module.anti_afk.interval.name=Interval
+module.anti_afk.interval.description=Otomatik anti-boşta kalma hareketinin ne sıklıkla gerçekleştirileceğini belirler.
+
+# Hacker Detector
+module.hacker_detector.name=Hacker Detector
+module.hacker_detector.description=Oyunuzdaki hile yapan oyuncuları tespit eder.
+module.hacker_detector.settings.name=Settings
+module.hacker_detector.settings.description=Dedektörün kontrolleri ve bildirim seçeneklerini gruplar.
+module.hacker_detector.checks.name=Checks
+module.hacker_detector.checks.description=Hangi hile kontrollerinin çalışacağını seçer: Auto Block, Omni Sprint ve Scaffold.
+module.hacker_detector.auto_block.name=Auto Block
+module.hacker_detector.auto_block.description=Aynı anda bloklayıp saldıran oyuncuları işaretler.
+module.hacker_detector.omni_sprint.name=Omni Sprint
+module.hacker_detector.omni_sprint.description=Vanilya hareketinin izin vermediği yönlerde sprint yapan oyuncuları işaretler.
+module.hacker_detector.scaffold.name=Scaffold
+module.hacker_detector.scaffold.description=Şüpheli zamanlama veya rotasyonla köprü blokları yerleştiren oyuncuları işaretler.
+module.hacker_detector.chat.name=Chat
+module.hacker_detector.chat.description=Bir oyuncu bir kontrolü tetiklediğinde sohbet mesajı gönderir.
+module.hacker_detector.notifications.name=Notifications
+module.hacker_detector.notifications.description=Bir oyuncu bir kontrolü tetiklediğinde açılır bildirim gösterir.

@@ -9,15 +9,15 @@ Translations and localized content for Opal, served as a public repository.
   `module.<id>.<prop>.name`, `module.<id>.description`, …). Served per released
   build (`{stream}` ∈ `stable|canary|nightly`; `{version}` e.g.
   `2.1.0`). Current: `lang/opal/stable/2.1.0/{locale}.lang`,
-  locales `en`, `de`, `ru`, `zh`, plus a per-version `manifest.json`.
+  locales `en`, `de`, `ru`, `tr`, `zh`, plus a per-version `manifest.json`.
 - `theme/{name}.lang` — locale-independent module/property display-name overrides.
   `default` is empty (names come from `lang/`); alternate themes rebrand names.
 - `manifest.json` — declares locales, themes, and content sections for the
-  `lang/` client UI translations (currently `en`, `de`, `ru`, `zh`). This
+  `lang/` client UI translations (currently `en`, `de`, `ru`, `tr`, `zh`). This
   `locales` list is client-scoped only; `web/` and `compliance/` ship their
   own, broader locale sets (see below) and are not tracked in `manifest.json`.
-- `web/{locale}.json` — marketing-site UI strings. 9 locales: `de`, `en`,
-  `fr`, `it`, `ja`, `pl`, `pt`, `ru`, `zh`.
+- `web/{locale}.json` — marketing-site UI strings. 10 locales: `de`, `en`,
+  `fr`, `it`, `ja`, `pl`, `pt`, `ru`, `tr`, `zh`.
 - `content/{locale}/{blog,learn,compare}/*.mdx` + `_index.json` — marketing content.
 - `docs/{locale}/**/*.mdx` + `_index.json` — client documentation (setup,
   scripting guide and API reference). `_index.json` is a nav tree of
