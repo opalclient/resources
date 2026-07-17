@@ -29,7 +29,7 @@ script.registerModule({ name: "Example", description: "Event demo" }, (module) =
     });
 
     module.on("preGameTick", (event) => {
-        if (mc.player === null || mc.world === null) return;
+        if (mc.getPlayer() === null || mc.getWorld() === null) return;
         // logic runs 20 times per second
     });
 
@@ -68,7 +68,7 @@ Fired around the 20 TPS client tick. Both pass an event object, but neither obje
 
 ```javascript
 module.on("preGameTick", (event) => {
-    if (mc.player === null || mc.world === null) return;
+    if (mc.getPlayer() === null || mc.getWorld() === null) return;
     if (player.getHealth() < 5) {
         notification.warn("Low HP", "Health below 5!");
     }
@@ -372,11 +372,11 @@ To reset error reporting after a fix, toggle the module off and on (the `enable`
 
 ## Null Safety
 
-Always check `mc.player` and `mc.world` before touching game state, since they are `null` in menus and loading screens:
+Always check `mc.getPlayer()` and `mc.getWorld()` before touching game state, since they are `null` in menus and loading screens:
 
 ```javascript
 module.on("preGameTick", (event) => {
-    if (mc.player === null || mc.world === null) return;
+    if (mc.getPlayer() === null || mc.getWorld() === null) return;
     // safe to use the player / world / inventory proxies here
 });
 ```

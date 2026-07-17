@@ -13,14 +13,16 @@ Block queries, entity queries, and world info.
 <Method name="isReplaceable" signature="boolean isReplaceable(BlockPos pos)" description="Whether the block can be replaced (air, fluid, grass, etc.)." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "boolean", desc: "True if replaceable." }} />
 <Method name="isSolid" signature="boolean isSolid(BlockPos pos)" description="Whether the block is solid." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "boolean", desc: "True if solid." }} />
 <Method name="getBlockName" signature="String getBlockName(BlockPos pos)" description="Returns the localized display name of the block." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "String", desc: "Block name." }} />
-<Method name="getBlockState" signature="BlockState getBlockState(BlockPos pos)" description="Returns the raw BlockState object." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "BlockState", desc: "Block state." }} />
-<Method name="getBlock" signature="Block getBlock(BlockPos pos)" description="Returns the Block type object." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "Block", desc: "Block." }} />
 <Method name="getBlockHardness" signature="float getBlockHardness(BlockPos pos)" description="Returns the breaking hardness. -1 means unbreakable (bedrock)." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "float", desc: "Hardness." }} />
+
+<Callout type="info">
+    There is no `getBlockState` or `getBlock`. A raw block state carries nothing a script could read, so the queries above are flattened onto `world` directly: `isAir`, `isSolid`, `isReplaceable`, `getBlockName`, and `getBlockHardness` cover what those methods were used for.
+</Callout>
 
 ### Block Helpers
 
 <Method name="hasAdjacentBlock" signature="boolean hasAdjacentBlock(BlockPos pos)" description="Whether any face-adjacent block is solid (placeable-against)." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "boolean", desc: "True if has neighbor." }} />
-<Method name="getAdjacentDirections" signature="List&lt;Direction&gt; getAdjacentDirections(BlockPos pos)" description="Returns directions where a solid neighbour exists. Can be empty." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "List<Direction>", desc: "List of ScriptDirection." }} />
+<Method name="getAdjacentDirections" signature="List&lt;Direction&gt; getAdjacentDirections(BlockPos pos)" description="Returns directions where a solid neighbour exists. Can be empty. A List wrapper, not a JS array: walk it with size() and get(i)." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "List<Direction>", desc: "Directions with a solid neighbour." }} />
 
 ```javascript
 const below = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
@@ -36,8 +38,12 @@ const neighbor = below.offset(side);
 
 ### Entity Queries
 
-<Method name="getEntities" signature="Iterable getEntities()" description="Returns all entities in the world." returns={{ type: "Iterable", desc: "All entities." }} />
-<Method name="getLivingEntitiesInRange" signature="List&lt;LivingEntity&gt; getLivingEntitiesInRange(double radius)" description="Returns living entities (mobs + players) within radius of the player, excluding self." params={[{ name: "radius", type: "double", desc: "Search radius in blocks." }]} returns={{ type: "List<LivingEntity>", desc: "Nearby living entities." }} />
+<Method name="getEntities" signature="List&lt;Entity&gt; getEntities()" description="Returns all entities in the world. A List wrapper, not a JS array and not iterable." returns={{ type: "List<Entity>", desc: "All entities." }} />
+<Method name="getLivingEntitiesInRange" signature="List&lt;Entity&gt; getLivingEntitiesInRange(double radius)" description="Returns living entities (mobs + players) within radius of the player, excluding self. A List wrapper, not a JS array." params={[{ name: "radius", type: "double", desc: "Search radius in blocks." }]} returns={{ type: "List<Entity>", desc: "Nearby living entities." }} />
+
+<Callout type="warning">
+    Both return a [`List`](types#list) wrapper. `for...of`, `.length`, and `[i]` indexing **do not work on it**, and they fail silently rather than throwing. Walk it with `size()` and `get(i)`.
+</Callout>
 
 ```javascript
 // Attack closest entity
@@ -45,6 +51,13 @@ const targets = world.getLivingEntitiesInRange(5.0);
 if (!targets.isEmpty()) {
     mc.interactionManager.attackEntity(targets.get(0));
     player.swingHand(MAIN_HAND);
+}
+
+// Walk every entity in the world
+const all = world.getEntities();
+for (let i = 0; i < all.size(); i++) {
+    const entity = all.get(i);
+    if (entity.isPlayer()) client.print(entity.getName());
 }
 ```
 

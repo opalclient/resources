@@ -21,26 +21,32 @@ These methods turn world-space positions and entities into screen-space coordina
 
 <Method
     name="getEntityBox2D"
-    signature="Vector4d getEntityBox2D(LivingEntity entity, float tickDelta)"
+    signature="Box2D getEntityBox2D(Entity entity, float tickDelta)"
     description="Projects an entity's full 3D bounding box onto the screen and returns the enclosing 2D rectangle."
     params={[
-        { name: "entity", type: "LivingEntity", desc: "The entity to project (e.g. from world.getLivingEntitiesInRange)." },
+        { name: "entity", type: "Entity", desc: "The entity to project (e.g. from world.getLivingEntitiesInRange)." },
         { name: "tickDelta", type: "float", desc: "Partial tick for interpolation. Use client.getTickDelta()." }
     ]}
-    returns={{ type: "Vector4d", desc: "Rectangle {x, y, width, height}, or null if the entity is behind the camera or fully outside the viewport." }}
+    returns={{ type: "Box2D | null", desc: "The enclosing rectangle, or null if the entity is behind the camera or fully outside the viewport." }}
 />
 
-The returned `Vector4d` packs the rectangle into its four components:
+The returned [`Box2D`](types#box2d) exposes the rectangle through getters. It offers two equivalent spellings of the same box:
 
-| Component | Meaning |
+| Getter | Meaning |
 |---|---|
-| `box.x` | Left edge of the 2D box (screen X) |
-| `box.y` | Top edge of the 2D box (screen Y) |
-| `box.z` | Width of the 2D box |
-| `box.w` | Height of the 2D box |
+| `box.getX()` / `box.getX1()` | Left edge of the 2D box (screen X) |
+| `box.getY()` / `box.getY1()` | Top edge of the 2D box (screen Y) |
+| `box.getZ()` / `box.getWidth()` | Width of the 2D box |
+| `box.getW()` / `box.getHeight()` | Height of the 2D box |
+| `box.getX2()` | Right edge (left + width) |
+| `box.getY2()` | Bottom edge (top + height) |
+
+<Callout type="warning">
+    Read the box with **getters**, never properties. `box.x` is `undefined`, and it does not throw: it propagates into your arithmetic as `NaN` and the overlay silently draws nothing.
+</Callout>
 
 ```javascript
-module.on("renderScreen", (event) => {
+module.on("renderScreen", () => {
     const entities = world.getLivingEntitiesInRange(64);
     const tickDelta = client.getTickDelta();
 
@@ -49,12 +55,13 @@ module.on("renderScreen", (event) => {
         const box = esp.getEntityBox2D(entity, tickDelta);
         if (box === null) continue; // off-screen or behind camera
 
-        const x = box.x, y = box.y, w = box.z, h = box.w;
+        const x = box.getX(), y = box.getY();
+        const w = box.getWidth(), h = box.getHeight();
         const red = renderer.color(255, 0, 0);
         renderer.rectOutline(x, y, w, h, 0.5, red);
 
         // Name tag centered above the box
-        const name = entity.getName().getString();
+        const name = entity.getName();
         const nameW = renderer.textWidth("productsans-bold", name, 6);
         renderer.text("productsans-bold", name,
             x + w / 2 - nameW / 2, y - 8, 6, renderer.color(255, 255, 255));
@@ -66,7 +73,7 @@ module.on("renderScreen", (event) => {
 
 <Method
     name="project"
-    signature="Vector3d project(double worldX, double worldY, double worldZ, float tickDelta)"
+    signature="Vec3d project(double worldX, double worldY, double worldZ, float tickDelta)"
     description="Projects a single 3D world position onto the 2D screen."
     params={[
         { name: "worldX", type: "double", desc: "World-space X coordinate." },
@@ -74,53 +81,56 @@ module.on("renderScreen", (event) => {
         { name: "worldZ", type: "double", desc: "World-space Z coordinate." },
         { name: "tickDelta", type: "float", desc: "Partial tick for interpolation." }
     ]}
-    returns={{ type: "Vector3d", desc: "Screen position {x, y, depth}, or null if the projection fails." }}
+    returns={{ type: "Vec3d | null", desc: "Screen position (x, y, depth), or null if the projection fails." }}
 />
 
-The returned `Vector3d` carries the screen position plus a depth value:
+The returned [`Vec3d`](types#vec3d) carries the screen position plus a depth value:
 
-| Component | Meaning |
+| Getter | Meaning |
 |---|---|
-| `p.x` | Screen X coordinate |
-| `p.y` | Screen Y coordinate |
-| `p.z` | Depth: a value `>= 1.0` means the point is **behind the camera** |
+| `p.getX()` | Screen X coordinate |
+| `p.getY()` | Screen Y coordinate |
+| `p.getZ()` | Depth: a value `>= 1.0` means the point is **behind the camera** |
 
 <Callout type="warning">
-    A non-null result does not guarantee the point is visible. Check `p.z < 1.0` before drawing: points behind the camera still project to a `Vector3d` but to mirrored, meaningless coordinates.
+    A non-null result does not guarantee the point is visible. Check `p.getZ() < 1.0` before drawing: points behind the camera still project to a `Vec3d`, but to mirrored, meaningless coordinates.
 </Callout>
 
 ```javascript
-module.on("renderScreen", (event) => {
+module.on("renderScreen", () => {
     const tickDelta = client.getTickDelta();
 
     // Beam a marker onto a fixed world block at (100, 70, -240)
     const p = esp.project(100, 70, -240, tickDelta);
-    if (p === null || p.z >= 1.0) return; // failed or behind camera
+    if (p === null || p.getZ() >= 1.0) return; // failed or behind camera
 
     renderer.text("productsans-bold", "Base",
-        p.x, p.y, 8, renderer.color(0, 200, 255));
+        p.getX(), p.getY(), 8, renderer.color(0, 200, 255));
 });
 ```
 
 <Method
     name="projectVec"
-    signature="Vector3d projectVec(Vec3 pos, float tickDelta)"
-    description="Projects a Vec3 world position onto the 2D screen. Convenience wrapper around project()."
+    signature="Vec3d projectVec(Vec3d pos, float tickDelta)"
+    description="Projects a Vec3d world position onto the 2D screen. Convenience wrapper around project()."
     params={[
-        { name: "pos", type: "Vec3", desc: "The world position (e.g. an entity position or block center)." },
+        { name: "pos", type: "Vec3d", desc: "The world position (e.g. an entity position or block center)." },
         { name: "tickDelta", type: "float", desc: "Partial tick for interpolation." }
     ]}
-    returns={{ type: "Vector3d", desc: "Screen position {x, y, depth}, or null if the projection fails." }}
+    returns={{ type: "Vec3d | null", desc: "Screen position (x, y, depth), or null if the projection fails." }}
 />
 
 ```javascript
-module.on("renderScreen", (event) => {
+module.on("renderScreen", () => {
+    if (mc.getPlayer() === null) return;
+
     const tickDelta = client.getTickDelta();
-    const feet = esp.getInterpolatedPosition(mc.player, tickDelta);
+    const feet = esp.getInterpolatedPosition(mc.getPlayer(), tickDelta);
     // (feet is camera-relative; see getInterpolatedPosition below)
     const p = esp.projectVec(feet, tickDelta);
-    if (p !== null && p.z < 1.0) {
-        renderer.text("productsans-bold", "you", p.x, p.y, 6, renderer.color(255, 255, 255));
+    if (p !== null && p.getZ() < 1.0) {
+        renderer.text("productsans-bold", "you",
+            p.getX(), p.getY(), 6, renderer.color(255, 255, 255));
     }
 });
 ```
@@ -129,13 +139,13 @@ module.on("renderScreen", (event) => {
 
 <Method
     name="getInterpolatedPosition"
-    signature="Vec3 getInterpolatedPosition(Entity entity, float tickDelta)"
+    signature="Vec3d getInterpolatedPosition(Entity entity, float tickDelta)"
     description="Returns an entity's smoothly interpolated position between the previous and current tick, relative to the camera, for world-space rendering."
     params={[
         { name: "entity", type: "Entity", desc: "The entity to interpolate." },
         { name: "tickDelta", type: "float", desc: "Partial tick." }
     ]}
-    returns={{ type: "Vec3", desc: "The interpolated, camera-relative world position, or null if the entity is not a LivingEntity." }}
+    returns={{ type: "Vec3d | null", desc: "The interpolated, camera-relative world position, or null if the entity is not living." }}
 />
 
 <Callout type="info">
@@ -177,17 +187,17 @@ renderer.rect(x, y, w, h, renderer.color(255, 0, 0, Math.round(a)));
 
 <Method
     name="isEntityOnScreen"
-    signature="boolean isEntityOnScreen(LivingEntity entity, float tickDelta)"
+    signature="boolean isEntityOnScreen(Entity entity, float tickDelta)"
     description="Returns whether any part of an entity's bounding box projects to visible screen coordinates."
     params={[
-        { name: "entity", type: "LivingEntity", desc: "The entity to check." },
+        { name: "entity", type: "Entity", desc: "The entity to check." },
         { name: "tickDelta", type: "float", desc: "Partial tick." }
     ]}
     returns={{ type: "boolean", desc: "True if the entity is visible on screen (equivalent to getEntityBox2D returning non-null)." }}
 />
 
 ```javascript
-module.on("renderScreen", (event) => {
+module.on("renderScreen", () => {
     const tickDelta = client.getTickDelta();
     const entities = world.getLivingEntitiesInRange(96);
 
@@ -195,8 +205,8 @@ module.on("renderScreen", (event) => {
         const entity = entities.get(i);
         if (!esp.isEntityOnScreen(entity, tickDelta)) continue;
         const box = esp.getEntityBox2D(entity, tickDelta);
-        renderer.rectOutline(box.x, box.y, box.z, box.w, 0.5,
-            client.getThemePrimary());
+        renderer.rectOutline(box.getX(), box.getY(), box.getWidth(), box.getHeight(),
+            0.5, client.getThemePrimary());
     }
 });
 ```
