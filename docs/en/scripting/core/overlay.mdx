@@ -25,8 +25,11 @@ const island = overlay.createIsland({
     height: 28,
     priority: 10,
     render: (posX, posY, width, height, progress) => {
-        renderer.roundedRect(posX, posY, width, height, 4, 0xFF1a1a1a);
-        renderer.text("productsans-bold", "Custom HUD", posX + 10, posY + 14, 8, 0xFFFFFFFF);
+        // Build colors with renderer.color(...): a raw 0xAARRGGBB literal
+        // above 2^31 narrows to the wrong int and loses the alpha channel.
+        renderer.roundedRect(posX, posY, width, height, 4, renderer.color(26, 26, 26));
+        renderer.text("productsans-bold", "Custom HUD",
+            posX + 10, posY + 14, 8, renderer.color(255, 255, 255));
     }
 });
 overlay.showIsland(island);
@@ -77,12 +80,6 @@ overlay.showIsland(island);
     ]}
 />
 
-<Method
-    name="cleanup"
-    signature="void cleanup()"
-    description="Destroys every island the calling script created."
-/>
-
 <Callout type="info">
-    The client already calls `cleanup()` automatically when a module disables or a script unloads, so most scripts never need to call it directly. Call it yourself only if you want to clear all your islands early, without waiting for either of those.
+    **Cleanup is automatic and not something you call.** The client destroys every island a script created when its module disables or the script unloads, so you never have to tidy up yourself. `overlay.cleanup()` is not part of the script API: it is a host-side hook, and calling it from a script throws. To clear islands early, call `destroyIsland(id)` for each one you own.
 </Callout>
