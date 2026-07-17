@@ -588,25 +588,25 @@ renderer.stroke();
 <Method
     name="wrapText"
     signature="List&lt;String&gt; wrapText(String fontName, String text, double width, double size)"
-    description="Wraps a string into lines that each fit within the given width. Returns a List wrapper, not a JS array: walk it with size() and get(i)."
+    description="Wraps a string into lines that each fit within the given width. Returns a read-only ScriptList: iterate it with for..of or index it, and size()/get(i) also work."
     params={[
         { name: "fontName", type: "String", desc: "Registered font name." },
         { name: "text", type: "String", desc: "The text to wrap." },
         { name: "width", type: "double", desc: "Maximum line width in scaled pixels." },
         { name: "size", type: "double", desc: "Font size." }
     ]}
-    returns={{ type: "List<String>", desc: "The wrapped lines in order. A List wrapper: use size() and get(i)." }}
+    returns={{ type: "List<String>", desc: "The wrapped lines in order. A read-only ScriptList: for..of, indexing, or size()/get(i)." }}
 />
 
-<Callout type="warning">
-    `wrapText` returns a [`List`](../world/types#list), **not a JavaScript array**. `.length` and index access evaluate to `undefined` without throwing, so a loop over `.length` runs zero times and no text is drawn.
+<Callout type="info">
+    `wrapText` returns a read-only [`ScriptList`](../world/types#list). It reads as a real array: `.length`, `[i]` indexing, and `for..of` all work, and so do `size()`/`get(i)`. Its write and `Array.prototype` limits are in [Types](../world/types#list).
 </Callout>
 
 ```javascript
 module.on("renderScreen", () => {
     const lines = renderer.wrapText("productsans-bold", longMessage, 120, 8);
-    for (let i = 0; i < lines.size(); i++) {
-        renderer.text("productsans-bold", lines.get(i),
+    for (let i = 0; i < lines.length; i++) {
+        renderer.text("productsans-bold", lines[i],
             10, 10 + i * 10, 8, renderer.color(255, 255, 255));
     }
 });

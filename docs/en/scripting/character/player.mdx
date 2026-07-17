@@ -214,7 +214,7 @@ Read the player's active potion effects. Each returns an [`Effect`](../world/typ
 <Method
     name="getEffects"
     signature="List&lt;Effect&gt; getEffects()"
-    description="Returns every status effect currently active on the player. A List wrapper, not a JS array: walk it with size() and get(i)."
+    description="Returns every status effect currently active on the player. A read-only ScriptList: iterate it with for..of or index it, and size()/get(i) also work."
     returns={{ type: "List<Effect>", desc: "Active effects." }}
 />
 
@@ -230,9 +230,7 @@ module.on("preGameTick", () => {
     }
 
     // Anything the player reads wants the 1-based level.
-    const effects = player.getEffects();
-    for (let i = 0; i < effects.size(); i++) {
-        const effect = effects.get(i);
+    for (const effect of player.getEffects()) {
         const time = effect.isInfinite() ? "∞" : effect.getDurationSeconds() + "s";
         client.print(effect.getName() + " " + effect.getLevel() + " — " + time);
     }

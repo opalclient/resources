@@ -22,7 +22,7 @@ Block queries, entity queries, and world info.
 ### Block Helpers
 
 <Method name="hasAdjacentBlock" signature="boolean hasAdjacentBlock(BlockPos pos)" description="Whether any face-adjacent block is solid (placeable-against)." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "boolean", desc: "True if has neighbor." }} />
-<Method name="getAdjacentDirections" signature="List&lt;Direction&gt; getAdjacentDirections(BlockPos pos)" description="Returns directions where a solid neighbour exists. Can be empty. A List wrapper, not a JS array: walk it with size() and get(i)." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "List<Direction>", desc: "Directions with a solid neighbour." }} />
+<Method name="getAdjacentDirections" signature="List&lt;Direction&gt; getAdjacentDirections(BlockPos pos)" description="Returns directions where a solid neighbour exists. Can be empty. A read-only ScriptList: iterate it with for..of or index it, and size()/get(i) also work." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "List<Direction>", desc: "Directions with a solid neighbour." }} />
 
 ```javascript
 const below = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
@@ -38,11 +38,11 @@ const neighbor = below.offset(side);
 
 ### Entity Queries
 
-<Method name="getEntities" signature="List&lt;Entity&gt; getEntities()" description="Returns all entities in the world. A List wrapper, not a JS array and not iterable." returns={{ type: "List<Entity>", desc: "All entities." }} />
-<Method name="getLivingEntitiesInRange" signature="List&lt;Entity&gt; getLivingEntitiesInRange(double radius)" description="Returns living entities (mobs + players) within radius of the player, excluding self. A List wrapper, not a JS array." params={[{ name: "radius", type: "double", desc: "Search radius in blocks." }]} returns={{ type: "List<Entity>", desc: "Nearby living entities." }} />
+<Method name="getEntities" signature="List&lt;Entity&gt; getEntities()" description="Returns all entities in the world. A read-only ScriptList: iterate it with for..of or index it, and size()/get(i) also work." returns={{ type: "List<Entity>", desc: "All entities." }} />
+<Method name="getLivingEntitiesInRange" signature="List&lt;Entity&gt; getLivingEntitiesInRange(double radius)" description="Returns living entities (mobs + players) within radius of the player, excluding self. A read-only ScriptList." params={[{ name: "radius", type: "double", desc: "Search radius in blocks." }]} returns={{ type: "List<Entity>", desc: "Nearby living entities." }} />
 
-<Callout type="warning">
-    Both return a [`List`](types#list) wrapper. `for...of`, `.length`, and `[i]` indexing **do not work on it**, and they fail silently rather than throwing. Walk it with `size()` and `get(i)`.
+<Callout type="info">
+    Both return a read-only [`ScriptList`](types#list). It reads as a real array: `for..of`, `.length`, `[i]` indexing, and spread all work, and so do `size()`/`get(i)`. The write and `Array.prototype` limits are in [Types](types#list).
 </Callout>
 
 ```javascript
@@ -54,9 +54,7 @@ if (!targets.isEmpty()) {
 }
 
 // Walk every entity in the world
-const all = world.getEntities();
-for (let i = 0; i < all.size(); i++) {
-    const entity = all.get(i);
+for (const entity of world.getEntities()) {
     if (entity.isPlayer()) client.print(entity.getName());
 }
 ```

@@ -101,15 +101,15 @@ All lookups are **case-insensitive**, and module names are matched after spaces 
 
 ## Listing
 
-<Callout type="warning">
-    Listing methods return a [`List`](../world/types#list) wrapper, **not a JavaScript array**. `.length`, `[i]` indexing, `for...of`, and `Array.from()` do not work on it, and they do not throw either: they evaluate to `undefined` or an empty array, so a loop over `.length` runs zero times and your script silently does nothing. Walk it with `size()` and `get(i)`.
+<Callout type="info">
+    Listing methods return a read-only [`ScriptList`](../world/types#list). It reads as a real array: `for..of`, `.length`, `[i]` indexing, and spread all work, and so do `size()`/`get(i)`. It is read-only and lacks the `Array.prototype` helpers (`.map`/`.filter`); see [Types](../world/types#list).
 </Callout>
 
 <Method
     name="listAll"
     signature="List&lt;String&gt; listAll()"
     description="Returns the display names of all registered modules, both native and script-defined."
-    returns={{ type: "List<String>", desc: "Module names. A List wrapper: use size() and get(i)." }}
+    returns={{ type: "List<String>", desc: "Module names. A read-only ScriptList: for..of, indexing, or size()/get(i)." }}
 />
 
 <Method
@@ -126,7 +126,7 @@ All lookups are **case-insensitive**, and module names are matched after spaces 
     name="listEnabled"
     signature="List&lt;String&gt; listEnabled()"
     description="Returns the display names of all currently enabled modules."
-    returns={{ type: "List<String>", desc: "Enabled module names. A List wrapper: use size() and get(i)." }}
+    returns={{ type: "List<String>", desc: "Enabled module names. A read-only ScriptList: for..of, indexing, or size()/get(i)." }}
 />
 
 ---
@@ -146,10 +146,7 @@ script.registerModule({
         }
 
         // Walk every Combat module and report its state.
-        // size()/get(i), never .length/[i] — the list is not a JS array.
-        const combat = modules.listCategory("Combat");
-        for (let i = 0; i < combat.size(); i++) {
-            const name = combat.get(i);
+        for (const name of modules.listCategory("Combat")) {
             client.print(name + " -> " + modules.isEnabled(name));
         }
     });
