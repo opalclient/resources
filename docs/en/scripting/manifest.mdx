@@ -1,0 +1,53 @@
+# Script Manifest
+
+An optional metadata block you can put at the very top of a script. Opal parses it and logs what it finds.
+
+<Callout type="info">
+    The manifest is **recommended but optional**. A script with no header runs exactly the same. Today Opal only reads and logs the block; the fields are forward-looking for update checks and the public gallery, and none of them gate loading yet.
+</Callout>
+
+---
+
+## Format
+
+Put the block before any code. The opening `// ==OpalScript==` must be the first non-blank line (leading blank lines are allowed); a block that first appears after code is ignored.
+
+```javascript
+// ==OpalScript==
+// @name       My Script
+// @version    1.2.0
+// @author     trq
+// @minClient  26.2
+// @capability render, chat
+// ==/OpalScript==
+
+const script = registerScript({ name: "My Script", version: "1.2.0", authors: ["trq"] });
+```
+
+---
+
+## Fields
+
+| Field | Meaning |
+| :--- | :--- |
+| `@name` | Display name. |
+| `@version` | Version string, kept verbatim (never parsed or normalised). |
+| `@author` | Author name. |
+| `@minClient` | Minimum client version the script targets. |
+| `@capability` | Comma-separated capability tags (e.g. `render, chat`). Repeated `@capability` lines merge. |
+
+Every field is optional. Keys are case-insensitive, unknown keys are ignored, and a malformed line is skipped rather than ending the block. Parsing never fails: a hand-edited header cannot stop a script from loading.
+
+---
+
+## What it does not do yet
+
+<Callout type="warning">
+    Update checking is **not live**. Declaring `@version` or `@minClient` does not make Opal check for a newer version or refuse an out-of-date client yet, and the fields are not exposed on the script object. Opal reads and logs the header, nothing more. Keep declaring it so your scripts are ready when those checks ship.
+</Callout>
+
+---
+
+## Relationship to `registerScript`
+
+The manifest does not replace `registerScript`. `registerScript({ name, version, authors })` is what actually registers the script and its modules; the header is separate metadata Opal reads from the file. Keep the two in agreement so a reader sees one story.

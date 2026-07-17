@@ -66,6 +66,51 @@ client.sendChat("gg");                   // sent to the server
 client.runCommand("spawn");              // no leading slash
 ```
 
+### Chat Criteria
+
+Compile a ChatTriggers-style chat template once, then match server chat lines against it. `${name}` captures a run of characters and binds it to `name`; everything else matches literally.
+
+<Method
+    name="criteria"
+    signature="ScriptCriteria criteria(String pattern)"
+    description="Compiles a chat template into a reusable matcher. Compile once (e.g. on enable) and reuse the handle across chat events rather than rebuilding it per line."
+    params={[
+        { name: "pattern", type: "String", desc: "The chat template. See the pattern syntax below." }
+    ]}
+    returns={{ type: "ScriptCriteria", desc: "A compiled matcher." }}
+/>
+
+The returned `ScriptCriteria` carries three members:
+
+<Method name="match" signature="Object match(String line)" description="Matches a line against the template. Returns a read-only object of named captures (read m.player, m.message), or null when the line does not match." params={[{ name: "line", type: "String", desc: "The chat line to test." }]} returns={{ type: "Object | null", desc: "Named captures, or null on no match." }} />
+
+<Method name="test" signature="boolean test(String line)" description="Whether the line matches, without building a captures object." params={[{ name: "line", type: "String", desc: "The chat line to test." }]} returns={{ type: "boolean", desc: "True if it matches." }} />
+
+<Method name="getPattern" signature="String getPattern()" description="Returns the original template string." returns={{ type: "String", desc: "The template." }} />
+
+In a pattern, `${name}` captures a lazy run of one or more characters, and every other character matches literally (regex metacharacters are escaped, so `[${rank}]` treats the brackets as text). A line too short to fill every placeholder does not match.
+
+<Callout type="info">
+    The captures object is **read-only** and holds only the placeholder names you declared: read `m.player`, and guard with `if (m)` first, since `match` returns `null` on no match.
+</Callout>
+
+<Callout type="warning">
+    Matching is bounded so an untrusted chat line can never hang the game: a line longer than **1024 characters never matches**, and a template with more than **16 `${}` placeholders** is rejected when you compile it. Keep templates small.
+</Callout>
+
+```javascript
+// A chat filter: hide messages from a muted player.
+const chat = client.criteria("<${player}> ${message}");
+const muted = ["Griefer123"];
+
+module.on("chatReceived", (event) => {
+    const m = chat.match(event.getMessage());
+    if (m && muted.includes(m.player)) {
+        event.cancel();   // suppress the message
+    }
+});
+```
+
 ### Module Access
 
 <Method

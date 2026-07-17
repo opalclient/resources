@@ -44,7 +44,7 @@ script.registerModule({ name: "Example", description: "Event demo" }, (module) =
 </Callout>
 
 <Callout type="warning">
-    The events that **carry no readable data at all** are `preGameTick`, `postGameTick`, `renderScreen`, `renderWorld`, `renderBloom`, `joinWorld`, `itemUse`, `serverDisconnect`, and `resolutionChange`. Write their handlers with no parameter. For the partial tick inside a render event, call `client.getTickDelta()`.
+    The events that **carry no readable data at all** are `preGameTick`, `postGameTick`, `joinWorld`, `itemUse`, `serverDisconnect`, and `resolutionChange`. Write their handlers with no parameter. Render events do pass a payload now (partial ticks, and the cursor for `renderScreen`); see [Render Events](#render-events).
 </Callout>
 
 ## Lifecycle Events
@@ -85,25 +85,22 @@ module.on("postGameTick", () => {
 
 ## Render Events
 
-Fired every frame. Draw with the `renderer` proxy here.
+Fired every frame. Draw with the `renderer` proxy here. Each render handler receives a payload carrying the frame's partial-tick progress, and `renderScreen` also carries the cursor position.
 
 | Event | Payload | Fires when |
 | :--- | :--- | :--- |
-| `renderScreen` | _(no readable data)_ | During the 2D HUD pass. Use for screen-space overlays. |
-| `renderWorld` | _(no readable data)_ | During the 3D world pass. Use for world-space drawing (`esp.*` projection). |
-| `renderBloom` | _(no readable data)_ | During the HUD bloom pass. Shapes drawn here feed the glow/bloom effect rather than showing directly. |
+| `renderScreen` | `RenderScreenEvent` | During the 2D HUD pass. Use for screen-space overlays. |
+| `renderWorld` | `RenderEvent` | During the 3D world pass. Use for world-space drawing (`esp.*` projection). |
+| `renderBloom` | `RenderEvent` | During the HUD bloom pass. Shapes drawn here feed the glow/bloom effect rather than showing directly. |
 
-<Callout type="warning">
-    **Render event payloads expose nothing.** `drawContext()`, `canvas()`, `mouseX()`, `mouseY()`, `matrixStack()`, and `tickDelta()` all **throw** if you call them: the render events declare no script-readable members. Write these handlers with no parameter.
-</Callout>
+<Method name="getPartialTicks" signature="double getPartialTicks()" description="The fractional progress through the current tick, in [0, 1). Present on all three render payloads; interpolate positions by it for smooth motion. Equal to client.getTickDelta() for the frame." returns={{ type: "double", desc: "Partial-tick value." }} />
+
+<Method name="getMouseX" signature="double getMouseX()" description="renderScreen only: the cursor X in GUI-scaled coordinates." returns={{ type: "double", desc: "Cursor X." }} />
+
+<Method name="getMouseY" signature="double getMouseY()" description="renderScreen only: the cursor Y in GUI-scaled coordinates." returns={{ type: "double", desc: "Cursor Y." }} />
 
 <Callout type="info">
-    Everything a render handler needs is on the globals instead:
-
-    - **Partial tick** — `client.getTickDelta()`, not `event.tickDelta()`.
-    - **Draw context** — implicit; the `renderer` proxy targets the open pass automatically.
-    - **Screen size** — `client.getScaledWidth()` / `client.getScaledHeight()`.
-    - **World projection** — the `esp` proxy, which handles the camera transform itself.
+    `renderScreen` exposes `getPartialTicks()`, `getMouseX()`, and `getMouseY()`. `renderWorld` and `renderBloom` expose `getPartialTicks()` only, with no cursor coordinates. Those getters are the whole payload: the draw context, canvas, and matrix stack stay internal. The rest a render handler needs is on the globals: screen size from `client.getScaledWidth()`/`getScaledHeight()`, world projection from the `esp` proxy.
 </Callout>
 
 <Callout type="warning">
@@ -111,13 +108,19 @@ Fired every frame. Draw with the `renderer` proxy here.
 </Callout>
 
 ```javascript
-module.on("renderScreen", () => {
+module.on("renderScreen", (event) => {
     renderer.roundedRect(10, 10, 120, 24, 4, renderer.color(0, 0, 0, 180));
     renderer.text("productsans-bold", "FPS: " + client.getFPS(), 18, 24, 8, renderer.color(255, 255, 255));
+
+    // Outline the panel while the cursor is over it.
+    const mx = event.getMouseX(), my = event.getMouseY();
+    if (mx >= 10 && mx <= 130 && my >= 10 && my <= 34) {
+        renderer.roundedRectOutline(10, 10, 120, 24, 4, 1, client.getThemePrimary());
+    }
 });
 
-module.on("renderWorld", () => {
-    const delta = client.getTickDelta();   // not event.tickDelta(), which throws
+module.on("renderWorld", (event) => {
+    const delta = event.getPartialTicks();   // interpolate positions by delta
     // use esp.* for 3D-to-2D projection here
 });
 ```

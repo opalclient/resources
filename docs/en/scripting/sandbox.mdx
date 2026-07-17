@@ -34,6 +34,40 @@ and filesystem access both switched off. That buys you these guarantees:
 
 ---
 
+## A script cannot freeze your game
+
+A script's event handlers run on the game thread, so a `while (true)` in one would
+once have hung Minecraft. It can't now. Every handler dispatch runs under a
+wall-clock budget of about 250ms; a handler that overruns is interrupted, its error
+is reported, and the script stays loaded. A runaway loop loses its own frame, not
+your session.
+
+<Callout type="info">
+    The budget interrupts JavaScript, so the one path to keep in mind is a chat
+    criteria pattern, whose matching runs as host code the budget cannot reach. That
+    path carries its own bound instead: a chat line over 1024 characters never
+    matches, and a template with more than 16 placeholders is rejected when you
+    compile it. See [Chat Criteria](core/client#chat-criteria).
+</Callout>
+
+---
+
+## Errors are located, and prints are readable
+
+Two things make debugging inside the sandbox less opaque.
+
+- **Errors carry a location.** A handler that throws reports
+  `MyScript.js:42: <message>`, with Opal's own internal frames collapsed to
+  `<internal>` rather than dumped. An error thrown at load time, before you join a
+  world, is held and surfaces when you join. A `registerScript` call missing a
+  required field names the field.
+- **`console.log` prints a readable form.** Every wrapper has a `toString()`, so
+  `console.log(vec)` prints `ScriptVec3(12.5, 64.0, -3.2)` and an entity prints
+  `ScriptEntity(Zombie #123 hp=20.0/20.0)`, not `JavaObject[...]`. `client.print(vec)`
+  shows the same in chat.
+
+---
+
 ## The rule that governs every read
 
 Only a member marked `@HostAccess.Export` on Opal's own wrapper classes is visible

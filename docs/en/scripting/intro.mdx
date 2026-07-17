@@ -183,10 +183,13 @@ See the **API Reference** pages for full method documentation.
 
 - Community scripts stay in `scripts/pending` until you Trust & run them, even though every script runs sandboxed to the proxy API.
 - Guard with `if (mc.getPlayer() === null) return;` before touching player data, since it's null in menus and loading screens. Call the getter: `mc.player` is `undefined`, so that guard silently never fires.
-- Collections are `List` wrappers: walk them with `size()` and `get(i)`. `.length` and `[i]` return `undefined` without throwing.
+- Collections come back as a read-only `ScriptList`: iterate with `for..of`, index with `list[i]`, or read `.length`, and `size()`/`get(i)` still work. `.map`/`.filter` are absent; spread into an array first (`[...list].map(...)`).
 - Use `renderScreen` for HUD drawing; renderer methods only work during render events.
 - Use `preGameTick` for logic that needs to run every tick (20 times a second).
 - Build colors with `renderer.color(...)` instead of raw `0xAARRGGBB` literals, since JS numbers narrow to `int` incorrectly.
+- Errors report where they came from (`MyScript.js:42: ...`), and a handler that overruns a ~250ms budget is stopped, so a runaway loop can't freeze the game. See [The Sandbox](sandbox).
+- Print-debug with readable forms: `console.log(vec)` or `client.print(vec)` shows `ScriptVec3(...)` rather than `JavaObject[...]`.
+- Declare an optional `// ==OpalScript==` header for name, version, and author metadata. See [Script Manifest](manifest).
 - Each script is isolated in its own context, so scripts can't interfere with each other.
 - Hot reload with `.script reload`; no restart needed.
 - Max script size: 100KB.

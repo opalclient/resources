@@ -103,6 +103,20 @@ module.on("preGameTick", (event) => {
     returns={{ type: "int", desc: "The inventory slot index (0-35), or -1 if not found." }}
 />
 
+<Method
+    name="findItemById"
+    signature="int findItemById(String id)"
+    description="Searches the hotbar (slots 0-8) for an item by its stable registry id and returns the slot index. Accepts 'diamond' or 'minecraft:diamond' (the default namespace is minecraft)."
+    params={[
+        { name: "id", type: "String", desc: "The item's registry id, bare or namespaced." }
+    ]}
+    returns={{ type: "int", desc: "The hotbar slot index (0-8), or -1 if not found." }}
+/>
+
+<Callout type="info">
+    `findItemById` / `countItemById` key on the **registry id** (`minecraft:diamond`), which is stable and locale-independent, so prefer them for logic. `findItem` / `countItem` match the **display name** as a case-insensitive substring: convenient, but locale-dependent and changed by an anvil rename. The id here is the same one `ItemStack.getId()` returns, so the two always agree.
+</Callout>
+
 ```javascript
 if (mc.getPlayer() === null) return;
 
@@ -188,6 +202,16 @@ client.print("Totem at inventory slot " + totemSlot);
     description="Counts the total number of a specific item across the entire inventory (slots 0-35) by matching display name (case-insensitive substring)."
     params={[
         { name: "itemName", type: "String", desc: "The item name to search for." }
+    ]}
+    returns={{ type: "int", desc: "The total count across the inventory." }}
+/>
+
+<Method
+    name="countItemById"
+    signature="int countItemById(String id)"
+    description="Counts the total number of an item across the entire inventory (slots 0-35) by its stable registry id. Accepts 'diamond' or 'minecraft:diamond'. The id-keyed counterpart to countItem."
+    params={[
+        { name: "id", type: "String", desc: "The item's registry id, bare or namespaced." }
     ]}
     returns={{ type: "int", desc: "The total count across the inventory." }}
 />
