@@ -1,14 +1,22 @@
 # Types
 
-Bound Java and wrapper types available to every script. These are injected as
-globals. You do not need to import them.
+Bound Java and wrapper types available to every script. The class globals are
+injected; you do not need to import them. The rest are wrapper types that proxy
+methods hand back.
+
+<Callout type="warning">
+    **Read every value with getters, never properties.** The scripting sandbox
+    grants member access only to members its wrappers explicitly export, and it
+    does **no bean-property mapping**. `vec.x` is `undefined`, not a number, and
+    it does not throw: it silently poisons your arithmetic with `NaN`. Always
+    write `vec.getX()`.
+</Callout>
 
 <Callout type="info">
-    Wrapper types (`BlockPos`, `Vec2f`, `Direction`, `RaytracedRotation`) expose
-    stable, readable method names. The raw Minecraft types (`Vec3d`, `Vec3i`)
-    and `MathHelper` use Fabric intermediary names at runtime, so their methods
-    are **not** callable by readable name. Use them for construction and for
-    passing into proxy methods, and do the math through the proxy globals.
+    Every type below is a script-safe wrapper with real, readable getters. There
+    are no raw Minecraft types left in the scripting API surface, except for a
+    few deliberately **opaque tokens** (`mc.getWorld()`, `HitResult`) that you
+    only ever hand straight back to another proxy method.
 </Callout>
 
 ---
@@ -88,61 +96,250 @@ mc.interactionManager.interactBlock(MAIN_HAND, raytrace.getHitResult());
 
 <Method name="getYaw" signature="float getYaw()" description="Returns the yaw angle in degrees to aim at the target." returns={{ type: "float", desc: "Yaw in degrees." }} />
 <Method name="getPitch" signature="float getPitch()" description="Returns the pitch angle in degrees to aim at the target." returns={{ type: "float", desc: "Pitch in degrees." }} />
-<Method name="getHitResult" signature="HitResult getHitResult()" description="Returns the raw hit result to pass to mc.interactionManager.interactBlock()." returns={{ type: "HitResult", desc: "Hit result." }} />
+<Method name="getHitResult" signature="HitResult getHitResult()" description="Returns the hit result to pass straight to mc.interactionManager.interactBlock(). An opaque token: it exposes no readable members of its own." returns={{ type: "HitResult", desc: "Opaque hit result." }} />
+
+<Callout type="info">
+    `getHitResult()` returns an **opaque token**. Hand it directly to
+    `mc.interactionManager.interactBlock()`; do not try to read anything off it.
+    This is a deliberate pass-back value, not a gap in the API.
+</Callout>
 
 ---
 
 ## Vec3d
 
-The raw `net.minecraft.world.phys.Vec3` (double-precision world vector), bound
-as `Vec3d`. Construct with `new Vec3d(x, y, z)`. Returned by proxies such as
-`player.getPosition()`, `player.getEyePosition()`, and
-`esp.getInterpolatedPosition()`, and accepted by `esp.projectVec(pos)` and
+A double-precision world vector, bound as `Vec3d` and backed by the `ScriptVec3`
+wrapper. Construct with `new Vec3d(x, y, z)`. Returned by proxies such as
+`player.getPosition()`, `player.getEyePosition()`, `rotation.getRotationVector()`,
+and `esp.getInterpolatedPosition()`, and accepted by `esp.projectVec(pos)` and
 `rotation.getRotationFromPosition(pos)`.
 
 ```javascript
 const eye = player.getEyePosition();
 const screen = esp.projectVec(eye, client.getTickDelta());
+
+client.print("Eye Y: " + eye.getY());          // getters, never eye.y
 ```
 
-<Callout type="warning">
-    `Vec3d` is a raw Minecraft type. Its instance methods are intermediary-named
-    at runtime and cannot be called by readable name from a script. Use it to
-    construct vectors and to pass into proxy methods; read coordinates through
-    the proxy that produced it.
-</Callout>
+<Method name="getX" signature="double getX()" description="Returns the X component." returns={{ type: "double", desc: "X component." }} />
+<Method name="getY" signature="double getY()" description="Returns the Y component." returns={{ type: "double", desc: "Y component." }} />
+<Method name="getZ" signature="double getZ()" description="Returns the Z component." returns={{ type: "double", desc: "Z component." }} />
+<Method name="length" signature="double length()" description="Returns the vector's magnitude." returns={{ type: "double", desc: "Magnitude." }} />
+<Method name="distanceTo" signature="double distanceTo(Vec3d other)" description="Returns the distance between this vector and another." params={[{ name: "other", type: "Vec3d", desc: "The other vector." }]} returns={{ type: "double", desc: "Distance." }} />
+<Method name="add" signature="Vec3d add(Vec3d other)" description="Returns a new vector: this plus the other." params={[{ name: "other", type: "Vec3d", desc: "The vector to add." }]} returns={{ type: "Vec3d", desc: "The sum." }} />
+<Method name="subtract" signature="Vec3d subtract(Vec3d other)" description="Returns a new vector: this minus the other." params={[{ name: "other", type: "Vec3d", desc: "The vector to subtract." }]} returns={{ type: "Vec3d", desc: "The difference." }} />
 
 ---
 
-## Vec3i
+## Entity
 
-The raw `net.minecraft.core.Vec3i` (integer vector), bound as `Vec3i`.
-Construct with `new Vec3i(x, y, z)`. The same intermediary-name caveat as
-`Vec3d` applies. Treat it as a construction and pass-through type. For block
-positions, prefer the `BlockPos` wrapper, which exposes readable
-`getX()`/`getY()`/`getZ()`.
+Any entity a script can see: what `world.getEntities()`,
+`world.getLivingEntitiesInRange()`, `mc.getPlayer()`, and `event.getTarget()`
+hand back. Backed by the `ScriptEntity` wrapper. Scripts do not construct one.
+
+<Callout type="info">
+    Reads that need a living entity return the `-1` sentinel on one that is not
+    (`getHealth()`, `getMaxHealth()`, `getAbsorption()`, `getArmor()`, and
+    `getDistance()`). Check `isLiving()`, or test for `-1`, before trusting them.
+</Callout>
+
+```javascript
+const targets = world.getLivingEntitiesInRange(16);
+for (let i = 0; i < targets.size(); i++) {
+    const entity = targets.get(i);
+    client.print(entity.getName() + ": " + entity.getHealth() + " HP");
+}
+```
+
+<Method name="getName" signature="String getName()" description="Returns the entity's display name as a plain string." returns={{ type: "String", desc: "Display name." }} />
+<Method name="getId" signature="int getId()" description="Returns the entity's numeric network ID." returns={{ type: "int", desc: "Entity ID." }} />
+<Method name="getUuid" signature="String getUuid()" description="Returns the entity's UUID as a string." returns={{ type: "String", desc: "UUID." }} />
+<Method name="isAlive" signature="boolean isAlive()" description="Whether the entity is currently alive." returns={{ type: "boolean", desc: "True if alive." }} />
+<Method name="isLiving" signature="boolean isLiving()" description="Whether the entity is a living entity (and so carries health, armor, and effects)." returns={{ type: "boolean", desc: "True if living." }} />
+<Method name="isPlayer" signature="boolean isPlayer()" description="Whether the entity is a player." returns={{ type: "boolean", desc: "True if a player." }} />
+<Method name="getX" signature="double getX()" description="Returns the entity's world X coordinate." returns={{ type: "double", desc: "X coordinate." }} />
+<Method name="getY" signature="double getY()" description="Returns the entity's world Y coordinate." returns={{ type: "double", desc: "Y coordinate." }} />
+<Method name="getZ" signature="double getZ()" description="Returns the entity's world Z coordinate." returns={{ type: "double", desc: "Z coordinate." }} />
+<Method name="getYaw" signature="double getYaw()" description="Returns the entity's yaw rotation in degrees." returns={{ type: "double", desc: "Yaw in degrees." }} />
+<Method name="getPitch" signature="double getPitch()" description="Returns the entity's pitch rotation in degrees." returns={{ type: "double", desc: "Pitch in degrees." }} />
+<Method name="getHealth" signature="double getHealth()" description="Returns the entity's current health, or -1.0 if it is not a living entity." returns={{ type: "double", desc: "Health, or -1.0." }} />
+<Method name="getMaxHealth" signature="double getMaxHealth()" description="Returns the entity's maximum health, or -1.0 if it is not a living entity." returns={{ type: "double", desc: "Maximum health, or -1.0." }} />
+<Method name="getAbsorption" signature="double getAbsorption()" description="Returns the entity's absorption (golden hearts), or -1.0 if it is not a living entity." returns={{ type: "double", desc: "Absorption, or -1.0." }} />
+<Method name="getArmor" signature="int getArmor()" description="Returns the entity's armor points, or -1 if it is not a living entity." returns={{ type: "int", desc: "Armor points, or -1." }} />
+<Method name="getDistance" signature="double getDistance()" description="Returns the distance from the local player to this entity, or -1.0 if there is no local player." returns={{ type: "double", desc: "Distance in blocks, or -1.0." }} />
+<Method name="hasEffect" signature="boolean hasEffect(String name)" description="Whether the entity currently has the named status effect. Accepts 'speed' or 'minecraft:speed'." params={[{ name: "name", type: "String", desc: "Effect name, with or without the minecraft: namespace." }]} returns={{ type: "boolean", desc: "True if the effect is active." }} />
+<Method name="getEffect" signature="Effect getEffect(String name)" description="Returns the named active status effect, or null if the entity does not have it." params={[{ name: "name", type: "String", desc: "Effect name, with or without the minecraft: namespace." }]} returns={{ type: "Effect | null", desc: "The active effect, or null." }} />
+<Method name="getEffects" signature="List<Effect> getEffects()" description="Returns every status effect currently active on the entity. A List wrapper, not a JS array." returns={{ type: "List<Effect>", desc: "Active effects." }} />
+
+---
+
+## Effect
+
+One active status (potion) effect, from `player.getEffect(name)`,
+`player.getEffects()`, or the `Entity` equivalents. Backed by the `ScriptEffect`
+wrapper. Scripts do not construct one.
+
+<Callout type="warning">
+    **`getAmplifier()` is 0-based; `getLevel()` is 1-based.** Speed II is
+    amplifier `1` and level `2`. `getAmplifier()` matches vanilla's internal
+    value and is what movement math expects; `getLevel()` is the number players
+    read on the screen. Picking the wrong one is an off-by-one in every
+    calculation that follows.
+</Callout>
+
+<Callout type="info">
+    `getDurationSeconds()` returns **`-1` when the effect is infinite**. Check
+    `isInfinite()` before formatting a countdown, or the HUD reads "-1s".
+</Callout>
+
+```javascript
+const speed = player.getEffect("speed");
+if (speed !== null) {
+    // Speed II -> getLevel() is 2, getAmplifier() is 1.
+    const remaining = speed.isInfinite() ? "∞" : speed.getDurationSeconds() + "s";
+    client.print(speed.getName() + " " + speed.getLevel() + " (" + remaining + ")");
+}
+```
+
+<Method name="getId" signature="String getId()" description="Returns the namespaced effect identifier." returns={{ type: "String", desc: "e.g. 'minecraft:speed'." }} />
+<Method name="getName" signature="String getName()" description="Returns the localized display name of the effect." returns={{ type: "String", desc: "e.g. 'Speed'." }} />
+<Method name="getAmplifier" signature="int getAmplifier()" description="Returns the vanilla amplifier, counting from 0. Speed II is 1. This is the value movement math expects." returns={{ type: "int", desc: "Amplifier, 0-based." }} />
+<Method name="getLevel" signature="int getLevel()" description="Returns the display level, counting from 1. Speed II is 2. This is the value shown to players." returns={{ type: "int", desc: "Level, 1-based." }} />
+<Method name="getDuration" signature="int getDuration()" description="Returns the remaining duration in ticks." returns={{ type: "int", desc: "Remaining ticks." }} />
+<Method name="getDurationSeconds" signature="int getDurationSeconds()" description="Returns the remaining duration in seconds, or -1 if the effect is infinite." returns={{ type: "int", desc: "Remaining seconds, or -1 when infinite." }} />
+<Method name="isInfinite" signature="boolean isInfinite()" description="Whether the effect has an infinite duration." returns={{ type: "boolean", desc: "True if infinite." }} />
+<Method name="isAmbient" signature="boolean isAmbient()" description="Whether the effect comes from an ambient source, such as a beacon." returns={{ type: "boolean", desc: "True if ambient." }} />
+<Method name="getColor" signature="int getColor()" description="Returns the effect's particle color as a packed ARGB integer." returns={{ type: "int", desc: "Packed ARGB color." }} />
+
+---
+
+## ItemStack
+
+One inventory stack, from `inventory.getStack(slot)`,
+`inventory.getMainHandStack()`, or `inventory.getOffHandStack()`. Backed by the
+`ScriptItemStack` wrapper. Scripts do not construct one.
+
+```javascript
+const held = inventory.getMainHandStack();
+if (!held.isEmpty() && held.isDamageable()) {
+    const left = held.getMaxDamage() - held.getDamage();
+    client.print(held.getName() + ": " + left + " uses left");
+}
+```
+
+<Method name="isEmpty" signature="boolean isEmpty()" description="Whether the stack is empty (the air/none stack)." returns={{ type: "boolean", desc: "True if empty." }} />
+<Method name="getCount" signature="int getCount()" description="Returns the number of items in the stack." returns={{ type: "int", desc: "Stack count." }} />
+<Method name="getName" signature="String getName()" description="Returns the item's localized display name as a plain string." returns={{ type: "String", desc: "Display name." }} />
+<Method name="getId" signature="String getId()" description="Returns the namespaced item identifier." returns={{ type: "String", desc: "e.g. 'minecraft:diamond_sword'." }} />
+<Method name="isDamageable" signature="boolean isDamageable()" description="Whether the item has a durability bar." returns={{ type: "boolean", desc: "True if damageable." }} />
+<Method name="getDamage" signature="int getDamage()" description="Returns the damage already taken. 0 is undamaged." returns={{ type: "int", desc: "Damage taken." }} />
+<Method name="getMaxDamage" signature="int getMaxDamage()" description="Returns the item's maximum durability." returns={{ type: "int", desc: "Maximum durability." }} />
+<Method name="isBlock" signature="boolean isBlock()" description="Whether the item is a placeable block." returns={{ type: "boolean", desc: "True if a block item." }} />
+
+---
+
+## Box2D
+
+A screen-space rectangle, returned by `esp.getEntityBox2D()`. Backed by the
+`ScriptBox2D` wrapper. Scripts do not construct one. The rectangle is laid out
+as `(x, y, width, height)`, and exposes two equivalent spellings of the same
+box: the raw component names (`getX`/`getY`/`getZ`/`getW`) and the readable
+edge/size names (`getX1`/`getY1`/`getX2`/`getY2`, `getWidth`/`getHeight`).
+
+<Callout type="info">
+    `getZ()` is the **width** and `getW()` is the **height**, not the right and
+    bottom edges. For edges use `getX2()`/`getY2()`.
+</Callout>
+
+<Method name="getX" signature="double getX()" description="The left edge, in scaled GUI pixels." returns={{ type: "double", desc: "Left edge." }} />
+<Method name="getY" signature="double getY()" description="The top edge, in scaled GUI pixels." returns={{ type: "double", desc: "Top edge." }} />
+<Method name="getZ" signature="double getZ()" description="The raw third component: the box width. Same value as getWidth()." returns={{ type: "double", desc: "Width." }} />
+<Method name="getW" signature="double getW()" description="The raw fourth component: the box height. Same value as getHeight()." returns={{ type: "double", desc: "Height." }} />
+<Method name="getX1" signature="double getX1()" description="The left edge. Same value as getX()." returns={{ type: "double", desc: "Left edge." }} />
+<Method name="getY1" signature="double getY1()" description="The top edge. Same value as getY()." returns={{ type: "double", desc: "Top edge." }} />
+<Method name="getX2" signature="double getX2()" description="The right edge (left + width)." returns={{ type: "double", desc: "Right edge." }} />
+<Method name="getY2" signature="double getY2()" description="The bottom edge (top + height)." returns={{ type: "double", desc: "Bottom edge." }} />
+<Method name="getWidth" signature="double getWidth()" description="The box width, in scaled GUI pixels." returns={{ type: "double", desc: "Width." }} />
+<Method name="getHeight" signature="double getHeight()" description="The box height, in scaled GUI pixels." returns={{ type: "double", desc: "Height." }} />
+
+---
+
+## Box3D
+
+A world-space axis-aligned bounding box, returned by `player.getBoundingBox()`.
+Backed by the `ScriptBox3D` wrapper. Scripts do not construct one.
+
+<Method name="getMinX" signature="double getMinX()" description="The minimum X bound." returns={{ type: "double", desc: "Minimum X." }} />
+<Method name="getMinY" signature="double getMinY()" description="The minimum Y bound." returns={{ type: "double", desc: "Minimum Y." }} />
+<Method name="getMinZ" signature="double getMinZ()" description="The minimum Z bound." returns={{ type: "double", desc: "Minimum Z." }} />
+<Method name="getMaxX" signature="double getMaxX()" description="The maximum X bound." returns={{ type: "double", desc: "Maximum X." }} />
+<Method name="getMaxY" signature="double getMaxY()" description="The maximum Y bound." returns={{ type: "double", desc: "Maximum Y." }} />
+<Method name="getMaxZ" signature="double getMaxZ()" description="The maximum Z bound." returns={{ type: "double", desc: "Maximum Z." }} />
+<Method name="getWidth" signature="double getWidth()" description="The box size along X." returns={{ type: "double", desc: "Width." }} />
+<Method name="getHeight" signature="double getHeight()" description="The box size along Y." returns={{ type: "double", desc: "Height." }} />
+<Method name="getDepth" signature="double getDepth()" description="The box size along Z." returns={{ type: "double", desc: "Depth." }} />
+
+---
+
+## List
+
+Every collection the scripting API returns is a `List` wrapper (`ScriptList`),
+never a Java array and never a JavaScript array.
+
+<Callout type="warning">
+    **`.length`, `[i]` indexing, `for...of`, and `Array.from()` do not work on a
+    `List`.** They do not throw either: they silently evaluate to `undefined` or
+    an empty array, so a script that uses them appears to run and quietly does
+    nothing. Walk a list with `size()` and `get(i)`.
+</Callout>
+
+```javascript
+const list = world.getLivingEntitiesInRange(64);
+for (let i = 0; i < list.size(); i++) {
+    const entity = list.get(i);
+}
+```
+
+<Method name="size" signature="int size()" description="Returns the number of elements." returns={{ type: "int", desc: "Element count." }} />
+<Method name="isEmpty" signature="boolean isEmpty()" description="Whether the list has no elements." returns={{ type: "boolean", desc: "True if empty." }} />
+<Method name="get" signature="T get(int index)" description="Returns the element at the given index. Bounds-safe: an out-of-range index returns null rather than throwing." params={[{ name: "index", type: "int", desc: "Zero-based index." }]} returns={{ type: "T | null", desc: "The element, or null if out of range." }} />
+
+---
+
+## Image
+
+A loaded GPU image, returned by `renderer.loadImage(path)`. Backed by the
+`ScriptImage` wrapper. Scripts do not construct one. See
+[Renderer](../ui/renderer) for drawing.
+
+<Method name="isValid" signature="boolean isValid()" description="Whether the image loaded successfully. Check this before drawing: a failed load returns an invalid image rather than throwing." returns={{ type: "boolean", desc: "True if the image is usable." }} />
+<Method name="getWidth" signature="int getWidth()" description="Returns the image's pixel width." returns={{ type: "int", desc: "Width in pixels." }} />
+<Method name="getHeight" signature="int getHeight()" description="Returns the image's pixel height." returns={{ type: "int", desc: "Height in pixels." }} />
 
 ---
 
 ## MathHelper
 
-The raw `net.minecraft.util.Mth` math utility, bound as `MathHelper`.
+`MathHelper` is bound as a global, but **nothing on it is callable from a
+script**: it is a raw Minecraft type with no exported members, so every call
+against it is denied by the sandbox.
 
 <Callout type="warning">
-    `MathHelper` (`Mth`) is a raw Minecraft type. Its static methods are
-    intermediary-named at runtime, so they are not callable by readable name
-    from a script. For interpolation use `esp.lerp(start, end, tickDelta)`; for
-    general math prefer JavaScript's built-in `Math`.
+    Treat `MathHelper` as unavailable. Use JavaScript's built-in `Math` instead,
+    which covers `abs`, `floor`, `ceil`, `round`, `min`, `max`, `pow`, `sqrt`,
+    `hypot`, `random`, and the trigonometric functions. For interpolation use
+    `esp.lerp(start, end, tickDelta)`. The Minecraft-specific helpers scripts
+    need are exposed on the proxy globals themselves.
 </Callout>
 
 ---
 
 ## Color
 
-The standard `java.awt.Color`, bound as `Color`. Unlike the Minecraft types
-above, its methods are **not** intermediary-mapped, so they are callable
-directly. Use it as an alternative to `renderer.color(r, g, b, a)` for building
-packed ARGB integers.
+The standard `java.awt.Color`, bound as `Color`. Its two constructors and
+`getRGB()` are explicitly allow-listed by the sandbox, so they genuinely work.
+Use it as an alternative to `renderer.color(r, g, b, a)` for building packed
+ARGB integers.
 
 ```javascript
 const c = new Color(255, 80, 0, 200);

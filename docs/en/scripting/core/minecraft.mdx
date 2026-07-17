@@ -2,30 +2,39 @@
 
 **Global Binding:** `mc`
 
-A safe, structured facade over the Minecraft client. It exists so scripts can reach the client without touching intermediary-named fields (GraalVM JS would otherwise see `field_1724` instead of `player` under Fabric intermediary mappings).
+A safe, structured facade over the Minecraft client. It exists so scripts can reach the client through a curated, script-safe surface instead of raw Minecraft types, which the sandbox's host-access policy makes unreadable.
+
+<Callout type="warning">
+    **Getters must be called, not read as properties.** The sandbox does no bean-property mapping, so `mc.player` is **`undefined`**, not the player. That makes `mc.player === null` permanently **false**: it is a no-op guard that never fires. Write `mc.getPlayer() === null` instead. The same applies to `mc.world`.
+</Callout>
 
 <Callout type="info">
-    `mc.player` and `mc.world` are exposed for **null checks only**. For actual player/world behavior, use the dedicated `player` and `world` proxy globals; they return script-safe wrapper types instead of raw intermediary objects.
+    `mc.getPlayer()` and `mc.getWorld()` are intended for **null checks only**. For actual player/world behavior, use the dedicated `player` and `world` proxy globals; they return script-safe wrapper types instead of raw Minecraft objects.
 </Callout>
 
 ---
 
 ## Client Access
 
-<Method name="getPlayer" signature="LocalPlayer getPlayer()" description="Returns the local player entity, or null if not yet loaded. Intended for null-guard checks only, use the player global for state and movement methods." returns={{ type: "LocalPlayer | null", desc: "Local player, or null." }} />
+<Method name="getPlayer" signature="Entity getPlayer()" description="Returns the local player as an Entity wrapper, or null if not yet loaded. Use for null-guard checks; the player global carries the richer local-player state and movement methods." returns={{ type: "Entity | null", desc: "Local player, or null." }} />
 
-<Method name="getWorld" signature="ClientLevel getWorld()" description="Returns the active client world, or null if not yet loaded. Intended for null-guard checks only, use the world global for block and entity queries." returns={{ type: "ClientLevel | null", desc: "Client world, or null." }} />
+<Method name="getWorld" signature="ClientLevel getWorld()" description="Returns the active client world, or null if not yet loaded. An opaque token: comparing it against null works, but it exposes no readable members. Use the world global for block and entity queries." returns={{ type: "ClientLevel | null", desc: "Opaque world token, or null." }} />
 
-<Method name="getInteractionManager" signature="InteractionManagerProxy getInteractionManager()" description="Returns the interaction manager proxy. Kept for completeness; prefer the public field mc.interactionManager." returns={{ type: "InteractionManagerProxy", desc: "Interaction manager proxy." }} />
+<Method name="getInteractionManager" signature="InteractionManagerProxy getInteractionManager()" description="Returns the interaction manager proxy. Kept for completeness; prefer the field mc.interactionManager." returns={{ type: "InteractionManagerProxy", desc: "Interaction manager proxy." }} />
 
 <Callout type="info">
-    `mc.player`, `mc.world`, and `mc.interactionManager` are also readable as direct fields (GraalVM JS reads them via field access). `mc.player === null` is the idiomatic guard at the top of every event callback.
+    `mc.interactionManager` **is** readable as a direct field, because it is an exported field rather than a getter. It is the one property-style read on `mc` that works. `mc.getPlayer() === null` is the idiomatic guard at the top of every event callback.
+</Callout>
+
+<Callout type="warning">
+    `mc.getWorld()` returns an **opaque token**. Comparing it to `null` needs no member access, so the guard below is valid, but the returned value has no readable methods or fields. Every world query lives on the `world` global instead.
 </Callout>
 
 ```javascript
-module.on("preGameTick", (event) => {
+module.on("preGameTick", () => {
     // Standard guard: always null-check before doing anything.
-    if (mc.player === null || mc.world === null) return;
+    // Note the call — mc.player would be undefined, and the guard would never fire.
+    if (mc.getPlayer() === null || mc.getWorld() === null) return;
 
     client.print("Health: " + player.getHealth());
 });

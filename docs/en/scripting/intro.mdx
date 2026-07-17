@@ -126,17 +126,20 @@ Specific Java classes and constants are exposed globally. You do not need to imp
 
 | Global | Description |
 | :--- | :--- |
-| `Vec3d` | `net.minecraft.world.phys.Vec3` |
-| `Vec3i` | `net.minecraft.core.Vec3i` |
-| `Vec2f` | 2D float vector (wrapped as `ScriptVec2f`) |
-| `BlockPos` | Block position (wrapped as `ScriptBlockPos`, stable `getX/getY/getZ/offset`) |
-| `MathHelper` | `net.minecraft.util.Mth` |
-| `Color` | `java.awt.Color` |
-| `MAIN_HAND` / `OFF_HAND` | `InteractionHand` enum constants |
-| `keys` | GLFW key codes for palette-view key handlers (e.g. `keys.UP`) |
+| `Vec3d` | World vector (wrapped as `ScriptVec3`, readable `getX/getY/getZ`, plus vector math) |
+| `Vec2f` | Yaw/pitch rotation pair (wrapped as `ScriptVec2f`, readable `getYaw/getPitch`) |
+| `BlockPos` | Block position (wrapped as `ScriptBlockPos`, readable `getX/getY/getZ/offset`) |
+| `MathHelper` | Bound, but **nothing on it is callable**. Use JavaScript's `Math`. See [Types](world/types) |
+| `Color` | `java.awt.Color`; its constructors and `getRGB()` are allow-listed |
+| `MAIN_HAND` / `OFF_HAND` | `InteractionHand` constants; pass-through tokens for interaction calls |
+| `keys` | Key codes for binds and palette-view key handlers (e.g. `keys.F7`) |
 
 <Callout type="warning">
-    Accessing methods directly on `mc.player` or `mc.world` requires knowledge of Fabric's intermediary mappings, and those calls fail at runtime. Use the provided proxy globals (`player`, `world`, `inventory`, etc.) for all method calls. Use `mc.player` and `mc.world` only for null checks.
+    **Call getters; never read them as properties.** The sandbox does no bean-property mapping, so `mc.player` is `undefined`, not the player, and `if (mc.player === null)` is a guard that never fires. Write `mc.getPlayer() === null`. The same rule governs every wrapper: `vec.getX()`, never `vec.x`.
+</Callout>
+
+<Callout type="info">
+    `Java.type(...)` is **not available**, and that is deliberate and permanent: the sandbox refuses every script-initiated host class lookup. The globals above are the curated set of classes a script gets, and that closed surface is what makes the public script gallery safe to offer. Use the proxy globals (`player`, `world`, `inventory`, etc.) for all client access.
 </Callout>
 
 ## Available Globals
@@ -155,7 +158,8 @@ Specific Java classes and constants are exposed globally. You do not need to imp
 | `modules` | Query, toggle, and list all modules |
 | `notification` | Toast notifications (success, error, warn, info) |
 | `palette` | Custom command-palette views (mini-apps, games) |
-| `mc` | Null-safe access to Minecraft player/world/interactionManager |
+| `timer` | Millisecond timers for rate-limiting and delays |
+| `mc` | Null guards for player/world, plus `interactionManager` |
 
 See the **API Reference** pages for full method documentation.
 
@@ -178,7 +182,8 @@ See the **API Reference** pages for full method documentation.
 ## Tips
 
 - Community scripts stay in `scripts/pending` until you Trust & run them, even though every script runs sandboxed to the proxy API.
-- Null check `mc.player` before touching player data, since it's null in menus and loading screens.
+- Guard with `if (mc.getPlayer() === null) return;` before touching player data, since it's null in menus and loading screens. Call the getter: `mc.player` is `undefined`, so that guard silently never fires.
+- Collections are `List` wrappers: walk them with `size()` and `get(i)`. `.length` and `[i]` return `undefined` without throwing.
 - Use `renderScreen` for HUD drawing; renderer methods only work during render events.
 - Use `preGameTick` for logic that needs to run every tick (20 times a second).
 - Build colors with `renderer.color(...)` instead of raw `0xAARRGGBB` literals, since JS numbers narrow to `int` incorrectly.
