@@ -47,7 +47,7 @@ module.on("preGameTick", (event) => {
 <Method
     name="yawPos"
     signature="List&lt;double&gt; yawPos(float yaw, double value)"
-    description="Computes the X and Z offsets for a given yaw direction and distance. Returns a two-element List wrapper, not a JS array: read it with get(0) and get(1)."
+    description="Computes the X and Z offsets for a given yaw direction and distance. Returns a two-element read-only ScriptList: read it with offset[0]/offset[1] or get(0)/get(1)."
     params={[
         { name: "yaw", type: "float", desc: "The direction angle in degrees." },
         { name: "value", type: "double", desc: "The distance to project." }
@@ -55,14 +55,14 @@ module.on("preGameTick", (event) => {
     returns={{ type: "List<double>", desc: "A two-element list: get(0) is deltaX, get(1) is deltaZ." }}
 />
 
-<Callout type="warning">
-    `yawPos` returns a [`List`](../world/types#list), **not a JS array**. `offset[0]` evaluates to `undefined` without throwing, so the arithmetic that follows quietly becomes `NaN`. Read it with `get(0)` / `get(1)`.
+<Callout type="info">
+    `yawPos` returns a two-element read-only [`ScriptList`](../world/types#list). Index it (`offset[0]`, `offset[1]`) or use `get(0)` / `get(1)`; both read the same deltaX and deltaZ.
 </Callout>
 
 ```javascript
 // Project 1 block forward along the player's movement yaw.
 const offset = movement.yawPos(movement.getMoveYaw(), 1.0);
-client.print("dX=" + offset.get(0).toFixed(3) + " dZ=" + offset.get(1).toFixed(3));
+client.print("dX=" + offset[0].toFixed(3) + " dZ=" + offset[1].toFixed(3));
 ```
 
 <Method

@@ -1,0 +1,154 @@
+# The Sandbox
+
+Every script runs inside a locked GraalVM JavaScript context. The lock is the
+point: it is what lets Opal host a public script gallery where you can download
+and run someone else's script without auditing every line first. A script cannot
+read or write your files, open a network connection, start a thread, or reach any
+Minecraft or Opal class that a proxy global didn't hand it. Its entire reachable
+surface is the API documented in these pages.
+
+This page covers what that boundary refuses, and the few ways the refusal shows
+up while you write a script.
+
+---
+
+## What a script cannot do
+
+The context is built default-deny (`HostAccess.EXPLICIT`), with host class lookup
+and filesystem access both switched off. That buys you these guarantees:
+
+| Denied | What it means |
+| :--- | :--- |
+| **Filesystem** | No reading or writing files. There is no `require`, no `fs`, no path a script can open. |
+| **Network** | No sockets, no HTTP. A script has no class that opens a connection, and no way to import one. |
+| **Threads and processes** | A script cannot start a thread, spawn a process, or call native code. |
+| **`Java.type` / host classes** | `Java.type(...)` is denied outright, so a script cannot pull in an arbitrary Java class. The only classes it gets are the curated globals: `BlockPos`, `Vec2f`, `Vec3d`, `Color`. |
+| **Client internals** | A script reaches the Minecraft client only through the proxy globals. Anything a proxy doesn't expose is unreachable, not merely discouraged. |
+
+<Callout type="info">
+    `Java.type` being off is deliberate and permanent, not a missing feature. A
+    closed surface is what makes a downloaded script safe to run: its whole reach
+    is the documented API, so it can be read and reasoned about. Community scripts
+    are also quarantined to `opal/scripts/pending/` until you **Trust & run** them.
+</Callout>
+
+---
+
+## A script cannot freeze your game
+
+A script's event handlers run on the game thread, so a `while (true)` in one would
+once have hung Minecraft. It can't now. Every handler dispatch runs under a
+wall-clock budget of about 250ms; a handler that overruns is interrupted, its error
+is reported, and the script stays loaded. A runaway loop loses its own frame, not
+your session.
+
+<Callout type="info">
+    The budget interrupts JavaScript, so the one path to keep in mind is a chat
+    criteria pattern, whose matching runs as host code the budget cannot reach. That
+    path carries its own bound instead: a chat line over 1024 characters never
+    matches, and a template with more than 16 placeholders is rejected when you
+    compile it. See [Chat Criteria](core/client#chat-criteria).
+</Callout>
+
+---
+
+## Errors are located, and prints are readable
+
+Two things make debugging inside the sandbox less opaque.
+
+- **Errors carry a location.** A handler that throws reports
+  `MyScript.js:42: <message>`, with Opal's own internal frames collapsed to
+  `<internal>` rather than dumped. An error thrown at load time, before you join a
+  world, is held and surfaces when you join. A `registerScript` call missing a
+  required field names the field.
+- **`console.log` prints a readable form.** Every wrapper has a `toString()`, so
+  `console.log(vec)` prints `ScriptVec3(12.5, 64.0, -3.2)` and an entity prints
+  `ScriptEntity(Zombie #123 hp=20.0/20.0)`, not `JavaObject[...]`. `client.print(vec)`
+  shows the same in chat.
+
+---
+
+## The rule that governs every read
+
+Only a member marked `@HostAccess.Export` on Opal's own wrapper classes is visible
+to a script. Everything else is invisible, and here is the part that bites:
+**half of that invisibility is silent.**
+
+<Callout type="warning">
+    A property read on something the sandbox doesn't expose returns `undefined`.
+    It does not throw. A typo, a missing getter, or a raw Minecraft object all read
+    as `undefined`, your arithmetic turns to `NaN` or your guard never fires, and
+    nothing in the log tells you why.
+</Callout>
+
+| You write | You get |
+| :--- | :--- |
+| `obj.prop` on a raw Java or Minecraft object | `undefined`, no error |
+| an un-exported member | `undefined`, no error |
+| `obj.method()` on a raw object | throws `Unknown identifier: method` |
+
+A method call at least throws. A property read stays quiet, which is why the two
+mistakes below cost the most time.
+
+### `mc.player` does not exist
+
+The sandbox does no bean-property mapping, so a getter never doubles as a property.
+`mc.getPlayer()` works; `mc.player` reads `undefined`. That makes
+`if (mc.player === null) return;` a guard that never fires, because
+`undefined === null` is `false`, so the handler runs on with no player.
+
+```javascript
+// Wrong: mc.player is undefined, so the guard never returns.
+if (mc.player === null) return;
+
+// Right: call the getter.
+if (mc.getPlayer() === null || mc.getWorld() === null) return;
+```
+
+The same rule governs every wrapper: write `vec.getX()`, never `vec.x`.
+
+### Exported fields, though, do read as properties
+
+The no-bean-mapping rule is about getters, not fields. A field marked
+`@HostAccess.Export` reads as a plain property, which is why `keys.F1` gives you a
+key code and `mc.interactionManager` gives you the interaction proxy: both are
+exported fields, not getters. `mc.interactionManager` and
+`mc.getInteractionManager()` are both correct. When something reads fine as a
+property it is an exported field; when it only answers as a call it is a method.
+
+---
+
+## `MathHelper` is a dead global
+
+`MathHelper` is bound, but it is the raw Minecraft `Mth` class with nothing
+exported, so every call on it is denied. Treat it as unavailable. JavaScript's
+built-in `Math` covers `abs`, `floor`, `ceil`, `round`, `min`, `max`, `pow`,
+`sqrt`, `hypot`, `random`, and the trig functions; for interpolation use
+`esp.lerp(start, end, tickDelta)`.
+
+---
+
+## What works the way you expect
+
+The sandbox shapes the API, but much of it behaves like ordinary JavaScript:
+
+- **`ScriptList` is a real, read-only array.** Every collection method
+  (`world.getEntities()`, `world.getLivingEntitiesInRange()`, `modules.listAll()`,
+  `player.getEffects()`, `renderer.wrapText()`, `movement.yawPos()`) hands back a
+  `ScriptList`. It reports a `length`, answers `list[0]`, and iterates under
+  `for..of` and spread, alongside the `size()`/`isEmpty()`/`get(i)` methods. You
+  cannot write through it, and the `Array.prototype` helpers such as `map` and
+  `filter` are not on it; spread into a real array first when you need them:
+  `[...list].map(...)`.
+- **`Color` works.** `java.awt.Color`'s constructors and `getRGB()` are
+  allow-listed, so `new Color(r, g, b, a).getRGB()` builds a packed ARGB color.
+- **Everything the docs list is reachable.** If a page documents a member, the
+  sandbox exports it. If it doesn't, the member isn't there, so read the reference
+  rather than guessing method names.
+
+```javascript
+const entities = world.getLivingEntitiesInRange(16);
+for (const entity of entities) {
+    client.print(entity.getName() + ": " + entity.getHealth());
+}
+```

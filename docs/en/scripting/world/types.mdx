@@ -145,8 +145,7 @@ hand back. Backed by the `ScriptEntity` wrapper. Scripts do not construct one.
 
 ```javascript
 const targets = world.getLivingEntitiesInRange(16);
-for (let i = 0; i < targets.size(); i++) {
-    const entity = targets.get(i);
+for (const entity of targets) {
     client.print(entity.getName() + ": " + entity.getHealth() + " HP");
 }
 ```
@@ -169,7 +168,7 @@ for (let i = 0; i < targets.size(); i++) {
 <Method name="getDistance" signature="double getDistance()" description="Returns the distance from the local player to this entity, or -1.0 if there is no local player." returns={{ type: "double", desc: "Distance in blocks, or -1.0." }} />
 <Method name="hasEffect" signature="boolean hasEffect(String name)" description="Whether the entity currently has the named status effect. Accepts 'speed' or 'minecraft:speed'." params={[{ name: "name", type: "String", desc: "Effect name, with or without the minecraft: namespace." }]} returns={{ type: "boolean", desc: "True if the effect is active." }} />
 <Method name="getEffect" signature="Effect getEffect(String name)" description="Returns the named active status effect, or null if the entity does not have it." params={[{ name: "name", type: "String", desc: "Effect name, with or without the minecraft: namespace." }]} returns={{ type: "Effect | null", desc: "The active effect, or null." }} />
-<Method name="getEffects" signature="List<Effect> getEffects()" description="Returns every status effect currently active on the entity. A List wrapper, not a JS array." returns={{ type: "List<Effect>", desc: "Active effects." }} />
+<Method name="getEffects" signature="List<Effect> getEffects()" description="Returns every status effect currently active on the entity. A read-only ScriptList: iterate it with for..of or index it, and size()/get(i) also work." returns={{ type: "List<Effect>", desc: "Active effects." }} />
 
 ---
 
@@ -283,21 +282,25 @@ Backed by the `ScriptBox3D` wrapper. Scripts do not construct one.
 
 ## List
 
-Every collection the scripting API returns is a `List` wrapper (`ScriptList`),
-never a Java array and never a JavaScript array.
+Every collection the scripting API returns is a read-only `ScriptList`. It reads
+as a real JavaScript array: `.length`, `list[i]`, `for..of`, spread, and
+`Array.from()` all work, alongside the `size()`/`isEmpty()`/`get(i)` methods.
 
-<Callout type="warning">
-    **`.length`, `[i]` indexing, `for...of`, and `Array.from()` do not work on a
-    `List`.** They do not throw either: they silently evaluate to `undefined` or
-    an empty array, so a script that uses them appears to run and quietly does
-    nothing. Walk a list with `size()` and `get(i)`.
+<Callout type="info">
+    A `ScriptList` is **read-only and not a full `Array`**. Writing through it
+    (`list[0] = x`, `.push(...)`) throws, and the `Array.prototype` helpers
+    (`.map`, `.filter`, `.forEach`) are not on it. Spread into a real array when
+    you need them: `[...list].map(...)`.
 </Callout>
 
 ```javascript
 const list = world.getLivingEntitiesInRange(64);
-for (let i = 0; i < list.size(); i++) {
-    const entity = list.get(i);
+for (const entity of list) {
+    client.print(entity.getName());
 }
+
+// Index access and size()/get(i) both work.
+const first = list.length > 0 ? list[0] : null;
 ```
 
 <Method name="size" signature="int size()" description="Returns the number of elements." returns={{ type: "int", desc: "Element count." }} />
