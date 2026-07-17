@@ -145,6 +145,54 @@ There are four setting types and a grouping helper:
 
 ---
 
+## Keybinds
+
+A script module can bind itself to a key, exactly like a native module. Codes come from the `keys` global.
+
+<Callout type="warning">
+    A `setBind` call during script load is a **default, not an override**. A bind the user has saved, or sets in-session through the binds menu, is applied afterwards and wins. Use it to ship a sensible starting key, not to force one.
+</Callout>
+
+<Method
+    name="setBind"
+    signature="void setBind(int code)"
+    description="Binds this module to a key, replacing any previous bind. Codes below 10 are treated as mouse buttons. A negative code (such as keys.NONE) leaves the module unbound."
+    params={[
+        { name: "code", type: "int", desc: "A code from the keys global, or keys.NONE to unbind." }
+    ]}
+/>
+
+<Method
+    name="getBind"
+    signature="int getBind()"
+    description="Returns this module's bound key code, or keys.NONE (-2) when it is unbound."
+    returns={{ type: "int", desc: "The bound key code, or -2 when unbound." }}
+/>
+
+<Method
+    name="clearBind"
+    signature="void clearBind()"
+    description="Removes this module's bind. Equivalent to setBind(keys.NONE)."
+/>
+
+```javascript
+script.registerModule({ name: "MyModule", description: "..." }, (module) => {
+    module.setBind(keys.F7);            // default bind; a saved user bind still wins
+
+    module.on("enable", () => {
+        if (module.getBind() === keys.NONE) {
+            client.print("Unbound — set a key in the binds menu");
+        }
+    });
+});
+```
+
+<Callout type="info">
+    `keys` covers `A`–`Z`, `NUM_0`–`NUM_9`, `F1`–`F12`, the arrows (`UP`/`DOWN`/`LEFT`/`RIGHT`), `SPACE`, `ENTER`, `ESCAPE`, `TAB`, `BACKSPACE`, `LEFT_SHIFT`, `LEFT_CONTROL`, the mouse buttons `MOUSE_0`–`MOUSE_4`, and `NONE` (`-2`).
+</Callout>
+
+---
+
 ## Worked example
 
 This module defines a toggle, a slider, and a dropdown, groups two of them, then reads every value back inside a tick handler.

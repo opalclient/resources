@@ -14,7 +14,7 @@ Wraps the internal `SlotHelper` system used by Scaffold and other modules for se
 </Callout>
 
 <Callout type="warning">
-    All methods read `mc.player` without a null guard. Always confirm the player exists before calling (e.g. `if (mc.player === null) return;`) to avoid errors when not in a world.
+    All methods read the local player without a null guard. Always confirm the player exists before calling (`if (mc.getPlayer() === null) return;`) to avoid errors when not in a world. Note the call: `mc.player` reads as `undefined`, so a `mc.player === null` guard never fires.
 </Callout>
 
 ### Slot Switching
@@ -64,7 +64,7 @@ Wraps the internal `SlotHelper` system used by Scaffold and other modules for se
 
 ```javascript
 module.on("preGameTick", (event) => {
-    if (mc.player === null) return;
+    if (mc.getPlayer() === null) return;
 
     const blockSlot = inventory.findBlock();
     if (blockSlot !== -1) {
@@ -104,7 +104,7 @@ module.on("preGameTick", (event) => {
 />
 
 ```javascript
-if (mc.player === null) return;
+if (mc.getPlayer() === null) return;
 
 const swordSlot = inventory.findItem("sword");
 if (swordSlot !== -1) {
@@ -117,10 +117,14 @@ client.print("Totem at inventory slot " + totemSlot);
 
 ### Stack Inspection
 
+<Callout type="info">
+    The stack getters return an [`ItemStack`](../world/types#itemstack) wrapper. Read it with `isEmpty()`, `getName()`, `getId()`, `getCount()`, `isBlock()`, and the durability getters (`isDamageable()`, `getDamage()`, `getMaxDamage()`). It has no readable properties: use the getters.
+</Callout>
+
 <Method
     name="getStack"
     signature="ItemStack getStack(int slot)"
-    description="Returns the ItemStack in the specified hotbar slot."
+    description="Returns the ItemStack wrapper for the specified hotbar slot. Read it with isEmpty(), getName(), getId(), getCount(), and the durability getters."
     params={[
         { name: "slot", type: "int", desc: "The hotbar slot index (0-8)." }
     ]}
@@ -197,7 +201,7 @@ client.print("Totem at inventory slot " + totemSlot);
 
 ```javascript
 module.on("preGameTick", (event) => {
-    if (mc.player === null) return;
+    if (mc.getPlayer() === null) return;
 
     const blocks = inventory.countBlocks();
     if (blocks < 16) {

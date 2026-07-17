@@ -46,19 +46,23 @@ module.on("preGameTick", (event) => {
 
 <Method
     name="yawPos"
-    signature="double[] yawPos(float yaw, double value)"
-    description="Computes the X and Z offsets for a given yaw direction and distance."
+    signature="List&lt;double&gt; yawPos(float yaw, double value)"
+    description="Computes the X and Z offsets for a given yaw direction and distance. Returns a two-element List wrapper, not a JS array: read it with get(0) and get(1)."
     params={[
         { name: "yaw", type: "float", desc: "The direction angle in degrees." },
         { name: "value", type: "double", desc: "The distance to project." }
     ]}
-    returns={{ type: "double[]", desc: "A two-element array [deltaX, deltaZ]." }}
+    returns={{ type: "List<double>", desc: "A two-element list: get(0) is deltaX, get(1) is deltaZ." }}
 />
+
+<Callout type="warning">
+    `yawPos` returns a [`List`](../world/types#list), **not a JS array**. `offset[0]` evaluates to `undefined` without throwing, so the arithmetic that follows quietly becomes `NaN`. Read it with `get(0)` / `get(1)`.
+</Callout>
 
 ```javascript
 // Project 1 block forward along the player's movement yaw.
 const offset = movement.yawPos(movement.getMoveYaw(), 1.0);
-client.print("dX=" + offset[0].toFixed(3) + " dZ=" + offset[1].toFixed(3));
+client.print("dX=" + offset.get(0).toFixed(3) + " dZ=" + offset.get(1).toFixed(3));
 ```
 
 <Method
@@ -136,14 +140,26 @@ movement.setSpeed(movement.getSwiftnessSpeed(base));
 
 <Method
     name="getMoveYaw"
-    signature="float getMoveYaw(Vector2d from, Vector2d to)"
-    description="Calculates the movement yaw between two 2D positions."
+    signature="float getMoveYaw(double fromX, double fromZ, double toX, double toZ)"
+    description="Calculates the movement yaw from one horizontal world position to another. Takes plain numbers, and the pairs are world X and Z (not X and Y)."
     params={[
-        { name: "from", type: "Vector2d", desc: "The starting position." },
-        { name: "to", type: "Vector2d", desc: "The ending position." }
+        { name: "fromX", type: "double", desc: "The starting world X coordinate." },
+        { name: "fromZ", type: "double", desc: "The starting world Z coordinate." },
+        { name: "toX", type: "double", desc: "The target world X coordinate." },
+        { name: "toZ", type: "double", desc: "The target world Z coordinate." }
     ]}
     returns={{ type: "float", desc: "The yaw angle in degrees." }}
 />
+
+<Callout type="info">
+    This overload takes four plain numbers, and both pairs are **world X and Z** — the horizontal plane. Passing a Y coordinate gives a meaningless yaw.
+</Callout>
+
+```javascript
+// Yaw from the player toward a target block's column.
+const pos = player.getPosition();
+const yaw = movement.getMoveYaw(pos.getX(), pos.getZ(), 100.0, -240.0);
+```
 
 <Method
     name="getMoveYaw"

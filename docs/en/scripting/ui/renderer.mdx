@@ -329,24 +329,24 @@ renderer.roundedRect(x, y, w, h, 8, renderer.color(20, 20, 28, 120));
 
 ## Images
 
-Images load once into a GPU handle and draw by that handle. The renderer caches loaded images, so calling `loadImage` repeatedly with the same path is cheap.
+Images load once into an [`Image`](../world/types#image) and draw by that value. The renderer caches loaded images, so calling `loadImage` repeatedly with the same path is cheap. `isValid()`, `getWidth()`, and `getHeight()` are callable on it.
 
 <Method
     name="loadImage"
-    signature="GpuImageHandle loadImage(String path)"
-    description="Loads an image from the client's resource path and returns a GPU handle for drawing. Returns GpuImageHandle.NONE on failure rather than throwing: check handle.isValid() before drawing."
+    signature="Image loadImage(String path)"
+    description="Loads an image from the client's resource path and returns it for drawing. Returns an invalid image on failure rather than throwing: check image.isValid() before drawing."
     params={[
         { name: "path", type: "String", desc: "Resource-relative image path." }
     ]}
-    returns={{ type: "GpuImageHandle", desc: "The loaded handle, or GpuImageHandle.NONE if it could not be loaded." }}
+    returns={{ type: "Image", desc: "The loaded image, or an invalid image if it could not be loaded." }}
 />
 
 <Method
     name="image"
-    signature="void image(GpuImageHandle handle, double x, double y, double width, double height, double radius)"
+    signature="void image(Image image, double x, double y, double width, double height, double radius)"
     description="Draws a loaded image within the given bounds with optional corner rounding."
     params={[
-        { name: "handle", type: "GpuImageHandle", desc: "Handle obtained from loadImage." },
+        { name: "image", type: "Image", desc: "Image obtained from loadImage." },
         { name: "x", type: "double", desc: "Left edge in scaled pixels." },
         { name: "y", type: "double", desc: "Top edge in scaled pixels." },
         { name: "width", type: "double", desc: "Destination width." },
@@ -357,10 +357,10 @@ Images load once into a GPU handle and draw by that handle. The renderer caches 
 
 <Method
     name="imageTinted"
-    signature="void imageTinted(GpuImageHandle handle, double x, double y, double width, double height, double radius, double tint)"
+    signature="void imageTinted(Image image, double x, double y, double width, double height, double radius, double tint)"
     description="Draws a loaded image multiplied by a tint color, useful for recoloring icons or fading images."
     params={[
-        { name: "handle", type: "GpuImageHandle", desc: "Handle obtained from loadImage." },
+        { name: "image", type: "Image", desc: "Image obtained from loadImage." },
         { name: "x", type: "double", desc: "Left edge in scaled pixels." },
         { name: "y", type: "double", desc: "Top edge in scaled pixels." },
         { name: "width", type: "double", desc: "Destination width." },
@@ -372,10 +372,10 @@ Images load once into a GPU handle and draw by that handle. The renderer caches 
 
 <Method
     name="destroyImage"
-    signature="void destroyImage(GpuImageHandle handle)"
+    signature="void destroyImage(Image image)"
     description="Releases a GPU image previously obtained from loadImage and frees its backend resources."
     params={[
-        { name: "handle", type: "GpuImageHandle", desc: "Handle obtained from loadImage." }
+        { name: "image", type: "Image", desc: "Image obtained from loadImage." }
     ]}
 />
 
@@ -587,16 +587,30 @@ renderer.stroke();
 
 <Method
     name="wrapText"
-    signature="List<String> wrapText(String fontName, String text, double width, double size)"
-    description="Wraps a string into lines that each fit within the given width. The result is exposed to scripts as a JS array (.length and index access work)."
+    signature="List&lt;String&gt; wrapText(String fontName, String text, double width, double size)"
+    description="Wraps a string into lines that each fit within the given width. Returns a List wrapper, not a JS array: walk it with size() and get(i)."
     params={[
         { name: "fontName", type: "String", desc: "Registered font name." },
         { name: "text", type: "String", desc: "The text to wrap." },
         { name: "width", type: "double", desc: "Maximum line width in scaled pixels." },
         { name: "size", type: "double", desc: "Font size." }
     ]}
-    returns={{ type: "List<String>", desc: "The wrapped lines in order." }}
+    returns={{ type: "List<String>", desc: "The wrapped lines in order. A List wrapper: use size() and get(i)." }}
 />
+
+<Callout type="warning">
+    `wrapText` returns a [`List`](../world/types#list), **not a JavaScript array**. `.length` and index access evaluate to `undefined` without throwing, so a loop over `.length` runs zero times and no text is drawn.
+</Callout>
+
+```javascript
+module.on("renderScreen", () => {
+    const lines = renderer.wrapText("productsans-bold", longMessage, 120, 8);
+    for (let i = 0; i < lines.size(); i++) {
+        renderer.text("productsans-bold", lines.get(i),
+            10, 10 + i * 10, 8, renderer.color(255, 255, 255));
+    }
+});
+```
 
 <Method
     name="trimText"

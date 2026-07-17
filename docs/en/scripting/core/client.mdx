@@ -38,17 +38,35 @@ Provides access to high-level client functions, including module management, cha
     ]}
 />
 
-### Module Access
+<Callout type="info">
+    `print`, `success`, and `error` are **local only**: they render in your own chat and send nothing to the server. To actually talk to the server, use `sendChat` / `runCommand` below.
+</Callout>
 
 <Method
-    name="getModule"
-    signature="Module getModule(String id)"
-    description="Retrieves a registered module by its display name (case-insensitive). Throws if not found."
+    name="sendChat"
+    signature="void sendChat(String message)"
+    description="Sends a chat message to the server as though the local player typed it."
     params={[
-        { name: "id", type: "String", desc: "The module name (e.g., 'KillAura')." }
+        { name: "message", type: "String", desc: "The message to send." }
     ]}
-    returns={{ type: "Module", desc: "The module instance." }}
 />
+
+<Method
+    name="runCommand"
+    signature="void runCommand(String command)"
+    description="Runs a command as the local player. Pass the command without its leading slash."
+    params={[
+        { name: "command", type: "String", desc: "The command to run, with no leading slash (e.g. 'spawn')." }
+    ]}
+/>
+
+```javascript
+client.print("Only I can see this");     // local
+client.sendChat("gg");                   // sent to the server
+client.runCommand("spawn");              // no leading slash
+```
+
+### Module Access
 
 <Method
     name="isModuleEnabled"
@@ -71,7 +89,11 @@ Provides access to high-level client functions, including module management, cha
 />
 
 <Callout type="info">
-    For metadata lookups, category listings, and bulk operations, use the [Modules Proxy](modules) instead. `client.getModule`/`isModuleEnabled`/`setModuleEnabled` cover the common single-module case.
+    `client.isModuleEnabled` / `setModuleEnabled` cover the common single-module case. For metadata lookups, category listings, and bulk operations, use the [Modules Proxy](modules) instead.
+</Callout>
+
+<Callout type="warning">
+    There is no `client.getModule(id)`. It returned a raw module the sandbox exposes nothing on, so every call against the returned value failed. Toggle modules by id with `client.setModuleEnabled(id, enabled)` or the `modules` proxy (`modules.toggle`, `modules.setEnabled`) instead.
 </Callout>
 
 ### Screen & Display

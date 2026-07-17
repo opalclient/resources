@@ -6,12 +6,12 @@ A script module registers behaviour by attaching JavaScript handlers to named ev
 
 ## Registering Handlers
 
-Inside a `registerModule` callback, call `module.on(eventName, handler)` for each event you want to react to. The handler is invoked with the Java event object as its only argument, except for `enable` and `disable`, which receive no argument.
+Inside a `registerModule` callback, call `module.on(eventName, handler)` for each event you want to react to. Events that carry data pass a payload object as the handler's only argument; the rest pass nothing your handler can read, so write those handlers with no parameter.
 
 <Method
     name="on"
     signature="void on(String event, Function handler)"
-    description="Registers a JavaScript callback for the named event. The callback receives the event object as its only argument (lifecycle events receive nothing)."
+    description="Registers a JavaScript callback for the named event. Data-carrying events pass a payload object as the only argument; the rest pass nothing readable."
     params={[
         { name: "event", type: "String", desc: "The event name (e.g. 'preGameTick'). See the tables below." },
         { name: "handler", type: "Function", desc: "The JS function to run when the event fires." }
@@ -28,8 +28,8 @@ script.registerModule({ name: "Example", description: "Event demo" }, (module) =
         client.print("Module enabled!");
     });
 
-    module.on("preGameTick", (event) => {
-        if (mc.player === null || mc.world === null) return;
+    module.on("preGameTick", () => {
+        if (mc.getPlayer() === null || mc.getWorld() === null) return;
         // logic runs 20 times per second
     });
 
@@ -39,8 +39,12 @@ script.registerModule({ name: "Example", description: "Event demo" }, (module) =
 });
 ```
 
-<Callout type="info">
-    Most events are plain Java objects whose fields are read through `getX()` getters (`event.getTarget()`, `event.getPos()`). A few are Java **records** whose fields are read through bare accessors with no `get` prefix (`event.hand()`, `event.tickDelta()`). The record events are `renderScreen`, `renderWorld`, `renderBloom`, and `swing`.
+<Callout type="warning">
+    **Every payload is read through `getX()` getters, and only the getters listed on this page exist.** There are no bare record accessors (`event.hand()`, `event.tickDelta()`) and no readable properties: the scripting sandbox exposes only what each payload explicitly declares. Anything else either throws `Unknown identifier` or evaluates to `undefined`.
+</Callout>
+
+<Callout type="warning">
+    The events that **carry no readable data at all** are `preGameTick`, `postGameTick`, `renderScreen`, `renderWorld`, `renderBloom`, `joinWorld`, `itemUse`, `serverDisconnect`, and `resolutionChange`. Write their handlers with no parameter. For the partial tick inside a render event, call `client.getTickDelta()`.
 </Callout>
 
 ## Lifecycle Events
@@ -59,60 +63,61 @@ module.on("disable", () => notification.info("Example", "Stopped"));
 
 ## Game Tick Events
 
-Fired around the 20 TPS client tick. Both pass an event object, but neither object carries any data. They are timing hooks for game logic.
+Fired around the 20 TPS client tick. Neither carries any readable data: they are pure timing hooks for game logic, so write their handlers with no parameter.
 
 | Event | Payload | Fires when |
 | :--- | :--- | :--- |
-| `preGameTick` | `PreGameTickEvent` | At the start of a tick, before vanilla tick logic runs. Ideal for logic updates. |
-| `postGameTick` | `PostGameTickEvent` | At the end of a tick, after vanilla tick logic has run. Symmetric with `preGameTick`. |
+| `preGameTick` | _(no readable data)_ | At the start of a tick, before vanilla tick logic runs. Ideal for logic updates. |
+| `postGameTick` | _(no readable data)_ | At the end of a tick, after vanilla tick logic has run. Symmetric with `preGameTick`. |
 
 ```javascript
-module.on("preGameTick", (event) => {
-    if (mc.player === null || mc.world === null) return;
+module.on("preGameTick", () => {
+    if (mc.getPlayer() === null || mc.getWorld() === null) return;
     if (player.getHealth() < 5) {
         notification.warn("Low HP", "Health below 5!");
     }
 });
 
-module.on("postGameTick", (event) => {
+module.on("postGameTick", () => {
     // end-of-tick cleanup
 });
 ```
 
 ## Render Events
 
-Fired every frame. Draw with the `renderer` proxy here. All three are records, so read their fields with bare accessors.
+Fired every frame. Draw with the `renderer` proxy here.
 
 | Event | Payload | Fires when |
 | :--- | :--- | :--- |
-| `renderScreen` | `RenderScreenEvent` | During the 2D HUD pass. Use for screen-space overlays. |
-| `renderWorld` | `RenderWorldEvent` | During the 3D world pass. Use for world-space drawing (`esp.*` projection). |
-| `renderBloom` | `RenderBloomEvent` | During the HUD bloom pass. Shapes drawn here feed the glow/bloom effect rather than showing directly. |
+| `renderScreen` | _(no readable data)_ | During the 2D HUD pass. Use for screen-space overlays. |
+| `renderWorld` | _(no readable data)_ | During the 3D world pass. Use for world-space drawing (`esp.*` projection). |
+| `renderBloom` | _(no readable data)_ | During the HUD bloom pass. Shapes drawn here feed the glow/bloom effect rather than showing directly. |
 
-<Method name="drawContext" signature="GuiGraphicsExtractor drawContext()" description="renderScreen / renderBloom: the GUI graphics extractor for the current frame." returns={{ type: "GuiGraphicsExtractor", desc: "Frame draw context." }} />
+<Callout type="warning">
+    **Render event payloads expose nothing.** `drawContext()`, `canvas()`, `mouseX()`, `mouseY()`, `matrixStack()`, and `tickDelta()` all **throw** if you call them: the render events declare no script-readable members. Write these handlers with no parameter.
+</Callout>
 
-<Method name="canvas" signature="RenderCanvas canvas()" description="renderScreen / renderBloom: the render canvas for the pass (the bloom target for renderBloom)." returns={{ type: "RenderCanvas", desc: "Render canvas." }} />
+<Callout type="info">
+    Everything a render handler needs is on the globals instead:
 
-<Method name="mouseX" signature="double mouseX()" description="renderScreen: the cursor X position in GUI-scaled coordinates." returns={{ type: "double", desc: "Cursor X." }} />
-
-<Method name="mouseY" signature="double mouseY()" description="renderScreen: the cursor Y position in GUI-scaled coordinates." returns={{ type: "double", desc: "Cursor Y." }} />
-
-<Method name="matrixStack" signature="PoseStack matrixStack()" description="renderWorld: the camera-relative transform stack (pre-multiplied by the camera view rotation)." returns={{ type: "PoseStack", desc: "Camera-space pose stack." }} />
-
-<Method name="tickDelta" signature="float tickDelta()" description="renderScreen / renderWorld / renderBloom: fractional progress through the current tick, for smooth interpolation." returns={{ type: "float", desc: "Partial tick (0.0 to 1.0)." }} />
+    - **Partial tick** — `client.getTickDelta()`, not `event.tickDelta()`.
+    - **Draw context** — implicit; the `renderer` proxy targets the open pass automatically.
+    - **Screen size** — `client.getScaledWidth()` / `client.getScaledHeight()`.
+    - **World projection** — the `esp` proxy, which handles the camera transform itself.
+</Callout>
 
 <Callout type="warning">
     Colors are 32-bit ARGB ints, but JavaScript has only one number type: the IEEE-754 `double`. A literal like `0xFF1a1a1a` is `4278190080`, which is larger than `2^31`; narrowing that double to a Java `int` truncates to the wrong value. Build colors with `renderer.color(r, g, b)` or `renderer.color(r, g, b, a)` instead of raw `0xAARRGGBB` literals.
 </Callout>
 
 ```javascript
-module.on("renderScreen", (event) => {
+module.on("renderScreen", () => {
     renderer.roundedRect(10, 10, 120, 24, 4, renderer.color(0, 0, 0, 180));
     renderer.text("productsans-bold", "FPS: " + client.getFPS(), 18, 24, 8, renderer.color(255, 255, 255));
 });
 
-module.on("renderWorld", (event) => {
-    const delta = event.tickDelta();
+module.on("renderWorld", () => {
+    const delta = client.getTickDelta();   // not event.tickDelta(), which throws
     // use esp.* for 3D-to-2D projection here
 });
 ```
@@ -130,9 +135,17 @@ Fired around the player's per-tick movement and the movement packet sent to the 
 
 ### Move payload (`preMove` / `postMove`)
 
-<Method name="getSpeed" signature="float getSpeed()" description="The movement speed for the step." returns={{ type: "float", desc: "Movement speed." }} />
+<Method name="getSpeed" signature="double getSpeed()" description="The movement speed for the step." returns={{ type: "double", desc: "Movement speed." }} />
 
-<Method name="getMovementInput" signature="Vec3 getMovementInput()" description="The directional movement vector for the step." returns={{ type: "Vec3", desc: "Directional input vector." }} />
+<Method name="getInputX" signature="double getInputX()" description="The X component of the directional movement input for the step." returns={{ type: "double", desc: "Input X." }} />
+
+<Method name="getInputY" signature="double getInputY()" description="The Y component of the directional movement input for the step." returns={{ type: "double", desc: "Input Y." }} />
+
+<Method name="getInputZ" signature="double getInputZ()" description="The Z component of the directional movement input for the step." returns={{ type: "double", desc: "Input Z." }} />
+
+<Callout type="info">
+    The movement input is read as three separate components, not as a vector: there is no `getMovementInput()`. `postMove` exposes the same four getters and cannot be cancelled.
+</Callout>
 
 ### Movement-packet payload (`preMovementPacket`)
 
@@ -144,10 +157,10 @@ Getters read the values about to be sent; setters rewrite them before the packet
 <Method name="setX" signature="void setX(double x)" description="Overrides the X coordinate to report." params={[{ name: "x", type: "double", desc: "New X." }]} />
 <Method name="setY" signature="void setY(double y)" description="Overrides the Y coordinate to report." params={[{ name: "y", type: "double", desc: "New Y." }]} />
 <Method name="setZ" signature="void setZ(double z)" description="Overrides the Z coordinate to report." params={[{ name: "z", type: "double", desc: "New Z." }]} />
-<Method name="getYaw" signature="float getYaw()" description="The yaw rotation reported to the server." returns={{ type: "float", desc: "Yaw." }} />
-<Method name="getPitch" signature="float getPitch()" description="The pitch rotation reported to the server." returns={{ type: "float", desc: "Pitch." }} />
-<Method name="setYaw" signature="void setYaw(float yaw)" description="Overrides the yaw rotation (server-side rotation spoofing)." params={[{ name: "yaw", type: "float", desc: "New yaw." }]} />
-<Method name="setPitch" signature="void setPitch(float pitch)" description="Overrides the pitch rotation (server-side rotation spoofing)." params={[{ name: "pitch", type: "float", desc: "New pitch." }]} />
+<Method name="getYaw" signature="double getYaw()" description="The yaw rotation reported to the server." returns={{ type: "double", desc: "Yaw." }} />
+<Method name="getPitch" signature="double getPitch()" description="The pitch rotation reported to the server." returns={{ type: "double", desc: "Pitch." }} />
+<Method name="setYaw" signature="void setYaw(double yaw)" description="Overrides the yaw rotation (server-side rotation spoofing)." params={[{ name: "yaw", type: "double", desc: "New yaw." }]} />
+<Method name="setPitch" signature="void setPitch(double pitch)" description="Overrides the pitch rotation (server-side rotation spoofing)." params={[{ name: "pitch", type: "double", desc: "New pitch." }]} />
 <Method name="isOnGround" signature="boolean isOnGround()" description="Whether the player is reported as on the ground." returns={{ type: "boolean", desc: "On-ground flag." }} />
 <Method name="setOnGround" signature="void setOnGround(boolean onGround)" description="Overrides the on-ground flag." params={[{ name: "onGround", type: "boolean", desc: "New on-ground flag." }]} />
 <Method name="isSprinting" signature="boolean isSprinting()" description="Whether the player is reported as sprinting." returns={{ type: "boolean", desc: "Sprint flag." }} />
@@ -187,16 +200,21 @@ Fired for raw network packets. All four are **cancellable**: cancelling drops th
 | `instantaneousSendPacket` | `InstantaneousSendPacketEvent` | Yes | An outbound packet is sent immediately on the network thread. |
 | `instantaneousReceivePacket` | `InstantaneousReceivePacketEvent` | Yes | An inbound packet is received on the network thread, before main-thread queueing. |
 
-<Method name="getPacket" signature="Packet getPacket()" description="Returns the raw Minecraft packet this event wraps (inbound or outbound depending on the event)." returns={{ type: "Packet", desc: "The wrapped packet." }} />
+<Method name="getType" signature="String getType()" description="Returns the packet's type name, for identifying which packet this is." returns={{ type: "String", desc: "The packet type name." }} />
+
+<Callout type="warning">
+    There is no `getPacket()`. A raw Minecraft packet exposes nothing a script could read, so the payload gives you the **type name** and the ability to cancel. Match on `getType()` to identify a packet, then `cancel()` to drop it.
+</Callout>
 
 ```javascript
 module.on("sendPacket", (event) => {
-    const packet = event.getPacket();   // outbound packet
+    const type = event.getType();       // outbound packet type name
 });
 
 module.on("receivePacket", (event) => {
-    const packet = event.getPacket();   // incoming packet
-    // event.setCancelled() drops it (see Cancelling Events)
+    if (event.getType().includes("Explode")) {
+        event.cancel();                 // drop it (see Cancelling Events)
+    }
 });
 ```
 
@@ -207,13 +225,23 @@ Fired around the player's combat and item interactions. Only `jump` is cancellab
 | Event | Payload | Cancellable | Fires when |
 | :--- | :--- | :--- | :--- |
 | `attack` | `AttackEvent` | No | The player attacks an entity, before the interaction is processed. |
-| `swing` | `SwingEvent` _(record)_ | No | The player swings an arm, before the swing is sent. |
-| `itemUse` | `ItemUseEvent` | No | The player uses (right-clicks) the held item. Carries no data. |
+| `swing` | `SwingEvent` | No | The player swings an arm, before the swing is sent. |
+| `itemUse` | _(no readable data)_ | No | The player uses (right-clicks) the held item. |
 | `jump` | `JumpEvent` | Yes | Before the jump impulse is applied. |
 
-<Method name="getTarget" signature="Entity getTarget()" description="attack: the entity being attacked." returns={{ type: "Entity", desc: "The targeted entity." }} />
+<Method name="getTarget" signature="Entity getTarget()" description="attack: the entity being attacked, as an Entity wrapper." returns={{ type: "Entity", desc: "The targeted entity." }} />
 
-<Method name="hand" signature="InteractionHand hand()" description="swing: the hand performing the swing (record accessor, no get prefix)." returns={{ type: "InteractionHand", desc: "Swinging hand." }} />
+<Method name="getTargetName" signature="String getTargetName()" description="attack: the target's display name. A shortcut for getTarget().getName()." returns={{ type: "String", desc: "Target display name." }} />
+
+<Method name="getTargetId" signature="int getTargetId()" description="attack: the target's numeric network ID." returns={{ type: "int", desc: "Target entity ID." }} />
+
+<Method name="getTargetHealth" signature="double getTargetHealth()" description="attack: the target's current health, or -1.0 if it is not a living entity." returns={{ type: "double", desc: "Target health, or -1.0." }} />
+
+<Method name="getTargetMaxHealth" signature="double getTargetMaxHealth()" description="attack: the target's maximum health, or -1.0 if it is not a living entity." returns={{ type: "double", desc: "Target maximum health, or -1.0." }} />
+
+<Method name="getTargetDistance" signature="double getTargetDistance()" description="attack: the distance from the player to the target." returns={{ type: "double", desc: "Distance in blocks." }} />
+
+<Method name="isMainHand" signature="boolean isMainHand()" description="swing: whether the swing came from the main hand rather than the off hand." returns={{ type: "boolean", desc: "True for a main-hand swing." }} />
 
 <Method name="isSprinting" signature="boolean isSprinting()" description="jump: whether the player is sprinting while jumping." returns={{ type: "boolean", desc: "Sprint state." }} />
 
@@ -221,18 +249,24 @@ Fired around the player's combat and item interactions. Only `jump` is cancellab
 
 ```javascript
 module.on("attack", (event) => {
-    const target = event.getTarget();   // Entity
+    const target = event.getTarget();       // an Entity wrapper
+    client.print("Hit " + target.getName() + " at " + event.getTargetDistance());
+
+    // The convenience getters read the same target without the hop.
+    if (event.getTargetHealth() !== -1.0) {
+        client.print("HP: " + event.getTargetHealth() + "/" + event.getTargetMaxHealth());
+    }
 });
 
 module.on("swing", (event) => {
-    const hand = event.hand();          // record accessor
+    if (event.isMainHand()) { /* main-hand swing */ }
 });
 
 module.on("jump", (event) => {
     if (event.isSprinting()) {
-        event.setSprinting(false);      // drop the sprint-jump boost
+        event.setSprinting(false);          // drop the sprint-jump boost
     }
-    // event.setCancelled() suppresses the jump entirely
+    // event.cancel() suppresses the jump entirely
 });
 ```
 
@@ -242,33 +276,45 @@ Fired around world loading, block changes, and server connection lifecycle. Only
 
 | Event | Payload | Cancellable | Fires when |
 | :--- | :--- | :--- | :--- |
-| `joinWorld` | `JoinWorldEvent` | No | The local player joins a world, after the client world is initialised. Carries no data. |
-| `blockUpdate` | `BlockUpdateEvent` | No | A loaded block changes state. Carries position plus old/new states. |
+| `joinWorld` | _(no readable data)_ | No | The local player joins a world, after the client world is initialised. |
+| `blockUpdate` | `BlockUpdateEvent` | No | A loaded block changes state. Carries position plus old/new block names. |
 | `serverConnect` | `ServerConnectEvent` | Yes | Before connecting to a multiplayer server. Cancel to abort the connection. |
-| `serverDisconnect` | `ServerDisconnectEvent` | No | The client disconnects from a server. Carries no data. |
+| `serverDisconnect` | _(no readable data)_ | No | The client disconnects from a server. |
 
-<Method name="getPos" signature="BlockPos getPos()" description="blockUpdate: the position where the block change occurred." returns={{ type: "BlockPos", desc: "Block position." }} />
+<Method name="getX" signature="int getX()" description="blockUpdate: the X coordinate where the block change occurred." returns={{ type: "int", desc: "Block X." }} />
 
-<Method name="getOldState" signature="BlockState getOldState()" description="blockUpdate: the block state before the update." returns={{ type: "BlockState", desc: "Previous state." }} />
+<Method name="getY" signature="int getY()" description="blockUpdate: the Y coordinate where the block change occurred." returns={{ type: "int", desc: "Block Y." }} />
 
-<Method name="getNewState" signature="BlockState getNewState()" description="blockUpdate: the block state after the update." returns={{ type: "BlockState", desc: "New state." }} />
+<Method name="getZ" signature="int getZ()" description="blockUpdate: the Z coordinate where the block change occurred." returns={{ type: "int", desc: "Block Z." }} />
 
-<Method name="getServerAddress" signature="ServerAddress getServerAddress()" description="serverConnect: the address being connected to." returns={{ type: "ServerAddress", desc: "Target server address." }} />
+<Method name="getOldBlock" signature="String getOldBlock()" description="blockUpdate: the name of the block before the update." returns={{ type: "String", desc: "Previous block name." }} />
+
+<Method name="getNewBlock" signature="String getNewBlock()" description="blockUpdate: the name of the block after the update." returns={{ type: "String", desc: "New block name." }} />
+
+<Method name="getHost" signature="String getHost()" description="serverConnect: the hostname being connected to." returns={{ type: "String", desc: "Server hostname." }} />
+
+<Method name="getPort" signature="int getPort()" description="serverConnect: the port being connected to." returns={{ type: "int", desc: "Server port." }} />
+
+<Method name="getAddress" signature="String getAddress()" description="serverConnect: the full address being connected to." returns={{ type: "String", desc: "Target server address." }} />
+
+<Callout type="info">
+    `blockUpdate` reports the position as three plain coordinates and the blocks as **names**, not as a `BlockPos` and raw block states. Build a `BlockPos` from the coordinates if you need one: `new BlockPos(event.getX(), event.getY(), event.getZ())`.
+</Callout>
 
 ```javascript
-module.on("joinWorld", (event) => {
+module.on("joinWorld", () => {
     client.print("Joined a world!");
 });
 
 module.on("blockUpdate", (event) => {
-    const pos = event.getPos();
-    const before = event.getOldState();
-    const after = event.getNewState();
+    const pos = new BlockPos(event.getX(), event.getY(), event.getZ());
+    const before = event.getOldBlock();     // a block name, e.g. "Air"
+    const after = event.getNewBlock();
 });
 
 module.on("serverConnect", (event) => {
-    const address = event.getServerAddress();
-    // event.setCancelled() aborts the connection (see Cancelling Events)
+    client.print("Connecting to " + event.getHost() + ":" + event.getPort());
+    // event.cancel() aborts the connection (see Cancelling Events)
 });
 ```
 
@@ -278,18 +324,22 @@ module.on("serverConnect", (event) => {
 | :--- | :--- | :--- | :--- |
 | `chatReceived` | `ChatReceivedEvent` | Yes | A chat message is received from the server, before it is shown. Cancel to suppress it. |
 
-<Method name="getText" signature="Component getText()" description="The received chat message as a text Component. Use .getString() for plain text." returns={{ type: "Component", desc: "Message component." }} />
+<Method name="getMessage" signature="String getMessage()" description="The received chat message as a plain string." returns={{ type: "String", desc: "Message text." }} />
 
 <Method name="isOverlay" signature="boolean isOverlay()" description="Whether the message is an action-bar overlay message rather than a chat-line message." returns={{ type: "boolean", desc: "True for action-bar messages." }} />
 
 <Method name="setOverlay" signature="void setOverlay(boolean overlay)" description="Reroutes the message to (true) or away from (false) the action bar." params={[{ name: "overlay", type: "boolean", desc: "True to render as an action-bar message." }]} />
 
+<Callout type="info">
+    `getMessage()` returns a **plain string**, already flattened. There is no `getText()` and no `.getString()` hop.
+</Callout>
+
 ```javascript
 module.on("chatReceived", (event) => {
     if (event.isOverlay()) return;               // skip action-bar messages
-    const raw = event.getText().getString();
+    const raw = event.getMessage();
     if (raw.includes("spam")) {
-        event.setCancelled();                    // suppress the message
+        event.cancel();                          // suppress the message
     }
 });
 ```
@@ -300,24 +350,24 @@ Raw keyboard and mouse input, plus the screen-resize hook. None are cancellable.
 
 | Event | Payload | Fires when |
 | :--- | :--- | :--- |
-| `keyPress` | `KeyPressEvent` | A keyboard key is pressed. Carries the GLFW key code. |
-| `mousePress` | `MousePressEvent` | A mouse button is pressed. Carries the GLFW button code. |
-| `resolutionChange` | `ResolutionChangeEvent` | The GUI is resized (the framebuffer resolution changed). Carries no data. |
+| `keyPress` | `KeyPressEvent` | A keyboard key is pressed. Carries the key code. |
+| `mousePress` | `MousePressEvent` | A mouse button is pressed. Carries the button code. |
+| `resolutionChange` | _(no readable data)_ | The GUI is resized (the framebuffer resolution changed). |
 
-Both `keyPress` and `mousePress` expose the raw GLFW code through the same accessor:
+Both `keyPress` and `mousePress` expose the code through the same accessor:
 
-<Method name="getInteractionCode" signature="int getInteractionCode()" description="Returns the GLFW code of the key (keyPress) or mouse button (mousePress) that triggered the event." returns={{ type: "int", desc: "The GLFW key or mouse-button code." }} />
+<Method name="getCode" signature="int getCode()" description="Returns the code of the key (keyPress) or mouse button (mousePress) that triggered the event. Compare it against the keys global." returns={{ type: "int", desc: "The key or mouse-button code." }} />
 
 ```javascript
 module.on("keyPress", (event) => {
-    const keyCode = event.getInteractionCode();    // GLFW key code
+    if (event.getCode() === keys.F7) { /* ... */ }
 });
 
 module.on("mousePress", (event) => {
-    const button = event.getInteractionCode();     // GLFW mouse-button code
+    if (event.getCode() === keys.MOUSE_1) { /* right click */ }
 });
 
-module.on("resolutionChange", (event) => {
+module.on("resolutionChange", () => {
     // recompute layout that depends on screen size
 });
 ```
@@ -338,19 +388,23 @@ Cancellable events extend the client's cancellable base, letting a handler suppr
 | `instantaneousSendPacket` | Prevents the outbound packet from being sent. |
 | `instantaneousReceivePacket` | Drops the inbound packet. |
 
-<Method name="setCancelled" signature="void setCancelled()" description="Marks the event cancelled. Takes no argument, and the flag cannot be cleared once set." />
+<Method name="cancel" signature="void cancel()" description="Marks the event cancelled. Takes no argument, and the flag cannot be cleared once set." />
 
-<Method name="isCancelled" signature="boolean isCancelled()" description="Returns whether the event has already been cancelled by another handler." returns={{ type: "boolean", desc: "True once setCancelled() has been called." }} />
+<Method name="isCancelled" signature="boolean isCancelled()" description="Returns whether the event has already been cancelled by another handler." returns={{ type: "boolean", desc: "True once cancel() has been called." }} />
 
 <Callout type="warning">
-    Calling `setCancelled()` on a non-cancellable event (for example `attack`, `swing`, `postMove`, or any render event) throws, since the method does not exist on those payloads. Only call it on the events listed above.
+    The method is **`cancel()`**, not `setCancelled()`. There is no `setCancelled` on any payload: calling it throws `Unknown identifier`.
+</Callout>
+
+<Callout type="warning">
+    Calling `cancel()` on a non-cancellable event (for example `attack`, `swing`, `postMove`, `blockUpdate`, or any render event) throws, since the method does not exist on those payloads. Only call it on the events listed above.
 </Callout>
 
 ```javascript
 // Drop a specific outbound packet
 module.on("sendPacket", (event) => {
     if (someCondition) {
-        event.setCancelled();        // packet is never sent
+        event.cancel();              // packet is never sent
     }
 });
 ```
@@ -361,7 +415,7 @@ module.on("sendPacket", (event) => {
     JavaScript has a single number type: the 64-bit `double`. Java accessors that return `int`, `float`, or `long` arrive as ordinary JS numbers, and JS numbers you pass back are narrowed to the Java parameter type. Two consequences worth remembering:
 
     - **Colors:** build ARGB ints with `renderer.color(r, g, b[, a])`. A raw `0xAARRGGBB` literal above `2^31` (any color with alpha ≥ 0x80) is a positive double that truncates to the wrong `int` when narrowed.
-    - **Codes:** `getInteractionCode()` returns an `int` GLFW code; compare it against numeric constants directly.
+    - **Codes:** `getCode()` returns an `int` key or button code; compare it against the `keys` constants directly (`event.getCode() === keys.F7`).
 </Callout>
 
 ## Error Handling
@@ -372,11 +426,15 @@ To reset error reporting after a fix, toggle the module off and on (the `enable`
 
 ## Null Safety
 
-Always check `mc.player` and `mc.world` before touching game state, since they are `null` in menus and loading screens:
+Always check `mc.getPlayer()` and `mc.getWorld()` before touching game state, since they are `null` in menus and loading screens:
 
 ```javascript
-module.on("preGameTick", (event) => {
-    if (mc.player === null || mc.world === null) return;
+module.on("preGameTick", () => {
+    if (mc.getPlayer() === null || mc.getWorld() === null) return;
     // safe to use the player / world / inventory proxies here
 });
 ```
+
+<Callout type="warning">
+    **Call the getters.** `mc.player` and `mc.world` read as `undefined`, not `null`, so `if (mc.player === null) return;` is always false: the guard never fires and the handler runs on unloaded state anyway. Only `mc.getPlayer()` / `mc.getWorld()` work.
+</Callout>

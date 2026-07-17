@@ -15,10 +15,11 @@ sensitivity-corrected values without touching any client state.
 
 <Callout type="info">
     Rotation values are yaw/pitch in degrees. Methods return and accept the
-    `Vec2f` wrapper (read it with `getYaw()` / `getPitch()`), the `Vec3d` world
-    vector, and the `RaytracedRotation` wrapper. JavaScript has only one number
-    type (double); when you pass a plain number into a `float` parameter it is
-    narrowed automatically, so just pass numbers normally.
+    `Vec2f` wrapper (read it with `getYaw()` / `getPitch()` — it has no `.x`/`.y`
+    properties), the `Vec3d` world vector (`getX()`/`getY()`/`getZ()`), and the
+    `RaytracedRotation` wrapper. JavaScript has only one number type (double);
+    when you pass a plain number into a `float` parameter it is narrowed
+    automatically, so just pass numbers normally.
 </Callout>
 
 ---
@@ -60,7 +61,7 @@ movement automatically.
 ```javascript
 // Smoothly aim at the closest living entity each tick
 module.on("preGameTick", (event) => {
-    if (mc.player === null || mc.world === null) return;
+    if (mc.getPlayer() === null || mc.getWorld() === null) return;
 
     const targets = world.getLivingEntitiesInRange(5.0);
     if (targets.isEmpty()) return;
@@ -87,7 +88,7 @@ them alter client state.
     params={[
         { name: "pos", type: "Vec3d", desc: "Target position in world space." }
     ]}
-    returns={{ type: "Vec2f", desc: "Yaw/pitch pair (x = yaw, y = pitch)." }}
+    returns={{ type: "Vec2f", desc: "Yaw/pitch pair; read with getYaw() and getPitch()." }}
 />
 
 <Method
@@ -116,10 +117,10 @@ them alter client state.
 
 <Method
     name="getRotationFromRaycastedEntity"
-    signature="RaytracedRotation getRotationFromRaycastedEntity(LivingEntity entity, Vec3d closestVector, double entityInteractionRange)"
+    signature="RaytracedRotation getRotationFromRaycastedEntity(Entity entity, Vec3d closestVector, double entityInteractionRange)"
     description="Computes a raytraced rotation to a living entity, validating that the rotation would land a hit within the given interaction range. This is the method KillAura uses internally."
     params={[
-        { name: "entity", type: "LivingEntity", desc: "Target entity." },
+        { name: "entity", type: "Entity", desc: "Target entity." },
         { name: "closestVector", type: "Vec3d", desc: "Closest point on the entity's bounding box to the player's eyes." },
         { name: "entityInteractionRange", type: "double", desc: "Maximum interaction range." }
     ]}
@@ -146,7 +147,7 @@ them alter client state.
 ```javascript
 // Scaffold-style: raycast the block below, aim at it, and place
 module.on("preGameTick", (event) => {
-    if (mc.player === null || mc.world === null) return;
+    if (mc.getPlayer() === null || mc.getWorld() === null) return;
 
     const feet = player.getBlockPosition();
     const below = new BlockPos(feet.getX(), feet.getY() - 1, feet.getZ());
@@ -180,7 +181,7 @@ module.on("preGameTick", (event) => {
     name="getRotation"
     signature="Vec2f getRotation()"
     description="Returns the local player's current server-side rotation as managed by the rotation handler."
-    returns={{ type: "Vec2f", desc: "Yaw/pitch pair (x = yaw, y = pitch)." }}
+    returns={{ type: "Vec2f", desc: "Yaw/pitch pair; read with getYaw() and getPitch()." }}
 />
 
 ---
@@ -302,7 +303,7 @@ cursor deltas, and shaping rotations to match legitimate mouse input.
 ```javascript
 // Only aim at the nearest entity inside a 90-degree cone
 module.on("preGameTick", (event) => {
-    if (mc.player === null || mc.world === null) return;
+    if (mc.getPlayer() === null || mc.getWorld() === null) return;
 
     const range = player.getEntityInteractionRange();
     const targets = world.getLivingEntitiesInRange(range);

@@ -10,12 +10,16 @@ Local player state, position and rotation, health, and combat/entity utilities p
 Wraps the local player so scripts can read position, rotation, movement state, health, and combat context, and trigger basic actions like swinging or using the held item.
 
 <Callout type="warning">
-    Every method here reads from `mc.player`, which is `null` on the main menu, during world loads, and between disconnects. Calling a `player` method while it is `null` throws into your script and stops the handler. Guard every handler before touching `player`:
+    Every method here reads the local player, which is `null` on the main menu, during world loads, and between disconnects. Calling a `player` method while it is `null` throws into your script and stops the handler. Guard every handler before touching `player`:
 </Callout>
 
 ```javascript
-if (mc.player === null) return;
+if (mc.getPlayer() === null) return;
 ```
+
+<Callout type="warning">
+    Note the **call**: `mc.getPlayer()`. Read as a property, `mc.player` is `undefined`, not `null`, so `if (mc.player === null) return;` is always false and the guard silently never fires.
+</Callout>
 
 <Callout type="info">
     JavaScript has a single number type (double), so every `int`, `float`, and `double` return on this page arrives as a plain JS number. The entity helpers fail soft: `getDistanceToEntity()` returns `-1.0` and `getClosestPoint()` returns `null` when handed a non-living entity, so test for those sentinels before using the result.
@@ -75,12 +79,12 @@ if (mc.player === null) return;
 />
 
 <Callout type="info">
-    `getEyePosition()`, `getPosition()`, and `getVelocity()` return raw `Vec3d` values. Their instance methods are intermediary-named at runtime and are **not** callable by readable name. Pass them into proxy methods (such as `rotation.getRotationFromPosition` or `esp.projectVec`), or use `getBlockPosition()` when you need readable `getX()`/`getY()`/`getZ()`. See the Types reference.
+    `getEyePosition()`, `getPosition()`, and `getVelocity()` return [`Vec3d`](../world/types#vec3d) wrappers with real getters: read them with `getX()`/`getY()`/`getZ()`, and use `length()`, `distanceTo()`, `add()`, and `subtract()` for vector math. Pass them straight into proxy methods such as `rotation.getRotationFromPosition` or `esp.projectVec`. Read them with getters, never as `.x`/`.y`/`.z` properties, which evaluate to `undefined`.
 </Callout>
 
 ```javascript
 module.on("preGameTick", (event) => {
-    if (mc.player === null) return;
+    if (mc.getPlayer() === null) return;
 
     const pos = player.getBlockPosition();
     client.print("Standing at Y=" + pos.getY());
@@ -166,6 +170,75 @@ module.on("preGameTick", (event) => {
     returns={{ type: "float", desc: "Absorption amount." }}
 />
 
+<Method
+    name="getArmor"
+    signature="int getArmor()"
+    description="Returns the player's total armor points from equipped armor."
+    returns={{ type: "int", desc: "Armor points." }}
+/>
+
+---
+
+## Status Effects
+
+Read the player's active potion effects. Each returns an [`Effect`](../world/types#effect) wrapper. Effect names accept either the bare name (`"speed"`) or the namespaced form (`"minecraft:speed"`).
+
+<Callout type="warning">
+    **`getAmplifier()` counts from 0; `getLevel()` counts from 1.** Speed II is amplifier `1` and level `2`. Use `getAmplifier()` for vanilla movement math, and `getLevel()` for anything a player reads. Mixing them up is an off-by-one through every calculation downstream.
+</Callout>
+
+<Callout type="info">
+    `getDurationSeconds()` returns **`-1` for an infinite effect**, not a large number. Call `isInfinite()` before formatting a countdown.
+</Callout>
+
+<Method
+    name="hasEffect"
+    signature="boolean hasEffect(String name)"
+    description="Returns whether the player currently has the named status effect."
+    params={[
+        { name: "name", type: "String", desc: "Effect name, with or without the minecraft: namespace." }
+    ]}
+    returns={{ type: "boolean", desc: "True if the effect is active." }}
+/>
+
+<Method
+    name="getEffect"
+    signature="Effect getEffect(String name)"
+    description="Returns the named active status effect, or null if the player does not have it."
+    params={[
+        { name: "name", type: "String", desc: "Effect name, with or without the minecraft: namespace." }
+    ]}
+    returns={{ type: "Effect | null", desc: "The active effect, or null." }}
+/>
+
+<Method
+    name="getEffects"
+    signature="List&lt;Effect&gt; getEffects()"
+    description="Returns every status effect currently active on the player. A List wrapper, not a JS array: walk it with size() and get(i)."
+    returns={{ type: "List<Effect>", desc: "Active effects." }}
+/>
+
+```javascript
+module.on("preGameTick", () => {
+    if (mc.getPlayer() === null) return;
+
+    // Vanilla speed math wants the 0-based amplifier.
+    if (player.hasEffect("speed")) {
+        const speed = player.getEffect("speed");
+        const boost = 1.0 + 0.2 * (speed.getAmplifier() + 1);
+        client.print("Speed multiplier: " + boost.toFixed(2));
+    }
+
+    // Anything the player reads wants the 1-based level.
+    const effects = player.getEffects();
+    for (let i = 0; i < effects.size(); i++) {
+        const effect = effects.get(i);
+        const time = effect.isInfinite() ? "∞" : effect.getDurationSeconds() + "s";
+        client.print(effect.getName() + " " + effect.getLevel() + " — " + time);
+    }
+});
+```
+
 ---
 
 ## Combat
@@ -200,7 +273,7 @@ module.on("preGameTick", (event) => {
 
 ```javascript
 module.on("preGameTick", (event) => {
-    if (mc.player === null) return;
+    if (mc.getPlayer() === null) return;
 
     if (player.canCrit() && player.isHoldingWeapon()) {
         client.print("Crit window open (" + player.getAttackDamage() + " dmg)");
@@ -256,9 +329,9 @@ module.on("preGameTick", (event) => {
 
 <Method
     name="getBoundingBox"
-    signature="AABB getBoundingBox()"
+    signature="Box3D getBoundingBox()"
     description="Returns the player's current axis-aligned bounding box."
-    returns={{ type: "AABB", desc: "Player bounding box." }}
+    returns={{ type: "Box3D", desc: "Player bounding box." }}
 />
 
 <Method
@@ -271,7 +344,7 @@ module.on("preGameTick", (event) => {
 ```javascript
 // Aim at and attack the nearest reachable living entity.
 module.on("preGameTick", (event) => {
-    if (mc.player === null || mc.world === null) return;
+    if (mc.getPlayer() === null || mc.getWorld() === null) return;
 
     const targets = world.getLivingEntitiesInRange(player.getEntityInteractionRange());
     if (targets.isEmpty()) return;
@@ -292,7 +365,7 @@ module.on("preGameTick", (event) => {
 
 ```javascript
 // Scaffold-style edge check: is there ground under the next step?
-if (mc.player !== null && player.isBoxEmptyBelow(-0.6)) {
+if (mc.getPlayer() !== null && player.isBoxEmptyBelow(-0.6)) {
     client.print("No ground below — would fall");
 }
 ```
@@ -320,12 +393,12 @@ if (mc.player !== null && player.isBoxEmptyBelow(-0.6)) {
 />
 
 <Callout type="info">
-    `MAIN_HAND` and `OFF_HAND` are global `InteractionHand` constants injected into every script. See the Types reference. Both `swingHand` and `useItem` already null-check internally, but guarding the whole handler with `if (mc.player === null) return;` keeps your logic consistent.
+    `MAIN_HAND` and `OFF_HAND` are global `InteractionHand` constants injected into every script. See the Types reference. Both `swingHand` and `useItem` already null-check internally, but guarding the whole handler with `if (mc.getPlayer() === null) return;` keeps your logic consistent.
 </Callout>
 
 ```javascript
 module.on("preGameTick", (event) => {
-    if (mc.player === null) return;
+    if (mc.getPlayer() === null) return;
 
     // Right-click the main-hand item (eat, throw a pearl, place, ...).
     player.useItem(MAIN_HAND);

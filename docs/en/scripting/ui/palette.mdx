@@ -135,7 +135,7 @@ All three input callbacks are optional and return a boolean. Return `true` when 
 
 **Global Binding:** `keys`
 
-Scripts cannot reference `org.lwjgl.*` classes directly, so the GLFW key codes a `keyPressed` handler needs are surfaced as plain integer fields on the `keys` global. The values match the codes the palette delivers.
+Scripts cannot reference `org.lwjgl.*` classes directly, so the key codes a `keyPressed` handler needs are surfaced as plain integer fields on the `keys` global. The values match the codes the palette delivers, and the same constants feed `module.setBind(code)` (see [Module Settings](../settings)) and `event.getCode()` on the `keyPress` / `mousePress` events.
 
 | Group | Constants |
 |---|---|
@@ -143,6 +143,13 @@ Scripts cannot reference `org.lwjgl.*` classes directly, so the GLFW key codes a
 | Action | `keys.SPACE`, `keys.ENTER`, `keys.ESCAPE`, `keys.TAB`, `keys.BACKSPACE`, `keys.LEFT_SHIFT`, `keys.LEFT_CONTROL` |
 | Letters | `keys.A` … `keys.Z` |
 | Digit row | `keys.NUM_0` … `keys.NUM_9` |
+| Function row | `keys.F1` … `keys.F12` |
+| Mouse buttons | `keys.MOUSE_0` … `keys.MOUSE_4` |
+| Unbound | `keys.NONE` (`-2`) |
+
+<Callout type="info">
+    These are exported **fields**, so reading them as properties (`keys.F7`) is correct: they need no getter. Codes below 10 are mouse buttons, which is how `setBind` tells a mouse bind from a key bind.
+</Callout>
 
 ```javascript
 keyPressed: function (keyCode, mods) {
