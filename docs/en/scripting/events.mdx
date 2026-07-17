@@ -63,22 +63,22 @@ module.on("disable", () => notification.info("Example", "Stopped"));
 
 ## Game Tick Events
 
-Fired around the 20 TPS client tick. Both pass an event object, but neither object carries any data. They are timing hooks for game logic.
+Fired around the 20 TPS client tick. Neither carries any readable data: they are pure timing hooks for game logic, so write their handlers with no parameter.
 
 | Event | Payload | Fires when |
 | :--- | :--- | :--- |
-| `preGameTick` | `PreGameTickEvent` | At the start of a tick, before vanilla tick logic runs. Ideal for logic updates. |
-| `postGameTick` | `PostGameTickEvent` | At the end of a tick, after vanilla tick logic has run. Symmetric with `preGameTick`. |
+| `preGameTick` | _(no readable data)_ | At the start of a tick, before vanilla tick logic runs. Ideal for logic updates. |
+| `postGameTick` | _(no readable data)_ | At the end of a tick, after vanilla tick logic has run. Symmetric with `preGameTick`. |
 
 ```javascript
-module.on("preGameTick", (event) => {
+module.on("preGameTick", () => {
     if (mc.getPlayer() === null || mc.getWorld() === null) return;
     if (player.getHealth() < 5) {
         notification.warn("Low HP", "Health below 5!");
     }
 });
 
-module.on("postGameTick", (event) => {
+module.on("postGameTick", () => {
     // end-of-tick cleanup
 });
 ```

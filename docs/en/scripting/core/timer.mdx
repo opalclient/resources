@@ -1,0 +1,95 @@
+# Timer Proxy
+
+**Global Binding:** `timer`
+
+Millisecond timers for rate-limiting, cooldowns, and delays. Use these instead of counting ticks by hand when you want wall-clock timing that does not drift with TPS.
+
+<Callout type="info">
+    A timer is created once and reused. Create it in your `registerModule` callback (or on `enable`), not inside a tick handler, which would reset it every tick and mean it never elapses.
+</Callout>
+
+---
+
+## Creating Timers
+
+<Method
+    name="create"
+    signature="Timer create()"
+    description="Creates a new timer, started at the current moment."
+    returns={{ type: "Timer", desc: "A new timer." }}
+/>
+
+<Method
+    name="now"
+    signature="long now()"
+    description="Returns the current time in milliseconds, for ad-hoc timing that does not need a Timer."
+    returns={{ type: "long", desc: "Current time in milliseconds." }}
+/>
+
+---
+
+## Timer
+
+The value returned by `timer.create()`.
+
+<Method
+    name="reset"
+    signature="void reset()"
+    description="Restarts the timer from the current moment."
+/>
+
+<Method
+    name="elapsed"
+    signature="long elapsed()"
+    description="Returns the milliseconds since the timer was created or last reset."
+    returns={{ type: "long", desc: "Elapsed milliseconds." }}
+/>
+
+<Method
+    name="passed"
+    signature="boolean passed(long ms)"
+    description="Returns whether at least the given number of milliseconds has elapsed. Does not reset the timer."
+    params={[
+        { name: "ms", type: "long", desc: "The threshold in milliseconds." }
+    ]}
+    returns={{ type: "boolean", desc: "True once the threshold has been passed." }}
+/>
+
+<Method
+    name="passedAndReset"
+    signature="boolean passedAndReset(long ms)"
+    description="Returns whether at least the given number of milliseconds has elapsed, and resets the timer when it has. The idiomatic way to run something on a fixed interval."
+    params={[
+        { name: "ms", type: "long", desc: "The threshold in milliseconds." }
+    ]}
+    returns={{ type: "boolean", desc: "True once the threshold has been passed; resets the timer when it returns true." }}
+/>
+
+---
+
+## Example
+
+```javascript
+script.registerModule({
+    name: "Announcer",
+    description: "Posts a message on a fixed interval"
+}, (module) => {
+    // Created once, not per tick.
+    const cooldown = timer.create();
+
+    module.on("enable", () => cooldown.reset());
+
+    module.on("preGameTick", () => {
+        if (mc.getPlayer() === null) return;
+
+        // Fires at most once every 5 seconds, then restarts the clock.
+        if (cooldown.passedAndReset(5000)) {
+            client.print("5 seconds elapsed");
+        }
+    });
+});
+```
+
+<Callout type="info">
+    `passed(ms)` only asks the question; `passedAndReset(ms)` asks and restarts the clock in one step. Reach for `passedAndReset` for repeating intervals, and `passed` when you want to hold a condition open until you reset it yourself.
+</Callout>
