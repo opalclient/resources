@@ -1,0 +1,89 @@
+---
+title: Wie man stabile FPS für Minecraft PvP (2026) erreicht
+description: Für PvP-Kämpfe ist präzises Timing wichtiger als ein hoher Spitzenwert. Hier erfahren Sie, wie Sodium, eine Framerate-Begrenzung und die richtigen Einstellungen dies ermöglichen, und wo ein PvP-Client wie Opal ins Spiel kommt.
+excerpt: Konstanz gewinnt Kämpfe, nicht maximale FPS. Hier ist die Einrichtung für stabile Framerates und wo ein PvP-Client wie Opal darüber passt.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: Ist eine höhere FPS immer besser für PvP?
+    a: Nein. Konstanz gewinnt. Ein stabiler, limitierter Bildwiederholfrequenz fühlt sich im Kampf reaktionsfreudiger an als eine höhere, die sprunghaft ansteigt und fällt.
+  - q: Benötige ich für PvP-FPS einen speziellen Client?
+    a: Für reine FPS, nein. Sodium plus die richtigen Einstellungen erledigen das. Ein PvP-Client wie Opal fügt dann die Kampf-, Bewegungs- und Hilfsfunktionen hinzu; behalte Sodium installiert, um Spielraum zu haben.
+  - q: Ist Lithium mit Opal kompatibel?
+    a: Nein. Lithium ist nicht mit Opal kompatibel. Führen Sie Sodium für Ihre Framerate aus und lassen Sie Lithium weg, wenn Opal installiert ist.
+  - q: Welche FPS sollte ich begrenzen?
+    a: Was immer deine Maschine jederzeit fassen kann, ohne etwas fallen zu lassen. Konstanz über Höchstleistung.
+---
+
+Im PvP-Modus ist eine stabile Bildrate wichtiger als eine hohe. Ein Spiel, das eine konstante Anzahl an Bildern pro Sekunde liefert, fühlt sich deutlich reaktionsfreudiger an als eines, das während des Kampfes Leistungsschwankungen aufweist. Das Rezept ist [Sodium](https://modrinth.com/mod/sodium) für rohe Leistung, ein vernünftiger Bildratenbegrenzer für Konsistenz und ein paar Einstellungen, die Klarheit über bloße Optik priorisieren. Eine Anmerkung vorab: Lithium ist nicht mit Opal kompatibel, daher sollten Sie bei Verwendung von Opal auf Sodium für den Leistungsspielraum setzen.
+
+<KeyTakeaways>
+
+- Ein stabiler Frametime übertrifft den Spitzen-FPS in einem Kampf. Strebe nach einer Zahl, die du immer hältst.
+- Sodium ist die Basis; es bietet den Spielraum, den stabile Frames benötigen.
+- Lithium glättet die Spiel-Logik, ist aber nicht mit Opal kompatibel. Überspringe es, wenn du Opal verwendest.
+- Ein Framelimit plus Klarheitseinstellungen machen den Job fertig.
+
+</KeyTakeaways>
+
+## Baue den Performance-Kern
+
+[Sodium](https://modrinth.com/mod/sodium) schreibt Minecrafts Renderer um und ist die größte Einzelverbesserung für stabile Frameraten. Installiere den [Fabric](https://fabricmc.net) Loader und die [Fabric API](https://modrinth.com/mod/fabric-api) und lege dann Sodium in deinen `mods`-Ordner. Es läuft gut parallel zu Opal.
+
+<Callout variant="warning" title="Laufender Opal? Lithium überspringen">Lithium ist nicht mit Opal kompatibel. Verwende Sodium für deine Framerate und lasse Lithium aus dem Ordner. Sodium deckt die Rendering-Seite ab, was ohnehin der größere Vorteil für PvP ist</Callout>
+
+## Begrenze deine Bildrate
+Ein stabiler Zeitplan für die Frametimes fühlt sich besser an als einer, der schneller, aber unregelmäßiger ist. Setzen Sie eine Obergrenze, die Ihre Maschine jederzeit komfortabel bewältigen kann, anstatt die höchstmögliche Zahl anzustreben. Ein konsistenter Frametime ist das Ziel, nicht eine große Zahl in der Ecke
+## Stimmung für Klarheit
+
+<Checklist>
+<ChecklistItem>Sichtweite: moderat, damit weit entfernte Bereiche nicht zu Leistungseinbrüchen während des Kampfes führen.</ChecklistItem>
+<ChecklistItem>Grafiken: Schnell.</ChecklistItem>
+<ChecklistItem>Partikel: minimal, um zu verhindern, dass Effekte den Bildschirm überladen oder Frames kosten.</ChecklistItem>
+<ChecklistItem>Sanfte Beleuchtung: niedrig.</ChecklistItem>
+</Checklist>
+
+<Callout variant="tip" title="Schneller Erfolg">
+Die Reduzierung der Renderdistanz von 16 auf 12 Chunks gibt einen großen Teil Ihrer Framerate zurück, fast ohne visuellen Nachteil im Nahkampf-PvP.
+</Callout>
+
+## Wo ein PvP-Client passt
+
+Stabile Frames sind das Fundament; der Client ist das, was du damit machst. Opal ist ein Fabric-Mod für Minecraft 1.21.10, sodass er im selben `mods`-Ordner wie Sodium installiert wird und über eine Glas-UI hinweg 200+ Features in den Bereichen Kampf, Bewegung, Optik und Hilfsmittel bietet. Es ist ein vollständiger Client, sodass es wie jeder große Mod Ressourcen verbraucht, während es läuft. Genau das ist der Grund, warum Sodium wichtig ist: es gibt dir den Spielraum, einen Funktionsumfang wie den von Opal auszuführen und trotzdem stabile Frames im Kampf zu halten.
+
+## Auf einen Blick
+
+| Wunsch | Installieren |
+| :--- | :--- |
+| Höhere, stabilere FPS | Sodium |
+| Flüssigere Spielmechanik (nicht mit Opal) | Lithium |
+| Benötigte Basis | Fabric API |
+| 200+ PvP- und Hilfsmittel-Features | Opal |
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Ist eine höhere FPS in PvP immer besser?">
+Nein. Konstanz ist entscheidend. Eine stabile, begrenzte Bildrate ist besser als eine unregelmäßige, höhere.
+</FAQItem>
+
+<FAQItem question="Ist Lithium mit Opal kompatibel?">
+Nein. Verwenden Sie Sodium für Ihre Framerate und lassen Sie Lithium weg, wenn Opal installiert ist.
+</FAQItem>
+
+<FAQItem question="Wird Opal meine FPS senken?">
+Opal ist ein vollständiger Client, und wie jeder große Mod benötigt es einige Ressourcen. Behalte Sodium installiert, um etwas Spielraum zu haben, und du wirst auf den meisten Maschinen stabile Frameraten beibehalten.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/blog/how-to-get-more-fps-in-minecraft", label: "Wie man in Minecraft mehr FPS erhält", description: "Die Einstellungen und Optionen hinter dem Headroom." },
+  { href: "/de/blog/best-performance-mods-for-minecraft", label: "Die besten Performance-Mods für Minecraft", description: "Der vollständige, kostenlose Performance-Stack." },
+  { href: "/de/blog/sodium-or-optifine-which-should-you-use", label: "Sodium oder OptiFine?", description: "Warum ein Fabric der Klient möchte Sodium." },
+]} />
+
+<CTA href="/de/purchase">Opal für $8.99 lebenslang erhalten</CTA>

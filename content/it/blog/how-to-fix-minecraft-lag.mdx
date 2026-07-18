@@ -1,0 +1,79 @@
+---
+title: Come risolvere il lag di Minecraft (2026)
+description: "Il lag di Minecraft ha tre cause: bassi FPS, latenza di rete e pressione sulla memoria. Ecco come distinguerle e i mod e le impostazioni che risolvono ciascuna di esse."
+excerpt: Il lag è in realtà tre problemi. Ecco come distinguerli e una valutazione onesta su cosa un cliente può e non può risolvere.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: Perché Minecraft presenta rallentamenti con un buon PC?
+    a: Di solito è la memoria o le impostazioni di rendering a dare problemi, non la potenza di calcolo. Aggiungi FerriteCore, installa Sodium e controlla la distanza di rendering.
+  - q: Le modifiche alle prestazioni risolvono il lag del server?
+    a: No. Le mod del client risolvono i tuoi FPS e la memoria. Il lag lato server non dipende da te, e nessuna modifica lato client può risolverlo.
+  - q: Il litio è compatibile con Opal?
+    a: No. Il litio non è compatibile con Opal. Uso Sodium per le prestazioni e ometti il litio se Opal è installato.
+  - q: Più RAM risolve il problema del lag?
+    a: Solo fino a un certo punto. Un'allocazione eccessiva può causare pause più lunghe nella garbage collection.
+---
+
+"Lag" è in realtà tre problemi diversi, e la soluzione dipende da quale di questi stai riscontrando. Il basso FPS indica che il tuo computer sta faticando a disegnare i frame. Il lag di rete è la connessione al server. La pressione sulla memoria è il gioco che si mette in pausa per liberare RAM. Inizia con [Sodium](https://modrinth.com/mod/sodium) per il frame rate, poi procedi con gli altri elementi della lista. Una nota per gli utenti di Opal: Lithium non è compatibile con Opal, quindi costruisci la configurazione attorno a Sodium.
+
+<KeyTakeaways>
+
+- FPS bassi, ritardo di rete e scatti di memoria sono problemi diversi che richiedono soluzioni diverse.
+- Sodium risolve i problemi di FPS durante il rendering; FerriteCore e ModernFix risolvono gli scatti di memoria.
+- Una mod lato client non può risolvere il ritardo lato server. Lo diciamo chiaramente.
+- Lithium non è compatibile con Opal. Utilizza Sodium se utilizzi Opal.
+
+</KeyTakeaways>
+
+## Distingui i tre l'uno dall'altro
+
+<Callout variant="info" title="Quale ritardo stai riscontrando?">
+FPS bassi: l'intero gioco risulta a scatti anche in single-player (un problema di GPU e CPU). Ritardo di rete: i blocchi si disconnettono e ricompaiono, i mob rimbalzano, solo sui server (un problema di connessione). Stuttering della memoria: gioco fluido con blocchi periodici ogni pochi secondi (un problema di garbage collection).
+</Callout>
+
+## Risolvi il basso FPS
+
+Installa [Sodium](https://modrinth.com/mod/sodium) per il rendering. Poi riduci la distanza di rendering di un paio di chunk, imposta la grafica su Veloce e disabilita VSync se desideri frame senza limiti. Consulta [come ottenere più FPS](/it/blog/how-to-get-more-fps-in-minecraft) per la configurazione completa. Sodium funziona bene insieme a Opal.
+
+## Risolvi lo stutter della memoria
+
+Aggiungi [FerriteCore](https://modrinth.com/mod/ferritecore) per ridurre l'utilizzo della memoria e [ModernFix](https://modrinth.com/mod/modernfix) per ridurlo ulteriormente. Non allocare troppa RAM; più non è sempre meglio, e troppa può rendere i blocchi più lunghi.
+
+## Risolvi il lag di rete
+
+Il lag di rete è dovuto al server o alla tua connessione, non al client. Chiudi le applicazioni che consumano molta larghezza di banda, usa una connessione cablata se possibile e scegli una regione del server vicino a te. Un mod non può risolvere un collegamento lento, e non ci faremo trovarci a fingere il contrario.
+
+<Callout variant="warning" title="Stai eseguendo Opal? Salta Lithium">
+Lithium è una scelta comune per contrastare il balbuzie, ma non è compatibile con Opal. Affidati a Sodium per le prestazioni e FerriteCore per la memoria, ed escludi Lithium.
+</Callout>
+
+## Dove si inserisce Opal
+
+Opal è un client completo (una mod di Fabric per Minecraft 1.21.10), quindi, come ogni mod di grandi dimensioni, utilizza alcune risorse durante l'esecuzione. Da solo non causa "lag" su un sistema in buone condizioni, ma è un motivo per assicurarsi che le prestazioni di base siano corrette: installa Sodium per avere margine di manovra, aggiungi FerriteCore se noti rallentamenti della memoria e lascia fuori Lithium. Con ciò in atto, le 200+ funzionalità di Opal e la sua interfaccia utente in vetro hanno spazio per funzionare senza problemi.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Perché Minecraft presenta rallentamenti con un PC performante?">
+Di solito il problema è legato a stuttering della memoria o alle impostazioni di rendering, non alla potenza di calcolo. Prova ad aggiungere FerriteCore, installa Sodium e verifica la distanza di rendering.
+</FAQItem>
+
+<FAQItem question="Le mod di performance risolvono il lag del server?">
+No. Le mod lato client migliorano il tuo FPS e la memoria. Il lag lato server non dipende da te.
+</FAQItem>
+
+<FAQItem question="Il litio è compatibile con Opal?">No. Usare Sodium e FerriteCore, e omettere Lithium quando Opal è installato</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/blog/best-performance-mods-for-minecraft", label: "Le migliori mod per migliorare le prestazioni di Minecraft", description: "La soluzione completa che risolve i cali di FPS e il ritardo della memoria." },
+  { href: "/it/blog/how-to-get-more-fps-in-minecraft", label: "Come ottenere più FPS in Minecraft", description: "Le impostazioni che recuperano il maggior numero di fotogrammi." },
+  { href: "/it/blog/best-multiplayer-performance-mods", label: "Migliori mod per prestazioni multiplayer", description: "Cosa aiuta sui server affollati, e cosa no." },
+]} />
+
+<CTA href="/it/purchase">Prendi Opal per $8.99 vita intera</CTA>

@@ -1,0 +1,81 @@
+---
+title: Wie man Minecraft-Ruckeln behebt (2026)
+description: "Minecraft-Ruckler haben drei Ursachen: niedrige FPS, Netzwerk-Latenz und Speicherdruck. Hier erfahren Sie, wie Sie diese auseinanderhalten und welche Mods und Einstellungen jedes Problem beheben."
+excerpt: Lag ist tatsächlich ein Problem mit drei Facetten. Hier ist, wie man sie auseinanderhalten kann und was ein Kunde realistisch beheben kann und was nicht.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: Warum ruckelt Minecraft auf einem guten PC?
+    a: Meistens sind es Speicher-Ruckler oder Rendering-Einstellungen, nicht die rohe Rechenleistung. Füge FerriteCore hinzu, installiere Sodium und überprüfe deine Renderdistanz.
+  - q: Beheben Leistungsmodifikationen Server-Lags?
+    a: Nein. Client-Mods beheben deine FPS und deinen Speicher. Server-seitiges Lag liegt außerhalb deiner Möglichkeiten, und keine Client-Änderungen ändern das.
+  - q: Ist Lithium mit Opal kompatibel?
+    a: Nein. Lithium ist nicht kompatibel mit Opal. Benutzung Sodium für Leistung und Lithium weglassen, wenn Opal ist installiert.
+  - q: Behebt mehr RAM Ruckeln?
+    a: Nur bis zu einem gewissen Punkt. Eine übermäßige Zuteilung kann zu längeren Garbage-Collection-Pausen führen.
+---
+
+"Lag" ist tatsächlich drei verschiedene Probleme, und die Lösung hängt davon ab, welches du hast. Niedrige FPS bedeuten, dass dein Gerät Schwierigkeiten hat, Frames zu zeichnen. Netzwerk-Lag ist die Verbindung zu einem Server. Speicherbelastung tritt auf, wenn das Spiel pausiert, um RAM freizugeben. Beginne mit [Sodium](https://modrinth.com/mod/sodium) für FPS und arbeite dich dann die Liste hinunter. Eine Anmerkung für Opal-Nutzer: Lithium ist nicht mit Opal kompatibel, also baue stattdessen um Sodium herum auf.
+
+<KeyTakeaways>
+
+- Niedrige FPS, Netzwerk-Lags und Speicher-Stottern sind unterschiedliche Probleme mit unterschiedlichen Lösungen.
+- Sodium behebt FPS-Probleme beim Rendern; FerriteCore und ModernFix beheben Speicher-Stottern.
+- Ein Client-Mod kann Server-seitigen Lag nicht beheben. Das werden wir offen sagen.
+- Lithium ist nicht mit Opal kompatibel. Verwenden Sie Sodium, wenn Sie Opal nutzen.
+
+</KeyTakeaways>
+
+## Die drei unterscheiden
+
+<Callout variant="info" title="Welchen Lag hast du?">
+Niedrige FPS: Das gesamte Spiel fühlt sich sogar im Einzelspielermodus ruckelig an (ein Problem mit GPU und CPU). Netzwerk-Lag: Blöcke brechen auf und erscheinen wieder, Mobs werden zurückversetzt, nur auf Servern (ein Verbindungsproblem). Speicher-Stottern: Flüssiges Spiel mit periodischen Einfrieren alle paar Sekunden (ein Problem mit der Speicherbereinigung).
+</Callout>
+
+## FPS verbessern
+
+Installiere [Sodium](https://modrinth.com/mod/sodium) für die Darstellung. Reduziere dann die Sichtweite um ein paar Chunks, stelle die Grafikeinstellungen auf Schnell und deaktiviere VSync, wenn du unbegrenzte Frameraten möchtest. Siehe [wie du mehr FPS bekommst](/de/blog/how-to-get-more-fps-in-minecraft) für die vollständige Einrichtung. Sodium läuft problemlos zusammen mit Opal.
+
+## Speicher-Ruckeln beheben
+
+Füge [FerriteCore](https://modrinth.com/mod/ferritecore) hinzu, um den Speicherverbrauch zu reduzieren, und [ModernFix](https://modrinth.com/mod/modernfix), um ihn weiter zu optimieren. Überallokiere nicht zu viel RAM; mehr ist nicht immer besser, und zu viel kann die Einfrierungen sogar noch verlängern.
+
+## Netzwerk-Lags beheben
+
+Netzwerk-Lags liegen am Server oder deiner Verbindung, nicht an deinem Client. Schließe bandbreitenintensive Anwendungen, verwende wenn möglich eine kabelgebundene Verbindung und wähle eine Serverregion in deiner Nähe. Ein Mod kann eine langsame Verbindung nicht beheben, und wir werden das auch nicht vortäuschen.
+
+<Callout variant="warning" title="Laufender Opal? Lithium überspringen">
+Lithium ist ein häufig verwendetes Mittel gegen Stottern, aber es ist nicht kompatibel mit Opal. Verlassen Sie sich auf Sodium für Leistung und FerriteCore für Speicher, und Lithium weglassen.
+</Callout>
+
+## Wo Opal passt
+
+Opal ist ein vollständiger Client (ein Fabric-Mod für Minecraft 1.21.10) und benötigt, wie jeder große Mod, während der Ausführung einige Ressourcen. Es verursacht allein auf einem gesunden System keinen "Lag", ist aber ein Grund, um zuerst die Performance-Basis richtig einzurichten: Installiere Sodium für Reserven, füge FerriteCore hinzu, wenn du Speicher-Ruckler bemerkst, und lasse Lithium weg. Mit dieser Konfiguration haben Opals über 200 Funktionen und die Glas-UI genügend Spielraum, um reibungslos zu laufen.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Warum ruckelt Minecraft auf einem guten PC?">
+Meistens liegt es an Speicher-Stottern oder den Grafikeinstellungen, nicht an der rohen Rechenleistung. FerriteCore hinzufügen, Sodium installieren und die Renderdistanz überprüfen.
+</FAQItem>
+
+<FAQItem question="Beheben Leistungsmodifikationen Server-Lags?">
+Nein. Client-Modifikationen verbessern Ihre FPS und Ihren Speicher. Server-seitige Lags liegen außerhalb Ihrer Kontrolle.
+</FAQItem>
+
+<FAQItem question="Ist Lithium mit Opal kompatibel?">
+Nein. Benutzen Sodium und FerriteCore, und Lithium weglassen, wenn Opal ist installiert.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/blog/best-performance-mods-for-minecraft", label: "Die besten Performance-Mods für Minecraft", description: "Der umfassende Stack, der FPS-Einbrüche und Speicher-Lags behebt." },
+  { href: "/de/blog/how-to-get-more-fps-in-minecraft", label: "Wie man in Minecraft mehr FPS erhält", description: "Die Einstellungen, die am meisten Frames wiederherstellen." },
+  { href: "/de/blog/best-multiplayer-performance-mods", label: "Die besten Multiplayer-Performance-Mods", description: "Was bei stark ausgelasteten Servern hilft, und was nicht." },
+]} />
+
+<CTA href="/de/purchase">Opal für $8.99 lebenslang erhalten</CTA>

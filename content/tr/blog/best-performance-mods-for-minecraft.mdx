@@ -1,0 +1,101 @@
+---
+title: Minecraft için En İyi Performans Modları (2026)
+description: "2026'daki en iyi Minecraft performans modları: Render için Sodium, artı bellek ve culling modları. Takılmayı düzelten kısa liste ve Opal kullanıyorsanız atlayacağınız mod."
+excerpt: Sodium çoğu işi yapıyor; birkaç hafıza ve budama modu onu tamamlıyor. İşte kısa liste ve çalıştırıyorsanız atlayacağınız mod Opal.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: En iyi tek performans modu nedir?
+    a: Sodium. Yeniden işleyerek yeniden oluşturuyor ve çoğu makine için en büyük tek FPS artışını sağlıyor.
+  - q: Lityum, Opal ile uyumlu mu?
+    a: Hayır, lityum ile uyumlu değil Opal. Koş Sodium kare hızın için ve eğer Lithium'u çıkaracaksan Opal kurulumu yapılmış.
+  - q: Bu modlar oyunun görünümünü değiştiriyor mu?
+    a: Hayır. Bunlar hız modları. Gölgelendiriciler için Iris'i ayrı olarak ekleyin.
+  - q: Birlikte koşmaları güvenli mi?
+    a: Evet, bunlar bir arada çalışacak şekilde tasarlandı. Öncelikle Fabric API'yi kurun, sonra geri kalanını ekleyin.
+---
+
+Eğer bir şey kuracaksanız, [Sodium](https://modrinth.com/mod/sodium)'u kurun. Minecraft'ın render motorunu yeniden yazar ve çoğu kurulum için en büyük kare hızı artışını sağlar. Bellek modlarından birkaçını ve bir culling modunu da ekleyerek, gerçek lag nedenlerini ortadan kaldırmış olursunuz. Bunların hepsi ücretsiz [Fabric](https://fabricmc.net) modlarıdır. Opal kullanıcıları için bir not: Lithium yaygın bir seçimdir ancak Opal ile uyumlu değildir, bu yüzden onu dışarıda bırakmanız gereken moddur.
+
+<KeyTakeaways>
+
+- Sodyum, en büyük FPS kazancı. Öncelikle onu kurun.
+- FerriteCore ve ModernFix belleği azaltır; Entity Culling görünmeyen yaratıkları atlar.
+- Lithium oyun mantığını iyileştirir ancak Opal ile uyumlu değildir. Opal kullanıyorsanız onu atlayın.
+- Sodium, Opal gibi bir istemci için yer açan boş alanı sağlar.
+
+</KeyTakeaways>
+
+## Yığın
+
+<ModSection title="Ücretsiz performans modları" badge="Ücretsiz" badgeColor="zümrüt" description="Sodium çekirdek. FerriteCore, Entity Culling ve ModernFix tamamlıyor. Lithium yalnızca Opal dışı kurulumlarda harika.">
+<ModList>
+<ModLink href="https://modrinth.com/mod/sodium">Sodium (render FPS, Opal ile uyumlu)</ModLink>
+<ModLink href="https://modrinth.com/mod/ferritecore">FerriteCore (daha az bellek kullanımı)</ModLink>
+<ModLink href="https://modrinth.com/mod/entityculling">Entity Culling (gizli varlıkları atla)</ModLink>
+<ModLink href="https://modrinth.com/mod/modernfix">ModernFix (yükleme süresi ve bellek)</ModLink>
+<IncompatibleMod>Lithium (oyun mantığı, Opal ile uyumlu değil)</IncompatibleMod>
+</ModList>
+</ModSection>
+
+## Sodium
+
+Yeniden işleme yeniden yazımı. Varsayılan işleme yolunu daha hızlı bir yol ile değiştirir ve genellikle en büyük tek farkı yaratır, özellikle daha zayıf GPU'larda. İhtiyacı var [Fabric]((https://fabricmc.net) yükleyicisi ve [Fabric Önce API](https://modrinth.com/mod/fabric-api) yükleyin. Yanında sorunsuz çalışır Opal.
+
+## Ferrit Çekirdek
+
+Kesimler Minecraft'bellek kullanımını, verilerin RAM'de nasıl depolandığını yeniden düzenleyerek iyileştirir. Daha düşük bellek yükü, sessiz performans düşüş sebeplerinden biri olan çöp toplama duraklamalarının sayısını azaltır.
+
+## Varlık Eleme
+
+Oyunda, duvarların arkasında veya yer altında göremediğiniz varlıkların oluşturulmasını durdurur. Çok sayıda yaratık veya eşya çerçevesi olan yoğun dünyalarda, ücretsiz kareler kazandırır.
+
+## ModernFix
+
+Yükleme sürelerini hızlandıran ve belleği budayan geniş kapsamlı düzeltme ve performans modudur. Temel modlar kurulduktan sonra güvenli bir çözüm olarak kullanılabilir.
+
+<Callout variant="warning" title="Koşan Opal mı? Lityumu atla">
+Lityum genellikle oyun mantığına uygun seçimdir, ancak bununla uyumlu değildir Opal. Güven Sodium performans için litiumu klasörden çıkarın.
+</Callout>
+
+## Hızlı Bakış
+
+| Mod | Düzeltir | Opal ile Uyumlu |
+| :--- | :--- | :--- |
+| Sodium | Render FPS | Evet |
+| FerriteCore | Bellek kullanımı | Evet |
+| Entity Culling | Gereksiz varlık render'ı | Evet |
+| ModernFix | Yükleme süresi ve bellek | Evet |
+| Lithium | Oyun mantığı performansı | Hayır |
+
+## Opal Nerede Yer Alıyor
+
+Opal, Minecraft 1.21.10 için bir Fabric modudur, bu nedenle performans paketinin olduğu `mods` klasörüne kurulur. Kare hızınızı korur ve üzerine tam bir istemci ekler: Savaş, hareket, görsel ve yardımcı araçlar için 200'den fazla özellik, cam bir kullanıcı arayüzü ve bir betik motoru. Opal büyük bir mod olduğundan, boş alan için Sodium'u açık bırakın ve Lithium'u kapatın, kurulum böylece sağlam kalır.
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="En iyi performans modifikasyonu nedir?">
+Sodium. Renderlama işlemini yeniden yazar ve çoğu makine için en büyük tek kazanımı sağlar.
+</FAQItem>
+
+<FAQItem question="Lityum, Opal ile uyumlu mu?">
+Hayır. Kullanma Sodium performans için ve Lithium'u ayırmak gerektiğinde Opal kurulumu yapılmış.
+</FAQItem>
+
+<FAQItem question="Bunlar oyunun görünümünü değiştirir mi?">
+Hayır. Bunlar hız modlarıdır. Gölgeler için Iris'i ayrı olarak ekleyin.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/blog/how-to-get-more-fps-in-minecraft", label: "Minecraft'ta FPS'yi artırmanın yolları", description: "Modların başlattıklarını tamamlayan ayarlar." },
+  { href: "/tr/blog/best-mods-for-low-end-pcs", label: "Düşük sistemli bilgisayarlar için en iyi modlar", description: "Aynı yığın, zayıf donanım için optimize edildi." },
+  { href: "/tr/blog/how-to-fix-minecraft-lag", label: "Minecraft'ta takılmayı nasıl giderebilirsiniz", description: "Hangi tür gecikmenin olduğunu teşhis edin." },
+]} />
+
+<CTA href="/tr/purchase">Opal'ı $8.99'ın üzerine ekleyin</CTA>

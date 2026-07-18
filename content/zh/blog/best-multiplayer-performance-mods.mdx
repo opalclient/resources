@@ -1,0 +1,86 @@
+---
+title: 最佳多人游戏性能模组 Minecraft (2026)
+description: 更顺畅 Minecraft 多人游戏源自氪隆，用于网络连接增强 Sodium 以及 C2ME 用于渲染和分块加载。客户端模组，它们能帮助服务器.
+excerpt: 多人模式增加了网络功能和人群渲染。以下是客户端栈，它能优化你的体验，并说明客户端的角色.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: 客户端模组能否解决服务器延迟？?
+    a: 不，他们会处理渲染、网络开销和分块加载这些问题，这些都在你的端上完成。服务器端的延迟是你无法控制的.
+  - q: 多人遊戲中，哪個最重要？?
+    a: Sodium 为应对人群拥挤的情况，以及网络开销的Krypton。同时运行两者.
+  - q: 锂元素与Opal兼容吗？?
+    a: 不。锂不兼容于 Opal. 使用 Sodium 以及氪星，如果省略锂 Opal 已安装.
+  - q: 这些适用于任何服务器吗？?
+    a: 它们是客户端的，与服务器无关，因此无论你在哪里游玩，都能提供帮助。请务必遵守每个服务器对模组的规定.
+---
+
+多人游戏会带来单人游戏所没有的工作量：网络数据包、需要渲染的更多玩家，以及你在移动时加载的区块。在客户端，[Krypton](https://modrinth.com/mod/krypton) 优化网络，[Sodium](https://modrinth.com/mod/sodium) 在人群中也能保持快速的渲染速度，而 **C2ME** 则优化区块加载。这些都无法解决服务器速度慢的问题，但它们能让你的连接尽可能流畅。对于 Opal 用户请注意：Lithium 与 Opal 不兼容，所以围绕 Sodium 构建.
+
+<KeyTakeaways>
+
+- Sodium 当屏幕上布满玩家和粒子时，它会稳定你的帧率。
+- Krypton 减少了繁忙服务器的网络开销。
+- C2ME 加快了区块加载速度，从而减少了快速旅行时的卡顿。
+- 客户端模组无法修复服务器延迟。Lithium 不兼容 Opal.
+
+</KeyTakeaways>
+
+## 氪星
+
+优化 Minecraft'客户端的网络协议栈。它减少了数据包处理的开销，这有助于在繁忙的服务器发送大量更新时.
+
+## Sodium
+
+当屏幕上同时出现大量玩家、实体和粒子时，它能保持帧速率的稳定，而这正是在原版渲染出现问题的时候。它能与…一同运行 Opal.
+
+## C2ME
+
+加快区块加载速度，在大型多人游戏地图上快速移动时卡顿现象会减少。
+
+## 无法修复的问题
+
+如果方块出现回弹，生物实体出现传送，那是因为服务器端延迟或你的网络连接问题，而不是客户端问题。请使用有线连接，选择附近的区域，并关闭占用大量带宽的应用程序。我们宁愿告诉你这些，也不愿出售一款无法解决这些问题的模组.
+
+<Callout variant="warning" title="运行 Opal？跳过 Lithium">
+Lithium 是一个常见的多人游戏选择，但它与 Opal 不兼容。运行 Sodium 和 Krypton，并排除 Lithium。
+</Callout>
+
+## Opal 如何融入
+Opal 是一个为 Minecraft 1.21.10 构建的 Fabric 模组，专为竞技性多人游戏设计：它拥有超过 200 个战斗、移动、视觉和实用功能，采用玻璃 UI 界面，并提供一套适合 BedWars 和 SkyWars 模式的混合配置，以及一套更安静的配置，可在大多数服务器上稳定运行。它会安装到与 Krypton 和 Sodium 相同的 `mods` 文件夹中。首先优化你的连接以获得最佳性能，然后添加 Opal 以获得功能，并避免使用 Lithium
+## 一目了然
+
+| 模式 | 工作 | 与 Opal |
+| :--- | :--- | :--- |
+| Sodium | 人群中的框架 | 是 |
+|氪石 | 网络开销 | 是 |
+|C2ME | 分块加载 | 是 |
+|锂 | 客户端模拟 | 否 |
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="客户端模组能否解决服务器延迟？">
+不能。它们能优化你的渲染、网络开销和区块加载，但服务器延迟是无法控制的。
+</FAQItem>
+
+<FAQItem question="多人游戏最看重什么？">
+Sodium 用于人群中的帧数，“Krypton” 用于网络开销。两者都运行。
+</FAQItem>
+
+<FAQItem question="锂元素与Opal兼容吗？?">
+不。使用 Sodium 以及氪星，并且在何时不包括锂 Opal 已安装.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/blog/how-to-fix-minecraft-lag", label: "如何修复 Minecraft 滞后", description: "分析帧率和内存延迟来判断网络延迟." },
+  { href: "/zh/blog/best-performance-mods-for-minecraft", label: "Minecraft 最佳性能优化模组", description: "单人与多人游戏的核心技术栈." },
+  { href: "/zh/blog/how-to-get-stable-fps-for-pvp", label: "如何获得稳定的 PvP 帧数", description: "稳定的帧率，助力竞技对决." },
+]} />
+
+<CTA href="/zh/purchase">终身享有 Opal，仅售 8.99 美元</CTA>

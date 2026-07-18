@@ -1,0 +1,87 @@
+---
+title: 如何在 中安装着色器 Minecraft (2026)
+description: 在Fabric中使用Iris和Sodium安装着色器：添加这两个mod，将着色器包放入文件夹，然后在视频设置中选择它。完整步骤、FPS优化技巧以及客户端适配方法.
+excerpt: 材质Fabric的着色器制作需要三个步骤，无需OptiFine。以下是整个过程，以及Opal如何在着色器设置中发挥作用.
+date: 2026-05-28
+lastUpdated: 2026-06-03
+category: Guides
+author: trq
+faqs:
+  - q: 我需要 OptiFine 才能使用着色器吗？?
+    a: 非织物使用。Iris 可以在不使用 OptiFine 的情况下加载着色器包，并且与 Fabric mod 生态系统的其他模组兼容.
+  - q: 着色器会降低我的帧率吗？?
+    a: 它们需要框架，但使用 Sodium 运行 Iris 能抵消大部分费用。如果需要更大的空间，请选择更轻便的包.
+  - q: 材质包应该放在哪里？?
+    a: 在你的 Minecraft 目录下的 shaderpacks 文件夹中。安装 Iris 后，启动一次，文件夹就会为你自动创建.
+  - q: 我可以用 Opal 运行着色器吗？?
+    a: 是的。Opal、Iris 和 Sodium 都是同一个文件夹中的 Fabric 模组。着色器和完整的客户端可以并行运行.
+---
+
+在Fabric上运行着色器最干净的方式是使用[Iris](https://modrinth.com/mod/iris)，它加载着色器包并且构建于[Sodium](https://modrinth.com/mod/sodium)之上，从而保持你的帧率。安装这两个模组，将着色器包放入一个文件夹，然后在视频设置中选择它。这就是全部的工作。无需OptiFine.
+
+<KeyTakeaways>
+
+- Iris 在 Fabric 上运行着着色器，无需 OptiFine。
+- 将 Iris 与 Sodium 搭配使用，这样着色器所需的帧数就会减少。
+- 着色器包位于 `shaderpacks` 文件夹中；在视频设置中选择一个。
+- Opal 在同一个文件夹中运行，因此你可以拥有着色器和完整的客户端.
+
+</KeyTakeaways>
+
+## 安装着色器
+
+<Steps>
+
+<Step number={1} title="安装 Iris 和 Sodium">安装 [Fabric](https://fabricmc.net) 启动器和 [Fabric API](https://modrinth.com/mod/fabric-api)，然后将 [Iris](https://modrinth.com/mod/iris) 和 [Sodium](https://modrinth.com/mod/sodium) 添加到你的 `mods` 文件夹中。Iris 运行着着色器，Sodium 保持帧率。它们是设计成协同工作的</Step>
+
+<Step number={2} title="添加着色器包">下载一个着色器包（它是一个单独的文件），然后将其放入你的 Minecraft 目录下的 `shaderpacks` 文件夹中。如果该文件夹还没有，请先安装 Iris 启动游戏一次，它会自动为你创建</Step>
+
+<Step number={3} title="在游戏中选择它">打开视频设置，然后是着色器包界面，选择你添加的包。它会立即生效，你可以在同一个界面切换不同的包</Step>
+
+</Steps>
+
+<Callout variant="warning" title="如果您的帧率下降过多">
+请先降低渲染距离或切换到更轻量级的材质包，再责怪模组。复杂的着色器会消耗大量的帧数，而减少一些渲染距离往往就能帮你找回所需。
+</Callout>
+
+## 挑选背包
+
+<Checklist>
+<ChecklistItem>更轻的背包会降低帧数，但依然看起来不错。如果你的电脑配置一般，可以从这里开始。</ChecklistItem>
+<ChecklistItem>更重的背包会增加华丽的水、阴影和体积光，但会显著降低帧数。</ChecklistItem>
+<ChecklistItem>选择与你的显卡相匹配的背包，而不是看截图。</ChecklistItem>
+</Checklist>
+
+## 使用客户端运行着色器
+
+由于 Iris 和 Sodium 是 Fabric 模组，任何其他以 Fabric 模组形式构建的内容都会共享同一个文件夹，包括 Opal。因此，着色器渲染的游戏和完整的实用工具客户端并非二选一。Opal 针对 Minecraft 1.21.10 版本，并与您的着色器堆栈一起加载，因此您可以同时运行外观和功能集。
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="我需要 OptiFine 才能使用着色器吗？">
+在 Fabric 环境下不需要。Iris 可以加载着色器包，无需 OptiFine。
+</FAQItem>
+
+<FAQItem question="着色器会降低我的 FPS 吗？">
+它们会消耗帧数，但 Iris 和 Sodium 能抵消很多。如果需要更多缓冲空间，可以选择更轻量级的材质包。
+</FAQItem>
+
+<FAQItem question="着色器包应该放在哪里？">
+在你的 Minecraft 目录中的 `shaderpacks` 文件夹里。
+</FAQItem>
+
+<FAQItem question="我可以使用着色器搭配 Opal 吗？">
+是的。Opal、Iris 和 Sodium 共享同一个文件夹，因此着色器和完整的客户端可以一起运行。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/blog/how-to-get-more-fps-in-minecraft", label: "如何在提升帧数 Minecraft", description: "在添加着色器之前，先恢复骨骼框架." },
+  { href: "/zh/blog/best-mods-for-performance-and-shaders", label: "性能和着色器最佳模组", description: "Sodium, Iris, 以及其余的堆栈." },
+  { href: "/zh/blog/essential-fabric-mods-every-player-should-have", label: "必需的 Fabric 模式", description: "每一个 Fabric 开始设置." },
+]} />
+
+<CTA href="/zh/purchase">获取 Opal 用于 $8.99</CTA>

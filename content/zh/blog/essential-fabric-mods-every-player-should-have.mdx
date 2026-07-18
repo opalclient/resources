@@ -1,0 +1,101 @@
+---
+title: 必需的 Fabric 每个玩家都应该拥有的模组 (2026)
+description: 值得优先安装的 Fabric 模组精选列表：Fabric API、Sodium、Iris 和 ModMenu，以及客户端层。 它们各自的作用以及与 Opal 兼容的模组.
+excerpt: 一些模组涵盖了干净的 Fabric 环境的基础设置。这里是启动包，按安装顺序排列，以及位于顶端的客户端.
+date: 2026-06-01
+lastUpdated: 2026-06-03
+category: Guides
+author: trq
+faqs:
+  - q: 我应该先安装哪个 Fabric 模组？?
+    a: Fabric API。 大部分其他模组都依赖它，所以它应该在其他模组之前加载.
+  - q: 这些mod会改变游戏的外观吗？?
+    a: 只有Iris，它添加着色器。Sodium是关于速度的，而ModMenu是一个管理界面.
+  - q: 锂元素与Opal兼容吗？?
+    a: 锂是很好的游戏逻辑优化器，但它与 Opal 不兼容。如果你运行 Opal，请使用 Sodium，跳过 Lithium.
+  - q: 像 Opal 这样的客户应该放在哪里？?
+    a: 在顶部。 Opal也是一个Fabric模组，因此它会安装到你的启动包的同一文件夹中，并添加200多个功能.
+---
+
+一些模组涵盖了良好 [Fabric](https://fabricmc.net) 设置的基础：以 [Fabric API](https://modrinth.com/mod/fabric-api) 作为基础，[Sodium](https://modrinth.com/mod/sodium) 用于性能提升，[Iris](https://modrinth.com/mod/iris) 用于着色器，以及 [ModMenu](https://modrinth.com/mod/modmenu) 用于管理所有内容。首先安装这些模组，大多数其他模组就能顺利安装在它们之上，包括客户端。对于 Opal 用户请注意：Lithium 是一个常见的选择，但它与 Opal 不兼容，所以应该将其排除.
+
+<KeyTakeaways>
+
+- Fabric API 是基础。在安装其他任何东西之前先安装它。
+- Sodium 用于提升帧数，Iris 用于着色器，ModMenu 用于管理所有内容。
+- Lithium 单独使用效果很好，但与 Opal 不兼容。
+- Opal 是客户端层；它安装在与其它文件相同的文件夹中.
+
+</KeyTakeaways>
+
+## 启动包
+
+<ModSection title="首先安装这些" badge="核心" badgeColor="翠绿" description="基础、性能、着色器以及管理器。所有组件与 Opal 协同工作。">
+<ModList>
+<ModLink href="https://modrinth.com/mod/fabric-api">Fabric API (必需的基础)</ModLink>
+<ModLink href="https://modrinth.com/mod/sodium">Sodium (渲染 FPS)</ModLink>
+<ModLink href="https://modrinth.com/mod/iris">Iris (着色器)</ModLink>
+<ModLink href="https://modrinth.com/mod/modmenu">ModMenu (游戏内管理模组)</ModLink>
+<IncompatibleMod>Lithium (游戏逻辑，与 Opal 不兼容)</IncompatibleMod>
+</ModList>
+</ModSection>
+
+## Fabric API
+
+几乎所有 Fabric 模组都依赖的共享库。请先安装它。没有它，大多数模组将无法加载。与其说是功能，不如说是必需品。
+
+## Sodium
+
+重写渲染引擎，可提高 FPS，对性能较弱的 GPU 压力最大。这是你能获得的最大的性能提升，并且可以与 Opal 一起正常运行。
+
+## Iris
+
+运行着色器包，并且设计用于与 Sodium 配合使用，因此你可以在不降低帧数的情况下获得精美的视觉效果。如果你不关心着色器，可以跳过它。
+
+## ModMenu
+
+添加游戏内的模组列表和配置屏幕，让你无需编辑文件即可查看已安装的模组并更改设置。提升生活品质，让其他模组更容易使用。
+
+## 关于 Lithium 的说明
+
+[Lithium](https://modrinth.com/mod/lithium) 优化游戏逻辑，并且在原版增强设置下表现出色。不过，它与 Opal 不兼容，因此如果你的文件夹中包含 Opal，请不要使用 Lithium，而是依赖 Sodium 来提高性能。
+
+## 简要概览
+
+| 模组 | 功能 | 与 Opal 兼容 |
+| :--- | :--- | :--- |
+| Fabric API | 基础必需 | 是 |
+| Sodium | 渲染 FPS | 是 |
+| Iris | 着色器 | 是 |
+| ModMenu | 游戏内模组管理 | 是 |
+| Lithium | 游戏逻辑性能 | 否 |
+
+## 顶层框架
+
+一旦启动包已安装，文件夹即可供客户端使用。Opal 是 Minecraft 1.21.10 的 Fabric 模组，因此它的安装方式与其他模组相同：安装到 `mods` 文件夹中。您保留性能和着色器堆栈，并在其基础上添加 200 多个功能、玻璃 UI 和脚本引擎。
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="我应该先安装哪个模组？">
+Fabric API。 大多数其他模组都依赖于它。
+</FAQItem>
+
+<FAQItem question="这些会改变游戏的外观吗？">
+只有 Iris（着色器）会改变。Sodium 提升速度，ModMenu 负责管理。
+</FAQItem>
+
+<FAQItem question="锂元素与Opal兼容吗？?">
+不。使用 Sodium 跳过锂，然后跑吧 Opal.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/blog/how-to-get-more-fps-in-minecraft", label: "如何在提升帧数 Minecraft", description: "调整性能优化以获得最大收益." },
+  { href: "/zh/blog/how-to-install-shaders-in-minecraft", label: "如何在 Minecraft 中安装着色器", description: "为不使用 OptiFine 的着色器添加 Iris." },
+  { href: "/zh/blog/why-opal-is-the-best-value-minecraft-client", label: "为什么 Opal 客户性价比最高", description: "客户端层位于堆栈之上." },
+]} />
+
+<CTA href="/zh/purchase">完成 Opal 的设置，$8.99</CTA>

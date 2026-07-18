@@ -1,0 +1,93 @@
+---
+title: 如何在不降低帧数的情况下运行着色器 (2026)
+description: 着色器会消耗帧数，但 Iris 加上 Sodium 和一个轻量级材质包可以保持流畅运行。以下是设置和选项，能在开启着色器的情况下尽可能恢复 FPS.
+excerpt: 着色器始终会消耗帧数，但你可以保持游戏的可玩性。以下是 Iris 和 Sodium 的设置，以及客户端如何仍然可以叠加在上面.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: 使用Iris和Sodium后，着色器为什么会更流畅？?
+    a: Sodium 的快速渲染器负责主要的运算，而Iris 则在其基础上添加着色器，而不是采用旧式的单一罐装方案.
+  - q: 哪种设置能获得最高的帧数？?
+    a: 阴影距离和分辨率，以及体积光。先降低那些.
+  - q: Iris 和 Sodium 能和 Opal 配合吗？?
+    a: 是的. Sodium 与 Iris 并排而行 Opal. 仅锂是例外，因为它不兼容 Opal.
+  - q: 低端电脑能运行着色器吗？?
+    a: 是的，轻装且低画质。在配置较低的硬件上，帧率通常是首要考虑的.
+---
+
+着色器始终会消耗一些帧数，但你可以保持游戏的可玩性。基础是[Iris](https://modrinth.com/mod/iris)，它是在[Sodium](https://modrinth.com/mod/sodium)的基础上运行着色器，Sodium 旨在提升性能，速度比旧方法快得多。然后你可以选择一个更轻量级的着色器包，并移除最耗费资源的特效。Iris 和 Sodium 与 Opal 共同运行，因此着色器渲染的游戏和完整的客户端可以在同一设置中运行.
+
+<KeyTakeaways>
+
+- Iris 叠加在 Sodium 之上是可玩着色器最重要的步骤。
+- 更轻的材质包和修剪后的特效可以恢复大部分丢失的帧数。
+- Iris 和 Sodium 都可以与 Opal 配合运行；只有 Lithium 不兼容。
+- 保持渲染距离适中；着色器会使其成本成倍增加.
+
+</KeyTakeaways>
+
+## 第一步：使用 Iris 用 Sodium
+
+<Steps>
+
+<Step number={1} title="安装 Sodium">钠 (Sodium) 是一个快速渲染器，负责处理繁重的工作。首先安装 [Fabric](https://fabricmc.net) 载入器和 [Fabric API](https://modrinth.com/mod/fabric-api)，然后将“钠 (Sodium)” 放入你的 `mods` 文件夹中。它能与 Opal 一起良好运行</Step>
+
+<Step number={2} title="添加Iris">[Iris](https://modrinth.com/mod/iris) 运行着着色器包，并且构建于 Sodium 之上，因此你可以保留之前提升的帧率。这种组合是整个技巧的精髓</Step>
+
+</Steps>
+
+## 第二步：选择更轻的背包
+
+沉重的写实背包成本最高。一个平衡的背包，或者一个更重背包的低调版本，可以在保留大部分外观的同时恢复大量帧数。
+
+## 第三步：修剪昂贵的效果
+
+在着色器的设置中，主要的成本通常是：
+
+<Checklist>
+<ChecklistItem>体积光照和雾.</ChecklistItem>
+<ChecklistItem>倒影，屏幕空间或水面.</ChecklistItem>
+<ChecklistItem>阴影分辨率与距离.</ChecklistItem>
+</Checklist>
+
+降低这些可以保留大部分外观，却只需一小部分成本。
+
+## 第 4 步：调整渲染距离
+
+着色器会使每个绘制块体的成本成倍增加，因此过高的渲染距离会造成两重负担。保持适中即可.
+
+<Callout variant="tip" title="Opal 用户">
+Sodium 和 Iris 均与 Opal 兼容，因此您可以同时拥有着色器和客户端。Lithium 是唯一无法与 Opal 配合使用的常用模组，请将其排除，并让 Sodium 处理性能。
+</Callout>
+
+## Opal 的适用环境
+
+Opal 是一个针对 Minecraft 1.21.10 的 Fabric 模组，安装方式与 Sodium 和 Iris 相同，即放入 `mods` 文件夹。它能提供着色器渲染的世界，以及完整的客户端：200 多个功能、玻璃材质的 UI 和一个脚本引擎。这种玻璃界面设计旨在完美地覆盖着色器渲染的游戏画面，两者相互补充，而非相互冲突。请保留 Sodium 以获得性能空间，并移除 Lithium。
+
+## 常见问题解答
+
+<FAQList>
+
+<FAQItem question="为什么使用 Iris 和 Sodium 时着色器更流畅？">
+Sodium 的快速渲染器负责主要的运算，而 Iris 在其基础上添加着色器，而不是旧的单罐装方法。
+</FAQItem>
+
+<FAQItem question="Iris 和 Sodium 是否与 Opal 兼容？">
+是的。两者都可与 Opal 同时运行。只有 Lithium 不兼容 Opal。
+</FAQItem>
+
+<FAQItem question="如何设置能获得最高的帧数？">
+阴影距离、分辨率以及体积光。首先降低这些设置。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/blog/best-minecraft-shaders", label: "最好 Minecraft 着色器", description: "从轻装到重装，该选择哪些装备？." },
+  { href: "/zh/blog/how-to-install-shaders-in-minecraft", label: "如何在 Minecraft 中安装着色器", description: "Iris 的完整设置，一步一步地." },
+  { href: "/zh/blog/how-to-get-more-fps-in-minecraft", label: "如何在提升帧数 Minecraft", description: "在添加着色器之前恢复帧." },
+]} />
+
+<CTA href="/zh/purchase">顶端添加Opal 8.99 美元</CTA>

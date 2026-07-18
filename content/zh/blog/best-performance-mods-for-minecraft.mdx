@@ -1,0 +1,99 @@
+---
+title: 最佳性能改装 Minecraft (2026)
+description: "最好 Minecraft 性能改装 2026: Sodium 用于渲染，以及内存和剔除模组。简短的列表可以修复卡顿，还有一个列表用于跳过运行的情况 Opal."
+excerpt: Sodium 完成大部分工作；少数内存和筛选模组完成它。这是简短列表，如果你运行，请跳过那个模组 Opal.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: 有什么是最好的单项性能改装？?
+    a: Sodium. 它重写了渲染方式，并且是大多数机器上最大的单帧性能提升.
+  - q: 锂元素与Opal兼容吗？?
+    a: 不。锂不兼容于 Opal. 跑 Sodium 你的帧率，如果不需要锂的话就不用了 Opal 已安装.
+  - q: 这些mod会改变游戏的外观吗？?
+    a: 不，这些是速度修改器。着色器请单独添加 Iris.
+  - q: 它们一起奔跑安全吗？?
+    a: 是的，它们的设计就是为了共存。首先安装 Fabric API，然后添加其余部分.
+---
+
+如果你要安装任何东西，就安装 [Sodium](https://modrinth.com/mod/sodium)。它重写了 Minecraft 的渲染器，并且是大多数配置中提升帧率的最大单项改进。 搭配一两个内存优化模组和剔除模组，你就能解决真正的卡顿原因。 这些都是免费的 [Fabric](https://fabricmc.net) 模组。 针对 Opal 用户请注意：Lithium 是一个常见的选择，但与 Opal 不兼容，所以应该将其排除在外.
+
+<KeyTakeaways>
+
+- 钠是最大的 FPS 提升。首先安装它。
+- FerriteCore 和 ModernFix 减少内存占用；Entity Culling 跳过隐藏的实体。
+- 锂平滑游戏逻辑，但与 Opal 不兼容。如果你使用 Opal，请跳过它。
+- Sodium 提供空间，让像 Opal 这样的客户端得以运行.
+
+</KeyTakeaways>
+
+## 堆栈
+
+<ModSection title="免费性能模组" badge="免费" badgeColor="翠绿" description="Sodium 是核心。FerriteCore、实体剔除和 ModernFix 完善它。Lithium 仅适用于非 Opal 设置。">
+<ModList>
+<ModLink href="https://modrinth.com/mod/sodium">Sodium (渲染 FPS，与 Opal 兼容)</ModLink>
+<ModLink href="https://modrinth.com/mod/ferritecore">FerriteCore (降低内存使用)</ModLink>
+<ModLink href="https://modrinth.com/mod/entityculling">实体剔除 (跳过隐藏实体)</ModLink>
+<ModLink href="https://modrinth.com/mod/modernfix">ModernFix (加载时间和内存)</ModLink>
+<IncompatibleMod>Lithium (游戏逻辑，与 Opal 不兼容)</IncompatibleMod>
+</ModList>
+</ModSection>
+
+## Sodium
+
+渲染重写。它用更快的渲染路径替换了原版渲染路径，通常能带来最大的单项提升，尤其是在性能较弱的显卡上。需要 [Fabric](https://fabricmc.net) 载入器和 [Fabric 首先安装 API](https://modrinth.com/mod/fabric-api)。与其它模组一起运行也没有问题 Opal.
+
+## 铁氧体芯 Minecraft's 内存使用情况，通过重新设计数据在 RAM 中的存储方式来实现。 降低内存压力意味着更少的垃圾回收暂停，这是导致卡顿的常见原因之一。
+
+## 实体剔除
+
+阻止游戏渲染你实际上看不到的实体，例如被墙壁或地下遮挡的实体。 在拥有大量生物或物品框的繁忙世界中，它可以免费回收帧数。
+
+## ModernFix
+
+一个广泛的修复和性能优化模组，可以加快加载速度并修剪内存。 在核心模组到位后，这是一个安全且全面的解决方案.
+
+<Callout variant="warning" title="运行Opal？跳过锂">
+锂通常是游戏逻辑中的首选，但它不兼容于 Opal. 依靠 Sodium 为了性能，请将锂从文件夹中移除.
+</Callout>
+
+## 概览
+
+| 模块 | 修复内容 | 与 Opal 兼容 |
+| :--- | :--- | :--- |
+| Sodium | 渲染帧数 | 是 |
+| FerriteCore | 内存占用 | 是 |
+| 实体剔除 | 浪费的实体渲染 | 是 |
+| ModernFix | 加载时间和内存 | 是 |
+| Lithium | 游戏逻辑性能 | 否 |
+
+## Opal 的定位
+
+Opal 是一个针对 Minecraft 1.21.10 的 Fabric 模组，因此它安装在与性能堆栈相同的 `mods` 文件夹中。您可以保留您的帧率，并在此基础上添加一个完整的客户端：涵盖战斗、移动、视觉和实用工具的 200 多个功能，一个玻璃 UI，以及一个脚本引擎。Opal 是一个大型模组，因此请保留 Sodium 以获得性能空间，并排除 Lithium，这样配置就能稳定运行。
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="什么是最佳性能模组？">
+Sodium。它重写渲染，是大多数机器获得的最大单次提升。
+</FAQItem>
+
+<FAQItem question="锂元素与Opal兼容吗？?">
+不。使用 Sodium 为了性能，当离开锂时 Opal 已安装.
+</FAQItem>
+
+<FAQItem question="这些会改变游戏的外观吗？">
+不会。这些是速度修改器。着色器请单独添加 Iris。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/blog/how-to-get-more-fps-in-minecraft", label: "如何在提升帧数 Minecraft", description: "模组启动后，这些设置会完成后续工作." },
+  { href: "/zh/blog/best-mods-for-low-end-pcs", label: "低端电脑最佳模组", description: "同样的堆栈针对较弱的硬件进行了优化." },
+  { href: "/zh/blog/how-to-fix-minecraft-lag", label: "如何修复 Minecraft 滞后", description: "诊断你遇到的延迟类型." },
+]} />
+
+<CTA href="/zh/purchase">顶端添加Opal 8.99 美元</CTA>

@@ -1,0 +1,145 @@
+---
+title: Przedstawiamy silnik skryptowy GraalVM firmy Opal
+description: Napisz niestandardowy JavaScript, który współdziała z wewnętrznymi API Opal. Automatyzuj zadania, reaguj na wydarzenia w grze, rysuj własny HUD i rozszerzaj klienta w czasie działania.
+excerpt: Silnik skryptowy Opal działa na GraalVM, pełnym środowisku uruchomieniowym JavaScript wewnątrz Minecraft. Oto, co możesz z nim zbudować.
+date: 2026-03-15
+lastUpdated: 2026-06-03
+category: Features
+author: trq
+faqs:
+  - q: Jakiego silnika skryptów używa Opal?
+    a: Opal wykorzystuje GraalVM, środowisko uruchomieniowe JavaScripta klasy enterprise od Oracle, osadzone w Minecraft z bezpiecznymi wątkami połączeniami do API klienta.
+  - q: Czy skrypty mogą uzyskać dostęp do moich plików lub sieci?
+    a: Nie. Skrypty działają w środowisku GraalVM z piaskownicą. Mogą wchodzić w interakcje z API Opal, ale nie mają dostępu do systemu plików, sieci ani innych aplikacji.
+  - q: Czy muszę zrestartować Minecrafta, żeby załadować skrypty?
+    a: Nie. Skrypty ładują się w czasie działania. Wrzuć plik .js do folderu skryptów i będzie dostępny od razu.
+  - q: Czy inny klient Minecrafta posiada silnik skryptowy jak ten?
+    a: Większość kończy na podstawowych makrosach. Opal dostarcza pełny runtime JavaScript GraalVM z bezpiecznymi wątkami bindingami do gier, co jest zupełnie inną rzeczą.
+---
+
+Opal udostępnia silnik JavaScript GraalVM, pełne środowisko uruchomieniowe JS działające wewnątrz klienta Minecraft. Piszesz skrypty, które komunikują się z wewnętrznymi API Opal podczas trwającej rozgrywki. To nie jest rejestrator makr ani system przypisywania klawiszy. Jest to prawdziwe środowisko programistyczne z dostępem do systemu zdarzeń klienta, konfiguracji modułów i stanu gry.
+
+<KeyTakeaways>
+
+- Pełny środowisko uruchomieniowe JavaScript GraalVM, a nie rejestrator makr.
+- Reaguj na zdarzenia w grze, zmieniaj ustawienia modułów i rysuj własny HUD.
+- Skrypty ładują się w czasie działania, bez potrzeby ponownego uruchamiania, i działają w środowisku piaskownicy w odniesieniu do API Opal.
+- Większość pozostałych klientów kończy się na podstawowych makrach.
+
+</KeyTakeaways>
+
+## Dlaczego GraalVM
+
+GraalVM to wielojęzyczny środowisko uruchomieniowe od Oracle. Wybraliśmy je z konkretnych powodów:
+
+- Szybkość: kompilacja JIT utrzymuje skrypty wystarczająco szybkie, aby działać w każdym cyklu.
+- JavaScript: większość ludzi go już zna, więc krzywa uczenia się jest krótka.
+- Bezpieczeństwo wątków: powiązania JS-Java prawidłowo obsługują współbieżność, zamiast zostawiać Cię do potknięcia się o nią.
+- Znane wzorce: standardowe API JavaScript zachowują się tak, jak się tego oczekuje.
+
+## Co możesz zbudować
+
+### Niestandardowa automatyzacja
+
+Reaguj na zdarzenia w grze:
+
+```javascript
+// Auto-respond to certain chat messages
+on('chat', (event) => {
+  if (event.message.includes('1v1?')) {
+    sendChat('/duel accept');
+  }
+});
+```
+
+### Dynamiczna konfiguracja modułów
+
+Zmieniaj ustawienia modułów w zależności od stanu gry:
+
+```javascript
+// Increase reach when health is low
+on('tick', () => {
+  const health = player.getHealth();
+  if (health < 8) {
+    modules.get('Reach').setSetting('distance', 3.3);
+  } else {
+    modules.get('Reach').setSetting('distance', 3.1);
+  }
+});
+```
+
+### Niestandardowe elementy HUD
+
+Rysuj własne nakładki:
+
+```javascript
+// Display a combo counter on screen
+let combo = 0;
+on('attackEntity', () => { combo++; });
+on('damage', () => { combo = 0; });
+on('render2d', (ctx) => {
+  ctx.drawText(`Combo: ${combo}`, 10, 10, 0xFFFFFF);
+});
+```
+
+### Profile specyficzne dla serwera
+
+Automatycznie przełączaj konfiguracje po dołączeniu do różnych serwerów:
+
+```javascript
+on('serverJoin', (event) => {
+  if (event.ip.includes('pvp.example.com')) {
+    loadConfig('server-bypass');
+  } else {
+    loadConfig('ghost-default');
+  }
+});
+```
+
+## Rozpoczęcie pracy
+
+<Steps>
+
+<Step number={1} title="Otwórz katalog skryptów">Znajdź katalog skryptów w folderze konfiguracyjnym Opal</Step>
+
+<Step number={2} title="Utwórz plik .js">Dowolna nazwa będzie pasować. To jest twój scenariusz</Step>
+
+<Step number={3} title="Zapisz w oparciu o API">Skorzystaj z referencji API w dokumentacji panelu: zdarzenia, dostęp do modułów, stan odtwarzacza i renderowanie</Step>
+
+<Step number={4} title="Zapisz i odtwarzaj">Skrypty ładują się w czasie działania, więc nie ma potrzeby ponownego uruchamiania</Step>
+
+</Steps>
+
+<Callout variant="info" title="Skrypty działają w środowisku piaskownicy">
+Skrypty wykonują się wewnątrz GraalVM i mogą wywoływać API Opal, ale nie mogą modyfikować systemu plików, sieci ani innych aplikacji. Twoje skrypty pozostają lokalne, a Twój komputer jest Twój.
+</Callout>
+
+## Skrypty społecznościowe
+
+Społeczność tworząca skrypty rośnie. Na Discordzie udostępniono skrypty i osoby, które pomogą Ci napisać własne. Najpopularniejsze to skrypty do automatyzacji gier dla mini-gier, trackery statystyk, wykrywanie kombinacji oraz przełączniki konfiguracji specyficzne dla serwera.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Jakiego silnika używa Opal?">
+GraalVM, środowisko wykonawcze JavaScript dla przedsiębiorstw firmy Oracle, z bezpiecznymi wątkami powiązaniami z grami.
+</FAQItem>
+
+<FAQItem question="Czy skrypty mogą czytać moje pliki?">
+Nie. Działają w środowisku piaskownicy, mając dostęp tylko do API Opal.
+</FAQItem>
+
+<FAQItem question="Czy muszę zrestartować program, aby załadować skrypt?">
+Nie. Wystarczy umieścić plik, a on załaduje się podczas działania.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/blog/opal-config-sharing-guide", label: "System udostępniania konfiguracji Opal", description: "Automatycznie ładuj odpowiednią konfigurację dla każdego serwera za pomocą skryptu." },
+  { href: "/pl/blog/why-opal-is-the-best-value-minecraft-client", label: "Dlaczego Opal to najlepszy wybór klienta", description: "Wszystko $8.99 zawiera." },
+  { href: "/pl/compare/opal-vs-liquidbounce", label: "Opal kontra LiquidBounce", description: "Skryptowanie a ścieżka open source." },
+]} />
+
+<CTA href="/pl/purchase" note="Lifetime license · instant delivery · no subscription">Zdobądź klienta, z którym możesz pracować według scenariusza, $8.99</CTA>

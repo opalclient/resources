@@ -1,0 +1,93 @@
+---
+title: シェーダーをFPSを落とさずに実行する方法 (2026)
+description: シェーダーはフレームを消費しますが、Iris、Sodium、および軽量化パックがあれば、プレイ可能です。ここに、シェーダーを使用しても最も多くのFPSを回復できる設定とセットアップを示します.
+excerpt: シェーダーは常にフレームコストがかかるものですが、プレイ可能な状態を維持できます。ここにIrisとSodiumの設定、そしてクライアントがどのように上に重ねて動作するかを説明します.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: IrisやSodiumを使うと、シェーダーがより滑らかになるのはなぜですか？?
+    a: Sodiumの高速レンダラーがメインの処理を行い、Irisがその上にシェーダーを追加する、という方式で、以前の単一JARファイル方式とは異なります.
+  - q: 最もFPSを向上させる設定は何ですか？?
+    a: 影の距離と解像度、それにボリュームライティング。まずそれらを下げてください.
+  - q: Do Iris そして Sodium 共に働く Opal?
+    a: はい. Sodium そして Iris 並んで走る Opal. リチウムだけが例外です。なぜなら、それと相性が悪いからです Opal.
+  - q: ローエンドのPCでもシェーダーは動きますか？?
+    a: はい、軽い荷物と低い設定で。弱いハードウェアでは、通常、フレームが優先されます.
+---
+
+シェーダーは常にいくつかのフレームを消費しますが、プレイ可能な状態に保つことができます。その基盤は、パフォーマンスのために[Sodium](https://modrinth.com/mod/sodium)の上で動作するシェーダーを実行するための[Iris](https://modrinth.com/mod/iris)です。これは、旧来の方法よりもはるかに高速です。次に、より軽量なパックを選び、最も高価なエフェクトを削減します。IrisとSodiumはOpalと共に動作するため、シェーダーで照らされたゲームとフルクライアントが同じ環境で動作します.
+
+<KeyTakeaways>
+
+- シェーダーを動作させる上で最も重要なステップは、Sodiumの上にIrisを配置することです。
+- より軽量なパックとトリムされたエフェクトで、失われたフレームの大部分を取り戻せます。
+- IrisとSodiumはどちらもOpalと連携しますが、Lithiumとの互換性はありません。
+- レンダリング距離は中程度に保ちましょう。シェーダーはそれのコストを増大させます.
+
+</KeyTakeaways>
+
+## ステップ1： IrisとSodiumを使用する
+
+<Steps>
+
+<Step number={1} title="Sodiumをインストールする">[Sodium](https://modrinth.com/mod/sodium) は、重い処理を行う高速レンダラーです。まず [Fabric](https://fabricmc.net) ローダーと [Fabric API](https://modrinth.com/mod/fabric-api) を入れ、その後 Sodium を `mods` フォルダにドロップしてください。Opal と一緒に問題なく動作します</Step>
+
+<Step number={2} title="追加 Iris">[Iris](https://modrinth.com/mod/iris) はシェーダーパックを実行し、Sodiumの上で動作するように設計されているため、先ほど得たフレームレートを維持できます。この組み合わせが全てです</Step>
+
+</Steps>
+
+## ステップ 2：軽量パックを選ぶ
+
+重厚なリアルなパックは最も高価です。バランスの取れたパック、あるいはより重いパックのロープロファイルを選ぶことで、多くのフレームを回収しつつ、見た目はほとんど損なわれません。
+
+## ステップ 3：高価なエフェクトを削減する
+
+シェーダーの設定内では、主に以下の要素が高コストになっています
+
+<Checklist>
+<ChecklistItem>ボリュームライティングと霧.</ChecklistItem>
+<ChecklistItem>反射、スクリーン空間、または水.</ChecklistItem>
+<ChecklistItem>影の解像度と距離.</ChecklistItem>
+</Checklist>
+
+これらを下げることで、見た目はほとんど変わらずに、費用はほんのわずかなものになります。
+
+## ステップ4：レンダー距離を調整
+
+シェーダーは描画されるチャンクごとにコストをかけてくるため、レンダー距離が高いと二倍に痛手になります。ほどほどに保ちましょう.
+
+<Callout variant="tip" title="オパールユーザーへ">
+SodiumとIrisはどちらもOpal上で動作するため、シェーダーとクライアントを同時に使用できます。Opalと互換性がない一般的なModはLithiumのみなので、Lithiumは除外し、Sodiumにパフォーマンスを任せてください。
+</Callout>
+
+## どこ Opal 合う
+
+Opal is a Fabric modu para Minecraft 1.21.10 と同じ`mods`フォルダにインストールされます Sodium そして Iris. シェーダーライティングされた世界とフルクライアントが手に入ります。200以上の機能、ガラス製のUI、そしてスクリプトエンジンを備えています。このガラスインターフェースは、シェーダーライティングされたゲームに自然に合うように設計されており、互いを補完し、対立することはありません Sodium 頭の高さのために、リチウムは除外してください。
+
+## よくある質問
+
+<FAQList>
+
+<FAQItem question="なぜ Iris と Sodium でシェーダーが滑らかになるのですか？">
+Sodium の高速レンダラーが大部分の処理を行い、Iris はそれの上にシェーダーを追加します。これは、従来の単一の JAR ファイルによる方法とは異なります。
+</FAQItem>
+
+<FAQItem question="IrisとSodiumはOpalと連携しますか？">
+はい。どちらもOpalと並行して動作します。「Lithium」のみがOpalと互換性がありません。
+</FAQItem>
+
+<FAQItem question="最もFPSを向上させる設定は何ですか？">
+影の距離、解像度、そしてボリュームライティングを下げることから始めてください。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/ja/blog/best-minecraft-shaders", label: "最高のMinecraftシェーダー", description: "軽いものから重いものまで、どのパックを使うべきか." },
+  { href: "/ja/blog/how-to-install-shaders-in-minecraft", label: "シェーダーのインストール方法 Minecraft", description: "Irisの設定を、ステップごとに完全解説." },
+  { href: "/ja/blog/how-to-get-more-fps-in-minecraft", label: "ゲームでより多くのFPSを得るには Minecraft", description: "シェーダーを追加する前にフレームを復元してください." },
+]} />
+
+<CTA href="/ja/purchase">追加 Opal 上に $8.99</CTA>

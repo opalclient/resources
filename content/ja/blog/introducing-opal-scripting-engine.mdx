@@ -1,0 +1,143 @@
+---
+title: OpalのGraalVMスクリプティングエンジンをご紹介します
+description: Opalの内部APIと連携するカスタムJavaScriptを記述してください。タスクを自動化したり、ゲームイベントに反応したり、独自のHUDを描画したり、クライアントをランタイムで拡張したりできます.
+excerpt: Opal'スクリプティングエンジンが動作します GraalVM, javaScript ランタイム全体 Minecraft. これを使って何を作れるか、ここにあります.
+date: 2026-03-15
+lastUpdated: 2026-06-03
+category: Features
+author: trq
+faqs:
+  - q: Opal は どのスクリプトエンジンを使用していますか？?
+    a: Opal 使用 GraalVM, オラクルによる、エンタープライズ向けのJavaScriptランタイムで、内部に組み込まれています Minecraft クライアントのAPIへのスレッドセーフなバインディングを提供します.
+  - q: スクリプトは私のファイルやネットワークにアクセスできますか？?
+    a: スクリプトはサンドボックス化されたGraalVM環境で実行されます。OpalのAPIと連携できますが、ファイルシステム、ネットワーク、または他のアプリケーションにはアクセスできません.
+  - q: Minecraftのスクリプトを読み込むには、再起動が必要ですか？?
+    a: いいえ。スクリプトは実行時にロードされます。スクリプトディレクトリに.jsファイルをドロップすれば、すぐに利用可能です.
+  - q: このようなスクリプトエンジンを持つMinecraftクライアントは他にありますか？?
+    a: 多くの人は基本的なマクロで止めてしまいます。Opalは、スレッドセーフなゲームバインディングを備えた、フルGraalVM JavaScriptランタイムを同梱しており、これは全く別のものです.
+---
+
+OpalはGraalVMJavaScript エンジンを搭載しており、これはMinecraftクライアント内で動作するフル JS ランタイムです。ゲーム実行中にOpalの内部 API と対話するスクリプトを作成できます。これはマクロレコーダーやキーバインドシステムではありません。クライアントのイベントシステム、モジュール設定、ゲーム状態にアクセスできる、本格的なプログラミング環境です.
+
+<KeyTakeaways>
+
+- フル GraalVM JavaScript ランタイムであり、マクロレコーダーではありません。
+- ゲームイベントに反応し、モジュール設定を変更し、独自の HUD を描画できます。
+- スクリプトは実行時にロードされ、再起動なしで、Opal の API に対してサンドボックス化されて実行されます。
+- 他のほとんどのクライアントは基本的なマクロで止まります.
+
+</KeyTakeaways>
+
+## なぜGraalVM
+
+GraalVMはOracleによるポリグロットランタイムです。具体的な理由から、採用しました。
+
+- 速度: JITコンパイルにより、スクリプトは毎ティック実行するのに十分な速さを維持します。
+- JavaScript: 多くの人がすでに知っているので、学習曲線は短いです。
+- スレッドセーフティ: JSからJavaへのバインディングは、競合状態を適切に処理し、それに引っかかるのを防ぎます。
+- 慣れ親しんだパターン: 標準的なJavaScript APIは、期待どおりに動作します。
+
+## 構築できるもの
+
+### カスタム自動化
+
+ゲーム内イベントに応答します。
+
+```javascript
+// Auto-respond to certain chat messages
+on('chat', (event) => {
+  if (event.message.includes('1v1?')) {
+    sendChat('/duel accept');
+  }
+});
+```
+
+### 動的なモジュール設定
+
+ゲームの状態に基づいてモジュールの設定を変更します。
+
+```javascript
+// Increase reach when health is low
+on('tick', () => {
+  const health = player.getHealth();
+  if (health < 8) {
+    modules.get('Reach').setSetting('distance', 3.3);
+  } else {
+    modules.get('Reach').setSetting('distance', 3.1);
+  }
+});
+```
+
+### カスタムHUD要素
+
+独自のオーバーレイを描画します。
+
+```javascript
+// Display a combo counter on screen
+let combo = 0;
+on('attackEntity', () => { combo++; });
+on('damage', () => { combo = 0; });
+on('render2d', (ctx) => {
+  ctx.drawText(`Combo: ${combo}`, 10, 10, 0xFFFFFF);
+});
+```
+
+### サーバー固有のプロファイル
+
+異なるサーバーに参加すると、設定を自動的に切り替えます。
+
+```javascript
+on('serverJoin', (event) => {
+  if (event.ip.includes('pvp.example.com')) {
+    loadConfig('server-bypass');
+  } else {
+    loadConfig('ghost-default');
+  }
+});
+```
+
+## 始め方
+
+<Steps>
+
+<Step number={1} title="スクリプトディレクトリを開いてください">Opalの設定フォルダ内に、スクリプトディレクトリを見つけてください</Step>
+
+<Step number={2} title=".js ファイルを作成する">どんな名前でも構いません。これはあなたの脚本です</Step>
+
+<Step number={3} title="API に対して記述する">ダッシュボードのドキュメントにあるAPIリファレンスを参照してください：イベント、モジュールアクセス、プレイヤーの状態、レンダリング</Step>
+
+<Step number={4} title="保存して再生">スクリプトは実行時にロードされるため、再起動は不要です</Step>
+
+</Steps>
+
+<Callout variant="info" title="スクリプトはサンドボックスで実行されます">GraalVM内でスクリプトが実行され、OpalのAPIを呼び出すことができますが、ファイルシステム、ネットワーク、または他のアプリケーションにはアクセスできません。スクリプトはローカルに留まり、あなたのマシンはあなたのものです</Callout>
+
+## コミュニティスクリプト
+
+スクリプトコミュニティは成長しています。Discordでは、スクリプトや、あなた自身のスクリプト作成を手伝ってくれる人々が共有されています。一般的なものとしては、ミニゲーム用の自動ゲームスクリプト、ステータストラッカー、コンボ検出、そしてサーバー固有の設定切り替えなどが挙げられます。
+
+## よくある質問
+
+<FAQList>
+
+<FAQItem question="Opalは何のエンジンを使用していますか？">
+GraalVM、OracleのエンタープライズJavaScriptランタイムで、スレッドセーフなゲームバインディングを備えています。
+</FAQItem>
+
+<FAQItem question="スクリプトは私のファイルにアクセスできますか？">
+いいえ、OpalのAPIにサンドボックス化されています。
+</FAQItem>
+
+<FAQItem question="スクリプトを読み込むために再起動は必要ですか？">
+いいえ。ファイルをドロップするだけで、実行時に読み込まれます。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/ja/blog/opal-config-sharing-guide", label: "Opal's設定共有システム", description: "サーバーごとにスクリプトで適切な設定ファイルを自動ロードする." },
+  { href: "/ja/blog/why-opal-is-the-best-value-minecraft-client", label: "なぜ Opal 最高の価値を持つ顧客です", description: "全て8.99ドル込み." },
+  { href: "/ja/compare/opal-vs-liquidbounce", label: "Opal vs LiquidBounce", description: "スクリプティングか、オープンソースの道か." },
+]} />
+
+<CTA href="/ja/purchase" note="生涯ライセンス · 即時配信 · サブスクリプションなし">スクリプト可能なクライアントを、$8.99で</CTA>

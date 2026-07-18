@@ -1,0 +1,101 @@
+---
+title: 最高のパフォーマンスMOD Minecraft (2026)
+description: 2026年版、Minecraftパフォーマンス改善MOD：レンダリングにはSodium、メモリとカリングMODも。ラグを解消するおすすめMODの短縮リスト、そしてOpalを使用している場合は避けるべきMOD.
+excerpt: Sodium 大部分の作業はそれが行い、いくつかのメモリとカリングmodがそれを完了させる。短いリストはこちらで、実行する場合はスキップすべきmodはこれだけです Opal.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: 最高のパフォーマンスmodは何ですか？?
+    a: Sodium. レンダリングを書き換え、多くのマシンにとって最大の単独FPS向上が実現します.
+  - q: リチウムは対応していますか？ Opal?
+    a: いいえ、リチウムは～と相性が良くありません Opal. 走れ Sodium フレームレートに合わせて、リチウムは除いてください Opal インストールされています.
+  - q: これらのMODはゲームの見た目を変化させますか？?
+    a: いいえ。これらはスピードMODです。シェーダーは、別途Irisを追加してください.
+  - q: 一緒に走らせても大丈夫？?
+    a: はい、これらは共存するように設計されています。まずFabric APIをインストールし、その後、残りのものを追加してください.
+---
+
+もし何かを導入するなら、[Sodium](https://modrinth.com/mod/sodium)を導入してください。Minecraftのレンダラーを書き換え、ほとんどの環境で最も大きなフレームレート向上をもたらします。メモリMODやカリングMODと組み合わせれば、ラグの根本原因をカバーできます。これらはすべて[Fabric](https://fabricmc.net)製の無料MODです。Opalユーザーへの注意点：Lithiumはよく選ばれますが、Opalと互換性がないため、これは除外してください.
+
+<KeyTakeaways>
+
+- Sodiumは、FPS 性能を向上させる最も大きな改善です。まずインストールしてください。
+- FerriteCore と ModernFix はメモリ使用量を削減し、Entity Culling は見えない mob をスキップします。
+- Lithium はゲームロジックをスムーズにしますが、Opalとの互換性はありません。Opalを使用している場合は、インストールをスキップしてください。
+- Sodiumは、Opalのようなクライアントを動作させるための余裕を生み出します.
+
+</KeyTakeaways>
+
+## スタック
+
+<ModSection title="無料パフォーマンスMOD" badge="無料" badgeColor="エメラルド" description="Sodiumがコアです。FerriteCore、Entity Culling、ModernFixで完成です。LithiumはOpal環境以外でのみ有効です。">
+<ModList>
+<ModLink href="https://modrinth.com/mod/sodium">Sodium (レンダリングFPS、Opalに対応)</ModLink>
+<ModLink href="https://modrinth.com/mod/ferritecore">FerriteCore (メモリ使用量削減)</ModLink>
+<ModLink href="https://modrinth.com/mod/entityculling">Entity Culling (非表示のエンティティをスキップ)</ModLink>
+<ModLink href="https://modrinth.com/mod/modernfix">ModernFix (ロード時間とメモリ)</ModLink>
+<IncompatibleMod>Lithium (ゲームロジック、Opal環境との互換性なし)</IncompatibleMod>
+</ModList>
+</ModSection>
+
+## Sodium
+
+レンダリングの書き換え。これは、デフォルトのレンダリングパスを高速なものに置き換えるもので、通常、最も大きな変更をもたらします。特に、性能の低いGPUでは効果を発揮します [Fabric]((https://fabricmc.net/) ローダーと [Fabric まずAPI](https://modrinth.com/mod/fabric-api)を。他のmodと問題なく動作します Opal.
+
+## フェライトコア
+
+カット Minecraft's メモリ使用量を、RAM 内でのデータ保存方法を修正することで改善します。メモリ負荷が軽減されると、スタッターの静かな原因の一つであるガベージコレクションの一時停止が少なくなります。
+
+## エンティティの切り捨て
+
+壁の裏や地下など、実際に見ていないエンティティのレンダリングを停止します。多くのモブやアイテムフレームが存在する混雑したワールドでは、無料でフレームを取り戻します。
+
+## ModernFix
+
+ロード時間の高速化とメモリの削減を行う、広範な修正とパフォーマンス改善modです。コアmodが導入された後の安全な万能策となります.
+
+<Callout variant="warning" title="Opalを実行する場合、リチウムはスキップ">
+リチウムは通常、ゲームロジックで選択されるものですが、Opalとの互換性はありません。パフォーマンスのためにSodiumを使用し、リチウムはフォルダから除外してください。
+</Callout>
+
+## 概要
+
+| Mod | 修正内容 | Opal との互換性 |
+| :--- | :--- | :--- |
+| Sodium | レンダリング FPS | 互換性あり |
+| FerriteCore | メモリ使用量 | 互換性あり |
+| Entity Culling | 不要なエンティティレンダリング | 互換性あり |
+| ModernFix | ロード時間とメモリ | 互換性あり |
+| Lithium | ゲームロジックのパフォーマンス | 互換性なし |
+
+## Opal の位置づけ
+
+Opal は Minecraft 1.21.10 用の Fabric Mod です。パフォーマンスパックと同様に、`mods` フォルダにインストールします。フレームレートを維持しつつ、戦闘、移動、視覚効果、ユーティリティなど、200 以上の機能、ガラス製の UI、スクリプトエンジンを備えたクライアントを追加できます。Opal は大規模な Mod であるため、Sodium を導入して余裕を持たせ、Lithium は導入しないことを推奨します。この構成で安定します。
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="最高のパフォーマンスMODは何ですか？">
+Sodiumです。レンダリングを書き換えることで、多くのマシンにとって最大のパフォーマンス向上をもたらします。
+</FAQItem>
+
+<FAQItem question="リチウムは対応していますか？ Opal?">
+いいえ。使用しないでください Sodium パフォーマンスのため、リチウムは使用を避けてください Opal インストールされています.
+</FAQItem>
+
+<FAQItem question="これらはゲームの外観を変えますか？">
+いいえ。これらはスピードMODです。シェーダーについては、Irisを別途追加してください。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/ja/blog/how-to-get-more-fps-in-minecraft", label: "ゲームでより多くのFPSを得るには Minecraft", description: "モッドが始めたことを完成させる設定." },
+  { href: "/ja/blog/best-mods-for-low-end-pcs", label: "ローエンドPCにおすすめのMOD", description: "同じスタックが、性能の低いハードウェア向けに調整されています." },
+  { href: "/ja/blog/how-to-fix-minecraft-lag", label: "修理する方法 Minecraft 遅延", description: "どのような種類のラグが発生しているか診断してください." },
+]} />
+
+<CTA href="/ja/purchase">追加 Opal 上に $8.99</CTA>

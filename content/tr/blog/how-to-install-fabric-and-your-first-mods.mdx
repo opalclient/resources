@@ -1,0 +1,88 @@
+---
+title: Fabric ve İlk Modlarınızı Kurulumu (2026)
+description: Modlara yeni mi başladınız? Fabric yükleyiciyi kurun, Fabric API'yi ekleyin, ardından Sodium ve ModMenu'yu bırakın. Sıfırdan çalışan bir modlu yapılandırmaya ve istemciye yönelik yeni başlayanlar için bir rehber.
+excerpt: Modlama görünenden daha kolaydır. İşte saf bir oyundan, üstünde bir istemci için hazır, çalışan bir Fabric kurulumuna giden yol.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: Bana Fabric API gerekli mi?
+    a: Neredeyse her zaman. Çoğu Fabric modları buna bağlıdır, bu yüzden önce onu kurun.
+  - q: Modlarım neden yüklenmiyor?
+    a: Genellikle bir sürüm uyumsuzluğu veya eksik bir Fabric API'si söz konusudur. Minecraft sürümünüze her mod'u eşleştirin.
+  - q: Bu şekilde Opal gibi bir müşteri ekleyebilir miyim?
+    a: Evet. Opal, Minecraft 1.21.10 için bir Fabric modudur, bu yüzden aynı mod klasörüne kurulur. Sodium'u tutun ve Lithium'u dahil etmeyin, çünkü Lithium Opal ile uyumlu değildir.
+  - q: Hangi modları kullanmaya başlamalıyım?
+    a: FPS ve ModMenü için Sodium kullanın, her şeyi yönetebilmeniz için. Shader'lar istiyorsanız Iris ekleyin.
+---
+
+Modlara girmek görünenden daha kolay. [Fabric](https://fabricmc.net) yükleyiciyi kuruyorsunuz, çoğu modun ihtiyaç duyduğu [Fabric API](https://modrinth.com/mod/fabric-api) (kütüphane) ekliyorsunuz, ardından birkaç mod jar dosyasını bir klasöre atıyorsunuz. Harika bir başlangıç seti [Sodium](https://modrinth.com/mod/sodium) ve [ModMenu](https://modrinth.com/mod/modmenu). İşte saf bir oyundan çalışan modlu bir oyuna, üstünde bir istemci için hazır olan yoldur.
+
+<KeyTakeaways>
+
+- Fabric yükleyiciyi kurun, ardından başka bir şeyden önce Fabric API'yi kurun.
+- FPS için Sodium, modlarınızı oyunda yönetmek için ModMenu.
+- Opal gibi bir istemci, aynı mod klasörüne kurulur.
+- Opal kullanmayı planlıyorsanız Lithium'u dışarıda bırakın; uyumlu değil.
+
+</KeyTakeaways>
+
+## Adım adım kurun
+
+<Steps>
+
+<Step number={1} title="Fabric yükleyiciyi kurun">Minecraft sürümünüz için [Fabric](https://fabricmc.net) yükleyicisini çalıştırın. Başlatmadan önce seçtiğiniz yeni bir başlatıcı profili ekler</Step>
+
+<Step number={2} title="Kumaş API'sini Ekle">
+[Fabric API](https://modrinth.com/mod/fabric-api), neredeyse tüm Fabric modlarının ihtiyaç duyduğu ortak kütüphanedir. Sürümünüze uygun olan sürümü indirin ve `mods` klasörüne yerleştirin. Olmadan, çoğu mod yüklenmeyecektir.
+</Step>
+
+<Step number={3} title="İlk modlarınızı ekleyin">[Sodium](https://modrinth.com/mod/sodium) (FPS) ve [ModMenu](https://modrinth.com/mod/modmenu) (oyun içinde modları yönetin ve yapılandırın) dosyalarını `mods` klasörüne atın. Shader'lar istiyorsanız [Iris](https://modrinth.com/mod/iris) ekleyebilirsiniz</Step>
+
+<Step number={4} title="Başlat ve kontrol et">Oyunu Fabric profilinde başlatın, ModMenu'yu açın ve modlarınızın listelendiğini doğrulayın. Bir şey eksikse, sürümünün Minecraft sürümünüzle eşleştiğini ve Fabric API'nin yüklü olduğunu kontrol edin</Step>
+
+</Steps>
+
+<Callout variant="info" title="Lityum Hakkında Bir Not">
+Birçok yeni başlayan rehber, Lityum'u üçüncü bir mod olarak ekler. Tek başına da güzel bir oyun mantığı optimize edicidir, ancak Opal ile uyumlu değildir. Opal'ı çalıştırmayı planlıyorsanız, performans için Sodium kullanın ve Lityum'u baştan çıkarın. 
+</Callout>
+
+## Hızlıca Gözden Geçirme
+
+| Adım | Yapılacak |
+| :--- | :--- |
+| 1 | Fabric yükleyiciyi kurun |
+| 2 | Fabric API'yi ekleyin |
+| 3 | Sodium ve ModMenu'yu (gölge efektleri için Iris) ekleyin |
+| 4 | Başlatın ve ModMenu'da doğrulayın |
+
+## İstemci Ekleme
+
+Yükleyici, Fabric API ve ilk modlarınız takıldıktan sonra, klasör bir istemci için hazır. Opal, Minecraft 1.21.10 için bir Fabric modudur, bu nedenle diğerleri gibi tam olarak aynı şekilde, `mods` klasörüne yüklenir. Performans kurulumunuzu koruyun ve savaş, hareket, görsel ve yardımcı araçlar, cam bir kullanıcı arayüzü ve bir betik motoru gibi 200'den fazla özellik ekleyin. Sodium'u performans için bırakın ve Lithium'u devre dışı bırakın, böylece hazırsınız.
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Fabric API'ne ihtiyacım var mı?">
+Neredeyse her zaman. Çoğu Fabric modları ona bağlıdır, bu yüzden önce onu yükleyin.
+</FAQItem>
+
+<FAQItem question="Bu şekilde Opal gibi bir müşteri ekleyebilir miyim?">
+Evet. Opal bir Fabric modudur ve aynı modlar klasörüne kurulur. Sodium'u tutun ve Lithium'u çıkarın.
+</FAQItem>
+
+<FAQItem question="Modlarım neden yüklenmiyor?">
+Genellikle bir sürüm uyumsuzluğu veya eksik bir Fabric API'sidir. Tüm modlarınızı Minecraft sürümünüzle eşleştirin.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/blog/essential-fabric-mods-every-player-should-have", label: "Zorunlu Fabric modlar", description: "Önce başlangıç paketini kurun." },
+  { href: "/tr/blog/best-performance-mods-for-minecraft", label: "Minecraft için en iyi performans modları", description: "Performans yığınını bir sonraki adımda oluşturun." },
+  { href: "/tr/blog/why-opal-is-the-best-value-minecraft-client", label: "Neden Opal en iyi fiyat-performanslı müşteri", description: "Üzerinde oturan istemci katmanı." },
+]} />
+
+<CTA href="/tr/purchase">Opal ile kurulumu tamamla, $8.99</CTA>

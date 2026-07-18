@@ -1,0 +1,93 @@
+---
+title: Jak uzyskać stabilne FPS w Minecraft PvP (2026)
+description: W PvP stabilne opóźnienia są ważniejsze niż wysoki szczyt. Oto jak Sodium, limit liczby klatek i odpowiednie ustawienia to umożliwiają, a także gdzie pasuje klient PvP, taki jak Opal.
+excerpt: Spójność wygrywa bitwy, a nie szczytowe FPS. Oto konfiguracja dla stabilnych klatek, oraz miejsce, gdzie klient PvP, taki jak Opal, doskonale się wpasowuje.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: Czy wyższa liczba FPS zawsze jest lepsza w PvP?
+    a: Nie. Stabilność wygrywa. Stały, ograniczony maksymalny FPS wydaje się bardziej responsywny w walce niż wyższy, który skacze i spada.
+  - q: Czy potrzebuję specjalnego klienta do PvP FPS?
+    a: Dla surowego FPS-a, nie. Sodium plus odpowiednie ustawienia to wystarczające. Klient PvP, taki jak Opal, dodaje funkcje walki, ruchu i użyteczności; zachowaj zainstalowany Sodium dla zapasu mocy.
+  - q: Czy lit dopasowuje się do Opalu?
+    a: Nie. Lit jest niekompatybilny z Opal. Uruchom Sodium dla swojej liczby klatek na sekundę i pomiń Lit, jeśli zainstalowany jest Opal.
+  - q: Jaką liczbę FPS powinienem ustawić?
+    a: Cokolwiek Twoja maszyna pomieści w każdej chwili, bez spadania. Stabilność ponad szczytem.
+---
+
+W PvP stabilna liczba klatek na sekundę ma większe znaczenie niż wysoka. Gra, która utrzymuje stałą liczbę klatek, wydaje się znacznie bardziej responsywna niż ta, której liczba klatek gwałtownie wzrasta i spada w trakcie walki. Przepis to [Sodium](https://modrinth.com/mod/sodium) dla surowej wydajności, rozsądny limit klatek dla stabilności oraz kilka ustawień dostosowanych pod kątem klarowności, a nie efektów wizualnych. Uwaga na wstępie: Lithium nie jest kompatybilne z Opalem, więc jeśli używasz Opala, polegaj na Sodium dla zapasu mocy.
+
+<KeyTakeaways>
+
+- Stabilna liczba klatek na sekundę przewyższa szczytową liczbę FPS w walce. Celuj w wartość, którą zawsze utrzymujesz.
+- Sodium to podstawa; zapewnia zapas klatek, które potrzebują stabilności.
+- Lit jest wygładzaczem logiki gry, ale nie jest kompatybilny z Opal. Pomiń go, jeśli używasz Opal.
+- Ograniczenie liczby klatek plus ustawienia klarowności kończą sprawę.
+
+</KeyTakeaways>
+
+## Zbuduj rdzeń wydajności
+
+[Sodium](https://modrinth.com/mod/sodium) przepisuje silnik renderujący Minecrafta i zapewnia największy zysk w postaci stabilnych klatek. Zainstaluj ładowacz [Fabric](https://fabricmc.net) oraz [Fabric API](https://modrinth.com/mod/fabric-api), a następnie wrzuć Sodium do folderu `mods`. Działa dobrze w połączeniu z Opalem.
+
+<Callout variant="warning" title="Uruchamiasz Opal? Pomiń Lithium">
+Lithium nie jest kompatybilne z Opal. Użyj Sodium dla swojej liczby klatek na sekundę i usuń Lithium z folderu. Sodium odpowiada za rendering, co i tak daje większą przewagę w PvP.
+</Callout>
+
+## Ogranicz liczbę klatek na sekundę
+
+Klatka, która pojawia się w regularnych odstępach, jest przyjemniejsza niż szybsza, ale nieregularna. Ustaw limit, jaki Twój komputer może utrzymać komfortowo przez cały czas, zamiast gonić za najwyższą możliwą wartością. Celem jest stały czas trwania klatki, a nie duża liczba w rogu.
+
+## Dostrój dla klarowności
+
+<Checklist>
+<ChecklistItem>Zasięg rysowania: umiarkowany, aby odległe fragmenty nie powodowały spadków wydajności w trakcie walki.</ChecklistItem>
+<ChecklistItem>Grafika: Szybko.</ChecklistItem>
+<ChecklistItem>Cząstki: minimalne, aby efekty nie zaśmiecały ekranu ani nie obciążały wydajności.</ChecklistItem>
+<ChecklistItem>Gładkie oświetlenie: nisko.</ChecklistItem>
+</Checklist>
+
+<Callout variant="tip" title="Szybki sukces">
+Zmniejszenie zasięgu renderowania z 16 do 12 klocków przywraca znaczną część płynności gry, praktycznie bez wpływu na jakość wizualną w walce PvP na krótkim dystansie.
+</Callout>
+
+## Gdzie pasuje klient PvP
+
+Stabilne klatki to podstawa; klient to to, co z nimi robisz. Opal to mod Fabric dla Minecrafta 1.21.10, więc instaluje się go w tej samej folderze `mods` co Sodium i dodaje ponad 200 funkcji związanych z walką, ruchem, wizualizacją i użytecznością, ukrytych za przejrzystym interfejsem użytkownika. Jest to pełny klient, więc jak każdy duży mod, zużywa zasoby podczas działania. Właśnie dlatego Sodium ma znaczenie: daje Ci zapas mocy, aby uruchomić zestaw funkcji takiego jak Opal i nadal utrzymywać stabilne klatki w walce.
+
+## Na pierwszy rzut oka
+
+| Chcesz | Zainstaluj |
+| :--- | :--- |
+| Wyższą, bardziej stabilną liczbę klatek na sekundę | Sodium |
+| Płynniejszą logikę gry (nie z Opalem) | Lithium |
+| Podstawę | Fabric API |
+| Ponad 200 funkcji PvP i użytkowych | Opal |
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy wyższa liczba FPS zawsze jest lepsza w PvP?">
+Nie. Stabilność ma znaczenie. Stały, ograniczony FPS jest lepszy niż niestabilny, wyższy.
+</FAQItem>
+
+<FAQItem question="Czy Lithium jest kompatybilne z Opal?">
+Nie. Używaj Sodium dla swojej liczby klatek na sekundę i pomiń Lithium, gdy zainstalowane jest Opal.
+</FAQItem>
+
+<FAQItem question="Czy Opal obniży mój FPS?">
+Opal jest pełnym klientem, więc jak każdy duży mod, zużywa pewne zasoby. Utrzymuj zainstalowany Sodium, aby mieć zapas mocy, a utrzymasz stabilne klatkażu na większości maszyn.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/blog/how-to-get-more-fps-in-minecraft", label: "Jak uzyskać więcej FPS w Minecraft", description: "Ustawienia i opcje wpływające na zakres dynamiki." },
+  { href: "/pl/blog/best-performance-mods-for-minecraft", label: "Najlepsze mody wydajności do Minecrafta", description: "Pełny, darmowy stos narzędzi do występów." },
+  { href: "/pl/blog/sodium-or-optifine-which-should-you-use", label: "Sodium czy OptiFine?", description: "Dlaczego Fabric klient chce Sodium." },
+]} />
+
+<CTA href="/pl/purchase">Opal za 8,99 USD na zawsze</CTA>

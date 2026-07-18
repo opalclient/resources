@@ -1,0 +1,87 @@
+---
+title: シェーダーのインストール方法 Minecraft (2026)
+description: FabricでIrisとSodiumを使ってシェーダーを導入する方法：2つのMODを追加し、フォルダにパックを入れ、ビデオ設定でパックを選択する。手順を詳しく、FPS向上のヒント、そしてクライアント側の設定方法を紹介します.
+excerpt: Fabricのシェーダーは3つのステップで、OptiFineは不要です。以下にその全工程と、Opalがシェーダー設定にどのように組み込まれるかを示します.
+date: 2026-05-28
+lastUpdated: 2026-06-03
+category: Guides
+author: trq
+faqs:
+  - q: シェーダーを使うのにOptiFineは必要ですか？?
+    a: ファブリックには対応していません。IrisはOptiFineなしでシェーダーパックを読み込み、他のFabricのMODエコシステムと問題なく動作します.
+  - q: シェーダーはフレームレートを落としますか？?
+    a: フレームはコストがかかるものの、SodiumとIrisを併用することで、その多くを相殺できます。より余裕が必要な場合は、軽いパックを選んでください.
+  - q: シェーダーパックはどこに置くのですか？?
+    a: Minecraftのディレクトリ内のシェーダーパックフォルダ内です。Irisをインストールして一度起動すると、フォルダが自動的に作成されます.
+  - q: Opalでシェーダーを実行できますか？?
+    a: はい. Opal, Iris, そして Sodium すべて Fabric 同じフォルダ内のmods。シェーダーとフルクライアントを並行して実行.
+---
+
+Fabric環境でシェーダーを実行する最もクリーンな方法は[Iris](https://modrinth.com/mod/iris)です。これはシェーダーパックを読み込み、[Sodium](https://modrinth.com/mod/sodium)との連携を前提に構築されているため、フレームレートを維持できます。この2つのMODをインストールし、フォルダにパックをドロップして、ビデオ設定で選択するだけです。これだけで完了です。OptiFineは不要です.
+
+<KeyTakeaways>
+
+- Iris は Fabric でシェーダーを実行します。OptiFine は不要です。
+- Iris と Sodium を組み合わせることで、シェーダーの負荷を軽減できます。
+- シェーダーパックは `shaderpacks` フォルダにあります。ビデオ設定から選択してください。
+- Opal は同じフォルダで動作するので、シェーダーとフルクライアントの両方を使用できます.
+
+</KeyTakeaways>
+
+## シェーダーのインストール
+
+<Steps>
+
+<Step number={1} title="IrisとSodiumをインストールしてください">[Fabric](https://fabricmc.net) ローダーと [Fabric API](https://modrinth.com/mod/fabric-api) をインストールし、次に [Iris](https://modrinth.com/mod/iris) と [Sodium](https://modrinth.com/mod/sodium) を `mods` フォルダに追加してください。Iris はシェーダーを実行し、Sodium は FPS を維持します。これらは一緒に動作するように設計されています</Step>
+
+<Step number={2} title="シェーダーパックを追加する">シェーダーパック（単一のファイルとして提供されます）をダウンロードし、Minecraftのディレクトリ内の`shaderpacks`フォルダに配置してください。まだそのフォルダがない場合は、Irisをインストールした状態でゲームを一度起動すると、自動的に作成されます</Step>
+
+<Step number={3} title="ゲーム内で選択してください">ビデオ設定を開き、次にシェーダーパックの画面で、追加したパックを選択してください。適用はすぐに完了し、同じ画面からパックを切り替えることができます</Step>
+
+</Steps>
+
+<Callout variant="warning" title="FPSが極端に低下した場合">
+まず、レンダー距離を短くするか、より軽いパックに切り替えてみてください。ヘビーなシェーダーは多くの処理能力を消費しますし、レンダー距離を少し短くするだけでも必要なパフォーマンスを取り戻せる場合があります。
+</Callout>
+
+## パック選び
+
+<Checklist>
+<ChecklistItem>軽量パックはコストパフォーマンスに優れ、見た目も良い。スペックが控えめなマシンをお使いなら、そこから始めるのがおすすめです.</ChecklistItem>
+<ChecklistItem>より重いパックには、精巧な水表現、影、そしてボリュメトリックライティングが追加されますが、フレームレートに大きな影響を与えます.</ChecklistItem>
+<ChecklistItem>GPU に合わせてパックを選んでください、スクリーンショットに合わせるな.</ChecklistItem>
+</Checklist>
+
+## クライアントでのシェーダーの実行
+
+IrisとSodiumはFabricのModであるため、Opalを含むFabric Modとして構築されたものはすべて同じフォルダを共有します。したがって、シェーダーが適用されたゲームとフル機能のユーティリティクライアントは、どちらか一方を選ぶ必要はありません。OpalはMinecraft 1.21.10を対象としており、シェーダーパックの隣にロードされるため、外観と機能セットを同時に実行できます。
+
+## よくある質問
+
+<FAQList>
+
+<FAQItem question="シェーダーを使うためにOptiFineは必要ですか？">
+Fabric環境では必要ありません。IrisはOptiFineなしでシェーダーパックを読み込みます。
+</FAQItem>
+
+<FAQItem question="シェーダーはFPSを落としますか？">
+フレームを消費しますが、SodiumとIrisの組み合わせで大幅に軽減されます。より余裕を持たせるには、軽いパックを選んでください。
+</FAQItem>
+
+<FAQItem question="シェーダーパックはどこに置くのですか？">
+Minecraftのディレクトリ内の`shaderpacks`フォルダに置いてください。
+</FAQItem>
+
+<FAQItem question="Opalでシェーダーを実行できますか？">
+はい。Opal、Iris、そしてSodiumは同じフォルダを共有しているため、シェーダーとフルクライアントが一緒に動作します。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/ja/blog/how-to-get-more-fps-in-minecraft", label: "ゲームでより多くのFPSを得るには Minecraft", description: "シェーダーを追加する前に、クローバックフレームを取り戻してください." },
+  { href: "/ja/blog/best-mods-for-performance-and-shaders", label: "パフォーマンスとシェーダーに最適なMOD", description: "Sodium, Iris, そして、スタックの残りの部分." },
+  { href: "/ja/blog/essential-fabric-mods-every-player-should-have", label: "必須のFabricMOD", description: "その基底 Fabric セットアップは開始から." },
+]} />
+
+<CTA href="/ja/purchase">得る Opal ため $8.99</CTA>

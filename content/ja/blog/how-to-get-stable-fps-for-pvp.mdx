@@ -1,0 +1,85 @@
+---
+title: 安定したFPSを得る方法 Minecraft 対人 (2026)
+description: 対人戦では、安定したフレームタイミングがピークの高さよりも重要です。フレームキャップであるSodiumと適切な設定が、それをどのように実現するか、そしてOpalのような対人戦クライアントがどのように役立つかをご紹介します.
+excerpt: 一貫性こそが勝負を左右する、ピーク時のFPSではない。安定したフレームレートを得るための設定と、PvPクライアントであるOpalがどのようにその上に組み込まれるか、以下に説明します.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: 対人戦において、常に高いFPSが有利なのでしょうか？?
+    a: いいえ。一貫性が勝つ。安定したフレームレートは、スパイクしたりディップしたりする高いレートよりも、戦闘でより応答性が高いと感じられる.
+  - q: 対人FPSで特別なクライアントは必要ですか？?
+    a: 生のFPSはいいえ。Sodiumと適切な設定で対応できます。OpalのようなPvPクライアントは、戦闘、移動、ユーティリティ機能をその上に加えます。Sodiumをインストールしたままにしておくと、余裕が生まれます.
+  - q: リチウムは対応していますか？ Opal?
+    a: いいえ、リチウムは～と相性が良くありません Opal. 走れ Sodium フレームレートに合わせて、リチウムは除いてください Opal インストールされています.
+  - q: どのFPSに上限値を設定すればいい？?
+    a: いつでも機械が落とさずに保持できる量。ピークよりも安定.
+---
+
+対人戦では、高いフレームレートよりも安定したフレームレートが重要です。戦闘中に急激に変動するゲームよりも、一定のフレームレートを維持するゲームの方が遥かに反応が良いと感じられます。パフォーマンス向上のための[Sodium](https://modrinth.com/mod/sodium)をベースに、安定性のための適切なフレームレート制限、そして視覚的な装飾よりも明瞭さを重視した設定をいくつか調整するのが最適解です。最初に一つ注意点ですが、LithiumはOpalと互換性がないため、Opalを使用している場合は、Sodiumにリソースを割り当ててください.
+
+<KeyTakeaways>
+
+- 激しい戦闘では、安定したフレームレートがピークのFPSを上回ります。常に維持できる数値を目標にしてください。
+- Sodiumはベースです。安定したフレームレートに必要な余裕を与えます。
+- 「Lithium」はゲームロジックを滑らかにしますが、Opalとの互換性はありません。Opalを使用している場合はスキップしてください。
+- フレームキャップと画質設定を組み合わせることで、完了です.
+
+</KeyTakeaways>
+
+## パフォーマンスの中核を構築せよ
+
+[Sodium](https://modrinth.com/mod/sodium) は Minecraft のレンダラーを書き換え、安定したフレームレートを大幅に向上させます。まず [Fabric](https://fabricmc.net) ローダーと [Fabric API](https://modrinth.com/mod/fabric-api) を設置し、その後 Sodium を `mods` フォルダにドロップしてください。Opal と並行して問題なく動作します.
+
+<Callout variant="warning" title="走る Opal? リチウムをスキップ">リチウムはOpalと互換性がないため、フレームレートにはSodiumを使用し、リチウムはフォルダから除外してください。Sodiumはレンダリングを担当し、PvPにおいてはそちらの方がより大きな利点となります</Callout>
+
+## フレームレートを制限してください
+安定したスケジュールで到着するフレームの方が、速くても不規則なものより優れている。機械が常に快適に処理できる上限を設定し、可能な限り高い数字を追い求めるのではなく、それを維持する。一貫したフレームタイムが目標であり、隅に表示される大きな数字ではない
+## 音を調整して、明瞭に
+
+<Checklist>
+<ChecklistItem>表示距離：中程度。これにより、戦闘中に遠くのチャンクがパフォーマンスの低下を引き起こすことはありません.</ChecklistItem>
+<ChecklistItem>グラフィック：速い.</ChecklistItem>
+<ChecklistItem>粒子は最小限に抑え、画面の煩雑化やフレームコストを避ける.</ChecklistItem>
+<ChecklistItem>照明は控えめ.</ChecklistItem>
+</Checklist>
+
+<Callout variant="tip" title="クイックウィン">レンダー距離を16チャンクから12チャンクに下げることで、近距離のPvPではほとんど視覚的なコストなしに、フレームレートが大幅に向上します</Callout>
+
+## PvPクライアントの立ち位置
+
+安定したフレームレートが基盤であり、クライアントはその上で何ができるかを定義します。OpalはMinecraft 1.21.10用のFabric製Modであり、Sodiumと同じ`mods`フォルダにインストールされ、戦闘、移動、視覚、ユーティリティの分野で200以上の機能を、ガラス張りのUIの背後で提供します。Opalはフルクライアントであるため、大規模なModと同様に動作中はリソースを消費します。まさにこの点がSodiumの重要性です。Sodiumは、Opalのような機能セットを動作させつつ、戦闘中に安定したフレームレートを維持するための余裕を与えてくれます。
+
+## 概要
+
+| 欲しいもの | インストールするもの |
+| :--- | :--- |
+| より高く、安定したFPS | Sodium |
+| よりスムーズなゲームロジック（Opalでは提供されない） | Lithium |
+| 必須の基盤 | Fabric API |
+| 200以上のPvPおよびユーティリティ機能 | Opal |
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="PvPでは、より高いFPSが常に良いことですか？">
+いいえ。安定性が重要です。不安定な高いFPSよりも、安定したフレームレートの方が優れています。
+</FAQItem>
+
+<FAQItem question="リチウムは対応していますか？ Opal?">いいえ。フレームレートのためにはSodiumを使い、OpalがインストールされているときはLithiumは使用しないでください</FAQItem>
+
+<FAQItem question="OpalはFPSを低下させますか？">
+Opalはフルクライアントですので、大規模なMODと同様に、ある程度のリソースを使用します。フレームレートの余裕を確保するためにSodiumをインストールしておけば、ほとんどの環境で安定したフレームレートを維持できます。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/ja/blog/how-to-get-more-fps-in-minecraft", label: "ゲームでより多くのFPSを得るには Minecraft", description: "ヘッドルームのモッドと設定." },
+  { href: "/ja/blog/best-performance-mods-for-minecraft", label: "最高のパフォーマンス向上MOD Minecraft", description: "フルスタックな無料パフォーマンス." },
+  { href: "/ja/blog/sodium-or-optifine-which-should-you-use", label: "Sodium or OptiFine?", description: "なぜ Fabric 顧客が望む Sodium." },
+]} />
+
+<CTA href="/ja/purchase">得る Opal ため $8.99 一生</CTA>

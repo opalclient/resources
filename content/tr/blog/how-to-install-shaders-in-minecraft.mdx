@@ -1,0 +1,87 @@
+---
+title: Minecraft'ta Shader Nasıl Kurulur (2026)
+description: "Fabric üzerinden Iris ve Sodium ile shader'lar yükleme: iki modu da ekleyin, bir paketi klasöre bırakın, video ayarlarından seçin. Adımlar, FPS ipuçları ve istemcinin nasıl çalıştığı."
+excerpt: Fabric shader'ları üç adımdan oluşur ve OptiFine kullanılmaz. İşte tüm süreç ve Opalın bir shader kurulumuna nasıl entegre edildiği.
+date: 2026-05-28
+lastUpdated: 2026-06-03
+category: Guides
+author: trq
+faqs:
+  - q: Shadeler için OptiFine gerekli mi?
+    a: Kuma Dokunmaz. Iris, OptiFine olmadan shader paketlerini yükler ve diğer Fabric mod ekosistemiyle uyumlu çalışır.
+  - q: Gölgelendiriciler FPS'imi düşürür mü?
+    a: Çerçevelere mal oluyorlar, ancak Sodium ile Iris'i çalıştırmak bunun çoğunu dengeliyor. Daha fazla boşluğa ihtiyacınız varsa daha hafif bir paket seçin.
+  - q: Shader paketleri nereye gider?
+    a: Minecraft dizininizdeki shaderpacks klasörü içinde. Iris yüklü olarak bir kez çalıştırdığınızda klasör sizin için otomatik olarak oluşturulur.
+  - q: Opal ile shader'ları çalıştırabilir miyim?
+    a: Evet. Opal, Iris ve Sodium hepsi aynı klasördeki Fabric modlarıdır. Gölgelendiriciler ve tam bir istemci aynı anda çalışır.
+---
+
+Fabricta shader'ları çalıştırmanın temiz yolu [Iris](https://modrinth.com/mod/iris) modudur; shader paketlerini yükler ve [Sodium](https://modrinth.com/mod/sodium) ile uyumlu olacak şekilde tasarlanmıştır, böylece kare hızınızı korursunuz. İki modu kurun, bir klasöre bir paket atın, video ayarlarından seçin. Bu kadar. OptiFine gerektirmiyor.
+
+<KeyTakeaways>
+
+- Iris, Fabric üzerinde shader'ları çalıştırır, OptiFine'a gerek yok.
+- Iris'i Sodium ile eşleştirin, böylece shader'lar size daha az kare keder.
+- Shader paketleri `shaderpacks` klasöründe bulunur; video ayarlarından birini seçin.
+- Opal aynı klasörde çalışır, böylece shader'lar ve tam bir istemciye sahip olabilirsiniz.
+
+</KeyTakeaways>
+
+## Gölgelendiricileri Yükle
+
+<Steps>
+
+<Step number={1} title="Iris ve Sodium'u yükleyin">[Fabric](https://fabricmc.net) yükleyiciyi ve [Fabric API](https://modrinth.com/mod/fabric-api) modunu yükleyin, ardından [Iris](https://modrinth.com/mod/iris) ve [Sodium](https://modrinth.com/mod/sodium) modlarını `mods` klasörünüze ekleyin. Iris shader'ları çalıştırır, Sodium ise FPS'yi yüksek tutar. Birlikte çalışacak şekilde tasarlanmıştır</Step>
+
+<Step number={2} title="Bir shader paketi ekle">Bir shader paketi indirin (tek bir dosya olarak gelir) ve Minecraft dizininiz içindeki `shaderpacks` klasörüne yerleştirin. Eğer o klasör henüz yoksa, Iris ile oyunu bir kez çalıştırın ve sizin için oluşturulacaktır</Step>
+
+<Step number={3} title="Oyunda seçin">Video ayarlarını açın, ardından shader paketleri ekranını ve eklediğiniz paketi seçin. Uygulama anında gerçekleşir ve aynı ekrandan paketleri değiştirebilirsiniz</Step>
+
+</Steps>
+
+<Callout variant="warning" title="FPS'niz çok düşerse">
+Render mesafenizi kısaltın veya daha hafif bir paket kullanmaya geçin, modları suçlamadan önce. Ağır shader'lar gerçek FPS kaybettirir ve birkaç parça render mesafesi, ihtiyacınız olanı geri kazanmanızı sağlayabilir.
+</Callout>
+
+## Paket Seçimi
+
+<Checklist>
+<ChecklistItem>Daha hafif paketler daha az FPS tüketir ve yine de iyi görünür. Makineniz mütevazıysa oradan başlayın.</ChecklistItem>
+<ChecklistItem>Daha ağır paketler, lüks su efektleri, gölgeler ve hacimsel aydınlatma ekler, ancak bunun karşılığında gerçek bir performans kaybına neden olur.</ChecklistItem>
+<ChecklistItem>Paketi ekran görüntüleriyle değil, GPU'nuzla eşleştirin.</ChecklistItem>
+</Checklist>
+
+## İstemciyle Shader'ları Çalıştırma
+
+Iris ve Sodium Fabric modları olduğundan, Opal dahil olmak üzere Fabric modları olarak oluşturulmuş her şey aynı klasörü paylaşır. Bu nedenle, shader ile aydınlatılmış bir oyun ve tam özellikli bir yardımcı istemci birbirini dışlamaz. Opal, Minecraft 1.21.10'u hedef alır ve shader yığınınızın yanında yüklenir, böylece görünümleri ve özellik setini birlikte çalıştırabilirsiniz.
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Shadeler için OptiFine gerekli miyim?">
+Fabric'de değil. Iris, OptiFine olmadan shader paketlerini yükler.
+</FAQItem>
+
+<FAQItem question="Shadeler FPS'imi düşürür mü?">
+Karelere mal olsalar da, Sodium ile birlikte Iris birçoğunu telafi eder. Daha fazla boşluk için daha hafif bir paket seçin.
+</FAQItem>
+
+<FAQItem question="Shader paketleri nereye gider?">
+Minecraft dizininizdeki `shaderpacks` klasörüne.
+</FAQItem>
+
+<FAQItem question="Opal ile shader çalıştırabilir miyim?">
+Evet. Opal, Iris ve Sodium aynı klasörü paylaştığı için shader'lar ve tam bir istemci birlikte çalışır.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/blog/how-to-get-more-fps-in-minecraft", label: "Minecraft'ta FPS'yi artırmanın yolları", description: "Gölgelendiricileri eklemeden önce geri alma çerçevelerini al." },
+  { href: "/tr/blog/best-mods-for-performance-and-shaders", label: "Performans ve shader'lar için en iyi modlar", description: "Sodium, Iris, ve yığının geri kalanı." },
+  { href: "/tr/blog/essential-fabric-mods-every-player-should-have", label: "Zorunlu Fabric modlar", description: "Her temel Fabric kurulum başlar." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'i $8.99 için edinin</CTA>

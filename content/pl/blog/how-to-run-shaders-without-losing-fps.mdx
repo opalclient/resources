@@ -1,0 +1,93 @@
+---
+title: Jak uruchamiać шейдеры bez spadku FPS (2026)
+description: Shadery kosztują klatki, ale Iris plus Sodium i lżejszy pakiet sprawiają, że są grywalne. Poniżej znajduje się konfiguracja i ustawienia, które pozwalają odzyskać najwięcej FPS przy włączonych shaderach.
+excerpt: Shadery zawsze kosztują klatki, ale można utrzymać płynność rozgrywki. Oto konfiguracja Iris i Sodium, oraz sposób, w jaki klient nadal się na to nakłada.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: Dlaczego shadery są gładsze z Iris i Sodium?
+    a: Szybki renderer Sodium wykonuje większość pracy, a Iris dodaje shadery na wierzch, w przeciwieństwie do starszego podejścia opartego na pojedynczym pliku JAR.
+  - q: Jakie ustawienia zapewniają najwyższą liczbę FPS?
+    a: Odległość cieni i rozdzielczość, a także oświetlenie objętościowe. Najpierw zmniejsz te ustawienia.
+  - q: Czy Iris i Sodium współpracują z Opal?
+    a: Tak. Zarówno Sodium, jak i Iris biegną obok "Opalu". Wyjątkiem jest tylko "Lithium", ponieważ nie jest z nim kompatybilne.
+  - q: Czy słabe komputery w ogóle poradzą sobie z shaderami?
+    a: Tak, z lekkimi plecakami i niskimi ustawieniami. Na słabym sprzęcie, liczba klatek na sekundę zwykle jest priorytetem.
+---
+
+Shadery zawsze kosztują kilka klatek, ale można utrzymać je w rozsądnej płynności. Podstawą jest [Iris](https://modrinth.com/mod/iris) dla shaderów działających na bazie [Sodium](https://modrinth.com/mod/sodium) podnoszącego wydajność, co jest znacznie szybsze niż dotychczas. Następnie wybiera się lżejszy pakiet i usuwa najbardziej kosztowne efekty. Zarówno Iris, jak i Sodium działają obok Opal, dzięki czemu gra oświetlona shaderami i pełny klient współistnieją w tej samej konfiguracji.
+
+<KeyTakeaways>
+
+- Iris nałożony na Sodium to najważniejszy krok dla działających shaderów.
+- Lżejszy pakiet i przycięte efekty odzyskują większość utraconych klatek.
+- Iris i Sodium działają razem z Opalem; tylko Lithium jest z nimi niekompatybilne.
+- Utrzymuj umiarkowaną odległość renderowania; shadery mnożą jej koszt.
+
+</KeyTakeaways>
+
+## Krok 1: Użyj Iris z Sodium
+
+<Steps>
+
+<Step number={1} title="Zainstaluj Sodium">Sodium to szybki renderer, który wykonuje większość pracy. Najpierw umieść loader [Fabric](https://fabricmc.net) oraz [Fabric API](https://modrinth.com/mod/fabric-api), a następnie wrzuć Sodium do folderu `mods`. Działa dobrze w połączeniu z Opalem</Step>
+
+<Step number={2} title="Dodaj Iris">[Iris](https://modrinth.com/mod/iris) obsługuje paczki shaderów i został zaprojektowany, aby działać na warstwie Sodium, dzięki czemu utrzymujesz uzyskany framerate. To połączenie jest kluczem do sukcesu</Step>
+
+</Steps>
+
+## Krok 2: Wybierz lżejszy plecak
+
+Realistyczne, ciężkie plecaki kosztują najwięcej. Zbalansowany plecak lub jego lekka wersja, odzyskuje wiele ramek, zachowując przy tym większość wyglądu.
+
+## Krok 3: Przytnij kosztowne efekty
+
+W ustawieniach shader’a, największe koszty zazwyczaj wynoszą:
+
+<Checklist>
+<ChecklistItem>Oświetlenie objętościowe i mgła.</ChecklistItem>
+<ChecklistItem>Refleksje, przestrzeń ekranu czy woda.</ChecklistItem>
+<ChecklistItem>Rozdzielczość cieni i odległość.</ChecklistItem>
+</Checklist>
+
+Obniżenie tych ustawień zachowuje większość efektu wizualnego za ułamek kosztów.
+
+## Krok 4: Odległość renderowania
+
+Shadery mnożą koszt każdego narysowanego bloku, więc duża odległość renderowania szkodzi podwójnie. Utrzymuj ją na umiarkowanym poziomie.
+
+<Callout variant="tip" title="Opal users">
+Sodium i Iris działają z Opal, więc możesz mieć shadery i klienta jednocześnie. "Lithium" to jedyny popularny mod, który nie współpracuje z Opal, więc pomiń go i pozwól, by Sodium zajmował się wydajnością.
+</Callout>
+
+## Gdzie pasuje Opal
+
+Opal to mod Fabric dla Minecrafta 1.21.10, który instaluje się w tej samej folderze `mods` co Sodium i Iris. Otrzymujesz świat oświetlony shaderami oraz pełnego klienta: ponad 200 funkcji, szklany interfejs użytkownika i silnik skryptów. Szklany interfejs został zaprojektowany tak, aby wyglądał dobrze na tle gry oświetlonej shaderami, więc uzupełniają się one nawzajem, zamiast ze sobą konkurować. Zachowaj Sodium dla zapasu mocy i pomiń Lithium.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Dlaczego shadery działają płynniej z Iris i Sodium?">
+Sodium zapewnia szybki renderer, który wykonuje większość pracy, a Iris dodaje shadery na jego podstawie, zamiast starszego, pojedynczego podejścia w jednym pliku.
+</FAQItem>
+
+<FAQItem question="Czy Iris i Sodium współpracują z Opalem?">
+Tak. Oba działają obok Opalu. Tylko Lithium nie jest z nim kompatybilne.
+</FAQItem>
+
+<FAQItem question="Jakie ustawienia pozwolą odzyskać najwięcej FPS?">
+Odległość cieni i rozdzielczość, a także oświetlenie objętościowe. Zmniejsz najpierw te parametry.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/blog/best-minecraft-shaders", label: "Najlepsze shadery do Minecrafta", description: "Jakie plecaki zabrać, od lekkich do ciężkich." },
+  { href: "/pl/blog/how-to-install-shaders-in-minecraft", label: "Jak zainstalować shader'y w Minecraft", description: "Pełne ustawienie Iris, krok po kroku." },
+  { href: "/pl/blog/how-to-get-more-fps-in-minecraft", label: "Jak uzyskać więcej FPS w Minecraft", description: "Odzyskaj ramki przed dodawaniem shaderów." },
+]} />
+
+<CTA href="/pl/purchase">Dodaj Opal na górze dla $8.99</CTA>

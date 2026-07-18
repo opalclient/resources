@@ -1,0 +1,99 @@
+---
+title: Istotny Fabric Mody, które powinien mieć każdy gracz (2026)
+description: "Krótka lista modyfikacji Fabric, które warto zainstalować na początek: Fabric API, Sodium, Iris i ModMenu, a także warstwa klienta. Co robi każda z nich i z którymi z nich współpracuje Opal."
+excerpt: Kilka modów obejmuje podstawy czystej konfiguracji Fabric. Oto zestaw startowy, w kolejności instalacji, oraz klient, który działa na jego szczycie.
+date: 2026-06-01
+lastUpdated: 2026-06-03
+category: Guides
+author: trq
+faqs:
+  - q: Który mod Fabric powinienem zainstalować jako pierwszy?
+    a: API Fabric. Większość innych modyfikacji od niej zależy, więc należy ją umieścić przed wszystkim innym.
+  - q: Czy te mody zmieniają wygląd gry?
+    a: Tylko Iris, które dodaje shadery. Sodium odpowiada za szybkość, a ModMenu to ekran zarządzania.
+  - q: Czy lit dopasowuje się do Opalu?
+    a: Nie. Lit jest świetnym optymalizatorem logiki gry sam w sobie, ale nie jest kompatybilny z Opalem. Jeśli używasz Opala, użyj Sodium i pomiń Lit.
+  - q: Gdzie pasuje klientka jak Opal?
+    a: Na górze. Opal to również mod Fabric, więc instaluje się w tej samej lokalizacji co twój starter pack i dodaje ponad 200 funkcji.
+---
+
+Kilka modów obejmuje podstawy dobrej konfiguracji [Fabric](https://fabricmc.net): [Fabric API](https://modrinth.com/mod/fabric-api) jako bazę, [Sodium](https://modrinth.com/mod/sodium) dla wydajności, [Iris](https://modrinth.com/mod/iris) dla shaderów i [ModMenu](https://modrinth.com/mod/modmenu) do zarządzania wszystkim. Zainstaluj te mody jako pierwsze, a większość pozostałych wpasuje się bezproblemowo, w tym klient. Uwaga dla użytkowników Opal: Lithium jest popularnym wyborem, który nie działa z Opal, więc to ten, którego należy pominąć.
+
+<KeyTakeaways>
+
+- Fabric API to podstawa. Zainstaluj ją przed czymkolwiek innym.
+- Sodium dla FPS, Iris dla shaderów, ModMenu do zarządzania wszystkim.
+- Lithium jest dobre samo w sobie, ale nie jest kompatybilne z Opalem.
+- Opal to warstwa klienta; instaluje się w tej samej lokalizacji co reszta.
+
+</KeyTakeaways>
+
+## Zestaw startowy
+
+<ModSection title="Zainstaluj najpierw" badge="Rdzeń" badgeColor="szmaragdowy" description="Podstawa, wydajność, shadery i menedżer. Wszystko współpracuje z Opalem.">
+<ModList>
+<ModLink href="https://modrinth.com/mod/fabric-api">Fabric API (wymagana podstawa)</ModLink>
+<ModLink href="https://modrinth.com/mod/sodium">Sodium (FPS renderowania)</ModLink>
+<ModLink href="https://modrinth.com/mod/iris">Iris (shadery)</ModLink>
+<ModLink href="https://modrinth.com/mod/modmenu">ModMenu (zarządzaj modami w grze)</ModLink>
+<IncompatibleMod>Lithium (logika gry, niekompatybilny z Opalem)</IncompatibleMod>
+</ModList>
+</ModSection>
+
+## Fabric API
+
+Biblioteka współdzielona, od której zależy niemal każdy mod Fabric. Zainstaluj ją jako pierwszą. Bez niej większość modów odmówi załadowania. Raczej wymóg niż funkcja.
+
+## Sodium
+
+Przepisanie renderowania, które zwiększa liczbę klatek na sekundę, najbardziej obciążające słabsze GPU. Największy pojedynczy wzrost wydajności, jaki możesz dodać, i działa dobrze w połączeniu z Opal.
+
+## Iris
+
+Uruchamia pakiety shaderów i został zaprojektowany do współpracy z Sodium, dzięki czemu uzyskujesz wygląd bez utraty klatek. Pomijaj go tylko, jeśli nie zależy Ci na shaderach.
+
+## ModMenu
+
+Dodaje listę modów i ekrany konfiguracji w grze, dzięki czemu możesz zobaczyć, co jest zainstalowane i zmieniać ustawienia bez edycji plików. Ułatwia życie, dzięki czemu wszystkie pozostałe mody stają się łatwiejsze w użyciu.
+
+## Uwaga dotycząca Lithium
+
+[Lithium](https://modrinth.com/mod/lithium) optymalizuje logikę gry i doskonale sprawdza się w konfiguracji vanilla-plus. Nie jest kompatybilny z Opal, więc jeśli Opal znajduje się w twojej folderze, pomiń Lithium i polegaj na Sodium dla wydajności.
+
+## Na pierwszy rzut oka
+
+| Mod | Zadanie | Współpracuje z Opal |
+| :--- | :--- | :--- |
+| Fabric API | Wymagana podstawa | Tak |
+| Sodium | Renderowanie FPS | Tak |
+| Iris | Shader | Tak |
+| ModMenu | Zarządzanie modami w grze | Tak |
+| Lithium | Wydajność logiki gry | Nie |
+
+## Warstwa na wierzchu
+
+Gdy już zainstalujesz pakiet startowy, folder jest gotowy dla klienta. Opal to mod Fabric dla Minecrafta 1.21.10, więc instaluje się tak samo jak pozostałe: do folderu `mods`. Zachowujesz wydajność i stos shaderów, a następnie dodajesz ponad 200 funkcji, szklany interfejs użytkownika i silnik skryptów.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Który mod powinienem zainstalować jako pierwszy?">
+Fabric API. Większość pozostałych modów od niej zależy.
+</FAQItem>
+
+<FAQItem question="Czy to zmienia wygląd gry?">
+Tylko Iris (szadersy). Sodium to szybkość, ModMenu to zarządzanie.
+</FAQItem>
+
+<FAQItem question="Czy lit dopasowuje się do Opalu?">Nie. Użyj Sodium, pomiń "Lithium" podczas uruchamiania Opal</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/blog/how-to-get-more-fps-in-minecraft", label: "Jak uzyskać więcej FPS w Minecraft", description: "Dostosuj ustawienia modów wydajności, aby uzyskać największy zysk." },
+  { href: "/pl/blog/how-to-install-shaders-in-minecraft", label: "Jak zainstalować shader'y w Minecraft", description: "Dodaj Iris dla shaderów bez OptiFine." },
+  { href: "/pl/blog/why-opal-is-the-best-value-minecraft-client", label: "Dlaczego Opal to najlepszy wybór klienta", description: "Warstwa kliencka, która leży na szczycie stosu." },
+]} />
+
+<CTA href="/pl/purchase">Zakończ konfigurację z Opalem, $8.99</CTA>

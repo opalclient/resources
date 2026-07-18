@@ -1,0 +1,99 @@
+---
+title: Najlepsze mody wydajności do Minecrafta (2026)
+description: "Najlepsze mody wydajnościowe do Minecrafta w 2026 roku: Sodium do renderowania, a także mody zarządzające pamięcią i cullingiem. Krótka lista, która naprawia opóźnienia, oraz ten, którego należy unikać, jeśli używasz Opal."
+excerpt: Sodium wykonuje większość pracy; kilka modów związanych z pamięcią i selekcją ją kończy. Oto krótka lista i ten jeden mod, którego należy unikać, jeśli uruchamiasz Opal.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: Jaki jest najlepszy pojedynczy mod do wydajności?
+    a: Sodium. Przepisuje renderowanie i jest to największy pojedynczy wzrost wydajności FPS w większości maszyn.
+  - q: Czy lit dopasowuje się do Opalu?
+    a: Nie. Lit jest niekompatybilny z Opal. Uruchom Sodium dla swojej liczby klatek na sekundę i pomiń Lit, jeśli zainstalowany jest Opal.
+  - q: Czy te mody zmieniają wygląd gry?
+    a: Nie. To są mody pod prędkość. Dodaj Iris oddzielnie dla shaderów.
+  - q: Czy są bezpieczne, żeby biegać razem?
+    a: Tak, zostały zaprojektowane do współistnienia. Najpierw zainstaluj Fabric API, a następnie dodaj resztę.
+---
+
+Jeśli masz zainstalować tylko jedną rzecz, zainstaluj [Sodium](https://modrinth.com/mod/sodium). Przebudowuje silnik renderujący Minecrafta i zapewnia największy wzrost liczby klatek na sekundę w większości konfiguracji. Połącz to z jednym lub dwoma modami pamięci oraz modem culling, a zajmiesz się głównymi przyczynami spadków wydajności. Wszystkie te mody są darmowe i działają na [Fabric](https://fabricmc.net). Uwaga dla użytkowników Opal: Lithium jest popularnym wyborem, ale nie jest kompatybilny z Opal, więc go pomiń.
+
+<KeyTakeaways>
+
+- Największym sukcesem FPS jest Sodium. Zainstaluj go jako pierwszy.
+- FerriteCore i ModernFix redukują zużycie pamięci; Entity Culling pomija ukryte moby.
+- Lithium wygładza logikę gry, ale nie jest kompatybilne z Opal. Pomiń je, jeśli używasz Opal.
+- Sodium zapewnia zapas mocy, który pozwala na działanie klienta takiego jak Opal.
+
+</KeyTakeaways>
+
+## Stos
+
+<ModSection title="Darmowe mody wydajnościowe" badge="Free" badgeColor="emerald" description="Sodium to podstawa. FerriteCore, Entity Culling i ModernFix dopełniają całość. Lithium sprawdza się tylko na konfiguracjach bez Opal.">
+<ModList>
+<ModLink href="https://modrinth.com/mod/sodium">Sodium (wydajność renderowania, działa z Opal)</ModLink>
+<ModLink href="https://modrinth.com/mod/ferritecore">FerriteCore (mniejsze zużycie pamięci)</ModLink>
+<ModLink href="https://modrinth.com/mod/entityculling">Entity Culling (pomijanie ukrytych encji)</ModLink>
+<ModLink href="https://modrinth.com/mod/modernfix">ModernFix (czas ładowania i pamięć)</ModLink>
+<IncompatibleMod>Lithium (logika gry, niekompatybilny z Opal)</IncompatibleMod>
+</ModList>
+</ModSection>
+
+## Sodium
+
+Przeróbka renderowania. Zastępuje standardową ścieżkę renderowania szybszą i zazwyczaj wprowadza największą pojedynczą zmianę, szczególnie na słabszych kartach graficznych. Potrzebuje [Fabric](ładowarka (https://fabricmc.net) i [Fabric Najpierw API](https://modrinth.com/mod/fabric-api). Działa bezproblemowo razem z Opal.
+
+## Rdzeń Ferritowy
+
+Wycięcia Minecraft'zużycie pamięci jest redukowane poprzez zmianę sposobu przechowywania danych w pamięci RAM. Mniejsze obciążenie pamięci oznacza rzadsze przerwy w procesie zbierania śmieci, co jest jedną z cichych przyczyn zacięć.
+
+## Eliminacja obiektów
+
+Zapobiega renderowaniu obiektów, których nie widać, np. za ścianami lub pod ziemią. Na zatłoczonych światach z dużą ilością mobów lub ram przedmiotów, odzyskuje klatki bezkosztowo.
+
+## ModernFix
+
+Rozbudowany mod wprowadzający poprawki i optymalizacje, który przyspiesza czasy ładowania i redukuje zużycie pamięci. Bezpieczne rozwiązanie awaryjne, gdy podstawowe mody są zainstalowane.
+
+<Callout variant="warning" title="Uruchamiasz Opal? Pomiń Lit.">
+Lit jest zwykle wybierany ze względu na logikę gry, ale nie jest kompatybilny z Opal. Polegaj na Sodium dla wydajności i wyklucz Lit z folderu.
+</Callout>
+
+## Na pierwszy rzut oka
+
+| Mod | Rozwiązuje | Współpracuje z Opalem |
+| :--- | :--- | :--- |
+| Sodium | FPS renderowania | Tak |
+| FerriteCore | Zużycie pamięci | Tak |
+| Entity Culling | Marnowanie renderowania encji | Tak |
+| ModernFix | Czas ładowania i pamięć | Tak |
+| Lithium | Wydajność logiki gry | Nie |
+
+## Gdzie pasuje Opal
+
+Opal to mod Fabric dla Minecrafta 1.21.10, więc instaluje się go w tej samej lokalizacji `mods` co stos wydajności. Zachowujesz swoją liczbę klatek na sekundę i dodajesz pełnego klienta: ponad 200 funkcji związanych z walką, ruchem, wizualizacją i użytecznością, szklany interfejs użytkownika oraz silnik skryptów. Opal to duży mod, więc zachowaj Sodium dla zapasu mocy i pomiń Lithium, a konfiguracja się utrzymuje.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Jaki jest najlepszy mod do wydajności?">
+Sodium. Przekształca renderowanie i zapewnia największy pojedynczy zysk wydajności dla większości maszyn.
+</FAQItem>
+
+<FAQItem question="Czy lit dopasowuje się do Opalu?">Nie. Używaj Sodium dla wydajności i pomiń "Lithium", gdy zainstalowany jest Opal</FAQItem>
+
+<FAQItem question="Czy to zmienia wygląd gry?">
+Nie. To są mody podnoszące szybkość. Dodaj Iris oddzielnie dla shaderów.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/blog/how-to-get-more-fps-in-minecraft", label: "Jak uzyskać więcej FPS w Minecraft", description: "Ustawienia, które kończą to, co zaczynają mody." },
+  { href: "/pl/blog/best-mods-for-low-end-pcs", label: "Najlepsze mody dla słabych komputerów", description: "Ta sama kompilacja zoptymalizowana pod słabszy sprzęt." },
+  { href: "/pl/blog/how-to-fix-minecraft-lag", label: "Jak naprawić opóźnienia w Minecraft", description: "Zdiagnozuj, jaki rodzaj opóźnienia masz." },
+]} />
+
+<CTA href="/pl/purchase">Dodaj Opal na górze dla $8.99</CTA>

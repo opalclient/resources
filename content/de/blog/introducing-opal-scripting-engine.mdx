@@ -1,0 +1,135 @@
+---
+title: Die Einführung des GraalVM Scripting Engine von Opal
+description: Schreiben Sie benutzerdefiniertes JavaScript, das mit den internen APIs von Opal interagiert. Automatisieren Sie Aufgaben, reagieren Sie auf Spieleereignisse, zeichnen Sie Ihre eigene HUD und erweitern Sie den Client zur Laufzeit.
+excerpt: Opal's Skript-Engine läuft auf GraalVM, einer vollständigen JavaScript-Laufzeitumgebung innerhalb von Minecraft. Hier ist, was du damit bauen kannst.
+date: 2026-03-15
+lastUpdated: 2026-06-03
+category: Features
+author: trq
+faqs:
+  - q: Welchen Skript-Interpreter verwendet Opal?
+    a: Opal verwendet GraalVM, eine JavaScript-Laufzeitumgebung für Unternehmen von Oracle, die in Minecraft eingebettet ist und threadsichere Bindungen zu den APIs des Clients bereitstellt.
+  - q: Können Skripte auf meine Dateien oder mein Netzwerk zugreifen?
+    a: Nein. Skripte werden in einer Sandbox-Umgebung von GraalVM ausgeführt. Sie können mit den APIs von Opal interagieren, dürfen aber nicht auf Ihr Dateisystem, Netzwerk oder andere Anwendungen zugreifen.
+  - q: Muss ich Minecraft neu starten, um die Skripte zu laden?
+    a: Nein. Skripte werden zur Laufzeit geladen. Legen Sie eine .js-Datei in das Skriptverzeichnis und sie ist sofort verfügbar.
+  - q: Gibt es einen anderen Minecraft-Client mit einem solchen Skript-Engine?
+    a: Die meisten bleiben bei einfachen Makros. Opal liefert eine vollständige GraalVM JavaScript-Laufzeitumgebung mit threadsicheren Spielbindungen, was eine völlig andere Sache ist.
+---
+
+Opal liefert eine GraalVM JavaScript-Engine, eine vollständige JS-Laufzeitumgebung, die innerhalb des Minecraft-Clients läuft. Sie schreiben Skripte, die mit den internen APIs von Opal interagieren, während das Spiel aktiv ist. Dies ist weder ein Makrorekorder noch ein Keybind-System. Es ist eine echte Programmierumgebung mit Zugriff auf das Ereignissystem des Clients, die Modulkonfigurationen und den Spielzustand.
+
+<KeyTakeaways>
+
+- Eine vollständige GraalVM JavaScript-Laufzeitumgebung, kein Makrorekorder.
+- Reagiere auf Spieleereignisse, ändere Moduleinstellungen und zeichne deine eigene HUD.
+- Skripte werden zur Laufzeit geladen, kein Neustart erforderlich, und laufen in einer Sandbox für Opals APIs.
+- Die meisten anderen Clients stoppen bei einfachen Makros.
+
+</KeyTakeaways>
+
+## Warum GraalVM
+GraalVM ist eine polyglotte Laufzeitumgebung von Oracle. Wir haben es aus konkreten Gründen ausgewählt:
+
+- Geschwindigkeit: JIT-Kompilierung sorgt dafür, dass Skripte schnell genug sind, um jeden Takt auszuführen.
+- JavaScript: Die meisten Leute kennen es bereits, sodass die Lernkurve kurz ist.
+- Thread-Sicherheit: Die JS-zu-Java-Bindungen behandeln Nebenläufigkeit korrekt, anstatt Sie darüber stolpern zu lassen.
+- Vertraute Muster: Standard-JavaScript-APIs verhalten sich so, wie Sie es erwarten
+## Was du bauen kannst
+
+### Benutzerdefinierte Automatisierung
+Reagiere auf Ereignisse im Spiel:
+
+```javascript
+// Auto-respond to certain chat messages
+on('chat', (event) => {
+  if (event.message.includes('1v1?')) {
+    sendChat('/duel accept');
+  }
+});
+```
+### Dynamische Modulkonfiguration
+Ändere Moduleinstellungen basierend auf dem Spielzustand:
+
+```javascript
+// Increase reach when health is low
+on('tick', () => {
+  const health = player.getHealth();
+  if (health < 8) {
+    modules.get('Reach').setSetting('distance', 3.3);
+  } else {
+    modules.get('Reach').setSetting('distance', 3.1);
+  }
+});
+```
+### Benutzerdefinierte HUD-Elemente
+Erstellen Sie Ihre eigenen Überlagerungen:
+
+```javascript
+// Display a combo counter on screen
+let combo = 0;
+on('attackEntity', () => { combo++; });
+on('damage', () => { combo = 0; });
+on('render2d', (ctx) => {
+  ctx.drawText(`Combo: ${combo}`, 10, 10, 0xFFFFFF);
+});
+```
+### Serverbezogene Profile
+Schalte Konfigurationen automatisch um, wenn du unterschiedliche Server betrittst:
+
+```javascript
+on('serverJoin', (event) => {
+  if (event.ip.includes('pvp.example.com')) {
+    loadConfig('server-bypass');
+  } else {
+    loadConfig('ghost-default');
+  }
+});
+```
+## Erste Schritte
+
+<Steps>
+
+<Step number={1} title="Öffnen Sie das Skriptverzeichnis">Suchen Sie das Skriptverzeichnis in Ihrem Opal-Konfigurationsordner</Step>
+
+<Step number={2} title="Erstelle eine .js-Datei">Jeder Name ist passend. Das ist dein Drehbuch</Step>
+
+<Step number={3} title="Schreibe gegen die API">Verwenden Sie die API-Referenz in der Dashboard-Dokumentation: Ereignisse, Modulzugriff, Spielerstatus und Rendering</Step>
+
+<Step number={4} title="Speichern und abspielen">Die Skripte werden zur Laufzeit geladen, daher ist kein Neustart erforderlich</Step>
+
+</Steps>
+
+<Callout variant="info" title="Skripte werden in einer Sandbox ausgeführt">
+Skripte werden innerhalb von GraalVM ausgeführt und können die Opal-APIs aufrufen, dürfen aber weder auf Ihr Dateisystem, Netzwerk noch auf andere Apps zugreifen. Ihre Skripte bleiben lokal und Ihr Rechner bleibt Ihr Eigentum.
+</Callout>
+
+## Community-Skripte
+
+Die Scripting-Community wächst. Der Discord hat Skripte und Personen geteilt, die dir beim Schreiben deiner eigenen helfen können. Häufige Beispiele sind Auto-Game-Skripte für Minispiele, Stat-Tracker, Kombinationserkennung und serverseitige Konfigurations-Switcher.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Welche Engine verwendet Opal?">
+GraalVM, die Enterprise-JavaScript-Laufzeitumgebung von Oracle, mit threadsicheren Spielbindungen.
+</FAQItem>
+
+<FAQItem question="Können Skripte meine Dateien lesen?">
+Nein. Sie sind auf Opal's APIs beschränkt.
+</FAQItem>
+
+<FAQItem question="Muss ich neu starten, um ein Skript zu laden?">
+Nein. Legen Sie die Datei einfach hinein, sie wird zur Laufzeit geladen.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/blog/opal-config-sharing-guide", label: "Opals Konfigurationsfreigabesystem", description: "Lade die richtige Konfiguration für jeden Server mit einem Skript automatisch." },
+  { href: "/de/blog/why-opal-is-the-best-value-minecraft-client", label: "Warum Opal das beste Preis-Leistungs-Verhältnis für Kunden bietet", description: "Alles $8.99 enthält." },
+  { href: "/de/compare/opal-vs-liquidbounce", label: "Opal gegen LiquidBounce", description: "Skripting versus der Open-Source-Weg." },
+]} />
+
+<CTA href="/de/purchase" note="Lifetime license · instant delivery · no subscription">Einen Client, den Sie skripten können, erhalten, $8.99</CTA>

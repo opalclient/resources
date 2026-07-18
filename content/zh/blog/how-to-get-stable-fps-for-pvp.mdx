@@ -1,0 +1,89 @@
+---
+title: 如何获得稳定的帧数 Minecraft 玩家对战 (2026)
+description: 在 PvP 方面，稳定的帧时机比峰值帧数更重要。以下是如何通过 Sodium、帧数上限以及正确的设置来实现这一点，以及像 Opal 这样的 PvP 客户端如何发挥作用.
+excerpt: 稳定才能赢得战斗，而不是追求峰值帧数。以下是保持稳定帧数的设置，以及像 Opal 这样的 PvP 客户端如何在其基础上发挥作用.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: 在 PvP 游戏中，更高的帧数是否总是更好？?
+    a: 不二法眼，稳定帧率制胜。在战斗中，稳定的上限帧率比帧数波动较大的高帧率更具响应性.
+  - q: 我需要专门的客户端来玩 PvP FPS 游戏吗？?
+    a: 原始FPS方面，没有。Sodium加上合适的设置就能搞定。像Opal这样的PvP客户端在基础之上增加了战斗、移动和实用性功能；保留Sodium以提供性能余量.
+  - q: 锂元素与Opal兼容吗？?
+    a: 不。锂不兼容于 Opal. 跑 Sodium 你的帧率，如果不需要锂的话就不用了 Opal 已安装.
+  - q: 我应该将帧率限制在多少？?
+    a: 无论机器在任何时候能容纳多少，都应以稳定压倒峰值.
+---
+
+在 PvP 中，稳定的帧率比高帧率更重要。一款保持稳定帧数的游戏，在战斗中比帧数突然飙升或下降的游戏感觉更灵敏。秘诀是 [Sodium](https://modrinth.com/mod/sodium) 带来的原始性能提升，合理的帧数上限以保证稳定性，以及一些为了清晰度而非华丽效果而调整的设置。需要注意的是，Lithium 与 Opal 不兼容，如果你使用 Opal，请依赖 Sodium 来获得性能空间.
+
+<KeyTakeaways>
+
+- 稳定的帧数始终优于战斗中的峰值 FPS。 争取一个你始终能达到的数值。
+- Sodium 是基础；它提供稳定的帧数所需的空间。
+- 锂能优化游戏逻辑，但与Opal不兼容。 如果你使用Opal，请跳过它。
+- 帧数上限加上清晰度设置，就能完成任务.
+
+</KeyTakeaways>
+
+## 建立核心性能
+
+[Sodium](https://modrinth.com/mod/sodium) 重写 Minecraft'渲染器是获得稳定帧数最大的提升 [Fabric](https://fabricmc.net) 载入器和 [Fabric API已就緒，然後投放 Sodium 在你的 `mods` 文件夹中。它能很好地与…共存 Opal.
+
+<Callout variant="warning" title="运行 Opal 时，请跳过 Lithium">
+Lithium 与 Opal 不兼容。请使用 Sodium 来获得流畅的帧率，并将 Lithium 从文件夹中移除。Sodium 负责渲染部分，这对于 PvP 来说是更大的优势。
+</Callout>
+
+## 限制帧率
+规律的帧率比更快但不可靠的帧率更好。与其追求最高的可能数值，不如设置一台机器始终可以舒适承受的上限。稳定的帧时间才是目标，而不是角落里那个大数字
+## 调整以清晰
+
+<Checklist>
+<ChecklistItem>渲染距离：中等，以避免战斗中远距离区域导致帧数下降.</ChecklistItem>
+<ChecklistItem>图形：快速.</ChecklistItem>
+<ChecklistItem>粒子：最小化，以避免屏幕杂乱或浪费帧数.</ChecklistItem>
+<ChecklistItem>柔和的灯光：低.</ChecklistItem>
+</Checklist>
+
+<Callout variant="tip" title="快速胜利">
+将渲染距离从 16 个区块减少到 12 个区块，几乎不会在近距离 PvP 中产生视觉损失，却能大幅提升你的帧率。
+</Callout>
+
+## PvP 客户端的定位
+
+稳定的帧率是基础；客户端是你如何利用它们的。Opal 是一个针对 Minecraft 1.21.10 的 Fabric 模组，它会安装到与 Sodium 相同的 `mods` 文件夹中，并在战斗、移动、视觉和实用工具方面提供 200 多个功能，背后是一个玻璃 UI。它是一个完整的客户端，因此就像任何大型模组一样，它在运行时会消耗一些资源。这正是 Sodium 的重要性所在：它为你提供了运行 Opal 之类的功能集，并在战斗中保持稳定帧率的空间。
+
+## 一览
+
+| 想要 | 安装 |
+| :--- | :--- |
+| 更高、更稳定的 FPS | Sodium |
+| 更流畅的游戏逻辑（不适用于 Opal） | Lithium |
+| 基础要求 | Fabric API |
+| 200 多个 PvP 和实用工具功能 | Opal |
+
+## 常见问题解答
+
+<FAQList>
+
+<FAQItem question="更高的FPS对PvP总是更好吗？">
+不是。稳定比一切都重要。一个稳定的上限帧率比一个不稳定的更高帧率更好。
+</FAQItem>
+
+<FAQItem question="锂元素与Opal兼容吗？?">请运行 Sodium 以获得流畅的帧率，并在安装 Opal 时不要使用 Lithium</FAQItem>
+
+<FAQItem question="Opal 会降低我的 FPS 吗？">
+Opal 是一个完整的客户端，就像任何大型模组一样，它会消耗一些资源。请务必安装 Sodium 以提供性能空间，这样大多数机器上都能保持稳定的帧率。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/blog/how-to-get-more-fps-in-minecraft", label: "如何在提升帧数 Minecraft", description: "头部空间背后的模组和设置." },
+  { href: "/zh/blog/best-performance-mods-for-minecraft", label: "Minecraft 最佳性能优化模组", description: "完整的免费性能堆栈." },
+  { href: "/zh/blog/sodium-or-optifine-which-should-you-use", label: "Sodium or OptiFine?", description: "为什么Fabric客户端想要Sodium？." },
+]} />
+
+<CTA href="/zh/purchase">终身享有 Opal，仅售 8.99 美元</CTA>

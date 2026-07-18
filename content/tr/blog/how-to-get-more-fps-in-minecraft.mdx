@@ -1,0 +1,99 @@
+---
+title: Minecraft'ta Daha Fazla FPS Alma Yolu (2026 Rehberi)
+description: "İki ücretsiz Fabric modu çoğu işi yapar: Sodium görüntüleme için ve Lithium oyun mantığı için. İşte kurulum, önemli ayarlar ve Opal uyumluluk notu."
+excerpt: Minecraft'ta en hızlı FPS kazanımı, iki mod ve üç ayardan oluşuyor. İşte tüm kurulum ve Opal kullanıyorsanız atlayabileceğiniz mod.
+date: 2026-05-12
+lastUpdated: 2026-06-03
+category: Guides
+author: trq
+faqs:
+  - q: Minecraft'ta en büyük FPS artışını ne sağlar?
+    a: Sodium. Render motorunu yeniden yazıyor ve çoğu kurulum için en büyük kazancı sağlıyor, çoğu zaman tek başına bile.
+  - q: İkisine de ihtiyacım var mı Sodium ve Lityum?
+    a: Farklı şeyleri düzeltiyorlar. Sodium render'dan, "Lithium" ise oyun mantığından sorumlu. En iyi sonucu almak için her ikisini de çalıştırın, ancak Opal kullanıyorsanız Lithium ile uyumlu değildir. Bu durumda Sodium kullanın ve Lithium'u atlayın.
+  - q: Lityum, Opal ile uyumlu mu?
+    a: Hayır, lityum ile uyumlu değil Opal. Eğer koşarsan Opal, onu eşleştir Sodium lityum'u da dışarıda bırak.
+  - q: Bu modlar shader'larla çalışır mı?
+    a: Evet. Işınlandırma için Iris'i ekleyin; Sodium ile çalışacak şekilde tasarlandığı için çoğu kare hızını korursunuz. Işınlandırma yükleme kılavuzuna bakın.
+---
+
+Minecraft'ta elde edilebilecek en büyük FPS artışı [Sodium](https://modrinth.com/mod/sodium), ücretsiz bir [Fabric](https://fabricmc.net) modudur ve render işlemeyi yeniden yazar. [Lithium](https://modrinth.com/mod/lithium) ise oyun mantığını hızlandırır. Birlikte, daha zayıf makinelerde çoğu zaman kare hızlarını ikiye katlarlar. Başlangıçta bir uyarı: Lithium, Opal ile uyumlu değildir, bu yüzden Opal kullanıyorsanız Sodium'a yönelin.
+
+<KeyTakeaways>
+
+- Sodium en büyük FPS kazancı. Önce onu kurun.
+- Lithium oyun mantığını iyileştirir, ancak Opal ile uyumlu değildir. Opal kullanıyorsanız atlayın.
+- Üç vanilla ayarı (render mesafesi, VSync, grafikler) işi bitirir.
+- Sodium size boş alan sağlar; bu da Opal gibi bir istemci için yer açar.
+
+</KeyTakeaways>
+
+## Modları yükleyin
+
+<Steps>
+
+<Step number={1} title="Sodiumu yükleyin">[Sodium](https://modrinth.com/mod/sodium), Minecraft'ın render'ını çok daha hızlı bir render ile değiştirir; tek başına en büyük artışı sağlar. Öncelikle [Fabric](https://fabricmc.net) yükleyicisi ve [Fabric API](https://modrinth.com/mod/fabric-api) modlarını yerleştirin, ardından Sodium'u `mods` klasörüne atın. Sodium, Opal ile birlikte sorunsuz çalışır</Step>
+
+<Step number={2} title="Lityum ekleyin (Opal kullanmıyorsanız)">[Lithium](https://modrinth.com/mod/lithium), mob yapay zekasını, fiziğini ve blok işlemesini görsel bir değişiklik olmadan optimize eder. Vanilla-plus kurulumlarında harika bir eklenti olsa da, Opal ile uyumlu değildir, bu yüzden Opal yüklüyse onu kullanmayın</Step>
+
+</Steps>
+
+<Callout variant="warning" title="Koşan Opal mı? Lityumu atla">
+Lityum ile uyumlu değildir Opal. Kullan Sodium kare hızın için ve Lithium'u klasörden çıkar. Sodium yalnızca render tarafını kapsıyor, zaten o daha büyük bir kazanç.
+</Callout>
+
+## Üç ayarı ince ayarla
+
+<Checklist>
+<ChecklistItem>Görüş mesafesi: GPU darboğazınızsa bir veya iki blok düşürün.</ChecklistItem>
+<ChecklistItem>VSync: sınırsız kareler için kapalı.</ChecklistItem>
+<ChecklistItem>Grafikler: kolay bir ek hızlanma için Hızlı olarak ayarlayın.</ChecklistItem>
+</Checklist>
+
+<Callout variant="ipucu" başlık="Hızlı kazanım">
+Render mesafesini düşürmek, Sodium'dan sonra oyunda en büyük etkiye sahip tek şeydir. 16'dan 12 çifte düşmek, yakın mesafeli PvP'de neredeyse hiçbir görsel kayıp olmadan büyük bir bölüm kare hızınızı geri verebilir.
+</Callout>
+
+## Müşteri Ekleme
+
+Opal, Sodium ile aynı `mods` klasörüne kurulur. 200'den fazla özelliği olan tam bir istemci olduğundan, diğer büyük modlar gibi çalışırken bazı kaynakları kullanır. Tam da bu yüzden Sodium önemlidir: Opal gibi bir özellik setini çalıştırırken oyununuzu sorunsuz bir şekilde oynayabilmeniz için size boş alan sağlar. Sodium'u içinde bırakın, Lithium'u dışarıda bırakın ve Opal çalışmak için yer bulur.
+
+## Bir Bakışta
+
+| İstediğiniz | Kurulum |
+| :--- | :--- |
+| Daha yüksek FPS (işlem) | Sodium |
+| Daha akıcı oyun mantığı (Opal ile değil) | Lithium |
+| Gerekli temel | Fabric API |
+| Gölgelendiriciler | Iris |
+| 200+ özellik | Opal |
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="En büyük FPS artışını ne sağlar?">
+Sodium. Yeniden düzenlemeyi yeniden yazıyor ve çoğu kurulum için en büyük tek kazanım sağlıyor.
+</FAQItem>
+
+<FAQItem question="Lityum, Opal ile uyumlu mu?">
+Hayır, lityum şununla çalışmaz Opal. Çift Opal ile Sodium lityum'u da dışarıda bırak.
+</FAQItem>
+
+<FAQItem question="Opal FPS'imi düşürecek mi?">
+Opal, tam bir istemci olduğundan, diğer büyük modlar gibi çalışırken bazı kaynakları kullanır. Performans için Sodium'u yükli tutun ve çoğu bilgisayarda sorun yaşamayacaksınız.
+</FAQItem>
+
+<FAQItem question="Bunlar shader'larla çalışır mı?">
+Evet. Iris'i ekleyin ve [shader yükleme yöntemini öğrenmek için](/tr/blog/how-to-install-shaders-in-minecraft) burayı inceleyin.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/blog/how-to-install-shaders-in-minecraft", label: "Minecraft'te shader nasıl kurulur", description: "Ekle Iris üstünde Sodium çerçeveleri kaybetmeden." },
+  { href: "/tr/blog/best-mods-for-performance-and-shaders", label: "Performans ve shader'lar için en iyi modlar", description: "Tamamen ücretsiz performans yığını, tek bir yerde." },
+  { href: "/tr/blog/essential-fabric-mods-every-player-should-have", label: "Zorunlu Fabric modlar", description: "Her Fabric kurulumunun başladığı başlangıç paketi." },
+]} />
+
+<CTA href="/tr/purchase">Al Opal için $8.99 ömür</CTA>

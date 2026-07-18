@@ -1,0 +1,101 @@
+---
+title: プレイヤーが持っておくべき必須FabricMOD集（2026年）
+description: まず最初にインストールする価値のあるFabric Modの候補：Fabric API、Sodium、Iris、ModMenu、それにクライアントレイヤー。それぞれの機能と、Opalと互換性のあるMod.
+excerpt: クリーンなFabric環境の基本をカバーするMODがいくつかあります。以下は、インストール順とクライアントソフトです.
+date: 2026-06-01
+lastUpdated: 2026-06-03
+category: Guides
+author: trq
+faqs:
+  - q: どのFabric Modを最初にインストールすればいい？?
+    a: FabricAPI。ほとんどの他のMODはこのAPIに依存しているので、他のMODをロードする前に必ず入れてください.
+  - q: これらのMODはゲームの見た目を変化させますか？?
+    a: Irisだけ、シェーダーを追加するものです。Sodiumは速度を向上させ、「ModMenu」は管理画面です.
+  - q: リチウムは対応していますか？ Opal?
+    a: いいえ、リチウムはそれ自体でも優れたゲームロジック最適化ツールですが、互換性はありません Opal. 走れば Opal, 使う Sodium リチウムは飛ばして.
+  - q: クライアントのような人はどこで生まれるのか Opal 適合?
+    a: 上部です。OpalはFabricのModでもあり、スターターパックと同じフォルダにインストールされ、200以上の機能を追加します.
+---
+
+良いFabric環境を構築するための基本的なmodはいくつかあります。Fabric APIをベースとし、Sodiumでパフォーマンスを向上させ、Irisでシェーダーを使用し、ModMenuで全てを管理します。これらのmodを最初にインストールすれば、ほとんどの他のmodも問題なく動作し、クライアントも同様です。Opalユーザーの方はご注意ください。Lithiumはよく選ばれますが、Opalとの互換性がないため、インストールしない方が良いでしょう.
+
+<KeyTakeaways>
+
+- Fabric API がベースです。他のものを取り付ける前に、これをインストールしてください。
+- FPS には Sodium、シェーダーには Iris、ModMenu で全てを管理しましょう。
+- Lithium は単独で使用しても良いですが、Opal とは互換性がありません。
+- Opal はクライアント層です。他のものと同じフォルダにインストールします.
+
+</KeyTakeaways>
+
+## スターターパック
+
+<ModSection title="まずこれらをインストール" badge="Core" badgeColor="emerald" description="基本機能、パフォーマンス、シェーダー、そしてマネージャー。これらはすべてOpalと連携します。">
+<ModList>
+<ModLink href="https://modrinth.com/mod/fabric-api">Fabric API (必須の基本)</ModLink>
+<ModLink href="https://modrinth.com/mod/sodium">Sodium (レンダリングFPS)</ModLink>
+<ModLink href="https://modrinth.com/mod/iris">Iris (シェーダー)</ModLink>
+<ModLink href="https://modrinth.com/mod/modmenu">ModMenu (ゲーム内でのMOD管理)</ModLink>
+<IncompatibleMod>Lithium (ゲームロジック、Opalと互換性なし)</IncompatibleMod>
+</ModList>
+</ModSection>
+
+## Fabric API
+
+ほとんどのFabric製MODが依存する共有ライブラリです。まずインストールしてください。これがないと、ほとんどのMODがロードされません。機能というよりは、必須と言えるでしょう。
+
+## Sodium
+
+FPSを向上させるレンダリングの書き換えです。特に弱いGPUに負荷がかかります。導入することで最大のパフォーマンス向上が得られ、Opalと併用しても問題ありません。
+
+## Iris
+
+シェーダーパックを実行し、Sodiumとの連携を前提に構築されているため、フレームレートを犠牲にすることなく美しいグラフィックを楽しめます。シェーダーに興味がない場合はスキップしても構いません。
+
+## ModMenu
+
+ゲーム内のMODリストと設定画面を追加し、ファイルを編集することなくインストールされているMODを確認したり、設定を変更したりできます。他のMODとの相性が格段に良くなる、生活の質を向上させるツールです。
+
+## Lithiumについて
+
+[Lithium](https://modrinth.com/mod/lithium)はゲームロジックを最適化し、バニラプラス環境では非常に効果的です。ただし、Opalとの互換性がないため、Opalがフォルダにある場合はLithiumを導入せず、Sodiumにパフォーマンスを頼ってください。
+
+## 概要
+
+| MOD | 役割 | Opalとの互換性 |
+| :--- | :--- | :--- |
+| Fabric API | 必須の基盤 | 互換性あり |
+| Sodium | レンダリングによるFPS向上 | 互換性あり |
+| Iris | シェーダー | 互換性あり |
+| ModMenu | ゲーム内でのMOD管理 | 互換性あり |
+| Lithium | ゲームロジックのパフォーマンス向上 | 互換性なし |
+
+## 最上層
+
+スターターパックが導入されれば、フォルダはクライアントの準備が整います。OpalはMinecraft 1.21.10のFabric Modなので、他のModと同様に`mods`フォルダにインストールします。パフォーマンスとシェーダースタックを維持し、200以上の機能、ガラスUI、そしてスクリプティングエンジンを追加します。
+
+## よくある質問
+
+<FAQList>
+
+<FAQItem question="まずどのMODをインストールすればいいですか？">
+Fabric APIをインストールしてください。他のほとんどのMODはこれに依存しています。
+</FAQItem>
+
+<FAQItem question="これらはゲームの外観を変えますか？">
+Irisのみがシェーダーを変更します。Sodiumは速度、「ModMenu」は管理です。
+</FAQItem>
+
+<FAQItem question="リチウムは対応していますか？ Opal?">
+いいえ。使用しないでください Sodium そして走るときはリチウムをスキップする Opal.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/ja/blog/how-to-get-more-fps-in-minecraft", label: "ゲームでより多くのFPSを得るには Minecraft", description: "パフォーマンスの改造を調整して、最大の効果を得ましょう." },
+  { href: "/ja/blog/how-to-install-shaders-in-minecraft", label: "シェーダーのインストール方法 Minecraft", description: "OptiFine が不要なシェーダーのために、Iris を追加してください." },
+  { href: "/ja/blog/why-opal-is-the-best-value-minecraft-client", label: "なぜ Opal 最高の価値を持つ顧客です", description: "スタックの上部に位置するクライアント層." },
+]} />
+
+<CTA href="/ja/purchase">設定を完了させてください Opal, $8.99</CTA>

@@ -1,0 +1,86 @@
+---
+title: 安装Fabric及你的第一个模组 (2026)
+description: 新手模组玩家？安装 Fabric 载入器，添加 Fabric API，然后放入 Sodium 和 ModMenu。从零开始，逐步引导你搭建一个可用的模组环境和客户端.
+excerpt: 修改起来比想象中容易。这里是从原版游戏到可用的 Fabric 环境的步骤，准备好供客户端使用.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: 我需要 Fabric API 吗？?
+    a: 幾乎總是如此。大多數Fabric模組都依賴它，所以請先安裝它.
+  - q: 我的模组为什么没有加载？?
+    a: 通常是版本不匹配或缺少 Fabric API。请将每个模组与您的 Minecraft 版本匹配.
+  - q: 这样可以添加像 Opal 这样的客户吗？?
+    a: 是的。Opal是Minecraft1.21.10 的一个Fabric模组，所以它会安装到同一个模组文件夹里。请保留Sodium，但不要安装“Lithium”，因为“Lithium”与Opal不兼容.
+  - q: 我应该先从哪些模组开始呢？?
+    a: Sodium 用于 FPS 和 ModMenu 来管理所有内容。添加 Iris 如果你想要着色器.
+---
+
+安装模组比看起来容易。你安装 [Fabric](https://fabricmc.net) 启动器，添加 [Fabric API](https://modrinth.com/mod/fabric-api)（大多数模组需要的库），然后将几个模组 jar 文件放入一个文件夹中。一个不错的入门组合是 [Sodium](https://modrinth.com/mod/sodium) 和 [ModMenu](https://modrinth.com/mod/modmenu)。 这就是从原版游戏到可用的模组游戏的过程，为客户端做好准备.
+
+<KeyTakeaways>
+
+- 首先安装 Fabric Loader，然后安装 Fabric API。
+- 为了提升 FPS，使用 Sodium；ModMenu 用于在游戏中管理你的模组。
+- 像 Opal 这样的客户端安装到同一个模组文件夹中。
+- 如果你计划使用 Opal，请不要安装 Lithium；它们不兼容.
+
+</KeyTakeaways>
+
+## 逐步安装
+
+<Steps>
+
+<Step number={1} title="安装 Fabric 载入器">运行适用于你的 Minecraft 版本的 [Fabric](https://fabricmc.net) 安装程序。它会添加一个新的启动器配置文件，你可以在启动前选择</Step>
+
+<Step number={2} title="添加Fabric API">[Fabric API](https://modrinth.com/mod/fabric-api) 是几乎所有 Fabric 模组所依赖的共享库。下载与您的版本相符的版本，并将其放入 `mods` 文件夹中。没有它，大多数模组将无法加载</Step>
+
+<Step number={3} title="添加你的第一个模组">将 [Sodium](https://modrinth.com/mod/sodium) (帧数) 和 [ModMenu](https://modrinth.com/mod/modmenu) (游戏内管理和配置模组) 放入 `mods` 文件夹。 如果需要着色器，请添加 [Iris](https://modrinth.com/mod/iris)</Step>
+
+<Step number={4} title="启动并检查">在 Fabric 档案中启动游戏，打开 ModMenu，并确认你的模组已列出。如果缺少任何内容，请检查其版本是否与你的 Minecraft 匹配，以及 Fabric API 是否已安装</Step>
+
+</Steps>
+
+<Callout variant="info" title="关于锂的说明">
+许多入门指南会建议将锂作为第三个模组添加。它本身是一个不错的游戏逻辑优化器，但与Opal不兼容。如果您计划运行Opal，请使用Sodium来提升性能，从一开始就不要添加锂。
+</Callout>
+
+## 概览
+
+| 步骤 | 操作 |
+| :--- | :--- |
+| 1 | 安装 Fabric 客户端加载器 |
+| 2 | 添加 Fabric API |
+| 3 | 添加 Sodium 和 ModMenu (Iris 用于着色器) |
+| 4 | 启动并 ModMenu 中验证 |
+
+## 添加客户端
+
+一旦加载器、Fabric API 和你的第一个模组都已安装，文件夹就可以准备客户端了。Opal 是一个针对 Minecraft 1.21.10 的 Fabric 模组，因此它的安装方式与其他模组相同：放入 `mods` 文件夹中。你可以保留你的性能优化设置，并添加 200 多个战斗、移动、视觉和实用工具方面的特性，一个玻璃 UI，以及一个脚本引擎。保留 Sodium 以提供性能空间，并移除 Lithium，你就可以开始了。
+
+## 常见问题解答
+
+<FAQList>
+
+<FAQItem question="我需要 Fabric API 吗？">
+几乎总是需要的。大多数 Fabric 模组都依赖它，所以请先安装它。
+</FAQItem>
+
+<FAQItem question="这样可以添加像 Opal 这样的客户端吗？">
+可以。Opal 是一个 Fabric 模组，安装在同一个模组文件夹中。保留 Sodium，不要安装 Lithium。
+</FAQItem>
+
+<FAQItem question="为什么我的模组无法加载？">
+通常是版本不匹配或缺少 Fabric API。请确保所有模组与您的 Minecraft 版本相符。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/blog/essential-fabric-mods-every-player-should-have", label: "必需的 Fabric 模式", description: "先安装启动包." },
+  { href: "/zh/blog/best-performance-mods-for-minecraft", label: "Minecraft 最佳性能优化模组", description: "接下来构建性能栈." },
+  { href: "/zh/blog/why-opal-is-the-best-value-minecraft-client", label: "为什么 Opal 客户性价比最高", description: "客户层." },
+]} />
+
+<CTA href="/zh/purchase">完成 Opal 的设置，$8.99</CTA>

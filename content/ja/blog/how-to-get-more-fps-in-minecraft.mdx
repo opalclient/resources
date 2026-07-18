@@ -1,0 +1,99 @@
+---
+title: ゲームでより多くのFPSを得る方法 Minecraft (2026 ガイド)
+description: 2つの無料Fabric Modが大部分の作業を行います。Sodiumはレンダリング、Lithiumはゲームロジックを担当します。設定方法、重要な設定、そしてOpalとの互換性に関する注意点をご紹介します.
+excerpt: 最も速いFPS勝利は Minecraft 2つのMODと3つの設定です。これが全体のセットアップで、もし実行する場合は、この1つのMODはスキップしてください Opal.
+date: 2026-05-12
+lastUpdated: 2026-06-03
+category: Guides
+author: trq
+faqs:
+  - q: 最もFPSが向上するのは何ですか？ Minecraft?
+    a: Sodium. レンダラーを書き換え、多くの環境において最も大きな改善をもたらし、多くの場合、それ単独でも効果を発揮します.
+  - q: 両方必要ですか？ Sodium リチウムと?
+    a: 彼らは様々なものを修正します。Sodiumはレンダリングを担当し、「Lithium」はゲームロジックを担当します。最高のパフォーマンスを得るには両方を実行してください。ただし、Opalを実行する場合はLithiumと互換性がないため、Sodiumのみを使用し、Lithiumはスキップしてください.
+  - q: リチウムは対応していますか？ Opal?
+    a: いいえ、リチウムは～と相性が良くありません Opal. 走れば Opal, ペアリングする Sodium リチウムは抜きにして.
+  - q: これらのMODはシェーダーに対応していますか？?
+    a: はい。シェーダーにIrisを追加してください。Sodiumとの互換性があるので、ほとんどのフレームレートを維持できます。シェーダーのインストールガイドを参照してください.
+---
+
+史上最大のFPS勝利が Minecraft is [Sodium](https://modrinth.com/mod/sodium) は、無料の [Fabric]((https://fabricmc.net) の mod で、レンダリングを書き換えたり、[Lithium](https://modrinth.com/mod/lithium) のように、ゲームロジックを高速化したりするものがよくあります。これらを組み合わせることで、性能の低いマシンでもフレームレートが倍になることがよくあります。念頭に置いておいていただきたいのは、Lithium は～と互換性がないということです Opal, もし走ったら Opal, 頼る Sodium 代わりに.
+
+<KeyTakeaways>
+
+- Sodiumは最大のFPS改善です。まずインストールしてください。
+- Lithiumはゲームロジックを滑らかにしますが、Opalとの互換性はありません。Opalを使用している場合はスキップしてください。
+- バニラの3つの設定（レンダー距離、VSync、グラフィックス）で完了です。
+- Sodiumは余裕を生み出します。それがOpalのようなクライアントのためのスペースを作るのです.
+
+</KeyTakeaways>
+
+## MODのインストール
+
+<Steps>
+
+<Step number={1} title="Sodiumをインストールする">[Sodium](https://modrinth.com/mod/sodium) は、Minecraft のレンダラーをはるかに高速なものに置き換える、最も大きな改善をもたらす改造です。まず [Fabric](https://fabricmc.net) ローダーと [Fabric API](https://modrinth.com/mod/fabric-api) を設置し、その後、Sodium を `mods` フォルダにドロップしてください。Sodium は Opal と一緒に問題なく動作します</Step>
+
+<Step number={2} title="リチウムを追加してください（Opalを実行していない場合）">[Lithium](https://modrinth.com/mod/lithium) は、見た目の変化なしに、Mob の AI、物理演算、およびブロックのティックを最適化します。バニラプラス環境に加えるのに適していますが、Opal とは相性が悪いため、Opal がインストールされている場合は使用しないでください</Step>
+
+</Steps>
+
+<Callout variant="warning" title="Opalを実行中の場合、「Lithium」はスキップしてください">
+「Lithium」はOpalと互換性がありません。Sodiumをフレームレートに使用し、「Lithium」はフォルダから除外してください。Sodium単独でレンダリング側をカバーし、いずれにしても大きな改善となります。
+</Callout>
+
+## 三つの設定を調整する
+
+<Checklist>
+<ChecklistItem>レンダー距離：GPUがボトルネックになっている場合は、少し落とすと良いでしょう.</ChecklistItem>
+<ChecklistItem>VSync: 無効、フレームレート制限なし.</ChecklistItem>
+<ChecklistItem>グラフィック：簡単に追加ブーストを欲しければ、高速に設定してください.</ChecklistItem>
+</Checklist>
+
+<Callout variant="tip" title="手軽な改善策">
+レンダー距離を下げることは、Sodiumに次いでゲーム内での最も効果的な調整方法です。レンダー距離を16チャンクから12チャンクにすることで、近距離のPvPではほとんど視覚的な影響なく、大幅なフレームレートの向上が期待できます。
+</Callout>
+
+## クライアントの追加
+
+Opalは、Sodiumと同じ`mods`フォルダにインストールされます。200以上の機能を備えたフルクライアントであるため、大規模なMODと同様に動作中はリソースを消費します。まさにSodiumが重要である理由です。Sodiumがあれば、Opalのような機能セットを動作させながらも、スムーズにプレイすることができます。Sodiumを導入し、Lithiumは導入しないことで、Opalが動作するための余裕が生まれます。
+
+## 概要
+
+| 欲しいもの | インストールするもの |
+| :--- | :--- |
+| より高いFPS（レンダリング） | Sodium |
+| よりスムーズなゲームロジック（Opalでは非対応） | Lithium |
+| 必須のベース | Fabric API |
+| シェーダー | Iris |
+| 200以上の機能 | Opal |
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="最もFPSが向上するのは何ですか？">
+Sodium。レンダリングを書き換え、多くの環境で最も大きな単独の改善をもたらします。
+</FAQItem>
+
+<FAQItem question="リチウムは対応していますか？ Opal?">
+いいえ、リチウムは～と相性悪いです Opal. ペア Opal と Sodium リチウムは抜きにして.
+</FAQItem>
+
+<FAQItem question="OpalはFPSを低下させますか？">
+Opalはフルクライアントですので、他の大規模なMODと同様に、動作中はいくつかのリソースを使用します。パフォーマンスを確保するためにSodiumをインストールしておけば、ほとんどの環境で問題なく動作するはずです。
+</FAQItem>
+
+<FAQItem question="これらはシェーダーに対応していますか？">
+はい。Irisを追加し、[シェーダーのインストール方法](/ja/blog/how-to-install-shaders-in-minecraft)をご覧ください。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/ja/blog/how-to-install-shaders-in-minecraft", label: "シェーダーのインストール方法 Minecraft", description: "Sodiumの上にIrisを追加し、フレームを維持してください." },
+  { href: "/ja/blog/best-mods-for-performance-and-shaders", label: "パフォーマンスとシェーダーに最適なMOD", description: "フルスタック開発に必要なものがすべてここに." },
+  { href: "/ja/blog/essential-fabric-mods-every-player-should-have", label: "必須のFabricMOD", description: "Fabric設定のスターターパック." },
+]} />
+
+<CTA href="/ja/purchase">得る Opal ため $8.99 一生</CTA>

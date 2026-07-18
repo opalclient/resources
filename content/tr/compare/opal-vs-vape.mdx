@@ -1,0 +1,172 @@
+---
+title: "Opal vs Vape: Fabric Mod vs Dış DLL Enjektörü (2026)"
+description: Opal is an $8.99 Fabric 70 modüllü ve dahili GraalJS betik motoru. Vape, sunucularda adıyla bilinen uzun süredir devam eden harici DLL enjektörüdür.
+excerpt: Vape geçmişe sahip. Opal, dokümantasyonu, fiyat etiketi ve betik motoruna sahip. İşte dürüst bir dökümü.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Comparison
+type: versus
+author: trq
+competitors:
+  - Vape
+faqs:
+  - q: Vape ücretsiz mi yoksa ücretli mi?
+    a: Kayıtlarımızda Vape için şu anda bir kamu fiyatı görünmüyor. Opal, düz bir $8.99'dır.
+  - q: Vape DLL enjeksiyonu kullanıyor mu?
+    a: Evet. Vape'ın enjeksiyon modeli harici olup, javaw.exe sürecine DLL'ler yüklüyor; bu da bazı halka açık ekran paylaşımı tespit rehberlerinde adının geçmesine neden olan yükleme yöntemidir.
+  - q: Opal DLL enjeksiyonu kullanıyor mu?
+    a: Hayır, Opal, Mixin aracılığıyla yüklenen bir Fabric modudur ve yığında herhangi bir yerde DLL enjeksiyonu söz konusu değildir.
+  - q: Opal hangi Minecraft sürümünde çalışıyor?
+    a: MC 26.2, Fabric Loader 0.19.3 ve Fabric API 0.150.0+26.2 aracılığıyla.
+  - q: Opal ne kadar?
+    a: $8.99.
+---
+
+<KeyTakeaways>
+
+- Vape, sunucular arasında tanınan uzun süredir devam eden harici bir DLL enjektörüdür. Opal ise $8.99 Fabric modu, yığın içinde herhangi bir enjeksiyon bulunmuyor.
+- Opal'ın derlemesi paket düzeyine kadar belgelenmiştir: 70 modül, yerleşik bir GraalJS betik motoru ve BedWars/SkyWars tarzı mini oyun dövüşü ve yardımcı oyun için ayarlanmış dövüş.
+- Vape, Opal'dan daha fazla tarihe sahip, 2026'da daha küçük bir orijinal istemcinin devamı olduğunu iddia edebilir. Bu, onun lehine olan gerçek bir nokta.
+- Kurulum, başlatıcı, giriş ve Opal üzerinde oynamak. Vape, bir mod yükleyicisi yerine oyun sürecine enjekte edilen bir DLL anlamına gelir.
+- $8.99 için belgelenmiş, betik yazılabilir bir Fabric istemcisi istiyorsanız, o Opal. Daha uzun bir sicil, bir teknik özellikten daha önemliyse, o Vape.
+
+</KeyTakeaways>
+
+## Genel Bakış
+
+Vape ile ilgili kayıtlarımız her zamankinden daha az kapsamlı, çoğunlukla tespit ve ekran paylaşımı literatüründen, Vape'in kendi dokümantasyonundan değil. Bu nedenle, genellikle karşılaştırma satırlarının çoğu, Opal'ın yanına koyabileceğimiz bir Vape yanıtını içermiyor. İşte araştırmamızın her iki tarafının da gerçekten desteklediği şeyler.
+
+<ComparisonTable
+  features={[
+    "Kurulum",
+    "Enjeksiyon modeli",
+    "Fiyat",
+    "Modüller",
+    "Betik yazımı",
+    "Dövüş odaklı",
+    "Durum",
+    "Minecraft sürümü",
+  ]}
+  products={[
+    {
+      name: "Opal",
+      values: [
+        "Başlatıcı, giriş yap, oyna",
+        "Fabric mod'u Mixin ile, enjektörsüz",
+        "$8.99",
+        "Yetmiş",
+        "Yerleşik GraalJS motoru",
+        "BedWars/SkyWars tarzı mini oyun dövüşü ve kullanışlılık odaklı oynanış",
+        "Aktif, 2.0-stable.9 sürümünü oluştur",
+        "MC 26.2",
+      ],
+    },
+    {
+      name: "Vape",
+      values: [
+        "Çalışan bir oyun sürecine bir DLL enjekte et",
+        "Dışsal, vape.gg'den yüklenen DLL'ler javaw.exe'e yüklendi",
+        "Herkese açık bir şekilde belgelenmemiş",
+        "Belgelenmemiş",
+        "Belgelenmemiş",
+        "Belgelenmemiş",
+        "Aktif, uzun süredir devam eden",
+        "Belgelenmemiş",
+      ],
+    },
+  ]}
+/>
+
+## Opalin Sayılarıyla
+
+<StatGrid>
+  <Stat value="$8.99" label="Opal fiyatı" sub="Ödenmiş Fabric mod lisansı" />
+  <Stat value="70" label="Opal entegre modüller" sub="Savaş, hareket, görsel, dünya, kullanışlılık" />
+  <Stat value="0" label="DLL enjeksiyonları kullanıldı" sub="Fabric mod aracılığıyla Mixin, harici bir şey yok" />
+</StatGrid>
+
+## Her birinin oyununuza nasıl dahil olduğu
+
+Bunların arasındaki en büyük mimari fark bu: Opal bir Fabric modudur, Vape ise harici bir DLL enjektörüdür.
+
+Opal, Mixin aracılığıyla bir Fabric modu olarak yüklenir; MC 26.2'ye karşı kayıtlı yaklaşık 74 Mixin sınıfı bulunur ve yığın içinde hiçbir DLL enjeksiyonu bulunmaz. Vape'nin kendi girişi, enjeksiyon modelini harici olarak listeler: vape.gg'den yüklenen DLL'ler javaw.exe sürecine yüklenir. Bu yükleme yöntemi, elimizdeki en az bir halka ekran paylaşım rehberinde, personelin javaw.exe belleğini literal "vape" dizesi için tarayıp aynı DLL'leri gösteren ön yükleme girdileriyle doğruladığı şeydir. Bu, Fabric modlarının görünmez olduğu iddiası değildir; sadece iki istemcinin Minecraft'a fiziksel olarak nasıl bağlandaki gerçek, belgelenmiş bir farktır ve kendi başına değerlendirmeye değer, göz ardı edilmemelidir.
+
+## Fiyat ve gerçekte belgelenenler
+
+Opal $8.99 değerindedir. Notlarımızda Vape için mevcut bir fiyat bulunmuyor.
+
+Opal'ın yapısı paket düzeyine kadar belgelenmiş: savaş, hareket, görsel, dünya ve yardımcı araçlar için 70 modül, yerleşik bir GraalJS betik motoru ve Blaze3D üzerine inşa edilmiş özel bir cam kullanıcı arayüzü motoru (bulanıklık, fresnel, kırılma, gölge efektleri) ve düzen için GraalJS/Yoga. Vape'nin ne bir fiyatı, ne bir özellik listesi, ne de modül sayısı var. Onun yerine taşıdığı şey şöhret: yaygın olarak dağıtılmış ve sunucularda adıyla bilinen uzun süredir devam eden bir istemci. Bu gerçek bir güç ve Opal'ın henüz iddia edemeyeceği, 2026'da daha küçük bir orijinal istemcinin devamı olan bir geçmişten daha fazlası. Hak ettiği değeri verelim.
+
+## Betik ve özelleştirme
+
+Opal, tam bir JavaScript betik motoruyla birlikte gelir. Vape'nin betik hikayesi de kayıtlarımızda değil.
+
+Opal, kullanıcı betiklerine dahili istemci API'lerini açan ve çalışma zamanında yüklenebilen ve kaldırılabilen ara sınıflar (PlayerProxy, RenderProxy, RotationProxy, WorldProxy, ModuleProxy) ile bir GraalVM Çok Dilli ana bilgisayar olarak GraalJS'yi yerleştirir. Aynı Blaze3D efekt motoru üzerine inşa edilmiş bir GraalJS/Yoga kullanıcı arayüzü çalışma zamanının altında oturur. Vape bununla karşılaştırılabilir bir şey sunuyor mu konusunda bir belgemiz yok, bu yüzden tahmin etmek yerine şunu söyleyeceğiz: bilmiyoruz ve ne siz ne de herhangi bir yönde varsayımda bulunmamalısınız.
+
+## Savaş ayarlaması
+
+Opal, tam bir savaş ve hareket modül setini adıyla belgeliyor. Vape'nin savaş modülleri, doğrudan bir karşılaştırma için yeterince iyi belgelenmemiş.
+
+Opal'ın savaş seti, ayrı hedef seçimi ve nişan takibi alt paketlerine sahip KillAura, Scaffold, Flight, LongJump, Speed, NoSlow, bir ESP ailesi ve yeniden zamanlanmış paket dizileri için Blink içerir; bunlar BedWars/SkyWars tarzı mini oyun dövüşü ve yardımcı oyun için ayarlanmıştır. Vape'in girişi bir oyun tarzı veya sunucu odak noktasını belirtmiyor. Kayıtlarda yer alan tek dağıtım detayı, herhangi bir savaş ayarlama açısı belirtilmeden genellikle sunucularda yaygın olarak kullanıldığıdır.
+
+## Neden bu sayfa biraz tek taraflı gibi görünüyor
+
+Çünkü iki kaynak kaydı simetrik değil, biz desteyi yığıyor olduğumuz için değil. Opal'ın tüm yapı ağacı, paket adları ve sürüm numaraları dahil olmak üzere belgelenmiştir. Vape'in kamuya açık ayak izi ise araştırmamızda neredeyse tamamen tespit literatüründen oluşuyor, Vape'in kendi dokümanlarından değil. Bu, karşılaştırabileceğimiz konulardaki gerçek bir boşluk ve aksi takdirde davranmak dürüst olmazdı. Şüpheye yer olmayan şey, Vape'in şu anda Opal'den daha uzun bir geçmişe ve daha fazla tanınabilirliğe sahip olmasıdır. Bu, onun lehine olan gerçek bir nokta ve davanıza yardımcı olmadığı için bunu görmezden gelmeyeceğiz.
+
+## Ne zaman Vape daha iyi bir seçenek olur
+
+Gerçekten ne istediğinize karşı dürüst olun.
+
+<ProsCons
+  pros={[
+    "You specifically want an external DLL-injected client, independent of any single mod loader's ecosystem",
+    "A long track record and wide name recognition across servers matter more to you than a documented feature list",
+    "You aren't looking for a public price tag or module count before you commit",
+  ]}
+  cons={[
+    "No public price, module count, or scripting details exist in our records to evaluate ahead of time",
+    "External DLL injection is a fundamentally different footprint than a Fabric mod, a real tradeoff either way, not a defect",
+    "No documented launcher or support channel on file, unlike Opal's",
+    "Combat tuning and playstyle focus aren't documented anywhere we could find",
+  ]}
+/>
+
+Eğer $8.99 Fabric modunu, 70 modüllü bir yapıyla, yerleşik GraalJS betiği ve BedWars/SkyWars tarzı mini oyun dövüşleri ve yardımcı oyun için ayarlanmış bir dövüş istiyorsanız, o Opal. Daha uzun bir geçmiş ve tanıdık bir isim şu anda herkese açık bir teknik özellik tablosundan daha önemliyse, bunun Vape'i tercih etmeniz için geçerli bir neden.
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="Vape ücretsiz mi yoksa ücretli mi?">
+Kayıtlarımızda şu anda Vape için kamuya açık bir fiyat görünmüyor. Opal, düz bir $8.99.
+</FAQItem>
+
+<FAQItem question="Vape DLL enjeksiyonu kullanıyor mu?">
+Evet. Vape'ın enjeksiyon modeli haricidir; javaw.exe sürecine DLL'ler yükler ve bu, bazı kamuya açık ekran paylaşımı tespit rehberlerinde adının anılmasına neden olan yükleme yöntemidir.
+</FAQItem>
+
+<FAQItem question="Opal DLL enjeksiyonu kullanıyor mu?">
+Hayır. Opal, Mixin aracılığıyla yüklenen bir Fabric modudur ve yığın içinde herhangi bir DLL enjeksiyonu söz konusu değildir.
+</FAQItem>
+
+<FAQItem question="Opal hangi Minecraft sürümünde çalışıyor?">
+MC 26.2, Fabric Loader 0.19.3 ve Fabric API 0.150.0+26.2 aracılığıyla.
+</FAQItem>
+
+<FAQItem question="Opal ne kadar?">
+$8.99.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/compare/is-a-paid-minecraft-client-worth-it", label: "Ücretli bir Minecraft istemcisi buna değer mi?", description: "Ne harika $8.99 fiyat aslında satın alınan şey, ücretsiz veya belgelenmemiş bir seçeneğe karşı." },
+  { href: "/tr/blog/introducing-opal-scripting-engine", label: "Opal'in betik motoru", description: "Gömülü GraalJS ana makinesi Vape'in kayıtları bir yanıt sunmuyor." },
+  { href: "/tr/blog/why-opal-is-the-best-value-minecraft-client", label: "Neden Opal en iyi fiyat-performanslı müşteri", description: "Aslında $8.99 modül modül ne alıyor." },
+]} />
+
+<CTA href="/tr/purchase" note="Instant delivery">Dene Opal için $8.99</CTA>
+
+<Callout variant="info" title="Feragatname">
+Bağımsız karşılaştırma. Vape, sahiplerinin ticari markasıdır; burada kullanımı adlandırıcıdır ve herhangi bir bağlılığı veya onaylamayı ifade etmez. Rakip bilgileri, 2026 yılı itibarıyla bizim en iyi bilgimiz dahilinde doğrudur ve hatalar içerebilir.
+</Callout>

@@ -1,0 +1,99 @@
+---
+title: Jak Zwiększyć FPS w Minecraft (Przewodnik 2026)
+description: "Dwa darmowe mody Fabric robią większość pracy: Sodium odpowiada za renderowanie, a Lithium za logikę gry. Poniżej znajduje się konfiguracja, ustawienia, które mają znaczenie, oraz notatka o kompatybilności z Opal."
+excerpt: Najszybszy wygrany mecz w FPS w Minecraft to dwa mody plus trzy ustawienia. Oto cała konfiguracja i jeden mod, który należy pominąć, jeśli używasz Opal.
+date: 2026-05-12
+lastUpdated: 2026-06-03
+category: Guides
+author: trq
+faqs:
+  - q: Co daje największy wzrost FPS w Minecraft?
+    a: Sodium. Przepisuje silnik renderujący i stanowi największy zysk dla większości konfiguracji, często samodzielnie.
+  - q: Czy potrzebuję obu Sodium i Lit?
+    a: Naprawiają różne rzeczy. Sodium odpowiada za renderowanie, a Lithium za logikę gry. Uruchom oba, aby uzyskać najlepszy efekt, chyba że uruchamiasz Opal, który nie jest kompatybilny z Lithium. W takim przypadku użyj Sodium i pomiń Lithium.
+  - q: Czy lit dopasowuje się do Opalu?
+    a: Nie. Lit jest niekompatybilny z Opal. Jeśli biegniesz Opal, sparuj z Sodium i pomiń lit.
+  - q: Czy te mody działają z shaderami?
+    a: Tak. Dodaj Iris dla shaderów; jest zbudowany do współpracy z Sodium, więc zachowujesz większość klatek na sekundę. Zobacz poradnik instalacji shaderów.
+---
+
+Największy skok wydajności w Minecraftcie to [Sodium](https://modrinth.com/mod/sodium), darmowy mod dla [Fabric](https://fabricmc.net), który przepisuje proces renderowania, oraz [Lithium](https://modrinth.com/mod/lithium), który przyspiesza logikę gry. Razem często podwajają liczbę klatek na sekundę na słabszych maszynach. Mała uwaga z góry: Lithium nie jest kompatybilne z Opalem, więc jeśli używasz Opala, polegaj na Sodium.
+
+<KeyTakeaways>
+
+- Sodium to zdecydowane największy sukces FPS. Zainstaluj go jako pierwszego.
+- Lithium wygładza logikę gry, ale nie jest kompatybilne z Opal. Pomiń je, jeśli używasz Opal.
+- Trzy ustawienia domyślne (dystans renderowania, VSync, grafika) kończą sprawę.
+- Sodium daje Ci zapas mocy; to właśnie tworzy przestrzeń dla klienta takiego jak Opal.
+
+</KeyTakeaways>
+
+## Zainstaluj mody
+
+<Steps>
+
+<Step number={1} title="Zainstaluj Sodium">[Sodium](https://modrinth.com/mod/sodium) zastępuje render Minecrafta znacznie szybszym, co stanowi największy pojedynczy skok wydajności. Najpierw umieść loader [Fabric](https://fabricmc.net) oraz [Fabric API](https://modrinth.com/mod/fabric-api), a następnie wrzuć Sodium do folderu `mods`. Sodium współpracuje bezproblemowo z Opalem</Step>
+
+<Step number={2} title="Dodaj lit (jeśli nie używasz Opal)">[Lithium](https://modrinth.com/mod/lithium) optymalizuje sztuczną inteligencję, fizykę i cykl aktualizacji bloków, nie wprowadzając żadnych zmian wizualnych. Świetnie sprawdza się w konfiguracji vanilla-plus, ale nie współpracuje z Opalem, więc należy go pominąć, jeśli Opal jest zainstalowany</Step>
+
+</Steps>
+
+<Callout variant="warning" title="Uruchamiasz Opal? Pomiń Lithium">
+Lithium nie jest kompatybilny z Opalem. Użyj Sodu do swojej liczby klatek na sekundę i usuń Lithium z folderu. Sodium samodzielnie pokrywa stronę renderowania, co i tak jest większym zyskiem.
+</Callout>
+
+## Dostrój trzy ustawienia
+
+<Checklist>
+<ChecklistItem>Zasięg rysowania: zmniejsz go trochę, jeśli GPU jest wąskim gardłem.</ChecklistItem>
+<ChecklistItem>VSync: wyłączone dla nieograniczonej liczby klatek.</ChecklistItem>
+<ChecklistItem>Grafika: ustaw na Szybko, aby uzyskać łatwy dodatkowy zastrzyk mocy.</ChecklistItem>
+</Checklist>
+
+<Callout variant="tip" title="Szybki sukces">
+Zmniejszenie zasięgu renderowania to największy w grze element sterowania, zaraz po Sodium. Zmniejszenie go z 16 do 12 chunków może przywrócić znaczną część płynności rozgrywki, praktycznie bez wpływu na jakość grafiki w walce PvP na krótkim dystansie.
+</Callout>
+
+## Dodawanie klienta
+
+Opal instaluje się w tej samej folderze `mods` co Sodium. Jest to pełny klient z ponad 200 funkcjami, więc jak każdy duży mod, zużywa zasoby podczas działania. Właśnie dlatego Sodium ma znaczenie: daje Ci zapas mocy, aby uruchomić zestaw funkcji takiego jak Opal i jednocześnie grać płynnie. Pozostaw Sodium, pomiń Lithium, a Opal ma miejsce do działania.
+
+## Na pierwszy rzut oka
+
+| Chcesz | Zainstaluj |
+| :--- | :--- |
+| Wyższą liczbę FPS (renderowanie) | Sodium |
+| Płynniejszą logikę gry (nie z Opalem) | Lithium |
+| Podstawę | Fabric API |
+| Shadery | Iris |
+| 200+ funkcji | Opal |
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co daje największy wzrost FPS?">
+Sodium. Przebudowuje rendering i zapewnia największy pojedynczy zysk w większości konfiguracji.
+</FAQItem>
+
+<FAQItem question="Czy Lithium jest kompatybilne z Opal?">
+Nie. Lithium nie współpracuje z Opal. Sparuj Opal z Sodium i pomiń Lithium.
+</FAQItem>
+
+<FAQItem question="Czy Opal obniży mój FPS?">
+Opal jest pełnym klientem, więc jak każdy duży mod, zużywa pewne zasoby podczas działania. Utrzymuj zainstalowany Sodium, aby mieć zapas mocy, a na większości maszyn wszystko będzie w porządku.
+</FAQItem>
+
+<FAQItem question="Czy to działa z shaderami?">
+Tak. Dodaj Iris i zobacz [jak zainstalować shadery](/pl/blog/how-to-install-shaders-in-minecraft).
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/blog/how-to-install-shaders-in-minecraft", label: "Jak zainstalować shader'y w Minecraft", description: "Dodaj Iris nad Sodium, nie tracąc ramek." },
+  { href: "/pl/blog/best-mods-for-performance-and-shaders", label: "Najlepsze mody pod kątem wydajności i shaderów", description: "Pełny, darmowy stos narzędzi do występów w jednym miejscu." },
+  { href: "/pl/blog/essential-fabric-mods-every-player-should-have", label: "Kluczowe modyfikacje Fabric", description: "Zestaw początkowy, od którego rozpoczyna się każda konfiguracja Fabric." },
+]} />
+
+<CTA href="/pl/purchase">Opal za 8,99 USD na zawsze</CTA>

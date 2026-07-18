@@ -1,0 +1,135 @@
+---
+title: Opal 的 GraalVM 脚本引擎介绍
+description: 编写自定义 JavaScript 代码，与 Opal 的内部 API 交互。自动化任务，响应游戏事件，绘制自定义 HUD，并在运行时扩展客户端.
+excerpt: Opal 的脚本引擎运行在 GraalVM 上，GraalVM 是 Minecraft 内部的一个完整的 JavaScript 运行时环境。以下是你可以用它构建的内容.
+date: 2026-03-15
+lastUpdated: 2026-06-03
+category: Features
+author: trq
+faqs:
+  - q: Opal 使用什么脚本引擎？?
+    a: Opal 使用 Oracle 提供的企业级 JavaScript 运行时 GraalVM，将其嵌入到 Minecraft 中，并提供对客户端 API 的线程安全绑定.
+  - q: 脚本可以访问我的文件或网络吗？?
+    a: 脚本在沙盒化的 GraalVM 环境中运行。它们可以与 Opal 的 API 交互，但无法访问您的文件系统、网络或其他应用程序.
+  - q: 我需要重启我的世界 (Minecraft) 才能加载脚本吗？?
+    a: 无。脚本在运行时加载。将 .js 文件放入脚本目录，即可立即使用.
+  - q: 还有别的 Minecraft 客户端有像这样脚本引擎吗？?
+    a: 大多数人止于基础宏。Opal 提供了完整的 GraalVM JavaScript 运行时，以及线程安全的遊戲绑定，这完全是另一回事.
+---
+
+Opal 提供了 GraalVM JavaScript 引擎，这是一个完整的 JS 运行时，运行在 Minecraft 客户端内部。您可以在游戏运行期间编写脚本，与 Opal 的内部 API 进行交互。这既不是宏录制器，也不是按键绑定系统。它是一个真正的编程环境，可以访问客户端的事件系统、模块配置和游戏状态.
+
+<KeyTakeaways>
+
+- 一个完整的 GraalVM JavaScript 运行时，而不是一个宏记录器。
+- 响应游戏事件，更改模块设置，并绘制你自己的 HUD。
+- 脚本在运行时加载，无需重启，并以沙盒模式运行在 Opal 的 API 中。
+- 大多数其他客户端仅限于基本的宏.
+
+</KeyTakeaways>
+
+## 为什么选择 GraalVM？
+GraalVM 是 Oracle 提供的多语言运行时。我们选择它的原因很具体：
+
+- 速度：JIT 编译保持脚本足够快，可以在每个时钟周期运行。
+- JavaScript：大多数人已经熟悉它，因此学习曲线很短。
+- 线程安全：JS 到 Java 的绑定能够正确处理并发，而不是让您在其中绊倒。
+- 熟悉模式：标准的 JavaScript API 表现方式符合您的预期
+## 你能建造的东西
+
+### 定制自动化
+响应游戏内事件：
+
+```javascript
+// Auto-respond to certain chat messages
+on('chat', (event) => {
+  if (event.message.includes('1v1?')) {
+    sendChat('/duel accept');
+  }
+});
+```
+### 动态模块配置
+根据游戏状态更改模块设置：
+
+```javascript
+// Increase reach when health is low
+on('tick', () => {
+  const health = player.getHealth();
+  if (health < 8) {
+    modules.get('Reach').setSetting('distance', 3.3);
+  } else {
+    modules.get('Reach').setSetting('distance', 3.1);
+  }
+});
+```
+### 自定义 HUD 元素
+绘制您自己的覆盖层：
+
+```javascript
+// Display a combo counter on screen
+let combo = 0;
+on('attackEntity', () => { combo++; });
+on('damage', () => { combo = 0; });
+on('render2d', (ctx) => {
+  ctx.drawText(`Combo: ${combo}`, 10, 10, 0xFFFFFF);
+});
+```
+### 服务器特定配置
+加入不同的服务器时，自动切换配置：
+
+```javascript
+on('serverJoin', (event) => {
+  if (event.ip.includes('pvp.example.com')) {
+    loadConfig('server-bypass');
+  } else {
+    loadConfig('ghost-default');
+  }
+});
+```
+## 开始
+
+<Steps>
+
+<Step number={1} title="打开脚本目录">在您的 Opal 配置文件夹中找到脚本目录</Step>
+
+<Step number={2} title="创建 .js 文件">随便起个名字就行。这是你的剧本</Step>
+
+<Step number={3} title="反对 API 编写">请参考仪表盘文档中的 API 参考：事件、模块访问、播放器状态和渲染</Step>
+
+<Step number={4} title="保存并播放">脚本在运行时加载，无需重启</Step>
+
+</Steps>
+
+<Callout variant="info" title="脚本运行在沙箱中">
+脚本在 GraalVM 中执行，可以调用 Opal 的 API，但无法访问您的文件系统、网络或其他应用程序。您的脚本保持本地，您的机器仍然是您的。
+</Callout>
+
+## 社群脚本
+
+脚本社群正在发展壮大。Discord 频道分享了脚本和人员，可以帮助你编写自己的脚本。常见的脚本包括用于迷你游戏的自动游戏脚本、数据追踪器、连击检测器以及服务器特定的配置切换器。
+
+## 常见问题解答
+
+<FAQList>
+
+<FAQItem question="Opal 使用什么引擎？">
+GraalVM，Oracle 的企业级 JavaScript 运行时，具有线程安全的游戏绑定。
+</FAQItem>
+
+<FAQItem question="脚本可以读取我的文件吗？">
+不可以。它们仅限于 Opal 的 API 沙箱环境。
+</FAQItem>
+
+<FAQItem question="是否需要重启以加载脚本？">
+不需要。直接将文件放入，运行时即可加载。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/blog/opal-config-sharing-guide", label: "Opal's 配置共享系统", description: "根据服务器自动加载正确的配置文件脚本." },
+  { href: "/zh/blog/why-opal-is-the-best-value-minecraft-client", label: "为什么 Opal 客户性价比最高", description: "所有事物 $8.99 包含." },
+  { href: "/zh/compare/opal-vs-liquidbounce", label: "Opal vs LiquidBounce", description: "脚本化与开源路线." },
+]} />
+
+<CTA href="/zh/purchase" note="Lifetime license · instant delivery · no subscription">找到一个你可以掌控的客户，$8.99</CTA>

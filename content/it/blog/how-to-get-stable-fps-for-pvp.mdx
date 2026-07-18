@@ -1,0 +1,91 @@
+---
+title: Come Ottenere FPS Stabili per il PvP di Minecraft (2026)
+description: Per il PvP, una tempistica precisa dei frame è più efficace di un picco elevato. Ecco come Sodium, un limite di frame, e le impostazioni giuste lo garantiscono, oltre a dove un client PvP come Opal si inserisce.
+excerpt: La costanza vince le battaglie, non i picchi di FPS. Ecco la configurazione per frame stabili, e dove un client PvP come Opal si integra perfettamente.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: È sempre meglio avere un FPS più alto nel PvP?
+    a: No. La costanza vince. Un frame rate stabile e bloccato risulta più reattivo in combattimento rispetto a uno più alto che oscilla.
+  - q: Ho bisogno di un client speciale per gli FPS PvP?
+    a: Per FPS grezzi, no. Sodio e le impostazioni giuste bastano. Un client PvP come Opal aggiunge combattimento, movimento e funzionalità di utilità; tieni Sodium installato per avere margine di manovra.
+  - q: Il litio è compatibile con Opal?
+    a: No. Il litio non è compatibile con Opal. Esegui Sodium per il tuo framerate ed escludi il litio se Opal è installato.
+  - q: A quale FPS dovrei impostare il limite?
+    a: Qualunque cosa la tua macchina possa contenere costantemente, senza far cadere nulla. Stabilità, non picchi.
+---
+
+Nel PvP, un frame rate stabile è più importante di uno alto. Un gioco che mantiene un numero costante risulta molto più reattivo di uno che presenta picchi e cali durante lo scontro. La ricetta è [Sodium](https://modrinth.com/mod/sodium) per le prestazioni pure, un limite di frame sensato per la coerenza e alcune impostazioni ottimizzate per la chiarezza piuttosto che per gli effetti visivi. Un appunto da premettere: Lithium non è compatibile con Opal, quindi se utilizzi Opal, fai affidamento su Sodium per lo spazio di manovra.
+
+<KeyTakeaways>
+
+- Un framerate stabile supera i FPS di picco in combattimento. Punta a un valore che mantieni costantemente.
+- Sodium è la base; fornisce lo spazio necessario per frame stabili.
+- Il litio ammorbidisce la logica di gioco ma non è compatibile con Opal. Saltalo se utilizzi Opal.
+- Un limite di frame più le impostazioni di chiarezza completano il lavoro.
+
+</KeyTakeaways>
+
+## Costruisci il nucleo delle prestazioni
+
+[Sodium](https://modrinth.com/mod/sodium) riscrive il renderer di Minecraft ed è il guadagno più significativo per un frame rate stabile. Installa il loader [Fabric](https://fabricmc.net) e l'API [Fabric](https://modrinth.com/mod/fabric-api), quindi trascina Sodium nella cartella `mods`. Funziona bene anche con Opal.
+
+<Callout variant="warning" title="Stai eseguendo Opal? Salta Lithium">
+Lithium non è compatibile con Opal. Usa Sodium per il tuo framerate ed escludi Lithium dalla cartella. Sodium gestisce la parte di rendering, che è comunque il vantaggio maggiore per il PvP.
+</Callout>
+
+## Limita il framerate
+Un frametime che arriva secondo un programma costante è preferibile a uno più veloce ma irregolare. Stabilisci un limite che la tua macchina possa gestire comodamente in ogni momento, piuttosto che inseguire il numero più alto possibile. Un frametime costante è l'obiettivo, non un numero elevato nell'angolo
+## Accordare per chiarezza
+
+<Checklist>
+<ChecklistItem>Distanza di rendering: moderata, in modo che i chunk lontani non causino cali di frame durante i combattimenti.</ChecklistItem>
+<ChecklistItem>Grafica: Veloce.</ChecklistItem>
+<ChecklistItem>Particelle: Minime, in modo che gli effetti non affollino lo schermo né richiedano troppi frame.</ChecklistItem>
+<ChecklistItem>Illuminazione fluida: Bassa.</ChecklistItem>
+</Checklist>
+
+<Callout variant="tip" title="Vantaggio rapido">
+Ridurre la distanza di rendering da 16 a 12 chunk restituisce una buona parte del framerate con un costo visivo quasi nullo nel PvP a corto raggio.
+</Callout>
+
+## Dove si inserisce un client PvP
+
+Frame stabili sono la base; il client è ciò che fai con essi. Opal è un mod di Fabric per Minecraft 1.21.10, quindi si installa nella stessa cartella `mods` di Sodium e aggiunge oltre 200 funzionalità relative a combattimento, movimento, visuale e utilità, dietro un'interfaccia utente intuitiva. È un client completo, quindi, come ogni mod di grandi dimensioni, utilizza alcune risorse durante l'esecuzione. È proprio per questo che Sodium è importante: ti offre lo spazio necessario per eseguire un set di funzionalità come quello di Opal e mantenere frame stabili durante un combattimento.
+
+## In breve
+
+| Desideri | Installa |
+| :--- | :--- |
+| FPS più alti e più stabili | Sodium |
+| Logica di gioco più fluida (non con Opal) | Lithium |
+| Base richiesta | Fabric API |
+| Oltre 200 funzionalità PvP e di utilità | Opal |
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Un frame rate più alto è sempre meglio per il PvP?">
+No. La stabilità è ciò che conta. Un frame rate stabile e limitato è preferibile a uno più alto ma irregolare.
+</FAQItem>
+
+<FAQItem question="Lithium è compatibile con Opal?">
+No. Utilizza Sodium per il tuo framerate ed escludi Lithium quando Opal è installato.
+</FAQItem>
+
+<FAQItem question="Opal influirà sui miei FPS?">
+Opal è un client completo, quindi come qualsiasi mod di grandi dimensioni utilizza alcune risorse. Mantieni Sodium installato per avere margine di manovra e manterrai un frame rate stabile sulla maggior parte dei sistemi.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/blog/how-to-get-more-fps-in-minecraft", label: "Come ottenere più FPS in Minecraft", description: "Le impostazioni e le regolazioni relative al headroom." },
+  { href: "/it/blog/best-performance-mods-for-minecraft", label: "Le migliori mod per migliorare le prestazioni di Minecraft", description: "La pila completa di performance gratuita." },
+  { href: "/it/blog/sodium-or-optifine-which-should-you-use", label: "Sodium o OptiFine?", description: "Perché un cliente Fabric desidera Sodium." },
+]} />
+
+<CTA href="/it/purchase">Prendi Opal per $8.99 vita intera</CTA>

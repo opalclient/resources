@@ -1,0 +1,81 @@
+---
+title: Minecraft'ta Donma Sorununu Nasıl Giderebilirsiniz (2026)
+description: "Minecraft donmalarının üç nedeni vardır: düşük FPS, ağ gecikmesi ve bellek yükü. İşte bunları nasıl ayırt edebileceğiniz ve her birini düzelten modlar ve ayarlar."
+excerpt: Gecikme aslında üç farklı sorun. İşte bunları nasıl ayırt edebileceğiniz ve bir müşterinin neler düzeltebileceği, neler düzelteemeyeceği konusundaki dürüst gerçekler.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: Neden iyi bir bilgisayarı olmasına rağmen Minecraft takılıyor?
+    a: Genellikle bellek takılması veya render ayarları, ham güç değil. FerriteCore ekleyin, Sodium'u kurun ve render mesafenizi kontrol edin.
+  - q: Performans modları sunucu donmasını düzeltir mi?
+    a: Hayır. İstemci modları FPS'inizi ve belleğinizi düzeltir. Sunucu tarafındaki gecikme sizin kontrolünüzün dışında ve istemci değişiklikleri de bunu değiştirmez.
+  - q: Lityum, Opal ile uyumlu mu?
+    a: Hayır, lityum ile uyumlu değil Opal. Kullan Sodium performans için ve eğer varsa Lityum'u çıkarın Opal kurulumu yapılmış.
+  - q: Daha fazla RAM takılmayı düzeltir mi?
+    a: Sadece belirli bir noktaya kadar. Aşırı kaynak ayırmak, daha uzun çöp toplama duraklamalarına neden olabilir.
+---
+
+"Lag" aslında üç farklı problemdir ve çözüm, karşılaştığınız duruma göre değişir. Düşük FPS, bilgisayarınızın kareleri çizmekte zorlanmasıdır. Ağ gecikmesi ise sunucuya bağlantıdır. Bellek yükü, oyunun RAM'i temizlemek için duraklamasıdır. Öncelikle FPS için [Sodium](https://modrinth.com/mod/sodium) ile başlayın, ardından listeyi aşağıya doğru inceleyin. Opal kullanıcıları için bir not: Lithium, Opal ile uyumlu değildir, bu yüzden Sodium etrafında bir yapı oluşturun.
+
+<KeyTakeaways>
+
+- Düşük FPS, ağ gecikmesi ve bellek takılması farklı sorunlardır ve farklı çözümleri vardır.
+- Sodium, render FPS'yi düzeltir; FerriteCore ve ModernFix bellek takılmasını düzeltir.
+- Bir istemci modu sunucu tarafı gecikmesini düzeltebilir. Bunu açıkça belirtelim.
+- Lithium, Opal ile uyumlu değildir. Opal kullanıyorsanız Sodium kullanın.
+
+</KeyTakeaways>
+
+## Üçünü ayır
+
+<Callout variant="info" title="Hangi donma sorununu yaşıyorsunuz?">
+Düşük FPS: Oyunun tamamı tek oyunculu modda bile takılmalı hissettiriyor (bir GPU ve CPU sorunudur). Ağ donması: Bloklar kaybolup yeniden beliriyor, yaratıklar geriye doğru sıçrıyor, yalnızca sunucularda (bir bağlantı sorunudur). Bellek takılması: Oyun birkaç saniyede bir donmalarla pürüzsüz oynanır (bir çöp toplama sorunudur).
+</Callout>
+
+## Düşük FPS'yi Düzelt
+
+Render için [Sodium](https://modrinth.com/mod/sodium) yükleyin. Ardından render mesafesini birkaç blok azaltın, grafikleri Hızlı olarak ayarlayın ve sınırsız kareler istiyorsanız VSync'yi devre dışı bırakın. Tam kurulum için [daha fazla FPS elde etme yöntemlerini](/tr/blog/how-to-get-more-fps-in-minecraft) inceleyin. Sodium, Opal ile birlikte sorunsuz çalışır.
+
+## Bellek takılmasını düzelt
+
+Bellek kullanımını azaltmak için [FerriteCore](https://modrinth.com/mod/ferritecore) ve daha da azaltmak için [ModernFix](https://modrinth.com/mod/modernfix) ekleyin. RAM'i aşırı ayırmayın; bir noktadan sonra daha fazla RAM daha iyi değildir ve çok fazla RAM donmaları uzatabilir.
+
+## Ağ gecikmesini düzelt
+
+Ağ gecikmesi sunucu veya bağlantınızdan kaynaklanır, istemciden değil. Bant genişliği tüketen uygulamaları kapatın, mümkünse kablolu bir bağlantı kullanın ve size yakın bir sunucu bölgesini seçin. Bir mod yavaş bir bağlantıyı düzeltebilir ve aksi gibi davranmayacağız.
+
+<Callout variant="warning" title="Koşan Opal mı? Lityumu atla">
+Lityum sıkça kekemeliğe karşı kullanılan bir ilaç olsa da, bununla uyumlu değildir Opal. Güven Sodium performans için FerriteCore ve hafıza için, Lityum'u çıkarın.
+</Callout>
+
+## Opal Nerede Kullanılır
+
+Opal, tam bir istemci modudur (Minecraft 1.21.10 için bir Fabric modu), dolayısıyla diğer büyük modlar gibi çalışırken bazı kaynakları kullanır. Sağlıklı bir sistemde tek başına "lag"a neden olmaz, ancak performans tabanınızı doğru ayarlamanız için bir nedenidir: boş alan için Sodium'u yükleyin, bellek takılması görüyorsanız FerriteCore'u ekleyin ve Lithium'u kullanmayın. Bunlar yerinde olduktan sonra, Opal'ın 200'den fazla özelliği ve cam arayüzü sorunsuz çalışmak için yer bulur.
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Neden iyi bir bilgisayarda Minecraft takılıyor?">
+Genellikle bellek takılması veya grafik ayarları, ham işlem gücü değil. FerriteCore ekleyin, Sodium'u yükleyin ve render mesafesini kontrol edin.
+</FAQItem>
+
+<FAQItem question="Performans modları sunucu donmasını düzeltir mi?">
+Hayır. İstemci modları FPS'inizi ve belleğinizi düzeltir. Sunucu tarafındaki donma sizin kontrolünüzün dışında.
+</FAQItem>
+
+<FAQItem question="Lityum, Opal ile uyumlu mu?">
+Hayır. Kullanma Sodium ve FerriteCore, ve Lityum'u ayırıp ne zaman Opal kurulumu yapılmış.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/blog/best-performance-mods-for-minecraft", label: "Minecraft için en iyi performans modları", description: "FPS ve bellek takılmalarını düzelten eksiksiz çözüm." },
+  { href: "/tr/blog/how-to-get-more-fps-in-minecraft", label: "Minecraft'ta FPS'yi artırmanın yolları", description: "En çok kareyi geri getiren ayarlar." },
+  { href: "/tr/blog/best-multiplayer-performance-mods", label: "En iyi çok oyunculu performans modları", description: "Yoğun sunucularda neyin işe yaradığı, neyin yaramadığı." },
+]} />
+
+<CTA href="/tr/purchase">Al Opal için $8.99 ömür</CTA>

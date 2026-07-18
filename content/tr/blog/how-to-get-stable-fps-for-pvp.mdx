@@ -1,0 +1,93 @@
+---
+title: Minecraft PvP için İstikrarlı FPS Nasıl Alınır (2026)
+description: PvP için, istikrarlı kare zamanlaması yüksek tepeyi yener. İşte, bir kare sınırı olan Sodium, doğru ayarlar ve bunların nasıl birlikte çalıştığıyla birlikte, Opal gibi bir PvP istemcisinin nerede yer aldığı.
+excerpt: Tutarlılık savaşları kazanır, yüksek FPS değil. İşte istikrarlı kareler için kurulum ve Opal gibi bir PvP istemcisinin üzerine nasıl oturacağı.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: PvP için daha yüksek FPS her zaman daha iyi midir?
+    a: Hayır. İstikrar kazanır. Sabit, sınırlandırılmış bir kare hızı, yükselip alçalmaya eğilimli, daha yüksek bir kare hızından bir savaşta daha duyarlı hissedilir.
+  - q: PvP FPS için özel bir müşteriye ihtiyacım var mı?
+    a: Ham FPS için hayır. Sodyum ve doğru ayarlar işi görür. Opal gibi bir PvP istemcisi, dövüş, hareket ve yardımcı özelliklerini üzerine ekler; Sodium'u kurulu tutun, boşluk için.
+  - q: Lityum, Opal ile uyumlu mu?
+    a: Hayır, lityum ile uyumlu değil Opal. Koş Sodium kare hızın için ve eğer Lithium'u çıkaracaksan Opal kurulumu yapılmış.
+  - q: Hangi FPS'ye sabitlemeliyim?
+    a: Makinenizin her zaman düşürmeden taşıyabileceği her şey. Zirveye göre istikrar.
+---
+
+PvP'de yüksek bir kare hızı yerine istikrarlı bir kare hızı daha önemlidir. Savaşın ortasında dalgalanan ve düşüş gösteren bir oyundan ziyade, tutarlı bir kare sayısına sahip bir oyun çok daha duyarlı gelir. Tarif [Sodium](https://modrinth.com/mod/sodium) için ham performans, tutarlılık için mantıklı bir kare sınırı ve netlik için göz ziyafetinden daha fazla ayarlanmış birkaç ayardır. Önceden belirtilen bir not: Lithium, Opal ile uyumlu değildir, bu nedenle Opal kullanıyorsanız, boşluk için Sodium'a yönelin.
+
+<KeyTakeaways>
+
+- Düzgün bir kare hızı, savaşta zirve FPS'i geçiyor. Her zaman koruduğunuz bir sayıya ulaşmaya çalışın.
+- Sodium temel bu; çerçevelerin ihtiyaç duyduğu boşluğu sağlıyor.
+- Lityum oyun mantığını yumuşatıyor ancak uyumlu değil Opal. Koşuyorsan atla onu Opal.
+- Bir çerçeve başlığı ve netlik ayarları işi tamamlar.
+
+</KeyTakeaways>
+
+## Performans Çekirdeğini Oluşturun
+
+[Sodium](https://modrinth.com/mod/sodium), Minecraft'ın render motorunu yeniden yazıyor ve istikrarlı kareler için en büyük kazancı sağlıyor. [Fabric](https://fabricmc.net) yükleyiciyi ve [Fabric API](https://modrinth.com/mod/fabric-api) modunu yerleştirin, ardından Sodium'u `mods` klasörüne bırakın. Opal ile birlikte sorunsuz çalışır.
+
+<Callout variant="warning" title="Opal Çalışıyor Mu? Lithium'u Atlayın">
+Lithium, Opal ile uyumlu değildir. Çerçeve hızınız için Sodium kullanın ve Lithium'u klasörden çıkarın. Sodium işleme tarafını kapsar ve PvP'de daha büyük bir avantaj sağlar.
+</Callout>
+
+## Kare hızını sınırla
+
+Düzgün aralıklarla gelen bir karenin, daha hızlı ancak düzensiz olanından daha iyi hissettirilmesi daha iyidir. Makinenizin her zaman rahatça taşıyabileceği bir sınır belirleyin, mümkün olan en yüksek sayıyı kovalayarak değil. Amaç, büyük bir sayıdan ziyade tutarlı kare zamanıdır.
+
+## Netlik için ayarla
+
+<Checklist>
+<ChecklistItem>Görüş mesafesi: orta, böylece uzak bloklar savaşın ortasında performans düşüşlerine neden olmaz.</ChecklistItem>
+<ChecklistItem>Grafikler: Hızlı.</ChecklistItem>
+<ChecklistItem>Parçacıklar: minimum, böylece efektler ekranı tıkayamaz veya kare kaybetmez.</ChecklistItem>
+<ChecklistItem>Yumuşak aydınlatma: düşük.</ChecklistItem>
+</Checklist>
+
+<Callout variant="ipucu" başlık="Hızlı kazanım">
+Render mesafesini 16'dan 12 çifte düşürmek, yakın mesafedeki PvP'de neredeyse hiçbir görsel kayıp olmadan büyük bir bölümünüzü kare hızınıza geri kazandırır.
+</Callout>
+
+## Bir PvP istemcisinin nereye uyduğunu
+
+Kararlı kareler temeldir; istemci ise bunları ne yaptığınızdır. Opal, Minecraft 1.21.10 için bir Fabric modudur, bu nedenle Sodium ile aynı `mods` klasörüne yüklenir ve cam bir kullanıcı arayüzünün arkasında savaş, hareket, görsel ve yardımcı araçlar dahil 200'den fazla özellik ekler. Tam bir istemcidir, bu nedenle her büyük mod gibi çalışırken bazı kaynakları kullanır. Tam olarak bu yüzden Sodium önemlidir: Opal gibi bir özellik setini çalıştıracak ve bir savaşta yine de kararlı kareleri koruyacak boş alanı size sağlar.
+
+## Bir Bakışta
+
+| İstediğiniz | Yükleyin |
+| :--- | :--- |
+| Daha yüksek, daha kararlı FPS | Sodium |
+| Daha pürüzsüz oyun mantığı (Opal ile değil) | Lithium |
+| Gerekli temel | Fabric API |
+| 200'den fazla PvP ve yardımcı araç özelliği | Opal |
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="PvP'de daha yüksek FPS her zaman daha iyi midir?">
+Hayır. İstikrar kazanır. Sabit, sınırlandırılmış bir kare hızı, dalgalı, daha yüksek birinden daha iyidir.
+</FAQItem>
+
+<FAQItem question="Lithium, Opal ile uyumlu mu?">
+Hayır. Sodiumu çalıştırın ve Opal yüklüyken Lithium'u kullanmayın.
+</FAQItem>
+
+<FAQItem question="Opal FPS'imi düşürecek mi?">
+Opal, tam bir istemci olduğundan, diğer büyük modlar gibi bazı kaynakları kullanır. Performans için Sodium'u takılı tutun ve çoğu makinede sabit kare hızlarını koruyacaksınız.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/blog/how-to-get-more-fps-in-minecraft", label: "Minecraft'ta FPS'yi artırmanın yolları", description: "Kazanç için ayarlar ve kontroller." },
+  { href: "/tr/blog/best-performance-mods-for-minecraft", label: "Minecraft için en iyi performans modları", description: "Tamamen ücretsiz performans yığını." },
+  { href: "/tr/blog/sodium-or-optifine-which-should-you-use", label: "Sodium mu OptiFine mi?", description: "Neden bir Fabric istemci istiyor Sodium." },
+]} />
+
+<CTA href="/tr/purchase">Al Opal için $8.99 ömür</CTA>

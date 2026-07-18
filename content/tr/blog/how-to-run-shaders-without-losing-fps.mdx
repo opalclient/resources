@@ -1,0 +1,93 @@
+---
+title: FPS'yi Kaybetmeden Shader Çalıştırma Yolları (2026)
+description: Gölge efektleri karelere mal olur, ancak Iris, Sodium ve daha hafif bir paket bunları oynanabilir tutar. İşte gölge efektleriyle en fazla FPS'yi geri kazandıran kurulum ve ayarlar.
+excerpt: Gölgelemeler her zaman karelere mal olur, ancak oynanabilir tutabilirsiniz. İşte Iris ve Sodium kurulumu ve bir istemcinin hala üzerine nasıl sığdırılabileceği.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: Neden Iris ve Sodium ile shader'lar daha pürüzsüz?
+    a: Sodiumun hızlı render'ı işin büyük kısmını yapıyor ve Iris üzerine shader'lar ekliyor; eski tek-jar yönteminden farklı olarak.
+  - q: Hangi ayar en çok FPS kazandırır?
+    a: Gölge mesafesi ve çözünürlüğü, artı hacimsel aydınlatma. Bunları önce düşürün.
+  - q: Do Iris ve Sodium beraber çalışmak Opal?
+    a: Evet. Sodium ve Iris yan yana koşarlar Opal. Sadece lityum istisnadır, çünkü bununla uyumlu değildir Opal.
+  - q: Düşük seviyedeki bilgisayarlar hiç shader çalıştırabilir mi?
+    a: Evet, hafif çantalar ve düşük ayarlarla. Zayıf donanımlarda, kareler genellikle önceliklidir.
+---
+
+Gölge efektleri her zaman birkaç kareye mal olur, ancak oyunu oynanabilir tutabilirsiniz. Temel [Iris](https://modrinth.com/mod/iris), gölge efektlerinin [Sodium](https://modrinth.com/mod/sodium) üzerine çalışması için kullanılan bir araçtır; performans açısından eski yöntemden çok daha hızlıdır. Ardından daha hafif bir paket seçip en maliyetli efektleri azaltırsınız. Hem Iris hem de Sodium, Opal ile birlikte çalışır, böylece gölge efektli bir oyun ve tam bir istemci aynı kurulumda birlikte var olur.
+
+<KeyTakeaways>
+
+- Iris, Sodiumun üzerinde olması, oynanabilir shader'lar için en önemli adımdır.
+- Daha hafif bir paket ve budanmış efektler, kaybedilen karelerin çoğunu geri kazanır.
+- Iris ve Sodium ikisi de Opal ile çalışır; yalnızca Lithium uyumlu değildir.
+- Render mesafesini orta düzeyde tutun; shader'lar maliyetini artırır.
+
+</KeyTakeaways>
+
+## Adım 1: Kullan Iris ile Sodium
+
+<Steps>
+
+<Step number={1} title="Sodiumu yükleyin">
+[Sodium](https://modrinth.com/mod/sodium) hızlı render motorudur ve işin büyük kısmını yapar [Fabric]((https://fabricmc.net) yükleyicisi ve [Fabric Önce API'yi yükleyin, sonra bırakın Sodium `mods` klasörünüzün içinde. Yan yana sorunsuz çalışır Opal.
+</Step>
+
+<Step number={2} title="Iris'i ekle">[Iris](https://modrinth.com/mod/iris) shader paketlerini çalıştırır ve Sodium üzerine kurulacak şekilde tasarlanmıştır, böylece kazandığınız kare hızını korursunuz. Bu kombinasyon, işin tamamı budur</Step>
+
+</Steps>
+
+## Adım 2: Daha hafif bir sırt çantası seçin
+
+Ağır, gerçekçi sırt çantaları en çok paraya mal olur. Dengeli bir sırt çantası veya daha ağır birinin düşük profili, birçok çerçeveyi kurtarırken görünümün çoğunu korur.
+
+## Adım 3: Pahalı efektleri kısaltın
+
+Şeyder ayarlarının içinde, büyük maliyetler genellikle şunlardır:
+
+<Checklist>
+<ChecklistItem>Hacimsel aydınlatma ve sis.</ChecklistItem>
+<ChecklistItem>Yansımalar, ekran içi veya su.</ChecklistItem>
+<ChecklistItem>Gölge çözünürlüğü ve mesafesi.</ChecklistItem>
+</Checklist>
+
+Bunları düşürmek, maliyetin bir kısmıyla neredeyse tüm görünümü korur.
+
+## 4. Adım: Render mesafesini göz önünde bulundurun
+
+Gölgelendiriciler çizilen her blok için maliyeti çarpar, bu yüzden yüksek bir render mesafesi iki kat zarar verir. Orta düzeyde tutun.
+
+<Callout variant="tip" title="Opal kullanıcıları">
+Sodium ve Iris birlikte koşarlar Opal, böylece hem shader'ları hem de istemciyi aynı anda sahip olabilirsin. Lithium, bununla çalışmayan tek yaygın mod Opal, bırak da geç Sodium performans yönetimi.
+</Callout>
+
+## Opal'ın Yeri
+
+Opal, Minecraft 1.21.10 için bir Fabric modudur ve Sodium ve Iris'in bulunduğu `mods` klasörüne kurulur. Shader ile aydınlatılmış bir dünya ve tam bir istemci elde edersiniz: 200'den fazla özellik, cam bir kullanıcı arayüzü ve bir betik motoru. Cam arayüz, shader ile aydınlatılmış bir oyunun üzerinde doğru görünmesi için tasarlanmıştır, böylece ikisi birbirini tamamlar, savaşmaz. Performans için Sodium'u açık bırakın ve Lithium'u devre dışı bırakın.
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Neden Iris ve Sodium ile shader'lar daha akıcı?">
+Sodium'un hızlı render motoru asıl işi yapıyor ve Iris, eski tek dosya yaklaşımının aksine, shader'ları üzerine ekliyor.
+</FAQItem>
+
+<FAQItem question="Do Iris ve Sodium beraber çalışmak Opal?">Evet. Her ikisi de Opal ile birlikte çalışır. Sadece Lityum Opal ile uyumlu değildir</FAQItem>
+
+<FAQItem question="En çok FPS'yi hangi ayar geri getirir?">
+Gölge mesafesi ve çözünürlük, artı hacimsel aydınlatma. Bunları önce düşürün.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/blog/best-minecraft-shaders", label: "En iyi Minecraft shader'ları", description: "Hafiften ağıra doğru hangi çantalarla koşulmalı." },
+  { href: "/tr/blog/how-to-install-shaders-in-minecraft", label: "Minecraft'te shader nasıl kurulur", description: "Iris kurulumunun tamamı, adım adım." },
+  { href: "/tr/blog/how-to-get-more-fps-in-minecraft", label: "Minecraft'ta FPS'yi artırmanın yolları", description: "Gölgelendiricileri eklemeden önce çerçeveleri geri yükleyin." },
+]} />
+
+<CTA href="/tr/purchase">Opal'ı $8.99'ın üzerine ekleyin</CTA>

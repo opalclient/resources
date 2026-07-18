@@ -1,0 +1,87 @@
+---
+title: Wie man Shader in Minecraft installiert (2026)
+description: "Shader auf Fabric mit Iris und Sodium installieren: Füge die beiden Mods hinzu, lege einen Pack in den Ordner und wähle ihn in den Videoeinstellungen aus. Vollständige Schritte, FPS-Tipps und wie ein Client dazu passt."
+excerpt: Shader bei Fabric benötigen drei Schritte und kein OptiFine. Hier ist der gesamte Prozess, sowie die Integration von Opal in eine Shader-Einrichtung.
+date: 2026-05-28
+lastUpdated: 2026-06-03
+category: Guides
+author: trq
+faqs:
+  - q: Benötige ich OptiFine für Shader?
+    a: Nicht auf Stoff. Iris lädt Shader-Packs ohne OptiFine und harmoniert gut mit dem restlichen Fabric-Mod-Ökosystem.
+  - q: Werden Shader meine FPS reduzieren?
+    a: Sie kosten Rahmen, aber die Ausführung von Iris mit Sodium gleicht einen Großteil davon aus. Wähle einen leichteren Pack, wenn du mehr Spielraum benötigst.
+  - q: Wohin gehören Shader-Packs?
+    a: Im Shaderpacks-Ordner innerhalb deines Minecraft-Verzeichnisses. Starte es einmal mit Iris installiert, und der Ordner wird für dich erstellt.
+  - q: Kann ich mit Opal Shader ausführen?
+    a: Ja. Opal, Iris und Sodium sind alle Fabric-Mods im selben Ordner. Shader und ein vollständiger Client laufen nebeneinander.
+---
+
+Auf Fabric ist [Iris](https://modrinth.com/mod/iris) die saubere Methode, Shader auszuführen. Sie lädt Shader-Packs und ist dafür ausgelegt, mit [Sodium](https://modrinth.com/mod/sodium) zu laufen, sodass du deine Framerate beibehältst. Installiere die beiden Mods, lege einen Pack in einen Ordner und wähle ihn in den Videoeinstellungen aus. Das ist die ganze Arbeit. OptiFine ist nicht erforderlich.
+
+<KeyTakeaways>
+
+- Iris läuft mit Shadern auf Fabric, OptiFine ist nicht nötig.
+- Kombiniere Iris mit Sodium, damit dir die Shader weniger Frames kosten.
+- Shader-Packs befinden sich im Ordner `shaderpacks`; wähle einen in den Videoeinstellungen aus.
+- Opal läuft im selben Ordner, sodass du Shader und einen vollwertigen Client haben kannst.
+
+</KeyTakeaways>
+
+## Shader installieren
+
+<Steps>
+
+<Step number={1} title="Installiere Iris und Sodium">Installiere den [Fabric](https://fabricmc.net) Loader und die [Fabric API](https://modrinth.com/mod/fabric-api), füge dann [Iris](https://modrinth.com/mod/iris) und [Sodium](https://modrinth.com/mod/sodium) zu deinem `mods`-Ordner hinzu. Iris rendert die Shader, Sodium sorgt für eine hohe FPS. Sie sind aufeinander abgestimmt</Step>
+
+<Step number={2} title="Einen Shader-Pack hinzufügen">Laden Sie ein Shader-Paket herunter (es wird als einzelne Datei geliefert) und legen Sie es in den Ordner `shaderpacks` innerhalb Ihres Minecraft-Verzeichnisses ab. Falls dieser Ordner noch nicht existiert, starten Sie das Spiel einmal mit Iris und er wird für Sie erstellt</Step>
+
+<Step number={3} title="Wähle es im Spiel aus">Öffnen Sie die Videoeinstellungen, dann den Bildschirm für Shader-Packs und wählen Sie das Paket aus, das Sie hinzugefügt haben. Es wird sofort angewendet, und Sie können die Pakete von demselben Bildschirm aus wechseln</Step>
+
+</Steps>
+
+<Callout variant="warning" title="Wenn Ihre FPS zu stark sinken">
+Verringern Sie die Renderdistanz oder wechseln Sie zu einem leichteren Paket, bevor Sie die Mods beschuldigen. Schwere Shader kosten echte Frames, und ein paar Chunk Renderdistanz können oft das zurückgewinnen, was Sie brauchen.
+</Callout>
+
+## Eine Packung auswählen
+
+<Checklist>
+<ChecklistItem>Leichtere Packs kosten weniger FPS und sehen trotzdem gut aus. Beginnen Sie damit, wenn Ihr Rechner eher bescheiden ist.</ChecklistItem>
+<ChecklistItem>Schwerere Packs fügen schicke Wasser-, Schatten- und volumetrische Lichteffekte hinzu, was allerdings die Framerate merklich beeinträchtigt.</ChecklistItem>
+<ChecklistItem>Passen Sie das Pack an Ihre GPU an, nicht an die Screenshots.</ChecklistItem>
+</Checklist>
+
+## Shader ausführen mit einem Client
+
+Da Iris und Sodium Fabric-Mods sind, teilen alle anderen Mods, die als Fabric-Mod erstellt wurden, denselben Ordner, einschließlich Opal. Ein Shader-beleuchtetes Spiel und ein vollständiger Utility-Client schließen sich also nicht gegenseitig aus. Opal ist auf Minecraft 1.21.10 ausgerichtet und lädt neben deinem Shader-Paket, sodass du sowohl das Aussehen als auch den Funktionsumfang zusammen verwenden kannst.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Benötige ich OptiFine für Shader?">
+Nein, bei Fabric ist das nicht nötig. Iris lädt Shader-Packs ohne OptiFine.
+</FAQItem>
+
+<FAQItem question="Werden Shader meine FPS reduzieren?">
+Sie kosten Frames, aber Iris mit Sodium gleicht vieles aus. Wähle ein leichteres Paket für mehr Spielraum.
+</FAQItem>
+
+<FAQItem question="Wo werden Shader-Packs gespeichert?">
+Im Ordner `shaderpacks` in Ihrem Minecraft-Verzeichnis.
+</FAQItem>
+
+<FAQItem question="Kann ich mit Opal Shader ausführen?">
+Ja. Opal, Iris und Sodium verwenden denselben Ordner, sodass Shader und ein vollständiger Client zusammen ausgeführt werden.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/blog/how-to-get-more-fps-in-minecraft", label: "Wie man in Minecraft mehr FPS erhält", description: "Rückrahmen vor dem Hinzufügen von Shadern zurückholen." },
+  { href: "/de/blog/best-mods-for-performance-and-shaders", label: "Die besten Mods für Performance und Shader", description: "Sodium, Iris, und der Rest des Stapels." },
+  { href: "/de/blog/essential-fabric-mods-every-player-should-have", label: "Essentielle Fabric-Mods", description: "Der Basissatz für jede Fabric-Konfiguration." },
+]} />
+
+<CTA href="/de/kaufen">Opal für $8.99 sichern</CTA>

@@ -1,0 +1,137 @@
+---
+title: Introduzione al motore di scripting GraalVM di Opal
+description: Scrivi JavaScript personalizzato che interagisce con le API interne di Opal. Automatizza le attività, reagisci agli eventi di gioco, disegna il tuo HUD e estendi il client a runtime.
+excerpt: Il motore di scripting di Opal si basa su GraalVM, un ambiente di runtime JavaScript completo all'interno di Minecraft. Ecco cosa puoi realizzare con esso.
+date: 2026-03-15
+lastUpdated: 2026-06-03
+category: Features
+author: trq
+faqs:
+  - q: Quale motore di scripting utilizza Opal?
+    a: Opal utilizza GraalVM, un runtime JavaScript di livello enterprise di Oracle, integrato in Minecraft con binding thread-safe alle API del client.
+  - q: Possono gli script accedere ai miei file o alla mia rete?
+    a: No. Gli script vengono eseguiti in un ambiente GraalVM sandbox. Possono interagire con le API di Opal, ma non possono accedere al filesystem, alla rete o ad altre applicazioni.
+  - q: Devo riavviare Minecraft per caricare gli script?
+    a: No. Gli script vengono caricati a runtime. Basta inserire un file .js nella cartella degli script e sarà immediatamente disponibile.
+  - q: Esiste un altro client di Minecraft con un motore di scripting simile a questo?
+    a: La maggior parte si ferma ai macro di base. Opal fornisce un runtime JavaScript GraalVM completo con binding di gioco thread-safe, che è una cosa completamente diversa.
+---
+
+Opal include un motore JavaScript GraalVM, un runtime JS completo in esecuzione all'interno del client di Minecraft. Scrivi script che interagiscono con le API interne di Opal mentre il gioco è attivo. Non si tratta di un registratore di macro o di un sistema di bind dei tasti. È un vero ambiente di programmazione con accesso al sistema eventi del client, alle configurazioni dei moduli e allo stato del gioco.
+
+<KeyTakeaways>
+
+- Un runtime JavaScript GraalVM completo, non un semplice registratore di macro.
+- Rispondi agli eventi di gioco, modifica le impostazioni dei moduli e disegna il tuo HUD.
+- Gli script vengono caricati a runtime, senza riavvii, ed eseguiti in un ambiente sandbox rispetto alle API di Opal.
+- La maggior parte degli altri client si fermano a macro di base.
+
+</KeyTakeaways>
+
+## Perché GraalVM
+GraalVM è un runtime poliglotto di Oracle. L'abbiamo scelto per ragioni concrete:
+
+- Velocità: la compilazione JIT mantiene gli script sufficientemente veloci da poter essere eseguiti ad ogni tick.
+- JavaScript: la maggior parte delle persone lo conosce già, quindi la curva di apprendimento è breve.
+- Thread safety: i binding da JS a Java gestiscono la concorrenza correttamente, invece di lasciarti inciampare.
+- Modelli familiari: le API JavaScript standard si comportano come ci si aspetta
+## Cosa puoi costruire
+
+### Automazione personalizzata
+Rispondi agli eventi di gioco:
+
+```javascript
+// Auto-respond to certain chat messages
+on('chat', (event) => {
+  if (event.message.includes('1v1?')) {
+    sendChat('/duel accept');
+  }
+});
+```
+### Configurazione dinamica dei moduli
+Modifica le impostazioni del modulo in base allo stato di gioco:
+
+```javascript
+// Increase reach when health is low
+on('tick', () => {
+  const health = player.getHealth();
+  if (health < 8) {
+    modules.get('Reach').setSetting('distance', 3.3);
+  } else {
+    modules.get('Reach').setSetting('distance', 3.1);
+  }
+});
+```
+### Elementi HUD personalizzati
+Crea i tuoi overlay:
+
+```javascript
+// Display a combo counter on screen
+let combo = 0;
+on('attackEntity', () => { combo++; });
+on('damage', () => { combo = 0; });
+on('render2d', (ctx) => {
+  ctx.drawText(`Combo: ${combo}`, 10, 10, 0xFFFFFF);
+});
+```
+### Profili specifici per server
+Passa automaticamente alle configurazioni di gioco quando entri in server diversi:
+
+```javascript
+on('serverJoin', (event) => {
+  if (event.ip.includes('pvp.example.com')) {
+    loadConfig('server-bypass');
+  } else {
+    loadConfig('ghost-default');
+  }
+});
+```
+## Iniziare
+
+<Steps>
+
+<Step number={1} title="Apri la cartella degli script">Individua la cartella degli script nella configurazione di Opal</Step>
+
+<Step number={2} title="Crea un file .js">Qualsiasi nome va bene. Questo è il tuo copione</Step>
+
+<Step number={3} title="Scrivi contro l'API">
+Utilizza la documentazione del dashboard per l'API di riferimento: eventi, accesso al modulo, stato del giocatore e rendering.
+</Step>
+
+<Step number={4} title="Salva e riproduci">Gli script vengono caricati a runtime, quindi non è necessario riavviare</Step>
+
+</Steps>
+
+<Callout variant="info" title="Script eseguiti in ambiente isolato">
+Gli script vengono eseguiti all'interno di GraalVM e possono chiamare le API di Opal, ma non possono accedere al filesystem, alla rete o ad altre applicazioni. I tuoi script rimangono locali e la tua macchina rimane tua.
+</Callout>
+
+## Script di comunità
+
+La comunità di scripting è in crescita. Il server Discord ha condiviso script e persone che possono aiutarti a scrivere i tuoi. Tra quelli più comuni ci sono gli script automatici per i minigiochi, i tracker delle statistiche, il rilevamento delle combo e i selettori di configurazione specifici per i server.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Quale motore utilizza Opal?">
+GraalVM, il runtime JavaScript enterprise di Oracle, con binding di gioco thread-safe.
+</FAQItem>
+
+<FAQItem question="Gli script possono leggere i miei file?">
+No. Sono isolati in un ambiente protetto e possono accedere solo alle API di Opal.
+</FAQItem>
+
+<FAQItem question="È necessario riavviare per caricare uno script?">
+No. Basta inserire il file e questo viene caricato a runtime.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/blog/opal-config-sharing-guide", label: "Il sistema di condivisione della configurazione di Opal", description: "Carica automaticamente la configurazione corretta per ogni server tramite uno script." },
+  { href: "/it/blog/why-opal-is-the-best-value-minecraft-client", label: "Perché Opal offre il miglior rapporto qualità-prezzo", description: "Tutto $8.99 comprende." },
+  { href: "/it/compare/opal-vs-liquidbounce", label: "Opal contro LiquidBounce", description: "Scripting rispetto alla strada open source." },
+]} />
+
+<CTA href="/it/purchase" note="Lifetime license · instant delivery · no subscription">Trova un cliente che tu possa gestire, $8.99</CTA>

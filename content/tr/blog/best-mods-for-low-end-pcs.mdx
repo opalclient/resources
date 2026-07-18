@@ -1,0 +1,108 @@
+---
+title: Düşük Sistemli Bilgisayarlara En İyi Minecraft Modları (2026)
+description: "Düşük sistemli bilgisayarlar ve dizüstü bilgisayarlar için en iyi Minecraft modları: Sodium, FerriteCore, Entity Culling ve Dynamic FPS, ayrıca ekstra kareler elde etmenizi sağlayacak ayarlar."
+excerpt: Zayıf donanımlarda daha az çizim yapın ve daha az bellek yönetin. İşte bunu yapan ücretsiz yığın ve bir istemcinin nasıl hala sığdığı.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: Bunlar entegre bir GPU üzerinde çalışır mı?
+    a: Evet. Sodium özellikle entegre grafiklere en çok yardımcı olur. Render mesafesini düşük tutun.
+  - q: Düşük seviyeli bir bilgisayarda Opal gibi bir müşteri çalıştırabilir miyim?
+    a: Evet, eğer performans temelin sağlamsa. Başarı için Sodium'u kurun ve Lithium'u kullanmayın, çünkü Opal ile uyumlu değil.
+  - q: Düşük seviye bir kurulumda ne kadar RAM kullanılmalı?
+    a: Koşmak için yeterli, daha fazlası değil. Aşırı kaynak ayırmak zarar verir ve molaları uzatabilir.
+  - q: Bana shaderlara ihtiyacım var mı?
+    a: Hayır, zayıf donanımlarda bunları atlayın. Çerçeveler önce, görünüm sonra.
+---
+
+Zayıf bir bilgisayarda veya dizüstü bilgisayarda amaç, çizilecek daha az şey ve yönetilecek daha az bellek olmasını sağlamaktır. [Sodium](https://modrinth.com/mod/sodium) işin büyük kısmını oluşturma konusunda yapar, birkaç bellek ve kesme modlaması işi tamamlar ve [Dynamic FPS](https://modrinth.com/mod/dynamic-fps) sekmeyi bıraktığınızda oyunun dizüstü bilgisayarınızı yakmasını engeller. Hepsi [Fabric](https://fabricmc.net) üzerinde ücretsizdir. Opal kullanıcıları için bir not: Lithium, Opal ile uyumlu değildir, bu yüzden Sodium etrafında inşa edin.
+
+<KeyTakeaways>
+
+- Sodyum, zayıf donanımlarda en büyük kazançtır. Öncelikle onu kurun.
+- FerriteCore RAM yükünü azaltır; Entity Culling görünmeyen yaratıkları atlar.
+- Dinamik FPS, oyunun arka planda güç boşa harcamasını engeller.
+- Lithium, Opal ile uyumlu değildir. Opal kullanıyorsanız Sodium'u kullanın.
+
+</KeyTakeaways>
+
+## Yığın
+
+<ModSection title="Düşük Seviye Performans Modları" badge="Ücretsiz" badgeColor="zümrüt" description="Sodium en çok işi yapar. FerriteCore, Entity Culling ve Dynamic FPS işi tamamlar. Lithium yalnızca Opal olmayan kurulumlar için geçerlidir.">
+<ModList>
+<ModLink href="https://modrinth.com/mod/sodium">Sodium (render FPS, Opal ile uyumlu)</ModLink>
+<ModLink href="https://modrinth.com/mod/ferritecore">FerriteCore (daha az RAM kullanımı)</ModLink>
+<ModLink href="https://modrinth.com/mod/entityculling">Entity Culling (gizli yaratıkları atla)</ModLink>
+<ModLink href="https://modrinth.com/mod/dynamic-fps">Dynamic FPS (arka planda boşta kal)</ModLink>
+<IncompatibleMod>Lithium (oyun mantığı, Opal ile uyumlu değil)</IncompatibleMod>
+</ModList>
+</ModSection>
+
+## Sodium
+
+Zayıf donanımda elde edilebilecek en büyük kazanç. Renderlama yeniden yazımı, karelerin çoğunun geri gelmesini sağlıyor ve özellikle entegre GPU'lara yardımcı oluyor. Yükleyin [Fabric API'yi](https://modrinth.com/mod/fabric-api) önce yükleyin.
+
+## FerriteCore
+
+Oyunun çöp toplama için daha az duraksamasını sağlayan RAM kullanımını düşürür. Sadece birkaç gigabaytınız varsa önemlidir.
+
+## Varlık Eleme
+
+Göremediğiniz varlıkların çizimini atlar. Düşük seviyeli bir GPU'da, görünmeyen yaratıkların çizilmemesi kolay bir kazançtır.
+
+## Dinamik FPS
+
+Pencere arka planda olduğunda kare hızını düşürür, böylece sekmelerden çıktığınızda oyun çok çalışmayı bırakır. Dizüstü bilgisayarlara karşı naziktir.
+
+## Hala önemli olan ayarlar
+
+<Checklist>
+<ChecklistItem>Görüş mesafesi: Zayıf donanımlarda 6 ila 8 blok yeterli.</ChecklistItem>
+<ChecklistItem>Grafikler: Hızlı.</ChecklistItem>
+<ChecklistItem>Yumuşak aydınlatma: kapalı veya minimum.</ChecklistItem>
+<ChecklistItem>Parçacıklar: Minimal.</ChecklistItem>
+</Checklist>
+
+<Callout variant="warning" title="Koşan Opal mı? Lityumu atla">
+Lityum ile uyumlu değildir Opal. Düşük sistemlerde, üzerine güven Sodium performans için lityumu çıkarın.
+</Callout>
+
+## Düşük seviyedeki bir bilgisayar bir istemciyi çalıştırabilir mi?
+Evet, eğer temel sağlamsa. Opal, Minecraft 1.21.10 için bir Fabric modudur ve Sodium ile aynı `mods` klasörüne kurulur. 200'den fazla özellikle tam bir istemci olduğundan, bazı kaynaklar ister; bu nedenle zayıf donanımlarda Sodium'dan gelen boş alan en önemlisidir. Performans yığınını alın, render mesafesini düşük tutun, Lithium'u devre dışı bırakın ve Opal mütevazı makinelerde çalışabilir
+## Bir bakışta
+
+| Mod | İş | Çalışır Opal |
+| :--- | :--- | :--- |
+| Sodium | Render FPS | Evet |
+| FerriteCore | RAM kullanımını azalt | Evet |
+| Varlık Eleme | Gizli yaratıkları atla | Evet |
+| Dinamik FPS | Arka planda boşta kal | Evet |
+| Lithium | Oyun mantığı performansı | Hayır |
+
+## SIKÇA SORULAN SORULAR
+
+<FAQList>
+
+<FAQItem question="Bunlar entegre bir GPU üzerinde çalışır mı?">
+Evet. Sodium, entegre grafiklere en çok yardımcı olur. Render mesafesini düşük tutun.
+</FAQItem>
+
+<FAQItem question="Düşük seviyeli bir bilgisayarda Opal çalıştırabilir miyim?">
+Evet, sağlam bir performans tabanıyla. Performans için Sodium'u yükleyin ve Lithium'u devre dışı bırakın.
+</FAQItem>
+
+<FAQItem question="Zayıf bir bilgisayarım varsa shader kullanmam gerekir mi?">
+Hayır. Zayıf donanımlarda shader'ları atlayın. Önce kare hızı, sonra görünüm.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/blog/best-performance-mods-for-minecraft", label: "Minecraft için en iyi performans modları", description: "Tam performans yığını açıklanıyor." },
+  { href: "/tr/blog/how-to-fix-minecraft-lag", label: "Minecraft'ta takılmayı nasıl giderebilirsiniz", description: "Sizi yavaşlatan ne tür gecikmenin olduğunu bulun." },
+  { href: "/tr/blog/how-to-get-more-fps-in-minecraft", label: "Minecraft'ta FPS'yi artırmanın yolları", description: "İki mod ve üç ayar." },
+]} />
+
+<CTA href="/tr/purchase">Al Opal için $8.99 ömür</CTA>

@@ -1,0 +1,101 @@
+---
+title: Zorunlu Fabric Her Oyuncunun Sahip Olması Gereken Modlar (2026)
+description: "İlk olarak kurulması gereken Fabric modlarının kısa listesi: Fabric API, Sodium, Iris ve ModMenu, artı istemci katmanı. Bunların ne işe yaradığı ve Opal ile hangilerinin uyumlu olduğu."
+excerpt: Temel bir Fabric kurulumunu sağlamak için birkaç mod yeterli. İşte başlangıç paketi, kurulum sırasına göre ve bunun üzerine oturan istemci.
+date: 2026-06-01
+lastUpdated: 2026-06-03
+category: Guides
+author: trq
+faqs:
+  - q: Hangi Fabric modunu önce kurmalıyım?
+    a: Fabric API. Diğer çoğu mod ona bağlı olduğundan, her şeyden önce yüklenmesi gerekir.
+  - q: Bu modlar oyunun görünümünü değiştiriyor mu?
+    a: Sadece shader'lar ekleyen Iris. Sodium ise hızdan, ModMenu ise yönetim ekranından bahsediyor.
+  - q: Lityum, Opal ile uyumlu mu?
+    a: Hayır, Lithium tek başına harika bir oyun mantığı optimize edicidir, ancak Opal ile uyumlu değildir. Opal'ı çalıştırıyorsanız, Sodium'u kullanın ve Lithium'u atlayın.
+  - q: Opal gibi bir müşteri kime sığar?
+    a: Üstte. Opal aynı zamanda bir Fabric modudur, bu yüzden başlangıç paketinizin bulunduğu klasöre kurulur ve 200'den fazla özellik ekler.
+---
+
+Bir avuç mod, iyi bir [Fabric](https://fabricmc.net) kurulumunun temellerini kapsıyor: taban olarak [Fabric API](https://modrinth.com/mod/fabric-api), performans için [Sodium](https://modrinth.com/mod/sodium), gölgelendiriciler için [Iris](https://modrinth.com/mod/iris) ve her şeyi yönetmek için [ModMenu](https://modrinth.com/mod/modmenu). Bunları önce kurun ve çoğu mod, hatta bir istemci de dahil olmak üzere, üzerine sorunsuz bir şekilde entegre olur. Opal kullanıcıları için bir not: Lithium yaygın bir seçimdir ancak Opal ile uyumlu değildir, bu yüzden bundan vazgeçilmesi gereken moddur.
+
+<KeyTakeaways>
+
+- Fabric API temeldir. Başka bir şey yüklemeden önce onu yükleyin.
+- FPS için Sodium, gölgeler için Iris, her şeyi yönetmek için ModMenu.
+- Lithium tek başına iyidir ancak Opal ile uyumlu değildir.
+- Opal, istemci katmanıdır; geri kalanının bulunduğu klasöre kurulur.
+
+</KeyTakeaways>
+
+## Başlangıç Paketi
+
+<ModSection title="Önce Bunları Yükleyin" badge="Temel" badgeColor="zümrüt" description="Temel, performans, gölgelendiriciler ve bir yönetici. Bunların hepsi Opal ile birlikte çalışır.">
+<ModList>
+<ModLink href="https://modrinth.com/mod/fabric-api">Fabric API (gerekli temel)</ModLink>
+<ModLink href="https://modrinth.com/mod/sodium">Sodium (render FPS)</ModLink>
+<ModLink href="https://modrinth.com/mod/iris">Iris (gölgelendiriciler)</ModLink>
+<ModLink href="https://modrinth.com/mod/modmenu">ModMenu (oyunda modları yönetin)</ModLink>
+<IncompatibleMod>Lithium (oyun mantığı, Opal ile uyumlu değil)</IncompatibleMod>
+</ModList>
+</ModSection>
+
+## Fabric API
+
+Neredeyse her Fabric modunun ihtiyaç duyduğu ortak kütüphane. Öncelikle onu yükleyin. Olmadan çoğu mod yüklenmeyi reddeder. Bir özellikten ziyade bir gereklilik.
+
+## Sodium
+
+FPS'yi artıran, zayıf GPU'lar üzerinde en çok etki gösteren render motorunun yeniden yazımı. Yapabileceğiniz en büyük performans artışını sağlar ve Opal ile birlikte sorunsuz çalışır.
+
+## Iris
+
+Shader paketlerini çalıştırır ve Sodium ile uyumlu olacak şekilde tasarlanmıştır, böylece kare kaybetmeden görsel kalite elde edersiniz. Shader'lar umursamadığınız takdirde atlayabilirsiniz.
+
+## ModMenu
+
+Oyun içi mod listesini ve yapılandırma ekranlarını ekler, böylece yüklü olanları görebilir ve dosyaları düzenlemeden ayarları değiştirebilirsiniz. Diğer modlarla yaşamayı kolaylaştıran yaşam kalitesi.
+
+## Lithium Hakkında Bir Not
+
+[Lithium](https://modrinth.com/mod/lithium), oyun mantığını optimize eder ve vanilla-plus kurulumlarında mükemmeldir. Ancak Opal ile uyumlu değildir, bu nedenle klasörünüzde Opal varsa Lithium'u bırakın ve performans için Sodium'a güvenin.
+
+## Bir Bakışta
+
+| Mod | Görev | Opal ile çalışır mı? |
+| :--- | :--- | :--- |
+| Fabric API | Gerekli temel | Evet |
+| Sodium | Render FPS | Evet |
+| Iris | Shader'lar | Evet |
+| ModMenu | Oyunda modları yönetin | Evet |
+| Lithium | Oyun mantığı performansı | Hayır |
+
+## Üst Katman
+
+Başlangıç paketi yüklendiğinde, klasör bir müşteriye hazır olur. Opal, Minecraft 1.21.10 için bir Fabric modudur, bu yüzden diğerleri gibi aynı şekilde kurulur: `mods` klasörüne. Performans ve shader yığınını korur ve üzerine 200'den fazla özellik, bir cam kullanıcı arayüzü ve bir betik motoru ekler.
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="Hangi modu önce yüklemeliyim?">
+Fabric API. Çoğu mod onun bağımlı.
+</FAQItem>
+
+<FAQItem question="Bunlar oyunun görünümünü değiştirir mi?">
+Sadece Iris (gölge efektleri). Sodium hızdır, ModMenu ise yönetimdir.
+</FAQItem>
+
+<FAQItem question="Lityum, Opal ile uyumlu mu?">
+Hayır. Kullanma Sodium ve koşarken Lityum'u atla Opal.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/blog/how-to-get-more-fps-in-minecraft", label: "Minecraft'ta FPS'yi artırmanın yolları", description: "Performans modlarını en büyük kazanç için ayarlayın." },
+  { href: "/tr/blog/how-to-install-shaders-in-minecraft", label: "Minecraft'te shader nasıl kurulur", description: "OptiFine olmadan shader'lar için Iris ekleyin." },
+  { href: "/tr/blog/why-opal-is-the-best-value-minecraft-client", label: "Neden Opal en iyi fiyat-performanslı müşteri", description: "Yığın üzerine oturan istemci katmanı." },
+]} />
+
+<CTA href="/tr/purchase">Opal ile kurulumu tamamla, $8.99</CTA>

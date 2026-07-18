@@ -1,0 +1,145 @@
+---
+title: Opal'ın GraalVM Betik Motorunu Tanıtıyoruz
+description: Opal'ın dahili API'leriyle etkileşim kuran özel JavaScript kodları yazın. Görevleri otomatikleştirin, oyun olaylarına tepki verin, kendi HUD'nuzu çizin ve istemciyi çalışma zamanında genişletin.
+excerpt: Opal'ın betik motoru, Minecraft içinde bulunan tam bir JavaScript çalışma zamanı olan GraalVM üzerinde çalışır. İşte onunla neler inşa edebileceğiniz.
+date: 2026-03-15
+lastUpdated: 2026-06-03
+category: Features
+author: trq
+faqs:
+  - q: Opal hangi betik motorunu kullanıyor?
+    a: Opal, Oracle tarafından geliştirilen, kurumsal düzeyde bir JavaScript çalışma zamanı olan GraalVM'yi kullanır ve Minecraft içinde, istemcinin API'lerine iş parçacığı güvenli bağlamalarla yerleştirilmiştir.
+  - q: Betiklerime dosyalarıma veya ağımıza erişebilir miyim?
+    a: Hayır. Betikler, izole edilmiş bir GraalVM ortamında çalışır. Opal'ın API'leriyle etkileşim kurabilirler ancak dosya sisteminize, ağınıza veya diğer uygulamalarınıza erişemezler.
+  - q: Minecraft'ı yeniden başlatmam gerekiyor mu, script'ler yüklenmesi için?
+    a: Hayır. Betikler çalışma zamanında yüklenir. Betik klasörüne bir .js dosyası bırakın ve hemen kullanılabilir olur.
+  - q: Bunun gibi bir betik motoruna sahip başka bir Minecraft istemcisi var mı?
+    a: Çoğu kişi temel makrolarla yetiniyor. Opal, iş parçacığı güvenli oyun bağlamalarıyla birlikte tam bir GraalVM JavaScript çalışma zamanı gönderiyor; bu, tamamen farklı bir şey.
+---
+
+Opal, GraalVM JavaScript motorunu, Minecraft istemcisinin içinde çalışan tam bir JS çalışma zamanını gönderiyor. Oyun açıkken Opal'ın dahili API'leriyle etkileşim kuran komut dosyaları yazarsınız. Bu bir makro kaydedici veya bir kısayol sistemi değildir. İstemcinin olay sistemine, modül ayarlarına ve oyun durumuna erişebilen gerçek bir programlama ortamıdır.
+
+<KeyTakeaways>
+
+- Tam bir GraalVM JavaScript çalışma zamanı, yalnızca bir makro kaydedici değil.
+- Oyun olaylarına tepki verin, modül ayarlarını değiştirin ve kendi HUD'unuzu çizin.
+- Betikler çalışma zamanında yüklenir, yeniden başlatmaya gerek yoktur ve Opal'ın API'lerine göre güvenli bir şekilde çalışır.
+- Diğer çoğu istemci temel makrolarda durur.
+
+</KeyTakeaways>
+
+## Neden GraalVM
+
+GraalVM, Oracle tarafından sunulan çok dilli bir çalışma zamanıdır. Bunu seçmemizin somut nedenleri var:
+
+- Hız: JIT derlemesi, betikleri her döngüde yeterince hızlı çalışır hale getirir.
+- JavaScript: Çoğu kişi zaten biliyor, bu nedenle öğrenme eğrisi kısadır.
+- İş parçacığı güvenliği: JS-Java bağlamaları, sizi takılıp düşmekten alıkoymak yerine eşzamanlılığı düzgün bir şekilde yönetir.
+- Tanıdık kalıplar: Standart JavaScript API'leri beklendiği gibi davranır.
+
+## Neler Yapabilirsiniz
+
+### Özel otomasyon
+
+Oyun içi olaylara yanıt verin:
+
+```javascript
+// Auto-respond to certain chat messages
+on('chat', (event) => {
+  if (event.message.includes('1v1?')) {
+    sendChat('/duel accept');
+  }
+});
+```
+
+### Dinamik modül yapılandırması
+
+Oyun durumuna göre modül ayarlarını değiştirin:
+
+```javascript
+// Increase reach when health is low
+on('tick', () => {
+  const health = player.getHealth();
+  if (health < 8) {
+    modules.get('Reach').setSetting('distance', 3.3);
+  } else {
+    modules.get('Reach').setSetting('distance', 3.1);
+  }
+});
+```
+
+### Özel HUD öğeleri
+
+Kendi üst üste bindirmelerinizi çizin:
+
+```javascript
+// Display a combo counter on screen
+let combo = 0;
+on('attackEntity', () => { combo++; });
+on('damage', () => { combo = 0; });
+on('render2d', (ctx) => {
+  ctx.drawText(`Combo: ${combo}`, 10, 10, 0xFFFFFF);
+});
+```
+
+### Sunucuya özel profiller
+
+Farklı sunuculara katıldığınızda yapılandırmaları otomatik olarak değiştirin:
+
+```javascript
+on('serverJoin', (event) => {
+  if (event.ip.includes('pvp.example.com')) {
+    loadConfig('server-bypass');
+  } else {
+    loadConfig('ghost-default');
+  }
+});
+```
+
+## Başlangıç
+
+<Steps>
+
+<Step number={1} title="Betikleri dizinini aç">Opal yapılandırma klasörünüzdeki betik dizinini bulun</Step>
+
+<Step number={2} title=".js dosyası oluşturun">Her isim işe yarar. Bu senin senaryon</Step>
+
+<Step number={3} title="API'ye karşı yaz">Gösterge panelindeki dokümanlarda API referansını kullanın: olaylar, modül erişimi, oyuncu durumu ve işleme</Step>
+
+<Step number={4} title="Kaydet ve oyna">Komut dosyaları çalışma zamanında yüklenir, bu nedenle yeniden başlatmaya gerek yoktur</Step>
+
+</Steps>
+
+<Callout variant="info" title="Komut dosyaları güvenli ortamda çalışır">
+Komut dosyaları GraalVM içinde yürütülür ve Opal'ın API'lerini çağırabilir, ancak dosya sisteminize, ağınıza veya diğer uygulamalarınıza erişemezler. Komut dosyalarınız yerel kalır ve makineniz sizin kalır.
+</Callout>
+
+## Topluluk Betikleri
+
+Betik topluluğu büyüyor. Discord, kendi betiklerinizi yazmanıza yardımcı olacak betikler ve kişiler paylaştı. Yaygın olanlar arasında mini oyunlar için otomatik oyun betikleri, istatistik takipçileri, kombo algılama ve sunucuya özel yapılandırma değiştiriciler bulunur.
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Opal hangi motoru kullanır?">
+GraalVM, Oracle'ın kurumsal JavaScript çalışma zamanı ve iş parçacığı güvenli oyun bağlamaları.
+</FAQItem>
+
+<FAQItem question="Komut dosyaları benim dosyalarımı okuyabilir mi?">
+Hayır. Sadece Opal'ın API'lerine göre sandboxed'dır.
+</FAQItem>
+
+<FAQItem question="Bir betiği yüklemek için yeniden başlatmam gerekiyor mu?">
+Hayır. Dosyayı bırakın, çalışma zamanında yüklenir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/blog/opal-config-sharing-guide", label: "Opal'ın yapılandırma paylaşım sistemi", description: "Sunucuya göre doğru yapılandırmayı bir betik ile otomatik olarak yükleyin." },
+  { href: "/tr/blog/why-opal-is-the-best-value-minecraft-client", label: "Neden Opal en iyi fiyat-performanslı müşteri", description: "Her şey $8.99 içermektedir." },
+  { href: "/tr/compare/opal-vs-liquidbounce", label: "Opal ve LiquidBounce", description: "Betik yazmak mı, açık kaynaklı yolu mu." },
+]} />
+
+<CTA href="/tr/purchase" note="Ömür boyu lisans · anında teslimat · abonelik yok">Senaryo yazabileceğiniz bir müşteri edinin, $8.99</CTA>

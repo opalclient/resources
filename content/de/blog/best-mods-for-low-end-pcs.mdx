@@ -1,0 +1,108 @@
+---
+title: Die besten Minecraft-Mods für schwache PCs (2026)
+description: "Die besten Minecraft-Mods für schwache PCs und Laptops: Sodium, FerriteCore, Entity Culling und Dynamic FPS, sowie die Einstellungen, die zusätzliche Frames herausholen."
+excerpt: Auf schwacher Hardware weniger zeichnen und weniger Speicher verwalten. Hier ist das freie Stack, der das erledigt, und wie ein Client trotzdem passt.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: Werden diese mit einer integrierten GPU laufen?
+    a: Ja. Sodium insbesondere profitieren integrierte Grafikkarten davon am meisten. Halte die Renderdistanz niedrig.
+  - q: Kann ich eine Anwendung wie Opal auf einem einfachen PC ausführen?
+    a: Ja, wenn Ihre Leistungsgrundlage solide ist. Installieren Sie Sodium für mehr Spielraum und lassen Sie Lithium weg, da es nicht mit Opal kompatibel ist.
+  - q: Wie viel RAM sollte eine einfache Konfiguration verwenden?
+    a: Genug zum Laufen, nicht mehr. Übermäßige Zuweisung schadet und kann längere Pausen verursachen.
+  - q: Benötige ich Shader?
+    a: Nein, und du solltest sie auf schwacher Hardware vermeiden. Erst das Gerüst, dann der Anblick.
+---
+
+Auf einem schwachen PC oder Laptop ist das Ziel, weniger Dinge zu rendern und weniger Speicher zu verwalten. [Sodium](https://modrinth.com/mod/sodium) erledigt den Großteil der Arbeit beim Rendern, ein paar Mods für Speicher und Culling erledigen den Rest, und [Dynamic FPS](https://modrinth.com/mod/dynamic-fps) verhindert, dass das Spiel deinen Laptop auskochen lässt, wenn du aus dem Spiel gehst. Alles kostenlos auf [Fabric](https://fabricmc.net). Eine Anmerkung für Opal-Nutzer: Lithium ist nicht mit Opal kompatibel, also baut eure Konfiguration um Sodium herum auf.
+
+<KeyTakeaways>
+
+- Sodium ist der größte Gewinn auf schwacher Hardware. Installiere es zuerst.
+- FerriteCore reduziert den RAM-Druck; Entity Culling überspringt versteckte Mobs.
+- Dynamic FPS verhindert, dass das Spiel im Hintergrund unnötig Strom verbraucht.
+- Lithium ist nicht mit Opal kompatibel. Verwende Sodium, wenn du Opal verwendest.
+
+</KeyTakeaways>
+
+## Der Stapel
+
+<ModSection title="Leistungssteigerungen für den unteren Leistungsbereich" badge="Kostenlos" badgeColor="smaragd" description="Sodium leistet den größten Beitrag. FerriteCore, Entity Culling und Dynamic FPS runden es ab. Lithium ist nur für Nicht-Opal-Setups geeignet.">
+<ModList>
+<ModLink href="https://modrinth.com/mod/sodium">Sodium (Rendering-FPS, funktioniert mit Opal)</ModLink>
+<ModLink href="https://modrinth.com/mod/ferritecore">FerriteCore (geringerer RAM-Verbrauch)</ModLink>
+<ModLink href="https://modrinth.com/mod/entityculling">Entity Culling (versteckte Mobs überspringen)</ModLink>
+<ModLink href="https://modrinth.com/mod/dynamic-fps">Dynamic FPS (im Leerlauf im Hintergrund)</ModLink>
+<IncompatibleMod>Lithium (Spiel-Logik, nicht kompatibel mit Opal)</IncompatibleMod>
+</ModList>
+</ModSection>
+
+## Sodium
+
+Der größte Gewinn auf schwacher Hardware. Die Neufassung des Renderings ist es, wo die meisten deiner Frames zurückkommen, und sie hilft integrierten GPUs am meisten. Installieren [Fabric API](https://modrinth.com/mod/fabric-api) zuerst.
+
+## FerriteCore
+
+Reduziert den RAM-Verbrauch, sodass das Spiel seltener für die Garbage Collection pausiert. Wichtig, wenn nur wenige Gigabyte zur Verfügung stehen.
+
+## Entity Culling
+
+Überspringt das Rendern von Entitäten, die man nicht sehen kann. Bei einer schwachen GPU ist das Nicht-Zeichnen versteckter Mobs ein einfacher Gewinn.
+
+## Dynamic FPS
+
+Reduziert die Bildrate, wenn das Fenster im Hintergrund ist, sodass das Spiel nicht unnötig arbeitet, während man einen anderen Tab verwendet. Schonend für Laptops.
+
+## Einstellungen, die immer noch wichtig sind
+
+<Checklist>
+<ChecklistItem>Renderdistanz: 6 bis 8 Chunks sind auf schwacher Hardware ausreichend.</ChecklistItem>
+<ChecklistItem>Grafiken: Schnell.</ChecklistItem>
+<ChecklistItem>Sanfte Beleuchtung: Aus oder minimal.</ChecklistItem>
+<ChecklistItem>Partikel: minimal.</ChecklistItem>
+</Checklist>
+
+<Callout variant="warning" title="Opal ausführen? Lithium überspringen">
+Lithium ist nicht mit Opal kompatibel. Bei einer einfachen Konfiguration sollten Sie sich auf Sodium für die Leistung verlassen und Lithium weglassen.
+</Callout>
+
+## Kann ein einfacher PC einen Client ausführen?
+Ja, wenn die Basis stabil ist. Opal ist ein Fabric-Mod für Minecraft 1.21.10 und wird im selben `mods`-Ordner wie Sodium installiert. Es ist eine vollständige Client-Anwendung mit über 200 Funktionen, benötigt also einige Ressourcen, weshalb der Spielraum von Sodium auf schwacher Hardware am wichtigsten ist. Installieren Sie den Performance-Stack, halten Sie die Renderdistanz niedrig, lassen Sie Lithium weg, und Opal kann auf bescheidenen Maschinen laufen
+## Auf einen Blick
+
+| Modus | Beruf | Arbeitet mit Opal |
+| :--- | :--- | :--- |
+| Sodium | Rendering FPS | Ja |
+| FerriteCore | Geringerer RAM-Verbrauch | Ja |
+| Entity Culling | Versteckte Mobs überspringen | Ja |
+| Dynamische FPS | Leerlauf im Hintergrund | Ja |
+| Lithium | Game-Logik-Performance | Nein |
+
+## HÄUFIG GESTELLTE FRAGEN
+
+<FAQList>
+
+<FAQItem question="Werden diese auch mit einer integrierten GPU laufen?">
+Ja. Sodium hilft integrierten Grafikkarten am meisten. Halte die Renderdistanz niedrig.
+</FAQItem>
+
+<FAQItem question="Kann ich Opal auf einem einfachen PC ausführen?">
+Ja, mit einer soliden Leistungsbasis. Installieren Sie Sodium für mehr Spielraum und lassen Sie Lithium weg.
+</FAQItem>
+
+<FAQItem question="Benötige ich Shader auf einem schwachen PC?">
+Nein. Auf schwacher Hardware darauf verzichten. Erst Frames, dann Aussehen.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/blog/best-performance-mods-for-minecraft", label: "Die besten Performance-Mods für Minecraft", description: "Der vollständige Performance-Stack erklärt." },
+  { href: "/de/blog/how-to-fix-minecraft-lag", label: "Wie man Minecraft-Ruckeln behebt", description: "Finde heraus, welche Art von Verzögerung dich beeinträchtigt." },
+  { href: "/de/blog/how-to-get-more-fps-in-minecraft", label: "Wie man in Minecraft mehr FPS erhält", description: "Zwei Mods und drei Einstellungen." },
+]} />
+
+<CTA href="/de/purchase">Opal für $8.99 lebenslang erhalten</CTA>

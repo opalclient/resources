@@ -1,0 +1,79 @@
+---
+title: 如何修复 Minecraft 滞后 (2026)
+description: Minecraft 卡顿有三个原因：低帧率、网络延迟和内存压力。以下是如何区分它们，以及可以修复每个问题的外挂和设置.
+excerpt: 延迟实际上是三个问题。以下是如何区分它们，以及对客户能够修复和无法修复的诚实评估.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: 为什么 Minecraft 电脑配置好也会卡顿?
+    a: 通常是内存卡顿或渲染设置，而不是原始性能。添加 FerriteCore，安装 Sodium，并检查你的渲染距离.
+  - q: 性能优化能解决服务器延迟吗？?
+    a: 客户端修改能解决你的帧数和内存问题。服务器端延迟是你无法控制的，任何客户端修改都无法解决.
+  - q: 锂元素与Opal兼容吗？?
+    a: 不。锂不兼容于 Opal. 使用 Sodium 为了性能，如果需要，可以不使用锂 Opal 已安装.
+  - q: 更多 RAM 能解決卡頓嗎？?
+    a: 仅限于此。过度分配可能会导致更长的垃圾回收暂停.
+---
+
+“延迟”实际上是三个不同的问题，解决方法取决于你遇到了哪一个。低帧率是你的机器难以绘制帧。网络延迟是与服务器的连接问题。内存压力是游戏暂停以清理 RAM。首先尝试[Sodium](https://modrinth.com/mod/sodium)来提升帧率，然后依次检查列表中的其他选项。对于 Opal 用户请注意：Lithium 与 Opal 不兼容，所以围绕 Sodium 构建.
+
+<KeyTakeaways>
+
+- 低帧率、网络延迟和内存卡顿是不同的问题，需要不同的解决方法。
+- Sodium 修复渲染帧率；FerriteCore 和 ModernFix 修复内存卡顿。
+- 客户端模组无法修复服务器端的延迟。我们在此明确说明。
+- Lithium 与 Opal 不兼容。如果使用 Opal，请使用 Sodium.
+
+</KeyTakeaways>
+
+## 區分這三者
+
+<Callout variant="info" title="你遇到了哪种延迟？">
+低帧率：即使在单人游戏中，整个游戏也感觉卡顿（GPU 和 CPU 问题）。网络延迟：方块消失并重新出现，怪物回弹，仅在服务器上发生（连接问题）。内存卡顿：游戏流畅，但每隔几秒钟会冻结一段时间（垃圾回收问题）。
+</Callout>
+
+## 修复低帧率
+
+安装 [Sodium](https://modrinth.com/mod/sodium) 以进行渲染。然后将渲染距离降低几个区块，将图形设置为快速，如果想要无上限帧率，请禁用垂直同步。 参阅 [如何获得更多帧率](/zh/blog/how-to-get-more-fps-in-minecraft) 以获取完整的设置。 Sodium 与 Opal 配合良好。
+
+## 修复内存卡顿
+
+添加 [FerriteCore](https://modrinth.com/mod/ferritecore) 以减少内存使用，并添加 [ModernFix](https://modrinth.com/mod/modernfix) 以进一步修剪。 不要过度分配 RAM；超过一定程度，更多并不代表更好，过多的 RAM 甚至可能导致冻结时间更长。
+
+## 修复网络延迟
+
+网络延迟是服务器或您的连接问题，而不是客户端问题。 关闭占用带宽大的应用程序，如果可以，请使用有线连接，并选择离您地理位置较近的服务器区域。 模组无法修复慢速连接，我们也不会假装可以.
+
+<Callout variant="warning" title="运行Opal？跳过锂">
+锂是治疗口吃常用的药物，但它不适用于 Opal. 依靠 Sodium 用于性能，FerriteCore 用于内存，Lithium 排除.
+</Callout>
+
+## Opal 的定位
+
+Opal 是一个完整的客户端（Minecraft 1.21.10 的一个Fabric模组），因此就像任何大型模组一样，它在运行时会占用一些资源。它本身不会在健康的配置上造成“卡顿”，但它是确保你的性能底线良好的一个理由：安装Sodium以提供性能储备，如果出现内存卡顿，则添加 FerriteCore，而 Lithium 可以不用安装。 具备这些条件后，Opal 的 200 多个功能和玻璃 UI 就能流畅运行。
+
+## 常见问题解答
+
+<FAQList>
+
+<FAQItem question="为什么 Minecraft 电脑配置好也会卡顿?">通常是内存卡顿或渲染设置，而不是原始性能。添加 FerriteCore，安装 Sodium，并检查渲染距离</FAQItem>
+
+<FAQItem question="性能优化能解决服务器延迟吗？">
+不能。客户端优化能改善你的帧数和内存占用。服务器端延迟是无法控制的。
+</FAQItem>
+
+<FAQItem question="锂元素与Opal兼容吗？?">
+不。使用 Sodium 以及铁氧体核，并在何时不包含锂 Opal 已安装.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/blog/best-performance-mods-for-minecraft", label: "Minecraft 最佳性能优化模组", description: "全栈解决方案，解决帧率和内存延迟问题." },
+  { href: "/zh/blog/how-to-get-more-fps-in-minecraft", label: "如何在提升帧数 Minecraft", description: "恢复帧数最多的设置." },
+  { href: "/zh/blog/best-multiplayer-performance-mods", label: "最佳多人游戏性能模组", description: "繁忙服务器上什么有用，什么没用." },
+]} />
+
+<CTA href="/zh/purchase">终身享有 Opal，仅售 8.99 美元</CTA>

@@ -1,0 +1,109 @@
+---
+title: 最好 Minecraft 低端电脑的MOD (2026)
+description: "最好 Minecraft 电脑和笔记本电脑的低端优化模组: Sodium, 铁氧体核心、实体剔除、动态帧率，以及榨取额外帧数的设置."
+excerpt: 在硬件资源受限的情况下，减少绘图量并精简内存管理。以下是实现此功能的免费栈，以及客户端如何依然能够适配.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: 这些能在集成显卡上运行吗？?
+    a: 是的. Sodium 尤其能最好地提升集成显卡。保持渲染距离较低.
+  - q: 我能在低端电脑上运行像 Opal 这样的客户端吗？?
+    a: 是的，如果你的基础表现良好。安装Sodium以获得余裕空间，而不要安装“Lithium”，因为它与Opal不兼容.
+  - q: 低端配置应该使用多少内存？?
+    a: 足够奔跑，不多。过度分配会造成伤害，并可能延长停顿.
+  - q: 我需要着色器吗？?
+    a: 不，而且你最好在配置较低的硬件上跳过它们。先构建框架，再看效果.
+---
+
+在配置较低的电脑或笔记本电脑上，目标是减少需要绘制的项目数量并降低内存占用。 [Sodium](https://modrinth.com/mod/sodium) 负责渲染的大部分工作，一些内存优化和剔除模组完成剩余的任务，而 [Dynamic FPS](https://modrinth.com/mod/dynamic-fps) 则能在你切换出去时防止游戏过热。 所有模组都可在 [Fabric](https://fabricmc.net) 上免费获取。 针对 Opal 用户的一点提示：Lithium 与 Opal 不兼容，因此请围绕 Sodium 构建.
+
+<KeyTakeaways>
+
+- 钠是弱硬件上最大的优化。首先安装它。
+- FerriteCore 降低了内存压力；实体剔除会跳过隐藏的怪物。
+- 动态 FPS 阻止游戏在后台浪费电力。
+- 锂与 Opal 不兼容。如果你使用 Opal，请使用 Sodium.
+
+</KeyTakeaways>
+
+## 堆栈
+
+<ModSection title="低端性能优化" badge="免费" badgeColor="翠绿" description="Sodium 提升最多。FerriteCore、Entity Culling 和 Dynamic FPS 锦上添花。Lithium 仅适用于非 Opal 设置。">
+<ModList>
+<ModLink href="https://modrinth.com/mod/sodium">Sodium (渲染 FPS，与 Opal 兼容)</ModLink>
+<ModLink href="https://modrinth.com/mod/ferritecore">FerriteCore (降低 RAM 使用)</ModLink>
+<ModLink href="https://modrinth.com/mod/entityculling">Entity Culling (跳过隐藏的生物)</ModLink>
+<ModLink href="https://modrinth.com/mod/dynamic-fps">Dynamic FPS (后台空闲)</ModLink>
+<IncompatibleMod>Lithium (游戏逻辑，与 Opal 不兼容)</IncompatibleMod>
+</ModList>
+</ModSection>
+
+## Sodium
+
+在低端硬件上取得的最大胜利。渲染重写是您大部分帧数回来的地方，它对集成显卡帮助最大。安装 [Fabric API](https://modrinth.com/mod/fabric-api) 首先。
+
+## FerriteCore
+
+降低 RAM 使用量，减少游戏因垃圾回收而暂停的情况。 当你只有几 GB 的空间时，这一点很重要。
+
+## 实体剔除
+
+跳过你无法看到的实体的渲染。 在低端 GPU 上，不绘制隐藏的生物是一种简单的优化。
+
+## 动态 FPS
+
+当窗口在后台时，降低帧率，这样游戏在切换出去时就不会过度工作。 对笔记本电脑很友好。
+
+## 仍然重要的设置
+
+<Checklist>
+<ChecklistItem>渲染距离：6 到 8 个方块对配置较低的硬件来说已经足够了.</ChecklistItem>
+<ChecklistItem>图形：快速.</ChecklistItem>
+<ChecklistItem>柔和的灯光：关闭或亮度最低.</ChecklistItem>
+<ChecklistItem>微不足道.</ChecklistItem>
+</Checklist>
+
+<Callout variant="warning" title="运行 Opal？跳过 Lithium">
+Lithium 与 Opal 不兼容。在低端配置中，请优先使用 Sodium 以获得更好的性能，并排除 Lithium。
+</Callout>
+
+## 低端电脑能运行客户端吗？?
+是的，如果基础稳定的话。Opal 是 Minecraft 1.21.10 的一个 Fabric 模组，它会安装到与 Sodium 相同的 `mods` 文件夹中。它是一个拥有 200 多个功能的全客户端，因此需要一些资源，这也是为什么在配置较低的硬件上，Sodium 提供的空间至关重要。安装好性能堆栈，保持较低的渲染距离，将 Lithium 移除，Opal 就可以在配置普通的机器上运行了
+## 一目了然
+
+| 模式 | 工作 | 与 Opal |
+| :--- | :--- | :--- |
+| Sodium | 渲染帧率 | 是 |
+| 
+铁氧体核 | 降低 RAM 使用 | 是 |
+| 实体剔除 | 跳过隐藏的怪物 | 是 |
+| 动态帧率 | 在后台空闲 | 是 |
+| 锂 | 游戏逻辑性能 | 否 |
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="这些能在集成显卡上运行吗？">
+是的。Sodium 对集成显卡提升效果最好。请保持较低的渲染距离。
+</FAQItem>
+
+<FAQItem question="我可以在低端电脑上运行 Opal 吗？">
+是的，只要硬件基础良好即可。安装 Sodium 以获得更多空间，并移除 Lithium。
+</FAQItem>
+
+<FAQItem question="我的电脑配置较低，需要开启着色器吗？">
+不需要。在配置较低的电脑上禁用它们。流畅度优先，再考虑视觉效果。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/blog/best-performance-mods-for-minecraft", label: "Minecraft 最佳性能优化模组", description: "完整的性能栈详解." },
+  { href: "/zh/blog/how-to-fix-minecraft-lag", label: "如何修复 Minecraft 滞后", description: "找出是什么类型的延迟在影响你." },
+  { href: "/zh/blog/how-to-get-more-fps-in-minecraft", label: "如何在提升帧数 Minecraft", description: "两个模组和三个设置." },
+]} />
+
+<CTA href="/zh/purchase">终身享有 Opal，仅售 8.99 美元</CTA>

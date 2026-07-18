@@ -1,0 +1,84 @@
+---
+title: インストール方法 Fabric そして、最初のMOD (2026)
+description: MODsを始めたばかりですか？Fabric Loaderをインストールし、Fabric APIを追加し、SodiumとModMenuをドロップインしてください。ゼロから動作するMOD環境、そしてクライアントまでの初心者向けチュートリアルです.
+excerpt: モッド制作は、見た目ほど難しくありません。バニラゲームからFabric環境を構築し、クライアントが利用できる状態まですすめる手順をご紹介します.
+date: 2026-06-13
+lastUpdated: 2026-06-13
+category: Guides
+author: trq
+faqs:
+  - q: Fabric API は必要ですか？?
+    a: ほとんどの場合です。多くのFabric Modはこれに依存しているので、まずインストールしてください.
+  - q: 私のMODがロードされないのはなぜですか？?
+    a: 通常はバージョン不一致か、Fabric APIが不足していることが原因です。Minecraftのバージョンに合わせて、すべてのMODを調整してください.
+  - q: クライアントを新たに登録できますか？ Opal こちら?
+    a: はい。OpalはMinecraft1.21.10 のFabric製 MOD なので、同じ MOD フォルダにインストールします。Sodiumはそのままにして、「Lithium」は不要です。Opalと互換性がないからです.
+  - q: まず何を始めるべきでしょうか？?
+    a: FPSとModMenuでSodiumを使って、すべてを管理します。シェーダーが欲しい場合はIrisを追加してください.
+---
+
+MODを導入するのは、見た目よりも簡単です。 [Fabric](https://fabricmc.net) ローダーをインストールし、ほとんどのMODが必要とするライブラリである [Fabric API](https://modrinth.com/mod/fabric-api) を追加し、いくつかのMODのJARファイルをフォルダにドロップするだけです。 最初に試すのに適したセットは [Sodium](https://modrinth.com/mod/sodium) と [ModMenu](https://modrinth.com/mod/modmenu) です。 これが、バニラゲームから動作するMOD入りゲームへと至る道筋で、クライアントの上に重ねる準備が整っています.
+
+<KeyTakeaways>
+
+- まずはFabric Loaderをインストールし、その次にFabric APIをインストールしてください。
+- FPS向上のためにSodium、ゲーム内でのMod管理にはModMenuを使用してください。
+- Opalのようなクライアントは、同じModsフォルダにインストールします。
+- Opalを使用する場合はLithiumはインストールしないでください。互換性がないためです.
+
+</KeyTakeaways>
+
+## 手順に従ってインストールしてください
+
+<Steps>
+
+<Step number={1} title="Fabricローダーをインストールしてください">Minecraftのバージョンに対応した[Fabric](https://fabricmc.net)インストーラーを実行してください。起動前に選択できる新しいランチャープロファイルが追加されます</Step>
+
+<Step number={2} title="追加 Fabric API">[Fabric API](https://modrinth.com/mod/fabric-api) は、ほとんどの Fabric Mod が依存する共有ライブラリです。ご自身のバージョンに合ったものをダウンロードし、`mods` フォルダに入れてください。これがないと、ほとんどの Mod は読み込まれません</Step>
+
+<Step number={3} title="最初のMODを追加してください">Sodium (FPS) と ModMenu (ゲーム内でmodを管理・設定) を `mods` フォルダにドロップしてください。シェーダーを使用したい場合は、Iris を追加してください</Step>
+
+<Step number={4} title="開始して確認してください">Fabric プロファイルでゲームを開始し、ModMenu を開いて、インストールされている MOD がリストされていることを確認してください。もし何か不足している場合は、そのバージョンが Minecraft と一致しているか、そして Fabric API がインストールされているか確認してください</Step>
+
+</Steps>
+
+<Callout variant="info" title="リチウムに関する注意">多くの初心者向けガイドでは、Lithiumを3つ目のMODとして追加しています。単独でも優れたゲームロジック最適化ツールですが、Opalとは互換性がありません。Opalを実行する予定であれば、パフォーマンスのためにSodiumを使用し、Lithiumは最初から使用しないようにしてください</Callout>
+
+## 概要
+
+| ステップ | 内容 |
+| :--- | :--- |
+| 1 | Fabric Loader をインストール |
+| 2 | Fabric API を追加 |
+| 3 | Sodium と ModMenu (シェーダー用 Iris) を追加 |
+| 4 | ModMenu で起動し、確認 |
+
+## クライアントの追加
+
+ローダー、Fabric API、そして最初のModが揃ったら、フォルダはクライアントの追加準備が完了です。OpalはMinecraft 1.21.10用のFabric Modなので、他のModと同様に`mods`フォルダにインストールします。パフォーマンス設定はそのままに、戦闘、移動、視覚、ユーティリティ、ガラスUI、そしてスクリプトエンジンといった200以上の機能を追加できます。Sodiumはパフォーマンスの余裕のために残し、Lithiumは外しておけば準備完了です。
+
+## よくある質問
+
+<FAQList>
+
+<FAQItem question="Fabric APIは必要ですか？">
+ほとんどの場合、必要です。多くのFabric製MODはこれに依存しているので、まずインストールしてください。
+</FAQItem>
+
+<FAQItem question="このようにOpalのようなクライアントを追加できますか？">
+はい。OpalはFabricのModで、同じModフォルダにインストールされます。Sodiumはそのままに、Lithiumは入れないでください。
+</FAQItem>
+
+<FAQItem question="なぜ私のMODがロードされないのですか？">
+通常はバージョン不一致、またはFabric APIが不足していることが原因です。Minecraftのバージョンに合わせて、すべてのMODを一致させてください。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/ja/blog/essential-fabric-mods-every-player-should-have", label: "必須のFabricMOD", description: "まず、スターターパックをインストールしてください." },
+  { href: "/ja/blog/best-performance-mods-for-minecraft", label: "最高のパフォーマンス向上MOD Minecraft", description: "次に、パフォーマンススタックを構築してください." },
+  { href: "/ja/blog/why-opal-is-the-best-value-minecraft-client", label: "なぜ Opal 最高の価値を持つ顧客です", description: "クライアント層が上に位置する." },
+]} />
+
+<CTA href="/ja/purchase">設定を完了させてください Opal, $8.99</CTA>

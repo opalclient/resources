@@ -1,0 +1,99 @@
+---
+title: 如何在提升帧数 Minecraft (2026 导游)
+description: 两款免费的 Fabric 模组完成了大部分工作：Sodium 用于渲染，Lithium 用于游戏逻辑。以下是设置、重要的选项以及 Opal 兼容性说明.
+excerpt: 最快的FPS胜利 Minecraft 是两个模组加上三个设置。这里是完整的设置，如果你运行，可以跳过那个模组 Opal.
+date: 2026-05-12
+lastUpdated: 2026-06-03
+category: Guides
+author: trq
+faqs:
+  - q: Minecraft 中最能提升 FPS 的是什么？?
+    a: Sodium. 它重写了渲染器，并且是大多数配置中收益最大的单一改进，通常仅靠它就能带来显著提升.
+  - q: 我需要两个吗？ Sodium 和锂?
+    a: 他们修复不同的东西。Sodium负责渲染，“Lithium”负责游戏逻辑。同时运行两者以获得最流畅的结果，除非你运行Opal，它与“Lithium”不兼容。在这种情况下，使用Sodium并跳过“Lithium”.
+  - q: 锂元素与Opal兼容吗？?
+    a: 不。锂不兼容于 Opal. 如果你跑 Opal, 搭配 Sodium 把锂元素排除在外.
+  - q: 这些mod支持着色器吗？?
+    a: 是的。为着色器添加 Iris；它构建为与 Sodium 配合使用，因此您可以保留大部分帧率。请参阅着色器安装指南.
+---
+
+在 Minecraft 中，最大的 FPS 提升来自于 [Sodium](https://modrinth.com/mod/sodium)，这是一个免费的 [Fabric](https://fabricmc.net) 模组，它重写了渲染引擎，以及 [Lithium](https://modrinth.com/mod/lithium)，后者加速了游戏逻辑。 它们通常能在性能较弱的机器上将帧率提高一倍。 需要注意的是，Lithium 不兼容 Opal，如果你使用 Opal，最好只使用 Sodium.
+
+<KeyTakeaways>
+
+- Sodium 是最大的 FPS 优化。请先安装它。
+- Lithium 优化游戏逻辑，但与Opal不兼容。如果运行Opal，请跳过它。
+- 三个默认设置（渲染距离、垂直同步、图形）即可完成。
+- Sodium 提供了性能空间；这为像Opal这样的客户端留出了空间.
+
+</KeyTakeaways>
+
+## 安装模组
+
+<Steps>
+
+<Step number={1} title="安装 Sodium">[Sodium](https://modrinth.com/mod/sodium) 替换了 Minecraft 的渲染器，使用了速度更快的渲染器，这是它自身带来的最大提升。首先安装 [Fabric](https://fabricmc.net) 启动器和 [Fabric API](https://modrinth.com/mod/fabric-api)，然后将 Sodium 放入你的 `mods` 文件夹中。Sodium 与 Opal 一起使用也没有问题</Step>
+
+<Step number={2} title="添加锂 (如果您未使用 Opal)">[Lithium](https://modrinth.com/mod/lithium) 优化了生物人工智能、物理效果和方块刷新机制，且不改变视觉效果。它非常适合在原版增强 mod 环境中使用，但与 Opal 不兼容，如果安装了 Opal，请将其排除</Step>
+
+</Steps>
+
+<Callout variant="warning" title="运行 Opal 时，请跳过 Lithium">
+Lithium 与 Opal 不兼容。请使用 Sodium 来获得流畅的帧率，并将 Lithium 从文件夹中移除。Sodium 单独就能满足渲染需求，这才是更大的收益。
+</Callout>
+
+## 調整三個設定
+
+<Checklist>
+<ChecklistItem>渲染距离：如果你的 GPU 是瓶颈，可以适当降低一些.</ChecklistItem>
+<ChecklistItem>垂直同步：关闭以获得无上限帧数.</ChecklistItem>
+<ChecklistItem>图形：设置为快速，即可获得轻松的额外加速.</ChecklistItem>
+</Checklist>
+
+<Callout variant="tip" title="快速胜利">
+降低渲染距离是继Sodium之后游戏中影响最大的单一选项。将渲染距离从16个区块减少到12个区块，几乎不会牺牲近距离 PvP 的视觉效果，就能大幅提升你的帧率。
+</Callout>
+
+## 添加客户端
+
+Opal 安装到与 Sodium 相同的 `mods` 文件夹中。它是一个功能齐全的客户端，拥有 200 多个功能，因此就像任何大型模组一样，它在运行时会消耗一些资源。这正是一点 Sodium 的重要性：它能让你在运行 Opal 这样的功能集的同时，仍然流畅地游玩。保留 Sodium，移除 Lithium，Opal 就有足够的空间发挥。
+
+## 一览
+
+| 想要 | 安装 |
+| :--- | :--- |
+| 更高的 FPS（渲染） | Sodium |
+| 更流畅的游戏逻辑（Opal 不支持） | Lithium |
+| 基础模组 | Fabric API |
+| 着色器 | Iris |
+| 200+ 功能 | Opal |
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="什么能带来最大的 FPS 提升？">
+Sodium。它重写渲染方式，并且是大多数配置中最大的单项提升。
+</FAQItem>
+
+<FAQItem question="锂元素与Opal兼容吗？?">
+不。锂不适用于 Opal. 对 Opal 用 Sodium 把锂元素排除在外.
+</FAQItem>
+
+<FAQItem question="Opal 会降低我的 FPS 吗？">
+Opal 是一个完整的客户端，所以就像任何大型模组一样，它在运行时会占用一些资源。请务必安装 Sodium 以获得足够的性能空间，大多数电脑上都能正常运行。
+</FAQItem>
+
+<FAQItem question="这些适用于着色器吗？">
+是的。添加 Iris 并查看[如何安装着色器](/zh/blog/how-to-install-shaders-in-minecraft)。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/blog/how-to-install-shaders-in-minecraft", label: "如何在 Minecraft 中安装着色器", description: "将 Iris 叠加在 Sodium 之上，同时保留框架." },
+  { href: "/zh/blog/best-mods-for-performance-and-shaders", label: "性能和着色器最佳模组", description: "完整的免费演出堆栈，尽在此处." },
+  { href: "/zh/blog/essential-fabric-mods-every-player-should-have", label: "必需的 Fabric 模式", description: "每个Fabric设置的基础包." },
+]} />
+
+<CTA href="/zh/purchase">终身享有 Opal，仅售 8.99 美元</CTA>
