@@ -192,13 +192,23 @@ const ARRAY_BLOCK_RE = /(features=\{\[|values:\s*\[)([\s\S]*?)(\])/g;
  * tag name — it happily "translates" <KeyTakeaways> to <主なポイント> otherwise.
  */
 async function translateJsxProps(chunk, target) {
+  // A display prop that refuses to translate cleanly (single words like
+  // "Source" reliably provoke model meta-responses) keeps its English value
+  // — one untranslated table header beats failing the whole file.
+  const tryTranslate = async (value) => {
+    try {
+      return await translateString(value, target);
+    } catch {
+      return value;
+    }
+  };
   let out = await replaceAsync(chunk, PROP_RE, async (_, name, open, value, close) => {
-    return `${name}${open}${await translateString(value, target)}${close}`;
+    return `${name}${open}${await tryTranslate(value)}${close}`;
   });
   out = await replaceAsync(out, ARRAY_BLOCK_RE, async (_, open, inner, close) => {
     const translated = await replaceAsync(inner, /"((?:[^"\\]|\\.)+)"/g, async (m, literal) => {
       if (literal.startsWith('/') || literal.startsWith('http')) return m;
-      return `"${await translateString(literal, target)}"`;
+      return `"${await tryTranslate(literal)}"`;
     });
     return `${open}${translated}${close}`;
   });
