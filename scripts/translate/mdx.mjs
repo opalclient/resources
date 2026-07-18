@@ -11,7 +11,16 @@
 import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 
 import { translate } from './client.mjs';
-import { BRANDS, extractFences, mask, restoreFences, unmask, verifyTokens } from './protect.mjs';
+import {
+  BRANDS,
+  detectMetaLeak,
+  extractFences,
+  mask,
+  restoreFences,
+  unmask,
+  verifyTokens
+} from './protect.mjs';
+import { assertMdxCompiles } from './verify-mdx.mjs';
 
 /** Frontmatter fields whose string values are translated. */
 const FM_TRANSLATE = new Set(['title', 'description', 'excerpt', 'q', 'a', 'label']);
@@ -68,29 +77,28 @@ function stripBrandQuotes(text) {
  */
 async function translateString(s, target) {
   const errors = [];
+  const check = (out) => {
+    const lost = verifyTokens(s, out);
+    if (lost !== null) throw new Error(`token ${lost} lost`);
+    const leak = detectMetaLeak(s, out);
+    if (leak !== null) throw new Error(leak);
+    return out;
+  };
   try {
     const { masked, store } = mask(s);
     const { text, missing } = unmask(await translate(masked, target), store);
     if (missing > 0) throw new Error(`lost ${missing} masked token(s)`);
-    const lost = verifyTokens(s, text);
-    if (lost !== null) throw new Error(`token ${lost} lost`);
-    return text;
+    return check(text);
   } catch (e) {
     errors.push(e.message);
   }
   try {
-    const raw = await translate(s, target);
-    const lost = verifyTokens(s, raw);
-    if (lost !== null) throw new Error(`token ${lost} lost`);
-    return raw;
+    return check(await translate(s, target));
   } catch (e) {
     errors.push(e.message);
   }
   try {
-    const pinned = stripBrandQuotes(await translate(s.replace(BRAND_RE, '"$&"'), target));
-    const lost = verifyTokens(s, pinned);
-    if (lost !== null) throw new Error(`token ${lost} lost`);
-    return pinned;
+    return check(stripBrandQuotes(await translate(s.replace(BRAND_RE, '"$&"'), target)));
   } catch (e) {
     errors.push(e.message);
   }
@@ -114,9 +122,11 @@ async function translateString(s, target) {
       out.push(prefix + (await translateString(core, target)) + suffix);
     }
     const joined = out.join('');
-    const lost = verifyTokens(s, joined);
-    if (lost === null) return joined;
-    errors.push(`token ${lost} lost`);
+    try {
+      return check(joined);
+    } catch (e) {
+      errors.push(e.message);
+    }
   }
   throw new Error(`all strategies failed (${errors.join('; ')}) in: ${s.slice(0, 80)}`);
 }
@@ -318,7 +328,12 @@ export async function translateMdx(raw, target) {
   if (headingCount(outBody) !== headingCount(srcBody)) throw new Error('heading count mismatch after translation');
   if (fenceLineCount(outBody) !== fenceLineCount(srcBody)) throw new Error('code fence count mismatch after translation');
 
-  return fmOut + outBody.trimStart() + (outBody.endsWith('\n') ? '' : '\n');
+  const result = fmOut + outBody.trimStart() + (outBody.endsWith('\n') ? '' : '\n');
+  // The file must actually compile as MDX — structural token checks cannot
+  // see a merged attribute or a broken JSX expression. Nothing that fails
+  // this ever reaches disk (the site falls back to English per file).
+  await assertMdxCompiles(result);
+  return result;
 }
 
 export { translateString };

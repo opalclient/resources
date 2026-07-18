@@ -55,6 +55,22 @@ const BRAND_PATTERN = new RegExp(`\\b(?:${BRANDS.join('|')})\\b`, 'g');
 export const PATTERNS = [...STRICT_PATTERNS, PRICE_PATTERN];
 
 /**
+ * Detect model meta-text leaking into a translation: language labels
+ * ("Italian:"), translator commentary ("Here is the translation"), or
+ * paragraph breaks injected into a single-line source. These stay
+ * syntactically valid, so only content heuristics catch them.
+ */
+const META_LEAK_RE =
+  /^(?:Source|Translation|Translated text|Here (?:is|'s) the translation|English|German|Italian|Polish|Russian|French|Portuguese|Turkish|Japanese|Chinese|Spanish|Deutsch|Italiano|Français)\s*:/im;
+
+export function detectMetaLeak(src, out) {
+  if (META_LEAK_RE.test(out) && !META_LEAK_RE.test(src)) return 'meta-text leak';
+  if (!src.includes('\n') && out.includes('\n\n')) return 'paragraph injected into single-line string';
+  if (out.length > Math.max(200, src.length * 6)) return 'output suspiciously long';
+  return null;
+}
+
+/**
  * Placeholders must survive verbatim. Prices may be localized ($8.99 →
  * 8.99ドル is fine Japanese) as long as the digits survive — what must never
  * happen is a silent currency conversion to a different amount.

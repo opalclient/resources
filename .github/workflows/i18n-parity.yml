@@ -14,3 +14,7 @@ jobs:
         with:
           node-version: 22
       - run: node scripts/check-i18n-parity.mjs
+      # Every content MDX file must compile — a broken file fails the
+      # opal.wtf next build at prerender time.
+      - run: npm install --prefix scripts/translate
+      - run: node scripts/check-mdx-compile.mjs
