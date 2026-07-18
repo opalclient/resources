@@ -1,0 +1,97 @@
+---
+title: Was ist JVM-Bytecode? Java-Klassendateien erklärt
+description: Der Bytecode der JVM ist der kompakte Befehlssatz, den die Java Virtual Machine ausführt. Erfahren Sie, wie .class-Dateien funktionieren, warum Mods Bytecode umschreiben und wo ASM ins Spiel kommt.
+excerpt: Bytecode ist das portable Befehlssatz, den die JVM ausführt, nicht der native Maschinencode. Hier ist, wie .class-Dateien funktionieren und warum Mods sie umschreiben.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: Ist JVM-Bytecode dasselbe wie Maschinencode?
+    a: Nein. Maschinencode sind native Anweisungen für eine bestimmte CPU. Bytecode ist der eigene Befehlssatz der JVM, der von der JVM zur Laufzeit in Maschinencode übersetzt wird. Diese zusätzliche Schicht ermöglicht es, dass eine .class-Datei auf jeder Plattform ausgeführt werden kann.
+  - q: Kann man Bytecode zurück in Quellcode lesen?
+    a: Teilweise. Dekompilierer rekonstruieren lesbaren Java-Code aus Bytecode, und sie kommen bei gewöhnlichem Code ziemlich nahe. Das Ergebnis ist nicht immer identisch mit dem Original, und Kommentare sowie einige lokale Namen fehlen, aber es reicht meistens aus, um dem Verlauf folgen zu können.
+  - q: Warum nicht einfach den Java-Quellcode bearbeiten?
+    a: Da Mods normalerweise nicht den Quellcode haben. Sie liefern gegen das kompilierte Spiel aus. Das Neuschreiben von Bytecode ermöglicht es einem Mod, das Verhalten zu ändern, ohne jemals die ursprünglichen Java-Dateien anzufassen oder zu haben.
+  - q: Muss ich Bytecode lernen, um einen Mod zu schreiben?
+    a: Normalerweise nicht. Modding-Frameworks und Skriptschichten übernehmen die Bytecode-Arbeit für Sie. Es hilft, wenn man weiß, wie es funktioniert, wenn man einen kniffligen Patch debuggt oder Werkzeuge entwickelt.
+---
+
+<KeyTakeaways>
+
+- JVM-Bytecode ist das kompakte Befehlssatz, den die Java-Virtuelle Maschine ausführt.
+- Der Java-Compiler erzeugt Bytecode in `.class`-Dateien, nicht in nativem Maschinencode.
+- Die gleiche `.class`-Datei läuft auf jeder Plattform mit einer Java-Laufzeitumgebung, was der Sinn dieses Formats ist.
+- Mods überschreiben Bytecode, um das kompilierte Spiel zu verändern, ohne jemals Zugriff auf den Quellcode zu haben.
+
+</KeyTakeaways>
+
+Der Bytecode der JVM ist der Befehlssatz, den die Java Virtual Machine ausführt. Wenn Sie Java-Quellcode kompilieren, erzeugt der Compiler keinen Maschinencode für Ihre CPU. Stattdessen erzeugt er Bytecode, ein kompaktes, portables Format, das in `.class`-Dateien gespeichert ist. Die JVM liest diese Anweisungen zur Laufzeit und wandelt sie bei Bedarf in nativen Code um.
+
+<Callout variant="info" title="Wo Opal passt">
+Opal ist ein [Fabric](https://fabricmc.net/) Mod, und die Modding-Werkzeuge, auf denen es aufbaut, erledigen die Bytecode-Arbeit für Sie, sodass Sie keine Opcodes manuell anfassen müssen. Wenn Sie Verhalten in einfachem JavaScript hinzufügen möchten, siehe die [Einführung in die Skripterstellung](/de/docs/scripting).
+</Callout>
+
+## Wie Quellcode zu Bytecode wird
+
+Eine `.java`-Datei ist Text, den eine Person schreibt. Eine `.class`-Datei ist die kompilierte Ausgabe, die die JVM ausführt. Der Compiler liest Ihren Quellcode, prüft ihn und schreibt für jede Klasse eine `.class`-Datei, die Bytecode-Anweisungen sowie einen Constant Pool, Methodentabellen und andere Metadaten enthält.
+
+Bytecode ist an keinen bestimmten Prozessor gebunden. Die gleiche `.class`-Datei läuft unter Windows, macOS, Linux oder auf jedem System mit einer Java-Laufzeitumgebung, da die JVM die Schicht ist, die weiß, wie die Anweisungen auf der lokalen Maschine ausgeführt werden. Diese Portabilität ist der Sinn und Zweck des Formats.
+
+## Wie die Anweisungen aussehen
+
+Bytecode ist ein stapelbasierter Befehlssatz. Die meisten Operationen legen Werte auf einen Operand-Stack, entfernt sie und legt ein Ergebnis ab. Es gibt keine Registerzuweisung, über die man nachdenken muss; das Modell ist absichtlich einfach, damit die JVM es schnell verifizieren und ausführen kann.
+
+Einige Beispiel-Opcodes geben den Charakter wieder:
+
+| Opcode | Was er tut |
+| :--- | :--- |
+| `iload` | Legt eine lokale Integer-Variable auf den Stack |
+| `iadd` | Entfernt zwei Integers, legt ihre Summe ab |
+| `invokevirtual` | Ruft eine Instanzmethode auf |
+| `getfield` | Liest ein Instanzfeld |
+| `return` | Kehrt von einer Methode zurück |
+
+Sie lesen oder schreiben diese selten manuell. Tools generieren und verbrauchen sie, was die Verwendung einer Bibliothek wie [ASM](/de/learn/what-is-asm) ermöglicht.
+
+## Warum Bytecode für Mods wichtig ist
+
+Bytecode ist wichtig, weil es ermöglicht, das Verhalten zu ändern, ohne den ursprünglichen Quellcode zu haben. Ein Minecraft-Mod hat fast nie den Quellcode des Spiels. Stattdessen hat er das kompilierte Spiel auf der Festplatte. Um eine Funktion hinzuzufügen oder zu verändern, liest ein Mod den vorhandenen Bytecode, schreibt ihn um und speist das Ergebnis zurück an die JVM, wenn die Klassen geladen werden.
+
+So fügen Patching-Frameworks Hooks in Methoden ein, die sie nicht besitzen. Sie finden die richtige Stelle in einer kompilierten Methode und fügen einen Aufruf des Mod-Codes ein. Die Arbeit auf Bytecode-Ebene bedeutet, dass ein Mod sich an das Spiel anhängen kann, obwohl er nie eine Zeile des ursprünglichen Java-Codes sieht.
+
+## Wo ASM ins Spiel kommt
+
+[ASM](/de/learn/what-is-asm) ist eine Java-Bibliothek zum Lesen, Schreiben und Transformieren von Bytecode. Sie parst eine `.class`-Datei in Ereignisse oder einen Baum, ermöglicht die Modifikation der Anweisungen und gibt eine gültige `.class`-Datei aus. Sie ist klein, schnell und arbeitet eng mit dem Rohformat, weshalb höherwertige Modding-Tools darauf aufbauen, anstatt die Klassendateien selbst zu parsen.
+
+Die meisten Modder rufen [ASM](/de/learn/what-is-asm) nicht direkt auf. Sie verwenden eine höherwertige Schicht, die die Opcodes verbirgt und eine freundlichere Möglichkeit bietet, zu sagen: "Führe meinen Code am Anfang dieser Methode aus." Darunter bearbeitet diese Schicht Bytecode, oft über ASM.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Ist JVM-Bytecode dasselbe wie Maschinencode?">
+Nein. Maschinencode sind native Anweisungen für eine bestimmte CPU. Bytecode ist der eigene Befehlssatz der JVM, der von der JVM zur Laufzeit in Maschinencode übersetzt wird. Diese zusätzliche Ebene ermöglicht es, dass eine `.class`-Datei auf jeder Plattform ausgeführt werden kann.
+</FAQItem>
+
+<FAQItem question="Können Sie Bytecode wieder in Quellcode einlesen?">
+Teilweise. Dekompiler rekonstruieren lesbaren Java-Code aus Bytecode und kommen bei einfachem Code recht nahe. Das Ergebnis ist nicht immer identisch mit dem Original, und Kommentare sowie einige lokale Namen fehlen, aber es reicht meistens aus, um dem Code folgen zu können.
+</FAQItem>
+
+<FAQItem question="Warum nicht einfach den Java-Quellcode bearbeiten?">
+Da Mods in der Regel nicht den Quellcode haben. Sie werden mit dem kompilierten Spiel ausgeliefert. Durch das Umschreiben von Bytecode kann ein Mod das Verhalten ändern, ohne jemals die ursprünglichen Java-Dateien zu berühren oder zu besitzen.
+</FAQItem>
+
+<FAQItem question="Muss ich Bytecode lernen, um ein Mod zu schreiben?">
+Normalerweise nicht. Modding-Frameworks und Skriptschichten übernehmen die Bytecode-Arbeit für Sie. Kenntnisse darüber sind hilfreich, wenn Sie einen kniffligen Patch debuggen oder Werkzeuge entwickeln.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-the-jvm", label: "Was ist die JVM?", description: "Die Laufzeit, die diesen Bytecode ausführt." },
+  { href: "/de/learn/what-is-asm", label: "Was ist ASM?", description: "Die Bibliothek, die Klassen-Dateien liest und neu schreibt." },
+  { href: "/de/learn/what-is-graalvm-javascript-scripting", label: "Was ist GraalVM JavaScript Scripting?", description: "Verhalten hinzufügen, ohne Bytecode zu verändern." },
+]} />
+
+<CTA href="/de/purchase">Opal, einen Fabric-Client, für $8.99 erhalten</CTA>

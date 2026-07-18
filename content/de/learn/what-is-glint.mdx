@@ -1,0 +1,67 @@
+---
+title: Was ist Glint? Das Fake-Enchant-Schimmer-Modul
+description: Glint ist ein Minecraft-Client-Modul, das den Schimmer von Verzauberungen auf jedem Gegenstand hinzufügt oder bearbeitet – rein kosmetisch und für Anticheats sowie andere Spieler unsichtbar.
+excerpt: Verwandle einen einfachen Stock in einen schimmernden, vollständig verzauberten Schwert. Niemand sonst sieht es, und es ändert sich nichts an dem Gegenstand selbst.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Verändert Glint, ob ein Gegenstand tatsächlich verzaubert ist?
+    a: Nein. Glint verändert nur den Schimmer, der auf dem Gegenstand bei deinem eigenen Klienten dargestellt wird. Die wahren Verzauberungen, Werte und server-seitigen Daten des Gegenstands bleiben unverändert.
+  - q: Können andere Spieler meinen benutzerdefinierten Glanzeffekt sehen?
+    a: Nein. Die Darstellung des Artikels, einschließlich Glanz, erfolgt unabhängig auf jedem Client. Alle anderen sehen den Artikel genau so, wie er durch die Echtzeitdaten des Servers beschrieben wird, mit oder ohne Schimmer.
+  - q: Wird die Verwendung von Glint von Anti-Cheat-Systemen erkannt?
+    a: Nein. Glint verändert nur das, was lokal gezeichnet wird, und sendet niemals unterschiedliche Daten an den Server. Daher gibt es serverseitig nichts, was ein Anti-Cheat-System aufspüren könnte.
+  - q: Ist Glint dasselbe wie ein Ressource-Pack, das den Effekt von Verzauberungen neu einfärbt?
+    a: Fast nicht ganz. Ein Ressourcenpaket gestaltet die Glanztextur für alle verzauberten Gegenstände auf einmal neu. Ein Client-Modul kann den Schimmer auf bestimmte unverzauberte Gegenstände erzwingen oder ihn pro Gegenstand aktivieren/deaktivieren.
+---
+
+<KeyTakeaways>
+- Glint ist ein kosmetisches Minecraft-Client-Modul, das den Schimmer von Verzauberungen auf jedem Gegenstand vortäuscht oder entfernt, unabhängig davon, ob dieser tatsächlich verzaubert ist.
+- Es funktioniert vollständig im Rendering-Pipeline, sodass Item-Daten, Werte und serverseitige Verzauberungen niemals verändert werden.
+- Andere Spieler und Anticheats bemerken den Effekt nicht, da jeder Client Items unabhängig von den tatsächlichen Daten des Servers rendert.
+</KeyTakeaways>
+
+Glint ist das Modul, mit dem du dem Artikel ohne Verzauberungen den Zauberglanz von Minecraft verleihen oder einem Artikel mit Verzauberungen diesen Glanz entfernen kannst. Es ist eine rein kosmetische Einstellung, eine Art von Sache, die verändert, wie deine Ausrüstung aussieht, ohne zu beeinflussen, wie sie sich spielt. Wenn du dir jemals gewünscht hast, dass ein schlichtes Holzschwert wie frisch vom Schleifstein mit drei maximalen Verzauberungen glänzt, dann ist es dieses Modul, das das bewirkt.
+
+## Wie der Glanz gefälscht wird
+
+Minecraft rendert den Glanz-Effekt als Shader-Overlay, das über die Textur eines Artikels gezeichnet wird, und zeichnet dieses Overlay nur, wenn die Daten des Artikels tatsächlich eine Verzauberung enthalten. Keine Verzauberung, kein Glanz. Diese Prüfung erfolgt während der Renderzeit, genau dort, wo Glint ins Spiel kommt: Es fängt den Render-Aufruf ab und wendet, entfernt oder gestaltet den Glanz unabhängig davon, was die Verzauberungsdaten des Artikels tatsächlich aussagen.
+
+Nichts vor dem Render-Schritt ändert sich. Das NBT des Artikels, seine Werte, der Schaden, den er verursacht, was der Server gespeichert hat – nichts davon verschiebt sich. Ein unverzaubertes Schwert kann wie ein maximales Schwert glänzen oder ein tatsächlich verzaubertes Item kann komplett matt werden, und in beiden Fällen funktioniert das Item genau so, wie seine realen Daten es vorschreiben. Es ist die gleiche Art von Änderung wie das Auswählen eines Resource Packs oder einer Haut: lokal, visuell und für jeden unsichtbar, der nicht du bist.
+
+## Ist es sicher, es zu verwenden
+
+Ja, und es ist ungefähr so sicher, wie es bei Client-Modifikationen nur geht. Glint greift niemals in die echten Verzauberungsdaten des Gegenstands ein, sendet niemals etwas an den Server, was ein unveränderter Client nicht senden würde, und gibt keinem anderen Spieler eine andere Ansicht deines Inventars als den tatsächlichen Zustand des Servers. Das Rendern erfolgt lokal und pro Client, sodass es kein Paket gibt, das ein Anticheat inspizieren könnte und das einen gefälschten Schimmer enthüllt, weil der Schimmer nie deinen Rechner verlassen hat.
+
+Die einzige Einschränkung, die für jede Client-Modifikation gilt, gilt auch hier: Einige Server verbieten modifizierte Clients pauschal, unabhängig davon, was einzelne Module tun. Überprüfe die Regeln, bevor du irgendetwas modifiziert ausführst, Glint eingeschlossen.
+
+<Callout variant="tip" title="Wo dies in Opal passt">
+Opal versendet kein Modul namens Glint, aber dies ist genau die Art von clientseitiger visueller Anpassung, für die seine kosmetischen und Render-Anpassungseinstellungen konzipiert sind: Dinge, die verändern, was Sie auf Ihrem eigenen Bildschirm sehen, ohne auch nur ein einziges Byte davon zu verändern, was der Server verfolgt.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+<FAQItem question="Ändert Glint, ob ein Gegenstand tatsächlich verzaubert ist?">
+Nein. Glint verändert lediglich den Schimmer, der auf Ihrem Client über den Gegenstand dargestellt wird. Die echten Verzauberungen, Werte und server-seitigen Daten des Gegenstands bleiben unverändert.
+</FAQItem>
+<FAQItem question="Können andere Spieler meinen benutzerdefinierten Glint-Effekt sehen?">
+Nein. Die Darstellung von Gegenständen, einschließlich Glint, erfolgt unabhängig auf jedem Client. Jeder andere sieht den Gegenstand genau so, wie er durch die echten server-seitigen Daten beschrieben wird, mit oder ohne Schimmer.
+</FAQItem>
+<FAQItem question="Wird die Verwendung von Glint von Anticheats erkannt?">
+Nein. Glint verändert nur das, was lokal dargestellt wird und sendet niemals andere Daten an den Server. Daher gibt es serverseitig nichts, was ein Anticheat erkennen könnte.
+</FAQItem>
+<FAQItem question="Ist Glint dasselbe wie ein Resource Pack, das den Effekt der Verzauberung umfärbt?">
+Nicht ganz. Ein Resource Pack gestaltet die Glint-Textur für alle verzauberten Gegenstände gleichzeitig um. Ein Client-Modul kann den Schimmer auf bestimmte unverzauberte Gegenstände erzwingen oder ihn pro Gegenstand ein- und ausschalten.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die Kategorie Glint und Module wie dieses gehören zu, und was einen Utility-Client von einem gehackten Client unterscheidet." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Ein weiterer Kundenstil, der darauf basiert, was lokal gerendert wird, im Gegensatz zu dem, was der Server jemals darüber erfährt." },
+  { href: "/de/learn/what-is-an-aimbot", label: "Was ist ein Aim-Bot?", description: "Ein Modul am anderen Ende des Risikospektrums, das die Sicht des Servers tatsächlich verändert." }
+]} />
+
+<CTA href="/de/purchase">Die visuellen Einstellungen von Opal sind designtechnisch vollständig clientseitig. Sehen Sie, was sich im Panel für $8.99 befindet.</CTA>

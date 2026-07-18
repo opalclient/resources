@@ -1,0 +1,119 @@
+---
+title: Wie man eine Fabric-Entwicklungsumgebung einrichtet (2026)
+description: "Richten Sie eine Fabric-Mod-Entwicklungsumgebung ein: Installieren Sie ein JDK, klonen Sie die Beispiel-Mod-Vorlage, wählen Sie Yarn-Mappings aus und führen Sie dann gradle genSources und runClient aus. Vollständige Anleitung."
+excerpt: "Vier Schritte führen dich von Null zu einem lauffähigen Entwicklungskunden: ein JDK, die Beispiel-Modulvorlage, deine Zuordnungen und dann zwei Gradle-Aufgaben. Das Build-Plugin erledigt den Rest."
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: Muss ich Gradle selbst installieren?
+    a: Nein. Die Fabric-Beispielvorlage enthält ein Gradle-Wrapper, der beim ersten Ausführen die korrekte Gradle-Version abruft. Verwenden Sie das gradlew-Skript anstelle einer systemweiten Gradle-Installation.
+  - q: Soll ich von vorne anfangen oder die Vorlage verwenden?
+    a: Verwende die offizielle Beispiel-Mod-Vorlage. Sie enthält bereits das Build-Plugin, die Yarn-Zuordnungen und die Ausführtasks, sodass du dir die fummelige Einrichtung sparst und direkt mit dem Programmieren beginnen kannst.
+  - q: Muss ich Yarn-Mappings verwenden?
+    a: Yarn ist die Standardeinstellung für Fabric und wird mit dokumentierten Namen ausgeliefert, daher ist es die einfache Wahl. Du kannst stattdessen gegen offizielle Mojang-Mappings bauen, aber die Vorlage ist ab Werk für Yarn eingerichtet.
+  - q: Welche JDK-Version soll ich installieren?
+    a: Die, die deine Ziel-Minecraft-Version benötigt. Neuere Releases benötigen neuere JDKs, also überprüfe die Version, bevor du installierst, und zeige deine IDE auf dieses JDK.
+  - q: Was macht genSources?
+    a: Es dekompiliert Minecraft mithilfe Ihrer ausgewählten Yarn-Mappings, sodass Sie den Code des Spiels lesen und seine Klassen während der Entwicklung mit lesbaren Namen referenzieren können.
+---
+
+<KeyTakeaways>
+
+- Die Einrichtung erfolgt in vier Schritten: ein JDK, die Beispiel-Mod-Vorlage, Ihre Zuordnungen und dann Gradle.
+- Das Fabric Build-Plugin lädt Minecraft herunter und richtet die Ausführungstasks für Sie ein.
+- Sie installieren Gradle nie selbst: die Vorlage enthält einen Wrapper.
+- Eine Versionsabweichung in `gradle.properties` ist der häufigste Grund, warum ein neues Projekt fehlschlägt.
+
+</KeyTakeaways>
+
+Die Einrichtung einer [Fabric](https://fabricmc.net/) Entwicklungsumgebung erfordert vier Schritte: die Installation eines JDK, der Start von der offiziellen Beispiel-Mod-Vorlage, die Auswahl der Mappings (meist [Yarn](/de/learn/yarn-vs-mojmap)) und anschließend die Ausführung der Gradle-Aufgaben, die Minecraft herunterladen und einen Testclient starten. Das Build-Plugin erledigt den Großteil der Arbeit. Stimmen Sie Ihre JDK- und Minecraft-Version von Anfang an ab, und der Rest ergibt sich daraus.
+
+<Callout variant="info" title="Wo Opal Einzug hält">
+Opal ist ein Fabric-Mod mit einem [GraalVM JavaScript Scripting Engine](/de/learn/what-is-graalvm-javascript-scripting), sodass du es mit Skripten erweitern kannst, ohne eine vollständige Mod-Toolchain einrichten zu müssen. Wenn du es nur installieren und ausführen möchtest, folge der [Einrichtungsanleitung](/de/docs/setup); um mit dem Schreiben von Skripten zu beginnen, siehe die [Skripting-Dokumentation](/de/docs/scripting).
+</Callout>
+
+## Was du zuerst brauchst
+
+Du benötigst drei Dinge, bevor du überhaupt Code schreibst: ein Java Development Kit, eine IDE und Git.
+
+- **Ein JDK.** Wähle es passend zur Minecraft-Version aus, die du anvisierst. Neuere Minecraft-Versionen benötigen ein neueres JDK, also überprüfe die Versionsanforderung, bevor du anfängst.
+- **Eine IDE.** Sowohl IntelliJ IDEA als auch Eclipse funktionieren. Die meisten Fabric-Entwickler nutzen IntelliJ, da die Gradle- und Dekompilierungsintegration reibungsloser ist.
+- **Git.** Du wirst das Template-Repository klonen und deine eigenen Änderungen verfolgen.
+
+Du installierst [Gradle](https://gradle.org/) nicht selbst. Das Template enthält ein Gradle-Wrapper-Skript, das die richtige Version beim ersten Start herunterlädt.
+
+## Schritt für Schritt
+
+<Steps>
+
+<Step number={1} title="Installieren Sie ein JDK">Installieren Sie ein JDK, das mit Ihrer Ziel-Minecraft-Version übereinstimmt, und verweisen Sie Ihre IDE darauf</Step>
+
+<Step number={2} title="Besorgen Sie die Beispiel-Mod-Vorlage">Fabric veröffentlicht ein offizielles Starter-Repository. Klone es oder verwende es als Vorlage, und benenne dann das Package und die Mod-ID in deine eigenen um</Step>
+
+<Step number={3} title="Wählen Sie Ihre Zuordnungen">Das Template verwendet standardmäßig [Yarn](/de/learn/yarn-vs-mojmap). Yarn bietet lesbare, dokumentierte Namen für die Klassen und Methoden von Minecraft. Die Minecraft-Version, die Loader-Version und die Yarn-Mappings-Version werden in `gradle.properties` festgelegt</Step>
+
+<Step number={4} title="Quellen generieren und ausführen">Öffnen Sie das Projekt in Ihrer IDE, lassen Sie Gradle synchronisieren und führen Sie dann `genSources` aus, um Minecraft gegen Yarn-Namen zu dekompilieren. Starten Sie die Aufgabe `runClient`, um einen Entwicklungskunden mit Ihrem Mod zu starten</Step>
+
+</Steps>
+
+## Was das Build-Plugin für Sie tut
+
+Das Gradle-Build-Plugin für [Fabric](https://fabricmc.net/) lädt Minecraft herunter, ordnet es Ihren gewählten Mappings zu und richtet die Run-Konfigurationen ein. Sie konfigurieren es über einen kleinen Block in `build.gradle`.
+
+| Sie legen fest | Wo | Was es steuert |
+|---|---|---|
+| Minecraft-Version | `gradle.properties` | Gegen welche Spielversion Sie kompilieren |
+| Loader-Version | `gradle.properties` | Den Fabric-Loader, auf dem Ihr Mod läuft |
+| Yarn-Version | `gradle.properties` | Die Mapping-Namen, die in Ihrem Quellcode verwendet werden |
+| Abhängigkeiten | `build.gradle` | Die [Fabric API](/de/learn/what-is-the-fabric-api) und alle Bibliotheken |
+
+Halten Sie die drei Versionen in `gradle.properties` konsistent. Ein Ungleichgewicht zwischen der Minecraft-Version und der Yarn-Mappings-Version ist der häufigste Grund, warum ein neues Projekt nicht synchronisiert werden kann.
+
+## Warum Mappings hier wichtig sind
+
+Minecraft wird verschleiert ausgeliefert, sodass seine Klassen Namen wie `a.a.a` haben. [Yarn](/de/learn/yarn-vs-mojmap) ordnet diese lesbaren Namen zu und sitzt auf der stabilen [intermediary](/de/learn/what-is-intermediary)-Schicht. Wenn Sie `genSources` ausführen, dekompiliert das Build-Plugin das Spiel mit Yarn-Namen, sodass Sie Minecraft-Code direkt lesen und referenzieren können. Beim Kompilieren Ihres Mods ordnet es Ihren Yarn-benannten Code zurück zu intermediary, sodass die fertige JAR-Datei auf jeder passenden Installation funktioniert, unabhängig von Mapping-Umbenennungen.
+
+## Wenn das Projekt nicht erstellt werden kann
+
+<Checklist>
+<ChecklistItem>Gradle-Synchronisierung schlägt direkt nach dem Import fehl: in der Regel stimmen die Minecraft-, Loader- und Yarn-Versionen in `gradle.properties` nicht überein. Setzen Sie diese auf eine bekannte, übereinstimmende Version.</ChecklistItem>
+<ChecklistItem>Falsche Java-Version: Der Build beschwert sich über eine nicht unterstützte Klassen-Dateiversion, wenn Ihr JDK älter ist als die Minecraft-Version benötigt. Installieren Sie ein neueres JDK und verweisen Sie das Projekt darauf.</ChecklistItem>
+<ChecklistItem>Keine dekompilierten Quellen zum Lesen: führen Sie `genSources` aus und laden Sie es neu. Der erste Durchlauf dauert eine Weile, da das gesamte Spiel dekompiliert wird.</ChecklistItem>
+<ChecklistItem>`runClient` tut nichts: lassen Sie die anfängliche Gradle-Synchronisierung abschließen, bevor Sie eine Aufgabe ausführen. Die Run-Konfigurationen werden während der Synchronisierung generiert.</ChecklistItem>
+</Checklist>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Muss ich Gradle selbst installieren?">
+Nein. Die Fabric-Beispielvorlage enthält einen Gradle-Wrapper, der beim ersten Start die korrekte Gradle-Version herunterlädt. Verwenden Sie `./gradlew` anstelle einer systemweiten Gradle-Installation.
+</FAQItem>
+
+<FAQItem question="Soll ich von Grund auf neu anfangen oder die Vorlage verwenden?">
+Verwenden Sie die offizielle Beispiel-Mod-Vorlage. Sie enthält bereits das Build-Plugin, die Yarn-Zuordnungen und die Ausführung von Aufgaben, sodass Sie den umständlichen Einrichtungsaufwand überspringen und direkt mit dem Schreiben von Code beginnen können.
+</FAQItem>
+
+<FAQItem question="Muss ich Yarn-Mappings verwenden?">
+Yarn ist die Standardeinstellung von Fabric und wird mit dokumentierten Namen ausgeliefert, daher ist es die einfache Wahl. Sie können auch gegen die offiziellen Mojang-Mappings bauen, aber die Vorlage ist standardmäßig für Yarn eingerichtet.
+</FAQItem>
+
+<FAQItem question="Welche JDK-Version soll ich installieren?">
+Die, die von Ihrer Ziel-Minecraft-Version benötigt wird. Neuere Versionen benötigen neuere JDKs, daher sollten Sie die Version prüfen, bevor Sie installieren, und Ihre IDE auf dieses JDK ausrichten.
+</FAQItem>
+
+<FAQItem question="Was macht genSources?">
+Es dekompiliert Minecraft mithilfe Ihrer ausgewählten Yarn-Mappings, sodass Sie den Code des Spiels lesen und seine Klassen während der Entwicklung mit lesbaren Namen referenzieren können.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/how-to-install-a-fabric-mod", label: "Wie man eine Fabric-Mod installiert", description: "Der spielerseitige Gegenpart zum Bauen." },
+  { href: "/de/learn/what-is-the-fabric-api", label: "Was ist die Fabric API?", description: "Die Abhängigkeit, die fast jedes Mod deklariert." },
+  { href: "/de/learn/yarn-vs-mojmap", label: "Wolle gegen Mojmap", description: "Die Zuordnungen auswählen, die Ihre Quelle liest." },
+]} />
+
+<CTA href="/de/purchase">Opal, einen Fabric-Client, für $8.99 erhalten</CTA>

@@ -1,0 +1,68 @@
+---
+title: Was ist Frostschutzmittel in Minecraft?
+description: AntiFreeze verhindert, dass ein Minecraft-Client während starker Chunk-Ladezeiten oder Server-Lags einfriert, ohne Pakete, Trefferregistrierung oder Bewegung zu beeinträchtigen.
+excerpt: Das Einfrieren mitten im Kampf kostet mehr Spiele, als je ein Lag. AntiFreeze hält den Client reaktionsschnell, wenn es der Umgebung um ihn herum nicht ist.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Verleiht Frostschutz einen Vorteil im Spielverlauf?
+    a: Nein, nicht so, wie es ein Kampf- oder Bewegungsmodul tut. Es verhindert, dass der Client während des Ladens von Chunks oder bei Lags stottert, was eine Stabilitätskorrektur ist, nicht etwas, das die Treffererkennung, Bewegung oder die Daten verändert, die der Server empfängt.
+  - q: Kann Frostschutz einen Spieler sperren?
+    a: Kein bekannter Mechanismus würde es erkennen. Es läuft vollständig auf der lokalen Darstellung und Eingabebehandlung des Clients, und Server haben keine Möglichkeit zu beobachten, wie reibungslos ein Client läuft, sodass es für ein Anticheat nichts zu erkennen gibt.
+  - q: Was verursacht das Einfrieren von Minecraft beim Laden von Chunks überhaupt erst?
+    a: Das Laden einer großen Anzahl von Datenblöcken auf einmal oder eine plötzliche Verzögerung von Daten vom Server während eines Lag-Spikes kann den Hauptthread des Clients so lange blockieren, dass das Fenster nicht mehr reagiert, bis die Arbeit abgeschlossen ist.
+  - q: Ist Frostschutzmittel dasselbe wie eine Leistungssteigerung wie Sodium?
+    a: "Nicht ganz. Allgemeine Leistungssteigerungen erhöhen die Bildrate und verkürzen die Ladezeiten flächendeckend. AntiFreeze ist spezifischer: Es zielt gezielt auf Momente ab, in denen ein Client sonst hängen bleiben würde, wie beispielsweise Chunk-Ladezeiten und Lag-Spitzen."
+---
+
+<KeyTakeaways>
+- AntiFreeze ist ein clientseitiges Modul, das verhindert, dass Minecraft-Clients während starker Chunk-Ladezeiten oder Lag-Spitzen hängen bleiben.
+- Es greift nur die lokale Darstellung und Eingabe ab, niemals Pakete, Trefferregistrierung oder Bewegung.
+- Server können die clientseitige Laufruhe nicht beobachten, daher gibt es kein Signal für ein Anticheat-System.
+- Es ist eine Stabilitätskorrektur, eher eine Verbesserung der Lebensqualität als eine für Kampf oder Bewegung.
+</KeyTakeaways>
+
+AntiFreeze ist ein Minecraft-Client-Modul, das verhindert, dass das Spiel während der Momente einfriert, in denen normalerweise der Render-Thread zum Erliegen kommt: wenn eine große Anzahl neuer Chunk-Blöcke geladen wird oder ein Lagschub auftritt, der den Client auf die Server-Antwort warten lässt. Anstatt dass das Fenster für einen Moment (oder fünf) nicht mehr reagiert, hält das Modul das Rendern und die Eingabe während der Blockade am Laufen. Es ist weder ein Kampfinstrument noch ein Bewegungswerkzeug. Es ist das, was das Spiel spielbar hält, während ein anderer Teil der Pipeline Schwierigkeiten hat.
+
+## Funktionsweise
+
+AntiFreeze überwacht die spezifischen Momente, in denen ein Client dazu neigt, zu hängen: wenn eine große Anzahl von Chunk-Blöcken gleichzeitig geladen wird oder der Server hinterherhinkt und die Daten verzögert, auf die der Client wartet. Normalerweise blockiert diese Art von Last den Hauptspiel-Thread, und ein blockierter Haupt-Thread bedeutet ein eingefrorenes Fenster, kein Rendern, keine Eingabe, bis die Arbeit erledigt ist.
+
+Anstatt diese Blockade zuzulassen, hält AntiFreeze die Rendering- und Eingabeschleife des Clients während der Blockade am Laufen. Die Blockade, die es behebt, ist ein lokales Symptom einer starken Auslastung, kein Netzwerk- oder Gameplay-Mechanismus, sodass die Behebung keine Änderungen erfordert, die der Server sehen kann. Weltzustand, Treffererkennung und die Pakete, die den Client verlassen, bleiben unberührt. Es geht rein darum, dass das Fenster reagiert, während die Engine aufholt.
+
+Das erklärt auch, warum Spieler dazu neigen, es dauerhaft aktiviert zu lassen, anstatt es für bestimmte Situationen zu aktivieren und zu deaktivieren. Ein verpasster Sprung, weil das Spiel für eine Sekunde gehängt hat, eine verpasste Zeile im Chat, ein Ruckeln im genau falschen Moment im Kampf: Das sind alles Dinge, mit denen man nicht spielen kann. Es kommt einer Stabilitätskorrektur näher als einer Funktion, die man bewusst nutzt.
+
+## Ist es sicher, es zu verwenden?
+
+AntiFreeze ändert lediglich, wie der lokale Client Rendering und Eingabe unter Last verarbeitet. Es werden keine anderen Pakete gesendet, die Trefferregistrierung wird nicht berührt und nichts verändert, was der Server oder ein anderer Spieler beobachten kann. Ein Server verfügt nicht über einen Kanal, um dem Server mitzuteilen, dass der Client flüssig läuft, was bedeutet, dass es für einen Anti-Cheat-Mechanismus überhaupt keinen Signalpunkt gibt. Funktional gesehen gehört es in den gleichen Bereich wie andere clientseitige Tools für Leistung und Benutzerfreundlichkeit, weit entfernt von Kampfkombinationen oder Bewegungsmodulen, die tatsächlich verändern, was der Server empfängt.
+
+<Callout variant="tip" title="Wo dies im Vergleich zu Opal passt">
+Opal kennzeichnet dieses Verhalten nicht als eigenständigen Schalter in der Modulliste, und es lohnt sich, hier präzise zu sein, anstatt etwas anderes zu behaupten. Aber ein zahlender Kunde, dessen Erfolg oder Misserfolg von der Benutzererfahrung abhängt, bedeutet, dass die zugrunde liegende Engine-Arbeit, die auch bei großen Datenmengen und Verzögerungen reaktionsschnell bleibt, genau die Art von Vorarbeit ist, die von einer seriösen Anwendung erwartet wird, ohne dass Sie jemals bemerken, dass sie stattgefunden hat.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+<FAQItem question="Verschafft Frostschutz einen Vorteil im Spiel?">
+Nicht im Sinne eines Kampfbegrenzungs- oder Bewegungsmoduls. Es verhindert, dass der Client während des Ladens von Chunks oder bei Lags ruckelt, was eine Stabilitätskorrektur ist und nichts ändert an der Trefferregistrierung, der Bewegung oder dem, was der Server empfängt.
+</FAQItem>
+<FAQItem question="Kann Frostschutz einen Spieler verbannen?">
+Es gibt keinen bekannten Mechanismus, der ihn als verdächtig kennzeichnen würde. Er arbeitet ausschließlich auf der lokalen Darstellung und der Eingabeverarbeitung des Clients, und Server haben keine Möglichkeit zu beobachten, wie reibungslos ein Client läuft, sodass es nichts gibt, was ein Anti-Cheat erkennen könnte.
+</FAQItem>
+<FAQItem question="Was verursacht das Einfrieren von Minecraft beim Laden von Chunks?">
+Das Laden einer großen Anzahl von Chunks auf einmal oder eine plötzliche Verzögerung von Daten vom Server während eines Lags kann den Hauptthread des Clients lange genug blockieren, dass das Fenster nicht mehr reagiert, bis die Arbeit erledigt ist.
+</FAQItem>
+<FAQItem question="Ist Frostschutz dasselbe wie ein Performance-Mod wie Sodium?">
+Nicht genau. Allgemeine Performance-Mods erhöhen die Bildrate und verkürzen die Ladezeiten über den gesamten Bereich. Frostschutz ist spezifischer: Er zielt gezielt auf die Momente ab, in denen ein Client andernfalls blockieren würde, wie z. B. beim Laden von Chunks und bei Lags.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die Kategorie, in der AntiFreeze existiert, und was Nutzungs- von Kampf-Cheats unterscheidet." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Wie sich kundenorientierte Module mit Fokus auf Stealth von Stabilitäts- und QoL-Modulen wie diesem unterscheiden." },
+  { href: "/de/learn/what-is-killaura", label: "Was ist Killaura?", description: "Die Art von Modul, mit der AntiFreeze verglichen wird, und warum es nicht eines ist." }
+]} />
+
+<CTA href="/de/kaufen">Gleichmäßigkeit sollte keine Einstellung sein, die man verfolgen muss. Sehen Sie sich Opal für $8.99 an.</CTA>

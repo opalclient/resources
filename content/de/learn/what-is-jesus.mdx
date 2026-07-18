@@ -1,0 +1,69 @@
+---
+title: Was ist das Jesus-Modul in Minecraft?
+description: Jesus ist ein Minecraft-Client-Modul, das es ermöglicht, über Wasser zu gehen anstatt unterzugehen, die Fließphysik für schnelle Überquerungen außer Kraft setzt und dabei erkennbar ist.
+excerpt: Geh auf dem Wasser, als wäre es fester Boden. Jesus überschreibt Minecrafts Flüssigkeitsphysik, und ja, die Server können sehen, was du tust.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Arbeitet Jesus auch mit Lava?
+    a: Manchmal. Das Kernverhalten ist das Gehen auf dem Wasser. Einige Implementierungen erweitern diese Überschreibung auch auf Lava, obwohl dies weniger konsistent dokumentiert ist als der Fall des Wassers und tendenziell weniger zuverlässig ist.
+  - q: Ist Jesus dasselbe wie Flug?
+    a: Nein. Jesus hält dich an der Oberfläche einer Flüssigkeit, anstatt dich frei durch die offene Luft schweben zu lassen. Du kannst immer noch nicht vom Boden oder der Oberfläche der Flüssigkeit abheben, wie es ein Flugmodul ermöglichen würde.
+  - q: Können Server Jesus erkennen?
+    a: Ja, grundsätzlich. Ein Server, der überprüft, ob deine Position mit der erwarteten Strömungsphysik übereinstimmt, kann feststellen, dass du an der Wasseroberfläche bleibst anstatt zu sinken, was genau der Grund ist, warum das Modul ein Detektionsrisiko birgt.
+  - q: Welche Kunden beinhalten ein Jesus-Modul?
+    a: Jesus wurde bei Kunden wie Fan und Tenacity gesichtet, unter anderem bei solchen, die Bewegungskomponenten versenden.
+---
+
+<KeyTakeaways>
+- Jesus ist ein Bewegungsmodul, das es ermöglicht, auf Wasser zu gehen, anstatt unterzugehen, und die normale Fluidphysik des Spiels außer Kraft setzt.
+- Es hält Ihre vertikale Position an der Oberfläche, sodass das Überqueren von Wasser wie das Überqueren von festem Boden aussieht. Einige Versionen erweitern es auf Lava.
+- Es ist erkennbar: Server, die die Fluidphysik überwachen, können es markieren, daher sollten Sie es mit Vorsicht verwenden.
+</KeyTakeaways>
+
+Jesus ist ein Bewegungsmodul, das in Minecraft-Utility-Clients integriert ist und es ermöglicht, über die Wasseroberfläche zu gehen, anstatt hineinzufallen. Während die Standardphysik Sie in dem Moment unterziehen würde, in dem Sie das trockene Land verlassen, hält Sie Jesus an der Oberfläche und verwandelt einen Ozean, Fluss oder eine überflutete Schlucht in einfach einen weiteren Boden, den Sie zu Fuß überqueren können. Einige Implementierungen übertragen den gleichen Trick auch auf Lava, sodass Sie diese ohne Untergang oder Schaden überqueren können, obwohl diese Funktion weniger zuverlässig funktioniert als die Wasserversion. Es ist ein Traversierungs-Shortcut, kein Flug-Hack, und es ist ein Modul, das von serverseitigen Anticheat-Systemen speziell erkannt wird.
+
+## Funktionsweise
+
+Jesus fängt die Kollisions- und Bewegungshandhabung ab, die Minecraft normalerweise anwendet, sobald Sie in einen Flüssigkeitsblock treten. Die Standardphysik aktiviert Schwerkraft und Auftrieb in dem Moment, in dem Sie Wasser betreten, weshalb Sie untergehen, es sei denn, Sie schwimmen aktiv. Jesus überschreibt diese Übergabe und fixiert Ihre vertikale Position an der Oberfläche, sodass jeder Schritt über Wasser auf die gleiche Weise abläuft wie ein Schritt über Gras. Die Lava-Version funktioniert nach dem gleichen Prinzip, ist aber aufgrund der zusätzlichen Schadens- und Rendering-Logik, die separat berücksichtigt werden muss, weniger konsistent über Clients hinweg aufgebaut und gewartet.
+
+Menschen greifen danach aus naheliegendem Grund: Ozeane, Flüsse und Lavaseen sind Hindernisse, die Zeit kosten oder eine Umleitung erfordern, und Jesus lässt dich sie in einer geraden Linie überqueren. Auf großen Karten ist das wichtig für die Reise. Bei einer Verfolgungsjagd ist es noch wichtiger, da es dir ermöglicht, jemandem über Gelände zu folgen (oder zu verlieren), das er für sicher hielt.
+
+## Ist es sicher zu verwenden?
+
+Nein, und das war nie die Absicht. Auf Wasser zu gehen, kann vanilla Minecraft nicht von selbst erzeugen, und jeder Server, der Spielerpositionen protokolliert, kann es beobachten: du bleibst an der Oberfläche, anstatt wie es die Physik vorgibt, in die Flüssigkeit einzutauchen. Ob das dich bei einer bestimmten Runde gebannt werden lässt, hängt davon ab, wie genau dieser Server Kollisionen mit Flüssigkeiten überprüft, aber das Verhalten selbst ist ein Warnsignal. Behandle Jesus wie eine Nutzung auf eigene Gefahr auf allem, was echte Anticheat-Software ausführt, genauso wie du es mit Gerüsten, Killaura oder einem anderen Modul behandeln würdest, das sichtbar verändert, wie dein Charakter mit der Welt interagiert.
+
+## Jesus, der Opal-Weg
+
+Opal liefert diesen unter dem Namen, der ihm zusteht: Jesus. Lässt dich auf Wasser gehen. Das ist das ganze Angebot, und das Modul macht genau das, was der Name verspricht, nichts Aufgemotztes. Es hat die gleiche Klassifizierung wie überall sonst im Opal-Katalog für dieses Verhalten: Nutzung auf eigene Gefahr. Auf Wasser zu gehen, ist eine eindeutige physikalische Verletzung, und Opal tut so, als wäre eine eindeutige physikalische Verletzung nicht unsichtbar.
+
+<Callout variant="warning" title="Sperrbar auf Anti-Cheat-Servern">
+Jesus ist eine erkennbare Bewegungsüberschreibung, kein Stealth-Feature. Jeder Server, der deine Position mit erwarteten Fluidmechaniken vergleicht, kann feststellen, dass du auf Wasser stehst, anstatt darin zu versinken. Nutze es auf einem Anti-Cheat-geschützten Server, und du riskierst dein Konto, genauso wie bei jedem anderen Client, jeder anderen Implementierung.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+<FAQItem question="Arbeitet Jesus auch auf Lava?">
+Manchmal. Das Kernverhalten ist das Gehen auf Wasser. Einige Implementierungen erweitern diese Überschreibung auch auf Lava, obwohl dies weniger konsistent dokumentiert ist und tendenziell weniger zuverlässig ist als der Fall mit Wasser.
+</FAQItem>
+<FAQItem question="Ist Jesus dasselbe wie Flug?">
+Nein. Jesus hält dich an der Oberfläche einer Flüssigkeit, anstatt dich frei durch die offene Luft bewegen zu lassen. Du kannst immer noch nicht den Boden oder die Oberfläche der Flüssigkeit verlassen, wie es ein Flugmodul ermöglichen würde.
+</FAQItem>
+<FAQItem question="Können Server Jesus erkennen?">
+Ja, grundsätzlich. Ein Server, der überprüft, ob deine Position mit der erwarteten Fluidphysik übereinstimmt, kann feststellen, dass du über dem Wasser bleibst, anstatt zu sinken. Genau aus diesem Grund trägt das Modul ein Erkennungsrisiko.
+</FAQItem>
+<FAQItem question="Welche Clients beinhalten ein Jesus-Modul?">
+Jesus wurde in Clients wie Fan und Tenacity sowie in anderen Clients mit Bewegungmodulen gesehen.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die Kategorie Jesus, und jedes andere Modul auf dieser Seite, gehört zu." },
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Ein weiteres Bewegungsmodul, das verändert, wie du mit dem Gelände interagierst, indem es diesmal Blöcke unter deine Füße setzt." },
+  { href: "/de/learn/what-is-velocity-anti-knockback", label: "Was ist Geschwindigkeit (Anti-Rückstoß)?", description: "Eine andere Art der Physik-Override: eine, die dem Kampf entgegenwirkt, wenn er dich zurückstößt, anstatt der Fluidität, wenn sie dich herunterzieht." }
+]} />
+
+<CTA href="/de/kaufen">Opal versendet Jesus und den Rest der Movement Suite. Kommen Sie und sehen Sie, was sich unter der Haube befindet.</CTA>

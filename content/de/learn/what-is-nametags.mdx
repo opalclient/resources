@@ -1,0 +1,94 @@
+---
+title: Was sind Namensschilder in Minecraft? Modul erklärt
+description: Nametags ist ein visuelles Minecraft-Modul, das die Spielernamen mit Gesundheit, Entfernung oder Ping neu gestaltet, ohne dass die Serverdaten oder ein ESP verändert werden.
+excerpt: Nametags verändert das Namensschild, das über einer Person schwebt. Es zeigt dir nichts, was du nicht bereits über F3 abrufen könntest, es spart dir nur den Weg.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Ist Nametags dasselbe wie ein ESP oder ein Wallhack?
+    a: Nein. Nametags ändern lediglich das Aussehen des Tags für Spieler, die bereits auf Ihrem Bildschirm sichtbar sind. Ein ESP oder Wallhack zeigt Informationen für Entitäten an, die sich hinter Wänden oder Terrain befinden, was Nametags niemals tun.
+  - q: Können Namensschilder Wände durchdringen?
+    a: Nein. Es wird über die normale Namensschilddarstellung des Spiels gerendert, die nur ausgelöst wird, wenn der Client bereits ein Namensschild für diese Entität anzeigen würde.
+  - q: Welche Informationen kann ein Namensschild-Modul anzeigen?
+    a: Häufige Ergänzungen sind Gesundheit, Distanz, Rüstung und Ping, sowie gestalterische Änderungen wie ein anderes Hintergrundbild oder eine andere Schriftart. Die genauen Felder variieren je nach Kunde.
+  - q: Werden Nametags von Anticheats erkannt?
+    a: Unwahrscheinlich. Es ist eine lokale Anpassung, die keine zusätzlichen Daten an den Server sendet und nichts berührt, was der Server tatsächlich überprüft, im Gegensatz zu Kampfbzw. Bewegungsmodulen.
+  - q: Welche Kunden haben ein Namensschild-Modul?
+    a: Der Fan ist mit einem dokumentiert. Ähnliche, anpassbare Namensschild-Funktionen tauchen unter verschiedenen Namen in anderen Dienstprogramm-Clients auf.
+---
+
+<KeyTakeaways>
+
+- Nametags ist ein visuelles Modul, das den Kopf-Tag umgestaltet und Felder wie Gesundheit, Distanz oder Ping hinzufügt.
+- Es betrifft nur Spieler, die bereits auf dem Bildschirm sichtbar sind, nicht aber Personen, die hinter einer Wand verborgen sind.
+- Es werden keine zusätzlichen Pakete gesendet, sodass das Risiko einer Entdeckung nahezu null ist.
+- Dokumentiert in Fan; die angezeigten Zahlen existieren bereits auf F3 oder in der Tab-Liste.
+
+</KeyTakeaways>
+
+Nametags ist ein visuelles Minecraft-Client-Modul, das verändert, wie der Name über einem Spieler angezeigt wird, indem es Felder wie Gesundheit, Distanz, Rüstung oder Ping hinzufügt oder einfach den Hintergrund und die Schriftart des Namensschildes umgestaltet. Es funktioniert nur bei Spielern, für die dein Client bereits ein Namensschild zeichnet. Wenn du jemanden hinter einer Wand entlangläufst, verschwindet sein Namensschild mit ihm, genau wie in der Vanilla-Version. Das ist die Grenze zwischen Nametags und einem ESP oder Wallhack: diese Module gehen aktiv voran, um Informationen für Entitäten anzuzeigen, die du eigentlich gar nicht sehen solltest. Nametags lässt das Namensschild, das du bereits sehen würdest, einfach besser aussehen oder mehr anzeigen.
+
+## Funktionsweise
+
+Minecraft zeichnet standardmäßig einen schwebenden Namen über jedem nahen Spieler, und genau dieser Zeichenbefehl ist es, den Nametags aufgreift. Anstatt die Standard-Renderer-Routine unverändert ausführen zu lassen, fängt das Modul den Befehl ab und ersetzt ihn durch seine eigene Version: zusätzliche Felder, die in den String eingefügt werden, eine neue Hintergrundtextur, eine größere oder kleinere Schriftart – je nachdem, was die Einstellungen verlangen.
+
+Da der Hook rein in die Darstellung sitzt, ändert sich nichts vorgelagert zum Bildschirm. Kein Paket wird an den Server gesendet, um zusätzliche Daten anzufordern, und das Modul greift nicht ein, welche Entitäten überhaupt als sichtbar gelten. Ein Spieler, der hinter einer Wand steht, erhält weiterhin null Tag, weil der Client keinen Grund hatte, einen anzustellen. Der Nametag-Hook feuert nur für Entitäten, die bereits einen Standard-Tag erhalten würden; Nametags überschreibt lediglich, was angezeigt wird, nachdem diese Entscheidung bereits getroffen wurde.
+
+## Gemeinsame Einstellungen
+
+Nametags-Module stellen in der Regel einige Optionen bereit, um zu steuern, was auf dem Tag angezeigt wird und wie es aussieht.
+
+| Einstellung | Was sie steuert |
+|---|---|
+| Zusätzliche Informationen | Fügt Felder wie Gesundheit, Rüstung, Ping oder Entfernung zum Tag hinzu |
+| Stil | Ändert den Hintergrund, den Rahmen oder die Schriftart des Tags |
+| Skalierung | Vergrößert oder verkleinert den Tag |
+| Ausblendungsdistanz | Wie weit ein Tag vollständig sichtbar bleibt, bevor er auszublenden beginnt |
+
+Die meisten der hinzugefügten Informationen, wie Gesundheit, Entfernung und Ping, sind Zahlen, die man bereits im F3-Debug-Bildschirm oder in der Tab-Liste abrufen konnte. Nametags liefert keine neuen Informationen, sondern verschiebt Zahlen, auf die man bereits Zugriff hatte, näher an den Ort, an dem man bereits schaut.
+
+## Ist Nametags sicher zu verwenden
+
+Nametags liest sich eher wie ein kosmetischer Vorteil als wie ein Cheat, der einen spieltechnischen Vorteil verschafft. Es beeinflusst die Treffererkennung, die Bewegung oder Werte, die der Server überprüft, nicht, und da die Änderung vollständig in der lokalen Darstellung stattfindet, gibt es kein Paketmuster oder serverseitliche Prüfung, auf die ein Anti-Cheat-System reagieren könnte. Es gehört in dieselbe Kategorie wie HUD-Anpassungen und andere kosmetische Mods, weit entfernt von Kampfbegrenzungen oder Bewegungsmodulen.
+
+Der einzige Haken: Einige Server verbieten jede Client-Modifikation grundsätzlich, unabhängig davon, was diese Modifikation tatsächlich tut. Ob Nametags auf einem bestimmten Server erlaubt ist, hängt von den Regeln dieses Servers ab, nicht von einem tatsächlichen Erkennungsrisiko, da es meistens kaum eines gibt.
+
+<Callout variant="tip" title="Wo dies in Opal passt">
+Opal versendet kein Modul speziell unter dem Namen Nametags, aber das Gebiet, in dem es existiert, die Änderungen, die sich ausschließlich auf das beziehen, was gezeichnet wird und niemals etwas berührt, was der Server prüft, ist genau das, worauf Opals visuelle Kategorie aufgebaut ist. Die gleiche Philosophie, egal ob es sich um ein Tag, ein HUD-Element oder das Aussehen einer beleuchteten Höhle handelt.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Ist Nametags dasselbe wie ein ESP oder Wallhack?">
+Nein. Nametags verändert lediglich das Aussehen der Tags für Spieler, die bereits auf Ihrem Bildschirm sichtbar sind. Ein ESP oder Wallhack zeigt Informationen für Entitäten an, die hinter Wänden oder Terrain verborgen sind, was Nametags niemals tut.
+</FAQItem>
+
+<FAQItem question="Können Namensschilder durch Wände sehen?">
+Nein. Sie werden über die normale Namensschilddarstellung des Spiels gerendert, die nur ausgelöst wird, wenn der Client bereits ein Schild für diese Entität anzeigen würde.
+</FAQItem>
+
+<FAQItem question="Welche Informationen kann ein Nametags-Modul anzeigen?">
+Häufige Ergänzungen sind Gesundheit, Distanz, Rüstung und Ping, sowie Stiländerungen wie ein anderes Hintergrundbild oder eine andere Schriftart. Die genauen Felder variieren je nach Client.
+</FAQItem>
+
+<FAQItem question="Werden Nametags von Anticheats markiert?">
+Es ist unwahrscheinlich. Es handelt sich um eine lokale Rendering-Änderung, die keine zusätzlichen Daten an den Server sendet und nichts berührt, was der Server tatsächlich überprüft, im Gegensatz zu Kampfbzw. Bewegungsmodulen.
+</FAQItem>
+
+<FAQItem question="Welche Clients haben ein Nametags-Modul?">
+Ein Fan ist mit einem dokumentiert. Ähnliche, anpassbare Namensschildfunktionen finden sich unter verschiedenen Namen in anderen Utility-Clients wieder.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Namensschilder und alle anderen Module, zu denen diese hier gehören." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Um das Vermeiden der Aufmerksamkeit herum aufgebaut, das Gegenteil vom Instinkt eines Moduls, das lediglich das Sichtbare neu beschriftet." },
+  { href: "/de/learn/what-is-an-aimbot", label: "Was ist ein Aim-Bot?", description: "Ein Modul, das Informationen automatisch verarbeitet; Nametags zeigt es lediglich an." },
+]} />
+
+<CTA href="/de/kaufen">Opal's visuelle Kategorie ist auf Änderungen genau wie diese ausgelegt – sehen Sie, was sich tatsächlich darin befindet.</CTA>

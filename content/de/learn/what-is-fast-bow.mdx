@@ -1,0 +1,84 @@
+---
+title: Was ist Fast Bow in Minecraft? Modul erklärt
+description: Der Schnellschuss ist ein Kampfmoodul, das die Standard-Zugzeit des Bogens umgeht und Pfeile fast augenblicklich mit voller Kraft abfeuert. So funktioniert er und warum er als fehlerhaft markiert wird.
+excerpt: Vanille lässt dich fast eine Sekunde auf einen vollen Power-Schuss warten. Fast Bow beschließt einfach, dass du schon genug gewartet hast.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was genau ändert Fast Bow eigentlich?
+    a: Es verkürzt oder entfernt die Zeit, die ein Bogen gehalten werden muss, bevor er mit voller Kraft abgefeuert wird, sodass Schüsse, die schwach und langsam sein sollten, fast augenblicklich als vollständig geladene Pfeile ankommen.
+  - q: Ist Fast Bow dasselbe wie ein Aim-Bot?
+    a: Nein, der Schnellabzug beeinflusst lediglich das Timing des Schusses und die Schusskraft, nicht die Zielgenauigkeit. Er richtet dein Fadenkreuz nicht wie ein Aimbot auf ein Ziel, sondern lässt jeden Abschuss wie einen Vollerzug wirken.
+  - q: Können Server Fast Bow erkennen?
+    a: Viele können dies feststellen, indem sie vergleichen, wie lange ein Bogen sichtbar gespannt gehalten wurde im Verhältnis zur Kraft des Pfeils, der daraus kam. Ein Schuss mit voller Kraft und kaum Ziehzeit ist ein deutlicher Missvergleich, obwohl kleinere Verkürzungen der Verzögerung schwerer zu erkennen sind als das vollständige Entfernen.
+  - q: Welche Kunden haben Fast Bow?
+    a: Es ist dokumentiert, wie in Tenacity zu sehen, und dort unter den Kampanmodulen zusammen mit anderen zeitbasierten Abkürzungen abgelegt.
+---
+
+<KeyTakeaways>
+
+- Fast Bow ist ein Kampanmodul, das die Verzögerung beim Ziehen des Bogen im Vanilla-Spiel überspringt oder verkürzt, sodass Pfeile mit voller Kraft fast im selben Moment abgefeuert werden, in dem man loslässt.
+- Im Vanilla-Spiel sind Schaden und Reichweite eines Bogens an der Zugzeit gebunden, die bei voller Aufladung fast eine Sekunde beträgt; Fast Bow meldet diesen Zustand frühzeitig.
+- Es ändert nur das Aufladungszeitfenster und die Leistung, nicht die Zielerfassung, daher ist es kein Aim-Bot.
+- Server leiten die Zugzeit aus der Paket-Historie ab, und ein Schuss mit voller Leistung und fast ohne tatsächliche Zugzeit ist ein leichtes Anticheat-Flag.
+- Dokumentiert wie in Tenacitys Kampfkategorie zu sehen.
+
+</KeyTakeaways>
+
+Schnellbogen ist ein Kampanmodul, das die Standardverzögerung beim Ziehen eines Bogens entfernt, sodass ein Schuss mit voller Kraft fast im Moment landet, in dem er gezogen wird. Im normalen Überlebensmodus benötigt ein Bogen fast eine volle Sekunde im Vollzug, um echten Schaden anzurichten oder geradeaus zu fliegen. Lässt man den Bogen zu früh los, ist der Pfeil schwach und weicht vom Ziel ab. Schnellbogen verkürzt entweder dieses Zeitfenster oder teilt dem Spiel mit, dass der Bogen bereits vollständig aufgeladen ist, wodurch eine Mechanik, die Mojang als bewussten Kompromiss eingebaut hat, zu etwas nahe an sofortigem Feuern wird. Ihr Zielen bleibt genau das, was es war. Nur der Ladestand ändert sich.
+
+## Wie Schnellbogen funktioniert
+
+Standardmäßig sind ein Bogens Schaden und Geschwindigkeit davon abhängig, wie lange er gezogen wurde. Lässt man den Bogen zu früh los, ist der Schuss schwach und driftet vom Ziel ab. Hält man ihn fast eine Sekunde, wird er vollständig aufgeladen und trifft härter und fliegt gerader. Schnellbogen fängt diesen Aufladetimer auf der Client-Seite ab und verkürzt ihn entweder oder meldet einen vollen Aufladestand vom Moment an, in dem der Bogen hochkommt, sodass der abgefeuerte Pfeil volle Kraft trägt, lange bevor ein legitimer Zug dies erzeugt hätte.
+
+Der Client sendet weiterhin ein normales Schuss-Paket an den Server. Nichts an dem Paket selbst wirkt falsch. Was sich ändert, ist das Timing dahinter: der Spieler zieht und löst den Bogen fast sofort aus, und das Spiel behandelt den Schuss so, als ob er die ganze Zeit gehalten worden wäre.
+
+Der Vorteil ist einfach: Ein vollständig aufgeladener Pfeil trifft härter und fliegt gerader, sodass das Verkürzen der Ladezeit fast jeden Schuss zu einem nahezu sofortigen, nahezu maximalen Treffer macht. In einem Pfeilduell ist das der Unterschied zwischen dem ersten sauberen Treffer und dem Einstecken eines Treffers, während der eigene Pfeil noch lädt.
+
+## Ist der Schnellbogen sicher in der Anwendung?
+
+Nein. Der Schnellbogen verändert das Ergebnis einer Auseinandersetzung zugunsten des Schützen, und jeder Server, der faire Kämpfe schätzt, behandelt ihn als eine Form des Betrugs, nicht als eine Bequemlichkeit.
+
+Der Ladestand existiert auf dem Client, bevor das Schuss-Paket den Server erreicht, sodass der Server ihn nicht einfach vom Spieler ablesen kann. Anticheats schließen die Zugzeit indirekt: Sie verfolgen, wie lange ein Spieler einen Bogen sichtbar gespannt gehalten hat, basierend auf früheren Paketen, und vergleichen dies mit der Stärke des Pfeils, der herauskommt. Ein Schuss, der mit voller Leistung viel früher ankommt, als es eine legitime Zugzeit erzeugen könnte, ist eine Diskrepanz, die leicht zu erkennen ist.
+
+Wie zuverlässig dies geschieht, hängt vom Server ab. Einige Systeme prüfen nur den offensichtlichen Fall: einen Schuss, der abgefeuert wird, sobald der Bogen angehoben wird. Eine subtilere Konfiguration, die nur einen Teil der Verzögerung kürzt, ist schwer von Lag oder einem Spieler zu unterscheiden, der einfach nur sehr schnell auf den Zug ist, weshalb einige Implementierungen stattdessen eine Option für eine teilweise Verzögerung anbieten, anstatt die Wartezeit vollständig zu entfernen.
+
+<Callout variant="tip" title="Wo Opal die Grenze zieht">
+Opal versendet kein dediziertes Fast Bow-Modul. Draw-Timing-Exploits gehören zu den einfacheren Kategorien, die ein Server erkennen kann, da er bereits verfolgt, wie lange ein Bogen gehalten wurde; ein Ungleichgewicht dort gibt einem Anticheat einfach ein klares Signal, um darauf zu reagieren. Opals Kampflinie deckt die gleichen Fernkämpfe ab, ist aber darauf ausgelegt, sich in Verhaltensweisen zu bewegen, die ein Server nicht sauber von denen eines schnellen, legitimen Spielers unterscheiden kann, und nicht darauf, einen Aufladungszustand vorzutäuschen, den der Server messen kann.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite erklärt, was Fast Bow ist und wie es sich allgemein verhält. Sie ist keine Anleitung zum Betreiben eines solchen. Das Abfeuern von Vollkraftpfeilen vor einem legitimen Zug kann gegen die Regeln auf jedem Server verstoßen, der die Kampfzeitprüfung durchführt, und ist eines der einfacheren Muster, das ein Anticheat erkennen kann.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was ändert der 'Schnellschuss'-Effekt eigentlich?">
+Er verkürzt oder entfernt die Zeit, die ein Bogen gehalten werden muss, bevor er mit voller Kraft abgefeuert wird, sodass schwache und langsame Schüsse fast instantan als vollständig aufgeladene Pfeile ankommen.
+</FAQItem>
+
+<FAQItem question="Ist Fast Bow dasselbe wie ein Aim-Bot?">
+Nein. Fast Bow beeinflusst lediglich das Aufladungszeitfenster und die Schusskraft, nicht die Zielerfassung. Es richtet den Fadenkreuz nicht auf ein Ziel, wie es ein Aim-Bot tut, sondern lässt jede Freigabe wie einen vollständigen Zug wirken.
+</FAQItem>
+
+<FAQItem question="Können Server Fast Bow erkennen?">
+Viele können, indem sie vergleichen, wie lange ein Bogen sichtbar gespannt gehalten wurde, mit der Kraft des abgefeuerten Pfeils. Ein Schuss mit voller Kraft und fast keiner Spannzeit ist ein deutlicher Widerspruch, obwohl kleinere Verkürzungen der Verzögerung schwerer zu erkennen sind als eine vollständige Entfernung.
+</FAQItem>
+
+<FAQItem question="Welche Klienten haben Fast Bow?">
+Es ist in Tenacity dokumentiert, wie dort unter den Kampfmodulen zusammen mit anderen zeitbasierten Abkürzungen aufgeführt.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-killaura", label: "Was ist KillAura?", description: "Der Nahkampf-Autoangreifer aus derselben Kampfmodulfamilie." },
+  { href: "/de/learn/what-is-an-aimbot", label: "Was ist ein Aim-Bot?", description: "Wie sich die Zielautomatisierung von einer Zeitungsabkürzung wie Fast Bow unterscheidet." },
+  { href: "/de/learn/what-is-reach", label: "Was ist Reichweite?", description: "Ein weiteres Kampanmodul, das auf der Manipulation einer einzigen Vanilla-Zahl basiert." },
+]} />
+
+<CTA href="/de/kaufen">Opals Fernkampf ist darauf ausgelegt, den Vorteil zu erlangen, nicht ihn vorzutäuschen.</CTA>

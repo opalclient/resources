@@ -1,0 +1,87 @@
+---
+title: Was ist Auto Block in Minecraft? Modul erklärt
+description: Auto Block ist ein Kampfmodul, das es dir ermöglicht, dich zu bewegen und zu kämpfen, während du blockst, oder es blockt automatisch für dich. Hier erfährst du, wie es funktioniert und warum es riskant ist.
+excerpt: Blockieren soll dich in deiner Bewegung und deinen Optionen einschränken. Auto Block weigert sich stillschweigend, diesen Preis zu zahlen, indem es entweder die Strafe ignoriert oder den Block setzt, bevor du überhaupt reagieren kannst.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was ändert Auto-Block im Vergleich zum normalen Blockieren?
+    a: Normales Blockieren kostet Sie Bewegungsgeschwindigkeit und schließt die meisten anderen Aktionen solange aus, wie Sie es gedrückt halten. Auto-Blocken entfernt diese Kosten, entweder indem es die Strafe ignoriert, während das Blockieren aktiv bleibt, oder indem es das Blockieren selbst auslöst, sodass Sie es nie manuell gedrückt halten müssen.
+  - q: Gibt es zwei verschiedene Versionen von Auto-Block?
+    a: Ja. Eine Version hält den Block serverseitig aktiv, während Sie sich normal bewegen und agieren. Die andere beobachtet eingehende Treffer und löst den Block zum richtigen Zeitpunkt selbstständig aus, anstatt dass Sie ihn manuell festhalten und timen.
+  - q: Ist Auto-Block dasselbe wie Rückstoßvermeidung?
+    a: Nein. Anti-Knockback verändert, wie weit ein Treffer dich zurückwirft. Auto Block verändert die Kosten und den Zeitpunkt des Blockens selbst. Das sind separate Kampfmodule, und viele Leute nutzen beide gleichzeitig.
+  - q: Ist Auto Block von Anticheatsystemen erkennbar?
+    a: Es ist plausibel. Ein gemeldeter Blockzustand, der nicht mit Ihrer Bewegungsgeschwindigkeit, Ihrem Sprint oder Ihrem Angriffsmuster übereinstimmt, ist ein konkreter Fehler, den ein Server erkennen kann, und die automatisch ausgelöste Version kann sich auch durch Blockzeiten bemerkbar machen, die zu konstant um eingehende Treffer herum beginnen und enden.
+  - q: Welche Kunden beinhalten Auto-Block?
+    a: "Es ist wie in Slinky dokumentiert. Opal listet auch seine eigene Version im Katalog auf, als Block: 'Ermöglicht dir das Agieren beim Blocken oder blockt automatisch für dich.'"
+---
+
+<KeyTakeaways>
+
+- Auto Block ist ein Kampanmodul, das die Kosten für das Halten eines Standardblocks eliminiert.
+- Das Blockieren mit Standardblöcken schränkt deine Bewegung auf einen Gang ein und limitiert andere Aktionen während des Haltens.
+- Eine Form ignoriert diese Strafe; die andere löst automatisch das Blocken bei eingehenden Treffern aus.
+- Es ist wie bei Slinky dokumentiert und birgt wie jedes Modul, das verändert, was der Server sieht, ein Risiko bei der Verwendung.
+
+</KeyTakeaways>
+
+Auto Block ist ein Kampanmodul, das den Kompromiss beseitigt, der in der Standard-Schwertblockade enthalten ist. Halte im Überlebensmodus in Minecraft die rechte Maustaste gedrückt, um zu blocken, und das Spiel verlangsamt deine Bewegung auf Schrittgeschwindigkeit und sperrt die meisten anderen Aktionen für die Dauer des Gedrückthalte-Zustands. Das ist der Preis für den reduzierten Schaden. Auto Block beseitigt diesen Preis. Je nach Implementierung bewegst du dich entweder unauffällig weiter und kämpfst ganz normal, während die Blockade aktiv bleibt, oder es wird nichts festgehalten und die Blockade wird ausgelöst, sobald ein Treffer unmittelbar bevorsteht.
+
+## Funktionsweise
+
+Standard-Blocken ist manuell und alles oder nichts. Du hältst die rechte Maustaste mit einem Schwert gedrückt, deine Geschwindigkeit sinkt auf Schrittgeschwindigkeit, und das Spiel schränkt die meisten anderen Eingaben ein, bis du loslässt. Das ist der Deal: reduzierter Schaden im Austausch dafür, stillzustehen und wenig anderes zu tun.
+
+Auto Block bricht diesen Deal auf eine von zwei Arten. Die erste Form behält den Blockstatus auf der Serverseite bei, während der Client die Bewegung und die Aktionsbestrafung unauffällig ignoriert, sodass du weiterhin sprintest, schlägst oder dich neu positionierst, als ob nichts gehalten würde. Die zweite Form hält selbst nichts fest. Sie beobachtet den Moment, in dem ein Angriff unmittelbar bevorsteht, löst die Blockade für dich aus und lässt sie dann wieder los, wodurch das Blocken zu einer Reaktion wird, die du nie manuell timen musst. Auto Block ist dokumentiert wie in Slinky zu sehen.
+
+Der Reiz der Form mit automatischer Auslösung geht über das bloße Umgehen der Bewegungsstrafe hinaus. Ein Block, der sich sofort aktiviert, wenn er benötigt wird, eliminiert auch die menschliche Verzögerung zwischen dem Erkennen eines Treffers und dem Drücken des Knopfes dafür, was eine zweite Facette zusätzlich zur ersten darstellt.
+
+## Ist es sicher zu verwenden?
+
+Das Blockieren und die volle Mobilität sollen in Vanilla Minecraft nicht gleichzeitig auftreten, daher ist die Kombination davon ein echtes Warnsignal für einen Server, genauer hinzusehen. Ein Spieler, dessen Bewegungsgeschwindigkeit, Sprintstatus oder Angriffsmuster nicht mit dem Blockzustand übereinstimmen, den er meldet, wirkt inkonsistent mit dem Verhalten des Vanilla-Clients, und genau diese Art von Diskrepanz werden serverseitige Anticheats vergleichen. Die Form mit automatischer Auslösung hat auch ihr eigenes verräterisches Merkmal: ein Block, der mit unnatürlicher Konsistenz um eingehende Treffer startet und stoppt, liest sich anders als eine Person, die manuell reagiert.
+
+Auto Block ist eine Funktion, die mit eigenen Risiken genutzt werden sollte. Es ist plausibel, dass Anticheats sie als verdächtig einstufen, und keine Implementierung bietet eine Garantie, auf einem bestimmten Server unentdeckt zu bleiben.
+
+<Callout variant="tip" title="Opal versendet dies">
+Im Opal-Katalog wird es als Block aufgeführt: „Ermöglicht dir, während du blockst, zu agieren, oder blockt automatisch für dich.“ Gleiche zwei Formen wie oben beschrieben, gleiche Klassifizierung: Verwenden Sie es auf eigene Gefahr.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite beschreibt das Modul allgemein, damit Sie wissen, was der Begriff bedeutet. Die Benennung und das genaue Verhalten können je nach Client variieren, und das Blockieren bei freiem Handeln ist erkennbar und kann zur Sperrung eines Kontos führen, wie bei jedem Client.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was ändert Auto Block im Vergleich zum normalen Blockieren?">
+Normales Blockieren kostet dich Bewegungsgeschwindigkeit und schließt die meisten anderen Aktionen aus, solange du es hältst. Auto Block entfernt diese Kosten, entweder indem es die Strafe ignoriert, während der Block aktiv ist, oder indem es den Block selbst auslöst, sodass du ihn nie manuell halten musst.
+</FAQItem>
+
+<FAQItem question="Gibt es zwei verschiedene Versionen von Auto Block?">
+Ja. Eine Version hält den Block serverseitig aktiv, während Sie sich normal bewegen und agieren. Die andere Version beobachtet eingehende Treffer und löst den Block zum richtigen Zeitpunkt selbstständig aus, anstatt dass Sie ihn manuell festhalten und timen.
+</FAQItem>
+
+<FAQItem question="Ist Auto Block dasselbe wie Anti-Knockback?">
+Nein. Anti-Knockback verändert, wie weit ein Treffer dich zurückwirft. Auto Block verändert die Kosten und den Zeitpunkt des Blockens selbst. Es sind separate Kampffähigkeiten, und viele Leute nutzen beide gleichzeitig.
+</FAQItem>
+
+<FAQItem question="Ist Auto Block von Anticheats erkennbar?">
+Es ist möglich. Ein gemeldeter Blockzustand, der nicht mit Ihrer Bewegungsgeschwindigkeit, Ihrem Sprint oder Ihrem Angriffsmuster übereinstimmt, stellt einen konkreten Abweicher für einen Server dar. Auch die automatisch ausgelöste Version kann sich durch Blockzeiten, die zu konstant um eingehende Treffer herum beginnen und enden, auffällig machen.
+</FAQItem>
+
+<FAQItem question="Welche Kunden enthalten Auto Block?">
+Es ist wie in Slinky dokumentiert. Opal listet ebenfalls seine eigene Version auf, im Katalog als Block: "Ermöglicht das Handeln während des Blockierens oder blockiert automatisch für Sie."
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-velocity-anti-knockback", label: "Was ist Velocity (Rückstoßvermeidung)?", description: "Das Kampffach Auto Block gerät in Verwirrung, und wie sich die beiden tatsächlich unterscheiden." },
+  { href: "/de/learn/what-is-killaura", label: "Was ist KillAura?", description: "Ein weiteres Kampanmodul, das etwas automatisiert, das Sie sonst manuell timen müssten." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Kategorie, zu der diese Module gehören." },
+]} />
+
+<CTA href="/de/kaufen">Blockieren sollte nicht bedeuten, stillzustehen. Opal ist $8.99.</CTA>

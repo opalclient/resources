@@ -1,0 +1,95 @@
+---
+title: Was sind Minecraft-Karten? Namen erklärt
+description: "Minecraft-Karten erklärt: Wie MCP, Yarn und Mojmap verschleierte Klassennamen in lesbaren Code umwandeln, damit Mods und Clients sich in das Spiel einklinken können."
+excerpt: Mojang versendet Minecraft mit verschlüsselten Namen wie a.a.a. Zuordnungen sind das Wörterbuch, das sie wieder in lesbaren Code umwandelt, den Mods aufhängen können.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Mappings
+author: trq
+faqs:
+  - q: Verändern Mappings die Spielweise?
+    a: Nein. Eine Abbildung benennt Dinge nur für den Entwickler um, und der kompilierte Mod wird so umgemappt, dass er mit dem verschleierten Spiel übereinstimmt, sodass Codierungsnamen niemals an die Spieler gelangen.
+  - q: Warum gibt es mehrere Kartierungssysteme?
+    a: Geschichte. MCP kam zuerst für Minecraft vor 1.14, Yarn wuchs mit Fabric als offener Alternative heran, und die Mojang-Zuordnungen kamen hinzu, als Mojang begann, ab 1.14.4 offizielle Namen zu veröffentlichen.
+  - q: Welche Zuordnung sollte ein neues Projekt verwenden?
+    a: Für modernes Minecraft sind die Standardoptionen die Mappings von Mojang oder Yarn. MCP ist hauptsächlich für ältere Arbeiten aus der 1.8.9-Ära relevant, bei denen der alte Toolchain noch im Einsatz ist.
+  - q: Sind Mappings dasselbe wie ein Mod-Loader?
+    a: Nein. Eine Mapping ist eine Namensliste; ein Mod-Loader wie Fabric ist die Laufzeitumgebung, die Mods in das Spiel lädt. Sie arbeiten zusammen, lösen aber unterschiedliche Probleme.
+---
+
+<KeyTakeaways>
+
+- Mappings sind Namenslisten, die Minecrafts verschleierten Code in lesbare Namen übersetzen.
+- Mojang verschlüsselt Klassennamen, Feldnamen und Methodennamen, und diese ändern sich mit jeder Version.
+- Die drei, über die du hören wirst, sind MCP, Yarn und die Mojang-Mappings (Mojmap).
+- Eine Mapping-Datei wird zur Kompilierzeit angewendet, nicht zur Laufzeit, und wird daher niemals an die Spieler ausgeliefert.
+
+</KeyTakeaways>
+
+Minecraft-Mappings sind Namenslisten, die den verschleierten Code des Spiels in lesbare Namen übersetzen. Mojang liefert Minecraft mit verschlüsselten Klassen- und Feldnamen wie `a.a.a` aus, weshalb Mod- und Client-Entwickler ein Mapping-Set wie MCP, Yarn oder die Mojang-Mappings anwenden, um Namen zu erhalten, die sie tatsächlich lesen und in die sie eingreifen können.
+
+<Callout variant="info" title="Wo Opal passt">
+Opal ist ein [Fabric](https://fabricmc.net/) Mod, der unter der Haube auf modernen Mappings aufbaut und stattdessen eine saubere GraalVM JavaScript Scripting-API bereitstellt. Sie schreiben Skripte mit lesbaren Namen, ohne selbst Mappings anfassen zu müssen. Siehe den [Scripting-Guide](/de/docs/scripting).
+</Callout>
+
+## Warum Mappings existieren
+
+Mojang verschleiert Minecraft vor der Veröffentlichung. Das ausgelieferte Jar-Archiv benennt Klassen, Methoden und Felder in kurze, bedeutungslose Zeichenketten um, um die Dateigröße zu reduzieren und den Code schwer lesbar zu machen. Dieses Verwirren ist der Grund, warum man das Spiel nicht einfach öffnen und mit der Bearbeitung beginnen kann.
+
+Ein Mapping ist das Wörterbuch, das diese Verschleierung rückgängig macht. Es ordnet jedem verschleierten Namen einen menschenlesbaren zu, sodass ein Feld namens `field_70181_x` zu `motionY` wird. Mit einem angewendeten Mapping sieht ein Entwickler einen Codebasis, der normal aussieht, und kann Mods dafür schreiben.
+
+Ein einziger Punkt ist hier wichtig. Die verschleierten Namen ändern sich bei jeder Minecraft-Version, sodass dasselbe Feld in einer Version `a` und in der nächsten `bk` sein kann. Mappings absorbieren diese Veränderung, weshalb sie das Rückgrat jeder Mod-Toolchain bilden.
+
+## Die drei, die man hören wird
+
+MCP (Mod Coder Pack) ist das Community-Mapping, das Modding vor Version 1.14 ermöglicht hat. Es verwendete ein zweischichtiges Schema: Das Searge-Projekt erzeugte stabile, aber hässliche Zwischennamen wie `field_70181_x`, und MCP wickelte diese mit freundlichen Namen wie `motionY` ein. Die meisten älteren 1.8.9-Standalone-Clients kompilieren gegen einen MCP-abgebildeten Quellcodebaum und beziehen sich bei der Reflection auf die Namen von MCP und Searge.
+
+Yarn ist die von FabricMC für das [Fabric](https://fabricmc.net/) Ökosystem gepflegte, quelloffene Mapping-Datei. Sie wird von der Community getragen, ist frei lizenziert und wird schnell aktualisiert, sobald eine neue Minecraft-Version erscheint, was ein Grund dafür ist, warum Fabric-Mods schnell neue Versionen erreichen.
+
+Die Mojang-Mappings, oft als Mojmap bezeichnet, sind Mojangs eigene First-Party-Mapping-Datei, die seit 1.14.4 zusammen mit jeder offiziellen Veröffentlichung veröffentlicht wird. Da sie direkt von Mojang stammen, entsprechen die Namen den Bezeichnungen, die die Entwickler tatsächlich verwenden. Sie ersetzten effektiv MCP und Searge als Standard für jeden neuen Client, der auf 1.21 oder höher abzielt.
+
+## Vergleich
+
+| | MCP | Yarn | Mojang-Mappings |
+| :--- | :--- | :--- | :--- |
+| Gepflegt von | Community (Searge + MCP) | FabricMC | Mojang |
+| Ära | Vor 1.14 (1.7-1.12) | 1.14+ | 1.14.4+ |
+| Quelle | Community-basiert | Community-basiert | Offiziell |
+| Wird verwendet mit | Legacy-Clients, altes Modding | Fabric | Fabric, Forge |
+| Status | Von Mojang-Mappings abgelöst | Aktiv | Aktiver Standard |
+
+## Wie Mappings in eine Mod-Toolchain passen
+
+Ein Mapping wird zur Kompilierzeit angewendet, nicht zur Laufzeit. Das Build-Tool nimmt das verschleierte Spiel, führt das Mapping darüber aus und gibt Ihnen eine lesbare Version, mit der Sie Code schreiben können. Ihr fertiger Mod wird dann wieder zurückgemappt, sodass er mit den verschleierten Namen übereinstimmt, die das Spiel des Spielers tatsächlich verwendet.
+
+Verschiedene Loader gehen hier unterschiedlich vor. [Fabric](https://fabricmc.net/) baut entweder gegen Yarn oder eine Mojang-Mapping-Basis, abhängig vom Projekt. Forge hat die Aufgabe historisch aufgeteilt und dabei ein Mapping für den Quellcode und ein anderes für die Ausführung verwendet. Die Lizenzierung der Mojang-Mappings ist ausreichend permissiv, um sie zur Build-Zeit zu verwenden, weshalb moderne Toolchains darauf setzen.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Ändern Abbildungen, wie das Spiel läuft?">
+Nein. Eine Abbildung benennt lediglich Dinge für den Entwickler um. Der kompilierte Mod wird neu abgebildet, um mit dem verschleierten Spiel übereinzustimmen, sodass die Namen, die Sie beim Programmieren sehen, niemals an die Spieler gelangen.
+</FAQItem>
+
+<FAQItem question="Warum gibt es mehrere Mapping-Systeme?">
+Geschichte. MCP kam zuerst und trug die Community durch das Pre-1.14 Minecraft. Yarn wuchs mit Fabric als offener Alternative heran, und die Mojang-Mappings kamen hinzu, als Mojang begann, ab 1.14.4 offizielle Namen zu veröffentlichen.
+</FAQItem>
+
+<FAQItem question="Welche Mapping-Methode sollte ein neues Projekt verwenden?">
+Für modernes Minecraft sind Mojang Mappings oder Yarn die Standardoptionen. MCP ist hauptsächlich für ältere Arbeiten aus der 1.8.9-Ära relevant, bei denen noch die alte Toolchain im Einsatz ist.
+</FAQItem>
+
+<FAQItem question="Sind Mappings dasselbe wie ein Mod-Loader?">
+Nein. Ein Mapping ist eine Namensliste; ein Mod-Loader wie Fabric ist die Laufzeitumgebung, die Mods in das Spiel lädt. Sie arbeiten zusammen, lösen aber unterschiedliche Probleme.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-intermediary", label: "Was ist ein Vermittler?", description: "Die stabile Namenschicht, die Mods kompilierte und gegen sie auslieferte." },
+  { href: "/de/learn/yarn-vs-mojmap", label: "Wolle gegen Mojmap", description: "Welche lesbare Kartenressource sollte man für ein Fabric-Mod verwenden." },
+  { href: "/de/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "Die Loader werden durch diese Zuordnungen bedient." },
+]} />
+
+<CTA href="/de/purchase">Opal, einen Fabric-Client, für $8.99 erhalten</CTA>

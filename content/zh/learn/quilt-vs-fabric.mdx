@@ -1,0 +1,90 @@
+---
+title: "Quilt vs Fabric: 哪一个 Minecraft 模组加载器 (2026)"
+description: Quilt 与 Fabric 详解：社区分支与原始加载器在兼容性、API 和采用率上的区别，以及应该运行哪个.
+excerpt: Quilt 是 Fabric 的一个分支，它以不变的方式运行 Fabric 的模组。以下是这两个加载器在兼容性、API 和采用率上的区别，以及你应该选择哪一个.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Frameworks
+author: trq
+faqs:
+  - q: Quilt mod 是否与 Fabric mod 兼容？?
+    a: 是的。Quilt 通过其 Quilted Fabric API 层的 Quilted Fabric API 载入 Fabric 模组，但反之则不然：Fabric 无法运行需要 Quilt 专属 QSL API 的模组.
+  - q: 为什么会有Quilt，如果Fabric已经可以工作了？?
+    a: 2021年，Quilt因治理分歧从FabricMC分离，目标是保持与Fabric兼容的同时，通过QSL提供其自身的API设计.
+  - q: 如果一个公用事业客户应该选择 Fabric 还是 Quilt？?
+    a: 大多数目标 Fabric 是因为它的用户群和版本支持更大，而且 Fabric 的构建也能在 Quilt 上运行，因此仅构建 Quilt 收益不大.
+  - q: 一个比另一个快吗？?
+    a: 没有实质性的区别。Quilt 继承了 Fabric 的 Mixin 模型，因此性能取决于你安装的模组，而不是加载器.
+---
+
+<KeyTakeaways>
+
+- Quilt 是一个 2021 年基于 [Fabric](https://fabricmc.net/) 的社区分支，它运行 Fabric 模组而不做任何修改。
+- Fabric 是最初的加载器，拥有更大的模组生态系统和用户群。
+- 兼容性是单向的：Quilt 可以加载 Fabric 模组，但 Fabric 无法加载仅适用于 Quilt 的模组。
+- 对于大多数玩家来说，Fabric 是安全的默认选择；Quilt 适合那些想要其额外 API 的人.
+
+</KeyTakeaways>
+
+Quilt 是 [Fabric](https://fabricmc.net/) 的一个社区分支，它与 Fabric 模组保持二进制兼容，同时在其之上添加了自己的库。Fabric 是原始的加载器，拥有更大的模组生态系统和用户群。对于大多数玩家来说，Fabric 是安全的首选。Quilt 适合那些想要其额外 API 或出于原则支持此分支的人.
+
+<Callout variant="info" title="Opal 的适用环境">
+Opal 是一个 Fabric 模组，因此您需要 Fabric 作为加载器。Fabric 构建也适用于 Quilt，如果您更喜欢这个分支。请参阅 [设置指南](/zh/docs/setup)。
+</Callout>
+
+## 它们各自是什么
+
+Fabric 是由 FabricMC 维护的轻量级、模块化的模组加载器。它将一个小型核心与单独版本化的 [Fabric API](/zh/learn/what-is-the-fabric-api) 结合起来，并使用基于 Mixin 的补丁模型。它能快速更新到新的 Minecraft 版本，并拥有最大的性能和实用模组目录。
+
+Quilt 是 Fabric 在 2021 年因 FabricMC 内部治理争议而产生的分支。它能运行未修改的 Fabric 模组，自带 Quilted Fabric API 作为 Fabric API 兼容层，并添加了 QSL，即 Quilt 标准库，用于其自身的 API。它的采用率相对于 Fabric 来说较小。
+
+## 它们的不同之处
+
+一个重要的实际区别在于兼容性的方向。Quilt 可以加载 Fabric 模组，但 Fabric 无法加载依赖于 Quilt 专属 QSL 功能的模组。因此，为纯 Fabric 编写的模组可以覆盖到两个受众，而依赖 QSL 的模组仅能覆盖到 Quilt 用户。
+
+| | Fabric | Quilt |
+| :--- | :--- | :--- |
+| 起源 | FabricMC 原始加载器 | Fabric 的 2021 年社区分支 |
+| 模组生态 | 在现代 Minecraft 中最大 | 运行 Fabric 模组和 QSL 模组 |
+| 自己的 API | Fabric API | Quilted Fabric API（兼容层）+ QSL |
+| 兼容性 | 无法加载 Quilt 专属模组 | 运行未修改的 Fabric 模组 |
+| 采用率 | 非常大 | 相对于 Fabric 较小 |
+| 补丁模型 | Mixins | Mixins（从 Fabric 继承） |
+
+## 如何选择
+
+<Checklist>
+<ChecklistItem>如果你想要最广泛的模组选择、最快的版本支持以及大多数客户端和模组默认使用的加载器，请选择 Fabric.</ChecklistItem>
+<ChecklistItem>如果您想要其 QSL 功能、运行特定的 Quilt 专属模组，或者更喜欢此分支的治理方式，请选择 Quilt。您现有的 Fabric 模组仍然可以使用.</ChecklistItem>
+<ChecklistItem>你不能同时运行两者。为每个配置文件选择一个加载器，由于Quilt会读取Fabric模组，无论你选择哪一个切换成本都很低.</ChecklistItem>
+</Checklist>
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="Quilt 是否与 Fabric 模组兼容？">
+是的。Quilt 保持二进制兼容性，并通过其 Quilted Fabric API 层加载 Fabric 模组。反之则不然：Fabric 无法运行需要 Quilt 独有的 QSL API 的模组。
+</FAQItem>
+
+<FAQItem question="为什么Quilt存在，如果Fabric已经可以工作？">
+Quilt于2021年因治理分歧从FabricMC分离出来。它旨在与Fabric保持兼容，同时通过QSL提供自己的API设计。
+</FAQItem>
+
+<FAQItem question="实用工具客户端应该针对 Fabric 还是 Quilt？">
+大多数客户端会选择 Fabric，因为它的用户群和版本支持都更大，而且 Fabric 的构建也可以在 Quilt 上运行。 仅构建 Quilt 通常情况下会缩小受众，却无法带来任何好处。
+</FAQItem>
+
+<FAQItem question="其中一个是否更快？">
+没有显著差异。Quilt 继承了 Fabric 的 Mixin 模型，因此性能取决于你安装的模组，而不是加载器。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "另一个大型模组加载器分裂." },
+  { href: "/zh/learn/what-is-the-fabric-api", label: "什么是Fabric API？?", description: "图书馆是双方共同建设的." },
+  { href: "/zh/learn/what-is-a-minecraft-mod-loader", label: "什么是 Minecraft 模组加载器？?", description: "加载器如何将模组整合到游戏中." },
+]} />
+
+<CTA href="/zh/purchase">获取 Opal，一个 Fabric 客户端，用于 $8.99</CTA>

@@ -1,0 +1,91 @@
+---
+title: Was ist Auto Pot in Minecraft? Modul erklärt
+description: Auto Pot ist ein Minecraft-Kampfmodul, das automatisch eine Heiltrank trinkt oder wirft, sobald deine Gesundheit sinkt, und das Timing verrät es.
+excerpt: Auto Pot bemerkt, dass du fast keine Ressourcen mehr hast, bevor du es selbst bemerkst, und heilt dich, bevor du überhaupt an deine Aktionsleiste greifen kannst. So funktioniert der Auslöser und warum er ein Timing-Hinweis ist.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Funktioniert Auto Pot nur mit Trank-Effekten?
+    a: Nein. Je nach Situation und dem, was man trägt, kann es einen getragenen Trank direkt trinken oder einen Sprüh-Trank werfen, meistens auf die eigenen Füße, um einen Flächenheilung zu bewirken.
+  - q: Verleiht Auto Pot einen mechanischen Kampfvorteil?
+    a: Nicht direkt. Es beeinflusst keine Reichweite, keinen Schaden oder keine Bewegung, es entfernt lediglich den manuellen Schritt der Auswahl und Verwendung eines Tranks, sodass jeder Vorteil aus der eingesparten Reaktionszeit resultiert und nicht aus einer geänderten Mechanik.
+  - q: Wie würde ein Server Auto Pot erkennen?
+    a: Hauptsächlich durch das Timing. Ein Trank, der mit einer nahezu konstanten, sehr kurzen Verzögerung nach dem Schaden eingesetzt wird, wirkt automatisiert statt reaktiv, und genau dieses Muster beobachten Anticheat-Systeme und aufmerksames Personal.
+  - q: Ist Auto Pot dasselbe wie Auto Suppe?
+    a: Sie funktionieren gleich, beobachten die Gesundheit und lösen automatisch einen Gegenstand aus, zielen aber auf unterschiedliche Gegenstände ab. Auto Pot zielt auf Heil- oder Sprühpotione, Auto Soup auf Pilzsuppe.
+  - q: Welche Kunden haben Auto Pot?
+    a: "Es ist dokumentiert, wie in Fan und Ausdauer zu sehen ist. Auch Opal bietet eine eigene Version an, die in seinem Katalog als Auto Trank aufgeführt ist: 'Wirft Trankflaschen zu deinen Füßen für dich.'"
+---
+
+<KeyTakeaways>
+
+- Auto Pot trinkt oder wirft automatisch einen Heiltrank, sobald deine Gesundheit unter einen festgelegten Schwellenwert fällt.
+- Es überwacht die Gesundheit bei jedem Tick, wechselt zum Trank und führt die Aktion sofort aus.
+- Splash wirft Land zu deinen Füßen, sodass der Heilradius dich weiterhin erreicht.
+- Es beeinflusst keine Reichweite oder Bewegung, sondern nur die Reaktionsgeschwindigkeit, worauf Anticheats ansetzen.
+
+</KeyTakeaways>
+
+Auto Pot ist ein Minecraft-Kampfmodul, das im selben Moment einen Heiltrank trinkt oder wirft, in dem dein Leben einen festgelegten Schwellenwert unterschreitet, sodass du dich während eines Kampfes nicht ablenken musst, um in deiner Schnellleiste zu suchen. Es überwacht im Hintergrund deine Gesundheit und aktiviert sich, sobald der Wert erreicht ist – ohne manuellen Schalter, ohne Klicken unter Druck. Es erscheint unter derselben Idee, aber mit einem anderen Namen, in einer Handvoll Kampfclients und harmoniert natürlich mit allem, was einen Kampf länger am Laufen hält: Kristalltauschgeschäfte, lange Duelle, überall dort, wo es wichtiger ist, rechtzeitig zu heilen als irgendwann.
+
+## Funktionsweise
+
+Auto Pot überprüft in kurzen Abständen, normalerweise jede Zeiteinheit, deine aktuelle Gesundheit im Vergleich zu einem von dir konfigurierten Schwellenwert. Sobald deine Gesundheit unter diesen Wert fällt, wählt es einen Trank aus und verwendet ihn. Wenn du einen Heiltrank in der Hand hältst, wechselt es zu diesem Slot in deiner Schnellleiste und trinkt ihn. Wenn du Sprungtränke trägst, wechselt es, zielt auf deine eigenen Füße und wirft ihn.
+
+Das Zielen ist kein Zufall. Ein getrunkener Trank heilt nur, wer ihn trinkt. Ein geworfener Sprungtrank zerbricht beim Aufprall und heilt jeden, der in der Explosion gefangen ist, einschließlich des Werfers, weshalb der Wurf an deinen Füßen landet und nicht in der Nähe eines Feindes. Sobald du den Wechsel und den Wurf richtig hinbekommen hast, ist die Heilung abgeschlossen.
+
+Das Trinken ist der etwas unordentlichere Weg. Es ist immer noch Umschalten und dann Benutzen, aber die Trank benötigt einen Moment, um sich zu entleeren, und die Gesundheit kann weiter sinken, während die Animation abgespielt wird. Das ist einer der Gründe, warum Sprungtränke in Modulen, die auf ernstes PvP ausgelegt sind, tendenziell die bevorzugte Implementierung sind.
+
+## Warum Leute es benutzen
+
+Es geht nicht um zusätzliche Kraft, es geht nicht darum, eine Heilung in einem Kampf zu verpassen, der bereits schlecht läuft. Das Feststellen niedriger Gesundheit, das Öffnen der Schnellleiste und das Auswählen des richtigen Tranks kostet die Aufmerksamkeit, die ein Spieler, der um sein Leben kämpft, lieber für die Positionierung oder das Zielen verwenden würde. Auto Pot entfernt diesen einen sich wiederholenden Schritt, sodass die Heilung sofort erfolgt, wenn der Schwellenwert überschritten wird, anstatt wann immer man dazu kommt.
+
+## Ist es sicher zu benutzen
+
+Auto Pot ist eher eine Komfortfunktion als ein mechanikverändernder Betrug. Es ändert weder Reichweite, Zielen noch Bewegung, und es tut nichts, was ein Server als physikalisch unmöglich messen kann; es automatisiert lediglich die Verwendung eines Gegenstands, den man bereits manuell verwenden durfte. Was Bedenken aufwirft, ist das Timing: ein Mensch, der oder der einen Trank unter Druck trinkt oder wirft, hat eine variable Verzögerung und fummelt manchmal beim Umschalten der Schnellleiste, während ein automatischer Auslöser jedes Mal zu einem festen, nahezu sofortigen Zeitpunkt reagiert. Diese Konsistenz ist ein Muster, das ein strenger Anticheat oder einfach ein misstrauischer Gegner bemerken kann, ohne jemals beweisen zu können, dass etwas clientseitig passiert ist.
+
+Ob es relevant ist, hängt vom Server ab. Ein Regelwerk, das bereits schnelles Trankwechseln toleriert, behandelt Auto Pot höchstens als einen geringfügigen Vorteil. Ein Server, der auf Ressourcenknappheit ausgelegt ist, bei dem das eigene Heilen managen Teil der Herausforderung ist, oder einer, der den automatischen Gebrauch von Gegenständen ausdrücklich verbietet, wird dies mit viel größerer Wahrscheinlichkeit bemerken, und die Erkennung hängt von dieser gleichen Reaktionszeit-Signatur ab.
+
+<Callout variant="tip" title="Opal nennt es Auto Trank">
+Im Opal-Katalog wird es schlicht aufgelistet: Auto Trank, „Wirft Spritztränke zu deinen Füßen für dich.“ Die gleiche Mechanik, der gleiche Kompromiss, eingestuft unter „mit Vorsicht zu genießen“ wie alles andere hier.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite erklärt, was Auto Pot ist und wie es erkannt wird. Sie enthält keine Anleitung zum Ausführen eines solchen Programms. Automatisierte Item-Nutzung dieser Art ist ein bekanntes Anticheat-Signal, und bei der Entdeckung droht ein Bann, wie bei jedem Client.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Funktioniert Auto Pot nur mit Sprühpotions?">
+Nein. Je nach Einstellung und dem, was Sie tragen, kann es eine getragene Potion direkt trinken oder eine Sprühpotion werfen, meistens auf Ihre eigenen Füße gerichtet, um eine Flächenheilung zu bewirken.
+</FAQItem>
+
+<FAQItem question="Verleiht Auto Pot einen mechanischen Kampfvorteil?">
+Nicht direkt. Es beeinflusst weder Reichweite, Schaden noch Bewegung; es entfernt lediglich den manuellen Schritt der Auswahl und Verwendung eines Tranks, sodass jeder Vorteil aus der eingesparten Reaktionszeit resultiert und nicht aus einer geänderten Mechanik.
+</FAQItem>
+
+<FAQItem question="Wie würde ein Server Auto Pot erkennen?">
+Vor allem durch die Timing-Analyse. Eine Tranknutzung mit einer nahezu konstanten, sehr kurzen Verzögerung nach dem Schaden wirkt automatisiert statt reaktiv, und genau dieses Muster beobachten Anticheat-Systeme und aufmerksames Personal.
+</FAQItem>
+
+<FAQItem question="Ist Auto Pot dasselbe wie Auto Soup?">
+Sie funktionieren auf die gleiche Weise, indem sie die Gesundheit überwachen und automatisch einen Gegenstand auslösen, zielen aber auf unterschiedliche Gegenstände ab. Auto Pot zielt auf Heil- oder Spritzpotione ab, Auto Soup auf Pilzsuppe.
+</FAQItem>
+
+<FAQItem question="Welche Klienten haben Auto Pot?">
+Es ist dokumentiert, wie in Fan und Tenacity zu sehen. Auch Opal liefert eine eigene Version, die in seinem Katalog als Auto Potion aufgeführt ist: "Wirft Trankflaschen zu deinen Füßen für dich."
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Kategorie, in die der Auto Pot fällt." },
+  { href: "/de/learn/what-is-killaura", label: "Was ist KillAura?", description: "Der Auto-Angreifer, der oft zusammen mit einer automatischen Heilung kämpft." },
+  { href: "/de/learn/what-is-a-crystal-aura", label: "Was ist eine Kristall Aura?", description: "Das Burst-Schaden-Modul, das automatisches Heilen lohnenswert macht." },
+]} />
+
+<CTA href="/de/purchase">Das Fehlen einer Heilung sollte nicht das Ende eines Kampfes bedeuten. Opal versendet eine Autotrank für $8.99.</CTA>

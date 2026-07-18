@@ -1,0 +1,79 @@
+---
+title: Was ist Outline ESP in Minecraft? (Modul erklärt)
+description: Outline ESP ist ein visuelles Minecraft-Modul, das die Silhouette einer Entität durch Wände verfolgt, anstatt sie mit Farbe zu füllen. Wie es funktioniert und das Risiko eines Banns.
+excerpt: Eine Wand verbirgt die Form, nicht das Gesamtbild. Outline ESP zeigt Ihnen die Silhouette hindurch und lässt alles andere genau so aussehen, wie es soll.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was zeichnet Outline ESP eigentlich?
+    a: Eine feine Linie umreißt den sichtbaren Rand eines Objekts, wobei diese Linie die Form des Objekts widerspiegelt, während der Rest des Modells seine normale Textur und Animation beibehält.
+  - q: Wie unterscheidet sich Outline ESP von Glow ESP?
+    a: Outline ESP lässt die eigene Darstellung der Entität intakt und fügt lediglich einen Rahmen hinzu. Glow ESP füllt die Entität stattdessen mit einer einzigen, durchgehenden Farbe aus, was dem Glowing-Effekt von Vanilla näher kommt.
+  - q: Sendet Outline ESP zusätzliche Daten an den Server?
+    a: Nein. Die Positions- und Poseninformationen, auf die es zugreift, werden bereits an den Kunden für das normale Gameplay gesendet. Das Modul ändert lediglich, wie diese bestehenden Daten auf dem Bildschirm dargestellt werden.
+  - q: Kann ein Ausschluss von ESP zu einer Sperre eines Spielers führen?
+    a: Ja, das ist möglich. Es birgt weniger Risiko als ein Kampanmodul, da es nie verändert, was der Klient sendet, aber ein Spieler, dessen Reaktionen eindeutig von Informationen abhängen, die er nicht haben sollte, kann dennoch von Mitarbeitern oder verhaltensbasierten Systemen erfasst werden.
+---
+
+<KeyTakeaways>
+- Outline ESP ist ein visuelles Minecraft-Modul, das eine dünne Linie um die Silhouette einer Entität zieht und sie durch Wände sichtbar hält, während Textur, Rüstung und Animation des Modells normal dargestellt werden.
+- Es verwendet Positions- und Pose-Daten, die das Spiel bereits an den Client für das normale Gameplay sendet, sodass keine zusätzlichen Pakete versendet werden.
+- Im Gegensatz zu einem vollflächigen Stil wie GlowESP bleiben die tatsächliche Haut und Ausrüstung der Entität unter der Umrandung sichtbar.
+- Die Erkennung basiert auf Verhalten, nicht auf Paketen: Es ist die Reaktion auf ein Ziel, das man nicht sehen sollte, die einen Spieler verrät.
+</KeyTakeaways>
+
+Outline ESP ist ein visuelles Modul in Minecraft, das die Kante eines Entities-Modells verfolgt und diese Umrandung durch Wände und Terrain sichtbar hält, anstatt das Entity in einer flachen Highlight-Farbe zu überdecken. Alles andere am Entity wird weiterhin so gerendert, wie es ein unverändertes Client tun würde, Haut, Rüstung und Animation bleiben unberührt. Die einzige Ergänzung ist eine dünne Linie, die seine Form nachzeichnet, was ausreicht, um zu erkennen, dass sich jemand oder etwas auf der anderen Seite einer Wand befindet, lange bevor man einen legitimen Grund dazu hätte zu wissen.
+
+## Funktionsweise
+
+Outline ESP verfolgt die Silhouette des Modells eines Ziel-Entities und zeichnet diese Linie über die Weltgeometrie, sodass sie jede Wand, jeden Boden oder jedes Terrain überlebt, das sich zwischen dem Entity und der Kamera befindet. Der Server streamt bereits die Position und Pose jedes nahen Entities an den Client für das normale Gameplay, unabhängig von Wand oder Terrain, da sowohl Physik als auch normale Renderung auf diese Daten angewiesen sind, unabhängig von der Sichtlinie. Ein Vanilla-Client verwirft den Großteil davon im letzten Schritt durch Depth-Testing, weshalb ein Entity verschwindet, sobald etwas Festes vor ihm vorbeizieht. Outline ESP überspringt einfach diesen Verzichtschritt für die Umrandung, die es zeichnet, und nichts anderes.
+
+Das ist der gesamte Mechanismus. Es wird keine neue Anfrage an den Server gesendet, keine ausgehende Paketform ändert sich, es ist lediglich eine andere Entscheidung darüber, was in einem Frame gezeichnet wird, den der Client bereits erstellt.
+
+## Umriss ESP vs. GlowESP
+
+Beide Module lösen das gleiche Problem, nämlich die Sichtung einer Einheit durch Gelände, wobei sie unterschiedliche Rendering-Optionen wählen, wie viel vom Modell berührt wird.
+
+| | Umriss ESP | GlowESP |
+|---|---|---|
+| Was gerendert wird | Eine dünne Linie, die die Silhouette des Modells nachzeichnet | Eine flache, einfarbige Füllung über das gesamte Modell |
+| Textur und Haut | Bleiben unter dem Umriss sichtbar | Werden durch die Füllfarbe ersetzt |
+| Am besten geeignet für | Das Unterscheiden von Einheiten anhand ihrer tatsächlichen Haut oder Ausrüstung | Eine schnelle, farbcodierte Erkennung, oft nach Team oder Einheitentyp |
+| Netzwerk-Signatur | Keine, in beiden Fällen sind die Positionsdaten bereits clientseitig |
+
+Keines der beiden sendet zusätzliche Daten über die Leitung, daher hängt die Wahl des einen gegenüber dem anderen von der Präferenz ab. Wählen Sie den Umriss, wenn Sie die Form und die Details darunter wünschen, eine durchgehende Füllung, wenn Sie etwas möchten, das auf einen Blick sofort ins Auge fällt.
+
+<Callout variant="tip" title="Wo dies angesiedelt ist in Opal">
+Entity ESP wird in Opal unter derselben Kennzeichnung „Nutzung auf eigene Gefahr“ ausgeliefert wie der Rest dieser Kategorie. Die zugrunde liegende Idee ist identisch mit dem, was Outline ESP darstellt: Ihnen zu zeigen, wo sich eine Entität durch das Gelände befindet, ohne ein einziges ausgehendes Paket zu senden. Ob eine bestimmte Implementierung einen dünnen Rahmen oder eine durchgehende Füllung darstellt, ist ein Rendering-Detail, das von Client zu Client variiert. Was tatsächlich wichtig ist, ist, ob diese Art von Information überhaupt in Ihre Einrichtung gehört, und das ist die Entscheidung, die Entity ESP Ihnen präsentiert.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite erklärt, was Outline ESP tut und warum die Verwendung auf eigene Gefahr erfolgt, nicht aber eine Empfehlung, es auszuführen. Sie berührt niemals Pakete, sodass ein Server keine sauberen Daten abfangen kann, aber die Überprüfung durch Mitarbeiter und verhaltensbasierte Erkennung fangen dennoch Spieler ab, deren Reaktionen eindeutig von Informationen abhängen, die ihnen nicht vorliegen sollten.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+<FAQItem question="Was zeichnet Outline ESP eigentlich?">
+Eine dünne Linie, die um den sichtbaren Rand eines Modells gezeichnet wird und dessen Form nachbildet, während der Rest des Modells seine normale Textur und Animation beibehält.
+</FAQItem>
+<FAQItem question="Wie unterscheidet sich Outline ESP von Glow ESP?">
+Outline ESP lässt die eigene Darstellung der Entität intakt und fügt lediglich einen Rahmen hinzu. Glow ESP füllt die Entität stattdessen mit einer einzigen, einfarbigen Farbe, was dem Vanilla-Glüheffekt ähnlicher ist.
+</FAQItem>
+<FAQItem question="Sendet Outline ESP zusätzliche Daten an den Server?">
+Nein. Die Positions- und Pose-Daten, aus denen es zeichnet, werden bereits für das normale Spiel an den Client gesendet. Das Modul ändert lediglich, wie diese vorhandenen Daten auf dem Bildschirm dargestellt werden.
+</FAQItem>
+<FAQItem question="Kann Outline ESP zu einem Bann führen?">
+Ja, das ist möglich. Es birgt weniger Risiko als ein Kampanmodul, da es nie ändert, was der Client sendet, aber ein Spieler, dessen Reaktionen eindeutig von Informationen abhängen, die er nicht haben sollte, kann dennoch von Mitarbeitern oder verhaltensbasierten Erkennungssystemen erwischt werden.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die breitere Kategorie, zu der Outline ESP und ähnliche Module gehören." },
+  { href: "/de/learn/what-is-killaura", label: "Was ist KillAura?", description: "Ein Modul, das auf ein Ziel wirkt, sobald ESP dir bereits mitgeteilt hat, wo es sich befindet." },
+  { href: "/de/learn/what-is-reach", label: "Was ist Reichweite?", description: "Ein Packet-Level-Cheat wird komplett umgangen, indem ESP rein visuell bleibt." }
+]} />
+
+<CTA href="/de/purchase">Erfahren Sie, wo Opal die Grenze zwischen Information und Risiko in seiner visuellen Kategorie zieht.</CTA>

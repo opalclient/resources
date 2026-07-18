@@ -1,0 +1,73 @@
+---
+title: 什么是反自动补全？ Minecraft 模块详解
+description: AntiTabComplete 阻止了一些服务器插件用来静默指纹识别 Minecraft 客户端的自动补全请求。了解其工作原理以及它为何重要.
+excerpt: 补全功能看起来无害。在某些服务器上，它只是一个被动的数据收集渠道，没有用户界面。AntiTabComplete 只是停止响应.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: AntiTabComplete 究竟阻止了什么？?
+    a: 它会阻止服务器插件为了被动收集玩家客户端信息而发送的补全请求，这些请求不会在聊天窗口或其他屏幕位置显示.
+  - q: AntiTabComplete 算作作弊吗？?
+    a: 不。它不会改变移动、战斗或其他任何服务器可以判定为不公平优势的内容。这只是一个隐私功能，它关闭了一个被动数据收集渠道，仅此而已.
+  - q: AntiTabComplete 能带来竞争优势吗？?
+    a: 不，这对其游戏体验没有任何影响。它仅仅改变了服务器插件可以通过标签补全交互了解玩家的信息，而不是影响他们的攻击速度或移动速度.
+  - q: 哪个客户端阻止自动补全？?
+    a: 坚韧性是知识库中通过反自动补全模块跟踪的客户.
+  - q: 服务器为什么要一开始就使用补全功能来收集数据呢？?
+    a: 由于交换发生在幕后且从未向玩家展示，这为插件提供了一个安静的通道来发送请求和读取响应，而这正是 AntiTabComplete 阻止的被动收集行为.
+---
+
+<KeyTakeaways>
+- AntiTabComplete 是一个 Minecraft 模块，用于阻止服务器用来静默分析玩家客户端的 Tab 自动补全请求。
+- 它拦截了 Minecraft Tab 自动补全过程中客户端的部分，即按下 Tab 键触发的后台流量。
+- 这是一个隐私修复，而非竞争性优化；它从不影响移动或战斗。
+- Tenacity 是该模块记录的客户端。
+</KeyTakeaways>
+
+AntiTabComplete 是一个模块，用于阻止服务器利用 Minecraft 的自动补全机制来悄悄地收集玩家客户端的信息。某些服务器插件会发送自动补全请求，并非为了辅助输入，而是作为一种低调的数据收集渠道。AntiTabComplete 从客户端侧关闭了这个渠道，因此这些请求将得不到任何回应。
+
+## 工作原理
+
+自动补全是 Minecraft 的正常行为。开始输入命令，按下 Tab 键，客户端和服务器会在幕后交换消息，以便游戏可以建议有效的补全项。这些交换过程对玩家来说是不可见的，这正是它能够被用于自动补全之外的其他用途的原因。插件可以向客户端发送这些请求以探测它，并读取返回的内容，而没有任何内容出现在聊天中。
+
+AntiTabComplete 正好堵住了这个漏洞。它在客户端能够回答这些请求之前拦截或忽略它们，因此依赖自动补全渠道的插件将无法获得任何有用的信息。对于玩家来说，正常的聊天和命令使用看起来一如既往。没有任何可见的变化，这正是设计的目的。
+
+## 隐私修复，而非游戏优势
+
+这正是 AntiTabComplete 与大多数人所说的“自动补全”功能分道扬镳的地方 "Minecraft 作弊。"像 [Reach](/zh/learn/what-is-reach) 或 KillAura 这样的模块会改变游戏允许你实际做的事情，而反作弊系统正是为了检测这些行为留下的移动和时机指纹而存在的。AntiTabComplete 从未触及移动或战斗。它仅仅改变了服务器可以被动了解你的信息，使其成为信息问题，而非竞争问题。
+
+这也使其运行风险较低。它不会发送虚假数据或改变服务器可以验证的任何关于你战斗或移动的信息，它只是对玩家原本不应该看到的请求不予回应。从服务器端来看，一个不回应被动探测的客户端，仅仅看起来像一个缺乏被探测行为的客户端，而不是一个被发现发送虚假数据包的客户端。它属于其他反监控工具的范畴：安静、防御性，并且不是反作弊系统真正要检测的内容.
+
+<Callout variant="tip" title="Opal 在这方面的立场">
+Opal 并没有提供名为 AntiTabComplete 的模块。这只是针对特定插件的一种狭窄修复，仅在运行此类插件的特定服务器上才重要。如果您从隐私角度而非仅仅是 DPS 来比较实用工具客户端，可以尝试询问该模块的具体名称。
+</Callout>
+
+## 常见问题
+
+<FAQList>
+<FAQItem question="AntiTabComplete 实际上阻止了什么？">
+它阻止了服务器插件发送以被动收集玩家客户端信息的 tab-complete 请求，这些请求不会显示在聊天窗口或屏幕的任何其他地方。
+</FAQItem>
+<FAQItem question="AntiTabComplete 是作弊工具吗？">
+不是的。它不会改变移动、战斗或服务器可以将其视为不公平优势的任何其他方面。它是一个隐私功能，关闭了一个被动数据收集渠道，仅此而已。
+</FAQItem>
+<FAQItem question="AntiTabComplete 能提供竞争优势吗？">
+不是的，它对游戏玩法没有任何影响。它仅改变了服务器插件可以通过 tab-completion 交互了解玩家的信息，而不是他们的命中速度或移动速度。
+</FAQItem>
+<FAQItem question="哪个客户端记录了 AntiTabComplete？">
+Tenacity 是知识库中拥有 AntiTabComplete 模块的客户端。
+</FAQItem>
+<FAQItem question="服务器为什么要使用 tab completion 来收集数据？">
+因为这个交互发生在幕后，并且从未显示给玩家，它为插件提供了一个安静的渠道来发送请求和读取响应，而 AntiTabComplete 恰好就是关闭这种被动收集。
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/what-is-a-minecraft-utility-client", label: "什么是 Minecraft 实用客户端？?", description: "AntiTabComplete 类别属于区分工具和作弊行为的范畴." },
+  { href: "/zh/learn/what-is-a-ghost-client", label: "什么是幽灵客户？?", description: "客户群体的另一端，是完全不被察觉." },
+  { href: "/zh/learn/what-is-reach", label: "什么叫做触及？?", description: "一个真正影响游戏性的模块，与像AntiTabComplete这样只注重隐私的模块形成鲜明对比." }
+]} />
+
+<CTA href="/zh/purchase">Opal 的模块列表是基于真正能占据位置的内容构建的，而非填充物。 快来看看。</CTA>

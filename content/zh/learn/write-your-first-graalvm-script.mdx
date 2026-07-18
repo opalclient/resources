@@ -1,0 +1,109 @@
+---
+title: 编写您的第一个 GraalVM JavaScript 脚本 (2026)
+description: 编写你的第一个 GraalVM JavaScript 脚本：注册入口点，钩住事件，并在不重新编译 Java 的情况下实现热重载。附带一个可运行的示例.
+excerpt: 三个小步骤就能运行脚本：注册它，绑定一个事件，然后保存到脚本文件夹中。它就是真正的 JavaScript，几秒钟内就能重新加载，无需重建.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: 我需要安装 GraalVM 才能编写脚本吗？?
+    a: 不，宿主程序会捆绑 GraalVM 和它的 JavaScript 引擎。你只需要编写 JavaScript 文件，然后把它放到脚本文件夹里就可以了.
+  - q: 我可以使用现代 JavaScript 语法吗？?
+    a: 是的。引擎支持最新的 ECMAScript 特性，包括模块及其导入和导出功能，因此您不会被困在旧的子集中.
+  - q: 我的脚本为什么没有加载？?
+    a: 检查文件是否位于宿主脚本文件夹中，是否具有宿主所期望的扩展名，以及是否已在宿主的入口点注册。 注册调用中的拼写错误通常是原因.
+  - q: 这和编写 Node.js 脚本一样吗？?
+    a: 不，引擎是嵌入在宿主 JVM 内部的，所以你的脚本与宿主程序交互，而不是与独立的 Node.js 运行时环境交互.
+---
+
+<KeyTakeaways>
+
+- 脚本的第一步是三个步骤：注册、钩住一个事件，然后将其保存到脚本文件夹中。
+- 主机捆绑了[GraalVM](https://www.graalvm.org/)，所以你可以编写真正的 JavaScript，而无需自行安装。
+- 脚本可以在几秒钟内热重载，无需重新构建 Java。
+- 一个脚本只能调用主机通过其主机访问白名单公开的对象.
+
+</KeyTakeaways>
+
+编写第一个 GraalVM JavaScript 脚本包含三个小步骤：将其注册到宿主程序的入口点，将其附加到事件或模块，并将它保存到脚本文件夹中，以便引擎加载它。引擎运行在 [GraalVM](https://www.graalvm.org/) 的 Polyglot API 上，因此该脚本是真正的 JavaScript，并且无需重新编译任何 Java 代码即可重新加载.
+
+<Callout variant="info" title="Opal 的适配">
+Opal 是一个基于 [Fabric](https://fabricmc.net/) 的模组，并使用 [GraalVM JavaScript 脚本引擎](/zh/learn/what-is-graalvm-javascript-scripting)，因此这些步骤可以直接应用。 要开始，请参阅 [脚本文档](/zh/docs/scripting)。
+</Callout>
+
+## 首先你需要
+
+一个宿主程序，其中嵌入了引擎。宿主程序自带 GraalVM JavaScript，暴露了一组供脚本调用的对象，并监视一个脚本文件夹。你不需要自行安装 GraalVM；宿主程序已经将其打包。你只需要编写针对宿主程序提供对象的纯 JavaScript 代码即可。
+
+了解这些对象所映射的内容会有所帮助，但你无需编写任何 Java 代码即可开始。
+
+## 三个步骤
+
+<Steps>
+
+<Step number={1} title="找到脚本文件夹">启动时，宿主从已知的目录加载脚本。请查阅宿主文档以获取确切路径</Step>
+
+<Step number={2} title="创建脚本文件">在那文件夹中创建一个新的 `.js`（或 `.mjs`）文件。主机在下次加载脚本时会自动识别它</Step>
+
+<Step number={3} title="注册并连接">在文件中，将脚本与宿主程序的入口点注册，然后将行为附加到事件或定义模块</Step>
+
+</Steps>
+
+## 一个最小的例子
+大多数宿主提供一个脚本注册入口以及几个代理对象，这些对象连接 JavaScript 与程序。确切的名称取决于宿主，但结构是相同的。一个脚本通常只是宣告自身并响应一个事件：
+
+```js
+// Register the script with the host (names vary by host).
+script.register({
+  name: "hello-world",
+  version: "1.0.0",
+});
+
+// React to an event the host exposes.
+script.on("enable", () => {
+  client.print("Hello from my first script.");
+});
+```
+
+请阅读宿主自身的 API 参考文档以获取真实的对象的名称和方法。重点在于模式：注册，然后钩住一个事件或定义一个模块
+## 工作时实时刷新
+保存文件并重新加载脚本（如果不支持实时重载，则重启宿主）。更改无需重建即可生效。这种快速循环是脚本化而不是编译模组的主要原因：脚本可以在几秒钟内重新加载，而编译后的模组必须重建和重新启动。
+
+| 方法 | 迭代循环 | 语言 | 适用时 |
+|----------|----------------|----------|--------------|
+| GraalVM JavaScript 脚本 | 编辑、保存、重新加载 | JavaScript | 快速调整、自定义行为 |
+| 编译后的模组 | 重建、重新启动 | Java 或 Kotlin | 更大的功能、更深层次的钩子 |
+## 脚本能做什么，不能做什么
+
+脚本只能调用宿主对象暴露的内容，除此之外无其他。宿主通过 GraalVM Polyglot 宿主访问白名单声明脚本可以访问哪些类和方法，默认情况下为拒绝访问。这保证了脚本的安全性和可预测性。如果所需的对象未暴露，宿主必须将其添加；脚本端无法绕过白名单。
+
+## 常见问题解答
+
+<FAQList>
+
+<FAQItem question="我需要安装 GraalVM 才能编写脚本吗？">
+不需要。宿主程序已经捆绑了 GraalVM 及其 JavaScript 引擎。您只需要编写 JavaScript 文件，然后将其放入脚本文件夹即可。
+</FAQItem>
+
+<FAQItem question="我可以使用现代 JavaScript 语法吗？">
+是的。引擎支持最新的 ECMAScript 特性，包括使用 `import` 和 `export` 的模块，因此您不会被限制在旧的子集上。
+</FAQItem>
+
+<FAQItem question="为什么我的脚本没有加载？">
+请确认文件位于宿主脚本文件夹中，具有宿主期望的扩展名，并且已在宿主的入口点注册。通常，注册调用中的拼写错误是原因。
+</FAQItem>
+
+<FAQItem question="这和编写 Node.js 脚本一样吗？">
+不是的。引擎是嵌入在宿主 JVM 内部的，所以你的脚本与宿主程序通信，而不是与独立的 Node.js 运行时环境通信。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/what-is-graalvm-javascript-scripting", label: "GraalVM JavaScript 脚本是什么？?", description: "这些脚本的运行原理." },
+  { href: "/zh/learn/what-is-the-jvm", label: "什么是 JVM？?", description: "发动机嵌入的平台." },
+  { href: "/zh/blog/introducing-opal-scripting-engine", label: "Opal 脚本引擎", description: "您可以使用脚本在 Opal 中构建什么." },
+]} />
+
+<CTA href="/zh/purchase">获取 Opal，一个 Fabric 客户端，用于 $8.99</CTA>

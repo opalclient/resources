@@ -1,0 +1,95 @@
+---
+title: 是什么 Minecraft 图解？名称解释
+description: Minecraft 映射解析：MCP、Yarn 和 Mojmap 如何将混淆的类名转换为可读代码，以便模组和客户端可以钩接游戏.
+excerpt: Mojang 运送 Minecraft 像 a.a.a. 这样的打乱名字，映射就像一个字典，可以将它们转换回可读的代码模块，模组可以进行钩子操作.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Mappings
+author: trq
+faqs:
+  - q: 映射会改变游戏运行方式吗？?
+    a: 编号：映射仅为开发者重命名事物，而编译后的模组会被重新映射以匹配混淆后的游戏，因此代码名称永远不会发送给玩家.
+  - q: 为什么有几种地图系统？?
+    a: 历史。MCP 最初是为 Minecraft 1.14 之前的版本设计的，Yarn 随着 Fabric 的发展而成长，作为一种开放的替代方案，而 Mojang 的映射则在 Mojang 开始在 1.14.4 版本中发布官方名称之后出现.
+  - q: 新项目应该使用哪种映射？?
+    a: 对于现代的 Minecraft，Mojang 映射或 Yarn 是标准选择。MCP 主要与 1.8.9 时代的旧工具链相关，在这些情况下，旧工具链仍在被使用.
+  - q: 映射和模组加载器一样吗？?
+    a: 编号：映射是一个名称表；像Fabric这样的模组加载器是加载模组到游戏中的运行时环境。它们协同工作，但解决不同的问题.
+---
+
+<KeyTakeaways>
+
+- 映射是名称表，用于将 Minecraft 的混淆代码转换为可读的名称。
+- Mojang 会打乱类、字段和方法的名称，并且这些名称会随着每个版本的变化而改变。
+- 你将要了解的这三个是 MCP、Yarn 和 Mojang 映射（Mojmap）。
+- 映射在编译时应用，而不是在运行时应用，因此它不会发送给玩家.
+
+</KeyTakeaways>
+
+Minecraft 的映射表是名称表，它们将游戏中的混淆代码转换为可读的名称。Mojang 发布的 Minecraft 包含打乱的类名和字段名，例如 `a.a.a`，因此模组和客户端开发者会应用一个映射集，如 MCP、Yarn 或 Mojang 映射，以获得他们可以实际读取和钩入的名称.
+
+<Callout variant="info" title="Opal 的适配方式">
+Opal 是一个 [Fabric](https://fabricmc.net/) 模组，因此它在内部针对现代映射进行构建，并提供了一个简洁的 GraalVM JavaScript 脚本 API。 您可以使用可读的名称编写脚本，而无需自己接触映射。 请参阅 [脚本编写指南](/zh/docs/scripting)。
+</Callout>
+
+## 为什么存在映射
+
+Mojang 在发布前会对 Minecraft 进行混淆处理。发布的 jar 文件会将类、方法和字段重命名为短小的、没有意义的字符串，以减小文件大小并使代码难以阅读。正是这种混淆导致了你无法直接打开游戏并开始编辑它。
+
+映射就是用来逆转这种处理的字典。它将每个混淆名称与人类可读的名称配对，例如，一个名为 `field_70181_x` 的字段会变成 `motionY`。应用了映射后，开发者就能看到外观正常的代码库，并可以针对它编写模组。
+
+这里有一个需要注意的例外。混淆名称会随着 Minecraft 的每个版本而变化，因此同一个字段在一个版本中可能是 `a`，在下一个版本中可能是 `bk`。映射吸收了这种变化，这就是它们是每个模组工具链的基石的原因。
+
+## 你会听到的三个
+
+MCP（Mod Coder Pack）是社区提供的映射，它使得在 1.14 之前的模组开发成为可能。它使用两层方案：Searge 项目生成了稳定但丑陋的中间名称，例如 `field_70181_x`，而 MCP 则用友好的名称（例如 `motionY`）将其包装起来。大多数较早的 1.8.9 独立客户端都针对 MCP 映射的源代码树进行编译，并使用 MCP 和 Searge 名称进行反射.
+
+Yarn 是 FabricMC 为 [Fabric](https://fabricmc.net/) 生态系统维护的开源映射。它由社区驱动，采用自由许可协议，并在每次发布新版 Minecraft 时迅速更新，这正是 Fabric 模组能够快速达到新版本的原因之一。
+
+Mojang 映射，通常被称为 Mojmap，是 Mojang 官方发布的首次方映射，自 1.14.4 版本起，随每个官方版本一同发布。由于它们直接来自 Mojang，因此名称与开发者实际使用的名称完全一致。它们有效地取代了 MCP 和 Searge，成为针对 1.21 或更高版本的任何新客户端的默认选择。
+
+## 它们之间的比较
+
+| | MCP | Yarn | Mojang 映射 |
+| :--- | :--- | :--- | :--- |
+| 维护者 | 社区 (Searge + MCP) | FabricMC | Mojang |
+| 时代 | 1.14 之前 (1.7-1.12) | 1.14+ | 1.14.4+ |
+| 来源 | 社区衍生 | 社区衍生 | 官方 |
+| 与其一起使用 | 遗留客户端，旧的模组 | Fabric | Fabric, Forge |
+| 状态 | 被 Mojang 映射取代 | 活跃 | 活跃的默认选项 |
+
+## 映射如何融入模组工具链
+
+映射在编译时应用，而不是在运行时应用。构建工具获取被混淆的游戏，对其运行映射，然后将可读的版本交给你进行编码。然后，你的成品模组会被重新映射，以便与玩家游戏实际使用的被混淆名称对齐.
+
+不同的加载器对此处理方式各不相同。 [Fabric](https://fabricmc.net/) 会根据项目情况，基于 Yarn 或 Mojang 映射进行构建。 历史上，Forge 将这项工作一分为二，使用一种映射来读取源代码，另一种映射来运行程序。 Mojang 映射的许可足够宽松，可以在构建时使用，这也是现代工具链依赖它的原因。
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="映射会改变游戏运行方式吗？">
+不会。映射仅为开发者重命名内容。编译后的模组会被重新映射以匹配混淆后的游戏，因此你在编码时看到的名字不会发布给玩家。
+</FAQItem>
+
+<FAQItem question="为什么有多个映射系统？">
+历史。MCP 最早出现，并带领社区度过了 Minecraft 1.14 之前的版本。随着 Fabric 的发展，Yarn 作为一个开放的替代方案而发展起来，而 Mojang 的映射则在 Mojang 开始在 1.14.4 版本发布官方名称之后出现。
+</FAQItem>
+
+<FAQItem question="新项目应该使用哪种映射？">
+对于现代 Minecraft，Mojang 映射或 Yarn 是标准选择。MCP 主要适用于旧版 1.8.9 时期的项目，这些项目仍然在使用旧的工具链。
+</FAQItem>
+
+<FAQItem question="映射和模组加载器一样吗？">
+不是的。映射是一个名称表；模组加载器，例如Fabric，是加载模组到游戏中的运行时环境。它们协同工作，但解决不同的问题。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/what-is-intermediary", label: "什么是中介？?", description: "模组冲突的稳定层." },
+  { href: "/zh/learn/yarn-vs-mojmap", label: "纱线与莫杰地图", description: "为 Fabric 模组选择哪个可读的映射？." },
+  { href: "/zh/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "这些映射服务于加载器." },
+]} />
+
+<CTA href="/zh/purchase">获取 Opal，一个 Fabric 客户端，用于 $8.99</CTA>

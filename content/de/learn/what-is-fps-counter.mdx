@@ -1,0 +1,75 @@
+---
+title: Was ist ein FPS-Zähler in Minecraft?
+description: Ein FPS-Zähler ist ein HUD-Modul, das die aktuelle Bildrate Ihres Minecraft-Clients auf dem Bildschirm anzeigt. Hier erfahren Sie, wie er funktioniert, warum Spieler ihn verwenden und ob es sicher ist, ihn auszuführen.
+excerpt: Es ist nur eine Zahl auf Ihrem Bildschirm, die über Ihre Hardware Auskunft gibt, niemals über Sie.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Gibt ein FPS-Zähler einen Vorteil im Spiel?
+    a: Nein. Es zeigt lediglich eine Zahl an, die angibt, wie schnell Ihr Client Frames rendert. Es verändert weder den Kampf, die Bewegung noch irgendetwas, was der Server verarbeitet.
+  - q: Ist das Anzeigen von FPS dasselbe wie FPS-Boosting?
+    a: Nein. Ein Zähler misst und zeigt lediglich Ihre aktuelle Bildrate an. Die tatsächliche Erhöhung erfordert separate Änderungen, wie beispielsweise die Reduzierung der Renderdistanz oder der Grafikeinstellungen.
+  - q: Können Server FPS-Zähler erkennen oder sperren?
+    a: Nein. Das Modul sendet niemals etwas an den Server. Es liest lediglich lokale Client-Daten und zeigt diese auf dem Bildschirm an, sodass es für den Server nichts zu beobachten oder zu markieren gibt.
+  - q: Ist ein FPS-Zähler in der Standard-Minecraft-Version integriert?
+    a: Vanille hat den F3-Debug-Bildschirm, der unter anderem eine Framerate in einer Fülle weiterer Diagnoseinformationen anzeigt. Ein dediziertes FPS-Modul zeigt nur die Zahl, meist als kleines, immer sichtbares HUD-Element.
+---
+
+<KeyTakeaways>
+
+- Ein FPS-Zähler ist ein HUD-Modul, das die aktuelle Bildrate Ihres Minecraft-Clients auf dem Bildschirm anzeigt.
+- Er zeigt lediglich eine Zahl an, die das Spiel bereits intern verfolgt; es wird nichts Neues berechnet.
+- Rein kosmetisch: er verändert weder die Bewegung, den Kampf noch irgendetwas, was an den Server gesendet wird.
+- Nichts wird vom Client gesendet, sodass ein serverseitiges Anti-Cheat-System dies nicht als verdächtig markieren kann.
+
+</KeyTakeaways>
+
+Ein FPS-Zähler ist ein kleines HUD-Element, das anzeigt, wie viele Frames pro Sekunde dein Minecraft-Client aktuell rendert und sich während des Spielens kontinuierlich aktualisiert. Er ist keine Spielefunktion. Die Zahl ändert sich mit deiner Hardware und deinen Einstellungen, nicht mit dem, was auf dem Server passiert, und gehört somit in dieselbe Kategorie wie eine Uhr oder eine Koordinatenanzeige: informativ, nicht kompetitiv. Die meisten Utility-Clients bündeln standardmäßig ein solches Modul im HUD, da es der schnellste Weg ist, die Frage "Warum fühlt sich das ruckelig an?" zu beantworten, ohne sich durch ein Debug-Menü wühlen zu müssen.
+
+## Funktionsweise
+
+Minecraft berechnet bereits intern seine eigene Bildrate, um die Render-Schleife anzutreiben. Das FPS-Modul führt keine neuen Berechnungen durch: Es liest den bestehenden Wert jeden Frame aus und gibt ihn irgendwo auf dem Bildschirm aus, meistens eine kleine Zahl, die in eine Ecke gequetscht oder in ein breiteres HUD neben Dingen wie Koordinaten oder Ping integriert ist.
+
+Da die Anzeige kontinuierlich aktualisiert wird, spiegelt sie die tatsächliche Leistung in Echtzeit wider, einschließlich Einbrüchen durch starkes Chunk-Laden, dichte Partikeleffekte oder überfüllte Entity-Bereiche. Vanilla Minecraft hat seine eigene Version davon im F3-Debug-Bildschirm, der die Bildrate inmitten einer Flut anderer Diagnoseinformationen verbirgt. Ein dediziertes FPS-Modul reduziert dies auf die eine Zahl, die die Leute tatsächlich beobachten, und hält sie sichtbar, ohne eine Taste gedrückt halten zu müssen.
+
+## Ist es sicher, es zu verwenden
+
+Ja, ohne jede Einschränkung. Ein FPS-Zähler liest und zeigt lediglich Daten an, die bereits auf Ihrem Rechner vorhanden sind. Er greift weder in die Bewegung, den Kampf, die Paketzeitgebung noch in irgendetwas ein, was der Server verarbeitet, sodass es hier kein Signal für eine serverseitige Anti-Cheat-Maßnahme gibt. Erkennungssysteme überwachen verdächtige Eingaben und Netzwerkverhalten. Eine Zahl, die lokal auf Ihrem Bildschirm dargestellt wird, ist für all diese Systeme unsichtbar.
+
+Der einzige wirkliche Nachteil ist Unordnung. Stapeln Sie einen FPS-Zähler mit einer Ping-Anzeige, einer Koordinatenanzeige und einer Tasteneingabe-Überlagerung, und Ihr Bildschirm beginnt, wie ein Cockpit auszusehen. Das ist ein Geschmacks-Problem, kein Risiko-Problem.
+
+<Callout variant="tip" title="Warum dies ein geringes Risiko darstellt">
+Ganz diese Kategorie – schreibgeschützt, bildschirmbasiert, serverunabhängig – ist der Grund, warum sie kaum zur Sprache kommt, wenn es um riskante Aspekte eines Utility-Clients geht. Auch Opals eigenes HUD neigt in die gleiche Richtung: Module, die über deinen Spielstatus berichten, ohne jemals eine Verbindung zum Server herzustellen.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Gibt ein FPS-Zähler einen Vorteil im Spiel?">
+Nein. Er zeigt lediglich eine Zahl an, die angibt, wie schnell Ihr Client Frames rendert. Er verändert weder den Kampf, die Bewegung noch irgendetwas, was der Server verarbeitet.
+</FAQItem>
+
+<FAQItem question="Ist die Anzeige von FPS dasselbe wie FPS-Boost?">
+Nein. Ein Zähler misst und zeigt lediglich Ihre aktuelle Bildrate an. Die tatsächliche Steigerung erfordert separate Änderungen, wie beispielsweise die Reduzierung der Renderdistanz oder der Grafikeinstellungen.
+</FAQItem>
+
+<FAQItem question="Können Server FPS-Zähler erkennen oder sperren?">
+Nein. Das Modul sendet niemals etwas an den Server. Es liest lediglich lokale Client-Daten und zeigt diese auf dem Bildschirm an, sodass es für einen Server nichts zu beobachten oder zu markieren gibt.
+</FAQItem>
+
+<FAQItem question="Ist ein FPS-Zähler in Vanilla Minecraft integriert?">
+Vanilla hat den F3-Debug-Bildschirm, der unter einer Vielzahl anderer Diagnoseinformationen auch die Bildrate anzeigt. Ein dediziertes FPS-Modul zeigt nur die Zahl, meist als kleines, immer sichtbares HUD-Element.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Kategorie, zu der Module wie dieses gehören." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Wo Subtilität tatsächlich eine Rolle spielt, anders als bei einer schreibgeschützten HUD-Anzeige." },
+  { href: "/de/learn/what-is-reach", label: "Was ist Reichweite?", description: "Ein Modul, das den Server berührt und überwacht wird." },
+]} />
+
+<CTA href="/de/purchase">Erfahren Sie mehr darüber, was Opal's HUD noch verfolgt, für $8.99</CTA>

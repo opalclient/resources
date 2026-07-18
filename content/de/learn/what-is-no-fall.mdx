@@ -1,0 +1,85 @@
+---
+title: Was ist "No Fall" in Minecraft? Modul erklärt
+description: No Fall verhindert, dass der Server in Minecraft Sturzschäden registriert. Hier erfahren Sie, wie Paketabsage, Boden-Spoofing und -erkennung in der Praxis funktionieren.
+excerpt: Das Modul, das einen Sturz aus zwölf Herzen in eine Achselzuckung verwandelt. Hier die Mechanik und das Risiko, das niemand auf die Verpackung druckt.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was genau macht No Fall?
+    a: Es verhindert, dass der Server Sturzschaden für deinen Charakter registriert, sodass ein Sturz, der dich normalerweise verletzen oder töten würde, keine Auswirkungen hat.
+  - q: Wie verhindert No Fall, dass Sturzschäden entstehen?
+    a: "Drei dokumentierte Ansätze: die Bewegungspakete zu unterdrücken, die der Server zur Berechnung des Sturzes verwenden würde, einen Zustand „auf dem Boden“ zu fälschen, sodass niemals ein Sturz registriert wird, oder die Daten der vorhergesagten Position zu manipulieren, sodass die Sturzverfolgung des Servers nie genügend Daten ansammelt, um Schaden zuzufügen."
+  - q: Ist ein Abfall feststellbar?
+    a: Ja. Der Server erwartet, dass Sturzschaden aus verfolgter vertikaler Bewegung resultiert, und eine Diskrepanz zwischen Ihrem gemeldeten Zustand und dem Schaden, der hätte passieren sollen, ist ein Signal, das Anticheats vernünftigerweise überprüfen können.
+  - q: Ist No Fall bei jedem Kunden gleich?
+    a: Nein. Es handelt sich um ein allgemeines Modulkonzept, das bei mehreren Kunden auftaucht, aber die genaue Methode (Paketabsage, Boden-Spoofing oder Manipulation des vorhergesagten Zustands) variiert je nach Implementierung.
+  - q: Beeinflusst No Fall etwas außer Sturzschäden?
+    a: Nicht beabsichtigt. Es zielt speziell auf die Sturzschadensprüfung ab, obwohl das Simulieren des Bodens insbesondere in andere bewegungsbezogene Prüfungen hineinfließen kann, je nachdem, wie es implementiert ist.
+---
+
+<KeyTakeaways>
+- No Fall verhindert, dass der Server Sturzschäden registriert, sodass Stürze aus jeder Höhe keine Kosten verursachen.
+- Es funktioniert, indem es die Sturzprüfung umgeht: Paketabbruch, Spoofing des Grundzustands oder Vortäuschen der vorhergesagten Position.
+- Eine Diskrepanz zwischen gemeldeter Bewegung und erwartetem Schaden ist genau das, wonach Anticheats suchen.
+- Opal liefert es als No Fall, mit einer Nutzung auf eigene Gefahr, wie jedes nachweisbare Modul.
+</KeyTakeaways>
+
+No Fall ist ein Minecraft-Modul, das verhindert, dass der Server deinen Charakter jemals für Sturzschäden registriert. Anstatt die normale Schadensberechnung des Spiels ablaufen zu lassen, greift es in die serverseitige Prüfung ein, die andernfalls entscheiden würde, dass du gerade zwölf Herzen von einer Klippe gerissen hast. Springe von einem Turm, verlasse einen Luftkampf mitten in der Luft, lass dich direkt in einen Schacht fallen: keiner davon kostet dich Gesundheit. Es ist ein kleines Stück Code, das eine große Aufgabe erledigt, und es ist auch einer der eher leicht erkennbaren Tricks in der Werkzeugkiste von Utility-Clients, den es wert ist, zu kennen, bevor man sich darauf verlässt.
+
+## Wie es funktioniert
+
+Der Server verfolgt deine vertikale Position ständig. Wenn er nach einem Sturz über eine bestimmte Distanz eine Landung feststellt, wendet er einen Schaden an, der sich nach der Fallhöhe richtet. Die gesamte Aufgabe von No Fall besteht darin, in diesen Prozess einzugreifen, bevor der Schaden eintritt.
+
+Es gibt drei gängige Methoden, um dies zu erreichen:
+
+**Paketabsage.** Der Client hält das Bewegungspaket zurück, das der Server zur Schadensberechnung verwenden würde, sodass der Server nie die benötigten Daten erhält.
+
+**Boden-Spoofing.** Der Client teilt dem Server mit, er stehe auf festem Boden, obwohl dies nicht der Fall ist. Keine Landung bedeutet, dass kein Sturz registriert wird.
+
+**Manipulation des vorhergesagten Zustands.** Der Client passt die Positionsdaten, die er meldet, unauffällig an, sodass der eigene Sturzdistanz-Tracker des Servers nie genügend Daten ansammelt, um den Schadenschwellenwert zu überschreiten.
+
+Gleiches Ziel, drei verschiedene Lügen an den Server. Welche ein Client verwendet, bestimmt, wie offensichtlich es ist.
+
+## Ist es sicher zu verwenden?
+
+Nein, in keiner absoluten Hinsicht. No Fall ist eine clientseitige Umgehung einer serverseitigen Prüfung, und genau diese Diskrepanz ist das, wonach Anticheats gebaut sind. Der Server erwartet, dass Sturzschaden aus deinen verfolgten Bewegungen resultiert. Wenn deine gemeldete Position oder dein Zustand nicht mehr mit dem Schaden übereinstimmt, der hätte auftreten sollen, ist diese Lücke ein plausibles Erkennungssignal, und ein vernünftiger Anticheat wird es melden.
+
+Ob es tatsächlich erwischt wird, hängt vom Server und der Methode ab. Paketabsagen und Bodenfälschungen hinterlassen tendenziell offensichtlichere Spuren in Bewegungsprotokollen als der subtilere Ansatz der voraussagenden Zustände, aber keine der drei Methoden ist standardmäßig unsichtbar. Betrachte No Fall als eine Nutzung auf eigene Gefahr und rechne damit, dass ein strenger Anticheat es häufiger erwischt als ein nachsichtiger.
+
+<Callout variant="tip" title="Opal versendet dies">
+Im Modul-Katalog von Opal steht es klar und deutlich: **Kein Fall**, „Entfernt Schaden durch Stürze“. Keine Beschönigung, kein separater Marketingname. Es wird unter „Nutzung auf eigene Gefahr“ im Client abgelegt, im selben Bereich wie alles andere, was ein Server plausibel erkennen kann.
+</Callout>
+
+<Callout variant="warning" title="Dies kann zu einer Sperre führen">
+Jeder Sturz hinterlässt einen mechanischen Fingerabdruck: einen Schaden, der hätte passieren können, aber nicht passiert ist. Anticheats suchen genau danach. Die Verwendung birgt ein echtes Sperrrisiko auf jedem Server, der danach sucht, genauso wie bei jedem anderen Client.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+<FAQItem question="Was macht No Fall eigentlich?">
+Es verhindert, dass der Server Sturzschäden für deinen Charakter registriert. Ein Sturz, der dich normalerweise verletzen oder töten würde, hat also keine Auswirkungen.
+</FAQItem>
+<FAQItem question="Wie vermeidet No Fall das Auslösen von Sturzschäden?">
+Drei dokumentierte Ansätze: das Abbrechen des Bewegungspakets, das der Server zur Berechnung des Sturzes verwenden würde, das Vortäuschen eines „auf dem Boden befindlichen“ Zustands, sodass kein Sturz registriert wird, oder die Manipulation von vorhergesagten Positionsdaten, sodass die Sturzverfolgung des Servers nie genügend Daten ansammelt, um Schaden zuzufügen.
+</FAQItem>
+<FAQItem question="Ist No Fall erkennbar?">
+Ja. Der Server erwartet, dass Sturzschäden aus der verfolgten vertikalen Bewegung resultieren, und eine Diskrepanz zwischen deinem gemeldeten Zustand und dem Schaden, der hätte entstehen sollen, ist ein Signal, auf das Anticheats vernünftigerweise prüfen können.
+</FAQItem>
+<FAQItem question="Ist No Fall auf jedem Client gleich?">
+Nein. Es handelt sich um ein allgemeines Modulkonzept, das in mehreren Clients auftaucht, aber die genaue Methode (Paketabbruch, Bodenspühlung oder Manipulation des vorhergesagten Zustands) variiert je nach Implementierung.
+</FAQItem>
+<FAQItem question="Beeinflusst No Fall etwas außer Sturzschäden?">
+Nicht nach Absicht. Es zielt speziell auf die Sturzschadenprüfung ab, obwohl die Bodenspühlung insbesondere je nach Aufbau in andere bewegungsbezogene Prüfungen hineinbluten kann.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die Kategorie No Fall existiert, und was einen Utility-Client von einem vollwertigen Cheat-Client unterscheidet." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Wo Module wie No Fall gebaut werden, um sich vor mehr als nur dem Server zu verstecken." },
+  { href: "/de/learn/what-is-velocity-anti-knockback", label: "Was ist Geschwindigkeit/Rückstoßvermeidung?", description: "Ein weiteres Modul, das eine Gebühr auslöscht, die das Spiel normalerweise von dir verlangt." }
+]} />
+
+<CTA href="/de/kaufen">No Fall ist ein Eintrag in Opals Modulliste. Schauen Sie, was sonst noch dabei ist.</CTA>

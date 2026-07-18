@@ -1,0 +1,81 @@
+---
+title: Was ist Fake-Lag in Minecraft? Paketverlängerung erklärt
+description: Falscher Lag verzögert die Bewegungspakete eines Spielers und setzt sie in einer Häufung frei, wodurch seine Position vom Server abweicht. So funktioniert es und warum es zu einer Sperre führen kann.
+excerpt: Falscher Lag macht dich nicht langsam. Er lässt den Server glauben, du seist langsam, während du dich bereits woanders befindest.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was genau ändert Fake Lag eigentlich?
+    a: Es ändert sich, wenn Bewegungsdatenpakete gesendet werden, nicht wie sich der Spieler auf seinem eigenen Bildschirm bewegt. Pakete werden zurückgehalten und zusammen in einer Burst-Aktion freigegeben, sodass der Positionsverlauf des Servers hinter dem realen zurückbleibt.
+  - q: Ist Fake-Lag dasselbe wie ein hoher Ping?
+    a: Nein. Hoher Ping ist eine tatsächliche Netzwerklatenz außerhalb der Kontrolle des Spielers. Gefälschte Lags ist ein absichtliches, clientseitiges Halten-und-Feuern-Muster, das eine normale Verbindung niemals von selbst erzeugen würde.
+  - q: Macht Fake Lag einen Spieler unantastbar?
+    a: Nein. Es öffnet eine vorübergehende Lücke zwischen der tatsächlichen Position und dem, was der Server gespeichert hat, was den Spieler während der Blockade schwieriger zu treffen machen kann, aber es blockiert keinen Schaden direkt, und der Burst selbst ist ein leichtes Erkennungssignal.
+  - q: Wie unterscheidet sich Fake Lag von Blink?
+    a: Fake Lag sendet kontinuierlich Pakete mit Verzögerung und setzt sie später frei. Blink unterbricht die Verbindung vollständig und nimmt sie danach wieder auf. Beide führen zu einer Positionsverschiebung, jedoch durch unterschiedliche Mechanismen auf Paketeebene.
+---
+
+# Was ist Fake-Lag in Minecraft?
+
+<KeyTakeaways>
+- Fake Lag verzögert die abgehenden Bewegungsdatenpakete eines Spielers und setzt sie in einem Stoß ab, anstatt bei jedem Tick.
+- Der Server zeichnet weiterhin die alte Position auf, während der Spieler sich bereits bewegt hat, und bemerkt dann ein Ruckeln oder Springen, wenn der Stoß eintrifft.
+- Es handelt sich um einen bannbaren Exploit, der die Positionssynchronisation beeinträchtigt und nicht um eine rein kosmetische Änderung. Er unterscheidet sich von Blink, das die Verbindung unterbricht, anstatt Datenpakete zu verzögern.
+</KeyTakeaways>
+
+Fake Lag ist ein Kampanmodul, das in einigen Minecraft-Cheat-Clients zu finden ist und die ausgehenden Bewegungsdatenpakete eines Spielers speichert, anstatt sie bei jedem Tick zu senden. Anschließend werden alle Pakete auf einmal freigegeben. Eine normale Verbindung meldet die Position ständig, sodass die Kopie des Servers, wo sich ein Spieler befindet, ihre tatsächliche Position genau verfolgt. Fake Lag unterbricht diesen Zusammenhang absichtlich: Der Spieler läuft und kämpft auf seinem Bildschirm normal weiter, während der Server eine ältere Position speichert. Wenn die Warteschlange schließlich geleert wird, sehen alle anderen einen Ruck oder eine kurze Teleportation anstelle einer flüssigen Bewegung.
+
+## Funktionsweise
+
+Ein Vanilla-Client sendet ein Bewegungspaket etwa einmal pro Tick, sodass der Server selten mehr als einen Bruchteil einer Sekunde hinter der Realität zurückbleibt. Fake Lag fängt diese ausgehenden Pakete ab, stellt sie in einer Warteschlange bereit und hält die Warteschlange für einen kurzen Zeitraum geschlossen, anstatt sie sofort freizugeben. Diese Technik findet sich in Clients wie Raven B++, meist gebündelt mit anderen Modulen zur Paketmanipulation und nicht einzeln ausgeliefert.
+
+Solange der Hold aktiv ist, ändert sich nichts an der eigenen Spielerfahrung. Sie laufen, springen und schwingen weiterhin normal auf ihrem eigenen Bildschirm. Was eingefroren ist, ist die Sicht aller anderen: der Server und alle zuschauenden Spieler bleiben auf der letzten Position hängen, die es tatsächlich vor Beginn des Holds geschafft hat. Wenn der Hold endet, werden die Warteschlangenpakete zusammen freigegeben, und der Spieler scheint in seine tatsächliche Position zu springen oder zu stottern, anstatt dorthin zu laufen.
+
+Die meisten Implementierungen begrenzen, wie lange ein Hold dauern kann. Wenn sich der Abstand zwischen der realen und der gemeldeten Position zu weit vergrößert, zieht der Server den Spieler entweder zurück zu einer sinnvollen Position oder markiert die Bewegung als ungültig, sodass das Modul im Wesentlichen abwägt, wie viel Desynchronisation es kauft, gegen wie auffällig der Burst aussieht.
+
+## Falsche Latenz vs. Blinken
+
+Falsche Latenz wird oft mit Blinken in einen Topf geworfen, da beide Packet-Manipulationsmodule sind, die eine Lücke zwischen der tatsächlichen Position eines Spielers und dem öffnen, was dem Server mitgeteilt wurde. Der zugrunde liegende Mechanismus ist jedoch anders, und das gilt auch für das Aussehen auf dem Bildschirm anderer.
+
+| | Falsche Verzögerung | Blinken |
+|---|---|---|
+| Paketverhalten | Verzögert Bewegungspakete und gibt sie dann in einer Burst frei | Unterbricht die Verbindung und nimmt sie dann wieder auf |
+| Visueller Effekt | Stottern oder kurzes Teleportieren | Einfrieren, dann ein Sprung zu einer neuen Position |
+| Was es ausnutzt | Server hält eine veraltete Position, während der Client weiterbewegt | Server erhält während der Unterbrechung keine Updates |
+
+Gleiche Art von Problem, anderer Hebel. Falsche Verzögerung hört nie auf, mit dem Server zu sprechen, sondern tut es nur verspätet und auf einmal. Blinken unterbricht das Gespräch vollständig und nimmt es wieder auf, wenn es sich entscheidet.
+
+<Callout variant="tip" title="Wo Opal die Grenze zieht">
+Opal versendet Kampanmodul, aber eine dedizierte Funktion zum Halten und Auslösen einer Desynchronisation wie Fake Lag gehört nicht dazu. Der Austausch von einigen hundert Millisekunden Positionslüge gegen ein freies Detektionssignal ist kein Tausch, für den der Client ausgelegt ist.
+</Callout>
+
+<Callout variant="warning" title="Dies ist eine verbotene Cheats, kein Netzwerkproblem">
+Fake Lag existiert, um die tatsächliche Position eines Spielers von der Position abzuweiche, die der Server gespeichert hat. Ein kurzer Bewegungsschub direkt nach einer Blockade entspricht genau dem Muster, das serverseitige Anti-Cheat-Systeme erkennen sollen. Behandle es als einen erkennbaren, vorteilsbringenden Cheat, der das gleiche Sperrrisiko birgt wie jeder andere Exploit, der die Position synchronisiert, und nicht als etwas, das eine schlechte Verbindung behebt oder verbirgt.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+<FAQItem question="Was ändert Fake Lag eigentlich?">
+Es ändert, wann Bewegungsdatenpakete gesendet werden, nicht wie sich der Spieler auf seinem eigenen Bildschirm bewegt. Pakete werden zurückgehalten und dann in einer Burst-Aktion freigegeben, sodass der Server die Position des Spielers nicht mehr mit der tatsächlichen Position synchron hält.
+</FAQItem>
+<FAQItem question="Ist Fake Lag dasselbe wie ein hoher Ping?">
+Nein. Ein hoher Ping ist eine echte Netzwerkverzögerung, die außerhalb der Kontrolle des Spielers liegt. Fake Lag ist ein absichtliches, clientseitiges Zurückhalten und Burst-Muster, das eine normale Verbindung niemals von selbst erzeugen würde.
+</FAQItem>
+<FAQItem question="Macht Fake Lag einen Spieler unschlagbar?">
+Nein. Es öffnet eine vorübergehende Lücke zwischen der tatsächlichen Position und der vom Server aufgezeichneten Position, was den Spieler während des Zurückhaltens zwar schwerer treffen kann, aber es blockiert den Schaden nicht vollständig, und der Burst selbst ist ein leicht erkennbares Signal.
+</FAQItem>
+<FAQItem question="Wie unterscheidet sich Fake Lag von Blink?">
+Fake Lag sendet Pakete verzögert und gibt sie später in einer Burst-Aktion frei. Blink unterbricht die Verbindung vollständig und nimmt sie danach wieder auf. Beide führen zu einer Positionsverschiebung, jedoch über unterschiedliche Mechanismen auf Paketebene.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Wo Module wie Fake Lag in die breitere Kategorie von Utility-Clients passen." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die Kundengruppe, die darauf bedacht ist, für andere Spieler und Mitarbeiter unsichtbar zu bleiben." },
+  { href: "/de/learn/what-is-killaura", label: "Was ist Killaura?", description: "Das Combat-Modul Fake Lag wird üblicherweise in Cheat-Paketen gebündelt." }
+]} />
+
+<CTA href="/de/purchase">Kämpfe, die keine Verbindung zum Server benötigen. Probiere Opal.</CTA>

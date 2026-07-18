@@ -1,0 +1,77 @@
+---
+title: Was ist ein AutoHeadHitter in Minecraft?
+description: AutoHeadHitter ist ein Minecraft-Bewegungsmodul, das Sprünge und Positionierung automatisch so timt, dass Kopfschüsse bei gezüchteten Mobs wie Endermen während des Grindens erzielt werden.
+excerpt: Einen Endermännchenkopf mit bloßen Händen zu treffen, ist eine Kunst. AutoHeadHitter macht es zur Formsache.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Funktioniert AutoHeadHitter im PvP?
+    a: Nein. Es zielt auf Mobs ab, hauptsächlich Endermänner beim Farmen, nicht auf andere Spieler, und es zielt nicht auf Personen ab oder greift sie an.
+  - q: Warum ist es wichtig, einen Endermännchen den Kopf zu schlagen?
+    a: Das Anvisieren des Kopfes ist es, was einen Kill als effizienten Headshot während des Farmens zählt, daher lohnt es sich, den Sprung so zu timen, dass der Kopf und nicht der Körper getroffen wird, um einen langen Grind zu automatisieren.
+  - q: Ist AutoHeadHitter dasselbe wie KillAura?
+    a: "Nein. KillAura greift benachbarte Einheiten automatisch an, darunter auch Spieler, und übernimmt die Zielauswahl und Rotation für den allgemeinen Kampf. AutoHeadHitter ist spezifischer: es steuert Sprünge und Positionierung gezielt, um Mob-Kopfschüsse zu landen, hauptsächlich zum Farmen."
+  - q: Welche Kunden haben AutoHeadHitter?
+    a: Das ist in Tenacity dokumentiert, und Opal liefert seine eigene Version als Auto Head.
+  - q: Kann die Verwendung von AutoHeadHitter zu einer Sperre führen?
+    a: Es ist unwahrscheinlich, dass es PvP-orientierte Anti-Cheat-Systeme auslöst, da es nie mit anderen Spielern interagiert. Einige Server verbieten jedoch automatisches Farmen oder makroähnliches Verhalten unabhängig vom Ziel, sodass es letztendlich auf die spezifischen Regeln dieses Servers ankommt. Opal weist für diesen Grund auf seine Versionsnutzung mit eigener Verantwortung hin.
+---
+
+<KeyTakeaways>
+- AutoHeadHitter ist ein Bewegungsmodul, das Sprünge so timt, dass ein Angriff auf den Kopf eines Mobs statt auf seinen Körper landet.
+- Es wurde für das Farmen von Endermen entwickelt, wo ein Kopftreffer als effizienter Kill zählt.
+- Es zielt nur auf Mobs ab und überspringt die Reichweiten- und Rotationsprüfungen, die Anticheats im PvP verwenden.
+- Einige Server verbieten es als Automatisierung. Opal liefert es als Auto Head, Nutzung auf eigene Gefahr.
+</KeyTakeaways>
+
+AutoHeadHitter ist ein Bewegungsmodul in Minecraft-Utility-Clients, das einen Sprung automatisch auslöst und deine Position anpasst, sodass ein Angriff auf den Kopf-Hitbox eines Mobs trifft, anstatt irgendwo tiefer am Körper. Es ist ein Werkzeug zum Farmen, nicht zum Kämpfen: es zielt nicht auf andere Spieler ab und schadet ihnen auch nicht. Der Mob, der am häufigsten damit in Verbindung gebracht wird, ist der Enderman, dessen groß und schmaler Körper es überraschend schwer macht, von Hand sauber auf den Kopf zu treffen, und das immer wieder für eine Stunde am Stück. AutoHeadHitter nimmt die Entscheidung ab, indem es das Ziel und deine Position jede Zehntelsekunde überwacht, sodass Kopfschüsse automatisch landen, sobald ein Mob in Reichweite ist.
+
+## Wie es funktioniert
+
+AutoHeadHitter beobachtet das Ziel-Mob und deine eigene Position jede Zehntelsekunde und entscheidet dann, wann gesprungen und wo gestanden werden muss, damit der Schwung den Kopf und nicht den Körper trifft. Dies von Hand zu tun bedeutet, die Höhe des Mobs, das Timing des Sprungs und den Winkel des Schwungs gleichzeitig zu beurteilen und es bei jedem Treffer während einer langen Sitzung richtig hinzubekommen. Das Modul entfernt diese Entscheidung vollständig. Es löst den Sprung aus und richtet den Angriff selbstständig aus, sobald ein gültiges Ziel in Reichweite ist.
+
+Endermänner sind das Mob, um das dieses Bauwerk herum entsteht, und das aus gutem Grund. Ihr großer, schmaler Kasten bestraft Inkonsequenz: verfehlen Sie den Kopf nur um einen Bruchteil, und der Treffer zählt entweder nicht als Kopfschuss oder landet überhaupt nicht sauber. Über hunderte von Kills in einer Farm-Session summiert sich das zu viel verlorener Zeit, was genau die Art von repetitiver, präziser Aufgabe ist, die besser dem Client überlassen werden sollte als Ihren Reflexen.
+
+<Callout variant="tip" title="Opal versendet dies als Auto Head">
+Opal's eigener Modulkatalog listet diese Idee genau als Auto Head auf: "frisst automatisch goldene Köpfe." Derselbe Farming-Instinkt, offizielle Opal-Marke.
+</Callout>
+
+## Ist es sicher, AutoHeadHitter zu verwenden?
+
+AutoHeadHitter zielt auf Mobs ab, nicht auf Spieler, und berührt daher nie die Reichweiten-, Rotations- oder Trefferzeitprüfungen, auf denen Anticheats basieren, die auf Spieler-gegen-Spieler-Kämpfen aufgebaut sind. Das platziert es deutlich unter Modulen wie [KillAura](/de/learn/what-is-killaura) oder Zielassistenz auf der Risikoleiter, da diese den Kampf direkt gegen andere Personen manipulieren und speziell dafür markiert werden.
+
+Das verbleibende Risiko hat nichts mit der Erkennung von Kämpfen zu tun. Es geht um die Automatisierung selbst. Einige Server verbieten grundsätzlich jede automatisierte oder makroartige Verhaltensweise, unabhängig davon, ob sie auf Mobs abzielt oder nicht, da sie der Ansicht sind, dass der Client immer noch handelt anstatt des Spielers. Ob dies auf einem bestimmten Server relevant ist, hängt von den spezifischen Regeln dieses Servers bezüglich der Automatisierung ab, nicht davon, ob ein Anticheat den Zeitpunkt eines Kopfschusses erkennen kann, wie er die Reichweite oder Rotation erkennt. Im Allgemeinen kann es das nicht.
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Opal klassifiziert Auto Head als Nutzung auf eigene Gefahr. Es ist erkennbar, und bei Entdeckung droht der Verlust des Auftrags, wie bei jeder Automatisierung bei jedem Kunden. Diese Seite erklärt, was das Modul tut; sie ist keine Garantie, dass es auf Ihrem Server sicher ist.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+<FAQItem question="Funktioniert AutoHeadHitter im PvP?">
+Nein. Es zielt auf Mobs ab, hauptsächlich Endermen beim Farmen, nicht auf andere Spieler, und es zielt nicht auf Personen oder greift sie an.
+</FAQItem>
+<FAQItem question="Warum ist es wichtig, einen Endermännerkopf zu treffen?">
+Das Treffen des Kopfes ist es, was einen Kill als effizienten Headshot während eines Farmvorgangs zählt, daher lohnt es sich, den Sprung so zu timen, dass der Kopf und nicht der Körper getroffen wird, um dies über einen langen Zeitraum zu automatisieren.
+</FAQItem>
+<FAQItem question="Ist AutoHeadHitter dasselbe wie KillAura?">
+Nein. KillAura greift automatisch nahegelegene Entitäten an, einschließlich Spieler, und übernimmt die Zielerfassung und Rotation für den allgemeinen Kampf. AutoHeadHitter ist spezialisierter: es timt Sprünge und Positionierung speziell, um Mob-Kopfschüsse zu landen, hauptsächlich für das Farmen.
+</FAQItem>
+<FAQItem question="Welche Clients haben AutoHeadHitter?">
+Es ist in Tenacity dokumentiert, und Opal liefert seine eigene Version als Auto Head.
+</FAQItem>
+<FAQItem question="Kann die Verwendung von AutoHeadHitter zu einem Bann führen?">
+Es ist unwahrscheinlich, dass es PvP-spezifische Anti-Cheat-Prüfungen auslöst, da es niemals andere Spieler berührt, aber einige Server verbieten automatisierte oder makroähnliche Farmvorgänge unabhängig vom Ziel, daher hängt es von den spezifischen Regeln dieses Servers ab. Opal kennzeichnet seine Version aus diesem Grund mit der Verwendung auf eigene Gefahr.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-killaura", label: "Was ist KillAura?", description: "Der Allzweck-Nahkämpfer AutoHeadHitter wird oft verwechselt." },
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Ein weiteres Bewegungselement, das die Positionierung automatisiert und für den Bau und nicht für die Landwirtschaft konzipiert ist." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Beides gehört zur breiteren Kategorie AutoHeadHitter und Auto Head." }
+]} />
+
+<CTA href="/de/purchase">Lass Opal sich um die Porträtaufnahmen kümmern. Auto Head und der Rest sind $8.99.</CTA>

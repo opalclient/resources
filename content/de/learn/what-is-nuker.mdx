@@ -1,0 +1,79 @@
+---
+title: Was ist Nuker in Minecraft? Sofortiger Blockabbruch erklärt
+description: Nuker ist ein Minecraft-Modul, das jeden Block in einem Umkreis auf einmal zerstört, anstatt einzeln. Wie es funktioniert, wofür es verwendet wird und warum es schnell gemeldet wird.
+excerpt: Ein Durchgang, voller Radius, vorbei. Nuker verwandelt das Blockbrechen in einen einzigen Knopfdruck, und es ist eine der einfachsten Sachen, bei denen eine Anti-Cheat-Software dich erwischt.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Ist Nuker ein Hacker oder ein legitimer Mod?
+    a: Es ist ein Betrug. Das Aufbrechen mehrerer Blöcke über einen Radius in einem Zug ist etwas, das Vanilla Minecraft einem Spieler nicht erlaubt, daher zählt es als ein unfaier Vorteil im Spiel, nicht als eine rein kosmetische Bequemlichkeit.
+  - q: Arbeitet Nuker im Überlebensmodus?
+    a: Das ist der springende Punkt. Die Regeln, die es umgeht, die Block-Härte-Zeitsteuerung, die Interaktion blockweise und die Reichweite, existieren nur im Überlebens- und Mehrspielermodus. Im Kreativmodus werden Blöcke bereits sofort zerstört, daher gibt es für Nuker dort nichts zu beschleunigen.
+  - q: Was ist der Unterschied zwischen Nuker und Scaffold?
+    a: Nuker entfernt Blöcke in großen Mengen. Gerüste platzieren diese ebenfalls in großen Mengen und bauen dabei automatisch Brücken, während man sich fortbewegt. Beide vereinfachen eine langsame, bedächtige Standardinteraktion und verwandeln sie in eine sofortige, automatisierte.
+  - q: Können Server-Plugins Nuker blockieren, ohne Anticheat?
+    a: Einige Server-Software begrenzen, wie viele Blöcke pro Tick oder pro Aktion zerstört werden können, was die Wirkung von Nuker selbst abschwächt. Aber das Aufspüren und Bann dieses Verhaltens ist immer noch die Aufgabe eines Anticheats.
+---
+
+<KeyTakeaways>
+- Nuker ist ein Weltmodul, das jeden zerstörbaren Block in einem Umkreis um den Spieler in einem einzigen Durchgang abbricht, anstatt Blöcke einzeln abzubauen.
+- Es ersetzt die Standard-Ziel-und-abbruch-Schleife durch einen Scan: Es werden alle Blockpositionen im Bereich überprüft, ungeeignete Blöcke herausgefiltert und der Rest auf einmal zerstört.
+- Es wird verwendet, um das Gelände schnell zu räumen und häufiger, um geschützte Konstruktionen oder Ansprüche zu zerstören, bevor jemand reagieren kann.
+- Anticheats erkennen es, indem sie die Abbruchrate und -ausbreitung mit dem vergleichen, was ein echter Eingabestrom erzeugen kann.
+</KeyTakeaways>
+
+Nuker ist ein Modul der Welt-Kategorie, das jeden zerstörbaren Block innerhalb eines Radius um den Spieler in einem Durchgang abbricht, anstatt wie im normalen Minecraft-Spielbetrieb üblich einen Block nach dem anderen abzubauen. Ein Geländeabschnitt, der normalerweise Dutzende von einzelnen Schlägen erfordern würde, stürzt in einer einzigen Aktion ein. Es erscheint in Clients wie [[Wurst]], neben anderen Modulen zur Massenautomatisierung und gehört als eines der brachialeren Werkzeuge in der Welt-Kategorie dazu.
+
+## Wie Nuker funktioniert
+
+Das normale Abbauen ist bewusst darauf ausgelegt, bedachtsam zu sein. Du betrachtest einen Block, hältst die Maustaste gedrückt und wartest die für die Härte dieses Blocks und das Werkzeug, das du hältst, festgelegte Abbruchzeit ab. Ein Block, eine Aktion, eine Wartezeit.
+
+Nuker durchbricht diese Schleife. Anstatt zu verfolgen, wohin du schaust, scannt es jede Blockposition innerhalb eines festgelegten Radius um dich herum, filtert alles heraus, was nicht qualifiziert ist (Luft, Grundgestein, Blöcke außerhalb der Reichweite) und sendet eine Abbruch-Anfrage für alles, was übrig bleibt, in einem einzigen Durchgang. Du zielst nicht auf jeden einzelnen Block. Du wartest nicht die einzelnen Abbruchzeiten ab. Der Client verarbeitet einfach die gesamte Fläche auf einmal und geht weiter.
+
+Das ist auch der Grund, warum die Attraktivität begrenzt, aber offensichtlich ist: Das Räumen eines Tunnels, das Planieren eines Geländeteils oder das Abräumen einer beanspruchten Basis bis zum Gestein erfordert nur einen Bruchteil der Zeit, die normales Abbauen benötigt. Auf Servern, auf denen Land geschützt oder Ressourcen umkämpft sind, ist genau diese Geschwindigkeit es, was es zu einem Griefing-Werkzeug macht, nicht nur zu einer Bequemlichkeit.
+
+## Nuker vs. Gerüst
+
+Beide Module verwandeln eine langsame, unveränderte Interaktion in eine sofortige, umfangreiche Version davon. Die Richtung ist entgegengesetzt.
+
+| | Nuker | Gerüst |
+|---|---|---|
+| Die ursprüngliche Aktion, die es automatisiert | Abbauen von Blöcken | Platzieren von Blöcken |
+| Wie es ausgelöst wird | Ein einzelner Ausbruch über einen Radius | Kontinuierlich, während man von einer Kante abläuft |
+| Typische Verwendung | Schnelles Räumen oder Griefen von Gelände | Überbrücken von Lücken, ohne nach unten zu schauen |
+| Was es aus dem Spiel entfernt | Die Wartezeit, die Zielerfassung und die Einschränkung auf das Abbauen von jeweils einem Block | Die Wartezeit, die Zielerfassung und die Einschränkung auf das Platzieren von jeweils einem Block |
+
+<Callout variant="tip" title="Kein Bestandteil von Opals Toolkit">
+Opal wird kein Nuker-Modul mitgeliefert, und das ist kein Versehen. Das gesamte Konzept eines kostenpflichtigen Kunden besteht darin, unauffällig auf einem Server zu bleiben, und das massenhafte Zerstören von Blöcken ist eine der unauffälligsten Aktionen, die man vor Mitarbeitern oder einem Anti-Cheat-System ausführen kann. Das ist nicht die Art von Vorteil, auf die Opal ausgelegt ist.
+</Callout>
+
+<Callout variant="warning" title="Dies ist eine der einfacheren Möglichkeiten, einen Nuker zu erkennen">
+Nuker hinterlässt ein Muster, das ein echter Eingabestrom niemals erzeugt: mehrere Blöcke, die im selben Takt zerstört werden, verteilt über einen Radius anstatt in die Richtung, in die man blickt, manchmal sogar außerhalb der normalen Reichweite. Serverseitige Anti-Cheat-Systeme messen die Block-Zerstörungsrate und -Verteilung im Vergleich zu den Härte- und Reichweitenbeschränkungen von Vanilla, und ein solcher Ausbruch ist ein starkes, leicht erkennbares Signal. Behandle dies als einen schnellen Weg zu einer Sperre, nicht als eine Abkürzung zum Räumen des Geländes.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+<FAQItem question="Ist Nuker ein Hack oder eine legitime Mod?">
+Es ist ein Cheat. Das Brechen mehrerer Blöcke über einen Radius in einem Durchgang ist etwas, das Vanilla Minecraft einem Spieler nicht erlaubt, daher zählt es als ein unfaier Vorteil im Spiel, nicht als eine kosmetische Bequemlichkeit.
+</FAQItem>
+<FAQItem question="Funktioniert Nuker im Überlebensmodus?">
+Das ist der springende Punkt. Die Regeln, die es umgeht – Blockhärte-Timing, die Interaktion von Block für Block und die Reichweite – gelten nur im Überlebens- und Mehrspielermodus. Im Kreativmodus werden Blöcke bereits sofort zerstört, daher gibt es für Nuker dort nichts zu beschleunigen.
+</FAQItem>
+<FAQItem question="Was ist der Unterschied zwischen Nuker und Scaffold?">
+Nuker entfernt Blöcke in großen Mengen. Scaffold platziert sie in großen Mengen und baut dabei automatisch Brücken, während man läuft. Beide verwandeln eine langsame, bedachte Vanilla-Interaktion in eine sofortige, automatisierte.
+</FAQItem>
+<FAQItem question="Können Server-Plugins Nuker blockieren, ohne Anticheat?">
+Einige Server-Software begrenzen, wie viele Blöcke pro Tick oder pro Aktion zerstört werden können, was die Wirkung von Nuker dadurch abschwächt. Aber das Erkennen und Sperren des Verhaltens ist immer noch die Aufgabe eines Anticheats.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Der Blockplatzierungs-Gegenpart zu Nuker, automatisiertes Brückenbauen beim Gehen." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die Kundengruppe, die sich darauf konzentriert, sich vor dem Personal zu verstecken und das Gelände nicht freizumachen." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Wo Module wie Nuker in die breitere Kategorie der Utility-Clients passen." }
+]} />
+
+<CTA href="/de/kaufen">Opal verzichtet auf weltuntergehende Spielereien und schärft die Module, die dich tatsächlich am Leben erhalten.</CTA>

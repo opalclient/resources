@@ -1,0 +1,75 @@
+---
+title: Was ist AutoAuthenticate in Minecraft?
+description: AutoAuthenticate ist ein Minecraft-Client-Modul, das bei jedem Verbindungsversuch mit einem Server, der ein Auth-Plugin verwendet, automatisch dein gespeichertes Passwort als Login-Befehl erneut sendet.
+excerpt: Es merkt sich Ihr Passwort, sodass Sie es nicht fünfzig Mal pro Woche eingeben müssen. Das ist das gesamte Modul.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Viel AutoAuthenticate gibt irgendeinen Vorteil im Spiel?
+    a: Nein. Es automatisiert lediglich das Senden eines Login- oder Registrierungs-Chatbefehls mit einem gespeicherten Passwort. Es hat keinen Einfluss auf Kämpfe, Bewegungen oder irgendetwas anderes, was der Server als Spielgeschehen erfasst.
+  - q: Kann ein Server jemanden sperren, weil er AutoAuthenticate verwendet?
+    a: Es gibt keine erkennbare Spielaktion, da der Befehl, den es sendet, dem eines Befehls entspricht, den ein Spieler manuell eingibt. Server haben in der Regel keinen Grund, dies zu melden.
+  - q: Wo wird mein Passwort gespeichert?
+    a: Das Modul speichert das gespeicherte Passwort lokal auf Ihrem Gerät, sodass es bei zukünftigen Verbindungen erneut gesendet werden kann. Seine Sicherheit hängt vollständig von der Sicherheit des Geräts ab, auf dem es gespeichert ist.
+  - q: Welche Kunden nutzen AutoAuthenticate?
+    a: Es taucht in Tenacity auf, wird meist unter Komfort- oder Qualitätsverbesserungsmodulen und nicht unter Kampfbefähigungs- oder Bewegungsmodulen abgelegt.
+---
+
+<KeyTakeaways>
+- AutoAuthenticate ist ein Modul, das Sie automatisch in auth-plugin-Server einloggt, indem es Ihr gespeichertes Passwort als Login- oder Registrierungsbefehl erneut sendet.
+- Es ersetzt lediglich die Eingabe, nicht das Gameplay, und hat daher keinen Einfluss auf Kämpfe, Bewegungen oder alles, was ein Anti-Cheat-System verfolgt, und sieht identisch mit der Eingabe eines Spielers aus.
+- In Clients wie Tenacity zu finden, und unter „Quality of Life“ und nicht unter „Kampf“ eingeordnet.
+</KeyTakeaways>
+
+**AutoAuthenticate** ist ein Minecraft-Utility-Client-Modul, das dich in einem Server automatisch einloggt, sobald du beitrittst, indem es dein gespeichertes Passwort als Login- oder Registrier-Chat-Befehl sendet. Wenn du jemals auf einem geknackten oder offline-modus-Server gespielt hast, kennst du die Prozedur: Trete bei, tippe `/login deinpasswort` ein und beginne dann tatsächlich mit dem Spielen. AutoAuthenticate überspringt den zweiten Schritt, indem es ihn für dich sofort jedes Mal erledigt.
+
+## Funktionsweise
+
+Viele Server, die auf geknackten oder offline-modus-Konten laufen, schützen sich mit einem Auth-Plugin. Bevor du dich bewegen, chatten oder mit irgendetwas interagieren kannst, musst du einen Login-Befehl (bestehendes Konto) oder einen Registrier-Befehl (beim ersten Beitritt) ausführen, jeweils mit einem Passwort. Lass diesen Schritt aus, und du bleibst an Ort und Stelle, bis du ihn korrekt eingegeben hast.
+
+AutoAuthenticate speichert ein Passwort pro Server und beobachtet den genauen Moment, in dem dein Beitritt auf einem Server, der dies erfordert, abgeschlossen ist. Sobald es diesen Zustand erkennt, feuert es den passenden Befehl mit deinem gespeicherten Passwort in deinem Namen ab, ohne dass du etwas eintippen musst. Das ist der gesamte Mechanismus. Es gibt keinen Pakettrick, kein verstecktes Protokoll, nichts, was der Server nicht bereits von einem Menschen akzeptieren würde, der nach dem Tippen Enter drückt.
+
+## Was es berührt, und was nicht
+
+| Bereich | Von AutoAuthenticate betroffen? |
+|---|---|
+| Login/Registrier-Chatbefehl | Ja, wird automatisch beim Beitritt gesendet |
+| Kampf (Reichweite, Trefferzeitpunkt, Zielgenauigkeit) | Nein |
+| Bewegung (Geschwindigkeit, Sprünge, Pfadfindung) | Nein |
+| Alles, was der Server als Spielaktion protokolliert | Nein |
+| Passwortspeicherung | Lokal für den Client und den Rechner |
+
+Diese letzte Zeile ist die eigentliche "Einstellungen"-Oberfläche: ein gespeichertes Passwort pro Server, das lokal aufbewahrt wird, damit es beim nächsten Beitritt wiederverwendet werden kann. Alles andere ist lediglich eine Automatisierung einer Chatnachricht, die Sie bereits senden durften.
+
+Server, die sich auf Authentifizierungs-Plugins verlassen, fordern den gleichen Befehl bei jeder Neuverbindung an. Wenn Sie häufig die Verbindung trennen und wiederherstellen, summiert sich die Eingabe eines Passworts jedes Mal zu einer echten Belästigung über eine Sitzung hinweg. AutoAuthenticate beseitigt diese Belästigung vollständig, ohne etwas zu berühren, was ein Server oder eine Anti-Cheat-Software messen möchte.
+
+<Callout variant="tip" title="Wo dies ins Gesamtbild passt">
+Opal versendet kein Modul unter diesem Namen, und das ist auch nicht die Absicht. AutoAuthenticate befindet sich im Bereich der Verbesserungen im Modul-Listing, nicht im Bereich für Kämpfe oder Bewegung, wo sich ein kostenpflichtiger Client sein Geld verdient. Wenn Ihre Prioritätenliste „ständiges Eintippen meines Passworts stoppen“ lautet, ist ein dedizierter Auth-Helfer wie dieser wirklich das richtige Werkzeug. Wenn es „ständiges Sterben in Kämpfen stoppen“ ist, dann sind Sie in einem völlig anderen Regal unterwegs.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+<FAQItem question="Verschafft AutoAuthenticate einen Vorteil im Spielverlauf?">
+Nein. Es automatisiert lediglich das Senden eines Login- oder Registrierungs-Chatbefehls mit einem gespeicherten Passwort. Es hat keinen Einfluss auf Kämpfe, Bewegungen oder irgendetwas anderes, was der Server als Spielverlauf erfasst.
+</FAQItem>
+<FAQItem question="Kann ein Server jemanden für die Nutzung von AutoAuthenticate sperren?">
+Es gibt keine Spielaktion, die erkannt werden könnte, da der Befehl, den es sendet, identisch ist mit einem, den ein Spieler manuell eingibt. Server haben in der Regel keinen Grund, es zu markieren.
+</FAQItem>
+<FAQItem question="Wo wird mein Passwort gespeichert?">
+Das Modul speichert das gespeicherte Passwort lokal auf Ihrem Gerät, damit es bei zukünftigen Verbindungen erneut gesendet werden kann. Seine Sicherheit hängt vollständig von der Sicherheit des Geräts ab, auf dem es gespeichert ist.
+</FAQItem>
+<FAQItem question="Welche Clients beinhalten AutoAuthenticate?">
+Es erscheint in Tenacity, meist unter Komfort- oder Qualitätsverbesserungsmodulen anstatt unter Kampf- oder Bewegungsmodulen.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die Kategorie AutoAuthenticate gehört zu, und was sich sonst noch darin befindet." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Undetektierbar durch Design, genau dieses Designziel trifft AutoAuthenticate zufällig." },
+  { href: "/de/learn/what-is-killaura", label: "Was ist Killaura?", description: "Das andere Ende des Risikospektrums: ein Modul, das dich sperren lässt, anstatt dich nur anzumelden." }
+]} />
+
+<CTA href="/de/kaufen">Opal steuert die Module, die Kämpfe tatsächlich entscheiden. Probiere es für $8.99.</CTA>

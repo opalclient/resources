@@ -1,0 +1,71 @@
+---
+title: GraalVM JavaScript 脚本编程是什么？(2026)
+description: GraalVM JavaScript 是一种快速的 JS 引擎，可在 JVM 上运行。应用程序将其嵌入，以便用户可以使用 JavaScript 脚本编写，并在无需重新编译 Java 的情况下进行热重载.
+excerpt: GraalVM JavaScript 允许 Java 应用运行用户 JavaScript 脚本并在运行时动态重新加载。这使得客户端无需编译模组即可添加功能.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: GraalVM JavaScript 和 Node.js 是同一个东西吗？?
+    a: 不，两者都运行 JavaScript，但 GraalVM 的引擎旨在嵌入到 JVM 应用程序中，而 Node.js 是基于 V8 构建的独立运行时环境.
+  - q: 我需要懂 Java 才能写脚本吗？?
+    a: 通常不是。你通常会针对宿主应用暴露的对象编写 JavaScript。了解这些对象所对应的映射关系有助于高级使用.
+  - q: 为什么使用脚本而不是完整的模组？?
+    a: 迭代速度。脚本可以立即重新加载，而编译模组则需要重建并重新启动.
+---
+
+<KeyTakeaways>
+
+- GraalVM JavaScript 是一个快速且符合标准的 JS 引擎，可在 JVM 上运行。
+- Java 应用将其嵌入，以便用户可以编写调用宿主程序 JavaScript 代码。
+- 脚本可以热重载，因此您可以更改行为而无需重新编译 Java 代码。
+- 宿主决定脚本可以访问的确切对象和类.
+
+</KeyTakeaways>
+
+GraalVM JavaScript 是一种快速、符合标准的 JavaScript 引擎，可在 JVM 上运行，它是 [GraalVM](https://www.graalvm.org/) 项目的一部分。Java 应用程序可以嵌入它，以便用户可以编写调用宿主程序并即时重新加载的 JavaScript 代码。在 Java 应用程序中，这意味着可以在不重新编译 Java 代码的情况下，通过 JavaScript 添加或更改行为.
+
+<Callout variant="info" title="Opal 的集成方式">
+Opal 的脚本引擎基于 GraalVM JavaScript。 要开始编写脚本，请参阅 [脚本编写指南](/zh/docs/scripting)。
+</Callout>
+
+## GraalVM 和 GraalVM JavaScript
+
+GraalVM 是一种高性能运行时，可以在 JVM 上运行多种语言。 它的 JavaScript 引擎足够现代，可以支持最新的 ECMAScript 特性。一个应用程序会打包引擎，将一组对象交给脚本处理，然后运行它们。
+
+## 为什么应用程序会嵌入它
+
+- **热重载**: 更改脚本并无需重启或重建即可看到效果。
+- **安全的表面**: 主机决定脚本可以接触哪些对象和 Java 类。
+- **Java 互操作**: 脚本可以通过它暴露的对象调用应用程序自身的代码。
+
+## 它在客户端中如何呈现
+
+通常，嵌入引擎的程序会为脚本提供一个入口点以注册自身，然后提供一小套“代理”对象，这些对象连接 JavaScript 与程序的内部组件。用户编写一个脚本，将其放入脚本文件夹中，然后引擎加载它。 这样客户端就可以让用户用 JavaScript 添加功能，而不是编译 mod。
+
+## 常见问题解答
+
+<FAQList>
+
+<FAQItem question="GraalVM JavaScript 与 Node.js 相同吗？">
+不相同。两者都运行 JavaScript，但 GraalVM 的引擎旨在嵌入到 JVM 应用程序中，而 Node.js 是基于 V8 构建的独立运行时环境。
+</FAQItem>
+
+<FAQItem question="需要懂 Java 才能编写脚本吗？">
+通常不需要。您编写的 JavaScript 是针对宿主应用暴露的对象。了解这些对象对应的概念有助于高级使用。
+</FAQItem>
+
+<FAQItem question="为什么使用脚本而不是完整的模组？">
+迭代速度。脚本可以立即重新加载，而编译后的模组需要重建和重新启动。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/what-is-the-jvm", label: "什么是 JVM？?", description: "GraalVM JavaScript 在运行时运行." },
+  { href: "/zh/learn/what-is-jni", label: "什么是 JNI？?", description: "一种扩展 Java 程序的较低级方法." },
+  { href: "/zh/blog/introducing-opal-scripting-engine", label: "Opal'脚本引擎", description: "GraalVM 脚本在实践中的应用." },
+]} />
+
+<CTA href="/zh/purchase">获取 Opal，一个 Fabric 客户端，用于 $8.99</CTA>

@@ -1,0 +1,75 @@
+---
+title: Minecraft 中 Discord RPC 是什么？详解丰富的状态显示
+description: Discord RPC 在你的 Discord 个人资料中实时显示你的 Minecraft 服务器、活动和会话时长。以下是如何运作丰富的存在模块.
+excerpt: 你的 Discord 个人资料知道你所在的服务器，在你开口之前。这就是 Discord RPC，纯粹是炫耀，对游戏本身没有任何影响.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Discord RPC 在游戏内是否提供任何优势？?
+    a: 不，它只会在你的 Discord 个人资料上显示状态信息。它不会改变移动、战斗，或者服务器处理的任何其他内容.
+  - q: 它工作需要 Discord 打開嗎？?
+    a: 是的。丰富显示需要 Discord 桌面应用程序与 Minecraft 同时运行，因为客户端会向你的本地 Discord 应用程序发送状态更新，然后你的个人资料才会更新.
+  - q: 其他玩家能在游戏内看到我的 Discord 丰富状态吗？?
+    a: 不，它只会在 Discord 上显示，给那些可以查看你的 Discord 个人资料或共享服务器状态的人。它在 Minecraft 本身中没有可见性.
+  - q: 我能關閉 Discord RPC 嗎？?
+    a: 是的。 这是一个可选的装饰模块，所以您可以随时禁用它，这样您的服务器或活动就不会显示在您的 Discord 个人资料上.
+---
+
+<KeyTakeaways>
+
+- Discord RPC 是一款美化模块，可在您的 Discord 个人资料上以“丰富展示”的形式显示您的 Minecraft 服务器、活动和会话时长。
+- 它仅读取并报告状态，绝不会干扰游戏玩法或向服务器发送任何信息。
+- 需要同时运行 Discord 桌面应用和 Minecraft。
+- 安全分类：游戏中没有任何内容会被反作弊系统检测到.
+
+</KeyTakeaways>
+
+Discord RPC 是一个模块，可以将你的 Minecraft 会话变成 Discord 丰富的状态卡片，显示你在哪个服务器、正在做什么以及你玩了多长时间，这些信息会显示在你的用户名下方，供查看你资料的人看到。它是 Minecraft 客户端工具中最显眼但也最不引人注目的部分之一：它不会改变你的移动、瞄准或战斗方式。启用后，Discord 会在你登录的瞬间开始显示你的状态。禁用后，你的资料就会恢复到你上次的活动状态。
+
+## 工作原理
+
+该模块在 Minecraft 客户端和 Discord 桌面应用程序都运行时，保持一个小的后台连接。它会定期从游戏中读取一些值，例如服务器地址、当前活动以及会话持续时间，并将这些信息转发给 Discord 的丰富状态 API。Discord 会处理这些数据，并在你的资料卡片上呈现出来，以便任何查看你的资料或在共享服务器中悬停你的用户名的人都能看到.
+
+大多数客户端会通过 Discord 游戏 SDK 包装器，例如 discord-game-sdk4j，来实现此功能，该包装器负责连接握手和消息格式化。客户端的任务仅仅是提供状态文本，仅此而已。由于整个交互过程都是单向的，从游戏流向 Discord，因此 Discord RPC 永远不会发送输入，也不会触及任何发出的数据包，也不会改变 Minecraft 服务器所看到的一切。它只是一个侧通道，连接到 Discord，而不是一个游戏钩子.
+
+<Callout variant="tip" title="Opal 出货时包含此项">
+Opal 的 Discord RPC 模块完全符合其名称：在 Discord 中显示丰富的状态信息。它与 Opal 的其他外观和生活质量优化功能属于同一类别，而不是客户端的战斗或移动相关功能。
+</Callout>
+
+## 是否安全使用
+
+完全安全，毫无疑问。Discord RPC 仅读取并报告状态。它不会改变移动、战斗或服务器处理的任何内容，也不会将频道重新打开到游戏中。服务器端的反作弊系统无法检测到此功能，因为该功能在 Minecraft 中完全没有痕迹。它的每一个字节都存在于您的客户端和本地 Discord 应用之间的对话中。
+
+唯一值得考虑的事情不是检测问题，而是隐私问题。任何可以看到您的 Discord 个人资料、朋友、服务器成员、如果您的状态公开，则随机的人，都可以看到您所在的 Minecraft 服务器以及您在其中的活动。如果您不希望广播这些信息，请在登录前关闭该模块。
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="Discord RPC 能否提供游戏内优势？">
+不能。它仅在您的 Discord 个人资料上显示状态信息。它不会改变移动、战斗或服务器处理的任何内容。
+</FAQItem>
+
+<FAQItem question="我需要開啟 Discord 才能使用嗎？">
+是的。豐富顯示需要 Discord 桌面應用程式與 Minecraft 同時執行，因為客戶端會將狀態更新傳送到您的本地 Discord 應用程式，然後再更新您的個人資料。
+</FAQItem>
+
+<FAQItem question="其他玩家能在游戏内看到我的 Discord 丰富状态吗？">
+不能。它仅在 Discord 上显示，向那些可以查看你的 Discord 个人资料或共享服务器状态的人显示。它在 Minecraft 游戏内没有可见性。
+</FAQItem>
+
+<FAQItem question="我可以關閉 Discord RPC 嗎？">
+可以。 它是可選的視覺效果模組，所以您可以隨時在不想在您的 Discord 個人檔案中顯示您的伺服器或活動時停用它。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/what-is-a-minecraft-utility-client", label: "什么是实用客户端？?", description: "Discord RPC 的外观自定义功能都包含在内." },
+  { href: "/zh/learn/what-is-a-ghost-client", label: "什么是幽灵客户？?", description: "相反的目标：保持低调，而不是炫耀你的身份." },
+  { href: "/zh/learn/what-is-scaffold", label: "什么是脚手架？?", description: "Discord RPC 模块与可封禁的作弊程序毫无关联." },
+]} />
+
+<CTA href="/zh/purchase">开启 Discord RPC 以及 $8.99 的 Opal 皮肤层.</CTA>

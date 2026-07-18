@@ -1,0 +1,70 @@
+---
+title: Was sind Entity-Effekte in Minecraft? Modul erklärt
+description: Entity Effects ist ein kosmetisches Client-Modul für Minecraft, das den Trefferpartikeleffekt bei jedem erfolgreichen Treffer austauscht. Hier erfahren Sie, wie es funktioniert und warum es sicher ist.
+excerpt: Vanille verleiht jedem bei jedem Treffer das gleiche winzige Partikel-Plopp. Entity Effects ersetzt es durch etwas, das es wert ist, angesehen zu werden, und es verschwindet nie von deinem Bildschirm.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Verändern Entitätseffekte den Kampf in irgendeiner Weise?
+    a: Nein. Es verändert lediglich den visuellen Effekt, der angezeigt wird, wenn ein Treffer landet. Die Treffererkennung, der Schaden und das Timing bleiben unverändert wie im Originalspiel.
+  - q: Wie unterscheidet sich Entity Effects von Kill Effects?
+    a: Entitätseffekte werden bei jedem Treffer ausgelöst. Tödliche Effekte werden nur dann ausgelöst, wenn dieser Treffer das Leben des Ziels beendet. Entitätseffekte ist das umfassendere Modul der beiden und wird deutlich häufiger ausgelöst.
+  - q: Können andere Spieler meine benutzerdefinierten Treffereffekte sehen?
+    a: Nein. Der Effekt wirkt lokal, nur auf Ihrem eigenen Client. Alle anderen sehen weiterhin die Standard-Vanilla-Partikel, unabhängig davon, was Sie für Ihre eingestellt haben.
+  - q: Werden Entity-Effekte von Anticheats erkannt?
+    a: Nein. Es ändert nichts an den Daten, die an den Server gesendet werden, sodass ein serverseitiges Anticheat nichts zu prüfen hat. Der Effekt verlässt nie deinen Client.
+---
+
+<KeyTakeaways>
+- Entity Effects ist ein kosmetisches Modul, das den Partikeleffekt ändert, der angezeigt wird, wenn ein Treffer landet.
+- Es wird bei jedem erfolgreichen Treffer ausgelöst, nicht nur bei Kills, im Gegensatz zum enger gefassten Modul Kill Effects.
+- Es verändert nur die lokale Darstellung: Reichweite, Timing, Schaden und Serverdaten bleiben unverändert.
+- Nichts davon ist auf dem Server sichtbar, sodass es für ein Anticheat-System nicht markiert wird.
+</KeyTakeaways>
+
+Entity Effects ist ein kosmetisches Modul, das in einigen Minecraft-Utility-Clients zu finden ist und die Partikelexplosion ersetzt, die angezeigt wird, wenn man ein Entity trifft. Vanilla zeigt unabhängig davon, ob man einen Zombie, ein Skelett oder einen anderen Spieler trifft, immer denselben kleinen weißen Puster. Dieses Modul ersetzt diese Standardeinstellung durch etwas anderes, sei es eine andere Partikelform oder eine aufwendigere Optik, und wird bei jedem erfolgreichen Treffer abgespielt, anstatt es für seltenere Ereignisse aufzuheben. Das ist der Teil, den man sich merken sollte: Es verändert, wie das Spiel aussieht, nicht wie es gespielt wird.
+
+## Funktionsweise
+
+Das Modul greift in den Moment ein, in dem dein Client einen erfolgreichen Treffer registriert, und legt einen benutzerdefinierten Effekt darüber, anstelle der Standard-Partikelexplosion. Dieser Hook wird bei jedem Treffer ausgelöst, sodass du bei einem Client, der dieses Feature mitliefert, ständig mitten im Kampf etwas davon bemerkst, anstatt nur gelegentlich.
+
+Das ist auch der einzige Unterschied zwischen Entity Effects und Kill Effects, einem Modul, das einige der gleichen Clients zusammen mit ihm mitliefern. Kill Effects wird nur ausgelöst, wenn der Treffer das Leben des Ziels beendet. Entity Effects wird bei jedem Treffer ausgelöst, der trifft, unabhängig davon, ob man gewinnt oder verliert, sodass es während des normalen Kampfes angezeigt wird, anstatt nur einmal pro Eliminierung. Clients, die es bündeln, wie Tenacity, listen es als eine Option unter mehreren kosmetischen Treffer-Anpassungen auf, und nicht als etwas, das mit der Erkennung oder Auflösung von Treffern zusammenhängt.
+
+Der Reiz ist einfach. Jeder landet die gleichen Schläge, aber nicht jeder Treffer muss gleich aussehen. Es ist die Individualisierung, die nichts an dem ändert, wer einen Kampf gewinnt, aber alles daran, wie es sich anfühlt, einen zu landen.
+
+## Ist es sicher, es zu nutzen?
+
+Ja, und es ist eines der eindeutigeren Ja-Antworten in diesem Bereich. Entity Effects verändert lediglich, was auf dem eigenen Bildschirm angezeigt wird, wenn ein Treffer landet. Es berührt weder Reichweite, Timing, Schadensberechnung noch irgendetwas anderes, was der Server verfolgt, und es ändert nicht, was über das Netzwerk für einen Angriff gesendet wird. Es gibt keinen Paketunterschied zwischen einem Standard-Treffer und einem Treffer mit einem benutzerdefinierten Effekt, was bedeutet, dass es für eine serverseitige Anti-Cheat-Software nichts zu bewerten gibt.
+
+Die einzige Einschränkung hat nichts mit dem Modul selbst zu tun: Einige Server verbieten modifizierte Clients pauschal, unabhängig davon, was eine einzelne Funktion bewirkt. Überprüfen Sie die Serverregeln, bevor Sie einen modifizierten Client, einschließlich Entity Effects, ausführen.
+
+<Callout variant="tip" title="Wo dies in Opal passt">
+Opal liefert kein Modul namens Entity Effects. Aber genau das ist die Art von Sache, für die ein kostenpflichtiger Utility-Client zuständig sein sollte: rein kosmetische, clientseitige Verbesserungen, die niemals etwas berühren, was der Server sehen kann. Wenn Sie sich für diese Kategorie interessieren, beurteilen Sie einen Client anhand seines gesamten visuellen Anpassungs-Sets, nicht anhand eines einzelnen Moduls.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+<FAQItem question="Verändert Entity Effects den Kampf auf irgendeine Weise?">
+Nein. Es ändert lediglich den visuellen Effekt, der angezeigt wird, wenn ein Treffer landet. Die Treffererkennung, der Schaden und das Timing bleiben unverändert wie im Originalspiel.
+</FAQItem>
+<FAQItem question="Wie unterscheidet sich Entity Effects von Kill Effects?">
+Entity Effects wird bei jedem Treffer ausgelöst, der trifft. Kill Effects wird nur ausgelöst, wenn dieser Treffer das Leben des Ziels beendet. Entity Effects ist das umfassendere Modul der beiden und wird deutlich häufiger ausgelöst.
+</FAQItem>
+<FAQItem question="Können andere Spieler meine benutzerdefinierten Treffeffekte sehen?">
+Nein. Der Effekt wird lokal gerendert, nur auf Ihrem eigenen Client. Jeder andere sieht weiterhin die Standard-Trefferpartikel, unabhängig davon, was Sie für Ihre Effekte eingestellt haben.
+</FAQItem>
+<FAQItem question="Wird die Verwendung von Entity Effects von Anticheats erkannt?">
+Nein. Es ändert nichts, was an den Server gesendet wird, daher gibt es nichts, was ein serverseitiges Anticheat auswerten könnte. Der Effekt verlässt nie Ihren Client.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft Utility Client?", description: "Die Kategorie Entity Effects liegt im Inneren und unterscheidet einen Utility-Client von einem einfachen Ressourcenpaket." },
+  { href: "/de/learn/what-is-an-aimbot", label: "Was ist ein Aimbot?", description: "Ein Modul am anderen Ende des Spektrums: eines, das Kampfergebnisse verändert, anstatt nur deren Darstellung." },
+  { href: "/de/learn/what-is-reach", label: "Was ist Reichweite?", description: "Einer der tatsächlichen Gameplay-Werte, den Entity Effects unberührt lässt, und warum diese Unterscheidung für die Erkennung wichtig ist." }
+]} />
+
+<CTA href="/de/kaufen">Opal's oberste Kosmetikschicht geht weit über ein einzelnes Partikel hinaus. Entdecken Sie, was in der Vollversion enthalten ist.</CTA>

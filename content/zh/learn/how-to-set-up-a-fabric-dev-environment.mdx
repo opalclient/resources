@@ -1,0 +1,119 @@
+---
+title: 如何搭建 Fabric 开发环境 (2026)
+description: 搭建Fabric模组开发环境：安装JDK，克隆示例模组模板，选择Yarn映射，然后运行gradle genSources和runClient。完整指南.
+excerpt: 四个步骤就能让你从无到有，拥有一个可运行的开发客户端：一个JDK、示例模块模板、你的映射文件，然后是两个Gradle任务。构建插件会处理剩下的事情.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: 我需要自己安装 Gradle 吗？?
+    a: 不，Fabric 示例模板包含一个 Gradle 包装器，该包装器会在首次运行时自动获取正确的 Gradle 版本。请使用 gradlew 脚本，而不是系统 Gradle.
+  - q: 我该从头开始还是使用模板？?
+    a: 请使用官方示例模组模板。它已经内置了构建插件、Yarn 映射和运行任务，因此您可以跳过繁琐的设置，直接开始编写代码.
+  - q: 我必须使用 Yarn 映射吗？?
+    a: 纱线是 Fabric 的默认配置，并附带了记录完善的名称，因此它是最简单的选择。 你也可以针对官方的 Mojang 映射进行构建，但此模板默认配置为 Yarn.
+  - q: 我应该安装哪个JDK版本？?
+    a: 您目标 Minecraft 版本所要求的那个。较新版本需要较新的 JDK，因此在安装前请检查版本，并将您的 IDE 指向该 JDK.
+  - q: GenSources 是做什么的？?
+    a: 它使用您选择的Yarn映射来反编译Minecraft，以便您能够阅读游戏代码并在开发过程中通过可读的名称引用其类.
+---
+
+<KeyTakeaways>
+
+- 设置包括四个步骤：JDK、示例模组模板、你的映射文件，以及 Gradle。
+- Fabric 构建插件会下载 Minecraft 并为你配置运行任务。
+- 你无需自行安装 Gradle：模板中包含一个包装器。
+- `gradle.properties` 文件中的版本不匹配是新项目失败的最常见原因.
+
+</KeyTakeaways>
+
+搭建 [Fabric](https://fabricmc.net/) 开发环境需要四个步骤：安装一个 JDK，从官方示例模组模板开始，选择你的映射（通常是 [Yarn](/zh/learn/yarn-vs-mojmap)），然后运行 Gradle 任务来下载 Minecraft 并启动一个测试客户端。构建插件负责处理繁重的工作。在开始时就匹配你的 JDK 和 Minecraft 版本，其余部分就会自然而然地跟上.
+
+<Callout variant="info" title="Opal 的适用场景">
+Opal 是一个 Fabric 模组，它使用 [GraalVM JavaScript 脚本引擎](/zh/learn/what-is-graalvm-javascript-scripting)，因此您可以无需设置完整的模组工具链即可通过脚本对其进行扩展。 如果您只想安装并运行它，请遵循 [设置指南](/zh/docs/setup)； 要开始编写脚本，请参阅 [脚本文档](/zh/docs/scripting)。
+</Callout>
+
+## 首先你需要
+
+在编写任何代码之前，你需要三个东西：Java 开发工具包、集成开发环境 (IDE) 和 Git。
+
+- **一个 JDK。** 确保它与你目标版本的 Minecraft 兼容。较新的 Minecraft 版本需要较新的 JDK，所以在开始之前请检查版本要求。
+- **一个 IDE。** IntelliJ IDEA 或 Eclipse 都可以使用。大多数 Fabric 开发者使用 IntelliJ，因为 Gradle 和反编译器集成更加顺畅。
+- **Git。** 你将克隆模板仓库并跟踪你自己的更改。
+
+你不需要自行安装 [Gradle](https://gradle.org/)。模板自带 Gradle 包装脚本，首次运行时会自动下载正确的版本。
+
+## 逐步操作
+
+<Steps>
+
+<Step number={1} title="安装一个 JDK">安装与你的目标 Minecraft 版本相匹配的 JDK，并将你的 IDE 指向它</Step>
+
+<Step number={2} title="获取模组模板示例">Fabric 发布了官方入门仓库。克隆它或将其用作模板，然后将包名和模组 ID 重命名为您的</Step>
+
+<Step number={3} title="选择您的映射关系">默认情况下，此模板使用 [Yarn](/zh/learn/yarn-vs-mojmap)。Yarn 为 Minecraft 的类和方法提供可读且带有文档说明的名称。请在 `gradle.properties` 文件中设置 Minecraft 版本、加载器版本和 Yarn 映射版本</Step>
+
+<Step number={4} title="生成来源并运行">在你的 IDE 中打开项目，让 Gradle 同步，然后运行 `genSources` 以 Yarn 命名反编译 Minecraft。运行 `runClient` 任务来启动你的模组已加载的开发客户端</Step>
+
+</Steps>
+
+## 构建插件对您的帮助
+
+[Fabric](https://fabricmc.net/) 的 Gradle 构建插件会下载 Minecraft，将其重映射到您选择的映射文件，并配置运行配置。您可以通过 `build.gradle` 文件中的一个小区块来配置它。
+
+| 您设置 | 位置 | 它控制 |
+|---|---|---|
+| Minecraft 版本 | `gradle.properties` | 您编译的游戏版本 |
+| 加载器版本 | `gradle.properties` | 您的模组运行的 Fabric 加载器版本 |
+| Yarn 版本 | `gradle.properties` | 您源代码中使用的映射名称 |
+| 依赖项 | `build.gradle` | [Fabric API](/zh/learn/what-is-the-fabric-api) 以及任何库 |
+
+请保持 `gradle.properties` 中的三个版本一致。Minecraft 版本和 Yarn 映射版本不匹配是全新项目无法同步的最常见原因。
+
+## 为什么映射在这里很重要
+
+Minecraft 包含混淆代码，因此其类名类似于 `a.a.a`。 [Yarn](/zh/learn/yarn-vs-mojmap) 将这些映射到可读名称，并位于稳定的 [intermediary](/zh/learn/what-is-intermediary) 层之上。 当您运行 `genSources` 时，构建插件使用 Yarn 名称反编译游戏，以便您可以直接读取和引用 Minecraft 代码。 当它编译您的模组时，它会将 Yarn 命名的代码重新映射回 intermediary，以便最终的 jar 文件可以在任何匹配的安装上运行，而无论映射名称如何.
+
+## 项目无法构建时
+
+<Checklist>
+<ChecklistItem>Gradle 同步在导入后立即失败：通常，`gradle.properties` 文件中的 Minecraft、加载器和 Yarn 版本不匹配。请将它们设置为一组已知的匹配版本.</ChecklistItem>
+<ChecklistItem>Java版本错误：当您的JDK版本低于Minecraft版本所需时，构建会报告不受支持的类文件版本。请安装更新的JDK并将其指向项目.</ChecklistItem>
+<ChecklistItem>没有可读取的编译后源代码：请运行 `genSources` 并重新加载。首次运行需要一些时间，因为它会编译整个游戏.</ChecklistItem>
+<ChecklistItem>`runClient` 命令不做任何操作：请在运行任何任务之前，等待 Gradle 初始同步完成。运行配置在同步期间生成.</ChecklistItem>
+</Checklist>
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="我需要自行安装 Gradle 吗？">
+不需要。Fabric 示例模板包含 Gradle 包装器，首次运行时会自动下载正确的 Gradle 版本。请使用 `./gradlew` 代替系统中的 Gradle。
+</FAQItem>
+
+<FAQItem question="我应该从头开始还是使用模板？">
+请使用官方示例模组模板。它已经预配置了构建插件、Yarn 映射和运行任务，您可以跳过繁琐的设置，直接开始编写代码。
+</FAQItem>
+
+<FAQItem question="我必须使用 Yarn 映射吗？">
+Yarn 是 Fabric 的默认设置，并附带了记录完善的名称，因此它是最简单的选择。 您也可以使用官方的 Mojang 映射进行构建，但模板默认配置为 Yarn。
+</FAQItem>
+
+<FAQItem question="我应该安装哪个JDK版本？">
+安装你的目标 Minecraft 版本所需要的那个。较新的版本需要较新的 JDK，所以在安装前请检查版本，并将你的 IDE 指向该 JDK。
+</FAQItem>
+
+<FAQItem question="genSources 是做什么的？">
+它会使用您选择的 Yarn 映射来反编译 Minecraft，让您能够阅读游戏的源代码，并在开发过程中通过可读的名称引用其类。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/how-to-install-a-fabric-mod", label: "如何安装 Fabric 模组", description: "建造方对应的玩家端." },
+  { href: "/zh/learn/what-is-the-fabric-api", label: "什么是Fabric API？?", description: "几乎每个模组都会声明的依赖项." },
+  { href: "/zh/learn/yarn-vs-mojmap", label: "纱线与莫杰地图", description: "选择你的源文件读取的映射." },
+]} />
+
+<CTA href="/zh/purchase">获取 Opal，一个 Fabric 客户端，用于 $8.99</CTA>

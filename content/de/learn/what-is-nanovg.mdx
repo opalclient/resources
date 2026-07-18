@@ -1,0 +1,92 @@
+---
+title: Was ist NanoVG? Vektorgrafiken für OpenGL
+description: NanoVG ist eine kleine, antialiastete 2D-Vektorgrafikbibliothek für OpenGL. Minecraft-Clients nutzen sie über LWJGL, um scharfe HUDs, Menüs und Formen zu zeichnen.
+excerpt: NanoVG zeichnet glatte 2D-Formen und Text auf der GPU mit einer einzigen, kompakten API. Deshalb greifen Minecraft-Clients darauf zurück, um ihre Benutzeroberfläche zu gestalten.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Libraries
+author: trq
+faqs:
+  - q: Ist NanoVG ein Minecraft-Mod?
+    a: Nr. NanoVG ist eine allgemeine C-Grafikbibliothek für OpenGL und nicht Minecraft-spezifisch; ein Client bettet sie über LWJGL ein, um seine eigene Oberfläche zu zeichnen.
+  - q: In welcher Programmiersprache ist NanoVG geschrieben?
+    a: C. Java-Programme nutzen dies über native Bindungen, wie beispielsweise die, die LWJGL bereitstellt, anstatt den C-Code manuell aufzurufen.
+  - q: Zeichnet NanoVG die Spielwelt?
+    a: Nein. Es zeichnet 2D-Overlays wie HUDs, Menüs, Formen und Text; die Spielwelt selbst wird von Minecrafts eigener Engine gerendert.
+  - q: Warum nicht einfach Bilder für die Benutzeroberfläche verwenden?
+    a: Bilder verschwimmen oder erzeugen Aliase beim Skalieren, und jedes einzelne benötigt Speicherplatz. NanoVG hingegen baut Formen aus mathematischen Berechnungen auf, sodass sie in jeder GUI-Größe scharf bleiben und wenig Speicher verbrauchen.
+---
+
+<KeyTakeaways>
+
+- NanoVG ist eine kleine, antialiastete 2D-Vektorgrafikbibliothek für OpenGL, geschrieben in C.
+- Sie zeichnet Formen, Text und Farbverläufe aus Pfaden mit glatten Kanten in jeder Größe.
+- Minecraft-Clients erreichen sie über LWJGL-Bindungen, um HUDs und Menüs zu malen.
+- Vektorgrafiken sind für skalierbare Benutzeroberflächen besser geeignet; Bitmaps sind immer noch die beste Wahl für festes Artwork.
+
+</KeyTakeaways>
+
+NanoVG ist eine kleine, antialiastete Vektorgrafikbibliothek für OpenGL, geschrieben in C. Sie zeichnet 2D-Formen, Text und Farbverläufe mit glatten Kanten über eine kompakte API. In einem Minecraft-Client ist sie über [LWJGL](https://www.lwjgl.org/) Bindungen erreichbar, sodass Java-Code scharfe HUDs und Menüs über dem Spiel darstellen kann.
+
+<Callout variant="info" title="Wo Opal passt">
+Opal ist ein [Fabric](https://fabricmc.net/) Mod, der eine eigene Oberfläche über das Spiel legt. Wenn Sie eigene Funktionen hinzufügen möchten, zeigt die [Skripting-Anleitung](/de/docs/scripting) wie Sie dies in JavaScript machen können.
+</Callout>
+
+## Was NanoVG macht
+
+NanoVG rendert 2D-Vektorgrafiken über OpenGL auf der GPU. Sie beschreiben Formen mit Pfaden (Linien, Kurven, Rechtecke, Kreise) und füllen oder umranden diese anschließend. Die Bibliothek übernimmt das Antialiasing, sodass Kanten in jeder Größe glatt bleiben und nicht wie bei einem gestreckten Bitmap blockig werden.
+
+Sie ist bewusst klein gehalten. Die gesamte Bibliothek besteht aus einer einzigen C-Datei mit einer fokussierten API, was ein Grund dafür ist, dass sie in Grafikdemos und schlanken UI-Schichten anstelle von umfangreichem Engine-Code verwendet wird.
+
+## Warum ein Minecraft-Client es verwendet
+
+Ein Client zeichnet seine eigene Benutzeroberfläche über Minecraft: Listen, Menüs, Formindikatoren, benutzerdefinierte HUD-Elemente. NanoVG bietet dieser Benutzeroberfläche eine saubere Möglichkeit, Vektorgrafiken und Text zu zeichnen, die sich ohne gezacktes Aussehen an jede Auflösung anpassen.
+
+Da das Rendering auf Pfaden basiert, kann ein Entwickler abgerundete Panels, Farbverläufe und Umrandungen aus einfachen Formen erstellen, anstatt vorgefertigte Bilder zu verwenden. Das sorgt für ein konsistentes Aussehen über verschiedene GUI-Skalierungen und Bildschirmgrößen hinweg.
+
+## NanoVG und LWJGL
+
+Minecraft und seine Mods laufen auf der JVM, aber NanoVG ist eine C-Bibliothek. [LWJGL](/de/learn/what-is-lwjgl) schlägt die Brücke. Es liefert Java-Bindungen für native Bibliotheken wie NanoVG und OpenGL, sodass Java-Code die nativen Funktionen direkt aufrufen kann.
+
+Ein Client verlinkt gegen das LWJGL NanoVG-Modul, öffnet einen Zeichenkontext und gibt Pfad- und Malbefehle innerhalb der Render-Schleife des Spiels aus. Die native Seite führt die eigentliche Rasterisierung auf der GPU durch.
+
+## NanoVG vs. Bitmap-Zeichnung
+
+| Aspekt | NanoVG (Vektor) | Bitmap-Texturen |
+| :--- | :--- | :--- |
+| Kanten | Antialiased in jeder Größe | Verschwommen oder aliasartig beim Skalieren |
+| Formen | Laufzeit-Pfade | Vorgefertigte Bildressourcen |
+| Speicher | Leicht, keine großen Texturen | Wächst mit der Anzahl der Bilder |
+| Am besten geeignet für | UI, Formen, dynamischen Text | Fotos, festes Artwork, Icons |
+
+Vektorgrafiken sind ideal für Interface-Elemente, die Größe oder Farbe ändern. Bitmaps sind weiterhin die beste Wahl für detaillierte, feststehende Grafiken.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Ist NanoVG ein Minecraft-Mod?">
+Nein. NanoVG ist eine allgemeine C-Grafikbibliothek für OpenGL. Es ist nicht Minecraft-spezifisch. Ein Client bettet es über LWJGL ein, um seine eigene Oberfläche zu zeichnen.
+</FAQItem>
+
+<FAQItem question="In welcher Programmiersprache ist NanoVG geschrieben?">
+C-Programme nutzen es über native Bindungen wie die, die LWJGL bereitstellt, anstatt den C-Code manuell aufzurufen.
+</FAQItem>
+
+<FAQItem question="Zeichnet NanoVG die Spielwelt?">
+Nein. Es zeichnet 2D-Overlays: HUDs, Menüs, Formen und Text. Die Spielwelt selbst wird von Minecrafts eigener Engine gerendert.
+</FAQItem>
+
+<FAQItem question="Warum nicht einfach Bilder für die Benutzeroberfläche verwenden?">
+Bilder verschwimmen oder werden verpixelt, wenn sie skaliert werden, und jedes einzelne Bild benötigt Speicherplatz. NanoVG erstellt Formen aus mathematischen Berechnungen, sodass sie in jeder GUI-Größe scharf bleiben und wenig Speicher verbrauchen.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-lwjgl", label: "Was ist LWJGL?", description: "Die Bindungen, die Java den Zugriff auf NanoVG ermöglichen." },
+  { href: "/de/learn/what-is-graalvm-javascript-scripting", label: "Was ist GraalVM JavaScript Scripting?", description: "Wie Opal es Ihnen ermöglicht, es in JavaScript zu erweitern." },
+  { href: "/de/learn/what-is-the-fabric-api", label: "Was ist die Fabric API?", description: "Die gemeinsame Ebene, auf der die meisten Fabric-Mods aufbauen." },
+]} />
+
+<CTA href="/de/purchase">Opal, einen Fabric-Client, für $8.99 erhalten</CTA>

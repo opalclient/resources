@@ -1,0 +1,103 @@
+---
+title: Was ist ein Aimbot in Minecraft? Modul-Erklärung
+description: Ein Aim-Bot ist ein Cheatm-Modul, das automatisch Ihr Fadenkreuz auf ein Ziel ausrichtet. Hier ist, wie es funktioniert, wie es sich von der Zielhilfe unterscheidet und warum es entdeckt wird.
+excerpt: Ein Aim-Bot setzt dein Fadenkreuz blitzschnell auf einen Gegner, sodass jeder Schuss trifft, obwohl du weiterhin klickst. So verändert er deine Blickwinkel und warum er auf einem Spektrum mit der Zielhilfe liegt.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Modules
+author: trq
+faqs:
+  - q: Ist ein Aimbot ein Hack oder eine Mod?
+    a: Ein Aimbot ist ein Cheathook. Er zielt für den Spieler und verstößt damit gegen die Regeln von praktisch jedem Mehrspieler-Server, weshalb er als Betrug und nicht als Fairplay-Mod zählt.
+  - q: Was ist der Unterschied zwischen einem Aim-Bot und KillAura?
+    a: Ein Aimbot richtet lediglich das Fadenkreuz aus und überlässt das Klicken dem Spieler. Ein KillAura zielt und sendet die Angriffe eigenständig. Ein Aimbot ist die zielorientierte Variante.
+  - q: Was ist der Unterschied zwischen einem Aim-Bot und einer Zielhilfe?
+    a: Sie liegen auf dem gleichen Spektrum. Die Zielerleichterung bewegt die Ansicht sanft und überlässt den größten Teil des Ziels dem Spieler; ein Aimbot zieht stark und erledigt fast alles selbst.
+  - q: Kann ein Aim-Bot unentdeckbar sein?
+    a: Nein. Glättung und Zufälligkeit lassen die Zielerfassung menschlicher wirken, aber die Rotationsdaten, die ein Kunde sendet, enthalten immer noch Muster, die Anticheats messen. Starkes Zielen bleibt erkennbar.
+---
+
+<KeyTakeaways>
+
+- Ein Aimbot ist ein Kampffunktionsmodul, das den Fadenkreuz auf ein Ziel für den Spieler bewegt.
+- Ein reiner Aimbot zielt nur; der Spieler klickt immer noch, um anzugreifen, was die Grenze zu KillAura darstellt.
+- Aim Assist und Aimbot liegen auf einem Kontinuum, oft gesteuert durch einen einzigen Stärkeregler.
+- Er wird durch Blickwinkeldaten erkannt: Rotationen, die zu präzise oder zu schnell für einen Menschen sind.
+
+</KeyTakeaways>
+
+Ein Aimbot ist ein Cheatm-Modul, das auf den Spieler zielt. Es wählt ein Ziel aus und bewegt dann das Fadenkreuz auf dieses Ziel, ohne dass der Spieler die Maus anpasst. Der Begriff ist eine Kurzform von "automatischer Zielerfassung". In Minecraft bezieht sich der Begriff meist auf ein Modul, das die Ansicht auf einen Gegner sperrt, sodass jeder Treffer landet.
+
+## Wie ein Aimbot funktioniert
+
+Ein Aimbot führt eine kleine Schleife aus, während der Spieler im Kampf ist. Zuerst scannt er nach gültigen Zielen innerhalb der Reichweite. Dann wählt er eines aus, meist den nächsten Gegner oder denjenigen, der sich am nächsten zum aktuellen Fadenkreuz befindet. Schließlich dreht er die Ansicht des Spielers so, dass das Fadenkreuz auf diesem Ziel sitzt.
+
+Der Hauptunterschied zu Auto-Angriffs-Modulen besteht darin, was der Aimbot steuert. Ein reiner Aimbot kümmert sich nur um die Zielerfassung. Der Spieler klickt immer noch, um anzugreifen. Das macht es weniger offensichtlich automatisiert als ein Modul, das auch die Treffer abfeuert, da der Mensch immer noch die Taste drückt.
+
+Die meisten Implementierungen funktionieren, indem sie die Werte für die horizontale und vertikale Blickrichtung des Spielers ändern, die beiden Winkel, die beschreiben, in welche Richtung die Ansicht zeigt. Das Modul berechnet den Winkel von den Augen des Spielers zum Ziel und schreibt diese Winkel dann zurück ins Spiel, sodass das nächste Angriffspaket sie enthält.
+
+## Aimbot vs. Zielhilfe
+
+Diese beiden Begriffe beschreiben ein Spektrum und keine zwei unzusammenhängenden Dinge. Die Trennung liegt darin, wie viel die Software tut und wie stark die Zugkraft ist.
+
+| Begriff | Was es tut | Spielerinteraktion | Eindruck |
+|---|---|---|---|
+| Zielhilfe | Bewegt die Ansicht sanft in Richtung eines Ziels | Spieler zielt den Großteil des Weges selbst | Fein, "klebrig" |
+| Zielautomatisierung | Sperrt die Ansicht direkt auf ein Ziel | Spieler zielt kaum | Harte Verriegelung |
+
+Zielhilfe wendet eine sanfte Korrektur an. Der Spieler erledigt den Großteil der Zielerfassung, und das Modul biegt die letzten paar Grad, sodass das Fadenkreuz in der Nähe des Feindes bleibt. Eine Zielautomatisierung entfernt fast die gesamte Zielerfassungsarbeit des Spielers und schnappt direkt auf das Ziel. Viele Module liegen zwischen den beiden und lassen einen Schieberegler die Stärke steuern, sodass derselbe Code wie eines der beiden funktionieren kann.
+
+## Häufige Einstellungen
+
+Zielautomatisierungs- und Zielhilfemodule stellen Regler bereit, die verändern, wie stark und wie offensichtlich die Zielerfassung ist.
+
+| Einstellung | Was sie steuert |
+|---|---|
+| Reichweite | Wie weit ein Ziel entfernt sein kann und dennoch angezielt werden kann |
+| Sichtfeld | Wie breit ein Winkel als "vor" dem Spieler zählt |
+| Stärke | Wie stark die Ansicht auf das Ziel gezogen wird |
+| Glättung | Wie allmählich das Fadenkreuz auf das Ziel gleitet |
+| Ziele | Welche Entitätstypen als gültig zählen (Spieler, Kreaturen) |
+| Zielpriorität | Ob das nächste, am wenigsten gesunde oder am meisten zugewandte Ziel verriegelt werden soll |
+
+Stärke und Glättung sind am wichtigsten. Eine Stärke von 100 Prozent ohne Glättung ist ein harter Riegel, der sofort bricht. Niedrigere Stärke mit starker Glättung sieht eher einem geschickten Menschen ähnlich, was das ganze Ziel des Aim-Assist-Bereichs ist.
+
+## Warum es aufgedeckt wird
+
+Ein Aimbot wird aufgedeckt, weil er Zielmuster erzeugt, die ein Mensch nicht reproduzieren kann. Serverseitige Anti-Cheat-Systeme überwachen den Fluss der Blickwinkel, die ein Client sendet. Automatisches Zielen hinterlässt Spuren: Drehungen, die zu präzise sind, Drehungen, die schneller sind, als eine Hand eine Maus bewegen kann, und ein Fadenkreuz, das ein sich bewegendes Ziel ohne Fehler verfolgt.
+
+Der schwierige Teil beim Schreiben einer solchen Moduls ist nicht die Mathematik. Es geht darum, die Drehungen menschlich aussehen zu lassen. Deshalb fügen so viele Versionen Zufälligkeit, Beschleunigungskurven und einen kleinen konstanten Versatz hinzu, sodass das Fadenkreuz in der Nähe des Ziels landet, anstatt genau in der Mitte. Ein modernes Anti-Cheat-System misst immer noch das zugrunde liegende Signal, sodass eine starke Korrektur trotz aller Glättung riskant bleibt.
+
+## Aimbot vs. andere Kampfmodule
+
+Ein Aimbot schreibt lediglich die Blickwinkel und überlässt den Angriff dem Spieler. [KillAura](/de/learn/what-is-killaura) geht einen Schritt weiter und sendet auch die Treffer, sodass es sowohl zielt als auch im Nahkampf angreift. [Reach](/de/learn/what-is-reach) verfolgt einen völlig anderen Ansatz und erweitert die Reichweite eines Angriffs, anstatt darauf zu achten, wo das Fadenkreuz zeigt. Der Aimbot ist das zielorientierte Mitglied dieser Familie, weshalb ein einzelner Stärkeregler es in Richtung des sanfteren Aim-Assist-Verhaltens oder in Richtung einer harten Zielsperre verschieben kann.
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite beschreibt das Modul allgemein, damit Sie wissen, was der Begriff bedeutet. Die Benennung und das genaue Verhalten variieren je nach Client, und automatische Zielerfassung verstößt gegen die Regeln auf praktisch jedem Server.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Ist ein Aimbot ein Hack oder eine Mod?">
+Ein Aimbot ist ein Cheatm-Modul. Er zielt für den Spieler und verstößt damit gegen die Regeln fast aller Mehrspieler-Server, weshalb er als Cheaten und nicht als Fairplay-Mod zählt.
+</FAQItem>
+
+<FAQItem question="Was ist der Unterschied zwischen einem Aimbot und KillAura?">
+Ein Aimbot richtet lediglich das Fadenkreuz aus und überlässt das Klicken dem Spieler. KillAura zielt und sendet die Angriffe eigenständig. Ein Aimbot ist die zielorientierte Variante; KillAura ist die vollautomatische Angriffsversion.
+</FAQItem>
+
+<FAQItem question="Was ist der Unterschied zwischen einem Aim-Bot und Aim-Assist?">
+Sie liegen auf demselben Kontinuum. Aim-Assist bewegt die Ansicht leicht und überlässt den größten Teil des Ziels dem Spieler. Ein Aim-Bot zieht die Ansicht stark und erledigt fast die gesamte Zielerfassung. Ein einzelner Stärkeregler kann das eine in das andere verwandeln.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-killaura", label: "Was ist KillAura?", description: "Der Auto-Angriffs-Cousin eines Aim-Bots." },
+  { href: "/de/learn/what-is-reach", label: "Was ist Reichweite?", description: "Das Nahkampf-Distanzmodul." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Kategorie, zu der diese Module gehören." },
+]} />
+
+<CTA href="/de/purchase">Was Opal für $8.99 versendet, siehst du</CTA>

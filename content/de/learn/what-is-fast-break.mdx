@@ -1,0 +1,93 @@
+---
+title: Was ist "Fast Break" in Minecraft? Abbaugeschwindigkeit erklärt
+description: Fast Break ist ein Minecraft-Modul, das Blöcke schneller abbaut als die Standardgeschwindigkeit deines Werkzeugs, indem es die normale Abbruchzeitberechnung vollständig überspringt.
+excerpt: Ein Block, der eine vollständige Schwungfolge auslösen soll, aktiviert sich sofort, wenn man ihn berührt. Das ist Fast Break, und Aufschläger können das bemerken.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was macht ein Fast Break in Minecraft?
+    a: Es fördert Blöcke schneller ab, als die Geschwindigkeit berechnet, die durch dein Werkzeug, die Härte des Blocks und alle aktiven Verzauberungen oder Effekte bestimmt wird, sodass Blöcke in einem Bruchteil ihrer normalen Zeit zerbrechen.
+  - q: Ist Fast Break dasselbe wie ein Nuker?
+    a: Nein. Ein Nuker zerstört mehrere Blöcke um dich herum auf einmal. Schneller Bruch beschleunigt, wie schnell ein einzelner Block zerbricht. Einige Kunden versenden beide, aber es sind separate Mechaniken, die unterschiedliche Probleme lösen.
+  - q: Ist Fast Break dasselbe wie Instant Mine?
+    a: "Instant Mine ist nur ein gebräuchlicher alternativer Name für dieselbe Idee: jedes Modul, das die Abbruchzeit unter den Vanilla-Wert senkt. Fast Break ist eine Implementierung davon."
+  - q: Können Server Fast Break erkennen?
+    a: Ja. Der Server weiß bereits, wie lange ein bestimmtes Werkzeug und Block zum Abbruch benötigen, sodass er dies mit der Geschwindigkeit vergleichen kann, mit der der Client meldet, dass der Block verschwunden ist.
+  - q: Ist die Verwendung von Fast Break bannbar?
+    a: Auf jedem Server, der seine Regeln tatsächlich durchsetzt, ja. Es ist eine saubere Abweichung von der Standard-Mathematik, und es braucht keine Vermutungen, wie bei einigen Bewegungsprüfungen.
+---
+
+<KeyTakeaways>
+- Fast Break ist ein Modul, das Blöcke schneller als die Vanilla-Geschwindigkeit für Werkzeug und Block abbricht.
+- Es verkürzt die Abbruchberechnung, sodass Blöcke fast instantan verschwinden, anstatt über mehrere Schläge.
+- Server können die erwartete Abbruchzeit mit der gemeldeten vergleichen, was das Markieren erleichtert.
+- Opal liefert es unter demselben Namen, mit dem Hinweis "use-at-own-risk", wie auch anderswo.
+</KeyTakeaways>
+
+Fast Break ist ein Modul, das Blöcke schneller abbricht als die im Originalspiel für dein Werkzeug und den jeweiligen Block berechnete Geschwindigkeit. Normalerweise ist das Abbauen eines Blocks eine kleine mathematische Aufgabe: Werkzeuggeschwindigkeit, Blockhärte, alle Verzauberungen oder Effekte, die tick für tick ausgeführt werden, bis die Fortschrittsleiste gefüllt ist. Fast Break umgeht diese Berechnung, anstatt sie ehrlich auszuführen, sodass ein Block, der normalerweise eine vollständige Abfolge von Schlägen benötigt, in einem Bruchteil der Zeit verschwindet. Es ist ein Modul zur Interaktion mit der Welt, kein Bewegungs- oder Kampfsmodul, obwohl es sowohl beim Abbauen als auch beim Durchbrechen von Wänden im Kampf auftaucht.
+
+## Funktionsweise
+
+Minecraft berechnet, wie lange ein Block zum Abbauen benötigt, anhand von drei Eingaben: der Abbaugeschwindigkeit des Werkzeugs, der Härte des Blocks und allen aktiven Verzauberungen oder Zustandsanzeigen. Der Client verfolgt diesen Fortschritt tick für tick und meldet dem Server erst, wenn die Berechnung tatsächlich abgeschlossen ist, dass der Block abgebaut wurde. Fast Break fängt diesen Prozess ab. Es erhöht oder überschreibt den Fortschrittswert direkt, sodass der Client einen Abbruch meldet, lange bevor das Werkzeug-Block-Paar dies normalerweise zulassen würde.
+
+Nichts an der Optik ist subtil. Ein Block verschwindet einfach fast im Moment, in dem du ihn zu schlagen beginnst, unabhängig davon, was die Originalspiel-Abbaugeschwindigkeits-Tabelle für einen hölzernen Pickel auf Stein oder eine bloße Hand auf Obsidian eigentlich verlangen würde.
+
+## Warum Leute es verwenden
+
+Der Pitch ist Zeit. Abbauen, Tunneln und die Beseitigung von Terrain kosten im Vanilla-Survival jeweils eine feste Menge davon, während Fast Break diese Kosten auf nahezu Null reduziert. Es hat auch außerhalb des reinen Abbaus Verwendung: Durchbrechen einer Wand, einer Tür oder einer Verteidigungsanlage schneller, als ein Gegner reagieren kann, oder Räumen eines Weges mitten im Bau, ohne in den Kreativmodus zu wechseln. Fast Break findet sich in Clients wie Wurst, neben anderen Welt-Interaktionsmodulen, die eine überprüfbare Regelverletzung gegen eine direkte Zeitersparnis eintauschen.
+
+## Fast Break vs. Nuker
+
+Man verwechselt die beiden oft, weil sie beide unter „Mining-Cheats“ fallen, aber sie lösen unterschiedliche Probleme.
+
+| | Fast Break | Nuker |
+|---|---|---|
+| Was es verändert | Wie schnell ein Block abbricht | Wie viele Blöcke auf einmal abbricht |
+| Typische Verwendung | Tunneln, schnelles Durchbrechen einer Wand oder Tür | Räumen eines Bereichs mit einem einzigen Schwung |
+| Was ein Server vergleicht | Gemeldete Abbruchzeit vs. erwartete Abbruchzeit | Anzahl gleichzeitiger Abbruche, die einer Aktion zugeordnet sind |
+
+Sie schließen sich nicht gegenseitig aus. Ein Client kann beide mitliefern und es dir ermöglichen, mehrere Blöcke abbrechen zu lassen, jeweils sofort, aber sie sind separate Einstellungen, die separate Fragen beantworten.
+
+<Callout variant="tip" title="Schneller Bruch in Opal">
+Opal versendet dies unter demselben Namen. Der Katalogeintrag macht es nicht zu kompliziert: "Bricht Blöcke schneller." Derselbe Mechanismus wie oben beschrieben, derselbe Kompromiss, eingetragen unter Verwendung auf eigene Gefahr, wie überall sonst auch.
+</Callout>
+
+<Callout variant="warning" title="Eine der leichter zu erkennenden">
+Der Server kennt bereits die erwartete Ausfallzeit für eine bestimmte Kombination aus Werkzeug, Block und Status-Effekt und muss lediglich diese Erwartung mit der Geschwindigkeit vergleichen, mit der der Client angibt, dass der Block verschwunden ist. Ein Ausfall, der deutlich vor dem Zeitplan endet, ist eine eindeutige Diskrepanz, und legitime Abbaugeschwindigkeit lässt kaum Spielraum für Schwankungen, weshalb viele Anti-Cheat-Systeme dies als hartes Flag anstatt als Grenzfall behandeln. Ob dies tatsächlich bestraft wird, hängt immer noch vom Server ab: Einige führen keine sinnvollen Interaktionen mit der Welt durch und bemerken dies nie, andere protokollieren die Abbaugeschwindigkeit speziell, weil sie billig zu überprüfen und schwer überzeugend zu fälschen ist. Behandeln Sie dies als eines der erkennbareren Module in einem Utility-Client, nicht als sichere Standardeinstellung, auf Opal oder überall sonst, wo es ausgeliefert wird.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was bewirkt Fast Break in Minecraft?">
+Es abbricht Blöcke schneller als die im Originalspiel basierend auf Werkzeug, Härte des Blocks und aktiven Zaubern oder Effekten berechnete Geschwindigkeit, sodass Blöcke in einem Bruchteil ihrer normalen Zeit zerbrechen.
+</FAQItem>
+
+<FAQItem question="Ist Fast Break dasselbe wie ein Nuker?">
+Nein. Ein Nuker zerstört mehrere Blöcke gleichzeitig. Fast Break beschleunigt, wie schnell ein einzelner Block abbricht. Einige Kunden versenden beide, aber es sind separate Mechanismen, die unterschiedliche Probleme lösen.
+</FAQItem>
+
+<FAQItem question="Ist Fast Break dasselbe wie Instant Mine?">
+Instant Mine ist lediglich ein gebräuchlicher alternativer Name für dasselbe Konzept: jedes Modul, das die Abbruchzeit unter den Vanilla-Wert senkt. Fast Break ist eine Implementierung davon.
+</FAQItem>
+
+<FAQItem question="Kann der Server einen schnellen Abbruch erkennen?">
+Ja. Der Server weiß bereits, wie lange ein bestimmtes Werkzeug und Block zum Abbruch benötigen, und kann dies mit der Geschwindigkeit vergleichen, mit der der Client meldet, dass der Block verschwunden ist.
+</FAQItem>
+
+<FAQItem question="Ist die Verwendung von Fast Break bannwürdig?">
+Auf jedem Server, der seine Regeln tatsächlich durchsetzt, ja. Es ist eine saubere Abweichung von der ursprünglichen Mathematik, und es erfordert keine Vermutungen, wie bei einigen Bewegungsprüfungen.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die breitere Kategorie, zu der Fast Break gehört." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Der kundenorientierte Bereich mit Schwerpunkt auf unauffälliger Leistung." },
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Die Blockplatzierungs-Entsprechung zu Fast Breaks Blockzerlegung." },
+]} />
+
+<CTA href="/de/purchase">Fast Break ist eine Zeile in Opals Modulliste, genau dort, wo sie hingehört.</CTA>

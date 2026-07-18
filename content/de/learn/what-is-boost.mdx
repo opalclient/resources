@@ -1,0 +1,90 @@
+---
+title: Was ist Boost in Minecraft? (Bewegungsmodul erklärt)
+description: Boost ist ein Bewegungsmodul, das stattdessen einen kurzen Geschwindigkeitsschub erzeugt, anstatt ihn allmählich aufzubauen. Hier ist, wie es funktioniert und warum es markiert wird.
+excerpt: Boost verwandelt deinen Charakter für etwa eine Sekunde in eine Art Flaschenrakete – genug, um eine Lücke zu schließen oder aus einer Auseinandersetzung zu entkommen, und mehr als genug, damit der Server es bemerkt.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was bewirkt ein Boost in einem Minecraft-Client?
+    a: Boost verleiht dem Spieler einen kurzen Geschwindigkeitsschub oder eine erhöhte Geschwindigkeit, der meist dazu dient, schnell eine Distanz zu einem Ziel zu schließen oder sich in einer ungünstigen Situation schnell aus einer Auseinandersetzung zu befreien.
+  - q: Ist Boost nachweisbar?
+    a: Ja. Es erzeugt einen plötzlichen Sprung in der Bewegungsgeschwindigkeit, mit dem ein Server die maximale Geschwindigkeit vergleichen kann, die die Vanilla-Physik für einen bestimmten Tick erlaubt. Dies macht es einfach, große oder wiederholte Beschleunigungen zu erkennen.
+  - q: Welche Kunden haben Boost?
+    a: Das Modul ist wie bei Kunden wie Juul und Rose dokumentiert.
+  - q: Ist Boost dasselbe wie ein Dash oder ein Sprint-Hack?
+    a: Es beschreibt dieselbe allgemeine Idee, eine kurzzeitige Geschwindigkeitserhöhung, die über das, was die Standardbewegung erlaubt, hinausgeht, wobei die genaue Bezeichnung und Umsetzung je nach Client variieren.
+  - q: Kann Boost zu einer Sperre führen?
+    a: Jede Art von Bewegungs-Cheat, die eine Geschwindigkeit erzeugt, die das Spiel nicht zulässt, verstößt gegen die Regeln von im Wesentlichen jedem Server, der eine Anti-Cheat-Software betreibt, und Boost fällt darunter, da er den Spieler außerhalb der normalen Physik bewegt.
+---
+
+<KeyTakeaways>
+
+- Boost ist ein Bewegungsmodul, das stattdessen einen kurzen Geschwindigkeitsschub erzeugt, anstatt ihn allmählich aufzubauen.
+- Es verkürzt Distanzen zu einem flüchtenden Ziel oder reißt sich aus einer verlorenen Auseinandersetzung los und kehrt dann zur normalen Geschwindigkeit zurück.
+- Server erkennen es, indem sie die pro Tick zurückgelegte Distanz mit dem vergleichen, was die ursprüngliche Physik erlaubt.
+
+</KeyTakeaways>
+
+Boost ist ein Bewegungsmodul, das einem Spieler einen kurzen Schub zusätzlicher Geschwindigkeit oder Beschleunigung verleiht, der auf einmal angewendet wird, anstatt sich wie beim normalen Sprinten und Schwung aufzubauen. Es ist ein fester Bestandteil von Minecraft-Utility-Clients für zwei Anlässe: um die Distanz zu jemandem zu schließen, der wegläuft, und um aus einer Auseinandersetzung zu entkommen, die schiefgelaufen ist. Der Effekt ist absichtlich kurz, ein einzelner Anstieg statt einer anhaltenden Geschwindigkeitserhöhung.
+
+## Funktionsweise
+
+In Vanilla Minecraft baut sich die Geschwindigkeit allmählich auf. Sprinten, Springen und Schwung folgen festen Formeln, die der Server Ticks für Ticks vorhersagen kann. Boost überspringt diesen Aufbau vollständig: Er setzt die Geschwindigkeit des Spielers für einen kurzen Zeitraum direkt und lässt sie dann nach Ende des Schubs wieder auf den Normalzustand zurückkehren.
+
+Da diese Injektion clientseitig erfolgt, ist es der Client, der meldet, wo sich der Spieler danach befindet. Der Server hat zwei Optionen: die Positionsmeldung zu akzeptieren oder neu zu berechnen, was ein legitimer Spieler über den gleichen Zeitraum an Schwung erzeugen könnte, und die beiden zu vergleichen.
+
+## Warum es tatsächlich genutzt wird
+
+Der Kernanwendungsfall ist die Neupositionierung. Ein kurzer Geschwindigkeitsanstieg schließt die Distanz zu einem Ziel, das wegläuft, sodass der Spieler aufholen oder einen Treffer landen kann, bevor sich die Lücke zu weit öffnet. Derselbe Trick funktioniert umgekehrt: sich schnell genug von einer Auseinandersetzung zurückziehen, sodass ein Gegner nicht mithalten kann, um einen Moment zum Heilen oder einfach zum Verlassen zu gewinnen.
+
+Beide Fälle weisen die gleiche Form auf. Es ist ein Bewegungs-Vorteil, der in ein paar Sekunden komprimiert ist, anstatt über einen ganzen Kampf verteilt zu sein.
+
+## Ist es sicher, es zu verwenden?
+
+Boost ist eine spieltechnische Vorteilfunktion und keine kosmetische, und plötzliche Bewegungen sind eines der Dinge, auf die ein serverseitiges Anti-Cheat-System besonders achtet. Der Server verfolgt die Position tick für tick und vergleicht die zurückgelegte Distanz mit dem, was die Vanilla-Physik unter Berücksichtigung des Zustands des Spielers (Sprinten, Springen, am Boden, usw.) zulässt. Ein Schub, der diese Grenze überschreitet, erzeugt eine Positionsänderung, die für den jeweiligen Tick zu groß ist, was ein klares Signal für eine Markierung darstellt.
+
+Die Erkennung wird schwieriger, wenn der Schub klein oder in normale Beschleunigung eingeblendet ist, da er als Lag-Spike oder ein gut getimter Sprung durchgehen kann. Ein großer, wiederholter oder eindeutig sofortiger Geschwindigkeitsanstieg ist leicht zu erkennen; ein moderater ist es nicht, weshalb Implementierungen, die unauffällig bleiben wollen, den Boost kurz und selten halten.
+
+<Callout variant="tip" title="Wo dies im Opal-Katalog zu finden ist">
+Opal versendet eine vollständige Kategorie für Bewegung, Geschwindigkeit, Keine Verlangsamung, Phase, Schritt und den Rest, aber nichts, das speziell als Boost gekennzeichnet ist. Diese Module basieren auf kontinuierlicher Bewegung und der Überwindung von Terrain, nicht auf einem einzelnen, kurzzeitigen Geschwindigkeitsanstieg. Wenn Sie also hierher gekommen sind, um den genauen Modulnamen im Opal-Menü zu finden, wird er dort nicht unter diesem Namen geführt.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite beschreibt das Modul allgemein, damit Sie wissen, was der Begriff bedeutet. Die Benennung und das genaue Verhalten können je nach Client variieren, und jede Geschwindigkeit, die über das hinausgeht, was die Standardphysik erlaubt, bricht die Regeln auf praktisch jedem Server, der eine Anti-Cheat-Software ausführt.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was bewirkt Boost in einem Minecraft-Client?">
+Boost verleiht dem Spieler einen kurzen Geschwindigkeitsschub oder eine zusätzliche Beschleunigung, meistens verwendet, um schnell Distanz zu einem Ziel zu schließen oder sich in einer unterlegenen Situation schnell aus dem Kampf zu retten.
+</FAQItem>
+
+<FAQItem question="Ist Boost nachweisbar?">
+Ja. Er erzeugt einen plötzlichen Anstieg der Bewegungsgeschwindigkeit, den ein Server mit der maximalen Geschwindigkeit vergleichen kann, die die Vanilla-Physik für einen Tick erlaubt. Große oder wiederholte Beschleunigungen lassen sich so leicht erkennen.
+</FAQItem>
+
+<FAQItem question="Welche Kunden nutzen Boost?">
+Das Modul ist wie bei Kunden wie Juul und Rose dokumentiert.
+</FAQItem>
+
+<FAQItem question="Ist Boost dasselbe wie ein Dash oder ein Sprint-Hack?">
+Es beschreibt dieselbe allgemeine Idee, eine kurzlebige Geschwindigkeitserhöhung, die über das normale Bewegungstempo hinausgeht, obwohl die genaue Bezeichnung und Umsetzung je nach Client variieren.
+</FAQItem>
+
+<FAQItem question="Kann Boost dazu führen, dass man gesperrt wird?">
+Jede Art von Movement-Cheat, die eine Geschwindigkeit erzeugt, die das Spiel erlaubt, verstößt gegen die Regeln von im Wesentlichen jedem Server, der einen Anti-Cheat-Mechanismus betreibt, und Boost fällt darunter, da er den Spieler außerhalb der normalen Physik bewegt.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Ein weiteres Bewegungsmodul, das dich in Bewegung hält, nicht behindert." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die Kategorie Stealth, die auf unauffälligem Handeln basiert." },
+  { href: "/de/learn/what-is-reach", label: "Was ist Reichweite?", description: "Ein Kampanmodul, das dieselben Lücken auf andere Weise schließt." },
+]} />
+
+<CTA href="/de/kaufen">Opal sich sichern und sehen, wie eine ehrliche Bewegungskategorie aussieht.</CTA>

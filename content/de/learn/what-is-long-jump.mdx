@@ -1,0 +1,79 @@
+---
+title: Was ist der Weitsprung in Minecraft? Modul erklärt
+description: Weitreißer verändert, wie weit ein einzelner Sprung reicht, indem er die Bewegung in der Luft anpasst, Distanzen überwindet, die normale Physik unmöglich macht, und stellt ein bannbares Risiko dar.
+excerpt: Ein Sprung, länger als er sein sollte. Der Weitsprung schreibt die Zahlen in der Luft neu, und keine serverseitige Prüfung lässt sich ewig täuschen.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was ändert der Weitsprung eigentlich?
+    a: Es verändert die horizontale Distanz eines Sprungs, indem es die während des Sprungs bereits gesendeten Bewegungsdatenpakete verändert, und nicht die Sprunghöhe oder die Häufigkeit, mit der der Spieler springt.
+  - q: Ist Weitsprung dasselbe wie Bhop?
+    a: Nr. Bhop-Ketten wiederholen Sprünge, um im Laufe der Zeit Geschwindigkeit aufzubauen oder beizubehalten, während der Weitsprung die Distanz eines einzelnen Sprungs verlängert. Beide sind Bewegungsmodule und beide überschreiten die Vanilla-Physik, aber der Mechanismus ist unterschiedlich.
+  - q: Kann ein Weitsprungwurf einen Spieler sperren?
+    a: Ja. Es erzeugt Sprungdistanzen, die die Vanilla-Physik nicht zulässt. Ein Server, der die Bewegung mit erwarteten Werten vergleicht, kann das erkennen, und die Verwendung davon verstößt typischerweise gegen die Anti-Cheat-Regeln, die die meisten Server durchsetzen.
+  - q: Macht das Manipulieren von Bewegungspaketen den Weitsprung schwer fassbar?
+    a: Nicht unbedingt. Paketmanipulation kann einen offensichtlich unmöglichen Frame umgehen, aber die resultierende Distanz ist immer noch messbar im Vergleich zu dem, was die gemeldete Geschwindigkeit und Position erzeugen sollten – und genau das vergleichen serverseitige Prüfungen.
+---
+
+<KeyTakeaways>
+
+- Der Weitsprung ist ein Bewegungsmodul, das die Distanz eines einzelnen Sprungs über die normale Entfernung in Vanilla Minecraft hinaus erweitert.
+- Es funktioniert, indem es die Bewegungsdatenpakete verändert, die während eines Sprungs gesendet werden, und nicht, indem es ändert, wie der Sprung ausgelöst wird.
+- Der Vorteil ist bei einem einzelnen Sprung gering, summiert sich aber bei wiederholter Nutzung beim Überqueren von Terrain oder beim Abbrechen einer Verfolgung.
+- Es verändert die messbare Bewegung, sodass ein Server, der die erwartete Sprungdistanz neu berechnet, es genauso leicht als eine physikalische Verletzung kennzeichnen kann wie jede andere.
+
+</KeyTakeaways>
+
+Der Weitsprung ist ein Bewegungsmodul, das die Reichweite eines einzelnen Sprungs über das hinaus erweitert, was die Physik von Vanilla Minecraft erlaubt. Anstatt zu verändern, wie ein Sprung ausgelöst wird, arbeitet es mit den Daten, die den Sprung beschreiben, während er bereits stattfindet: den Paketen, die die Position und Bewegung des Spielers während des Sprungs melden. Das Ergebnis ist ein Sprung, der weiter landet, als es die Schwerkraft, die Anfangsgeschwindigkeit und der bestehende Schwung zulassen würden. Er gehört zur Kategorie der Bewegungsmodule wie Geschwindigkeit und Schwung und ist genau die Art von messbarer Abweichung, die ein serverseitiges Anticheat-System erkennen soll.
+
+## Wie der Weitsprung funktioniert
+
+Vanilla Minecraft berechnet die horizontale Distanz eines Sprungs anhand einer kleinen Anzahl physikalischer Eingaben: wie schnell man war, als man den Boden verlassen hat, der Schwerkraft, die einen zurückzieht, und dem Schwung, den man bereits hatte. Es gibt keine versteckte "springe weiter"-Einstellung im Client, die darauf wartet, umgeschaltet zu werden. Die Distanz ergibt sich jedes Mal auf die gleiche Weise aus diesen Zahlen, für jeden Spieler.
+
+Der Weitsprung beeinflusst nicht, wie der Sprung beginnt. Er greift erst danach ein, in den Paketen, die die Position und Bewegung des Spielers beschreiben, während der Sprung bereits in der Luft ist, und dehnt die horizontale Distanz, die vor der Landung zurückgelegt wird, aus. Server vertrauen im Allgemeinen der gemeldeten Position eines Clients innerhalb einer gewissen Toleranz, niemand möchte bei jeder Verbindungsproblematik eine Fehlermeldung erhalten, und diese Toleranz ist das, worauf sich das Modul stützt. Es kann einen Spieler über die Stelle hinaus transportieren, an der ein legitimer Sprung enden würde, ohne einen offensichtlich fehlerhaften Frame zu erzeugen, der isoliert auffällt.
+
+## Ist der Weitsprung sicher nutzbar?
+
+Der Reiz ist einfach: eine Lücke überwinden, die ein normaler Sprung nicht bewältigen kann, die Zeit beim Überqueren offenes Geländes verkürzen oder ein paar zusätzliche Blöcke zwischen sich und demjenigen schaffen, der Sie verfolgt. Bei einem einzelnen Sprung mag der Vorteil gering erscheinen. Wird er bei jeder Überquerung oder bei jeder Ausweichbewegung eingesetzt, summiert er sich.
+
+Das macht es jedoch nicht unsichtbar. Der Weitsprung ist eine spielmechanische Vorteilfunktion, keine rein kosmetische, und er bewegt etwas, das ein Server direkt messen kann: die horizontale Distanz pro Sprung. Ein Server, der basierend auf der gemeldeten Geschwindigkeit und Position des Spielers neu berechnet, wie weit ein Sprung zurücklegen sollte, kann einen markieren, der weiter landet, als die Physik es zulässt, unabhängig davon, wie sauber die einzelnen Pakete aussehen. Er ist in Clients wie Fan und Tenacity entdeckt worden. Behandeln Sie ihn als nachweisbar, nicht als sicheren Abkürzung.
+
+<Callout variant="tip" title="Opal versendet es, ehrlich gekennzeichnet">
+Opals eigener Katalog führt ein Long-Jump-Modul, beschrieben so schlicht wie möglich: es ermöglicht dir, weiter zu springen. Es wird unter „mit eigenem Risiko verwenden“ eingeordnet, genauso wie es bei jedem Kunden der Fall wäre, denn eine Sprungdistanz, die die Standardphysik nicht erzeugt, ist genau die Art von Sache, auf die ein serverseitiger Check achtet.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite erklärt, was Weitsprung bedeutet und wie der Effekt im Allgemeinen funktioniert, nicht aber wie man ihn konfiguriert. Das Überschreiten der Sprungweite über die Vanilla-Physik hinweg verletzt die Anti-Cheat-Regeln auf praktisch jedem Server, der diese durchsetzt, und das Erwischtwerden führt zum Sperren des Kontos.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was ändert der Weitsprung eigentlich?">
+Er verlängert die horizontale Distanz eines Sprungs, indem er die während des Sprungs bereits gesendeten Bewegungsdaten verändert, und nicht die Sprunghöhe oder -häufigkeit des Spielers.
+</FAQItem>
+
+<FAQItem question="Ist der Weitsprung dasselbe wie Bhop?">
+Nein. Bhop verkettet wiederholte Sprünge, um im Laufe der Zeit Geschwindigkeit aufzubauen oder beizubehalten, während der Weitsprung die Distanz eines einzelnen Sprungs ausdehnt. Beide sind Bewegungsmodule und überschreiten beide die Standardphysik, aber der Mechanismus ist unterschiedlich.
+</FAQItem>
+
+<FAQItem question="Kann der Weitsprung-Hack einen Spieler sperren?">
+Ja. Er erzeugt Weitsprunge, die die Vanilla-Physik nicht zulässt. Ein Server, der Bewegungen anhand erwarteter Werte überprüft, kann dies erkennen, und die Verwendung davon verstößt typischerweise gegen die Anti-Movement-Cheat-Regeln, die die meisten Server durchsetzen.
+</FAQItem>
+
+<FAQItem question="Schwieriger macht die Erfassung des Weitsprungs das Manipulieren von Bewegungspaketen?">
+Nicht zwangsläufig. Die Manipulation von Paketen kann einen offensichtlich unmöglichen Frame vermeiden, aber die resultierende Distanz ist immer noch messbar im Vergleich zu dem, was die gemeldete Geschwindigkeit und Position erwarten lassen – genau das, worüber serverseitige Prüfungen entscheiden.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Ein weiteres Bewegungsmodul, das automatisch Blöcke unter dich platziert, während du von Klippen läufst." },
+  { href: "/de/learn/what-is-velocity-anti-knockback", label: "Was ist Velocity (Rückstoßvermeidung)?", description: "Ein bewegungsnahes Modul, das Widerstand anstelle der Schwerkraft bekämpft." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Wo Module, die unauffällig bleiben sollen, wie dieses hier, dazu neigen, unterzubringen." },
+]} />
+
+<CTA href="/de/purchase">Einen Weitsprung und die restlichen Bewegungsmodule von Opal, inklusive Risikohinweisen, ansehen.</CTA>

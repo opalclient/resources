@@ -1,0 +1,87 @@
+---
+title: "NeoForge vs Forge: Minecraft 模组加载器 (2026)"
+description: NeoForge 与 Forge 的区别：社区分支与原始加载器在治理、版本支持和模组方面的差异，以及如何选择.
+excerpt: NeoForge 是 Forge 的社区分支，目前在 Minecraft 的 Forge-lineage 场景中处于领先地位。以下是它们之间的区别以及你应该运行哪一个.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Frameworks
+author: trq
+faqs:
+  - q: NeoForge 是 Forge 的替代品吗？?
+    a: 在当前 Minecraft 版本中，大多数社区将 NeoForge 视为继任者，但 Forge 仍然存在并支持旧版本，因此两者都没有被对方取代.
+  - q: 我能在 NeoForge 上运行 Forge 模组吗？?
+    a: 不一定可靠。两者有共同的根源，但 API 已经分歧，因此针对一个 mod 的修改不保证能在另一个上加载；请安装对应的构建版本.
+  - q: NeoForge 和 Fabric 是同一回事吗？?
+    a: No. NeoForge 源自 Forge 系列，拥有事件总线和注册模型，而 Fabric 是一个独立的、更轻量级的加载器，采用基于 Mixin 的补丁机制.
+---
+
+<KeyTakeaways>
+
+- NeoForge 是 2023 年社区发起的 Forge 分支，目前已成为 Minecraft 中 Forge 谱系的首选。
+- Forge 是最初的加载器，多年来承载了模组生态系统，并且仍然为较旧的模组包提供服务。
+- 分裂的原因是治理问题，而非重写；两者共享核心理念，但此后已渐行渐远。
+- 如果您需要新版本和活跃的模组，请选择 NeoForge；如果您需要针对其构建的旧模组包，请选择 Forge.
+
+</KeyTakeaways>
+
+NeoForge 是由社区维护的 Forge 衍生版本，于 2023 年启动，现在已成为 Minecraft 当前版本 Forge-lineage 模组生态系统的默认加载器。Forge 是最初的加载器，多年来承载了模组生态系统。对于新版本和活跃的模组，选择 NeoForge；对于基于 Forge 构建的旧模组包，选择 Forge.
+
+<Callout variant="info" title="Opal 的适配方式">
+Opal 基于 [Fabric](https://fabricmc.net/) 运行，而不是 Forge 系列，因此两者都不是您为 Opal 设置的加载器。 如果您是新手，[设置指南](/zh/docs/setup) 将引导您完成 Fabric 的安装。
+</Callout>
+
+## 各自的特点
+
+Forge 是最初的 Minecraft 模组加载器。它在 1.6 时代及之后的大部分大型模组包场景中运行，拥有基于注解的事件总线、有主观性的生命周期以及底层的 ASM 类转换器。
+
+NeoForge 是 Forge 在 2023 年分叉的项目，当时 Forge 项目的领导层冲突达到高潮。它保留了相同的广泛架构（注册表、能力、事件总线），但采用社区治理，并拥有更开放的贡献模式。
+
+## 分叉的原因
+
+分叉是关于治理，而不是重写。一群 Forge 贡献者在对 Forge 的运行方式产生分歧后，迁移到了一个社区拥有的项目。由于 NeoForge 起源于 Forge 的代码库，这两个加载器共享大部分核心理念，熟悉 Forge 的模组作者会立即认出 NeoForge。
+
+随着时间的推移，这两个项目逐渐分道扬镳。NeoForge 已经重构了 API 的部分内容，并提供了自己的约定，因此为当前 NeoForge 构建的模组不能保证在 Forge 上加载，反之亦然。
+
+## 它们的不同之处
+
+| | NeoForge | Forge |
+| :--- | :--- | :--- |
+| 起源 | 2023 年 Forge 社区分支 | 最初的加载器 |
+| 治理 | 社区拥有，开放贡献 | 传统 Forge 项目领导 |
+| 架构 | 相同基础（注册器、能力、事件总线） | 注册器、能力、事件总线 |
+| 新版本重点 | 当前的 Minecraft 版本 | 承载着旧的模组场景 |
+| 模组目录 | 在现代版本中不断增长 | 在旧版本中拥有丰富的目录 |
+
+## 如何选择
+
+<Checklist>
+<ChecklistItem>如果你游玩最新的 Minecraft 版本，并且你的模组已经迁移到 NeoForge，那就选择 NeoForge 吧。现在，大多数积极维护的 Forge 风格模组都在较新版本中针对 NeoForge.</ChecklistItem>
+<ChecklistItem>如果你运行较旧的模组包或仅提供 Forge 版本的模组，请选择 Forge。 许多历史悠久的模组包仍然基于它.</ChecklistItem>
+<ChecklistItem>请为每个模组查看版本页面。同一作者可能会为旧版本发布 Forge 版本，为新版本发布 NeoForge 版本.</ChecklistItem>
+</Checklist>
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="NeoForge 是否是 Forge 的替代品？">
+在当前的 Minecraft 版本中，大多数社区将 NeoForge 视为 Forge 谱系模组的继任者。Forge 仍然存在并继续支持旧版本，因此两者尚未完全取代对方。
+</FAQItem>
+
+<FAQItem question="我可以在 NeoForge 上运行 Forge 模组吗？">
+不可靠。两者有共同的根源，因此一些简单的模组可能可以运行，但 API 已经分歧。针对特定加载器开发的模组不能保证能在另一加载器上加载。请安装与您的加载器匹配的构建版本。
+</FAQItem>
+
+<FAQItem question="NeoForge 和 Fabric 是同一回事吗？">
+不是。NeoForge 源自 Forge 系列，并共享其事件总线和注册模型。[Fabric](https://fabricmc.net/) 是一个独立的、更轻量级的加载器，拥有自己的基于 Mixin 的补丁模型。它们是不同的生态系统。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "旁边的较轻生态系统 Forge 家庭." },
+  { href: "/zh/learn/what-is-a-minecraft-mod-loader", label: "什么是 Minecraft 模组加载器？?", description: "首先，装卸工做什么." },
+  { href: "/zh/learn/what-is-asm", label: "什么是ASM？?", description: "字节码工具包 Forge 使用的转换器." },
+]} />
+
+<CTA href="/zh/purchase">获取 Opal，一个 Fabric 客户端，用于 $8.99</CTA>

@@ -1,0 +1,93 @@
+---
+title: LWJGL 是什么？Java 游戏库详解 (2026)
+description: LWJGL 允许 Java 访问原生图形、音频和输入 API。以下是它所能做到的以及原因 Minecraft 并且它的修改器都依赖于它.
+excerpt: Java 无法自行调用 OpenGL 或你的声卡。LWJGL 是桥梁，整个 Minecraft 渲染栈就建立在这个层面上.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Libraries
+author: trq
+faqs:
+  - q: 我需要单独安装 LWJGL 吗？?
+    a: Minecraft 附带所需的版本，启动器会获取适合你平台的原生文件，因此玩家几乎从不直接接触 LWJGL.
+  - q: LWJGL 中 “lightweight” 是什么意思？?
+    a: 它意味着该库会尽可能地靠近原生 API，而不是将它们包裹在一个庞大的引擎中，这样你就能直接访问，代码与硬件之间几乎没有中间层.
+  - q: LWJGL 仅适用于 Minecraft 吗？?
+    a: LWJGL 是一個通用的 Java 遊戲庫，許多 Java 遊戲和工具都使用它；Minecraft 是建立在它之上但又不受其束縛最著名的專案.
+  - q: LWJGL 可以支持哪些语言？?
+    a: 任何在 Java 虚拟机上运行的语言，包括 Java 和 Kotlin，因为绑定以 Java API 的形式暴露.
+---
+
+<KeyTakeaways>
+
+- LWJGL 是轻量级 Java 游戏库，它是 Java 与原生图形、音频和输入之间的桥梁。
+- 它是一系列精简的绑定（OpenGL、OpenAL、GLFW 等），而不是一个单独的库。
+- Minecraft 的窗口、渲染和输入栈都建立在 LWJGL 之上。
+- 它是库，而不是模组或模组加载器，而且 Minecraft 已经包含了它.
+
+</KeyTakeaways>
+
+LWJGL 是轻量级 Java 游戏库。它是连接 Java 代码与图形、音频和输入原生 API 的桥梁。 像 Minecraft 这样的 Java 游戏，会使用 LWJGL 来与你的 GPU 和声卡通信。绘制自定义界面或播放声音的模组也会通过它访问相同的原生层.
+
+<Callout variant="info" title="Opal 的适配">
+Opal 是一个 [Fabric](https://fabricmc.net/) 模组，因此它使用游戏已经设置好的 LWJGL 图形上下文进行渲染。 [设置指南](/zh/docs/setup) 涵盖了 Opal 的运行设置。
+</Callout>
+
+## LWJGL 实际上做什么
+
+LWJGL 为 Java 提供了对原生 C 库的精简、直接的封装。Java 本身无法调用 OpenGL 或 OpenAL；它们是用 C 编写的，并存在于操作系统或驱动程序中。LWJGL 提供了绑定代码和原生二进制文件，因此 Java 方法几乎可以与底层的 C 函数一一对应。
+
+这个封装层是故意保持精简的。LWJGL 并没有用场景图或引擎来隐藏 OpenGL。您编写的图形代码会紧贴 API，这正是它在希望获得控制权和可预测性能的游戏中如此受欢迎的原因。
+
+## 它绑定了什么
+
+LWJGL 是一组绑定，而不是单个库。与 Minecraft 及其模组相关的组件包括：
+
+| 绑定 | 用途 |
+| :--- | :--- |
+| OpenGL | 向屏幕绘制：游戏使用的渲染 API |
+| OpenAL | 3D 位置音频 |
+| GLFW | 窗口创建、游戏循环以及键盘/鼠标输入 |
+| stb | 图像和字体加载辅助工具 |
+| NanoVG | 抗锯齿 2D 矢量绘图，某些 UI 代码使用 |
+
+每个绑定都是可选的。项目只需引入其需要的模块。
+
+## 为什么 Minecraft 及其模组依赖它
+
+Minecraft 的整个窗口、渲染和输入堆栈都建立在 LWJGL 之上。当游戏打开一个窗口、读取鼠标或将三角形推送到 GPU 时，该调用会通过 LWJGL 传递到原生层.
+
+模组会继承这个。那些绘制游戏内覆盖层或自定义菜单的模组，会使用游戏通过 LWJGL 设置的同一个 OpenGL 上下文。一些模组也使用 [NanoVG](/zh/learn/what-is-nanovg) 来绘制界面，而 NanoVG 本身就是 LWJGL 的一个绑定。这种共享的基础是模组能够与游戏一起渲染，而无需建立自己的图形系统的一部分原因。
+
+## LWJGL 是模组吗？
+
+不是。LWJGL 是一个库，而不是模组，也不是模组加载器。你不会像安装模组那样安装它。Minecraft 已经捆绑了它所需的版本，并且启动器会下载适用于你的操作系统的匹配的本地二进制文件。模组开发者会针对 LWJGL 进行编译，但很少会附带自己的副本。
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="我需要单独安装 LWJGL 吗？">
+不需要。Minecraft 包含它所需版本，启动器会为你的平台下载原生文件。玩家几乎从不直接接触 LWJGL。
+</FAQItem>
+
+<FAQItem question="LWJGL 中的“轻量级”是什么意思？">
+它意味着该库尽可能贴近底层的原生 API，而不是将其封装在一个庞大的引擎中。 你可以获得直接访问，你的代码和硬件之间几乎没有中间层。
+</FAQItem>
+
+<FAQItem question="LWJGL 仅适用于 Minecraft 吗？">
+不是的。LWJGL 是一个通用的 Java 游戏库，被许多 Java 游戏和工具所使用。Minecraft 是基于它的最知名的项目，但它与 Minecraft 无关。
+</FAQItem>
+
+<FAQItem question="LWJGL 支持哪些语言？">
+任何能在 Java 虚拟机上运行的语言，包括 Java 和 Kotlin。 绑定以 Java API 的形式暴露。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/what-is-nanovg", label: "什么是 NanoVG？?", description: "矢量图形绑定客户端通过 LWJGL 实现." },
+  { href: "/zh/learn/what-is-the-fabric-api", label: "什么是Fabric API？?", description: "Fabric 模组通常构建的共享层." },
+  { href: "/zh/learn/what-is-graalvm-javascript-scripting", label: "GraalVM JavaScript 脚本是什么？?", description: "Opal 如何让您使用 JavaScript 编写游戏." },
+]} />
+
+<CTA href="/zh/purchase">获取 Opal，一个 Fabric 客户端，用于 $8.99</CTA>

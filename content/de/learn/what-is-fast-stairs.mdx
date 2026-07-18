@@ -1,0 +1,84 @@
+---
+title: Was sind Speedstufen in Minecraft? Modul erklärt
+description: Schnelle Treppen ist ein Bewegungsmodul, das die geringe Geschwindigkeitsreduzierung entfernt, die Minecraft beim Klettern von Treppen anwendet. Hier erfahren Sie, wie es funktioniert und warum es möglicherweise als problematisch markiert wird.
+excerpt: Vanilla Minecraft verlangt für jeden gestiegenen Treppenabsatz einen halben Schritt an Steuern. Fast Stairs zahlt das einfach nicht.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was genau verändert "Fast Stairs" eigentlich?
+    a: Es reduziert oder entfernt die geringe Geschwindigkeitsbeeinträchtigung, die Vanilla Minecraft anwendet, wenn ein Spieler eine Treppe erklimmt, sodass das Klettern nahezu mit normaler Gehgeschwindigkeit oder schneller erfolgt.
+  - q: Ist „Fast Stairs“ dasselbe wie „Fast Ladder“?
+    a: Nein, aber es ist die gleiche Idee, nur auf unterschiedliches Terrain angewendet. Schnelle Leiter beschleunigt das Klettern von Leitern und Lianen, Schnelle Treppe beschleunigt das Klettern von Treppen.
+  - q: Beeinflussen die schnellen Treppen den Bewegungsablauf auf ebenem Untergrund?
+    a: Nein. Es ändert die Geschwindigkeit nur, während ein Spieler eine Treppe hinaufsteigt. Die Bewegung auf ebenem Boden und anderem Gelände bleibt unverändert.
+  - q: Können schnelle Treppen dazu führen, dass ein Spieler markiert wird?
+    a: Das kann es. Da es eine Treppensteigerungsgeschwindigkeit erzeugt, die den Standardwert übersteigt, kann ein Server, der Bewegungen mit erwarteten Werten vergleicht, dies melden, obwohl die Erkennung davon abhängt, wie genau dieser Server treppenspezifische Bewegungen überwacht.
+---
+
+<KeyTakeaways>
+
+- Fast Stairs ist ein Bewegungsmodul, das die geringe Geschwindigkeitsstrafe entfernt oder reduziert, die Vanilla Minecraft anwendet, wenn ein Spieler eine Treppe erklimmt.
+- Es ändert die Geschwindigkeit nur beim Aufsteigen auf Treppen, nicht auf ebenem Boden oder anderem Terrain.
+- Es ist die gleiche mechanische Idee wie Fast Ladder, nur angewendet auf ein anderes Terrainstück.
+- In Clients wie Fan zu finden, hauptsächlich verwendet, um die Durchlaufzeit in Treppen-reichen Bauwerken und Karten zu verkürzen.
+- Anticheats, die treppenspezifische Bewegungen überprüfen, können es als Fehlfunktion kennzeichnen, obwohl viele Prüfungen die Geschwindigkeit auf ebenem Boden und Sprünge stärker gewichten als den geringen Spielraum, den Treppen erlauben.
+
+</KeyTakeaways>
+
+Schnelle Treppen ist ein Bewegungsmodul, das einem Spieler erlaubt, eine Treppe schneller zu erklimmen, als es in der Standard-Minecraft-Version normalerweise möglich ist. Das Erklimmen von Treppen kostet dich einen kleinen Teil deiner Geschwindigkeit im Vergleich zum Gehen auf ebenem Boden, eine kleine, bewusste Steuer, die in das Basisspiel integriert ist. Fast Stairs stoppt diese Steuer quietly, sodass der Aufstieg in fast normalem Gehgeschwindigkeit oder darüber hinaus stattfindet, ohne die visuellen Hinweise, die ein Flight-Hack oder ein offensichtlicher Speed-Hack erzeugen würden.
+
+## Wie Fast Stairs funktioniert
+
+In der Standard-Minecraft-Version wird eine geringe Bewegungsstrafe auf Treppen angewendet, weil jeder Schritt nach oben den horizontalen Schwung leicht unterbricht, im Vergleich zum Gleiten über eine ebene Fläche. Es ist ein kleiner Effekt, der beim eigentlichen Spielen leicht zu übersehen ist, aber konsistent ist: das Spiel misst ihn jeden Tick, den du beim Aufsteigen verbringst. Fast Stairs fängt diese Bewegungsbehandlung auf der Client-Seite ab und passt die Geschwindigkeit an, während der Spieler klettert, sodass die Strafe schrumpft oder vollständig verschwindet.
+
+Es gibt nichts Exotisches an der Mechanik. Es fügt keine neue Art der Bewegung hinzu, wie es ein Dash oder ein verbesserter Sprung tun würde. Es nimmt eine bestehende Aktion, die gewöhnliche Handlung des Treppensteigens, und führt sie mit einer Geschwindigkeit aus, für die das Basisspiel nie ausgelegt war. Das ist auch genau so, wie Fast Ladder funktioniert, nur auf Leitern und Lianen anstatt auf Treppen ausgerichtet: dasselbe Prinzip, unterschiedliches Terrain.
+
+## Warum Leute es benutzen
+
+Der Vorteil liegt in der Zeitersparnis, nicht in einem Vorteil, der Kämpfe gewinnt. Fast Stairs bewirkt nichts auf ebenem Boden und auch nichts in der Luft, daher rechnet es sich auf Basen, Parkour-Strecken und jeder Karte, die auf Treppen basiert. Das Abschneiden von selbst nur einem Bruchteil einer Sekunde von jeder Treppe in einer Konstruktion summiert sich bei einer vollständigen Basenüberquerung, und das ohne das offensichtliche visuelle Zeichen von Fliegen oder einen generellen Geschwindigkeitsboost.
+
+## Ist es sicher, es zu verwenden?
+
+Fast Stairs ist eine spieltechnische Vorteilfunktion, keine rein kosmetische. Es verändert die messbare Bewegungsgeschwindigkeit über das hinaus, was die Standardphysik ermöglicht, was es in dieselbe Kategorie wie andere Bewegungsmodule bringt, die von Anticheats erkannt werden sollen. Ein Server kann die vom Spieler beobachtete Geschwindigkeit beim Treppensteigen mit der maximal zulässigen Geschwindigkeit gemäß den Standardeinstellungen vergleichen, und eine konstante Bewegung über diese Grenze ist ein durchaus vernünftiger Grund zur Kennzeichnung.
+
+Ob ein bestimmter Server es tatsächlich erkennt, hängt davon ab, wie genau er treppenspezifische Bewegungen überprüft. Viele Anticheats konzentrieren ihr Augenmerk hauptsächlich auf die Geschwindigkeit auf ebenem Boden und Sprungprüfungen, da dies die häufigsten Orte sind, an denen Spieler betrügen, und der Spielraum, den Treppen erlauben, ist oft zu gering, um die gleiche Aufmerksamkeit zu erhalten. Weniger Aufmerksamkeit bedeutet nicht keine Aufmerksamkeit. Es ist immer noch eine Abweichung von der Standardbewegung, die in einem Protokoll gespeichert ist und auf eine strengere Prüfung wartet.
+
+<Callout variant="tip" title="Wo Opal die Grenze zieht">
+Opal bietet eine echte Bewegungs-Kategorie, Geländetools, Momentum-Tricks und die üblichen Survival-Komforts, aber es gibt keinen Schnelltreppen-Schalter in der Liste. Ein Modul, das sich nur dadurch auszahlt, indem es heimlich eine Bewegungsgrenze überwindet, die der Server messen kann, ist nicht die Art von Vorteil, für den Opal einen Schalter bereitstellt.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite erklärt, was Fast Stairs bedeutet und wie der Effekt generisch funktioniert. Das genaue Verhalten variiert je nach Client, und das Klettern von Treppen schneller als die Vanilla-Physik es zulässt, bricht die Bewegungsregeln auf den meisten Survival- und kompetitiven Servern.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was ändert Fast Stairs eigentlich?">
+Es reduziert oder entfernt die geringe Geschwindigkeitsstrafe, die Vanilla Minecraft anwendet, wenn ein Spieler eine Treppe erklimmt, sodass der Aufstieg nahezu mit normaler Gehgeschwindigkeit oder schneller erfolgt.
+</FAQItem>
+
+<FAQItem question="Ist Fast Stairs dasselbe wie Fast Ladder?">
+Nein, aber es ist die gleiche Idee, die auf unterschiedliches Terrain angewendet wird. Fast Ladder beschleunigt das Klettern von Leitern und Lianen, Fast Stairs beschleunigt das Klettern von Treppen.
+</FAQItem>
+
+<FAQItem question="Beeinflusst Schnelle Treppe die Bewegung auf ebenem Boden?">
+Nein. Es verändert nur die Geschwindigkeit, während ein Spieler eine Treppe hinaufsteigt. Die Bewegung auf ebenem Boden und anderem Gelände bleibt unberührt.
+</FAQItem>
+
+<FAQItem question="Kann Fast Stairs einen Spieler melden?">
+Ja, das ist möglich. Da es eine Treppensteigerungsgeschwindigkeit erzeugt, die über die des Basisspiels hinausgeht, kann ein Server, der Bewegungen anhand erwarteter Werte überprüft, es melden. Die Erkennung hängt jedoch davon ab, wie genau dieser Server treppenspezifische Bewegungen überwacht.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Ein weiteres Bewegungsmodul, das Blöcke automatisch platziert, während man sich bewegt." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Das vom Kunden entworfene Design basiert auf der Unauffälligkeit gegenüber Detektionsscans." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Kategorie, zu der diese Module gehören." },
+]} />
+
+<CTA href="/de/kaufen">Treppen sind nicht, wo Opal seine Energie investiert, Kampf und Nutzen stehen im Vordergrund. Sieh, was es geschafft hat.</CTA>

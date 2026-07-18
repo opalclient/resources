@@ -1,0 +1,93 @@
+---
+title: 如何安装Fabric模组 (2026 年指南)
+description: 安装一个Fabric模组需要三个步骤：安装适用于你的Minecraft版本的Fabric加载器，添加Fabric API，然后将模组jar文件放入你的mods文件夹中.
+excerpt: 安装任何 Fabric 模组的三个步骤：加载器、Fabric API，然后是模组 jar 文件。以下是完整的安装指南以及解决无法加载时的修复方法.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: 我需要为每个模组安装 Fabric API 吗？?
+    a: 大多数Fabric模组都依赖它，因此默认安装即可。少数独立的模组不需要它，但添加它也不会有坏处.
+  - q: 我的模组启动时为什么会崩溃？?
+    a: 通常是版本不匹配或缺少 Fabric API。请确认加载器、Fabric API 和模组都针对相同的 Minecraft 版本.
+  - q: Fabric模组都放哪儿？?
+    a: 在你的 Minecraft 文件夹内的 mods 文件夹中。在 Windows 上，路径为 %appdata%\.minecraft\mods。如果该文件夹尚不存在，请运行一次 Fabric 配置文件.
+  - q: 我可以同时运行多个Fabric模组吗？?
+    a: 是的。请将每个罐子都放入相同的mods文件夹中。只要它们针对你的Minecraft版本且不冲突，加载器就会将它们一起运行.
+---
+
+<KeyTakeaways>
+
+- 安装 Fabric 模组有三个步骤：加载器、Fabric API，然后是模组 jar 文件。
+- 每个组件（加载器、API、模组）都必须针对相同的 Minecraft 版本。
+- 模组位于你的 Minecraft 目录下的 mods 文件夹中。
+- 大多数安装失败的原因是版本不匹配或缺少 Fabric API.
+
+</KeyTakeaways>
+
+安装 [Fabric](https://fabricmc.net/) 模组需要三个步骤：为你的 Minecraft 版本的确切版本安装 Fabric 载入器，将 Fabric API 放入你的模组文件夹中，然后将模组的 jar 文件放在旁边。启动 Fabric 配置文件，模组就会加载。 大多数安装问题都源于版本不匹配，所以请确保所有组件都与相同的 Minecraft 版本相对应.
+
+<Callout variant="info" title="安装 Opal">
+Opal 的安装步骤与之相同：它是一个 Fabric 模组。有关确切版本和推荐的 JVM 参数，请参考[设置指南](/zh/docs/setup)。
+</Callout>
+
+## 三步
+
+<Steps>
+
+<Step number={1} title="安装 Fabric 载入器">为您的 Minecraft 版本安装 [Fabric](https://fabricmc.net/) 载入器，可以使用官方的 Fabric 安装程序或支持 Fabric 的启动器。请参阅 [Fabric 载入器安装指南](/zh/learn/how-to-install-fabric-loader)，以获取完整的安装步骤</Step>
+
+<Step number={2} title="添加FabricAPI">
+将 [Fabric API](/zh/learn/what-is-the-fabric-api) jar 文件放入你的 mods 文件夹中。 大多数模组都依赖于它。
+</Step>
+
+<Step number={3} title="添加模组">将模组的 jar 文件放在与 Fabric API 相同的 mods 文件夹中</Step>
+
+</Steps>
+
+然后启动 Fabric 档案，模组将在启动时加载。如果未出现，请查看以下故障排除列表。
+
+## 模组文件夹的位置
+
+| 操作系统 | 路径 |
+| :--- | :--- |
+| Windows | `%appdata%\.minecraft\mods` |
+| macOS | `~/Library/Application Support/minecraft/mods` |
+| Linux | `~/.minecraft/mods` |
+
+如果 `mods` 文件夹尚未存在，请运行 Fabric 档案一次，它将为您自动创建。
+
+## 模组无法加载时
+
+<Checklist>
+<ChecklistItem>模组未显示：模组文件位于错误文件夹中，或者您启动了非 Fabric 的配置文件.</ChecklistItem>
+<ChecklistItem>启动时发生崩溃，缺少类错误：Fabric API 缺失或版本不正确.</ChecklistItem>
+<ChecklistItem>版本不匹配：加载器、Fabric API 和模组都必须针对相同的 Minecraft 版本.</ChecklistItem>
+</Checklist>
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="我需要为每个模组安装 Fabric API 吗？">
+大多数 Fabric 模组都依赖它，因此默认情况下安装它。少数独立的模组不需要它，但添加它通常不会造成任何损害。
+</FAQItem>
+
+<FAQItem question="为什么我的模组启动时会崩溃？">
+通常是版本不匹配或缺少 Fabric API。请确认加载器、Fabric API 和模组都针对相同的 Minecraft 版本。
+</FAQItem>
+
+<FAQItem question="材质包应该放在哪里？">
+在你的 Minecraft 目录下的 `mods` 文件夹内（路径见上文）。如果该文件夹不存在，请先运行一次 Fabric 配置文件。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/how-to-install-fabric-loader", label: "如何安装 Fabric 客户端加载器", description: "第一步，详尽地." },
+  { href: "/zh/learn/what-is-the-fabric-api", label: "什么是Fabric API？?", description: "几乎每个模组都需要它，原因何在." },
+  { href: "/zh/blog/essential-fabric-mods-every-player-should-have", label: "必需的 Fabric 模式", description: "搭建好之后，一个稳固的基础." },
+]} />
+
+<CTA href="/zh/purchase">获取 Opal，一个 Fabric 客户端，用于 $8.99</CTA>

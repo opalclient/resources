@@ -1,0 +1,71 @@
+---
+title: Was ist Motion Graph in Minecraft?
+description: Motion Graph verwandelt die Geschwindigkeit und Beschleunigung eines Spielers in ein live scrollendes Diagramm anstelle einer einzelnen, statischen Zahl und ist rein kosmetisch, ohne Risiko einer Erkennung.
+excerpt: Eine Live-Ansicht deiner Geschwindigkeit statt einer Zahl im HUD. Motion Graph verändert nicht, wie du dich bewegst, sondern lässt dich endlich sehen, wie du es tust.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was zeigt Motion Graph eigentlich?
+    a: "Eine Live-Ansicht einer scrollbaren Grafik, die die Bewegung oder Geschwindigkeit des Spielers im Zeitverlauf anzeigt. Anstatt einer einzelnen Momentaufnahme der Geschwindigkeit siehst du die Tendenz: wie Geschwindigkeit oder Beschleunigung steigt und fällt, während du dich bewegst."
+  - q: Beeinflusst Motion Graph, wie ich mich im Spiel bewege?
+    a: Nein. Es liest und zeigt lediglich Bewegungsdaten, die der Client bereits lokal gespeichert hat. Es verändert Ihre Bewegungen nicht und sendet nichts anderes an den Server.
+  - q: Ist Motion Graph ein Betrug?
+    a: Nein. Es ist eine rein kosmetische, informationsbezogene Überlagerung, dieselbe Kategorie wie ein FPS-Zähler oder eine Koordinatenanzeige, und keine Funktion, die die Spielergebnisse verändert.
+  - q: Bei welchem Kunden ist Motion Graph zu finden?
+    a: Es ist als Teil von Tenacity dokumentiert, wo es zusammen mit den anderen visuellen Modulen dieses Kunden sitzt.
+---
+
+<KeyTakeaways>
+- Motion Graph ist ein kosmetisches HUD-Modul, das die Geschwindigkeit oder Beschleunigung eines Spielers als eine live scrollende Linie anstelle einer einzelnen Zahl darstellt.
+- Es nutzt Bewegungsdaten, die der Client bereits besitzt, und zeichnet sie lokal: Nichts an der Art und Weise, wie Sie sich bewegen, ändert sich, und keine zusätzlichen Daten werden an den Server gesendet.
+- Spieler nutzen es, um zu sehen, wie Sprünge, Landungen und Drehungen die Schwungimpulse im Laufe der Zeit beeinflussen, hauptsächlich für Bewegungstests und -anpassungen.
+- Es birgt kein nennenswertes Risiko einer Entdeckung, da es schreibgeschützt und rein kosmetisch ist, derselben Kategorie wie ein FPS-Zähler angehört.
+- Es ist als Teil des visuellen Modul-Sets von Tenacity dokumentiert.
+</KeyTakeaways>
+
+Motion Graph ist ein visuelles Minecraft-Modul, das die Geschwindigkeit oder die Geschwindigkeit eines Spielers in ein Live-Scroll-Liniendiagramm umwandelt, anstatt in eine einzelne, flache Zahl. Anstatt auf "6,2 m/s" zu schauen und zu erraten, ob das für die Situation schnell ist, beobachtest du, wie sich die Linie beim Springen nach oben bewegt, bei der Landung abfällt und sich beruhigt, sobald du wieder einen gleichmäßigen Sprint erreicht hast. Es ist eine schreibgeschützte Überlagerung: Es ändert nichts daran, wie sich der Spieler bewegt, und es werden keine zusätzlichen Daten an den Server gesendet. Betrachte es als einen Herzfrequenzmesser für den Schwung deines Charakters, nicht als einen Beschleuniger.
+
+## Funktionsweise
+
+Das Modul erfasst die Geschwindigkeit oder die Geschwindigkeit des Spielers in einem festen Intervall und zeichnet jede Erfassung als Punkt auf einem scrollbaren Diagramm. Wenn neue Erfassungen eintreffen, scrollen die ältesten vom Rand, sodass du immer ein aktuelles Bewegungsfenster und nicht die vollständige Historie siehst. Lies die Form der Linie so, wie du jede Liniendiagramm lesen würdest: Eine aufsteigende Linie bedeutet, dass du schneller wirst, eine abfallende Linie bedeutet, dass du langsamer wirst, und eine flache Linie bedeutet, dass du ein konstantes Tempo hältst.
+
+Da es nur Daten liest, die der Client bereits lokal gespeichert hat, indem es die Geschwindigkeit erfasst und sie auf dem Bildschirm darstellt, greift es niemals in deine tatsächliche Bewegung ein. Keine zusätzlichen Pakete, keine veränderten Physik, kein Server-Fußabdruck. Es ist eine Instrumentierung, die über die gewöhnliche Minecraft-Bewegung gelegt wird, nicht eine Mechanik, die sie verändert.
+
+Der praktische Anwendungsfall ist das Erkennen von Trends, die eine einzelne Anzeige verbirgt. Eine Zahl sagt Ihnen Ihre aktuelle Geschwindigkeit; ein Diagramm zeigt Ihnen, ob eine Sprungtechnik tatsächlich an Schwung gewinnt, ob eine Landung unerwartet Geschwindigkeit verliert oder wie sich eine Änderung der Einstellungen über mehrere Sekunden hinweg entwickelt, anstatt in einem einzigen, eingefrorenen Moment. Das macht es eher zu einem Einstellungstool als zu einer Flexibilität.
+
+## Ist es sicher zu verwenden?
+
+Motion Graph gehört in dieselbe Kategorie wie ein FPS-Zähler oder eine Koordinatenüberlagerung: informativ, nicht funktional. Es liest Werte, die der Client bereits hat, und zeichnet sie auf den Bildschirm – Punkt. Es gibt keine Paketmanipulation, keine Physiküberschreibung, nichts, was ein serverseitiges Anti-Cheat-System zum Flaggen hätte, denn es passiert nichts außer der Darstellung eines Diagramms.
+
+Das einzige wirkliche Risiko bei einem Modul wie diesem ist der Betriebskreis. Ein HUD-Element, das in einen ansonsten gewöhnlich aussehenden Client eingebunden ist, macht die Modulliste des restlichen Clients nicht sicher, daher ist es wertvoll zu wissen, was sonst noch zusammen mit einer visuellen Funktion wie dieser ausgeliefert wird, bevor man ein ganzes Build daran beurteilt.
+
+<Callout variant="tip" title="Wo dies in eine echte Modulliste passt">
+Opal versendet kein Modul namens Motion Graph. Wenn Sie jedoch Live-Bewegungsinstrumentierung suchen, ist dies genau der Bereich, den eine kostenpflichtige Utility-Client abdecken soll – visuelle und diagnostische Werkzeuge, die neben den Modulen für Kampf und Bewegung stehen, und nicht nachträglich angebracht sind. Ein Geschwindigkeitsgraph für sich ist eine kleine Funktion. Ob ein Client visuelle Diagnosen überhaupt als eigenständige Kategorie behandelt, ist das entscheidende Zeichen.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+<FAQItem question="Was zeigt der Motion Graph eigentlich?">
+Eine live aktualisierte, scrollende Grafik, die die Bewegung oder Geschwindigkeit des Spielers im Laufe der Zeit anzeigt. Anstatt einer einzelnen Momentaufnahme der Geschwindigkeit siehst du den Trend: wie Geschwindigkeit oder Beschleunigung steigt und fällt, während du dich bewegst.
+</FAQItem>
+<FAQItem question="Beeinflusst der Motion Graph, wie ich mich im Spiel bewege?">
+Nein. Er liest und zeigt lediglich Bewegungsdaten, die der Client bereits lokal gespeichert hat. Er verändert deine Bewegung nicht und sendet keine anderen Daten an den Server.
+</FAQItem>
+<FAQItem question="Ist der Motion Graph ein Cheat?">
+Nein. Er ist eine rein kosmetische, informative Überlagerung, die derselben Kategorie wie ein FPS-Zähler oder eine Koordinatenanzeige angehört und keine Funktion, die die Spielergebnisse verändert.
+</FAQItem>
+<FAQItem question="In welchem Client ist der Motion Graph zu finden?">
+Er ist als Teil von Tenacity dokumentiert, wo er zusammen mit den anderen visuellen Modulen dieses Clients zu finden ist.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft Utility Client?", description: "Die Kategorie Bewegungsgraph und jedes Modul in dieser Anleitung gehören tatsächlich dazu." },
+  { href: "/de/learn/what-is-velocity-anti-knockback", label: "Was ist Geschwindigkeit (Anti-Rückstoß)?", description: "Ein weiteres Modul, das auf Bewegungsdaten basiert, verändert in diesem Fall die Physik, anstatt sie nur darzustellen." },
+  { href: "/de/learn/what-is-reach", label: "Was ist Reichweite?", description: "Eine kampfseitige Diagnose im gleichen Geist: eine verborgene Zahl in etwas Sichtbares verwandeln." }
+]} />
+
+<CTA href="/de/kaufen">Möchten Sie ein HUD, das Ihnen die Wahrheit über Ihre Bewegung anzeigt, anstatt nur eine einzelne, flache Zahl? Sehen Sie, wie Opal’s visuelle Werkzeuge aussehen.</CTA>

@@ -1,0 +1,93 @@
+---
+title: 什么是 JVM？Java 虚拟机详解
+description: JVM 可以在任何操作系统上运行 Java 字节码。 这就是为什么 Minecraft Java 版以及所有 Fabric 模组在 Windows、macOS 和 Linux 上都能运行的原因.
+excerpt: JVM 运行 Minecraft Java 版及其所有模组的编译后的字节码。以下是其作用以及重要性.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: JVM 和 Java 是同一个东西吗？?
+    a: 不。Java 是一种语言；JVM 是执行编译输出的运行时环境。Kotlin 等其他语言也编译成字节码并在同一 JVM 上运行.
+  - q: 我需要安装 JVM 才能玩吗？ Minecraft?
+    a: 你需要一个 Java 运行时环境，其中包含 JVM。许多启动器会为你捆绑一个，所以你可能已经拥有它，而无需单独安装.
+  - q: JVM 和 JDK 有什么区别？?
+    a: JVM 运行字节码。JDK 是完整的开发工具包，包括编译器和工具，您最初就是用它来构建 Java 程序.
+  - q: JVM 为什么启动时很慢，但之后很快？?
+    a: 它首先解释字节码，然后即时编译器将最热的代码转换为本地机器码，在程序运行时进行转换。这个预热阶段是启动成本；速度提升则在之后实现.
+---
+
+<KeyTakeaways>
+
+- JVM（Java虚拟机）是运行编译后的Java字节码的程序。
+- 相同的字节码可以在Windows、macOS和Linux上运行，因此模组无需重新编译。
+- 玩家需要Java运行时环境（JRE）；模组开发者需要包含编译器的完整JDK。
+- Minecraft Java版和所有Fabric模组，包括Opal，都运行在JVM上.
+
+</KeyTakeaways>
+
+JVM，即 Java 虚拟机，是运行 Java 代码的程序。你编写 Java 代码，编译器将其转换为字节码，然后 JVM 可以在任何操作系统上运行该字节码。 这就是为什么 Minecraft Java 版及其构建的模组在 Windows、macOS 和 Linux 上无需重新编译就能表现出相同的行为.
+
+<Callout variant="info" title="Opal 的适用环境">
+Opal 是一个 [Fabric](https://fabricmc.net/) 模组，因此它与游戏使用相同的 JVM。 如果您正在设置它，[设置指南](/zh/docs/setup) 将会引导您完成整个过程。
+</Callout>
+
+## JVM 实际执行的操作
+
+JVM 运行的是字节码，而不是源代码。当你编译一个 Java 程序时，你不会得到一个 Windows 或 Mac 可执行文件。你会得到包含字节码的类文件，字节码是 JVM 能够理解的紧凑指令集。JVM 读取这些指令并在你的机器上执行它们。
+
+这个额外的层级是关键所在。相同的字节码可以在任何安装了 JVM 的地方运行，因此“编写一次，随处运行”是 Java 如此广泛传播的简短解释。JVM 是使这个承诺成为现实的部分。
+
+## JVM、JRE 和 JDK
+
+这三个术语经常被混淆，所以这里给出它们的划分。
+
+| 术语 | 它是什么 | 何时需要它 |
+| :--- | :--- | :--- |
+| JVM | 运行字节码的引擎 | 始终，运行任何 Java 程序时都需要 |
+| JRE | JVM 加上标准库 | 运行 Java 程序时需要 |
+| JDK | JRE 加上编译器和开发工具 | 构建 Java 程序时需要 |
+
+玩家只需要运行时环境来启动游戏。构建模组的开发者需要完整的 JDK，以便首先将 Java 编译成字节码。
+
+## JVM 如何快速运行你的代码
+
+JVM 首先通过逐个指令的方式解释字节码。在运行过程中，它会观察哪些方法被调用得最多。这些热点路径会被交给 JIT 编译器，JIT 编译器会将其转换为机器码并在运行时执行。经过预热后，最繁忙的代码将以接近原生速度运行.
+
+JVM 也为你管理内存。垃圾回收器会回收你不再使用的对象，因此你无需像在 C 语言中那样手动释放内存。这正是 Java 易于编写且是许多模组作者首选语言的原因之一。
+
+## 为什么这很重要 Minecraft
+
+Minecraft Java 版在 JVM 上运行，所有针对它的工具客户端和模组也是如此。客户端自身的代码可以是 Java、Kotlin 或其他 JVM 语言，因为它们都编译成 JVM 运行的相同字节码 [Fabric]((https://fabricmc.net/) 的模组以字节码 jar 包形式发布，启动时加载器将其连接到游戏中，JVM 以一个进程运行整个内容。
+
+这也是为什么启动器允许你调整诸如堆大小和使用的 Java 版本之类的设置。你是在配置托管游戏的 JVM，而不是游戏本身。
+
+## 常见问题解答
+
+<FAQList>
+
+<FAQItem question="JVM 与 Java 是否相同？">
+不是。Java 是一种编程语言；JVM 是执行编译后代码的运行时环境。Kotlin 等其他语言也可以编译成字节码并在同一 JVM 上运行。
+</FAQItem>
+
+<FAQItem question="我需要安装 JVM 才能玩 Minecraft 吗？">
+您需要 Java 运行时环境，其中包含 JVM。许多启动器会为您捆绑一个，因此您可能已经拥有它，而无需单独安装。
+</FAQItem>
+
+<FAQItem question="JVM和JDK有什么区别？">
+JVM运行字节码。JDK是完整的开发工具包，包括编译器和工具，您最初就是用它来构建Java程序。
+</FAQItem>
+
+<FAQItem question="JVM启动慢但后续运行快的原因是什么？">
+最初，它会解释字节码，然后JIT编译器会将最热的代码转换为本地机器码，在程序运行时进行转换。这种预热是启动成本；速度提升则是在之后实现的。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/what-is-jvm-bytecode", label: "JVM 字节码是什么？?", description: "JVM 实际运行的指令集." },
+  { href: "/zh/learn/what-is-graalvm-javascript-scripting", label: "GraalVM JavaScript 脚本是什么？?", description: "一个运行在 JVM 上的 JavaScript 运行时环境." },
+  { href: "/zh/learn/what-is-a-minecraft-mod-loader", label: "什么是 Minecraft 模组加载器？?", description: "游戏发售时，模组是如何整合进来的." },
+]} />
+
+<CTA href="/zh/purchase">获取 Opal，一个 Fabric 客户端，用于 $8.99</CTA>

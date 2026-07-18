@@ -1,0 +1,88 @@
+---
+title: "纱线与莫杰地图: Minecraft 映射比较 (2026)"
+description: 纱线与 Mojmap 对比：两款 Minecraft 地图制作工具集在命名、许可和工具上的区别，以及选择哪个工具集用于 Fabric 模组.
+excerpt: 纱线是社区命名的并记录下来的；Mojmap 与 Mojang 自己的源代码相符。以下是这两个地图集的不同之处，以及哪个更适合你的项目.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Mappings
+author: trq
+faqs:
+  - q: 编织还是 Mojmap 更适合 Fabric 模组？?
+    a: 两者都适用于 Fabric。Yarn 已经成为生态系统的默认选择，并提供命名参数和文档，而 Mojmap 则与 Mojang 自己的命名方式一致；请根据团队的偏好选择.
+  - q: 莫杰地图的名字和混淆后的名字一样吗？?
+    a: 不。那些被混淆的名称看起来像 a.a.a；Mojmap 会将它们映射到 Mojang 内部使用的可读名称，每个版本都会发布.
+  - q: 我可以把Yarn和Mojmap混在一起吗？?
+    a: 是的，某种程度上是这样。有些 Fabric 设置会基于 Mojmap 并应用 Yarn 重映射，因此它们在一个工具链中共存，而不是直接竞争.
+  - q: 线团或 Mojmap 取代了 MCP 吗？?
+    a: 自 1.14.4 版本起，它们使 MCP 和 Searge 对于新项目都已过时，尽管 1.7 到 1.12 的旧项目仍然依赖 MCP 命名.
+---
+
+<KeyTakeaways>
+
+- Yarn 是社区命名的、开源的 Fabric 绘图工具，具有完整的参数方法。
+- Mojmap 是 Mojang 的官方命名，自 1.14.4 版起每发布版都包含其中。
+- 两者都建立在稳定的层面上，因此可读名称可以更改而不会破坏模组。
+- 许多 Fabric 项目现在都基于 Mojmap 并在此基础上应用 Yarn 重映射.
+
+</KeyTakeaways>
+
+Yarn 是由社区命名的、开源的 [Fabric](https://fabricmc.net/) 映射，它提供了描述性名称和完整的参数方法。Mojmap 是 Mojang 自己的官方命名，自 1.14.4 版本以来一直随每个版本发布。如果您想要一个免费且文档完善的命名方案，请选择 Yarn；如果您想要与 Mojang 自己的名称一致且永不偏离的名称，请选择 Mojmap。
+
+## 它们各自是什么
+
+Yarn 是 FabricMC 维护的映射集。志愿者为 Minecraft 中混淆的类、字段和方法分配可读的名称，这些名称位于稳定的 [Intermediary](/zh/learn/what-is-intermediary) 层之上，以便在不破坏编译的模组的情况下进行重命名。
+
+Mojmap 是 Mojang 随每个版本一起发布的官方映射表，自 1.14.4 版本起。这些名称直接来自 Mojang 自己的源代码，因此它们与开发者内部使用的名称一致。它取代了 MCP 和 Searge，成为任何新项目的默认选择。
+
+## 它们有何不同
+
+这种区别在于谁来选择名称以及许可证如何对待这些名称。Yarn 的名称由社区选择，可以自由使用和分享。Mojmap 的名称是 Mojang 的，其许可证在历史上对编译时使用一直比较宽松，但对再分发则更加谨慎。现代加载器可以为您处理这些问题.
+
+| | Yarn | Mojmap |
+| :--- | :--- | :--- |
+| 命名者 | FabricMC 社区 | Mojang (官方) |
+| 首次可用 | Fabric 时代 | 1.14.4 及更高版本 |
+| 方法参数 | 命名并记录 | 经常缺失 |
+| 授权许可 | 开放，可自由分享 | 编译时宽松 |
+| 底层稳定层 | 中间层 | 每个版本对应的混淆映射 |
+| 最佳适用 | 需要文档的 Fabric 模组 | 匹配 Mojang 源代码的项目 |
+
+## 如何选择
+
+- 如果您基于 [Fabric](https://fabricmc.net/) 且希望获得描述性名称、命名方法参数和内联文档，请选择 Yarn。它是 Fabric 生态系统中的长期默认选择。
+- 如果您希望名称与 Mojang 自己的源代码匹配，计划与使用其他加载器的其他人共享代码，或针对 1.21 或更高版本（官方映射是常见基准），请选择 Mojmap。
+- 许多 Fabric 项目现在基于 Mojmap 构建，并在其基础上应用 Yarn 重映射，因此您不必总是选择其中一个。
+
+## 它们如何与其他映射关联
+
+这两者都处于更长的历史中。在 Mojang 发布映射之前，模组社区使用 MCP 和 Searge 反转混淆名称。从 1.14.4 开始，Mojmap 使官方命名可用，而 Yarn 作为开放的 Fabric 替代方案，叠加在 [Intermediary](/zh/learn/what-is-intermediary) 之上。中间层是保持模组跨映射重命名兼容性的关键.
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="Yarn 或 Mojmap 对于 Fabric 模组更好吗？">
+两者都适用于 Fabric。Yarn 已经成为生态系统的默认选择，并提供命名参数和文档，而 Mojmap 则与 Mojang 自己的命名方式一致。根据您的团队更喜欢哪种命名和工具来选择。
+</FAQItem>
+
+<FAQItem question="莫甲地图的名字和混淆名称一样吗？">
+不是。混淆名称看起来像 `a.a.a`。莫甲地图会将这些映射到 Mojang 内部使用的可读名称，每个版本都会发布。
+</FAQItem>
+
+<FAQItem question="我可以混合使用 Yarn 和 Mojmap 吗？">
+是的，某种程度上可以。有些 Fabric 环境构建在 Mojmap 的基础上，然后应用 Yarn 的重映射，因此这两个工具在同一个工具链中共存，而不是直接竞争。
+</FAQItem>
+
+<FAQItem question="Yarn 或 Mojmap 取代了 MCP 吗？">
+自 1.14.4 版本起，它们使 MCP 和 Searge 对于新项目都已过时。旧的 1.7 到 1.12 的项目仍然依赖 MCP 的命名方式。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/what-are-minecraft-mappings", label: "Minecraft 地图是什么？?", description: "这两个事物所属于的更广泛的话题." },
+  { href: "/zh/learn/what-is-intermediary", label: "什么是中介？?", description: "稳定层覆盖了这两个映射." },
+  { href: "/zh/learn/what-is-the-fabric-api", label: "什么是Fabric API？?", description: "Fabric 模组通常构建的共享层." },
+]} />
+
+<CTA href="/zh/purchase">获取 Opal，一个 Fabric 客户端，用于 $8.99</CTA>

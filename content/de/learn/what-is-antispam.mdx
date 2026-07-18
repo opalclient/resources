@@ -1,0 +1,67 @@
+---
+title: Was ist AntiSpam in Minecraft? (Chat-Filter erklärt)
+description: AntiSpam-Filter entfernen wiederholte und flutende Chatnachrichten automatisch aus Ihrem Minecraft-Chatfenster und sorgen so für eine lesbare Konversation während Spam-Ausbrüchen.
+excerpt: Spam-Bots haben in Ihrem Chatfenster kein Stimmrecht. AntiSpam filtert den Ansturm unauffällig, damit Sie tatsächlich lesen können, was die Leute tippen.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Wird man durch AntiSpam gesperrt?
+    a: Nein, AntiSpam ändert lediglich, wie bereits empfangene Chatnachrichten auf Ihrem Bildschirm angezeigt werden. Nichts wird anders an den Server gesendet, sodass kein Paket oder keine Aktion für ein Anti-Cheat-System markiert wird.
+  - q: Was gilt für AntiSpam als Spam?
+    a: Wiederholte Zeilen, die in schneller Folge oder als Teil einer Flut von Nachrichten abgefeuert werden – wie sie Chat-Spam-Bots und Makros verwenden, um echte Gespräche zu überdecken – werden von diesem Modul ausgeblendet.
+  - q: Blockiert AntiSpam Nachrichten vollständig?
+    a: Nein. Die Chatnachrichten kommen weiterhin wie gewohnt vom Server. AntiSpam entscheidet lediglich, welche davon im sichtbaren Chatfenster angezeigt werden sollen.
+  - q: Kommt AntiSpam nur in Wurst vor?
+    a: Es ist als eine spezielle Wurst-Funktion dokumentiert. Eine Chatfilterung dieser Art ist einfach genug, dass andere Clients dasselbe implementieren könnten, aber diese können wir bestätigen.
+---
+
+<KeyTakeaways>
+- AntiSpam ist ein Chat-Modul, das wiederholte oder überflutende Nachrichten aus deinem Minecraft-Chatfenster filtert, damit echte Gespräche nicht untergehen.
+- Es läuft ausschließlich clientseitig und entscheidet, was dargestellt wird, nachdem der Server die Nachricht zugestellt hat.
+- Es werden keine Daten an den Server gesendet und es beeinflusst weder Bewegungen noch Kämpfe, sodass kein Risiko einer Erkennung besteht.
+- Dokumentiert als Wurst-Feature.
+</KeyTakeaways>
+
+AntiSpam ist ein Chat-Modul, das wiederholte oder überflutende Nachrichten aus dem Chatfenster eines Spielers filtert, sodass Spam nicht die Nachrichten überdeckt, die Sie wirklich interessieren. Es ist ein Anzeige-Filter, keine Netzwerkfunktion: Es entscheidet lokal, was Ihnen angezeigt wird, nicht was an den Server gesendet oder von anderen gesehen wird. Wurst ist der Client, in dem dies als benanntes Modul dokumentiert ist.
+
+Wenn Sie schon einmal beobachtet haben, wie der Chat eines belebten Servers von einem Bot überflutet wird, der dieselbe Zeile zwanzig Mal pro Sekunde spamt, kennen Sie bereits das Problem, das AntiSpam lösen soll
+## Wie es funktioniert
+AntiSpam sitzt im Datenstrom der Chatnachrichten, die beim Client ankommen, und hält die verdächtigen Nachrichten zurück: Zeilen, die in schneller Folge wiederholt werden, oder eine Flut von Nachrichten, die eng genug zusammen gesendet wurden, um offensichtlich automatisiert zu sein. Die Filterung erfolgt, nachdem der Server die Nachricht bereits zugestellt hat und bevor sie im Chatfenster dargestellt wird. Es ändern sich keine der zugrunde liegenden Daten, nur das, was auf Ihrem Bildschirm gezeichnet wird.
+
+Da es sich um eine rein darstellungsbezogene Entscheidung handelt, sendet AntiSpam niemals etwas an den Server zurück. Es gibt kein Paket zu prüfen, keine Zeitangabe zur Identifizierung und keine Interaktion mit der Spielwelt. Es handelt sich um eine Funktion der gleichen Kategorie wie eine Stummschaltungsfunktion, nur dass sie intelligenter darin ist, zu entscheiden, was stummgeschaltet werden soll
+## Ist es sicher, zu verwenden
+
+AntiSpam birgt kein relevantes Risiko hinsichtlich der Erkennung. Es verändert nie, was der Client sendet, plant keine Aktionen und greift weder Bewegungen noch Kämpfe an, sodass ein serverseitiges Anticheat-System nichts vergleichen kann, da es nichts gibt, was der Server überhaupt beobachten könnte. Es gehört zu den anderen unauffälligen, rein visuellen Komfortfunktionen, nicht zu etwas, das darauf ausgelegt ist, das tatsächliche Geschehen in der Spielwelt zu manipulieren.
+
+Das stellt eine völlig andere Risikokategorie dar als die von Modulen, die Ihre Eingaben oder Ausgaben verändern. Wenn eine Funktion nur das lokale Rendering ändert, gibt es keine serverseitige Aktion, auf die sich ein Bildschirmfreigabe- oder Anticheat-Protokoll beziehen könnte.
+
+<Callout variant="tip" title="Wo dies in Opal seinen Platz findet">
+Opal versendet derzeit kein dediziertes AntiSpam-Modul, sondern lediglich ein schlecht dokumentiertes Feature. Die eigene Modulliste von Opal konzentriert sich stark auf Kampf, Bewegung und visuelle Hilfsmittel – die Bereiche, in denen eine Millisekunde tatsächlich einen Unterschied macht. Ein übersichtlicheres Chatfenster wäre zwar schön, aber nicht der Kampf, den Opal aufnimmt.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+<FAQItem question="Wird man durch AntiSpam gebannt?">
+Nein. AntiSpam ändert lediglich, wie bereits empfangene Chatnachrichten auf Ihrem Bildschirm angezeigt werden. Nichts wird anders an den Server gesendet, sodass kein Paket oder eine Aktion vorliegt, die von einem Anticheat-System markiert werden könnte.
+</FAQItem>
+<FAQItem question="Was zählt als Spam für AntiSpam?">
+Wiederholte Zeilen in schneller Folge oder solche, die als Teil einer Flut abgesetzt werden – die Art von Chat-Spam, die Bots und Makros verwenden, um echte Gespräche zu verschütten – werden von dem Modul aus der Anzeige gefiltert.
+</FAQItem>
+<FAQItem question="Blockiert AntiSpam Nachrichten, sodass sie niemals ankommen?">
+Nein. Die Chatnachrichten kommen weiterhin unverändert vom Server an. AntiSpam entscheidet lediglich, welche davon es wert sind, in Ihrem sichtbaren Chatfenster dargestellt zu werden.
+</FAQItem>
+<FAQItem question="Ist AntiSpam nur in Wurst zu finden?">
+Es ist als eine spezifische Wurst-Funktion dokumentiert. Chatfilterung dieser Art ist einfach genug, dass andere Clients das Gleiche bauen könnten, aber dies ist der eine, in dem wir es bestätigen können.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die Kategorie AntiSpam und ähnliche Funktionen leben darin." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Ein anderer Geschmacksrichtung von Dienstprogramm-Client, der auf unauffälligem Betrieb basiert." },
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Ein Modul am anderen Ende des Risikospektrums: serverseitig sichtbar und nachweisbar." }
+]} />
+
+<CTA href="/de/purchase">Erfahren Sie, was tatsächlich in Opals Modulliste enthalten ist.</CTA>

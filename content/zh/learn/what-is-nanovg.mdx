@@ -1,0 +1,92 @@
+---
+title: 什么是 NanoVG？OpenGL 的矢量图形
+description: NanoVG 是一个用于 OpenGL 的小型抗锯齿 2D 矢量图形库。 Minecraft 客户端通过 LWJGL 使用它来绘制清晰的 HUD、菜单和形状.
+excerpt: NanoVG 能够利用 GPU 从一个紧凑的 API 绘制平滑的 2D 形状和文本。这就是为什么 Minecraft 客户端会选择它来绘制他们的界面.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Libraries
+author: trq
+faqs:
+  - q: NanoVG 是 Minecraft 的模组吗？?
+    a: NanoVG 并非 Minecraft 专属的通用 C 绘图库，而是为 OpenGL 设计的；客户端通过 LWJGL 嵌入它来绘制自己的界面.
+  - q: NanoVG 是用什么语言编写的？?
+    a: C. Java 程序通常通过 LWJGL 等原生绑定来使用它，而不是手动调用 C 代码.
+  - q: NanoVG 渲染游戏世界吗？?
+    a: 不，它绘制 2D 重叠层，例如 HUD、菜单、形状和文本；游戏世界本身由 Minecraft 自身的引擎渲染.
+  - q: 为什么不干脆用图像来设计用户界面呢？?
+    a: 图像在缩放时会变得模糊或出现锯齿，而且每个图像都会消耗内存，而 NanoVG 则通过数学公式构建形状，因此无论 GUI 缩放比例如何，它们都能保持清晰，并且占用内存很少.
+---
+
+<KeyTakeaways>
+
+- NanoVG 是一个为 OpenGL 编写的、使用 C 语言实现的轻量级的抗锯齿 2D 矢量图形库。
+- 它可以从路径绘制形状、文本和渐变，在任何尺寸下都能呈现出平滑的边缘。
+- Minecraft 客户端通过 LWJGL 绑定来使用它，以绘制 HUD 和菜单。
+- 矢量绘图在可调整大小的 UI 中胜出；位图仍然在固定艺术品方面更胜一筹.
+
+</KeyTakeaways>
+
+NanoVG 是一个为 OpenGL 编写的、小巧的抗锯齿矢量图形库，使用 C 语言编写。它能通过一个紧凑的 API 绘制具有平滑边缘的 2D 形状、文本和渐变。在 Minecraft 客户端中，它通过 [LWJGL](https://www.lwjgl.org/) 绑定实现，从而允许 Java 代码在游戏之上绘制清晰的 HUD 和菜单.
+
+<Callout variant="info" title="Opal 的适配">
+Opal 是一个基于 [Fabric](https://fabricmc.net/) 的模组，它会在游戏界面上绘制自己的界面。如果您想自行添加功能，[脚本指南](/zh/docs/scripting) 介绍了如何使用 JavaScript 来实现。
+</Callout>
+
+## NanoVG 的作用
+
+NanoVG 通过 OpenGL 在 GPU 上渲染 2D 矢量图形。你可以用路径（线条、曲线、矩形、圆形）来描述形状，然后填充或描边它们。该库处理抗锯齿，因此无论大小如何，边缘都能保持平滑，而不会像拉伸的位图那样变得像素化。
+
+它被故意设计得小巧。整个库就是一个单独的 C 文件，具有集中的 API，这正是它出现在图形演示和轻量级 UI 层，而不是重量级引擎代码的原因之一。
+
+## 为什么 Minecraft 客户端使用它
+
+客户端在其之上绘制自己的界面：数组列表、菜单、形状指示器、自定义 HUD 元素。NanoVG 为该界面提供了一种干净的方式来绘制矢量形状和文本，这些形状和文本可以缩放到任何分辨率，而不会出现锯齿。
+
+由于渲染基于路径，因此开发人员可以使用基本图形来构建圆角面板、渐变和轮廓，而不是预烘焙的图像。这保持了 GUI 缩放和显示尺寸的一致外观。
+
+## NanoVG 和 LWJGL
+
+Minecraft 及其模组在 JVM 上运行，但 NanoVG 是一个 C 库。[LWJGL](/zh/learn/what-is-lwjgl) 弥合了这一差距。它为像 NanoVG 和 OpenGL 这样的本机库提供 Java 绑定，因此 Java 代码可以直接调用本机函数.
+
+客户链接到 LWJGL NanoVG 模块，打开绘图上下文，并在游戏渲染循环中发出路径和绘制调用。原生端负责在 GPU 上进行实际的栅格化处理。
+
+## NanoVG 与位图绘图
+
+| 方面 | NanoVG（矢量） | 位图纹理 |
+| :--- | :--- | :--- |
+| 边缘 | 任意尺寸皆抗锯齿 | 缩放时模糊或失真 |
+| 形状 | 运行时从路径构建 | 预制图像资源 |
+| 内存 | 占用少，无大型纹理 | 随着图像数量增长 |
+| 适用场景 | UI、形状、动态文本 | 照片、固定艺术品、图标 |
+
+矢量绘图在界面元素大小或颜色变化时更胜一筹。位图仍然适用于细节丰富、固定的艺术作品。
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="NanoVG 是 Minecraft 的模组吗？">
+不是。NanoVG 是一个用于 OpenGL 的通用 C 图形库。它不是 Minecraft 专属的。客户端通过 LWJGL 嵌入它来绘制自己的界面。
+</FAQItem>
+
+<FAQItem question="NanoVG 是用什么语言编写的？">
+Java 程序通过 LWJGL 等原生绑定来使用它，而不是直接调用 C 代码。
+</FAQItem>
+
+<FAQItem question="NanoVG是否绘制游戏世界？">
+不是。它绘制2D覆盖层：HUD、菜单、形状和文本。游戏世界本身由Minecraft自身的引擎渲染。
+</FAQItem>
+
+<FAQItem question="为什么不直接使用图像来构建UI？">
+图像在缩放时会变得模糊或出现锯齿，而且每个图像都会占用内存。NanoVG通过数学公式来构建形状，因此它们在任何GUI缩放比例下都能保持清晰，并且占用内存很少。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/what-is-lwjgl", label: "LWJGL 是什么？?", description: "Java 能够访问 NanoVG 的绑定." },
+  { href: "/zh/learn/what-is-graalvm-javascript-scripting", label: "GraalVM JavaScript 脚本是什么？?", description: "Opal 如何让您在 JavaScript 中扩展它." },
+  { href: "/zh/learn/what-is-the-fabric-api", label: "什么是Fabric API？?", description: "Fabric 模组通常构建的共享层." },
+]} />
+
+<CTA href="/zh/purchase">获取 Opal，一个 Fabric 客户端，用于 $8.99</CTA>

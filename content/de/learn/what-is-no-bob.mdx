@@ -1,0 +1,82 @@
+---
+title: Was ist No Bob in Minecraft? Modul erklärt
+description: Kein Bob ist ein Minecraft-Modul, das das Auf- und Abbewegen der Kamera beim Gehen verhindert und so die gleiche, feste Ansicht wie die eingebaute View-Bobbing-Einstellung in der Vanilla-Version erzeugt.
+excerpt: Vanille Minecraft lässt deine Kamera bei jedem Schritt erzittern. Kein Bob stabilisiert sie, sondern verwendet den gleichen Trick wie ein Kontrollkästchen in deinen Videoeinstellungen.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Ist "No Bob" dasselbe wie die "View Bobbing"-Option in Vanilla?
+    a: Funktionell ja. Vanillas Videoeinstellungen enthalten bereits einen Schalter, der das Kamera-Wackeln entfernt. No Bob reproduziert diesen gleichen festen Kameraeffekt als Client-Modul.
+  - q: Gibt No Bob einen Vorteil im PvP?
+    a: Keiner, der wirklich etwas bringt. Da jeder Spieler das Wackeln der Ansicht bereits in den Standardeinstellungen deaktivieren kann, verschafft dir das Deaktivieren über ein Modul keinen Vorteil gegenüber jemandem, der einfach das Häkchen selbst entfernt hat.
+  - q: Kann ein Server "No Bob" erkennen?
+    a: Nein. Das Beobachten von Bobbern wird vollständig auf Ihrem Client gerendert und niemals an den Server übermittelt, sodass es in keinem Paket etwas gibt, das eine serverseitige Prüfung bemerken könnte.
+  - q: Ändert No Bob die Bewegung oder nur die Kamera?
+    a: Nur die Kamera. Gehgeschwindigkeit, Sprunghöhe und Kollision bleiben unverändert. Das Modul verändert, was du siehst, nicht wie dein Charakter sich tatsächlich bewegt.
+---
+
+<KeyTakeaways>
+
+- No Bob ist ein kosmetisches Minecraft-Modul, das das Wackeln der Ansicht, also die Kamerabewegung beim Gehen, aufhebt.
+- Es verändert lediglich das Rendering. Bewegungsgeschwindigkeit, Hitboxen und Serverdaten bleiben unberührt.
+- Es besteht kein Risiko einer Erkennung: das Wackeln der Ansicht erreicht den Server überhaupt nicht.
+- Vanilla bietet die gleiche Lösung bereits unter Optionen > Videoeinstellungen > Ansichtswackeln.
+
+</KeyTakeaways>
+
+No Bob ist ein Minecraft-Modul, das die standardmäßige Kamerabewegung beim Gehen aufhebt, die kleine seitliche Schwung- und Nickbewegung, die mit deiner Geh-Animation synchronisiert ist. Aktiviere es, und die Kamera verriegelt sich auf einer ebenen, konstanten Höhe, unabhängig davon, wie schnell du dich bewegst. Es ist eine Rendering-Änderung, keine Gameplay-Änderung: dein Charakter läuft mit der gleichen Geschwindigkeit, wird auf die gleiche Weise getroffen und sendet die gleichen Daten an den Server wie immer. Das Einzige, was sich ändert, ist das, was du persönlich siehst.
+
+## Funktionsweise
+
+Standardmäßig wird bei jedem Schritt während des Gehens ein kleiner periodischer Offset auf die Kamera angewendet – das ist der eingebaute Bob: eine rhythmische Schwung- und Nickbewegung, die direkt an den Gehzyklus gebunden ist. No Bob platziert sich im Rendering-Pfad und hebt diesen Offset auf, bevor der Frame gezeichnet wird, und hält die Kamera in einer festen Kopfhöhe, unabhängig von der Bewegung.
+
+Da das Kamerabobbing rein ein Rendering-Schritt ist, gibt es nichts darunter, mit dem es interagieren könnte. Es beeinflusst weder die Bewegungsgeschwindigkeit, die Kollision noch die Treffererkennung, und es ist Teil von nichts, was der Server verfolgt. Der Server hat von vornherein kein Konzept von "Bobbing". Er empfängt Positionsaktualisierungen wie immer und lässt jeden Client den Gehzyklus zeichnen, wie er es wünscht.
+
+Der Reiz liegt hauptsächlich in Komfort und Klarheit. Ein ruhiges Bild schont die Augen bei längeren Sitzungen, reduziert die Übelkeit, die manche Spieler durch ständige Kamerabewegungen bekommen, und liefert sauberere Aufnahmen, wenn man streamt oder Material aufnimmt. Eine kleinere Gruppe mag es einfach, während kampfintensiver Kämpfe eine Sache weniger auf dem Bildschirm zu haben, die hin und her wackelt.
+
+## Keine Bobbing-Bewegung vs. Vanilla's View Bobbing-Umschalter
+
+| | Vanilla View Bobbing | Modul "Keine Bobbing" |
+|---|---|---|
+| Speicherort | Optionen > Videoeinstellungen | Modulliste des Clients |
+| Effekt | Entfernt Kamerabewegung | Entfernt Kamerabewegung |
+| Erkennungsrisiko | Keines | Keines |
+| Kosten | Kostenlos, im Spiel integriert | Im Lieferumfang des Clients enthalten |
+
+Beide erzeugen das gleiche Bild. Der einzige wirkliche Unterschied ist, wo man den Schalter findet und ob er neben den anderen visuellen Optionen des Clients liegt, anstatt in einem Einstellungsmenü versteckt zu sein.
+
+<Callout variant="tip" title="Wo dies in Opal zu finden ist">
+Opal liefert keinen dedizierten No Bob Toggle mit, und es gibt auch keinen wirklichen Grund dafür. Mojang hat die Lösung bereits eingebaut; sie befindet sich aktuell unter Optionen > Videoeinstellungen > Ansicht Bobbing. Sie ist kostenlos verfügbar, ohne dass ein Download erforderlich ist. Die Modulslots eines kostenpflichtigen Clients sollten besser für Dinge verwendet werden, die Vanilla nicht leisten kann, worauf sich Opals eigene visuelle und Bewegungsarbeit stattdessen konzentriert.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Ist No Bob dasselbe wie die View Bobbing-Option in Vanilla?">
+Funktionell ja. Vanillas Videoeinstellungen enthalten bereits einen Schalter, der das Kamerabobbing entfernt. No Bob reproduziert denselben festen Kameraeffekt als Client-Modul.
+</FAQItem>
+
+<FAQItem question="Verleiht das Deaktivieren von Bob einen Vorteil im PvP?">
+Keinen nennenswerten. Da jeder Spieler das Bobbing bereits in den Standardeinstellungen deaktivieren kann, verschafft das Deaktivieren über ein Modul keinen Vorteil gegenüber jemandem, der einfach das Häkchen entfernt hat.
+</FAQItem>
+
+<FAQItem question="Kann ein Server No Bob erkennen?">
+Nein. Das Betrachten von Bobbing wird vollständig auf Ihrem Client gerendert und niemals an den Server übermittelt, sodass es in keinem Paket etwas gibt, das eine serverseitliche Prüfung bemerken könnte.
+</FAQItem>
+
+<FAQItem question="Ändert No Bob die Bewegung oder nur die Kamera?">
+Nur die Kamera. Gehgeschwindigkeit, Sprunghöhe und Kollision bleiben unverändert. Das Modul ändert, was du siehst, nicht wie dein Charakter sich tatsächlich bewegt.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die breitere Kategorie, zu der Module wie No Bob gehören." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Wo die Grenze zwischen subtil und erkennbar tatsächlich verläuft." },
+  { href: "/de/learn/what-is-velocity-anti-knockback", label: "Was ist Geschwindigkeit (Anti-Rückstoß)?", description: "Ein Modul am anderen Ende des Risikospektrums als eine kosmetische Lösung wie No Bob." },
+]} />
+
+<CTA href="/de/kaufen">Vanille hat bereits deine Kamera stabilisiert. Sieh dir an, was Opal für alles baut, was Vanille nicht kann.</CTA>

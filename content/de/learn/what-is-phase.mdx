@@ -1,0 +1,79 @@
+---
+title: Was ist eine Phase in Minecraft? Das Noclip-Modul erklärt
+description: Phase ist ein Bewegungsmodul, das es dir ermöglicht, durch feste Blöcke zu gehen, indem du deine Position vom eigentlichen Kollisionsverhalten entkoppelt. So funktioniert es.
+excerpt: Phase füttert dem Server eine Position zu, die eine Kollision niemals erzeugen könnte, und für einen Moment ist die Wand einfach nicht da. Es ist auch einer der leichtesten Betrüge im Spiel, um ihn aufzudecken.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was macht Phase eigentlich?
+    a: Es ermöglicht einem Spieler, durch feste Blöcke zu gehen, indem es dem Server eine Position meldet, die eine echte Kollisionserkennung niemals erzeugen würde – im Wesentlichen ein kurzes Noclip durch eine Wand.
+  - q: Ist Phase dasselbe wie ein Fly-Hack?
+    a: Nein. Ein Flyhack entfernt die Schwerkraft, sodass du dich frei durch die offene Luft bewegen kannst. Phase umgeht speziell Kollisionen mit festen Blöcken, sodass du Gelände passieren kannst, das dich normalerweise aufhalten würde.
+  - q: Kann Phase dich sperren lassen?
+    a: Ja. Es gibt keinen legitimen Weg, um auf der anderen Seite eines festen Blocks zu landen, und serverseitige Anti-Cheats überprüfen die Position gegen die Weltkollision unabhängig vom Client, was diese Art von Bewegung leicht erkennbar und handlungsfähig macht.
+  - q: Welche Kunden haben Phase versendet?
+    a: Es ist dokumentiert, wie in Fan und Opal v1 zu sehen, und als Bewegungsmodul in beiden aktenkundig. Andere Kunden können ähnliches Noclip-Verhalten unter einem anderen Modulnamen ausliefern.
+---
+
+<KeyTakeaways>
+- Phase ist ein Bewegungsmodul, das es einem Spieler ermöglicht, durch feste Blöcke zu gehen, indem er seine Position vom realen Kollisionsverlauf entkoppelt.
+- Es löscht die Kollision nicht aus der Welt, sondern liefert dem Server eine Position, die eine Kollision niemals erzeugen würde.
+- Die Entkopplung muss nur so lange aufrechterhalten werden, bis die Wand geräumt ist, danach kehrt die Bewegung in den normalen Zustand zurück.
+- Anti-Cheat-Systeme erkennen dies, indem sie die Position direkt mit der Weltgeometrie vergleichen, was eine der zuverlässigsten Erkennungsmethoden ist.
+</KeyTakeaways>
+
+Phase ist ein Bewegungsmodul, das einem Spieler erlaubt, durch feste Blöcke zu gehen – ein kurzdistanziger Noclip, der durch eine Täuschung des Servers bezüglich der eigenen Position realisiert wird. Die normale Kollisionserkennung hält dich unabhängig von den gedrückten Tasten immer auf einer Seite einer Wand. Phase umgeht dies, indem es dem Server eine Position auf der anderen Seite meldet, eine, die eine normale Kollisionserkennung niemals eigenständig generieren könnte. Der Server vertraut im Allgemeinen den Koordinaten, die ein Client sendet, innerhalb einer gewissen Toleranz, sodass deine Position hinter dem Block aktualisiert wird, der dich hätte aufhalten sollen. Durchschlüpfe hindurch, und die Bewegung kann wie nichts geschehen wieder normal weitergehen.
+
+## Wie Phase funktioniert
+
+Phase greift nicht in die Kollisionskörper der Welt ein. Die Blöcke sind weiterhin fest, die Trefferbereichsberechnungen haben sich nicht geändert, und ein Spieler ohne laufendes Modul, der in dieselbe Wand läuft, bleibt wie immer genau daran stehen. Was sich ändert, ist, was der Client meldet. Das Modul verfolgt, wo der Spieler sich tatsächlich im Verhältnis zum Blockgitter befindet, und sendet dann dem Server Koordinaten, die über die Wand hinausgehen, anstatt an ihr anzuhalten. Da der Server die ihm vorgelegten Positionen im Allgemeinen innerhalb einer gewissen Toleranz vertraut, aktualisiert er die Position des Spielers auf der gegenüberliegenden Seite eines Blocks, der ihn hätte blockieren sollen.
+
+Die Lüge muss nur für einen Moment Bestand haben. Sobald der Spieler die Wand verlassen hat, geht die Bewegung wieder in die Normalität über, was dazu beiträgt, dass das Modul auf einen schnellen Blick schwer zu erkennen ist: Es gibt keine anhaltende Seltsamkeit, sondern nur ein Augenblick, in dem sich jemand an einem Ort befand, den er nicht hätte erreichen können.
+
+Der Reiz ist einfach. Es umgeht Gelände, das ansonsten einen Umweg erfordern würde: eine Wand, ein Zaun, eine einblockige Lücke, um die eine Karte absichtlich herumgebaut wurde. Es zeigt sich am häufigsten in spielerisch fokussierter Bewegung, wo das Durchschneiden durch feste Geometrie Distanz spart oder einen Ort freigibt, den die Karte nie zulassen sollte. Es wird als Bewegungs-Kategorie-Modul in Clients wie Fan und Opal v1 dokumentiert.
+
+## Ist es sicher zu verwenden?
+
+Nein, auf keine Weise, die einer Prüfung standhält. Es gibt keine legitime Abfolge von Vanilla-Eingaben, die einen Spieler auf der anderen Seite eines festen Blocks platziert, ohne ihn zu umgehen, darüber zu klettern oder durch eine tatsächliche Öffnung zu gehen. Das macht Phase zu einer der auffälligsten, anstatt zu einer der subtileren Schummelmethoden. Es gibt keine Grauzonen-Version davon und keine legitime Erklärung, die ein Server zuerst ausschließen muss.
+
+Server-seitige Anti-Cheat-Systeme überprüfen Bewegungen anhand der Kollisionskörper der Welt unabhängig davon, was der Client behauptet. Ein Spieler, der in einem Tick außerhalb eines Blocks ist und im nächsten Tick darüber hinaus, ohne einen gültigen Pfad zwischen diesen beiden Punkten zu haben, scheitert an dieser Prüfung sofort. Es handelt sich um ein geometrisches Problem, nicht um eine statistische Beurteilung, wie menschlich die Mausbewegungen aussehen, und genau deshalb ist die Erkennung dieser Art von Noclip in der Regel zuverlässig. Die Timing-Tricks und Randomisierung, die die Erkennung anderer Cheats abschwächen, haben hier kaum Wirkung, da die Prüfung nur darauf achtet, wo sich ein Spieler relativ zum Raster befindet, nicht wie er dorthin gelangt ist.
+
+<Callout variant="tip" title="Phase in Opal">
+Opal liefert dieses Modul ebenfalls mit, unter demselben Namen: Phase. Die Katalogbeschreibung macht keine großen Versprechungen: "Ermöglicht es Ihnen, durch Wände zu gehen." Ebenfalls die gleiche kurzreichweitige Noclip-Funktion wie überall sonst, dieselbe Erkennungsgeschichte.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite beschreibt das Modul allgemein, damit Sie wissen, was der Begriff bedeutet. Benennung und exaktes Verhalten können je nach Client variieren, und das Umgehen von festen Blöcken hat auf keinem Server, der eine Anti-Cheat-Software ausführt, eine legitime Erklärung. Opal klassifiziert die Verwendung von Phase auf eigene Gefahr genau aus diesem Grund: sie ist erkennbar, und sie kann dazu führen, dass ein Konto gesperrt wird, wie es bei jedem Client der Fall ist, der sie mitliefert.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was macht die Phase-Funktion eigentlich?">
+Sie ermöglicht es einem Spieler, durch feste Blöcke zu gehen, indem eine Position an den Server übermittelt wird, die normale Kollisionserkennung niemals zulassen würde – effektiv ein kurzer Noclip-Modus durch eine Wand.
+</FAQItem>
+
+<FAQItem question="Ist Phasen das Gleiche wie ein Fly-Hack?">
+Nein. Ein Fly-Hack entfernt die Schwerkraft und ermöglicht es einem Spieler, sich frei durch den offenen Raum zu bewegen. Phasen hingegen umgeht die Kollision mit festen Blöcken, sodass der Spieler Gelände passieren kann, das ihn eigentlich aufhalten sollte.
+</FAQItem>
+
+<FAQItem question="Kann Phase dich bannen?">
+Ja. Das Durchdringen von festen Blöcken hat keine legitime Erklärung, und serverseitige Anti-Cheat-Systeme überprüfen die Positionen der Spieler unabhängig vom Client gegen die Weltkollision, was diese Art von Bewegung leicht erkennbar und handlungsfähig macht.
+</FAQItem>
+
+<FAQItem question="Welche Kunden haben Phase ausgeliefert?">
+Dies ist dokumentiert, wie in Fan und Opal v1 zu sehen ist. Andere Kunden können ähnliches Noclip-Verhalten unter einem anderen Modulnamen implementieren.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Ein weiteres Bewegungsmodul, das darauf basiert, die Informationen auszunutzen, denen ein Server bezüglich der Position vertrauen muss." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die Kundengruppe, die auf unauffälligem Verbleib statt auf bloß schneller Bewegung basiert." },
+  { href: "/de/learn/what-is-velocity-anti-knockback", label: "Was ist Geschwindigkeit (Anti-Rückstoß)?", description: "Ein anderes Bewegungs-Kategorie-Modul mit dem gleichen Risikoprofil bei eigener Nutzung." },
+]} />
+
+<CTA href="/de/kaufen">Das Phasenmodul von Opal macht die Behauptung, durch Wände zu gehen, wahr. Sehen Sie sich die restliche Liste an.</CTA>

@@ -1,0 +1,81 @@
+---
+title: Was ist "No Rotate" in Minecraft? Modul erklärt
+description: No Rotate ist ein Minecraft-Utility-Modul, das verhindert, dass der Server die Blickrichtung deines Clients erzwingt, wodurch Desynchronisationen entstehen können, die von Anticheats erkannt und bestraft werden.
+excerpt: Der Server denkt, er könne dir jederzeit den Kopf verdrehen. "Keine Drehung" ist die stille Antwort des Clients.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was bewirkt "No Rotate" in Minecraft?
+    a: Es verhindert, dass der Server die Blickrichtung deines Clients erzwingt. Deine Kamera behält ihre Ausrichtung bei, egal wohin du sie tatsächlich richtest, anstatt sich an die Drehung anzupassen, die der Server versucht festzulegen – sei es durch einen Teleport, einen Zuschauerwechsel oder ein skriptgesteuertes Ereignis.
+  - q: Verändert No Rotate, wo ich tatsächlich hinschaue?
+    a: Nein. Ihre tatsächliche Kamerarichtung ändert sich nie. Was sich ändert, ist, was der Server für Ihre Richtung hält, und diese Lücke zwischen den beiden ist genau der Grund für die Diskrepanz.
+  - q: Ist "No Rotate" dasselbe wie ein Rotation-Spoofer, wie beispielsweise Anti-Aim?
+    a: Fast nicht ganz. No Rotate lehnt eine Drehung ab, die der Server erzwingen möchte, anstatt eine gefälschte zu senden. Anti-Aim und ähnliche Module lügen aktiv über Ihre Ausrichtung bei jedem Tick; No Rotate lässt den Server einfach nicht damit überschreiben.
+  - q: Kann Anticheat No Rotate erkennen?
+    a: Ja, grundsätzlich. Jede Prüfung, die die vom Server zugewiesene Rotation mit dem vergleicht, was der Client anschließend meldet, kann die Diskrepanz aufdecken, weshalb sie als ein modulares System behandelt wird, das mit eigener Gefahr verwendet werden darf, anstatt als ein sicheres.
+---
+
+<KeyTakeaways>
+
+- No Rotate ist ein Hilfsprogramm, das verhindert, dass der Server die Blickrichtung Ihres Clients erzwingt.
+- Es verwirft die Drehungspakete des Servers, anstatt einen eigenen gefälschten Wert zurückzusenden.
+- Das Ergebnis ist eine Desynchronisation: die Kopie der Blickrichtung Ihres Charakters auf dem Server stimmt nicht mehr mit dem überein, wohin Sie tatsächlich schauen.
+- Es ist erkennbar und wird auf eigene Gefahr verwendet, wie jedes Modul, das Server- und Clientdaten in Konflikt bringt.
+
+</KeyTakeaways>
+
+No Rotate ist ein Minecraft-Hilfsprogramm, das verhindert, dass der Server die Blickrichtung deines Clients erzwingt. Bestimmte Serveraktionen – ein Teleport, ein Wechsel in den Zuschauer-Modus, eine programmierte Zwischensequenz – haben normalerweise die Autorität, deine Kamera in eine von ihnen gewählte Drehung zu zwingen. No Rotate sorgt dafür, dass der Client diese Anweisung ignoriert und weiterhin in die Richtung schaut, in die du tatsächlich schaust. Deine lokale Ansicht ändert sich nicht. Was sich ändert, ist die eigene Aufzeichnung des Servers über deine Drehung, die nicht mehr mit der Realität übereinstimmen muss. Diese Diskrepanz ist der Sinn und Zweck des Moduls, und auch das gesamte Risiko.
+
+## Funktionsweise
+
+No Rotate fängt die Pakete ab, die der Server verwendet, um deine Blickrichtung festzulegen, und verhindert, dass sie auf deiner Seite wirksam werden. Deine Kamera zeigt weiterhin in die Richtung, in die du tatsächlich zielst; die Anweisung, die sie normalerweise drehen würde, wird verworfen, bevor sie wirken kann.
+
+Der Server merkt derweil nichts davon. Soweit seine eigene Buchhaltung betrifft, hat er das Drehungsupdate gesendet und der Client hat es angewendet, so wie er es für jedes andere Paket tut, das er sendet. Für denselben Spieler existieren nun zwei unterschiedliche Zahlen: die echte, die deine Kamera verwendet, und die veraltete, von der der Server als aktuell angesehen wird. Sie stimmen nicht mehr überein, und nichts zwingt sie, wieder synchron zu werden.
+
+Dies ist ein dokumentiertes Exploit-Modul, und es ist bei Clients wie Tenacity aufgetaucht. Es ist ein schmales Trick, aber ein hartnäckiges: jede Servermechanik, die sich darauf verlässt, zu wissen, in welche Richtung Sie sich tatsächlich gerade befinden, liest einen falschen Wert.
+
+## Keine Rotation vs. Rotations-Spoofing
+
+"No Rotate" wird oft mit Modulen wie [Anti-Aim](/de/learn/what-is-anti-aim) in einen Topf geworfen, und das ist leicht nachvollziehbar. Beide führen dazu, dass der Server eine Rotation hält, die nicht der Realität entspricht. Der zugrunde liegende Mechanismus ist jedoch unterschiedlich. Anti-Aim sendet aktiv einen gefälschten Yaw- und Pitch-Wert an den Server bei jedem Tick und lügt absichtlich über Ihre Ausrichtung. No Rotate sendet überhaupt nichts Falsches. Es lehnt einfach eine Rotation ab, die der Server versucht hat aufzuerlegen, und lässt den tatsächlichen Wert überall sonst unverändert.
+
+Diese Unterscheidung ist wichtig für die Art und Weise, wie jede dieser Methoden aufgedeckt wird. Anti-Aim muss seine gefälschten Zahlen intern mit Ihrer Bewegung konsistent halten, sonst fällt die Lüge unter genauerer Betrachtung auseinander. No Rotate erzeugt eine flachere Art von Diskrepanz: eine Rotation, die der Server explizit zugewiesen hat und die auf der anderen Seite einfach nie auftaucht. Das Ablehnen einer Anweisung führt tendenziell zu einer größeren, offensichtlicheren Lücke, als wenn man eine Zahl nur leise anpasst, was auch ein Grund dafür ist, dass diese Methode als leicht zu erkennen gilt, sobald ein Server sich die Mühe macht, danach zu suchen.
+
+<Callout variant="tip" title="Wo Keine Rotation in Opal sitzt">
+Opal versendet Keine Rotation unter seiner Kategorie Dienstprogramme, beschrieben wie es hier funktioniert: es verhindert, dass der Server Ihre Rotation erzwingt. Es wird als Nutzung auf eigene Gefahr im Opal-Katalog selbst eingereicht, nicht als sicherer kosmetischer Schalter, da die Inkonsistenz, die es erzeugt, genau die Art von Sache ist, die eine serverseitige Prüfung kennzeichnen kann.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite erklärt, was No Rotate ist und wie es sich allgemein verhält. Sie enthält keine Anweisungen zum Ausführen, und es ist keine Aussage darüber, dass es sicher ist. Wenn ein Server die ihm zugewiesene Drehung mit der später vom Client gemeldeten Drehung vergleicht, entsteht hier eine solche Lücke, und das Erkennen dieser Lücke birgt das gleiche Bannrisiko wie jeder andere erkannte Cheat.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was bewirkt 'No Rotate' in Minecraft?">
+Es verhindert, dass der Server die Blickrichtung deines Clients erzwingt. Deine Kamera behält die Ausrichtung bei, die du tatsächlich einstellst, anstatt sich an die Drehung anzupassen, die der Server versucht, festzulegen – sei es durch einen Teleport, einen Zuschauerwechsel oder ein Skript-Ereignis.
+</FAQItem>
+
+<FAQItem question="Ändert No Rotate, wo ich tatsächlich hinschaue?">
+Nein. Ihre tatsächliche Kamerarichtung ändert sich nie. Was sich ändert, ist, was der Server für Ihre Richtung hält, und genau diese Diskrepanz führt zu einer Fehlanzeige.
+</FAQItem>
+
+<FAQItem question="Ist 'No Rotate' dasselbe wie ein Rotation-Spoofer wie Anti-Aim?">
+Nicht ganz. 'No Rotate' lehnt eine Drehung ab, die der Server erzwingen möchte, anstatt eine gefälschte zu senden. Anti-Aim und ähnliche Module lügen aktiv über Ihre Blickrichtung bei jedem Tick; 'No Rotate' lässt den Server lediglich nicht überschreiben.
+</FAQItem>
+
+<FAQItem question="Kann Anticheat No Rotate erkennen?">
+Ja, grundsätzlich schon. Jede Prüfung, die die vom Server zugewiesene Drehung mit dem vergleicht, was der Client danach meldet, kann die Diskrepanz aufdecken. Deshalb wird es als ein modulares System behandelt, das mit eigenen Risiken genutzt werden sollte, anstatt als ein sicheres.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die Kategorie, auf die sich vor allem Stealth-Spiele mit Exploits wie diesem konzentrieren." },
+  { href: "/de/learn/what-is-velocity-anti-knockback", label: "Was ist Velocity (Anti-Knockback)?", description: "Ein weiteres Modul, das darauf ausgelegt ist, einen vom Server zugewiesenen Wert unauffällig zu überschreiben." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Kategorie „Keine Drehung“ und ähnliche Module gehören dazu." },
+]} />
+
+<CTA href="/de/kaufen">Der Reiter „Dienstprogramme“ von Opal wird ohne Drehsperre ausgeliefert und unter „Nutzung auf eigene Gefahr“ abgelegt, anstatt als sicher aufzutreten.</CTA>

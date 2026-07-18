@@ -1,0 +1,79 @@
+---
+title: Was sind neue Chunks in Minecraft? (Modul erklärt)
+description: New Chunks ist ein Minecraft-Exploit-Modul, das Pakete und Beleuchtungsdaten ausliest, um frisch generiertes Terrain und versteckte Basen auf Servern wie 2b2t aufzudecken.
+excerpt: Es gräbt nicht, es erkundet nicht. Es liest nur die Beleuchtung und sagt dir genau, wo die Karte veraltet ist.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was genau erkennt New Chunks eigentlich?
+    a: Ob der aktuell ladende Chunk um den Spieler gerade vom Server generiert wurde, oder ob es sich um einen Chunk handelt, der bereits existierte und einfach erneut an den Client gesendet wird.
+  - q: Ist New Chunks dasselbe wie X-ray?
+    a: Nr. X-Ray zeigt, was sich bereits in bereits geladenem Terrain befindet, meistens Erze. Neue Chunks geben an, ob das Terrain neu oder bereits erkundet ist, was eine völlig andere Art von Information ist.
+  - q: Schickt New Chunks etwas Ungewöhnliches an den Server?
+    a: Nein. Es liest lediglich Pakete und Lichtsignale, die der Client bereits während des normalen Chunk-Ladevorgangs empfängt, und sendet niemals veränderte Daten zurück. Genau aus diesem Grund kann eine serverseitige Prüfung dies nicht direkt erkennen.
+  - q: Warum ist das speziell auf Anarchie-Servern relevant?
+    a: Anarchie-Server wie 2b2t haben keine geschützten Claims und jahrelange Erkundungstouren haben sich um den Spawn angesammelt. Die Grenze zwischen erkundetem und unerforschtem Gelände zu finden, ist einer der wenigen Wege, um unbeanspruchte Landstriche oder eine Basis zu finden, die jemand zu verstecken versucht hat.
+---
+
+<KeyTakeaways>
+
+- New Chunks ist ein Exploit-Modul, das neu generiertes Terrain von Land unterscheidet, das der Server bereits erstellt und gesendet hat.
+- Es liest Pakete und Lichtsignale aus dem normalen Chunk-Laden, ohne dass Erkundung, Graben oder Kartenprüfung erforderlich sind.
+- Auf Anarchie-Servern wie 2b2t markiert diese Grenze den Rand des erkundeten Landes und weist auf Orte hin, an denen Basen versteckt sind.
+- Es sendet dem Server niemals etwas Ungewöhnliches, weshalb es von Fair-Play-Regeln häufiger erfasst wird als von Anticheats.
+
+</KeyTakeaways>
+
+New Chunks ist ein Exploit-Modul, das den Unterschied zwischen Terrain erkennt, das der Server gerade zum ersten Mal generiert hat, und Terrain, das bereits existiert und lediglich neu geladen wird. Diese Unterscheidung trifft es, indem es Pakete und Lichtsignale ausliest, die während des normalen Chunk-Ladevorgangs gesendet werden – dieselben Daten, die jeder Client bereits erhält, unabhängig davon, ob das Modul ausgeführt wird oder nicht. Es ist keine Spieleraktion erforderlich. Auf einer Welt, die seit Jahren rund um den Spawnpunkt abgegrast wurde, ist diese einzige Unterscheidung der schnellste Weg, um die eigentliche Grenze zu finden und alles, was jemand hinter sie vergraben hat.
+
+## Wie New Chunks die Welt ausliest
+
+Das Modul beobachtet die Daten, die als Chunks in die Sichtweite springen, und liest sie aus. Frisch generiertes Terrain und bereits existierendes Terrain senden subtil unterschiedliche Paket- und Lichtsignaturen beim Laden, und das ist der ganze Trick: New Chunks liest einen Unterschied, der bereits vorhanden war, es setzt lediglich eine Kennzeichnung darauf. Es gibt nichts, was der Spieler visuell interpretieren muss. Das Modul läuft passiv im Hintergrund und markiert die Unterscheidung, sobald ein benachbarter Chunk geladen wird, sodass eine sichtbare Linie zwischen alter und neuer Welt sich mitbewegt, während man reist.
+
+Diese Linie lohnt sich aus zwei Gründen, sie zu verfolgen. Land, das seit Jahren rund um den Spawn auf einem Server wie 2b2t erkundet wurde, wurde bereits abgegrast, daher verrät das Wissen, welche Chunks neu sind, wo die Grenze tatsächlich beginnt. Es funktioniert auch umgekehrt: Eine Basis, die weit vom Spawn entfernt gebaut wurde, befindet sich in Chunks, die vor langer Zeit generiert wurden, sodass das Absuchen unbekannten Geländes nach der Grenze zwischen Alt und Neu die Wahrscheinlichkeit verringert, wo ein versteckter Bau zu finden ist.
+
+## Warum Anticheats es nicht einfach kennzeichnen können
+
+New Chunks lügt dem Server gegenüber über nichts. Es liest Paket- und Beleuchtungsdaten, die der Server bereits an jeden verbundenen Client als Teil des normalen Chunk-Ladevorgangs sendet, und zieht daraus ausschließlich auf der Client-Seite eine Schlussfolgerung. Es gibt kein gefälschtes Paket, keine veränderte Bewegung, nichts, was man mit einer Baseline vergleichen könnte, wie ein Anticheat die Reichweite oder das Angriffstiming eines Combat-Cheats vergleicht.
+
+Das bringt es in einen anderen Bereich als beispielsweise einen Aim-Bot oder ein Gerüst. Es ist ein Informationsausnutzer: Der Vorteil ergibt sich daraus, Daten zu lesen, die Sie ohnehin erhalten hätten, nur anders zu interpretieren, als es der Server beabsichtigt hat, und nicht daraus, etwas Falsches zu senden. Die meisten Server, die Tools wie dieses verbieten, greifen auf allgemeine Fair-Play-Regeln zurück, anstatt eine Paket-Anomalie zu kennzeichnen, da es in der Regel keine spezifische Anomalie gibt, auf die man hinweisen könnte.
+
+<Callout variant="tip" title="Nicht wirklich Opals Gebiet">
+Opal ist für PvP gemacht: Kampf, Bewegung, der Geist-gegen-offensichtlich-Schalter. Aufklärungsmissionen auf Anarchie-Servern wie New Chunks finden sich in einem völlig anderen Bereich der Modulliste, und das ist etwas, das Opal nicht mitliefert. Wenn das Auslesen von Chunk-Grenzen die Funktion ist, wegen der Sie hierhergekommen sind, suchen Sie danach vor dem Kauf in der Modulliste eines Clients. „Utility-Client“ deckt ein breites Spektrum sehr unterschiedlicher Aufgaben ab.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite erklärt, was der Begriff allgemein bedeutet. Das genaue Verhalten und die Benennung variieren je nach Client, und die meisten Server verbieten Anarchie-Erkundungstools wie dieses unter den allgemeinen Fairplay-Regeln, selbst wenn es keine spezifische Anti-Cheat-Markierung hinter dem Verbot gibt.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was genau erkennt New Chunks?">
+Ob der aktuell geladene Chunk um den Spieler herum gerade vom Server neu generiert wurde oder ob es sich um einen Chunk handelt, der bereits existierte und dem Client einfach erneut gesendet wird.
+</FAQItem>
+
+<FAQItem question="Ist New Chunks dasselbe wie X-ray?">
+Nein. X-ray zeigt, was sich bereits in bereits geladenem Terrain befindet, meistens Erze. New Chunks sagt Ihnen, ob das Terrain selbst neu oder bereits erkundet ist, was eine völlig andere Art von Information ist.
+</FAQItem>
+
+<FAQItem question="Sendet New Chunks etwas Ungewöhnliches an den Server?">
+Nein. Es liest lediglich Pakete und Beleuchtungssignale, die der Client bereits während des normalen Chunk-Ladevorgangs empfängt, und sendet niemals veränderte Daten zurück. Genau aus diesem Grund kann eine serverseitige Prüfung dies nicht direkt erkennen.
+</FAQItem>
+
+<FAQItem question="Warum ist das speziell auf Anarchie-Servern relevant?">
+Anarchie-Server wie 2b2t haben keine geschützten Claims und seit Jahren angestaute Erkundungstouren rund um den Spawn. Die Unterscheidung zwischen erkundetem und unerforschtem Gelände ist einer der wenigen Wege, um unbeanspruchte Landstriche oder eine Basis zu finden, die jemand zu verstecken versucht hat.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Kategorie, zu der Module wie dieses gehören." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die Kategorie, die auf unauffälligem Verbleib basiert und Subtilität in den Vordergrund stellt." },
+  { href: "/de/learn/what-is-reach", label: "Was ist Reichweite?", description: "Eine andere Art von Schärfe, eine, die den Kampf berührt, nicht das Gelände." },
+]} />
+
+<CTA href="/de/kaufen">Opal spielt das PvP-Spiel, nicht die Karte. Siehe die Modulliste für $8.99.</CTA>

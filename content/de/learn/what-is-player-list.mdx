@@ -1,0 +1,85 @@
+---
+title: Was ist die Spielervorliste in Minecraft? Die Tab-Liste erklärt
+description: Spielerliste ist ein Minecraft-Client-Modul, das die Tab-key-Übersicht der online aktiven Spieler mit zusätzlichen Informationen umformatiert. Hier erfahren Sie, wie es funktioniert und ob es sicher ist.
+excerpt: Der Tab-Key-Overlay, den alle bereits überprüfen, umformatiert und mit mehr Informationen als je zuvor. Es ändert nichts an der Partie selbst, nur an dem, was du auf dem Bildschirm siehst.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Beeinflusst die Spielerliste das Spielverlauf?
+    a: Nein. Es verändert lediglich das Aussehen der Tabliste auf Ihrem Bildschirm und hat keinerlei Interaktion mit Kämpfen, Bewegung oder irgendetwas, was der Server tatsächlich verfolgt.
+  - q: Kann Anticheat die Spielerliste erkennen?
+    a: Nein. Die Tabliste ist eine rein clientseitige Anzeige, und da keine der Anpassungen an den Server gesendet wird, gibt es für eine serverseitige Anti-Cheat-Maßnahme nichts zu markieren.
+  - q: Was ist die Tab-Liste in Minecraft?
+    a: Es ist die Vanilla-Übersicht, die erscheint, wenn man die Tab-Taste gedrückt hält und alle aktuell mit dem Server verbundenen Spieler auflistet.
+  - q: Ist die Spielerliste dasselbe wie eine Array-Liste?
+    a: Nr. Die Array-Liste zeigt, welche Client-Module aktuell aktiv sind, während die Player-Liste die Tab-Key-Overlay-Darstellung von Online-Spielern neu formatiert. Beide sind kosmetische Module, die sich in der Nähe des HUD befinden und lediglich unterschiedliche Vanilla-Bildschirme abdecken.
+---
+
+<KeyTakeaways>
+
+- Spielerliste ist ein visuelles Modul, das die Minecraft-Tab-Taste-Übersicht neu formatiert und Spielerbezeichnungen umgestaltet oder zusätzliche Informationen zu jedem Eintrag hinzufügt.
+- Es ändert lediglich die Darstellung der Übersicht auf dem Client, nicht die Daten, die der Server tatsächlich sendet.
+- Rein kosmetisch: nichts davon verlässt den Client, sodass kein Anticheat-Signal erfasst wird.
+- Unterscheidet sich von der Array-Liste, die aktive Module anstelle von Online-Spielern anzeigt.
+- In Clients wie Tenacity zu finden.
+
+</KeyTakeaways>
+
+Spielerliste ist ein Modul in Minecraft-Utility-Clients, das die Tab-Liste umformatiert – die Anzeige verbundener Spieler, die erscheint, wenn du die Tab-Taste gedrückt hältst. Anstatt der einfachen Namensspalte in der Vanilla-Version stehen zu bleiben, gestaltet es jeden Eintrag um oder fügt zusätzliche Informationen daneben hinzu. Es handelt sich lediglich um eine Änderung der Anzeige: was du siehst, ist anders, aber es ändert nichts an der eigentlichen Spielweise. Das setzt es in dieselbe Kategorie wie jeden anderen Modul, das einen Bildschirm umgestaltet, den das Spiel bereits zeichnet, nur hier angewendet auf die Tab-Überlagerung anstelle beispielsweise des Chatfensters oder der Schnellleiste.
+
+## Funktionsweise
+
+Minecraft baut die Tab-Liste bereits im Vanilla-Modus: Halte die Tab-Taste gedrückt und eine Spalte mit verbundenen Spielern erscheint, basierend auf Daten, die der Server über die online befindlichen Spieler sendet. Spielerliste greift in diese bestehende Überlagerung ein und ändert, wie sie gerendert wird; es wird die darunterliegende Datenbasis nicht verändert. Namen können umfärbt oder neu angeordnet werden, oder Einträge erhalten zusätzliche Felder, Ping ist bereits im Vanilla-Modus vorhanden, aber ein Client kann Rangabzeichen, Gruppemarkierungen oder alles andere, was er wünscht, hinzufügen.
+
+Da die Änderung rein zur Renderzeit stattfindet, nachdem der Server bereits das gesendet hat, was er senden wird, beeinflusst sie nicht, was andere Spieler sehen oder wie jemand tatsächlich verfolgt wird. Das Modul liest Informationen, die der Client bereits besitzt, und entscheidet sich, diese anders darzustellen. Das ist die gleiche Art von Änderung wie bei jedem HUD-Modul, das einen bestehenden Vanilla-Bildschirm neu gestaltet, nur speziell auf die Tab-Key-Overlay-Anzeige ausgerichtet.
+
+Der Reiz ist einfach. Die Tab-Liste ist etwas, das man ständig überprüft, um zu sehen, wer online ist, eine Gruppe zu zählen oder während eines Gefechts einen Namen zu überblicken. Eine übersichtlichere oder informativere Version eines Bildschirms, den man bereits dutzende Male pro Sitzung öffnet, ist eine Verbesserung der Lesbarkeit und nicht etwas, das ein Ergebnis in einem Match verändert.
+
+## Spielerliste vs. Array-Liste
+
+Die beiden werden ständig verwechselt, weil beide rein kosmetische, HUD-ähnliche Module sind, die im selben visuellen Bereich leben. Es sind jedoch nicht der gleiche Bildschirm.
+
+| | Spielerliste | Array-Liste |
+|---|---|---|
+| Bildschirm, den sie berührt | Die Tab-Key-Online-Spieler-Overlay-Anzeige | Eine dedizierte Anzeige in der Ecke des Bildschirms |
+| Was sie anzeigt | Umformatierte oder erweiterte Spielereinträge | Derzeit aktive Client-Module |
+| Vanilla-Äquivalent | Ja, sie erweitert ein bestehendes Menü | Nein, diese Overlay-Anzeige existiert nicht in Vanilla |
+| Risiko der Server-seitigen Erkennung | Keines, rein clientseitiges Rendering | Keines, rein clientseitiges Rendering |
+
+Verschiedene Aufgabe, dasselbe Grundprinzip: Informationen, die der Kunde bereits besitzt, auf eine nützlichere Weise präsentieren als die Standardeinstellung.
+
+<Callout variant="tip" title="Wo dies in Opal passt">
+Opal versendet kein Modul namens Player List unter genau diesem Namen. Die Umformatierung eines bestehenden Vanilla-Bildschirms wie der Tab-Liste fällt eindeutig in den visuellen Bereich, den jeder Utility-Client abdeckt. Wenn Sie also eine übersichtlichere Tab-Überlagerung wünschen, lohnt es sich, die tatsächliche Modulliste eines Clients zu prüfen, anstatt davon auszugehen, dass die Benennung übereinstimmt.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Beeinflusst die Spielerliste das Gameplay?">
+Nein. Sie verändert lediglich das Aussehen der Tabliste auf Ihrem Bildschirm. Kämpfe, Bewegung oder alles, was der Server tatsächlich verfolgt, wird davon nicht berührt.
+</FAQItem>
+
+<FAQItem question="Kann Anticheat die Spielerliste erkennen?">
+Nein. Die Tab-Liste ist eine rein clientseitige Anzeige, und da keine der Anpassungen jemals an den Server gesendet wird, gibt es für ein serverseitiges Anticheat nichts zu sehen, geschweige denn zu markieren.
+</FAQItem>
+
+<FAQItem question="Was ist die Tab-Liste in Minecraft?">
+Es ist die Standard-Overlay-Anzeige, die erscheint, während du die Tab-Taste gedrückt hältst und alle Spieler auflistet, die sich gerade mit dem Server verbindet.
+</FAQItem>
+
+<FAQItem question="Ist die Spielerliste das Gleiche wie die Array-Liste?">
+Nein. Die Array-Liste zeigt, welche Module eines Clients gerade aktiviert sind. Die Spielerliste formatiert die Tab-Key-Überlagerung der online aktiven Spieler um. Unterschiedliche Bildschirme, dieselbe allgemeine Idee eines HUD-nahen, kosmetischen Moduls.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Ein Tab-Listen-Overlay-Modul ist ein kleines Teil eines größeren Ganzen." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Wo das Ziel von der Neugestaltung eines Bildschirms zum vollständigen Verschwinden davon übergeht." },
+  { href: "/de/learn/what-is-killaura", label: "Was ist Killaura?", description: "Ein Modul am anderen Ende des Risikospektrums im Vergleich zu einer oberflächlichen Änderung." },
+]} />
+
+<CTA href="/de/kaufen">Eine neu gestaltete Tabliste ist eine schöne Ergänzung. Opals visuelle Gestaltung geht dabei deutlich weiter.</CTA>

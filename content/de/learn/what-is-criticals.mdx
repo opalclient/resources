@@ -1,0 +1,85 @@
+---
+title: Was sind Criticals in Minecraft? Modul erklärt
+description: Criticals ist ein Kampanmodul, das jeden Treffer als kritischen Treffer registriert, ohne dass eine präzise Sprungzeitung erforderlich ist. So funktioniert es und warum es leicht zu erwischen ist.
+excerpt: Jeder Treffer fühlt sich an wie ein perfekt getimter Sprungangriff, nur ohne den Sprung. Hier ist, was das Criticals-Modul tatsächlich verändert und die Partikelexplosion, die es verrät.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was benötigt ein kritischer Treffer normalerweise in Vanilla Minecraft?
+    a: Der Angreifer muss im Moment des Treffers fallen, was meistens bedeutet, kurz bevor der Schwung trifft, springen zu müssen. Stillstehen oder schlagen während der Bewegung erzeugt in unmodifiziertem Minecraft nie einen kritischen Treffer.
+  - q: Ändert Criticals, wie viel Schaden ein Treffer verursacht?
+    a: Ja. Es zwingt den kritischen Schadensbonus auf jeden Angriff, sodass Treffer mehr Schaden anrichten, als wenn das Spiel den Bewegungszustand des Spielers tatsächlich prüfen würde.
+  - q: Sind Criticals dasselbe wie ein Reichweiten- oder Zielmodul?
+    a: Nein. Reichweite erhöht die Angriffsdistanz und Zielmodulkomponenten kümmern sich um die Zielerfassung; Kritische Treffer ändern lediglich, ob ein getroffener Treffer als kritisch für den Schaden gewertet wird. Sie sind dazu gedacht, sich gegenseitig zu verstärken, nicht zu ersetzen.
+  - q: Kann ein Server erkennen, ob Criticals verwendet werden?
+    a: Ja. Ein Server kann die verfolgte Position und Geschwindigkeit des Spielers mit den Anforderungen eines echten kritischen Treffers vergleichen. Ein Spieler, der nicht fällt, aber weiterhin kritische Treffer erzielt, ist ein Muster, auf das Anticheats besonders achten.
+---
+
+<KeyTakeaways>
+
+- Criticals ist ein Kampfmoodul, das jeden Treffer als kritischen Treffer erzwingt, wobei der Schadensbonus, den Minecraft im Original nur beim Fallen gewährt, angewendet wird.
+- Es überspringt die Anforderung an das Timing des Sprungs, sodass Treffer kritisch landen, auch wenn man stillsteht.
+- Es ist eine Schadensmanipulation, die in Client-Linien wie Fan und Tenacity zu finden ist.
+- Server erkennen es, indem sie prüfen, ob die Bewegung des Angreifers einen kritischen Treffer unterstützt.
+
+</KeyTakeaways>
+
+Criticals ist ein Kampanmodul, das zwingt, dass jede Attacke eines Spielers als kritischer Treffer gewertet wird – die zusätzliche Schadenswirkung, die in der Standard-Minecraft-Version normalerweise nur für Attacken reserviert ist, bei denen der Angreifer fällt. Einen echten kritischen Treffer erzielt man durch einen zeitgesteuerten Sprung direkt vor dem Schwung. Criticals macht dieses Timing komplett überflüssig: jede Treffer zählt als kritisch, egal ob der Spieler in der Luft ist, flach läuft oder ganz stillsteht. Es ist eine kleine mechanische Änderung mit einem auffälligen visuellen Signal und gehört zum gröberen, älteren Ende des Cheat-Spektrums, anstatt zu etwas, das für eine Überprüfung ausgelegt ist.
+
+## Wie Criticals funktioniert
+
+Minecraft prüft in der Standardversion nur eine Sache, bevor es einen kritischen Treffer gewährt: Bewegt sich der Angreifer im Moment des Aufpralls nach unten? In der Praxis bedeutet das, dass man springt und auf dem Weg nach unten trifft – ein schmales Zeitfenster, das die meisten Spieler durch Gefühl zu timen lernen. Landet man innerhalb dieses Fensters, fügt das Spiel Bonusschaden hinzu, zusammen mit dem Sternenpartikel-Ausbruch und dem kritischen Treffer-Sound. Verfehlt man es, ist der Treffer gewöhnlich.
+
+Criticals entfernt den Haken. Anstatt die tatsächliche vertikale Geschwindigkeit des Spielers auszulesen, markiert es jeden ausgehenden Angriff als kritisch, bevor der Client ihn sendet, sodass der Schadensbonus angewendet wird, unabhängig davon, wie die tatsächliche Bewegung des Spielers aussieht. Dies wurde in Client-Linien wie Fan und Tenacity dokumentiert, beide aus einer Ära und einem Stil von Clients, in denen das Verschleiern einer so offensichtlichen Diskrepanz nie wirklich der Sinn war.
+
+## Warum es verwendet wird
+
+Der Reiz liegt im Schaden ohne Kompromiss. Ein echter kritischer Treffer erfordert, dass man in einen Kampf springt, was einen kurzzeitig in die Luft hebt, die Bewegungsoptionen einschränkt und das Trefferfeld leichter lesbar macht. Criticals vergibt diesen Bonus, ohne jemals den Boden zu verlassen, sodass ein Spieler, der flachstehend kämpft, genauso viel Schaden pro Schlag austeilt wie jemand, der den Zeitpunkt jedes einzelnen Treffers perfekt getroffen hat. Es verwandelt eine Fähigkeit in eine Konstante.
+
+## Warum es aufgedeckt wird
+
+Kritische Treffer ändern das Ergebnis einer Kampfbegegnung, nicht das Aussehen des Spiels, und bergen daher auf jedem Server, der serverseitige Prüfungen durchführt, ein echtes Risiko. Die Signatur ist zweifach. Es gibt die visuelle: kritische Treffer erzeugen eine deutliche Partikeleffekte und einen Sound, und ein Client, der bei fast jedem Schwung einen solchen meldet, wirkt auf den ersten Blick falsch. Dann gibt es die, die der Server tatsächlich überprüft: er kann die eigene Position und Geschwindigkeit des Angreifers zum Zeitpunkt des Treffers verfolgen, und ein Spieler, der sich auf dem Boden befindet und nicht fällt, der einen kritischen Treffer meldet, den der Client beansprucht, widerspricht direkt der Funktionsweise des normalen Kampfsystems. Diese Inkonsistenz ist es, die von serverseitigen Anti-Cheat-Systemen markiert wird.
+
+<Callout variant="tip" title="Wo Opal die Grenze zieht">
+Opal liefert eigene Module für die Kampfseite, dieselbe Kategorie, in der sich auch Criticals befindet, aber einen erzwungenen Kritikal-Schalter gibt es nicht. Eine Diskrepanz, die für einen Server so leicht zu erkennen ist (kritischer Schaden landet, während die eigene verfolgte Geschwindigkeit anzeigt, dass man nie den Boden verlassen hat), ist genau die Art von Vorteil, der einen Client innerhalb einer Woche auf die Blacklist der Server-Allowlists bringt.
+</Callout>
+
+## Kritische Treffer vs. Reichweite- und Zielmodul
+
+Kritische Treffer beeinflussen weder Distanz noch Zielerfassung und sind daher kein Ersatz für [Reichweite](/de/learn/what-is-reach) oder ein [Aim-Bot](/de/learn/what-is-an-aimbot). Die Reichweite entscheidet, ob ein Treffer aus einer Entfernung registriert werden kann, die über die der Standardeinstellung hinausgeht. Ein Aim-Bot entscheidet, ob das Fadenkreuz überhaupt auf das Ziel landet. Kritische Treffer bestimmen lediglich, was mit dem Schaden passiert, nachdem ein Treffer bereits erzielt wurde, und ob er als kritisch zählt. Die drei werden häufig übereinander gestapelt anstatt als Alternativen verwendet, da jeder von ihnen einen anderen Teil eines Schlags löst.
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite beschreibt das Modul allgemein, damit Sie wissen, was der Begriff bedeutet. Die Benennung und das genaue Verhalten können je nach Client variieren, und das Erzwingen kritischer Treffer außerhalb der Regeln von Vanilla verstößt gegen die Nutzungsbedingungen auf praktisch jedem Server.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was benötigt ein kritischer Treffer normalerweise in Vanilla Minecraft?">
+Der Angreifer muss im Moment des Aufpralls fallen, was in der Regel bedeutet, kurz vor dem Einschlag zu springen. Stillstehen oder Angreifen während der horizontalen Bewegung führt in unverändertem Minecraft nicht zu einem kritischen Treffer.
+</FAQItem>
+
+<FAQItem question="Ändert Criticals, wie viel Schaden ein Treffer verursacht?">
+Ja. Es erzwingt den kritischen Schadensbonus auf jeden Treffer, sodass Angriffe mehr Schaden verursachen, als er wäre, wenn der tatsächliche Bewegungszustand des Spielers geprüft würde.
+</FAQItem>
+
+<FAQItem question="Ist Criticals das Gleiche wie ein Reichweite- oder Zielmodul?">
+Nein. Reichweite erhöht die Angriffsdistanz, während Zielmodule die Zielerfassung übernehmen. Criticals ändert lediglich, ob ein getroffener Treffer für Schadensberechnungen als kritisch gewertet wird, und die drei werden üblicherweise gestapelt anstatt gegeneinander ausgetauscht.
+</FAQItem>
+
+<FAQItem question="Kann ein Server erkennen, ob Criticals verwendet werden?">
+Ja. Ein Server kann überprüfen, ob die verfolgte Position und Geschwindigkeit des Spielers tatsächlich eine Critical-Treffer zum Zeitpunkt eines Treffers unterstützen. Ein Spieler, der nicht fällt, aber weiterhin Critical-Treffer erzielt, ist ein Muster, nach dem Anticheats direkt suchen.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-reach", label: "Was ist Reichweite?", description: "Das Distanzmodul Criticals wird oft gestapelt." },
+  { href: "/de/learn/what-is-an-aimbot", label: "Was ist ein Aim-Bot?", description: "Das Zielsuchermodul, das einen anderen Teil des Schwungs steuert." },
+  { href: "/de/learn/what-is-killaura", label: "Was ist KillAura?", description: "Der Auto-Angreifer Criticals tritt in älteren Clients zusammen auf." },
+]} />
+
+<CTA href="/de/kaufen">Fair kämpfen und trotzdem im richtigen Moment zuschlagen. Entdecken Sie Opals Kampfausstattung für $8.99.</CTA>

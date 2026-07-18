@@ -1,0 +1,73 @@
+---
+title: Was ist Bootflug? Der Minecraft Fahrzeugflug-Exploit
+description: Bootfliege ist ein Minecraft-Bewegungsmodul, das die Fahrzeugpakete eines Bootes manipuliert, damit es steigen und schweben kann und so ein langsames Treiben in uneingeschränkte Flugfähigkeit verwandelt.
+excerpt: Ein Boot, das senkrecht nach oben klettert, ist kein Lag. Das ist Boat Fly, und Vanilla-Physik hat das nie abgenommen.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Funktioniert Bootsflug außerhalb eines Bootes?
+    a: Nein. Es funktioniert nur, wenn Sie in einem Boot sitzen, da der ganze Trick davon abhängt, die Fahrzeugbewegungsdatenpakete des Bootes zu manipulieren. Zu Fuß gibt es keinen Fahrzeugkanal, der auszunutzen wäre, daher tut das Modul nichts.
+  - q: Ist Boat Fly dasselbe wie ein normaler Fliegenhaken?
+    a: Das Ergebnis sieht ähnlich aus, ein unbeschränkter Flug, aber der Mechanismus ist anders. Ein Standard-Fly-Hack überschreibt die eigenen Bewegungspakete des Spielers. Boat Fly überschreibt die Bewegungspakete des Bootes als Fahrzeug, während man darauf fährt.
+  - q: Kann das Flugboot über Land eingesetzt werden?
+    a: Ja. Vanillenboote können bereits kurze Strecken an Land in der Nähe von Wasser fahren, aber Boat Fly erweitert dies zu vollem Flug und lässt das Boot weit über alles hinaus reisen, was normale Bootsphysik jemals erlauben würde, einschließlich des Landes.
+  - q: Ist Boat Fly auf irgendeinem Server nachweisbar?
+    a: Nur auf Servern, die die Fahrzeugbewegung mit den erwarteten Schiffsdynamiken abgleichen. Anticheats, die nur die Spieler-Entität beobachten und das Fahrzeug, auf dem er sich befindet, ignorieren, können dies vollständig übersehen.
+---
+
+<KeyTakeaways>
+- Boat Fly ist ein Bewegungsmodul, das die Pakete eines Bootes umschreibt, sodass es steigt und fliegt anstatt zu schweben.
+- Es nutzt den separaten Kanal für Fahrzeugbewegungen eines Bootes aus, da die Standardphysik nie erwartet, dass ein Boot von selbst Auftrieb erzeugt.
+- Es handelt sich um einen bannbaren Flug-Exploit, der von Clients wie Wurst nachverfolgt wird, und Fahrzeugphysik-Prüfungen fangen ihn schnell ab.
+</KeyTakeaways>
+
+Bootflieger ist ein Bewegungsmodul, das sich um ein einziges, eng definiertes Ziel dreht: das originale Minecraft-Boot. Ein Boot wurde ausschließlich dazu konzipiert, auf dem Wasser zu schwimmen und sich in Küstennähe leicht an Land zu bewegen – und nichts weiter. Bootflieger bricht diese Vorgabe auf, indem es die Fahrzeugbewegungsdatenpakete, die ein Boot sendet, während ein Spieler es benutzt, neu schreibt, sodass das Boot aufsteigt, eine Höhe hält und überall hinfliegen kann, wo auch eine fliegende Kreatur hinkommt. Der Spieler verlässt dabei niemals den Sitz. Von außen sieht es einfach nur aus wie ein Boot, das vergessen hat, dass es kein Flugzeug ist.
+
+## Wie die Pakete des Bootes gekapert werden
+
+Originale Boote sind keine eigenständigen Akteure. Die Positionsaktualisierungen eines Bootes stammen von Fahrzeugbewegungsdatenpaketen, die an die Wasserauftriebskraft und die Schwerkraft gebunden sind – ein separater Kanal von den Paketen, die einen Spieler bewegen, der auf festem Boden steht. Lassen wir diesen Kanal in Ruhe, kann er keinen Auftrieb erzeugen: kein Wasser unter dem Rumpf, keine aufwärts gerichtete Kraft, kein Grund für das Boot, die Oberfläche zu verlassen.
+
+Bootflieger zielt direkt auf diesen Kanal ab. Es überschreibt oder fügt die Fahrzeugbewegungsdaten hinzu, die das Boot meldet, sodass der Server ein Boot sieht, das aufsteigt, eine Höhe hält oder sich auf eine Weise seitwärts bewegt, die echte Wasser- und Schwerkraftphysik niemals erzeugen würde. Der Server vertraut darauf, was der Client sendet, und aktualisiert die Position des Spielers basierend darauf.
+
+Der Spieler, der die ganze Zeit sitzen bleibt, lässt das Ganze seltsam erscheinen, anstatt offensichtlich gehackt. Niemand sieht eine Person schweben, sondern ein Boot, das dort ist, wo es nicht hingehört – eine subtile Art von Fehler, bis man weiß, wonach man suchen muss.
+
+## Warum es markiert wird, auf Servern, die sich darum kümmern
+
+Boat Fly ist weder eine kosmetische Änderung noch eine bequeme Abkürzung. Es gewährt eine Bewegung, die kein legitimer Spieler erreichen kann: das Erklimmen von Gelände, das Überspringen der normalen Kartennavigation oder das Verlassen eines Kampfes, indem man an einen Ort geht, dem niemand folgen kann. Das setzt es in die gleiche Kategorie wie andere Flug- und No-Clip-Exploits, weit entfernt von einem lediglich umgestalteten HUD-Element.
+
+Serverseitige Anti-Cheat-Systeme, die das erwartete Verhalten eines Bootes modellieren – wie schnell es sich bewegen sollte, wie es auf dem Wasser sitzt und wie die Schwerkraft es wieder nach unten zieht – fangen das schnell ein, sobald sie danach suchen. Ein Boot, das klettert oder schwebt, bricht dieses Muster in dem Moment, in dem es passiert. Die Lücke besteht darin, dass viele Server nur die Bewegung von Spieler-Entitäten validieren und nie eine separate Prüfung für Fahrzeuge durchführen, und genau dort überlebt Boat Fly.
+
+<Callout variant="warning" title="Dies ist ein bannwürdiger Exploit, keine versteckte Funktion">
+Boat Fly fällt eindeutig unter Bewegungsschwindel. Jeder Server, der ein Boot sieht, das in der Luft schwebt oder die Schwerkraft ignoriert, hat einen Grund, dagegen vorzugehen, und Clients, die dies ermöglichen, werden genau dafür verfolgt und benannt (Wurst wird am häufigsten genannt). Betrachten Sie dies als Hintergrundinformationen darüber, wie der Exploit funktioniert, und nicht als Vorschlag, ihn zu nutzen.
+</Callout>
+
+<Callout variant="tip" title="Wo Opal die Grenze zieht">
+Opal's Bewegungsmechaniken sind darauf ausgelegt, realer Physik standzuhalten, nicht aber auf von Paketen gefälschten Fahrzeugzuständen. Wenn ein Trick nur funktioniert, weil ein Server nie die Fahrzeugbewegung separat von der Spielerbewegung überprüft hat, dann kommt er nicht auf den Client. Gleiche Kategorie wie Boat Fly im Geiste, aber eine völlig andere Wette: Wir erweitern die Grenzen dessen, was die Physik erlaubt, anstatt die Pakete zu fälschen, die sie melden.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+<FAQItem question="Funktioniert Bootflug außerhalb eines Bootes?">
+Nein. Es funktioniert nur, wenn Sie in einem Boot sitzen, da der gesamte Trick davon abhängt, die Fahrzeugbewegungspakete des Bootes zu manipulieren. Steigen Sie an Land, und es gibt keinen Fahrzeugkanal mehr, der ausgenutzt werden kann, sodass das Modul einfach nichts tut.
+</FAQItem>
+<FAQItem question="Ist Bootflug dasselbe wie ein regulärer Flug-Hack?">
+Das Ergebnis sieht ähnlich aus, unbeschränkte Flugfähigkeit in jedem Fall, aber der Mechanismus ist nicht derselbe. Ein Standard-Flug-Hack überschreibt direkt die Bewegungspakete des Spielers. Bootflug überschreibt stattdessen die Fahrzeugbewegungspakete des Bootes, während Sie darin sitzen.
+</FAQItem>
+<FAQItem question="Kann Bootflug über Land verwendet werden?">
+Ja. Standardboote können bereits kurze Strecken über Land in der Nähe der Küste fahren, aber Bootflug erweitert dies zu vollem, dauerhaftem Flug, sodass das Boot weit über das hinaus reisen kann, was normale Bootphysik jemals erlauben würde, einschließlich Land.
+</FAQItem>
+<FAQItem question="Ist Bootflug auf irgendeinem Server erkennbar?">
+Nur auf Servern, die die Fahrzeugbewegung mit den erwarteten Bootphysik-Werten vergleichen. Anticheats, die die Spielereinheit überwachen, aber das darunterliegende Fahrzeug ignorieren, können dies vollständig übersehen.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Ein weiteres Bewegungsmodul, das eine gewöhnliche Minecraft-Mechanik in uneingeschränkte Fortbewegung verwandelt." },
+  { href: "/de/learn/what-is-velocity-anti-knockback", label: "Was ist Velocity (Anti-Knockback)?", description: "Ein Bewegungsmodul, das umschreibt, wie ein Spieler-Client auf Rückstoßpakete reagiert." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die Kategorie Bootsfliege und Module wie dieses gehören dazu und markieren die Grenze, wo es um Betrug gegenüber Kunden geht." }
+]} />
+
+<CTA href="/de/kaufen">Ersichtlich sind die Bewegungsmodule, die Opal tatsächlich versendet, mit intakter Physik.</CTA>

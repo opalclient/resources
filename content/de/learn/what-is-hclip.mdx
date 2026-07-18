@@ -1,0 +1,86 @@
+---
+title: Was ist HClip in Minecraft? Horizontal Clip erklärt
+description: HClip (Horizontales Klippen) verschiebt einen Spieler seitwärts durch einen festen Block, um eine dünne Wand zu überspringen. So funktioniert das Weltmodul und warum es als Fehler markiert wird.
+excerpt: Kein Loch in der Wand, kein gebrochenes Schloss, nur du auf der anderen Seite. Das ist das Angebot, und das ist auch der Verrat.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was macht HClip eigentlich?
+    a: Es verschiebt den Spieler um eine kurze Strecke seitwärts durch einen festen Block, sodass er auf der anderen Seite landet, ohne etwas zu zerstören oder zu platzieren.
+  - q: Ist HClip dasselbe wie das Durchbrechen einer Mauer?
+    a: Nein. Durchbrechen einer Wand entfernt Blöcke und hinterlässt ein sichtbares Loch. HClip lässt die Wand stehen; der Spieler durchquert ihre Kollision, anstatt sie zu entfernen.
+  - q: Funktioniert HClip über große Entfernungen?
+    a: Nein. Es ist dafür ausgelegt, den Spieler eine kurze Distanz zu bewegen, ausreichend, um beispielsweise die Dicke einer Wand oder eine schmale Lücke zu überwinden, nicht um größere Strecken durch das Gelände zu zurücklegen.
+  - q: Ist HClip erkennbar?
+    a: Ja, grundsätzlich. Es erfordert, dass die Position des Spielers kurzzeitig mit einem festen Block überlappt, was normale Bewegungen niemals erzeugen und durch serverseitige Kollisionsprüfungen abzufangen ist.
+  - q: Welcher Klient hat HClip?
+    a: HClip wird wie in Juul beschrieben dokumentiert, zusammen mit seinem vertikalen Gegenstück, VClip.
+---
+
+<KeyTakeaways>
+
+- HClip (Horizontal Clip) ist ein weltweiten Bereich abdeckendes Modul, das einen Spieler seitlich durch einen festen Block verschiebt, um eine dünne Wand zu überwinden oder einen versiegelten Raum zu betreten.
+- Die Bewegung ist kurz und ausschließlich horizontal, konzipiert zum Überwinden der Dicke einer Wand oder einer schmalen Lücke, nicht zum Überbrücken großer Distanzen.
+- Keine Blöcke werden zerstört oder platziert. Der Spieler befindet sich einfach auf der anderen Seite.
+- Es ist wie in Juul dokumentiert, zusammen mit seinem vertikalen Gegenstück VClip.
+- Der Positionsbericht überlappt kurz festen Boden, was genau das ist, worauf kollisionsbasierte Anti-Cheats achten.
+
+</KeyTakeaways>
+
+HClip, kurz für Horizontal Clip, ist ein Minecraft-Weltmodul, das einen Spieler durch einen festen Block seitwärts schiebt, anstatt ihn daran vorbeiführen. Anstatt zu graben, zu springen oder eine Tür zu finden, bewegt sich die Position des Spielers einfach in einem einzigen Schritt von der einen Seite des Hindernisses zur anderen. Es ist für kurze Überquerungen konzipiert, eine Wand, eine schmale Lücke, und es berührt dabei keinen einzigen Block.
+
+## Wie HClip funktioniert
+
+Normalerweise bewegt das Spiel den Spieler schrittweise und überprüft jeden Schritt anhand der Kollisionsdaten der Welt, sodass er nicht den gleichen Raum wie einen festen Block einnehmen kann. HClip überspringt diese Sequenz. Es schiebt die Position des Spielers seitlich an der Kollision eines Blocks vorbei in einem Zug, sodass der Client anstatt das Hindernis über mehrere Ticks herumzulaufen, der Spieler einfach auf der anderen Seite landet.
+
+Da die Verschiebung kurz und rein horizontal ist, handelt es sich nicht um eine allgemeine Teleportation. Sie ist auf die Überquerung von etwas wie der Dicke einer einzelnen Wand oder einer schmalen Lücke ausgelegt, der Art von Hindernis, das andernfalls das Graben hinein oder das lange Umhergehen bedeuten würde. HClip ist als Weltkategorie-Modul dokumentiert und wurde in Juul beobachtet, demselben Client, der VClip, sein vertikal ausgerichtetes Gegenstück, zum Klippen nach oben oder unten durch Böden und Decken anstelle von Wänden mit sich führt.
+
+## Ist HClip sicher zu verwenden
+
+Der Reiz ist offensichtlich: Zugang ohne Spuren. Das Durchbrechen einer Basis kostet Zeit, hinterlässt zerstörte Blöcke und kann eine Falle auslösen oder denjenigen verraten, der den Ort gebaut hat. HClip umgeht all das. Nichts wird platziert, nichts wird zerstört, und die Wand sieht danach unberührt aus, was es attraktiv macht, um unauffällig eine dünne Barriere zu überwinden oder in ein versiegeltes Tresorraum zu gelangen.
+
+Diese Stille hat ihren Preis. Das Durchdringen eines Blocks, den der Server als fest betrachtet, ist etwas, was normale Bewegungsphysik nicht erzeugen kann, und ein Positionsbericht, der einen Spieler – selbst nur für einen Tick – innerhalb einer Wand platziert, ist per Definition illegal. Die Beschränkung auf kurze, horizontale Bewegungen verengt zwar das Zeitfenster, in dem ein Anticheat es erkennen kann, schließt es aber nicht. Jeder Server, der die gemeldete Position mit den Weltkollisionsdaten abgleicht, prüft genau dieses Verhalten. Dies ist ein Bewegungsexploit, kein kosmetischer Trick, und birgt ein echtes Bannrisiko auf Systemen, die dies prüfen.
+
+<Callout variant="tip" title="Wo Opal die Grenze zieht">
+Opal's Weltkategorie deckt viel Realität ab, aber es wird kein Modul zum Durchdringen von Wänden unter irgendeinem Namen mitgeliefert. Eine Funktion, deren einziger Zweck es ist, Ihre Position innerhalb eines Blocks zu platzieren, den der Server als fest betrachtet, ist für etwas, das länger als den ersten strengen Anticheat-Test halten soll, schwer zu vermarkten.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite erklärt, was HClip bedeutet und wie der Effekt generisch funktioniert. Das genaue Verhalten variiert je nach Client, und das Durchdringen von festem Terrain, das der Server nicht autorisiert hat, bricht die Regeln auf praktisch jedem Server, der Bewegungen gegen Kollisionen prüft.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was genau macht HClip?">
+Es verschiebt den Spieler um eine kurze Strecke seitwärts durch einen festen Block, sodass er sich auf der anderen Seite wiederfindet, ohne etwas zu zerstören oder zu platzieren, um dorthin zu gelangen.
+</FAQItem>
+
+<FAQItem question="Ist HClip dasselbe wie das Durchbrechen einer Wand?">
+Nein. Das Durchbrechen einer Wand entfernt Blöcke und hinterlässt ein sichtbares Loch. HClip lässt die Wand stehen; der Spieler durchquert ihre Kollision, anstatt sie zu entfernen.
+</FAQItem>
+
+<FAQItem question="Funktioniert HClip über große Entfernungen?">
+Nein. Es ist dafür ausgelegt, den Spieler eine kurze Strecke zu bewegen, ausreichend, um beispielsweise die Dicke einer Wand oder eine schmale Lücke zu überwinden, aber nicht, um nennenswerte Distanzen durch das Gelände zu zurücklegen.
+</FAQItem>
+
+<FAQItem question="Ist HClip erkennbar?">
+Ja, grundsätzlich. Es erfordert, dass die Position des Spielers kurzzeitig mit einem festen Block überlappt, was normale Bewegungen niemals erzeugen und das serverseitige Kollisionsprüfprogramm erkennen kann.
+</FAQItem>
+
+<FAQItem question="Welcher Klient hat HClip?">
+HClip ist wie in Juul beschrieben dokumentiert, zusammen mit seinem vertikalen Gegenstück, VClip.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die Kategorie des unauffälligen Vorgehens, die darauf abzielt, keine Spuren zu hinterlassen, ist das gleiche Instinkt, dem HClip nachjagt." },
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Ein weiteres weltnahes Modul, das von einem spezifischen, überprüfbaren Merkmal verraten wird." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Kategorie, zu der diese Module gehören." },
+]} />
+
+<CTA href="/de/purchase">Erlebe die Welt mit den Opal-Werkzeugen – ohne deine Position in eine Falle zu locken.</CTA>

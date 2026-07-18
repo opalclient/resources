@@ -1,0 +1,79 @@
+---
+title: Was ist ein Antibot-Check-Umgehung in Minecraft?
+description: Antibot-Check-Bypass umgeht das Anti-Bot-Verifizierungs-Gate eines Minecraft-Anarchie-Servers, wodurch Bot-Farmen, ähnlich wie bei Captchas, automatisch und sofort auslösen.
+excerpt: Ein fünfsekündiges Captcha, das vorüberzieht, bevor man es bemerkt. Kein manuelles Klicken, kein erneutes Lösen, jedes Mal wenn ein Anarchie-Server beweist, dass man ein Mensch ist.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was umgeht der Antibot-Check-Bypass eigentlich?
+    a: Es umgeht die Anti-Bot-Verifizierungsabfrage eines Servers, eine Art Captcha-Prüfung, die einige Anarchie-Server durchführen, bevor eine Verbindung zur normalen Spielweise zugelassen wird.
+  - q: Ist die Antibot-Check-Umgehung dasselbe wie das Anti-Bot-Kampfmodul?
+    a: Nein. Das Anti-Bot-Kampfmodul filtert gefälschte Spieler während eines Gefechts aus einer Zielliste aus. Antibot-Check-Umgehung ist ein separates Modul aus der Ausnutzungs-Kategorie, das einen Verifizierungsschritt bei der Beitrittszeit abwickelt.
+  - q: Gilt die Verwendung von Antibot-Checks als Betrug?
+    a: Es automatisiert das Bestehen eines Bot-Filters, anstatt einen spieltechnischen Vorteil zu gewähren, sodass es nicht wie eine Kampf- oder Bewegungs-Cheaterie funktioniert. Ob die Regeln eines Servers das Automatisieren von Teilen des Clients als Verstoß erachten, steht davon getrennt, ob die Prüfung selbst dies erkennen kann, und diese kann es im Allgemeinen nicht.
+  - q: Warum haben nur einige Server diese Prüfung?
+    a: Die Bot-Verifizierung tritt hauptsächlich auf Anarchie-Servern auf, die einen hohen automatisierten Account-Traffic aufweisen und die Prüfung nutzen, um diesen herauszufiltern, bevor echte Spieler das Hauptspiel erreichen.
+---
+
+<KeyTakeaways>
+
+- Antibot Check Bypass ist ein Modul aus der Kategorie Exploits, das automatisch die Anti-Bot-Willkommensnachricht eines Servers löscht.
+- Es zielt auf eine Art Captcha-Sperre ab, die einige Anarchie-Server verwenden, um Bot-Accounts herauszufiltern, nicht um Kämpfe zu verhindern.
+- Es trägt den Namen „antibot“ wie das Kampfmoodul Anti Bot, aber die beiden unterscheiden sich.
+- Die Sperre zielt auf Bots ab, nicht auf Cheat-Clients, daher löst das schnelle Löschen keine Warnungen aus.
+
+</KeyTakeaways>
+
+Antibot Check Bypass ist ein Modul der Exploit-Kategorie für Minecraft, das einen Client durch den Anti-Bot-Verifizierungsschritt eines Servers schleust, ohne dass der Spieler etwas manuell tun muss. Einige Anarchie-Server zeigen bei der Verbindung oder bei der ersten Bewegung des Spielers einen captcha-ähnlichen Prompt an, um Bot-Konten auszuschließen, bevor sie das normale Gameplay erreichen. Das Modul beobachtet diesen Prompt und beantwortet ihn sofort, genau wie ein echter Spieler, nur ohne die zehn Sekunden des Klickens. Es hat nichts mit dem Kampf zu tun. Sobald eine Verbindung durch das Tor ist, hat das Modul nichts mehr zu tun.
+
+## Funktionsweise
+
+Anarchie-Server haben einen hohen automatisierten Kontoverkehr, daher betreiben einige von ihnen ein Verifizierungs-Tor, bevor sie den vollständigen Zugriff gewähren: einen captcha-ähnlichen Prompt, der für einen Menschen trivial und für ein Skript teuer ist, um ihn in großem Maßstab zu lösen. Er erscheint normalerweise bei der Verbindung oder wird durch die erste Bewegung des Spielers ausgelöst und existiert ausschließlich, um das Massen-Bot-Farming zu verlangsamen, nicht um Cheater zu fangen.
+
+Antibot Check Bypass erkennt genau diesen Prompt und füllt ihn sofort aus, genauso wie ein Spieler es manuell tun würde, nur automatisiert. Sobald der Server die Verbindung durchlässt, hat das Modul für den Rest der Sitzung nichts mehr zu tun. Es greift nicht die Bewegung an, es greift nicht den Kampf an, es existiert rein dazu, ein Tor zu beseitigen, das für Bots und nicht für Menschen gebaut wurde.
+
+Ein legitimer Spieler muss dieses Tor jedes Mal passieren, wenn ein Server danach fragt, und dies manuell wiederholt zu tun, wird schnell lästig. Die Automatisierung der Antwort beseitigt lediglich die Reibung.
+
+## Nicht das gleiche Modul wie Anti Bot
+
+Zwei verschiedene Funktionen teilen sich den Begriff „antibot“ und verwirren die Leute. Das im Rahmen dieser Seite behandelte Exploit-Kategorie-Modul, Antibot Check Bypass, umgeht ein Verifizierungs-Tor beim Beitritt, bevor das Spiel überhaupt beginnt. Das Combat-Kategorie-Modul Anti Bot macht etwas völlig anderes: Es filtert gefälschte oder doppelte Spieler-Entitäten aus einer Ziel-Liste mitten im Kampf, sodass Combat-Module nicht auf etwas zielen, das kein echter Gegner ist. Eines läuft, bevor ein Spieler die Welt sieht. Das andere läuft, während er darin kämpft. Sie tragen denselben Namen, weil beide sich darum drehen, echte Spieler von gefälschten oder automatisierten zu unterscheiden, aber hier endet die Überschneidung.
+
+<Callout variant="tip" title="Opal versendet die Kampfanwendung">
+Opals eigenes Anti-Bot-Modul ist genau dieser zweite Typ: zusätzliche Bot-Erkennungsprüfungen, sodass die Zielauswahl gefälschte Spieler ignoriert. Es wird als sicheres Modul zur Verbesserung der Benutzerfreundlichkeit eingestuft, nicht als Ausnutzung, und hat nichts mit dem Freiräumen von Beitrittstoren zu tun. Wenn Sie hier auf der Suche nach Opals Anti-Bot-Modul waren, ist dies das richtige.
+</Callout>
+
+## Ist es sicher, Antibot Check Bypass zu verwenden?
+
+Antibot Check Bypass verändert nichts, was ein Server oder ein anderer Spieler sehen kann, sobald das Tor freigegeben ist. Kämpfe, Bewegung und alles andere, was für andere Spieler sichtbar ist, bleibt unberührt. Das Verifizierungssystem, das es anspricht, ist darauf ausgelegt, Bot-Traffic herauszufiltern, anstatt Cheat-Clients zu identifizieren, sodass eine schnellere Antwort als ein Mensch nicht wie Betrug wirkt, egal wer zuschaut. Das stellt ein viel geringeres Risikoprofil dar als ein Modul, nach dem ein Anti-Cheat-System aktiv sucht.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Was umgeht der Antibot-Check Bypass eigentlich?">
+Er umgeht die Anti-Bot-Verifizierungsabfrage eines Servers, eine Art Captcha-Prüfung, die einige Anarchie-Server durchführen, bevor eine Verbindung zur normalen Spielweise zulässig ist.
+</FAQItem>
+
+<FAQItem question="Ist Antibot Check Bypass dasselbe wie das Anti-Bot-Kampfmodul?">
+Nein. Das Anti-Bot-Modul aus der Kampf-Kategorie filtert gefälschte Spieler aus einer Zielauswahl während eines Kampfes heraus. Antibot Check Bypass ist ein separates Modul aus der Ausnutzungs-Kategorie, das stattdessen einen Verifizierungsschritt bei der Anmeldung abwickelt.
+</FAQItem>
+
+<FAQItem question="Gilt die Verwendung von Antibot Check Bypass als Betrug?">
+Es automatisiert das Umgehen eines Bot-Filters, anstatt einen spielerischen Vorteil zu gewähren, und verhält sich daher nicht wie ein Cheat für den Kampf oder die Bewegung. Ob ein Server das Automatisieren von Teilen des Clients als Verstoß gegen die Regeln betrachtet, ist eine separate Frage von der Frage, ob die Prüfung selbst dies erkennen kann, und letztere kann dies in der Regel nicht.
+</FAQItem>
+
+<FAQItem question="Warum haben nur einige Server diese Prüfung?">
+Die Bot-Verifizierung erscheint hauptsächlich auf Anarchie-Servern, die einen hohen automatisierten Account-Traffic aufweisen und die Prüfung nutzen, um diesen herauszufiltern, bevor echte Spieler das Hauptspiel erreichen.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die umfassendere Kategorie, zu der dieses Modul und alles andere hier gehören." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die subtile Spielseite des Anarchie-Server-Überlebens." },
+  { href: "/de/learn/what-is-killaura", label: "Was ist KillAura?", description: "Ein Modul mit einem echten Erkennungsprofil, im Gegensatz zu diesem." },
+]} />
+
+<CTA href="/de/purchase">Besorgen Sie den Anti-Bot für den Kampf und alles andere für $8.99</CTA>

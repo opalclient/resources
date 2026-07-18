@@ -1,0 +1,81 @@
+---
+title: Was ist FakeHand in Minecraft? Modul erklärt
+description: FakeHand ist ein Minecraft-Exploit-Modul, das die Diskrepanz zwischen dem sichtbaren Gegenstand, den du hältst, und dem, was der Server registriert, erzeugt, wodurch Gegenstandstausches für alle, die deinen Bildschirm beobachten, verborgen bleiben.
+excerpt: Deine Hand zeigt ein Element. Der Server protokolliert ein anderes. FakeHand ist das gesamte Modul, das auf dieser Diskrepanz basiert.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Vieltelegrafen geben einen Vorteil im Spiel?
+    a: Nein. FakeHand beeinflusst keine Trefferdistanz, das Timing oder die Bewegung. Es ändert lediglich, welches Item im Inventar eines Spielers erscheint, relativ zu dem, was der Server tatsächlich registriert hat; daher ist es ein Tarnwerkzeug und kein Kampanmodul.
+  - q: Gilt FakeHand als ein kosmetisches Modul?
+    a: Nicht im üblichen Sinne. Kosmetische Module verändern das Aussehen um des Aussehens willen. FakeHand wird als Exploit-Kategorie eingestuft, da die Desynchronisation existiert, um eine Aktion vor einem Betrachter zu verbergen, nicht um das Erscheinungsbild des Clients zu verändern.
+  - q: Kann serverseitige Anticheat FakeHand erkennen?
+    a: Nicht direkt über Pakete. FakeHand operiert auf der visuellen Ausgabe des Clients, anstatt auf den Daten, auf die sich der Server für seinen eigenen Zustand verlässt, sodass eine Prüfung auf Paketebene kaum etwas abfängt. Die Diskrepanz wird eher von einem Menschen bemerkt, der Aufnahmen überprüft, oder bei einem Live-Screenshare.
+  - q: Hat Opal jemals ein FakeHand-Modul versendet?
+    a: Ja, historisch gesehen. Es ist in der Modulhistorie von Opal v1 dokumentiert. Das aktuelle Opal führt diesen Modulnamen nicht mehr separat weiter.
+---
+
+<KeyTakeaways>
+
+- FakeHand versetzt einen Spielers sichtbaren gehaltenen Gegenstand aus dem Takt mit dem tatsächlichen Serverprotokoll.
+- Es funktioniert nur auf der Render-Ebene; die eigentliche Interaktion erreicht den Server unverändert.
+- Es verschafft allein keinen Vorteil im Kampf oder bei der Bewegung, sondern verbirgt lediglich einen Gegenstandstausch vor einem Betrachter.
+- Paketprüfungen decken wenig auf; ein Mensch, der Aufnahmen überprüft, bemerkt die Diskrepanz weitaus leichter.
+
+</KeyTakeaways>
+
+FakeHand ist ein Exploit-Modul in Minecraft, das die Verbindung zwischen dem, was ein Spieler auf dem Bildschirm angezeigt bekommt, und dem Item-Interaktion-Status, den der Server tatsächlich protokolliert, unterbricht. Normalerweise bleiben die beiden miteinander verbunden: Wechselt man Items, aktualisieren sich die Client-Darstellung und der vom Server verfolgte Ausrüstungszustand synchron. FakeHand hält die angezeigte Hand ruhig oder zeigt ein völlig anderes Item an, während die tatsächliche Interaktion im Hintergrund genau so abläuft, als ob das Modul nicht laufen würde. Der Server bemerkt keinen Unterschied. Nur die Person, die den Bildschirm beobachtet, sieht etwas anderes.
+
+## Funktionsweise
+
+FakeHand greift nur die visuelle Ebene an. Es schreibt keine Pakete um oder verzögert Eingaben, sondern trennt das gerenderte Handmodell vom Ausrüstungszustand, den der Server tatsächlich verfolgt.
+
+Nehmen wir an, ein Spieler wechselt mitten im Kampf von einem Schwert zu einem Totem. Serverseitig findet dieser Wechsel und alles, was danach passiert, genau so statt, wie es auf einem sauberen Client ohne laufende Module geschehen würde. FakeHands einzige Aufgabe ist es, die gerenderte Hand weiterhin das Schwert anzeigen zu lassen oder keine Änderung anzuzeigen, während die Totem-Interaktion, die der Server protokolliert, im Hintergrund abgeschlossen wird.
+
+Das ist der gesamte Mechanismus. Keine Hitbox-Berechnungen, keine Timing-Tricks, keine Server-Desynchronisation. Einfach nur eine Diskrepanz zwischen dem, was tatsächlich passiert, und dem, was auf dem Bildschirm angezeigt wird, während es passiert.
+
+## Ist FakeHand erkennbar
+
+Anticheats auf Paketebene haben hier kaum etwas, auf das sie sich beziehen könnten. FakeHand verändert keine Trefferdistanz, fügt keine Ticks hinzu oder entfernt sie, und verändert nicht, wie schnell eine Interaktion abläuft. Die serverseitigen Daten sind identisch mit dem, was ein sauberes Client-Programm senden würde. Eine Prüfung, die auf der Konsistenz zwischen dem vom Client gemeldeten Zustand und dem Serverzustand basiert, findet keinen Widerspruch, weil es ihn auf dieser Seite der Gleichung nicht gibt.
+
+Der Haken läuft in die entgegengesetzte Richtung der meisten Exploit-Module. FakeHand existiert speziell, um die sichtbare Hand mit dem tatsächlichen Geschehen nicht übereinstimmen zu lassen, sodass die Diskrepanz, die es verrät, in den Aufnahmen und nicht in den Paketen auftritt. Ein Screenshare-Reviewer, ein Zuschauer oder jeder, der eine Aufnahme erneut ansieht und weiß, wie ein normaler Gegenstandstausch aussieht, hat genau die Art von Auge, die dafür geeignet ist, es zu erkennen. Es tauscht serverseitiges Risiko gegen visuelles Risiko. Es vermeidet das Risiko nicht vollständig.
+
+<Callout variant="info" title="Opal's Geschichte mit FakeHand">
+Es wurde einmal in Opal v1 ausgeliefert, bevor der Client komplett neu aufgebaut wurde. Das aktuelle Opal bietet keinen dedizierten Modulnamen mehr unter dieser Bezeichnung an. Wenn Sie also danach anhand dieses genauen Labels suchen, finden Sie es nicht im aktuellen Katalog.
+</Callout>
+
+<Callout variant="warning" title="Immer noch ein Exploit, ob gesehen oder nicht">
+FakeHand löst keine Prüfung der Reichweite oder des Timings aus, da es diese nie berührt. Das macht es nicht erlaubt. Jeder Server, der modifizierte Clients verbietet, behandelt ein Exploit-Kategorie-Modul gleich, unabhängig davon, ob das Personal es live erwischt oder nicht.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Verleiht FakeHand einen Vorteil im Spiel?">
+Nein. FakeHand beeinflusst keine Treffweite, das Timing oder die Bewegung. Es ändert lediglich, wie ein Gegenstand in der Hand eines Spielers erscheint, im Verhältnis zu dem, was der Server tatsächlich registriert hat. Es ist also ein Werkzeug zur Verschleierung, kein Kampanelement.
+</FAQItem>
+
+<FAQItem question="Gilt FakeHand als kosmetisches Modul?">
+Nicht im üblichen Sinne. Kosmetische Module verändern das Aussehen um ihrer selbst willen. FakeHand wird als Exploit-Kategorie eingestuft, da die Desynchronisation existiert, um eine Aktion vor einem Betrachter zu verbergen, und nicht, um das Erscheinungsbild des Clients zu verändern.
+</FAQItem>
+
+<FAQItem question="Kann serverseitige Anticheat-Software FakeHand erkennen?">
+Nicht direkt über Pakete. FakeHand operiert auf der visuellen Ausgabe des Clients, anstatt auf den Daten, auf die sich der Server für seinen eigenen Zustand verlässt. Eine Paket-basierte Prüfung hat daher wenig Chancen, etwas aufzudecken. Viel wahrscheinlicher ist, dass eine Diskrepanz von einem Menschen auffällt, der Aufnahmen überprüft oder einen Live-Screenshare betrachtet.
+</FAQItem>
+
+<FAQItem question="Hat Opal jemals ein FakeHand-Modul versendet?">
+Ja, historisch gesehen. Es ist in der Modulhistorie von Opal v1 dokumentiert. Aktuelles Opal führt dieses Modul nicht mehr unter diesem Namen.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die Kategorie der Verschleierungs- zuerst-orientierten Klienten, zu der FakeHand gehört." },
+  { href: "/de/learn/what-is-reach", label: "Was ist Reichweite?", description: "Ein Kampanmodul, das tatsächlich die Trefferdistanz verändert, im Gegensatz zu FakeHand." },
+  { href: "/de/learn/what-is-killaura", label: "Was ist KillAura?", description: "Das automatisierte Kampffach FakeHand bietet keinen Vorteil." },
+]} />
+
+<CTA href="/de/purchase">Erfahre, was Opal heute tatsächlich versendet, von $8.99</CTA>

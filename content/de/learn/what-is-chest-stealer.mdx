@@ -1,0 +1,96 @@
+---
+title: Was ist der Chest Stealer in Minecraft? Modul erklärt
+description: Chest Stealer ist ein Minecraft-Utility-Client-Modul, das einen offenen Kasten, Fass oder Shulker-Kasten in einem automatisierten Durchgang mit schnellen Bewegungen in dein Inventar entleert.
+excerpt: Einen Moment ist die Truhe voll. Im nächsten ist sie in deiner Tasche. So funktioniert das bei Chest Stealer, und warum es einem Server auffallen könnte.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was genau macht der Brustdieb?
+    a: Es entleert eine offene Truhe, Fässchen oder Shulker-Box in dein Inventar in einem Durchgang, indem es bei jedem belegten Feld einen schnellen Transfer auslöst, sobald sich der Behälter öffnet.
+  - q: Ist Brustdieb dasselbe wie Brusthilfe?
+    a: Nr. ChestAssist ist ein separates, nicht dokumentiertes Modul aus derselben Client-Familie. Chest Stealer ist das Modul, das einen Container leer räumt; was ChestAssist tut, ist hier nicht dokumentiert.
+  - q: Warum fügen Implementierungen Chest Stealer eine Verzögerung hinzu?
+    a: Da kann ein Mensch einen ganzen Container in einem einzigen Takt nicht leeren. Eine zufällige Verzögerung pro Zug, eine pro Takt begrenzte Artikelanzahl und eine zufällige Reihenfolge der Slots lassen das Muster für jeden Beobachter weniger mechanisch wirken.
+  - q: Filtert Brustdieb, was er nimmt?
+    a: Einige tun es. Eine Filterliste überspringt die Gegenstände, die du nicht benötigst, sodass unnötiger Ballast zurückbleibt und nur nützliche oder verbesserte Ausrüstung in dein Inventar gelangt.
+  - q: Welche Kunden haben den Brustdieb versendet?
+    a: Es ist in Fan, Tenacity, Rose und Augustus dokumentiert, und auch Opal bietet seine eigene Version an.
+---
+
+<KeyTakeaways>
+
+- Chest Stealer (auch als ChestStealer geschrieben) leert eine offene Truhe, Fässchen oder Shulker-Box in einem Durchgang in dein Inventar.
+- Es feuert einen Schnellzug auf jeden gefüllten Slot im selben Moment, in dem sich der Behälter öffnet.
+- Kein Mensch leert einen Behälter so schnell, daher fügen Builds eine Verzögerung und eine zufällige Reihenfolge hinzu, um dies zu verschleiern.
+- Es ist getrennt von ChestAssist; Opal liefert seine eigene Version, Verwendung auf eigene Gefahr.
+
+</KeyTakeaways>
+
+ChestStealer ist ein Minecraft-Utility-Client-Modul, das einen gesamten offenen Truhe-, Fass- oder Shulker-Kasten in einem einzigen Durchgang in dein Inventar entleert – ohne dass du jeden einzelnen Slot mit der Umschalttaste anklicken oder Gegenstände zurücklassen musst, weil du an ihnen vorbeigescrollt bist. Sobald der Containerbildschirm geöffnet wird, werden alle Gegenstände bewegt, bevor ein Mensch das Innere lesen könnte. Es wird als ein Wort geschrieben, ChestStealer, dasselbe Modul, und es ist leicht mit ChestAssist zu verwechseln, einer anderen Funktion, die zufällig zur selben Client-Familie gehört und einen ähnlichen Namen trägt.
+
+## Funktionsweise
+
+ChestStealer hakt den Containerbildschirm ab dem Moment ab, in dem er sich öffnet, und durchläuft jeden gefüllten Slot auf der Truhenseite des Menüs. Für jeden Slot sendet es einen schnellen Move, dieselbe Aktion, die ein Umschalttaste-Klick auslöst, sodass der Server nur eine Sequenz von gewöhnlichen Slot-Klick-Paketen sieht. Nichts an einem einzelnen Paket wirkt eigenartig.
+
+Was es verrät, ist das Tempo. Ein Spieler, der eine volle Truhe mit der Umschalttaste durchklickt, braucht mehrere Sekunden, mit gelegentlichen verpassten Slots und Neuklicks. ChestStealer muss nichts betrachten oder die Maus bewegen, es durchläuft einfach die Slot-Liste und feuert ab, sodass der gesamte Container in etwa einem Tick leer wird. Diese Kompression, mehrere Sekunden Arbeit in fast keine, ist der Teil, den kein legitimer Client von sich aus erzeugt.
+
+## Häufige Einstellungen
+
+Da Rohgeschwindigkeit verrät, stellen die meisten Implementierungen einige Stellschrauben bereit, die Vollständigkeit zugunsten eines weniger skriptartigen Aussehens opfern:
+
+| Einstellung | Was sie steuert |
+|---|---|
+| Bewegungsverzögerung | Zufällige Pause zwischen jeder schnellen Bewegung, damit sie nicht in einem Schwung landen |
+| Takt-Limit | Maximale Anzahl von Slots, die das Modul in einem einzigen Spieltakt freigibt |
+| Slot-Reihenfolge | Mischt die Freigabereihenfolge anstatt wie ein Bot von oben nach unten abzulaufen |
+| Gegenstandsfilter | Überspringt Gegenstände, die du nicht benötigst, sodass nur nützliche oder aufgerüstete Ausrüstung gezogen wird |
+
+<Callout variant="tip" title="Opal versendet dies als Chest Stealer">
+Opals eigener Katalog listet es in einer Zeile auf: "Nimmt nur nützliche oder verbesserte Gegenstände aus Truhen." Die gleiche Idee, der gleiche Instinkt für Item-Filter, offizielle Bezeichnung. Und die gleiche Ehrlichkeit bezüglich des Kompromisses: Opal klassifiziert es als „mit eigener Gefahr verwenden“, erkennbar wie jede andere automatisierte Inventaraktion.
+</Callout>
+
+## Ist es sicher zu verwenden
+
+Chest Stealer ist eine Funktion, die mit dem Risiko des eigenen Verschuldens genutzt wird, und keine Verbesserung der Benutzerfreundlichkeit. Eine sofortige, vollständige Leerräumung von Containern ist etwas, das ein legitimer Client nicht erzeugt, und jedes Server- oder Anticheat-System, das Container-Interaktionen überwacht, dieses Muster plausibel melden kann, unabhängig davon, ob Verzögerungen und Ruckler es verschleiern. Zufällige Zeitsteuerung und Slot-Mischung machen das Verhalten weniger mechanisch. Sie machen die zugrunde liegende Aktion, das Entnehmen aller Gegenstände in einem Schwung, den kein Mensch nachmachen kann, nicht für einen Server, der tatsächlich prüft, unsichtbar.
+
+Wie genau ein bestimmter Server die Container-Aktivität überwacht, variiert stark, und diese Varianz ist das eigentliche Risiko. Gehen Sie davon aus, dass eine Erkennung möglich ist, anstatt anzunehmen, dass die Verschleierungsmassnahmen sie zunichtemachen.
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite erklärt, was Chest Stealer ist und warum er markiert wird, nicht aber Anleitungen zum Ausführen. Die Automatisierung einer Containerbereinigung verstößt gegen die Regeln auf praktisch jedem Server, der Wert auf Fairness legt, und die damit verbundene Geschwindigkeit ist genau die Art von Signal, auf die Anticheats ausgelegt sind.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was genau macht der Truhenräuber?">
+Er leert eine offene Truhe, einen Fass oder eine Schulker-Box in einem Schritt in dein Inventar und führt für jeden belegten Slot einen schnellen Move aus, sobald der Behälter geöffnet wird.
+</FAQItem>
+
+<FAQItem question="Ist Chest Stealer dasselbe wie ChestAssist?">
+Nein. ChestAssist ist ein separates, nicht dokumentiertes Modul derselben Client-Familie. Chest Stealer ist das, was Behälter leer macht; was ChestAssist tut, ist hier nicht dokumentiert.
+</FAQItem>
+
+<FAQItem question="Warum fügen Implementierungen Chest Stealer eine Verzögerung hinzu?">
+Das vollständige Leeren eines Containers in einem einzigen Tick ist etwas, was ein Mensch nicht leisten kann. Eine zufällige Verzögerung pro Zug, eine pro Tick festgelegte Artikelanzahl und eine zufällige Slot-Reihenfolge sorgen dafür, dass das Muster für jeden Beobachter weniger mechanisch wirkt.
+</FAQItem>
+
+<FAQItem question="Filtert Chest Stealer, was es nimmt?">
+Einige Versionen tun dies. Eine Filterliste überspringt die Gegenstände, die du nicht möchtest, sodass unnützes Zeug zurückbleibt und nur nützliche oder aufgewertete Ausrüstung in dein Inventar gelangt.
+</FAQItem>
+
+<FAQItem question="Welche Klienten haben Chest Stealer verschickt?">
+Es ist in Fan, Tenacity, Rose und Augustus dokumentiert, und Opal versendet auch seine eigene Version.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die Kategorie Brustdieb gehört zu, und was sonst noch darin lebt." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Eine andere Philosophie: Module, die darauf ausgelegt sind, vollständig unsichtbar zu sein." },
+  { href: "/de/learn/what-is-velocity-anti-knockback", label: "Was ist Geschwindigkeit (Anti-Rückstoß)?", description: "Ein weiteres Modul des täglichen Gebrauchs mit eigenen Erkennungsabwägung." },
+]} />
+
+<CTA href="/de/kaufen">Lass Opal die guten Beute einsammeln, während du weiterkämpfst.</CTA>

@@ -1,0 +1,79 @@
+---
+title: Was ist AntiKB in Minecraft?
+description: AntiKB ist ein Minecraft-Modul, das den Rückstoß bei Treffern reduziert oder aufhebt. Sieh dir an, wie es den Vektor abfängt, ihn mit der Geschwindigkeit vergleicht und warum Server ihn abfangen.
+excerpt: AntiKB überschreibt, was nach einem Treffer passiert, sodass ein Faustschlag kaum etwas bewirkt. Hier ist der Mechanismus dahinter und warum der Server es trotzdem immer bemerkt.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Ist AntiKB dasselbe wie ein Velocity-Modul?
+    a: Ja. AntiKB und ein Velocity-Modul beschreiben dasselbe Verhalten, indem sie den Rückstoß reduzieren oder aufheben, den ein Spieler erleidet, wenn er getroffen wird. Einige Clients melden dies unter „Spieler“ anstatt unter „Kampf“, aber der zugrunde liegende Mechanismus ist identisch.
+  - q: Entfernt AntiKB vollständig die Rückstoßwirkung?
+    a: Es kommt auf die Einstellung an. AntiKB kann Rückstoß vollständig aufheben oder ihn nur abmildern, aber in beiden Fällen bedeutet das weniger Schub, als der Treffer eigentlich ausüben sollte.
+  - q: Ist die Verwendung von AntiKB gegen die Regeln?
+    a: Ja. Es verschafft einen echten Kampfvorteil, da es einem Spieler erlaubt, eine Mechanik zu ignorieren, an die alle anderen Spieler gebunden sind, weshalb Server es wie jede andere Manipulation im Kampf behandeln.
+  - q: Können andere Spieler erkennen, ob jemand AntiKB verwendet?
+    a: Manchmal bemerkt ein Gegner, dass ein Ziel kaum reagiert, obwohl ein Treffer es eigentlich wegschleudern sollte, aber die zuverlässige Erfassung erfolgt serverseitig, indem die Bewegung, die ein Treffer verursachen sollte, mit der Bewegung verglichen wird, die der Server tatsächlich empfängt.
+---
+
+<KeyTakeaways>
+
+- AntiKB reduziert oder hebt den Rückstoß eines Spielers auf, der von einem Treffer betroffen ist.
+- Es fängt den Rückstoßvektor von Minecraft ab, sodass der Treffer landet, aber der Rückstoß schrumpft oder verschwindet.
+- Mechanisch ist es das Gleiche wie ein Geschwindigkeitsmodul, nur unter einem anderen Menüpunkt bei einigen Clients.
+- Anticheats erkennen es serverseitig, indem sie die erwartete Bewegung des Treffers mit dem vergleichen, was der Spieler tatsächlich sendet.
+
+</KeyTakeaways>
+
+AntiKB ist ein Minecraft-Modul, das den Rückstoß, den ein Spieler erleidet, wenn er getroffen wird, reduziert oder vollständig aufhebt, unabhängig davon, ob dieser Treffer von einem Schwertschlag, einem Pfeil, einer Explosion oder der Knockback-Verzauberung stammt. In Vanilla Minecraft wird ein getroffener Spieler für einen Moment zurückgestoßen, wodurch seine Bewegung für diesen Moment außer Kontrolle gerät. AntiKB stellt sich dieser Stoßkraft in den Weg und verkleinert oder setzt sie auf Null, sodass der Treffer weiterhin registriert wird, aber der Kampf nicht durch einen Wurf über die Arena unterbrochen wird. Einige Clients fassen diese Funktion mit Kampfinstrumenten zusammen; andere ordnen sie stattdessen unter allgemeine Spieleroptionen ein, obwohl der Effekt in jedem Fall identisch ist.
+
+## Funktionsweise
+
+Der Vanilla-Rückstoß ist ein Vektor, keine Empfehlung. Werden Sie getroffen, stößt das Spiel Sie für einen Moment von der Schadensquelle weg und überschreibt dabei die Richtung, in die Sie sich tatsächlich bewegen. AntiKB fängt diesen Vektor ab, bevor er die Bewegung Ihres Charakters erreicht, und skaliert ihn herunter, manchmal bis hin zu Null. Der Angriff trifft weiterhin, der Schaden wird weiterhin angewendet, der Schwung zählt weiterhin, aber die körperliche Reaktion auf den Treffer wird zurückgefahren oder vollständig entfernt.
+
+Der Vorteil ist einfach. Ohne Rückstoß kann ein Spieler Nahkampfreichweite halten und weiterhin Schläge austauschen, anstatt nach jedem Angriff zurückgestoßen zu werden, was normalerweise eine Verfolgungsjagd erfordert, um die Distanz wiederherzustellen. Es beseitigt auch das Risiko, von einer Klippe, in ein Loch oder von einer Brücke gestoßen zu werden – Situationen, in denen normaler Rückstoß einen Kampf unabhängig vom tatsächlichen Sieger beenden kann. Gegenüber jemandem, der es nicht nutzt, ist die Diskrepanz offensichtlich: ein Spieler blockt Schläge und behauptet seine Position, der andere wird bei jedem Treffer weggestoßen.
+
+## AntiKB vs Velocity: derselbe Trick, unterschiedliches Menü
+
+AntiKB und ein [Velocity-Modul](/de/learn/what-is-velocity-anti-knockback) sind keine Cousins, sondern dasselbe Feature unter zwei Namen. Beide fangen den vom Server gesteuerten Rückstoßvektor ab, skalieren oder setzen ihn auf Null, bevor er die Spielerbewegung beeinflusst, und werden beide durch dieselbe Erkennungsmethode aufgespürt. Der einzige wirkliche Unterschied ist die Verpackung. Einige Clients ordnen den Effekt Kampfwerkzeugen zu, wo er offensichtlich hingehört, neben Dingen wie Reichweite oder einem Aim-Assistenten. Andere verstecken ihn stattdessen in einer allgemeinen Spieler-Kategorie, was eine Menüentscheidung desjenigen ist, der den Client erstellt hat, und keine Abweichung davon, was der Code tatsächlich tut.
+
+Wenn Sie einen der beiden Namen auf einer Feature-Liste sehen, lesen Sie ihn gleich: dieser Client kann reduzieren, wie weit Sie durch einen Treffer zurückgeschleudert werden.
+
+<Callout variant="tip" title="Wo Opal die Grenze zieht">
+Opal's Kampfkombinationen und Bewegungstools sind für BedWars- und SkyWars-ähnliche Kämpfe konzipiert: Zielhilfe, Bewegungswerkzeuge, das übliche Kit, um einen Handel zu gewinnen. Ein dedizierter Rückstoßunterdrücker gehört nicht zu dieser Auswahl. Es ist genau die Art der Bewegungsmanipulation, die eine saubere Signatur im Hitlog eines Servers hinterlässt, was es zu einer riskanten Sache macht, ein Konto dafür zu gefährden.
+</Callout>
+
+<Callout variant="warning" title="Dies ist eine serverseitige Verlosung">
+AntiKB ist kein reines kosmetisches Element. Es verändert, wie deine Position auf Kämpfe reagiert, und genau das ist der Zweck eines serverseitig autorisierten Anticheats. Wenn der Server einen Rückstoß bei einem Treffer anwendet, hat er eine Erwartung, wie weit du dich im nächsten Zyklus bewegen solltest. Kaum Bewegung nach einem Treffer, der dich wegschleudern sollte, ist eine Diskrepanz, über die das Anticheat nicht spekulieren muss. Die Wirkung herunterzudrehen, anstatt sie vollständig zu deaktivieren, verringert diese Lücke lediglich, schließt sie aber nicht.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Ist AntiKB dasselbe wie ein Velocity-Modul?">
+Ja. AntiKB und ein Velocity-Modul beschreiben dasselbe Verhalten, indem sie die Rückstoßkraft reduzieren oder aufheben, die ein Spieler beim Treffer erfährt. Einige Clients ordnen dies unter Spieler statt unter Kampf ein, aber der zugrunde liegende Mechanismus ist identisch.
+</FAQItem>
+
+<FAQItem question="Entfernt AntiKB Rückstoß vollständig?">
+Das hängt von der Konfiguration ab. AntiKB kann Rückstoß vollständig aufheben oder ihn lediglich abmildern, aber in beiden Fällen bedeutet dies weniger Schub als der Treffer eigentlich verursachen sollte.
+</FAQItem>
+
+<FAQItem question="Ist die Verwendung von AntiKB gegen die Regeln?">
+Ja. Es verschafft einen echten Kampfvorteil, da ein Spieler eine Mechanik ignorieren kann, an die alle anderen Spieler gebunden sind. Server behandeln es daher wie jede andere Art von Kampffmanipulations-Cheat.
+</FAQItem>
+
+<FAQItem question="Können andere Spieler erkennen, ob jemand AntiKB verwendet?">
+Manchmal bemerkt ein Gegner, dass ein Ziel kaum noch bewegt wird, nachdem es von einem Treffer getroffen wurde, der es eigentlich wegschleudern sollte, aber die zuverlässige Erkennung erfolgt serverseitig, indem der Bewegungsumfang verglichen wird, den ein Treffer verursachen sollte, mit der Bewegung, die der Server tatsächlich empfängt.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-velocity-anti-knockback", label: "Was ist Velocity (Rückstoßvermeidung)?", description: "Das Modul AntiKB ist funktional identisch mit seiner gebräuchlicheren Bezeichnung." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Wo solche subtilen, kaum wahrnehmbaren Module in das Gesamtkonzept eines Kunden passen." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die breitere Kategorie, zu der AntiKB und ähnliche Module gehören." },
+]} />
+
+<CTA href="/de/kaufen">Erhalten Sie den Kampfvorteil, der keine Rückstoß-Ausnutzung benötigt.</CTA>

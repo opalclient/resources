@@ -1,0 +1,94 @@
+---
+title: Was ist das Benachrichtigungsmodul in Minecraft?
+description: Das Benachrichtigungsmodul in Minecraft-Clients zeigt eine schnelle On-Screen-Benachrichtigung an, wenn ein Modul umgeschaltet oder eine Aufgabe abgeschlossen wird, ohne dabei Anticheat-Spuren zu hinterlassen.
+excerpt: Ein Schalter wird betätigt, eine Aufgabe wird abgeschlossen und ein kleines Banner zeigt Ihnen, dass es funktioniert, sodass Sie es nicht selbst überprüfen müssen. Das ist das gesamte Modul.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Ist Benachrichtigungen ein Cheat-Modul?
+    a: Nein. Es zeigt lediglich eine Meldung an, wenn etwas im Client passiert, wie beispielsweise das Umschalten eines Moduls oder das Beenden einer automatisierten Aufgabe. Es handelt nicht in Ihrem Namen oder verändert keine Spielmechanik, sondern dient lediglich als Rückmeldung, nicht als Automatisierung.
+  - q: Welche Arten von Ereignissen lösen eine Benachrichtigung aus?
+    a: Die beiden häufigsten Varianten sind das Ein- oder Ausschalten eines Moduls, meist über eine Hotkey- oder GUI-Klick, und das automatische Abschließen einer Aufgabe durch ein Modul, wie beispielsweise das vollständige Durchsuchen einer Truhe durch einen Chest Stealer.
+  - q: Werden Benachrichtigungen von Anti-Cheat-Systemen erkannt?
+    a: Nein. Es hinterlässt überhaupt keinen serverseitigen Fußabdruck. Es sendet nichts und verändert nichts am Spielablauf, und Anticheats bewerten Bewegung, Kampf und Paketdaten, wobei ein rein visueller Pop-up diese nicht berührt.
+  - q: Wie unterscheidet sich Notifications von einem HUD-Modul?
+    a: Ein HUD-Modul ist eine dauerhafte Überlagerung, die ständig angezeigt wird, beispielsweise Koordinaten oder FPS. Benachrichtigungen erscheinen nur kurzzeitig als Reaktion auf ein bestimmtes Ereignis und verschwinden dann wieder.
+  - q: Welche Kunden haben ein Benachrichtigungsmodul?
+    a: Man findet es bei Klienten wie Fan und Tenacity, meistens zusammen mit einem HUD und einer Array-Liste als Teil derselben Kategorie für passive Anzeigen.
+---
+
+<KeyTakeaways>
+
+- Das Benachrichtigungsmodul zeigt einen kurzen Pop-up-Hinweis auf dem Bildschirm an, wenn ein bestimmtes Ereignis im Client ausgelöst wird, meistens das Ein- oder Ausschalten eines Moduls oder das Beenden einer Aufgabe durch ein automatisiertes Modul wie den Chest Stealer.
+- Es ist ereignisgesteuert und nicht persistent: die Benachrichtigung erscheint, hält ein oder zwei Sekunden und verschwindet dann von selbst, im Gegensatz zu einem immer sichtbaren HUD.
+- Es wird nur lokal gezeichnet. Keine Pakete, keine Bewegungs- oder Kampfanpassungen, nichts, was ein serverseitiges Anti-Cheat-System messen könnte.
+- In Clients wie Fan und Tenacity als Komfortfunktion wahrgenommen, nicht als Spielelement.
+
+</KeyTakeaways>
+
+Das Modul "Benachrichtigungen" ist ein kleines Alarmsystem in einigen Minecraft-Utility-Clients, das jedes Mal, wenn ein bestimmtes Ereignis eintritt, einen kurzen Pop-up-Hinweis auf dem Bildschirm anzeigt, am häufigsten wenn ein Modul aktiviert oder deaktiviert wird oder eine Hintergrundaufgabe abgeschlossen ist. Es ändert nichts an der Art und Weise, wie das Spiel gespielt wird. Betrachten Sie es als Bestätigung, nicht als Automatisierung: eine Funktion, an die Sie nicht denken, bis Sie gleichzeitig sechs Module verwalten und wissen müssen, ohne überprüfen zu müssen, ob das Modul, das Sie gerade umgeschaltet haben, tatsächlich aktiviert wurde.
+
+## Wie es funktioniert
+
+"Benachrichtigungen" horcht auf Ereignisse innerhalb des Clients selbst und nicht auf etwas, das auf dem Server passiert. Der häufigste Auslöser ist ein Hotkey oder ein GUI-Umschalter: Schalten Sie Killaura ein und ein schneller Banner bestätigt dies. Ein weiterer häufiger Auslöser ist ein automatisches Modul, das eine Aufgabe nach eigenem Zeitplan abschließt, wobei das klarste Beispiel das Beenden eines Durchlaufs eines Truhe-Diebs [Chest Stealer](/de/learn/what-is-chest-stealer) ist, nachdem Sie eine Truhe geöffnet haben.
+
+Das Pop-up selbst ist klein: Eine Textzeile oder ein kompaktes Banner, meist in einer Ecke des Bildschirms platziert und für ein oder zwei Sekunden sichtbar, bevor es verblasst. Es funktioniert auf die gleiche Weise wie die eigenen Toast-Nachrichten von Vanilla Minecraft (Fortschritts-Pop-ups, das Banner für das Freischalten von Rezepten), nur hier für clientseitige Ereignisse anstelle der Vanilla-Ereignisse umfunktioniert. Wichtig ist, was es nicht tut: Das Anzeigen der Benachrichtigung hat keinen Effekt auf das Ereignis, über das es berichtet. Der Schalter wurde bereits umgelegt. Das Pop-up informiert dich lediglich nachträglich darüber.
+
+## Benachrichtigungen vs. ein HUD-Modul
+
+Es ist verlockend, dies unter HUD einzureichen, aber die beiden lösen unterschiedliche Probleme. Ein HUD bleibt kontinuierlich auf dem Bildschirm und zeigt eine laufende Anzeige wie Koordinaten oder FPS an, unabhängig davon, ob etwas passiert oder nicht. Benachrichtigungen sind das Gegenteil: standardmäßig unsichtbar und erscheint nur, wenn etwas Bestimmtes ausgelöst wird.
+
+| | Benachrichtigungen | HUD |
+|---|---|---|
+| Standardmäßig sichtbar | Nein, nur bei Ereignis | Ja, kontinuierlich |
+| Dauer | Ein oder zwei Sekunden, dann löscht es sich | Bleibt, bis es deaktiviert wird |
+| Zeigt | Ein einzelnes Ereignis (Umschalten, Aufgabe erledigt) | Laufende Statistiken (Koordinaten, FPS, Kampf) |
+| Serverinteraktion | Keine | Keine |
+
+Kunden wie Fan und Tenacity versenden beide, wobei sie diese als separate Teile derselben Kategorie für passive Anzeigen behandeln, anstatt dass eine die andere abdeckt. Wenn Sie die Anzeige-Funktion dieser Kombination wünschen, finden Sie diese auf der Seite [HUD-Modul](/de/learn/what-is-hud).
+
+## Ist es sicher in der Anwendung?
+
+So sicher, wie es eine Client-Funktion nur sein kann. Benachrichtigungen werden lokal gezeichnet und dort beendet. Es werden keine zusätzlichen Pakete gesendet, nichts über Bewegung oder Kampf ändert sich, und keine Eingabe wird automatisiert. Ein serverseitiger Anti-Cheat-Mechanismus bewertet, was Ihr Client sendet und wie sich Ihr Spieler bewegt, und ein Pop-up, das nur auf Ihrem Bildschirm existiert, berührt weder die eine noch die andere Seite davon. Es gibt keine Rotationssignatur, kein Timing-Hinweis, nichts, was korreliert werden könnte.
+
+Die einzige Einschränkung stellt kein Erkennungsrisiko dar: es ist eine Sichtbarkeitsfrage. Da das Pop-up direkt auf dem Bildschirm gerendert wird, sieht jeder, der diesen Bildschirm betrachtet (ein Moderator, ein Bildschirmfreigabe, ein Stream), genau, was angezeigt wird. Das ist gut zu wissen, hat aber nichts damit zu tun, wie ein Anti-Cheat einen Spieler bewertet.
+
+<Callout variant="tip" title="Wo dies in Opal passt">
+Opal liefert kein Modul namens Notifications. Aber der dahinterliegende Gedanke, Sie über das Geschehene zu informieren, anstatt Sie danach suchen zu lassen, zieht sich dennoch durch die Benutzeroberfläche. Modulstatus und abgeschlossene Hintergrundaufgaben sind Dinge, die Sie auf einen Blick erfassen sollten, anstatt sie in einem Menü zu suchen.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Ist Notifications ein Cheatm-Modul?">
+Nein. Es zeigt lediglich eine Nachricht an, wenn etwas im Client passiert, wie beispielsweise das Umschalten eines Moduls oder das Beenden einer automatisierten Aufgabe. Es handelt nicht in Ihrem Namen und verändert keine Spielmechanik, sondern dient lediglich als Rückmeldung, nicht als Automatisierung.
+</FAQItem>
+
+<FAQItem question="Welche Arten von Ereignissen lösen eine Benachrichtigung aus?">
+Die beiden häufigsten sind das Ein- oder Ausschalten eines Moduls, meist durch eine Hotkey- oder die GUI-Klick, und das eigenständige Abschließen einer Aufgabe durch ein automatisiertes Modul, wie beispielsweise das Abschließen eines Passes an eine Truhe durch den Chest Stealer.
+</FAQItem>
+
+<FAQItem question="Werden Benachrichtigungen von Anti-Cheat-Systemen erkannt?">
+Nein. Es hinterlässt überhaupt keinen Server-Footprint. Es sendet nichts und verändert nichts am Spielablauf, und Anti-Cheat-Systeme bewerten Bewegungen, Kämpfe und Paketdaten, von denen ein rein visueller Pop-up nicht berührt wird.
+</FAQItem>
+
+<FAQItem question="Wie unterscheidet sich Benachrichtigungen von einem HUD-Modul?">
+Ein HUD-Modul ist eine permanente Überlagerung, die ständig angezeigt wird, wie beispielsweise Koordinaten oder FPS. Benachrichtigungen erscheinen nur kurzzeitig als Reaktion auf ein bestimmtes Ereignis und verschwinden dann wieder.
+</FAQItem>
+
+<FAQItem question="Welche Kunden haben ein Benachrichtigungsmodul?">
+Es ist bei Kunden wie Fan und Tenacity zu finden, meistens zusammen mit einem HUD und einer Array-Liste als Teil derselben passiven Anzeigekategorie.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die umfassendere Kategorie Benachrichtigungen ist ein kleiner Teil davon." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Eine andere, passiv-orientierte Philosophie, die auf dem Prinzip des Unauffälligkeit statt auf Information basiert." },
+  { href: "/de/learn/what-is-an-aimbot", label: "Was ist ein Aim-Bot?", description: "Eines der automatisierten Module, das gerade ausgelöst wurde, um eine Benachrichtigungsanzeige zu bestätigen." },
+]} />
+
+<CTA href="/de/kaufen">Opal sichern und sich nicht länger fragen, ob dein letzter Schalter tatsächlich aktiviert wurde.</CTA>

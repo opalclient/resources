@@ -1,0 +1,85 @@
+---
+title: Was sind Drachenflügel in Minecraft? (Modul erklärt)
+description: Dragon Wings ist ein kosmetisches Minecraft-Modul, das anstelle eines Umhangs ein Flügelmodell auf deinem Rücken darstellt, ohne Auswirkungen auf Bewegung, Kampf oder Kollision.
+excerpt: Ein Umhang gegen ein Paar Flügel. Wie du spielst, ändert sich nichts, nur dein Aussehen dabei.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Erlaubt dir Dragon Wings fliegen oder gleiten?
+    a: Nein. Es erzeugt lediglich ein Flügelmodell auf deinem Rücken. Es hat keinen Einfluss auf Bewegung, Sprünge oder Stürze und verleiht kein käferartiges Gleiten.
+  - q: Können andere Spieler meine Drachenflügel sehen?
+    a: Es hängt davon ab, ob ihr Kunde dasselbe Modell rendert. Es ist eine Rendering-Funktion, daher beeinflusst sie, was auf einem Spielermodell angezeigt wird, anstatt etwas, das der Server selbst verfolgt oder als Daten überträgt.
+  - q: Sind Drachenflügel dasselbe wie das Tragen von Elytren?
+    a: Nein. Ein Elytra ist ein Vanilla-Gegenstand mit einer echten Gleitmechanik. Drachenflügel sind ein kosmetisches Modell ohne mechanische Wirkung, eher wie ein Umhang als wie echte Flugausrüstung.
+  - q: Riskiert die Nutzung von Dragon Wings einen Bann?
+    a: Nein. Es ist ein rein visuelles Modul, das nichts an den vom Server erfassten Daten zu Bewegung oder Kampf ändert, sodass es kein höheres Risiko birgt als jede andere kosmetische Anzeigeoption.
+---
+
+<KeyTakeaways>
+
+- Dragon Wings ist ein kosmetisches Modul, das anstelle eines Umhangs ein Flügelmodell auf dem Rücken des Spielers darstellt.
+- Es ändert nur die lokale Darstellung, nicht das Fliegen, Gleiten, die Bewegung oder die Kollisionserkennung.
+- Nichts, was an den Server gesendet wird, ändert sich, sodass es kein höheres Bannrisiko birgt als jede andere kosmetische Wahl.
+- In Clients wie Tenacity als Standard-Kosmetikoption zu sehen.
+
+</KeyTakeaways>
+
+Drachenflügel ist ein kosmetisches Modul in Minecraft-Utility-Clients, das den Platz für den Umhang deines Charakters durch ein gerendertes Flügelpaar ersetzt. Es funktioniert genau wie das Auswählen eines Umhangs, nur mit Federn statt Stoff. Aktiviere es, und jeder Frame zeichnet ein Flügelmodell, das an den Rücken deines Spielers angebracht ist, genau an der Stelle, an der Vanilla einen Umhang oder eine ausgestattete Elytra rendert. Das ist die gesamte Funktion. Bewegung, Kampf und Kollision bleiben genau so, wie Vanilla sie definiert: das Modul berührt niemals die serverseitige Seite des Spiels, sondern nur das clientseitige Modell, das du und alle anderen, die es ausführen, sehen können.
+
+## Wie es funktioniert
+
+Drachenflügel fügt dem Spieler einen Flügel an den Rücken in derselben Position hinzu, in der ein Vanilla-Umhang oder eine Elytra sitzt, und zeichnet ihn dann jeden Frame neu, in dem das Spielermodell gezeichnet wird. Das ist ein clientseitiger Render-Schritt, keine Mechanik. Das Modul hängt sich an den gleichen Draw-Call an, den Vanilla für einen Umhang verwendet, und ersetzt ihn durch seine eigene Geometrie.
+
+Es ändern sich nichts an der Physik darunter. Es gibt keinen Flug, kein Gleiten, keine Interaktion mit dem Kollisions- oder Geschwindigkeits-Code des Spiels, weil die Flügel eine visuelle Ebene über dem bestehenden Spielermodell sind und nicht einen Ersatz für das Elytra-Item oder die dahinterliegende Mechanik. Der Server empfängt niemals ein Signal, das besagt: "Dieser Spieler trägt Flügel." Er sendet weiterhin die normalen Bewegungs- und Ausrüstungspakete, die er immer sendet, und der Client entscheidet sich einfach, etwas Zusätzliches darüber zu zeichnen.
+
+## Drachenflügel vs. Umhang vs. Elytra
+
+| | Drachenflügel | Vanilla-Umhang | Elytra |
+|---|---|---|---|
+| Was es ist | Clientseitiges kosmetisches Modell | Vanilla-Kosmetikgegenstand | Vanilla-Gleitgegenstand |
+| Ermöglicht Flug oder Gleiten | Nein | Nein | Ja, wenn ausgerüstet und in der Luft |
+| Benötigt einen Ingame-Gegenstand | Nein | Ja, einen Umhang | Ja, ein ausgerüstetes Elytra |
+| Für andere Spieler sichtbar | Nur wenn deren Client es darstellt | Ja, für alle | Ja, für alle |
+| Beeinflusst Bewegung oder Kollision | Nein | Nein | Ja, während des Gleitens |
+
+Die Flügel belegen den gleichen visuellen Slot wie ein Umhang, ohne den Gegenstand, das Kontoflag oder das Resource Pack zu benötigen, das ein Umhang normalerweise erfordert. Ein Elytra befindet sich in einem völlig anderen Bereich: Es ist eine echte Vanilla-Mechanik mit serverseitig verfolgter Physik, nicht ein Aussehen, das man nach Belieben ein- und ausschalten kann.
+
+## Ist es sicher zu verwenden
+
+Drachenflügel sendet nichts Zusätzliches an den Server, beeinflusst keine Trefferbereiche und gibt dem Spieler keine Informationen, die der Server nicht bereits an alle weitergibt. Es ist eine lokale Erscheinungseinstellung, dieselbe Kategorie wie das Auswählen eines Umhangs oder das Ändern eines Skins, nicht eine Spielmechanik. Da es keinen Spieleffekt gibt, gibt es nichts, was eine serverseitliche Prüfung erkennen könnte, da es nichts produziert, was der Server anders als einen Vanilla-Spieler am selben Ort sehen würde.
+
+<Callout variant="tip" title="Wo dies in Opal seinen Platz findet">
+Opal liefert kein Modul unter diesem Namen aus. Seine optische Seite basiert jedoch auf derselben Logik: das Animationsmodul ändert beispielsweise, was Sie sehen, ohne etwas zu verändern, das der Server verfolgt. Wenn das Ziel darin besteht, anders auszusehen, ohne etwas Mechanisches zu riskieren, dann ist das ein Bereich, den Opal bereits gut abdeckt. Wings sind speziell nicht im aktuellen Katalog enthalten.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Ermöglicht Dragon Wings das Fliegen oder Gleiten?">
+Nein. Es erzeugt lediglich ein Flügelmodell auf dem Rücken. Es hat keinen Einfluss auf die Bewegung, das Springen oder den Sturz und verleiht kein gleitfähiges Elytra-ähnliches Verhalten.
+</FAQItem>
+
+<FAQItem question="Können andere Spieler meine Drachenflügel sehen?">
+Das hängt davon ab, ob ihr Client dasselbe Modell darstellt. Es handelt sich um eine Rendering-Funktion, die beeinflusst, was auf einem Spielermodell angezeigt wird, und nicht um etwas, das der Server selbst verfolgt oder als Daten überträgt.
+</FAQItem>
+
+<FAQItem question="Sind Drachenflügel dasselbe wie das Tragen einer Elytra?">
+Nein. Eine Elytra ist ein Vanilla-Gegenstand mit einer echten Gleitmechanik. Drachenflügel ist ein kosmetisches Modell ohne mechanische Wirkung, eher wie ein Umhang als wie eine tatsächliche Flugausrüstung.
+</FAQItem>
+
+<FAQItem question="Besteht bei der Nutzung von Dragon Wings die Gefahr eines Banns?">
+Nein. Es handelt sich um ein rein visuelles Modul, das nichts an den vom Server erfassten Daten zu Bewegung oder Kampf ändert. Daher birgt es kein höheres Risiko als jede andere kosmetische Darstellungswahl.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Größere Kategorien von Kosmetikmodulen wie Dragon Wings sind darin enthalten." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Wo unbemerkt bleiben wichtiger ist als dein Aussehen dabei." },
+  { href: "/de/learn/what-is-a-crystal-aura", label: "Was ist eine Kristallaura?", description: "Ein Modul am anderen Ende des Risikospektrums im Vergleich zu einem rein oberflächlichen." },
+]} />
+
+<CTA href="/de/kaufen">Diskutiert nicht länger über das verpixelte Cape. Opal kümmert sich um die Module, die wirklich den Verlauf eines Kampfes verändern.</CTA>

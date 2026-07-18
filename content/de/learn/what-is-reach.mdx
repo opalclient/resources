@@ -1,0 +1,88 @@
+---
+title: Was ist Reichweite in Minecraft? (Kampfmodul erklärt)
+description: Reach ist ein Kampfmoodul, das die Reichweite deiner Angriffe über die Standardgrenze hinaus erweitert. Hier ist eine Erklärung, wie es funktioniert, warum Anticheats es erkennen und welche Risiken damit verbunden sind.
+excerpt: Reach ermöglicht es dir, Treffer zu landen, bevor sich ein Gegner in der echten Nahkampfreichweite befindet. Hier erfährst du, wie das Modul die Angriffsreichweite verlängert und warum Server diese so genau messen.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Modules
+author: trq
+faqs:
+  - q: Wie hoch ist die normale Reichweite in Minecraft?
+    a: Die Reichweite eines Überlebens-Nahkampfangriffs beträgt drei Blöcke. Ein Reichweitenmodul erhöht diese Grenze, sodass der Client Ziele angreifen kann, die weiter entfernt sind, als es im Originalspiel erlaubt ist.
+  - q: Ist Reach eine clientseitige oder serverseitige Funktion?
+    a: "Der Betrug geschieht clientseitig: Ein modifizierter Client meldet Treffer außerhalb des normalen Bereichs. Die Erkennung erfolgt serverseitig, wo die Anti-Cheat-Software die Distanz neu berechnet und Treffer, die zu weit sind, markiert."
+  - q: Warum ist ein kleiner Reach schwieriger zu erkennen als ein großer Reach?
+    a: Server ermöglichen eine Toleranz für Latenz und Ausgleich von Verzögerungen. Eine geringe zusätzliche Reichweite kann in dieser Toleranz verborgen liegen, während ein großer Wert jede glaubwürdige Distanz deutlich überschreitet.
+  - q: Ist die Verwendung von Reach gegen die Regeln?
+    a: Ja. Reach ist eine Combat-Cheaterei. Die Verwendung davon verstößt gegen die Nutzungsbedingungen von praktisch jedem Server und führt in der Regel zu einer Sperre, wenn sie entdeckt wird.
+---
+
+<KeyTakeaways>
+
+- Reach ist ein Kampanmodul, das es dir ermöglicht, Ziele zu treffen, die über die normale Angriffsreichweite hinausliegen.
+- Im Originalspiel ist die Reichweite für Nahkampfangriffe auf drei Blöcke begrenzt; Reach ersetzt diese Prüfung durch eine größere Zahl.
+- Die Erkennung erfolgt serverseitig: Der Server berechnet die Trefferreichweite neu und markiert Treffer über die normale Distanz.
+- Kleine Reach-Angriffe sind schwerer zu erwischen, da sie sich in der Latenztoleranz verstecken, die Server bereits gewähren.
+
+</KeyTakeaways>
+
+Reach ist ein Kampanmodul, das einem Spieler ermöglicht, ein Ziel aus größerer Entfernung zu treffen, als das Spiel normalerweise zulässt. In der Standard-Minecraft-Version ist die Angriffsreichweite auf einen festen Wert begrenzt. Ein Reach-Modul erhöht diese Grenze, sodass Angriffe landen, bevor sich der Gegner in echter Nahkampfreichweite befindet. Es ist eine Schummel-Funktion, und Server behandeln sie als solche.
+
+## Funktionsweise von Reach
+
+Reach ändert die Entfernung, bei der der Client einen Angriff registriert und sendet. Der Standard-Überlebenskampf verwendet eine Angriffsreichweite von drei Blöcken, und der Client greift nichts an, was diese Entfernung überschreitet. Ein Reach-Modul ersetzt diese Prüfung durch eine größere Zahl, sodass der Client dem Server mitteilt: "Ich habe diese Entität getroffen", während sich die Entität noch mehrere Blöcke entfernt befindet.
+
+Der Server ist es, der hier eine Rolle spielt. Da der Client des angreifenden Spielers entscheidet, wer getroffen wurde, kann ein modifizierter Client Treffer melden, die der Server nicht erwartet. Ein naiver Server akzeptiert den Treffer. Ein strengerer Server berechnet die Entfernung selbst neu und lehnt alles ab, was über eine geringe Toleranz hinausgeht.
+
+## Warum es verwendet wird
+
+Der Reiz liegt im Gewinnen von Kämpfen, die man normalerweise verlieren würde. Zusätzliche Reichweite bedeutet, den ersten Treffer zu landen, einen Gegner zu hetzen, der nie die Distanz schließen kann, und sich im Nahkampf vorteilhaft auszutauschen. In einem Eins-gegen-Eins-Kampf entscheidet selbst ein kleiner Distanzvorteil, wer zuerst trifft und wer kombiniert wird.
+
+Zielassistenz- und Trefferzeitungsmodule verfolgen aus unterschiedlicher Perspektive das gleiche Ziel: Sie kippen den Kampf um einen zu geringen Wert, sodass das Opfer ein normales Duell erlebt, während es heimlich eines verliert, das es hätte gewinnen sollen.
+
+## Wie Anticheats Reach aufdecken
+
+Anticheats decken Reach auf, indem sie die Trefferdistanz serverseitig neu berechnen und mit einem plausiblen Maximum vergleichen. Die Mathematik bildet den Kern der Prüfung, aber eine echte Erkennung muss Rauschen berücksichtigen.
+
+| Faktor, den das Anticheat gewichtet | Warum das wichtig ist |
+|---|---|
+| Positionen von Spieler und Ziel zum Zeitpunkt des Treffers | Die angegebene Rohdistanz |
+| Netzwerk-Latenz und Tick-Timing | Lag kann einen legitimen Treffer lang erscheinen lassen |
+| Größe des Entity-Hitbox und Lag-Kompensation | Server spulen Positionen zurück, um Spielern mit hoher Ping-Zeit gerecht zu werden |
+| Bewegung und Schwung | Beide Kämpfer bewegen sich, wenn der Treffer landet |
+
+Ein modernes Anticheat setzt einen Schwellenwert knapp über der realen Grenze an, um dieses Rauschen zu absorbieren, und markiert dann Treffer, die ihn überschreiten. Subtiles Reach, ein Bruchteil eines Blocks über der Grenze, ist schwerer zu fassen als ein großer Wert, weil es sich in der Latenztoleranz versteckt, die der Server bereits gewährt. Deshalb werden offensichtliche, große Reach-Einstellungen schnell aufgedeckt, während kleinere durch schwächere Prüfungen durchrutschen können.
+
+## Reach als Kampfmoodul
+
+Reach gehört zur selben Familie wie Aim- und Timing-Module. Als Konzept ist es eine der ältesten und einfachsten Combat-Cheats, und genau aus diesem Grund behandeln serverseitige Anticheats Distanzprüfungen als eine Basisfunktion, die sie unbedingt korrekt umsetzen müssen. Es harmoniert natürlich mit [KillAura](/de/learn/what-is-killaura], welches den Angriff selbst automatisiert, während Reach erweitert, wie weit dieser Angriff landet.
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite beschreibt das Modul allgemein, damit Sie wissen, was der Begriff bedeutet. Die Benennung und das genaue Verhalten können je nach Client variieren, und jede Erweiterung über die Standardgrenze hinaus verstößt gegen die Regeln auf praktisch jedem Server.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Wie hoch ist die normale Reichweite in Minecraft?">
+Die Reichweite eines Nahkampangriffs im Überlebensmodus beträgt drei Blöcke. Ein Reichweiten-Modul erhöht diese Grenze, sodass der Client Ziele angreifen kann, die weiter entfernt sind, als es die Standardeinstellung erlaubt.
+</FAQItem>
+
+<FAQItem question="Ist Reach eine clientseitige oder serverseitige Funktion?">
+Der Betrug ist clientseitig: ein modifizierter Client meldet Treffer außerhalb der normalen Reichweite. Die Erkennung erfolgt serverseitig, wo die Anti-Cheat-Software den Abstand neu berechnet und Treffer, die zu weit sind, ablehnt oder meldet.
+</FAQItem>
+
+<FAQItem question="Warum ist eine geringe Reichweite schwerer zu erkennen als eine große Reichweite?">
+Server erlauben eine Toleranz für Latenz und Ausgleichsmechanismen. Eine geringe zusätzliche Reichweite kann innerhalb dieser Toleranz verborgen bleiben, während ein großer Wert jede glaubwürdige Distanz deutlich überschreitet und schnell markiert wird.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-killaura", label: "Was ist KillAura?", description: "Der Auto-Angreifer, mit dem Reach oft kombiniert wird." },
+  { href: "/de/learn/what-is-an-aimbot", label: "Was ist ein Aim-Bot?", description: "Das zielorientierte Kampanmodul." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Kategorie, zu der diese Module gehören." },
+]} />
+
+<CTA href="/de/purchase">Was Opal für $8.99 versendet, siehst du</CTA>

@@ -1,0 +1,88 @@
+---
+title: Was ist Nachbearbeitung in Minecraft? Visuelles Modul
+description: Die Nachbearbeitung ist ein Minecraft-Modul, das einen Shader-Pass im Bildschirmraum ausführt – beispielsweise Farbkorrektur oder Unschärfe – über die gesamte Spielansicht, ohne das Gameplay zu beeinflussen.
+excerpt: Ein Shader-Durchlauf, der ganze Bildschirm, kein Bannrisiko. Post-Processing funktioniert wie ein Fotofilter, nicht wie eine Cheaterei.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Beeinflusst Nachbearbeitung das Gameplay in Minecraft?
+    a: Nein. Es verändert lediglich das Aussehen des fertigen Rahmens nach dem Rendern. Es hat keinen Einfluss auf Bewegungen, Kämpfe, Trefferbereiche oder irgendetwas, was der Server sehen kann.
+  - q: Kann Nachbearbeitung zu einer Sperre führen?
+    a: Nein. Es ist ein rein visueller, clientseitiger Rendering-Durchlauf ohne Auswirkungen auf Netzwerk oder Spielablauf, daher birgt er kein Risiko einer Erkennung.
+  - q: Welche Minecraft-Clients haben ein Post-Processing-Modul?
+    a: Die Nachbearbeitung ist in Tenacity dokumentiert. Ähnliche Effekte im Bildschirmbereich finden sich in anderen Clients unter verschiedenen Bezeichnungen als allgemeine Anzeigeeinstellung.
+  - q: Welche Effekte umfasst die Nachbearbeitung?
+    a: Die beiden dokumentierten Effekte sind Farbkorrektur, die Farbe und Kontrast des Bildes verändert, und Unschärfe, die das Gesamtbild weicher macht. Beide werden innerhalb derselben Shader-Pass ausgeführt.
+  - q: Ist Nachbearbeitung dasselbe wie ein Shader-Paket?
+    a: Fast nicht ganz. Ein Shader-Pack ersetzt oder erweitert in der Regel die gesamte Rendering-Pipeline und benötigt einen separaten Loader zur Installation. Post-Processing ist ein engerer, in die Client-Software integrierter Effektaufruf, der direkt im Client aktiviert wird.
+---
+
+<KeyTakeaways>
+
+- Post-Processing ist ein clientseitiges Minecraft-Modul, das einen einzelnen Shader-Pass im Bildschirmraum ausführt, beispielsweise Farbkorrektur oder Unschärfe, über den gesamten gerenderten Frame.
+- Es wird ausgelöst, nachdem die Welt und die Benutzeroberfläche bereits gezeichnet wurden, und behandelt das fertige Bild als eine einzige Ebene, anstatt einzelne Blöcke oder Entitäten anzupassen.
+- Es greift weder die Position, die Trefferbereiche, das Timing noch Werte ab, die der Server verfolgt, sodass ein serverseitiges Anticheat-System es nicht erfassen kann.
+- Wie in Tenacity dokumentiert, dient es als integrierte Ersatzlösung für die Installation eines vollständigen externen Shader-Packs.
+
+</KeyTakeaways>
+
+Nachbearbeitung ist ein Minecraft-Modul, das einen Bildschirmraum-Shader-Pass über Ihre gesamte Spielansicht laufen lässt – eine Art Effekt, den Sie normalerweise durch ein vollständiges Shader-Paket erreichen würden. Aktivieren Sie es, und der Client färbt oder weichzeichnet den fertigen Frame um, führt eine Farbkorrektur oder einen Weichzeichner-Pass durch, kurz bevor er Ihren Monitor erreicht. Es verändert keinen einzigen Spielwert. Blöcke bleiben an ihrem Platz, die Trefferbereiche behalten ihre Größe, und der Server hat keine Möglichkeit zu erfahren, dass das Modul existiert. Es ist eine Anzeigemöglichkeit, keine Spieleoption, und verhält sich wie eine von der ersten bis zur letzten Frame.
+
+## Wie es funktioniert
+
+Der Großteil dessen, was ein Minecraft-Client zeichnet, geschieht Objekt für Objekt: ein Block erhält seine Textur, eine Entität ihr Modell, die HUD ihren eigenen Pass. Nachbearbeitung funktioniert anders. Es wartet, bis die Welt und die Benutzeroberfläche bereits gerendert sind, und wendet dann einen Shader-Pass über den gesamten zusammengesetzten Frame an, kurz bevor er auf dem Bildschirm erscheint. Da es das fertige Bild als eine einzige Einheit und nicht als eine Szene voller separater Teile behandelt, kann es alles auf einmal einfärben oder weichzeichnen, anstatt einzelne Elemente zu verändern.
+
+Die beiden dokumentierten Effekte für das Modul sind Farbkorrektur, die die Farbe und den Kontrast des Bildes verändert, um eine Szene wärmer, kühler oder flacher wirken zu lassen, und Unschärfe, die das Gesamtbild weicher macht. Beide Effekte werden in einem einzigen Durchlauf angewendet, sodass das Aktivieren des Moduls keinen zusätzlichen Rendering-Schritt pro Element auf dem Bildschirm hinzufügt, sondern nur einen Durchlauf über das Ergebnis. Ebenso ist es im Vergleich zum Austausch eines kompletten neuen Beleuchtungsmodells kostengünstig, da lediglich Pixel umfärbt werden, die bereits existieren, anstatt zu berechnen, wie die Welt beleuchtet ist.
+
+Menschen greifen darauf aus aus dem gleichen Grund, wie sie ein Shader-Paket installieren würden: Sie möchten, dass ihre Screenshots und Clips anders aussehen als das Standard-Minecraft. Die Farbkorrektur verleiht einer Szene eine Stimmung, ohne dass ein passendes Ressourcenthema erforderlich ist. Ein Unschärfe-Durchlauf mildert einen überladenen oder harten Blick. Da es sich um einen integrierten Schalter handelt und nicht um eine Kombination aus externem Loader und Paket, gibt es nichts herunterzuladen, zu konfigurieren oder zu aktualisieren.
+
+## Post-Processing vs. ein vollständiges Shader-Paket
+
+| | Nachbearbeitung | Volles Shader-Paket |
+|---|---|---|
+| Installation | Im Client integriert, ein Schalter | Separater Loader (Iris, OptiFine) plus ein Paket zum Auswählen und Konfigurieren |
+| Umfang | Ein Screen-Space-Pass über den fertigen Frame | Ersetzt oder erweitert einen Großteil der Rendering-Pipeline |
+| Effekte | Farbkorrektur, Weichzeichnung | Beleuchtung, Schatten, Reflexionen und mehr, je nach Paket |
+| Einrichtung | Sofortig | Auswählen, Installieren und Anpassen eines Pakets |
+
+Keiner der beiden Ansätze verändert etwas, was der Server sieht. Der Unterschied liegt in der Tiefe: Ein Shader-Paket baut neu auf, wie die Welt beleuchtet wird, während Nachbearbeitung die bereits gerenderte Grafik einfärbt oder weicher zeichnet.
+
+<Callout variant="tip" title="Wo dies angesiedelt ist in Opal">
+Opal liefert kein Modul namens Post Processing mit. Aber die visuelle Seite des Clients basiert auf demselben Prinzip: lokale Optimierungen, die niemals Ihren Rechner verlassen und niemals einen serverseitigen Wert berühren. Wenn Sie einen bestimmten Look für Screenshots oder Clips anstreben, ohne ein Shader-Paket zu installieren, sollten Sie nach dieser Funktionsgruppe suchen: rein kosmetisch, risikofrei, nichts, was ein Anti-Cheat-System markieren könnte, selbst wenn es dies wollte.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Beeinflusst die Nachbearbeitung das Gameplay in Minecraft?">
+Nein. Sie verändert lediglich das Aussehen des fertigen Frames nach dem Rendern. Sie hat keinen Einfluss auf Bewegung, Kampf, Trefferbereiche oder irgendetwas, was der Server sehen kann.
+</FAQItem>
+
+<FAQItem question="Kann Nachbearbeitung zu einem Bann führen?">
+Nein. Es handelt sich um einen rein visuellen, clientseitigen Rendering-Durchlauf ohne Auswirkungen auf Netzwerk oder Spielablauf, sodass kein Risiko einer Erkennung besteht.
+</FAQItem>
+
+<FAQItem question="Welche Minecraft-Clients verfügen über ein Post-Processing-Modul?">
+Post-Processing wird wie in Tenacity dokumentiert. Ähnliche Screen-Space-Effekt-Passes tauchen in anderen Clients unter verschiedenen Namen als allgemeine Anzeigeeinstellung auf.
+</FAQItem>
+
+<FAQItem question="Welche Effekte umfasst die Nachbearbeitung?">
+Die beiden dokumentierten Effekte sind Farbkorrektur, die die Farbe und den Kontrast des Bildes verändert, und Unschärfe, die das Gesamtbild weicher macht. Beide werden in derselben Shader-Pass durchlaufen.
+</FAQItem>
+
+<FAQItem question="Ist Nachbearbeitung dasselbe wie ein Shader-Pack?">
+Nicht ganz. Ein Shader-Pack ersetzt oder erweitert in der Regel die gesamte Rendering-Pipeline und benötigt einen separaten Loader zur Installation. Nachbearbeitung ist ein schmalerer, integrierter Effektdurchgang, der direkt im Client aktiviert wird.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die breitere Kategorie, zu der Modul wie Nachbearbeitung gehören." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Wo die Grenze zwischen oberflächlichem Firnis und erkennbarem Verhalten tatsächlich verläuft." },
+  { href: "/de/learn/what-is-a-crystal-aura", label: "Was ist eine Kristallaura?", description: "Ein Modul, das am gegenüberliegenden Ende des Risikospektrums von der Nachbearbeitung liegt." },
+]} />
+
+<CTA href="/de/kaufen">Ihre Clips verdienen eine bessere Farbe, als Vanilla Ihnen bietet. Sehen Sie, was Opal ab Werk visuell liefert.</CTA>

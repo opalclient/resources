@@ -1,0 +1,71 @@
+---
+title: Was ist GraalVM JavaScript Scripting? (2026)
+description: GraalVM JavaScript ist eine schnelle JS-Engine, die auf der JVM läuft. Anwendungen betten sie ein, sodass Nutzer in JavaScript skripten und sie ohne Neukompilierung von Java hot-reloaden können.
+excerpt: GraalVM JavaScript ermöglicht einer Java-App, Benutzerskripte in JavaScript auszuführen und diese sofort neu zu laden. So kann ein Client Funktionen hinzufügen, ohne eine Modifikation kompilieren zu müssen.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: Ist GraalVM JavaScript dasselbe wie Node.js?
+    a: Nein. Beide verwenden JavaScript, aber die Engine von GraalVM soll in eine JVM-Anwendung eingebettet werden, während Node.js eine eigenständige Laufzeitumgebung auf Basis von V8 ist.
+  - q: Muss ich Java beherrschen, um ein Skript zu schreiben?
+    a: Nicht üblicherweise. Man schreibt JavaScript gegen die Objekte, die die Host-App bereitstellt. Zu wissen, wofür diese Objekte stehen, hilft bei fortgeschrittener Nutzung.
+  - q: Warum Skripte anstelle eines vollständigen Mods verwenden?
+    a: Iterierungsgeschwindigkeit. Ein Skript lädt sofort neu, während ein kompilierter Mod neu erstellt und neu gestartet werden muss.
+---
+
+<KeyTakeaways>
+
+- GraalVM JavaScript ist eine schnelle, standardskonforme JS-Engine, die auf der JVM läuft.
+- Java-Anwendungen betten sie ein, sodass Benutzer JavaScript schreiben können, das Aufrufe an das Hostprogramm durchführt.
+- Skripte werden dynamisch neu geladen, sodass Sie das Verhalten ändern können, ohne den Java-Code neu zu kompilieren.
+- Der Host entscheidet genau, welche Objekte und Klassen ein Skript erreichen kann.
+
+</KeyTakeaways>
+
+GraalVM JavaScript ist eine schnelle, standardskonforme JavaScript-Engine, die auf der JVM läuft und Teil des [GraalVM](https://www.graalvm.org/) Projekts ist. Java-Anwendungen betten sie ein, sodass Benutzer JavaScript schreiben können, das Aufrufe an das Hostprogramm sendet und dynamisch neu geladen wird. In einer Java-Anwendung bedeutet das, Verhalten in JavaScript hinzuzufügen oder zu ändern, ohne den Java-Code neu zu kompilieren.
+
+<Callout variant="info" title="Wo Opal passt">
+Opal's Skripting-Engine läuft auf GraalVM JavaScript. Um mit dem Schreiben von Skripten zu beginnen, siehe den [Skripting-Leitfaden](/de/docs/scripting).
+</Callout>
+
+## GraalVM und GraalVM JavaScript
+
+GraalVM ist eine High-Performance-Laufzeitumgebung, die mehrere Sprachen auf der JVM ausführen kann. Ihr JavaScript-Engine ist modern genug, um aktuelle ECMAScript-Funktionen zu unterstützen. Eine App liefert den Engine mit, übergibt den Skripten eine Reihe von Objekten, mit denen sie arbeiten können, und führt sie aus.
+
+## Warum Apps ihn einbetten
+
+- **Hot Reload**: Ändern Sie ein Skript und sehen Sie die Auswirkungen, ohne neu starten oder neu erstellen zu müssen.
+- **Eine sichere Oberfläche**: Der Host entscheidet genau, welche Objekte und Java-Klassen ein Skript erreichen kann.
+- **Java-Interoperabilität**: Skripte können über die Objekte, die es bereitstellt, in den eigenen Code der Anwendung aufrufen.
+
+## Wie es in einem Client auftaucht
+
+Ein Programm, das den Engine einbettet, gibt Skripten normalerweise einen Einstiegspunkt, um sich zu registrieren, und dann eine kleine Reihe von "Proxy"-Objekten, die JavaScript mit den internen Abläufen des Programms verbinden. Benutzer schreiben ein Skript, legen es in einen Skriptordner und der Engine lädt es. So kann ein Client Benutzern ermöglichen, Funktionen in JavaScript hinzuzufügen, anstatt eine Mod zu kompilieren.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Ist GraalVM JavaScript dasselbe wie Node.js?">
+Nein. Beide führen JavaScript aus, aber die Engine von GraalVM ist dazu gedacht, in eine JVM-Anwendung eingebettet zu werden, während Node.js eine eigenständige Laufzeitumgebung auf Basis von V8 ist.
+</FAQItem>
+
+<FAQItem question="Benötige ich Java-Kenntnisse, um ein Skript zu schreiben?">
+Meistens nicht. Sie schreiben JavaScript gegen die Objekte, die die Host-App bereitstellt. Kenntnisse darüber, wofür diese Objekte stehen, helfen bei fortgeschrittener Nutzung.
+</FAQItem>
+
+<FAQItem question="Warum Skripte anstelle eines vollständigen Mods verwenden?">
+Geschwindigkeit der Iteration. Ein Skript lädt sofort neu, während ein kompilierter Mod neu erstellt und neu gestartet werden muss.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-the-jvm", label: "Was ist die JVM?", description: "Die Laufzeitumgebung, auf der GraalVM JavaScript läuft." },
+  { href: "/de/learn/what-is-jni", label: "Was ist JNI?", description: "Eine einfachere Möglichkeit, ein Java-Programm zu erweitern." },
+  { href: "/de/blog/introducing-opal-scripting-engine", label: "Opals Skripting-Engine", description: "Wie GraalVM-Scripting in der Praxis aussieht." },
+]} />
+
+<CTA href="/de/purchase">Opal, einen Fabric-Client, für $8.99 erhalten</CTA>

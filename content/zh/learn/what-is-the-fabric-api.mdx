@@ -1,0 +1,76 @@
+---
+title: Fabric API 是什么？(Minecraft, 2026)
+description: Fabric API 是 Fabric 模组所依赖的共享库。以下是它的作用、它为何与加载器分离，以及几乎所有模组为何都需要它.
+excerpt: Fabric API 是几乎所有 Fabric 模组构建所依赖的共享库。如果模组在启动时崩溃，通常是由于 Fabric API 缺失或过时造成的.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Frameworks
+author: trq
+faqs:
+  - q: Fabric API 需要吗？?
+    a: 大部分模组是这样的。依赖它的模组如果没有它就无法加载。少数独立的模组不需要，但安装它通常是最安全的做法.
+  - q: 我从哪里弄得到？?
+    a: 来自官方 Fabric 渠道以及往常的模组主机。请务必选择与您的 Minecraft 版本相符的构建.
+  - q: 为什么没有内置到加载器里？?
+    a: 因此，加载器可以保持小巧并快速更新，而共享的 API 则可以独立演进。这是 Fabric 中的一个有意识的设计选择.
+---
+
+<KeyTakeaways>
+
+- Fabric API 是一套共享的钩子和辅助工具库，大多数 Fabric 模组都是基于此构建的。
+- 它与加载器是分开设计的：一个精简的加载器可以快速更新，而 API 则可以独立演进。
+- 它提供了许多模组依赖的事件、网络、注册和渲染辅助功能。
+- 缺失或过时的 Fabric API 通常是模组启动时崩溃的常见原因.
+
+</KeyTakeaways>
+
+Fabric API 是一个共享的钩子和辅助工具库，大多数 [Fabric](https://fabricmc.net/) 模组都是基于此构建的。Fabric 的核心加载器设计得很小巧，因此 API 填补了空白：事件、网络、注册助手、渲染工具。如果一个 Fabric 模组在启动时因缺少类而崩溃，通常是 Fabric API 缺失或过时造成的.
+
+<Callout variant="info" title="Opal 的适配">
+Opal 是一个 Fabric 模组，因此也需要 Fabric API。 [安装指南](/zh/docs/setup) 涵盖了安装这两者。
+</Callout>
+
+## 为什么它与加载器分离
+
+Fabric 有意将系统分成两部分。加载器保持小巧且稳定，而 Fabric API 提供了更大的、更新速度更快的共享接口集合。这种分离使得加载器能够快速更新到新的 Minecraft 版本，而 API 则可以按照自己的节奏发展。
+
+## 它提供了什么
+
+API 为模组提供了一种通用的、版本稳定的方式来完成许多模组都需要做的事情：
+
+- 生命周期和游戏事件，供模组钩入。
+- 自定义数据包的网络助手。
+- 注册和内容助手，用于添加物品、方块和实体。
+- 模组共享的渲染和资源助手。
+
+如果没有它，每个模组都将重新发明这些组件，并导致彼此冲突。
+
+## 你需要它吗？
+
+几乎总是需要。大多数 Fabric 模组将 Fabric API 列为依赖项，因此您可以将其作为模组与其它模组一起安装。将其版本与您的 Minecraft 版本匹配。
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="是否需要 Fabric API？">
+对于大多数模组，是的。依赖它的模组如果没有安装，将无法加载。少数独立的模组不需要它，但安装它是最安全的默认选项。
+</FAQItem>
+
+<FAQItem question="我从哪里获取它？">
+从官方Fabric渠道以及常见的模组发布者处获取。请务必选择与您的Minecraft版本相匹配的版本。
+</FAQItem>
+
+<FAQItem question="为什么没有内置到加载器中？">
+这样可以保持加载器体积小巧，并能快速更新，同时共享的 API 可以独立演进。这是 Fabric 中的一个有意识的设计选择。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "这两个模组加载器如何比较." },
+  { href: "/zh/learn/how-to-install-a-fabric-mod", label: "如何安装 Fabric 模组", description: "Fabric API 在安装步骤中的位置." },
+  { href: "/zh/learn/what-is-a-minecraft-mod-loader", label: "什么是 Minecraft 模组加载器？?", description: "API 依赖的加载器." },
+]} />
+
+<CTA href="/zh/purchase">获取 Opal，一个 Fabric 客户端，用于 $8.99</CTA>

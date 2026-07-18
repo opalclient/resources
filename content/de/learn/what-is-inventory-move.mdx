@@ -1,0 +1,87 @@
+---
+title: Was ist eine Inventarverschiebung in Minecraft? Modul erklärt
+description: Inventarverschieben ermöglicht es dir, dich weiterzubewegen, während eine Truhe, ein Ofen oder ein Crafting-Bildschirm geöffnet bleibt, anstatt komplett einzufrieren. So funktioniert es und warum es riskant ist.
+excerpt: Vanille friert dich ein, sobald sich ein Inventarfenster öffnet. Die Inventarverschiebung verweigert, und genau diese Verweigerung verrät sie.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was genau ändert die Inventarverschiebung?
+    a: Es verhindert, dass der Klient deine Bewegung einfriert, sobald ein Inventarbildschirm, wie eine Truhe oder eine Werkbank, geöffnet wird. Die Bewegungseingabe wird weiterhin verarbeitet anstatt ignoriert.
+  - q: Funktioniert die Bestandsverwaltung auf jedem Server?
+    a: Nicht unbedingt. Ob die resultierende Bewegung akzeptiert wird, hängt davon ab, wie der Server und jegliche Anticheat-Software die Position des Spielers validiert, während ein Inventarfenster geöffnet ist.
+  - q: Ist eine Inventarverschiebung feststellbar?
+    a: Es ist plausibel, dass Anticheats dies melden, da es für einen unveränderten Client nicht möglich ist, sich zu bewegen, während ein Behälter geöffnet ist. Die Erkennung hängt vom jeweiligen Server und dem verwendeten Anticheat ab.
+  - q: Welche Kunden haben eine Inventarverschiebung versendet?
+    a: Es wurde unter anderem in Fan, Tenacity und Rose dokumentiert.
+  - q: Ist Inventarverschiebung ein Kampanmodul?
+    a: Nein, es wird als Bewegung kategorisiert. Das ist in Kämpfen wichtig, weil es die erzwungene Unbeweglichkeit beim Öffnen eines Behälters aufhebt, aber es verändert deine Bewegung, nicht deine Angriffe.
+---
+
+<KeyTakeaways>
+
+- Inventory Move ist ein Bewegungsmodul, das es dir ermöglicht, weiterzugehen, zu sprinten oder dich neu zu positionieren, während eine Truhe, ein Ofen oder ein Crafting-Bildschirm geöffnet ist, anstatt wie in der Vanilla-Version einzufrieren.
+- Es überschreibt die Bewegungssperre des Clients im Inventarbildschirm, sodass deine Position aktualisiert wird, während der Bildschirm geöffnet bleibt.
+- Ob diese Bewegung akzeptiert, ignoriert oder markiert wird, hängt vollständig davon ab, wie der Server und eventuelle Anti-Cheat-Systeme die Position während eines geöffneten Bildschirms validieren.
+- Opal liefert es als Inventory Move, mit der Bitte, es auf eigene Gefahr zu verwenden, da es erkennbar ist.
+
+</KeyTakeaways>
+
+Inventar-Bewegung ist ein Bewegungsmodul, das dich in Bewegung hält, während ein Inventarbildschirm, eine Truhe, ein Ofen oder eine Werkbank geöffnet bleibt. Standard-Minecraft sperrt dich sofort, sobald einer dieser Bildschirme geöffnet wird; du gehst erst wieder, wenn du ihn schließt. Inventar-Bewegung entfernt diese Sperre auf Client-Ebene, sodass Eingaben für die Bewegung weiterhin verarbeitet werden, egal was sich vor dir befindet. Sortiere eine Truhe, ohne stillzustehen und dich auszusetzen. Fülle eine Werkbank mitten im Kampf wieder auf. Halte dich weiterhin im Strafe, während du überprüfst, was du trägst. Ob diese Bewegung den Kontakt mit dem Server überlebt, ist eine völlig separate Frage.
+
+## Wie Inventar-Bewegung funktioniert
+
+Inventar-Bewegung überschreibt die Bewegungssperre des Clients für Inventarbildschirme. Beim Standardspiel führt das Öffnen einer Truhe, eines Ofens oder einer Werkbank dazu, dass das Spiel in einen Zustand versetzt wird, in dem Eingaben für die Bewegung ignoriert werden, bis der Bildschirm geschlossen wird. Das Modul fängt diesen Zustand ab und verarbeitet weiterhin Eingaben für die Bewegung, sodass deine Position auf dem Client während der gesamten Zeit, in der der Bildschirm geöffnet ist, ständig aktualisiert wird.
+
+Keines davon garantiert etwas über deine eigene Maschine hinaus. Bewegung, während ein Behälter geöffnet ist, ist kein Zustand, den Vanilla-Server erwarten, da das Basisspiel schlichtweg davon ausgeht, dass dies nicht passieren kann. Was der Server mit den resultierenden Positionsaktualisierungen macht – sie akzeptiert, ignoriert oder markiert – hängt vollständig davon ab, wie er und die Anticheat-Software, die er ausführt, die Bewegung im Verhältnis zum offenen Bildschirmzustand validiert. Das ist durch Design serverabhängig, kein Einstellungs-Schalter innerhalb des Moduls selbst. Dieses Verhalten ist bei Clients wie Fan, Tenacity und Rose aufgetreten.
+
+Der Anreiz ist einfach: Vanilla erzwingt jedes Mal, wenn du einen Behälter öffnest, einen Moment völliger Stillstand, und in PvP oder einer Verfolgungsjagd ist genau dann, wenn du getroffen wirst, wenn du stillstehst. Inventory Move weigert sich, dieses Zeitfenster aufzugeben.
+
+## Ist es sicher, es zu verwenden?
+
+Inventory Move liegt näher am risikoreichen Ende des Spektrums als eine rein kosmetische, clientseitige Anpassung. Es ändert ein Verhalten, das Vanilla als fest betrachtet: keine Bewegung, während ein Behälterbildschirm geöffnet ist. Jeder Server oder jede Anticheat-Software, die überprüft, ob sich die Position eines Spielers während dieses Zeitfensters geändert hat, kann diese Änderung vernünftigerweise als verdächtig einstufen, da ein legitimer Vanilla-Client sie nicht erzeugen kann.
+
+Ob ein bestimmtes Anticheat-System dies tatsächlich aufdeckt und wie streng es vorgeht, hängt von der jeweiligen Implementierung ab. Es gibt hierfür keine allgemeingültige Antwort. Spieler, die es nutzen, sollten davon ausgehen, dass sie zur Anzeige gebracht werden können, anstatt anzunehmen, dass es unbemerkt bleibt.
+
+<Callout variant="tip" title="Inventarverschiebung in Opal">
+Opal liefert dieses Modul ebenfalls mit, unter demselben Namen: Inventarverschiebung. Die Katalogbeschreibung ist genauso schlicht wie das Modul selbst: „Ermöglicht das Verschieben während eines geöffneten Inventars.“ Dieselbe Ausweichfunktion, dieselbe Abwägung mit eigenem Risiko wie überall sonst, wo es ausgeliefert wird.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite beschreibt das Modul allgemein, damit Sie wissen, was der Begriff bedeutet. Benennung und exaktes Verhalten variieren je nach Client, und das Bewegen während eines Inventarsbildschirms ist ein Muster, das kein unveränderter Client erzeugen kann – genau das, worauf Server achten. Opal klassifiziert die Verwendung von Inventarverschiebung auf eigene Gefahr aus diesem Grund: sie ist erkennbar, und sie kann dazu führen, dass ein Konto gesperrt wird, wie es bei jedem Client der Fall ist, der sie ausliefert.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was ändert die Funktion 'Inventarverschiebung' eigentlich?">
+Sie verhindert, dass der Client Ihre Bewegung blockiert, sobald ein Inventarbildschirm, wie beispielsweise eine Truhe oder eine Werkbank, geöffnet wird. Die Eingabe für die Bewegung wird weiterhin verarbeitet anstatt ignoriert.
+</FAQItem>
+
+<FAQItem question="Funktioniert Inventarverschieben auf jedem Server?">
+Nicht unbedingt. Ob die resultierende Verschiebung akzeptiert wird, hängt davon ab, wie der Server und jegliche Anticheat-Software die Position des Spielers während eines geöffneten Inventars validiert.
+</FAQItem>
+
+<FAQItem question="Ist ein Inventarverschieben erkennbar?">
+Es ist möglich, dass Anticheats dies als verdächtig markieren, da das Bewegen während einer geöffneten Inventarbox etwas ist, was ein unverändertes Client-Programm nicht leisten kann. Die Erkennung hängt vom jeweiligen Server und dem verwendeten Anticheat ab.
+</FAQItem>
+
+<FAQItem question="Welche Kunden haben Inventory Move versendet?">
+Es wurde in Fan, Tenacity und Rose unter anderem dokumentiert.
+</FAQItem>
+
+<FAQItem question="Ist Inventarverschiebung ein Kampanmodul?">
+Nein, es wird als Bewegung kategorisiert. Es ist in Kämpfen relevant, weil es die erzwungene Unbeweglichkeit beim Öffnen eines Containers beseitigt, aber es ändert Ihre Bewegung, nicht Ihre Angriffe.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Ein weiteres Modul, das auf dem Übertrumfen dessen basiert, was Vanilla normalerweise verbietet." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die Stealth-Kategorie, die auf Unsichtbarkeit beim Ausführen von Modulen wie diesem basiert." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Kategorie, zu der diese Module gehören." },
+]} />
+
+<CTA href="/de/purchase">Opal's Inventarverschiebung macht genau das, was sie verspricht: verschieben, während ein Inventar geöffnet ist. Sieh dir den Rest des Sets an.</CTA>

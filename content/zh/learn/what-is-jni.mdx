@@ -1,0 +1,100 @@
+---
+title: 什么是 JNI？Java 原生接口详解
+description: JNI（Java Native Interface）是连接器，它允许 Java 代码调用本地的 C 或 C++ 函数，并允许本地代码回调到 JVM.
+excerpt: JNI 是 Java 与原生 C 或 C++ 代码之间的内置桥梁。以下是如何运作以及跨越此边界的成本.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: JNI 是 Java 标准的一部分吗？?
+    a: 是的。JNI 随 JDK 和 JVM 一起发布。您无需在 Java 侧安装任何额外内容，但需要一个本地工具链来编译 C 或 C++ 部分.
+  - q: 使用 JNI 能使我的代码实现平台无关性吗？?
+    a: 不，Java 部分保持可移植性，但原生库是为单个操作系统和 CPU 编译的，因此您需要为每个平台单独分发原生构建.
+  - q: JNI 是从 Java 调用原生代码的唯一途径吗？?
+    a: 不，这是原生且内置的方式。较新的 Java 版本添加了更现代的外部函数接口 (FFI)，旨在更安全、更易用，但 JNI 仍然被广泛使用且理解透彻.
+  - q: 为什么会这样？ Minecraft 客户使用 JNI?
+    a: 客户的代码通常使用 Java 编写，有时需要一个本地库来完成 JVM 无法直接执行的任务。JNI 是加载和调用此类库的标准桥接技术.
+---
+
+<KeyTakeaways>
+
+- JNI 是内置接口，允许 JVM 代码调用本地的 C 或 C++ 函数，并允许本地代码回调到 Java。
+- `native` 方法没有 Java 代码体；JVM 在运行时将其链接到编译后的函数。
+- 程序利用它来重用本地库，访问操作系统，加速热点路径，或直接操作硬件。
+- 边界非常清晰：本地崩溃可能导致 JVM 崩溃，而本地构建是平台特定的.
+
+</KeyTakeaways>
+
+JNI 是 Java 原生接口，它是 Java 内置的一部分，允许在 JVM 上运行的代码调用用 C 或 C++ 编写的函数，并允许这些原生代码反过来调用 Java 代码。 这就是 Java 程序如何通过 JVM 使用平台库或编译后的机器代码片段.
+
+<Callout variant="info" title="Opal 的适配">
+Opal 是一个 [Fabric](https://fabricmc.net/) 模组，因此大部分内容都是纯 Java，您可以使用 JavaScript 编写脚本，而无需接触原生代码。 如果您刚开始使用，请参阅 [设置指南](/zh/docs/setup)。
+</Callout>
+
+## JNI 的作用
+
+JNI 连接两个世界：JVM 上的托管 Java 代码和编译为机器指令的本地代码。一个 Java 方法被标记为 `native`，在 Java 中没有主体。运行时，JVM 加载一个本地库并将该方法链接到匹配的 C 或 C++ 函数。从那里，两端相互传递参数和返回值。
+
+本地端获得一个 `JNIEnv` 指针。这个句柄是门户：它暴露了读取 Java 字段、调用 Java 方法、创建对象和抛出异常的函数。因此，桥梁是双向运行的，而不仅仅是 Java 伸出援手。
+
+## 为什么程序使用它
+
+大多数 Java 代码不需要 JNI。程序在以下几种情况下使用它：
+
+- **重用现有的本地代码。** 一个成熟的 C 或 C++ 库已经完成了这项工作，用 Java 重新编写它并不值得。
+- **访问操作系统。** 一些平台功能没有纯 Java API，因此本地调用是唯一的途径。
+- **加速热点路径。** 一个紧密的数值或底层例程可以作为编译后的本地代码运行得比在 JVM 上更快。
+- **接触硬件或驱动程序。** 图形、音频和设备访问通常隐藏在本地库之后。
+
+## JNI 调用是如何工作的
+
+步骤在每个平台上都是相同的.
+
+| 步骤 | 发生的情况 |
+|------|--------------|
+| 声明 | Java 方法使用 `native` 关键字编写，且没有方法体。 |
+| 构建 | C 或 C++ 函数被编译成共享库 (`.dll`, `.so`, `.dylib`)。 |
+| 加载 | Java 在运行时调用 `System.loadLibrary` 加载该库。 |
+| 链接 | JVM 通过名称将 `native` 方法与 C 函数匹配。 |
+| 调用 | Java 调用该方法；控制权交由原生代码，再返回。 |
+
+函数名称遵循固定的模式，以便 JVM 能够找到它们，生成的头文件会告诉你需要实现的精确签名。
+
+## 成本与风险
+
+JNI 功能强大，但也存在潜在风险。原生代码中的崩溃可能会导致整个 JVM 崩溃，因为该代码运行在 JVM 安全机制之外。原生侧分配的内存不会被垃圾回收，因此容易出现内存泄漏。Java 和原生代码之间的每一次跨越都有开销，因此在循环中频繁跨越边界可能会导致性能下降。而且原生库是平台特定的：为 Windows 构建的库无法在 Linux 上运行，除非单独编译.
+
+<Callout variant="warning" title="谨慎使用">
+由于原生边界绕过了 JVM 的安全保障，JNI 只能作为没有纯 Java 解决方案时的选择。大多数模组，包括 Opal，都无需使用它。
+</Callout>
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="JNI 是 Java 标准的一部分吗？">
+是的。JNI 包含在 JDK 和 JVM 中。您无需在 Java 侧安装任何额外内容，但需要一个本地工具链来编译 C 或 C++ 部分。
+</FAQItem>
+
+<FAQItem question="使用 JNI 会使我的代码具有平台无关性吗？">
+不是的。Java 代码仍然是可移植的，但原生库是为特定的操作系统和 CPU 编译的，因此您需要为每个平台提供单独的原生构建。
+</FAQItem>
+
+<FAQItem question="JNI 是从 Java 调用原生代码的唯一途径吗？">
+不是。它是最初的、内置的方式。较新的 Java 版本增加了一个更现代的外国函数接口 (FFI)，旨在更安全、更易用，但 JNI 仍然被广泛使用且理解透彻。
+</FAQItem>
+
+<FAQItem question="为什么 Minecraft 客户端会使用 JNI？">
+一个主要使用 Java 编写的客户端有时需要一个本地库来完成 JVM 无法直接执行的任务。JNI 是加载和调用该库的标准桥接器。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/what-is-the-jvm", label: "什么是 JVM？?", description: "运行时 JNI 调用，进出." },
+  { href: "/zh/learn/what-is-graalvm-javascript-scripting", label: "GraalVM JavaScript 脚本是什么？?", description: "扩展 Java 应用的更高级方法." },
+  { href: "/zh/learn/what-is-a-minecraft-mod-loader", label: "什么是 Minecraft 模组加载器？?", description: "游戏发布时，代码是如何整合进去的." },
+]} />
+
+<CTA href="/zh/purchase">获取 Opal，一个 Fabric 客户端，用于 $8.99</CTA>

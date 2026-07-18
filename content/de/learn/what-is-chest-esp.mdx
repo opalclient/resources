@@ -1,0 +1,78 @@
+---
+title: Was ist Chest ESP in Minecraft? (Modul erklärt)
+description: Chest ESP markiert Truhen, Fässer und andere Behälter durch Wände in Minecraft. Hier ist, wie das Modul Beute rendert, warum Leute es verwenden und welches Bannrisiko besteht.
+excerpt: Die Brust-ESP beleuchtet jeden Behälter in Reichweite, egal ob Wand vorhanden ist oder nicht. Ideal für Loot-Runs, weniger ideal, wenn ein Server bemerkt, dass du geradewegs zu Truhen läufst, die du eigentlich nicht sehen solltest.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was markiert eigentlich Brust-ESP?
+    a: Truhen, Fässer und andere Behälterblöcke, manchmal inklusive gefangener Truhen und Shulker-Kisten, je nach Kundenwunsch. Es zeigt dir, wo Behälter sind, nicht was sich darin befindet.
+  - q: Ist Brust-ESP dasselbe wie Entitäts-ESP?
+    a: Nr. Entity ESP markiert Spieler und Mobs durch Wände. Chest ESP erledigt dasselbe für Containerblöcke, sodass die beiden als Begleitfunktionen und nicht als ein Modul ausgeliefert werden.
+  - q: Kann Chest ESP dazu führen, dass man gesperrt wird?
+    a: Ja, auch wenn es weniger Risiko birgt als ein Combat-Hack. Es ändert nicht, was dein Klient an den Server sendet, aber ein Server, der auf Spieler achtet, die wiederholt den Weg zu versteckten Containern finden, kann es trotzdem melden oder sperren. Behandle es als erkennbar, nicht als sicher.
+  - q: Funktioniert Brust-ESP durch Wände hindurch?
+    a: Überall, wo der Client Blockdaten geladen hat – was sich in der Praxis auf alles innerhalb der Renderdistanz bezieht – spielen Stein, Gelände und vollständige Strukturen zwischen Ihnen und dem Container keine Rolle, da der Render-Schritt die übliche Prüfung ignoriert, was im Weg steht.
+---
+
+<KeyTakeaways>
+- Chest ESP ist ein visuelles Modul, das Truhen, Fässer und andere Behälter durch Wände markiert.
+- Es verwendet Blockdaten, die der Client bereits besitzt, sodass keine Sichtlinie erforderlich ist.
+- Es ist das Behälter-Gegenstück zu Entity ESP, das dasselbe für Spieler tut.
+- Es sendet keine ungewöhnlichen Pakete, aber das Pfadfinden zu versteckter Beute kann dennoch zu einem Bann führen.
+</KeyTakeaways>
+
+Chest ESP ist ein visuelles Modul, das Truhen, Fässer und andere Lagerbehälter durch Wände und Gelände markiert, indem es um jeden Behälter eine Umrandung oder einen ausgefüllten Kasten zeichnet, sodass er immer sichtbar bleibt, unabhängig davon, was im Weg steht. Es macht für Beute, was Entity ESP für Spieler tut: Es verwandelt eine Suche, die Sie normalerweise zu Fuß durchführen würden, in etwas, das Sie sofort beim Laden der Welt sehen können. Das Modul benötigt keinen Behälter in Sicht, um ihn zu finden. Es prüft einfach den Blocktyp an jeder geladenen Koordinate und zeichnet dort einen Marker, egal ob Wand oder kein Wand.
+
+## Funktionsweise
+
+Chest ESP scannt die geladene Welt nach Behälterblöcken wie Truhen, verzauberten Truhen, Fässern und Shulker-Kisten und rendert dann jeden Behälter, unabhängig davon, was sich zwischen dem Spieler und dem Block befindet. Das ist keine Wallhack-Magie, sondern Buchhaltung. Der Client hat bereits die Position jedes Blocks innerhalb der Renderdistanz gespeichert, da das Spiel diese Daten benötigt, um Gelände zu zeichnen und Kollisionen zu verarbeiten. Chest ESP filtert diese Daten einfach nach Behältertypen und überspringt den Schritt, bei dem die Geometrie zwischen Ihnen und dem Ziel normalerweise den Behälter verbergen würde.
+
+Das Rendering selbst funktioniert wie bei den meisten ESPs: eine Umrandung, ein ausgefüllter Kasten oder ein Textlabel wird durch den Tiefenpuffer der Welt gezeichnet, anstatt dahinter. Der Behälter bewegt sich nicht und sein Inhalt ändert sich nicht. Das Einzige, was anders ist, ist, ob eine Wand ihn vor Ihnen verbergen darf.
+
+## Warum Leute es verwenden
+
+Der offensichtlichste Grund ist die Geschwindigkeit. Truhen und Fässer sind der Ort, an dem eine Minecraft-Welt alles Wertvolle aufbewahrt, und das Räumen einer Basis oder eines Raum durch Raum ist langsam. Chest ESP komprimiert diese Suche auf einen Blick: jede Kiste im Renderbereich wird sofort angezeigt, auch diejenigen, die hinter einer falschen Wand versteckt oder unter einer Treppe vergraben sind.
+
+Der weniger unschuldige Grund ist das Rauben. Auf Servern, auf denen Spieler Beute in einer Basis lagern, beseitigt das Sehen des Standorts jeder Kiste durch feste Wände das einzige Hindernis, um das herum Basis-Sicherheit aufgebaut ist, nämlich das tatsächliche Auffinden der Dinge. Deshalb behandeln viele Server Container-Sichtbarkeitsfunktionen zuerst als Werkzeug zum Rauben und zweitens als eine Bequemlichkeit.
+
+## Ist es sicher zu verwenden?
+
+Chest ESP ist leiser als ein Kampffach. Es greift weder deine Drehungen, dein Angriffszeitfenster noch irgendetwas an, was über das Netzwerk gesendet wird, an, sodass es keine Paket-Anomalie gibt, die ein serverseitiger Anticheat direkt erfassen könnte. In diesem begrenzten Sinne ist es tatsächlich weniger riskant als etwas wie ein Aim-Bot oder KillAura.
+
+Der Haken ist, dass die Erkennung kein Paket benötigt. Ein Spieler, der in gerader Linie zu einer Truhe geht, zu der er nie Sicht hatte, oder der eine Reihe von Behältern hinter versiegelten Wänden öffnet, ohne einen Grund zu wissen, dass sie dort sind, kann von einer muster- und verhaltensbasierten Erkennung erfasst werden. Das ist eine Schlussfolgerung, kein harter Check, was genau Chest ESP in eine Grauzone bringt: weniger mechanisch offensichtlich als Kampf-Cheats, aber dennoch eine Funktion, die mit eigenen Risiken genutzt werden sollte. Ein Server, der die Wegfindung zu unsichtbarer Beute beobachtet, kann sie trotzdem erwischen, ohne jemals ein einzelnes Paket zu markieren.
+
+<Callout variant="tip" title="Wo dies in Opal sitzt">
+Opal liefert dies unter einem anderen Namen aus. Block ESP, der in der Kategorie Visuell abgelegt ist, ist direkt in Opals eigener Modulliste mit "mit eigener Gefahr verwenden" gekennzeichnet und deckt den gleichen Bereich wie Chest ESP (Kisten) plus Ressourcenblöcke wie Erze unter einem umfassenderen Modul ab, anstatt nur einen Kisten-Modul. Gleiches Verhalten, gleiches ehrliches Risikokennzeichen. Opal wird einen Wallhack für Beute nicht als "sicher" bezeichnen, nur weil er nicht Ihre Pakete berührt.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite erklärt, was Chest ESP tut und warum es in einer Grauzone liegt, nicht als eine Empfehlung, es zu verwenden. Das direkte Ansteuern von Beute, die du nicht sehen solltest, ist genau die Art von Verhalten, auf die Mitarbeiter und Anti-Cheat-Systeme achten, und viele Server verbieten es bereits aufgrund allgemeiner Fairplay-Regeln, selbst ohne eine feste Paketmarkierung.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+<FAQItem question="Was markiert Chest ESP eigentlich?">
+Truhen, Fässer und andere Containerblöcke, manchmal einschließlich gefangener Truhen und Shulker-Boxen, abhängig vom Client. Es zeigt Ihnen, wo sich Container befinden, nicht aber, was sich darin befindet.
+</FAQItem>
+<FAQItem question="Ist Chest ESP dasselbe wie Entity ESP?">
+Nein. Entity ESP markiert Spieler und Mobs durch Wände. Chest ESP macht dasselbe für Containerblöcke, sodass die beiden Funktionen als Begleiterfunktionen und nicht als ein einzelnes Modul ausgeliefert werden.
+</FAQItem>
+<FAQItem question="Kann Chest ESP zu einem Bann führen?">
+Ja, obwohl es ein geringeres Risiko birgt als eine Combat-Cheats. Es ändert nicht, was Ihr Client an den Server sendet, aber ein Server, der nach Spielern sucht, die wiederholt den Weg zu versteckten Containern finden, kann es trotzdem melden oder bannen. Behandeln Sie es als erkennbar, nicht als sicher.
+</FAQItem>
+<FAQItem question="Funktioniert Chest ESP durch jede Wand?">
+Überall, wo der Client Blockdaten geladen hat, was in der Praxis bedeutet, überall innerhalb der Renderdistanz. Stein, Gelände und vollständige Strukturen zwischen Ihnen und dem Container sind egal, da der Render-Schritt die übliche Prüfung ignoriert, was sich im Weg befindet.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die Kategorie „Chest ESP und andere visuelle und QoL-Module“ gehört dazu." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die Klientenkategorie, die darauf ausgelegt ist, unentdeckt zu bleiben – dieselbe Grauzone, in der Chest ESP existiert." },
+  { href: "/de/learn/what-is-an-aimbot", label: "Was ist ein Aim-Bot?", description: "Das Spektrum der Combat-Cheats, insbesondere Chest ESP, ist im Vergleich eher unauffällig." }
+]} />
+
+<CTA href="/de/purchase">Block ESP und die restliche visuelle Kategorie von Opal entdecken.</CTA>

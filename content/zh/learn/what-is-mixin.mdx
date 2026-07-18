@@ -1,0 +1,89 @@
+---
+title: Mixin 是什么？ 2026 年的 Minecraft 字节码修改 (Mixin Shì Shénme? 2026 Nián de Minecraft Zìyǎnmǎ Xiūgǎi)
+description: Mixin 是一个字节码注入库，它允许 Minecraft 模组在游戏加载时修改游戏的类。以下是它的作用以及模组为什么需要它.
+excerpt: Mixin 允许模组在游戏加载时将代码切入 Minecraft 的编译后的类中，无需修改源代码。 这是一个工作原理以及 Fabric 之上构建的原因.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Frameworks
+author: trq
+faqs:
+  - q: Mixin 是模组吗？?
+    a: Mixin 是一个库，模组就是用它构建的；像 Fabric 这样的加载器会将其打包，并应用你模组提供的 Mixin.
+  - q: Mixin 会修改我的游戏文件吗？?
+    a: 不。这些补丁在类加载时发生在内存中，磁盘上的文件保持不变，干净地移除一个模组可以完全移除其更改.
+  - q: Mixin 中有时为什么会出现两个模组冲突？?
+    a: 如果两个补丁以不兼容的方式修补相同的方法，尤其是在使用 @Overwrite 时，一个可能会撤销或破坏另一个； 细化的注入点可以避免这种情况.
+  - q: Mixin 仅适用于 Minecraft 吗？?
+    a: Mixin 并非一个通用的 Java 字节码框架，但它在 Minecraft 模组开发中被最广泛地使用，而 Fabric 采用它使其成为了该领域的标准.
+---
+
+<KeyTakeaways>
+
+- Mixin 是一个 Java 库，它在加载时会修改 Minecraft 的编译后的类。
+- 模组描述了注入代码的位置，而不是文件的外观，因此补丁可以承受游戏更新。
+- [Fabric](https://fabricmc.net/) 基于 Mixin 构建，并在类加载期间应用每个模组的 Mixin。
+- 你永远不会自己安装 Mixin；加载器会将其打包.
+
+</KeyTakeaways>
+
+Mixin 是一个 Java 库，它允许模组在游戏加载时修改 Minecraft 的编译后的类，而无需编辑原始源代码。模组编写小的类，指示“在此游戏方法中的此点处添加此代码”，Mixin 随后在运行时将其编织到字节码中。 [Fabric](https://fabricmc.net/) 将其用作核心模组机制.
+
+<Callout variant="info" title="Opal 的适用范围">
+Opal 是一个 Fabric 模组，因此它在底层依赖 Mixin。您无需自行安装 Mixin；[设置指南](/zh/docs/setup) 涵盖了 Opal 和 Fabric 的运行环境配置。
+</Callout>
+
+## Mixin 的工作原理
+Mixin 在 JVM 运行代码之前，对已编译的类进行修改。一个模组会提供一个 Mixin 类，该类会针对游戏中的真实类。该类上的注解标记了注入代码的位置：方法的开始、结束、特定的方法调用或返回值。当 Minecraft 加载目标类时，Mixin 会重写其字节码，以插入模组的代码。
+
+这很重要，因为 Minecraft 的设计并非为了扩展。游戏的大部分行为都没有官方的插件接口。Mixin 通过将编译后的游戏本身视为扩展表面，为模组提供了一种途径
+## 为什么模组会选择这样做而不是直接修改游戏文件
+两个原因：兼容性和更新。
+
+直接编辑游戏源代码意味着发布一个完整的修改副本，其他人无法在此基础上构建，并且在游戏更新时失效。 Mixin 补丁体积小且精准，因此许多模组可以补丁同一个游戏，而无需各自发布一个完整的分支。
+
+这些补丁描述了注入的位置，而不是文件的外观，因此针对一个版本编写的 Mixin 通常在游戏更新后仍然适用，只要目标方法仍然存在
+## 它如何契合 Fabric
+
+Fabric 建立在 Mixin 之上。加载器读取每个模组的 Mixin 配置文件，然后将列出的 Mixin 类传递给 Mixin，以便在类加载期间应用。一个典型的 Fabric 模组主要由其自身的类组成，加上少量用于钩接其需要修改的几个游戏方法的 Mixin。
+
+## 常见的注入点
+
+| 注解 | 功能 |
+|---|---|
+| `@Inject` | 在目标方法中选定位置运行你的代码 |
+| `@Redirect` | 替换目标方法内部的特定方法调用 |
+| `@ModifyArg` | 更改传递给目标方法内部调用的参数 |
+| `@ModifyVariable` | 在方法中间重写局部变量 |
+| `@Overwrite` | 替换整个方法（最后的手段；容易出错） |
+
+`@Inject` 是默认工具，因为它侵入性最小，并且最有可能在游戏更新中幸存下来。`@Overwrite` 应避免，因为它会与其他修改相同方法的模组冲突。
+
+## 常见问题解答
+
+<FAQList>
+
+<FAQItem question="Mixin 是模组吗？">
+不是。Mixin 是一个模组构建所用的库。您不会单独安装它；像 [Fabric](https://fabricmc.net/) 这样的加载器会将其打包并应用您的模组提供的混入。
+</FAQItem>
+
+<FAQItem question="Mixin 会修改我的游戏文件吗？">
+不会。补丁在类加载时以内存形式生效。磁盘上的文件保持不变，这就是为什么干净地移除一个模组可以移除其更改的原因。
+</FAQItem>
+
+<FAQItem question="为什么有时两个模组会因为 Mixin 冲突？">
+如果它们以不兼容的方式修改了相同的方法，尤其是在使用 `@Overwrite` 时，一个模组可能会覆盖或破坏另一个模组。 编写良好的 Mixin 会使用狭窄的注入点来避免互相干扰。
+</FAQItem>
+
+<FAQItem question="Mixin 仅适用于 Minecraft 吗？">
+不是的。Mixin 是一个通用的 Java 字节码框架，但它在 Minecraft 模组开发中被最广泛地使用，而 [Fabric](https://fabricmc.net/) 的采用使其成为了该领域的标准。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/what-is-a-minecraft-mod-loader", label: "什么是 Minecraft 模组加载器？?", description: "游戏发售时，模组是如何整合进来的." },
+  { href: "/zh/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "两款模组生态系统的对比." },
+  { href: "/zh/learn/what-is-asm", label: "什么是ASM？?", description: "Mixin 底下的字节码工具包." },
+]} />
+
+<CTA href="/zh/purchase">获取 Opal，一个 Fabric 客户端，用于 $8.99</CTA>

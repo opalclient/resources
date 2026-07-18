@@ -1,0 +1,117 @@
+---
+title: 如何安装Fabric加载器（分步指南，2026）
+description: 几分钟内安装 Fabric 载入器：运行官方安装程序，选择你的 Minecraft 版本，然后启动新的 Fabric 配置文件。 完整指南及修复方法.
+excerpt: Fabric 载入器是所有 Fabric 模组都依赖的基础。以下是如何使用官方安装程序安装它，以及随时切换回原版的方法.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: 我需要 Forge 才能安装 Fabric 吗？?
+    a: No. Fabric 是一个独立的模组加载器。您需要为每个配置文件安装一个或另一个，而不是同时安装两者.
+  - q: 安装加载器会改变原版 Minecraft 吗？?
+    a: 不。安装程序会添加一个新的配置文件，而不会修改你的原版游戏。切换配置文件即可恢复.
+  - q: 安装加载器后，模组会去哪里？?
+    a: 在你的 Minecraft 目录中的 mods 文件夹内。它会在你首次启动 Fabric 配置文件时创建.
+  - q: 我可以不用官方安装程序安装加载器吗？?
+    a: 是的。有些启动器会为你添加 Fabric 支持，并完全跳过独立的安装程序.
+---
+
+<KeyTakeaways>
+
+- Fabric 载入器使用一个工具安装：官方 Fabric 安装程序。
+- 它会添加一个新的启动配置文件，并且永远不会修改你的原版游戏。
+- 在你启动 Fabric 配置文件一次后，`mods` 文件夹会出现。
+- 将载入器与你计划游玩的精确 Minecraft 版本相匹配.
+
+</KeyTakeaways>
+
+安装 [Fabric](https://fabricmc.net/) 启动器只需要一个工具和几次点击。下载官方的 Fabric 安装程序，运行它，选择你想要使用的 Minecraft 版本，然后让它创建一个新的启动配置文件。打开你的启动器，选择这个 Fabric 配置文件，启动游戏一次。启动器现在已激活，并且可以安装模组了.
+
+<Callout variant="info" title="Opal 的安装位置">
+Opal 是一个 Fabric 模组，因此它使用与您在此处安装的加载器相同的加载器。安装好加载器后，请按照 [设置指南](/zh/docs/setup) 中的说明，使用正确的版本和推荐的 JVM 参数。
+</Callout>
+
+## 步骤
+
+<Steps>
+
+<Step number={1} title="下载安装程序">从 Fabric 项目网站获取官方的 [Fabric](https://fabricmc.net/) 安装程序。它是一个小的 Java 程序</Step>
+
+<Step number={2} title="运行它">双击该文件，或如果双击无效，则从终端运行它</Step>
+
+<Step number={3} title="选择你的 Minecraft 版本">选择你计划游玩的具体版本，例如最近发布的新版本或你仍然使用的旧版本</Step>
+
+<Step number={4} title="安装">安装程序会将新的配置文件写入您的启动器，并下载相应的加载器文件</Step>
+
+<Step number={5} title="选择Fabric配置">
+打开你的Minecraft启动器，并切换到安装程序创建的配置。
+</Step>
+
+<Step number={6} title="启动一次">请在该个人资料中启动游戏，以便加载器设置其文件和 `mods` 文件夹</Step>
+
+</Steps>
+
+## 安装程序实际执行的操作
+
+安装程序不会修改游戏 jar 文件。它会添加一个启动配置文件，在 Minecraft 启动前加载 [Fabric](https://fabricmc.net/) 加载器。该加载器在启动时读取你的 `mods` 文件夹并加载每个模组。由于该配置文件位于原版配置文件旁边，你的未修改游戏保持不变，你可以随时切换回原版。
+
+## 安装程序与启动器支持
+
+你有两种方法来安装加载器。选择最适合你设置的方法。
+
+| 方法 | 何时使用 | 备注 |
+|--------|----------------|-------|
+| 官方 Fabric 安装程序 | 标准启动器的默认选项 | 写入配置文件，下载加载器，几分钟内完成 |
+| 内置 Fabric 支持的启动器 | 你已经在使用第三方启动器 | 启动器为你处理版本匹配 |
+
+最终结果都是一样的：你可以在启动前选择一个 Fabric 配置文件。
+
+## 文件存放位置
+
+| 操作系统 | 路径 |
+| :--- | :--- |
+| Windows | `%appdata%\.minecraft` |
+| macOS | `~/Library/Application Support/minecraft` |
+| Linux | `~/.minecraft` |
+
+第一次 Fabric 启动后，`mods` 文件夹会出现在该目录下。一旦该文件夹存在，就可以将模组 jar 文件放入其中。
+
+## 加载器无法安装的情况
+
+<Checklist>
+<ChecklistItem>安装程序无法打开：可能缺少 Java 或 jar 文件使用错误的程序打开。请安装最新的 Java 运行时环境并重试.</ChecklistItem>
+<ChecklistItem>启动器中未找到Fabric配置：刷新或重启启动器，然后在版本下拉菜单中查找新的配置.</ChecklistItem>
+<ChecklistItem>添加模组后游戏崩溃：加载器没问题，但某个模组针对的是不同的 Minecraft 版本。请确保每个模组都与你安装的版本匹配.</ChecklistItem>
+<ChecklistItem>Minecraft 版本错误：请重新运行安装程序并选择正确的版本。它可以创建多个配置文件.</ChecklistItem>
+</Checklist>
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="我需要 Forge 才能安装 Fabric 吗？">
+不需要。Fabric 是独立的模组加载器。您需要为每个配置文件安装一个或另一个，而不是同时安装两者。
+</FAQItem>
+
+<FAQItem question="安装加载器会改变原版 Minecraft 吗？">
+不会。安装程序会添加一个新的配置文件，而不会对您的原版游戏进行任何改动。切换配置文件即可恢复。
+</FAQItem>
+
+<FAQItem question="安装加载器后模组会放到哪里？">
+在你的 Minecraft 目录下的 `mods` 文件夹内。当首次启动 Fabric 配置文件时，该文件夹会被创建。
+</FAQItem>
+
+<FAQItem question="我可以不用官方安装程序安装加载器吗？">
+是的。有些启动器会为你添加 Fabric 支持，完全跳过独立的安装程序。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/how-to-install-a-fabric-mod", label: "如何安装 Fabric 模组", description: "一旦装载机就位." },
+  { href: "/zh/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "这两个模组加载器有何不同？." },
+  { href: "/zh/learn/what-is-a-minecraft-mod-loader", label: "什么是模组加载器？?", description: "启动时加载器所做的事情." },
+]} />
+
+<CTA href="/zh/purchase">获取 Opal，一个 Fabric 客户端，用于 $8.99</CTA>

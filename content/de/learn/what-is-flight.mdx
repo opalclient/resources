@@ -1,0 +1,87 @@
+---
+title: Was ist Fliegen in Minecraft? Das Bewegungsmodul erklärt
+description: Flug ist ein Bewegungsmodul, das Schwerkraft und Bewegung für freies Fliegen außer Kraft setzt, ohne Flügel oder Kreativmodus. So funktioniert es und warum es leicht zu fangen ist.
+excerpt: Der Flug überschreibt Schwerkraft und Bewegung, sodass du das Abheben auf Befehl steuern kannst. Keine Flügel, kein Spielmodus-Umschaltvorgang, nur eine Übersteuerung, die der Server nie erhalten sollte.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Ist Fliegen dasselbe wie die Verwendung von Elytren oder den kreativen Modus?
+    a: Nein. Elytren und kreativer Modus sind beide Spielmechaniken, die Minecraft tatsächlich unter bestimmten Bedingungen gewährt. Fliegen erzeugt die gleiche Bewegung ohne das Vorhandensein von beidem, was es genau das macht, was es erkennbar macht.
+  - q: Kann ein Spieler durch Flight gesperrt werden?
+    a: Ja. Nachhaltiges Fliegen ohne eine gültige Quelle ist eine der offensichtlicheren Bewegungsanomalien, die ein serverseitiges Anticheat überprüfen kann, und dessen Verwendung bricht typischerweise die Regeln eines jeden Servers, der eines betreibt.
+  - q: Schränkt eine Bewegungseinschränkung von Flight dessen Ortung ein?
+    a: "Nr. Das Verlangsamen der vertikalen Geschwindigkeit oder die Begrenzung der Flugzeit macht die Erkennung unsicherer, beseitigt aber nicht das zugrunde liegende Signal: eine Bewegung in der Luft ohne Flügeldecken oder einen kreativen Modus dahinter."
+  - q: Warum nennen manche Kunden dieses Modul Fly anstatt Flight?
+    a: "Fliegen ist ein Alias für dieselbe Funktion: freie vertikale und horizontale Bewegung durch überschriebene Bewegungs- und Schwerkraftbehandlung. Unterschiedliche Clients wählen entweder den einen oder den anderen Namen für dasselbe Modul."
+---
+
+<KeyTakeaways>
+- Flug ist ein Bewegungsmodul, das durch die Überwindung der Schwerkraft und Bewegung freie vertikale und horizontale Flugbewegungen ermöglicht.
+- Es überspringt die Elytren und den Kreativmodus vollständig und simuliert das gleiche Ergebnis in der Luft auf Client-Ebene.
+- Dauerflug ohne gültige Quelle ist eine der offensichtlichsten Anomalien, die ein Server überprüfen kann.
+- Opal katalogisiert es als Flug, einfach unter Verwendung auf eigene Gefahr abgelegt, dieselbe Erkennungsgeschichte wie überall sonst.
+</KeyTakeaways>
+
+Flug ist ein Bewegungsmodul, das die Schwerkraft- und Bewegungshandhabung von Minecraft außer Kraft setzt, sodass du ohne Elytra oder Kreativmodus aufsteigst, schwebst oder das Gelände überquerst. Vanilla erlaubt dir nur zwei Möglichkeiten, den Boden zu verlassen: Flügel anlegen und mit Fallmomentum dahinter gleiten, oder in den Kreativ- oder Zuschauermodus wechseln. Flug simuliert das Ergebnis, indem es die vertikale Geschwindigkeit an der Stelle hält, an der du sie haben möchtest, anstatt sie zum Boden hin abfallen zu lassen, und indem es die horizontale Bewegung direkt anwendet. Einige Clients bezeichnen dasselbe Modul als "Fly". Egal welchen Namen es hat, es ist einer der offensichtlichsten Bewegungs-Cheats, die es gibt.
+
+## Wie Flug funktioniert
+
+Flug überschreibt zwei Dinge, die Vanilla normalerweise vollständig besitzt: Schwerkraft und Bewegung. Anstatt die vertikale Geschwindigkeit sofort abfallen zu lassen, sobald kein Block unter den Füßen ist, setzt das Modul diese Geschwindigkeit und hält sie, sodass das Fallen aufhört und du auf Befehl aufsteigst oder schwebst. Die horizontale Bewegung wird auf die gleiche direkte Weise angewendet, sodass du dich vorwärts, seitwärts oder direkt nach oben bewegst, ohne jemals eine Oberfläche berühren zu müssen.
+
+Keines davon entlehnt sich einer Elytra oder einem kreativen Modus. Das Modul erzeugt die exakte Bewegung, die diese Funktionen legitim gewähren, ohne die Quelle, die sie eigentlich freischalten sollte. Spieler greifen darauf zurück, um die Teile des Spiels zu überspringen, die durch Schwerkraft und Terrain erzwungen werden sollen: um direkt zu einem Ziel zu gelangen, anstatt darum herumzulaufen oder zu fallen, um Sturzschäden vollständig zu vermeiden oder an Orte zu gelangen, die kein Bodenpfad erlauben würde, wie zum Beispiel das Schwebeln über einer Basis. In einer Verfolgungsjagd schafft es auch, in der Luft zu bleiben, Distanz zu allem, was sich nur auf dem Boden bewegt.
+
+## Flug im Vergleich zu einer echten Elytra oder einem kreativen Modus
+
+Vanilla erklärt ungestützte Bewegung in der Luft nur auf zwei Arten. Flug entspricht keiner davon.
+
+| Art, das Erdreich zu verlassen | Was es tatsächlich gewährt | Was ein Server sieht |
+|---|---|---|
+| Elytra | Ausgestattete Brustplatte plus Sturzmomentum | Eine gleitende Entität mit einem passenden Sturzzustand |
+| Kreativ oder Zuschauer | Eine Spielmodus-Flagge im Konto | Ein Spieler, der als kreativ oder Zuschauer markiert ist |
+| Flugmodul | Überschriebene Schwerkraft und Bewegung, keine Quelle | Stetige Bewegung in der Luft ohne Flagge |
+
+Diese letzte Zeile ist das ganze Problem. Ein Server, der die Position im Laufe der Zeit verfolgt, muss nicht raten: er prüft einfach, ob eine legitime Flagge gesetzt ist, und wenn der Spieler ohne eine in der Luft ist, entspricht das Muster nichts, was die Vanilla-Physik erzeugt.
+
+## Warum es entdeckt wird
+
+Da die Prüfung unkompliziert ist, versuchen Flight-Implementierungen, die auf Umgehungen basieren, die resultierende Bewegung innerhalb von Grenzen zu halten, die ein Anticheat bereits toleriert: durch Abschwächen der vertikalen Geschwindigkeit, Imitieren einer Sprungbahn oder durch Begrenzung der Zeit, die ein Spieler gleichzeitig in der Luft verbringt. Das verringert die Lücke, schließt sie aber nicht. Das zugrunde liegende Verhalten, sich ohne unterstützende Mechanik durch offene Luft zu bewegen, ist für einen Server immer noch erkennbar. Clients, die Flight ausgeliefert haben, darunter Fan, Tenacity und Silhouette, behandeln es als eine Funktion mit bekanntem Risiko und nicht als eine sichere, und dieser Ruf wird verdient, nicht paranoid.
+
+<Callout variant="tip" title="Flug im Opal">
+Opal liefert dieses Modul ebenfalls, ebenfalls unter dem Namen Flight geführt. Die Katalogbeschreibung lässt hierzu keine Zweifel: "Du bekommst echte Flügel." Dieselbe Override-Funktion, derselbe Kompromiss wie bei jedem anderen Client, der es nutzt.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite beschreibt das Modul allgemein, damit Sie wissen, was der Begriff bedeutet. Die Benennung und das genaue Verhalten können je nach Client variieren, und ein andauernder Flug ohne gültige Quelle verstößt gegen die Regeln von praktisch jedem Server. Opal klassifiziert die Verwendung von Flight auf eigene Gefahr genau aus diesem Grund: sie ist erkennbar und kann dazu führen, dass ein Konto gesperrt wird, wie es bei jedem Client der Fall ist, der sie mitliefert.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Ist Fliegen dasselbe wie die Verwendung eines Elytras oder des Kreativmodus?">
+Nein. Ein Elytra und der Kreativmodus sind beide Spielmechaniken, die Minecraft unter bestimmten Bedingungen tatsächlich gewährt. Fliegen erzeugt eine ähnliche Bewegung ohne eines davon, was es genau erkennbar macht.
+</FAQItem>
+
+<FAQItem question="Kann Fliegen einen Spieler bannen?">
+Ja. Ausgezeichnetes Fliegen ohne eine gültige Quelle ist eine der offensichtlichsten Bewegungsanomalien, die ein serverseitiger Anticheat überprüfen kann, und dessen Verwendung verstößt typischerweise gegen die Regeln eines Servers, der einen einsetzt.
+</FAQItem>
+
+<FAQItem question="Verhindert die Beschränkung der Flugbewegung, dass es unentdeckbar wird?">
+Nein. Die resultierende Bewegung innerhalb von Grenzen zu halten, die ein Anticheat bereits toleriert, verringert die Wahrscheinlichkeit der Entdeckung, beseitigt aber nicht das zugrunde liegende Signal: Luftbewegung ohne Flügeldecken oder Kreativmodus dahinter.
+</FAQItem>
+
+<FAQItem question="Warum nennen einige Kunden dieses Modul Fly anstatt Flight?">
+Fly ist ein Alias für dieselbe Funktion, ein freies, vertikales und horizontales Fliegen durch übergebene Bewegungs- und Gravitationshandhabung. Verschiedene Implementierungen verwenden den einen oder den anderen Namen für das, was funktional das gleiche Modul ist.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die breitere Kategorie, zu der Flug und ähnliche Module gehören." },
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Ein weiteres modulnahes Modul, das das Risiko einer Entdeckung gegen schnellere Fortbewegung eintauscht." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die Kundengruppe, die auf unauffälligem Verbleib statt auf bloß schneller Bewegung basiert." },
+]} />
+
+<CTA href="/de/kaufen">Das Opal's Flight-Modul macht die Behauptung "Flügel im echten Leben" wahr. Sehen Sie sich den Rest der Liste an.</CTA>

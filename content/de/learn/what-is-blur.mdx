@@ -1,0 +1,72 @@
+---
+title: Was ist Unschärfe in Minecraft? Menü-Unschärfe erklärt
+description: Blur ist ein clientseitiges Modul, das die Spielwelt hinter einer offenen Click-GUI verschwimmt, wodurch das Menü lesbar und gut erkennbar bleibt, ohne die Spielmechanik zu verändern.
+excerpt: Der Blur-Effekt verwischt alles hinter deiner Click-GUI, sodass das Menü in den Vordergrund rückt. Reine Optik, kein Einfluss auf den Server.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Beeinflusst Unschärfe das Gameplay in Minecraft?
+    a: Nein. Der Blur-Effekt verändert lediglich das Aussehen des Hintergrunds hinter einem geöffneten Menü. Er hat keinen Einfluss auf die Bewegung, den Kampf oder irgendetwas, was der Server beobachten kann.
+  - q: Kann die Verwendung von Blur zu einer Sperre führen?
+    a: Nein. Es ist ein rein visueller, clientseitiger Rendering-Effekt ohne Auswirkungen auf Netzwerk oder Spielablauf, daher birgt er kein Risiko einer Erkennung.
+  - q: Welche Minecraft-Clients haben ein Blur-Modul?
+    a: Der Weichzeichner wird wie in Rose dokumentiert. Ähnliche Hintergrund-Weichzeichner-Effekte treten in anderen Clients unter verschiedenen Bezeichnungen als allgemeine Option für die Click-GUI-Anzeige auf.
+  - q: Funktioniert Blur auch außerhalb der Click-GUI?
+    a: Es ist an das aktuell offene Menü gebunden, meistens an die Click-GUI, anstatt während des normalen Spielverlaufs zu laufen.
+---
+
+<KeyTakeaways>
+
+- Blur ist ein kosmetisches Minecraft-Modul, das die Spielwelt hinter einer geöffneten Click-GUI verschwimmt und sich sofort wieder zurücksetzt, sobald das Menü geschlossen wird.
+- Es handelt sich um einen rein visuellen Effekt: kein Netzwerkverkehr, keine Änderung des Spielzustands, kein Vorteil im Kampf oder bei der Bewegung.
+- Nichts davon verlässt den Client, sodass ein serverseitiges Anticheat-System nichts dagegen einsetzen kann.
+
+</KeyTakeaways>
+
+Blur ist ein Minecraft-Modul, das die Spielwelt hinter einer offenen Click-GUI oder einem anderen Bildschirmmenü weichzeichnet, sodass das Menü selbst scharf und gut lesbar bleibt. Es beeinflusst weder die Bewegung, den Kampf noch das Inventar. Öffnen Sie das Menü und der Hintergrund verschwimmt; schließen Sie es und die Welt kehrt sofort in den normalen Zustand zurück. Das ist die gesamte Funktion.
+
+## Wie der Effekt funktioniert
+
+Blur führt einen Weichzeichner-Pass über die Welt hinter dem aktuell geöffneten Menü aus und zeichnet dann das Menü darüber. Es läuft nur, während dieses Menü, meist eine Click-GUI, auf dem Bildschirm ist. Sobald Sie es schließen, stoppt der Pass und die Welt rendert wieder normal. Es ist der gleiche Trick, den Sie in modernen Software-Menüs und Pausenbildschirmen gesehen haben: die Ebene hinter dem Panel weichzeichnen, sodass das Panel selbst gut lesbar ist.
+
+Der Grund, warum sich Leute damit herumschlagen, ist die Lesbarkeit. Ein verschwommener Hintergrund lenkt die visuelle Aufmerksamkeit auf das Menü, sodass Schaltflächen, Schalter und Schieberegler auf einen Blick leichter zu erfassen sind, besonders über einem hellen oder geschäftigen Hintergrund. Manche Spieler mögen einfach das Aussehen. Ein verschwommener Hintergrund lässt eine Click-GUI wie ein fertiges Softwarestück anstelle eines Panels wirken, das über rohes Gameplay geklebt wurde.
+
+## Ist Blur sicher zu verwenden
+
+Ja, und es ist nicht einmal so. Blur beeinflusst lediglich die lokale Darstellung, während ein Menü auf deinem eigenen Bildschirm geöffnet ist. Es werden keine Daten an den Server gesendet, der Spielzustand wird nicht verändert und du erhältst keinen Vorteil im Kampf, bei der Bewegung oder in irgendeinem anderen System, das der Server verfolgt. Es gibt nichts, was ein serverseitiges Anti-Cheat-System aufspüren könnte, da der Effekt niemals deinen Client verlässt. Er gehört in dieselbe Kategorie wie ein Helligkeitsschieberegler oder ein Ressourcenpaket: eine Darstellungsoption, nicht eine Interaktion mit den Spielregeln.
+
+<Callout variant="tip" title="Wo dies in Opal seinen Platz findet">
+Opal liefert kein Modul namens Blur mit. Aber der visuelle und komfortitätsorientierte Teil des Clients läuft nach demselben Prinzip wie dieser Effekt: Nur lokal werden Verbesserungen vorgenommen, die der Server nie sieht. Ein verschwommener Hintergrund hinter einem Menü ist genau die Art von Änderung, die in diese Kategorie gehört, rein kosmetisch, risikofrei und nicht nachweisbar.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Beeinflusst Unschärfe das Gameplay in Minecraft?">
+Nein. Unschärfe verändert lediglich das Aussehen des Hintergrunds hinter einem geöffneten Menü. Sie hat keinen Einfluss auf die Bewegung, den Kampf oder irgendetwas, was der Server beobachten kann.
+</FAQItem>
+
+<FAQItem question="Kann die Verwendung von Blur zu einer Sperre führen?">
+Nein. Es handelt sich um einen rein visuellen, clientseitigen Rendering-Effekt ohne Auswirkungen auf Netzwerk oder Spielablauf, sodass kein Risiko einer Erkennung besteht.
+</FAQItem>
+
+<FAQItem question="Welche Minecraft-Clients haben ein Blur-Modul?">
+Blur ist in Rose dokumentiert. Ähnliche Hintergrundunschärfe-Effekte tauchen in anderen Clients unter verschiedenen Namen als allgemeine Option für die Click-GUI-Anzeige auf.
+</FAQItem>
+
+<FAQItem question="Funktioniert Blur außerhalb der Click-GUI?">
+Es ist an das aktuell offene Menü gebunden, meistens die Click-GUI, und läuft nicht während des normalen Spielverlaufs.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die breitere Kategorie, zu der Module wie Blur gehören." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Wo die Grenze zwischen oberflächlichem Firnis und erkennbarem Verhalten tatsächlich verläuft." },
+  { href: "/de/learn/what-is-an-aimbot", label: "Was ist ein Aim-Bot?", description: "Ein Modul, das am gegenüberliegenden Ende des Risikospektrums von Blur existiert." },
+]} />
+
+<CTA href="/de/kaufen">Ein Menü sollte gestaltet wirken, nicht nachträglich angefügt. Sehen Sie, wie die Benutzeroberfläche von Opal ab Werk aussieht.</CTA>

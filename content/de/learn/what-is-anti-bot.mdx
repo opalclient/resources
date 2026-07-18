@@ -1,0 +1,77 @@
+---
+title: Was ist Anti-Bot in Minecraft? Modul erklärt
+description: Anti Bot ist ein Kampanmodul, das gefälschte Köderspieler aus der automatischen Zielauswahl filtert, sodass Ihre Automatisierung niemals einen Treffer auf einen eingesetzten Screenshare-Bot verschwendet.
+excerpt: "Anti-Bot-System sorgt für faires Zielen: echte Spieler werden angegriffen, platzierte Köder ignoriert."
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was gilt als ein Köderbot in Minecraft?
+    a: Ein Köderbot ist eine spielerähnliche Entität, die oft von einem Server, einem Plugin oder einem Screenshare-Reviewer erzeugt wird und wie ein echtes Konto aussieht, es aber nicht ist. Er existiert ausschließlich, um zu prüfen, ob Ihre Automatisierung darauf reagiert.
+  - q: Ändert Anti-Bot den Kampf oder nur die Zielauswahl?
+    a: Nur Zielen. Anti Bot erhöht weder Reichweite, Zielgenauigkeit noch Angriffsgeschwindigkeit. Es entfernt lediglich Köder-Einheiten aus der Liste der Ziele, die deine Kampfausführung angreifen darf.
+  - q: Ist Anti Bot an sich ein Cheat?
+    a: Nein. Anti Bot greift, zielt oder bewegt Sie nicht für sich allein. Es filtert, welche Entitäten Ihre Kampfdrohnen sehen können, sodass es sich eher um eine Verbesserung der Benutzerfreundlichkeit für diese Drohnen handelt als um eine eigene Automatisierung.
+  - q: Wie unterscheidet sich Anti Bot von der Bot-Erkennung eines Anti-Cheat-Systems?
+    a: Sie sitzen auf gegenüberliegenden Seiten desselben Austauschs. Ein Anti-Cheat platziert eine Köderluke und beobachtet, wie Sie darauf reagieren. Anti-Bot ist das Client-seitige Modul, das verhindert, dass Ihre Automatisierung überhaupt erst auf diese Köderluke reagiert.
+---
+
+<KeyTakeaways>
+
+- Anti Bot ist ein Kampanmodul, das gefälschte Köder-Spieler-Entitäten aus der automatischen Zielerfassung filtert.
+- Server- und Bildschirmfreigabe-Prüfer erstellen Bot-Konten, um zu sehen, wie die Werkzeuge eines verdächtigen Cheaters reagieren.
+- Es prüft jede nahegelegene Entität, bevor ein Angriff ausgelöst wird, und überspringt alles, was wie ein platzierter Köder aussieht.
+- Es greift nur die Zielauswahl an, nicht die Zielgenauigkeit, Reichweite oder Angriffsgeschwindigkeit.
+
+</KeyTakeaways>
+
+Anti Bot ist ein Kampanmodul, das gefälschte Köder-Spieler-Entitäten aus der automatischen Zielauswahl eines Clients herausfiltert. Screenshare-Reviewer und einige Server platzieren Bot-Konten, die wie gewöhnliche Spieler aussehen, um zu sehen, ob die Werkzeuge eines verdächtigen Cheaters darauf reagieren. Anti Bot erkennt diese Köder als solche und verhindert, dass die Kampfausführung einen Angriff auf sie verschwendet, genauso wie ein echter Gegner eine stehende Figur ignorieren würde, die einfach nichts tut.
+
+## Wie Anti Bot funktioniert
+
+Das Modul sitzt vor der Logik, die ein Ziel für die Kampfausführung auswählt. Bevor ein Angriff ausgelöst wird, prüft Anti Bot jede in der Nähe befindliche, spielerähnliche Entität und filtert diejenigen aus, die wie platzierte Köder und nicht wie echte Gegner gelesen werden. Entitäten, die die Prüfung bestehen, bleiben im normalen Zielpool. Entitäten, die als Köder markiert sind, werden einfach übersprungen, sodass der Angriff niemals auf sie abgefeuert wird.
+
+Das ist wichtig, weil ein Bot, der angegriffen wird, dem Reviewer genau die Reaktion liefert, nach der er gesucht hat. Anti Bot versucht nichts zu verbergen oder Unschuld vorzutäuschen. Es lässt sich einfach nicht auf den Köder ein, was bedeutet, dass die Kampfausführung ihre Angriffe nur auf Entitäten verwendet, die tatsächlich da sind, um zu kämpfen.
+
+In der Praxis zeigt sich das als eine mehrschichtige Prüfung, die an das bereits laufende Kampfsystem des Kunden angehängt ist, nicht als eigenständiges Feature. Rise Nextgen, ein Fabric-basierter Utility-Client, läuft genau so: unter der Kategorie „Kampf“ eingeordnet und filtert die Zielisten unauffällig, bevor die restliche Automatisierung aktiv wird.
+
+## Anti Bot vs. Anticheat-Bot-Erkennung
+
+Diese beiden Begriffe haben zwar den gleichen Namen, weisen aber entgegengesetzte Richtungen auf. Die Bot-Erkennung eines serverseitigen Anticheats funktioniert, indem ein Köder platziert und beobachtet wird, wie der Client eines verdächtigen Cheaters darauf reagiert. Es ist eine Falle und soll Automatisierungen erwischen, die keinen Unterschied zwischen einem gefälschten und einem echten Spieler erkennen können.
+
+Anti Bot ist die andere Hälfte dieser Interaktion. Es ist ein clientseitiger Filter, der den Köder erkennt, bevor überhaupt ein Angriff ausgelöst wird, sodass es für den Anticheat keine Reaktion gibt, die es beobachten könnte. Eines ist eine Erkennungsmethode, die auf Cheater abzielt. Das andere ist ein Modul, das stillschweigend darauf verzichtet, hineinzulaufen.
+
+<Callout variant="tip" title="Opal versendet dies">
+Opals eigenes Anti-Bot-Modul erledigt genau diese Aufgabe: zusätzliche Bot-Erkennungsprüfungen, sodass die Zielauswahl gefälschte Spieler ignoriert. Es wird in der Modulliste als Sicher eingestuft, da es niemals die Zielerfassung, Reichweite oder das Angriffsverhalten beeinflusst, sondern nur das, was Ihre Kampfausautomatisierung sehen darf.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was gilt als Köderbot in Minecraft?">
+Ein Köderbot ist eine spielerähnliche Entität, die oft von einem Server, einem Plugin oder einem Screenshare-Reviewer erzeugt wird und wie ein echtes Konto aussieht, es aber nicht ist. Er existiert ausschließlich, um zu prüfen, ob Ihre Automatisierung darauf reagiert.
+</FAQItem>
+
+<FAQItem question="Verändert Anti Bot den Kampf oder nur die Zielauswahl?">
+Nur die Zielauswahl. Anti Bot erhöht weder die Reichweite, die Zielgenauigkeit noch die Angriffsgeschwindigkeit. Es entfernt lediglich Ablenkungsentitäten aus der Liste der Ziele, die deine Kampfausführung treffen darf.
+</FAQItem>
+
+<FAQItem question="Ist Anti Bot ein Cheat an sich?">
+Nein. Alleinstehend greift Anti Bot nicht an, zielt nicht und bewegt Sie nicht. Es filtert, welche Entitäten Ihre Kampfausautomatisierung sehen kann, sodass es sich um eine Verbesserung der Benutzerfreundlichkeit für diese Automatisierung handelt und nicht um eine Automatisierung an sich.
+</FAQItem>
+
+<FAQItem question="Wie unterscheidet sich Anti Bot von der Bot-Erkennung eines Anticheats?">
+Sie stehen auf gegenüberliegenden Seiten derselben Interaktion. Ein Anticheat platziert Köder und beobachtet, wie Sie darauf reagieren. Anti Bot ist das Client-seitige Modul, das verhindert, dass Ihre Automatisierung überhaupt erst auf diesen Köder reagiert.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-killaura", label: "Was ist KillAura?", description: "Das Zielfiltermodul des Auto-Angriffs wird von Anti Bot gespeist." },
+  { href: "/de/learn/what-is-an-aimbot", label: "Was ist ein Aim-Bot?", description: "Ein weiteres zielorientiertes Modul, dessen Erfolg oder Misserfolg von der Zielisten abhängt." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Kategorie, zu der diese Module gehören." },
+]} />
+
+<CTA href="/de/kaufen">Bekämpfen Sie Automatisierung, die einen Köder erkennt, sobald sie ihn sieht. Opal beginnt bei $8.99.</CTA>

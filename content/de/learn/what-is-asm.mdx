@@ -1,0 +1,86 @@
+---
+title: Was ist ASM (Java-Bytecode)? Bibliotheks-Erklärung
+description: ASM ist eine Java-Bibliothek zum Lesen und Schreiben von JVM-Bytecode zur Laufzeit. Hier ist, was sie tut, wie sie funktioniert und warum Minecraft-Mods darauf angewiesen sind.
+excerpt: Das Spiel wird als kompilierte Datei ausgeliefert, nicht als Quellcode, den man neu erstellen kann. ASM ist der Weg, wie Mods eingreifen und diesen Bytecode während des Ladens patchen.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Libraries
+author: trq
+faqs:
+  - q: Ist ASM dasselbe wie ein Dekompilierer?
+    a: Nein. Ein Decompiler wandelt Bytecode zurück in lesbaren Quellcode, während ASM direkt auf den Bytecode wirkt und darauf ausgelegt ist, ihn zu verändern, nicht Quellcode wiederherzustellen.
+  - q: Muss ich Assembler lernen, um einen Mod zu erstellen?
+    a: Normalerweise nicht. Die meisten Fabric-Mods verwenden Mixin, welches die ASM-Details hinter Annotationen verbirgt, sodass du nur dann auf rohes ASM zurückgreifst, wenn du feine Kontrolle benötigst.
+  - q: Ist ASM spezifisch für Minecraft?
+    a: ASM ist eine allgemeine Java-Bibliothek, die in vielen Tools verwendet wird, die mit Bytecode arbeiten. Minecraft-Modding ist eine häufige Anwendung, aber nicht die einzige.
+  - q: Warum nicht einfach die Quelle bearbeiten?
+    a: Das ist nicht möglich. Das Spiel wird als kompilierte Datei ausgeliefert, nicht als Quellcode, den Sie ändern und neu kompilieren können. Daher ist das Bearbeiten von Bytecode der praktikable Weg, um Code zu patchen, den Sie nicht besitzen.
+---
+
+<KeyTakeaways>
+
+- ASM ist eine Java-Bibliothek zum Lesen, Ändern und Schreiben von JVM-Bytecode.
+- Sie arbeitet mit kompilierten .class-Dateien und kann so eine Klasse umschreiben, ohne sie neu kompilieren zu müssen.
+- Mods verwenden sie, um das bereits kompilierte Spiel beim Laden zu patchen.
+- Die meisten Modder nutzen Mixin, das auf ASM aufbaut und die Details verbirgt.
+
+</KeyTakeaways>
+
+ASM ist eine Java-Bibliothek zum Lesen, Ändern und Schreiben von JVM-Bytecode. Sie arbeitet mit kompilierten `.class`-Dateien anstelle von Quellcode, sodass sie eine Klasse inspizieren oder umschreiben kann, ohne sie neu kompilieren zu müssen. Minecraft-Mods nutzen sie, da sie es ihnen ermöglicht, das Spiel zur Laufzeit zu patchen, nachdem es bereits kompiliert wurde.
+
+<Callout variant="info" title="Wo Opal passt">
+Opal ist ein [Fabric](https://fabricmc.net/) Mod, und Fabric-Mods greifen über diese Bytecode-Schicht in den Spielcode ein. Sie müssen diese Schicht nicht direkt anpassen: Die [Skript-Engine](/de/docs/scripting) bietet Ihnen eine saubere Möglichkeit, Opal zu erweitern, ohne Bytecode schreiben zu müssen.
+</Callout>
+
+## Was ASM tatsächlich tut
+ASM wandelt eine kompilierte Klasse in etwas um, das ein Programm bearbeiten kann. Eine `.class`-Datei ist lediglich Bytecode, die Anweisungen, die die Java Virtual Machine ausführt. ASM parst diesen Bytecode, übergibt Ihnen die Methoden und Felder und ermöglicht es Ihnen, Anweisungen hinzuzufügen, zu entfernen oder zu ändern. Anschließend schreibt es eine neue, gültige Klasse zurück.
+
+Plain Java kann dies nicht von selbst. Der Compiler wandelt Ihren Quellcode einmal in Bytecode um, und danach ist der Bytecode fixiert. ASM greift auf Bytecode-Ebene ein, was die Schicht unterhalb des Quellcodes ist, den Sie normalerweise schreiben
+## Wie es funktioniert
+ASM liest eine Klasse mit einem `ClassReader` und schreibt eine mit einem `ClassWriter`. Zwischen diesen beiden durchläuft Ihr Code die Teile der Klasse und entscheidet, was geändert werden soll. Es gibt zwei Möglichkeiten, dies zu tun.
+
+Der Visitor-Ansatz durchläuft die Klasse Element für Element. Er ist schnell und benötigt wenig Speicher, da er die gesamte Klasse nie auf einmal hält. Der Tree-Ansatz lädt die Klasse in Objekte, die Sie frei durchlaufen und bearbeiten können, was für größere Änderungen leichter nachzuvollziehen ist, aber mehr Speicher verbraucht.
+
+| Ansatz | Funktionsweise | Am besten geeignet für |
+| :--- | :--- | :--- |
+| Visitor API | Überträgt Klasse-Ereignisse während des Lesens | Kleine, schnelle Änderungen mit wenig Speicherbedarf |
+| Tree API | Erstellt ein bearbeitbares Objektmodell der Klasse | Größere oder komplexere Neuschreibungen |
+## Warum Minecraft-Mods es verwenden
+
+Mods müssen Spielcode ändern, den sie nicht geschrieben und nicht neu kompilieren können. Das Spiel wird als kompilierte Klassen ausgeliefert, sodass der einzige Weg hinein auf Bytecode-Ebene liegt, und genau das bietet ASM. Ein Mod kann einen Hook in eine Spielmethode einfügen, einen Aufruf umleiten oder ein Feld hinzufügen, alles zur Laufzeit.
+
+Die meisten Modder rufen ASM nicht manuell auf. Sie verwenden [Mixin](/de/learn/what-is-mixin), ein höherwertiges Framework, das auf ASM aufbaut und einfache Annotationen in die darunterliegenden Bytecode-Änderungen umwandelt. Sie schreiben eine kleine Java-Klasse, die die Änderung beschreibt, und das Framework erledigt die Low-Level-Arbeit mit ASM für Sie. [Fabric](https://fabricmc.net/)-Mods stützen sich insbesondere auf diese Kette.
+
+## Wann Sie ASM direkt ansprechen würden
+
+Sie schreiben selten rohes ASM als Mod-Autor. Es taucht auf, wenn ein Tool mehr Kontrolle benötigt, als eine Annotation ausdrücken kann, wie z. B. ein Loader, ein Obfuskator oder ein Patcher, der Klassen komplett neu schreibt. Für alltägliche Mods reicht die Annotationsebene aus, und sie ist viel weniger fehleranfällig.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Ist ASM dasselbe wie ein Dekompilierer?">
+Nein. Ein Dekompilierer wandelt Bytecode zurück in lesbaren Quellcode. ASM arbeitet selbst mit dem Bytecode und ist darauf ausgelegt, ihn zu verändern, nicht Quellcode wiederherzustellen.
+</FAQItem>
+
+<FAQItem question="Muss ich ASM lernen, um einen Mod zu erstellen?">
+Normalerweise nicht. Die meisten Fabric-Mods verwenden Mixin, das die ASM-Details hinter Annotationen verbirgt. Du greifst erst dann auf rohes ASM zurück, wenn du eine feine Kontrolle benötigst.
+</FAQItem>
+
+<FAQItem question="Ist ASM spezifisch für Minecraft?">
+Nein. ASM ist eine allgemeine Java-Bibliothek, die in vielen Tools verwendet wird, die mit Bytecode arbeiten. Minecraft-Modding ist eine gängige Anwendung, aber nicht die einzige.
+</FAQItem>
+
+<FAQItem question="Warum nicht einfach die Quelldateien bearbeiten?">
+Das ist nicht möglich. Das Spiel wird kompiliert ausgeliefert, nicht als veränderbare und neu kompilierbare Quelldatei. Das Bearbeiten von Bytecode ist der praktikable Weg, um Code zu patchen, den man nicht besitzt.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-mixin", label: "Was ist Mixin?", description: "Das Annotationsframework, das auf ASM aufbaut." },
+  { href: "/de/learn/what-is-jvm-bytecode", label: "Was ist JVM-Bytecode?", description: "Die Befehlssatz ASM liest und schreibt." },
+  { href: "/de/learn/what-is-a-minecraft-mod-loader", label: "Was ist ein Minecraft-Mod-Loader?", description: "Wie gepatchte Klassen in das Spiel integriert werden." },
+]} />
+
+<CTA href="/de/purchase">Opal, einen Fabric-Client, für $8.99 erhalten</CTA>

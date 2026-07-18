@@ -1,0 +1,81 @@
+---
+title: Was ist Durchdringen in Minecraft? Durch Wände schlagen
+description: Das Durchbohren ist ein Kampfmodul in Minecraft, das die Sichtprüfung umgeht und so Treffer durch Wände ermöglicht. So funktioniert es und warum es leicht zu erkennen ist.
+excerpt: Durchdringende Effekte verwandeln Wände in eine Andeutung. So unterbrechen sie den Raycast, und warum Server sie fast jedes Mal abfangen.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was kann Piercing eigentlich bewirken?
+    a: Es lässt einen Angriff auf ein Ziel zu, selbst wenn ein Block, wie eine Mauer oder ein Zaun, sich direkt zwischen dir und dem Ziel befindet. Normale Minecraft-Blöcke treffen direkt.
+  - q: Ist Piercing dasselbe wie Reichweite?
+    a: Nein. Die Reichweite bestimmt, wie weit ein Angriff reichen kann. Durchschlagskraft ignoriert alles, was sich physisch im Weg befindet. Sie lösen unterschiedliche Probleme, werden aber oft zusammen eingesetzt.
+  - q: Welche Kunden haben Piercing verschickt?
+    a: Slinky ist ein Client, der mit diesem Modul dokumentiert ist. Die Benennung und das genaue Verhalten variieren je nach Client, da einige Implementierungen nur einen Teil der Prüfung lockern, anstatt sie vollständig zu entfernen.
+  - q: Kann ein Server jemanden dabei erwischen, Piercing zu benutzen?
+    a: Ja, im Allgemeinen. Der Server kann zum Zeitpunkt des Treffers eine eigene Sichtprüfung zwischen den beiden Spielern durchführen, und ein massiver Block in diesem Pfad ist etwas, an dem sich der Client nicht vorbeikämpfen kann.
+---
+
+<KeyTakeaways>
+
+- Durchbohren ermöglicht es einem Angriff, eine Wand oder einen anderen festen Block zwischen Angreifer und Ziel zu durchschlagen.
+- Es funktioniert, indem es den normalerweise von Minecraft benötigten Sichtstrahl-Raycast überspringt, bevor ein Treffer registriert wird.
+- Es ist nicht Reichweite: Reichweite verlängert die Reichweite, Durchbohren ignoriert Hindernisse vollständig.
+- Server können die Sichtlinie unabhängig überprüfen, was es zu einem der zuverlässiger erkennbaren Kampffähigkeiten macht.
+
+</KeyTakeaways>
+
+Durchdringung ist ein Kampfmuster, das es einem Angriff ermöglicht, zu treffen, selbst wenn ein fester Block sich direkt zwischen Angreifer und Ziel befindet. Normale Minecraft-Kämpfe führen zuerst eine Prüfung durch: Das Spiel verfolgt eine Linie von dir zu dem, was du triffst, und wenn diese Linie das Terrain trifft, bevor sie das Ziel erreicht, wird der Angriff nicht registriert. Durchdringung überspringt diese Prüfung. Ein Zaun, eine Wand, eine Steinplatte – es spielt keine Rolle mehr. Das Ziel hat entweder Sichtlinie oder nicht, und Durchdringung löscht einfach die Anforderung, was genau der Grund dafür ist, dass es für einen Server eine der einfacheren Dinge ist, dies zu erkennen.
+
+## Funktionsweise
+
+Vanilla Minecraft führt einen Raycast durch, bevor ein Treffer landen darf. Das Spiel verfolgt eine gerade Linie vom angreifenden Spieler zum Ziel und stoppt beim ersten festen Block, den diese Linie berührt. Wenn dieser Block näher am Ziel ist als das Ziel selbst, verfehlt der Angriff, ohne Ausnahme. Diese einzelne Prüfung ist der Grund, warum eine Wand, eine geschlossene Tür oder sogar ein Zaunpfosten normalerweise ausreichen, um einen Schwung wirkungslos zu machen.
+
+Das Durchdringen umgeht oder überschreitet diesen Raycast, sodass der Angriff so durchgeht, als wäre der Block nicht vorhanden. Die Entfernung ist nicht immer vollständig. Einige Implementierungen behalten die Blockkollision für die Bewegung bei, verzichten aber speziell im Kampf darauf, und einige stoppen die Prüfung auf Entitäten im Weg, anstatt auf das Gelände – eine engere Variante derselben Idee. Das Endergebnis ist in allen Fällen dasselbe: Etwas Festes befand sich zwischen zwei Spielern, und der Treffer landete trotzdem.
+
+Es ist sinnvoll, dies von [Reach](/de/learn/what-is-reach) zu trennen. Reach bestimmt, wie weit ein Treffer reichen kann. Durchdringen hat nichts mit der Entfernung zu tun, sondern mit dem, was sich auf der Linie zwischen zwei Punkten befindet, nicht mit der Länge dieser Linie. Ein Spieler kann eine völlig normale Reichweite haben und trotzdem Durchdringen aktivieren, und die beiden kommen oft genug zusammen vor, dass sie verwechselt werden.
+
+## Ist Durchdringen sicher zu verwenden?
+
+Kurze Antwort: nein. Behandeln Sie es als eine verbotene Funktion, nicht als eine Grauzone. Die Prüfung, die Durchdringen umgeht, ist eine der einfachsten Dinge, die ein Server unabhängig überprüfen kann. Im Moment des Treffers kann der Server seinen eigenen Raycast zwischen den tatsächlichen Positionen der beiden Spieler durchführen, und wenn festes Gelände auf diesem Weg liegt, gibt es keine legitime Erklärung dafür, dass der Schwung trotzdem landet.
+
+Anders als bei Reichweiten- oder Rotationsglättung, wo ein Server Raum für Latenz und normale menschliche Ungenauigkeiten einplanen muss, war eine Wand entweder da oder nicht. Das lässt kaum Spielraum für Fehlalarme, was auch bedeutet, dass es kaum Spielraum für einen Spieler gibt, damit davonzukommen. Deshalb behandeln Anticheats einen bestätigten Schuss durch eine Wand in der Regel als hartes Flag anstatt als etwas, für das mehrere Datenpunkte benötigt werden, um einen Fall aufzubauen.
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite beschreibt das Modul allgemein, damit Sie wissen, was der Begriff bedeutet. Die Benennung und das genaue Verhalten können je nach Client variieren, und das Durchbrechen von festen Blöcken verstößt gegen die Regeln auf praktisch jedem Server, der eine kompetente Anti-Cheat-Software betreibt.
+</Callout>
+
+<Callout variant="tip" title="Opal ships Piercing">
+Opals Version macht genau das, was der Name verspricht: Sie ermöglicht es, Spieler durch Blöcke hindurch zu treffen. Sie wird unter „mit Vorsicht verwenden“ in der Modulliste geführt, die gleiche Bezeichnung wie alles andere, was sich auf eine so einfache Prüfung für den Server verlässt. Keine Illusionen, dass es sicherer ist, als es ist.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was erlaubt dir eigentlich das Piercing?">
+Es ermöglicht einem Angriff, ein Ziel zu treffen, selbst wenn ein Block, wie eine Mauer oder ein Zaun, sich direkt zwischen dir und dem Ziel befindet. Normale Minecraft-Blöcke, die direkt treffen.
+</FAQItem>
+
+<FAQItem question="Ist Piercing dasselbe wie Reichweite?">
+Nein. Reichweite bestimmt, wie weit ein Angriff reichen kann. Piercing ignoriert alles, was sich physisch im Weg befindet. Sie lösen unterschiedliche Probleme, werden aber oft zusammen verwendet.
+</FAQItem>
+
+<FAQItem question="Welche Kunden haben Piercing versendet?">
+Slinky ist ein Kunde, bei dem dieses Modul dokumentiert ist. Die Benennung und das genaue Verhalten variieren je nach Kunde, da einige Implementierungen nur einen Teil der Prüfung lockern, anstatt sie vollständig zu entfernen.
+</FAQItem>
+
+<FAQItem question="Kann ein Server tatsächlich feststellen, ob jemand Piercing verwendet?">
+Ja, im Allgemeinen. Der Server kann zum Zeitpunkt des Treffers eine eigene Sichtprüfung zwischen den beiden Spielern durchführen, und ein fester Block in diesem Pfad ist etwas, das der Client nicht umgehen kann.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-reach", label: "Was ist Reichweite?", description: "Das Durchschlag-Distanz-Modul Piercing verwechselt man." },
+  { href: "/de/learn/what-is-killaura", label: "Was ist KillAura?", description: "Der Auto-Angreifer Piercing kombiniert manchmal." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Kategorie, zu der diese Module gehören." },
+]} />
+
+<CTA href="/de/purchase">Piercing ist ein Modul. Opal bewertet jedes einzelne ehrlich.</CTA>

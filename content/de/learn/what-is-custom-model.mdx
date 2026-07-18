@@ -1,0 +1,75 @@
+---
+title: Was ist ein benutzerdefiniertes Modell in Minecraft? Modul-Erklärung
+description: Benutzerdefiniertes Modell ist ein visuelles Minecraft-Modul, das deine Haut oder dein Spielermodell nur auf deinem eigenen Bildschirm austauscht, ohne Auswirkungen auf Trefferbereiche, Reichweite oder Erkennung.
+excerpt: Das Custom Model ändert lediglich das Aussehen deines Charakters auf deinem Bildschirm, nichts weiter. Es gibt keine Änderungen der Trefferbox, keine zusätzlichen Pakete, nur eine andere Haut als die, die Mojang dir gegeben hat.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Viel ihr benutzerdefiniertes Modell einen Vorteil im Spiel?
+    a: Nein. Es ändert lediglich, wie dein Spieler-Modell oder deine Haut lokal dargestellt wird. Es beeinflusst keine Trefferbereiche, Reichweite, Bewegung oder irgendetwas, was der Server verfolgt, und bietet daher keinen Vorteil im Kampf oder bei der Bewegung.
+  - q: Können andere Spieler mein benutzerdefiniertes Modell sehen?
+    a: Normalerweise nicht. Minecraft rendert Skins pro Client, sodass eine Änderung Ihrer eigenen Darstellung nicht auf den Bildschirm anderer übertragen wird. Der Effekt ist in der Regel nur für Sie sichtbar.
+  - q: Ist benutzerdefinierte Modellierung von Anticheats erkennbar?
+    a: Kaum, wenn überhaupt. Da es weder die Bewegung noch den Kampf oder die an den Server gesendeten Pakete verändert, hat ein serverseitiges Anticheat kaum etwas zu melden. Das Risiko einer Erkennung ist deutlich geringer als bei Modulen für Kampf oder Bewegung.
+  - q: Ist ein benutzerdefiniertes Modell dasselbe wie ein Ressourcennpaket?
+    a: Fast nicht ganz. Ein Resource Pack kommt vom Server und verändert, was jeder verbundene Spieler sieht. Ein Custom Model ist ein Client-seitiges Modul, das das Rendering lokal austauscht, ein Resource Pack ist nicht erforderlich.
+---
+
+<KeyTakeaways>
+
+- Ein Custom Model ist ein visuelles Modul, das das In-Game-Modell oder die Haut eines Spielers gegen ein benutzerdefiniertes austauscht.
+- Es ändert nur das, was lokal gerendert wird, nicht Trefferbereiche, Bewegung oder Daten, die an den Server gesendet werden.
+- Andere Spieler können den Austausch nicht sehen, da Minecraft Skins pro Client und nicht serverweit rendert.
+- Das Risiko einer Erkennung ist minimal: Es ändern sich keine Spielwerte, es werden keine zusätzlichen Pakete gesendet.
+
+</KeyTakeaways>
+
+Benutzerdefiniertes Modell ist ein visuelles Modul, das einem Spieler ermöglicht, sein In-Game-Modell oder die Hautdarstellung durch etwas völlig anderes zu ersetzen, und zwar auf seinem eigenen Client, ohne etwas zu verändern, was der Server sehen kann. Es gehört in dieselbe Kategorie wie andere kosmetische und Rendering-Optionen: keine Kampfmathematik, keine Bewegungsmathematik, nur ein anderes Bild anstelle deines Charakters. Während ein Ressourcennpackt verändert, was jeder am Tisch sieht, ändert Benutzerdefiniertes Modell nur deine eigene Ansicht. Es ist das Modul für Spieler, die darauf achten, wie sie vor der Kamera aussehen, und nicht warten möchten, bis der Server ihnen eine neue Haut zur Verfügung stellt.
+
+## Wie Benutzerdefiniertes Modell funktioniert
+
+Minecrafts Hautsystem ist normalerweise pro Konto. Dein Client holt sich die Haut, die mit deinem Konto verknüpft ist, von Mojang ab oder zieht sie aus dem lokalen Cache und übergibt diese Textur jedes Mal an den Renderer, wenn ein Spieler gezeichnet wird, einschließlich dir. Benutzerdefiniertes Modell greift in diesen Render-Aufruf ein und ersetzt etwas anderes: eine andere Textur, eine andere Modellform, manchmal Proportionen, die das ursprüngliche Spielermodell nie verarbeiten sollte.
+
+Der Austausch findet vollständig innerhalb der lokalen Rendering-Pipeline statt. An den Paketen, die Sie senden, ändert sich nichts. Bewegungsdatenpakete, Angriffspakete und der Inventarstatus werden genau so ausgegeben, wie es ohne das Modul der Fall wäre. Der Server sieht weiterhin dieselbe Spieler-Entität, mit demselben Trefferbereich und denselben echten Spieldaten, die Ihrem Konto zugeordnet sind. Nur das Bild, das Ihr eigener Client lokal zeichnet, ist anders.
+
+## Ist es sicher, es zu verwenden?
+
+Custom Model greift in nichts ein, was ein serverseitiges Anti-Cheat-System abfangen soll. Es ändert weder die Reichweite, die Bewegungsgeschwindigkeit, die Größe des Trefferbereichs noch die Timing-Werte, und es fügt keinen neuen Paketen dem Datenstrom zwischen Client und Server hinzu. Funktional gibt es für ein Anti-Cheat-System nichts zu messen, da die Werte, die es misst, sich nicht ändern.
+
+Das setzt es in eine andere Kategorie als beispielsweise ESP oder Röntgenfunktionen, die Informationen preisgeben, die der ursprüngliche Client dazu ausgelegt ist zu verbergen, und die speziell deshalb verboten werden, weil sie einen Informationsvorteil verschaffen. Custom Model greift nicht in Informationen ein, sondern nur in das Erscheinungsbild, sodass es eher einem kosmetischen Feature als einem spielmechanischen Feature ähnelt. Einige Server haben eine pauschale Regel gegen jegliche modifizierte Clients, unabhängig davon, was die Modifikation bewirkt, daher hängen die Regeln weiterhin davon ab, wo Sie spielen. Der Mechanismus selbst birgt nicht das Risiko einer Erkennung, das ein Modul für Kämpfe oder Bewegungen mit sich bringt.
+
+<Callout variant="tip" title="Wo Kosmetikartikel in einem Kunden wie Opal passen">
+Opal’s visuelle Kategorie basiert genau auf dieser Art von Kompromiss: Änderungen, die beeinflussen, was man sieht, und nichts, was der Server tut. Es wird kein Modul unter dem Namen „Custom Model“ ausgeliefert, aber dasselbe Prinzip zieht sich durch die gesamte Kategorie. Schauen Sie, wie Sie möchten, ohne die Kampfkraft- oder Bewegungszahlen zu berühren, die der Server tatsächlich verfolgt.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Verleiht das benutzerdefinierte Modell einen Vorteil im Spiel?">
+Nein. Es ändert lediglich, wie Ihr Spieler-Modell oder Ihre Haut lokal gerendert wird. Es beeinflusst keine Trefferbereiche, Reichweite, Bewegung oder irgendetwas, was der Server verfolgt, und bietet daher keinen Vorteil im Kampf oder bei der Bewegung.
+</FAQItem>
+
+<FAQItem question="Können andere Spieler mein benutzerdefiniertes Modell sehen?">
+Normalerweise nicht. Minecraft rendert Skins pro Client, sodass eine Änderung Ihrer eigenen Darstellung nicht auf den Bildschirm anderer Spieler übertragen wird. Der Effekt ist in der Regel nur für Sie sichtbar, es sei denn, eine bestimmte Implementierung teilt ihn auf andere Weise.
+</FAQItem>
+
+<FAQItem question="Ist ein benutzerdefiniertes Modell von Anticheats erkennbar?">
+Kaum oder gar nicht. Da es weder die Bewegung, den Kampf noch die an den Server gesendeten Pakete verändert, hat ein serverseitiges Anticheat kaum etwas, was es kennzeichnen könnte. Das Risiko einer Erkennung ist deutlich geringer als bei Modulen für Kampf oder Bewegung.
+</FAQItem>
+
+<FAQItem question="Ist ein benutzerdefiniertes Modell dasselbe wie ein Ressourcenpaket?">
+Nicht ganz. Ein Ressourcenpaket kommt vom Server und verändert, was jeder verbundene Spieler sieht. Ein benutzerdefiniertes Modell ist ein Client-seitiges Modul, das die Darstellung lokal austauscht, ohne dass ein Ressourcenpaket erforderlich ist.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die umfassendere Kategorie Benutzerdefiniertes Modell und jedes andere Modul, zu dem es gehört." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Eine weitere, ausschließlich clientseitige Unterscheidung, die es wert ist, verstanden zu werden." },
+  { href: "/de/learn/what-is-an-aimbot", label: "Was ist ein Aim-Bot?", description: "Das andere Ende des Spektrums: ein Modul, das der Server absolut messen kann." },
+]} />
+
+<CTA href="/de/kaufen">Erfahre, wie Opals visueller Tab den Rest deines Looks für $8.99 abdeckt</CTA>

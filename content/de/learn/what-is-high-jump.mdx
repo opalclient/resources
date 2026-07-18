@@ -1,0 +1,79 @@
+---
+title: Was ist ein hoher Sprung in Minecraft? Modul erklärt
+description: Der Hochsprung ist ein Bewegungsmodul, das die Sprunghöhe über die Limitierung in Vanilla Minecraft hinaus erhöht, indem es Bewegungsdatenpakete verändert – nicht die Sprungeingabe. So funktioniert es.
+excerpt: Ein High Jump verwandelt einen einfachen Tastendruck in einen Sprung, den die Vanilla-Physik niemals erzeugen würde. Hier ist erklärt, wie das Paket-Trick funktioniert und warum er für einen Server leicht zu erkennen ist.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was genau verändert der Hochsprung?
+    a: Es erhöht die maximale Sprunghöhe eines Spielers über die feste Grenze hinaus, die die normale Minecraft-Physik sonst erzwingt.
+  - q: Wie funktioniert Hochsprung technisch gesehen?
+    a: Es manipuliert die Bewegungspakete, die an den Server gesendet werden, sodass die gemeldete Position höher ist, als sie durch einen normalen Sprung erreicht würde, anstatt die Sprungeingabe selbst zu verändern.
+  - q: Ist Hochsprung dasselbe wie Fliegen?
+    a: Nein. Der hohe Sprung beeinflusst nur die Höhe eines einzelnen Sprungs. Er ermöglicht es einem Spieler nicht, eine Höhe zu halten oder sich wie mit einem Flugmodul frei in der Luft zu bewegen.
+  - q: Kann ein hoher Sprung dazu führen, dass ein Spieler markiert oder gesperrt wird?
+    a: Das kann es. Die Sprunghöhe ist ein Wert, den ein Server messen und mit der Standardphysik vergleichen kann, sodass ungewöhnlich hohe Sprünge eine plausible Grundlage für die Erkennung darstellen und die Verwendung des Moduls typischerweise gegen Serverregeln verstößt, die Bewegungs-Cheats verbieten.
+---
+
+<KeyTakeaways>
+
+- Der Weitsprung ist ein Bewegungsmodul, das die Sprungfähigkeit eines Spielers über die Höhenbegrenzung von Vanilla Minecraft hinaus erhöht.
+- Es bearbeitet die Bewegungsdatenpakete, die an den Server gesendet werden, anstatt die Sprungeingabe, sodass der Server einen Höchststand sieht, den ein normaler Sprung nicht erreicht.
+- Er wird verwendet, um Hindernisse zu überwinden oder das Gelände zu überspringen, ohne einen einzigen Block zu platzieren.
+- Da die Sprunghöhe leicht messbar ist, ist sie ein häufiges Ziel für die Erkennung durch Anti-Cheat-Systeme.
+
+</KeyTakeaways>
+
+Der Weitsprung ist ein Bewegungsmodul, das einem Spieler erlaubt, höher zu springen, als es die Physik von Vanilla Minecraft zulässt. Es verändert nicht, was passiert, wenn man die Sprungtaste drückt. Es verändert lediglich, was der Server danach sieht: der Client bearbeitet die ausgehenden Bewegungsdatenpakete, sodass die gemeldete Position höher ist als jeder normale Sprung jemals erreichen könnte. Es ist einer der älteren Tricks im Bereich der Paketmanipulation, kostengünstig zu erstellen und genauso leicht für einen Server zu erkennen, wenn dieser aufmerksam ist.
+
+## Wie der Weitsprung funktioniert
+
+Die Sprunghöhe in Vanilla ist fest. Das Spiel wendet eine konstante Aufwärtsgeschwindigkeit an, sobald man den Boden verlässt, die Schwerkraft zieht einen planmäßig zurück, und das ist das gesamte Budget. Der Weitsprung greift weder in diese Formel ein, noch in die Eingabe. Man drückt die Leertaste genau so, wie man es immer getan hat.
+
+Was sich ändert, ist die Position, die der Client dem Server danach übermittelt. Das Modul überschreibt die Bewegungsdatenpakete, sodass die Koordinaten, die während des Sprungs gemeldet werden, höher sind, als es die Physik-Engine jemals von selbst erzeugen würde. Vom Standpunkt des Servers aus sah nichts an deinem Tastendruck ungewöhnlich aus. Dein Charakter ist einfach an einen Ort gelangt, den ein legitimer Sprung nicht erreichen könnte.
+
+## Ist der Weitsprung sicher zu verwenden
+
+Der Reiz ist einfach, sobald man sich das vorstellt. Ein paar zusätzliche Blöcke Höhe überwinden Kanten und Lücken, die ein normaler Sprung nicht erreichen kann, überspringen Gelände, das man sonst umgehen müsste, und im Kampf gewinnt man so einen Moment der Distanz, genug, um die Sichtlinie des Gegners zu unterbrechen oder aus seiner Reichweite zu treten, bevor er nachsetzen kann.
+
+Keines davon macht es leise. High Jump ist ein spielerischer Vorteil, kein rein kosmetischer, und die Sprunghöhe ist eines der einfacheren Dinge, die ein Server überprüfen kann. Jeder legitime Sprung hat eine bekannte Obergrenze, die durch die Vanilla-Physik festgelegt ist, sodass ein Server, der die vertikale Position protokolliert, nur vergleichen muss, was er sieht, mit dieser Obergrenze. High Jump fällt in dieselbe Bewegungs-Kategorie wie andere paketbasierte Tricks wie [Bhop](/de/learn/what-is-bhop) und [Velocity](/de/learn/what-is-velocity-anti-knockback) und sollte genauso behandelt werden: erkennbar, nicht eine sichere Bequemlichkeit.
+
+<Callout variant="tip" title="Wo Opal die Grenze zieht">
+Opal’s Bewegungsmechanik deckt ein weites Feld ab, aber es wird kein High-Jump-Modul unter diesem Namen ausgeliefert. Eine Funktion, deren einziger Zweck es ist, eine Zahl zu erhöhen, die der Server trivial anhand der Physik überprüfen kann, ist nicht die Art von Abkürzung, die zu Opals Ansatz beim Bau von Bewegungswerkzeugen passt.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite erklärt, was High Jump bedeutet und wie der Effekt im Allgemeinen funktioniert. Die genaue Umsetzung variiert je nach Client, und das Überschreiten der Sprunghöhenbegrenzung von Vanilla bricht die Regeln auf praktisch jedem Server, der das Movement ernst nimmt.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was ändert der High Jump eigentlich?">
+Es erhöht die maximale Höhe, die ein Spieler beim Springen erreicht, über die feste Grenze hinaus, die die normale Minecraft-Physik sonst erzwingt.
+</FAQItem>
+
+<FAQItem question="Wie funktioniert der Hochsprung technisch?">
+Es manipuliert die Bewegungspakete, die an den Server gesendet werden, sodass die gemeldete Position höher ist, als sie bei einem normalen Sprung erreicht würde, anstatt die Sprungeingabe selbst zu verändern.
+</FAQItem>
+
+<FAQItem question="Ist Hochsprung dasselbe wie Fliegen?">
+Nein. Hochsprung beeinflusst lediglich die Höhe eines einzelnen Sprungs. Er ermöglicht es einem Spieler nicht, eine Höhe zu halten oder sich wie ein Flugmodul frei durch die Luft zu bewegen.
+</FAQItem>
+
+<FAQItem question="Kann High Jump dazu führen, dass ein Spieler gemeldet oder gesperrt wird?">
+Ja, das kann vorkommen. Die Sprunghöhe ist ein Wert, den ein Server messen und mit der Standardphysik vergleichen kann, sodass ungewöhnlich hohe Sprünge eine plausible Grundlage für die Erkennung darstellen. Die Verwendung des Moduls verstößt in der Regel gegen die Serverregeln gegen Bewegungs-Cheats.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Ein Bewegungsmodul, das Blöcke automatisch platziert, während man sich bewegt." },
+  { href: "/de/learn/what-is-velocity-anti-knockback", label: "Was ist Velocity (Rückstoßvermeidung)?", description: "Ein bewegungsnahes Modul, das Widerstand anstelle der Schwerkraft bekämpft." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die Kategorie, die um solche Stolperfallen herum aufgebaut ist." },
+]} />
+
+<CTA href="/de/purchase">Erfahren Sie, wie Opal Bewegungen verarbeitet, ohne sich auf eine Zahl zu verlassen, die der Server einfach messen kann.</CTA>

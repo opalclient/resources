@@ -1,0 +1,79 @@
+---
+title: Was ist No Slow in Minecraft?
+description: No Slow ist ein Minecraft-Bewegungsmodul, das die Vanilla-Geschwindigkeitsstrafen beim Essen, Blocken und Durchqueren von Cobwebs aufhebt. Hier ist, wie es funktioniert, und das Risiko.
+excerpt: No Slow löscht die Vanilla-Steuer beim Essen, Blockieren und Durchwaten von Spinnweben, sodass Sie bei all dem nie einen Schritt verlieren. Hier ist der Mechanismus und warum Server dies immer noch abfangen können.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Welche Auswirkungen hat No Slow?
+    a: Einen Bogen spannen, essen, Tränke trinken, blocken und sich durch Blöcke wie Seelensand, Cobwebs oder Wasser bewegen. Vanilla Minecraft verlangsamt dich in all diesen Situationen, und No Slow hebt diese Verlangsamung auf.
+  - q: Verändert No Slow, was Gegenstände oder Blöcke tun?
+    a: Nein. Essen stellt immer noch den gleichen Hunger wieder her, Blockaden blockieren immer noch den eingehenden Schaden auf die gleiche Weise und Seelensand ist immer noch Seelensand. Nur Langsam hebt die Geschwindigkeitsstrafe auf, die durch die Interaktion mit ihnen entsteht.
+  - q: Gilt No Slow als eine Art Betrug?
+    a: Ja. Es erzeugt eine Bewegungsgeschwindigkeit, die ein Standard-Client in diesem Zustand nicht erreichen kann, was es zu einem spielmechanischen Vorteil macht, anstatt zu einem rein kosmetischen, und jeder Server, der Bewegungen überprüft, behandelt es dementsprechend.
+  - q: Ist „No Slow“ dasselbe wie ein Geschwindigkeitsmodul?
+    a: Nein. Ein Geschwindigkeitsmodul erhöht deine Bewegungsgeschwindigkeit überall über das Vanilla-Maximum hinaus. Nur die Auswirkung von Verlangsamung wird aufgehoben, spezifische situative Strafen werden dadurch nicht aufgehoben. Ohne ein gleichzeitig laufendes Geschwindigkeitsmodul bewegst du dich den Rest der Zeit weiterhin mit normaler Vanilla-Geschwindigkeit.
+---
+
+<KeyTakeaways>
+
+- No Slow ist ein Bewegungsmodul, das die Vanilla-Geschwindigkeitsstrafen in Minecraft beim Essen, Trinken, Blocken und Durchschreiten von Seelensand oder Spinnweben aufhebt.
+- Es funktioniert, weil die Bewegung client-autoritär ist: der Client meldet lediglich eine schnellere Position als ein Vanilla-Client im gleichen Zustand.
+- Server erkennen dies, indem sie die gemeldete Geschwindigkeit mit der Vanilla-Maximalgeschwindigkeit für diesen Zustand vergleichen.
+- Es wird als "Nutzung auf eigene Gefahr" auf den Clients eingestuft, die es ausliefern, einschließlich Opal.
+
+</KeyTakeaways>
+
+No Slow ist ein Bewegungsmodul, das verhindert, dass Vanilla Minecraft deine Geschwindigkeit reduziert, während du isst, trinkst, einen Bogen ziehst, blockst oder durch Seelensand, Spinnweben und Wasser watest. Das Spiel behandelt normalerweise jeden dieser Vorgänge als Grund, dich zu verlangsamen, in der Logik, dass die Benutzung eines Gegenstands oder das Kämpfen durch das Gelände dich etwas kosten sollte. No Slow entfernt diese Kosten vollständig. Du behältst dein normales Lauf- oder Sprinttempo, egal was du gerade tust, was klein klingt, bis du selbst mitten im Schwung nicht mehr erwischt wirst.
+
+## Wie es funktioniert
+
+Vanilla Minecraft verlangsamt dich in bestimmten, bekannten Situationen: Das Ziehen eines Bogens, das Essen von Nahrung, das Trinken eines Tranks, das Blocken und das Laufen durch Seelensand, Spinnweben oder Wasser reduzieren jeweils deine Geschwindigkeit um einen festen Betrag. No Slow fängt diese Berechnung auf dem Client ab und verhindert, dass die Reduktion angewendet wird, sodass deine angezeigte Geschwindigkeit bei der normalen Lauf- oder Sprintgeschwindigkeit bleibt, unabhängig davon, in welchem dieser Zustände du dich befindest.
+
+Das funktioniert, weil die Bewegung in Minecraft weitgehend client-autoritär ist. Dein Client berechnet seine eigene Position jeden Tick und sendet sie an den Server, der diese Position im Allgemeinen vertraut, es sei denn, er führt eigene Prüfungen durch. No Slow greift nicht in das ein, was der Bogen, der Trank oder die Spinnwebe tatsächlich tun, sondern ändert lediglich die Position, die dein Client meldet, während du mit ihnen interagierst.
+
+Der Reiz ist im Kampf offensichtlich. Das Blocken ist der klarste Fall: Vanilla verlangsamt einen Spieler, der aktiv blockt, mit einem Schild in modernen Versionen oder einem Schwert in älteren, sodass ein Gegner einfach weggehen und den Abstand zurücksetzen kann. Ohne Verlangsamung kannst du einen Treffer blocken und gleichzeitig die Geschwindigkeit halten. Essen mitten im Kampf, einen Trank während der Verfolgung eines anderen Schlucken, eine Spinne überqueren, ohne Terrain zu verlieren – derselbe Trick, derselbe Effekt. Es taucht in Clients wie Fan und Tenacity auf, meist gebündelt mit anderen Bewegungs- und Kampfmodulen, anstatt als eigenständiger Schalter ausgeliefert zu werden.
+
+## Ohne Verlangsamung vs. ein Geschwindigkeitsmodul
+
+Manchmal werden die beiden verwechselt, aber sie lösen unterschiedliche Probleme. Ein Geschwindigkeitsmodul erhöht deine Bewegungsgeschwindigkeit über das Vanilla-Maximum hinaus, du sprintest schneller, als das Spiel es zulässt, Punkt. Ohne Verlangsamung berührt es niemals deine Basisgeschwindigkeit. Es hebt nur die spezifischen Strafen auf, die mit bestimmten Zuständen verbunden sind: Essen, Blocken, Stehen in einer Spinne. Schalte das ab, was einen dieser Zustände auslöst, und ein Benutzer ohne Verlangsamung bewegt sich genau wie ein Vanilla-Spieler, denn außerhalb dieser Momente gibt es nichts für das Modul zu tun.
+
+<Callout variant="tip" title="Keine Verlangsamung mehr in Opal">
+Die eigene Katalogbeschreibung von Opal für dieses Feature ist erfrischend unspektakulär: "Entfernt Vanilla-Verlangsamungen wie die Nutzung von Gegenständen." Das ist die ganze Funktion, ohne aufgebauschte Marketing-Versprechungen. Sie wird unter "Nutzung auf eigene Gefahr" geführt, demselben Bereich wie alles andere, das eine Bewegungssignatur hinterlässt, nach der ein Server suchen kann.
+</Callout>
+
+<Callout variant="warning" title="Erkennbar durch Design">
+Der gesamte Mehrwert von No Slow basiert darauf, sich von der Standardphysik zu unterscheiden, und genau diese Abweichung ist der Grund, warum eine servergesteuerte Bewegungsprüfung existiert. Ein Server, der verfolgt, ob ein Gegenstand verwendet wird, ob ein Spieler blockiert oder ob er in einem Spinnennetz steht, kann die maximale Geschwindigkeit berechnen, die ein Standard-Client in diesem Zustand melden würde, und diese mit dem tatsächlichen Wert vergleichen. Bleibt man in diesem Zustand mit voller Geschwindigkeit, so hat man einen eindeutigen Widerspruch geschaffen. Ob ein Server dies rigoros durchsetzt, variiert, aber die Spur ist immer vorhanden, auf Opal oder jedem anderen Client.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Welche Aktionen werden von No Slow beeinflusst?">
+Das Ziehen eines Bogens, Essen, Trinken von Tränken, Blocken und das Bewegen durch Blöcke wie Seelensand, Cobwebs oder Wasser. Vanilla Minecraft verlangsamt dich in all diesen Situationen, und No Slow hebt diese Reduktion auf.
+</FAQItem>
+
+<FAQItem question="Ändert No Slow etwas an Gegenständen oder Blöcken?">
+Nein. Essen stellt immer noch den gleichen Hunger wieder her, Blöcke blockieren immer noch den gleichen Schaden und Soul Sand ist immer noch Soul Sand. No Slow entfernt lediglich die Geschwindigkeitsstrafe, die mit der Interaktion mit ihnen verbunden ist.
+</FAQItem>
+
+<FAQItem question="Gilt No Slow als eine Art Schummeln?">
+Ja. Es erzeugt eine Bewegungsgeschwindigkeit, die ein Standard-Client in diesem Zustand nicht erreichen kann, was es zu einem Modul mit einem Spielvorteil macht, anstatt zu einem rein kosmetischen. Jeder Server, der Bewegungen überprüft, behandelt es dementsprechend.
+</FAQItem>
+
+<FAQItem question="Ist No Slow dasselbe wie ein Geschwindigkeitsmodul?">
+Nein. Ein Geschwindigkeitsmodul erhöht Ihre Bewegungsgeschwindigkeit überall über das Vanilla-Maximum hinaus. No Slow hebt lediglich bestimmte situative Strafen auf, sodass Sie ohne ein zusätzlich laufendes Geschwindigkeitsmodul die meiste Zeit weiterhin mit normaler Vanilla-Geschwindigkeit unterwegs sind.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-velocity-anti-knockback", label: "Was ist Velocity (Rückstoßvermeidung)?", description: "Ein weiteres Modul, das eine Standardstrafe aufhebt, anstatt eine neue Fähigkeit hinzuzufügen." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Wo stillere, leicht übersehene Module wie dieses in das Design eines Kunden passen." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die breitere Kategorie von Klienten, zu der No Slow und ähnliche Module gehören." },
+]} />
+
+<CTA href="/de/kaufen">Hören Sie auf, gegen Soul Sand einzubüßen. Sehen Sie sich an, was Opal sonst noch versendet für $8.99.</CTA>

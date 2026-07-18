@@ -1,0 +1,78 @@
+---
+title: 什么是 Minecraft 模组加载器？（2026 年详解）
+description: 一个 Minecraft 模组加载器会在游戏启动时对其进行补丁，以便模组可以运行。以下是加载器所做的事情以及主要选项：Fabric、Forge、NeoForge、Quilt.
+excerpt: 香草 Minecraft 无法独立运行模组。模组加载器是在游戏启动时进行补丁修改并为模组提供钩入方式的层.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: 我需要模组加载器才能使用模组吗？?
+    a: 是的。修改游戏内容的模组需要加载器。资源包和着色器是独立的，通常不需要.
+  - q: 我可以不用加载器来运行模组吗？?
+    a: 不。游戏本身不会加载模组 jar 文件.
+  - q: 我应该选哪个装载机？?
+    a: 你选择的模组所针对的版本。如果你是全新开始，并且想要速度快以及尽早获得最新版本，Fabric 是一个常见的选择.
+---
+
+<KeyTakeaways>
+
+- 模组加载器是允许 Minecraft 运行模组的层，原版 Minecraft 不支持模组。
+- 它在游戏启动时修改游戏文件，并为每个模组提供钩入代码的方式。
+- 您只需为您的 Minecraft 版本安装一次，然后将模组 jar 文件放入 mods 文件夹中即可。
+- 主要选项包括 Fabric、Forge、NeoForge 和 Quilt；选择您的模组所针对的那个.
+
+</KeyTakeaways>
+
+模组加载器是允许 Minecraft 运行模组的层。原版 Minecraft 不支持模组，因此加载器会在启动时修改游戏，并为模组提供钩入游戏的方式。您只需为您的 Minecraft 版本安装一次加载器，然后将模组 jar 文件放入 mods 文件夹，它们将在启动时加载.
+
+<Callout variant="info" title="Opal 的适配">
+Opal 是一个 [Fabric](https://fabricmc.net/) 模组，所以你需要 Fabric 作为加载器。 [设置指南](/zh/docs/setup) 详细介绍了它。
+</Callout>
+
+## 你为什么需要它
+
+模组会改变游戏的行为，这意味着它们必须在游戏的代码中运行。加载器正是使这成为可能的东西。没有它，一个模组 jar 仅仅是一个游戏会忽略的文件。
+
+## 工作原理
+
+游戏启动时，加载器会在游戏开始前插入自身，读取模组文件夹，并将每个模组连接到正确的钩子。[Fabric](https://fabricmc.net/) 使用混入（mixins）来实现这一点，这是一种有针对性的字节码补丁方法。Forge 使用它自己的更大的钩子系统。无论如何，游戏最终会运行带有缝合进代码的模组。
+
+## 主要加载器
+
+| 加载器 | 以…而闻名 |
+| :--- | :--- |
+| Fabric | 轻量级、更新速度快、性能和实用模组 |
+| Forge | 大型内容模组和长期存在的模组包 |
+| NeoForge | 一个社区驱动的 Forge 分支 |
+| Quilt | 一个具有额外功能的 Fabric 分支 |
+
+## 选择一个
+
+使用你的模组所针对的加载器。大多数模组只为一种加载器提供支持，而不是两种，所以你想要的模组通常会为你决定。对于更深入的区分，请参阅[Fabric vs Forge](/zh/learn/fabric-vs-forge)。
+
+## 常见问题
+
+<FAQList>
+
+<FAQItem question="我需要模组加载器才能使用模组吗？">
+是的。修改游戏内容的模组需要加载器。资源包和着色器是独立的，通常不需要。
+</FAQItem>
+
+<FAQItem question="我能不用加载器运行模组吗？">
+不行。游戏不会自行加载模组 jar 文件。
+</FAQItem>
+
+<FAQItem question="我应该选择哪个加载器？">
+选择你的模组所构建的那个。如果你是新手，想要速度和尽早获得最新版本，[Fabric](https://fabricmc.net/) 是一个常见的选择。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "两台主要装载机，已详细比较." },
+  { href: "/zh/learn/what-is-the-fabric-api", label: "什么是Fabric API？?", description: "Fabric 模组通常依赖的共享库." },
+  { href: "/zh/learn/what-is-a-minecraft-utility-client", label: "什么是实用客户端？?", description: "装载机安装好后，什么在其顶部运行？." },
+]} />
+
+<CTA href="/zh/purchase">获取 Opal，一个 Fabric 客户端，用于 $8.99</CTA>

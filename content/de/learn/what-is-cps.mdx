@@ -1,0 +1,80 @@
+---
+title: Was ist CPS in Minecraft? Clicks pro Sekunde erklärt
+description: CPS ist das HUD-Modul, das deine Mausklicks pro Sekunde zählt und die aktuelle Anzahl während des Spielens anzeigt, ohne jeglichen Einfluss auf den Server und ohne Risiko eines Banns.
+excerpt: Haben Sie sich jemals gefragt, wie schnell Sie eigentlich klicken? Dieses Modul gibt Ihnen die Antwort, ohne dass ein externes Portal benötigt wird.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Gibt CPS irgendeinen spielerischen Vorteil?
+    a: Nein. Es zeigt nur eine Zahl im HUD an, basierend auf Klicks, die du bereits ausgeführt hast. Es ändert keine Klickzeit, keinen Schaden oder irgendetwas, was der Server verarbeitet.
+  - q: Ist ein CPS-Zähler dasselbe wie ein Autoklicker?
+    a: Nein, das sind Gegensätze. Ein CPS-Zähler misst Eingaben, die du bereits erzeugt hast. Ein Autoklicker erzeugt Eingaben von selbst. Autoklicken ist ein Betrug, eine CPS-Anzeige rechnet lediglich mit Klicks, die du selbst gemacht hast.
+  - q: Kann ein CPS-Modul dazu führen, dass ich gesperrt werde?
+    a: Nein. Es liest lediglich lokale Eingaben und rendert diese auf Ihrem Bildschirm, sodass es für einen Server oder eine Anticheat-Software von vornherein nichts zu erkennen oder zu markieren gibt.
+  - q: Wo erscheint die CPS-Nummer normalerweise auf dem Bildschirm?
+    a: Meistens erscheint es als kleines Display in der Nähe des Fadenkreuzes oder versteckt in einer Ecke des HUDs und aktualisiert sich kontinuierlich, während Sie klicken. Die genaue Platzierung hängt vom HUD-Layout des Kunden ab.
+  - q: Warum kümmern sich PvP-Spieler um ihren CPS?
+    a: Eine höhere, legitime Klickgeschwindigkeit ist in klickbasierten Kämpfen entscheidend, weshalb Spieler den Zähler verwenden, um ihre Technik zu verfolgen, beispielsweise das Schmetterlings- oder Zitterklicken, und ihren Fortschritt in Echtzeit messen, anstatt zur Überprüfung auf eine Website abzuwechseln.
+---
+
+<KeyTakeaways>
+
+- CPS (Klicks pro Sekunde) ist ein HUD-Modul, das deine Mausklicks in Echtzeit zählt und die Anzahl während des Spielens auf dem Bildschirm anzeigt.
+- Es liest nur lokale Eingaben und zeichnet Text, sodass es für ein Anti-Cheat-System nichts zu markieren gibt.
+- Es ist das Gegenteil eines Autoklickers: Es misst Klicks, die du bereits ausgeführt hast, nicht neue, die es erzeugt.
+
+</KeyTakeaways>
+
+CPS steht für Klicks pro Sekunde und ist als Minecraft-Modul eine kleine HUD-Anzeige, die misst, wie schnell Sie klicken, und die Zahl in Echtzeit auf dem Bildschirm anzeigt. Anstatt während des Spiels zu einer externen Website für Zählungen zu wechseln, erhalten Sie eine Live-Zahl, die in der Nähe Ihres Fadenkreuzes verankert oder in einer HUD-Ecke angezeigt wird und jede Sekunde, die Sie klicken, aktualisiert wird. Es ist ein Messwerkzeug, kein Mechanismus. Das Modul beobachtet die Eingaben, die Sie bereits erzeugen, und meldet sie Ihnen zurück. Es greift nicht in die Eingabe selbst ein.
+
+## Funktionsweise
+
+CPS zählt Mausklicks innerhalb eines gleitenden Ein-Sekunden-Fensters und schreibt die laufende Gesamtsumme in die HUD. Jeder Klick erhöht den Zähler für das aktuell offene Fenster. Sobald eine Sekunde vergangen ist, wechselt die Anzeige zur neuen Gesamtsumme und beginnt erneut zu zählen. Da das Fenster zurückgesetzt wird, anstatt über einen längeren Zeitraum zu mitteln, verfolgt die Zahl Ihr tatsächliches Klicktempo und nicht eine geglättete Zahl von vor zehn Sekunden.
+
+Das Modul kommt nie zwischen Maus und Server. Ein Eingangsereignis lesen, einen Zähler erhöhen, einen String zeichnen – das ist die gesamte Pipeline. Ein ausgelöster Klick erreicht den Server weiterhin als genau ein Klick: gleiche Zeitgebung, gleiches Paket, alles gleich. Rose ist ein Client, der das Versenden eines CPS-Auslesens dokumentiert, und befindet sich im visuellen Bereich neben anderen On-Screen-Anzeigen, nicht in der Nähe von Kampf oder Bewegung, da es nichts für Kampf oder Bewegung tut.
+
+## Ist es sicher zu verwenden?
+
+Ja, sauber. Ein CPS-Zähler liest lokale Maus-Eingaben und rendert eine Zahl auf Ihrem HUD, Punkt. Er sendet nie ein zusätzliches Paket, verändert nie, was der Server empfängt, und greift nie einen Wert an, den der Server zur Ausführung einer Aktion verwenden würde. Es gibt schlichtweg nichts hier, was ein serverseitiges Anticheat bewerten könnte, da die Funktion niemals Ihren Rechner verlässt.
+
+Die Verwechslung mit Autoklickern ist verständlich, da beide Begriffe mit Klickgeschwindigkeit zu tun haben, aber sie stehen an gegenüberliegenden Enden derselben Idee. Ein Autoklicker generiert eigene Klicks und ist ein echter, bannbarer Cheat. Ein CPS-Zähler macht das Gegenteil: er misst Klicks, die ein Mensch bereits ausgeführt hat. Einer erzeugt Eingaben, der andere meldet lediglich darüber.
+
+<Callout variant="tip" title="Wo Opal sein Modulbudget ausgibt">
+Opal liefert keinen dedizierten CPS-Zähler mit. Das ist kein Versehen, sondern vielmehr eine Budgetentscheidung: Das Modul meldet eine Zahl und verändert nichts an der eigentlichen Kämpfung, es landet keinen zusätzlichen Treffer und rasiert keine Millisekunde von dem ab, was der Server misst. Opals Kampfeinheiten und Bewegungseinheiten existieren, um den Unterschied in einer echten Auseinandersetzung zu machen. Ein Klickzähler ist eher ein Streaming-Feature als ein Vorteil, und Opal verwendet seine Modulanzahl für Letzteres.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Verschafft CPS einen Vorteil im Spiel?">
+Nein. Es zeigt lediglich eine Zahl im HUD an, basierend auf Klicks, die Sie bereits ausgeführt haben. Es verändert weder die Reaktionszeit beim Klicken, noch den Schaden oder irgendetwas, was der Server verarbeitet.
+</FAQItem>
+
+<FAQItem question="Ist ein CPS-Zähler dasselbe wie ein Autoklicker?">
+Nein, sie sind Gegensätze. Ein CPS-Zähler misst Eingaben, die Sie bereits erzeugt haben, während ein Autoklicker Eingaben von selbst erzeugt. Autoklicken ist ein Betrug. Eine CPS-Anzeige führt lediglich Berechnungen über Klicks durch, die Sie selbst gemacht haben.
+</FAQItem>
+
+<FAQItem question="Kann ein CPS-Modul dazu führen, dass ich gesperrt werde?">
+Nein. Es liest lediglich lokale Eingaben und zeigt diese auf Ihrem Bildschirm an, sodass es für einen Server oder eine Anticheat-Software nichts zu erkennen oder zu markieren gibt.
+</FAQItem>
+
+<FAQItem question="Wo erscheint die CPS-Nummer üblicherweise auf dem Bildschirm?">
+Meistens als kleine Anzeige in der Nähe des Fadenkreuzes oder in einer HUD-Ecke, die sich kontinuierlich aktualisiert, während Sie klicken. Die genaue Platzierung hängt vom Layout der HUD des Kunden ab.
+</FAQItem>
+
+<FAQItem question="Warum kümmern sich PvP-Spieler um ihre CPS?">
+Eine höhere, legitime Klickgeschwindigkeit ist in klickbasierten Kämpfen wichtig, weshalb Spieler den Zähler verwenden, um ihre Technik, wie Schmetterlings- oder Zitterklicken, zu verfolgen und ihre Fortschritte in Echtzeit zu messen, anstatt per Alt-Tab zu einer Website zu wechseln.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Ein CPS-Ausdruck ist ein kleines Element einer größeren Kategorie." },
+  { href: "/de/learn/what-is-an-aimbot", label: "Was ist ein Aim-Bot?", description: "Ein Modul am anderen Ende des Risikospektrums im Vergleich zu einem rein oberflächlichen HUD-Zähler." },
+  { href: "/de/learn/what-is-killaura", label: "Was ist KillAura?", description: "Die automatisierte Variante des schnellen Klickens und warum das in Betrug umschlagen kann." },
+]} />
+
+<CTA href="/de/kaufen">Ein CPS-Zähler zeigt Ihnen, wie schnell Sie geklickt haben. Opals Module sind für das, was als Nächstes passiert, für $8.99, ausgelegt.</CTA>
