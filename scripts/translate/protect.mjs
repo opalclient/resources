@@ -65,11 +65,16 @@ export function verifyTokens(src, out) {
       if (!out.includes(m[0])) return m[0];
     }
   }
+  const DOLLAR_MARKS = ['$', 'USD', 'ドル', '美元'];
   for (const m of src.matchAll(new RegExp(PRICE_PATTERN.source, 'g'))) {
     const digits = m[0].slice(1);
-    // Accept decimal-comma localizations (8.99 → 8,99) — what must never
-    // change is the amount itself.
+    // The amount may localize its separator (8,99) and the currency its
+    // notation (8.99ドル), but it must stay DOLLARS — models love converting
+    // $8.99 into €, zł, or even rubles while keeping the digits.
     if (!out.includes(digits) && !out.includes(digits.replace('.', ','))) return m[0];
+    // "R$" is the Brazilian real, not a dollar sign.
+    const currency = out.replace(/R\$/g, '');
+    if (!DOLLAR_MARKS.some((mark) => currency.includes(mark))) return m[0];
   }
   // Brands: every distinct brand mentioned in the source must still appear
   // (verbatim, in Latin script) somewhere in the output.

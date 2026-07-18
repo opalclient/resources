@@ -46,13 +46,16 @@ let done = 0;
 let failed = 0;
 
 // --- web catalogs ---
+// MT input is ALWAYS the en value: the locale file may hold an en copy (same
+// thing) or a bad earlier translation (must not be re-translated from).
+const enWeb = JSON.parse(readFileSync(join(ROOT, 'web', 'en.json'), 'utf8'));
 for (const [locale, keys] of Object.entries(manifest.web ?? {})) {
   if (only && !only.includes(locale)) continue;
   const file = join(ROOT, 'web', `${locale}.json`);
   const data = JSON.parse(readFileSync(file, 'utf8'));
   const remaining = [];
   for (const key of keys) {
-    const value = getPath(data, key);
+    const value = getPath(enWeb, key);
     if (value === undefined) continue; // key vanished; drop from manifest
     try {
       if (!dry) setPath(data, key, await translateValue(value, locale));
@@ -73,10 +76,22 @@ for (const [locale, keys] of Object.entries(manifest.web ?? {})) {
 }
 
 // --- lang catalogs ---
+const parseLang = (path) => {
+  const map = new Map();
+  for (const line of readFileSync(path, 'utf8').split(/\r?\n/)) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    const idx = trimmed.indexOf('=');
+    if (idx !== -1) map.set(trimmed.slice(0, idx).trim(), trimmed.slice(idx + 1));
+  }
+  return map;
+};
 for (const [label, keys] of Object.entries(manifest.lang ?? {})) {
   const locale = label.split('/').pop();
   if (only && !only.includes(locale)) continue;
   const file = join(ROOT, 'lang', `${label}.lang`);
+  // MT input is the en value from the sibling en.lang, never the locale line.
+  const enLang = parseLang(join(ROOT, 'lang', `${label.split('/').slice(0, -1).join('/')}/en.lang`));
   const lines = readFileSync(file, 'utf8').split(/\r?\n/);
   const wanted = new Set(keys);
   const remaining = new Set(keys);
@@ -88,7 +103,7 @@ for (const [label, keys] of Object.entries(manifest.lang ?? {})) {
     const key = t.slice(0, eq).trim();
     if (!wanted.has(key)) continue;
     try {
-      const text = await translateString(t.slice(eq + 1), locale);
+      const text = await translateString(enLang.get(key) ?? t.slice(eq + 1), locale);
       if (!dry) lines[i] = `${key}=${text}`;
       remaining.delete(key);
       done++;

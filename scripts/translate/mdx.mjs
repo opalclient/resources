@@ -94,14 +94,17 @@ async function translateString(s, target) {
   } catch (e) {
     errors.push(e.message);
   }
-  // Strategy 4: brands never enter MT at all — split around them, translate
-  // the fragments in between, and reassemble. Loses a little context, can
-  // never lose a brand. Only reachable when the string contains a brand.
-  if (BRAND_TEST_RE.test(s)) {
-    const parts = s.split(new RegExp(`(${BRANDS.join('|')})`, 'g'));
+  // Strategy 4: protected tokens never enter MT at all — split around
+  // brands, prices, and placeholders, translate the fragments in between,
+  // and reassemble. Loses a little context, can never lose a token.
+  const PIN_SOURCE = `${BRANDS.join('|')}|\\$\\d+(?:\\.\\d{2})?|\\{\\w+\\}|%[sd]`;
+  if (new RegExp(PIN_SOURCE).test(s)) {
+    const parts = s.split(new RegExp(`(${PIN_SOURCE})`, 'g'));
+    const isPinned = new RegExp(`^(?:${PIN_SOURCE})$`);
     const out = [];
     for (const part of parts) {
-      if (BRANDS.includes(part) || !/[A-Za-z]{3,}/.test(part)) {
+      if (part === undefined) continue;
+      if (isPinned.test(part) || !/[A-Za-z]{3,}/.test(part)) {
         out.push(part);
         continue;
       }
@@ -263,6 +266,10 @@ export async function translateMdx(raw, target) {
           lastError = 'JSX tag set mismatch';
           continue;
         }
+        if (headingCount(candidate) !== headingCount(chunk)) {
+          lastError = 'heading count mismatch';
+          continue;
+        }
         result = candidate;
       } catch (e) {
         lastError = e.message;
@@ -270,6 +277,32 @@ export async function translateMdx(raw, target) {
     }
     if (result === null && /<\/?[A-Z]/.test(chunk)) {
       result = await translateAroundTags(chunk, target);
+      if (headingCount(result) !== headingCount(chunk)) result = null;
+    }
+    if (result === null && headingCount(chunk) > 0) {
+      // The model keeps restyling headings — translate each heading line on
+      // its own (marker re-attached verbatim) and the prose between them
+      // separately. Structure becomes unbreakable.
+      const lines = chunk.split('\n');
+      const out = [];
+      let prose = [];
+      const flushProse = async () => {
+        if (prose.length === 0) return;
+        const text = prose.join('\n');
+        out.push(/[A-Za-z]{2,}/.test(text) ? await translateString(text, target) : text);
+        prose = [];
+      };
+      for (const line of lines) {
+        const m = line.match(/^(#{1,6} )(.*)$/);
+        if (m) {
+          await flushProse();
+          out.push(m[1] + (m[2].trim() ? await translateString(m[2], target) : m[2]));
+        } else {
+          prose.push(line);
+        }
+      }
+      await flushProse();
+      result = out.join('\n');
     }
     if (result === null) throw new Error(`body chunk failed after retries: ${lastError}`);
     outChunks.push(result);
