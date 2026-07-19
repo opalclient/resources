@@ -1,10 +1,13 @@
 /**
- * Post-translation MDX verification: the output must actually compile.
- * Catches the syntax-breaking MT failure class (merged attributes, mangled
- * JSX expressions) that structural token checks cannot see. Components are
- * irrelevant to compilation, so no component map is needed.
+ * Post-translation MDX verification: the output must actually compile, and
+ * known components' enum/attribute props must still hold values compile()
+ * can't validate (see component-contracts.mjs — a JSX-syntax-valid but
+ * semantically mangled prop, like a translated enum value, compiles fine and
+ * still crashes the component at render time).
  */
 import { compile } from '@mdx-js/mdx';
+
+import { assertComponentContracts } from '../component-contracts.mjs';
 
 export async function assertMdxCompiles(source) {
   try {
@@ -12,4 +15,5 @@ export async function assertMdxCompiles(source) {
   } catch (e) {
     throw new Error(`translated MDX does not compile: ${e.message?.split('\n')[0]}`);
   }
+  assertComponentContracts(source);
 }

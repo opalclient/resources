@@ -14,6 +14,7 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
 import { compile } from './translate/node_modules/@mdx-js/mdx/index.js';
+import { checkComponentContracts } from './component-contracts.mjs';
 
 const ROOT = join(import.meta.dirname, '..');
 const CONTENT = join(ROOT, 'content');
@@ -39,6 +40,9 @@ for (const file of files) {
   } catch (e) {
     errors.push(`${rel}: does not compile — ${e.message?.split('\n')[0]}`);
     continue;
+  }
+  for (const err of checkComponentContracts(source)) {
+    errors.push(`${rel}: ${err}`);
   }
   if (!rel.startsWith('content/en/') && META_LEAK_RE.test(source)) {
     errors.push(`${rel}: possible MT meta-text leak`);
