@@ -1,0 +1,78 @@
+---
+title: Minecraft'ta Anti-Aim Nedir? Dönenme Sahtekarlığı Açıklandı
+description: Anti-Aim, Minecraft istemcisinin sunucuya bildirdiği yaw ve pitch değerlerini taklit ederek, hile önleme sistemlerinden ve rotasyonunuzu okuyan diğer oyuncularınızdan gerçek nişanınızı gizler.
+excerpt: Kameran bir yöne bakıyor, sunucu ise başka bir şey duyuyor. Anti-Aim, gerçek nişan almanı herkesin görebildiği versiyondan ayırıyor.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Anti-Aim ile KillAura aynı şey mi?
+    a: "Hayır, Anti-Aim yalnızca istemcinizin bildirdiği dönüşü taklit eder, sizin için nişan almaz veya saldırmaz. İkisi bazen birlikte çalışır, ancak farklı işler görür: biri yönünüzü gizler, diğeri ise salınımı otomatikleştirir."
+  - q: Anti-Aim kullanırsam diğer oyuncular gerçek nişan yönümü görebilir mi?
+    a: Hayır. Diğer tüm müşteriler sadece sizin müşterinizin gönderdiği dönüş değerlerini alıyor, bu yüzden o değerler sahte gönderilirse, herkes sahte yönü sizin baktığınız yerin yerine görüyor.
+  - q: Anti-Aim, isabet ettiğim yerleri değiştirir mi?
+    a: Tek başına değil. Anti-Aim sadece sunucuya bildirilen dönüş değerini değiştirir, saldırıları gerçekleştirmeyip yönlendirmeyle ilgilenmez. İsabet etme işlemi ise tamamen farklı bir modülün işidir.
+  - q: Anti-Aim kullanmak güvenli mi?
+    a: Risk içermemesi anlamında değil. Antichipler ve diğer oyunculara bilgi saklamak için tasarlanmış, kural ihlali yapan bir hile ve sunucunun kontrolleri bu uyumsuzluğu tespit ederse, diğer hilelerde olduğu gibi aynı şekilde yasaklanabilirsiniz.
+---
+
+<KeyTakeaways>
+
+- Anti-Aim, Minecraft istemcisinin sunucuya bildirdiği yatay ve dikey açıyı taklit eder, böylece kimse gerçek nişan yönünüzü göremez.
+- Yerel görünüm normal kalır; yalnızca diğer oyunculara ve anticheat sistemlerine gönderilen dönüş verisi değiştirilir.
+- Nişan kanıtlarını gizler, isabetleri değil; bir sunucu tutarsızlığı tespit ederse, yasaklanabilir, kural ihlali olan bir hiledir.
+
+</KeyTakeaways>
+
+Hedef Saptırıcı, Minecraft istemcisinin sunucuya bildirdiği yatay ve dikey dönüşü taklit eden bir savaş modülüdür, böylece diğer oyuncuların ve antilerin gördüğü dönüş, aslında baktığınız yeri yansıtmaz. Kendi ekranınız her zamanki gibi davranır, yalnızca gönderilen veri yalan söyler. Amacı tamamen nereye nişan aldığınızı gizlemektir ve bu nedenle tek başına bir hile olarak kabul edilir: sunucunun bir değerin kopyasını kasıtlı olarak yanlış yapar.
+
+## Nasıl Çalışır
+
+Minecraft'ın ağ kodu, istemcinin gönderdiği dönüş değerini, kameranın aslında hangi yöne işaret ettiğini senkronize tutacak şekilde tasarlanmıştır. Hedef Saptırıcı bu bağlantıyı kasıtlı olarak koparır. Yerel olarak, görünümünüz her zamanki gibi tam olarak hareket eder, baktığınız yere bakarsınız, döndüğünüz gibi dönersiniz. Ancak istemcinizin ağ üzerinden gönderdiği yatay ve dikey dönüş değerleri, makinenizden ayrılmadan önce farklı sayılarla değiştirilir.
+
+Dönüş, herkesin bakış açısından sunucu tarafından yetkilendirildiğinden, bu değiştirme, aşağı yöndeki herkesin gördüğünüz tek sürümüdür. Sunucu sahte değerleri okur. Bağlı diğer her istemci sahte değerleri okur. Dövüş mantığı, izleyici görünümleri ve dönüşe dayalı herhangi bir antichi̇t kontrolü, aynı yalanı miras alır, gerçekliğin sızabileceği ikinci bir kanal yoktur.
+
+Sahtelenmesinin değerinin asıl nedeni, dönüşün kanıt olarak değerlendirilmesidir. Gerçek bir oyuncunun kafası ve vücudu, bir hedefi ve kendi hareketlerini takip edecek şekilde dönerken, otomatik nişan alma eğilimi doğal olmayan açılara aniden geçiş yapar veya onları korur; bu da sunucu tarafı antichiplerinin işaretlemesi için tam olarak tasarlanmıştır. Anti-Aim, bu kanıtı iki katı şekilde reddeder: hem antichiplerinden ipucunu gizler hem de kendi nişan yardımına veya hedef tahminine, nereye baktığınızı okuyarak bağlı olan herhangi bir rakibin görüş açınızı gizler.
+
+## Anti-Aim vs KillAura
+
+İkisi de dövüş kategorisinde ve aynı PvP hileleri dönemine bağlı olduğu için bir araya getirilse de aynı işi yapmazlar. Anti-Aim yalnızca istemcinizin bildirdiği dönüş değerini etkiler; hiçbir şeye nişan almaz ve hiçbir zaman saldırı göndermez. [KillAura](/tr/learn/what-is-killaura) ise tam tersi yönde çalışır: bir hedef seçer, oyuncuyu ona doğru döndürür ve hiçbir şeyi raporlananı taklit etmeden ateşler.
+
+İkisini birlikte çalıştırırsanız, dönüyormuş gibi yalan söylerken sizin için savaşan bir istemci elde edersiniz. Ancak her biri kendi başına da sorunsuz çalışır ve hiçbiri işlevsel olmak için diğerine ihtiyaç duymaz.
+
+<Callout variant="tip" title="Opal nerede çizgiyi çiziyor">Opal özel bir Anti-Aim göndermiyor. Sunucuya, gerçek dönüşünüzle hiçbir zaman uyuşmayan bir dönüş beslemek, bir savaş modülü için olabilecek en doğrudan veri bütünlüğü ihlalidir ve sunucu tarafı antichipleri, rapor edilen bakış açınız hareketlerinizle uyumlu olmaktan saptığı anı yakalamak üzere tasarlanmıştır. Opal'ın savaş kategorisi mevcut, ancak sunucunun bir insandan ayırt edemeyeceği modüller üzerine kurulu, tasarımla yanlış bir sayı sunmak üzerine değil</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını anlatmıyor">
+Bu sayfa, Anti-Aim'in ne olduğunu ve genel olarak nasıl davrandığını açıklar. Bir tanesini çalıştırma talimatları değildir. Dönüş verilerini taklit etmek, paket düzeyinde bir hiledir ve erişim veya nişan alma hilelerini cezalandıran her sunucu, sahte yönlendirmeyi aynı şekilde ele alır; eğer uyumsuzluk tespit edilirse, bir KillAura veya erişim kullanıcısının alacağı aynı cezayı bekleyin.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Anti-Aim, KillAura ile aynı mı?">
+Hayır. Anti-Aim yalnızca istemcinizin bildirdiği dönüşü taklit eder, sizin için nişan almaz veya saldırmaz. İkisi bazen birlikte çalışır, ancak farklı işlevleri vardır: biri yönünüzü gizler, diğeri ise saldırmayı otomatikleştirir.
+</FAQItem>
+
+<FAQItem question="Anti-Aim kullanırsam diğer oyuncular gerçek nişan yönümü görebilir mi?">
+Hayır. Diğer tüm istemciler yalnızca istemcinizin gönderdiği dönüş değerlerini alır, bu nedenle bu değerler sahte ise herkes sizin gerçekte baktığınız yer yerine sahte yönü görür.
+</FAQItem>
+
+<FAQItem question="Anti-Aim saldırılarımın nereye isabet ettiğini değiştirir mi?">
+Tek başına değiştirmez. Anti-Aim yalnızca sunucuya bildirilen dönüş değerini değiştirir, saldırıları gerçekleştirmeyin veya yönlendirmeyin. İsabet etmeyi sağlamak tamamen farklı bir modülün işidir.
+</FAQItem>
+
+<FAQItem question="Anti-Aim kullanmak güvenli mi?">
+Riskten tamamen arınmış anlamda değil. Anticheat sistemlerinden ve diğer oyuncularından bilgi saklamak için tasarlanmış, kural ihlali içeren bir hile. Eğer bir sunucunun kontrolleri bu hilenin yarattığı uyumsuzluğu tespit ederse, diğer hileler gibi siz de yasaklanabilirsiniz.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "Otomatik saldırgan Anti-Aim ile eşleştirilir, karıştırılmaz." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Başka bir odaklanmış modül, bu sefer nişanınızın tam olarak nereye yöneldiğini değiştiriyor." },
+  { href: "/tr/learn/what-is-velocity-anti-knockback", label: "Hız (Çarpma Geri Tepmesi Önleyici) nedir?", description: "Sunucuya, sessizce yanlış bir versiyonu aktarılan farklı bir değer." },
+]} />
+
+<CTA href="/tr/satın-al">Opal'ın muharebe modülleri, incelenmek üzere inşa edilmiştir, sadece ondan saklanmak üzere değil.</CTA>

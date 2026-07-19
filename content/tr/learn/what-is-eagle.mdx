@@ -1,0 +1,79 @@
+---
+title: Minecraft'ta Kartal Nedir? Otomatik Çöküş Köprüleme Açıklaması
+description: Kartal, Minecraft'ta blok kenarlarında otomatik olarak gizlenmeyi ve Ninja Köprüsü tekniğini kullanan bir hareket modülüdür; böylece Shift tuşuna basılı tutmadan tam hızda köprü kurabilirsiniz.
+excerpt: Kartal, kenarda senin için gizlice hareket ediyor, böylece Ninja Köprüsü güvenliğini, kaydırma tuşuna bakmadan elde ediyorsun.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Kartal aslında ne yapıyor?
+    a: Sizin için otomatik olarak gizlenir, ancak yalnızca bir bloğun kenarında, tüm köprü boyunca kaydırma tuşunu basılı tutmadan gizli köprülemenin düşme korumasını sağlar.
+  - q: Kartal, Ninja Köprüsü ile aynı mı?
+    a: Ninja Köprüsü, köprüleme yaparken blok kenarlarına yakın shift tuşunu tutma tekniğidir. Eagle, o tekniği otomatikleştirir, böylece siz tuşa kendiniz basmak zorunda kalmazsınız.
+  - q: Eagle'ın hangi müşterileri var?
+    a: Juul ve Rose'da çalıştığı belgelenmiş, Opal ise kendi Eagle modülüyle aynı işi yapıyor. Diğer müşteriler, farklı bir modül adı altında aynı kenar-gizlenme davranışını uygulayabilirler.
+  - q: Eagle seni yasaklayabilir mi?
+    a: Bu tespit edilebilir bir özellik. Blok kenarlarında tutarlı bir şekilde ateşlenen otomatik gizlenme zamanlaması, manuel oynatımından farklıdır ve bazı antichipler tam olarak bu kalıbı izler, bu yüzden sunucuya bağlı olarak kullanımı risk taşır.
+---
+
+<KeyTakeaways>
+
+- Kartal gibi otomatik gizlenme yalnızca blok kenarlarında gerçekleşir, böylece Ninja Köprüsü güvenliğini tüm yolu boyunca kaydırmadan elde edersiniz.
+- Konumunuzu altındaki bloğa göre her tik'te kontrol eder, kenarda gizlenir ve tekrar ortalandığında bırakır.
+- Aksi takdirde tam yürüyüş hızı, çünkü gizlenme yalnızca kenar anında etkinleşir.
+- Juul ve Rose gibi istemcilerde belgelenmiştir; tespit edilebilir, kendi sorumluluğunuzda kullanabileceğiniz bir modüldür.
+
+</KeyTakeaways>
+
+Kartal, Minecraft'ta otomatik olarak gizlenmenizi sağlayan bir hareket modülüdür, ancak yalnızca bir bloğun kenarında olduğunuzda. Ninja Köprüsü'nün güvenliğini, bir sonraki blok yere düşmeden önce kenardan düşmemek için köprü yaparken kaydırma tuşunu tutma alışkanlığını, aslında tuşu tutmadan yeniden yaratır. Normalde yürüyor ve bloklar yerleştiriyorsunuz. Kartal, kenarı gözetler ve gizlenmeyi kendisi halleder, önemli olduğu an devreye girer ve geri kalan zamanlarda bırakır.
+
+## Nasıl Çalışır
+
+Kartal, her tick'ta bulunduğunuz bloğa göre konumunuzu izler. Bir adım atmanız sizi bir kenardan düşürecek kadar yaklaştığınız an, gizlenme otomatik olarak devreye girer. Bloğun ortasına doğru geri hareket ettiğiniz anda, bırakır ve tekrar tam hızla yürüyorsunuz.
+
+Dışarıdan bakıldığında, bu tamamen sıradan köprü yapmaya benziyor. Fark, kendiniz kaydırma tuşunu tutmadığınız içindir, bu nedenle hareket yalnızca gizlenmenin gerçekten bir şey yaptığı anlarda yavaşlar, tüm köprü boyunca değil. Kartal'ın tasarlandığı özel boşluk budur: manuel gizlenerek köprü yapmak güvenlidir ancak yavaştır ve hiç gizlenmeden köprü yapmak, bir sonraki bloğa düşmeden önce bloğun kenarından düşme riskini taşır. Kartal, Juul ve Rose gibi istemcilerde çalıştığı ve ortaya çıktığı her yerde aynı işi yaptığı belgelenmiştir.
+
+## Kullanımı Güvenli mi
+
+Otomatik, koşullu gizlenme, normal bir kullanıcı davranışıdır değildir. Orijinal Minecraft, duruş pozisyonunuza bağlı olarak kendi kendine gizlenmeyi etkinleştirmez, bu nedenle hareketleri izleyen bir sunucunun karşılaştırması için somut bir veri vardır. Bir bloğun kenarında tam olarak, her seferinde, bir insanın elle başarabildiğinden daha hızlı ve daha tutarlı bir şekilde ateşlenen gizlenme girişi, sunucu tarafındaki bir kontrolün tespit edebileceği bir kalıptır.
+
+Bu, Eagle'ı uçuş veya hız hilesiyle aynı ligde sınıflandırmaz. Daha sessizdir ve sunucunun diğer ucundan normal oyun gibi görünme spektrumuna daha yakındır. Ancak sessiz olmak görünmez olmak anlamına gelmez ve belirli bir sunucunun bunu yakalayıp yakalaması, o sunucunun antichiatiğinin gizlenme zamanlamasını ne kadar yakından izlemesine bağlıdır.
+
+<Callout variant="tip" title="Opal bunu da Kartal olarak adlandırıyor">
+Opal aynı modülü aynı isim altında gönderiyor. Ninja Köprüsü tekniği sayesinde blok kenarlarında otomatik olarak tespit ediyor, böylece kaydırma tuşuna basmaya gerek kalmadan düşme koruması sağlanıyor. Opal, kullanımını kullanıcının sorumluluğunda olarak sınıflandırıyor; tıpkı burada olduğu gibi: tespit edilebilir ve çalıştırılması, herhangi bir istemcinin modül sürümüyle aynı yasağı taşıma riskini barındırıyor.
+</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapılmaz">
+Bu sayfa, Eagle'ın ne olduğunu ve nasıl davrandığını açıklar, onu fark edilmeden çalıştırma kılavuzu değildir. Bu özellik doğası gereği kullanıcının kendi sorumluluğundadır: kenarlarda otomatik olarak gizlenmek, varsayılan bir davranış değildir ve hareketleri yakından izleyen herhangi bir sunucu bu kalıbı tespit edebilir.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Eagle aslında ne işe yarar?">
+Sizim için otomatik olarak gizlenir, ancak yalnızca bir bloğun kenarında, tüm köprü boyunca shift tuşunu basılı tutmadan gizlenerek köprü geçişinin düşme korumasını sağlar.
+</FAQItem>
+
+<FAQItem question="Eagle, Ninja Köprüsü ile aynı mı?">
+Ninja Köprüsü, köprüleme yaparken blok kenarlarına yakın shift tuşunu tutma tekniğidir. Eagle, tam olarak aynı tekniği otomatikleştirir, böylece tuşa kendiniz basmanıza gerek kalmaz.
+</FAQItem>
+
+<FAQItem question="Eagle'yi hangi müşteriler kullanıyor?">
+Juul ve Rose'da çalıştığı belgelenmiştir ve Opal kendi Eagle modülünü kullanarak aynı işi yapar. Diğer müşteriler, farklı bir modül adı altında aynı kenar-gizlenme davranışını uygulayabilir.
+</FAQItem>
+
+<FAQItem question="Eagle sizi banlanmanıza neden olabilir mi?">
+Bu tespit edilebilir bir özellik. Blok kenarlarında tutarlı bir şekilde ateşlenen otomatik gizlenme zamanlaması, manuel oyunlardan farklıdır ve bazı anticheat yazılımları tam olarak bu kalıbı arar, bu nedenle kullanmak sunucuya bağlı olarak risk taşır.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-scaffold", label: "Scaffold nedir?", description: "Diğer otomatik köprüleme modülü, bu sefer gizlice girip blok yerleştirmek yerine sizin için blokları yerleştiriyor." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Bu tarza sahip, sessizliğe odaklanan modüllerin ait olduğu kategori." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Kartal ve benzeri modüller gibi daha geniş bir kategori içeride yaşıyor." },
+]} />
+
+<CTA href="/tr/satin-al">Tam hızla köprüye geçin. Opal'ın Kartalı kenarları kapatır.</CTA>

@@ -1,0 +1,79 @@
+---
+title: Cos'è AntiKB in Minecraft?
+description: AntiKB è un modulo di Minecraft che riduce o annulla la repulsione dai colpi. Scopri come intercetta il vettore, lo confronta con la Velocità e perché i server lo bloccano.
+excerpt: AntiKB riscrive ciò che accade dopo un colpo, quindi essere colpiti a malapena ti scuote. Ecco il meccanismo alla base e il motivo per cui il server lo nota comunque.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: AntiKB è la stessa cosa di un modulo Velocity?
+    a: Sì. AntiKB e un modulo Velocity descrivono lo stesso comportamento, riducendo o annullando la repulsione che un giocatore subisce quando viene colpito. Alcuni client lo segnalano sotto Player invece che Combat, ma il meccanismo sottostante è identico.
+  - q: AntiKB rimuove completamente la repulsione?
+    a: Dipende dalla configurazione. AntiKB può annullare completamente la repulsione o semplicemente attenuarla, ma in entrambi i casi si traduce in una spinta inferiore a quella che il colpo dovrebbe applicare.
+  - q: L'uso di AntiKB è contro le regole?
+    a: Sì. Offre un reale vantaggio in combattimento, permettendo a un giocatore di ignorare una meccanica a cui tutti gli altri sono soggetti, quindi i server lo trattano come qualsiasi altra forma di imbroglio per manipolare il combattimento.
+  - q: Possono gli altri giocatori capire se qualcuno sta usando l'AntiKB?
+    a: A volte un avversario nota un bersaglio che si muove a malapena dopo un colpo che avrebbe dovuto farlo volare via, ma l'affidabilità della presa è gestita lato server, confrontando il movimento che un colpo dovrebbe causare con quello che il server effettivamente riceve.
+---
+
+<KeyTakeaways>
+
+- AntiKB riduce o annulla la repulsione che un giocatore subisce quando viene colpito.
+- Intercetta il vettore di repulsione di Minecraft, quindi il colpo va a segno ma la spinta diminuisce o scompare.
+- Meccanicamente è identico a un modulo di Velocità, semplicemente catalogato in un menu diverso su alcuni client.
+- Gli anticheat lo rilevano lato server, confrontando il movimento previsto del colpo con quello che il giocatore invia effettivamente.
+
+</KeyTakeaways>
+
+AntiKB è un modulo di Minecraft che riduce o annulla completamente la repulsione subita da un giocatore quando viene colpito, che si tratti di un colpo di spada, una freccia, un'esplosione o dell'incantesimo Knockback. Il Minecraft originale spinge il giocatore colpito all'indietro per un istante, togliendogli il controllo del movimento in quell'attimo. AntiKB si interpone tra questa spinta e la riduce o la azzera, in modo che il colpo sia comunque registrato ma il combattimento non venga interrotto da un lancio attraverso l'arena. Alcuni client raggruppano questa funzionalità con gli strumenti di combattimento; altri la classificano invece come impostazione generale del giocatore, anche se l'effetto è identico in entrambi i casi.
+
+## Come funziona
+
+La repulsione vanilla è un vettore, non un suggerimento. Ricevi un colpo e il gioco ti spinge via dalla fonte del danno per un momento, annullando la direzione in cui ti stavi effettivamente muovendo. AntiKB intercetta questo vettore prima che raggiunga il movimento del tuo personaggio e lo ridimensiona, a volte fino a zero. L'attacco va comunque a segno, il danno viene comunque applicato, il colpo viene comunque contato, ma la risposta fisica a essere colpito viene attenuata o rimossa completamente.
+
+L'attrattiva è semplice. Senza contraccolpo, un giocatore può mantenere la distanza in mischia e continuare a scambiarsi colpi invece di essere respinto dopo ogni colpo, il che normalmente costringe a un inseguimento per ricomporre la distanza. Elimina anche il rischio di essere scaraventato da un dirupo, in un buco o da un ponte, momenti in cui il contraccolpo vanilla può terminare un combattimento di per sé, indipendentemente da chi stia effettivamente vincendo lo scambio. Contro qualcuno che non lo usa, la disparità è evidente: un giocatore incassa i colpi e mantiene il terreno, l'altro viene spinto via ogni volta.
+
+## AntiKB vs Velocity: lo stesso trucco, menu diverso
+
+AntiKB e un [modulo Velocity](/it/learn/what-is-velocity-anti-knockback) non sono cugini, sono la stessa funzionalità con due nomi diversi. Entrambi intercettano lo stesso vettore di contraccolpo controllato dal server, entrambi lo ridimensionano o lo azzerano prima che raggiunga il movimento del giocatore, e entrambi vengono rilevati dallo stesso metodo. L'unica vera differenza è l'imballaggio. Alcuni client raggruppano l'effetto con gli strumenti di combattimento, dove ovviamente appartiene accanto a cose come la portata o un aimbot. Altri lo inseriscono invece in una categoria generale Player, che è una decisione di menu di chi ha costruito il client, non una differenza in quello che fa il codice.
+
+Se vedi uno dei due nomi in una lista di funzionalità, leggilo allo stesso modo: questo client può ridurre la distanza di contraccolpo quando vieni colpito.
+
+<Callout variant="tip" title="Dove Opal pone il limite">
+I moduli di combattimento e movimento di Opal sono progettati per combattimenti in stile BedWars e SkyWars: assistenza alla mira, strumenti di movimento, il kit standard per vincere uno scambio. Un annullatore dedicato della repulsione non fa parte di questa selezione. È esattamente il tipo di manipolazione del movimento che lascia una firma chiara nel registro degli impatti di un server, il che lo rende una cosa strana su cui rischiare un account.
+</Callout>
+
+<Callout variant="warning" title="Questo è un'iniziativa server-side">
+AntiKB non è puramente estetico. Modifica il modo in cui la tua posizione reagisce al combattimento, ed è proprio questo che un anticheat autorevole lato server è progettato a controllare. Quando il server applica la spinta a un colpo, ha un'aspettativa su quanto dovresti muoverti nei prossimi istanti. Muoversi a malapena dopo un colpo che avrebbe dovuto sbalzarti via è una discrepanza che l'anticheat non deve indovinare. Attenuare l'effetto invece di annullarlo completamente non fa altro che restringere quel divario, non colmarlo.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="AntiKB è lo stesso di un modulo Velocity?">
+Sì. AntiKB e un modulo Velocity descrivono lo stesso comportamento, riducendo o annullando la repulsione che un giocatore subisce quando viene colpito. Alcuni client lo classificano sotto Player invece che Combat, ma il meccanismo sottostante è identico.
+</FAQItem>
+
+<FAQItem question="AntiKB rimuove completamente la repulsione?">
+Dipende dalla configurazione. AntiKB può annullare completamente la repulsione o semplicemente attenuarla, ma in entrambi i casi significa una spinta minore di quella che il colpo dovrebbe applicare.
+</FAQItem>
+
+<FAQItem question="L'uso di AntiKB è contro le regole?">
+Sì. Offre un vantaggio reale in combattimento, permettendo a un giocatore di ignorare una meccanica a cui tutti gli altri sono soggetti; pertanto, i server lo trattano come qualsiasi altra forma di manipolazione del combattimento e di cheat.
+</FAQItem>
+
+<FAQItem question="Gli altri giocatori possono capire se qualcuno sta usando AntiKB?">
+A volte un avversario nota che un bersaglio si muove a malapena dopo un colpo che avrebbe dovuto farlo volare via, ma la cattura affidabile è lato server, confrontando il movimento che un colpo dovrebbe causare con il movimento che il server effettivamente riceve.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-velocity-anti-knockback", label: "Cos'è la Velocità (anti-knockback)?", description: "Il modulo AntiKB è funzionalmente identico al modulo noto con il suo nome più comune." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Dove moduli sottili e difficilmente individuabili come questo si inseriscono nel design complessivo di un cliente." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria più ampia a cui appartengono AntiKB e moduli simili." },
+]} />
+
+<CTA href="/it/purchase">Ottieni il vantaggio in combattimento che non ha bisogno di exploit di respinta per funzionare.</CTA>

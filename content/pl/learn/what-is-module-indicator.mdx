@@ -1,0 +1,90 @@
+---
+title: Czym jest wskaźnik modułu w Minecraft?
+description: Wskaźnik modułu to mały element nakładany na HUD, który wyświetla listę aktualnie aktywnych modułów w kliencie Minecraft, podobny do Array List, ale prostszy w budowie.
+excerpt: Wskaźnik modułu przekształca włączoną funkcję w listę wyświetlaną w rogu ekranu. Wykonuje tę samą pracę co Lista Tablicowa, tylko jest lżejsza.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy wskaźnik modułu wpływa na rozgrywkę?
+    a: Nie. To tylko rysuje tekst na Twoim ekranie i nigdy nie ingeruje w ruch, walkę ani żadną inną logikę gry, więc nie ma wpływu na to, jak faktycznie grasz.
+  - q: Czy system anticheat może wykryć moduł wskaźnikowy?
+    a: Nie. To nigdy nic nie wysyła do serwera, więc nie ma nic, co serwerowa antywirusowa ochrona mogłaby zaobserwować lub oznaczyć.
+  - q: Jaka jest różnica między wskaźnikiem modułu a listą tablicową?
+    a: Wykonują tę samą pracę, wypisując aktywne moduły, ale wskaźnik modułu jest zazwyczaj prostszą, oddzielnie zakodowaną wersją, a nie implementacją współdzieloną z Listą Tablic.
+  - q: Dlaczego klient wysłałby zarówno wskaźnik modułu, jak i listę tablicową?
+    a: Zazwyczaj dzieje się tak, ponieważ te dwie funkcje zostały stworzone oddzielnie, w różnych momentach, zamiast zostać połączone w jedną. To szczegół implementacji, a nie coś, co zmienia to, co widzisz na ekranie.
+  - q: Czy wskaźnik modułu jest widoczny dla innych graczy?
+    a: Nie. Renderuje tylko na Twoim własnym kliencie i nigdy nie jest wysyłane na serwer ani widoczne dla kogokolwiek innego w grze.
+---
+
+<KeyTakeaways>
+
+- Wskaźnik modułów to kompaktowa lista wyświetlana na ekranie, pokazująca, które moduły są aktualnie włączone w kliencie narzędziowym Minecraft.
+- Aktualizuje się na żywo: włącz moduł, a jego nazwa pojawia się; wyłącz go, a nazwa znika.
+- Renderuje się całkowicie po stronie klienta i nigdy nie kontaktuje się z serwerem, więc nie niesie ze sobą ryzyka związanego z anticheatem.
+- Wykonuje tę samą funkcję co Lista Tablicowa, ale jest to prostszy moduł, zbudowany oddzielnie, a nie dzielący kod.
+- Pojawia się w klientach takich jak Fan.
+
+</KeyTakeaways>
+
+Wskaźnik modułów to krótka lista tekstów, zazwyczaj umieszczona w rogu ekranu, która informuje, które moduły są aktualnie uruchomione w kliencie narzędziowym Minecraft. Włącz Killaura, a jego nazwa pojawia się. Wyłącz go, a nazwa znika. To cała funkcja: aktualny odczyt stanu Twojego klienta, nic więcej. Pełni tę samą rolę co Array List, a w klientach, które oferują oba te elementy, są one zwykle pisane jako oddzielne, niezależnie zakodowane funkcje, a nie jedna lista z dwoma skórkami. Znajdziesz go w klientach takich jak Fan, robiąc dokładnie to, co sugeruje nazwa.
+
+## Jak to działa
+
+Każdy klatka, klient sprawdza, które moduły są oznaczone jako włączone i rysuje ich nazwy jako krótką listę, zazwyczaj zakotwiczoną do rogu ekranu. Włącz moduł, a linia zostaje dodana. Wyłącz go, a linia znika natychmiast. Mechanizm jest prostszy niż to.
+
+Ponieważ lista odczytuje tylko stan lokalnego klienta i rysuje tekst na widoku gry, nigdy nie komunikuje się z serwerem. Nie wysyła pakietów, nie dotyka logiki rozgrywki, tylko wywołanie rysowania nałożone na to, co już robisz. Należy ją traktować tak samo jak HUD z koordynatami lub licznik FPS: w pełni lokalna, w pełni kosmetyczna i niewidoczna dla każdego, kto nie patrzy na Twój ekran.
+
+## Wskaźnik modułów vs Array List
+
+Nakładanie się tutaj nie jest przypadkowe. Oba te elementy istnieją, by w krótkim czasie odpowiedzieć na to samo pytanie: co jest aktualnie uruchomione? Różnią się one zakresem, a nie przeznaczeniem.
+
+| | Wskaźnik modułu | Lista tablicowa |
+|---|---|---|
+| Cel | Wyświetla aktualnie aktywne moduły | Ten sam: wyświetla aktualnie aktywne moduły |
+| Poziom szczegółowości | Minimalna, lista zawierająca tylko nazwy | Często bardziej rozbudowana, z dodatkami takimi jak opcje sortowania lub stylizacji |
+| Podejście do budowy | Własny, prosty moduł, kodowany oddzielnie nawet w przypadku klientów wysyłających oba | Często bardziej rozwinięta, "główna" wersja z obu |
+| Interakcja z serwerem | Brak | Brak |
+| Ryzyko związanego z anticheatem | Brak | Brak |
+
+Klient może wysłać jeden, drugi lub oba obok siebie. Który z nich ostatecznie widzisz, albo czy otrzymasz oba ułożone w rogu, zależy od tego, jak zespół programistów zbudował swój HUD, a nie od jakiejkolwiek różnicy w tym, co faktycznie widzisz, że robi. Jeśli chcesz dowiedzieć się więcej o bardziej rozbudowanej wersji z większą liczbą funkcji, zajrzyj na stronę [Lista tablicowa](/pl/learn/what-is-array-list).
+
+<Callout variant="tip" title="Jak wypada Opal w tym kontekście">
+Opal nie dostarcza modułu o nazwie Wskaźnik Modułu. Podstawowe wskazanie „co jest aktualnie włączone” to standard dla klienta narzędziowego, a nie argument sprzedażowy, więc to, czy taki wskaźnik istnieje, ma znacznie mniejsze znaczenie niż to, co faktycznie się na nim wyświetla. Skup uwagę na samych modułach.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy wskaźnik modułu wpływa na rozgrywkę?">
+Nie. Wyświetla jedynie tekst na Twoim ekranie i nigdy nie ingeruje w ruch, walkę ani żadną inną logikę gry, więc nie ma żadnego wpływu na to, jak faktycznie grasz.
+</FAQItem>
+
+<FAQItem question="Czy anticheat może wykryć moduł wskaźnikowy?">
+Nie. Nigdy nie wysyła nic do serwera, więc nie ma nic, co serwerowy anticheat mógłby zaobserwować lub oznaczyć.
+</FAQItem>
+
+<FAQItem question="Jaka jest różnica między wskaźnikiem modułu a listą tablicową?">
+Oba robią to samo, wypisując aktywne moduły, ale wskaźnik modułu jest zazwyczaj prostszą, oddzielnie napisaną wersją, a nie implementacją współdzieloną z listą tablicową.
+</FAQItem>
+
+<FAQItem question="Dlaczego klient wysyła zarówno moduł wskaźnikowy, jak i listę tablicową?">
+Zazwyczaj dlatego, że te dwie funkcje zostały zbudowane oddzielnie w różnych momentach, a nie połączone w jedną. To szczegół implementacji, a nie coś, co zmienia to, co widzisz na ekranie.
+</FAQItem>
+
+<FAQItem question="Czy wskaźnik modułu jest widoczny dla innych graczy?">
+Nie. Wyświetla się tylko na Twoim kliencie i nigdy nie jest wysyłany na serwer ani pokazywany innym graczom w grze.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "To jest mały element szerszej kategorii, do której należy ten wyświetlacz HUD." },
+  { href: "/pl/learn/what-is-killaura", label: "Co to jest Killaura?", description: "Jedna z modułów, której nazwa najprawdopodobniej pojawi się na tej liście." },
+  { href: "/pl/learn/what-is-reach", label: "Co to jest zasięg?", description: "Moduł, który serwer jest w stanie faktycznie zmierzyć, w przeciwieństwie do czegokolwiek, co obejmuje ta strona." },
+]} />
+
+<CTA href="/pl/purchase">Wyświetlacz jest tak dobry, jak dane, które prezentuje. Sprawdź, co znajduje się na liście Opal.</CTA>

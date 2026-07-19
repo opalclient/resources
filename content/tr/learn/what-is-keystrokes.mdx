@@ -1,0 +1,99 @@
+---
+title: Minecraft'ta Keystroke Nedir? HUD Anahtar Üst Bilgi Açıklaması
+description: Keystrokes, hangi tuşları ve fare düğmelerini gerçek zamanlı olarak gösteren bir HUD üst bilgisidir. Girdiyi nasıl takip ettiği, yayıncıların neden kullandığı ve yasaklanabilir olup olmadığı.
+excerpt: Her bastığınız tuş, bastığınız an ekranda yanıyor. Oyun akışını etkilemez, yayınınızın nasıl göründüğünü tamamen etkiler.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Keystrokes herhangi bir oyun avantajı sağlıyor mu?
+    a: Hayır. Sadece hangi tuşların ve fare düğmelerinin şu anda basılı olduğunu gösterir. Giriş işleme, hareket veya savaş mekaniklerini hiçbir şekilde değiştirmez.
+  - q: Bir sunucu, Keystroke'ları kullandığımı tespit edebilir mi?
+    a: Hayır. Modül tamamen istemci tarafında çalışır ve normal bir istemcinin zaten göndereceği hiçbir şeyi sunucuya göndermez, bu nedenle anticheat'ın işaretleyebileceği hiçbir ayırıcı özelliği yoktur.
+  - q: Streamer'lar neden Keystroke kullanır?
+    a: İzleyicilerin, yayıncıyken hangi tuşlara ve fare düğmelerine bastığını gerçek zamanlı olarak görmesini sağlar, bu da hareketleri, tıklama zamanlamasını ve aksi takdirde ekranda görünmeyen diğer teknikleri açıklamak için faydalıdır.
+  - q: Keystrokes, Keystrokes2 veya OLDKeystrokes arasındaki fark nedir?
+    a: Bunlar, farklı müşterilerde görünen aynı modül kavramının takma adları veya önceki varyantlarıdır. Alttaki fikir, ekrandaki klavye ve fare okuması, ad veya görsel stil farklı olsa bile aynı kalır.
+---
+
+<KeyTakeaways>
+
+- Keystrokes, oynarken canlı olarak güncellenen, hangi tuşları ve fare düğmelerini bastığınızı gösteren bir HUD üst bilgisidir.
+- Sadece yerel girdiyi okur ve bunları ekrana çizer, sunucuya hiçbir ek veri göndermez.
+- Yayıncılar, izleyicilerin giriş zamanlamasını görebilmesi için kullanır; herhangi bir oyun avantajı sağlamaz ve tespit edilemez
+
+</KeyTakeaways>
+
+Tuş vuruşları, çoğu Minecraft yardımcı istemci programına entegre edilmiş bir HUD modülüdür ve gerçek zamanlı olarak hangi klavye ve fare girdilerini basılı tuttuğunuzu gösterir. İleriye doğru hareket etmek için W tuşuna basarsanız W ışığı yanar. Tıklarsanız fare simgesi tepki verir. Bırakırsanız sıfırlanır. İşte tüm özellik bu. Bir değiştirici değil, bir görüntüleme aracıdır; bastığınız şeylere oyunun nasıl tepki verdiğini etkilemez.
+
+## Nasıl Çalışır
+
+Tuş vuruşları, hareket tuşlarınızın, boşluk tuşunun ve sol ve sağ fare düğmelerinin durumunu okur ve ardından basılı olanı yansıtan küçük bir örtük katman oluşturur. Çoğu uygulamada, bir tuş anında basıldığında yanar veya rengi değişir ve bırakıldığında hemen dinlenme durumuna geri döner, böylece örtük katman ellerinizin canlı bir aynasıdır, gecikmeli veya özetlenmiş bir aynası değildir.
+
+İçeride ise tamamen bir okuma işlemidir: modül giriş durumunu kontrol eder ve pikselleri çizer. Ek paketler göndermez, tuşları oyun görmeden önce kesintiye uğratmaz ve bu tuşların zaten yaptığı şeyi değiştirmez. Bazı istemciler daha da ileri giderek aynı fikrin iki veya üç görsel varyantını gönderir (farklı şekiller, farklı düzenler), böylece tek bir görünüme sıkışıp kalmak yerine bir stil seçebilirsiniz.
+
+## Gerçekte Ne İzler
+
+| Giriş | Ne Gösterir |
+|---|---|
+| W A S D | Hareket tuşları, ayrı ayrı |
+| Boşluk | Zıplama |
+| Sol tıklama | Saldır / kullan |
+| Sağ tıklama | Blok / etkileşim |
+
+Bu standart bir set. PvP ve parkur görüntüleri için önemli olan aynı birkaç girdiyi içeriyor ve tam da bu yüzden modül mevcut.
+
+## İnsanların aslında neden kullandığı
+
+Açık cevap yayın yapmak. Bir izleyici fiziksel klavyenizi göremez, bu yüzden Keystrokes size ellerinizin canlı bir çevirisini sunar: kaydırdığınızda, tıkladığınızda, o kritik hamlenin tek bir tıklama mı yoksa üç hızlı tıklama mı olduğunu gösterir. Tam olarak bu nedenle PvP ve parkur içeriğinde vazgeçilmezdir, izleyiciler girdiyi ekranla birlikte görebildiğinde görüntü tamamen farklı okunur.
+
+Daha az bariz kullanımı kişiseldir. Bazı oyuncular, bir kombinasyonun ortasında bir tuşun gerçekten kaydedilip kaydedilmediğini doğrulamak veya bir tekniği geliştirirken kendi alışkanlıklarını denetlemek için sadece onu çalıştırır. Ucuz geri bildirim döngüsü, hiçbir dezavantajı yok.
+
+## Kullanmak güvenli mi?
+
+Evet ve burada bir yıldız işareti yok. Sunucu yalnızca istemciniz tarafından gönderilen paketleri görür. Keystrokes paket eklemez, zaten göndereceğiniz olanları değiştirmez ve hareket veya savaş mantığına dokunmaz. Sunucu tarafındaki bir antichiatin inceleyebileceği gerçekte hiçbir şey yoktur, çünkü modül açık veya kapalı olsun, giden trafiğinizde hiçbir değişiklik olmaz. Müşterilerin onu savaş veya hareket kategorilerine yakın değil, diğer kozmetik HUD öğelerinin yanında kaydetmesinin nedeni de budur, hiçbir avantaj taşımadığı için hiçbir riski yoktur.
+
+<Callout variant="tip" title="Opal'ta bunun yeri neresi">
+
+Opal, Keystrokes adlı bir modül göndermiyor. Modül listemiz, bir dövüşün veya hareket sekansının nasıl oynatıldığını gerçekten değiştiren şeylere yöneliktir; izleyiciler için oluşturulmuş üst üste bindirmelere değil. Kayıt yapıyorsanız, izleyiciler için özel bir yayın üst üste bindirme aracı, istemci içi birine göre size genellikle daha iyi hizmet eder, çünkü Keystrokes izleyenler için, sizin için değil
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Keystrokes herhangi bir oyun avantajı sağlıyor mu?">
+
+Hayır. Sadece hangi tuşların ve fare düğmelerinin şu anda basılı olduğunu gösterir. Giriş işleme, hareket veya savaşla hiçbir şekilde bir değişiklik yapmaz
+
+</FAQItem>
+
+<FAQItem question="Bir sunucu, Keystroke'ları kullandığımı tespit edebilir mi?">
+
+Hayır. Modül tamamen istemci tarafında çalışır ve normal bir istemcinin zaten göndereceği hiçbir şeyi sunucuya göndermez, bu yüzden anticheat'ın işaretleyebileceği hiçbir ayırıcı özelliği yoktur
+
+</FAQItem>
+
+<FAQItem question="Streamer'lar neden Keystroke kullanır?">
+
+İzleyicilerin, gerçek zamanlı olarak hangi tuşlara ve fare düğmelerine bastığınızı görmesini sağlar, bu da ekranda görünmeyen hareket, tıklama zamanlaması ve diğer teknikleri açıklar
+
+</FAQItem>
+
+<FAQItem question="Keystrokes, Keystrokes2 veya OLDKeystrokes arasındaki fark nedir?">
+
+Bunlar, farklı müşterilerdeki aynı modül kavramının takma adları veya önceki varyantlarıdır. Fikir, ekrandaki klavye ve fare okuması, ad veya sanat tarzı değişse bile aynı kalır
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Bu kategori, Keystrokes ve bu serideki diğer tüm modüllerin ait olduğu kategoridir." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Spektrumün tam tersi uç: Giden paketleri değiştiren ve sizi yasaklatan bir modül." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Gözlemlenmekten ziyade görünmez kalmak üzere inşa edilmiş bir yazılım, Keystrokes'un ters motivasyonu." }
+]} />
+
+<CTA href="/tr/purchase">Opal'ın sadece sergilediği değil, gerçekten kullandığı modülleri görün.</CTA>

@@ -1,0 +1,109 @@
+---
+title: İlk GraalVM JavaScript Betiğinizi Yazın (2026)
+description: "İlk GraalVM JavaScript komut dosyanızı yazın: bir giriş noktası kaydeder, bir olayı tetikler ve Java'yı yeniden derlemeden sıcak yeniden yükleyin. Çalışır durumda bir örnek ile."
+excerpt: "Üç küçük adım bir betiği çalıştırmayı sağlar: kaydet, bir olayı bağla ve betikler klasörüne kaydet. Gerçek JavaScript'tir ve saniyeler içinde yeniden yüklenir, yeniden derlemeye gerek yoktur."
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: Bir betik yazmak için GraalVM'i yüklemem gerekiyor mu?
+    a: Hayır. Ana program GraalVM ve JavaScript motorunu paketler. Siz sadece JavaScript dosyasını yazın ve scriptler klasörüne bırakın.
+  - q: Modern JavaScript sözdizimini kullanabilir miyim?
+    a: Evet. Motor, modüllerle birlikte import ve export özelliklerini de içeren son ECMAScript özelliklerini destekler, bu yüzden eski bir alt kümeyle sınırlı kalmıyorsunuz.
+  - q: Senaryom neden yüklenmiyor?
+    a: Dosyanın ana makinenin betik klasöründe olduğundan, ana makinenin beklediği uzantıya sahip olduğundan ve ana makinenin giriş noktasıyla kayıt yaptırdığından emin olun. Kayıt çağrısındaki bir yazım hatası genellikle neden olur.
+  - q: Bu, bir Node.js betiği yazmakla aynı şey mi?
+    a: Hayır. Motor, ana JVM'in içine gömülüdür, bu yüzden script'iniz bağımsız bir Node.js çalışma zamanı yerine ana programa konuşur.
+---
+
+<KeyTakeaways>
+
+- İlk adım, üç adımdır: kayıt, bir olayı yakalama ve bunu betikler klasörüne kaydetme.
+- Ev sahibi [GraalVM](https://www.graalvm.org/) paketini içerir, bu yüzden gerçek JavaScript yazarsınız ve onu kendiniz asla yüklemezsiniz.
+- Betikler, Java yeniden derlemesi olmadan saniyeler içinde yeniden yüklenir.
+- Bir betik, yalnızca ev sahibinin host-access beyaz listesi aracılığıyla sunduğu nesneleri çağırabilir.
+
+</KeyTakeaways>
+
+İlk bir GraalVM JavaScript betiği yazmak, üç küçük adımdan oluşur: betiği ana makinenin giriş noktasıyla kaydetmek, bir olaya veya modüle bağlamak ve motorun yükleyebilmesi için betikler klasörüne kaydetmek. Motor, [GraalVM](https://www.graalvm.org/) Çok Dilli API üzerinde çalışır, bu nedenle betik gerçek JavaScript'tir ve herhangi bir Java derlemesi olmadan yeniden yüklenir.
+
+<Callout variant="info" title="Opal Nerede Çalışır">
+Opal, bir [Fabric](https://fabricmc.net/) modudur ve [GraalVM JavaScript betik çalıştırma motoruna](https://en.graalvm.org/en/learn/what-is-graalvm-javascript-scripting) sahiptir, bu nedenle bu adımlar doğrudan uygulanır. Başlamak için [betik dokümanlarına](/tr/docs/scripting) bakın.
+</Callout>
+
+## İlk olarak ihtiyacınız olanlar
+
+Motoru yerleştiren bir ana program. Ana program GraalVM JavaScript ile birlikte gelir, komut dosyalarının çağırabileceği bir nesne kümesini sunar ve bir komut dosyası klasörünü izler. GraalVM'i kendiniz yüklemeyin; ana program onu içerir. Ana program size verdiği nesnelere karşı düz JavaScript yazarsınız.
+
+Bu nesnelerin neye karşılık geldiğini bilmek yardımcı olur, ancak başlamak için herhangi bir Java yazmanıza gerek yoktur.
+
+## Üç adım
+
+<Steps>
+
+<Step number={1} title="Betikleri klasörünü bul">Ev sahibi, başlatıldığında bilinen bir dizinden betikleri yükler. Tam yolu öğrenmek için ev sahibinin belgelerine bakın</Step>
+
+<Step number={2} title="Bir betik dosyası oluşturun">O klasörde yeni bir `.js` (veya `.mjs`) dosyası oluşturun. Sunucu, bir sonraki script yüklemesinde bunu algılayacaktır</Step>
+
+<Step number={3} title="Kaydet ve bağla">Dosya içinde, komut dosyasını ana makinenin giriş noktasıyla ilişkilendirin, ardından bir davranışa bir olay ekleyin veya bir modül tanımlayın</Step>
+
+</Steps>
+
+## En basit örnek
+Çoğu ana program, kendini kaydetmek için bir giriş noktası ve JavaScript'i programa bağlayan birkaç ara nesne sunar. Tam adlar ana programa göre değişse de, yapı aynıdır. İlk betik genellikle kendini duyurur ve tek bir olaya tepki verir:
+
+```js
+// Register the script with the host (names vary by host).
+script.register({
+  name: "hello-world",
+  version: "1.0.0",
+});
+
+// React to an event the host exposes.
+script.on("enable", () => {
+  client.print("Hello from my first script.");
+});
+```
+
+Gerçek nesne ve yöntem adları için ana programın kendi API referansını okuyun. Önemli olan örüntüdür: kaydet, ardından bir olumayı tetikle veya bir modül tanımla
+## Çalışırken canlı yenileme
+Dosyayı kaydedin ve betikleri yeniden yükleyin (veya canlı yeniden yüklemeyi desteklemiyorsa ana programı yeniden başlatın). Değişiklik, yeniden derleme olmadan etkili olur. Bu hızlı döngü, bir mod yerine betik yazmanın ana nedeni: bir betik saniyeler içinde yeniden yüklenirken, derlenmiş bir mod yeniden derlenmeli ve yeniden başlatılmalıdır.
+
+| Yaklaşım | Yineleme döngüsü | Dil | Ne zaman uygun |
+|----------|----------------|----------|--------------|
+| GraalVM JavaScript betiği | Düzenle, kaydet, yeniden yükle | JavaScript | Hızlı düzeltmeler, özel davranış |
+| Derlenmiş mod | Yeniden derle, yeniden başlat | Java veya Kotlin | Daha büyük özellikler, daha derin bağlantılar |
+## Yazılar neler yapabilir ve neler yapamaz
+
+Bir betik, yalnızca ana nesne tarafından sunulan nesnelere erişebilir. Ana nesne, GraalVM Çoklu Dil Barındırma ana erişim beyaz listesi aracılığıyla betiklerin erişebileceği sınıfları ve yöntemleri belirtir ve varsayılan olarak reddeder. Bu, betikleri güvenli ve öngörülebilir tutar. İstediğiniz nesne sunulmamışsa, ana nesne onu eklemek zorundadır; betik tarafında beyaz listeyi aşamazsınız.
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="Bir betik yazmak için GraalVM'i yüklemem gerekiyor mu?">
+Hayır. Ana program GraalVM ve JavaScript motorunu içerir. Siz sadece JavaScript dosyasını yazın ve betikler klasörüne bırakın.
+</FAQItem>
+
+<FAQItem question="Modern JavaScript sözdizimini kullanabilir miyim?">
+Evet. Motor, modüllerle `import` ve `export` de dahil olmak üzere son ECMAScript özelliklerini destekler, bu yüzden eski bir alt kümeyle sınırlı kalmıyorsunuz.
+</FAQItem>
+
+<FAQItem question="Senaryom neden yüklenmiyor?">
+Dosyanın sunucunun script klasöründe olduğundan, sunucunun beklediği uzantıya sahip olduğundan ve sunucunun giriş noktasıyla kayıtlı olduğundan emin olun. Kayıt çağrısındaki bir yazım hatası genellikle neden olur.
+</FAQItem>
+
+<FAQItem question="Bu, Node.js betiği yazmaya benzer mi?">
+Hayır. Motor, ana JVM içinde yerleştirilmiştir, bu yüzden betiğiniz ana programa, bağımsız bir Node.js çalışma zamanına değil, iletişim kurar.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-graalvm-javascript-scripting", label: "GraalVM JavaScript betiği nedir?", description: "Bu betiklerin çalışma zamanı, açıklanıyor." },
+  { href: "/tr/learn/what-is-the-jvm", label: "JVM nedir?", description: "Motorun yerleştirildiği platform." },
+  { href: "/tr/blog/introducing-opal-scripting-engine", label: "Opal betik motoru", description: "Opal'deki komut dosyalarıyla neler inşa edebileceğiniz." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

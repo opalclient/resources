@@ -1,0 +1,87 @@
+---
+title: Minecraft'ta Radar Nedir?
+description: Radar, yakındaki oyuncuları ve varlıkları yukarıdan aşağıya bir örtü üzerinde gösteren bir Minecraft istemci modülüdür; tam bir ESP işleme olmadan duvarların içinden konumları ortaya çıkarır.
+excerpt: Ekran üzerindeki bir nokta, arkana dönmeden bile birinin geldiğini haber veriyor. Farkındalık için kullanışlı, bir sunucu bunu yakalarsa pahalıya mal olur.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Radar, ESP'ye benzer mi?
+    a: Bunlar ilişkili ama aynı değiller. ESP, 3D dünyada tam varlık modellerini veya taslakları duvarların içinden görüntüleyebilirken, Radar aynı farkındalığı sadece yön ve mesafeyi gösteren 2D yukarıdan bakış şeklinde soyutlar.
+  - q: Radar duvarlardan geçebilir mi?
+    a: Evet. Çünkü yakındaki varlıklar için zaten gönderilen konum verilerinden oluşturulduğu için, doğrudan görüşe bağlı değildir, bu nedenle duvarların veya arazinin arkasındaki oyuncuları ve varlıkları gösterebilir.
+  - q: Radar tespit eden anticheat sistemleri var mı?
+    a: Radar kendisi ek ağ trafiği göndermez, bu nedenle tespit genellikle istemci tarafı bütünlük taramalarına veya oyuncunun kendi davranışlarının, normal görüş alanı dışındaki bir şeye tepki verdiğini ele vermesine dayanır.
+  - q: Hangi müşterilerimizin Radar modülü var?
+    a: Sebat, bir gönderi olarak belgelenmiştir. Radar benzeri üstbilişler, farklı isimler altında diğer istemcilerde de görünür, çünkü HUD haritasında yakındaki varlıkları çizme fikri tek bir istemciye özgü değildir.
+---
+
+<KeyTakeaways>
+
+- Radar, kameranın nereye baktığına bakılmaksızın, üstten görünümde yakındaki oyuncuları ve varlıkları göstererek yön ve mesafeyi belirtir.
+- Sunucu tarafından zaten gönderilen konum verilerini yeniden kullandığı için ek ağ trafiğine ihtiyaç duymaz.
+- Duvarlardan geçebilir, çünkü görüş hattına dayanmaz, bu da çoğu sunucunun yasaklamasının nedenidir.
+- Tenacity, belgelenmiş bir Radar modülü sunar
+
+</KeyTakeaways>
+
+Radar, Minecraft için bir istemci modülüdür ve kameranın hangi yöne işaret ettiğinden bağımsız olarak, size göre yakınlardaki oyuncuların ve varlıkların konumlarını gösteren, yukarıdan aşağıya bakan, minimap tarzı bir örtü çizer. ESP'nin duvarların içinden tam modeller oluşturduğu gibi değil, aynı farkındalığı bir dizi noktaya indirger: yön, mesafe, tamam. Bir köşeden veya sırtından size doğru yaklaştığına dair bir uyarı alırsınız, araziyi aşan bir vücudun görsel karmaşası olmadan. Daha çok bir hile gibi değil, bir sonar sinyali gibi gelir ve oyuncuların neden bundan hoşlandığını ve sunucuların neden hoşlanmadığını tam olarak da bu yüzden.
+
+## Nasıl Çalışır
+
+Sizin yakınınızdaki her varlığın zaten sunucu tarafından takip edilen ve istemcinize gönderilen bir konumu vardır. Normal oluşturma, çarpışma algılama ve sekme listesinin tümü böyle çalışır. Radar, aynı göreceli konum verilerini, sizden olan yönü ve mesafeyi alır ve HUD üzerine yerleştirilmiş düz bir örtüde bir nokta olarak çizer; yalnızca normal, oklüzyon saygı gösteren oluşturmaya beslemek yerine.
+
+Üst katman genellikle gerçek kuzeye veya şu anda baktığınız yöne yöneliktir, bu nedenle bir noktanın radar üzerindeki açısı dünyadaki gerçek bir açıyı yansıtır. Farklı bir yöne dönün ve eğer yönlendirme ile ilgiliyse noktalar sizinle birlikte döner veya kuzeye kilitlenmişse sabit durur. Ne olursa olsun, Radar, normal bir istemcinin zaten alacağı hiçbir şey için sunucuya talepte bulunmaz. Sadece normalde sizin için görünmeyen verileri görselleştirir.
+
+## Radar'ı kullanmak güvenli mi?
+
+Radar, ESP ve diğer farkındalık modülleriyle aynı aileye aittir. Normal bir istemcinin asla oluşturmayacağı duvarların içinden, görüş alanınızın dışından konumları gösterir, bu nedenle çoğu sunucu bunu bir kozmetik özellikten ziyade bir hile olarak sınıflandırır ve aynı yasak riskini taşır.
+
+Mevcut istemci verilerini yeniden çizdiği için, bir sunucunun kendi başına işaretleyebileceği sıra dışı ağ trafiği oluşturmaz. Algılama genellikle iki yerden gelir: kendi davranışınız ve istemci tarafı taramalarınız. Görünür olmaları için oyunculara doğru dönmek, onlara görüş hattınız olmadan kaçınmak için konumlandırmak veya ekranda olmaması gereken varlıklara tepki vermek, meşru bir istemcinin sahip olmadığı bilgilere göre çalıştığınızı gösteren belirtilerdir. İstemci ikili dosyasını veya belleğini Radar veya ESP imzaları için tarayan antichipler, bunun üzerine ikinci bir katman ekler.
+
+<Callout variant="warning" title="Neredeyse her oyun kurallarında yasaklanabilir">
+
+Radar, bir vanilla istemcinin size gösteremeyeceği bilgileri ortaya çıkarır. Bu, çoğu sunucudaki ESP ile aynı yaptırım kapsamına sokar: gri bir alan değil, yasaklanabilir bir modül. Bunu özelliğin nasıl çalıştığına dair bir referans olarak ele alın, nasıl yapılacağına dair bir rehber olarak değil
+
+</Callout>
+
+Opal şu anda özel bir Radar modülü göndermiyor. Bu belirli özellikle ilgili olarak yardımcı program istemcilerini karşılaştırıyorsanız, bilmeniz gereken bir şey: "radar" markası alanda gevşek bir şekilde kullanılıyor ve istemciye göre aynı şeyi her zaman ifade etmiyor.
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="Radar, ESP'ye benzer mi?">
+
+Bunlar ilişkili ama aynı değiller. ESP, 3D dünyada tam varlık modellerini veya taslakları duvarların içinden görüntüleyebilirken, Radar aynı farkındalığı sadece yön ve mesafeyi gösteren 2D yukarıdan bakış şeklinde soyutlar
+
+</FAQItem>
+
+<FAQItem question="Radar duvarlardan geçebilir mi?">
+
+Evet. Çünkü yakındaki varlıklar için zaten gönderilen konum verilerinden oluşturulduğu için, doğrudan görüşe ihtiyaç duymaz, bu nedenle duvarların veya arazinin arkasındaki oyuncuları ve varlıkları gösterebilir
+
+</FAQItem>
+
+<FAQItem question="Radar tespit eden anticheat sistemleri var mı?">
+
+Radar kendisi ek ağ trafiği göndermez, bu nedenle tespit genellikle istemci tarafı bütünlük taramalarına veya oyuncunun kendi davranışlarının, normal görüş alanı dışındaki bir şeye tepki verdiğini ele vermesine dayanır
+
+</FAQItem>
+
+<FAQItem question="Hangi müşterilerimizin Radar modülü var?">
+
+Sebat, tek bir gönderi olarak belgelenmiştir. Radar benzeri üstbilişler, farklı adlar altında diğer istemcilerde de görünür, çünkü HUD haritasında yakındaki varlıkları çizme fikri tek bir istemciye ait değildir
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Radar kategorisi ve buna benzer modüllerin ait olduğu yer ve faydalı istemcilerin temel sürümlerden farkı." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Farklı bir bilinç odaklı müşteri tipi, daha fazla görmekten ziyade görünmez kalmaya odaklanılarak inşa edilmiş." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Bir başka modül de, meşru oyunu haksız bir avantaja değişerek yakalanıyor ve neden Radar'dan farklı şekilde tespit edildiği." }
+]} />
+
+<CTA href="/tr/satin-al">Opal'ın modül listesi herkese açıktır. Yanlış müşteriye $8.99 harcamadan önce içeriğinde ne olduğunu görün.</CTA>

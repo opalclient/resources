@@ -1,0 +1,83 @@
+---
+title: Cosa sono le Array List in Minecraft? Spiegazione del Modulo
+description: Array List è la sovrapposizione HUD che elenca i moduli attivi di un client di utilità per Minecraft in tempo reale, permettendoti di verificare cosa è attivo senza aprire un menu.
+excerpt: Array List trasforma tutti i moduli attivi in un elenco visualizzato nell'angolo dello schermo. Niente menu da esplorare.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: L'Array List influisce sul gameplay?
+    a: No. Rende solo testo sulla tua schermata e non interferisce mai con la logica di gioco né comunica con il server, quindi non ha alcun effetto sul gameplay.
+  - q: Può anticheat rilevare un Array List?
+    a: No. Non invia mai nulla al server, quindi non c'è nulla che un anticheat lato server possa rilevare o segnalare.
+  - q: Cos'è un modulo nascosto in una Array List?
+    a: Un modulo contrassegnato per continuare a funzionare normalmente in background, pur rimanendo escluso dall'elenco visibile, in modo da rimanere attivo anche se non compare mai sullo schermo.
+  - q: È sempre la stessa cosa l'Array List in tutti i client?
+    a: Non esattamente. Posizione, stile e persino l'esistenza di un'opzione modulo nascosto variano a seconda del cliente, ma il concetto fondamentale, ovvero elencare ciò che è attualmente attivo, rimane coerente.
+  - q: Perché un cliente nasconderebbe moduli dalla propria lista?
+    a: Così, la visualizzazione non rivela a qualcun altro che guarda lo schermo, soprattutto durante una condivisione dello schermo, tutti i moduli attivati.
+---
+
+<KeyTakeaways>
+
+- Array List è un overlay HUD che elenca i moduli attivi correntemente del client in un angolo dello schermo, aggiornandosi in tempo reale mentre i moduli si attivano o disattivano.
+- Viene renderizzato solo lato client, quindi non tocca mai il server e l'anticheat non può rilevarlo.
+- Alcuni client permettono ai moduli di funzionare nascosti: attivi, ma non presenti nella lista.
+- Trovato in client come Fan, Tenacity e Rose.
+
+</KeyTakeaways>
+
+L'Array List è un elemento HUD nei client utility di Minecraft che visualizza il nome di ogni modulo attualmente attivo, solitamente impilato in un angolo dello schermo. Attiva un modulo e il suo nome compare; disattivalo e scompare, nessuna voce di menu richiesta. Si presenta in client come Fan, Tenacity e Rose, e sebbene posizione e stile varino tra loro, la funzione rimane la stessa ovunque: un'indicazione costante e immediata di ciò che è effettivamente in esecuzione.
+
+## Come funziona
+
+Ogni frame, il client verifica quali moduli sono attualmente contrassegnati come abilitati e disegna i loro nomi come una breve pila di testo, ancorata a un angolo dello schermo. Abilita un modulo e viene aggiunta una riga; disabilitalo e la riga scompare. Questo è l'intero meccanismo. La lista viene disegnata localmente sopra la visualizzazione del gioco, quindi non tocca mai il server, non invia mai un pacchetto e non ha alcuna influenza su come il gioco si svolge effettivamente. È un'indicazione, non un'azione.
+
+L'attrattiva risiede principalmente nella comodità. Una volta che un client include più di un numero limitato di moduli, tenere traccia di ciò che è stato attivato a memoria smette di essere affidabile, e riaprire una GUI completa con clic solo per controllare diventa rapidamente fastidioso. Un'occhiata a un angolo dello schermo risolve il problema in mezzo secondo.
+
+Alcuni clienti associano l'elenco a una categoria di modulo nascosto. Un modulo contrassegnato in questo modo continua a funzionare esattamente come al solito, ma non viene incluso nel testo renderizzato. Ciò significa che l'Array List sullo schermo non è sempre un inventario completo di ciò che è attivo, il che è più rilevante per l'aspetto di uno schermo per chi lo guarda che per qualsiasi cosa che accada lato server.
+
+## È sicuro utilizzarlo?
+
+L'Array List di per sé non comporta alcun rischio associato ai moduli che modificano effettivamente il modo in cui il gioco viene giocato. Renderizza il testo localmente e non comunica mai con il server, quindi un anticheat lato server non ha nulla da osservare, tanto meno da segnalare. Confronta questo con qualcosa come un aimbot o un aumento della portata, dove il server può misurare angoli di tiro e distanze e rilevare la discrepanza tra ciò che è fisicamente possibile e ciò che è appena accaduto. Non esiste un segnale equivalente qui, perché non c'è alcuna interazione con il server.
+
+L'associazione con il modulo nascosto è una considerazione diversa. Il suo scopo è nascondere le informazioni a una persona che guarda lo schermo, soprattutto durante una condivisione dello schermo, piuttosto che eludere un sistema di rilevamento. Vale la pena saperlo se si considera l'Array List come un quadro completo di ciò che è in esecuzione: potrebbe non esserlo.
+
+<Callout variant="tip" title="La posizione di Opal in merito">
+Opal non offre una funzionalità chiamata Array List. La presenza di un modulo di lettura in tempo reale è diventata una comodità di base in questa categoria, tanto che l'avere o meno un cliente tale non conta quanto ciò che è effettivamente elencato, se i nomi che lo compongono rappresentano un vero toolkit o semplicemente un lungo elenco.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="L'Array List influisce sul gameplay?">
+No. Influenza solo la visualizzazione del testo sullo schermo e non interagisce mai con la logica di gioco né con il server, quindi non ha alcun effetto sul gameplay.
+</FAQItem>
+
+<FAQItem question="L'anticheat può rilevare un Array List?">
+No. Non invia mai nulla al server, quindi non c'è nulla che un anticheat lato server possa vedere o segnalare fin da subito.
+</FAQItem>
+
+<FAQItem question="Cos'è un modulo nascosto in una Array List?">
+Un modulo contrassegnato per continuare a funzionare normalmente in background, pur rimanendo escluso dall'elenco visibile, in modo da rimanere attivo anche se non compare mai sullo schermo.
+</FAQItem>
+
+<FAQItem question="L'Array List è identico in ogni client?">
+Non esattamente. Posizione, stile e persino l'esistenza di un'opzione per moduli nascosti variano a seconda del client, ma il concetto fondamentale, ovvero l'elenco di ciò che è attualmente attivo, rimane coerente.
+</FAQItem>
+
+<FAQItem question="Perché un cliente potrebbe nascondere dei moduli dalla propria lista?">
+Così, la visualizzazione non rivela tutti i moduli abilitati a qualcun altro che guarda lo schermo, più comunemente durante una condivisione dello schermo.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "L'ampia categoria a cui appartiene un Array List." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Dove l'occultamento smette di essere una questione di lista HUD e diventa il fulcro stesso." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Un modulo all'estremità opposta dello spettro del rischio rispetto a un display HUD puramente estetico." },
+]} />
+
+<CTA href="/it/purchase">L'elenco dei moduli è valido quanto i contenuti che include. Scopri cosa contiene effettivamente Opal.</CTA>

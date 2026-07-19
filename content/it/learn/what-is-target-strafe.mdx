@@ -1,0 +1,87 @@
+---
+title: Cos'è lo strafe mirato in Minecraft? Spiegazione del modulo
+description: Target Strafe è un modulo di movimento per Minecraft che esegue automaticamente un movimento circolare attorno a un bersaglio di combattimento bloccato. Ecco come funziona, la sua variante silenziosa e il motivo per cui i server lo segnalano.
+excerpt: Gira automaticamente attorno al tuo bersaglio, senza bisogno di movimenti particolari. È anche uno dei trucchi di movimento più facili da individuare per un server.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa fa esattamente Target Strafe?
+    a: Si muove automaticamente a cerchio attorno a un bersaglio di combattimento bloccato, gestendo il movimento laterale che normalmente il giocatore controllerebbe con A e D.
+  - q: Qual è la variante silenziosa di Target Strafe?
+    a: Una sottomodale, documentata in LiquidBounce, che modifica la tua direzione di movimento reale sul server senza ruotare la telecamera che tu o gli altri vedete, disaccoppiando la direzione in cui stai guardando da quella in cui ti stai effettivamente muovendo.
+  - q: È rilevabile il target strafe dagli anticheat?
+    a: Sì. La versione standard produce un movimento circolare innaturalmente fluido, e la versione silenziosa crea una discrepanza tra direzione e movimento che un client base non può generare, entrambi elementi che gli anticheat possono rilevare.
+  - q: Quali clienti hanno spedito Target Strafe?
+    a: È stato documentato in LiquidBounce e Fan, e Opal include la propria versione con lo stesso nome, Target Strafe.
+  - q: È Target Strafe la stessa cosa di un'assistenza al movimento?
+    a: No. Un assist di movimento potrebbe mostrare informazioni o smussare l'input. Lo Strafe mirato sostituisce completamente il tuo input direzionale, motivo per cui è classificato come modulo di cheat piuttosto che come modulo di aiuto.
+---
+
+<KeyTakeaways>
+
+- Target Strafe è un modulo di movimento che ti fa compiere automaticamente dei giri attorno a un bersaglio di combattimento bloccato, sostituendo lo strafing manuale.
+- Una variante silenziosa disaccoppia la tua direzione visibile dal tuo movimento reale, cosa che un client vanilla non può fare.
+- Entrambe le varianti sono rilevabili: giri innaturalmente fluidi e discrepanze tra direzione e movimento sono segnali reali per l'anticheat.
+- Opal include il proprio modulo Target Strafe e ne segnala l'utilizzo a proprio rischio.
+
+</KeyTakeaways>
+
+Target Strafe è un modulo di movimento che automaticamente ti fa ruotare attorno a qualsiasi bersaglio di combattimento tu abbia bloccato, invece di dover tenere premuto A o D e tracciare il cerchio da solo. Calcola una direzione di schivata ad ogni tick e la invia direttamente al tuo movimento, mantenendo così il cerchio fluido indipendentemente da quello che stai facendo con le mani. Alcuni client includono una variante silenziosa, che muove il tuo personaggio in una direzione mentre la telecamera continua a puntare in un'altra. È un piccolo automatismo con una reputazione esagerata per far prendere alla gente.
+
+## Come funziona Target Strafe
+
+Target Strafe si integra con il sistema di targeting di combattimento del client e prende il controllo del movimento laterale non appena un bersaglio viene bloccato, di solito nello stesso momento in cui un modulo di combattimento o di mira inizia a oscillare. Invece di premere A o D per tracciare il cerchio, il modulo ricalcola la direzione di schivata ad ogni tick e la scrive direttamente nel gestore del movimento. Il risultato è un'orbita pulita e meccanicamente coerente attorno a ciò con cui stai combattendo, con un raggio e una velocità che uno schivata manuale non eguaglia.
+
+La variante silenziosa, documentata in LiquidBounce, va un passo avanti. Invece di automatizzare semplicemente l'input dello strafe, modifica la direzione in cui il tuo personaggio si muove effettivamente sul server, mantenendo intatta la rotazione della telecamera renderizzata. Chiunque stia guardando vede un giocatore rivolto in una direzione e che scivola in un'altra, una combinazione che un input client normale non può fisicamente produrre.
+
+Abbinata a un modulo di mira o di combattimento, Target Strafe rimuove un ulteriore elemento di coordinazione manuale da un combattimento a corto raggio: niente più perdita dell'angolo durante lo swing, niente più essere aggirati perché i tuoi piedi e il tuo mouse non stavano facendo la stessa cosa contemporaneamente.
+
+<Callout variant="tip" title="Opal lo chiama anche Target Strafe">
+La voce del catalogo di Opal per questo componente fa esattamente ciò che suggerisce il nome: ti fa girare attorno al bersaglio. Stesso modulo, stessa categoria, stesso compromesso trattato di seguito.
+</Callout>
+
+## È sicuro utilizzare il Target Strafe?
+
+Qui vengono segnalate due cose distinte. La versione base produce un movimento troppo fluido e troppo costante per essere attribuito a una persona che utilizza una tastiera, e un server che traccia i modelli di movimento può misurare direttamente tale costanza.
+
+La variante silenziosa è la più rischiosa delle due. Una discrepanza tra la direzione in cui è rivolto il corpo di un giocatore e la direzione in cui si muove effettivamente non è qualcosa che un input client legittimo può produrre, quindi qualsiasi anticheat che controlla la rotazione rispetto al movimento ha un segnale chiaro per intercettarlo. Se un determinato server lo intercetti effettivamente dipende da quanto attentamente quel server controlla la costanza del movimento, ma nessuna delle due varianti è un'assunzione sicura.
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Il Target Strafe, silenzioso o meno, è un'automazione del movimento rilevabile e viola le regole in praticamente ogni server multiplayer. Ogni client che lo include, Opal compreso, lo elenca come utilizzo a proprio rischio e pericolo. Non si tratta di una promessa di non essere bannati, ma di un riconoscimento del fatto che potrebbe accadere.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa fa esattamente Target Strafe?">
+Circola automaticamente attorno al bersaglio di combattimento bloccato, gestendo il movimento laterale che normalmente il giocatore controllerebbe con A e D.
+</FAQItem>
+
+<FAQItem question="Qual è la variante silenziosa di Target Strafe?">
+Una sottomodale, documentata in LiquidBounce, che modifica la tua reale direzione di movimento sul server senza ruotare la telecamera che tu o chiunque altro vede, disaccoppiando la direzione in cui stai guardando da quella in cui ti stai effettivamente muovendo.
+</FAQItem>
+
+<FAQItem question="È rilevabile il Target Strafe da parte degli anticheat?">
+Sì. La versione regolare produce un movimento circolare innaturalmente fluido, e la versione silenziosa crea una discrepanza tra la direzione dello sguardo e il movimento che un client vanilla non può generare, entrambi elementi che gli anticheat possono misurare.
+</FAQItem>
+
+<FAQItem question="Quali client hanno spedito Target Strafe?">
+È stato documentato in LiquidBounce e Fan, e Opal spedisce la propria versione con lo stesso nome, Target Strafe.
+</FAQItem>
+
+<FAQItem question="Target Strafe è la stessa cosa di un'assistenza al movimento?">
+No. Un'assistenza al movimento potrebbe mostrare informazioni o smussare gli input. Target Strafe sostituisce completamente il tuo input direzionale, motivo per cui è classificato come modulo cheat piuttosto che come aiuto.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "Il modulo di auto-attacco Target Strafe di solito viaggia di fianco." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Il modulo di combattimento mirato, a cui viene spesso abbinato." },
+  { href: "/it/learn/what-is-velocity-anti-knockback", label: "Cos'è la Velocità / l'Anti-Recoil?", description: "Un altro modulo di movimento progettato per farti durare più a lungo in combattimento." },
+]} />
+
+<CTA href="/it/purchase">Pensa in modo più strategico. Opal spedisce Target Strafe e il resto del kit da combattimento ad esso associato.</CTA>

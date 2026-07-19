@@ -1,0 +1,85 @@
+---
+title: Cos'è il Tabellone in Minecraft? Spiegazione del Modulo
+description: Tabellone dei punteggi è un modulo di Minecraft che restilizza il tabellone laterale del server o aggiunge righe calcolate dal client come il ping, una modifica estetica che nessun anticheat può segnalare.
+excerpt: Il tabellone non interferisce con il gioco, solo la scatola nell'angolo. Ricopialo, aggiungi una linea, e vai avanti con la tua vita.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Il tabellone fornisce un vantaggio sleale?
+    a: No. Cambia soltanto il modo in cui i dati del tabellone vengono visualizzati o aggiunge informazioni che il client può già calcolare localmente, come il ping. Non rivela nulla che un giocatore non possa altrimenti vedere.
+  - q: Possono gli amministratori del server rilevare un tabellone dei punteggi personalizzato?
+    a: Non attraverso il tabellone in sé. Il server continua a inviare i propri obiettivi e punteggi come di consueto. La restyling lato client e qualsiasi riga aggiuntiva non vengono mai trasmessi indietro, quindi non c'è nulla che il server possa notare.
+  - q: Scoreboard è la stessa cosa di una mod HUD?
+    a: Non esattamente. Il tabellone dei punteggi è limitato specificamente alla barra laterale. Una mod HUD più ampia potrebbe interessare la barra degli strumenti, la visualizzazione delle coordinate, lo stato dell'armatura e altro ancora. Il tabellone dei punteggi gestisce solo quell'elemento.
+  - q: Perché un cliente dovrebbe mai includere un modulo Tabellone?
+    a: Le classifiche dei server variano notevolmente nello stile, e un modulo integrato mantiene un aspetto coerente tra i server o le superfici, mostrando una statistica come il ping senza dover aprire un menu separato.
+---
+
+<KeyTakeaways>
+
+- Il tabellone dei punteggi è un modulo lato client che restilizza il tabellone laterale del server, oppure aggiunge righe extra costruite a partire dai dati che il client possiede già, come il ping.
+- Intercetta la fase di rendering della barra laterale: gli obiettivi e i punteggi reali del server rimangono invariati, il modulo si limita a formattarli in modo diverso o a inserire valori locali.
+- Nulla viene inviato nuovamente al server, quindi la modifica è invisibile agli amministratori ed irrilevante per gli anticheat.
+- Viene considerato un elemento di comodità dell'HUD, accanto a funzionalità come la sovrapposizione delle coordinate o il contatore FPS, e non una funzionalità di combattimento o di movimento.
+
+</KeyTakeaways>
+
+La bacheca è un modulo di Minecraft che modifica l'aspetto o il contenuto della barra laterale della bacheca sul lato server. Può ridisegnare la casella inviata dal server, utilizzare font diversi, colori, angoli arrotondati, oppure aggiungere righe extra calcolate a partire dai dati che il client possiede già, come il ping. In ogni caso, si limita alla presentazione. Non cambiano nulla su come giochi, ti muovi o combatti.
+
+## Come funziona
+
+La barra laterale che vedi nell'angolo dello schermo è controllata dal server per impostazione predefinita: il server invia obiettivi e punteggi, e il client li disegna con lo stile generico fornito da Minecraft. Scoreboard intercetta questa fase di rendering e, o ridisegna completamente la casella, o inserisce righe aggiuntive lato client accanto alle voci del server. I dati forniti dal server rimangono esattamente come inviati. Il modulo li legge, li formatta in modo diverso e può inserire valori che il server non ha mai trasmesso, dato che queste righe extra vengono calcolate localmente invece di essere recuperate dalla rete.
+
+Il restyling riguarda lo strato visivo: uno sfondo diverso, angoli arrotondati invece che spigolosi, un font personalizzato o una transizione animata quando un valore aumenta o diminuisce, invece di un semplice salto al nuovo numero. Le aggiunte di contenuti sono la seconda metà, più piccola, del modulo: elementi che il cliente può già calcolare autonomamente, con il ping come esempio lampante, inseriti come una riga extra senza che il server trasmetta nulla di nuovo. Poiché nulla di tutto ciò proviene da un pacchetto inviato nuovamente al server, l'intero processo è locale al tuo schermo e lo rimane.
+
+## Cosa tocca effettivamente Scoreboard
+
+| Impostazione | Cosa modifica |
+|---|---|
+| Sfondo | Sostituisce il pannello laterale predefinito con un colore o uno stile personalizzato |
+| Arrotondamento degli angoli | Ammorbidisce gli angoli squadrati forniti da Minecraft |
+| Font personalizzati | Sostituisce il carattere predefinito del pannello laterale |
+| Transizioni dei valori | Anima un numero quando si aggiorna, invece di saltare istantaneamente |
+| Righe extra (ad esempio, ping) | Aggiunge statistiche calcolate dal cliente che il server non ha mai inviato |
+
+Nessuna di queste righe richiede la collaborazione del server. Sono tutte decisioni che il cliente prende dopo che il server ha già comunicato gli obiettivi e i punteggi, ed è anche per questo che l'elenco si interrompe dove si interrompe. Scoreboard non legge nulla dal server che non gli sia stato fornito, si limita a scegliere come visualizzare ciò che già possiede.
+
+## È sicuro utilizzarlo
+
+Sì, ed è sicuro quanto possa esserlo un modulo. Il tabellone si limita a riformattare o estendere ciò che il server ti mostra già localmente. Non legge dati a cui non dovresti avere accesso, non invia pacchetti aggiuntivi e non modifica il modo in cui il tuo client interagisce con il mondo. Non c'è alcun vantaggio informativo rispetto a un altro giocatore che guarda lo stesso tabellone vanilla, solo una diversa veste grafica. Gli anticheat non hanno nulla da segnalare qui, perché il modulo non tocca mai movimento, combattimento o qualsiasi cosa venga trasmessa via cavo.
+
+<Callout variant="tip" title="Dove si trova questa funzionalità in Opal">
+Opal non include un modulo chiamato Scoreboard. L'area che copre, ovvero le modifiche alla visualizzazione locale che non toccano i dati del server, è la stessa categoria visiva in cui risiedono il resto dell'HUD e gli strumenti cosmetici di Opal. Se una barra laterale pulita è importante per te, vale la pena verificare cosa offre un client nelle sue impostazioni visive piuttosto che presumere che manchi solo perché il nome non corrisponde.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Il tabellone offre un vantaggio sleale?">
+No. Modifica soltanto il modo in cui i dati del tabellone esistente vengono visualizzati o aggiunge informazioni che il client può già calcolare localmente, come il ping. Non rivela nulla che un giocatore non possa altrimenti vedere.
+</FAQItem>
+
+<FAQItem question="Gli amministratori del server possono rilevare un tabellone dei punteggi personalizzato?">
+Non attraverso il tabellone dei punteggi stesso. Il server invia comunque i propri obiettivi e punteggi come di consueto. La restyling lato client e qualsiasi riga aggiuntiva non vengono mai trasmessi, quindi non c'è nulla che il server possa notare.
+</FAQItem>
+
+<FAQItem question="Scoreboard è la stessa cosa di una mod HUD?">
+Non esattamente. Scoreboard è limitato specificamente alla barra laterale. Una mod HUD più ampia potrebbe interessare la barra degli strumenti, la visualizzazione delle coordinate, lo stato dell'armatura e altro ancora. Scoreboard gestisce solo quell'elemento.
+</FAQItem>
+
+<FAQItem question="Perché un cliente raggrupperebbe mai un modulo Tabellone dei Punteggi?">
+I tabelloni dei punteggi dei server variano notevolmente in termini di stile, e un modulo integrato mantiene un aspetto coerente tra i server o le superfici, mostrando una statistica come il ping senza dover aprire un menu separato.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "I moduli di categoria più ampi a cui appartengono elementi come il tabellone dei punteggi." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "La parte dello spettro incentrata sul rilevamento è qualcosa che Scoreboard non deve mai considerare." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Un modulo che si colloca all'estremità opposta della scala del rischio rispetto a uno puramente estetico." },
+]} />
+
+<CTA href="/it/purchase">Una barra laterale più pulita è una piccola cosa. Scopri cosa altro Opal sistema.</CTA>

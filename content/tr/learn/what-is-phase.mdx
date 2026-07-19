@@ -1,0 +1,93 @@
+---
+title: Minecraft'ta Faz Nedir? Noclip Modülü Açıklandı
+description: Faz, katı blokların içinden geçmenizi sağlayan bir hareket modülüdür; gerçek çarpışmaların izin vermeyeceği şekilde konumunuzu senkronize dışı bırakır. İşte nasıl çalıştığı.
+excerpt: Faz, sunucuyu bir pozisyon çarpışmasının asla üretemeyeceği bir şeyle besliyor ve bir an için duvar yokmuş gibi. Aynı zamanda oyundaki en kolay yakalanan hilelerden biri.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Faz aslında ne işe yarıyor?
+    a: Oyuncunun katı blokların içinden geçmesini sağlar, gerçek çarpışma algılamasının asla üretmeyeceği bir konumu sunucuya bildirerek, etkili bir şekilde bir duvardan kısa bir noclip geçişi yapar.
+  - q: Faz, bir sinek hilesiyle aynı şey mi?
+    a: Hayır. Bir sinek hilesi yerçekimini ortadan kaldırır, böylece açık havada serbestçe hareket edebilirsiniz. Faz ise özellikle katı bloklara çarpışmayı engeller, böylece sizi tamamen durdurması gereken araziyi geçebilirsiniz.
+  - q: Phase seni banlanmaya yol açabilir mi?
+    a: Evet. Katı bir bloğun diğer tarafında yasal bir şekilde sonlanacak bir yol yok ve sunucu tarafı antichipleri, istemci bağımsız olarak dünya çarpışmasına karşı konumu kontrol eder, bu tür hareketleri yakalamak ve müdahale etmek kolaylaştırır.
+  - q: Hangi müşteriler Faz'ı gönderdi?
+    a: Fan ve Opal v1'de görüldüğü gibi belgelenmiştir; her ikisinde de bir hareket modülü olarak kaydedilmiştir. Diğer müşteriler benzer noclip davranışını farklı bir modül adı altında gönderebilirler.
+---
+
+<KeyTakeaways>
+
+- Faz, oyuncunun gerçek çarpışmalardan kaydırarak katı blokların içinden geçmesini sağlayan bir hareket modülüdür.
+- Dünyadan çarpışmayı silmez, çarpışmanın asla üretmeyeceği bir pozisyonu sunucuya iletir.
+- Senkron kayması yalnızca duvar temizlenene kadar sürdürülmeli, ardından hareket normale döner.
+- Antichipler, pozisyonu dünya geometrisine karşı doğrudan kontrol ederek bunu yakalar; bu, en güvenilir tespit yöntemlerinden biridir
+
+</KeyTakeaways>
+
+Faz, oyuncunun katı blokların içinden geçmesini sağlayan bir hareket modülüdür; sunucuya bulunduğunuz konumu yalan söyleyerek oluşturulmuş kısa menzilli bir noclip'tir. Orijinal çarpışma, hangi düğmelere basarsanız basın sizi her zaman bir duvarın bir tarafında tutar. Faz, normal çarpışma algılamasının tek başına üretemeyeceği, duvarın diğer tarafındaki bir konumu raporlayarak bunu aşar. Sunucu genellikle bir tolerans dahilinde istemci tarafından gönderilen koordinatlara güvenir, bu nedenle sizi durdurması gereken bloğun ötesinde konumunuzu günceller. Bloktan geçin ve hareket normal seyrine geri dönebilir, sanki hiçbir şey olmamış gibi.
+
+## Faz Nasıl Çalışır
+
+Faz, dünyanın çarpışma kutularına dokunmaz. Bloklar hala katıdır, çarpışma kutusu matematiği değişmedi ve hiçbir şey çalıştırılmayan bir oyuncu aynı duvara yürürse her zaman olduğu gibi hemen durur. Değişen şey, istemcinin ne bildirmesidir. Modül, oyuncunun blok ızgarasına göre gerçekte nerede durduğunu izler ve ardından onu durdurmak yerine duvarın ötesine geçen koordinatları sunucuya gönderir. Sunucu genellikle kendisine verilen konuma, belirli bir tolerans dahilinde güvendiği için, oyuncunun konumunu sizi tamamen engellemesi gereken bir bloğun diğer tarafında günceller.
+
+Yalanın sadece bir an için geçerli olması yeterli. Oyuncu duvardan çıktıktan sonra hareket normal seyrine döner; bu da modülün hızlı bir bakışta yakalanmasının zor olmasının bir parçasıdır: fark edilecek sürdürülebilir bir tuhaflık yok, sadece bir an için birinin ulaşmaması gereken bir yerde durduğunu gösteren bir anlık bir durum.
+
+Çekiciliği basittir. Aksi takdirde sapmaya neden olacak araziyi atlar: bir duvar, bir çit, bir harita özel olarak inşa edildiği bir blokluk boşluk. Özellikle hareket odaklı oyunlarda kendini gösterir; burada katı geometrinin içinden doğrudan geçmek mesafeyi kısaltır veya haritanın asla izin vermemesi gereken bir yeri açar. Müşteriler arasında Fan ve Opal v1 gibi istemcilerde görülen bir hareket kategorisi modülü olarak belgelenmiştir.
+
+## Kullanımı Güvenli mi?
+
+Hayır, hiçbir şekilde inceleme altında dayanıklı değil. Bir oyuncuyu katı bir bloğun arkasına dolaşmadan, üzerinden geçmeden veya gerçek bir açıklıktan geçmeden yerleştiren meşru bir vanilla giriş dizisi yoktur. Bu, onu piyasadaki daha bariz hilelerden biri, daha ince olanlardan biri yapmaktadır. Gri alan versiyonu veya bir sunucunun öncelikle dışlaması gereken meşru bir açıklaması yoktur.
+
+Sunucu tarafı anticheat sistemleri, oyuncunun iddia ettiği şeyden bağımsız olarak, hareketleri dünyadaki çarpışma kutularıyla karşılaştırır. Bir oyuncu bir tick'te bir bloğun dışında ve bir sonraki tick'te onun ötesindeyse, bu iki nokta arasında geçerli bir rota olmadan, bu kontrolü doğrudan başarısız olur. Bu, bir insanın fare hareketlerini istatistiksel olarak değerlendiren bir yargı değil, bir geometri problemidir; bu da noclip türündeki hilelerin tespitinin tam olarak bu nedenle güvenilir olma nedenidir. Diğer hilelerde tespiti yumuşatan zamanlama numaraları ve rastgeleleştirme burada çok az işe yarar, çünkü kontrol yalnızca oyuncunun ızgara ile ilişkili olarak nerede sonlandığıyla ilgilenir, nasıl oraya geldiğiyle değil.
+
+<Callout variant="tip" title="Opal Evresi">
+
+Opal da bu modülü aynı isim altında yayınlıyor: Faz. Katalog açıklamasında abartı yok: "Duvarlardan geçmenizi sağlar." Her yerde olduğu gibi aynı kısa menzilli noclip, aynı tespit hikayesi
+
+</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapıldığı değil">
+
+Bu sayfa, terimin ne anlama geldiğini bilmeniz için modülü genel olarak açıklamaktadır. İsimlendirme ve kesin davranış, müşteriye göre değişiklik gösterir ve katı bloklardan geçmek, anticheat çalıştıran hiçbir sunucuda geçerli bir açıklaması yoktur. Opal, tam olarak bu nedenle Phase kullanımını kendi sorumluluğunuzda olarak sınıflandırır: tespit edilebilir ve herhangi bir müşteride olduğu gibi bir hesabın yasaklanmasına neden olabilir
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Faz aslında ne işe yarıyor?">
+
+Oyuncunun normalde çarpışma algılamasının izin vermeyeceği şekilde, katı blokların içinden geçmesini sağlar; sunucuya, normalde mümkün olmayacak bir konum bildirerek, etkili bir şekilde bir duvardan noclip geçişi yapar
+
+</FAQItem>
+
+<FAQItem question="Faz, bir sinek hilesiyle aynı şey mi?">
+
+Hayır. Bir sinek hilesi yerçekimini ortadan kaldırır ve oyuncunun açık uzayda serbestçe hareket etmesini sağlar. Faz ise oyuncunun durdurulması gereken araziyi geçebilmesi için katı bloklara karşı çarpışmayı özel olarak engeller
+
+</FAQItem>
+
+<FAQItem question="Phase seni banlanmaya yol açabilir mi?">
+
+Evet. Katı blokların içinden geçmenin meşru bir açıklaması yoktur ve sunucu tarafı antichipleri, oyuncu konumunu dünya çarpışmasına karşı bağımsız olarak kontrol eder, bu tür hareketleri tespit etmek ve buna göre müdahale etmek kolaylaştırır
+
+</FAQItem>
+
+<FAQItem question="Hangi müşteriler Faz'ı gönderdi?">
+
+Görüntüde Fan ve Opal v1'de belgelendiği gibi. Diğer istemciler benzer noclip davranışını farklı bir modül adı altında uygulayabilir
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-scaffold", label: "Scaffold nedir?", description: "Konum hakkında sunucunun güvenebileceği şeyleri kullanma üzerine kurulu başka bir hareket modülü." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Görünmez kalmaya odaklanan, sadece hızlı hareket etmeye değil." },
+  { href: "/tr/learn/what-is-velocity-anti-knockback", label: "Hızlanma (geri tepme önleme) nedir?", description: "Farklı bir hareket kategorisi modülü, aynı kendi sorumluluğunuzda kullanım profiliyle." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ın Faz Modülü, duvarlardan geçme iddiasını gerçek kılıyor. Listenin geri kalanını inceleyin.</CTA>

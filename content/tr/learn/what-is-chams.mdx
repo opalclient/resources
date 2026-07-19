@@ -1,0 +1,110 @@
+---
+title: Minecraft'ta Chams Nedir? (Modül Açıklaması)
+description: Chams, oyuncuları ve yaratıkları duvarların içinden çizimleyen bir Minecraft modüdür; vanilla'da olduğu gibi arazi gerisinde saklamak yerine gerçek modelini çizer.
+excerpt: Bir duvarın sizi göremeyecekleri anlamına gelmesi gerekir. Chams, bu vaadin asla tutulmamasını sağlar.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Chams herhangi bir duvardan geçebilir mi, yoksa sadece belirli bloklardan mı?
+    a: Render adımını kendisi hedef alır, blok türünü kontrol etmekten ziyade, bu nedenle genellikle duvarların ve katı blokların içinden varlıkları oluşturur. Özel uygulamalar kapsamda hafifçe değişiklik gösterebilir.
+  - q: Chams, normal bir istemciden farklı veriler mi gönderiyor sunucuya?
+    a: Hayır, varlık pozisyonu ve rotasyon verileri zaten normal oyun için her müşteriye gönderiliyor, çünkü sunucuya fizik ve çarpışma algılama için zaten gerekiyor. Chams sadece bu verilerin nasıl çizildiğini değiştiriyor.
+  - q: Chams, ESP ile aynı şey mi?
+    a: Üst üste biniyorlar ancak aynı değiller. Chams, varlığın gerçek modelini araziyle yansıtıyor; tipik bir kutu ESP üst bilgisi ise modelin kendisi yerine ayrı bir kontur veya işaret çiziyor.
+  - q: Hangi müşteriler Chams'ı içeriyor?
+    a: Fan ve Azim'de bir özellik olarak belgelenmiştir.
+  - q: Bir sunucu Chams'i otomatik olarak tespit edebilir mi?
+    a: Güvenilir değil. Sadece yerel görüntülemeyi değiştirir ve olağandışı paketler göndermez, bu nedenle ağ tabanlı hile önleme sistemleri çok az şey bulur. Sunucular, kayıtlar veya raporlar gibi diğer yöntemlerle yakalandığında yine de bunu bir kural ihlali olarak kabul eder.
+---
+
+<KeyTakeaways>
+
+- Chams, oyuncuları ve yaratıkları katı duvarların içinden görüntüleyen bir Minecraft görsel modülüdür.
+- Varlık modellerindeki render derinlik kontrolünü atlar, istemci tarafından zaten alınan konum verilerini kullanır.
+- Kutulu ESP'lerin dış hat işaretçilerinin aksine, varlığın gerçek modelini arazi boyunca çizer.
+- Paket tabanlı antichipler tarafından tespit edilmesi zordur çünkü yalnızca yerel render değişiklikleri yapar, ancak yakalandığında sunucular tarafından yine de yasaklanır
+
+</KeyTakeaways>
+
+Chams, oyuncuları ve yaratıkları duvarların ve diğer katı blokların içinden çizmesini sağlayan bir Minecraft istemci modülüdür, böylece modeli aralarındaki her ne olursa olsun görünür kalır. Adı, yıllardır nişancı oyunlarında da görünen "chameleon" (geyik kertenkelesi) kavramından gelir. Vanilla Minecraft'ın arazi arkasına bir varlığı gizlemesi yerine, chams onu sürekli olarak çizmeye devam eder. Bu yalnızca bir işleme değişikliğidir, yeni bir bilgi kaynağı değildir: istemci zaten varlığın konumuna sahiptir, sadece farklı şekilde çizmeye karar verir.
+
+## Nasıl Çalışır
+
+Minecraft'ın işleme motoru, çizdiği her model için derinlik testi yapar. Bir blok kamera ile bir varlık arasında bulunuyorsa, varlık derinlik testini kaybeder ve hiçbir şey görünmez. Chams, varlık modelleri için bu adımı yamalar, ya kontrolü tamamen atlar ya da her zaman geçmesini sağlayacak şekilde üzerine yazar. Varlık, önünde ne tür bir geometri olursa olsun, tüm detaylarıyla çizmeye devam eder; uzuvlar, zırh, tutulan eşya dahil. Görsel olarak, hedefin harita içinden parlıyor gibi görünür, arkasında duruyormuş gibi değil.
+
+Bunun hiçbirinin sunucudan yeni bilgi gerekliliği yok. Yakındaki varlıkların konumu, rotasyonu ve duruşu zaten fizik ve çarpışma algılama için istemciye aktarılıyor, o istemci şu anda onları görebilse de göremese de. Chams yalnızca o hattın sonunda çizim çağrısına dokunur, bu nedenle ek bir istek veya yeni paket türü yoktur, modülü açmadan önce zaten gelen hiçbir şey gelmez.
+
+## Chams vs kutu ESP
+
+Her iki modül de aynı tür gizli bilgiyi ortaya koyar: bir rakibin tam konumu, ancak farklı şekillerde ulaşırlar.
+
+| | Chams | Kutu ESP |
+|---|---|---|
+| Ne işler | Varlığın gerçek modeli | Ayrı bir anahat veya sınırlayıcı kutu |
+| Ekranda nasıl görünür | Gerçek karakter, duvarın içinden görülebilir | Varlığın konumuna yakın soyut bir işaret |
+| Ek ağ trafiği | Yok | Yok |
+| Modül kategorisi | Görsel | Görsel |
+
+Chams, aynı hilenin daha sürükleyici versiyonudur: "birisi orada" diye size bir gösterge vermek yerine, o kişiyi görürsünüz. Bu, duruşu, yönü ve ekipmanı tek bir bakışta okumayı kolaylaştırır, ancak basit bir kutudan biraz daha fazla render yükü getirir.
+
+## Neden bir avantaj olarak sayılır
+
+Bir düşmanın tam konumunu bir duvardan görebilmek, vanilla Minecraft'ın kasıtlı olarak elinden kaçırdığı bir bilgi. Normalde köşeleri gözlüyor, ayak seslerini dinliyor veya tahmin yürütüyorsunuz. Chams, bu tahmini tamamen ortadan kaldırır; bu, bir kozmetik değil, taktiksel bir avantajdır; görsel modüller kategorisinde yer almasına ve doğrudan nişan almanızı veya hareketinizi etkilememesine rağmen. Oyuncuların tam ESP kurulumlarını kullanmasının aynı nedeni ile diğer görsel modüllerle birlikte sıklıkla kullanılır: Daha iyi bilgi, yeniden konumlanmadan bir çatışmaya zamanlama belirlemeye kadar daha iyi kararlar anlamına gelir.
+
+<Callout variant="tip" title="Burada Opal'da nerede duruyor">
+
+Opal'ın görsel kategorisi Entity ESP gemisi, oyuncuları ve dünyadaki varlıkları vurgular ve kullanımı kendi sorumluluğunuzda olarak işaretlenmiştir. Bu, onu eskiz kampına, chams kampına değil yerleştirir: Opal birinin nerede olduğunu işaret eder, karakter modelini değiştirip oturma odasının duvarından görüntülemez. Modelin arazi içinden render edilmesi özellikle aradığınız şeyse, Opal'ın görsel araç kutusu farklı bir alana girer
+
+</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapıldığı değil">
+
+Bu sayfa, Chams'ın ne yaptığını ve sunucuların neden bunu bir ihlal olarak gördüğünü, çalıştırılmasına izin verme olarak değil, açıklıyor. Gizli bir rakibin kesin konumunu görmek, vanilla oyunun kasıtlı olarak gizlediği bir bilgidir ve çoğu sunucu, bir anticheat render değişikliğini yakalayıp yakalamadığına bakılmaksızın, genel adil oyun kuralları kapsamında bunu yasaklamaktadır
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Chams herhangi bir duvardan geçebilir mi, yoksa sadece belirli bloklardan mı?">
+
+Render adımını kendisi hedef alır, blok türünü kontrol etmekten ziyade, bu nedenle genellikle duvarların ve katı blokların içinden varlıkları oluşturur. Özel uygulamalar kapsamda küçük farklılıklar gösterebilir
+
+</FAQItem>
+
+<FAQItem question="Chams, normal bir istemciden farklı veriler mi gönderiyor sunucuya?">
+
+Hayır. Varlık pozisyonu ve rotasyon verileri zaten normal oyun için her müşteriye gönderiliyor, çünkü sunucu zaten fizik ve çarpışma algılama için buna ihtiyaç duyuyor. Chams sadece bu verilerin nasıl çizildiğini değiştiriyor
+
+</FAQItem>
+
+<FAQItem question="Chams, ESP ile aynı şey mi?">
+
+Üst üste biniyorlar ancak aynı değiller. Chams, varlığın gerçek modelini araziyle yansıtıyor; tipik bir kutu ESP üst bilgisi ise modelin kendisi yerine ayrı bir kontur veya işaret çiziyor
+
+</FAQItem>
+
+<FAQItem question="Hangi müşteriler Chams'ı içeriyor?">
+
+Fan ve Azim'de bir özellik olarak belgelenmiştir
+
+</FAQItem>
+
+<FAQItem question="Bir sunucu Chams'i otomatik olarak tespit edebilir mi?">
+
+Güvenilir değil. Sadece yerel görüntülemeyi değiştirir ve olağandışı paketler göndermez, bu nedenle ağ tabanlı hile önleme sistemleri çok az şey bulur. Sunucular, kayıtlar veya raporlar gibi diğer yöntemlerle yakalandığında yine de bunu bir kural ihlali olarak kabul eder
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Daha geniş kategori, Şamlar ve onlar gibi modüllerin ait olduğu şeydir." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Bilgi üzerinde etkili olan bir modül; Chams sadece onu açığa çıkarır." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Görünmez kalmak üzerine kurulu, Cham'ın başkalarına yaptığı şeyin aynası." }
+]} />
+
+<CTA href="/tr/satın-al">Opal'ın görsel araç seti, kimseyi duvar kağıdınıza yansıtmadan bir kavgayı nereye gideceğini size söyler.</CTA>

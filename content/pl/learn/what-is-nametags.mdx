@@ -1,0 +1,94 @@
+---
+title: Czym są tabliczki z imionami w Minecraft? Wyjaśnienie modułu
+description: Nametags to moduł wizualny dla Minecrafta, który zmienia wygląd tagów graczy, dodając informacje o zdrowiu, odległości lub ping’u, nie wpływając na to, co śledzi serwer ani co ujawnia ESP.
+excerpt: Nametagi zmieniają wygląd imienia unoszącego się nad głową. Nie pokazują niczego, czego nie mogłeś już uzyskać z F3, po prostu oszczędzają Ci podróż.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Nametags to to samo co ESP czy wallhack?
+    a: Nie. Nametagi zmieniają jedynie wygląd tagu dla graczy widocznych już na ekranie. ESP lub wallhack wyświetla informacje o obiektach ukrytych za ścianami lub terenem, czego Nametagi nigdy nie robią.
+  - q: Czy Nametagi widzą przez ściany?
+    a: Nie. Renderuje się na wierzchu normalnego rysowania nazwy gracza w grze, które uruchamia się tylko dla bytów, dla których klient i tak wyświetlałby etykietę.
+  - q: Jakie informacje może wyświetlać moduł Nametags?
+    a: Częste dodatki to zdrowie, dystans, zbroja i ping, a także zmiany stylów, takie jak inna tło czy czcionka. Dokładne pola różnią się w zależności od klienta.
+  - q: Czy Nametags wykrywane są przez antycheaty?
+    a: Mało prawdopodobne. To lokalna zmiana renderowania, która nie wysyła żadnych dodatkowych danych do serwera i nie dotyka niczego, co serwer faktycznie sprawdza, w przeciwieństwie do modułów walki lub ruchu.
+  - q: Jakie klientów mają moduł Nametags?
+    a: Wentylator jest udokumentowany z jednym. Podobne, konfigurowalne funkcje identyfikatora pojawiają się w innych klientach narzędzi pod różnymi nazwami.
+---
+
+<KeyTakeaways>
+
+- Nametagi to moduł wizualny, który zmienia wygląd tagu nad głową, dodając pola takie jak zdrowie, odległość lub ping.
+- Dotyczy tylko graczy widocznych na ekranie, a nie tych ukrytych za ścianą.
+- Nie wysyła żadnych dodatkowych pakietów, więc ryzyko wykrycia jest bliskie zeru.
+- Udokumentowane w Fanie; liczby, które wyświetla, już istnieją na F3 lub w liście graczy.
+
+</KeyTakeaways>
+
+Nametags to moduł wizualny klienta Minecraft, który zmienia sposób renderowania nazw wyświetlanych nad głowami graczy, dodając pola takie jak zdrowie, odległość, pancerz lub ping, albo po prostu zmieniając wygląd tła i czcionki tagu. Działa tylko z graczami, dla których twój klient już rysuje tag. Ktoś przejdzie za ścianę, a jego tag zniknie razem z nim, tak jak w wersji podstawowej. To jest granica między Nametags a ESP lub wallhackiem: te moduły starają się rysować informacje dla bytów, których w ogóle nie powinieneś widzieć. Nametags po prostu sprawia, że tag, który i tak byś widział, wygląda lepiej lub mówi więcej.
+
+## Jak to działa
+
+Podstawowa wersja Minecrafta już rysuje imię nad głowami każdego pobliskiego gracza, a Nametags przechwytuje dokładnie to wywołanie rysowania. Zamiast pozwolić domyślnemu rendererowi dokończyć zadanie, moduł przechwytuje wywołanie i zastępuje je własną wersją: dodatkowe pola dodawane do ciągu znaków, nowa tekstura tła, większa lub mniejsza czcionka – cokolwiek żądają ustawienia.
+
+Ponieważ hak działa wyłącznie w procesie renderowania, nic powyżej ekranu się nie zmienia. Żaden pakiet nie jest wysyłany do serwera z prośbą o dodatkowe dane, a moduł w ogóle nie ingeruje w to, które encje są uznawane za widoczne. Gracz stojący za ścianą nadal otrzymuje zerową etykietę, ponieważ klient nigdy nie miał powodu, aby ją ustawić w kolejce. Hak namietagów uruchamia się tylko dla encji, które już otrzymywały domyślną etykietę; namietagi po prostu przepisują to, co się wyświetla, po podjęciu tej decyzji.
+
+## Ustawienia wspólne
+
+Moduły namietagów zazwyczaj udostępniają kilka przełączników kontrolujących, co wyświetlane jest na etykiecie i jak ona wygląda.
+
+| Ustawienie | Co kontroluje |
+|---|---|
+| Dodatkowe informacje | Dodaje pola takie jak zdrowie, zbroja, ping lub odległość do etykiety |
+| Styl | Zmienia tło, obramowanie lub czcionkę etykiety |
+| Skala | Zwiększa lub zmniejsza rozmiar etykiety |
+| Odległość zanikania | Jak daleko etykieta pozostaje w pełni widoczna, zanim zacznie zanikać |
+
+Większość z tego, co jest dodawane, czyli zdrowie, odległość, ping, to liczby, które można było już pobrać z ekranu debugowania F3 lub listy kart. Namietagi nie przekazują Ci nowych informacji, po prostu przenoszą liczby, do których już miałeś dostęp, bliżej tego, na co już patrzysz.
+
+## Czy Nametagi są bezpieczne w użyciu
+
+Naszywki imienne są traktowane jako kosmetyczna wygoda, a nie oszustwo dające przewagę w rozgrywce. Nie wpływają na wykrywanie trafień, ruch ani żadne wartości weryfikowane przez serwer, a ponieważ zmiana zachodzi wyłącznie w lokalnym renderowaniu, nie ma żadnego wzorca pakietów ani sprawdzenia po stronie serwera, na które mógłby się zawiesić system anticheat. Znajdują się w tej samej kategorii co modyfikacje interfejsu użytkownika i inne modyfikacje kosmetyczne, z dala od modułów walki i ruchu.
+
+Jedyny haczyk: niektóre serwery zakazują wszelkich modyfikacji klienta z zasady, niezależnie od tego, co te modyfikacje faktycznie robią. Czy Naszywki imienne są dozwolone na danym serwerze, zależy od zasad tego serwera, a nie od rzeczywistego ryzyka wykrycia, ponieważ w większości przypadków takiego ryzyka nie ma.
+
+<Callout variant="tip" title="Gdzie to się mieści w Opal">
+Opal nie udostępnia modułu o nazwie Nametags, ale obszar, w którym on funkcjonuje – zmiany, które ograniczają się wyłącznie do tego, co jest rysowane i nigdy nie wpływają na to, co sprawdza serwer – jest dokładnie tym, wokół czego zbudowana jest wizualna kategoria Opal. Ta sama filozofia, niezależnie od tego, czy chodzi o znacznik, element HUD-u, czy o wygląd oświetlonej jaskini.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Nametags to to samo co ESP lub wallhack?">
+Nie. Nametags jedynie zmienia wygląd tagu dla graczy, którzy są już widoczni na ekranie. ESP lub wallhack wyświetla informacje o obiektach ukrytych za ścianami lub terenem, czego Nametags nigdy nie robi.
+</FAQItem>
+
+<FAQItem question="Czy Nametagi widzą przez ściany?">
+Nie. Wyświetla się na wierzchu normalnego rysowania nametagów w grze, co uruchamia się tylko dla obiektów, dla których klient już wyświetlałby namiętnie.
+</FAQItem>
+
+<FAQItem question="Jakie informacje może wyświetlać moduł Nametags?">
+Często dodawane informacje to zdrowie, dystans, pancerz i ping, a także zmiany stylów, takie jak inny kolor tła lub czcionka. Dokładne pola różnią się w zależności od klienta.
+</FAQItem>
+
+<FAQItem question="Czy Nametags są wykrywane przez systemy anticheat?">
+Mało prawdopodobne. To lokalna zmiana renderowania, która nie wysyła żadnych dodatkowych danych do serwera i nie ingeruje w nic, co serwer faktycznie sprawdza, w przeciwieństwie do modułów walki lub ruchu.
+</FAQItem>
+
+<FAQItem question="Którzy klienci mają moduł Nametags?">
+Wentylator jest udokumentowany z takim modułem. Podobne, konfigurowalne funkcje identyfikatorów pojawiają się w innych narzędziowych klientach pod różnymi nazwami.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Szersza kategoria, do której należą Nametagi i każdy inny moduł tutaj." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Zbudowane wokół zasady niezauważalności, przeciwieństwa instynktu modułu, który jedynie przepisuje to, co już widoczne." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Moduł, który automatycznie przetwarza informacje; Nametags je tylko wyświetla." },
+]} />
+
+<CTA href="/pl/purchase">Kategoria wizualna Opal jest przygotowana na zmiany takie jak ta, zobacz, co w niej faktycznie jest.</CTA>

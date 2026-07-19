@@ -1,0 +1,79 @@
+---
+title: Cos'è AutoConfig nei client di Minecraft?
+description: AutoConfig è un modulo di LiquidBounce che rileva il tuo server o anticheat e carica automaticamente le impostazioni corrispondenti. Ecco come funziona effettivamente il sistema di profili.
+excerpt: AutoConfig sceglie l'anticheat più adatto per te. Connettiti a un server e carica silenziosamente le impostazioni che già funzionano contro Watchdog, Grim o qualsiasi altro sistema di controllo.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa cambia effettivamente AutoConfig?
+    a: Scrive nuovi valori nelle impostazioni degli altri moduli di un client, come la distanza di portata, la smussatura della rotazione o la temporizzazione, in base a un profilo corrispondente al server o all'anticheat rilevato. Non si toccano mai quei numeri manualmente.
+  - q: Funziona AutoConfig con qualche sistema anti-cheat?
+    a: Solo anticheat con un profilo mantenuto. LiquidBounce è noto per conservare i profili per gli anticheat, tra cui Watchdog, Grim, Vulcan, Intave e Polar, oltre a preset ottimizzati per server specifici.
+  - q: AutoConfig è esso stesso un modulo di imbroglio?
+    a: Non nel senso di fare qualcosa che un anticheat possa segnalare direttamente. È un livello di configurazione. È il modulo di portata o rotazione che regola e che in realtà produce il comportamento di gioco che viene segnalato.
+  - q: Perché non codificare semplicemente delle impostazioni valide in ogni modulo?
+    a: Poiché un ambiente protetto da un anticheat può causare falsi positivi in un altro. Mantenere le impostazioni esterne significa che un singolo codebase funziona su tutti i server e che solo il profilo deve essere aggiornato quando un anticheat modifica le sue soglie.
+---
+
+<KeyTakeaways>
+
+- AutoConfig è un modulo di LiquidBounce che rileva il tuo server o anticheat e carica automaticamente le impostazioni corrispondenti.
+- Scrive valori come la portata, la levigatura della rotazione e la tempistica in altri moduli da un profilo recuperato.
+- Esistono profili gestiti per anticheat tra cui Watchdog, Grim, Vulcan, Intave e Polar.
+- AutoConfig non invia pacchetti aggiuntivi, quindi il rischio di rilevamento ricade sui moduli che configura.
+
+</KeyTakeaways>
+
+AutoConfig è un modulo in LiquidBounce che rileva a quale server o anticheat sei connesso e carica automaticamente un profilo di impostazioni corrispondente negli altri moduli del client. Invece di dover regolare manualmente la portata, la smussatura della rotazione o la tempistica ogni volta che cambi server, estrae un profilo associato a ciò che trova (Watchdog, Grim, Vulcan, Intave, Polar, o qualunque sia in esecuzione) e scrive quei valori per te. Non è di per sé un cheat, quanto piuttosto la struttura che mantiene correttamente tarati tutti gli altri componenti.
+
+## Come funziona
+
+AutoConfig inizia identificando la tua posizione. Ciò può significare leggere direttamente l'indirizzo del server o identificare quale anticheat è effettivamente attivo una volta connesso. In ogni caso, estrae un profilo corrispondente da una fonte remota e scrive i valori direttamente nelle impostazioni degli altri moduli: la distanza di portata utilizzata da un modulo di combattimento, la smussatura applicata da un modulo di rotazione, gli offset di tempistica su cui fa leva un bypass del movimento.
+
+La ragione dietro questa suddivisione è semplice. Un helper di rotazione o un bypass del movimento vengono scritti una sola volta, come codice generico con parametri regolabili. I numeri effettivi che fanno sì che questi parametri resistano a Watchdog non sono gli stessi che resistono a Grim o Polar, e LiquidBounce mantiene questa differenza completamente fuori dal codice del modulo, vivendo invece nel profilo AutoConfig che recupera. Quando un anticheat modifica le sue soglie di rilevamento, la correzione è un aggiornamento del profilo, non una nuova build del client inviata a tutti gli utenti.
+
+## AutoConfig è rilevabile di per sé?
+
+No, ed è proprio questo il punto di costruirlo in questo modo. AutoConfig non muove il tuo personaggio, non altera le tue rotazioni e non invia nulla di insolito via rete. Scrive valori di configurazione in altri moduli prima o durante una sessione, e un anticheat lato server non ha modo di sapere se un numero è stato digitato a mano o inserito da un profilo recuperato.
+
+Il rischio effettivo risiede un livello più in basso, in quello che AutoConfig configura. Se un profilo regola un modulo di combattimento in modo da trovarsi proprio al limite di una soglia di rilevamento, quel modulo porta esattamente il rischio che avrebbe con qualsiasi altro set di numeri. AutoConfig è uno strato di manutenzione e comodità sopra un cheat client, non un bypass di per sé, e non aggiunge o rimuove rischi oltre a quelli che hanno già i moduli che tocca.
+
+<Callout variant="info" title="Dove si colloca Opal in questo contesto">
+Opal non include un modulo chiamato AutoConfig. È opportuno essere trasparenti su questo piuttosto che minimizzare la questione: l'architettura di profili remoti di LiquidBounce esiste in gran parte perché è open source e deve mantenere sincronizzate diverse impostazioni specifiche per anticheat in un'unica codebase condivisa. Un client a pagamento con un set di moduli fisso e gestito risolve un problema diverso. Se state confrontando specificamente client di utilità in base alla funzionalità di "cambio automatico delle impostazioni in base all'anticheat rilevato", quella è una meccanica di LiquidBounce, non qualcosa da aspettarsi da Opal.
+</Callout>
+
+<Callout variant="warning" title="Il rischio non è AutoConfig, ma ciò che configura">
+AutoConfig di per sé non ti farà bannare, è invisibile a un server. Il modulo di portata, il modulo di rotazione o l'elusione del movimento, che AutoConfig regola silenziosamente, potrebbero agire esattamente alla stessa velocità con cui lo faresti impostando i valori manualmente. Tratta un'impostazione basata su un profilo con la stessa cautela che daresti a una configurazione manuale.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa modifica effettivamente AutoConfig?">
+Scrive nuovi valori nelle impostazioni degli altri moduli di un client, come la distanza di portata, la smussatura della rotazione o la temporizzazione, in base a un profilo corrispondente al server o all'anticheat che rileva. Non toccherai mai quei numeri manualmente.
+</FAQItem>
+
+<FAQItem question="AutoConfig funziona contro qualsiasi anticheat?">
+Solo anticheat con un profilo gestito. LiquidBounce è noto per mantenere profili per anticheat come Watchdog, Grim, Vulcan, Intave e Polar, oltre a preset ottimizzati per server specifici.
+</FAQItem>
+
+<FAQItem question="AutoConfig è esso stesso un modulo di cheat?">
+No, non nel senso di fare qualcosa che un anticheat possa segnalare direttamente. È uno strato di configurazione. È il modulo di portata o rotazione che regola a produrre effettivamente il comportamento di gioco che viene segnalato.
+</FAQItem>
+
+<FAQItem question="Perché non codificare semplicemente le impostazioni ottimali in ogni modulo?">
+Poiché un'impostazione sicura contro un sistema anticheat potrebbe far scattare il rilevamento su un altro. Mantenere la regolazione esterna significa che un singolo codice di modulo funziona su diversi server e solo il profilo deve essere aggiornato quando un anticheat modifica le sue soglie.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia AutoConfig e i moduli che essa configura vi appartengono." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Essere discreti è una strategia diversa rispetto alla sostituzione dei profili per ogni anti-cheat." },
+  { href: "/it/learn/what-is-reach", label: "Cos'è la portata?", description: "Una delle impostazioni precise che AutoConfig regola, e il motivo per cui il numero sicuro sposta anticheat in anticheat." },
+]} />
+
+<CTA href="/it/purchase">Salta la ricerca del profilo. Scopri cosa spedisce Opal per $8.99.</CTA>

@@ -1,0 +1,94 @@
+---
+title: Minecraft'ta Nametag Nedir? Modül Açıklaması
+description: Nametags, Minecraft için görsel bir modül olup, oyuncu etiketlerini sağlık, mesafe veya ping gibi bilgilerle yeniden düzenler; sunucunun takip ettiği hiçbir şeyi veya bir ESP'nin ortaya çıkardığı hiçbir şeyi değiştirmez.
+excerpt: Nametags, başınızın üzerinde beliren ismi yeniden düzenler. Size F3'ten zaten elde edebileceğiniz hiçbir şeyi göstermez, sadece size o zahmete girmeyi kurtarır.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Nametags, ESP veya wallhack ile aynı şey mi?
+    a: Hayır. İsimetiketler yalnızca ekranda zaten görünür olan oyuncular için etiketin görünümünü değiştirir. Bir ESP veya duvar hack'i, duvarların veya arazi arkasındaki varlıklar için bilgi çizer, Nametags asla yapmaz.
+  - q: Nametag'lar duvarların içinden görebilir mi?
+    a: Hayır. Oyunun normal isim etiketi çiziminin üzerine render'lanır, bu çizim yalnızca istemcinin zaten bir etiket göstereceği varlıklar için tetiklenir.
+  - q: Nametags modülü ne tür bilgiler gösterebilir?
+    a: Sıkça eklenenler arasında sağlık, mesafe, zırh ve ping bulunur; ayrıca farklı bir arka plan veya yazı tipi gibi stil değişiklikleri de yer alır. Kesin alanlar müşteriye göre değişir.
+  - q: Nametags anticheat sistemleri tarafından işaretleniyor mu?
+    a: İmkansız. Sunucuya ek veri göndermeyen ve sunucunun kontrol ettiği hiçbir şeyi etkilemeyen, savaş veya hareket modülleri gibi olmayan yerel bir değişiklik.
+  - q: Hangi müşterilerde Nametags modülü var?
+    a: Fan, tek bir özellik olarak belgelenmiştir. Benzer, özelleştirilebilir rozet özellikleri, farklı isimler altında diğer yardımcı programlarda da karşımıza çıkıyor.
+---
+
+<KeyTakeaways>
+
+- Nametags, sağlık, mesafe veya ping gibi alanlar ekleyerek başlık görünümünü yeniden düzenleyen görsel bir modüldür.
+- Sadece ekranda zaten görünür olan oyuncuları etkiler, bir duvarın arkasında gizli olanları etkilemez.
+- Ekstra paket göndermez, bu nedenle tespit riski sıfıra yakındır.
+- Fan'da belgelenmiştir; gösterdiği sayılar zaten F3'te veya oyuncu listesinde mevcuttur.
+
+</KeyTakeaways>
+
+Nametags, oyuncuların başlarının üzerinde beliren isimlerin nasıl görüntülendiğini değiştiren görsel bir Minecraft istemci modülüdür; sağlık, mesafe, zırh veya ping gibi alanlar ekleyebilir veya sadece etiketin arka planını ve yazı tipini yeniden düzenleyebilir. Yalnızca istemcinizin zaten bir etiket çizdiği oyuncular üzerinde çalışır. Birini bir duvarın arkasına götürün ve etiketi de onlarla birlikte kaybolur, tıpkı orijinal oyunda olduğu gibi. Nametags ile ESP veya duvar hilesi arasındaki çizgi budur: bu modüller, görmemeniz gereken varlıklar için bilgi çizmek için elinden geleni yapar. Nametags sadece zaten göreceğiniz etiketi daha iyi görünmesini veya daha fazlasını söylemesini sağlar.
+
+## Nasıl Çalışır
+
+Orijinal Minecraft, yakındaki her oyuncunun üzerinde yüzen bir isim çizer ve Nametags, tam olarak bu çizim çağrısına müdahale eder. Orijinal işleyiciye dokunmadan işi bitirmesine izin vermek yerine, modül çağrıyı keser ve kendi sürümünü değiştirir: dizeye eklenen ek alanlar, yeni bir arka plan dokusu, daha büyük veya daha küçük bir yazı tipi, ayarların ne istediği ne olursa olsun.
+
+Çünkü kanca tamamen oluşturma işleminde yer alır, ekranın önündeki hiçbir şey değişmez. Sunucudan ek veri istemek için hiçbir paket gönderilmez ve modül, ilk etapta hangi varlıkların görünür sayıldığını bile etkilemez. Bir duvarın arkasında duran bir oyuncu bile sıfır etiket alır, çünkü istem hiçbir zaman bir etiket oluşturma ihtiyacı duymadı. Nametag kancası yalnızca zaten bir vanilla etiketi çizimi alacak varlıklar için tetiklenir; Nametags, bu karar zaten verilmişken ekranda neyin görüneceğini yeniden yazar.
+
+## Ortak ayarlar
+
+Nametags modülleri genellikle etikette neyin görüneceği ve nasıl görüneceği için birkaç geçiş anahtarını kullanıma sunar.
+
+| Ayar | Ne kontrol eder |
+|---|---|
+| Ek bilgi | Etikete sağlık, zırh, ping veya mesafe gibi alanlar ekler |
+| Stil | Etiketin arka planını, kenarlığını veya fontunu değiştirir |
+| Ölçek | Etiketi daha büyük veya daha küçük yapar |
+| Solma mesafesi | Bir etiketin görünürlüğünü kaybetmeye başlamadan önce ne kadar uzağa kadar tamamen görünür kalır |
+
+Eklenenlerin çoğu, sağlık, mesafe, ping gibi, zaten F3 hata ekranından veya sekmeler listesinden çekebileceğiniz sayılardır. Nametags size yeni bilgiler vermez, sadece zaten erişebildiğiniz sayıları zaten baktığınız yere daha yakın taşır.
+
+## Nametags kullanmak güvenli mi
+
+İsim etiketleri, oyun avantajı sağlayan bir hileden ziyade, estetik bir kolaylık olarak görünür. Hedef tespiti, hareket veya sunucu tarafından doğrulanacak herhangi bir değeri etkilemez ve değişiklik tamamen yerel işleme içinde gerçekleştiği için, hile önleme sistemlerinin tetikleyebileceği bir paket deseni veya sunucu tarafı kontrolü bulunmaz. HUD ayarlamaları ve diğer estetik modifikasyonlar gibi aynı kategoride yer alır; savaş veya hareket modüllerine uzaktan bile yakın değildir.
+
+Tek uyarı: Bazı sunucular, yaptığı şey ne olursa olsun, herhangi bir istemci modifikasyonunu prensip olarak yasaklayabilir. İsim etiketlerinin belirli bir sunucuda izin verilip verilmemesi, gerçek bir tespit riski olmadığı için, o sunucunun kurallarına bağlıdır; zaten pek bir risk söz konusu değildir.
+
+<Callout variant="tip" title="Opal'da Nerede Bulunur">
+Opal, Nametags adıyla özel bir modül göndermez, ancak içinde bulunduğu alan, tamamen çizimlere bağlı ve sunucu tarafından kontrol edilen hiçbir şeyi etkilemeyen değişiklikler, Opal'ın görsel kategorisinin temelini oluşturur. Etiketi, HUD öğesini veya bir mağaranın aydınlatılmış görünümünü düşünürsek aynı felsefe geçerlidir.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Nametags, bir ESP veya duvar hilesiyle aynı mı?">
+Hayır. Nametags yalnızca ekranınızda zaten görünür olan oyuncuların etiketinin görünümünü değiştirir. Bir ESP veya duvar hilesi, duvarların veya arazinin arkasındaki varlıklar için bilgi çizer, Nametags ise asla bunu yapmaz.
+</FAQItem>
+
+<FAQItem question="Nametag'lar duvarların içini görebiliyor mu?">
+Hayır. Oyunun normal nametag çiziminin üzerine render edilir, bu da yalnızca istemcinin zaten bir nametag göstermesi gereken varlıklar için devreye girer.
+</FAQItem>
+
+<FAQItem question="Nametags modülü ne tür bilgiler gösterebilir?">
+Sıkça eklenenler arasında sağlık, mesafe, zırh ve ping bulunur; ayrıca arka plan veya yazı tipi gibi stil değişiklikleri de yapılabilir. Kesin alanlar, istemciye göre değişir.
+</FAQItem>
+
+<FAQItem question="Nametags anticheat sistemleri tarafından mı işaretleniyor?">
+Muhtemel değil. Sunucuya ek veri göndermeyen ve sunucunun kontrol ettiği hiçbir şeyi etkilemeyen, savaş veya hareket modüllerinden farklı olarak, yerel bir görüntüleme değişikliğidir.
+</FAQItem>
+
+<FAQItem question="Hangi müşterilerde Nametags modülü var?">
+Fan, bir modülle belgelenmiştir. Benzer, özelleştirilebilir rozet özellikleri, farklı isimler altında diğer yardımcı istemcilerde de karşımıza çıkar.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Daha geniş Nametags kategorisi ve burada bulunan diğer tüm modüllerin ait olduğu yer." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Görünmez kalmak üzerine kurulu, sadece zaten görünen şeyleri yeniden etiketleyen bir modülün tam tersi içgüdü." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Bilgiyi otomatik olarak işleyen bir modül; Nametags sadece görüntüler." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ın görsel kategorisi, tam olarak böyle değişiklikler için tasarlanmıştır, içinde ne olduğunu görün.</CTA>

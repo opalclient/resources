@@ -1,0 +1,70 @@
+---
+title: Czym jest radar w Minecraft?
+description: Radar to moduł klienta Minecraft, który wyświetla pobliskich graczy i byty na warstwie z widokiem z góry, ujawniając pozycję przez ściany bez pełnego renderowania ESP.
+excerpt: Kropka na ekranie, która informuje o czyjejś nadchodzącej wizycie, zanim jeszcze się obrócisz. Praktyczna w kwestii świadomości, kosztowna, jeśli serwer ją wychwyci.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy radar jest tym samym co jasnowidztwo?
+    a: Są ze sobą powiązane, ale nie identyczne. ESP generuje pełne modele obiektów lub rysuje je przez ściany w świecie 3D, podczas gdy Radar abstrahuje tę samą świadomość do 2D widoku z góry, który pokazuje jedynie kierunek i odległość.
+  - q: Czy radar działa przez ściany?
+    a: Tak. Ponieważ jest zbudowane na podstawie danych o położeniu, które serwer już wysyła dla pobliskich obiektów, nie zależy od linii wzroku, więc może pokazywać graczy i obiekty znajdujące się za ścianami lub terenem.
+  - q: Czy antycheaty potrafią wykryć radar?
+    a: Radar sam w sobie nie generuje dodatkowego ruchu sieciowego, więc wykrywanie zazwyczaj sprowadza się do skanów integralności po stronie klienta lub do zachowania gracza, które zdradza, że reagują na coś spoza ich normalnego pola widzenia.
+  - q: Jakie klientów mają moduł Radar?
+    a: Wytrwałość jest udokumentowana jako wysyłka jednego. Nakładki w stylu radaru pojawiają się u innych klientów pod różnymi nazwami, ponieważ pomysł nanoszenia na HUD mapy pobliskich obiektów nie jest unikalny dla żadnego z nich.
+---
+
+<KeyTakeaways>
+- Wykres radarowy pokazuje pobliskich graczy i obiekty na warstwie widoku z góry, wskazując kierunek i odległość niezależnie od ustawienia kamery.
+- Ponownie wykorzystuje dane o pozycji, które serwer już wysyła, więc nie generuje dodatkowego ruchu sieciowego.
+- Działa przez ściany, ponieważ nigdy nie zależał od linii wzroku, co jest powodem, dla którego większość serwerów go zakazuje.
+- Tenacity udostępnia udokumentowany moduł Radaru.
+</KeyTakeaways>
+
+Radar to moduł klienta Minecraft, który rysuje widok z góry, nakładkę w stylu minimapy, pokazującą położenie pobliskich graczy i bytów względem ciebie, niezależnie od tego, w którą stronę skierowana jest kamera. Zamiast renderować pełne modele przez ściany, jak to robi ESP, kompresuje tę samą świadomość do rozproszonych kropek: kierunek, odległość, gotowe. Otrzymujesz ostrzeżenie, że ktoś zbliża się zza rogu lub ponad granią, bez wizualnego bałaganu związanego z obserwowaniem, jak ciało przecina teren. Wygląda mniej jak oszustwo i bardziej jak sygnał sonarowy, i właśnie dlatego gracze go lubią, i właśnie dlatego serwery go nie lubią.
+
+## Jak to działa
+
+Każda istota w pobliżu ma już pozycję, którą serwer śledzi i przesyła do twojego klienta. Właśnie tak działają normalne renderowanie, wykrywanie kolizji i lista zakładki. Radar pobiera te same dane dotyczące pozycji względnej, kierunku i odległości od ciebie i rysuje je jako kropkę na płaskiej nakładce nałożonej na HUD, zamiast przekazywać je tylko do normalnego renderowania, które uwzględnia zasłonięcie.
+
+Nakładka jest zwykle zorientowana albo na prawdziwy północny kierunek, albo na kierunek, w którym aktualnie się patrzy, więc kąt punktu na mapach radarowych odpowiada rzeczywistemu kątowi w świecie. Obróć się w inną stronę, a punkty obracają się razem z Tobą, jeśli są ustawione na relatywny kierunek, albo pozostają nieruchome, jeśli są zablokowane na północ. W każdym razie Radar nigdy nie wysyła do serwera żadnych danych, których zwykły klient nie otrzymałby już. Po prostu wizualizuje dane, które normalnie są dla Ciebie niewidoczne.
+
+## Czy Radar jest bezpieczny w użyciu?
+
+Radar należy do tej samej rodziny co ESP i inne moduły świadomości. Pokazuje Ci pozycje, których zwykły klient nigdy nie wyświetliłby, przez ściany, poza Twoim polem widzenia, dlatego większość serwerów klasyfikuje go jako oszustwo, a nie element kosmetyczny, i wiąże się z takim samym ryzykiem zbanowania.
+
+Ponieważ przetwarza tylko dane, które klient już posiada, nie generuje nietypowego ruchu sieciowego, który serwer mógłby samodzielnie wykryć. Wykrywanie zazwyczaj pochodzi z dwóch źródeł: Twojego własnego zachowania i skanów po stronie klienta. Obracanie się w stronę gracza, zanim jest on widoczny, przemieszczanie się, aby uniknąć kogoś, do kogo nie masz linii wzroku, lub reagowanie na obiekty, które powinny być poza ekranem, to wszystko sygnały, że działasz na podstawie informacji, których legalny klient nie posiada. Anticheaty, które skanują binarny kod klienta lub pamięć w poszukiwaniu znanych sygnatur Radar lub ESP, dodają kolejną warstwę zabezpieczeń.
+
+<Callout variant="warning" title="Możliwość zbanowania w prawie każdym zestawie zasad">
+Radar ujawnia informacje, których zwykły klient nie jest w stanie pokazać. To umieszcza go w tej samej kategorii egzekwowania, co ESP na większości serwerów: nie jest to obszar szary, a moduł, który może skutkować zbanowaniem. Traktuj go jako odniesienie do działania tej funkcji, a nie instrukcję.
+</Callout>
+
+Opal obecnie nie wysyła dedykowanego modułu Radar. Warto wiedzieć, jeśli porównujesz klientów narzędzi, ponieważ ta konkretna funkcja: nazwa "radar" jest używana dość swobodnie w tej branży, a nie zawsze oznacza to samo w zależności od klienta.
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Czy Radar jest tym samym co ESP?">
+Są ze sobą powiązane, ale nie identyczne. ESP renderuje pełne modele obiektów lub ich zarysy przez ściany w świecie 3D, podczas gdy Radar abstrahuje tę samą świadomość do 2D widoku z góry, pokazując jedynie kierunek i odległość.
+</FAQItem>
+<FAQItem question="Czy Radar działa przez ściany?">
+Tak. Ponieważ jest zbudowany z danych o położeniu, które serwer już wysyła dla pobliskich obiektów, nie zależy od linii wzroku, więc może pokazywać graczy i obiekty znajdujące się za ścianami lub terenem.
+</FAQItem>
+<FAQItem question="Czy anticheaty mogą wykryć Radar?">
+Sam Radar nie wysyła dodatkowego ruchu sieciowego, więc wykrywanie zazwyczaj sprowadza się do skanowania integralności po stronie klienta lub do zachowania gracza, które zdradza, że reaguje na coś spoza jego normalnego pola widzenia.
+</FAQItem>
+<FAQItem question="W których klientach znajduje się moduł Radaru?">
+Tenacity jest udokumentowany jako zawierający taki moduł. Nakładki w stylu Radaru pojawiają się również w innych klientach pod różnymi nazwami, ponieważ pomysł nanoszenia pobliskich obiektów na mapę HUD nie jest unikalny dla żadnego konkretnego klienta.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Kategoria Radar oraz moduły do niej zaliczane, a także różnice między klientami narzędziowymi a standardowymi." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Inna odmiana świadomego klienta, oparta na pozostawaniu niezauważonym, a nie na dostrzeganiu więcej." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Kolejny moduł, który wymienia uczciwą rozgrywkę na nieuczciwą przewagę, i dlaczego wykrywany jest inaczej niż Radar." }
+]} />
+
+<CTA href="/pl/purchase">Lista modułów Opal jest publiczna. Sprawdź dokładnie, co się w niej znajduje, zanim wydasz $8.99 na niewłaściwego klienta.</CTA>

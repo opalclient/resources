@@ -1,0 +1,121 @@
+---
+title: Jak zainstalować Fabric Loader (krok po kroku, 2026)
+description: "Zainstaluj Fabric Loader w kilka minut: uruchom oficjalny instalator, wybierz wersję Minecrafta, a następnie uruchom nowy profil Fabric. Pełny poradnik z rozwiązaniami problemów."
+excerpt: Ładowacz Fabric to podstawa, na której opiera się każdy mod Fabric. Oto jak go zainstalować za pomocą oficjalnego instalatora i w każdej chwili powrócić do wersji vanilla.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: Czy potrzebuję Forge, żeby zainstalować Fabric?
+    a: Nie. Fabric to oddzielny loader modów. Instalujesz jeden lub drugi na profil, nie oba naraz.
+  - q: Czy instalacja loadera zmienia oryginalną wersję Minecraft?
+    a: Nie. Instalator dodaje nowy profil i nie ingeruje w oryginalną wersję gry. Przełącz profile, aby wrócić.
+  - q: Gdzie trafiają mody po zainstalowaniu ładowarki?
+    a: W folderze "mods" wewnątrz katalogu Minecraft. Jest on tworzony przy pierwszym uruchomieniu profilu Fabric.
+  - q: Czy mogę zainstalować ładowacz bez oficjalnego instalatora?
+    a: Tak. Niektóre launchery dodają obsługę Fabricu i całkowicie pomijają samodzielny instalator.
+---
+
+<KeyTakeaways>
+
+- Instalator Fabrica instalowany jest za pomocą jednego narzędzia: oficjalnego instalatora Fabric.
+- Dodaje on nowy profil uruchamiania i nigdy nie ingeruje w oryginalną wersję gry.
+- Folder `mods` pojawia się po uruchomieniu profilu Fabric przynajmniej raz.
+- Dopasuj instalator do dokładnie tej wersji Minecrafta, w którą planujesz grać.
+
+</KeyTakeaways>
+
+Instalacja programu ładującego [Fabric](https://fabricmc.net/) wymaga jednego narzędzia i kilku kliknięć. Pobierz oficjalny instalator Fabric, uruchom go, wybierz wersję Minecrafta, którą chcesz, i pozwól mu utworzyć nowy profil uruchamiania. Otwórz uruchomiacz, wybierz ten profil Fabric i uruchom grę raz. Program ładujący jest teraz aktywny i gotowy na mody.
+
+<Callout variant="info" title="Gdzie pasuje Opal">
+Opal jest modyfikacją Fabric, więc korzysta z tego samego loadera, który tutaj instalujesz. Po zainstalowaniu loadera, postępuj zgodnie z [instrukcją konfiguracji](/pl/docs/setup) dla dokładnej wersji i zalecanych argumentów JVM.
+</Callout>
+
+## Kroki
+
+<Steps>
+
+<Step number={1} title="Pobierz instalator">
+Pobierz oficjalny instalator [Fabric](https://fabricmc.net/) ze strony projektu Fabric. Jest to mały program Java.
+</Step>
+
+<Step number={2} title="Uruchom to">Kliknij dwukrotnie plik jar, lub uruchom go z terminala, jeśli dwukrotne kliknięcie nie przyniesie efektu</Step>
+
+<Step number={3} title="Wybierz wersję Minecrafta">Wybierz dokładnie tę wersję, w którą planujesz grać, na przykład najnowszą lub starszą, której nadal używasz</Step>
+
+<Step number={4} title="Instalacja">
+Instalator zapisuje nowy profil w Twoim launcherze i pobiera pasujące pliki loadera.
+</Step>
+
+<Step number={5} title="Wybierz Fabric profil">Otwórz uruchomiacz Minecrafta i przejdź do profilu, który został utworzony przez instalator</Step>
+
+<Step number={6} title="Uruchom raz">
+Uruchom grę na tym profilu, aby ładowacz skonfigurował swoje pliki i folder `mods`.
+</Step>
+
+</Steps>
+
+## Co właściwie robi instalator
+
+Instalator nie patchuje pliku jar gry. Dodaje profil uruchamiania, który uruchamia loader [Fabric](https://fabricmc.net/) przed uruchomieniem Minecrafta. Ten loader odczytuje folder `mods` podczas startu i ładuje każdy mod. Ponieważ profil znajduje się obok standardowego, twoja gra bez modyfikacji pozostaje nietknięta i możesz wrócić do niej w dowolnym momencie.
+
+## Instalator a wsparcie launchera
+
+Masz dwie możliwości, aby umieścić loader w odpowiednim miejscu. Wybierz tę, która najlepiej pasuje do twojej konfiguracji.
+
+| Metoda | Kiedy używać | Uwagi |
+|--------|----------------|-------|
+| Oficjalny instalator Fabric | Domyślny dla standardowego launchera | Zapisuje profil, pobiera loader, gotowe w kilka minut |
+| Launcher z wbudowanym wsparciem dla Fabric | Już używasz launchera firm trzecich | Launcher zajmuje się dopasowywaniem wersji za ciebie |
+
+Oba kończą się tak samo: profilem Fabric, który wybierasz przed uruchomieniem.
+
+## Gdzie lądują pliki
+
+| System operacyjny | Ścieżka |
+| :--- | :--- |
+| Windows | `%appdata%\.minecraft` |
+| macOS | `~/Library/Application Support/minecraft` |
+| Linux | `~/.minecraft` |
+
+Folder `mods` pojawia się w tym katalogu po pierwszym uruchomieniu Fabric. Umieść tam pliki jar modów, gdy już istnieje.
+
+## Kiedy loader nie zostanie zainstalowany
+
+<Checklist>
+<ChecklistItem>Instalator nie otwiera się: Java może być nieobecna lub plik jar otwiera się za pomocą niewłaściwego programu. Zainstaluj aktualną wersję środowiska uruchomieniowego Java i spróbuj ponownie.</ChecklistItem>
+<ChecklistItem>Brak profilu Fabric w uruchomieniu: odśwież lub zrestartuj uruchomienie, a następnie poszukaj nowego profilu w rozwijanym menu wersji.</ChecklistItem>
+<ChecklistItem>Gra się zawiesza po dodaniu modów: ładowacz działa poprawnie, ale mod celuje w inną wersję Minecrafta. Dopasuj każdy mod do wersji, którą zainstalowałeś.</ChecklistItem>
+<ChecklistItem>Nieprawidłowa wersja Minecrafta: uruchom ponownie instalator i wybierz właściwą wersję. Może utworzyć więcej niż jeden profil.</ChecklistItem>
+</Checklist>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy potrzebuję Forge, żeby zainstalować Fabric?">
+Nie. Fabric to oddzielny loader modów. Instalujesz jeden lub drugi dla każdego profilu, a nie oba naraz.
+</FAQItem>
+
+<FAQItem question="Czy instalacja loadera zmienia oryginalną wersję Minecrafta?">
+Nie. Instalator dodaje nowy profil i pozostawia Twoją oryginalną grę nietkniętą. Przełącz profile, aby wrócić.
+</FAQItem>
+
+<FAQItem question="Gdzie trafiają mody po zainstalowaniu ładowarki?">
+W folderze `mods` wewnątrz Twojego katalogu Minecraft. Powstaje on przy pierwszym uruchomieniu profilu Fabric.
+</FAQItem>
+
+<FAQItem question="Czy mogę zainstalować loader bez oficjalnego instalatora?">
+Tak. Niektóre launchery dodają obsługę Fabric i pomijają całkowicie oddzielny instalator.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/how-to-install-a-fabric-mod", label: "Jak zainstalować modyfikację Fabric", description: "Następny krok, gdy ładowarka jest już na miejscu." },
+  { href: "/pl/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "Jak różnią się dwa mod loadery." },
+  { href: "/pl/learn/what-is-a-minecraft-mod-loader", label: "Co to jest ładowacz modów?", description: "Co robi ładowacz podczas uruchamiania." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź Opala, klienta Fabric, za $8.99</CTA>

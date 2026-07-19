@@ -1,0 +1,78 @@
+---
+title: Czym jest Chest ESP w Minecraft? (Wyjaśnienie modułu)
+description: Skrzynki ESP oznaczają skrzynie, beczki i inne pojemniki przez ściany w Minecraft. Oto jak moduł renderuje łupy, dlaczego ludzie go używają i ryzyko bana.
+excerpt: Światło z Chest ESP oświetla każdy pojemnik w zasięgu renderowania, bez względu na to, czy jest za ścianą, czy nie. Świetnie sprawdza się podczas polowań na łupy, mniej dobrze, gdy serwer zauważy, że pędzisz prosto do skrzyń, których nie powinieneś widzieć.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie oznacza Chest ESP?
+    a: Skarby, beczki i inne bloki pojemników, czasami w tym także skrzynie pułapkowe i skrzynie shulkerów, w zależności od zlecenia. Pokazują one, gdzie znajdują się pojemniki, a nie co w nich jest.
+  - q: Czy ESP klatki piersiowej to to samo co ESP istoty?
+    a: Nie. ESP jednostki oznaczają graczy i moby przez ściany. ESP skrzyń robi to samo dla bloków kontenerów, więc obie te funkcje są dostarczane jako cechy towarzyszące, a nie jeden moduł.
+  - q: Czy Chest ESP może skutkować zablokowaniem?
+    a: Tak, choć wiąże się z mniejszym ryzykiem niż oszustwo bojowe. Nie zmienia tego, co klient wysyła do serwera, ale serwer monitorujący graczy wielokrotnie podążających do ukrytych pojemników nadal może ich oznaczyć lub zbanować za to. Traktuj to jako wykrywalne, a nie bezpieczne.
+  - q: Czy Chest ESP działa przez ściany?
+    a: Gdziekolwiek klient załadował dane bloków, co w praktyce oznacza wszędzie w zasięgu renderowania. Kamień, teren i pełne konstrukcje między tobą a pojemnikiem nie mają znaczenia, ponieważ etap renderowania pomija zwykłą weryfikację przeszkód.
+---
+
+<KeyTakeaways>
+- Chest ESP to moduł wizualny, który oznaczana skrzynie, beczki i inne pojemniki przez ściany.
+- Wykorzystuje dane blokowe, które klient już posiada, więc nie jest wymagana linia wzroku.
+- Jest to odpowiednik ESP dla pojemników, który robi to samo dla graczy.
+- Nie wysyła nietypowych pakietów, ale ścieżka do ukrytej łupy nadal może skutkować zbanowaniem.
+</KeyTakeaways>
+
+Chest ESP to moduł wizualny, który oznaczana skrzynie, beczki i inne pojemniki magazynowe przez ściany i teren, rysując obrys lub wypełnione pudełko nad każdym z nich, aby pozostawały widoczne niezależnie od tego, co stoi na drodze. Robi to dla łupów to, co ESP encji robi dla graczy: zamienia poszukiwania, które zwykle odbywają się na piechotę, w coś, co można zobaczyć w momencie załadowania świata. Moduł nie potrzebuje pojemnika w zasięgu wzroku, aby go znaleźć. Po prostu sprawdza typ bloku w każdej załadowanej współrzędnej i rysuje znacznik tam, bez względu na to, czy jest ściana, czy nie.
+
+## Jak to działa
+
+Chest ESP skanuje załadowany świat w poszukiwaniu bloków pojemników, takich jak skrzynie, skrzynie pułapkowe, beczki i skrzynie shulkerów, a następnie renderuje je nad każdym z nich, niezależnie od tego, co stoi między graczem a blokiem. To nie jest magia wallhacka, to księgowość. Klient już przechowuje pozycję każdego bloku w zasięgu renderowania, ponieważ gra potrzebuje tych danych do rysowania terenu i obsługi kolizji. Chest ESP po prostu filtruje te dane pod kątem typów pojemników i pomija krok, w którym geometria między tobą a celem normalnie by ją ukrywała.
+
+Własne renderowanie działa w sposób, w jaki robi to większość ESP: obrys, pełne pudełko lub etykieta tekstowa rysowana przez bufor głębi świata, a nie za nim. Pojemnik się nie porusza, a jego zawartość się nie zmienia. Jedyną różnicą jest to, czy ściana ma go przed tobą ukryć.
+
+## Dlaczego ludzie to używają
+
+Oczywistym powodem jest szybkość. Skrzynie i beczki to miejsce, w którym świat Minecraft przechowuje wszystko, co warte posiadania, a oczyszczanie bazy lub pomieszczenia krok po kroku jest powolne. Chest ESP redukuje to poszukiwanie do jednego rzutu oka: wszystkie pojemniki w zasięgu renderowania pojawiają się naraz, w tym te ukryte za fałszywą ścianą lub zasypane pod schodami.
+
+Mniej niewinny powód to najazd. Na serwerach, gdzie gracze przechowują łupy w bazie, widok lokalizacji każdej skrzyni przez ściany usuwa jedyną przeszkodę, wokół której zbudowana jest ochrona bazy, czyli konieczność odnalezienia tych rzeczy. Dlatego wiele serwerów traktuje funkcje widoczności pojemników przede wszystkim jako narzędzie do najazdów, a w drugiej kolejności jako wygoda.
+
+## Czy jest bezpieczne w użyciu
+
+Chest ESP jest cichszy niż moduł walki. Nie ingeruje w twoje obroty, czas ataku ani nic, co jest wysyłane przez sieć, więc serwerowy anticheat nie może go bezpośrednio wykryć. W tym wąskim sensie jest faktycznie mniej ryzykowny niż coś w rodzaju aimbota czy KillAura.
+
+Pułapką jest to, że wykrywanie niekoniecznie wymaga pakietu. Gracz, który idzie prosto do skrzyni, do której nigdy nie miał widoczności, albo który otwiera sekwencję pojemników za zamkniętymi ścianami bez powodu, by wiedzieć, że tam są, to coś, co wykrywanie oparte na wzorcach i zachowaniach może wychwycić. To wnioskowanie, a nie twarda kontrola, co dokładnie stawia Chest ESP w szarej strefie: mniej mechanicznie oczywiste niż oszustwa związane z walką, ale wciąż funkcja do użycia na własną odpowiedzialność. Serwer, który obserwuje ścieżki prowadzące do niewidocznej łupy, może to wykryć, nie oznaczając nawet pojedynczego pakietu.
+
+<Callout variant="tip" title="Gdzie to się znajduje w Opalu">
+Opal udostępnia to pod inną nazwą. Block ESP, znajdujący się w kategorii Visual, jest oznaczony jako używaj na własne ryzyko bezpośrednio na liście modułów Opalu i obejmuje te same obszary co Chest ESP (kontenery) plus bloki zasobów, takie jak rudy, w jednym, szerszym module zamiast modułu dedykowanego tylko skrzyniom. Ta sama funkcjonalność, ta sama uczciwa etykieta ostrzegawcza. Opal nie nazwie „bezpiecznego” programu do podglądu ścianek z łupami tylko dlatego, że nie ingeruje w twoje pakiety.
+</Callout>
+
+<Callout variant="warning" title="Informacja, nie instrukcja">
+Ta strona wyjaśnia, czym jest Chest ESP i dlaczego znajduje się w obszarze szarej strefy, a nie jest to rekomendacja do jego używania. Bezpośrednie wskazywanie na łupy, których nie powinieneś widzieć, to dokładnie tego typu zachowanie, na które zwracają uwagę administratorzy i systemy anticheat, a wiele serwerów zakazuje go na podstawie ogólnych zasad fair play, nawet bez konkretnego flagi pakietu.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Co dokładnie oznaczają Chest ESP?">
+Skrzynie, beczki i inne bloki kontenerów, czasami w tym także skrzynie pułapkowe i skrzynki shulkerów, w zależności od klienta. Pokazuje, gdzie znajdują się kontenery, a nie co w nich jest.
+</FAQItem>
+<FAQItem question="Czy Chest ESP to to samo co entity ESP?">
+Nie. Entity ESP oznaczają graczy i moby przez ściany. Chest ESP robi to samo dla bloków kontenerów, dlatego obie te funkcje są dostarczane jako funkcje towarzyszące, a nie jeden moduł.
+</FAQItem>
+<FAQItem question="Czy używanie Chest ESP może spowodować bana?">
+Tak, mimo że wiąże się z mniejszym ryzykiem niż oszustwo w walce. Nie zmienia tego, co twój klient wysyła do serwera, ale serwer monitorujący graczy, którzy wielokrotnie podążają do ukrytych kontenerów, nadal może ich oznaczyć lub zbanować za to. Traktuj to jako wykrywalne, a nie bezpieczne.
+</FAQItem>
+<FAQItem question="Czy Chest ESP działa przez każdą ścianę?">
+Wszędzie tam, gdzie klient ma załadowane dane bloków, co w praktyce oznacza wszędzie w zasięgu renderowania. Kamień, teren i pełne konstrukcje między tobą a kontenerem nie mają znaczenia, ponieważ krok renderowania pomija zwykłą kontrolę tego, co jest na drodze.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Kategoria parasolowa, do której należą Chest ESP i inne moduły wizualne oraz poprawiające komfort użytkowania." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kategoria klientów oparta na pozostawaniu niezauważonym, ta sama szara strefa, w której żyje Chest ESP." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Końcowy segment oszustw związanych z walką, Chest ESP, jest stosunkowo cichy w porównaniu z nim." }
+]} />
+
+<CTA href="/pl/purchase">Sprawdź Block ESP i pozostałą część kategorii wizualnej Opal.</CTA>

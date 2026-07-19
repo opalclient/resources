@@ -1,0 +1,87 @@
+---
+title: "NeoForge vs Forge: Ładowarki modów do Minecrafta (2026)"
+description: "NeoForge vs Forge: wyjaśnienie różnic między forkiem społecznościowym a oryginalnym loaderem pod względem zarządzania, wsparcia wersji i modyfikacji, oraz wskazówki, który wybrać."
+excerpt: NeoForge to społecznościowy odnoż Forge, który obecnie prowadzi scenę Forge-lineage w aktualnej wersji Minecrafta. Oto jak te dwa rozwiązania się różnią i które z nich warto uruchomić.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Frameworks
+author: trq
+faqs:
+  - q: Czy NeoForge zastępuje Forge?
+    a: W obecnych wersjach Minecrafta większość społeczności traktuje NeoForge jako następcę, ale Forge nadal istnieje i wspiera starsze wersje, więc żadne z nich nie wyeliminowało drugiego.
+  - q: Czy mogę uruchamiać mody Forge na NeoForge?
+    a: Nie niezawodnie. Oba mają wspólne korzenie, ale API się rozeszły, więc mod skierowany do jednego nie jest gwarantowany do załadowania na drugim; zainstaluj odpowiednią wersję.
+  - q: Czy NeoForge i Fabric to to samo?
+    a: Nie. NeoForge pochodzi z rodziny Forge, oferując event-bus i model rejestru, podczas gdy Fabric to oddzielny, lżejszy loader z własnym systemem patchy opartym na mixinach.
+---
+
+<KeyTakeaways>
+
+- NeoForge to widełek społecznościowy Forge’a z 2023 roku, który obecnie prowadzi scenę Forge-lineage w aktualnej wersji Minecrafta.
+- Forge to oryginalny loader, który przez lata obsługiwał ekosystem modów i nadal służy starszym paczkom modów.
+- Podział dotyczył zarządzania, a nie przepisywania kodu; oba projekty dzielą podstawowe założenia, ale od tamtej pory rozeszły się.
+- Wybierz NeoForge dla nowych wersji i aktywnych modów; wybierz Forge dla starszych paczek zbudowanych na jego podstawie.
+
+</KeyTakeaways>
+
+NeoForge to społecznościowy fork Forge'a, który powstał w 2023 roku i jest obecnie domyślnym loaderem dla sceny modowania Forge-lineage na aktualnych wersjach Minecrafta. Forge to oryginalny loader, który przez lata wspierał ekosystem modów. Wybierz NeoForge dla nowych wersji i aktywnych modów; wybierz Forge dla starszych pakietów modów zbudowanych na jego podstawie.
+
+<Callout variant="info" title="Gdzie działa Opal">
+Opal działa na [Fabric](https://fabricmc.net/), a nie na rodzinie Forge, więc żaden z nich nie jest loaderem, który skonfigurowałeś dla Opala. Jeśli dopiero zaczynasz, [przewodnik konfiguracji](/pl/docs/setup) przeprowadzi Cię przez instalację Fabric.
+</Callout>
+
+## Czym się różnią
+
+Forge to oryginalny loader modów dla Minecrafta. Obsługiwał większość dużych paczek modów od ery 1.6, charakteryzując się systemem zdarzeń opartym na adnotacjach, zdefiniowanym cyklem życia oraz transformatorami klas ASM pod maską.
+
+NeoForge to rozwidlenie Forge, które nastąpiło w 2023 roku w związku z konfliktem przywództwa w projekcie Forge. Zachowuje tę samą ogólną architekturę (rejestry, możliwości, system zdarzeń), ale działa pod kontrolą społeczności z bardziej otwartym modelem wnoszenia wkładu.
+
+## Dlaczego doszło do rozwidlenia
+
+Rozwidlenie dotyczyło zarządzania, a nie przepisywania kodu. Grupa współtwórców Forge przeniósła się do projektu będącego własnością społeczności po nieporozumieniach dotyczących sposobu zarządzania Forge. Ponieważ NeoForge powstał z kodu źródłowego Forge, oba loadery dzielą większość swoich podstawowych idei, a autorzy modów zaznajomieni z Forge uznają NeoForge od razu.
+
+Z biegiem czasu oba loadery oddalają się od siebie. NeoForge przeprojektował fragmenty API i dostarcza własne konwencje, więc mod zbudowany dla aktualnego NeoForge nie jest gwarantowany do załadowania na Forge, i odwrotnie.
+
+## Jak się różnią
+
+| | NeoForge | Forge |
+| :--- | :--- | :--- |
+| Posiadanie | Fork społecznościowy Forge z 2023 roku | Oryginalny loader |
+| Zarządzanie | Własność społeczności, otwarty wkład | Tradycyjne kierownictwo projektu Forge |
+| Architektura | Ta sama podstawa (rejestry, możliwości, magistrala zdarzeń) | Rejestry, możliwości, magistrala zdarzeń |
+| Skupienie na nowych wersjach | Aktualne wersje Minecrafta | Przenosi starszą scenę modów |
+| Katalog modów | Rozrasta się na nowszych wersjach | Rozbudowany katalog na starszych wersjach |
+
+## Który wybrać
+
+<Checklist>
+<ChecklistItem>Wybierz NeoForge, jeśli grasz w aktualne wersje Minecrafta i twoje mody zostały na nie przeniesione. Większość aktywnie rozwijanych modów w stylu Forge teraz celuje w NeoForge w nowszych wydaniach.</ChecklistItem>
+<ChecklistItem>Wybierz Forge, jeśli używasz starszego pakietu modów lub moda, który jest dystrybuowany tylko dla Forge. Wiele sprawdzonych pakietów nadal jest na nim opartych.</ChecklistItem>
+<ChecklistItem>Sprawdź stronę wersji dla każdego moda. Ten sam autor może udostępniać wersję Forge dla starszych wersji i wersję NeoForge dla nowszych.</ChecklistItem>
+</Checklist>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy NeoForge zastępuje Forge'a?">
+W obecnych wersjach Minecrafta większość społeczności traktuje NeoForge jako następcę modyfikacji z linii Forge. Forge nadal istnieje i nadal obsługuje starsze wersje, więc żadne z nich w pełni nie wyparło drugiego.
+</FAQItem>
+
+<FAQItem question="Czy mogę uruchomić mody Forge na NeoForge?">
+Niezbyt niezawodnie. Oba mają wspólne korzenie, więc niektóre proste mody mogą działać, ale API się rozeszły. Mod, który jest przeznaczony dla jednego loadera, nie jest gwarantowany do załadowania na drugim. Zainstaluj wersję, która odpowiada Twojemu loaderowi.
+</FAQItem>
+
+<FAQItem question="Czy NeoForge i Fabric to to samo?">
+Nie. NeoForge wywodzi się z rodziny Forge i dzieli z nią model event-busa oraz rejestru. [Fabric](https://fabricmc.net/) to oddzielny, lżejszy loader z własnym modelem łatania opartym na mixinach. To różne ekosystemy.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "Lżejszy ekosystem obok rodziny Forge." },
+  { href: "/pl/learn/what-is-a-minecraft-mod-loader", label: "Czym jest ładowacz modów do Minecrafta?", description: "Czym zajmuje się operator na początku." },
+  { href: "/pl/learn/what-is-asm", label: "Co to jest ASM?", description: "Używają Forge'a, zestawu narzędzi do bytecode'u." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź Opala, klienta Fabric, za $8.99</CTA>

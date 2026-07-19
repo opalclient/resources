@@ -1,0 +1,91 @@
+---
+title: Czym jest Stash Finder w Minecraft? (Wyjaśnienie modułu)
+description: Stash Finder skanuje załadowane fragmenty terenu w poszukiwaniu ukrytych skrzyń, beczek i miejsc do przechowywania w Minecraft, aby gracze mogli szybko wypatrywać zakopane łupy. Jak to działa i jakie jest ryzyko bana.
+excerpt: Stash Finder zamienia każdą załadowaną bryłę w mapę łupów, bez potrzeby łopaty. Serwery Anarchii na to wzrok nie spuszczają. Serwery z ochroną roszczeń nazywają to oszustwem.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Lokalizator Skarbów to to samo co Promień Rentgenowski?
+    a: Ta sama zasada, inny cel. Oba ujawniają informacje, które klient już posiada, ale gracz jeszcze nie odkrył. X-ray podświetla rudę i teren, Lokalizator Skrytek celuje konkretnie w umieszczone przez gracza skrzynie.
+  - q: Czy Stash Finder potrafi widzieć przez ściany?
+    a: "Nie wizualnie, nie następuje żadne renderowanie przez samą ścianę. Oznacza to lokalizację, używając danych fragmentów, które klient już posiada, ale efekt praktyczny jest taki sam: wiesz dokładnie, gdzie kopać, zanim zbadasz to miejsce."
+  - q: Czy Stash Finder działa na każdym serwerze?
+    a: Technicznie rzecz biorąc, wszędzie tam, gdzie fragmenty danych są ładowane i wysyłane do klienta, czyli w większości serwerów działających w standardowym trybie. Czy to jest dozwolone, to już oddzielne pytanie, na które każdy serwer odpowiada inaczej.
+  - q: Dlaczego nazywa się to również StashLogger?
+    a: StashLogger to tylko alias, którego niektórzy klienci używają dla tej samej funkcji. To samo skanowanie skrzyni, inna nazwa.
+  - q: Czy używanie Stash Findera jest niezgodne z regulaminem?
+    a: Zależy od serwera. Serwery z chaosem, gdzie jest najczęściej używane, zazwyczaj nie mają zakazu. Serwery działające na zasadzie roszczeń lub posiadające bardziej rygorystyczną politykę anticheat zazwyczaj traktują lokalizowanie ukrytej przestrzeni magazynowej w ten sposób jako oszustwo.
+---
+
+<KeyTakeaways>
+- Stash Finder (zwany również StashLogger) to moduł świata, który skanuje załadowane fragmenty terenu w poszukiwaniu pojemników umieszczonych przez graczy, takich jak skrzynie, beczki i skrzynki shulkerów, a następnie oznacza ich współrzędne.
+- Odczytuje dane jednostek bloku, które klient już posiada w momencie załadowania fragmentu, nie ma potrzeby najpierw zobaczyć, otworzyć lub podejść do pojemnika.
+- Promień wyszukiwania i filtry typów bloków to ustawienia, które mają największe znaczenie w praktyce.
+- Nie wysyła niczego nietypowego przez sieć, więc jeśli zostanie wykryty, to przez zachowanie, a nie sygnaturę pakietu.
+- Najczęściej spotykany na serwerach anarchy, gdzie ukryty łup nie jest chroniony systemem roszczeń.
+</KeyTakeaways>
+
+Stash Finder to moduł światowy, który skanuje bloki wokół ciebie w poszukiwaniu schowków umieszczonych przez graczy, skrzyń zakopanych pod kamieniem, beczek schowanych w ścianie jaskini, skrzynek shulker zamkniętych w bazie bez widocznych drzwi i precyzyjnie zaznacza ich położenie. Niektórzy klienci udostępniają tę samą funkcję jako StashLogger; to identyczne zachowanie pod inną nazwą. Moduł nie wymaga, abyś wcześniej widział, otwierał, a nawet przechodził obok pojemnika. Jest przeznaczony do serwerów anarchii, gdzie gracze chowają swoje łupy, mając między nimi a każdym, kto ich szuka, jedynie ziemię i nadzieję.
+
+## Jak to działa
+
+Stash Finder filtruje dane bloku, które klient już posiada, dotyczące bytów blokowych typu schowek i oznaczają ich współrzędne w momencie załadowania bloku. To cała sztuczka: klient nie pobiera niczego dodatkowego z serwera, tylko czyta dane, które przybywają wraz z blokiem, i wyciąga to, czego potrzebuje. Nie ma znaczenia, czy skrzynia znajduje się pod dziesięcioma blokami kamienia, wbudowana w niezaznaczoną ścianę jaskini, czy w bazie bez oczywitego wejścia, ponieważ nic z tego nie zmienia tego, co blok już zawiera.
+
+## Popularne ustawienia
+
+| Ustawienie | Kontroluje |
+|---|---|
+| Promień wyszukiwania | Jak daleko od gracza sięga skan |
+| Typy bloków | Które pojemniki liczą się jako skrytkę: skrzynie, beczki, skrzynki shulkerów i tak dalej |
+| Styl znacznika lub ESP | Jak znaleziona skrytka wyświetla się na ekranie, jako punkt orientacyjny, podświetlone pole lub podobne |
+| Tylko pod ziemią | Czy pominąć skrytkę, która jest już widoczna nad ziemią |
+
+Filtry promienia i typów bloków robią tu większość pracy. Poszerz promień lub rozszerz zakres tego, co liczy się jako „skrytkę”, a pojedyncze przeskanowanie bloku przyniesie więcej trafień.
+
+## Dlaczego ludzie z niego korzystają
+
+Atrakcyjność polega na łupach bez kopania. Stash Finder pojawia się w klientach takich jak Meteor Client i SalHack, które są stałym elementem serwerów anarchii, gdzie nie ma systemu roszczeń ani wtyczki ochronnej między graczami. Na takim serwerze zakopana skrytka jest tak bezpieczna, jak dobrze ukryta, a Stash Finder całkowicie eliminuje konieczność ukrywania: przelot przez region i każdy element skrytki w zasięgu zostaje oznaczony zamiast ręcznego wyszukiwania. Niektórzy gracze używają go w przeciwnym kierunku, sprawdzając, czy ich własna baza pojawiłaby się w tym samym skanie, zanim mu zaufa.
+
+<Callout variant="tip" title="Gdzie znajduje się Block ESP w Opal">
+Opal nie udostępnia modułu o nazwie Stash Finder ani StashLogger, i nie będzie tego robić. Najbliższą opcją jest Block ESP, zgłoszony jako Visual i oznaczony jako używaj na własną odpowiedzialność na liście modułów Opal, który podświetla kontenery (oraz bloki zasobów, takie jak rudy) podczas poruszania się po świecie. Został on zbudowany jako renderowany overlay, a nie skaner punktów nawigacyjnych z automatycznym logowaniem, więc te dwie rzeczy nie są identyczne, ale jeśli tak naprawdę chcesz wiedzieć, co jest wokół, zanim zaczniesz kopać, to ta funkcja robi to najlepiej.
+</Callout>
+
+## Czy to wykrywalne?
+
+Stash Finder nie wysyła niczego nietypowego na serwer i nie automatyzuje ruchu ani walki, zmienia jedynie to, co wyświetla Twój własny klient. Oznacza to, że omija anomalie pakietów i opóźnień, które zdradzają moduły takie jak celownik lub automatyczny atakujący. Nie ma oczywistej sygnatury po stronie serwera, która mogłaby zostać wykryta, ponieważ skanowanie i oznaczanie nigdy nie opuszczają Twojego ekranu.
+
+Nie oznacza to jednak, że jest to bezpieczne pod względem zasad wszędzie. Znajdowanie i grabież ukrytego schowka innej osoby bez jego odkrycia poprzez eksplorację to rodzaj niezasłużonej przewagi informacyjnej, którą większość serwerów z jakąkolwiek polityką anticheat traktuje jako oszustwo, w tej samej kategorii co X-ray do wydobywania rud. Tam, gdzie jest wykrywane, dzieje się to poprzez zachowanie: gracz idący prosto do nie wykopalnego, wcześniej niezauważonego skrzynka to wzorzec, który personel może zauważyć bez pojedynczego oznaczanego pakietu. Serwery Anarchii, gdzie Stash Finder jest najczęściej używany, zazwyczaj nie mają tej zasady w ogóle, co jest dużą częścią powodu, dla którego moduł tam przetrwał.
+
+<Callout variant="warning" title="Informacja, nie instrukcja">
+Ta strona wyjaśnia, czym jest Stash Finder i gdzie plasuje się na spektrum zasad, a nie jest to zachęta do jego używania. Na każdym serwerze z systemem roszczeń lub polityką zabraniającą wykorzystywania przewagi danych po stronie klienta, używanie go do najazdu na bazę, którą nigdy nie odnalazłeś uczciwie, stanowi podstawę do zbanowania.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Czy Stash Finder to to samo co X-ray?">
+Ta sama zasada, inny cel. Oba ujawniają informacje, które klient już posiada, ale gracz jeszcze nie odkrył normalnie. X-ray podświetla rudy i teren, Stash Finder celuje konkretnie w umieszczone przez gracza skrzynie.
+</FAQItem>
+<FAQItem question="Czy Stash Finder widzi przez ściany?">
+Nie wizualnie, nie ma renderowania przez samą ścianę. Oznacza lokalizację, używając danych chunków, które klient już posiada, ale efekt praktyczny jest taki sam: wiesz dokładnie, gdzie kopać, zanim zbadasz to miejsce.
+</FAQItem>
+<FAQItem question="Czy Stash Finder działa na każdym serwerze?">
+Technicznie, wszędzie tam, gdzie chunk-i są ładowane i wysyłane do klienta, czyli na większości serwerów zbliżonych do vanilla. Czy jest to dozwolone, to już oddzielne pytanie, na które każdy serwer odpowiada inaczej.
+</FAQItem>
+<FAQItem question="Dlaczego nazywa się go również StashLogger?">
+StashLogger to tylko alias, którego niektórzy klienci używają dla tej samej funkcji. To samo zachowanie skanowania skrzyń, inna nazwa.
+</FAQItem>
+<FAQItem question="Czy używanie Stash Findera jest sprzeczne z zasadami?">
+Zależy od serwera. Serwery anarchy, na których jest on najczęściej używany, zazwyczaj nie mają żadnych zasad przeciwko temu. Serwery działające na zasadzie claimów lub bardziej restrykcyjnej polityki anticheat zazwyczaj traktują lokalizowanie ukrytych skrzyń w ten sposób jako oszustwo.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Kategoria nadrzędna, do której należą Stash Finder oraz inne moduły świata i wizualne." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kategoria klientów ukrytych, takich jak Stash Finder, jest ich naturalnym środowiskiem." },
+  { href: "/pl/learn/what-is-scaffold", label: "Co to jest Scaffold?", description: "Kolejny moduł bliski anarchii, tym razem służący zakorzenianiu się, a nie odkrywaniu tego, co już zostało zasypane." }
+]} />
+
+<CTA href="/pl/purchase">Blok ESP i pozostałe produkty z kategorii Wizualnej Opal są tylko jednego kliknięcia od Ciebie.</CTA>

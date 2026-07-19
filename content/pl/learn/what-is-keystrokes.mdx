@@ -1,0 +1,82 @@
+---
+title: Co to są naciśnięcia klawiszy w Minecraft? Wyjaśnienie nakładki klawiszy HUD
+description: Keystrokes to nakładka HUD, która w czasie rzeczywistym pokazuje, które klawisze i przyciski myszy naciskasz. Jak śledzi dane wejściowe, dlaczego streamerzy z niej korzystają i czy jest zabroniona.
+excerpt: Każdy naciśnięty klawisz podświetla się na ekranie w momencie naciśnięcia. Brak wpływu na rozgrywkę, pełny wpływ na to, jak wygląda Twój stream.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Keystrokes daje jakąś przewagę w rozgrywce?
+    a: Nie. Wyświetla jedynie, które klawisze i przyciski myszy są aktualnie wciśnięte. Nie wpływa w żaden sposób na obsługę wejścia, ruch ani walkę.
+  - q: Czy serwer może wykryć, że używam rejestratora uderzeń klawiszy?
+    a: Nie. Moduł działa w całości po stronie klienta i nie wysyła na serwer niczego, czego normalny klient już nie wysyłałby, więc nie ma nic, co mogłoby zostać wychwycone przez system anticheat.
+  - q: Dlaczego streamerzy używają rejestrowania naciśnięć klawiszy?
+    a: Pozwala widzom zobaczyć, które klawisze i przyciski myszy streamer naciska w czasie rzeczywistym, co jest przydatne do wyjaśniania ruchów, momentu kliknięcia oraz innych technik, które w przeciwnym razie byłyby niewidoczne poza ekranem.
+  - q: Jaka jest różnica między Keystrokes, Keystrokes2 czy OLDKeystrokes?
+    a: To są aliasy lub wcześniejsze warianty tej samej koncepcji modułu, spotykane u różnych klientów. Podstawowa idea, czyli wyświetlanie klawiszy i myszy na ekranie, pozostaje taka sama, nawet jeśli zmienia się nazwa lub styl wizualny.
+---
+
+<KeyTakeaways>
+- Keystrokes to nakładka HUD wyświetlająca, które klawisze i przyciski myszy naciskasz, aktualizowana na żywo podczas gry.
+- Odczytuje tylko lokalne dane wejściowe i wyświetla je na ekranie, nie wysyła nic dodatkowego do serwera.
+- Streamerzy używają go, aby widzowie mogli zobaczyć czas naciśnięć klawiszy; nie daje żadnej przewagi w rozgrywce i nie jest wykrywalny.
+</KeyTakeaways>
+
+Keystrokes to moduł HUD wbudowany w większość klientów narzędziowych Minecraft, który w czasie rzeczywistym pokazuje dokładnie, które klawisze i przyciski myszy są wciśnięte. Przesuwasz się do przodu, a klawisz W się podświetla. Klikasz, a ikona myszy reaguje. Puścisz, a wszystko wraca do stanu początkowego. To cała funkcja. To wyświetlacz, a nie modyfikator – nie wpływa na to, jak gra reaguje na naciśnięcia klawiszy.
+
+## Jak to działa
+
+Keystrokes odczytuje stan klawiszy ruchu, spacji oraz lewego i prawego przycisku myszy, a następnie renderuje mały overlay odzwierciedlający aktualnie wciśnięte przyciski. Większość implementacji podświetla lub zmienia kolor klawisza w momencie wciśnięcia i przywraca go do stanu spoczynku w momencie zwolnienia, dzięki czemu overlay jest zawsze żywym odzwierciedleniem Twoich ruchów, a nie opóźnionym lub podsumowanym.
+
+Pod maską jest to tylko odczyt: moduł sprawdza stan wejścia i maluje piksele. Nie wysyła dodatkowych pakietów, nie przechwytuje klawiszy przed tym, jak gra je zobaczy i nie zmienia tego, co te klawisze już robią. Niektórzy klienci idą dalej i oferują dwie lub trzy wizualne wersje tego samego pomysłu (różne kształty, różne układy), dzięki czemu możesz wybrać styl zamiast być uwięziony z jednym wyglądem.
+
+## Co faktycznie śledzi
+
+| Wejście | Co pokazuje |
+|---|---|
+| W A S D | Klawisze ruchu, pojedynczo |
+| Spacja | Skok |
+| Lewy przycisk myszy | Atak / użycie |
+| Prawy przycisk myszy | Blok / interakcja |
+
+To jest standardowy zestaw. To ta sama garstka danych wejściowych, która ma znaczenie w nagraniach PvP i parkour, a to również dokładnie dlatego moduł istnieje.
+
+## Dlaczego ludzie go w ogóle używają
+
+Oczywista odpowiedź to streamowanie. Widz nie widzi Twojej fizycznej klawiatury, a Keystrokes daje mu na żywo tłumaczenie Twoich ruchów: kiedy się przemieszczałeś, kiedy klikałeś, czy ten kluczowy moment był wynikiem jednego kliknięcia, czy trzech szybkich. To podstawa w treściach PvP i parkour, właśnie z tego powodu, ponieważ nagranie wygląda zupełnie inaczej, gdy widzowie mogą zobaczyć dane wejściowe obok ekranu.
+
+Mniej oczywistym zastosowaniem jest używanie go na własne potrzeby. Niektórzy gracze uruchamiają go tylko po to, by potwierdzić, że klawisz został zarejestrowany w środku kombinacji, albo żeby przeanalizować swoje nawyki podczas opanowywania techniki. Tani system sprzężenia zwrotnego, bez wad.
+
+## Czy to jest bezpieczne w użyciu?
+
+Tak, i tutaj nie ma żadnego zastrzeżenia. Serwer widzi tylko pakiety, które wysyła Twój klient. Keystrokes nie dodaje pakietów, nie zmienia tych, które wysyłasz, i nie ingeruje w logikę ruchu ani walki. Serwerowy anticheat nie ma czego szukać, ponieważ nic w Twoim wychodzącym ruchu się nie zmienia, niezależnie od tego, czy moduł jest włączony, czy wyłączony. Dlatego klienci klasyfikują go obok innych kosmetycznych elementów HUD, a nie w kategoriach walki lub ruchu, ponieważ nie niesie ze sobą żadnego ryzyka, ponieważ nie daje żadnej przewagi.
+
+<Callout variant="tip" title="Gdzie to się mieści w Opal">
+Opal nie dystrybuuje modułu o nazwie Keystrokes. Nasza lista modułów skłania się ku tym, które faktycznie zmieniają przebieg walki lub sekwencji ruchów, a nie nakładkom przeznaczonym dla odbiorców. Jeśli nagrywasz dla widzów, dedykowane narzędzie do nakładek do streamingu zazwyczaj lepiej Ci posłuży niż to wbudowane w klienta, ponieważ Keystrokes jest przeznaczone dla tych, którzy oglądają, a nie dla Ciebie.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Czy Keystrokes daje przewagę w rozgrywce?">
+Nie. Wyświetla jedynie, które klawisze i przyciski myszy są aktualnie wciśnięte. Nie zmienia w żaden sposób obsługi wprowadzanych danych, ruchu ani walki.
+</FAQItem>
+<FAQItem question="Czy serwer może wykryć, że używam Keystrokes?">
+Nie. Moduł działa całkowicie po stronie klienta i nie wysyła na serwer niczego, czego normalny klient już nie wysyłałby, więc nie ma nic, co mogłoby zostać wychwycone przez system anticheat.
+</FAQItem>
+<FAQItem question="Dlaczego streamerzy używają Keystrokes?">
+Pozwala widzom zobaczyć w czasie rzeczywistym, które klawisze i przyciski myszy naciskasz, co wyjaśnia ruchy, czas kliknięć i inne techniki, które w przeciwnym razie byłyby niewidoczne z zewnątrz.
+</FAQItem>
+<FAQItem question="Jaka jest różnica między Keystrokes a Keystrokes2 lub OLDKeystrokes?">
+Są to aliasy lub wcześniejsze wersje tego samego modułu w różnych klientach. Sama koncepcja, czyli wyświetlanie klawiszy i przycisków myszy na ekranie, pozostaje identyczna, nawet jeśli zmienia się nazwa lub styl graficzny.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Kategoria „Uderzenia klawiszy” oraz każdy inny moduł z tej serii." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Drugi biegun spektrum: moduł, który zmienia wychodzące pakiety i skutkuje banem." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Oprogramowanie stworzone tak, by pozostać niezauważone, a nie by być obserwowane – odwrotna motywacja Keystrokes." }
+]} />
+
+<CTA href="/pl/purchase">Zobacz moduły, z którymi Opal faktycznie pracuje, a nie tylko te, które prezentuje.</CTA>

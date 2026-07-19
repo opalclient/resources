@@ -1,0 +1,76 @@
+---
+title: Cos'è l'API Fabric? (Minecraft, 2026)
+description: L'API di Fabric è la libreria condivisa da cui dipendono la maggior parte dei mod di Fabric. Ecco cosa fa, perché è separata dal loader e perché quasi ogni mod ne ha bisogno.
+excerpt: L'API di Fabric è la libreria condivisa a cui si basa quasi ogni mod di Fabric. Se un mod si blocca all'avvio, la causa più comune è una API di Fabric mancante o obsoleta.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Frameworks
+author: trq
+faqs:
+  - q: È necessario Fabric API?
+    a: Per la maggior parte dei mod, sì. Un mod che ne dipende non si caricherà senza di esso. Alcuni mod autonomi non ne hanno bisogno, ma installarlo è l'impostazione predefinita più sicura.
+  - q: Dove lo posso trovare?
+    a: Dai canali ufficiali di Fabric e dagli abituali host di mod. Scegli sempre la build corrispondente alla tua versione di Minecraft.
+  - q: Perché non è integrato nel caricatore?
+    a: Così il loader può rimanere piccolo e aggiornarsi rapidamente mentre l'API condivisa evolve separatamente. È una scelta progettuale deliberata in Fabric.
+---
+
+<KeyTakeaways>
+
+- L'API di Fabric è una libreria condivisa di hook e helper su cui si basano la maggior parte dei mod di Fabric.
+- È separata dal loader appositamente: un loader leggero si aggiorna rapidamente, l'API evolve autonomamente.
+- Fornisce eventi, networking, registry e helper di rendering su cui molti mod fanno affidamento.
+- Un'API di Fabric mancante o obsoleta è la causa più comune di un crash di un mod all'avvio.
+
+</KeyTakeaways>
+
+L'API di Fabric è una libreria condivisa di hook e helper a cui la maggior parte dei mod di [Fabric](https://fabricmc.net/) viene costruita. Il loader principale di Fabric è deliberatamente piccolo, quindi l'API colma le lacune: eventi, networking, helper di registro, utilità di rendering. Se un mod di Fabric si blocca all'avvio con un errore di classe mancante, la causa più comune è l'assenza o l'obsolescenza dell'API di Fabric.
+
+<Callout variant="info" title="Dove si integra Opal">
+Opal è un mod per Fabric, quindi necessita anche di Fabric API. La [guida all'installazione](/it/docs/setup) copre l'installazione di entrambi.
+</Callout>
+
+## Perché è separato dal loader
+
+Fabric divide il sistema in due intenzionalmente. Il loader rimane piccolo e stabile, mentre l'API di Fabric distribuisce l'insieme più grande e in rapida evoluzione di interfacce condivise. Questa separazione permette al loader di aggiornarsi rapidamente a una nuova versione di Minecraft, mentre l'API evolve secondo il suo ritmo.
+
+## Cosa fornisce
+
+L'API offre ai mod un modo comune e stabile per fare le cose che molti mod necessitano:
+
+- Ciclo di vita ed eventi di gioco a cui collegarsi.
+- Utilità di rete per pacchetti personalizzati.
+- Utilità di registro e contenuti per aggiungere oggetti, blocchi ed entità.
+- Utilità di rendering e risorse condivise tra i mod.
+
+Senza di essa, ogni mod dovrebbe reinventare questi componenti e interrompersi a vicenda.
+
+## Ne hai bisogno?
+
+Quasi sempre, sì. La maggior parte dei mod Fabric elenca l'API di Fabric come dipendenza, quindi la installi una volta come mod insieme agli altri. Abbina la sua versione alla tua versione di Minecraft.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Fabric API è richiesto?">
+Nella maggior parte dei casi, sì. Un mod che ne dipende non si caricherà senza di esso. Alcuni mod autonomi non ne hanno bisogno, ma installarlo è l'impostazione predefinita più sicura.
+</FAQItem>
+
+<FAQItem question="Dove lo posso trovare?">
+Dai canali ufficiali di Fabric e dai soliti host di mod. Scegli sempre la versione che corrisponde alla tua versione di Minecraft.
+</FAQItem>
+
+<FAQItem question="Perché non è integrato nel loader?">
+Così il loader può rimanere piccolo e aggiornarsi rapidamente mentre l'API condivisa evolve separatamente. È una scelta progettuale deliberata in Fabric.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "Come si confrontano i due mod loader." },
+  { href: "/it/learn/how-to-install-a-fabric-mod", label: "Come installare un mod di Fabric", description: "Dove si inserisce l'API Fabric nelle fasi di installazione." },
+  { href: "/it/learn/what-is-a-minecraft-mod-loader", label: "Cos'è un mod loader di Minecraft?", description: "Il loader su cui si basa l'API." },
+]} />
+
+<CTA href="/it/purchase">Ottieni Opal, un client Fabric, per $8.99</CTA>

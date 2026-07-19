@@ -1,0 +1,117 @@
+---
+title: Fabric開発環境の構築方法 (2026)
+description: Fabric Mod 開発環境の構築：JDKをインストールし、サンプルModテンプレートをクローンし、Yarnのマッピングを選択し、gradle genSourcesとrunClientを実行します。完全ガイド.
+excerpt: JDK、サンプルmodテンプレート、あなたのマッピング、そして2つのGradleタスクという4つのステップで、開発クライアントの稼働が開始されます。ビルドプラグインが残りの部分を処理します.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: Gradle を自分でインストールする必要はありますか？?
+    a: いいえ。Fabricのサンプルテンプレートには、Gradle wrapperが含まれており、初回実行時に適切なGradleバージョンをダウンロードします。システムにインストールされたGradleではなく、gradlewスクリプトを使用してください.
+  - q: 最初から始めるか、テンプレートを使うか?
+    a: 公式のModテンプレートを使用してください。ビルドプラグイン、Yarnマッピング、そして実行タスクがすでに設定されているので、面倒な初期設定をスキップして、すぐにコーディングを始めることができます.
+  - q: Yarn マッピングは必須ですか？?
+    a: Yarn は Fabric のデフォルトであり、ドキュメント化された名前が付属しているため、導入が容易です。公式の Mojang マッピングに対して構築することもできますが、テンプレートは最初から Yarn に対応するように設定されています.
+  - q: どのJDKバージョンをインストールすればいいですか？?
+    a: 対象のMinecraftバージョンで要求されるものを使用してください。新しいリリースでは新しいJDKが必要になるため、インストール前にバージョンを確認し、IDEでそのJDKを指定してください.
+  - q: GenSources は何をする会社ですか？?
+    a: 選択したYarnマッピングを使用してMinecraftを逆コンパイルし、開発中にゲームのコードを読み、クラスを読みやすい名前で参照できます.
+---
+
+<KeyTakeaways>
+
+- セットアップは4つのステップです：JDK、サンプルModテンプレート、あなたのマッピング、そしてGradle。
+- FabricのビルドプラグインはMinecraftをダウンロードし、実行タスクを自動的に設定してくれます。
+- Gradleを自分でインストールする必要はありません。テンプレートにラッパーが同梱されています。
+- `gradle.properties`でのバージョン不一致が、新規プロジェクトが失敗する最も一般的な原因です.
+
+</KeyTakeaways>
+
+Fabric開発環境の構築は4つのステップで行います。JDKをインストールし、公式のサンプルModテンプレートから始め、マッピング（通常はYarn）を選択し、Minecraftとテストクライアントをダウンロードし、起動するGradleタスクを実行します。ビルドプラグインが重い作業を処理します。JDKとMinecraftのバージョンを最初に一致させれば、あとはそれに続くだけです.
+
+<Callout variant="info" title="どこ Opal 合う">OpalはFabricのModで、[GraalVM JavaScriptスクリプティングエンジン](https://en.learn/what-is-graalvm-javascript-scripting) を搭載しているため、フルなModツールチェーンをセットアップすることなく、スクリプトで拡張できます。インストールして実行するだけで済ませたい場合は、[セットアップガイド](https://en.docs/setup) を参照してください。スクリプトの作成を始めるには、[スクリプティングドキュメント](https://en.docs/scripting) をご覧ください</Callout>
+
+## まずに必要なもの
+
+コードを書く前に、Java Development Kit、IDE、そして Git の 3 つが必要です。
+
+- **JDK。** ターゲットとする Minecraft のバージョンに合ったものを選択してください。新しい Minecraft のリリースでは、より新しい JDK が必要になるため、始める前にバージョンの要件を確認してください。
+- **IDE。** IntelliJ IDEA または Eclipse のどちらでも構いません。多くの Fabric 開発者は、Gradle とデコンパイラの統合がスムーズなため、IntelliJ IDEA を使用しています。
+- **Git。** テンプレートリポジトリをクローンし、自分の変更を追跡します。
+
+[Gradle](https://gradle.org/) はご自身でインストールする必要はありません。テンプレートには、初回実行時に適切なバージョンをダウンロードする Gradle ラッパー スクリプトが同梱されています。
+
+## ステップバイステップ
+
+<Steps>
+
+<Step number={1} title="JDKをインストールする">ターゲットのMinecraftバージョンに合ったJDKをインストールし、IDEでそれを指定してください</Step>
+
+<Step number={2} title="例のMODテンプレートを入手してください">Fabric は公式のスターターリポジトリを公開しました。クローンするか、テンプレートとして使用し、パッケージ名と mod ID をご自身のものに置き換えてください</Step>
+
+<Step number={3} title="マッピングを選択してください">デフォルトでは、[Yarn](/ja/learn/yarn-vs-mojmap) が使用されます。Yarn は、Minecraft のクラスとメソッドに読みやすく、ドキュメント化された名前を付与します。`gradle.properties` で、Minecraft のバージョン、ローダーのバージョン、および Yarn マッピングのバージョンを設定してください</Step>
+
+<Step number={4} title="情報源を生成し、実行する">IDEでプロジェクトを開き、Gradleを同期させてから、`genSources`を実行して、Yarnの名前を使用してMinecraftを逆コンパイルします。`runClient`タスクを実行して、modをロードした開発クライアントを起動します</Step>
+
+</Steps>
+
+## ビルドプラグインがあなたに提供するもの
+
+[Fabric](https://fabricmc.net/) 向けの Gradle ビルドプラグインは、Minecraft をダウンロードし、選択したマッピングにリマップし、実行設定を構築します。これは `build.gradle` 内の小さなブロックで構成します。
+
+| 設定項目 | 場所 | 制御するもの |
+|---|---|---|
+| Minecraft のバージョン | `gradle.properties` | どのゲームビルドに対してコンパイルするか |
+| ローダーのバージョン | `gradle.properties` | モードが動作する Fabric ローダー |
+| Yarn のバージョン | `gradle.properties` | ソースで使用されるマッピング名 |
+| 依存関係 | `build.gradle` | [Fabric API](/ja/learn/what-is-the-fabric-api) およびライブラリ |
+
+`gradle.properties` 内の 3 つのバージョンは一貫性を保ってください。Minecraft のバージョンと Yarn マッピングのバージョンの不一致は、新規プロジェクトが同期に失敗する最も一般的な理由です。
+
+## マッピングが重要である理由
+
+Minecraft は難読化されているため、クラス名は `a.a.a` のようになっています。[Yarn](/ja/learn/yarn-vs-mojmap) はそれらを読みやすい名前にマッピングし、安定した [intermediary](/ja/learn/what-is-intermediary) レイヤーの上に配置されます。`genSources` を実行すると、ビルドプラグインは Yarn 名を使用してゲームを逆コンパイルし、Minecraft コードを直接読み取って参照できるようにします。モードをコンパイルする際、Yarn 名のコードを intermediary にリマップし、マッピングの変更に関係なく、どの対応するインストールでも動作する最終的な jar を作成します.
+
+## プロジェクトがビルドできない場合
+
+<Checklist>
+<ChecklistItem>Gradle 同期がインポート直後に失敗します。通常、`gradle.properties` 内の Minecraft、ローダー、および Yarn のバージョンが一致しません。既知の一致するバージョンセットに設定してください.</ChecklistItem>
+<ChecklistItem>Javaのバージョンが誤っています。Minecraftのバージョンが必要とするJDKよりも古い場合、ビルド時にサポートされていないクラスファイルバージョンに関するエラーが発生します。新しいJDKをインストールし、プロジェクトをそれに向けるように設定してください.</ChecklistItem>
+<ChecklistItem>逆コンパイルされたソースコードはありません。`genSources`を実行し、リロードしてください。初回実行は、ゲーム全体を逆コンパイルするため、時間がかかります.</ChecklistItem>
+<ChecklistItem>`runClient` は何も実行しません。初期の Gradle 同期が完了するまで、タスクを実行しないでください。実行構成は同期中に生成されます.</ChecklistItem>
+</Checklist>
+
+## よくある質問
+
+<FAQList>
+
+<FAQItem question="Gradleを自分でインストールする必要がありますか？">
+いいえ。Fabricのサンプルテンプレートには、Gradleラッパーが含まれており、初回実行時に適切なGradleバージョンを自動的にダウンロードします。システムにインストールされたGradleではなく、`./gradlew`を使用してください。
+</FAQItem>
+
+<FAQItem question="最初から作るべきか、テンプレートを使うべきか？">
+公式のModテンプレートを使用してください。ビルドプラグイン、Yarnマッピング、そして実行タスクがすでに設定されているため、面倒な初期設定をスキップして、すぐにコーディングを始めることができます。
+</FAQItem>
+
+<FAQItem question="Yarnのマッピングは必須ですか？">
+YarnはFabricのデフォルトであり、ドキュメント化された名前が付属しているため、最も簡単な選択肢です。公式のMojangマッピングを使用することもできますが、テンプレートはYarnの使用を前提として設定されています。
+</FAQItem>
+
+<FAQItem question="どのJDKバージョンをインストールすればいいですか？">
+対象のMinecraftのバージョンで必要なものをインストールしてください。新しいバージョンでは新しいJDKが必要になるため、インストール前にバージョンを確認し、IDEでそのJDKを指定してください。
+</FAQItem>
+
+<FAQItem question="genSources は何をする？">
+genSources は、選択した Yarn マッピングを使用して Minecraft を逆コンパイルし、開発中にゲームのコードを読み、クラスを読みやすい名前で参照できるようにします。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/ja/learn/how-to-install-a-fabric-mod", label: "Fabric Mod のインストール方法", description: "プレイヤー側の対応するもの." },
+  { href: "/ja/learn/what-is-the-fabric-api", label: "Fabric APIとは何ですか？?", description: "ほとんどのMODが宣言する依存関係." },
+  { href: "/ja/learn/yarn-vs-mojmap", label: "ヤーン 対 モジュマップ", description: "ソースが読み込むマッピングを選択する." },
+]} />
+
+<CTA href="/ja/purchase">OpalFabricクライアントを8.99ドルで手に入れよう</CTA>

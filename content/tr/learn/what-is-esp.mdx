@@ -1,0 +1,87 @@
+---
+title: Minecraft'ta ESP Nedir? (Modül Açıklaması)
+description: ESP, oyuncuları ve varlıkları Minecraft'ta duvarların içinden görmenizi sağlayan görsel bir hiledir. İşte nasıl çalıştığı, neden paket izi bırakmadığı ve ban riskleri.
+excerpt: Bir duvarın arkasını göremeyeceğiniz anlamına gelmesi gerekir. ESP sessizce bunu yapar ve sunucuya tek bir ek paket bile göndermeden.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: ESP, wallhack ile aynı şey mi?
+    a: Evet. Duvar hilesi, bu modül ailesi için genel bir takma addır ve ESP, çoğu yardımcı uygulamanın ayarlar menüsünde kullandığı özel terimdir.
+  - q: Anticheat yazılımları ESP'yi doğrudan tespit edebiliyor mu?
+    a: Sadece ağ trafiğiyle değil. ESP yalnızca istemcinizin zaten sahip olduğu verileri nasıl çizdiğini değiştirir, bu nedenle ek veri ağ üzerinden geçmez. Algılama ise istemci tarafındaki bütünlük taramalarından veya duvarların içinden baktığınızı ele veren davranışlardan gelir.
+  - q: ESP sunucudan ek veri gönderiyor mu?
+    a: Hayır. Sunucu zaten normal oyun için yakındaki her varlığın konumunu aktarıyor, duvar olsun olmasın. ESP yalnızca istemcinin bu mevcut veriyi nasıl çizdiğini değiştirir, yeni bir şey talep etmez veya almaz.
+  - q: Çoğu sunucuda ESP kullanmak kurallara aykırı mı?
+    a: Evet. Neredeyse her çok oyunculu sunucu ESP'yi hile olarak değerlendirir ve yakalanmak, ister istemci taramasıyla ister davranışla olsun, genellikle yasaklanmayla sonuçlanır.
+---
+
+<KeyTakeaways>
+
+- ESP, oyuncuları ve varlıkları duvarların ve araziye rağmen gösterir, aralarındaki engellerden bağımsız olarak görünür tutar.
+- Sadece yerel işleme yapar. Sunucu zaten normal oyun için varlık pozisyonlarını aktarıyor, bu yüzden ekstra bir şey istenmez veya gönderilmez.
+- Herhangi bir paket izi bırakmaz, bu nedenle tespit, istemci bütünlüğü taramalarına veya ne gördüğünü ele veren davranışlara dayanır.
+- Duvar hilesi, buna genel olarak verilen isimdir ve ESP, bu ilgili görsel modüllerin tüm ailesi için şemsiye terimdir.
+
+</KeyTakeaways>
+
+ESP, yani extrasansöryel algı kısaltması, Minecraft'ta görsel bir hile modülüdür ve diğer oyuncuları ve varlıkları duvarlardan ve arazi engellerinden geçerek, kamera açınız nereye bakarsa baksın veya aranızda ne olursa olsun görünür tutar. Normal bir istemcinin göstermesi beklenmeyen şeyleri çizen duvarhack ailesinin şemsiye terimidir.
+
+## Nasıl Çalışır
+
+Sunucu zaten yakındaki her oyuncu, yaratık ve eşyanın konumunu takip eder ve bunların pozisyonlarını duvar ya da duvar olmasın, istemcinize aktarır. Bu bir sızıntı değildir, oyunun nasıl çalıştığının sadece bir yoludur: fizik, çarpışma algılama ve normal işleme, aranızda ne olursa olsun hedef arasında tüm bu veriye ihtiyaç duyar. Normal bir istemci bunların çoğunu son anda atar. Derinlik testi, neyin ne önünde olduğunu kontrol eder ve yalnızca kameranızın olası olarak görebileceği varlıkları çizer, böylece katı bloklar geri kalanını gizler.
+
+ESP, seçilen varlıklar için bu atma adımını atlar. Vanilla işleme tarafından talep edilen şekilde bir duvarın arkasında kaybolmak yerine, varlık bir taslak, bir kutu veya tam bir model olarak dünya geometrisinin üzerine çizilir, onu engellemesi gereken her şeyin önünde. Sıradan oyun için konum verileri zaten geldiğinden, bunun için sunucuya yeni bir istek yapılmasına veya ekstra bir şeyin geri gönderilmesine gerek yoktur. Bu karar tamamen makinenizde ne çizileceğine dair bir karardır, istemcinizin ne bildiğini değiştiren bir şey değildir.
+
+## Neden İnsanlar Kullanıyor
+
+Çekiciliği erken bilgi sağlıyor. Donanımlı bir oyuncuyu bir köşeyi dönmeden önce fark etmek, arkadan yaklaşan birini fark etmek veya körü körüne keşfetmeden canavarları ve ganimeti takip etmek, bunların hepsi aynı hileden kaynaklanıyor. Bir savaşta, ESP bir duvarın veya köşenin sağlaması gereken sürprizi ortadan kaldırır, çünkü yakındaki her varlığın konumu her zaman görünür.
+
+Fan, Tracers ve Nametags gibi ilgili görsel özelliklerle birlikte özel bir ESP modülüyle birlikte gönderilen bir istemcidir ve bunların hepsi aynı fikre dayanır: normal bir istemcinin asla göstermeyeceği kadar çok şeyi haritada görme.
+
+## Neden Bayrak Yükseltiyor
+
+ESP tek başına ağ üzerinde sessizdir. Sunucudan herhangi bir şey talep etmez ve sıra dışı bir şey geri göndermez, bu nedenle paketleri izleyen bir sunucu doğrudan bir şey yakalayamaz. Algılama genellikle iki farklı yönden gelir.
+
+Bazı antichipler, maçta yaptığınız şeyleri izlemek yerine bilinen ESP kancalarını, enjekte edilmiş işleme kodunu veya değiştirilmiş oyun dosyalarını tarayan istemci tarafı bütünlük kontrolleri çalıştırır. Diğerleri oyuncuyu izler: bir duvardan bir pusuya dönmek, görüş hattı olmayan gizlice yaklaşan bir düşmanı önlemek veya görsel bir neden olmaksızın bir hedefin hareketini takip etmek, bunların hepsi birinin normal bir istemcinin gösterdiğinden daha fazlasını gördüğünün işaretleridir.
+
+Tam da bu kombinasyon, ESP'yi "sadece bir render değişikliği" açıklaması düşündürdüğünden daha riskli kılıyor. Paket izi olmaması, iz olmadığı anlamına gelmiyor. İstemci taramasıyla davranış analizini birleştiren sunucular bunu düzenli olarak yakalıyor, bu yüzden yasaklanabilir sütuna, güvenli olanın yanına değil.
+
+<Callout variant="tip" title="Opal'da Nerede Bulunur">
+Opal bunu doğrudan gönderiyor. Varlık ESP, görsel kategorisinde yer alıyor ve adının da belirttiği gibi dünyadaki oyuncuları ve varlıkları vurguluyor. Opal'ın kendi modül listesinde "kendi sorumluluğunuzda kullanın" olarak işaretlenmiş durumda; burada her duvar hack tarzı özelliğe verilen dürüst etiket, "kesinlikle güvenli" gibi bir yanıltıcı ifadeyle gelmiyor.
+</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını anlatmıyor">
+Bu sayfa, ESP'nin ne olduğunu ve sunucuların neden bunu bir ihlal olarak gördüğünü, çalıştırılmasına bir onay olarak değil, açıklar. Bir düşmanın tam konumunu bir duvarın içinden görme, vanilla oyunun kasıtlı olarak tuttuğu bir bilgidir ve bunu sağlayan, istem taraması veya davranış yoluyla olsun, esasen her sunucuda yasaklanabilir bir özelliktir.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="ESP, wallhack ile aynı mı?">
+Evet, aynı fikir ancak iki farklı isim altında. Wallhack takma adıdır; ESP ise çoğu yardımcı programın ayarlar menüsünde modül olarak adlandırdığı şeydir.
+</FAQItem>
+
+<FAQItem question="Anticheat sistemleri ESP'yi doğrudan tespit edebilir mi?">
+Sadece ağ trafiği üzerinden değil, çünkü ESP, sunucuya ek veri göndermeden yerel işleme değişiklikleri yapar. Tespit genellikle istemci tarafı bütünlük taramalarına veya bir oyuncunun görmemesi gereken bir şeye tepki verdiğini gösteren davranışlara dayanır.
+</FAQItem>
+
+<FAQItem question="ESP sunucudan ek veri gönderiyor mu?">
+Hayır. Sunucu zaten normal oyun için varlık konumlarını gönderiyor. ESP yalnızca istemcinin mevcut veriyi nasıl çizdiğini değiştirir; yeni bir şey talep etmez veya almaz.
+</FAQItem>
+
+<FAQItem question="ESP çoğu sunucuda yasak mı?">
+Evet. Neredeyse tüm çok oyunculu sunucular ESP'yi hile olarak değerlendirir ve istemci taraması veya davranış yoluyla yakalanmak genellikle yasaklanmaya yol açar.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Daha geniş ESP kategorisi ve burada bulunan diğer tüm modüller de bu kategoriye aittir." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "ESP'nin nerede olduklarını zaten size söylediği hedef üzerinde etkili olan modül." },
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "Hedefler ve kendi başına yapılan saldırılar, ifşa et-sonra-hareket et kombinasyonunun ESP'sinin diğer yarısını oluşturur." },
+]} />
+
+<CTA href="/tr/satin-al">Entity ESP'nin Opal'in görsel araç kutusunda nerede yer aldığını görün.</CTA>

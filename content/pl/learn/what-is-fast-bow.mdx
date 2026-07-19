@@ -1,0 +1,84 @@
+---
+title: Co to jest szybki bój w Minecraft? Moduł Wyjaśniony
+description: Szybki Łuk to moduł bojowy, który pomija opóźnienie w naciąganiu łuku w wersji podstawowej, wystrzeliwując strzały z pełną mocą niemal natychmiast. Oto jak on działa i dlaczego jest oznaczany.
+excerpt: Wanilia zmusza cię do czekania prawie sekundę na pełną moc. Fast Bow po prostu decyduje, że już wystarczy.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie zmienia Fast Bow?
+    a: Skraca lub eliminuje czas, przez jaki należy przytrzymać cięciwę naciągniętą przed wystrzeleniem z pełną mocą, dzięki czemu strzały, które powinny być słabe i wolne, trafiają jako w pełni naładowane strzały niemal natychmiast.
+  - q: Czy Fast Bow to to samo co aimbot?
+    a: Nie. Szybki łuk wpływa tylko na czas naciągania i siłę strzału, a nie na celność. Nie celuje krzyżkiem w cel tak jak aimbot, po prostu sprawia, że każdy strzał jest wykonywany z pełnego naciągnięcia.
+  - q: Czy serwery mogą wykrywać Fast Bow?
+    a: Wielu można to ustalić, porównując czas, przez jaki łuk był widocznie naciągnięty, do siły strzały, która z niego wystrzeliła. Strzał wykonany z pełną mocą i minimalnym czasem naciągania to wyraźna niezgodność, choć mniejsze redukcje opóźnienia trudniej wychwycić niż całkowite ich usunięcie.
+  - q: Klienci, którzy mają Fast Bow?
+    a: Udokumentowano to, jak widać w Tenacity, skategoryzowano wraz z modułami bojowymi oraz innymi skrótami opartymi na czasie.
+---
+
+<KeyTakeaways>
+
+- Szybki Łuk to moduł bojowy, który pomija lub skraca domyślne opóźnienie naciągania łuku, dzięki czemu strzały wystrzeliwane są z pełną mocą niemal natychmiast po zwolnieniu.
+- Domyślny łuk wiąże obrażenia i zasięg z czasem naciągania, zbliżonym do pełnej sekundy dla maksymalnego naładowania; Szybki Łuk raportuje ten stan we wczesnej fazie.
+- Zmienia tylko czas ładowania i moc, a nie celowanie, więc nie jest to celownik.
+- Serwery wyciągają czas naciągania z historii pakietów, a strzał z pełną mocą, z niemal zerowym rzeczywistym czasem naciągania, to łatwy sygnał anticheat.
+- Udokumentowane, jak widać w kategorii bojowej Tenacity.
+
+</KeyTakeaways>
+
+Szybki Łuk to moduł bojowy, który eliminuje standardowe opóźnienie przy wyciąganiu łuku, dzięki czemu strzał trafia z pełną mocą niemal natychmiast po naciągnięciu. W normalnym trybie przetrwania łuk musi być naciągnięty przez prawie pełną sekundę, aby zadać realne obrażenia lub trafić prosto. Puść za wcześnie, a strzała będzie słaba i zboczy z celu. Szybki Łuk albo skraca ten czas, albo informuje grę, że łuk był już w pełni naładowany, redukując mechanikę, którą Mojang stworzył jako celową wymianę, do czegoś w rodzaju natychmiastowego strzelania. Twoje celowanie pozostaje dokładnie takie samo. Zmienia się tylko stan naładowania.
+
+## Jak działa Szybki Łuk
+
+Standardowa wersja łączy obrażenia i prędkość łuku z czasem, przez jaki jest on naciągnięty. Puść za wcześnie, a strzała będzie słaba i zboczy z celu. Przytrzymaj przez prawie sekundę, a wypuści pełny ładunek, uderzając mocniej i lecąc prościej. Szybki Łuk przechwytuje ten licznik ładowania po stronie klienta i albo go skraca, albo zgłasza pełne naładowanie od momentu podniesienia łuku, dzięki czemu strzała, która wystrzeliwana jest, niesie pełną moc znacznie wcześniej, niż mogłaby ją wygenerować prawidłowo naciągnięty łuk.
+
+Klient nadal wysyła do serwera normalnie wyglądający pakiet strzelania. Nic w samym pakiecie nie wygląda nieprawidłowo. Zmienia się tylko czas: gracz wyciąga i puszcza niemal natychmiast, a gra traktuje strzał tak, jakby był on przytrzymany przez cały czas.
+
+Odwołanie jest proste. W pełni naładowana strzała uderza mocniej i leci prościej, więc skrócenie czasu ładowania zamienia niemal każdy strzał w niemal natychmiastowe, niemal maksymalne trafienie. W wymianie strzał, to różnica między zadaniem pierwszego skutecznego trafienia, a otrzymaniem strzały, podczas gdy własny strzał wciąż się ładuje.
+
+## Czy Fast Bow jest bezpieczny w użyciu?
+
+Nie. Fast Bow zmienia wynik walki na korzyść strzelca, a każdy serwer, który dba o uczciwe walki, traktuje go jako oszustwo, a nie wygodę.
+
+Stan ładowania istnieje po stronie klienta, zanim pakiet strzały dotrze do serwera, więc serwer nie może go po prostu odczytać z danych gracza. Antycheaty wnioskują o czasie naciągania łuku pośrednio: śledzą, jak długo gracz widocznie trzymał naciągnięty łuk na podstawie poprzednich pakietów, a następnie porównują to z mocą strzały, która wyleciała. Strzał docierający z pełną mocą znacznie szybciej, niż mógłby go wygenerować legalny naciąg, to niezgodność, którą łatwo wykryć.
+
+Jak niezawodnie to się dzieje, zależy od serwera. Niektóre konfiguracje sprawdzają tylko oczywisty przypadek, strzał wystrzelony w momencie podniesienia łuku. Bardziej subtelna konfiguracja, która usuwa tylko część opóźnienia, trudniej odróżnić od opóźnień lub gracza, który po prostu jest bardzo szybki w naciąganiu łuku, dlatego niektóre implementacje oferują opcję częściowego opóźnienia zamiast całkowitego usunięcia oczekiwania.
+
+<Callout variant="tip" title="Gdzie Opal wyznacza granicę">
+Opal nie dostarcza dedykowanego modułu Fast Bow. Wykorzystywanie błędów w czasie naciągania cięciwy jest jedną z łatwiejszych kategorii do wykrycia przez serwer, ponieważ serwer już śledzi, jak długo łuk jest naciągnięty; wymuszanie niezgodności w tym zakresie po prostu przekazuje anticheatowi czysty sygnał do działania. Skład bojowy Opal obejmuje te same walki na dystans, ale opiera się na zachowaniach, których serwer nie jest w stanie wyraźnie odróżnić od zachowań szybkiego, legalnego gracza, a nie na udawaniu stanu naciągania cięciwy, który serwer może zmierzyć.
+</Callout>
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona wyjaśnia, czym jest Fast Bow i jak zachowuje się w ogólnych kategoriach. Nie jest to przewodnik po jego używaniu. Odpalanie strzał z pełną mocą przed prawidłowym naciągnięciem łuku narusza zasady na każdym serwerze sprawdzającym czas walki i jest to jeden z łatwiejszych wzorców wykrywanych przez anticheat.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co tak naprawdę zmienia umiejętność Szybkiego Celu?">
+Skraca lub eliminuje czas, przez jaki należy przytrzymać cięciwę naciągniętą, zanim strzała wystrzeli z pełną mocą, dzięki czemu strzały, które powinny być słabe i wolne, trafiają jako w pełni naładowane pociski niemal natychmiast.
+</FAQItem>
+
+<FAQItem question="Czy Fast Bow to to samo co aimbot?">
+Nie. Fast Bow wpływa jedynie na czas ładowania i siłę strzału, a nie na celowanie. Nie kieruje krzyżka na cel tak jak aimbot, po prostu sprawia, że każdy strzał jest jak pełne naciągnięcie cięciwy.
+</FAQItem>
+
+<FAQItem question="Czy serwery mogą wykrywać Fast Bow?">
+Wielu tak, porównując czas, przez jaki łuk był widocznie naciągnięty, z mocą wystrzelonej strzały. Strzał z pełną mocą przy minimalnym czasie naciągnięcia to wyraźna rozbieżność, choć mniejsze redukcje opóźnienia trudniej wykryć niż całkowite ich usunięcie.
+</FAQItem>
+
+<FAQItem question="Kto posiada Fast Bow?">
+Jest to udokumentowane w Tenacity, skatalogowane w sekcji modułów bojowych wraz z innymi skrótami opartymi na czasie.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Broń biała w tym samym module bojowym." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Jak różni się automatyzacja celów od skrótu czasowego, takiego jak Fast Bow." },
+  { href: "/pl/learn/what-is-reach", label: "Co to jest Reach?", description: "Kolejny moduł bojowy oparty na manipulacji pojedynczą, standardową liczbą." },
+]} />
+
+<CTA href="/pl/purchase">Walka na dystansie Opal jest stworzona, by wygrywać losowania, a nie je udawać.</CTA>

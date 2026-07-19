@@ -1,0 +1,79 @@
+---
+title: Minecraft'ta Uzun Atlama Nedir? Modül Açıklaması
+description: Uzun Atlama, havada hareket dizilimlerini değiştirerek tek bir zıplayışın ne kadar mesafeyi kat edebileceğini etkiler, fiziksel kuralların izin vermediği mesafeleri kapsar ve yasaklanmaya yol açabilecek bir risktir.
+excerpt: Tek bir zıplama, olması gerektiğinden uzun. Uzun Atlama, havada sayıları yeniden yazıyor ve hiçbir sunucu tarafı kontrolü sonsuza dek yanıltılmıyor.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Uzun Atlama aslında neyi değiştiriyor?
+    a: Zıplama sırasında gönderilen hareket paketlerini değiştirerek, oyuncunun zıplama yüksekliğini veya sıklığını etkilemeden zıplamanın yatay mesafesini artırır.
+  - q: Uzun Atlama, Bhop ile aynı şey mi?
+    a: Hayır, Bhop zincirleri, zamanla hız kazanmak veya hızı korumak için tekrarlanan zıplamalar kullanır; Uzun Zıplama ise tek bir zıplamanın mesafesini uzatır. Her ikisi de hareket modülleridir ve her ikisi de temel fizik kurallarını aşar, ancak mekanizmaları farklıdır.
+  - q: Uzun atlama bir oyuncunun kadro dışı kalmasına neden olabilir mi?
+    a: Evet. Zıplama mesafelerini, normal fizik kuralları izin vermediği gibi, üretiyor. Bir sunucu, hareketleri beklenen değerlere karşı kontrol ederek bunu tespit edebilir ve bu kullanım genellikle çoğu sunucunun uyguladığı hareket hilelerine karşı kuralları ihlal eder.
+  - q: Hareket paketlerini değiştirmek Uzun Atlama'yı yakalamayı zorlaştırır mı?
+    a: Aslında değil. Paket manipülasyonu, bariz bir şekilde imkansız bir çerçeveyi engelleyebilir, ancak sonuçtaki mesafe, bildirilen hız ve konumun üretmesi gereken değerlere karşı hala ölçülebilir; tam olarak sunucu tarafı kontrollerinin karşılaştığı şey budur.
+---
+
+<KeyTakeaways>
+
+- Uzun Atlama, tek bir zıplamanın normal Minecraft mesafesini ne kadar aştığını artıran bir hareket modülüdür.
+- Zıplama zaten devam ederken gönderilen hareket paketlerini değiştirerek çalışır, zıplamanın nasıl tetiklendiğini değiştirerek değil.
+- Tek bir zıplamada elde edilen kazanç küçük olsa da, araziyi aşarken veya bir kovalamacadan kaçarken tekrar tekrar kullanıldığında birikir.
+- Ölçülebilir hareketi değiştirir, bu nedenle beklenen zıplama mesafesini yeniden hesaplayan bir sunucu, bunu diğer fiziksel ihlaller kadar kolaylıkla tespit edebilir.
+
+</KeyTakeaways>
+
+Uzun Atlama, tek bir zıplamanın vanilla Minecraft'ın fiziği izin verdiklerinden daha uzağa ulaşmasını sağlayan bir hareket modülüdür. Zıplamanın nasıl tetiklendiğini değiştirmek yerine, zıplama gerçekleşirken zaten mevcut olan veriler üzerinde çalışır: oyuncunun pozisyonunu ve yayılan hareketini yayınlayan paketler. Sonuç, yerçekimi, başlangıç hızı ve mevcut momentumun izin verdiğinden daha uzağa inen bir zıplamadır. Hız ve momentum modülleri gibi diğerleriyle birlikte hareket kategorisinde yer alır ve sunucu tarafı bir anticheat tarafından yakalanmak üzere tasarlanmış tam olarak ölçülebilir bir sapmadır.
+
+## Uzun Atlama Nasıl Çalışır
+
+Vanilla Minecraft, bir zıplamanın yatay mesafesini, ayrıldığınızda ne kadar hızlı hareket ettiğiniz, sizi aşağı çeken yerçekimi ve zaten sahip olduğunuz momentum gibi küçük bir fizik girdisi kümesiyle hesaplar. Gizli bir "daha uzağa zıpla" ayarı, açılmayı bekleyen istemcide bulunmaz. Mesafe, her oyuncu için her zaman aynı şekilde bu sayılardan çıkar.
+
+Uzun Atlama, zıplayışın başlangıcını etkilemez. Zıplayış havada gerçekleştiğinde, oyuncunun pozisyonunu ve hareketini tanımlayan paketlerde müdahale eder ve yere düşmeden önce kat edilen yatay mesafeyi uzatır. Sunucular genellikle bir istemcinin bildirdiği konuma belirli bir tolerans dahilinde güvenir, her bağlantı aksadığında yanlış bir işaret istemez ve bu tolerans modülün dayandığı şeydir. Bir oyuncuyu, meşru bir zıplayışın sona ereceği noktadan daha uzağa taşıyabilir, ancak tek başına dikkat çeken belirgin bir bozuk kareye neden olmaz.
+
+## Uzun Atlama kullanmak güvenli mi?
+
+Çekiciliği basittir: normal bir zıplayışla geçilemeyen bir boşluğu aşın, açık arazide harcanan süreyi kısaltın veya sizi kovalayan kişiden birkaç blok daha uzağa geçin. Tek bir zıplayışta elde edilen kazanç küçük görünür. Her geçişte veya her geri çekilmede kullanıldığında, zamanla birikir.
+
+Bunların hiçbirinin görünmez olduğu anlamına gelmez. Uzun Atlama, bir kozmetik özellik değil, bir oyun avantajı özelliğidir ve bir sunucunun doğrudan ölçebileceği bir şeyi hareket ettirir: zıplayış başına yatay mesafe. Bir oyuncunun bildirdiği hız ve konumdan bir zıplayışın ne kadar mesafe kat etmesi gerektiğini yeniden hesaplayan bir sunucu, fiziksel olarak mümkün olandan daha uzağa inen bir zıplayışı işaretleyebilir, tek tek paketlerin ne kadar temiz görünmesinden bağımsız olarak. Fan ve Tenacity dahil olmak üzere istemcilerde tespit edilmiştir. Güvenli bir kısayol olarak değil, tespit edilebilir bir özellik olarak ele alın.
+
+<Callout variant="tip" title="Opal gönderiyor, dürüstçe etiketlenmiş">
+Opal'ın kendi kataloğu, bir tanımı olabildiğince açık bir şekilde tanımlanan bir Uzun Atlama modülüne sahiptir: daha uzağa atlamanı sağlar. Aynı şekilde herhangi bir müşteride olduğu gibi, kendi sorumluluğunuzda kullanmak başlığı altında dosyalanmıştır, çünkü vanilla fiziğinin üretmediği bir atlama mesafesi, sunucu tarafı bir kontrolün izlediği tam olarak o tür şeydir.
+</Callout>
+
+<Callout variant="uyarı" başlık="Referans, nasıl yapılacağını değil">
+Bu sayfa, Uzun Atlama'nın ne anlama geldiğini ve etkinin genel olarak nasıl çalıştığını açıklar, nasıl yapılandırılacağını değil. Atlama mesafesini vanilla fiziğinin ötesine geçirmek, onları uygulayan hemen hemen her sunucuda hareket hilesi kurallarını ihlal eder ve yakalanmak hesabın kaybolmasına neden olur.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Uzun Atlama aslında neyi değiştiriyor?">
+Zıplama sırasında gönderilen hareket paketlerini değiştirerek, zıplamanın yatay mesafesini etkiler; oyuncunun ne kadar yükseğe veya ne sıklıkla zıpladığıyla ilgili bir değişiklik değildir.
+</FAQItem>
+
+<FAQItem question="Uzun Atlama Bhop ile aynı mı?">
+Hayır. Bhop, zamanla hız kazanmak veya korumak için tekrarlanan zıplamaları bir araya getirirken, Uzun Atlama tek bir zıplamanın mesafesini uzatır. Her ikisi de hareket modülleridir ve her ikisi de temel fizik kurallarını aşar, ancak mekanizmaları farklıdır.
+</FAQItem>
+
+<FAQItem question="Uzun Atlama bir oyuncunun yasaklanmasına neden olabilir mi?">
+Evet. Vanilla fiziğinin izin vermediği atlama mesafeleri üretir, bir sunucu hareketleri beklenen değerlere karşı kontrol edebilir ve tipik olarak çoğu sunucunun uyguladığı hareket hileleri kurallarını ihlal eder.
+</FAQItem>
+
+<FAQItem question="Hareket paketlerini değiştirmek Uzun Atlama'yı yakalamayı zorlaştırır mı?">
+Doğrudan bir zorluk yaratmaz. Paket manipülasyonu, açıkça imkansız bir kareyi atlatabilir, ancak sonuçtaki mesafe, bildirilen hız ve konumdan beklenen değerlere karşı ölçülebilir. Sunucu tarafındaki kontroller de tam olarak bunları karşılaştırır.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-scaffold", label: "Scaffold nedir?", description: "Bir başka hareket modülü, uçurumdan inerken otomatik olarak blokları senin altında yerleştiriyor." },
+  { href: "/tr/learn/what-is-velocity-anti-knockback", label: "Hız (çarpma geri tepmesi önleme) nedir?", description: "Hareketle ilişkili bir modül, yer çekimi yerine tepkiyle savaşıyor." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Gözlerden uzak kalmak üzere inşa edilmiş, tıpkı bunun gibi olan modüllerin genellikle bulunduğu yer." },
+]} />
+
+<CTA href="/tr/satin-al">Uzun Atlama ve Opal'ın diğer hareket modüllerini, risk etiketleriyle birlikte inceleyin.</CTA>

@@ -1,0 +1,77 @@
+---
+title: Czym jest antybot Minecraft? Moduł Wyjaśniony
+description: Anti Bot to moduł bojowy, który filtruje fałszywych atrap graczy z automatycznego celowania, dzięki czemu Twoja automatyzacja nigdy nie marnuje ataku na zaimplantowanego bota udostępniającego ekran.
+excerpt: "Anti Bot zapewnia uczciwość celowania: prawdziwi gracze są atakowani, zastawione przynęty są ignorowane."
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czym jest bot przynależny do przynęty w Minecraft?
+    a: Bot przynętowy to byt przypominający gracza, często generowany przez serwer, wtyczkę lub recenzenta udostępniania ekranu, który wygląda jak prawdziwe konto, ale nim nie jest. Istnieje wyłącznie w celu sprawdzenia, czy Twoja automatyzacja na niego reaguje.
+  - q: Czy Anti Bot zmienia walkę, czy tylko celowanie?
+    a: Tylko celowanie. Przeciwko botom nie zwiększa zasięgu, celności ani szybkości ataku. Usuwa jedynie fałszywe obiekty z listy celów, na które może atakować automatyzacja walki.
+  - q: Czy Anti Bot sam w sobie jest oszustwem?
+    a: Nie. Samo w sobie Anti Bot nie atakuje, nie celuje i nie porusza się. Filtruje, które istoty Twoja automatyzacja walki może zobaczyć, więc działa jako ułatwienie użytkowania dla tej automatyzacji, a nie jako automatyzacja sama w sobie.
+  - q: Jak Anti Bot różni się od wykrywania botów przez system antycheat?
+    a: Siedzą po przeciwnych stronach tej samej wymiany. Anticheat umieszcza przynętę i obserwuje, jak na nią reagujesz. Anti Bot to moduł po stronie klienta, który zapobiega reagowaniu Twojej automatyzacji na tę przynętę.
+---
+
+<KeyTakeaways>
+
+- Anti Bot to moduł bojowy, który filtruje fałszywe, atrapowe jednostki graczy z automatycznego celownika.
+- Administratorzy serwerów i recenzenci udostępniania ekranu zakładają konta botów, aby sprawdzić, jak reagują narzędzia podejrzanego oszusta.
+- Sprawdza każdą pobliską jednostkę przed wystrzeleniem ataku, pomijając wszystko, co wygląda jak zasadzka.
+- Wpływa tylko na wybór celu, a nie na celność, zasięg czy szybkość ataku.
+
+</KeyTakeaways>
+
+Anti Bot to moduł bojowy, który filtruje fałszywe, imitujące graczy, jednostki z logiki automatycznego celowania klienta. Recenzenci nagrań ekranowych i niektóre serwery tworzą konta botów, udające zwykłych graczy, specjalnie po to, by sprawdzić, czy narzędzia podejrzanego oszusta zareagują na nie. Anti Bot rozpoznaje te przynęty jako to, czym są, i zapobiega marnowaniu automatyzacji walki na atak na taką przynętę, tak jak prawdziwy przeciwnik po prostu zignorowałby postać stojącą bezczynnie.
+
+## Jak działa Anti Bot
+
+Moduł umieszczony jest przed logiką wyboru celu dla automatyzacji walki. Przed wysłaniem ataku, Anti Bot sprawdza każdą znajdującą się w pobliżu jednostkę przypominającą gracza i odrzuca te, które wskazują na sztucznie wstawione przynęty, a nie na prawdziwych przeciwników. Jednostki, które przejdą weryfikację, pozostają w normalnej puli celów. Jednostki oznaczone jako przynęty są po prostu pomijane, więc atak w ogóle na nie nie jest wystrzeliwany.
+
+Ma to znaczenie, ponieważ bot, który zostanie zaatakowany, przekazuje recenzentowi dokładnie reakcję, na którą polował. Anti Bot nie próbuje nic ukrywać ani udawać niewinności. Po prostu odmawia połknięcia przynęty, co oznacza, że automatyzacja walki wydaje ataki tylko na jednostki, które faktycznie tam są, by walczyć.
+
+W praktyce objawia się to jako warstwowa weryfikacja dołączona do tego, co już robi zestaw bojowy klienta, a nie jako samodzielna funkcja. Rise Nextgen, narzędzie klienckie oparte na Fabricu, działa dokładnie w ten sposób: skategoryzowane jako element walki, cicho filtrujące listę celów zanim reszta automatyzacji zacznie działać.
+
+## Wykrywanie botów anticheat vs. botów
+
+Te dwa pojęcia mają tę samą nazwę, ale wskazują w przeciwnych kierunkach. Wykrywanie botów przez anticheat po stronie serwera działa poprzez umieszczenie przynęty i obserwowanie, jak klient podejrzanego oszusta na nią reaguje. To pułapka i ma na celu wychwycenie automatyzacji, która nie potrafi odróżnić fałszywego gracza od prawdziwego.
+
+Anti Bot to druga strona tego zagadnienia. To filtr po stronie klienta, który rozpoznaje przynętę zanim rozpocznie się atak, więc anticheat nie ma czego obserwować. Jedna to metoda detekcji skierowana do oszustów. Druga to moduł, który po prostu odmawia wejścia w tę pułapkę.
+
+<Callout variant="tip" title="Opal to wysyła">
+Własny moduł Anti Bot od Opal robi dokładnie to: dodatkowe sprawdzanie botów, dzięki czemu celowanie ignoruje fałszywych graczy. Jest sklasyfikowany jako Bezpieczny na liście modułów, ponieważ nigdy nie ingeruje w celowanie, zasięg ani zachowanie ataku, tylko w to, co może widzieć twoja automatyzacja walki.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co uznaje się za bot przynętowy w Minecraft?" >
+Bot przynętowy to byt o wyglądzie gracza, często generowany przez serwer, wtyczkę lub recenzenta udostępniania ekranu, który wygląda jak prawdziwe konto, nim ono nie jest. Istnieje wyłącznie w celu sprawdzenia, czy Twoja automatyzacja na niego reaguje.
+</FAQItem>
+
+<FAQItem question="Czy Anti Bot zmienia walkę, czy tylko celowanie?">
+Tylko celowanie. Anti Bot nie zwiększa zasięgu, celności ani szybkości ataku. Usuwa jedynie obiekty wabika z listy celów, na które może atakować automatyzacja walki.
+</FAQItem>
+
+<FAQItem question="Czy Anti Bot sam w sobie jest oszustwem?">
+Nie. Samodzielnie Anti Bot nie atakuje, nie celuje i nie porusza postaci. Filtruje, które istoty widzi Twoja automatyzacja walki, działając więc jako ułatwienie w korzystaniu z tej automatyzacji, a nie jako automatyzacja sama w sobie.
+</FAQItem>
+
+<FAQItem question="Jak Anti Bot różni się od wykrywania botów przez anticheat?">
+Stają po przeciwnych stronach tego samego procesu. Anticheat umieszcza wabik i obserwuje Twoją reakcję na niego. Anti Bot to moduł po stronie klienta, który zapobiega reagowaniu Twojej automatyzacji na ten wabik w pierwszej kolejności.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Filtr celu modułu autoataku Anti Bot." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Kolejny moduł sterowany celami, który żyje lub umiera w zależności od listy docelowej." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szersza kategoria, do której te moduły należą." },
+]} />
+
+<CTA href="/pl/purchase">Zwalczaj automatyzację, która rozpoznaje wabik od razu. Opal zaczyna się od $8.99.</CTA>

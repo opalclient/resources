@@ -1,0 +1,93 @@
+---
+title: Minecraft PvP'de Backtrack Nedir?
+description: Backtrack, Minecraft'ta bir savaş modülüdür ve hedefin hareketinden sonra vuruşların gerçekleşmesini sağlamak için konumunu geri alır. İşte nasıl çalıştığı ve neden anticheat sistemleri tarafından işaretlendiği.
+excerpt: Geri İzleme, son vuruşunuzu, olaydan sonra doğru olanla değiştirir. İşe yarıyor, kanıtlanabilir ve tam da bu yüzden antichipler bunu tespit etmek için bir kontrol geliştirdi.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Backtrack, gecikme veya ping ile aynı şey mi?
+    a: Hayır. Ping ve gecikme, bir bağlantının özellikleridir, kimsenin aldığı bir karar değil. Geri izleme, vuruş kaydına yerleşmiş gecikme odaklı toleransı kasıtlı olarak kullanan bir modüldür, yavaş bir bağlantının yan etkisi değil.
+  - q: Dışarıda savaş dışındaki durumlarda Backtrack önemli mi?
+    a: Aslında değil. Sadece hareketli bir hedefe yakın dövüş saldırısının kaydedilip kaydedilmediğini etkiler, bu yüzden doğrudan oyuncu-oyuncuya çatışmalar sırasında geçerlidir ve başka hiçbir yerde değil.
+  - q: Hedef, Backtrack'in onlar aleyhine kullanıldığını görebiliyor mu?
+    a: Hayır, doğrudan değil. Geri sarmalama, saldırganın istemcisinin zamanlaması ve vuruşu rapor etmesiyle tamamen gerçekleşir. Algılama sunucu tarafında gerçekleşmek zorunda, çünkü gerçek hareket geçmişine ve iddia edilen vuruşla karşılaştırma yeteneğine sahip olan tek yer sunucu.
+  - q: Backtrack, Reach'ten nasıl farklı?
+    a: Menzil, bir hedefin ne kadar uzakta olabileceğini ve yine de isabet edilebileceğini belirler. Geri izleme, hedef isabet edildiğinde zamanlamayı değiştirir; daha uzun bir mesafeden ziyade daha önce kaydedilmiş bir konumu kullanır. Bunlar, isabet tescilinin farklı bölümlerinden yararlanır ve bir istemci bunları aynı anda çalıştırabilir.
+---
+
+<KeyTakeaways>
+
+- Backtrack, hedefteki bir oyuncunun konumunu geri sararak, isabetin oyuncunun durduğu yere değil, şu anda bulunduğu yere denk gelmesini sağlayan bir savaş modülüdür.
+- Bu, isabet tespiti için yerleşik gecikme toleransını kullanır, bir hata veya bağlantı sorununu değil.
+- Antichipler, bir isabetin beyan ettiği konum ile hedefin kaydedilen hareketleri karşılaştırarak bunu yakalar.
+- Sadece yakın dövüş PvP'sini etkiler, başka bir şeyi değil
+
+</KeyTakeaways>
+
+Geri İzleme, sessizce bir düşmanın bir an önce durduğu konumu geri sarıp, isabetin olup olmadığını belirlemek için o eski konumu kullanan bir savaş modülüdür. Her çevrimiçi nişancı veya yakın dövüş oyununun, istemcinizin gösterdiği şey ile sunucunun şu anda doğru olarak kabul ettiği şey arasındaki boşluğu tolere etmesi gerekir, aksi takdirde bağlantı mükemmel değilse savaş oynanamaz hale gelir. Geri İzleme, bu yerleşik toleransı kasıtlı olarak kullanır. Hedefin şu anda bulunduğu konuma nişan almak yerine, yakın zamanda bulunduğu konuma nişan alır, böylece çalışması gereken bir kaçma veya yeniden konumlandırma artık önemli olmaz.
+
+## Nasıl Çalışır
+
+Geri İzleme, her görünür oyuncunun son birkaç tick içinde bulunduğu konumların kısa bir kaydını tutar. Birine saldırdığınızda, modül onların mevcut, sunucu tarafından onaylanmış konumunu kullanmak zorunda değildir. Kaydın içine ulaşabilir ve eski bir girişi hala geçerliymiş gibi ele alarak, hedef hiç hareket etmemiş gibi isabeti hesaplayabilir.
+
+Sadece bunun çalışmasının nedeni, sunucu tarafındaki isabet kaydının zaten bazı gecikmeleri affetmesi. İstemcilerinizde gördüğünüz şey ile sunucu tarafından işlenen şey arasında her zaman bir gecikme vardır ve sunucular, gerçek dünya ping değerine sahip herkes için savaşın bozulmaması adına bu boşluğu hoş görür. Backtrack, aynı toleransı kasıtlı olarak genişletir. Sonuç, sunucunun kurallarını sağlayan ancak alıcı ucundaki kişiye hatalı görünen bir isabet olur; o kişi, kenara çekildiğinden emindi.
+
+Hızlı yakın dövüş takaslarında, bir saniyenin küçük bir kesri kadar bir geri sarmanın, saldırı bariz bir şekilde bozulmadan kaçırılan bir vuruşu bile başarılı bir vuruşa dönüştürebilmesi açısından en çok önem taşır. Silhouette gibi, kaotik sunucu savaşları üzerine kurulu istemciler, Backtrack'i standart modüllerinden biri olarak belgelemişlerdir.
+
+## Neden anticheat'ler bunu yakalar (ve neden zayıf versiyonlar hayatta kalır)
+
+Backtrack, sadece bir kozmetik seçenek değil, gerçek bir oyun avantajıdır, bu nedenle anticheat'ler bunu hoş görmeye yönelik bir tercih olarak değil, bir istismar olarak ele alır. Algılama, sunucunun bir isabetin iddia ettiği konumu, hedefteki gerçek, kaydedilmiş hareketlerle karşılaştırmasıyla çalışır. Bir saldırı, hedefin açıkça terk ettiği bir noktaya karşı mantıklı geliyorsa, bu işaretlenmesi için bir nedendir.
+
+Bunu yöneten herkes için gerçek bir ödünleşimi ortaya çıkarır. Gerçek bir çatışmada önemli olacak kadar geniş bir geri sarma penceresi, imkansız görünen vuruşlar üretmek için geçmişe yeterince uzanır; bu da tam olarak örüntü algılamanın aradığı desendir. Daha dar, daha muhafazakar bir pencere yakalaması daha zordur, ancak aynı zamanda modülün başlangıçta kullanılmaya değer kılmasını sağlayan avantajın çoğunu da feda eder. Aynı itme ve çekme, Reach ve KillAura gibi diğer savaş istismarlarında da kendini gösterir: bir hilenin verdiği avantaj arttıkça, tespit edilmesi de kolaylaşır.
+
+<Callout variant="tip" title="Opal nerede çizgiyi çiziyor">
+
+Opal, bir Backtrack modülü göndermiyor. Rakibin arkasından darbe vuruş zamanlamasını değiştiren modüller tam olarak antichiplerin yakalamaya çalıştığı kategoridir ve biz sizin adınıza bu tür bir değiş tokuşu yapmıyoruz. Hesabınızı riske atarak çalışan savaş araçlarını biz inşa etmiyoruz
+
+</Callout>
+
+<Callout variant="warning" title="Bu seni yasaklatır">
+
+Backtrack, bir sunucunun vuruş kaydındaki esnekliği kullanmak üzere tasarlanmıştır ve modern antichipler tam olarak bu kalıbı yakalamak için geliştirilmiştir. Bunu tamamen tespit edilemez kılan bir ayar bulunmamaktadır, sadece daha az veya daha fazla belirgin hale getiren seçenekler vardır. Bunu, istismarın nasıl çalıştığına dair bir referans olarak kabul edin, onu çalıştırmanız için bir tavsiye olarak değil
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Backtrack, gecikme veya ping ile aynı şey mi?">
+
+Hayır. Ping ve gecikme, bir bağlantının özellikleridir, kimsenin aldığı bir karar değil. Geri izleme, vuruş kaydındaki gecikme kaynaklı toleransı kasıtlı olarak kullanan bir modüldür, yavaş bir bağlantının yan etkisi değil
+
+</FAQItem>
+
+<FAQItem question="Dışarıda savaş dışındaki durumlarda Backtrack önemli mi?">
+
+Aslında değil. Sadece hareketli bir hedefe yakın dövüş saldırısının kaydedilip kaydedilmediğini etkiler, bu yüzden doğrudan oyuncu-oyuncuya dövüşlerde geçerlidir ve başka hiçbir yerde değil
+
+</FAQItem>
+
+<FAQItem question="Hedef, Backtrack'in onlar aleyhine kullanıldığını görebiliyor mu?">
+
+Hayır, doğrudan değil. Geri sarmalama, saldırganın istemcisinin darbeyi zamanlaması ve raporlamasıyla tamamen gerçekleşir. Algılama sunucu tarafında gerçekleşmek zorundadır, çünkü gerçek hareket geçmişine ve iddia edilen darbeyle karşılaştırma yeteneğine sahip olan tek yer sunucudur
+
+</FAQItem>
+
+<FAQItem question="Backtrack, Reach'ten nasıl farklı?">
+
+Menzil, bir hedefin ne kadar uzakta olabileceğini ve yine de isabet edilebileceğini belirler. Geri izleme, hedef isabet edildiğinde zamanlamayı değiştirir; daha uzun bir mesafeden ziyade daha önce kaydedilmiş bir konumu kullanır. Bunlar, isabet tescilinin farklı bölümlerinden yararlanır ve bir istemci her ikisini de aynı anda çalıştırabilir
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "Savaş modülü Geri İzleme sık sık yanında seyahat eder." },
+  { href: "/tr/learn/what-is-reach", label: "Reach nedir?", description: "Mesafe istismarı, aynı isabet tespiti sorununun farklı yarısını çözen bir çözüm." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Geri İzleme kategorisi ve komşuları aittir." }
+]} />
+
+<CTA href="/tr/satin-al">Rekabetçi dövüşü yasak dalgası riski olmadan Opal'in nasıl ele aldığını görün.</CTA>

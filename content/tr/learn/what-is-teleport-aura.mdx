@@ -1,0 +1,77 @@
+---
+title: Minecraft'ta Teleport Aura Nedir? Modül Açıklaması
+description: Teleport Aura, oyuncuyu bir hedefin yanına ışınlayan ve ardından otomatik olarak saldıran bir Minecraft savaş hilesidir. İşte nasıl çalıştığı ve neden tespit edilmesi kolay olduğu.
+excerpt: "Teleport Aura, KillAura'yı bir boşluk yakalayıcıya dönüştürüyor: sizi menzile ışınlıyor, ardından sizin için saldırdıktan sonra savuruyor. Bu ek hareket adımı, aynı zamanda onu iki kat daha hızlı yakalanmasına neden oluyor."
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Teleport Aura, KillAura ile aynı şey mi?
+    a: Tam olarak değil. KillAura, yakındaki hedeflere nişan almayı ve saldırmayı otomatikleştirir. Teleport Aura, saldırı gerçekleşmeden önce hedefe olan mesafeyi kapatarak bunun önüne bir hareket adımı ekler, böylece bir boşluk kapatıcı etrafında inşa edilmiş bir KillAura gibi oynar.
+  - q: Teleport Aura yalnızca zaten yakın olan hedeflerde mi çalışır?
+    a: Hayır, bu tam tersi. Oyuncuyu normal yakın dövüş menzilinin dışındaki bir hedefe konumlandırıyor, sonra menzile girdiğinde saldırıyor. Zaten yakın olmayan hedeflere ulaşmak, modülün var olmasının tek nedeni.
+  - q: Teleport Aura'nın meşru bir kullanım amacı var mı?
+    a: Girişin izin verdiği hızdan daha hızlı hareket etmek ve oyuncunun nişan almadan veya tıklamadan otomatik olarak saldırmak, hem oyun avantajlarıdır, kolaylık özellikleri değildir; bu nedenle, normal hareket ve savaş kurallarını uygulayan herhangi bir sunucuda hile olarak sayılır.
+  - q: Teleport Aura, normal KillAura'dan daha hızlı tespit ediliyor, neden?
+    a: Tek bir anomali yerine iki tane yarattığı için. Ani konum atlaması, zaten hareket tabanlı hile önleme sistemleri tarafından kontrol edilen bir şeydir; dövüş tarafının dönüş, erişim ve zamanlama ile ilgili yaptığı şeylerin üzerine ek olarak.
+---
+
+<KeyTakeaways>
+
+- Teleport Aura, oyuncuyu bir hedefin yanına ışınlayan veya hızla konumlandıran ve ardından otomatik saldırı gerçekleştiren bir savaş modülüdür; normal bir istemcinin kapatamayacağı mesafeleri kapsar.
+- Bu, KillAura'nın bir boşluk kapatma varyantıdır: otomasyon yalnızca nişan alma ve salınım değil, aynı zamanda harekete de uzanır.
+- Düz KillAura'ya göre yakalaması daha kolaydır çünkü aynı kısa süre içinde bir hareket anomalisini bir savaş anomalisinin üzerine bindirir.
+- Rise Nextgen gibi istemcilerde görülür.
+
+</KeyTakeaways>
+
+Teleport Aura, hedefe ışınlanma veya oyuncuyu hızla konumlandırma yoluyla mesafeyi kapatan bir savaş modülüdür ve menzile girdiğinde otomatik olarak saldırır. KillAura ile aynı hedef ve saldırma döngüsünü kullanır, ancak hareket adımını ön plana yerleştirir: sizi menzile yürümeyi beklemeden, sizi oraya kendisi taşır. İşte onu sıradan bir otomatik saldırgan olmaktan ziyade bir mesafeyi kapatıcı yapan şey ve aynı zamanda sunucunun dikkat etmesi gereken ikinci bir şey de budur.
+
+## Nasıl Çalışır
+
+Teleport Aura, KillAura'nın yaptığı gibi bir hedef tarar, yapılandırılmış bir pencere içindeki bir varlığı seçer ve ona kilitlenir. Fark, saldırmadan önce ortaya çıkar. Hedef yakın dövüş menzilinin dışında ise, modül oyuncunun konumunu vurabileceği kadar yakın olana kadar ya tek büyük bir zıpla ya da hızlı bir konumlandırma patlamasıyla ona doğru kaydırır. Menzile girdiğinde, sıradan bir otomatik saldırı modülünün yaptığı gibi saldırır, düzenli bir KillAura saldırmasından farklı değildir.
+
+Rise Nextgen'de görüldüğü gibi, ön tarafa kaynaklanan bir mesafeyi kapatıcı ile KillAura gibi çalışır. Otomasyon artık sadece nişan alma ve zamanlamayla sınırlı değil. Oyuncuyu oraya götüren harekete gömülüdür.
+
+## Neden Sıradan KillAura'dan Yakalaması Daha Kolaydır
+
+Bu, kozmetik değil, bir oyun avantajı hilesidir ve düz KillAura'dan daha hızlı bir yakalama yöntemidir çünkü sunucuya bir tane yerine iki anomali verir. Bir oyuncunun meşru konumu, her tick'ta sınırlı bir hızda değişir; bu hız, normal hareket mekanikleriyle—yürüyüş, koşu, zıplama—sınırlandırılır. Bir teleport veya bir yeniden konumlandırma patlaması, yasal bir giriş dizisinin o zaman diliminde üretebileceğinden daha fazla mesafeyi kapsar.
+
+Sunucu tarafındaki antichipler, zaten hız ve uçuş hilelerini yakalamak için tick'ler arasındaki konum farklarını takip eder. Savaş hedefine doğru ani bir zıplama, tam da o kontrolün içinde gerçekleşir ve antichiplerin zaten yaptığı rotasyon, menzil ve saldırı zamanlamasıyla üst üste biner. Bir hareket anomalisinin ve bir savaş anomalisinin aynı kısa zaman diliminde birlikte ortaya çıkması, alınabilecek en güçlü sinyallerden biridir; bu nedenle bu tarz modüller, temel hareket doğrulama olan her şeyde hızlıca işaretlenir.
+
+<Callout variant="tip" title="Opal nerede çizgiyi çiziyor">Opal savaş modüllerini gönderiyor, ancak teleport tabanlı bir yakalama yeteneği bunlardan değil. Bir hareket anomalisini bir savaş anomalisinin üzerine bindirmek, sunucunun aynı anda iki nedenle seni yasaklamasına neden olur, tek bir nedenle değil; bu, yapmaya değmeyecek bir takas</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını değil">
+Bu sayfa Teleport Aura'nın ne olduğunu ve neden takıldığını açıklar, nasıl yapılandırılacağını değil. Savaş otomasyonuna yığılmış hareket otomasyonu, temel anticheat çalışan neredeyse her sunucuda kuralları ihlal eder ve listedeki en hızlı banlardan biridir.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Teleport Aura, KillAura ile aynı şey mi?">
+Tam olarak değil. KillAura, yakındaki hedeflere nişan alıp saldırmayı otomatikleştirir. Teleport Aura ise saldırı gerçekleşmeden önce hedefe yaklaşma adımı ekler, böylece bir boşluk doldurucu etrafında inşa edilmiş bir KillAura gibi oynar.
+</FAQItem>
+
+<FAQItem question="Teleport Aura yalnızca zaten yakın olan hedeflere mi etki eder?">
+Hayır, bunun tam tersi. Oyuncuyu normal yakın dövüş menzilinin dışındaki bir hedefe doğru konumlandırır, ardından menzile girdiğinde saldırır. Zaten yakın olmayan hedeflere ulaşmak, bu modülün var olmasının tek sebebidir.
+</FAQItem>
+
+<FAQItem question="Teleport Aura'nın meşru bir kullanımı var mı?">
+Hayır. Girdinin izin verdiği hızdan daha hızlı hareket etmek ve oyuncunun nişan almadan veya tıklamadan otomatik saldırı yapmak, hem oyun avantajlarıdır hem de kolaylık özellikleri değildir; bu nedenle, normal hareket ve savaş kurallarını uygulayan herhangi bir sunucuda hile olarak kabul edilir.
+</FAQItem>
+
+<FAQItem question="Teleport Aura, normal KillAura'dan daha hızlı tespit edilmesinin sebebi nedir?">
+Çünkü bir tane yerine iki anomali oluşturur. Ani bir konum değişimi, dövüş tarafının dönüş, menzil ve zamanlamayla ilgili yaptığı şeylerin yanı sıra, hareket tabanlı antichipleri zaten kontrol ettiği şeydir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "Teleport Aura, otomatik saldırı modülünün üzerine inşa edilmiştir." },
+  { href: "/tr/learn/what-is-reach", label: "Reach nedir?", description: "Vuruş mesafesi anormalliklerini tespit eden antichipler, hareketlerle birlikte kontrol edilir." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Bu savaş modüllerinin ait olduğu daha geniş kategori." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ın savaş kıyafeti iki anomali bahsini atlıyor. $8.99 için tam yapıyı inceleyin.</CTA>

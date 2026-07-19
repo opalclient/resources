@@ -1,0 +1,86 @@
+---
+title: Czym jest prędkość w Minecraft? Wyjaśnienie modułu ruchu
+description: Prędkość to moduł ruchu, który zwiększa prędkość chodzenia i sprintu powyżej limitu domyślnego w Minecraft. Oto jak to działa i dlaczego serwery tak łatwo to wykrywają.
+excerpt: Prędkość zamienia twoje nogi w najszybszą rzecz na serwerze, bez potrzeby mikstury. Oto jak moduł to osiąga i dlaczego serwer zawsze to zauważa.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy szybkość to to samo co efekt eliksiru?
+    a: Nie. Napój szybkiej prędkości waniliowej to tymczasowy efekt rozpoznawany przez serwer. Moduł prędkości zmienia ruch na poziomie klienta, natomiast serwer widzi prędkość bez mikstury lub innego źródła waniliowego.
+  - q: Czy prędkość wpływa na chodzenie, sprint, czy na oba?
+    a: Oba. Moduł zwiększa współczynnik dla chodzenia i dla sprintu, ponieważ oba wynikają z tego samego obliczenia ruchu i go nadpisuje.
+  - q: Dlaczego Speed jest łatwiejszy do złapania niż niektóre inne moduły?
+    a: Ruch jest czymś, co serwer śledzi dla każdego gracza na każdym ticku, niezależnie od tego, co twierdzi klient. To sprawia, że nadmierna, utrzymana prędkość jest bardziej wiarygodnym sygnałem niż oszustwa, które opierają się na subtelniejszych wskazówkach dotyczących czasu lub rotacji.
+  - q: Czy Speed jest bezpieczny do użycia na serwerze chronionym przez antywymus systemem?
+    a: Nie. Dane o ruchu to jeden z najbardziej wiarygodnych sygnałów, jakie posiada serwer, dlatego konto korzystające z Speeda na serwerze z działającym sprawdzaniem ruchu ryzykuje oznaczenie lub zbanowanie.
+---
+
+<KeyTakeaways>
+
+- Prędkość to moduł ruchu, który zwiększa prędkość chodzenia i sprintu powyżej stałej wartości w standardowym Minecraft.
+- Bezpośrednio nadpisuje obliczenia ruchu klienta, bez użycia mikstur czy bloków zapewniających dodatkową prędkość.
+- Przyspieszenie dotyczy zarówno chodzenia, jak i sprintu przez cały czas, gdy moduł jest aktywny.
+- Sprawdzanie ruchu to jedno z najstarszych narzędzi anticheatów, dlatego moduł Speed jest tak często wykrywany.
+
+</KeyTakeaways>
+
+Prędkość to moduł ruchu, który zwiększa prędkość chodzenia i sprintu gracza powyżej tego, co pozwala standardowy Minecraft. Włącz go, a pokonujesz teren szybciej niż mógłby to zrobić zmodyfikowany klient, bez żadnego wyjaśnienia w świecie gry dla tego dodatkowego tempa. Pojawia się w klientach takich jak Fan i Tenacity, a serwery traktują go tak samo jak każdy inny oszust związany z ruchem: jako nieuczciwą przewagę, a nie ustawienie.
+
+## Jak to działa
+
+Standardowy Minecraft oblicza stałą prędkość chodzenia i oddzielną, szybszą prędkość sprintu dla każdego gracza. Zwykle nic nie wpływa na te liczby poza przedmiotami takimi jak mikstura szybkości lub stanie na bloku wpływającym na prędkość. Moduł Speed pomija wszystko to i bezpośrednio nadpisuje obliczenia, zwiększając je, dzięki czemu gracz pokonuje więcej terenu na każdy tick podczas chodzenia i sprintu, bez mikstury, bloku lub innego wyjaśnienia w standardowej wersji gry.
+
+Ponieważ zmiana zachodzi w całości po stronie klienta, ekran gracza pokazuje płynny, szybszy ruch bez żadnych błędów lub zacięć, które mogłyby go zdradzić wizualnie. Serwer otrzymuje inną historię: strumień aktualizacji pozycji obejmujących większą odległość na każdy tick, niż powinien pozwalać znany stan gracza. Ta różnica między tym, co jest prawdopodobne, a tym, co przybywa, to dokładnie to, na co ma być zbudowana kontrola ruchu.
+
+## Dlaczego jest wykrywany
+
+Prędkość jest jednym z łatwiejszych sposobów na wykrycie oszustwa przez serwer, ponieważ serwer już wie, jak szybko gracz może się poruszać, niezależnie od tego, co twierdzi klient.
+
+| Czynnik brany pod uwagę przez anticheat | Dlaczego to ma znaczenie |
+|---|---|
+| Odległość pokonana na tick w porównaniu z bazową prędkością gracza | Bezpośredni dowód na poruszanie się szybciej niż pozwala gra |
+| Aktywne efekty mikstur i bloki wpływające na prędkość | Uzasadnione powody, dla których gracz może poruszać się szybko, które serwer musi najpierw wykluczyć |
+| Stan sprintu i zmiany kierunku | Sprintowanie i skręcanie wpływają na to, jaką prędkość serwer powinien się spodziewać |
+| Spójność w czasie | Pojedynczy szybki tick może być spowodowany opóźnieniem; utrzymywana prędkość powyżej limitu bez wyjaśnienia jest silniejszym sygnałem |
+
+Sprawdzanie ruchu po stronie serwera to jedne z najstarszych i najbardziej dojrzałych elementów konstrukcji anticheat. Wykorzystywanie prędkości przez dłuższy czas na serwerze z kompetentnym systemem jest mało prawdopodobne, aby pozostało niezauważone.
+
+<Callout variant="tip" title="Opal to wysyła">
+Własne podejście Opala nie udaje niczego innego: "Stajesz się gepardem w prawdziwym życiu". Znajduje się w kategorii Opal'a "używaj na własną odpowiedzialność", tak jak byłoby to na każdym innym kliencie, ponieważ surowa prędkość ruchu to dokładnie taki sygnał, który ma na celu wychwycić kontrola po stronie serwera.
+</Callout>
+
+<Callout variant="warning" title="Informacja, nie instrukcja">
+Ta strona opisuje moduł w sposób ogólny, abyś wiedział, co ten termin oznacza. Nazewnictwo i dokładne zachowanie różnią się w zależności od klienta, a poruszanie się szybciej niż to, na co pozwalają standardowe zasady fizyki, łamie zasady na praktycznie każdym serwerze konkurencyjnym lub survivalowym.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Prędkość jest tym samym co efekt mikstury?">
+Nie. Standardowa mikstura szybkości to tymczasowy efekt rozpoznawany przez serwer. Moduł Prędkości natomiast zmienia ruch na poziomie klienta, więc serwer widzi prędkość bez mikstury lub innego standardowego źródła.
+</FAQItem>
+
+<FAQItem question="Czy Prędkość wpływa na chodzenie, sprint czy na oba?">
+Oba. Moduł zwiększa tempo zarówno podczas chodzenia, jak i sprintu, ponieważ oba te działania wynikają z tego samego obliczenia ruchu, które jest nadpisywane.
+</FAQItem>
+
+<FAQItem question="Dlaczego Speed jest łatwiejszy do wykrycia niż niektóre inne moduły?">
+Ruch jest czymś, co serwer śledzi dla każdego gracza w każdym cyklu, niezależnie od tego, co twierdzi klient. To sprawia, że nadmierna, utrzymana prędkość jest bardziej wiarygodnym sygnałem niż oszustwa, które opierają się na subtelnych wskazówkach dotyczących czasu lub rotacji.
+</FAQItem>
+
+<FAQItem question="Czy Speed jest bezpieczny do użycia na serwerze chronionym przez anticheat?">
+Nie. Dane o ruchu są jednym z najbardziej wiarygodnych sygnałów, jakie serwer posiada, więc konto uruchamiające Speed na serwerze z działającą kontrolą ruchu ryzykuje oznaczenie lub zbanowanie.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-scaffold", label: "Co to jest Scaffold?", description: "Kolejny moduł ruchu, który pozwoli ci poruszać się po terenach, na których nie powinieneś się znajdować." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Podejście oparte na skrytości, w kontraście do tak bezpośredniego modułu." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szeroka kategoria, do której należą takie funkcje i moduły jak ten." },
+]} />
+
+<CTA href="/pl/purchase">Pokonuj dystanse szybciej, niż myśli serwer. Opal wysyła Speed, świadomy ryzyka.</CTA>

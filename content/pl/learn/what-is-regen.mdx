@@ -1,0 +1,72 @@
+---
+title: Czym jest Regen w Minecraft? Wyjaśnienie luki w zdrowiu
+description: Regen to exploit w Minecraft, który przyspiesza naturalną regenerację zdrowia poza standardową szybkością nasycenia. Oto jak to działa i dlaczego serwery to wykrywają.
+excerpt: Twoja pasku zdrowia nie powinien tak szybko się napełniać. Oto, jak Regen oszukuje zegar nasycenia i dlaczego jest to jedna z najłatwiejszych luk do wykrycia.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie zmienia Regen?
+    a: Zmienia szybkość, z jaką zdrowie gracza wraca do pełna, przekraczając naturalną regenerację, jaką umożliwia leczenie oparte na nasyceniu w wersji podstawowej.
+  - q: Czy Regen to to samo co używanie złotych jabłek lub eliksirów?
+    a: Nie. To są legalne przedmioty lecznicze w grze, posiadające własne czasy odnowienia i koszty. Regeneracja manipuluje pasywnym, poza walką, efektem leczenia, zamiast zużywać cokolwiek.
+  - q: Czy Regen działa na każdym serwerze?
+    a: Serwery, które obliczają i stosują naturalną regenerację po stronie serwera, zamiast ufać raportowanemu czasowi po stronie klienta, nie są dotknięte modułem Regen działającym po stronie klienta.
+  - q: Czy Regen jest uważany za hakera?
+    a: Tak. Zmienia podstawową mechanikę przetrwania na korzyść gracza w sposób wykraczający poza możliwości standardowych zasad, dlatego jest sklasyfikowane jako moduł wykorzystujący luki, a nie kosmetyczny lub legalny element rozgrywki.
+---
+
+<KeyTakeaways>
+- Regen to moduł wykorzystujący luki, który przyspiesza naturalną regenerację zdrowia gracza Minecraft's vanilla zależne od nasycenia tempo leczenia.
+- Działa poprzez przechwytywanie lub skracanie timera ticka leczenia po stronie klienta, a nie poprzez używanie mikstur, złotych jabłek lub jakichkolwiek przedmiotów.
+- Serwery, które obliczają naturalną regenerację po stronie serwera, zamiast ufać czasowi klienta, są odporne na to działanie dzięki projektowi.
+- Jest to wykorzystanie przewagi w rozgrywce, a nie kosmetyczna zmiana, i wykrywane jest poprzez porównanie zmian punktów zdrowia w czasie z oczekiwaną krzywą nasycenia.
+</KeyTakeaways>
+
+Regen (skrót od regeneracji) to moduł exploita, który przyspiesza powrót punktów zdrowia gracza do pełna, przekraczając tempo, jakie pozwala domyślny system nasycenia w Minecraft. Nie ingeruje w mikstury, złote jabłka ani żadne przedmioty w ogóle. Po prostu przepisuje zegar pasywnego leczenia w grze, dzięki czemu obrażenia zadane w środku walki znikają szybciej, niż powinny.
+
+## Jak to działa
+
+Naturalna regeneracja w wersji podstawowej leczy ułamek serca w stałych odstępach czasu, a ten odstęp jest ograniczony przez nasycenie pokarmem: dobrze odżywiony gracz leczy się szybciej niż głodny, ale nadal istnieje minimalny czas, w jakim zdrowie może powrócić. W wielu implementacjach klienta czas tego tiknięcia leczenia jest ustalany przez klienta i po prostu zgłaszany do serwera. Regen wykorzystuje to, skracając lub eliminując czas oczekiwania między leczeniami, wprowadzając zmiany zdrowia, których serwer nigdy nie spodziewał się, że nasycenie pokarmem wygeneruje samo.
+
+Zalety są oczywiste: dłuższe pozostawanie w walce. Gracz korzystający z Regen absorbuje obrażenia, których normalny przeciwnik nie jest w stanie nadrobić, i nigdy nie musi przerywać walki, aby zjeść i poczekać na normalny powrót zdrowia. Rzadko pojawia się jako samodzielny przełącznik. Zwykle jest to jeden z elementów klienta opartego na walce lub wykorzystujący exploity, obok modułów zaprojektowanych do utrzymania walki, a nie jej czystego zakończenia.
+
+## Czy jest bezpieczne do użycia
+
+Regen to wykorzystanie luki w rozgrywce, a nie kosmetyczne, i właśnie dlatego jest łatwo go wykryć. Zmienia coś, co serwer może zmierzyć bezpośrednio: ilość zdrowia gracza w danym momencie, w porównaniu z tym, co mechanika nasycenia powinna wygenerować do tego momentu. Serwer, który rejestruje zdrowie w czasie i sprawdza je w stosunku do oczekiwanej krzywej nasycenia, może oznaczyć tempo regeneracji, którego żadna legalna kombinacja jedzenia i czasu nie tłumaczy.
+
+Czystszym rozwiązaniem, a takim, z którego już korzystają najbardziej konkurencyjne serwery, jest całkowite powstrzymanie się od ufania czasowi raportowanemu przez klienta. Gdy naturalna regeneracja jest obliczana i stosowana po stronie serwera, moduł Regen po stronie klienta nie ma już nic do wykorzystania, bez względu na to, co raportuje.
+
+<Callout variant="tip" title="Gdzie Opal stawia granicę">
+Opal nie wysyła modułu Regen. Nie dlatego, że jest trudno go zbudować, ale dlatego, że w momencie, gdy serwer sam oblicza stan zdrowia zamiast ufać zegarowi klienta, cała ta luka staje się dowodem na ban, z którego nie da się wytłumaczyć.
+</Callout>
+
+<Callout variant="warning" title="To grozi banem">
+Regen to proste wykorzystanie gry dające przewagę. Każdy serwer śledzący stan zdrowia w odniesieniu do oczekiwanej krzywej nasycenia lub taki, który sam oblicza regenerację, wychwyci tempo, które nie powinno być możliwe. To materiał referencyjny, a nie rekomendacja.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Co tak naprawdę zmienia Regen?">
+Zmienia szybkość, z jaką zdrowie gracza wraca do pełna, przekraczając naturalną częstotliwość regeneracji, jaką pozwala leczenie oparte na nasyceniu w wersji podstawowej.
+</FAQItem>
+<FAQItem question="Czy Regen jest tym samym co używanie złotych jabłek lub eliksirów?">
+Nie. To legalne przedmioty lecznicze w grze, posiadające własne czasy odnowienia i koszty. Regen manipuluje pasywnym, pozabojowym cyklem leczenia, zamiast cokolwiek zużywać.
+</FAQItem>
+<FAQItem question="Czy Regen działa na każdym serwerze?">
+Nie. Serwery, które obliczają i stosują naturalną regenerację po stronie serwera, zamiast ufać raportowanemu czasowi przez klienta, nie są na nią podatne.
+</FAQItem>
+<FAQItem question="Czy Regen jest uważany za cheat?">
+Tak. Zmienia podstawową mechanikę przetrwania na korzyść gracza, wykraczając poza to, co dozwolone w wersji podstawowej, dlatego jest klasyfikowany jako moduł wykorzystujący luki, a nie kosmetyczny lub legalny element.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-killaura", label: "Co to jest Killaura?", description: "Kolejna sztuka bojowa, tym razem automatyzująca celowanie i czas wymachu, które w standardowym PvP gracz musi wykonywać ręcznie." },
+  { href: "/pl/learn/what-is-velocity-anti-knockback", label: "Czym jest prędkość (ochrona przed odrzuceniem)?", description: "Przesunięcie wykorzystujące możliwość anulowania nadchodzącego odrzucenia, defensywny odpowiednik oszustwa zdrowotnego Regen'a." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Gdzie moduły takie jak Regen wpisują się w szerszą kategorię klientów i co odróżnia użyteczność od otwartego oszustwa." }
+]} />
+
+<CTA href="/pl/purchase">Opuść wykorzystywanie luk, które są łatane. Opal jest stworzony na dłuższą metę.</CTA>

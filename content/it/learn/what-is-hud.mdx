@@ -1,0 +1,88 @@
+---
+title: Cos'è un modulo HUD in Minecraft? Spiegazione dell'interfaccia sovrapposta
+description: Un modulo HUD sovrappone statistiche in tempo reale come coordinate, FPS e informazioni di combattimento sullo schermo di Minecraft senza aprire un menu; ecco come funziona effettivamente.
+excerpt: Coordinate, FPS e informazioni di combattimento stampate direttamente sullo schermo, nessun menu richiesto. È il modulo meno appariscente di qualsiasi client e uno dei più utilizzati.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: È considerato imbroglio l'utilizzo di un modulo HUD in Minecraft?
+    a: No. Un modulo HUD mostra solo informazioni, coordinate, FPS, statistiche di combattimento e così via. Non automatizza nulla né modifica il comportamento del gioco, quindi comporta lo stesso rischio della schermata di debug F3 di Minecraft.
+  - q: Qual è la differenza tra un modulo HUD e una GUI a click?
+    a: "Un'interfaccia Click GUI è il menu che si apre per sfogliare e configurare i moduli di un client. Un HUD è ciò che rimane sullo schermo una volta chiuso quel menu: un display passivo che non richiede input e si limita a mostrare numeri."
+  - q: Che tipo di informazioni mostra solitamente un modulo HUD?
+    a: Coordinate, un contatore FPS e informazioni relative al combattimento sono quelle più comuni. La lista esatta e il grado di personalizzazione variano a seconda del cliente.
+  - q: Quali client di Minecraft hanno un modulo in stile HUD?
+    a: Juul chiama la sua versione HUD. Fan e Tenacity implementano la stessa idea con il nome HUDMod. Nome diverso, stesso scopo.
+  - q: Ti rallenta l'FPS l'utilizzo di un modulo HUD?
+    a: A malapena. Si tratta di disegnare una manciata di testo e forme aggiuntive sopra un frame che è già in fase di rendering, non di eseguire un sistema separato. Qualsiasi costo è irrisorio rispetto al rendering del gameplay normale.
+---
+
+<KeyTakeaways>
+
+- Un modulo HUD sovrappone informazioni in tempo reale, coordinate, FPS e statistiche di combattimento direttamente alla visuale di gioco, senza la necessità di aprire un menu per visualizzarle.
+- È di sola lettura: un HUD non automatizza mai azioni né modifica le meccaniche di gioco, ma solo il modo in cui le informazioni già disponibili al giocatore vengono visualizzate.
+- Diversi client lo chiamano in modi diversi. Juul lo chiama HUD, Fan e Tenacity definiscono lo stesso concetto HUDMod.
+- Non toccando mai la logica di gioco, un HUD presenta un profilo di rischio più o meno lo stesso della schermata di debug F3 di Minecraft: nullo.
+
+</KeyTakeaways>
+
+Un modulo HUD è una sovrapposizione a schermo che mostra statistiche in tempo reale, come coordinate, FPS o informazioni di combattimento, direttamente sopra la visuale di gioco durante il gioco. Non c'è un menu da aprire e niente su cui cliccare. I numeri sono semplicemente lì, aggiornati in tempo reale, nello stesso modo in cui gli elementi dell'interfaccia nativa di Minecraft si sovrappongono allo schermo senza richiedere input. È una funzionalità di visualizzazione, e un tipo di modulo fondamentalmente diverso da un menu di impostazioni interattivo Click GUI del client.
+
+## Come funziona
+
+Un HUD rende i suoi elementi ogni frame, sovrapponendosi alla visuale di gioco normale come fa la barra degli strumenti o la barra della fame nativa. Nulla di esso dipende dall'apertura di un menu. Le informazioni rimangono semplicemente visibili mentre ti muovi, combatti o costruisci, aggiornandosi alla stessa velocità con cui il resto del gioco viene renderizzato.
+
+Ciò che effettivamente viene visualizzato varia a seconda del client, ma l'insieme ricorrente è costituito da coordinate, un contatore FPS e informazioni relative al combattimento che il giocatore altrimenti dovrebbe controllare in un altro modo, ad esempio mettendo in pausa per aprire F3. Non si tratta di dati nuovi. Un HUD prende semplicemente numeri che il gioco espone già e li posiziona in un punto in cui non devi interrompere il gioco per vederli.
+
+È ciò che lo distingue anche da una GUI Click. Una GUI Click è il menu interattivo che apri per sfogliare e configurare i moduli di un client, riceve input e richiede di essere aperto. Un HUD non riceve alcun input. Visualizza informazioni e si ritira, funzionando continuamente in background rispetto al normale gameplay anziché come uno schermo che navighi.
+
+## HUD vs GUI Click
+
+| | HUD | GUI Click |
+|---|---|---|
+| Riceve input | No | Sì |
+| Visibile durante il gioco | Sempre, per impostazione predefinita | Solo quando aperto |
+| Scopo | Visualizzare statistiche in tempo reale | Configurare moduli e impostazioni |
+| Equivalente vanilla più vicino | La schermata di debug F3 | Il menu opzioni / pausa |
+
+Il caso della convenienza è semplice. Mantenere coordinate, FPS o informazioni di combattimento in vista a tutti i tempi ti evita di dover aprire ripetutamente un menu o la schermata di debug per controllare gli stessi numeri, e durante un combattimento, avere quelle informazioni già sullo schermo significa meno tempo speso a distogliere lo sguardo da ciò che sta effettivamente cercando di ucciderti.
+
+<Callout variant="tip" title="Dove si inserisce in Opal">
+Opal non spedisce attualmente un modulo chiamato HUD con proprio questo nome. La visualizzazione di informazioni in stile overlay è un elemento fondamentale della categoria visuale in tutti i client di utilità, quindi se la lettura persistente delle statistiche è il fattore determinante per te, vale la pena controllare direttamente l'elenco dei moduli di qualsiasi client piuttosto che presumere che i nomi corrispondano.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Un modulo HUD è considerato imbroglio in Minecraft?">
+No. Un modulo HUD mostra soltanto informazioni, coordinate, FPS, statistiche di combattimento e così via. Non automatizza nulla né modifica il comportamento del gioco, quindi non comporta alcun rischio maggiore rispetto alla schermata di debug F3 integrata in Minecraft.
+</FAQItem>
+
+<FAQItem question="Qual è la differenza tra un modulo HUD e una GUI Click?">
+Una GUI Click è il menu che apri per sfogliare e configurare i moduli di un client. Un HUD è ciò che rimane sullo schermo una volta chiuso quel menu: un display passivo che non richiede input e si limita a mostrarti dei numeri.
+</FAQItem>
+
+<FAQItem question="Quali informazioni mostra di solito un modulo HUD?">
+Coordinate, un contatore FPS e informazioni relative al combattimento sono quelle più comuni. L'elenco esatto e il grado di personalizzazione variano a seconda del client.
+</FAQItem>
+
+<FAQItem question="Quali client di Minecraft hanno un modulo in stile HUD?">
+Juul chiama la sua versione HUD. Fan e Tenacity offrono la stessa funzionalità con il nome HUDMod. Nome diverso, stesso scopo.
+</FAQItem>
+
+<FAQItem question="L'utilizzo di un modulo HUD influisce sui tuoi FPS?">
+Quasi per niente. Disegna solo una manciata di testo e forme aggiuntive sopra un frame che sta già venendo renderizzato, non esegue un sistema separato. Qualsiasi costo è minimo rispetto al rendering del normale gameplay.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "Un modulo HUD è un piccolo componente di una categoria più ampia." },
+  { href: "/it/learn/what-is-killaura", label: "Cos'è Killaura?", description: "Un modulo di combattimento che il display di combattimento del HUD tiene spesso sotto controllo." },
+  { href: "/it/learn/what-is-reach", label: "Cos'è la portata?", description: "Un altro modulo orientato al combattimento, all'estremità opposta dello spettro del rischio rispetto a un overlay passivo." },
+]} />
+
+<CTA href="/it/purchase">Scopri cosa mostra Opal sul tuo schermo e cosa ti lascia da configurare.</CTA>

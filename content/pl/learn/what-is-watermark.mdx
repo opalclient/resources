@@ -1,0 +1,75 @@
+---
+title: Czym jest moduł znaku wodnego w Minecraft?
+description: "Moduł znaku wodnego umieszcza nazwę lub logo klienta na ekranie, co pozwala na branding Twoich klipów. Jest to wyłącznie element wizualny: nie wysyła żadnych danych i nie może zostać wykryty przez system anticheat."
+excerpt: To jest logo w rogu ekranu i nigdy nic innego nie robi. Czysty znak firmowy, zero rozgrywki.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy moduł znaku wodnego daje jakąś przewagę w rozgrywce?
+    a: Nie. Wyświetla tylko tekst lub logo na ekranie i nie ma żadnego połączenia z ruchem, walką ani niczym, co przetwarza serwer.
+  - q: Czy system antycheat może wykryć moduł z watermarkiem?
+    a: Nie. Nigdy nic do serwera nie wysyła, więc nie ma nic, co serwerowa anticheat miałby obserwować w przypadku czysto lokalnego overlaya.
+  - q: Dlaczego klienci dodają moduł znakowania wodnego?
+    a: "Głównie branding i identyfikacja: sprawia, że klipy i zrzuty ekranu są rozpoznawalne, a także pozwala na błyskawiczne potwierdzenie, dla którego klienta lub której wersji pracujesz."
+  - q: Czy mogę przenieść lub wyłączyć nakładaną wodę znakową?
+    a: Zazwyczaj tak. Większość implementacji pozwala na przemieszczenie, zmianę rozmiaru lub całkowite wyłączenie, choć dokładne opcje zależą od klienta.
+---
+
+<KeyTakeaways>
+
+- Moduł znakowania wodnego nakłada nazwę lub logo klienta na ekran gry w celach brandingowych.
+- Jest to lokalne wywołanie polecenia rysowania po zbudowaniu klatki: bez pakietów, bez stanu gry.
+- Gracze używają go do znakowania fragmentów rozgrywki i potwierdzania, którą wersję klienta uruchamiają.
+- Brak wpływu na rozgrywkę oznacza zerowe ryzyko związane z anticheatem, po stronie serwera lub klienta.
+
+</KeyTakeaways>
+
+Wodoznak, w narzędziowym kliencie Minecraft, to mały element identyfikacji, zazwyczaj nazwa lub logo, rysowany w stałym miejscu na ekranie podczas gry. Działa on na podobną zasadę, co wodoznak na zdjęciu lub filmie: stempluje źródło na tym, co jest nagrywane, nie ingerując w rzeczywistą zawartość pod spodem. Jako moduł, wodoznak jest elementem HUD-u i nic więcej. Nie porusza twojej postaci, nie odczytuje stanu świata i nie wysyła nic dodatkowego do serwera. Istnieje po to, by klip krążący w Internecie lub zrzut ekranu wrzucony na Discorda był jednoznacznie powiązany z klientem, który go wygenerował.
+
+## Jak to działa
+
+Wodoznak należy do tej samej rodziny, co każdy inny element nakładkowy HUD: wskaźnik współrzędnych, timer mikstury, wyświetlacz naciśniętych klawiszy. Klient renderuje fragment tekstu lub mały obrazek logo na gotowym obrazie gry, zazwyczaj zakotwiczone w rogu (prawy dolny jest częstym domyślnym ustawieniem), po tym, jak wszystko inne na ekranie zostało już narysowane.
+
+Ponieważ jest to tylko wywołanie rysowania i nic więcej, nie ma dostępu do odczytu do niczego, co ma znaczenie dla rozgrywki: nie ma pozycji gracza, nie ma danych bloku, nie ma listy bytów. Po prostu maluje piksele w tym samym miejscu w każdej klatce. Większość implementacji udostępnia kilka opcji sterowania: pozycję lub przesunięcie, rozmiar oraz przełącznik włączania/wyłączania, z których żadna nie wpływa na pojedynczy pakiet wychodzący. Ten ostatni szczegół sprawia, że następna sekcja jest krótka.
+
+## Czy jest bezpieczne do użycia
+
+Watermark to jedno z najmniej ryzykownych rozwiązań, jakie mogą pojawić się jako moduł. Anticheaty, niezależnie od tego, czy jest to wykrywanie po stronie serwera na serwerze rankingowym, czy sprawdzanie integralności po stronie klienta, działają poprzez analizę tego, co klient wysyła lub jak jego zachowanie zgadza się ze stanem gry: różnice w ruchu, czas ataku, sekwencjonowanie pakietów. Watermark nie ingeruje w nic z tego. Jest to lokalna operacja rysowania bez śladu w sieci i bez interakcji z logiką gry, więc nie ma nic, co system wykrywania mógłby porównać.
+
+To plasuje go w tej samej kategorii co inne moduły wyświetlające tylko informacje, takie jak dostosowywanie HUD-u, licznik FPS, wyświetlacz naciśnięć klawiszy, a nie coś przypominającego celownik lub rozszerzyciel zasięgu. Gdyby serwer kiedykolwiek zbanował kogoś za logo w rogu ekranu, byłoby to decyzja polityczna, a nie wykrywania.
+
+<Callout variant="tip" title="Gdzie to się mieści w Opal">
+Opal nie udostępnia modułu o tej nazwie. Jeśli celem jest branding nagrań, to zadanie dla oprogramowania do nagrywania, a nie klienta. To, co obejmuje kategoria Visual w Opal, to szersza przestrzeń HUD i nakładek: elementy wyświetlane na ekranie, które informują o Twojej grze, a nie o kliencie, który je stworzył.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy moduł znaku wodnego daje jakąkolwiek przewagę w rozgrywce?">
+Nie. On jedynie rysuje tekst lub logo na ekranie i nie ma żadnego związku z ruchem, walką ani niczym, co przetwarza serwer.
+</FAQItem>
+
+<FAQItem question="Czy antywirus może wykryć moduł nakładki wodnej?">
+Nie. Nigdy nie wysyła nic do serwera, więc serwerowy antywirus nie ma nic do zaobserwowania w przypadku czysto lokalnej nakładki.
+</FAQItem>
+
+<FAQItem question="Dlaczego klienci dodają moduł znaków wodnych?">
+Głównie kwestia branding i identyfikacji: sprawia, że klipy i zrzuty ekranu są rozpoznawalne, a także pozwala w mgnieniu oka sprawdzić, dla którego klienta lub której wersji działasz.
+</FAQItem>
+
+<FAQItem question="Czy mogę przenieść lub wyłączyć nakładaną wodny znak?">
+Zazwyczaj tak. Większość implementacji pozwala na jego przestawienie, zmianę rozmiaru lub całkowite wyłączenie, choć dokładne opcje zależą od klienta.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szeroka kategoria wodoznaków oraz każdy inny moduł po stronie klienta do niej należy." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Przeciwny instynkt: pozostawać niezauważonym, zamiast stawiać swoje nazwisko na każdym fragmencie." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Moduł stworzony, aby zostać wykrytym. Znak wodny jest widoczny, ale nie przez serwer." },
+]} />
+
+<CTA href="/pl/purchase">Zobacz, co jeszcze znajdziesz w kategorii Wizualnej Opal</CTA>

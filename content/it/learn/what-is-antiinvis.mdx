@@ -1,0 +1,92 @@
+---
+title: Cos'è AntiInvis in Minecraft? (Modulo Spiegato)
+description: AntiInvis rivela i giocatori resi invisibili da pozioni o exploit di rendering client-side, tracciando un contorno parziale sopra la loro posizione reale anziché non mostrare nulla.
+excerpt: Le pozioni d'invisibilità promettono di far scomparire. AntiInvis infrange quella promessa in silenzio, e il bersaglio non se ne accorge nemmeno.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: AntiInvis riesce a vedere attraverso pozioni di invisibilità o solo exploit lato client?
+    a: Entrambi. Fornisce un'impalcatura parziale per i giocatori sotto l'effetto di invisibilità reale e per i giocatori che utilizzano un exploit lato client che nasconde il loro modello senza applicare mai tale effetto.
+  - q: AntiInvis invia dati aggiuntivi al server?
+    a: No. Il server invia già al client la posizione e la rotazione di un'entità invisibile per la fisica e il rilevamento degli impatti. AntiInvis modifica solo se tali dati vengono visualizzati, non cambia nulla riguardo ai pacchetti in uscita.
+  - q: AntiInvis è la stessa cosa dell'ESP?
+    a: Sono correlati ma non identici. ESP tipicamente rappresenta le entità attraverso muri e terreno. AntiInvis colpisce specificamente l'effetto di status "invisibilità" e sfrutta le imitazioni di esso, senza intervenire sulla linea di vista.
+  - q: Quali clienti includono AntiInvis?
+    a: È documentato come una funzionalità in Tenacity.
+  - q: Si può essere bannati per aver usato AntiInvis?
+    a: Sì, anche dove nessun sistema anticheat lo segnala. Ti fornisce informazioni che il gioco base omette deliberatamente, e la maggior parte dei server vieta l'utilizzo di tali informazioni in base a regole generali di fair play o di exploit, indipendentemente dal metodo di rilevamento.
+---
+
+<KeyTakeaways>
+- AntiInvis è un modulo che rivela i giocatori invisibili, disegnando un contorno parziale sopra la loro posizione reale invece di non mostrare nulla.
+- Intercetta la fase di rendering di vanilla per le entità invisibili, riutilizzando i dati di posizione che il client possiede già.
+- È uno sfruttamento, non una semplice modifica visiva: annulla una transazione che il giocatore ha già effettuato.
+- Il traffico appare normale agli anticheat, ma la maggior parte dei server continua a bandirlo in base alle regole del fair play.
+</KeyTakeaways>
+
+AntiInvis è un modulo che rivela i giocatori che si nascondono utilizzando una pozione di invisibilità o un exploit di invisibilità lato client. Invece di non mostrare nulla, disegna un contorno parziale sopra la posizione effettiva del giocatore nascosto, in modo che l'utente sappia approssimativamente dove si trova senza dover aspettare un segnale come dei passi o un oggetto brandito. Si colloca nella categoria degli exploit, non in quella visuale o di miglioramento della qualità della vita, perché aggira una meccanica su cui il gioco è specificamente costruito per nascondere.
+
+## Come funziona
+
+Nella versione base di Minecraft, viene saltato il passaggio di rendering per qualsiasi entità che porta l'effetto di stato invisibilità. Il client riceve comunque la posizione, la rotazione e altre informazioni sull'entità attraverso la rete, poiché il server deve tracciarla per il rilevamento dei colpi e la fisica, indipendentemente dal fatto che venga disegnata. Il gioco semplicemente sceglie di non disegnare il modello. AntiInvis interviene in quel passaggio di rendering e lo forza a disegnare comunque, di solito come un contorno a tinta piatta o parzialmente trasparente anziché il modello completo con texture. Poiché i dati di posizione erano già presenti sul client, non è necessario richiedere o inviare informazioni aggiuntive per farlo funzionare.
+
+Lo stesso hook intercetta anche gli exploit di invisibilità lato client, in cui un client modificato nasconde il proprio modello localmente senza mai applicare il vero effetto di stato a se stesso. AntiInvis non distingue quale metodo ha prodotto il modello nascosto; forza il disegno del contorno in entrambi i casi.
+
+| Cosa mostra Vanilla | Cosa mostra AntiInvis |
+|---|---|
+| Niente, a parte particelle, armature o un oggetto in mano | Un contorno parziale sopra la posizione reale dell'entità |
+| Posizione deducibile solo da indizi indiretti | Posizione visibile direttamente, nessun indizio richiesto |
+
+## AntiInvis vs ESP
+
+Vengono raggruppati insieme perché entrambi rendono disponibili informazioni che il gioco preferirebbe non farti avere, ma non risolvono lo stesso problema. ESP tipicamente attraversa muri e terreno per mostrarti entità semplicemente fuori dal tuo campo visivo. AntiInvis non tocca affatto il campo visivo: si rivolge a un caso specifico, un'entità che il gioco ha deliberatamente scelto di non disegnare a causa dell'effetto di status invisibilità (o qualcosa che lo simula). Un giocatore completamente visibile dietro un muro è un problema di ESP. Un giocatore completamente visibile in piena vista con una pozione di invisibilità attiva è un problema di AntiInvis.
+
+## Perché viene considerato un exploit
+
+Esiste una pozione di invisibilità per togliere un giocatore dalla vista. Assumerne una è una transazione deliberata: uno slot di inventario e una durata di effetto di stato, spesi per la copertura. AntiInvis annulla quella transazione per l'utente senza modificare nulla per il bersaglio. Il giocatore invisibile continua a credere di essere nascosto, continua ad aver speso le risorse e non ottiene alcun beneficio contro chi esegue il modulo. Si tratta di un vantaggio informativo e tattico, non di una resa estetica, ed è per questo che è classificato come exploit piuttosto che cosmetico o di miglioramento della qualità della vita.
+
+Non automatizza il combattimento o il movimento come fa un modulo come KillAura. AntiInvis cambia solo ciò che l'utente può vedere; continua a mirare, muoversi e combattere a mano. L'intero vantaggio risiede nelle informazioni che espone.
+
+## È sicuro da usare
+
+Essere difficile da intercettare non è la stessa cosa di essere sicuro. AntiInvis non modifica nulla dei pacchetti che un client invia: nessun nuovo tempismo di attacco, nessuna rotazione impossibile, nessun movimento alterato. I sistemi di rilevamento basati sul comportamento di rete non hanno nulla di insolito da esaminare, quindi una modifica di rendering puramente lato client come questa in genere non rientra in ciò che controllano.
+
+Questo non lo rende consentito. La maggior parte dei server vieta i moduli che rivelano l'invisibilità in base a regole generali di fair play o di exploit, indipendentemente dal fatto che un sistema automatizzato li segnali o meno; l'applicazione può derivare dalla visione in spettatore, dalle repliche o dalle segnalazioni, invece di un algoritmo di rilevamento. Considera "difficile da rilevare" e "consentito" come due domande separate, perché lo fanno i server.
+
+<Callout variant="tip" title="Dove si colloca in Opal">
+Opal non spedisce un modulo AntiInvis dedicato. Le sue funzionalità di categoria visiva rimangono sul lato informativo del gioco corretto, fornendo assistenza per leggere uno scontro, non moduli costruiti specificamente per annullare un effetto per cui qualcun altro ha pagato una pozione e una durata di effetto di stato. Se stai cercando moduli di livello exploit come questo, cerca altrove; se desideri un toolkit visivo pulito che non annulli silenziosamente ciò per cui un altro giocatore ha pagato, questa è la direzione che Opal segue.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina spiega cosa fa AntiInvis e perché è classificato come exploit, non come approvazione per eseguirlo. La maggior parte dei server vieta i moduli che rivelano l'invisibilità in base alle regole generali di fair play, indipendentemente dal fatto che un anticheat rilevi automaticamente la modifica del rendering.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+<FAQItem question="AntiInvis riesce a vedere attraverso le pozioni di invisibilità o solo gli exploit lato client?">
+Entrambi. Visualizza un contorno parziale per i giocatori sotto l'effetto di invisibilità reale e per i giocatori che utilizzano un exploit lato client che nasconde il loro modello senza mai applicare tale effetto.
+</FAQItem>
+<FAQItem question="AntiInvis invia dati aggiuntivi al server?">
+No. Il server invia già al client la posizione e la rotazione di un'entità invisibile per la fisica e il rilevamento dei colpi. AntiInvis modifica solo se tali dati vengono visualizzati, senza alterare i pacchetti in uscita.
+</FAQItem>
+<FAQItem question="AntiInvis è la stessa cosa di ESP?">
+Sono correlati ma non identici. L'ESP in genere visualizza le entità attraverso muri e terreno. AntiInvis si rivolge specificamente all'effetto di invisibilità e agli exploit che lo imitano, e non fa nulla sulla linea di vista.
+</FAQItem>
+<FAQItem question="Quali client includono AntiInvis?">
+È documentato come funzionalità in Tenacity.
+</FAQItem>
+<FAQItem question="Si può essere bannati per l'utilizzo di AntiInvis?">
+Sì, anche quando nessun anticheat automatizzato lo segnala. Fornisce informazioni che il gioco vanilla deliberatamente nasconde, e la maggior parte dei server lo vieta in base a regole generali di fair play o di exploit, indipendentemente dal metodo di rilevamento.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Un cliente costruito attorno all'idea di rimanere invisibile, l'esatto opposto del problema che AntiInvis risolve." },
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "Il modulo di combattimento automatizzato AntiInvis non lo è affatto; modifica soltanto ciò che vedi." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria più ampia AntiInvis e moduli simili vi appartengono." }
+]} />
+
+<CTA href="/it/purchase">Ottieni un toolkit visivo che non ha bisogno di un tag di exploit per meritarsi il suo posto.</CTA>

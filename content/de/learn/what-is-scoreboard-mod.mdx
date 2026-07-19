@@ -1,0 +1,85 @@
+---
+title: Was ist eine Anzeigetafel in Minecraft? Modul erklärt
+description: Das Scoreboard ist ein Minecraft-Modul, das die serverseitige Scoreboard-Sidebar neu gestaltet oder clientseitig berechnete Zeilen wie Ping hinzufügt – eine rein kosmetische Änderung, die von keinem Anticheat-System markiert werden kann.
+excerpt: Die Anzeigetafel beeinflusst das Spiel nicht, nur die Kiste unten rechts. Zeichne sie neu, füge eine Linie hinzu, und lebe dein Leben weiter.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Vieles deutet darauf hin, dass Scoreboard einen unfairen Vorteil bietet?
+    a: Nein. Es ändert lediglich die Anzeige vorhandener Punktestandsdaten oder fügt Informationen hinzu, die der Client bereits lokal berechnen kann, wie zum Beispiel den Ping. Es offenbart nichts, was ein Spieler nicht anderweitig sehen könnte.
+  - q: Können Server-Administratoren ein benutzerdefiniertes Punktestand erkennen?
+    a: Nicht durch die Anzeigetafel selbst. Der Server sendet weiterhin seine eigenen Ziele und Punktzahlen wie gewohnt. Das clientseitige Redesign und alle zusätzlichen Zeilen werden nicht zurückgesendet, sodass der Server nichts davon bemerkt.
+  - q: Ist Scoreboard dasselbe wie ein HUD-Mod?
+    a: Nicht ganz. Das Ergebnis wird ausschließlich auf die Seitenleiste beschränkt. Ein umfassenderes HUD-Mod könnte die Schnellleiste, die Koordinatenanzeige, den Rüstungsstatus und mehr beeinflussen. Das Ergebnis kümmert sich nur um dieses eine Element.
+  - q: Warum würde ein Kunde überhaupt ein Scoreboard-Modul bündeln?
+    a: Server-Bestenlisten variieren stark im Stil, und ein integriertes Modul sorgt für ein einheitliches Aussehen über Server hinweg oder auf Oberflächen, ohne ein separates Menü öffnen zu müssen, beispielsweise für eine Anzeige der Ping-Zeit.
+---
+
+<KeyTakeaways>
+
+- Das Scoreboard ist ein clientseitiges Modul, das die Punktestafel in der Seitenleiste des Servers neu gestaltet oder zusätzliche Zeilen hinzufügt, die aus Daten erstellt werden, die der Client bereits besitzt, wie zum Beispiel den Ping.
+- Es hakt den Seitenleisten-Render-Schritt ab: Die eigentlichen Ziele und Punktzahlen des Servers bleiben unverändert, das Modul formatiert sie lediglich anders oder fügt lokale Werte hinzu.
+- Nichts wird an den Server zurückgesendet, sodass die Änderung für Administratoren unsichtbar und für Anticheats irrelevant ist.
+- Es wird als HUD-Komfortfunktion neben Dingen wie einer Koordinatenüberlagerung oder einem FPS-Zähler geführt, nicht als Kampfbegleiterscheinung oder Bewegungseigenschaft.
+
+</KeyTakeaways>
+
+Das Scoreboard ist ein Minecraft-Modul, das verändert, wie die server-seitige Scoreboard-Sidebar aussieht oder was sie anzeigt. Es kann die Box, die der Server sendet, neu gestalten, andere Schriftarten, Farben oder abgerundete Ecken verwenden, oder es kann zusätzliche Zeilen anhängen, die aus Daten berechnet werden, die der Client bereits besitzt, wie zum Beispiel den Ping. In jedem Fall beschränkt es sich auf die Präsentation. Es ändert nichts daran, wie du spielst, dich bewegst oder kämpfst.
+
+## Wie es funktioniert
+
+Die Sidebar, die du in der Ecke des Bildschirms siehst, wird standardmäßig vom Server gesteuert: der Server sendet Ziele und Punktzahlen, und der Client zeichnet sie in dem generischen Stil, mit dem Minecraft ausgeliefert wird. Scoreboard hängt in diesen Render-Schritt ein und zeichnet entweder die Box komplett neu oder fügt zusätzliche client-seitige Zeilen neben den Einträgen des Servers ein. Die vom Server bereitgestellten Daten bleiben unverändert, wie sie gesendet wurden. Das Modul liest diese Daten, formatiert sie anders und kann Werte einfügen, die der Server nie übertragen hat, da diese zusätzlichen Zeilen lokal berechnet werden und nicht über das Netzwerk abgerufen werden.
+
+Das Restyling betrifft die visuelle Ebene: einen anderen Hintergrund, abgerundete Ecken anstelle von scharfen, eine benutzerdefinierte Schriftart oder ein animierter Übergang, wenn ein Wert steigt oder fällt, anstatt einfach auf die neue Zahl zu springen. Inhaltsergänzungen sind der kleinere, zweite Teil des Moduls: Dinge, die der Client bereits selbst berechnen kann, wobei Ping das offensichtliche Beispiel ist, und als zusätzliche Zeile eingefügt werden, ohne dass der Server etwas Neues sendet. Da hier nichts von einem Paket stammt, das an den Server zurückgesendet wird, ist das Ganze lokal auf Ihrem Bildschirm und bleibt es.
+
+## Was Scoreboard tatsächlich verändert
+
+| Einstellung | Was sich ändert |
+|---|---|
+| Hintergrund | Tauscht das Standard-Seitenleistenelement gegen eine benutzerdefinierte Farbe oder einen Stil aus |
+| Ecken abrunden | Verleiht den scharfen Box-Ecken, die Minecraft mitliefert, eine weichere Form |
+| Benutzerdefinierte Schriftarten | Ersetzt die Schriftart der Standard-Seitenleiste |
+| Wertübergänge | Animiert eine Zahl, wenn sie sich aktualisiert, anstatt sofort zu springen |
+| Zusätzliche Zeilen (z. B. Ping) | Fügt vom Client berechnete Statistiken hinzu, die der Server nie gesendet hat |
+
+Keine dieser Zeilen erfordert die Mitarbeit des Servers. Es sind alles Entscheidungen, die der Client trifft, nachdem die Ziele und Ergebnisse des Servers bereits eingetroffen sind, weshalb die Liste an dieser Stelle endet. Scoreboard liest nichts vom Server ab, was es nicht bereits erhalten hat; es wählt lediglich aus, wie es das bereits Vorhandene darstellen soll.
+
+## Ist es sicher zu verwenden
+
+Ja, und es ist ungefähr so sicher, wie ein Modul nur sein kann. Das Scoreboard formatiert oder erweitert lediglich das, was der Server bereits lokal anzeigt. Es liest keine Daten, die du nicht sehen solltest, sendet keine zusätzlichen Pakete und verändert nicht, wie dein Client mit der Welt interagiert. Es gibt keinen Informationsvorteil gegenüber einem anderen Spieler, der das gleiche Vanilla-Scoreboard betrachtet, sondern nur eine andere Lackierung. Anticheats haben hier nichts zu beanstanden, denn das Modul greift weder die Bewegung, den Kampf noch irgendetwas, was über die Leitung gesendet wird, an.
+
+<Callout variant="tip" title="Wo dies in Opal zu finden ist">
+Opal liefert kein Modul namens Scoreboard. Der Bereich, den es abdeckt – lokale Display-Anpassungen, die die Daten des Servers unberührt lassen – fällt in dieselbe visuelle Kategorie wie der Rest von Opals HUD und die kosmetischen Werkzeuge. Wenn Ihnen eine übersichtliche Seitenleiste wichtig ist, lohnt es sich, zu prüfen, was ein Client unter seinen visuellen Einstellungen anbietet, anstatt anzunehmen, dass sie fehlt, nur weil der Name nicht übereinstimmt.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Verleiht die Ergebnisübersicht einen unfairen Vorteil?">
+Nein. Sie verändert lediglich die Darstellung vorhandener Ergebnisdaten oder fügt Informationen hinzu, die der Client bereits lokal berechnen kann, wie zum Beispiel den Ping. Sie offenbart nichts, was ein Spieler nicht auch ohne sie sehen könnte.
+</FAQItem>
+
+<FAQItem question="Können Server-Administratoren ein benutzerdefiniertes Scoreboard erkennen?">
+Nicht über das Scoreboard selbst. Der Server sendet weiterhin seine eigenen Ziele und Ergebnisse wie gewohnt. Die clientseitige Umgestaltung und alle zusätzlichen Zeilen werden nicht zurückgesendet, sodass es für den Server nichts zu bemerken gibt.
+</FAQItem>
+
+<FAQItem question="Ist Scoreboard dasselbe wie ein HUD-Mod?">
+Nicht ganz. Scoreboard ist auf die Seitenleiste beschränkt. Ein umfassenderes HUD-Mod könnte die Schnellleiste, die Koordinatenanzeige, den Panzerstatus und mehr beeinflussen. Scoreboard befasst sich lediglich mit diesem einen Element.
+</FAQItem>
+
+<FAQItem question="Warum würde ein Kunde überhaupt ein Scoreboard-Modul bündeln?">
+Server-Scoreboards unterscheiden sich stark in ihrem Aussehen, und ein integriertes Modul sorgt für ein einheitliches Erscheinungsbild auf verschiedenen Servern oder Oberflächen, ohne ein separates Menü öffnen zu müssen, beispielsweise für eine Ping-Anzeige.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Kategorie, zu der Module wie die Ergebnisübersicht gehören." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Das detektionsorientierte Ende des Spektrums ist für Scoreboard kein Problem." },
+  { href: "/de/learn/what-is-an-aimbot", label: "Was ist ein Aim-Bot?", description: "Ein Modul, das am anderen Ende der Risikoliste von rein oberflächlichen Modulen angesiedelt ist." },
+]} />
+
+<CTA href="/de/kaufen">Eine aufgeräumtere Seitenleiste ist eine Kleinigkeit. Sehen Sie, was Opal noch alles bereinigt.</CTA>

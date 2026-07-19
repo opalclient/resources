@@ -1,0 +1,91 @@
+---
+title: Cos'è l'Auto Pot in Minecraft? Spiegazione del Modulo
+description: Auto Pot è un modulo di combattimento per Minecraft che beve o lancia automaticamente una pozione curativa quando la tua salute scende, ed è il tempismo a tradirlo.
+excerpt: Auto Pot ti avvisa quando stai per esaurire le risorse prima ancora che tu te ne accorga, e ti cura prima che tu possa raggiungere la barra delle abilità. Ecco come funziona il trigger e perché è un segnale temporale.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Funziona Auto Pot solo con pozioni a effetto esplosivo?
+    a: No. A seconda dell'ambiente e di ciò che stai trasportando, può bere direttamente una pozione tenuta in mano oppure lanciarne una a spruzzo, di solito mirata ai tuoi piedi per una guarigione di area.
+  - q: Dà Auto Pot un vantaggio in combattimento meccanico?
+    a: Non direttamente. Non influisce sulla portata, sui danni o sul movimento, rimuove semplicemente il passaggio manuale di selezione e utilizzo di una pozione, quindi qualsiasi vantaggio deriva dal tempo di reazione risparmiato, non da una meccanica modificata.
+  - q: Come potrebbe un server rilevare Auto Pot?
+    a: Principalmente attraverso la tempistica. Una pozione utilizzata con un ritardo quasi costante e brevissimo dopo aver subito dei danni sembra automatizzata piuttosto che reattiva, ed è proprio questo schema che gli anticheat e il personale attento monitorano.
+  - q: Auto Pot è la stessa cosa di Auto Soup?
+    a: Funzionano allo stesso modo, monitorando la salute e attivando automaticamente un oggetto, ma mirano a oggetti diversi. Auto Pozione mira a pozioni curative o a effetto area, Auto Zuppa mira alla zuppa di funghi.
+  - q: Quali clienti hanno Auto Pot?
+    a: "È documentato come si può vedere in Fan e Tenacia. Anche Opal include la propria versione, elencata nel suo catalogo come Pozione Automatica: 'Lancia pozioni a effetto area ai tuoi piedi.'"
+---
+
+<KeyTakeaways>
+
+- Auto Pot beve o lancia automaticamente una pozione curativa quando la tua salute scende al di sotto di una soglia impostata.
+- Monitora la salute ad ogni tick, passa alla pozione e attiva l'azione istantaneamente.
+- Splash lancia terra ai tuoi piedi in modo che il raggio curativo ti colpisca comunque.
+- Non influisce sulla gittata o sul movimento, solo sulla velocità di reazione, su cui gli anticheat si basano.
+
+</KeyTakeaways>
+
+Auto Pot è un modulo di combattimento per Minecraft che beve o lancia una pozione curativa non appena la tua salute supera una soglia impostata, così non devi interrompere la concentrazione durante un combattimento per cercare nella tua barra degli strumenti. Monitora la tua salute in background e si attiva nel momento in cui il valore viene raggiunto, senza interruttori manuali, senza clic sotto pressione. Si presenta con la stessa idea, ma con un nome diverso, in diversi client di combattimento, e si abbina perfettamente a tutto ciò che prolunga un combattimento: scambi di cristalli, duelli prolungati, ovunque la guarigione tempestiva sia più importante della guarigione eventuale.
+
+## Come funziona
+
+Auto Pot controlla la tua salute attuale a intervalli brevi, di solito ogni tick, rispetto a una soglia che configuri. Non appena la salute scende al di sotto di quel valore, seleziona una pozione e la usa. Se stai tenendo una pozione curativa, passa alla relativa posizione nella barra degli strumenti e la beve. Se stai trasportando pozioni a spruzzo, passa, mira ai tuoi piedi e le lancia.
+
+Il mirare non è casuale. Una pozione bevuta cura solo chi la beve. Una pozione a spruzzo lanciata si rompe all'impatto e cura tutti coloro che si trovano nell'esplosione, compreso chi lancia, ed è proprio per questo che il lancio atterra ai tuoi piedi invece di vicino a un nemico. Ottieni il cambio e il lancio giusti una volta sola e la guarigione è fatta.
+
+Bere è un percorso leggermente più disordinato. È comunque un'attivazione, poi un utilizzo, ma la pozione impiega un momento per esaurirsi e la salute può continuare a diminuire mentre l'animazione è in corso. Questo è parte del motivo per cui le pozioni a raffica tendono ad essere l'implementazione preferita nei moduli costruiti attorno a un PvP serio.
+
+## Perché le persone lo usano
+
+Il punto non è un potere extra, né perdere una cura in una battaglia che sta già andando male. Notare la bassa salute, aprire la barra degli oggetti e selezionare la pozione giusta costa attenzione che un giocatore che lotta per la propria vita preferirebbe dedicare al posizionamento o alla mira. Auto Pot elimina quel singolo passaggio ripetitivo, quindi la guarigione avviene nel momento in cui la soglia viene superata, invece che quando ne hai voglia.
+
+## È sicuro usarlo?
+
+Auto Pot si avvicina più a una funzionalità di convenienza che a un cheat che altera la meccanica. Non cambia la portata, la mira o il movimento e non fa nulla che un server possa misurare come fisicamente impossibile; automatizza semplicemente l'uso di un oggetto che eri già autorizzato a eseguire manualmente. Ciò che desta sospetti è il tempismo: un umano che beve o lancia una pozione sotto pressione ha un ritardo variabile e a volte sbaglia l'attivazione della barra degli oggetti, mentre un trigger automatizzato reagisce a un punto fisso, quasi istantaneo, ogni volta. Questa coerenza è un modello che un anticheat rigoroso, o semplicemente un avversario sospettoso, può notare senza mai dimostrare che sia successo qualcosa sul lato client.
+
+Che importi dipende dal server. Un set di regole che già tollera il cambio rapido di pozioni considera Auto Pot come un vantaggio minore al massimo. Un server costruito attorno alla scarsità di risorse, dove gestire la propria guarigione fa parte della sfida, o uno che vieta l'uso automatizzato degli oggetti, è molto più propenso a indagare, e la rilevazione si riduce a quella stessa firma dei tempi di reazione.
+
+<Callout variant="tip" title="Opal lo chiama Pozione Automatica">
+Il catalogo di Opal lo indica chiaramente: Pozione Automatica, "Lancia pozioni a terra ai tuoi piedi". Stessa meccanica, stesso compromesso, inserito nella categoria "usare a proprio rischio" come tutto il resto qui.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina spiega cos'è Auto Pot e come viene rilevato. Non sono istruzioni per eseguirne uno. L'uso automatizzato di oggetti come questo è un segnale anticheat noto, e farsi beccare può significare un ban, come su qualsiasi client.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Funziona Auto Pot solo con pozioni a effetto area?">
+No. A seconda dell'impostazione e di ciò che stai trasportando, può bere direttamente una pozione tenuta in mano o lanciarne una a effetto area, di solito puntata ai tuoi piedi per una guarigione ad area.
+</FAQItem>
+
+<FAQItem question="Auto Pot offre un vantaggio in combattimento meccanico?">
+Non direttamente. Non influisce sulla portata, sui danni o sul movimento, rimuove semplicemente il passaggio manuale di selezione e utilizzo di una pozione, quindi qualsiasi vantaggio deriva dal tempo di reazione risparmiato, non da una modifica meccanica.
+</FAQItem>
+
+<FAQItem question="Come rileverebbe un server l'Auto Pot?">
+Principalmente attraverso i tempi. Una pozione utilizzata con un ritardo quasi costante e molto breve dopo aver subito danni appare automatizzata piuttosto che reattiva, ed è questo schema che gli anticheat e il personale attento monitorano.
+</FAQItem>
+
+<FAQItem question="Auto Pot è la stessa cosa di Auto Soup?">
+Funzionano allo stesso modo, monitorando la salute e attivando automaticamente un oggetto, ma mirano a oggetti diversi. Auto Pot mira a pozioni curative o a effetto area, Auto Soup mira alla zuppa di funghi.
+</FAQItem>
+
+<FAQItem question="Quali clienti hanno Auto Pot?">
+È documentato come si può vedere in Fan e Tenacity. Anche Opal offre la propria versione, elencata nel suo catalogo come Auto Pozione: "Lancia pozioni a effetto area ai tuoi piedi".
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia in cui rientra Auto Pot." },
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "L'auto-attaccante che spesso combatte insieme a una guarigione automatica." },
+  { href: "/it/learn/what-is-a-crystal-aura", label: "Cos'è un'Aura Cristallina?", description: "Il modulo di danno ad area che rende degno di avere una guarigione automatica." },
+]} />
+
+<CTA href="/it/purchase">Perdere una cura non dovrebbe essere ciò che finisce una battaglia. Opal spedisce Pozione Automatica per $8.99.</CTA>

@@ -1,0 +1,79 @@
+---
+title: Minecraft'ta Arama (Kaynak Bulucu) Nedir?
+description: Arama, seçtiğiniz bloğu zaten yüklenmiş bölümlerinde tarayan bir Minecraft modülüdür ve her eşleşmeyi işaretler; duvarlardan geçmeyen bir cevher bulucu.
+excerpt: Arama duvarların içinden göremez, sadece müşterinin zaten bildiklerini hatırlar. Bir blok türüne yöneltin ve kazma ve sezgi yerine koordinatları alın.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Araç, aslında ne arar?
+    a: Müşterinin zaten yüklediği parçalar, başka bir şey değil. Belirttiğiniz bir blok türü için bu veriyi tarar ve her eşleşmeyi işaretler veya listeler, böylece sonuçlar oyuncunun etrafında şu anda yüklü olanlarla sınırlıdır.
+  - q: Arama, duvarların içinden görmenizi sağlıyor mu?
+    a: Hayır. Arama, bir X-ışını doku paketi veya shader'ın yaptığı gibi arazinin içinden blokları göstermiyor. Koordinatları bildiriyor veya bir işaret bırakıyor, ancak ekranda çizilen şeyi asla değiştirmiyor.
+  - q: Sunucular Arama'yı otomatik olarak algılayabilir mi?
+    a: Nadir durumlarda paket incelemesiyle, çünkü modül normal bir istemcinin göndermeyeceği hiçbir şey göndermiyor. Genellikle yakalandığı yer, bir çalışanın oyun kalıplarını gözden geçirmesiyle oluyor, otomatik bir işaretle değil.
+  - q: Arama, röntgen ile aynı mı?
+    a: Aynı problemi çözüyorlar; kaynakları aramadan buluyorlar, ancak farklı yöntemlerle. X-ray genellikle blokların içinden bakabilmek için render'ı değiştirir. Arama taramaları, istemcinin zaten sahip olduğu parçalı verileri analiz eder ve çizilen şeylere dokunmadan eşleşmeleri raporlar.
+---
+
+<KeyTakeaways>
+
+- Arama, yüklü blok parçalarını seçilen blok türü için tarayan (Wurst gibi istemcilerde görülen) bir modüldür ve her eşleşmeyi işaretler.
+- İstemcinin zaten sahip olduğu verileri okur, bu nedenle ek paketler gönderilmez.
+- Kapsama, render mesafesi ile sınırlıdır, boşaltılmış blok parçalarını göremez.
+- X-ray'den farklı olarak, duvarlardan geçerek görüntülemez, sadece koordinatları raporlar.
+
+</KeyTakeaways>
+
+Arama, seçtiğiniz blok tipini zaten yüklenmiş tüm bloklarda tarayan bir Minecraft modülüdür ve her bulduğu yeri işaretler veya listeler. Bir damarı bulmak için etrafta kazıp dolaşmak veya haritada şans eseri karşılaşmayı umak yerine, bloğun adını verirsiniz ve anında yanıt alırsınız. Savaş veya hareket yerine ortamı okuyan veya etkileşim kuran diğer araçlarla aynı dünya kategorisi altında sınıflandırılmıştır.
+
+## Nasıl Çalışır
+
+Arama, istemcinizin zaten belleğinde tuttuğu blok verilerini okur. Bir blok yüklendiği an, oyun onun tam blok düzenini alır; bu, işleyiş şeklinin basit bir yoludur, istemci onu çizebilmesi için neyin orada olduğunu bilmelidir. Arama, seçtiğiniz bloğa göre eşleşmeler aramak için bu verileri tarar ve ardından bulduğu her biri için bir işaret, bir yol gösterge veya bir liste girişi bırakır.
+
+Bunun için sunucuyla tekrar iletişim kurmaya gerek yoktur. Tarama tamamen istemcinizin zaten sahip olduğu bilgiler üzerinde çalışır, bu nedenle yeni paketler gönderilmez ve mevcut bir paket değiştirilmez. Tek gerçek kısıtlama render mesafesidir: Arama yalnızca aslında yüklediğiniz bloklarda blokları ortaya çıkarabilir, tüm dünyayı değil. Daha uzağa yürüyün, daha fazla blok yükleyin, daha fazla eşleşme bulun. İşte tüm döngü.
+
+## Kullanmak Güvenli mi
+
+Arama sadece yüzeysel bir şey değil. Kaynakları aramaya gerek kalmadan bulmak, gerçek bir oyun avantajıdır; tıpkı bir X-ışını aracının sunduğu avantaj gibi, Search duvarlardan geçmediği veya ekranda tek bir pikseli bile değiştirdiği halde. Savaşta ulaşma hilesi veya nişan alma botu gibi bir hileden ayıran şey, tespit hikayesidir. Bunlar, sunucu tarafından yakalanabilecek paketler gönderir: imkansız bir dönüş, gerçekleşmemesi gereken bir mesafeden bir isabet. Search ise olağandışı bir şey göndermez. Sadece sunucunun zaten meşru olarak istemciye verdiği verileri tekrar okur, bu nedenle hile önleme yazılımının işaretleyebileceği paket düzeyinde bir imza yoktur.
+
+Bu, her yerde adil bir oyun anlamına gelmez. X-ışını tarzı kaynak bulmayı yasaklayan çoğu sunucu, bunu otomatik tespit yoluyla değil, politika yoluyla uygular ve ihlalleri davranış yoluyla yakalar: oyuncunun sıfır ön keşif ile doğrudan bir cevher damarına doğru gitmesi veya personelin şüpheli bir oturumu manuel olarak incelemesi gibi. Burada ki risk, sunucu tarafında bir kontrolün istemciyi doğrudan işaretlemesi değil, sosyal ve kurallara dayalı bir risktir; bu da savaş hilelerinin dakikalar içinde yakalandığı sunucularda hayatta kalmasının tam nedeni.
+
+<Callout variant="tip" title="Opal'da Nerede Bulunur">
+Opal, özel bir Arama veya kaynak bulucu modülüyle birlikte gelmiyor. Bu modül, özellikle Wurst dünya kategorisi özelliği olarak belgelenmiştir. Opal'ın kendi kataloğu, tek bir tik veya tek bir karenin bir dövüşün sonucunu belirlediği dövüş, hareket ve görsel modüllerine odaklanıyor. Damar yatakları için parça verilerini okumak o dövüşün bir parçası değil.
+</Callout>
+
+<Callout variant="warning" title="Kurallar, tespit edilemese bile yasaklayabilir">
+Bu sayfa, Opal tarafından sunulan bir şey olarak değil, genel olarak Aramayı açıklamaktadır. Paket düzeyinde asla yakalayamayacak bir sunucuda bile, X-ışını tarzı kaynak bulma, yönteminden bağımsız olarak birçok kural seti tarafından doğrudan yasaklanmaktadır. Temiz bir tespit kaydı, kuralın kendisi yasak demediyse işe yaramaz, bu yüzden elmas yatağına yönlendirmeden önce kontrol edin.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Arama aslında ne arar?">
+İstemcinin zaten yüklediği parçaları, başka bir şey değil. Belirttiğiniz bir blok türü için bu verilerde arama yapar ve her eşleşmeyi işaretler veya listeler, böylece sonuçlar oyuncunun etrafında şu anda yüklü olanlarla sınırlıdır.
+</FAQItem>
+
+<FAQItem question="Arama size duvarların içinden görmeyi sağlar mı?">
+Hayır. Arama, bir X-ışını doku paketi veya shader'ın yaptığı gibi arazi boyunca blokları işlemez. Koordinatları bildirir veya bir işaret bırakır, ekranda asıl çizilen şeyi asla değiştirmez.
+</FAQItem>
+
+<FAQItem question="Sunucular Arama'yı otomatik olarak tespit edebilir mi?">
+Nadiren, paket incelemesi yoluyla; modül, normal bir istemcinin göndermeyeceği hiçbir şey göndermez. Genellikle yakalandığı yer, bir ekip üyesinin oyun kalıplarını incelemesidir, otomatik bir işaretleme değildir.
+</FAQItem>
+
+<FAQItem question="Arama, X-ışını ile aynı mı?">
+İkisi de aynı sorunu çözüyor: kaynakları aramadan bulmak, ancak farklı yöntemlerle. X-ışını genellikle blokların içinden bakabilmek için render'ı değiştirir. Arama ise istemcinin zaten sahip olduğu parça verilerini tarar ve çizilen şeylere dokunmadan eşleşmeleri raporlar.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Daha geniş Arama kategorisi ve diğer dünya modülleri bunların içinde yer alır." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Paket düzeyinde bir denetimi hiçbir zaman tetiklemeyen modüller üzerine kurulu, gizlilik odaklı kategori." },
+  { href: "/tr/learn/what-is-reach", label: "Ulaşmak nedir?", description: "Risk spektrumunun tam tersi ucundaki bir modül: gönderdiği paketlere yakalanan, ihlal ettiği kurallara değil." },
+]} />
+
+<CTA href="/tr/satin-al">Opal, mühendislik bütçesini mücadeleye, cevher damarına değil harcıyor. $8.99 için kataloğa göz atın.</CTA>

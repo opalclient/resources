@@ -1,0 +1,81 @@
+---
+title: Minecraft'ta Delme Nedir? Duvarlardan Geçme
+description: Delme, Minecraft'ta bir savaş modülüdür ve görüş hattı kontrolünü atlayarak duvarlardan geçen saldırılara izin verir. İşte nasıl çalıştığı ve neden yakalanmasının kolay olduğu.
+excerpt: Delme, duvarları bir öneriye dönüştürüyor. İşte ışın izlemeyi nasıl bozduğu ve sunucuların neden neredeyse her seferinde yakaladığı.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Piercing aslında ne gibi imkanlar sunuyor?
+    a: Bir saldırının, aranıza bir duvar veya çit gibi bir engel gelse bile hedefi vurmasına olanak tanır. Normal Minecraft blokları doğrudan vurur.
+  - q: Delme, Ulaşmak ile aynı şey midir?
+    a: Hayır. Menzil, bir saldırının ne kadar uzağa gidebileceğini belirler. Delme, fiziksel olarak önünde ne olursa olsun onu göz ardı eder. Farklı sorunları çözerler, ancak genellikle birlikte kullanılırlar.
+  - q: Hangi müşteriler Piercing gönderdi?
+    a: Slinky, bu modül ile belgelenen bir müşteridir. İsimlendirme ve kesin davranış, bazı uygulamaların kontrolü tamamen kaldırmak yerine yalnızca gevşetmesi nedeniyle müşteriye göre değişiklik gösterir.
+  - q: Bir sunucu gerçekten Piercing kullanan birini yakalayabilir mi?
+    a: Evet, genellikle. Sunucu, çarpışma anında iki oyuncu arasında doğrudan görüş hattı kontrolü yapabilir ve o yolda bulunan sağlam bir engel, istemcinin aşabileceği bir şey değildir.
+---
+
+<KeyTakeaways>
+
+- Delme, bir saldırının saldıran ile hedef arasında bir duvar veya başka katı bir engelden geçmesini sağlar.
+- Normalde bir isabetin kaydedilmesi için Minecraft'ın kullandığı görüş hattı ışınını atlayarak çalışır.
+- Reach menzil uzatır: Delme ise engelleri tamamen yok sayar.
+- Sunucular görüş hattını bağımsız olarak doğrulayabilir, bu da onu daha güvenilir şekilde tespit edilebilen savaş modüllerinden biri yapar.
+
+</KeyTakeaways>
+
+Delme, bir saldırının, saldıran ile hedef arasında katı bir blok bulunsa bile bağlantı kurmasını sağlayan bir savaş modülüdür. Normal Minecraft dövüşü önce bir kontrol yapar: oyun, sizden vurduğunuz şeye doğru bir çizgi çizer ve bu çizgi hedefe ulaşmadan önce araziye çarparsa saldırı kaydedilmez. Delme bu kontrolü atlar. Bir çit, bir duvar, bir taş levha, artık hiçbirinin önemi yok. Hedefin görüş açısı vardır veya yoktur ve Delme, gereksinimi tamamen ortadan kaldırır, bu da tam olarak neden sunucuların yakalaması en kolay şeylerden biri olmasındandır.
+
+## Nasıl Çalışır
+
+Orijinal Minecraft, bir isabetin gerçekleşmesine izin vermeden önce bir ışın izleme işlemi yapar. Oyun, saldıran oyuncudan hedefe doğru düz bir çizgi çizer ve bu çizgiye temas eden ilk katı blokta durur. Bu blok hedeften daha yakınsa, saldırı başarısız olur, bu kadar. Tamamen bu tek kontrol, bir duvarın, kapalı bir kapının veya hatta bir çit direğinin normalde bir salınımın hiçbir şey yapmasını sağlamasına neden olur.
+
+Delinme, o ışın izlemeyi ortadan kaldırır veya devre dışı bırakır, böylece saldırı bir engelleme varmış gibi geçilir. Kaldırma her zaman tam olmak zorunda değildir. Bazı uygulamalar hareket için engelleme çarpışmasını korurken, yalnızca savaş için devre dışı bırakır ve bazıları sadece yolundaki varlıkları kontrol etmeyi durdurur, bu da aynı fikrin daha dar bir versiyonudur. Hepsinin sonucu aynıdır: iki oyuncu arasında katı bir şey dururken bile vuruş yine de isabet eder.
+
+Bunu [Ulaşım](/tr/learn/what-is-reach) ayırından ayırmak değerlidir. Ulaşım, bir vuruşun ne kadar uzağa gidebileceğini uzatır. Delinme mesafeyle hiçbir ilgisi yoktur, iki nokta arasındaki şeyle ilgilidir, o çizginin uzunluğuyla değil. Bir oyuncunun tamamen normal bir ulaşımı olabilir ve yine de Delinme kullanıyor olabilir ve ikisi o kadar sık bir arada görünür ki insanlar bunları karıştırır.
+
+## Delinme kullanmak güvenli mi?
+
+Kısa cevap: hayır. Bunu gri bir alan olarak değil, yasaklanabilir bir özellik olarak ele alın. Delinme tarafından bozulan kontrol, bir sunucunun bağımsız olarak doğrulaması en kolay şeylerden biridir. Vuruş anında, sunucu iki oyuncunun gerçek konumları arasında kendi ışın izlemeyi çalıştırabilir ve katı arazi bu yolda oturuyorsa, salınımın yine de isabet etmesi için geçerli bir açıklama yoktur.
+
+Ulaşım veya dönüşüm yumuşatması gibi durumlarda sunucunun gecikme ve normal insan hataları için yer açması gerekirken, bir duvar ya vardı ya yoktu. Bu durum, yanlış pozitifler için çok az boşluk bırakır ve aynı zamanda oyuncunun bundan kurtulması için de çok az boşluk bırakır. Bu nedenle, hile önleme sistemleri, duvardan geçen bir isabetin kesinleştiği durumlarda, birkaç veri noktasıyla bir dava oluşturmaya ihtiyaç duyulması yerine, doğrudan bir işaret olarak ele alınır.
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını anlatmıyor">
+Bu sayfa, terimin ne anlama geldiğini bilmeniz için modülü genel olarak açıklamaktadır. İsimlendirme ve kesin davranışlar müşteriye göre değişir ve katı bloklardan geçmek, yetkin bir antichiati çalıştıran neredeyse her sunucuda kuralları ihlal eder.
+</Callout>
+
+<Callout variant="tip" title="Opal Gemileri Piercing">
+Opal'ın versiyonu, adının vaat ettiği şeyi tam olarak yapıyor: oyunculara blokların içinden vurmanızı sağlıyor. Mod listesinde “kendi sorumluluğunuzda kullanın” başlığı altında yer alıyor; bu, sunucunun kolayca doğrulayabileceği herhangi bir şeyle aynı belirteç. Daha güvenli olduğunu iddia etmeyin.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Piercing aslında ne işe yarıyor?">
+Bir blok, örneğin bir duvar veya çit, sizi hedefinizden ayırsa bile bir saldırının hedefe ulaşmasını sağlar. Normal Minecraft blokları gibi doğrudan vuran bloklar.
+</FAQItem>
+
+<FAQItem question="Piercing, Reach ile aynı şey midir?">
+Hayır. Reach, bir saldırının ne kadar uzağa gidebildiğini belirler. Piercing ise fiziksel olarak önünde ne olursa olsun onu yok sayar. Farklı sorunları çözerler, ancak genellikle birlikte kullanılırlar.
+</FAQItem>
+
+<FAQItem question="Piercing hangi müşteriler tarafından gönderildi?">
+Slinky, bu modül ile belgelenen bir müşteridir. İsimlendirme ve kesin davranış, bazı uygulamaların kontrolü tamamen kaldırmak yerine yalnızca bir kısmını gevşetmesi nedeniyle müşteriye göre değişiklik gösterir.
+</FAQItem>
+
+<FAQItem question="Bir sunucu Piercing kullanımını tespit edebilir mi?">
+Evet, genellikle. Sunucu, çarpma anında iki oyuncu arasındaki doğrudan görüş hattını kontrol edebilir ve bu yolda bulunan sağlam bir engel, istemcinin aşabileceği bir şey değildir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-reach", label: "Reach nedir?", description: "Piercing modülü, isabet mesafesiyle karıştırılıyor." },
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "Otomatik saldırgan Piercing bazen eşleşir." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Bu modüllerin ait olduğu daha geniş kategori." },
+]} />
+
+<CTA href="/tr/purchase">Piercing bir modüldür. Opal hepsini dürüstçe değerlendirir.</CTA>

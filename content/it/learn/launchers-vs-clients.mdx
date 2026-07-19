@@ -1,0 +1,121 @@
+---
+title: "Lanciatori contro Client in Minecraft: Spiegazione"
+description: Un launcher avvia il gioco e seleziona una versione; un client è il gioco modificato stesso. Ecco la differenza, come si integrano e quale ti serve.
+excerpt: Il launcher è l'ingresso; il client è la stanza in cui si entra. Ecco come i due dividono il lavoro e dove i mod vengono effettivamente eseguiti.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: È un launcher la stessa cosa di un client?
+    a: No. Un launcher è il programma che ti fa accedere e avvia il gioco. Un client è il gioco che si avvia dopo il lancio, inclusi eventuali mod. Si usa un launcher per avviare un client.
+  - q: Mi serve un launcher speciale per far funzionare i mod?
+    a: Non sempre. Il launcher ufficiale può eseguire un profilo di mod loader una volta installato Fabric o un altro loader. Alcuni launcher di terze parti includono il loader per semplificare la configurazione, ma in realtà si limitano ad avviare il gioco.
+  - q: Dove di solito vengono eseguiti i mod, il launcher o il client?
+    a: Il cliente. Il launcher seleziona un profilo modificato, ma il mod loader carica i tuoi mod all'avvio del gioco, quindi i mod vengono eseguiti all'interno del client.
+  - q: È un client personalizzato una sorta di launcher?
+    a: No. Un client personalizzato o di utilità è un gioco modificato, caricato tramite un mod loader. Si avvia dopo che il launcher ha avviato il gioco.
+---
+
+<KeyTakeaways>
+
+- Un launcher è il programma che ti fa accedere, seleziona una versione e avvia il gioco.
+- Un client è il gioco in esecuzione, inclusi eventuali mod caricati.
+- Il launcher si avvia prima di giocare; il client si avvia durante il gioco.
+- Le mod si caricano all'interno del client. Il launcher seleziona solo il profilo e lo avvia.
+
+</KeyTakeaways>
+
+Un launcher è il programma che seleziona la tua versione, ti fa accedere e avvia Minecraft. Un client è il gioco vero e proprio che si avvia una volta iniziato, inclusi eventuali mod caricati. Il launcher è la porta d'ingresso; il client è la stanza in cui entri. Usi entrambi, e svolgono lavori diversi.
+
+## Cosa fa un launcher
+
+Un launcher è la piccola app che apri prima di giocare. Esegue i preparativi e poi passa il controllo al gioco.
+
+Un launcher di solito gestisce:
+
+- L'accesso con il tuo account Microsoft.
+- La scelta di una versione di Minecraft da eseguire.
+- Il download dei file di gioco e di Java per quella versione.
+- La selezione di un profilo o installazione, inclusa una configurata per un [mod loader](/it/learn/what-is-a-minecraft-mod-loader).
+- L'impostazione della memoria e altre opzioni di avvio, quindi l'avvio del gioco.
+
+Quando premi "play", il launcher costruisce il comando che avvia il gioco e poi si ritira. Non è in esecuzione mentre giochi.
+
+## Cosa fa un client
+
+Un client è il gioco stesso: l'istanza in esecuzione di Minecraft che vedi e controlli. "Client vanilla" significa il gioco non modificato. Un client moddato è lo stesso gioco con mod caricate tramite un [mod loader](/it/learn/what-is-a-minecraft-mod-loader) come [Fabric](https://fabricmc.net/).
+
+Quando le persone parlano di un "client utility" o di un "client personalizzato", intendono una versione modificata del gioco in esecuzione, non un launcher separato. Le mod aggiungono funzionalità una volta che il gioco è già avviato.
+
+## Come si integrano
+
+Il launcher avvia il client. Questa è l'unica relazione.
+
+<Steps>
+
+<Step number={1} title="Apri il launcher ed esegui l'accesso">Apri il launcher ed effettua l'accesso con il tuo account</Step>
+
+<Step number={2} title="Scegli una versione o un profilo modificato">
+Scegli una versione o un profilo modificato da eseguire.
+</Step>
+
+<Step number={3} title="Avvia il gioco">Il launcher scarica ciò di cui ha bisogno e avvia il gioco</Step>
+
+<Step number={4} title="Il cliente esegue">
+Il cliente esegue. Se hai scelto un profilo di mod loader, le tue mod si caricano ora.
+</Step>
+
+</Steps>
+
+Un [mod loader](/it/learn/what-is-a-minecraft-mod-loader) si trova tra i due. Si installa [Fabric](https://fabricmc.net/) per la propria versione, il quale aggiunge un profilo di lancio. Il launcher avvia quindi il gioco tramite quel profilo, e il loader carica i mod durante l'avvio del client. Il launcher non conosce né si preoccupa dei mod installati; avvia semplicemente la versione scelta.
+
+<Callout variant="info" title="Dove si integra Opal">
+Opal è un mod [Fabric](https://fabricmc.net/), quindi non è necessario un launcher speciale per eseguirlo. Configura un profilo Fabric nel tuo launcher abituale, quindi aggiungi Opal come faresti con qualsiasi altro mod. Consulta la [guida all'installazione](/it/docs/setup) per iniziare, oppure l'[introduzione alla programmazione](/it/docs/scripting) una volta caricato.
+</Callout>
+
+## Launcher vs client a colpo d'occhio
+
+| | Launcher | Client |
+| :--- | :--- | :--- |
+| Cos'è | App che avvia il gioco | Il gioco in esecuzione |
+| Quando è in esecuzione | Prima di giocare | Mentre giochi |
+| Funzione | Accedere, scegliere versione, avviare | Renderizzare il mondo, eseguire mod |
+| Mod | Seleziona un profilo modificato | Carica ed esegue effettivamente le mod |
+| Esempio | Il launcher ufficiale di Minecraft | Vanilla o un gioco con mod |
+
+## I launcher di terze parti sostituiscono il client?
+
+Alcuni launcher fanno più dell'official. Gestiscono modpack, passano tra molte versioni o includono un [mod loader](/it/learn/what-is-a-minecraft-mod-loader) per permetterti di saltare la configurazione manuale. Alcuni client popolari includono anche il proprio launcher.
+
+Anche così, la distinzione rimane: il compito del launcher è ancora quello di avviare il gioco, e il client è ancora ciò che lo fa funzionare. Un launcher che installa mod per te sta semplicemente svolgendo la fase di configurazione in anticipo. Le mod stesse contano solo una volta che il client è in esecuzione.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Un launcher è la stessa cosa di un client?">
+No. Un launcher è il programma che ti fa accedere e avvia il gioco. Un client è il gioco che si avvia dopo il launcher, inclusi eventuali mod. Si usa un launcher per avviare un client.
+</FAQItem>
+
+<FAQItem question="È necessario un launcher speciale per eseguire i mod?">
+Non sempre. Il launcher ufficiale può eseguire un profilo di mod loader una volta installato [Fabric](https://fabricmc.net/) o un altro loader. Alcuni launcher di terze parti includono il loader per semplificare la configurazione, ma in realtà si limitano ad avviare il gioco.
+</FAQItem>
+
+<FAQItem question="Dove vengono eseguiti effettivamente i mod, il launcher o il client?">
+Il client. Il launcher seleziona un profilo con mod, ma il mod loader carica i tuoi mod all'avvio del gioco, quindi i mod vengono eseguiti all'interno del client.
+</FAQItem>
+
+<FAQItem question="Un client personalizzato è una sorta di launcher?">
+No. Un client personalizzato o di utilità è un gioco modificato, caricato tramite un mod loader. Si avvia dopo che il launcher ha avviato il gioco.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-mod-loader", label: "Cos'è un mod loader di Minecraft?", description: "Lo strato che carica i tuoi mod all'avvio del client." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "Un client modificato, non un launcher separato." },
+  { href: "/it/learn/how-to-install-a-fabric-mod", label: "Come installare un mod di Fabric", description: "Crea un profilo Fabric e aggiungi le mod." },
+]} />
+
+<CTA href="/it/purchase">Ottieni Opal, un client Fabric, per $8.99</CTA>

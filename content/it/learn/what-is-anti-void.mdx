@@ -1,0 +1,91 @@
+---
+title: Cos'è l'Anti Void in Minecraft? Spiegazione del modulo
+description: Anti Void è un modulo di Minecraft che impedisce una caduta fatale nel vuoto teletrasportandoti in un luogo sicuro o facendo cadere un blocco di salvataggio sotto di te prima che tu cada al suo interno.
+excerpt: Il vuoto non negozia. Anti Vuoto interviene un istante prima che la caduta diventi definitiva, o riportandoti indietro o prendendoti su un blocco che non c'era un secondo prima.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa cattura effettivamente l'Anti-Vuoto?
+    a: Un giocatore che sta per cadere nel vuoto, nello spazio vuoto al di sotto dell'ultimo livello giocabile. Interviene quando la sua altezza supera una soglia configurata dall'utente.
+  - q: Ti teletrasporta Anti Void o posiziona un blocco?
+    a: Dipende dall'implementazione. Alcuni ti riportano in una posizione sicura, altri piazzano un blocco sotto di te, così atterri su di esso invece di cadere ulteriormente.
+  - q: Può Anti Void attivarsi troppo presto o troppo tardi?
+    a: Sì. Funziona in base a una soglia di altezza configurabile, quindi impostarla troppo alta fa scattare il modulo troppo lontano dal reale pericolo, e impostarla troppo bassa rischia di farlo reagire dopo che la caduta è già irreparabile.
+  - q: È rilevabile l'Anti Void da parte degli anticheat?
+    a: È plausibile. Qualsiasi modulo che muova il giocatore o posizioni blocchi senza un input corrispondente crea un modello che un anticheat lato server può monitorare, quindi trattatelo come utilizzo a proprio rischio piuttosto che sicuro per impostazione predefinita.
+  - q: Quali clienti includono Anti Void?
+    a: 'Fan e Tenacity spediscono entrambe una versione. Anche Opal lo fa, elencata nel suo catalogo dei moduli come Anti Void: "Ti impedisce di cadere nel vuoto"'
+---
+
+<KeyTakeaways>
+
+- Anti Void è un modulo di Minecraft che impedisce una caduta fatale nel vuoto teletrasportandoti sul terreno solido o posizionando un blocco di salvataggio sotto di te.
+- Monitora la tua altezza ad ogni tick e reagisce quando superi una soglia da te impostata.
+- Ti muove o posiziona blocchi senza richiedere input, quindi usalo a tuo rischio e pericolo.
+
+</KeyTakeaways>
+
+Anti Void è un modulo di Minecraft che impedisce di morire nel vuoto intervenendo prima che la caduta sia completa, teletrasportandoti di nuovo a terra o facendo cadere un blocco sotto i tuoi piedi. Il vuoto non concede sconti nella versione base di Minecraft: cadi, muori, perdi ciò che stavi trasportando, niente rewind. Anti Void esiste per intercettare quell'unico errore che di solito non può essere corretto, un ponte mancato, una spinta sbagliata vicino a un bordo, un calo di frame nel momento sbagliato.
+
+## Come funziona Anti Void
+
+Anti Void traccia la tua coordinata Y, la tua altezza, ad ogni tick di gioco. Quando quel valore scende al di sotto di una soglia che configuri, il modulo presume che tu stia per cadere nel vuoto e reagisce prima che la caduta sia completa. A seconda del client, ti teletrasporta di nuovo in una posizione sicura o fa cadere un blocco direttamente sotto i tuoi piedi, catturandoti come farebbe un vero blocco. Fan e Tenacity includono entrambi una versione di questo modulo.
+
+## Impostazioni comuni
+
+| Impostazione | Cosa controlla |
+|---|---|
+| Soglia | L'altezza alla quale Anti Void decide che sei in pericolo e reagisce |
+| Modalità di risposta | Teletrasporto a terra o posizionamento di un blocco di salvataggio sotto di te |
+
+La soglia è l'unica vera valutazione da fare qui. Impostala troppo alta e il modulo si attiva in situazioni ben lontane dal pericolo reale, trascinandoti via con falsi allarmi. Impostala troppo bassa e stai scommettendo che la reazione avvenga prima che la caduta sia già irrecuperabile. Non esiste un valore sicuro in entrambe le direzioni contemporaneamente.
+
+## Perché viene segnalato
+
+Anti Void reagisce a un giocatore in caduta con un'azione che non ha eseguito tramite input normale: un teletrasporto in cui nessuno è entrato, o un blocco che appare senza una sequenza di puntamento e posizionamento. È esattamente il tipo di discrepanza che un anticheat lato server è progettato per intercettare, perché nessuna di queste azioni corrisponde a ciò che un client reale invia autonomamente.
+
+Questo è ciò che distingue Anti Void da qualcosa di passivo come una sovrapposizione di coordinate. Non si limita a mostrarti informazioni, ma modifica ciò che accade nel mondo al posto tuo. Chiunque lo utilizzi dovrebbe considerarlo come un utilizzo a proprio rischio, allo stesso modo in cui tratterebbe qualsiasi modulo che agisce per te invece di limitarsi a informarti.
+
+<Callout variant="tip" title="Spedito da Opal">
+Il catalogo di Opal lo indica chiaramente: Anti Void, "Ti impedisce di cadere nel vuoto". Stessa classificazione di tutto il resto in questa pagina, utilizzalo a tuo rischio e pericolo.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina descrive il modulo in termini generali, così da far capire il significato del termine. La denominazione e il comportamento esatto possono variare a seconda del client, e qualsiasi reazione lato client che provochi spostamenti o posizioni di blocchi senza un input corrispondente può portare alla sospensione dell'account, come avviene su qualsiasi client.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa cattura effettivamente l'Anti Void?">
+Un giocatore che sta per cadere nel vuoto, lo spazio vuoto sotto lo strato più basso giocabile del mondo. Interviene quando la sua altezza supera una soglia configurata dall'utente.
+</FAQItem>
+
+<FAQItem question="Ti teletrasporta l'Anti Void o posiziona un blocco?">
+Dipende dall'implementazione. Alcuni ti teletrasportano in una posizione sicura, altri lasciano cadere un blocco sotto di te, così atterri su di esso invece di cadere ulteriormente.
+</FAQItem>
+
+<FAQItem question="L'Anti Void può attivarsi troppo presto o troppo tardi?">
+Sì. Funziona in base a una soglia di altezza configurata, quindi impostarla troppo alta fa scattare il modulo lontano dal reale pericolo, e impostarla troppo bassa rischia di attivarsi dopo che la caduta è già irrecuperabile.
+</FAQItem>
+
+<FAQItem question="L'Anti Void è rilevabile dagli anticheat?">
+È plausibile. Qualsiasi modulo che muova il giocatore o posizioni blocchi senza un input corrispondente crea un modello che un anticheat lato server può monitorare, quindi utilizzalo a tuo rischio e pericolo piuttosto che considerarlo sicuro per impostazione predefinita.
+</FAQItem>
+
+<FAQItem question="Quali clienti includono Anti Void?">
+Sia Fan che Tenacity spediscono una versione. Anche Opal lo fa, elencata nel suo catalogo dei moduli come Anti Void: "Ti impedisce di cadere nel vuoto".
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "I moduli di categorie più ampie come Anti Void si trovano all'interno." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Come moduli sottili si distinguono da quelli costruiti per essere evidenti." },
+  { href: "/it/learn/what-is-scaffold", label: "Cos'è Scaffold?", description: "Un altro modulo che posiziona automaticamente i blocchi, per creare ponti invece di evitare cadute." },
+]} />
+
+<CTA href="/it/purchase">Smetti di perdere corse a causa di un ponte mancato. Opal è $8.99.</CTA>

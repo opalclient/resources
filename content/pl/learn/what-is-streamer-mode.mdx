@@ -1,0 +1,83 @@
+---
+title: Czym jest tryb streamerka w Minecraft?
+description: Tryb Streamera to moduł Minecrafta, który ukrywa Twoją nazwę użytkownika, współrzędne i dane konta na ekranie, dzięki czemu transmisje i nagrania nigdy nie ujawniają danych osobowych.
+excerpt: Twoja lokalizacja bazowa nie jest widoczna. Tryb Streamera utrzymuje ją poza ekranem, dopóki nikt nie rozpocznie nagrywania.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy tryb Streamer ukrywa moje dane również przed innymi graczami?
+    a: Nie. To zmienia jedynie to, co jest rysowane na Twoim ekranie lub przechwytywane. Serwer nadal wysyła Twoją rzeczywistą nazwę użytkownika i pozycję do wszystkich innych dokładnie tak, jak wcześniej.
+  - q: Czy tryb Streamer wpłynie na moją rozgrywkę?
+    a: Nie. To jest moduł tylko do wyświetlania. Ruch, walka i wszystko, co jest wysyłane do serwera, zachowują się identycznie, niezależnie od tego, czy moduł jest włączony, czy wyłączony.
+  - q: Jakie informacje zazwyczaj ukrywa tryb Streamer?
+    a: Często atakowane są Twoja nazwa użytkownika, nazwa konta w menu oraz odczyty współrzędnych, takie jak ekran debugowania F3 lub element HUD wyświetlający współrzędne.
+  - q: Dlaczego niektórzy klienci nazywają to Streamer, a nie Tryb Streamera?
+    a: To jest ta sama funkcja, tylko pod dwiema nazwami specyficznymi dla klientów. Rose nazywa ją Streamer Mode, Tenacity określa równoważny moduł jako Streamer, a oba ukrywają wrażliwe dane wyświetlane na ekranie dla twórców treści.
+---
+
+<KeyTakeaways>
+
+- Tryb Streamera to moduł, który ukrywa wrażliwe dane wyświetlane na ekranie, Twoją nazwę użytkownika, nazwę konta oraz współrzędne, abyś mógł streamować lub nagrywać bez ich ujawniania.
+- Zmienia jedynie to, co jest renderowane na Twoim ekranie, a nie Twoją rzeczywistą pozycję ani tożsamość.
+- Niektóre klienty zastępują ukryty tekst placeholderem zamiast pozostawiać lukę, aby reszta HUD-u się nie przesuwała.
+- Wyłącznie kosmetyczne: nic z tego nie wpływa na serwer, więc nie ma nic, co mogłoby zostać wychwycone przez anticheat.
+
+</KeyTakeaways>
+
+Tryb Streamera to moduł, który ukrywa identyfikujące informacje na ekranie Minecrafta, takie jak nazwa użytkownika, nazwa konta i współrzędne, aby transmisja lub nagranie nie ujawniły ich. To nie jest oszustwo. Nie sprawia, że poruszasz się szybciej, uderzasz mocniej ani nie wysyła nic innego do serwera. Zmienia jedynie to, co jest rysowane na Twoim ekranie, zanim zobaczy to widz lub przechwyci OBS.
+
+## Jak to działa
+
+Tryb Streamera skanuje fragmenty interfejsu, które zwykle wyświetlają identyfikujący tekst i maskuje lub zaciemnia je przed narysowaniem klatki. Typowymi celami są nazwa użytkownika unosząca się nad Twoim modelem gracza, nazwa konta w menu oraz odczyty współrzędnych, niezależnie od tego, czy jest to wbudowany ekran debugowania F3, czy dedykowany element HUD wyświetlający współrzędne. Podstawowe dane nigdy się nie zmieniają. Twoja pozycja i konto są dokładnie takie, jak wcześniej, zmienia się jedynie renderowanie.
+
+Uproszczona wersja tego rozwiązania po prostu pozostawiałaby pustą lukę tam, gdzie wcześniej znajdował się tekst, co wyglądałoby na zepsute i przesuwało wszystko wokół. Lepsze implementacje zastępują ukryty tekst tekstem zastępczym, na przykład gwiazdkami lub ogólną etykietą, aby układ pozostawał stabilny. Ma to większe znaczenie, niż się wydaje: element HUD, który przeskakuje za każdym razem, gdy ukrywa liczbę, jest własnym rodzajem rozproszenia i własnym rodzajem sygnału.
+
+## Co ukrywa Tryb Streamera
+
+| Co ukrywa | Gdzie zazwyczaj się pojawia | Co robi moduł |
+|---|---|---|
+| Twoja nazwa użytkownika | Unosi się nad modelem twojej postaci | Maskowana lub wyczerniana przed wyrenderowaniem klatki |
+| Nazwa twojego konta | Menu i ekrany ustawień | Zastępowana etykietą zastępczą |
+| Twoje współrzędne | Ekran debugowania F3 lub element HUD wyświetlający współrzędne | Wyczerniana lub zastępowana gwiazdkami |
+
+Powód, dla którego to przewyższa edycję materiału później, to czas. Jeśli informacje są ukrywane podczas renderowania, w ogóle nie są rejestrowane, więc nie ma klipu do przerabiania, nie ma VOD-a do ponownego wgrania, nie ma pięciu minut w przyspieszeniu 2x na początku transmisji, żeby upewnić się, że nic nie umknęło. Widoczny odczyt współrzędnych może przekazać widzowi lokalizację twojej bazy na publicznym serwerze. Widoczna nazwa użytkownika może zostać skojarzona z innymi kontami lub wykorzystana do nękania. Tryb Streamer usuwa oba zanim którykolwiek z tych problemów się pojawi.
+
+## Czy jest bezpieczne do użycia
+
+Tak, bez żadnych gwiazdek. Tryb Streamer wpływa tylko na lokalne renderowanie. Nie ingeruje w ruch, walkę ani pojedynczy pakiet wysyłany do serwera, więc z punktu widzenia serwera nic się nie zmieniło w sposobie twojej gry. Nie ma tu sygnału, który mógłby zostać wychwycony przez anticheat, ponieważ nic nie ma do obserwowania.
+
+<Callout variant="tip" title="Opal udostępnia go pod tą samą nazwą">
+Katalog modułów Opal określa tryb Streamer jako dokładnie to: moduł, który ukrywa wrażliwe informacje dla twórców treści. Jest on sklasyfikowany w kategorii SAFE firmy Opal, obejmującej elementy kosmetyczne i poprawiające komfort użytkowania, w tej samej grupie co wszystko inne, co nie wpływa na serwer. Włącz go przed rozpoczęciem transmisji i zapomnij o nim.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy tryb Streamer ukrywa moje dane również przed innymi graczami?">
+Nie. Zmienia on tylko to, co jest rysowane na Twoim ekranie lub nagraniu. Serwer nadal wysyła Twoją prawdziwą nazwę użytkownika i pozycję do wszystkich innych dokładnie tak, jak wcześniej.
+</FAQItem>
+
+<FAQItem question="Czy tryb Streamer wpłynie na moją rozgrywkę?">
+Nie. Jest to moduł wyłącznie wyświetlający. Ruch, walka i wszystko, co jest wysyłane na serwer, zachowują się identycznie, niezależnie od tego, czy jest włączony, czy wyłączony.
+</FAQItem>
+
+<FAQItem question="Jakie informacje zazwyczaj ukrywa tryb Streamer?">
+Najczęściej dotyczy to Twojej nazwy użytkownika, nazwy konta w menu oraz odczytów współrzędnych, takich jak ekran debugowania F3 lub element HUD wyświetlający współrzędne.
+</FAQItem>
+
+<FAQItem question="Dlaczego niektórzy klienci nazywają to Streamer zamiast Trybu Streamera?">
+To ta sama funkcja pod dwoma nazwami specyficznymi dla klientów. Rose dokumentuje to jako Tryb Streamera, a Tenacity nazywa równoważny moduł Streamer, a oba ukrywają wrażliwe dane wyświetlane na ekranie dla twórców treści.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Do których szerszych kategorii modułów kosmetycznych należy ten." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Ukrywanie się na głębszym poziomie niż pokazuje twój własny HUD." },
+  { href: "/pl/learn/what-is-killaura", label: "Co to jest killaura?", description: "Drugi biegun spektrum ryzyka: moduł, który serwer widzi bezwzględnie." },
+]} />
+
+<CTA href="/pl/purchase">Rozpocznij transmisję bez ujawniania swojej bazy, za $8.99</CTA>

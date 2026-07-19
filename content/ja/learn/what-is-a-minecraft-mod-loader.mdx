@@ -1,0 +1,76 @@
+---
+title: 何ですか Minecraft Modローダー？（2026年解説）)
+description: MinecraftのMODローダーは、ゲーム起動時にパッチを適用し、MODが動作できるようにします。ローダーの機能と主なオプションは以下の通りです。Fabric、Forge、NeoForge、Quilt.
+excerpt: バニラ Minecraft は、それだけで mod を実行することはできません。mod ローダーは、ゲーム起動時にパッチを適用し、mod がゲームに組み込まれるための層です.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: モッドを使うには、MODローダーは必要ですか？?
+    a: はい。ゲームを改造するMODはローダーが必要です。リソースパックやシェーダーは別の話で、必ずしも必要ではありません.
+  - q: ローダーなしでMODを実行できますか？?
+    a: いいえ。ゲームはそれだけでmod jarをロードしません.
+  - q: どれのローダーを選べばいい？?
+    a: あなたが選択したMODが構築されているもの。もし新たに始め、速度と最新バージョンをいち早く手に入れたい場合は、Fabricが一般的な選択肢です.
+---
+
+<KeyTakeaways>
+
+- Modローダーは、MinecraftでMODを実行させる層であり、バニラにはMODサポートがありません。
+- 起動時にゲームをパッチし、各MODがコードにフックする方法を提供します。
+- Minecraftのバージョンごとに一度インストールするだけで、MODのJARファイルをmodsフォルダにドロップするだけです。
+- 主な選択肢はFabric、Forge、NeoForge、Quiltで、MODがターゲットとするものを選択してください.
+
+</KeyTakeaways>
+
+Modローダーは、MinecraftでMODを実行させるためのレイヤーです。バニラ版のMinecraftにはMODのサポートがありません。そのため、ローダーはゲーム起動時にパッチを適用し、MODがゲームに接続するための手段を提供します。Minecraftのバージョンごとにローダーを一度インストールするだけで、MODのJARファイルをmodsフォルダに置くだけで、起動時にロードされます.
+
+<Callout variant="info" title="どこ Opal 合う">Opalは[Fabric](https://fabricmc.net/)のModなので、Fabricが使用するローダーです。セットアップガイド[/en/docs/setup]で手順を確認してください</Callout>
+
+## なぜ必要か
+
+Modはゲームの挙動を変更するため、ゲームのコード内に動作する必要があります。ローダーはそれを可能にするものです。ローダーがないと、ModのJARファイルはゲームが無視する単なるファイルに過ぎません。
+
+## 仕組み
+
+ゲーム起動時に、ローダーはゲーム開始前に挿入され、Modフォルダを読み込み、各Modを適切なフックに接続します。[Fabric](https://fabricmc.net/)は、mixinsという、ターゲットを絞ったバイトコードパッチングアプローチを使用します。Forgeは独自の、より大規模なフックシステムを使用します。いずれにしても、ゲームはModが組み込まれた状態で実行されます。
+
+## 主要なローダー
+
+| ローダー | 特徴 |
+| :--- | :--- |
+| Fabric | 軽量、アップデートが高速、パフォーマンスとユーティリティMod |
+| Forge | 大規模なコンテンツModと長年のModパック |
+| NeoForge | コミュニティ主導のForgeのフォーク |
+| Quilt | 追加機能を持つFabricのフォーク |
+
+## 選択
+
+Modがターゲットとするローダーを使用してください。ほとんどのModは両方ではなく、どちらか一方用に提供されるため、通常は使用したいModがそれを決定します。より深い比較については、[Fabric vs Forge](/ja/learn/fabric-vs-forge)をご覧ください。
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="MODを使用するには、MODローダーは必要ですか？">
+はい。ゲームを改造するMODは、ローダーが必要です。リソースパックやシェーダーは別の話で、必ずしも必要ではありません。
+</FAQItem>
+
+<FAQItem question="ローダーなしでMODを実行できますか？">
+いいえ。ゲームはMODのJARファイルを自動的に読み込みません。
+</FAQItem>
+
+<FAQItem question="どのローダーを選ぶべきですか？">
+使用するMODに合わせてください。新規に始める場合で、速度と最新バージョンをいち早く手に入れたい場合は、[Fabric](https://fabricmc.net/) が一般的な選択肢です。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/ja/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "両方の主要ローダー、詳細に比較検討." },
+  { href: "/ja/learn/what-is-the-fabric-api", label: "Fabric APIとは何ですか？?", description: "Fabric Mods が多く依存する共有ライブラリ." },
+  { href: "/ja/learn/what-is-a-minecraft-utility-client", label: "ユーティリティクライアントとは何ですか？?", description: "ローダーにインストールされた後、その上を何が動くのか." },
+]} />
+
+<CTA href="/ja/purchase">OpalFabricクライアントを8.99ドルで手に入れよう</CTA>

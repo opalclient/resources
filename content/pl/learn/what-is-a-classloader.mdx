@@ -1,0 +1,93 @@
+---
+title: Czym jest ładowacz klas Java? (Wyjaśnienie z 2026 roku)
+description: Wczytywacz klas Java znajduje pliki klas i ładuje je do JVM w czasie działania. Oto co robi, jak działa hierarchia wczytywaczy i dlaczego mody na nim polegają.
+excerpt: Ładowacz klas to część JVM, która na żądanie znajduje klasę i ładuje ją do pamięci. Jest to również dokładny punkt zaczepienia, który umożliwia modyfikowanie gry przez mody Minecraft.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: Kiedy JVM ładuje klasę?
+    a: Podczas pierwszego użycia, a nie podczas uruchamiania. Po raz pierwszy, gdy Twój kod dotyka typu, JVM prosi ładowacz klas o znalezienie i zdefiniowanie go. Nazywa się to leniwym ładowaniem.
+  - q: Jakie jest podejście delegacyjne?
+    a: Ładowacz prosi swojego rodzica o załadowanie klasy przed próbą załadowania własnej. Łańcuch rodziców prowadzi aż do ładowacza rozruchowego, który zapobiega dwukrotnemu ładowaniu podstawowych typów Java pod tą samą nazwą.
+  - q: Czy dwie klasy mogą mieć tę samą nazwę?
+    a: Tak, jeśli zdefiniują je różne klasy ładowania. JVM identyfikuje klasę po jej nazwie oraz ładowaczu, który ją zdefiniował, więc klasy o tej samej nazwie, ale z różnych ładowaczy, są odrębnymi typami.
+  - q: Dlaczego mody wymagają niestandardowego ładowacza klas?
+    a: Aby zobaczyć klasy gry podczas ich ładowania i poprawiania w pamięci. Niestandardowy ładowacz może przekształcać bytecode przed zdefiniowaniem klasy przez JVM, co pozwala modyfikować grę bez edycji jej na dysku.
+---
+
+<KeyTakeaways>
+
+- Ładowacz klas znajduje plik klasy i ładuje go do JVM, aby program mógł go użyć.
+- Klasy są ładowane przy pierwszym użyciu, a nie podczas uruchamiania, a ładowacz lokalizuje bajtkod każdego razu.
+- Wbudowane ładowacze tworzą łańcuch nadrzędny (bootstrap, platforma, aplikacja), który deleguje w górę.
+- Dzięki niestandardowym ładowaczom mody Minecraft mogą poprawiać klasy gry podczas ich ładowania.
+
+</KeyTakeaways>
+
+Ładowacz klas to część środowiska uruchomieniowego Java, która znajduje plik klasy i ładuje go do JVM, aby program mógł go użyć. Klasy nie są ładowane wszystkie na początku. JVM ładuje każdą z nich po raz pierwszy, gdy jest potrzebna, a ładowacz klas znajduje kod bajtowy, odczytuje go i przekazuje do JVM. Edycja Java Minecraft działa w oparciu o ten sam mechanizm.
+
+<Callout variant="info" title="Gdzie pasuje Opal">
+Opal to mod dla [Fabric](https://fabricmc.net/), a Fabric ładuje grę za pomocą własnego ładowacza klas, dzięki czemu mody mogą modyfikować klasy podczas ich ładowania. [Przewodnik instalacji](/pl/docs/setup) przeprowadza Cię przez proces instalacji.
+</Callout>
+
+## Jak naprawdę działa ładowacz klas
+
+Ładowacz klas przekształca nazwę klasy w używaną klasę w działającym JVM. Żądasz typu, ładowacz lokalizuje pasujące bajty `.class`, a JVM definiuje ten typ w pamięci.
+
+Praca odbywa się w trzech krokach. Ładowacz znajduje bajtkod dla klasy o określonej nazwie. JVM weryfikuje i łączy go. Następnie klasa jest gotowa do użycia. Dlatego program Java może pobierać kod, o którym nie wspomniano podczas kompilacji: wystarczy nazwa, aby ładowacz mógł go znaleźć.
+
+## Hierarchia ładowaczy
+
+Ładowacze klas są ułożone w hierarchię nadrzędną, a większość z nich najpierw pyta swojego nadrzędnego. Standardowa aplikacja ma trzy wbudowane ładowacze ułożone jeden na drugim.
+
+| Ładowacz | Ładuje |
+| :--- | :--- |
+| Bootstrap | Rdzenne klasy środowiska uruchomieniowego Java |
+| Platform | Standardowe moduły biblioteczne spoza rdzenia |
+| Aplikacja | Własne klasy Twojego programu z classpath |
+
+Gdy ładowacz aplikacji jest proszony o klasę, zazwyczaj najpierw deleguje zapytanie w górę. Nadrzędny ma szansę ją załadować, a dziecko próbuje tylko wtedy, gdy żaden nadrzędny nie może tego zrobić. Nazywa się to modelem delegacji i zapewnia spójność rdzennych typów w całym programie.
+
+## Tożsamość klasy i niestandardowe ładowacze
+
+Klasa jest identyfikowana zarówno po nazwie, jak i loaderze, który ją zdefiniował. Dwa loadery mogą ładować klasy o tej samej nazwie, a JVM traktuje je jako dwa różne typy. Brzmi to jak drobiazg, ale to właśnie jest powód, dla którego loadery klas są tak potężne.
+
+Programy mogą definiować własne loadery. Niestandardowy loader może odczytywać bytecode z dowolnego miejsca: z pliku jar, sieci, wygenerowanej tablicy bajtów, a nawet bytecode, który został przekształcony w trakcie ładowania. Dzięki temu działają systemy wtyczek, serwery aplikacji i frameworki modyfikacji, które ładują kod, o którym program hosta nie wiedział w czasie kompilacji.
+
+## Dlaczego to ma znaczenie dla modyfikacji Minecraft
+
+Modifikacje istnieją dzięki niestandardowemu ładowaniu klas. Loader modów dla Minecrafta uruchamia grę za pomocą własnego loadera, aby móc przeglądać i modyfikować klasy gry w trakcie ładowania. To punkt zaczepienia, w którym odbywa się łatanie bytecode.
+
+Kiedy loader znajduje się pomiędzy dyskiem a JVM, może przekształcić klasę tuż przed tym, jak JVM ją zdefiniuje. Mod może przepisać metodę gry, wstrzyknąć nowe zachowanie lub dodać pola, wszystko to bez zmodyfikowanej kopii gry na dysku. Klasa, którą ostatecznie uruchamia JVM, to ta poprawiona. Aby dowiedzieć się, jak to wpisuje się w szerszy obraz, zobacz [Co to jest loader modów Minecraft?](/pl/learn/what-is-a-minecraft-mod-loader).
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Kiedy JVM ładuje klasę?">
+Podczas pierwszego użycia, a nie podczas uruchamiania. Po raz pierwszy, gdy Twój kod dotknie typu, JVM prosi ładowacz klas o znalezienie i zdefiniowanie go. Nazywa się to leniwym ładowaniem.
+</FAQItem>
+
+<FAQItem question="Co to jest model delegacji?">
+Ładowacz prosi swojego rodzica o załadowanie klasy zanim spróbuje to zrobić sam. Łańcuch rodziców prowadzi aż do ładowacza bootstrap, który zapobiega dwukrotnemu ładowaniu podstawowych typów Java pod tą samą nazwą.
+</FAQItem>
+
+<FAQItem question="Czy dwie klasy mogą mieć tę samą nazwę?">
+Tak, jeśli definiują je różne ładowacze klas. JVM identyfikuje klasę po jej nazwie oraz ładowaczu, który ją definiuje, więc klasy o tej samej nazwie z oddzielnych ładowaczy są typami odrębnymi.
+</FAQItem>
+
+<FAQItem question="Dlaczego ładowarki modów potrzebują niestandardowego ładowacza klas?">
+Aby móc obserwować ładowanie klas gry i modyfikować je w pamięci. Niestandardowy ładowacz może przekształcać bytecode przed zdefiniowaniem klasy przez JVM, co pozwala modom zmieniać grę bez edycji plików na dysku.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-the-jvm", label: "Czym jest JVM?", description: "Czas działania, w którym ładowacz klas podaje kod bajtowy." },
+  { href: "/pl/learn/what-is-a-minecraft-mod-loader", label: "Czym jest ładowacz modów do Minecrafta?", description: "Jak ładowanie niestandardowe staje się ładowaniem modów." },
+  { href: "/pl/learn/what-is-graalvm-javascript-scripting", label: "Jakie jest skryptowanie JavaScript w GraalVM?", description: "Kolejny sposób, w jaki klienci ładują kod w czasie działania." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź Opala, klienta Fabric, za $8.99</CTA>

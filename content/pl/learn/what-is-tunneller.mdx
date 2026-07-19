@@ -1,0 +1,82 @@
+---
+title: Czym jest Tunneller w Minecraft? Wyjaśnienie modułu
+description: Tunneller to moduł Wurst, który automatycznie kopa tunnel o określonej szerokości, wysokości i kierunku, usuwając prosta ścieżkę przez bloki bez użycia pikax.
+excerpt: Tunneller wybiera rozmiar i kierunek, a następnie żuje solidną skałę, nie wymagając od ciebie użycia kilofa. To automatyzacja i wygląda jak automatyzacja.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Tunneller to oszust czy przydatna funkcja?
+    a: Automatyzuje coś, co gracz mógłby zrobić ręcznie, na przykład wykopać tunel, co sprawia, że jest to funkcja automatyzacji rozgrywki, a nie czysto kosmetyczna. Czy to sprawi, że wpadniesz w tarapaty, zależy całkowicie od zasad serwera i anticheatów, a nie od samego modułu.
+  - q: Czy Tunneller działa na serwerach survival multiplayer?
+    a: "Technicznie tak. Wysyła te same pakiety przerw bloków, co normalny gracz, więc nic nie stoi na przeszkodzie, aby działało na aktywnym serwerze. Trudniejsza jest kwestia pozostania niezauważonym: monitorowanie przerw bloków może wykryć mechaniczny timing i proste, jak strzała, ścieżki pozostawione przez automatyczne kopanie."
+  - q: Jaka jest różnica między Tunnellerem a Nukerem?
+    a: Nuker niszczy wszystkie możliwe bloki w promieniu wokół gracza, niezależnie od lokalizacji. Tunneller z kolei wycina zdefiniowany kształt w jednym kierunku, zachowując się bardziej jak automatyczne wydobycie niż oczyszczanie obszaru.
+  - q: Czy używanie Tunnellera może skutkować zablokowaniem konta?
+    a: Na serwerze z aktywnym anticheatem lub nadzorowanym przez administratorów, którzy monitorują aktywność bloków, tak, można traktować to tak samo jak każde inne zautomatyzowane zachowanie. W grze jednoosobowej lub na niemoderowanym serwerze, nikt nie egzekwuje bana w pierwszej kolejności.
+---
+
+<KeyTakeaways>
+
+- Tunneller to moduł Wurst, który automatycznie kopa tunnel o zadanej szerokości, wysokości i kierunku, bez konieczności ręcznego kopania.
+- Wycina stały przekrój poprzeczny do przodu, blok po bloku, w przeciwieństwie do czyszczenia obszaru przez Nukera.
+- Często spotykany na serwerach singleplayer oraz niemoderowanych serwerach anarchy, gdzie monitoring łamania bloków jest słaby.
+- Mechaniczny, idealnie prosty rytm jest dokładnie tym, na co zostały zaprojektowane systemy anticheat łamania bloków.
+
+</KeyTakeaways>
+
+Tunneller to moduł światowej klasy w Wurst, który automatycznie kopa tunnel o dowolnej szerokości, wysokości i kierunku, niszcząc każdy blok na swojej drodze, dzięki czemu nigdy nie musisz sięgać po kilof. Wybierasz wymiary i kierunek, włączasz moduł, a ten pracuje na zewnątrz od miejsca, w którym stoisz, oczyszczając przekrój blok po bloku w miarę postępu. Nie ma celowania, nie ma klikania, nie ma chodzenia na czoło do ściany, żeby rozpocząć szyb. Niektóre konstrukcje nawet łatają podłogę w trakcie pracy, ponieważ tunel wykopany automatycznie, który otwiera dziurę pod stopami, jest zagrożeniem, a nie wygoda.
+
+## Jak to działa
+
+Tunneller pobiera trzy dane wejściowe: szerokość, wysokość i kierunek. Następnie pracuje na zewnątrz od Twojej pozycji, niszcząc każdy blok w tym przekroju, zanim przesuniesz się do przodu do oczyszczonej przestrzeni. Moduł decyduje, który blok sprawdzić, wysyła polecenie zniszczenia i posuwa się naprzód dopiero wtedy, gdy droga przed nim jest faktycznie wolna. Nie sterujesz niczym z tego, po prostu obserwujesz, jak się to dzieje. Niektóre implementacje również wypełniają luki, które otwierają się pod Tobą w trakcie kopania, ponieważ wpadnięcie w dziurę, którą aktualnie kopiesz, obala sens automatyzacji.
+
+## Popularne ustawienia
+
+| Ustawienia | Kontrola |
+|---|---|
+| Szerokość i wysokość | Przekrój tunelu, który jest wycinany |
+| Kierunek | W którą stronę tunel biegnie od Twojej aktualnej pozycji |
+| Długość | Jak daleko rozciąga się, zanim zatrzyma się samo |
+| Obsługa bloków | Czy ciecze i cenne rudy są pomijane, czy też rozbijane jak wszystko inne |
+
+Szerokość, wysokość i kierunek to to, co odróżnia Tunnellera od zwykłego przełącznika automatycznej kopalni. Zamiast niszczyć wszystko, co znajduje się bezpośrednio przed Tobą, zobowiązuje się do kształtu z wyprzedzeniem i wycina dokładnie ten, nic więcej, nic mniej.
+
+<Callout variant="tip" title="Gdzie to się znajduje w Opal">
+Opal nie dostarcza modułu Tunnellera. To funkcja Wurst, stworzona dla świata serwerów anarchii, gdzie ręczne usuwanie kilometra kamienia jest faktycznym obowiązkiem. Katalog Opal skupia się na walce, ruchu i wyglądzie – kategoriach, w których pojedynczy tick decyduje o walce. Zautomatyzowana eksploatacja nie jest problemem, który Opal próbuje rozwiązać.
+</Callout>
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona opisuje Tunnellera ogólnie, abyś wiedział, co ten termin oznacza, a nie jako dokumentacja czegoś, co wysyła Opal. Na serwerze z uruchomionym anticheatem, automatyczne kopanie jest łatwiejsze do wykrycia, niż się wydaje. Prawdziwi gracze robią przerwy, wracają, i od czasu do czasu usuwają bloki pod kątem, podczas kopania, a mechanicznie wyznaczony, idealnie prosty tunel tego nie robi. Rejestrowanie łamania bloków może oznaczyć taką regularność tak samo, jak oznacza jakąkolwiek inną automatyczną akcję, a na moderowanym serwerze jest to wzorzec, który skutkuje zablokowaniem, niezależnie od tego, który klient go wygenerował.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Tunneller to oszustwo czy użyteczna funkcja?">
+Automatyzuje coś, co gracz mógłby zrobić ręcznie – wykopać tunel – co czyni go funkcją automatyzującą rozgrywkę, a nie czysto kosmetyczną. Czy narobi Ci kłopotów, zależy całkowicie od zasad serwera i systemu anticheat, a nie od samego modułu.
+</FAQItem>
+
+<FAQItem question="Czy Tunneller działa na serwerach survival multiplayer?">
+Technicznie tak. Wysyła te same pakiety łamania bloków, co normalny gracz, więc nic nie stoi na przeszkodzie, aby działał na aktywnym serwerze. Trudniejsza jest kwestia pozostania niezauważonym, ponieważ monitorowanie łamania bloków może wychwycić mechaniczny timing i proste, jak strzała, ścieżki pozostawione po automatycznym kopaniu.
+</FAQItem>
+
+<FAQItem question="Jaka jest różnica między Tunnellerem a Nukerem?">
+Nuker niszczy każdy rozkładalny blok w promieniu wokół gracza, niezależnie od lokalizacji. Tunneller z kolei wycina zdefiniowany kształt w jednym kierunku, zachowując się bardziej jak automatyczne wydobycie niż oczyszczanie obszaru.
+</FAQItem>
+
+<FAQItem question="Czy używanie Tunnellera może skutkować zbanowaniem?">
+Na serwerze z aktywnym anticheatem lub nadzorowanym przez administratorów, tak, może być traktowane jak każde inne zautomatyzowane zachowanie. Na serwerze jednoosobowym lub nienadzorowanym, nie ma nikogo, kto mógłby nałożyć bana.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Szeroka kategoria Tunneller oraz moduły podobne do niego znajdują się wewnątrz." },
+  { href: "/pl/learn/what-is-scaffold", label: "Co to jest Scaffold?", description: "Kolejny moduł automatyzacji, tym razem umieszczający bloki zamiast ich usuwać." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kategoria nastawiona na skrytość, stworzona specjalnie dla niemoderowanych serwerów, na których Tunneller prosperuje." },
+]} />
+
+<CTA href="/pl/purchase">Opal przeznacza cały budżet na walkę i mobilność, a nie na kilofy. Zobacz, co się w nim znajduje.</CTA>

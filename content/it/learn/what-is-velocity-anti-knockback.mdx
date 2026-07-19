@@ -1,0 +1,94 @@
+---
+title: Cos'è la Velocità (Anti-Rintraccolo) in Minecraft?
+description: La velocità, o resistenza allo shock, è un modulo di combattimento che riduce o annulla la repulsione subita quando si viene colpiti. Ecco come funziona e perché viene rilevato.
+excerpt: La velocità riduce la repulsione subita dopo un colpo, permettendoti di mantenere la posizione e continuare a colpire. Ecco come il modulo riscrive quella spinta e perché i server lo notano.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Modules
+author: trq
+faqs:
+  - q: Cosa significa "Velocity" in un client di Minecraft?
+    a: In un menu dedicato al cliente, Velocity è il modulo anti-rinculo. Riduce la spinta all'indietro che il giocatore subisce quando viene colpito, permettendogli di rimanere più vicino al suo bersaglio durante un combattimento.
+  - q: L'anti-knockback è la stessa cosa della Velocità?
+    a: "Sì. Anti-knockback è il nome in linguaggio semplice e Velocity è il nome del modulo più comune per lo stesso comportamento: ridurre la spinta che un giocatore riceve dagli attacchi."
+  - q: Perché non posso semplicemente impostare la repulsione a zero percento?
+    a: Puoi farlo, ma una cancellazione completa è la versione più facile da individuare. Il server sa quanto avresti dovuto volare indietro, quindi evitare qualsiasi rifiuto è una discrepanza ovvia.
+  - q: Aiuta Velocity nel PvP?
+    a: Può farlo mantenendo un giocatore nello scontro ravvicinato invece di farlo allontanare a ogni colpo. Questo vantaggio è anche il motivo per cui gli anticheat monitorano attentamente l'applicazione della repulsione.
+---
+
+<KeyTakeaways>
+
+- La Velocità, detta anche anti-knockback, riduce o annulla la spinta che si riceve quando si viene colpiti.
+- Il server invia un vettore di knockback dopo un colpo; la Velocità lo ridimensiona prima che il giocatore si muova.
+- Un annullamento completo è facile da intercettare; i valori parziali si integrano meglio con il lag e gli scambi normali.
+- Il rilevamento avviene sul server perché quest'ultimo sa già di quanto il giocatore avrebbe dovuto muoversi.
+
+</KeyTakeaways>
+
+La Velocità è un modulo di combattimento che riduce o annulla la repulsione subita da un giocatore quando un attacco lo colpisce. Il server comunica al client di quanto deve essere respinto dopo un colpo. Velocità intercetta quell'istruzione e la riduce, facendo sì che il giocatore si muova a malapena. È anche chiamata anti-repulsione.
+
+## Come funziona la Velocità
+
+La Velocità modifica la repulsione inviata dal server dopo un colpo. Quando un'entità viene colpita in Minecraft, il server invia al client un aggiornamento della velocità: un vettore che indica la direzione e la velocità del movimento. Il client vanilla applica quel vettore per intero. Velocità intercetta l'aggiornamento per primo e lo riduce prima che il giocatore si muova.
+
+La riduzione è solitamente una percentuale su ciascun asse. La repulsione orizzontale viene ridotta in modo che il giocatore non scivoli all'indietro, mentre la repulsione verticale spesso rimane più vicina al normale in modo che salti e cadute abbiano ancora un aspetto corretto. A zero percento il giocatore non subisce alcuna repulsione. Con un valore parziale, ne subisce una parte, che è più difficile da notare.
+
+Lo stesso effetto può essere raggiunto in due modi. Alcune implementazioni modificano il pacchetto di velocità al suo arrivo. Altre lasciano che il movimento vanilla venga eseguito e poi correggono la posizione al tick successivo. Entrambe finiscono con il giocatore che rimane fermo sul terreno che avrebbe dovuto perdere.
+
+## Impostazioni comuni
+
+I moduli Velocità espongono alcuni valori che bilanciano sicurezza ed efficacia.
+
+| Impostazione | Cosa controlla |
+|---|---|
+| Orizzontale | Percentuale della spinta laterale che il giocatore subisce ancora |
+| Verticale | Percentuale della spinta verso l'alto che il giocatore subisce ancora |
+| Modalità | Modifica pacchetto rispetto correzione posizione |
+| Probabilità | Quanto spesso un colpo viene ridotto, invece di ogni colpo |
+
+Una cancellazione completa è la più forte e la più ovvia. Valori parziali, o una probabilità che salti alcuni colpi, assomigliano di più a lag o a uno scambio normale e attirano meno l'attenzione.
+
+## Perché i giocatori lo usano
+
+La velocità conferisce un vantaggio in mischia mantenendo il giocatore nel raggio d'azione. La repulsione normalmente interrompe un combattimento: ogni colpo spinge entrambi i giocatori lontano, costringendoli a ricongiungersi. Un giocatore che subisce meno repulsione rimane sopra il bersaglio e continua a colpire mentre l'altro giocatore si allontana. In un duello in mischia diretto, questo rappresenta un notevole vantaggio.
+
+## Perché viene rilevato
+
+La velocità viene rilevata perché il server sa già di quanto dovrebbe essersi mosso il giocatore. Il server invia il vettore di repulsione, quindi può confrontare la posizione prevista con quella segnalata dal client. Quando un giocatore continua ad assorbire colpi senza muoversi della distanza prevista, lo spazio si evidenzia.
+
+I sistemi anticheat lato server lo tracciano direttamente. Monitorano la quantità di ogni respinta che il giocatore applica effettivamente in molte colpi. Un giocatore che costantemente mantiene più terreno di quanto consentito dalla fisica viene segnalato. Un annullamento completo è facile da individuare. La riduzione parziale è più difficile, motivo per cui molte implementazioni non arrivano mai a zero.
+
+## Velocità rispetto ad altri moduli di combattimento
+
+La velocità è insolita tra i moduli di combattimento perché cambia ciò che accade al giocatore piuttosto che ciò che il giocatore fa a un bersaglio. [KillAura](/it/learn/what-is-killaura) e un [aimbot](/it/learn/what-is-an-aimbot) agiscono sul nemico, automatizzando la mira e gli attacchi. La velocità agisce sulla posizione del giocatore stesso, sovrascrivendo un'istruzione del server su quanto lontano dovrebbe muoversi dopo un colpo. La caratteristica comune è che entrambi sovrascrivono qualcosa che il server si aspetta di controllare.
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina descrive il modulo in termini generali, così da far capire cosa significa il termine. La denominazione e il comportamento esatto variano a seconda del client, e sovrascrivere il knockback del server viola le regole in praticamente ogni server.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa significa Velocity in un client di Minecraft?">
+In un menu client, Velocity è il modulo anti-knockback. Riduce la spinta che il giocatore subisce quando viene colpito, permettendogli di rimanere più vicino al suo bersaglio durante un combattimento. Non ha nulla a che vedere con il software proxy omonimo.
+</FAQItem>
+
+<FAQItem question="L'anti-knockback è la stessa cosa della Velocità?">
+Sì. Anti-knockback è il nome in linguaggio semplice e Velocità è il nome del modulo più comune per lo stesso comportamento: ridurre la spinta che un giocatore riceve dagli attacchi.
+</FAQItem>
+
+<FAQItem question="Perché non posso semplicemente impostare la repulsione a zero percento?">
+Puoi farlo, ma l'annullamento completo è la versione più facile da rilevare. Il server sa di quanto dovresti essere stato respinto all'indietro, quindi non subire alcuna repulsione è una discrepanza ovvia. I valori parziali esistono perché si integrano meglio.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "Il modulo di combattimento auto-attaccante." },
+  { href: "/it/learn/what-is-reach", label: "Cos'è Reach?", description: "I moduli anticheating di rilevamento della distanza sono attentamente monitorati." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia a cui appartengono questi moduli." },
+]} />
+
+<CTA href="/it/purchase">Guarda cosa spedisce Opal per $8.99</CTA>

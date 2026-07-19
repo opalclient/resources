@@ -1,0 +1,87 @@
+---
+title: Czym jest latanie w Minecraft? Wyjaśnienie modułu ruchu
+description: Lot to moduł ruchu, który ignoruje grawitację i ruch, umożliwiając swobodne latanie, bez elytra ani trybu kreatywnego. Oto jak to działa i dlaczego jest łatwo go złapać.
+excerpt: Lot przesuwa granice grawitacji i ruchu, pozwalając oderwać się od ziemi na żądanie. Bez skrzydeł, bez trybu gry, tylko nadpisanie, o którym serwer nigdy nie został poinformowany.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy latanie jest tym samym co używanie elytra czy trybu kreatywnego?
+    a: Nie. Zarówno elytra, jak i tryb kreatywny to mechaniki, które vanilla Minecraft faktycznie udostępnia pod określonymi warunkami. Lot generuje identyczny ruch bez ich obecności, co dokładnie sprawia, że jest wykrywalny.
+  - q: Czy Flight może spowodować zawieszenie gracza?
+    a: Tak. Utrzymywany lot bez ważnego źródła jest jedną z bardziej oczywistych anomalii ruchu, które może sprawdzić anticheat po stronie serwera, a jego używanie zazwyczaj narusza zasady serwera, na którym działa.
+  - q: Czy ograniczenie ruchu Lotu sprawia, że staje się on niewykrywalny?
+    a: "Nr. Łagodzenie pionowej prędkości lub ograniczanie czasu lotu zmniejsza pewność wykrywania, ale nie usuwa podstawowego sygnału: ruchu powietrznego bez skrzydełek ani trybu kreatywnego za nim."
+  - q: Dlaczego niektórzy klienci nazywają ten moduł Fly, a nie Flight?
+    a: '"Fly" to alias dla tej samej funkcji: swobodnego pionowego i poziomego lotu dzięki zastępowaniu ruchu i obsługi grawitacji. Różni klienci wybierają jedną lub drugą nazwę dla tego samego modułu.'
+---
+
+<KeyTakeaways>
+- Lot to moduł ruchu, który umożliwia swobodne pionowe i poziome latanie poprzez ignorowanie grawitacji i ruchu.
+- Pomija skrzydła i tryb kreatywny całkowicie, symulując ten sam efekt unoszenia się na poziomie klienta.
+- Ciągły lot bez prawidłowego źródła jest jedną z najbardziej oczywistych anomalii, które serwer może sprawdzić.
+- Opal kataloguje go jako Lot, wyraźnie sklasyfikowany jako użycie na własną odpowiedzialność, ta sama historia wykrywania, co wszędzie indziej.
+</KeyTakeaways>
+
+Lot to moduł ruchu, który zastępuje obsługę grawitacji i ruchu w „Minecraftcie”, pozwalając Ci wzlecieć, unosić się lub pokonywać teren bez elytra lub trybu kreatywnego. W wersji podstawowej możesz opuścić ziemię tylko na dwa sposoby: założyć skrzydła i szybować z pędem spadania, albo przełączyć się do trybu kreatywnego lub obserwatora. Lot imituje efekt, utrzymując pionową prędkość w dowolnym miejscu, zamiast pozwolić jej maleć w kierunku ziemi, i bezpośrednio aplikując ruch poziomy. Niektórzy klienci oznaczają ten sam moduł jako Fly. Niezależnie od nazwy, jest to jeden z najbardziej oczywistych wykrywanych oszustw związanych z ruchem.
+
+## Jak działa Lot
+
+Lot przepisuje dwie rzeczy, które normalnie są w pełni kontrolowane przez wersję podstawową: grawitację i ruch. Zamiast pozwolić, aby prędkość pionowa malała w kierunku ziemi w momencie, gdy nie ma bloku pod stopami, moduł ustawia tę prędkość i utrzymuje ją, dzięki czemu upadek ustaje, a wspinaczka lub unoszenie się odbywa się na żądanie. Ruch poziomy jest aplikowany w ten sam bezpośredni sposób, dzięki czemu możesz poruszać się do przodu, na boki lub prosto w górę, bez dotykania jakiejkolwiek powierzchni.
+
+Żadne z tego nie czerpie nic z elytra ani trybu kreatywnego. Moduł generuje dokładnie taki ruch, jaki zapewniają te funkcje w sposób legalny, z pominięciem źródła, które miałby go odblokować. Gracze sięgają po niego, by pominąć elementy gry, które mają egzekwować grawitację i teren: aby od razu dotrzeć do celu zamiast chodzić lub spadać wokół niego, całkowicie unikając obrażeń od upadku lub dostając się w miejsce, do którego nie pozwoliłaby żadna ścieżka naziemna, jak unoszenie się nad bazą. W pogoni, pozostawanie w powietrzu również zwiększa dystans między tobą a wszystkim, co porusza się tylko po ziemi.
+
+## Lot w porównaniu z prawdziwym elytra lub trybem kreatywnym
+
+Vanilla wyjaśnia nienaturalny ruch w powietrzu tylko na dwa sposoby. Lot nie pasuje do żadnego z nich.
+
+| Sposób opuszczenia ziemi | Co to faktycznie zapewnia | Co widzi serwer |
+|---|---|---|
+| Elytra | Wyposażony pancerz piersiowy plus pęd wynikający z upadku | Latanie jako encja z pasującym stanem upadku |
+| Tryb kreatywny lub obserwatora | Flaga trybu gry na koncie | Gracz oznaczony jako kreatywny lub obserwator |
+| Moduł lotu | Przeciążona grawitacja i ruch, brak źródła | Ciągły ruch w powietrzu bez żadnej flagi |
+
+Ten ostatni wiersz to cały problem. Serwer śledzący pozycję w czasie nie musi zgadywać: po prostu sprawdza, czy ustawiona jest któraś z legalnych flag i czy gracz jest w powietrzu bez jednej z nich, wzorzec nie pasuje do niczego, co generuje standardowa fizyka.
+
+## Dlaczego to jest wykrywane
+
+Ponieważ sprawdzanie jest proste, implementacje Flight skupione na omijaniu próbują utrzymać wynikowy ruch w granicach, które anticheat już toleruje: łagodzą pionową prędkość, naśladują trajektorię skoku lub ograniczają czas, przez jaki gracz jest w powietrzu. To zawęża lukę, ale jej nie zamyka. Podstawowe zachowanie, przemieszczanie się w otwartej przestrzeni bez wspierającego mechanizmu, nadal jest zauważalne dla serwera. Klienci, którzy wypuścili Flight, w tym Fan, Tenacity i Silhouette, traktują go jako funkcję o znanym ryzyku, a nie bezpieczną, a ta reputacja jest zasłużona, a nie wynik paranoi.
+
+<Callout variant="tip" title="Lot w Opalu">
+Opal również wysyła ten moduł, skatalogowany pod tą samą nazwą: Lot. Opis w katalogu nie owija w bawełnę: „Zyskujesz skrzydła w prawdziwym życiu”. To samo obejście, ta sama kompromis jak w przypadku każdego innego klienta, który go posiada.
+</Callout>
+
+<Callout variant="warning" title="Informacja, nie instrukcja">
+Ta strona opisuje moduł w sposób ogólny, abyś wiedział, co oznacza ten termin. Nazewnictwo i dokładne zachowanie różnią się w zależności od klienta, a utrzymywanie lotu bez prawidłowego źródła łamie zasady praktycznie każdego serwera. Opal klasyfikuje użycie Flightu na własne ryzyko z dokładnie tego powodu: jest ono wykrywalne i może skutkować zablokowaniem konta, tak jak na każdym kliencie, który go udostępnia.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy latanie jest tym samym co używanie elytra lub trybu kreatywnego?">
+Nie. Zarówno elytra, jak i tryb kreatywny to mechaniki, które Minecraft faktycznie udostępnia w określonych warunkach. Latanie zapewnia taki sam rodzaj ruchu, nawet bez żadnej z nich, co dokładnie sprawia, że jest ono wykrywalne.
+</FAQItem>
+
+<FAQItem question="Czy latanie może skutkować zbanowaniem gracza?">
+Tak. Utrzymywane latanie bez ważnego źródła jest jedną z bardziej oczywistych anomalii ruchu, które może sprawdzić anticheat po stronie serwera, a korzystanie z niego zazwyczaj narusza zasady serwera, na którym działa.
+</FAQItem>
+
+<FAQItem question="Czy ograniczenie ruchu Flight sprawia, że staje się on niewykrywalny?">
+Nie. Ograniczenie ruchu do zakresu tolerowanego przez istniejący system anticheat zmniejsza pewność wykrycia, ale nie eliminuje podstawowego sygnału: ruchu powietrznego bez skrzydłek ani trybu kreatywnego.
+</FAQItem>
+
+<FAQItem question="Dlaczego niektórzy klienci nazywają ten moduł Fly, a nie Flight?">
+Fly to alias dla tej samej funkcji, swobodne pionowe i poziome latanie dzięki zastąpieniu obsługi ruchu i grawitacji. Różne implementacje używają jednej lub drugiej nazwy dla modułu, który funkcjonalnie jest taki sam.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Szeroką kategorią, do której należą loty i moduły tego typu." },
+  { href: "/pl/learn/what-is-scaffold", label: "Co to jest Scaffold?", description: "Kolejny moduł pokrewny ruchowi, który wymienia ryzyko wykrycia na szybkość przemieszczania się." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kategoria klientów, dla których liczy się pozostawanie niezauważonym bardziej niż szybkie działanie." },
+]} />
+
+<CTA href="/pl/purchase">Moduł Opal's Flight sprawia, że twierdzenie o skrzydłach w prawdziwym życiu staje się faktem. Zobacz pozostałe pozycje.</CTA>

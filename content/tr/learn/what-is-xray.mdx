@@ -1,0 +1,83 @@
+---
+title: Minecraft'ta XRay Nedir? Cevher Görüntüleme Açıklaması
+description: XRay, Minecraft için bir moddur; arazi içindeki cevherleri, sunucuya gönderilen veriyi değiştirmeden, istemci tarafında çizim yaparak görüntüler ve bu yüzden sunucular tarafından hala yasaklanmasına neden olur.
+excerpt: Taşın içinde sakladığı şeyleri gizlemesi beklenir. XRay ise bunu durdurur, her dağını tam olarak cevherlerin nerede bulunduğu gösteren bir şemaya dönüştürür.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: X ışını kullanmak hile sayılır mı?
+    a: Evet, madenciliğin veya kaynak ekonomisinin önemli olduğu herhangi bir sunucuda. Cevherleri normal yoldan bulan oyunculara doğrudan bir avantaj sağlar ve cezalandırılabilir bir hile olarak kabul edilir, sadece bir kozmetik özellik olarak değil.
+  - q: Sunucu XRay'den başka bir şeye ihtiyaç duyuyor mu?
+    a: Hayır. Sunucu zaten bir parça yüklendiği anda, cevher de dahil olmak üzere tam parça verisini gönderiyor. XRay sadece istemcinin zaten sahip olduğu blokları nasıl çizdiğini değiştirir. Yeni bir şey talep etmiyor veya almıyor.
+  - q: X ışını ESP'den nasıl farklıdır?
+    a: ESP, oyuncular ve yaratıklar gibi varlıkları duvarların içinden gösterir. XRay aynı hileyi bloklara uygulayarak, cevher ve diğer kaynakları arazinin içinden açığa çıkarır. Her ikisi de sunucudan yeni veri çekmek yerine yerel işleme yöntemini değiştirerek çalışır.
+  - q: X ışını, birinin nasıl oynadığına bakılmadan tespit edilebilir mi?
+    a: Bazen. İstemci tarafı bütünlük taramaları bilinen XRay hook'larını veya değiştirilmiş render dosyalarını yakalayabilir, ancak bu kontrollerden kaçınmak için yapılan bir derleme genellikle sadece madencilik kalıplarının incelenmesiyle tespit edilir.
+---
+
+<KeyTakeaways>
+
+- XRay, cevher ve diğer değerli blokları arazinin içinden gösteren görsel bir modülüdür, böylece oyuncular kazmadan önce bir yolağı görebilirler.
+- Tamamen istemci tarafında çalışır: sunucu zaten bloklar yüklendiğinde tüm blok verilerini göndermiştir, XRay sadece cevheri gizleyen normal oluşturmayı durdurur.
+- Ekstra ağ trafiği oluşmaz, bu nedenle tespit genellikle madencilik kalıplarından ve istemci bütünlüğü taramalarından, paket günlüklerinden değil kaynaklanır.
+- Madencilik ekonomisi olan herhangi bir sunucuda, XRay bir kozmetik ayar değil, yasaklanabilir bir hile olarak kabul edilir.
+
+</KeyTakeaways>
+
+XRay, cevher ve diğer değerli blokları katı zeminin içinden görüntüleyen görsel bir modülüdür, böylece bir oyuncu baltasını bile kullanmadan bir damarın tam olarak nerede olduğunu görebilir. Sunucudan özel bir şey talep etmez. Sadece istemcinin çizmesini istediği şeyleri değiştirir. Kör kazı, bir tahmin üzerine tünel açmak ve yakında bir şeyler çıkmasını ummaktır. XRay bu adımı atlar ve haritayı yeraltında gerçekten ne olduğunu gösteren bir şemaya dönüştürür.
+
+## Nasıl Çalışır
+
+Bir bölüm yüklendiğinde, sunucu istemciye o bölümdeki tüm blok verilerini, cevher dahil olmak üzere, ister havaya maruz kalsın ister kalmasın gönderir. Normal işleme, bunun çoğunu atar. Sadece dış yüzeyi, görünür bir yüzeyle temas eden blokları çizer, çünkü gerçek bir kamera hiçbir zaman katı kayanın içinden göremez.
+
+Bir XRay modülü, hedeflediği blok türleri için bu kuralı bozar. Yapıya bağlı olarak, çevredeki taş ve toprağın hiç işlenmesini durdurur veya hedef cevheri, aksi takdirde onu gömecek arazi üzerinde doğrudan çizer. Her neyse, bir dağın içine üç kat gömülmüş bir elmas damarı, zaten bir mağarada maruz kalmış gibi görünür. Tünelleme keşif olmaktan çıkar ve düz bir çizgiye başlar.
+
+Hız cazip olan şey, karmaşıklık değil. Madencilik, cevher satışı veya onu ekipmana dönüştürme yoluyla bir ekonomiyi besleyen herhangi bir sunucuda, keşfi ortadan kaldırmak, hala sezgisel olarak kazmaya devam eden herkesin üzerinde doğrudan bir avantajdır.
+
+## XRay kullanmak güvenli mi?
+
+XRay, ağ üzerinden hiçbir şey göndermez. Açığa çıkardığı her blok, parçacık yüklendiği anda zaten istemciye iletilmiştir; bu, duvarların içinden varlıkları göstermek için ESP gibi bir modülün kullandığı aynı ilkedir. İzole bir şekilde paketleri izleyen bir sunucu, yakalayacak neredeyse hiçbir şey bulamaz.
+
+Tespiti davranış belirler. Bir oyuncu, doğrudan bir çizgi boyunca bir damara doğru tünel açarsa, yalnızca değerli blokları kazıp geri kalanını yok sayarsa veya bilmesi imkansız olabilecek bir tehlikeden kaçarsa, bu, kör bir oyuncunun asla üretmeyeceği bir madencilik deseni oluşturur. Bazı sunucular ayrıca, XRay'in kullandığı değiştirilmiş işleme kodunu arayan istemci tarafı bütünlük taramaları da çalıştırır; bu, diğer görsel hilelere karşı kullanılan aynı yaklaşımdır.
+
+İz, tek bir bariz paket olmaktan ziyade davranışsal olduğundan, XRay bir savaş hilesinden daha uzun süre fark edilmeden kalabilir. Bu, güvenli olduğu anlamına gelmez. Madencilik istatistiklerini inceleyen veya şüpheli kazıları araştıran sunucular, onu diğer sömürüler gibi ele alır: tam yasak, uyarı verilmez.
+
+<Callout variant="tip" title="Opal'da Nerede Bulunur">
+Opal özel bir XRay modülüyle birlikte gelmez. Kendi kataloğu, PvP için, tek bir kare veya tek bir tick'in bir savaşı belirlediği dövüş, hareket ve görsel modüllerine yöneliktir. Cevherin taşın içinden okunması tamamen farklı bir oyun, Opal'ın üzerine kurulu olduğundan çok daha fazla bir hayatta kalma ekonomisi öğütmesi gibidir.
+</Callout>
+
+<Callout variant="warning" title="Referans, rehber değil">
+Bu sayfa XRay'in ne yaptığını ve sunucuların neden yasakladığını açıklar, onu çalıştırmayı desteklemek için değildir. Madenciliğin bir ekonomiye bağlandığı herhangi bir sunucuda, XRay bir savaş istismarı gibi değerlendirilir: personel istem taraması veya şüpheli bir madencilik geçmişini okuyarak tespit edip etmese de yasaklanabilir bir suçtur.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="XRay hile olarak kabul ediliyor mu?">
+Evet, madenciliğin veya kaynak ekonomisinin önemli olduğu herhangi bir sunucuda. Normal yoldan cevher bulan oyunculara doğrudan bir avantaj sağlar ve cezalandırılabilir bir istismar olarak kabul edilir, sadece bir kozmetik özellik olarak değil.
+</FAQItem>
+
+<FAQItem question="XRay sunucudan ek bir şeye ihtiyaç duyuyor mu?">
+Hayır. Sunucu, bir parça yüklendiği anda, cevher de dahil olmak üzere tam parça verisini zaten gönderiyor. XRay sadece zaten sahip olduğu blokları nasıl çizdiğini değiştiriyor. Yeni bir şey talep etmiyor veya almıyor.
+</FAQItem>
+
+<FAQItem question="XRay, ESP'den nasıl farklıdır?">
+ESP, oyuncular ve yaratıklar gibi varlıkları duvarların içinden gösterir. XRay ise aynı hileyi bloklara uygulayarak, cevher ve diğer kaynakları arazinin içinden açığa çıkarır. Her ikisi de sunucudan yeni veri çekmek yerine yerel işleme yöntemini değiştirerek çalışır.
+</FAQItem>
+
+<FAQItem question="XRay algılanabilir mi, birinin nasıl oynadığına bakılmadan?">
+Bazen. İstemci tarafı bütünlük taramaları bilinen XRay hook'larını veya değiştirilmiş render dosyalarını yakalayabilir, ancak bu kontrollerden kaçınmak için yapılmış bir build genellikle sadece madencilik kalıplarının incelenmesiyle tespit edilir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "XRay ve burada bulunan diğer tüm modüllerin ait olduğu daha geniş kategori." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Paket düzeyinde hiçbir denetimi tetiklemeden, modüller üzerine kurulu, gizliliğe öncelik veren kategori, XRay dahil." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Hilebazın tam tersi uçta: gönderdiği paketlerle yakalandı, bıraktığı izle değil." },
+]} />
+
+<CTA href="/tr/satin-alin">Eğer ganimet kazmak amaç değilse, Opal'in savaş için aslında neler inşa ettiğine bak.</CTA>

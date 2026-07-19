@@ -1,0 +1,73 @@
+---
+title: Cos'è il Boat Fly? Lo Sfruttamento del Volo dei Veicoli in Minecraft
+description: Boat Fly è un modulo di movimento per Minecraft che intercetta i pacchetti veicolo di una barca per farla salire e fluttuare, trasformando una lenta deriva in un volo senza restrizioni.
+excerpt: Una barca che sale dritta non è lag. È Boat Fly, e la fisica vanilla non l'ha mai approvata.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Funziona Boat Fly anche al di fuori di una barca?
+    a: No. Funziona solo quando sei seduto in una barca, dato che tutto il trucco dipende dalla manipolazione dei pacchetti di movimento del veicolo. A piedi non c'è alcun canale veicolare da sfruttare, quindi il modulo non fa nulla.
+  - q: È Boat Fly la stessa cosa di un hack per mosche normale?
+    a: Il risultato sembra simile, un volo illimitato, ma il meccanismo è diverso. Un hack standard per il volo riscrive i pacchetti di movimento del giocatore stesso. Boat Fly riscrive i pacchetti di movimento del veicolo della barca mentre la si sta guidando.
+  - q: Può Boat Fly essere utilizzato sulla terraferma?
+    a: Sì. Le imbarcazioni a vaniglia possono già muoversi per brevi tratti sulla terraferma vicino all'acqua, ma Boat Fly estende questa capacità in un vero e proprio volo, permettendo all'imbarcazione di viaggiare ben oltre i limiti imposti dalla fisica nautica, terraferma compresa.
+  - q: È rilevabile Boat Fly su qualche server?
+    a: Solo sui server che verificano il movimento del veicolo rispetto alla fisica prevista della barca. Gli anticheat che si limitano a monitorare l'entità del giocatore e ignorano il veicolo su cui sta viaggiando potrebbero non rilevarlo affatto.
+---
+
+<KeyTakeaways>
+- Boat Fly è un modulo di movimento che riscrive i pacchetti di una barca, facendola salire e volare invece di galleggiare.
+- Sfrutta il canale di pacchetti separato per il movimento dei veicoli delle barche, poiché la fisica di base non prevede mai che una barca produca portanza da sola.
+- È un exploit di volo bannabile tracciato in client come Wurst, e i controlli della fisica dei veicoli lo rilevano rapidamente.
+</KeyTakeaways>
+
+Boat Fly è un modulo di movimento costruito attorno a un unico obiettivo: la barca vanilla di Minecraft. Il compito principale di una barca è galleggiare sull'acqua e muoversi leggermente a terra vicino alla riva, nient'altro. Boat Fly sovverte questo compito riscrivendo i pacchetti di movimento del veicolo che una barca invia mentre un giocatore è a bordo, permettendo alla barca di salire, mantenere l'altitudine e viaggiare ovunque un'entità volante possa andare. Il giocatore non lascia mai il sedile. Dall'esterno, sembra semplicemente una barca che ha dimenticato di non essere un aereo.
+
+## Come i pacchetti della barca vengono intercettati
+
+Le barche vanilla non sono attori indipendenti. Gli aggiornamenti della posizione di una barca provengono da pacchetti di movimento del veicolo legati alla galleggiabilità e alla gravità dell'acqua, un canale separato dai pacchetti che muovono un giocatore in piedi su terreno solido. Lasciati così come sono, questo canale non può produrre portanza: nessuna acqua sotto lo scafo, nessuna forza verso l'alto, nessuna ragione per cui la barca debba lasciare la superficie.
+
+Boat Fly prende di mira direttamente questo canale. Riscrive o inietta i valori di movimento del veicolo che la barca segnala, in modo che il server veda una barca che sale, mantiene l'altitudine o deriva lateralmente in modi che la vera fisica dell'acqua e della gravità non produrrebbe mai. Il server si fida di ciò che il client invia e aggiorna la posizione del giocatore in base a esso.
+
+Il fatto che il giocatore rimanga seduto per tutta la durata del gioco è ciò che fa sembrare questa situazione strana piuttosto che palesemente truccata. Nessuno vede una persona fluttuare nel cielo; vede una barca in un luogo in cui una barca non dovrebbe trovarsi, un tipo di errore più silenzioso finché non sai cosa cercare.
+
+## Perché viene segnalato, sui server che si preoccupano di controllare
+
+Boat Fly non è una modifica estetica o una scorciatoia comoda. Offre una mobilità che nessun giocatore legittimo può eguagliare: superare il terreno, saltare le normali regole di navigazione della mappa o abbandonare un combattimento andando in un posto dove nessuno può seguirlo. Questo lo pone nella stessa categoria di altri exploit di volo e no-clip, ben lontano da un semplice elemento dell'interfaccia utente riprogettato.
+
+Gli anticheat lato server che modellano il comportamento previsto di una barca, quanto velocemente dovrebbe muoversi, come dovrebbe sedersi sull'acqua e come la gravità dovrebbe riportarla giù, lo intercettano rapidamente non appena lo controllano. Una barca che si arrampica o fluttua interrompe questo schema non appena accade. Il divario è che molti server validano solo il movimento dell'entità del giocatore e non creano mai un controllo separato per i veicoli, ed è proprio qui che Boat Fly sopravvive.
+
+<Callout variant="warning" title="Questo è un exploit passibile di ban, non una funzionalità nascosta">
+Boat Fly rientra pienamente nel barare con i movimenti. Qualsiasi server che dovesse cogliere una barca che mantiene l'altitudine o ignora la gravità ha motivo di intervenire, e i client che lo includono vengono tracciati e identificati proprio per questo (Wurst è quello più frequentemente citato). Considerate queste informazioni come un'analisi di come funziona l'exploit, non come un suggerimento per utilizzarlo.
+</Callout>
+
+<Callout variant="tip" title="Dove Opal traccia il limite">
+La gamma di movimenti di Opal è progettata per resistere a una fisica reale, non a stati dei veicoli creati tramite pacchetti. Se un trucco funziona solo perché un server non si è mai preso la briga di controllare separatamente i movimenti del veicolo da quelli del giocatore, non è qualcosa che inseriamo nel client. Stessa categoria di Boat Fly nello spirito, scommessa completamente diversa: spingere i limiti di ciò che permette la fisica, non falsificare i pacchetti che la riportano.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+<FAQItem question="Funziona Boat Fly anche al di fuori di una barca?">
+No. Funziona solo mentre sei seduto in una barca, dato che l'intero trucco dipende dalla manipolazione dei pacchetti di movimento del veicolo della barca. Scendi a terra e non c'è più alcun canale veicolare da sfruttare, quindi il modulo semplicemente non fa nulla.
+</FAQItem>
+<FAQItem question="Boat Fly è la stessa cosa di un normale hack di volo?">
+Il risultato può sembrare simile, un volo illimitato in entrambi i casi, ma il meccanismo è diverso. Un hack di volo standard riscrive direttamente i pacchetti di movimento del giocatore. Boat Fly invece riscrive i pacchetti di movimento del veicolo della barca mentre sei a bordo.
+</FAQItem>
+<FAQItem question="Si può usare Boat Fly sulla terraferma?">
+Sì. Le barche base possono già percorrere una breve distanza sulla terraferma vicino alla riva, ma Boat Fly estende questa possibilità in un volo completo e sostenuto, permettendo alla barca di viaggiare ben oltre i limiti imposti dalla fisica normale delle barche, terraferma inclusa.
+</FAQItem>
+<FAQItem question="Boat Fly è rilevabile su qualche server?">
+Solo sui server che controllano i movimenti del veicolo rispetto alla fisica prevista per le barche. Gli anticheat che monitorano l'entità del giocatore ma ignorano il veicolo sottostante possono non rilevarlo affatto.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-scaffold", label: "Cos'è Scaffold?", description: "Un altro modulo di movimento che trasforma una meccanica di Minecraft standard in un'abilità di movimento illimitata." },
+  { href: "/it/learn/what-is-velocity-anti-knockback", label: "Cos'è Velocity (Anti-Knockback)?", description: "Un modulo di movimento che riscrive come il client di un giocatore risponde ai pacchetti di spinta." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria Boat Fly e moduli simili rientrano in, e dove si traccia il confine per ingannare i clienti." }
+]} />
+
+<CTA href="/it/purchase">Scopri i moduli di movimento che Opal spedisce effettivamente, con la fisica intatta.</CTA>

@@ -1,0 +1,94 @@
+---
+title: Czym jest moduł powiadomień w Minecraft?
+description: Moduł Powiadomień w klientach Minecrafta wyświetla szybkie powiadomienie na ekranie, gdy moduł jest przełączany lub zadanie dobiega końca, bez żadnego śladu anticheat.
+excerpt: Przycisk przełącza się, zadanie kończy się, a mały baner informuje, że wszystko działa, więc nie musisz sprawdzać sam. To jest cały moduł.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Powiadomienia to moduł oszukiwania?
+    a: Nie. Wyświetla tylko komunikat, gdy coś się wydarzy po stronie klienta, na przykład przełączenie modułu lub zakończenie automatycznego zadania. Nie działa w Twoim imieniu ani nie zmienia żadnej mechaniki gry, więc to informacja zwrotna, a nie automatyzacja.
+  - q: Jakie rodzaje zdarzeń wywołują powiadomienie?
+    a: Dwa najczęstsze to przełączanie modułu włączania lub wyłączania, zwykle za pomocą skrótu klawiszowego lub kliknięcia w interfejs graficzny, oraz automatyczne zakończenie zadania przez moduł samodzielnie, na przykład Kradzież Skrzyni po pomyślnym przejściu przez skrzynię.
+  - q: Czy powiadomienia są wykrywane przez antywiry?
+    a: Nie. Nie pozostawia żadnego śladu po stronie serwera. Nie wysyła niczego i nie zmienia niczego w rozgrywce, a programy anticheat oceniają ruch, walkę i dane pakietów, z których żaden czysto wizualny komunikat nie ma styczności.
+  - q: Jak Notifications różni się od modułu HUD?
+    a: Moduł HUD to trwały element nakładany na ekran, widoczny cały czas, taki jak współrzędne lub FPS. Powiadomienia pojawiają się tylko na krótko w odpowiedzi na konkretne zdarzenie, a następnie znikają.
+  - q: Jakie klientów mają moduł Powiadomień?
+    a: Widoczne jest to u klientów takich jak Fan i Tenacity, zwykle umieszczonych obok HUD-a i listy elementów jako część tej samej kategorii wyświetlacza pasywnego.
+---
+
+<KeyTakeaways>
+
+- Moduł Powiadomień wyświetla krótkie okienkowe powiadomienie, gdy wystąpi konkretne zdarzenie w kliencie, najczęściej włączenie lub wyłączenie modułu, lub zakończenie zadania przez moduł automatyczny, taki jak Kradzież Skrzyń.
+- Działa w oparciu o zdarzenia, nie jest trwały: powiadomienie pojawia się, utrzymuje się przez sekundę lub dwie, a następnie znika, w przeciwieństwie do HUD-u, który jest zawsze widoczny.
+- Wyświetla się lokalnie. Brak pakietów, brak zmian w ruchu lub walce, nic, co mógłby zmierzyć anticheat po stronie serwera.
+- Widoczne w klientach takich jak Fan i Tenacity jako warstwa poprawiająca komfort użytkowania, a nie funkcja rozgrywki.
+
+</KeyTakeaways>
+
+Moduł Powiadomień to niewielki system powiadomień w niektórych klientach narzędziowych Minecraft, który wyświetla krótkie okienko na ekranie, gdy zdarzy się określone wydarzenie, najczęściej włączanie lub wyłączanie modułu lub zakończenie zadania w tle. Nie zmienia to nic w sposobie rozgrywki. Wyobraź sobie to jako potwierdzenie, a nie automatyzację: taką funkcję, o której nie myślisz, dopóki nie zarządzasz sześcioma modułami jednocześnie i nie musisz wiedzieć, bez konieczności sprawdzania, czy ten, który właśnie przełączyłeś, został rzeczywiście włączony.
+
+## Jak to działa
+
+Powiadomienia nasłuchują wydarzeń wewnątrz klienta, a nie tego, co dzieje się na serwerze. Najczęstszym wyzwalnikiem jest skrót klawiszowy lub przełącznik GUI: włącz Killaura, a szybki baner potwierdzi to. Kolejnym częstym wyzwalnikiem jest automatyczny moduł kończący zadanie według własnego harmonogramu, a najlepszym przykładem jest [Kradzież ze skrzyń](/pl/learn/what-is-chest-stealer) kończący przejrzenie skrzyni, którą właśnie otworzyłeś.
+
+Wyskakujące okienko jest niewielkie: linia tekstu lub kompaktowy baner, zwykle umieszczone w rogu ekranu, widoczne przez sekundę lub dwie, zanim zniknie. Działa na podobną zasadę jak komunikaty toast w standardowym Minecraft (okienka postępów, baner odblokowania przepisu), tylko przeznaczone do zdarzeń po stronie klienta, a nie standardowych. Ważne jest to, co ono nie robi: wyświetlanie powiadomienia nie ma wpływu na zdarzenie, o którym informuje. Przełącznik już zadziałał. Wyskakujące okienko po prostu informuje o tym po fakcie.
+
+## Powiadomienia a moduł HUD
+
+Można by sklasyfikować to pod HUD, ale oba rozwiązania służą do rozwiązywania różnych problemów. HUD pozostaje na ekranie stale, wyświetlając ciągłe dane, takie jak współrzędne lub FPS, niezależnie od tego, czy coś się dzieje, czy nie. Powiadomienia działają odwrotnie: są domyślnie niewidoczne i pojawiają się tylko wtedy, gdy wystąpi konkretne zdarzenie.
+
+| | Powiadomienia | HUD |
+|---|---|---|
+| Widoczne domyślnie | Nie, tylko na zdarzenie | Tak, stale |
+| Czas trwania | Sekundę lub dwie, a następnie znika | Pozostaje do wyłączenia |
+| Wyświetla | Pojedyncze zdarzenie (przełącznik, zadanie zakończone) | Ciągłe statystyki (współrzędne, FPS, walka) |
+| Interakcja z serwerem | Brak | Brak |
+
+Klienci tacy jak Fan i Tenacity wysyłają oba, traktując je jako oddzielne elementy tej samej kategorii wyświetlacza pasywnego, a nie jako jeden zasłaniający drugi. Jeśli chcesz mieć stały odczyt z tej pary, znajdziesz go na stronie [modułu HUD](/pl/learn/what-is-hud).
+
+## Czy to jest bezpieczne?
+
+Tak bezpieczne, jak tylko może być funkcja klienta. Powiadomienia są rysowane lokalnie i tam się zatrzymują. Nie wysyłane są żadne dodatkowe pakiety, nic o ruchu czy walce się nie zmienia, a żadne dane wejściowe nie są automatyzowane. Anticheat po stronie serwera ocenia, co wysyła twój klient i jak porusza się twój gracz, a okienko, które istnieje tylko na twoim ekranie, nie wpływa na żadną z tych stron. Nie ma sygnatury rotacji, nie ma żadnych wskazówek dotyczących czasu, nie ma nic, co można by skorelować.
+
+Jedynym zastrzeżeniem nie jest ryzyko wykrycia: jest to kwestia widoczności. Ponieważ okienko jest rysowane bezpośrednio na ekranie, każdy, kto ogląda ten ekran (moderator, udostępnianie ekranu, transmisja na żywo), widzi dokładnie, co na nim jest napisane. Warto wiedzieć, ale nie ma to nic wspólnego z tym, jak anticheat ocenia gracza.
+
+<Callout variant="tip" title="Gdzie to się mieści w Opal">
+Opal nie dostarcza modułu o nazwie Powiadomienia. Ale instynkt stojący za nim – informowanie o tym, co się dzieje, zamiast zmuszania do szukania – przejawia się w interfejsie i tak. Stany modułów i ukończone zadania w tle to rzeczy, które powinny być czytane na pierwszy rzut oka, a nie wyszukiwane w menu.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Powiadomienia to moduł oszukiwania?">
+Nie. Wyświetla jedynie komunikat, gdy coś się dzieje w kliencie, na przykład gdy przełączany jest moduł lub kończy się automatyczne zadanie. Nie działa w Twoim imieniu ani nie zmienia żadnej mechaniki gry, więc jest to informacja zwrotna, a nie automatyzacja.
+</FAQItem>
+
+<FAQItem question="Jakie rodzaje zdarzeń wywołują powiadomienie?">
+Dwa najczęstsze to włączanie lub wyłączanie modułu, zwykle za pomocą skrótu klawiszowego lub interfejsu graficznego, oraz automatyczne zakończenie zadania przez moduł, na przykład ukończenie przejęcia skrzyni przez Chest Stealer.
+</FAQItem>
+
+<FAQItem question="Czy powiadomienia wykrywane są przez antywiry?" >
+Nie. Nie pozostawia żadnego śladu po stronie serwera. Nie wysyła niczego i nie zmienia niczego w rozgrywce, a antywiry oceniają ruch, walkę i dane pakietów, z których żadnego nie dotyka czysto wizualne okienko.
+</FAQItem>
+
+<FAQItem question="Jak różni się powiadomienie od modułu HUD?">
+Moduł HUD to trwały element nakładany na ekran, wyświetlany cały czas, taki jak współrzędne lub FPS. Powiadomienia pojawiają się tylko krótko w odpowiedzi na konkretne zdarzenie, a następnie znikają.
+</FAQItem>
+
+<FAQItem question="U których klientów dostępny jest moduł Powiadomień?">
+Można go zaobserwować u klientów takich jak Fan i Tenacity, zwykle obok HUD-a i listy tablicowej, jako część tej samej kategorii wyświetlacza pasywnego.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Powiadomienia to tylko jeden element szerszej kategorii." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Inna filozofia pasywnego działania, oparta na pozostawaniu niezauważonym, a nie na byciu dobrze poinformowanym." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Prawdopodobnie właśnie zadziałał jeden z modułów automatycznych, który potwierdza powiadomienie." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź Opal i przestań się zastanawiać, czy ostatni przełącznik zadziałał.</CTA>

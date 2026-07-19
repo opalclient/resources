@@ -1,0 +1,85 @@
+---
+title: Czym jest tablica wyników w Minecraft? Wyjaśnienie modułu
+description: Tablica wyników to moduł Minecraft, który zmienia styl serwerowej tablicy wyników lub dodaje linie obliczane przez klienta, takie jak ping – kosmetyczna zmiana, której nie wykryje żaden anticheat.
+excerpt: Tablica nie wpływa na grę, tylko na pudełko w rogu. Narysuj ją na nowo, dodaj linię, i przejdź dalej.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy tabele wyników dają nieuczciwą przewagę?
+    a: Nie. Zmienia to jedynie sposób wyświetlania istniejących danych z tablicy wyników lub dodaje informacje, które klient może już obliczać lokalnie, takie jak ping. Nie ujawnia niczego, czego gracz nie mógłby zobaczyć w inny sposób.
+  - q: Czy administratorzy serwera mogą wykryć niestandardową tablicę wyników?
+    a: Nie przez samą tabelę wyników. Serwer nadal wysyła swoje własne cele i wyniki jak zwykle. Przeróbka po stronie klienta i wszelkie dodatkowe linie nigdy nie są przesyłane z powrotem, więc serwer nie ma nic do zauważenia.
+  - q: Czy tablica wyników to to samo co mod HUD?
+    a: Nie do końca. Tablica wyników jest ograniczona tylko do paska bocznego. Bardziej rozbudowany mod HUD mógłby wpływać na pasek szybkiego dostępu, wyświetlanie współrzędnych, stan pancerza i wiele innych. Tablica wyników obsługuje tylko ten jeden element.
+  - q: Dlaczego klient w ogóle miałby łączyć moduł Tablicy Wyników?
+    a: Tabele wyników serwerów różnią się znacznie pod względem stylu, a wbudowany moduł zapewnia spójny wygląd na różnych serwerach lub powierzchniach, prezentując statystyki, takie jak ping, bez konieczności otwierania oddzielnego menu.
+---
+
+<KeyTakeaways>
+
+- Tablica wyników to moduł po stronie klienta, który zmienia styl tablicy wyników w pasku bocznym serwera lub dodaje dodatkowe wiersze zbudowane z danych, które klient już posiada, takie jak ping.
+- Podłącza się do etapu renderowania paska bocznego: rzeczywiste cele i wyniki serwera pozostają nietknięte, moduł jedynie formatuje je inaczej lub wplata wartości dostępne tylko lokalnie.
+- Nic nie jest wysyłane z powrotem do serwera, więc zmiana jest niewidoczna dla administratorów i nieistotna dla programów anticheat.
+- Klasyfikowany jest jako wygodny element HUD obok takich rzeczy jak nakładka współrzędnych lub licznik FPS, a nie funkcja walki lub ruchu.
+
+</KeyTakeaways>
+
+Tablica wyników to moduł Minecraft, który zmienia wygląd lub zawartość panelu tablicy wyników po stronie serwera. Może on zmieniać styl wysyłanej przez serwer ramki, czcionki, kolory, zaokrąglenia rogów lub dodawać dodatkowe wiersze obliczane na podstawie danych, które klient już posiada, takie jak ping. W każdym razie ogranicza się do prezentacji. Nic się nie zmienia w sposobie gry, poruszania się czy walki.
+
+## Jak to działa
+
+Domyślnie panel tablicy wyników, który widzisz w rogu ekranu, jest kontrolowany przez serwer: serwer wysyła cele i wyniki, a klient rysuje je w dowolnym ogólnym stylu, który Minecraft udostępnia. Scoreboard podłącza się do tego etapu renderowania i albo w całości rysuje na nowo ramkę, albo wstawia dodatkowe wiersze po stronie klienta obok wpisów serwera. Dane dostarczone przez serwer pozostają dokładnie takie, jakie zostały wysłane. Moduł je odczytuje, formatuje inaczej i może wplatać wartości, których serwer nigdy nie przesłał, ponieważ te dodatkowe wiersze są obliczane lokalnie, a nie pobierane przez sieć.
+
+Przeładowanie wizualne obejmuje warstwę graficzną: inną tapetę, zaokrąglone rogi zamiast ostrych, niestandardową czcionkę lub animowaną przejście, gdy wartość rośnie lub maleje, zamiast po prostu przeskakiwać do nowej liczby. Dodatki do zawartości stanowią mniejszą, drugą część modułu: rzeczy, które klient może już obliczać samodzielnie, ping jest oczywistym przykładem, wplecione jako dodatkowy wiersz bez wysyłania czegokolwiek nowego przez serwer. Ponieważ nic tu nie pochodzi z pakietu wysłanego z powrotem do serwera, całość jest lokalna dla Twojego ekranu i tak pozostaje.
+
+## Co faktycznie zmienia Scoreboard
+
+| Ustawienie | Co zmienia |
+|---|---|
+| Tło | Zmienia domyślny panel boczny na niestandardowy kolor lub styl |
+| Zaokrąglanie rogów | Łagodzi ostre naroża pudełek, które Minecraft domyślnie dostarcza |
+| Niestandardowe czcionki | Zastępuje domyślną czcionkę panelu bocznego |
+| Przejścia wartości | Animuje liczbę podczas aktualizacji zamiast natychmiastowego przeskoku |
+| Dodatkowe wiersze (np. ping) | Dodaje statystyki obliczane przez klienta, których serwer nigdy nie wysłał |
+
+Żaden z tych wierszy nie wymaga współpracy serwera. To wszystko decyzje, które klient podejmuje po tym, jak serwer już przekazał cele i wyniki, dlatego też lista kończy się w tym miejscu. Scoreboard nie odczytuje niczego z serwera, czego wcześniej nie otrzymał; po prostu wybiera, jak narysować to, co już ma.
+
+## Czy jest bezpieczne do użycia
+
+Tak, a jest to tak bezpieczne, jak tylko moduł może być. Tablica wyników jedynie formatuje lub rozszerza to, co serwer już wyświetla lokalnie. Nie odczytuje danych, do których nie powinieneś mieć dostępu, nie wysyła dodatkowych pakietów i nie zmienia sposobu, w jaki twój klient wchodzi w interakcję ze światem. Nie ma tutaj żadnej przewagi informacyjnej nad innym graczem patrzącym na tę samą, standardową tablicę wyników – to tylko inna warstwa malarska. Anticheaty nie mają tu czego oznaczać, ponieważ moduł nigdy nie ingeruje w ruch, walkę ani nic, co jest przesyłane przez sieć.
+
+<Callout variant="tip" title="Gdzie to się znajduje w Opal">
+Opal nie wysyła modułu o nazwie Scoreboard. Obszar, który obejmuje – drobne modyfikacje wyświetlania, które nie ingerują w dane serwera – to ta sama kategoria wizualna, w której znajduje się reszta HUD i narzędzi kosmetycznych Opal. Jeśli czysty pasek boczny jest dla Ciebie ważny, warto sprawdzić, co oferuje klient w swoich ustawieniach wizualnych, zamiast zakładać, że go brakuje tylko dlatego, że nazwa się nie zgadza.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Tablica Wyników daje nieuczciwą przewagę?">
+Nie. Zmienia ona jedynie sposób wyświetlania istniejących danych z tablicy wyników lub dodaje informacje, które klient może już obliczać lokalnie, takie jak ping. Nie ujawnia ona niczego, czego gracz nie mógłby zobaczyć w inny sposób.
+</FAQItem>
+
+<FAQItem question="Czy administratorzy serwera mogą wykryć niestandardową tablicę wyników?">
+Nie, poprzez samą tablicę wyników. Serwer nadal wysyła swoje własne cele i wyniki jak zwykle. Przeróbka po stronie klienta i wszelkie dodatkowe linie nigdy nie są przesyłane z powrotem, więc nie ma nic, co mogłoby zwrócić uwagę serwera.
+</FAQItem>
+
+<FAQItem question="Czy Tablica Wyników to to samo co mod HUD?">
+Nie do końca. Tablica Wyników jest ograniczona tylko do paska bocznego. Szerszy mod HUD może wpływać na pasek szybkiego dostępu, wyświetlanie współrzędnych, stan pancerza i wiele innych. Tablica Wyników obsługuje tylko ten jeden element.
+</FAQItem>
+
+<FAQItem question="Dlaczego klient w ogóle połączyłby moduł Scoreboard?">
+Serwerowe tabele wyników różnią się znacznie pod względem stylizacji, a wbudowany moduł zapewnia spójny wygląd na różnych serwerach lub powierzchniach, prezentując statystykę, taką jak ping, bez konieczności otwierania oddzielnego menu.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Moduły szerszej kategorii, do której należy tablica wyników." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Tablica wyników skupiona na wykrywaniu nigdy nie musi się martwić." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Moduł, który znajduje się po przeciwnym końcu skali ryzyka niż czysto kosmetyczny." },
+]} />
+
+<CTA href="/pl/purchase">Czystszy pasek boczny to drobiazg. Zobacz, co jeszcze posprząta Opal.</CTA>

@@ -1,0 +1,121 @@
+---
+title: Come installare Fabric Loader (Guida passo passo, 2026)
+description: "Installa il loader Fabric in pochi minuti: esegui il programma di installazione ufficiale, scegli la tua versione di Minecraft, quindi avvia il nuovo profilo Fabric. Guida completa con risoluzione dei problemi."
+excerpt: Fabric Loader è l'unico componente su cui si basano tutte le mod di Fabric. Ecco come installarlo con l'installer ufficiale e tornare al gioco vanilla quando vuoi.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: Ho bisogno di Forge per installare Fabric?
+    a: No. Fabric è un mod loader separato. Si installa uno o l'altro per profilo, non entrambi contemporaneamente.
+  - q: L'installazione del loader modifica il Minecraft vanilla?
+    a: No. L'installatore aggiunge un nuovo profilo e lascia il gioco originale intatto. Passa al profilo precedente per tornare indietro.
+  - q: Dove vanno le mod dopo aver installato il loader?
+    a: Nella cartella "mods" all'interno della directory di Minecraft. Viene creata la prima volta che lanci il profilo Fabric.
+  - q: Posso installare il loader senza il programma di installazione ufficiale?
+    a: Sì. Alcuni launcher aggiungono il supporto per Fabric e saltano completamente l'installazione standalone.
+---
+
+<KeyTakeaways>
+
+- Il Fabric Loader si installa con un unico strumento: l'installer ufficiale di Fabric.
+- Aggiunge un nuovo profilo di lancio e non modifica mai il tuo gioco vanilla.
+- La cartella `mods` compare dopo aver lanciato il profilo Fabric una volta.
+- Abbina il loader alla versione esatta di Minecraft che intendi utilizzare.
+
+</KeyTakeaways>
+
+L'installazione del loader [Fabric](https://fabricmc.net/) richiede un solo strumento e pochi clic. Scarica il file di installazione ufficiale di Fabric, eseguilo, seleziona la versione di Minecraft desiderata e lascialo creare un nuovo profilo di avvio. Apri il tuo launcher, seleziona il profilo Fabric e avvia il gioco una volta. Il loader è ora attivo e pronto per i mod.
+
+<Callout variant="info" title="Dove si integra Opal">
+Opal è un mod per Fabric, quindi utilizza lo stesso loader che hai installato qui. Una volta installato il loader, segui la [guida alla configurazione](/it/docs/setup) per la versione esatta e gli argomenti JVM consigliati.
+</Callout>
+
+## Passaggi
+
+<Steps>
+
+<Step number={1} title="Scarica il programma di installazione">Scarica l'installer ufficiale di [Fabric](https://fabricmc.net/) dal sito web del progetto Fabric. È un piccolo programma Java</Step>
+
+<Step number={2} title="Eseguilo">
+Fai doppio clic sul file jar, oppure eseguilo da un terminale se il doppio clic non fa nulla.
+</Step>
+
+<Step number={3} title="Scegli la tua versione di Minecraft">Scegli la versione esatta che intendi utilizzare, che sia un'uscita recente o una più datata che usi ancora</Step>
+
+<Step number={4} title="Installa">
+Il programma di installazione scrive un nuovo profilo nel tuo launcher e scarica i file del loader corrispondenti.
+</Step>
+
+<Step number={5} title="Seleziona Fabric profilo">Apri il tuo launcher di Minecraft e passa al profilo creato dall'installer</Step>
+
+<Step number={6} title="Avvia una volta">
+Avvia il gioco su quel profilo in modo che il loader configuri i suoi file e una cartella `mods`.
+</Step>
+
+</Steps>
+
+## Cosa fa effettivamente l'installer
+
+L'installer non applica patch al file jar del gioco. Aggiunge un profilo di avvio che carica il loader [Fabric](https://fabricmc.net/) prima che Minecraft si avvii. Tale loader legge la cartella `mods` all'avvio e carica ciascun mod. Poiché il profilo si trova accanto a quello vanilla, il tuo gioco non modificato rimane intatto e puoi tornare indietro in qualsiasi momento.
+
+## Installer vs supporto del launcher
+
+Hai due modi per installare il loader. Scegli quello più adatto alla tua configurazione.
+
+| Metodo | Quando usarlo | Note |
+|--------|----------------|-------|
+| Installer ufficiale di Fabric | Predefinito per il launcher standard | Scrive un profilo, scarica il loader, fatto in pochi minuti |
+| Launcher con supporto Fabric integrato | Utilizzi già un launcher di terze parti | Il launcher gestisce l'abbinamento delle versioni per te |
+
+Entrambi terminano allo stesso modo: un profilo Fabric che selezioni prima di avviare.
+
+## Dove vengono salvati i file
+
+| Sistema operativo | Percorso |
+| :--- | :--- |
+| Windows | `%appdata%\.minecraft` |
+| macOS | `~/Library/Application Support/minecraft` |
+| Linux | `~/.minecraft` |
+
+La cartella `mods` appare all'interno di tale directory dopo il primo avvio di Fabric. Inserisci lì i file jar dei mod una volta che esiste.
+
+## Quando il loader non si installerà
+
+<Checklist>
+<ChecklistItem>L'installatore non si apre: potrebbe mancare Java oppure il jar si apre con il programma sbagliato. Installare una versione recente di Java runtime e riprovare.</ChecklistItem>
+<ChecklistItem>Nessun profilo Fabric nel launcher: aggiornare o riavviare il launcher, quindi cercare il nuovo profilo nel menu a tendina delle versioni.</ChecklistItem>
+<ChecklistItem>Il gioco si blocca dopo aver aggiunto mod: il loader è a posto, ma una mod è indirizzata a una versione diversa di Minecraft. Assicurarsi che ogni mod sia compatibile con la versione installata.</ChecklistItem>
+<ChecklistItem>Versione di Minecraft errata: rieseguire l'installatore e selezionare la versione corretta. Potrebbe scrivere più di un profilo.</ChecklistItem>
+</Checklist>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="È necessario Forge per installare Fabric?">
+No. Fabric è un mod loader separato. Si installa uno o l'altro per profilo, non entrambi contemporaneamente.
+</FAQItem>
+
+<FAQItem question="L'installazione del loader modifica Minecraft vanilla?">
+No. L'installer aggiunge un nuovo profilo e lascia il tuo gioco vanilla intatto. Passa a un profilo diverso per tornare indietro.
+</FAQItem>
+
+<FAQItem question="Dove vanno i mod dopo aver installato il loader?">
+Nella cartella `mods` all'interno della directory di Minecraft. Viene creata la prima volta che lanci il profilo Fabric.
+</FAQItem>
+
+<FAQItem question="Posso installare il loader senza l'installer ufficiale?">
+Sì. Alcuni launcher aggiungono il supporto per Fabric e saltano completamente l'installer autonomo.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/how-to-install-a-fabric-mod", label: "Come installare un mod di Fabric", description: "Il passo successivo una volta che il caricatore è in posizione." },
+  { href: "/it/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "Come differiscono i due mod loader." },
+  { href: "/it/learn/what-is-a-minecraft-mod-loader", label: "Cos'è un mod loader?", description: "Cosa fa il caricatore all'avvio." },
+]} />
+
+<CTA href="/it/purchase">Ottieni Opal, un client Fabric, per $8.99</CTA>

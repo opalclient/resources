@@ -1,0 +1,110 @@
+---
+title: Minecraft'ta Stash Finder Nedir? (Mod Açıklaması)
+description: Stash Finder, yüklü blokları gizli sandıklar, fıçılar ve depolama alanları için tarar, böylece oyuncular Minecraftta gömülü ganimeti hızla tespit edebilir. Nasıl çalıştığı ve gerçek yasaklanma riski.
+excerpt: Stash Finder, yüklediğiniz her şeyi bir ganimet haritasına dönüştürür, kazmaya gerek yok. Anarşi sunucuları ona aldırmaz. Hak iddia edilen sunucular ise onu hile olarak görür.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Define Finder, X-ışını ile aynı şey mi?
+    a: Aynı prensip, farklı hedef. Her ikisi de oyuncunun normalde bulamadığı, müşterinin zaten bildiği bilgileri ortaya çıkarır. X-ray cevher ve araziyi vurgularken, Eşya Bulucu oyuncu tarafından yerleştirilen depolama alanlarını hedefler.
+  - q: Duvarların içinden görülebilir mi?
+    a: "Görsel olarak bir şey görünmüyor, duvar aracılığıyla herhangi bir işleme yapılmıyor. Sadece, istemci zaten sahip olduğu parça verileriyle bir konumu işaretliyor; ancak pratik sonuç aynı: kazmaya başlamadan önce tam olarak nereye kazacağını bilirsin."
+  - q: Stash Finder herhangi bir sunucuda çalışır mı?
+    a: Teknik olarak, parçalar yüklendiği ve istemciye gönderildiği her yerde, yani çoğu standart sunucuda. Orada izin verilip verilmediği ise her sunucunun farklı yanıtladığı ayrı bir soru.
+  - q: Neden StashLogger olarak da adlandırılıyor?
+    a: StashLogger, bazı müşterilerin aynı özelliği belirtmek için kullandığı bir takma addır. Aynı sandık tarama davranışı, farklı bir isim.
+  - q: Stash Finder kullanmak yasak mı?
+    a: Sunucuya bağlıdır. En çok kullanıldığı, genellikle kuralı olmayan anarşi sunucularında böyle bir kısıtlama yoktur. İddia veya daha sıkı bir hile önleme politikası uygulayan sunucular, gizli depolama yerlerini bu şekilde tespit etmeyi hile olarak değerlendirirler.
+---
+
+<KeyTakeaways>
+
+- Stash Finder (aynı zamanda StashLogger olarak da bilinir), yüklenmiş blokları oyuncuların yerleştirdiği sandıklar, fıçılar ve şulker kutuları gibi depolama alanları için tarayan bir dünya modülüdür ve ardından bunların koordinatlarını işaretler.
+- Blok varlığı verilerini, bir blokyüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yüklenir yük
+
+</KeyTakeaways>
+
+Stash Finder, çevrenizdeki blokları tarayarak oyuncular tarafından yerleştirilen depolama alanlarını, taşın altında gömülü sandıkları, bir mağara duvarına gizlenmiş fıçıları, görünür bir kapısı olmayan bir üssün içinde mühürlenmiş shulker kutularını bulan ve her birinin tam olarak nerede durduğunu işaretleyen bir dünya modülüdür. Bazı istemciler aynı özelliği StashLogger olarak gönderir; bu, farklı bir isimle aynı davranışı sergilemek demektir. Modül, bir konteynerı görmenizi, açmanızı veya hatta yakından geçmenizi gerektirmez. Oyuncuların ganimetlerini sadece toprak ve umut arasında bırakarak gömdükleri anarşi sunucuları için tasarlanmıştır.
+
+## Nasıl Çalışır
+
+Stash Finder, istemcinin zaten sahip olduğu blok verilerini depolama türü blok varlıkları için filtreler ve bir blok yüklendiği an koordinatlarını işaretler. Tüm hile bu: istemci sunucudan ek bir şey çekmiyor, sadece bloğunla birlikte gelen verileri okuyor ve ihtiyaç duyduğu şeyleri ayıklıyor. Sandığın altında on blok taş olması, işaretsiz bir mağara duvarına inşa edilmiş olması veya bariz bir girişi olmayan bir üssün içinde bulunması fark etmez, çünkü bunların hiçbiri bloğun zaten içerdiği şeyi değiştirmez.
+
+## Yaygın Ayarlar
+
+| Ayar | Kontrol Ettiği Şey |
+|---|---|
+| Arama yarıçapı | Oyuncudan ne kadar uzağa tarama ulaşıyor |
+| Blok türleri | Sandıklar, fıçılar, shulker kutuları vb. hangi kaplar bir saklama alanı olarak sayılır |
+| İşaret veya ESP stili | Bulunan bir saklama alanının ekranda nasıl gösterileceği: bir işaret, vurgulanmış bir kutu veya benzeri |
+| Yalnızca yer altında | Zaten yer üstünde görünür olan saklama alanlarını atlayıp atmama |
+
+Yarıçap ve blok türü filtreleri burada çoğu işi yapıyor. Yarıçapı genişletin veya "saklama alanı" olarak sayılanları artırın ve tek bir geçişle bir bölümün tamamında daha fazla sonuç elde edersiniz.
+
+## Neden Kullanılıyor
+
+Çekiciliği kazı yapmadan ganimet bulmak. Stash Finder, Meteor Client ve SalHack gibi istemcilerde kendini gösteriyor; burada oyuncular arasında bir iddia sistemi veya koruma eklentisi bulunmayan anarşi sunucularında sabit bir yerdir. Bu tür bir sunucuda, gömülü bir saklama alanı, ne kadar iyi gizlenmişse o kadar güvenlidir ve Stash Finder gizleme kısmını tamamen ortadan kaldırır: bir bölge boyunca uçun ve menzildeki her saklama alanı elle arama yapmanıza gerek kalmadan işaretlenir. Bazı oyuncular bunu ters yönde kullanır, kendi üslerinin aynı taramada görünüp görünmediğini kontrol ederek ona güvenmeden önce.
+
+<Callout variant="tip" title="Burada Opal'ın oturduğu yer">
+
+Opal, Stash Finder veya StashLogger adında bir mod göndermiyor ve göndermeyecek. En yakın karşılığı, Görsel başlığı altında listelenmiş ve Opal'ın kendi mod listesinde kullan-riski-üstüne işaretlenmiş olan Block ESP. Bu özellik, dünyada ilerlerken konteynerleri (ve cevher gibi kaynak bloklarını) vurguluyor. Otomatik olarak yolu kaydeden bir tarayıcıdan ziyade, oluşturulmuş bir üst üste bindirme olarak tasarlandığı için ikisi aynı değil, ancak aslında “kazmaya başlamadan önce etrafınızda ne olduğunu bilin” istiyorsanız, bu özellik en yakın işi yapıyor
+
+</Callout>
+
+## Algılanabilir mi?
+
+Stash Finder sunucuya olağan dışı bir şey göndermez, hareket veya dövüşü otomatikleştirmeden yalnızca kendi istemcinizin gösterdiği şeyleri değiştirir. Bu, bir nişan alma botu veya otomatik saldırgan gibi modülleri ele veren paket ve zamanlama anormalliklerini atlaması anlamına gelir. Tarama ve işaretleme ekranınızdan asla çıkmadığı için yakalanacak bariz bir sunucu tarafı imzası yoktur.
+
+Bu, her yerde kurala uygun olmadığı anlamına gelmez. Keşfetmeden başka birinin gizli depolamasını bulmak ve yağmalamak, çoğu antichiating politikasına sahip sunucuların hile olarak değerlendirdiği kazanılmamış bir bilgi avantajıdır. Maden için X-ray ile aynı kategoridedir. Yakalandığında, davranış yoluyla olur: Bir oyuncunun kazılmamış, daha önce ziyaret edilmemiş bir sandığa düz bir çizgi üzerinde yürümesi, tek bir işaretli paket olmasa bile personelin fark edebileceği bir desiftir. Stash Finder'ın en çok kullanıldığı Anarşi sunucuları genellikle bu kurala sahip değildir ve modülün orada yaşamaya devam etmesinin büyük bir nedeni budur.
+
+<Callout variant="warning" title="Referans, nasıl yapıldığı değil">
+
+Bu sayfa, Stash Finder'ın ne yaptığını ve kurallar spektrumunda nerede konumlandığını açıklar, onu çalıştırmanın bir onayını teşkil etmez. İddia sistemi veya istemci tarafı veri avantajlarından yararlanmaya karşı bir politika olan herhangi bir sunucuda, dürüstçe asla bulamadığınız bir üssü yağmalamak için kullanmak, yasak sebebidir
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Define Finder, X-ışını ile aynı şey mi?">
+
+Aynı prensip, farklı hedef. Her ikisi de oyuncunun normalde bulamadığı, müşterinin zaten bildiği bilgileri ortaya çıkarıyor. X-ray cevher ve araziyi vurgularken, Eşya Bulucu oyuncu tarafından yerleştirilen depolama alanlarını hedefler
+
+</FAQItem>
+
+<FAQItem question="Duvarların içinden görülebilir mi?">
+
+Görsel olarak bir şey oluşmuyor, duvarın kendisinden bir işleme yapılmıyor. Sadece, istemcinin zaten sahip olduğu parça verilerini kullanarak bir konumu işaretliyor; ancak pratik sonuç aynı: kazmaya başlamadan önce tam olarak nereye kazacağını bilirsin
+
+</FAQItem>
+
+<FAQItem question="Stash Finder herhangi bir sunucuda çalışır mı?">
+
+Teknik olarak, parçalar yüklendiği ve istemciye gönderildiği her yerde, yani çoğu standart sunucuda. Orada izin verilip verilmediği ise her sunucunun farklı yanıtladığı ayrı bir soru
+
+</FAQItem>
+
+<FAQItem question="Neden StashLogger olarak da adlandırılıyor?">
+
+StashLogger, bazı müşterilerin aynı özelliği belirtmek için kullandığı bir takma addır. Aynı sandık tarama davranışı, farklı bir isim
+
+</FAQItem>
+
+<FAQItem question="Stash Finder kullanmak yasak mı?">
+
+Sunucuya bağlıdır. En çok kullanıldığı, genellikle kural tanımayan anarşi sunucularında sorun olmaz. İddia sistemleri veya daha sıkı bir hile önleme politikası olan sunucularda ise, gizli depolama alanlarını bu şekilde tespit etmek hile olarak değerlendirilir
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Şemsiye kategori Buluntu Arayıcı ve diğer dünya ve görsel modüllere aittir." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Gizli istemci kategorisi, Stash Finder gibi popüler araçların en doğal ortamıdır." },
+  { href: "/tr/learn/what-is-scaffold", label: "Scaffold nedir?", description: "Başka bir anarşiyle ilişkili modül, bu sefer zaten gömülü olanları bulmak yerine kazmak için." }
+]} />
+
+<CTA href="/tr/satin-alin">ESP'yi ve Opal'ın Görsel kategorisinin geri kalanını tek tıklamayla edinin.</CTA>

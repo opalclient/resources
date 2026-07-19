@@ -1,0 +1,87 @@
+---
+title: Minecraft'ta Hedefli Savrulma Nedir? Modül Açıklaması
+description: Hedef Savrulma, kilitlenmiş bir savaş hedefi etrafında otomatik olarak dönen bir Minecraft hareket modülüdür. İşte nasıl çalıştığı, sessiz versiyonu ve sunucuların neden işaretlediği.
+excerpt: Hedefi otomatik olarak dolaşır, herhangi bir ayak hareketine gerek kalmaz. Aynı zamanda bir sunucunun fark etmesi en kolay hareket hilelerinden biridir.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Target Strafe aslında ne işe yarıyor?
+    a: Kilitli bir hedefi otomatik olarak dolaşır, oyuncunun normalde A ve D tuşlarıyla kontrol ettiği yan hareketleri devralır.
+  - q: Hedef Savrulmanın sessiz varyantı nedir?
+    a: LiquidBounceta belgelenen, sunucudaki gerçek hareket yönünüzü kameranızın veya başkalarının gördüğü şekilde döndürmeden değiştiren, baktığınız yön ile aslında gittiğiniz yönü birbirinden ayırarak çalışan bir alt mod.
+  - q: Hedef Tarama antichipler tarafından tespit edilebilir mi?
+    a: Evet. Normal sürümü yapayalnız pürüzsüz dairesel hareket üretir ve sessiz sürümü, bir vanilla istemcinin üretemeyeceği, hareket ve yön arasındaki uyumsuzluk yaratır; bunların her ikisi de anticheat programları tarafından ölçülebilen sinyallerdir.
+  - q: Hedef Savrulma'yı hangi müşteriler gönderdi?
+    a: LiquidBounce ve Fan'da belgelenmiş olup, Opal aynı isim altında kendi versiyonunu, Hedef Kaydırma (Target Strafe) olarak sunmaktadır.
+  - q: Hedef Nişan Alma, hareket yardımıyla aynı şey mi?
+    a: Hayır. Bir hareket yardımı bilgi gösterebilir veya girdiyi yumuşatabilir. Hedef Kaydırma, yön girdinizi tamamen değiştirir, bu yüzden bir yardımcıdan ziyade bir hile modülü olarak sınıflandırılır.
+---
+
+<KeyTakeaways>
+
+- Hedef Savrulma, kilitli bir savaş hedefi etrafında otomatik olarak dönen bir hareket modülüdür ve manuel savrulmanın yerini alır.
+- Sessiz bir varyant, görünür yönünüzü gerçek hareketinizden ayırır; bu, standart bir istemci tarafından yapılamaz.
+- Her iki varyant da tespit edilebilir: doğal olmayan pürüzsüz dolaşım ve yön/hareket uyumsuzlukları gerçek anticheat sinyalleridir.
+- Opal kendi Hedef Savrulma modülünü gönderir ve kullanımını kendi sorumluluğunuzda olarak işaretler.
+
+</KeyTakeaways>
+
+Hedef Savrulma, kilitlediğiniz savaş hedefinin etrafında otomatik olarak dönen bir hareket modülüdür; bunun yerine A veya D tuşlarına basıp kendiniz daire çizmek zorunda kalmazsınız. Her birimde bir savrulma yönü hesaplar ve bunu doğrudan hareketinize uygular, böylece elleriniz ne yaparsa yapsın daire pürüzsüz kalır. Bazı istemciler, kameranız başka yöne bakarken karakterinizi bir yöne hareket ettiren, sessiz bir varyantıyla birlikte gelir. İnsanların yakalandığına yol açmasıyla ün salmış küçük bir otomasyon parçasıdır.
+
+## Hedef Savrulma Nasıl Çalışır
+
+Hedef Savrulma, istemcinin savaş hedefleme sistemine müdahale eder ve bir hedef kilitlendiği anda, genellikle bir savaş veya nişan alma modülü salınmaya başladığı aynı anda, yan hareketin kontrolünü ele alır. Siz A veya D tuşlarına basarak daire çizmek yerine, modül her birimde savrulma yönünü yeniden hesaplar ve bunu doğrudan hareket işleyicisine yazar. Çıktı, dövüştüğünüz şeyin etrafında temiz, mekanik olarak tutarlı bir yörünge olur; manuel savrulmanın ulaşamadığı bir yarıçap ve hızda.
+
+Sessiz varyant, LiquidBounce'ta belgelendiği gibi, konuyu bir adım öteye götürüyor. Sadece strafe girişini otomatikleştirmenin ötesinde, karakterinizin sunucuda aslında hareket ettiği yönü değiştirirken, render edilen kamera rotasyonunuzu olduğu gibi bırakıyor. İzleyen herkes, oyuncunun bir yöne baktığını ve başka bir yöne kaydığını görür; normal bir istemci girişi fiziksel olarak üretemeyeceği bir kombinasyon.
+
+Hedefleme veya savaş modülü ile birlikte kullanıldığında, Target Strafe yakın mesafeli bir dövüşten bir parça daha manuel koordinasyonu ortadan kaldırır: salınımınızın ortasında açınızı kaybetmemek, ayaklarınız ve fare aynı anda aynı şeyi yapmadığı için yanınızdan saldırıya uğramamak.
+
+<Callout variant="tip" title="Opal buna Hedef Savrulması diyor">
+Bu ürünün Opal kataloğundaki açıklaması, adının vaat ettiği gibi, sizi hedefinizin etrafında döndürür. Aynı modül, aynı kategori ve aşağıda bahsedilen aynı ödünleşim.
+</Callout>
+
+## Hedef Nişan Alırken Savrulma Güvenli mi?
+
+İki ayrı şey burada işaretleniyor. Temel sürüm, bir klavyeyle çalışan birinin hareketine benzemeyecek kadar pürüzsüz ve tutarlı bir hareket üretiyor ve hareket kalıplarını izleyen bir sunucu bu tutarlılığı doğrudan ölçebilir.
+
+Sessiz varyantı ise ikisinden daha riskli. Bir oyuncunun vücudunun baktığı yer ile aslında hareket ettiği yer arasında bir uyumsuzluk, meşru bir istemcinin üretebileceği bir şey değildir, bu nedenle rotasyonu hareketle karşılaştıran herhangi bir hile önleme sistemi bunu yakalamak için net bir sinyal alır. Belirli bir sunucunun bunu yakalayıp yakalamadığı, sunucunun hareket tutarlılığını ne kadar yakından kontrol ettiğine bağlıdır, ancak her iki varyantı da güvenli bir varsayım değildir.
+
+<Callout variant="warning" title="Referans, rehber değil">
+Hedef Nişan Alma, sessiz olsun ya da olmasın, tespit edilebilir hareket otomasyonudur ve temelde her çok oyunculu sunucudaki kuralları ihlal eder. Bunu gönderen her istemci, Opal dahil olmak üzere, kullanımının riskine göre olduğunu belirtir. Bu, yasaklanacağınızı vaat eden bir şey değildir. Sadece bunun olası olduğunu kabul ettiğiniz anlamına gelir.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Hedef Çevirme aslında ne işe yarıyor?">
+Kilitli bir savaş hedefi etrafında otomatik olarak dönmenizi sağlar, oyuncunun normalde A ve D tuşlarıyla kontrol ettiği yan hareketleri devralır.
+</FAQItem>
+
+<FAQItem question="Hedef Savar'ın sessiz varyantı nedir?">
+LiquidBounce'ta belgelenen, kameranızın veya başkasının görmediği şekilde sunucu üzerindeki gerçek hareket yönünüzü değiştiren bir alt moddur; böylece baktığınız yerden, aslında nereye gittiğiniz ayrışır.
+</FAQItem>
+
+<FAQItem question="Hedef Kaydırması antichipler tarafından tespit edilebilir mi?">
+Evet. Normal versiyon, doğal olmayan derecede pürüzsüz dairesel hareket üretir ve sessiz versiyon, orijinal bir istemcinin üretemeyeceği bir yön-hareket uyumsuzluğu yaratır; her ikisi de antichiplerin ölçebileceği işaretlerdir.
+</FAQItem>
+
+<FAQItem question="Hangi müşteriler Target Strafe gönderimini yaptı?">
+LiquidBounce ve Fan'da belgelenmiştir ve Opal, aynı isim altında kendi versiyonunu, Target Strafe olarak gönderiyor.
+</FAQItem>
+
+<FAQItem question="Hedef Sabitleme, hareket yardımıyla aynı mı?">
+Hayır. Bir hareket yardımı bilgi gösterebilir veya girdiyi yumuşatabilir. Hedef Sabitleme ise yönsel girdinizi tamamen değiştirir, bu yüzden bir yardımcıdan ziyade hile modülü olarak sınıflandırılır.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "Hedef Kaydırması Otomatik Saldırı modülü genellikle yanında bulunur." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Sadece hedef odaklı savaş modülü, sıkça eşlik ettiği modül." },
+  { href: "/tr/learn/what-is-velocity-anti-knockback", label: "Hız / Çarpma Geri Tepmesi Nedir?", description: "Daha uzun süre ayakta kalmanızı sağlayacak bir diğer hareket modülü." },
+]} />
+
+<CTA href="/tr/purchase">Daha akıllıca çember çiz. Opal, Hedef ve diğer tüm savaş ekipmanlarını onun etrafında konumlandır.</CTA>

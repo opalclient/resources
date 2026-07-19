@@ -1,0 +1,78 @@
+---
+title: Co to jest ładowacz modów do Minecrafta? (Wyjaśnienie z 2026 roku)
+description: "Ładowacz modów do Minecrafta poprawia grę podczas uruchamiania, aby umożliwić działanie modyfikacji. Oto, co robi ładowacz oraz główne opcje: Fabric, Forge, NeoForge, Quilt."
+excerpt: Vanilla Minecraft samodzielnie nie może uruchamiać modów. Modloader to warstwa, która patchuje grę przy starcie i daje modom możliwość włączenia się.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: Czy potrzebuję programu do ładowania modów, żeby ich używać?
+    a: Tak. Mody zmieniające grę wymagają loadera. Paczki zasobów i шейдеры to oddzielne rzeczy i nie zawsze go potrzebują.
+  - q: Czy mogę uruchomić moda bez ładowarki?
+    a: Nie. Gra sama nie załaduje pliku JAR moda.
+  - q: Które ładowarki powinienem wybrać?
+    a: Ten, dla którego tworzone są Twoje wybrane mody. Jeśli zaczynasz od nowa i chcesz szybko uzyskać najnowszą wersję, Fabric jest popularnym wyborem.
+---
+
+<KeyTakeaways>
+
+- Mod loader to warstwa, która umożliwia Minecraftowi uruchamianie modów; wersja vanilla nie obsługuje modów.
+- Łata grę podczas uruchamiania i zapewnia każdemu modowi możliwość podłączenia się do kodu.
+- Instalujesz go raz dla swojej wersji Minecrafta, a następnie wrzucasz pliki JAR modów do folderu mods.
+- Główne opcje to Fabric, Forge, NeoForge i Quilt; wybierz tę, na którą celują Twoje mody.
+
+</KeyTakeaways>
+
+Ładowacz modów to warstwa, która umożliwia Minecraftowi uruchamianie modyfikacji. Vanilla Minecraft nie obsługuje modów, dlatego ładowacz poprawia grę podczas uruchamiania i daje modom możliwość podłączenia się do niej. Instalujesz ładowacz raz dla swojej wersji Minecrafta, a następnie wrzucasz pliki JAR modów do folderu mods i ładują się one podczas uruchamiania.
+
+<Callout variant="info" title="Gdzie pasuje Opal">
+Opal to mod dla Fabric, więc Fabric jest loaderem, którego potrzebujesz. [Przewodnik instalacji](/pl/docs/setup) przeprowadzi Cię przez ten proces.
+</Callout>
+
+## Dlaczego go potrzebujesz
+
+Mody zmieniają sposób działania gry, co oznacza, że muszą działać wewnątrz kodu gry. Loader umożliwia to. Bez niego, plik modyfikacji (jar) jest po prostu plikiem, który gra ignoruje.
+
+## Jak to działa
+
+Podczas uruchamiania loader wstawia się przed rozpoczęciem gry, odczytuje folder z modami i podłącza każdy mod do odpowiednich punktów podłączenia (hooków). [Fabric](https://fabricmc.net/) robi to za pomocą mixinów, czyli metody ukierunkowanego łatania kodu bajtowego. Forge używa własnego, większego systemu hooków. W każdym razie, gra kończy się uruchamianiem z wplecionymi modami.
+
+## Główne loadery
+
+| Loader | Znany z |
+| :--- | :--- |
+| Fabric | Lekki, szybki w aktualizacjach, mody wydajnościowe i użytkowe |
+| Forge | Duże modyfikacje zawartości i długotrwałe paczki modów |
+| NeoForge | Rozwidlenie Forge prowadzone przez społeczność |
+| Quilt | Rozwidlenie Fabric z dodatkowymi funkcjami |
+
+## Wybór loadera
+
+Użyj loadera, który jest docelowy dla twoich modów. Większość modów jest tworzona dla jednego loadera, a nie obu, więc mody, których chcesz używać, zazwyczaj decydują o tym za ciebie. W przypadku głębszego podziału, zobacz [Fabric vs Forge](/pl/learn/fabric-vs-forge).
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy potrzebuję programu do ładowania modów, żeby ich używać?">
+Tak. Mody, które zmieniają grę, wymagają programu do ładowania. Paczki zasobów i shadery to inna sprawa i nie zawsze go potrzebują.
+</FAQItem>
+
+<FAQItem question="Czy mogę uruchomić moda bez loadera?">
+Nie. Gra sama nie załaduje pliku jar moda.
+</FAQItem>
+
+<FAQItem question="Który loader powinienem wybrać?">
+Ten, dla którego zostały stworzone Twoje wybrane mody. Jeśli zaczynasz od zera i chcesz szybko uzyskać najnowszą wersję, [Fabric](https://fabricmc.net/) jest popularnym wyborem.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "Dwóch głównych załadowców, porównanych szczegółowo." },
+  { href: "/pl/learn/what-is-the-fabric-api", label: "Czym jest Fabric API?", description: "Wspólna biblioteka, od której zależą większość modów Fabric." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Co znajduje się na górze ładowarki po jej zainstalowaniu." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź Opala, klienta Fabric, za $8.99</CTA>

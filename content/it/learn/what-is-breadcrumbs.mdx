@@ -1,0 +1,69 @@
+---
+title: Cos'è il modulo Breadcrumbs in Minecraft?
+description: Breadcrumbs è un modulo client di Minecraft che lascia una traccia visibile dietro il tuo personaggio mentre ti muovi, così potrai ripercorrere i tuoi passi senza alcun rischio di anticheat.
+excerpt: Una scia di segnali che ricorda dove sei stato, così non devi farlo tu. Nessun pacchetto modificato, nessun rischio corso, solo un sentiero verso casa.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Influiscono le briciole di pane sul gameplay?
+    a: No. Breadcrumbs visualizza solo un percorso sul tuo schermo. Non modifica il movimento, il combattimento o qualsiasi cosa il server riceva dal tuo client.
+  - q: Possono gli anticheat rilevare i Breadcrumbs?
+    a: Non c'è nulla da rilevare. I breadcrumb non inviano pacchetti diversi né offrono alcun vantaggio, quindi non interferiscono mai con il tipo di comportamento che gli anticheat lato server sono progettati a monitorare.
+  - q: Breadcrumbs è la stessa cosa di una mappa minima o di un mod per waypoint?
+    a: È correlato, ma più semplice. Una mod per minimappa o waypoint mostra una mappa o permette di impostare destinazioni, mentre Breadcrumbs segna semplicemente il percorso specifico che hai già percorso, così puoi ripercorrerlo.
+  - q: Quali clienti hanno Breadcrumbs?
+    a: È documentato in Tenacity, un client di utilità per Minecraft, come uno dei suoi moduli di categoria di rendering insieme ad altre funzionalità visive.
+---
+
+<KeyTakeaways>
+- Breadcrumbs lascia una scia di marcatori dietro di te mentre ti muovi, così il tuo percorso recente rimane visibile sullo schermo.
+- Disegna solo localmente: nessun pacchetto extra inviato, nessuna modifica al movimento o al combattimento.
+- Utile per grotte, basi tentacolari e per rivedere un percorso dopo l'esplorazione o l'estrazione mineraria.
+- Rischio zero di anti-cheat, non c'è alcun comportamento visibile al server da segnalare fin da subito.
+</KeyTakeaways>
+
+Breadcrumbs è un modulo client di Minecraft che lascia una scia di marcatori dietro di te mentre cammini, mini o esplori, in modo che il tuo percorso recente rimanga visibile senza dover aprire una mappa. Si tratta di una funzionalità di rendering, non di uno strumento di movimento o di combattimento: il client disegna marcatori nei luoghi in cui sei già stato, e nulla cambia nel modo in cui giochi. Pensala come la versione digitale di una vera scia di briciole di pane, lasciate automaticamente, sempre aggiornate, che scompaiono nel momento in cui non ti servono più. L'utilità è ovvia la prima volta che ti perdi in un sistema di grotte o in una base con troppe stanze che si assomigliano.
+
+## Come funziona
+
+Il modulo si interfaccia con i tuoi dati di posizione, le stesse coordinate che il client sta già tracciando ad ogni tick, e lascia un marcatore mentre ti muovi. Renderizza questi marcatori insieme in sequenza e ottieni una linea collegata: la scia. Continua a muoverti e la scia continua a crescere dietro di te, riflettendo sempre esattamente il terreno che hai appena percorso, non una stima.
+
+Poiché il posizionamento dei marcatori è legato alla tua posizione reale, la scia traccia il percorso effettivo che hai seguito, inclusi tutti i ritorni sui tuoi passi, i vicoli ciechi e le deviazioni. Nulla viene inviato al server e nulla cambia in ciò che gli altri giocatori vedono quando ti guardano. Si tratta di un overlay lato client, punto e basta.
+
+## È sicuro da usare
+
+Sì, su qualsiasi server. I breadcrumb non influenzano la velocità di movimento, il combattimento o un singolo pacchetto inviato dal client, quindi non c'è nulla a cui un anticheat lato server possa associare un flag. Confronta questo con un modulo come un aimbot, che modifica attivamente ciò che viene trasmesso al server ad ogni colpo. I breadcrumb non escono mai dalla tua pipeline di rendering.
+
+Questo significa anche che non ti rende migliore in nulla. Non ti renderà più veloce, più difficile da colpire o più preciso. Mantiene semplicemente una registrazione visiva del terreno che hai già percorso, il che è estremamente utile o completamente invisibile a seconda che tu ti sia mai perso nella tua miniera.
+
+<Callout variant="tip" title="Dove si inserisce questo in Opal">
+Opal non include un modulo chiamato Breadcrumbs specificamente, ma il principio alla base di esso, ovvero rendere qualcosa di veramente utile, non toccare nulla che il server possa vedere, è esattamente lo standard a cui la categoria visuale di Opal si attiene. Se una funzionalità non può guadagnarsi un posto come utile o provabilmente sicura, non viene inclusa.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+<FAQItem question="Le briciole influenzano il gameplay?">
+No. Tracciano solamente un sentiero sul tuo schermo. Movimento, combattimento e tutto ciò che il server vede del tuo client rimangono esattamente invariati.
+</FAQItem>
+
+<FAQItem question="Gli anticheat possono rilevare Breadcrumbs?">
+Non c'è nulla da intercettare. Breadcrumbs non invia pacchetti diversi né offre alcun vantaggio, quindi non interferisce con il comportamento che gli anticheat monitorano a livello server.
+</FAQItem>
+
+<FAQItem question="Le briciole sono la stessa cosa di una minimappa o di una mod per i waypoint?">
+Non esattamente, è più semplice. Una minimappa o una mod per i waypoint ti fornisce una mappa o ti permette di impostare una destinazione. Le briciole segnano semplicemente il percorso esatto che hai già percorso, così puoi ripercorrerlo.
+</FAQItem>
+
+<FAQItem question="Quali clienti hanno Breadcrumbs?">È documentato in Tenacity, un client di utilità per Minecraft, come uno dei suoi moduli di categoria di rendering insieme ad altre funzionalità visive</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria a cui appartengono le Briciole di pane e moduli simili." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "L'altra estremità dello spettro del rischio: un modulo che modifica ciò che vede il server." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Come i clienti orientati all'esplorazione si distinguono da un modulo puramente visivo come questo." }
+]} />
+
+<CTA href="/it/purchase">Scopri tutto ciò che Opal offre per te.</CTA>

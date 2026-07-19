@@ -1,0 +1,90 @@
+---
+title: Cosa sono gli indicatori di modulo in Minecraft?
+description: Un indicatore di modulo è una piccola sovrapposizione HUD che elenca quali moduli sono attualmente attivi in un client di Minecraft, simile a un Array List ma più semplice da realizzare.
+excerpt: Un indicatore di modulo trasforma ciò che hai attivato in un elenco in esecuzione nell'angolo dello schermo. Lo stesso compito di un Array List, ma realizzato in modo più leggero.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Influisce un indicatore del modulo sul gameplay?
+    a: No. Funziona solo disegnando testo sul tuo schermo e non interferisce mai con i movimenti, i combattimenti o qualsiasi altra logica di gioco, quindi non ha alcun effetto su come giochi effettivamente.
+  - q: Può anticheat rilevare un indicatore di modulo?
+    a: No. Non invia mai nulla al server, quindi non c'è nulla che un anticheat lato server possa osservare o segnalare fin da subito.
+  - q: Qual è la differenza tra un indicatore di modulo e un Array List?
+    a: Svolgono lo stesso lavoro, elencando i moduli attivi, ma un indicatore di modulo è tipicamente la versione più semplice e codificata separatamente, piuttosto che condividere un'implementazione con una Array List.
+  - q: Perché un cliente dovrebbe spedire sia un indicatore di modulo che una Array List?
+    a: Di solito perché le due funzionalità sono state implementate separatamente in momenti diversi, anziché essere unite in un'unica soluzione. È un dettaglio di sviluppo, non qualcosa che modifica ciò che si vede sullo schermo.
+  - q: È visibile un indicatore di modulo agli altri giocatori?
+    a: No. Viene eseguito solo sul tuo client e non viene mai inviato al server né mostrato ad altri giocatori.
+---
+
+<KeyTakeaways>
+
+- Un indicatore dei moduli è un elenco compatto sullo schermo che mostra quali moduli sono attualmente attivati in un client di utilità per Minecraft.
+- Si aggiorna in tempo reale: attiva un modulo e il suo nome appare, disattivalo e il nome scompare.
+- Viene renderizzato interamente lato client e non contatta mai il server, quindi non comporta alcun rischio di anticheat.
+- Svolge lo stesso lavoro di un Array List, semplicemente come un modulo più semplice costruito separatamente anziché condividere codice.
+- Appare in client come Fan.
+
+</KeyTakeaways>
+
+Un indicatore dei moduli è l'elenco testuale breve, solitamente posizionato in un angolo dello schermo, che ti indica quali moduli sono attualmente in esecuzione in un client utility di Minecraft. Attiva Killaura e il suo nome compare. Disattivalo e il nome scompare. Questa è l'intera funzionalità: una lettura in tempo reale dello stato del tuo client, nient'altro. Svolge lo stesso ruolo di un Array List, e nei client che ne includono entrambi, i due sono tipicamente scritti come funzionalità separate e codificate indipendentemente, piuttosto che un'unica lista con due skin. Lo troverai in client come Fan, che fa esattamente ciò che suggerisce il nome.
+
+## Come funziona
+
+Ogni frame, il client verifica quali moduli sono attualmente contrassegnati come abilitati e disegna i loro nomi come un breve elenco, solitamente ancorato a un angolo dello schermo. Abilita un modulo e viene aggiunta una riga. Disabilitalo e la riga scompare immediatamente. Non c'è più nulla nella meccanica di questo.
+
+Poiché la lista legge solo lo stato locale del client e sovrappone del testo alla visualizzazione del gioco, non comunica mai con il server. Nessun pacchetto viene inviato, nessuna logica di gioco viene toccata, solo una chiamata di disegno sovrapposta a ciò che stai già facendo. Appartiene alla stessa categoria di un HUD di coordinate o di un contatore FPS: completamente locale, completamente cosmetico e invisibile a chiunque non stia guardando il tuo schermo.
+
+## Indicatore dei moduli vs Array List
+
+La sovrapposizione qui non è casuale. Entrambe le funzionalità esistono per rispondere alla stessa domanda a colpo d'occhio: cosa c'è in programma? Dove divergono è l'ambito, non lo scopo.
+
+| | Indicatore Modulo | Array List |
+|---|---|---|
+| Scopo | Elenca i moduli attualmente attivi | Lo stesso: elenca i moduli attualmente attivi |
+| Profondità della funzionalità | Elenco minimale, solo con il nome | Spesso più completo, con extra come opzioni di ordinamento o di stile |
+| Approccio alla costruzione | Un modulo semplice a sé stante, codificato separatamente anche nei client che ne distribuiscono entrambi | Frequente la versione più sviluppata, la "primaria" delle due |
+| Interazione con il server | Nessuna | Nessuna |
+| Rischio anti-cheat | Nessuno | Nessuno |
+
+Un client può distribuire uno, l'altro o entrambi affiancati. Quale finisci per guardare, o se ottieni entrambi impilati in un angolo, dipende da come il team di sviluppo ha strutturato il proprio HUD piuttosto che da qualsiasi differenza in ciò che effettivamente vedi che fa. Se vuoi approfondire la conoscenza del fratello più completo e ricco di funzionalità, questa è la pagina [Array List](/it/learn/what-is-array-list).
+
+<Callout variant="tip" title="La posizione di Opal in merito">
+Opal non fornisce un modulo chiamato Module Indicator. Un semplice indicatore di ciò che è attualmente attivo è un requisito fondamentale per un client di utilità, non un punto di forza, quindi l'esistenza di un modulo del genere conta molto meno di ciò che effettivamente mostra. Concentrate l'attenzione sui moduli stessi.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Un indicatore di modulo influisce sul gameplay?">
+No. Disegna soltanto del testo sul tuo schermo e non interferisce con i movimenti, il combattimento o qualsiasi altra logica di gioco, quindi non ha alcun effetto su come giochi effettivamente.
+</FAQItem>
+
+<FAQItem question="L'anticheat può rilevare un indicatore di modulo?">
+No. Non invia mai nulla al server, quindi non c'è nulla che un anticheat lato server possa osservare o segnalare fin da subito.
+</FAQItem>
+
+<FAQItem question="Qual è la differenza tra un indicatore di modulo e un Array List?">
+Svolgono lo stesso compito, elencando i moduli attivi, ma un indicatore di modulo è tipicamente la versione più semplice e codificata separatamente, piuttosto che condividere un'implementazione con un Array List.
+</FAQItem>
+
+<FAQItem question="Perché un cliente spedirebbe sia un indicatore di modulo che una Array List?">
+Di solito perché le due funzionalità sono state sviluppate separatamente in momenti diversi piuttosto che unite in un'unica soluzione. Si tratta di un dettaglio di sviluppo, non di qualcosa che cambia ciò che si vede sullo schermo.
+</FAQItem>
+
+<FAQItem question="Un indicatore di modulo è visibile agli altri giocatori?">
+No. Viene visualizzato solo sul tuo client e non viene mai inviato al server o mostrato ad altri giocatori nel gioco.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "Questo indicatore HUD fa parte di una categoria più ampia." },
+  { href: "/it/learn/what-is-killaura", label: "Cos'è Killaura?", description: "Uno dei moduli il cui nome è più probabile che compaia in quella lista." },
+  { href: "/it/learn/what-is-reach", label: "Cos'è la portata?", description: "Un modulo che il server può effettivamente misurare, a differenza di tutto ciò che questa pagina tratta." },
+]} />
+
+<CTA href="/it/purchase">Un report è interessante quanto ciò che riporta. Scopri cosa c'è nella lista di Opal.</CTA>

@@ -1,0 +1,79 @@
+---
+title: Cos'è la Ricerca (Ricercatore di Risorse) in Minecraft?
+description: "La ricerca è un modulo di Minecraft che scansiona i blocchi già caricati alla ricerca di un blocco specifico, segnalando ogni corrispondenza: un cercatore di minerali che non attraversa i muri."
+excerpt: La ricerca non vede attraverso i muri, si limita a ricordare ciò che il cliente già sa. Puntala su un tipo di blocco e ottieni coordinate, non una piccozza e un presentimento.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa cerca realmente la Ricerca?
+    a: Solo i dati già caricati dal cliente. Scorre tali dati alla ricerca di un tipo di blocco specifico e contrassegna o elenca ogni corrispondenza, quindi i risultati sono limitati a ciò che è attualmente caricato intorno al giocatore.
+  - q: Permette la Ricerca di vedere attraverso i muri?
+    a: No. La ricerca non rende i blocchi visibili attraverso il terreno come farebbe una texture pack a raggi X o uno shader. Segnala coordinate o posiziona un segnalino, ma non modifica ciò che viene effettivamente disegnato sullo schermo.
+  - q: I server possono rilevare automaticamente la Ricerca?
+    a: Raramente tramite l'ispezione dei pacchetti, dato che il modulo non invia mai nulla che un client normale non invierebbe. Quando viene intercettato, di solito è a causa di un membro dello staff che esamina i modelli di gioco, non a causa di un segnale automatico.
+  - q: La ricerca è la stessa delle radiografie?
+    a: Risolvono lo stesso problema, trovando risorse senza doverle cercare, ma con metodi diversi. La radiografia tipicamente modifica il rendering per vedere attraverso i blocchi. La scansione di ricerca analizza i dati che il cliente possiede già e segnala le corrispondenze senza alterare ciò che è disegnato.
+---
+
+<KeyTakeaways>
+
+- La ricerca è un modulo (presente in client come Wurst) che scansiona i chunk caricati alla ricerca di un tipo di blocco specifico e segnala ogni corrispondenza.
+- Legge i dati già presenti nel client, quindi non vengono inviati pacchetti aggiuntivi.
+- La copertura è limitata dalla distanza di rendering, non può vedere i chunk non caricati.
+- A differenza della visione a raggi X, non attraversa i muri, ma riporta semplicemente le coordinate.
+
+</KeyTakeaways>
+
+La ricerca è un modulo di Minecraft che scansiona ogni blocco già caricato dal client per un tipo di blocco specifico, contrassegnando o elencando ogni sua occorrenza. Invece di scavare a casaccio o vagare per la mappa sperando di imbattersi in una vena, specifichi il blocco e ottieni una risposta immediata. È classificato nella categoria mondo, lo stesso contenitore di altri strumenti che leggono o interagiscono con l'ambiente, piuttosto che con il combattimento o il movimento.
+
+## Come funziona
+
+La ricerca legge i dati dei blocchi già memorizzati dal client. Nel momento in cui un blocco viene caricato, il gioco riceve la disposizione completa dei blocchi al suo interno, è semplicemente così che funziona il rendering: il client deve sapere cosa c'è per poterlo disegnare. La ricerca analizza questi dati alla ricerca di corrispondenze con il blocco scelto, quindi posiziona un segnalino, un punto di riferimento o una voce in una lista per ogni occorrenza trovata.
+
+Per questo non è necessario comunicare nuovamente con il server. La scansione si basa interamente sulle informazioni che il client possiede già, quindi non vengono inviati nuovi pacchetti e quelli esistenti non vengono modificati. L'unico vincolo reale è la distanza di rendering: la ricerca può solo visualizzare i blocchi nei blocchi che hai effettivamente caricato, non l'intero mondo. Cammina più lontano, carica più blocchi, trova più corrispondenze. Questo è l'intero ciclo.
+
+## È sicuro da usare
+
+La ricerca non è puramente estetica. Trovare risorse senza doverle cercare è un reale vantaggio di gioco, nella stessa categoria di un attrezzo a raggi X, anche se la ricerca non attraversa mai i muri né modifica un singolo pixel sullo schermo. Ciò che la distingue da un trucco per il combattimento come l'aumento della gittata o un mirino automatico è la storia della rilevazione. Questi ultimi inviano pacchetti che un server può intercettare: una rotazione impossibile, un colpo a distanza che non dovrebbe essere possibile. La ricerca non invia nulla di insolito. Rilegge soltanto dati che il server ha già fornito al client in modo legittimo, quindi non c'è una firma a livello di pacchetto che un anticheat possa segnalare.
+
+Questo non significa che sia lecita ovunque. La maggior parte dei server che proibiscono la ricerca di risorse in stile raggi X lo fanno tramite una politica, non tramite rilevazione automatica, e intercettano le violazioni attraverso il comportamento: un giocatore che corre dritto verso una vena di minerale senza aver prima esplorato nulla, oppure lo staff che esamina manualmente una sessione sospetta. Il rischio qui è sociale e basato sulle regole, piuttosto che un controllo lato server che segnala il client direttamente, ed è proprio per questo che sopravvive su server dove i trucchetti per il combattimento vengono intercettati in pochi minuti.
+
+<Callout variant="tip" title="Dove si colloca in Opal">
+Opal non include un modulo di ricerca o di localizzazione delle risorse dedicato. Questo è documentato come una funzionalità di categoria mondiale Wurst specifica. Il catalogo di Opal si concentra su moduli di combattimento, movimento e visuale, le categorie in cui un singolo tick o un singolo frame decidono l'esito di uno scontro. La lettura dei dati dei blocchi per le vene di minerale non è uno scontro del genere.
+</Callout>
+
+<Callout variant="warning" title="Le regole possono vietarlo anche quando il rilevamento non può farlo">
+Questa pagina descrive la Ricerca in termini generali, non come qualcosa che Opal fornisce. Anche su un server che non la rileverà mai a livello di pacchetto, molti set di regole vietano esplicitamente la ricerca di risorse in stile X-ray, indipendentemente dal metodo. Un record di rilevamento pulito non aiuta se la regola stessa lo vieta, quindi verifica prima di puntarla verso una vena di diamanti.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa cerca effettivamente la ricerca?">
+I frammenti di dati già caricati dal client, nient'altro. Scorre questi dati alla ricerca di un tipo di blocco specifico e contrassegna o elenca ogni corrispondenza, quindi i risultati sono limitati a ciò che è attualmente caricato intorno al giocatore.
+</FAQItem>
+
+<FAQItem question="La ricerca permette di vedere attraverso i muri?">
+No. La ricerca non visualizza i blocchi attraverso il terreno come farebbe una texture pack a raggi X o uno shader. Segnala coordinate o posiziona un segnalino, ma non modifica ciò che viene effettivamente disegnato sullo schermo.
+</FAQItem>
+
+<FAQItem question="I server possono rilevare le Ricerche automaticamente?">
+Raramente tramite l'ispezione dei pacchetti, poiché il modulo non invia mai nulla che un client normale non invierebbe. Quando viene rilevato, di solito è da un membro dello staff che esamina i modelli di gioco, non da un flag automatizzato.
+</FAQItem>
+
+<FAQItem question="La Ricerca è la stessa cosa di Raggi X?">
+Risolvono lo stesso problema, quello di trovare risorse senza doverle cercare, ma con metodi diversi. Raggi X tipicamente modifica il rendering per vedere attraverso i blocchi. La Ricerca analizza i dati già presenti nel client e segnala le corrispondenze senza alterare ciò che viene visualizzato.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria più ampia Ricerca e altri moduli mondiali vi risiedono." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "La categoria stealth basata su moduli che non attivano mai un controllo a livello di pacchetto." },
+  { href: "/it/learn/what-is-reach", label: "Cos'è la portata?", description: "Un modulo all'estremità opposta dello spettro del rischio: intrappolato dai pacchetti che invia, non dalle regole che infrange." },
+]} />
+
+<CTA href="/it/purchase">Opal investe il suo budget di ingegneria nella lotta, non nella vena mineraria. Consultare il catalogo per $8.99.</CTA>

@@ -1,0 +1,77 @@
+---
+title: Was ist ein Schritt in Minecraft? Bewegungsmodul erklärt
+description: Step ist ein Bewegungsmodul, das es dir ermöglicht, Blöcke zu erklimmen, die höher sind als die automatische Treppchenhöhe in Vanilla, ohne springen zu müssen. Hier ist, wie es funktioniert und welches Risiko bei der Erkennung besteht.
+excerpt: Die Stufen erhöhen die Blockhöhe, die man ohne Springen erreichen kann, sodass Vorsprünge und unebenes Gelände den Tritt nicht unterbrechen. Hier ist, was sich ändert und was es kostet.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was gilt als Vanille-Autostufenhöhe?
+    a: Vanille ermöglicht einem spielenden Charakter, kurze Hindernisse wie eine Platte oder eine Treppe automatisch zu überwinden, ohne springen zu müssen, stoppt aber an allem, was höher ist, und zwingt zum Springen. Steigung erhöht diese Grenze, sodass größere Blöcke auf die gleiche automatische Weise überquert werden können.
+  - q: Ersetzt ein Steig das Springen vollständig?
+    a: Nein. Der Schritt ändert lediglich, welche Blockhöhe noch als automatisch erklimmbar zählt. Springen funktioniert weiterhin normal für alles oberhalb dieser erhöhten Grenze und für Abgründe, die echte vertikale Distanz erfordern.
+  - q: Ist Step von Anticheats erkennbar?
+    a: Das kann es sein. Step verändert die vertikale Bewegung, die der Client sendet, im Vergleich zu dem, was die Blöcke vor dem Spieler normalerweise erlauben würden, und ein Server, der die Step-Höhe mit der Blockgeometrie abgleicht, hat ein konkretes Signal, um dies zu melden.
+  - q: Welche Kunden beinhalten ein Step-Modul?
+    a: Der Schritt ist dokumentiert und läuft in Fan und Tenacity, und Opal liefert sein eigenes Step-Modul, das die gleiche Aufgabe erfüllt. Andere Kunden implementieren dasselbe Verhalten unter unterschiedlichen Namen.
+---
+
+<KeyTakeaways>
+
+- Step ist ein Bewegungsmodul, das es dir ermöglicht, auf Blöcke zu steigen, die höher sind als die automatische Steighöhe in Vanilla, ohne springen zu müssen.
+- Es überschreibt die clientseitige Auto-Climb-Prüfung pro Tick, sodass größere Vorsprünge als begehbar und nicht als blockiert behandelt werden.
+- Es wird keine Sprungeingabe gesendet, was die Ausrichtung und die Positionsbestimmung des Hitbox während des Übergangs stabiler hält.
+- Es ändert die gemeldete vertikale Bewegung, was einige Anti-Cheat-Systeme erkennen können, indem sie sie mit der Blockgeometrie vergleichen.
+
+</KeyTakeaways>
+
+Schritt ist ein Bewegungsmodul, das einem Spieler erlaubt, über Blöcke zu steigen, die höher sind als die automatische Schrittweite in der Vanilla-Version, ohne springen zu müssen. Normalerweise erlaubt Minecraft dir nur, kurze Hindernisse automatisch zu überwinden und stoppt dich bei allem, was höher ist, was einen Sprung erzwingt. Schritt hebt diese Beschränkung auf oder entfernt sie, sodass größere Blöcke und Vorsprünge im Schritttempo überquert werden können.
+
+## Wie Schritt funktioniert
+
+Jede Zeiteinheit prüft die Vanilla-Version den Blockrand vor einem sich bewegenden Spieler und entscheidet, ob er niedrig genug ist, um automatisch darauf zu steigen. Wenn dies nicht der Fall ist, blockiert das Spiel die Bewegung und zwingt stattdessen einen Sprung. Schritt überschreibt diese Prüfung, indem er die Höhe eines Blocks erhöht, bevor der Client ihn immer noch als etwas betrachtet, auf das man direkt steigen kann. Der Client hebt den Spieler dann auf den höheren Block, ohne ein Sprungpaket zu senden.
+
+Dieser letzte Punkt ist der ganze Reiz. Ein Sprung unterbricht einen geraden Gehweg und verschiebt kurz deine vertikale Position und deinen Kollisionsbereich, die beide für einen Gegner sichtbar sind, der nach einer Gelegenheit sucht. Durch das Bleiben auf dem Boden beim Übersteigen eines Blocks bleiben Ziel und Schwung während des Übergangs stabil. Es glättet auch Treppen, Zäune, gestapelte Halbblöcke und unebenes Gelände im Allgemeinen, sodass du sie überquerst, ohne Sprintgeschwindigkeit zu verlieren oder den Rhythmus zu unterbrechen.
+
+## Ist Schritt sicher zu verwenden
+
+Step ist eine Funktion, die auf eigene Gefahr genutzt werden sollte, und keine garantierte sichere Funktion. Sie verändert die vertikale Bewegung, die der Client an den Server meldet, und ein serverseitiges Anti-Cheat-System, das die erwartete Schrittweite anhand der Blöcke vor einem Spieler neu berechnet, hat einen konkreten Datenpunkt, an dem es dies überprüfen kann. Ob ein bestimmter Server dies tatsächlich überwacht, variiert, aber das Verhalten selbst ist ein plausibler Indikator, und bei der Entdeckung drohen die gleichen Konsequenzen wie bei anderen Bewegungs-Cheats: ein Bann, wie bei Fliegen oder einem Speedhack, nur dass es leiser darüber ist, wie es funktioniert.
+
+<Callout variant="tip" title="Opal nennt diesen Schritt">
+Opal liefert dasselbe Modul unter demselben Namen: es ermöglicht Blöcke, die größer sind, als Vanilla zulässt. Opal klassifiziert es als nutze-es-auf-eigenes-Risiko, genauso wie hier. Es ist erkennbar, und das Ausführen birgt das gleiche Bannrisiko wie jede Client-Version des Moduls.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite erklärt, was Step ist und wie es sich verhält, nicht aber eine Anleitung, wie man es unentdeckt ausführt. Das Verändern der vertikalen Bewegung, die der Server wahrnimmt, ist kein natives Verhalten, und jeder Server, der die Step-Höhe mit der Blockgeometrie vergleicht, kann dieses Muster erkennen.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was gilt als Vanilla Auto-Step-Höhe?">
+Vanilla erlaubt einem spielbaren Charakter, kurze Hindernisse wie eine Platte oder eine Treppe automatisch zu überwinden, ohne springen zu müssen, stoppt aber an allem, was höher ist, und zwingt zum Springen. Step erhöht diese Grenze, sodass größere Blöcke auf die gleiche automatische Weise überquert werden können.
+</FAQItem>
+
+<FAQItem question="Ersetzt Step das Springen vollständig?">
+Nein. Step ändert lediglich, welche Blockhöhe noch als automatisch erklimmbar gilt. Springen funktioniert weiterhin normal für alles oberhalb dieser angehobenen Grenze und für Lücken, die eine echte vertikale Distanz benötigen.
+</FAQItem>
+
+<FAQItem question="Ist Step von Anticheats erkennbar?">
+Das kann der Fall sein. Step verändert die vertikale Bewegung, die der Client sendet, im Vergleich zu dem, was die Blöcke vor dem Spieler normalerweise erlauben würden, und ein Server, der die Step-Höhe mit der Blockgeometrie vergleicht, hat ein klares Signal, um dies zu melden.
+</FAQItem>
+
+<FAQItem question="Welche Clients beinhalten ein Step-Modul?">
+Step wird in Fan und Tenacity dokumentiert ausgeführt, und Opal liefert sein eigenes Step-Modul, das die gleiche Aufgabe erfüllt. Andere Clients implementieren dasselbe Verhalten unter anderen Namen.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Der blockplatzierende Gegenpart zu Steps' blockkletterndem Können." },
+  { href: "/de/learn/what-is-velocity-anti-knockback", label: "Was ist Velocity (Rückstoßvermeidung)?", description: "Ein weiteres Bewegungsmodul, das verändert, was der Server sieht, was Sie tun." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Kategorie, zu der diese Bewegungseinheiten gehören." },
+]} />
+
+<CTA href="/de/kaufen">Hören Sie auf, auf jeder Kante ins Stocken zu geraten. Sehen Sie, was Opal für $8.99 liefert.</CTA>

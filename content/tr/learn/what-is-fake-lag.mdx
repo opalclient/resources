@@ -1,0 +1,100 @@
+---
+title: Minecraft'ta Sahte Gecikme Nedir? Paket Gecikmesi Açıklaması
+description: Sahte gecikme, bir oyuncunun hareket paketlerini geciktirir ve ardından patlama şeklinde serbest bırakır, böylece oyuncunun konumunu sunucudan ayırır. İşte nasıl çalıştığı ve neden yasaklanabilir olduğunun açıklaması.
+excerpt: Sahte gecikme seni yavaşlatmaz. Sunucunun yavaşladığını düşünmesini sağlar, oysa sen zaten başka bir yerdesin.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Sahte Gecikme aslında ne değiştiriyor?
+    a: Hareket paketleri gönderildiğinde değişir, oyuncunun kendi ekranında nasıl hareket ettiği zaman değil. Paketler geri tutulup birlikte salınır, bu yüzden sunucunun konuma dair kaydı gerçek konumu geride bırakır.
+  - q: Sahte gecikme, yüksek ping ile aynı şey mi?
+    a: Hayır. Yüksek ping, oyuncunun kontrolü dışında gerçekleşen gerçek bir ağ gecikmesidir. Sahte Gecikme, normal bir bağlantının tek başına asla üretemeyeceği, kasıtlı bir istemci tarafı duraklatma ve ateşleme kalıbıdır.
+  - q: Sahte gecikme oyuncuyu vurmayı imkansız mı yapar?
+    a: Hayır. Gerçek pozisyon ile sunucunun kaydettiği arasında geçici bir boşluk açar, bu da tutma sırasında oyuncuyu vurmayı zorlaştırabilir, ancak hasarı doğrudan engellemez ve patlamanın kendisi kolay bir tespit sinyalidir.
+  - q: Fake Lag Blink'ten nasıl farklıdır?
+    a: Sahte Gecikme, paketleri gecikmeli gönderip daha sonra patlatıyor. Blink bağlantıyı tamamen askıya alıp sonra yeniden başlatıyor. Her ikisi de pozisyonu senkronize olmamasını sağlıyor, ancak farklı paket düzeyindeki mekanizmalar aracılığıyla.
+---
+
+# Minecraft'ta Sahte Gecikme Nedir?
+
+<KeyTakeaways>
+
+- Sahte gecikme, bir oyuncunun hareket paketlerini geciktirir ve her tik yerine tek bir seferde serbest bırakır.
+- Sunucu, oyuncu zaten hareket etmişken eski konumu kaydetmeye devam eder ve ardından paket patlaması geldiğinde sarsıntı veya sekme görür.
+- Bu, kozmetik olmayan, Blink'ten farklı, bağlantıyı kesmek yerine paketleri geciktiren bir yasaklanabilir konum senkronizasyonu hatasıdır
+
+</KeyTakeaways>
+
+Sahte Gecikme, bazı Minecraft hile istemcilerinde bulunan bir savaş modülüdür ve oyuncunun hareket paketlerini her tikte göndermek yerine saklar, ardından tüm kuyruğu bir seferde serbest bırakır. Normal bir bağlantı, konumu sürekli olarak rapor eder, bu nedenle sunucunun oyuncunun bulunduğu yerdeki kopyası, oyuncunun gerçek konumunu yakından takip eder. Sahte Gecikme bu bağlantıyı kasıtlı olarak koparır: oyuncu kendi ekranında normal şekilde yürümeye ve savaşmaya devam ederken, sunucu eski bir konumda takılı kalır ve kuyruk sonunda boşaldığında, herkes düzgün hareket yerine sarsıntı veya kısa bir teleport görür.
+
+## Nasıl Çalışır
+
+Orijinal bir istemci, hareket paketini yaklaşık olarak her tikte gönderir, bu nedenle sunucunun oyuncunun konumuyla ilgili kaydı gerçeklikten nadiren saniyeden daha kısa bir süre geride kalır. Sahte Gecikme, bu giden paketleri keser, kuyruğa alır ve onları hemen serbest bırakmak yerine kısa bir süre için kuyruğu kapalı tutar. Bu teknik, Raven B++ gibi istemcilerde görünür ve genellikle diğer paket manipülasyon modülleriyle birlikte paketlenir, ayrı olarak gönderilmez.
+
+Tutma işlemi devam ederken, oyuncunun kendi deneyiminde hiçbir şey değişmez. Onlar hala kendi ekranlarında normal şekilde yürür, zıplar ve sallanır. Dondurulmuş olan, herkesin görüşüdür: sunucu ve izleyen herhangi bir oyuncu, tutma işlemine başlamadan önce gerçekten çıkmış olan son pozisyonda kalır. Tutma işlemi bittiğinde, kuyruğa alınan paketler birlikte serbest bırakılır ve oyuncu, gerçek konumuna yürümek yerine zıplayıp takılma gibi bir hareket sergiler.
+
+Çoğu uygulama, tutma işleminin ne kadar sürebileceğini sınırlar. Gerçek ve bildirilen konum arasındaki farkın çok fazla büyümesine izin verin ve sunucu oyuncuyu mantıklı bir konuma geri "rubber-band" etsin veya hareketi doğrudan işaretlesin; böylece modül, ne kadar desenk kazandığına karşılık ne kadar belirgin bir patlama görünümü sağladığı arasında bir takas yapar.
+
+## Sahte Gecikme vs. Işınlanma
+
+Sahte Gecikme, her ikisi de oyuncunun gerçek konumu ile sunucuya bildirilen konum arasında bir boşluk açan paket manipülasyonu modülleri olduğu için Işınlanma ile birlikte ele alınır. Alttaki mekanizma farklıdır ve bu da başka birinin ekranında nasıl göründüğünü etkiler.
+
+| | Sahte Gecikme | Hızlı Yanıp Sönme |
+|---|---|---|
+| Paket davranışı | Gecikmeli paketleri serbest bırakır | Bağlantıyı askıya alır, sonra devam ettirir |
+| Görsel efekt | Sıkışma veya kısa teleport | Donma, ardından yeni bir konuma ani geçiş |
+| Neyi kullanır | Sunucunun eski bir konumda beklemesi, istemci hareket etmeye devam ederken | Sunucunun askıya alma sırasında güncelleme almaması |
+
+Aynı problem kategorisi, farklı bir kaldıraç. Sahte Gecikme sunucuyla konuşmayı asla kesmez, sadece konuşması gecikir ve hepsini aynı anda yapar. Hızlı Yanıp Sönme ise konuşmayı tamamen keser ve istediğinde sohbeti yeniden başlatır.
+
+<Callout variant="tip" title="Opal nerede çizgiyi çiziyor">
+
+Opal savaş modüllerini gönderiyor, ancak Fake Lag gibi özel bir bekle-ve-patlatma desenkronizasyon özelliği değil. Konumsal yalanın birkaç yüz milisaniyeliğine takas edilerek geniş bir şekilde açılmış tespit sinyali elde etmek, istemcinin yapıldığı şekilde bir takas değil
+
+</Callout>
+
+<Callout variant="warning" title="Bu yasaklanabilir bir hile, bir ağ düzeltmesi değil">
+
+Sahte gecikme, bir oyuncunun gerçek konumunu sunucunun kaydettiği konumdan uzaklaştırmak için vardır ve bir bekleme sonrasında ani bir hareket, sunucu tarafındaki hile önleme sistemlerinin yakalamak üzere tasarlandığı tam olarak o desendir. Bunu, herhangi bir konum senkronizasyonu hatasıyla aynı cezayı taşıyan, oyun avantajı sağlayan tespit edilebilir bir hile olarak kabul edin, kötü bir bağlantıyı düzelten veya gizleyen bir şey olarak değil
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Sahte Gecikme aslında ne değiştiriyor?">
+
+Hareket paketleri gönderildiğinde değişir, oyuncunun kendi ekranında nasıl hareket ettiği zaman değil. Paketler geri tutulup birlikte salınır, böylece sunucunun konuma dair kaydı gerçek olanı geride bırakır
+
+</FAQItem>
+
+<FAQItem question="Sahte gecikme, yüksek ping ile aynı şey mi?">
+
+Hayır. Yüksek ping, oyuncunun kontrolü dışında gerçekleşen gerçek bir ağ gecikmesidir. Sahte Gecikme ise, normal bir bağlantının tek başına asla üretemeyeceği, kasıtlı bir istemci tarafı duraklatma ve ateşleme modelidir
+
+</FAQItem>
+
+<FAQItem question="Sahte gecikme oyuncuyu vurmayı imkansız mı yapar?">
+
+Hayır. Gerçek pozisyon ile sunucunun kaydettiği arasında geçici bir boşluk açar, bu da tutma sırasında oyuncuyu vurmayı zorlaştırabilir, ancak hasarı doğrudan engellemez ve patlamanın kendisi kolay bir tespit sinyalidir
+
+</FAQItem>
+
+<FAQItem question="Fake Lag Blink'ten nasıl farklıdır?">
+
+Sahte Gecikme, paketleri gecikmeli gönderip daha sonra patlatıyor. Blink ise bağlantıyı tamamen askıya alıp sonra yeniden başlatıyor. Her iki yöntem de pozisyon senkronizasyonunu bozuyor, ancak farklı paket düzeyindeki mekanizmalar aracılığıyla
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Sahte Gecikme gibi modüllerin daha geniş kapsamlı yardımcı program istemcisi kategorisine nerede uyduğu." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Oyunculara ve personele görünmez kalmak üzerine kurulu müşteri kategorisi." },
+  { href: "/tr/learn/what-is-killaura", label: "Killaura nedir?", description: "Dövüş modülü Fake Lag genellikle hile paketlerinde bulunur." }
+]} />
+
+<CTA href="/tr/satin-al">Sunucuya yalan söylemeyen savaş. Opal'ı deneyin.</CTA>

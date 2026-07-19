@@ -1,0 +1,96 @@
+---
+title: Czym jest Chest Stealer w Minecraft? Wyjaśnienie modułu
+description: Chest Stealer to moduł klienta Minecrafta, który opróżnia otwarte skrzynie, beczki lub skrzynki shulker'a do twojego ekwipunku w jednym, zautomatyzowanym przejściu szybkich ruchów.
+excerpt: Począwszy od jednej chwili, pierś jest pełna. Następna chwila, a ona jest w twojej torbie. Oto jak Chest Stealer to robi i dlaczego serwer może to zauważyć.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie robi Chest Stealer?
+    a: Wypakowuje otwarty skrzynię, beczkę lub skrzynkę shulker'a do twojego ekwipunku jednym przejściem, wystrzeliwując szybki ruch na każdą zajętą komórkę w momencie otwarcia pojemnika.
+  - q: Czy Chest Stealer to to samo co ChestAssist?
+    a: Nie. ChestAssist to oddzielny, niezdokumentowany moduł w tej samej rodzinie klientów. Chest Stealer to ten, który opróżnia pojemnik zbiorczo; czym zajmuje się ChestAssist, nie jest udokumentowane tutaj.
+  - q: Dlaczego implementacje dodają opóźnienie do Chest Stealera?
+    a: Ponieważ opróżnienie całego kontenera w pojedynczym tiknięciu nie jest czymś, co człowiek potrafi zrobić. Losowy opóźnienie na ruch, limit przedmiotów na tik i przemieszane kolejności slotów sprawiają, że wzór wygląda mniej mechanicznie dla obserwatora.
+  - q: Czy Kradnący Piersi filtruje to, co bierze?
+    a: Niektóre wersje tak robią. Lista filtrów pomija niepotrzebne przedmioty, dzięki czemu śmieci pozostają, a do ekwipunku trafia tylko przydatny lub ulepszony sprzęt.
+  - q: Klienci, którzy wysłali Chest Stealer?
+    a: Udokumentowano to w Fan, Tenacity, Rose i Augustusie, a Opal również udostępnia własną wersję.
+---
+
+<KeyTakeaways>
+
+- Chest Stealer (znany również jako ChestStealer) opróżnia otwarte skrzynie, beczki lub skrzynki shulker do twojego ekwipunku jednym ruchem.
+- Wystrzeliwuje szybkie przesunięcie na każdym wypełnionym polu natychmiast po otwarciu pojemnika.
+- Żaden człowiek nie opróżnia pojemnika tak szybko, dlatego konstrukcje dodają opóźnienie i przemieszanie kolejności, aby to ukryć.
+- Jest oddzielony od ChestAssist; Opal dostarcza własną wersję, używaj na własną odpowiedzialność.
+
+</KeyTakeaways>
+
+Chest Stealer to moduł klienta Minecrafta, który opróżnia całą otwartą skrzynię, beczkę lub skrzynkę shulker'a do twojego ekwipunku jednym ruchem, bez konieczności przesuwania przedmiotów pojedynczo za pomocą shift-clicka, bez pozostawiania żadnych przedmiotów, ponieważ przescrollowałeś je. Już w momencie otwarcia ekranu kontenera, przenosi wszystko zanim człowiek zdąży przeczytać, co jest w środku. Jest również pisany jako jedno słowo, ChestStealer, ten sam moduł, i łatwo go pomylić z ChestAssist, inną funkcją, która przypadkowo łączy się z tą samą rodziną klientów i podobną nazwą.
+
+## Jak to działa
+
+Chest Stealer przechwytuje ekran kontenera w momencie jego otwarcia i przegląda każdą wypełnioną komórkę po stronie skrzyni w menu. Dla każdej z nich wysyła szybkie przeniesienie, taką samą akcję, jaką wywołuje shift-click, więc serwer widzi tylko sekwencję zwykłych pakietów kliknięć w komórki. Żaden z pojedynczych pakietów nie wygląda podejrzanie.
+
+To tempo zdradza go. Gracz przesuwa przedmioty shift-clickiem przez pełną skrzynię przez kilka sekund, z okazjonalnym pominiętym miejscem i ponownym kliknięciem. Chest Stealer nie musi nic oglądać ani poruszać myszą, po prostu przegląda listę komórek i działa, więc cały kontener opróżnia się w czasie zbliżonym do pojedynczego tiknięcia. Ta kompresja, kilka sekund pracy sprowadzonych do niemal żadnej, to część, której żaden legalny klient nie produkuje samodzielnie.
+
+## Popularne ustawienia
+
+Ponieważ surowa prędkość zdradza intencje, większość implementacji udostępnia kilka opcji konfiguracyjnych, które poświęcają kompletność na rzecz wyglądu mniej przypominającego skrypt:
+
+| Ustawienie | Co kontroluje |
+|---|---|
+| Opóźnienie ruchu | Losowa przerwa między każdym szybkim ruchem, aby nie lądowały w jednej serii |
+| Limit na cykl | Maksymalna liczba slotów, które moduł czyści w pojedynczym cyklu gry |
+| Kolejność slotów | Tasuje kolejność czyszczenia zamiast działać od góry do dołu, jak bot |
+| Filtr przedmiotów | Pomija przedmioty, których nie chcesz, dzięki czemu pobierane są tylko przydatne lub ulepszone ekwipunki |
+
+<Callout variant="tip" title="Opal wysyła to jako Chest Stealer">
+Własny katalog Opal opisuje to w jednej linii: „Pobiera tylko przydatne lub ulepszone przedmioty ze skrzyń”. Ta sama koncepcja, ten sam instynkt filtrowania przedmiotów, oficjalne oznaczenie. I ta sama szczerość co do kompromisu: Opal klasyfikuje to jako używaj na własną odpowiedzialność, wykrywalne jak każda inna automatyczna akcja inwentarza.
+</Callout>
+
+## Czy jest to bezpieczne do użycia
+
+Chest Stealer to funkcja używana na własną odpowiedzialność, a nie ulepszenie jakości rozgrywki. Natychmiastowe, całkowite opróżnienie kontenera to coś, czego nie generuje legalny klient, a każdy serwer lub anticheat monitorujący interakcje z kontenerami może prawdopodobnie oznaczyć ten wzorzec, niezależnie od tego, czy opóźnienia i zakłócenia go maskują. Losowe opóźnienia czasowe i przetasowywanie slotów sprawiają, że zachowanie wygląda mniej mechanicznie. Nie sprawiają one, że podstawowa akcja, czyli zabranie wszystkich przedmiotów w jednym ruchu, której żaden człowiek nie jest w stanie dorównać, staje się niewidoczna dla serwera, który faktycznie sprawdza.
+
+To, jak dokładnie dany serwer monitoruje aktywność kontenerów, bardzo się różni, a to właśnie ta zmienność stanowi realne ryzyko. Zakładaj możliwość wykrycia, a nie zakładaj, że środki kamuflażu ją uniemożliwiają.
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona wyjaśnia, czym jest Chest Stealer i dlaczego jest oznaczany, a nie zawiera instrukcji jego uruchamiania. Automatyzacja czyszczenia kontenerów łamie zasady na praktycznie każdym serwerze, który dba o uczciwą grę, a prędkość, z jaką to się odbywa, jest dokładnie takim sygnałem, który systemy antycheat mają na celu wykrywanie.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co właściwie robi Chest Stealer?">
+Wysypuje zawartość otwartego skrzyni, beczki lub skrzynki shulker do twojego ekwipunku jednym ruchem, aktywując szybki ruch na każdym zajętym polu w momencie otwarcia pojemnika.
+</FAQItem>
+
+<FAQItem question="Czy Chest Stealer to to samo co ChestAssist?">
+Nie. ChestAssist to oddzielny, niezdokumentowany moduł w tej samej rodzinie klientów. Chest Stealer to ten, który opróżnia pojemniki zbiorowo; czym zajmuje się ChestAssist, nie jest udokumentowane tutaj.
+</FAQItem>
+
+<FAQItem question="Dlaczego implementacje dodają opóźnienie do Chest Stealera?">
+Ponieważ opróżnianie całego pojemnika w pojedynczym ticku nie jest czymś, co człowiek jest w stanie zrobić. Losowe opóźnienie na każdy ruch, limit przedmiotów na tick oraz przemieszane kolejności slotów sprawiają, że wzorzec wydaje się mniej mechaniczny dla obserwatora.
+</FAQItem>
+
+<FAQItem question="Czy Chest Stealer filtruje to, co zabiera?">
+Niektóre wersje tak. Lista filtrów pomija przedmioty, których nie chcesz, więc śmieci zostają, a przydatne lub ulepszone wyposażenie trafia do twojego ekwipunku.
+</FAQItem>
+
+<FAQItem question="Kto z klientów wysłał Chest Stealer?">
+Jest to udokumentowane u Fan, Tenacity, Rose i Augustus, a także Opal wysyła własną wersję.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Kategoria Łupieżców należy do, a co jeszcze w niej żyje." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Inna filozofia: moduły budowane tak, by pozostać całkowicie niewidoczne." },
+  { href: "/pl/learn/what-is-velocity-anti-knockback", label: "Czym jest prędkość (ochrona przed odrzutem)?", description: "Kolejny codzienny moduł z własnymi kompromisami w zakresie wykrywania." },
+]} />
+
+<CTA href="/pl/purchase">Niech Opal zdobędzie dobre łupy, a ty kontynuuj walkę.</CTA>

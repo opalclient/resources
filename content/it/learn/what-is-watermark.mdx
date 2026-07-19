@@ -1,0 +1,75 @@
+---
+title: Cos'è un modulo di filigrana in Minecraft?
+description: "Un modulo di filigrana applica il nome o il logo di un cliente sullo schermo per personalizzare i tuoi clip. È puramente estetico: non invia dati e non può essere rilevato dai sistemi anti-cheat."
+excerpt: È un logo nell'angolo dello schermo, e non fa altro. Una firma pura, nessun gameplay.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Un modulo di filigrana offre qualche vantaggio in termini di gameplay?
+    a: No. Disegna solo testo o un logo sullo schermo e non ha alcuna connessione con il movimento, il combattimento o qualsiasi cosa il server elabori.
+  - q: Può anticheat rilevare un modulo watermark?
+    a: No. Non invia mai nulla al server, quindi non c'è nulla che un anticheat lato server possa osservare riguardo a un overlay puramente locale.
+  - q: Perché i clienti includono un modulo di filigrana?
+    a: "Principalmente branding e identificazione: rende riconoscibili clip e screenshot, e permette di confermare a colpo d'occhio a quale cliente, o quale build, ci si riferisce."
+  - q: Posso spostare o disattivare una sovrapposizione di filigrana?
+    a: Di solito, sì. La maggior parte delle implementazioni permette di riposizionarlo, ridimensionarlo o disabilitarlo del tutto, anche se i controlli esatti dipendono dal client.
+---
+
+<KeyTakeaways>
+
+- Un modulo di watermark sovrappone il nome o il logo di un cliente sullo schermo di gioco per scopi di branding.
+- Si tratta di una chiamata di disegno locale dopo che il frame è stato costruito: nessun pacchetto, nessun stato di gioco.
+- I giocatori lo utilizzano per marchiare le clip e confermare quale build del client stanno utilizzando.
+- Nessun effetto sul gameplay significa zero rischio di anti-cheat, sia lato server che lato client.
+
+</KeyTakeaways>
+
+Un'impronta d'acqua, in un client utility di Minecraft, è un piccolo elemento di branding, solitamente un nome o un logo, disegnato in una posizione fissa sullo schermo mentre giochi. Funziona come un'impronta d'acqua su una foto o un video: timbra la fonte su qualsiasi cosa venga registrata, senza toccare il contenuto sottostante. Come modulo, l'impronta d'acqua è un elemento HUD e nient'altro. Non muove il tuo personaggio, non legge lo stato del mondo e non invia nulla di extra al server. Esiste in modo che un clip che circola online o uno screenshot pubblicato su Discord sia inconfondibilmente legato al client che lo ha prodotto.
+
+## Come funziona
+
+L'impronta d'acqua appartiene alla stessa famiglia di qualsiasi altro overlay HUD: una lettura delle coordinate, un timer delle pozioni, una visualizzazione delle sequenze di tasti. Il client renderizza un pezzo di testo o una piccola immagine di un logo sopra il frame del gioco completato, solitamente ancorato a un angolo (l'angolo in basso a destra è l'impostazione predefinita più comune), dopo che tutto il resto sullo schermo è già stato disegnato.
+
+Essendo solo una chiamata di disegno e nient'altro, non ha accesso in lettura a nulla che sia rilevante per il gameplay: nessuna posizione del giocatore, nessun dato sui blocchi, nessuna lista di entità. Dipinge semplicemente pixel nello stesso punto ogni frame. La maggior parte delle implementazioni espone un numero limitato di controlli, posizione o offset, dimensione e un interruttore on/off, nessuno dei quali tocca un singolo pacchetto in uscita. Quest'ultimo dettaglio è ciò che rende la sezione successiva breve.
+
+## È sicuro utilizzarlo
+
+Watermark è tra i moduli meno rischiosi in assoluto. L'anticheat, che si tratti di rilevamento lato server su un server competitivo o di controlli di integrità lato client, funziona ispezionando ciò che il client invia o come il suo comportamento si allinea con lo stato del gioco: variazioni di movimento, tempistiche degli attacchi, sequenziamento dei pacchetti. Watermark non tocca nessuno di questi aspetti. Si tratta di un'operazione di disegno locale senza impronta di rete e senza interazione con la logica di gioco, quindi non c'è nulla che un sistema di rilevamento possa confrontare.
+
+Questo lo colloca nella stessa categoria di altri moduli di sola visualizzazione, come la personalizzazione dell'HUD, un contatore di FPS, un display delle sequenze di tasti, piuttosto che qualcosa di simile a un aimbot o un estensore di raggio d'azione. Se un server dovesse mai bannare qualcuno per un logo nell'angolo dello schermo, si tratterebbe di una decisione politica, non di rilevamento.
+
+<Callout variant="tip" title="Dove si inserisce questo in Opal">
+Opal non spedisce un modulo con questo nome. Se l'obiettivo è quello di personalizzare il tuo footage, è un compito del software di registrazione, non del client. Ciò che la categoria Visual di Opal copre invece è lo spazio più ampio degli HUD e delle sovrapposizioni: elementi sullo schermo che riportano informazioni sul tuo gioco, non sul client che li ha creati.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Un modulo di watermark offre qualche vantaggio nel gameplay?">
+No. Disegna solo testo o un logo sullo schermo e non ha alcuna connessione con il movimento, il combattimento o qualsiasi cosa il server elabori.
+</FAQItem>
+
+<FAQItem question="L'anticheat può rilevare un modulo watermark?">
+No. Non invia mai nulla al server, quindi non c'è nulla che un anticheat lato server possa osservare riguardo a un overlay puramente locale.
+</FAQItem>
+
+<FAQItem question="Perché i clienti includono un modulo di filigrana?">
+Principalmente per branding e identificazione: rende riconoscibili clip e screenshot, e permette di confermare a colpo d'occhio a quale cliente, o quale versione, si sta lavorando.
+</FAQItem>
+
+<FAQItem question="Posso spostare o disattivare una sovrapposizione di filigrana?">
+Di solito, sì. La maggior parte delle implementazioni consente di riposizionarla, ridimensionarla o disabilitarla completamente, anche se i controlli esatti dipendono dal client.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "L'ampia categoria watermark e ogni altro modulo lato client vi appartiene." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "L'istinto opposto: rimanere invisibili invece di apporre il proprio nome su ogni spezzone." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Un modulo costruito per essere intercettato. Il watermark è costruito per essere visibile, ma non dal server." },
+]} />
+
+<CTA href="/it/acquisto">Scopri cosa altro c'è nella categoria Visual di Opal</CTA>

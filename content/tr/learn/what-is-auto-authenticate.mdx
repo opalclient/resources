@@ -1,0 +1,92 @@
+---
+title: Minecraft'ta AutoAuthenticate Nedir?
+description: AutoAuthenticate, Minecraft istemci modülüdür ve her auth-plugin sunucusuna bağlandığınızda kaydedilmiş şifrenizi otomatik olarak bir giriş komutu olarak yeniden gönderir.
+excerpt: Parolanızı hatırlar, böylece haftada elli defa /login yazmanıza gerek kalmaz. İşte modülün tamamı.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: AutoKimlikDoğrulama herhangi bir oyun avantajı sağlıyor mu?
+    a: Hayır, sadece kaydedilmiş bir şifreyle giriş veya kayıt komutu göndermeyi otomatikleştirir. Savaş, hareket veya sunucu tarafından oyun olarak takip edilen başka hiçbir şey üzerinde etkisi yoktur.
+  - q: Bir sunucu, AutoAuthenticate kullanıldığı için birini yasaklayabilir mi?
+    a: Oyun içi bir eylem tespit edilemiyor, çünkü gönderdiği komut, bir oyuncunun elle yazdığı komuta birebir aynı. Sunucuların bunu işaretlemesi için genellikle bir neden yok.
+  - q: Şifrem nereye kaydedilmiş?
+    a: Modül, kaydedilen parolayı yerel olarak cihazınızda saklar, böylece gelecekteki bağlantılarda yeniden gönderebilir. Güvenliği, saklandığı cihazın güvenliğine tamamen bağlıdır.
+  - q: Hangi müşteriler AutoAuthenticate'ı kullanıyor?
+    a: Tenacity içinde görülür, genellikle savaş veya hareket modülleri yerine kolaylık veya yaşam kalitesi modülleri altında sınıflandırılır.
+---
+
+<KeyTakeaways>
+
+- AutoAuthenticate, kaydedilmiş şifrenizi giriş veya kayıt komutu olarak yeniden göndererek sizi otomatik olarak auth-plugin sunucularına bağlayan bir modüldür.
+- Sadece yazmayı değiştirir, oyun oynanışını değil, bu nedenle savaş, hareket veya bir antichi̇t programının izlediği hiçbir şey üzerinde etkisi yoktur ve bir oyuncunun yazdığıyla aynı görünür.
+- Tenacity gibi istemcilerde bulunur ve savaş yerine yaşam kalitesi kategorisi altında sınıflandırılmıştır
+
+</KeyTakeaways>
+
+**AutoAuthenticate**, Minecraft için bir yardımcı istemci modülüdür; sunucuya girdiğiniz an otomatik olarak oturum açar, kaydedilmiş şifrenizi bir giriş veya kayıt sohbet komutu olarak göndererek. Daha önce çatlak veya çevrimdışı modda bir sunucuya girdiyseniz, ne demek istediğimi bilirsiniz: sunucuya girin, `/login şifreniz` yazın ve ardından oynamaya başlayın. AutoAuthenticate, bunu sizin için yaparak, her seferinde anında ikinci adımı atlar.
+
+## Nasıl Çalışır
+
+Çatlak veya çevrimdışı modda çalışan birçok sunucu, kendilerini bir kimlik doğrulama eklentisiyle korur. Hareket etmeden, sohbet etmeden veya herhangi bir şeyle etkileşim kurmadan önce, ekli bir şifreyle birlikte bir giriş komutu (mevcut hesap) veya bir kayıt komutu (ilk giriş) çalıştırmanız gerekir. Bu adımı kaçırırsanız, doğru bir şekilde yazana kadar yerinizde donmuş kalırsınız.
+
+AutoAuthenticate, her sunucu için bir şifre saklar ve bu tür bir kimlik doğrulama gerektiren bir sunucuda birleşiminizin bittiği tam anı izler. Bu durumu tespit ettiğinde, kaydedilmiş şifrenizle eşleşen komutu sizin adınıza gönderir, herhangi bir yazmaya gerek kalmadan. Bu, tüm mekanizmadır. Paket hilesi, gizli bir protokol veya sunucunun zaten bir insanın yazıp Enter'a bastıktan sonra kabul edeceği hiçbir şey yoktur.
+
+## Neyi Etkiler, Neyi Etkilemez
+
+| Alan | OtomatikKimlikDoğrulama ile Etkileniyor mu? |
+|---|---|
+| Giriş/kayıt sohbet komutu | Evet, katılınca otomatik olarak gönderilir |
+| Savaş (menzil, isabet zamanlaması, nişan alma) | Hayır |
+| Hareket (hız, zıplama, yol bulma) | Hayır |
+| Sunucu tarafından oyun eylemi olarak kaydedilen her şey | Hayır |
+| Şifre saklama | İstemciye ve makineye yerel |
+
+Bu son satır, burada tek gerçek "ayarlar" yüzeyi: bir sonraki katılımda yeniden oynatılabilmesi için yerel olarak saklanan, sunucu başına kaydedilmiş bir şifre. Her şeyin geri kalanı, zaten göndermenize izin verilen bir sohbet mesajının otomatikleştirilmesidir.
+
+Kimlik doğrulama eklentilerine güvenen sunucular, her yeniden bağlanmada aynı komutu ister ve sık sık bağlantıyı kesip yeniden bağlanan biriyseniz, her seferinde bir şifre yazmak bir oturum boyunca gerçek bir can sıkıntısına yol açar. OtomatikKimlikDoğrulama, bir sunucu veya antichiatin ölçtüğü hiçbir şeyi etkilemeden bu can sıkıntısını tamamen ortadan kaldırır.
+
+<Callout variant="tip" title="Bunun daha büyük resimde nereye uyduğunu">
+
+Opal bu isim altında bir modül göndermiyor ve göndermeye çalışmıyor. AutoAuthenticate, modül listesinin yaşam kalitesi köşesinde duruyor; ücretli bir müşterinin değerini kazandığı savaş veya hareket köşesinde değil. Önceliğiniz "parolamı sürekli tekrar yazmayı durdurmak" ise, bu tür özel bir kimlik doğrulama yardımcısı gerçekten doğru araç. Eğer "savaşlarda ölmemeyi durdurmak" ise, o tamamen farklı bir reyon
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="AutoKimlikDoğrulama herhangi bir oyun avantajı sağlıyor mu?">
+
+Hayır, sadece kaydedilmiş bir şifreyle giriş veya kayıt komutu göndermeyi otomatikleştirir. Savaş, hareket veya sunucu tarafından oyun olarak takip edilen başka hiçbir şey üzerinde etkisi yoktur
+
+</FAQItem>
+
+<FAQItem question="Bir sunucu, AutoAuthenticate kullanıldığı için birini yasaklayabilir mi?">
+
+Oyun içi bir eylem tespit edilemiyor, çünkü gönderdiği komut, bir oyuncunun manuel olarak yazdığı komuta birebir aynı. Sunucuların bunu işaretlemesi için genellikle bir neden yok
+
+</FAQItem>
+
+<FAQItem question="Şifrem nereye kaydedilmiş?">
+
+Modül, kaydedilen parolayı yerel olarak cihazınızda saklar, böylece gelecekteki bağlantılarda yeniden gönderebilir. Güvenliği tamamen parolayı sakladığı cihazın güvenliğine bağlıdır
+
+</FAQItem>
+
+<FAQItem question="Hangi müşteriler AutoAuthenticate'ı kullanıyor?">
+
+Tenacity içinde görülür, genellikle savaş veya hareket modülleri yerine kolaylık veya yaşam kalitesi modülleri altında sınıflandırılır
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "AutoAuthenticate kategorisine ait olan ve orada başka neler bulunduğu." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Tasarımı gereği fark edilemezken, AutoAuthenticate de aynı tasarım hedefiyle tesadüfen örtüşüyor." },
+  { href: "/tr/learn/what-is-killaura", label: "Killaura nedir?", description: "Risk spektrumunun diğer ucu: sadece giriş yapılmanıza değil, aynı zamanda yasaklanmanıza neden olan bir modül." }
+]} />
+
+<CTA href="/tr/satin-al">Opal, dövüşleri belirleyen modülleri yönetir. $8.99 için deneyin.</CTA>

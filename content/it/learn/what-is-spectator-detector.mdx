@@ -1,0 +1,79 @@
+---
+title: Cos'è un modulo rilevatore di spettatori in Minecraft?
+description: Spectator Detector indovina quando un moderatore potrebbe essere in osservazione in Minecraft, utilizzando segnali indiretti invece di uno stato di spettatore confermato. Ecco come.
+excerpt: Non vede mai un spettatore. Vede l'ombra che si lascia dietro e scommette di conseguenza.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa rileva effettivamente il Rilevatore di Spettatori?
+    a: Non rileva direttamente la modalità spettatore, Minecraft non la espone mai al client. Ne deduce la probabile presenza di un osservatore da segnali indiretti, come un'entità che esiste sul client ma non viene mai resa, o l'assenza di pacchetti di movimento che un giocatore attivo invierebbe normalmente.
+  - q: Può dirti chi sta guardando?
+    a: No. Le euristiche possono suggerire che qualcuno stia osservando, ma non possono rivelare un'identità né confermare lo status di spettatore con certezza. È un segnale di probabilità, non una ricerca.
+  - q: Spectator Detector è di per sé una cheat bannabile?
+    a: Non altera il gameplay né fornisce vantaggi in gioco di per sé. Il suo compito è quello di nascondere agli occhi di un moderatore gli effetti di altri moduli, quindi funge da strumento di supporto per imbrogli piuttosto che da funzionalità di vantaggio autonoma, e di solito viene fornita in bundle con i moduli che protegge.
+  - q: Perché mai dovrebbe sfuggire a un vero spettatore?
+    a: Poiché si basa su segnali indiretti anziché su una lettura diretta dello status di spettatore. Uno spettatore che non dovesse attivare quei segnali particolari passa inosservato. Questo falso negativo è la modalità di errore più significativa, poiché fornisce all'utente una falsa sensazione di sicurezza che non sia necessario apportare modifiche.
+---
+
+<KeyTakeaways>
+- Spectator Detector è un modulo che segnala quando qualcuno potrebbe essere uno spettatore, in modo che altri moduli possano intervenire prima che un moderatore si accorga di qualcosa.
+- Non riceve mai un segnale diretto, Minecraft non espone lo stato di spettatore. Lo deduce da indizi indiretti come entità vicine non renderizzate e pacchetti di movimento mancanti.
+- Il risultato è una probabilità, non un fatto: i falsi positivi sprecano cautela, i falsi negativi non rilevano affatto un vero osservatore.
+- Da solo non modifica nulla del gameplay. Il suo unico compito è coprire altri moduli.
+</KeyTakeaways>
+
+Un rilevatore di spettatori è un modulo lato client che cerca di indovinare se un altro giocatore è passato in modalità spettatore per osservarti, in modo che moduli più evidenti possano essere attenuati prima che un moderatore veda qualcosa che meriti di essere catturato in un'immagine. Non conferma nulla. Funziona in base a euristiche locali piuttosto che a un segnale reale, il che significa che l'ipotesi può essere sbagliata in entrambe le direzioni e il modulo non ha idea di quale direzione sia sbagliata finché non è troppo tardi.
+
+## Come funziona
+
+Il gioco non dice mai a un client "uno spettatore ha appena iniziato a osservarti". Queste informazioni non esistono sulla rete, gli spettatori sono effettivamente invisibili per design. Quindi il modulo deve aggirare il problema, cercando effetti collaterali invece della cosa stessa.
+
+Due euristiche fanno il lavoro. La prima monitora la presenza di un'entità che esiste nello stato del mondo del client ma non viene mai effettivamente resa visibile, un modello che si presenta quando un giocatore in modalità spettatore si trova nelle vicinanze senza essere visualizzato come un giocatore normale. La seconda monitora l'assenza di pacchetti di movimento che un giocatore normale genererebbe, poiché la presenza di uno spettatore non crea lo stesso traffico di rete di un giocatore attivo. Nessuno dei due è una lettura diretta di chi sta osservando. Entrambi sono inferenze costruite a partire dai dati che il client aveva già a disposizione.
+
+Dove compare, è abbinato all'automazione del combattimento o ad altri moduli che un moderatore riconoscerebbe immediatamente. Il rilevatore non vince lo scontro né centra il colpo, semplicemente guadagna qualche secondo di preavviso per permettere ai moduli più vistosi di disattivarsi per primi.
+
+## Falsi positivi e falsi negativi
+
+Poiché entrambi i segnali sono indiretti, il modulo sbaglia in due direzioni diverse, e non è la stessa cosa.
+
+| Modalità di errore | Cosa succede | Conseguenza |
+|---|---|---|
+| Falso positivo | Segnala un giocatore normale come spettatore quando nessuno lo sta guardando | L'utente si trattiene inutilmente, senza un costo reale a parte la perdita di tempo |
+| Falso negativo | Non rileva affatto uno spettatore reale | L'utente si sente eccessivamente sicuro, non si ritira e ha più probabilità di essere scoperto |
+
+Il falso negativo è quello più costoso. Un falso positivo costa solo un po' di cautela. Un falso negativo ti fa credere che la costa sia libera quando non lo è, il che è peggio di non avere alcun rilevatore, perché sostituisce una vera incertezza con una fiducia ingiustificata.
+
+<Callout variant="info" title="Dove si colloca Opal">
+Opal non distribuisce un modulo con questo nome, e non ha intenzione di farlo. La rilevazione dello spettatore esiste per aiutare altri moduli, più evidenti, a rimanere nascosti agli occhi di un moderatore, e questo è un problema diverso dagli strumenti di utilità e interazione con il mondo che Opal effettivamente sviluppa. Se un client si affida a indovinare quando viene osservato, di solito è un segno che la lista dei suoi moduli necessita di copertura.
+</Callout>
+
+<Callout variant="warning" title="Insieme a ciò che nasconde">
+Un rilevatore di spettatori raramente viene spedito da solo. Esiste per proteggere l'automazione di combattimento e moduli simili dall'essere individuati, il che significa che utilizzarlo ti mette nella stessa categoria di rischio per l'account di ciò che sta proteggendo. Il rilevatore stesso non causa un ban. Il motivo per cui qualcuno lo ha installato, invece, molto probabilmente sì.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+<FAQItem question="Cosa rileva effettivamente Spectator Detector?">
+Non rileva direttamente la modalità spettatore: Minecraft non la espone mai al client. Ne deduce la probabile presenza di un osservatore da segnali indiretti, come un'entità che esiste sul client ma non viene renderizzata, o l'assenza di pacchetti di movimento che un giocatore attivo invierebbe normalmente.
+</FAQItem>
+<FAQItem question="Può dirti chi sta guardando in spettatore?">
+No. Le euristiche possono suggerire che qualcuno stia osservando, ma non possono rivelare un'identità né confermare lo stato di spettatore con certezza. È un segnale probabilistico, non una ricerca.
+</FAQItem>
+<FAQItem question="Spectator Detector stesso è una cheat bannabile?">
+Non altera il gameplay né fornisce alcun vantaggio in gioco di per sé. Il suo compito è aiutare a nascondere gli effetti di altri moduli a un moderatore, quindi funziona come uno strumento di supporto per il cheating piuttosto che una funzionalità vantaggiosa autonoma, e di solito viene fornito in bundle con i moduli che protegge.
+</FAQItem>
+<FAQItem question="Perché potrebbe non rilevare un vero spettatore?">
+Perché si basa su segnali indiretti anziché su una lettura diretta dello stato di spettatore. Uno spettatore che non attiva quei segnali particolari non viene notato. Quella falsa negativa è la modalità di errore più significativa, poiché dà all'utente una falsa sensazione di sicurezza che non è necessario cambiare nulla.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-killaura", label: "Cos'è Killaura?", description: "Il tipo di modulo per il quale è progettato un rilevatore di spettatori." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Clienti costruiti per rimanere invisibili, non solo per non essere scoperti." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "Dove moduli come questo si inseriscono nel quadro generale." }
+]} />
+
+<CTA href="/it/purchase">Opal elimina completamente i moduli di congettura. Scopri cosa è stato effettivamente selezionato.</CTA>

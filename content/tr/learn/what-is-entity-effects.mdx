@@ -1,0 +1,87 @@
+---
+title: Minecraft'ta Varlık Etkileri Nedir? Modül Açıklaması
+description: Entity Effects, her isabet halinde oluşan vuruş parçacığı efektini değiştiren bir Minecraft istemci modülüdür. İşte nasıl çalıştığı ve neden güvenli olduğu.
+excerpt: Vanilya, her vuruşta herkese aynı minik parçacık patlaması veriyor. Varlık Etkileri, bunu görülmeye değer bir şeyle değiştiriyor ve asla ekrandan kaybolmuyor.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Varlık Etkileri dövüşü herhangi bir şekilde etkiler mi?
+    a: Hayır, sadece bir isabet gerçekleştiğinde gösterilen görsel efekti değiştirir. İsabet tespiti, hasar ve zamanlama ise vanilla versiyonundaki gibi tamamen aynı kalır.
+  - q: Varlık Etkileri, Ölüm Etkilerinden nasıl farklıdır?
+    a: Varlık Etkileri, her isabet eden vuruşta etkinleşir. Ölüm Etkileri ise yalnızca o vuruş hedefi yok ettiğinde etkinleşir. Varlık Etkileri, bu ikisi arasında daha geniş kapsamlı bir modüldür ve çok daha sık tetiklenir.
+  - q: Diğer oyuncular özel efektlerimi görebilir mi?
+    a: Hayır. Etki yalnızca yerel olarak, kendi istemciniz üzerinde uygulanır. Başkaları ise siz ne ayarlarsanız ayarlayın, standart vanilla parçacıklarını görmeye devam eder.
+  - q: Varlık Etkileri kullanmak anticheat sistemleri tarafından tespit ediliyor mu?
+    a: Hayır, sunucuya gönderilen hiçbir şeyi değiştirmez, bu yüzden sunucu tarafındaki bir hile önleme sisteminin değerlendirebileceği hiçbir şey yoktur. Etki hiçbir zaman istemcinizden ayrılmaz.
+---
+
+<KeyTakeaways>
+
+- Varlık Etkileri, bir isabet gerçekleştiğinde gösterilen parçacık efektini değiştiren bir kozmetik modüldür.
+- Dar kapsamlı Ölü Etkileri modülünün aksine, her yere ulaşan isabet üzerine tetiklenir, sadece öldürmeler üzerine değil.
+- Sadece yerel işleme değişiklikleri yapar: menzil, zamanlama, hasar ve sunucu verileri hiçbir şekilde etkilenmez.
+- Bunların hiçbirinin sunucuda görünürlüğü yoktur, bu yüzden bir antichiati tespit etmesi için hiçbir şey yoktur
+
+</KeyTakeaways>
+
+Varlık Etkileri, bazı Minecraft yardımcı istemcilerinde bulunan ve bir varlığa isabet ettiğinizde gördüğünüz parçacık patlamasını değiştiren bir kozmetik modülüdür. Orijinal (vanilla) sürümde, isabet ettiğiniz şey ne olursa olsun aynı küçük beyaz patlama gösterilir; bir zombi, bir iskelet veya başka bir oyuncu olabilir. Bu modül, farklı bir parçacık şeklinden daha ayrıntılı bir görsele kadar her şeyi kullanarak bu varsayılanı değiştirir ve daha nadir durumlar için saklamak yerine her başarılı isabette etkinleşir. Unutulması gereken kısım şudur: oyunun nasıl göründüğünü, nasıl oynandığını değil, değiştirir.
+
+## Nasıl Çalışır
+
+Modül, istemcinizin bir isabetin kaydedildiğini algıladığı anı yakalar ve orijinal parçacık patlamasının yerine özel bir etki katmanı ekler. Bu bağlantı her isabet için ateşlenir, bu nedenle bu özelliği içeren bir istemci çalıştırıyorsanız, bir savaşın ortasında nadiren değil, sürekli olarak fark edeceksiniz.
+
+İşte Varlık Etkileri ile Kill Effects arasındaki tek fark budur; bazı aynı istemciler tarafından bununla birlikte gönderilen bir modül. Kill Effects yalnızca isabet hedefi öldürdüğünde tetiklenir. Varlık Etkileri ise, kazan veya kaybet fark etmeksizin bağlantı kuran her isabet için tetiklenir, bu nedenle ortalama bir savaşta bir kez ortadan kaldırılma başına değil, sürekli olarak görünür. Tenacity gibi onu paketleyen istemciler, bunu birkaç kozmetik isabet özelleştirmesi arasında bir seçenek olarak, isabetlerin nasıl algılandığına veya çözümlendiğine bağlı bir şey olarak değil listeler.
+
+İtiraz basit. Herkes aynı yumrukları atıyor, ancak herkesin vuruşları aynı görünmek zorunda değil. Önemli olan, bir dövüşü kimin kazanacağını değiştirmeyen, sadece bir yumruğu indirdiğinizde nasıl bir his uyandırdığıdır.
+
+## Kullanımı güvenli mi?
+
+Evet, bu alandaki en net evetlerden biri. Entity Effects yalnızca bir vuruş isabet ettiğinde kendi ekranınızda neyin görüntülendiğini değiştirir. Menzili, zamanlamayı, hasar hesaplamasını veya sunucu tarafından takip edilen başka bir şeyi etkilemez ve bir saldırı için ağ üzerinden ne gönderildiği de değişmez. Özel bir efekt içinde sarılı bir vuruş ile orijinal bir vuruş arasında paket farkı yoktur, yani sunucu tarafındaki bir antichiattin ilk etapta değerlendirebileceği hiçbir şey yoktur.
+
+Tek gerçek uyarı modülün kendisiyle ilgili değil: Bazı sunucular, herhangi bir özelliğin ne yaptığına bakılmaksızın, değiştirilmiş istemcileri doğrudan yasaklamaktadır. Herhangi bir değiştirilmiş istemciyi, Entity Effects dahil olmak üzere çalıştırmadan önce sunucu kurallarını kontrol edin.
+
+<Callout variant="tip" title="Bunun Opal ile uyumu nasıl sağlanır">
+
+Opal, Entity Effects adında özel bir modül göndermiyor. Ancak, ücretli bir yardımcı program istemcisinin tam olarak doğru yapması gereken şey tam olarak budur: sunucu tarafından görülemeyen hiçbir şeyi etkilemeyen, yalnızca görsel olarak cilalı, istemci tarafı geliştirmeler. Eğer bu kategori sizin için önemliyse, istemciyi tek bir adla anılan bir modül üzerinden değil, görsel özelleştirme setinin tamamı üzerinden değerlendirin
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Varlık Etkileri dövüşü herhangi bir şekilde etkiler mi?">
+
+Hayır, sadece bir isabet gerçekleştiğinde gösterilen görsel efekti değiştirir. İsabet tespiti, hasar ve zamanlama ise vanilla versiyonundaki gibi tamamen aynı kalır
+
+</FAQItem>
+
+<FAQItem question="Varlık Etkileri, Ölüm Etkilerinden nasıl farklıdır?">
+
+Varlık Etkileri, her isabet eden darbede etkinleşir. Ölüm Etkileri ise yalnızca o darbe hedefi yok ettiğinde devreye girer. Varlık Etkileri, bu ikisi arasında daha geniş kapsamlı bir modüldür ve çok daha sık tetiklenir
+
+</FAQItem>
+
+<FAQItem question="Diğer oyuncular özel efektlerimi görebilir mi?">
+
+Hayır. Etki yalnızca kendi istemcinizde yerel olarak uygulanır. Başkaları, ayarladığınız şey ne olursa olsun, standart vanilla parçacıklarını görmeye devam eder
+
+</FAQItem>
+
+<FAQItem question="Varlık Etkileri kullanmak anticheat sistemleri tarafından tespit ediliyor mu?">
+
+Hayır, sunucuya gönderilen hiçbir şeyi değiştirmez, bu yüzden sunucu tarafındaki bir hile önleme sisteminin değerlendirebileceği hiçbir şey yoktur. Etki hiçbir zaman istemcinizden ayrılmaz
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft Yardımcı İstemcisi Nedir?", description: "Varlık Etkileri kategorisi içinde yer alır ve bir yardımcı istemciyi sıradan bir kaynak paketinden ayıran şeydir." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot Nedir?", description: "Spektrumün tam tersi uçtaki bir modül: Savaşın görünümünü değiştirmek yerine sonuçlarını değiştiren bir modül." },
+  { href: "/tr/learn/what-is-reach", label: "Ulaşmak Ne Demektir?", description: "Varlık Etkileri'nin (Entity Effects) doğrudan etkilemediği oyun içi değerlerden biri ve bunun tespit açısından neden önemli olduğu." }
+]} />
+
+<CTA href="/tr/satın-al">Opal'ın kozmetik katmanı, tek bir parçacığın ötesine geçiyor. Tam sürümde neler olduğunu görün.</CTA>

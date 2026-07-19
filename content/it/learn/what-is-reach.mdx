@@ -1,0 +1,88 @@
+---
+title: Cos'è il raggio in Minecraft? (Spiegazione del modulo di combattimento)
+description: Reach è un modulo di combattimento che estende la distanza massima a cui puoi colpire un bersaglio, superando il limite previsto dal gioco originale. Ecco come funziona, perché gli anticheat lo rilevano e quali sono i rischi.
+excerpt: Il Reach ti permette di colpire prima che un avversario sia in mischia. Ecco come il modulo estende la distanza d'attacco e perché i server la misurano così attentamente.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Modules
+author: trq
+faqs:
+  - q: Qual è la portata normale in Minecraft?
+    a: La portata degli attacchi in mischia per la sopravvivenza è di tre blocchi. Un modulo Reach aumenta tale limite, permettendo al giocatore di attaccare bersagli più lontani di quanto consentito nella versione base.
+  - q: È una funzionalità lato client o lato server?
+    a: "La frode è client-side: un client modificato dichiara colpi al di fuori del range normale. Il rilevamento è server-side, dove l'anticheat ricalcola la distanza e segnala i colpi troppo lunghi."
+  - q: Perché un Reach piccolo è più difficile da rilevare di uno grande?
+    a: I server consentono una tolleranza per la latenza e la compensazione del ritardo. Una piccola quantità di raggio extra può celarsi all'interno di tale tolleranza, mentre un valore elevato supera chiaramente qualsiasi distanza plausibile.
+  - q: Usare Reach è contro le regole?
+    a: Sì. Reach è un cheat per combattimenti. Utilizzarlo viola i termini di servizio di praticamente ogni server e solitamente comporta un ban quando viene rilevato.
+---
+
+<KeyTakeaways>
+
+- Reach è un modulo di combattimento che ti permette di colpire bersagli oltre la distanza d'attacco standard.
+- La sopravvivenza vanilla limita i combattimenti corpo a corpo a tre blocchi; Reach sostituisce tale controllo con un numero maggiore.
+- La rilevazione avviene lato server: il server ricalcola la distanza di impatto e segnala i colpi più lunghi.
+- Reach di piccole dimensioni è più difficile da intercettare perché si nasconde all'interno della tolleranza di latenza che i server già concedono.
+
+</KeyTakeaways>
+
+Reach è un modulo di combattimento che permette a un giocatore di colpire un bersaglio da una distanza maggiore rispetto a quella normalmente consentita nel gioco. In Minecraft nella sua versione originale, la distanza di attacco è limitata a un raggio fisso. Un modulo Reach alza questo limite, permettendo agli attacchi di andare a segno prima che l'avversario sia in vera e propria distanza ravvicinata. È una funzionalità da considerarsi una "cheat", e i server la trattano come tale.
+
+## Come funziona Reach
+
+Reach modifica la distanza alla quale il client registrerà e invierà un attacco. Il combattimento nella modalità di sopravvivenza originale utilizza una portata di attacco di tre blocchi, e il client si rifiuta di attaccare qualsiasi cosa oltre tale distanza. Un modulo Reach sostituisce questo controllo con un numero maggiore, facendo sì che il client comunichi al server "ho colpito quell'entità" mentre l'entità si trova ancora a diversi blocchi di distanza.
+
+È il server a rendere tutto questo significativo. Poiché il client del giocatore che attacca decide chi è stato colpito, un client modificato può dichiarare colpi che il server non si aspettava. Un server ingenuo accetta il colpo. Un server più severo ricalcola la distanza da solo e rifiuta qualsiasi cosa superi una piccola tolleranza.
+
+## Perché le persone lo usano
+
+L'attrattiva sta nel vincere combattimenti che dovresti perdere. Una portata extra significa colpire per primi, tenere a distanza un avversario che non può mai colmare il divario e scambiare colpi in modo favorevole nel combattimento corpo a corpo. In un combattimento uno contro uno, anche un piccolo vantaggio di distanza decide chi colpisce per primo e chi viene messo a segno una combo.
+
+I moduli di assistenza e di tempismo dei colpi perseguono lo stesso obiettivo da un'angolazione diversa: inclinano lo scontro di un margine troppo piccolo per essere notato, in modo che la vittima viva un duello normale mentre perde silenziosamente uno che avrebbe dovuto vincere.
+
+## Come gli anticheat rilevano il Reach
+
+Gli anticheat rilevano il Reach ricalcolando la distanza del colpo sul server e confrontandola con un valore massimo plausibile. La matematica è il fulcro del controllo, ma la vera rilevazione deve tenere conto del rumore.
+
+| Fattore considerato dall'anticheat | Perché è importante |
+|---|---|
+| Posizioni del giocatore e del bersaglio al momento del colpo | La distanza grezza dichiarata |
+| Latenza di rete e tempismo dei tick | Il lag può far sembrare un colpo legittimo lungo |
+| Dimensione dell'hitbox dell'entità e compensazione del lag | I server riavvolgono le posizioni per essere equi con i giocatori con ping elevato |
+| Movimento e slancio | Entrambi i combattenti si muovono quando il colpo colpisce |
+
+Un anticheat moderno imposta una soglia leggermente al di sopra del limite reale per assorbire quel rumore, quindi segnala i colpi che la superano. Il Reach sottile, una frazione di blocco oltre il limite, è più difficile da catturare di un valore elevato perché si nasconde all'interno della tolleranza di latenza che il server già concede. Ecco perché le impostazioni di Reach ampie e ovvie vengono rilevate rapidamente, mentre quelle piccole possono sfuggire a controlli più deboli.
+
+## Reach come modulo di combattimento
+
+Reach appartiene alla stessa famiglia dei moduli di mira e tempismo. Come concetto, è una delle più antiche e semplici imbrogliature di combattimento, ed è proprio per questo che gli anticheat lato server considerano i controlli di distanza come una base imprescindibile. Si abbina naturalmente a [KillAura](/it/learn/what-is-killaura), che automatizza l'attacco stesso, mentre Reach estende la portata di tale attacco.
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina descrive il modulo in termini generali, per far capire il significato del termine. La denominazione e il comportamento esatto variano a seconda del client, e qualsiasi estensione oltre il limite standard viola le regole su praticamente ogni server.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Qual è la portata normale in Minecraft?">
+La portata dell'attacco corpo a corpo in modalità Sopravvivenza è di tre blocchi. Un modulo di portata aumenta tale limite, consentendo al client di attaccare bersagli più lontani di quanto consentito nella versione originale.
+</FAQItem>
+
+<FAQItem question="Reach è una funzionalità client-side o server-side?">
+La truffa è client-side: un client modificato dichiara colpi oltre il raggio normale. Il rilevamento è server-side, dove l'anticheat ricalcola la distanza e rifiuta o segnala i colpi troppo lunghi.
+</FAQItem>
+
+<FAQItem question="Perché una piccola estensione è più difficile da rilevare di una grande estensione?">
+I server consentono una tolleranza per la latenza e la compensazione del lag. Una piccola quantità di estensione extra può nascondersi all'interno di tale tolleranza, mentre un valore elevato supera chiaramente qualsiasi distanza plausibile e viene segnalato rapidamente.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "L'auto-attaccante Reach spesso si abbina." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Il modulo di combattimento mirato." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia a cui appartengono questi moduli." },
+]} />
+
+<CTA href="/it/purchase">Guarda cosa spedisce Opal per $8.99</CTA>

@@ -1,0 +1,89 @@
+---
+title: Czym jest celownik w Minecraft? (Wyjaśnienie modułu)
+description: Target HUD to Minecraft overlay walki, który wyświetla nazwę, zdrowie i odległość zablokowanego celu, nie ingerując w celownik, sterowanie ani ruch sieciowy.
+excerpt: Imię, zdrowie, dystans – wszystko na pierwszy rzut oka. Wyświetlacz HUD jest tak pikantny, jak etykieta wartości odżywczych, i to właśnie dlatego można śmiało biec.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy celownik HUD to oszustwo?
+    a: Nie. Wyświetla jedynie informacje, które klient już posiada na temat aktualnego celu, takie jak imię, stan zdrowia i odległość. Nie celuje, nie atakuje i nie porusza się za ciebie, więc nie niesie żadnego ryzyka, jakie wiążą się z modułami walki automatycznej.
+  - q: Co pokazuje celownik?
+    a: Zazwyczaj wyświetla nazwę, aktualny stan zdrowia i odległość celu, na który jesteś zablokowany podczas walki. Niektóre wersje zastępują liczbę paskiem stanu zdrowia lub ikoną, a dokładny układ różni się w zależności od klienta i wybranego stylu wizualnego.
+  - q: Czy używanie celownika w grze może skutkować zbanowaniem?
+    a: Nie samodzielnie. Nie zmienia żadnego pakietu ani wzorca ruchu wysyłanego do serwera, więc nie ma nic, co mogłoby zostać wychwycone przez anticheat. Zmienia jedynie to, co jest renderowane na Twoim ekranie.
+  - q: Czy TargetInfo to to samo co Target HUD?
+    a: "Tak. TargetInfo to tylko alternatywna nazwa, której niektórzy klienci używają na określenie tej samej rzeczy: wyświetlania na ekranie aktualnego celu bojowego."
+  - q: Klienci, którzy wysłali Target HUD?
+    a: Pojawiało się u kilku klientów na przestrzeni lat, w tym u Fan, Tenacity i Opal v1, zazwyczaj jako jeden z niewielu modułów wizualnych w stylu HUD, z których gracz może wybierać.
+---
+
+<KeyTakeaways>
+
+- Celownik HUD to nakładka bitewna wyświetlająca nazwę, stan zdrowia i odległość aktualnego celu na ekranie.
+- Odczytuje tylko dane, które klient już posiada: bez dodatkowych pakietów, zmienionych danych wejściowych ani automatyzacji.
+- Ponieważ zmienia to, co widzisz, a nie to, co robisz, systemy anticheat nie mają czego oznaczać.
+- Znany również jako TargetInfo, i jest zawarty w Fan, Tenacity i Opal v1.
+
+</KeyTakeaways>
+
+Celownik HUD to wyświetlacz walki na ekranie, który pokazuje informacje o podmiocie, na który aktualnie masz celownik podczas walki – zazwyczaj jego imię, aktualny stan zdrowia i odległość od ciebie. Wbudowany w "Minecrafta" wskaźnik ataku podaje przybliżony odczyt zdrowia w celowniku i nic więcej: brak imienia, brak odległości, brak możliwości określenia, z kim walczysz, gdy jednocześnie atakują cię trzej gracze. Celownik HUD upraszcza wszystkie te informacje do jednego panelu. Jest to czysty moduł informacyjny, czasami zwany TargetInfo, który odczytuje dane, które klient już posiada, i umieszcza je w miejscu, do którego masz dostęp w trakcie walki.
+
+## Jak to działa
+
+Celownik HUD obserwuje podmiot, który aktualnie jest celem walki – zazwyczaj osobę, na którą patrzysz lub osobę, którą ostatnio uderzyłeś – i rysuje mały panel z informacjami na jej temat.
+
+| Co wyświetla | Szczegół |
+|---|---|
+| Imię | Nazwa użytkownika w grze celu |
+| Zdrowie | Aktualny poziom HP, aktualizowany na bieżąco w trakcie walki |
+| Odległość | Jak daleko znajduje się cel |
+
+Niektóre implementacje zastępują zwykłą liczbę zdrowia paskiem graficznym lub ikoną. Klienci, którzy dostarczają kilka wizualnych wariantów modułu, pozwalają wybrać między kompaktowym paskiem a pełniejszym panelem w stylu karty, podczas gdy dane podstawowe pozostają takie same w każdym przypadku.
+
+Żadne z tych rzeczy nie pobiera nic nowego z serwera. Nazwa, zdrowie i pozycja, które wyświetla, już znajdują się na kliencie jako część normalnej rozgrywki, te same dane, których używa vanilla Minecraft do renderowania tabliczek nazewniczych i wskaźnika ataku. Target HUD po prostu pakuje te dane w jeden rzut oka zamiast zmuszać Cię do czytania tabliczki nazewniczej, a następnie paska celownika, a następnie zgadywania odległości. Nie wpływa na celność, ataki ani ruch, i nie wysyła nic dodatkowego przez sieć. To pasywny odczyt nałożony na walkę, którą już prowadzisz.
+
+## Czy jest bezpieczny do użycia
+
+Target HUD jest tak bezpieczny, jak moduł Minecraft może być. Renderuje tylko informacje, które klient już posiada lokalnie i nigdy nie ingeruje w stan gry, dane wejściowe ani ruch sieciowy, więc nie ma nic, na co anticheat po stronie serwera mógłby zwrócić uwagę. Zajmuje to to samo miejsce co inne nakładki HUD tylko do odczytu: moduły, które zmieniają to, co widzisz, a nie to, co Ty lub Twój klient robicie.
+
+To jest prawdziwa różnica, a nie techniczność. Porównaj to z czymś takim jak [killaura](/pl/learn/what-is-killaura) lub [aimbot](/pl/learn/what-is-an-aimbot), oba z których działają w Twoim imieniu i pozostawiają ślad w danych ruchu lub czasu, który anticheat może zmierzyć. Target HUD nigdy nie wysyła ataku, nigdy nie obraca kamery, nigdy nie klika niczego. Po prostu mówi Ci, co już jest prawdą, szybciej niż sam byś to zauważył.
+
+<Callout variant="tip" title="Gdzie to się znajduje w Opalu">
+Celownik HUD nie jest tu obcym terenem. Wcześniejsza wersja, Opal v1, zawierała panel w stylu Target HUD jako jeden z modułów HUD walki. Ten sam, tylko do odczytu, charakter przenika do obecnej kategorii wizualnej: nakładek, które dostarczają Ci więcej informacji o walce, nie ingerując w celownik, kliknięcia ani pojedynczy pakiet, który wysyłasz.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy celownik jest oszustwem?">
+Nie. Wyświetla jedynie informacje, które klient już posiada na temat aktualnego celu, takie jak nazwa, zdrowie i odległość. Nie celuje, nie atakuje i nie porusza się za ciebie, więc nie niesie ze sobą żadnego ryzyka związanego z automatycznymi modułami bojowymi.
+</FAQItem>
+
+<FAQItem question="Co wyświetla celownik HUD?">
+Zazwyczaj imię, aktualny stan zdrowia oraz odległość celu, na który jesteś zablokowany podczas walki. Niektóre wersje zastępują liczbę paskiem postępu lub ikoną, a dokładny układ różni się w zależności od klienta i wybranego stylu wizualnego.
+</FAQItem>
+
+<FAQItem question="Czy używanie Target HUD może skutkować zbanowaniem?">
+Nie, samodzielnie nie. Nie modyfikuje żadnych pakietów ani wzorców ruchu wysyłanych do serwera, więc system anticheat nie ma czego wychwycić. Zmienia jedynie to, co jest wyświetlane na Twoim ekranie.
+</FAQItem>
+
+<FAQItem question="Czy TargetInfo to to samo co Target HUD?">
+Tak. TargetInfo to po prostu alternatywna nazwa, której niektórzy klienci używają dla tej samej idei: wyświetlania na ekranie aktualnego celu bojowego.
+</FAQItem>
+
+<FAQItem question="Klienci, którzy wysłali Target HUD?">
+Pojawił się u kilku klientów na przestrzeni lat, w tym u Fan, Tenacity i Opal v1, zwykle jako jeden z niewielu modułów wizualnych w stylu HUD, z których gracz może wybierać.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Szersza kategoria, do której należą celowniki HUD i moduły tego typu." },
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Automatyczny odpowiednik HUD-u tylko do odczytu: działa za ciebie, zamiast tylko informować." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Kolejny moduł bojowy, ale taki, który celuje za ciebie, zamiast po prostu pokazywać ci walkę." }
+]} />
+
+<CTA href="/pl/purchase">Przejrzyste informacje bojowe bez wbudowanych automatyzacji – to sedno Opalu.</CTA>

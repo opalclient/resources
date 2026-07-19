@@ -1,0 +1,85 @@
+---
+title: Cosa sono le liste dei giocatori in Minecraft? Spiegazione della Tab List
+description: Elenco Giocatori è un modulo client di Minecraft che riformatta l'overlay del tasto tab con i giocatori online, aggiungendo informazioni extra. Ecco come funziona e se è sicuro.
+excerpt: La sovrapposizione del tasto Tab che tutti controllano già, riformattata e che mostra più informazioni di quanto mai fosse disponibile nella versione originale. Non cambia nulla sulla partita, solo ciò che puoi leggere sullo schermo.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Influisce la lista giocatori sul gameplay?
+    a: No. Cambia soltanto l'aspetto della lista delle schede sul tuo schermo e non ha alcuna interazione con il combattimento, il movimento o qualsiasi cosa il server tracci effettivamente.
+  - q: Può anticheat rilevare l'elenco dei giocatori?
+    a: No. L'elenco delle schede è una visualizzazione puramente lato client e, poiché nulla della personalizzazione viene inviato al server, non c'è nulla che un anticheat lato server possa segnalare.
+  - q: Qual è l'elenco delle schede in Minecraft?
+    a: È l'overlay color vaniglia che compare tenendo premuto il tasto Tab, elencando tutti i giocatori attualmente connessi al server su cui ti trovi.
+  - q: La lista dei giocatori è la stessa di un array list?
+    a: No. L'Array List mostra quali moduli client sono attualmente attivi, mentre la Player List riformatta l'overlay del tasto Tab dei giocatori online. Entrambi sono moduli cosmetici adiacenti all'HUD, semplicemente coprono schermate vanilla diverse.
+---
+
+<KeyTakeaways>
+
+- Player List è un modulo visivo che riformatta l'overlay del tasto Tab di Minecraft, ridisegnando i nomi dei giocatori o aggiungendo informazioni extra a ciascuna voce.
+- Modifica solo il modo in cui l'overlay viene renderizzato sul client, non i dati che il server invia effettivamente.
+- Puramente cosmetico: nulla ne esce dal client, quindi non genera alcun segnale anticheat.
+- Distinto da Array List, che mostra i moduli attivi invece dei giocatori online.
+- Presente in client come Tenacity.
+
+</KeyTakeaways>
+
+La Lista Giocatori è un modulo presente nei client utility di Minecraft che riformatta la lista della scheda, l'overlay dei giocatori connessi che si visualizza tenendo premuto il tasto Tab. Invece di lasciare la semplice colonna di nomi offerta da Minecraft vanilla, restilizza ogni voce o aggiunge informazioni extra accanto ad essa. Si tratta di una modifica all'aspetto visivo e nient'altro: ciò che si vede è diverso, ma non cambia nulla di come la partita viene effettivamente giocata. Questo lo colloca nella stessa categoria di qualsiasi altro modulo che ridisegna uno schermo già disegnato dal gioco, applicato qui all'overlay della scheda invece che, ad esempio, alla finestra di chat o alla barra degli strumenti.
+
+## Come funziona
+
+Minecraft vanilla costruisce già la lista della scheda: tenendo premuto il tasto Tab appare una colonna di giocatori connessi, costruita a partire dai dati che il server invia riguardo a chi è online. Player List si interfaccia con questo overlay esistente e modifica il modo in cui viene renderizzato, senza toccare i dati sottostanti. I nomi potrebbero essere ricollorati o riposizionati, oppure le voci potrebbero avere campi extra aggiunti; il ping è già presente nella versione vanilla, ma un client può aggiungere tag di rango, marcatori di gruppo o qualsiasi altra cosa desideri rendere visibile.
+
+Poiché la modifica avviene esclusivamente al momento del rendering, dopo che il server ha già inviato ciò che doveva inviare, non influisce su ciò che vedono gli altri giocatori o su come vengono tracciati. Il modulo legge informazioni che il client possiede già e sceglie di presentarle in modo diverso. Si tratta della stessa categoria di modifica di qualsiasi modulo HUD che riprogetta uno schermo vanilla esistente, mirato specificamente all'overlay attivabile con il tasto Tab.
+
+L'attrattiva è semplice: la lista dei giocatori è qualcosa che controlli costantemente per vedere chi è online, contare una squadra o dare un'occhiata a un nome durante un combattimento. Una versione più pulita o più informativa di uno schermo che apri già decine di volte in una sessione è un miglioramento della leggibilità, non qualcosa che cambia un risultato in una partita.
+
+## Lista giocatori vs. Lista array
+
+I due vengono confusi costantemente perché entrambi sono moduli cosmetici, adiacenti all'HUD, che risiedono nella stessa categoria visiva. Non sono però lo stesso schermo.
+
+| | Lista giocatori | Lista array |
+|---|---|---|
+| Schermo che tocca | L'overlay dei giocatori online attivabile con il tasto Tab | Un display dedicato nell'angolo dello schermo |
+| Cosa mostra | Voci giocatore riformattate o estese | Moduli client attivi al momento |
+| Equivalente vanilla | Sì, estende un menu esistente | No, questo overlay non esiste in vanilla |
+| Rischio di rilevamento lato server | Nessuno, rendering puramente lato client | Nessuno, rendering puramente lato client |
+
+Lavoro diverso, stessa idea di fondo: prendere le informazioni che il cliente già possiede e presentarle in modo più utile rispetto all'impostazione predefinita.
+
+<Callout variant="tip" title="Dove si inserisce in Opal">
+Opal non include un modulo chiamato Player List con proprio questo nome. La riformattazione di una schermata vanilla esistente, come la lista delle schede, rientra pienamente nella categoria visiva coperta da qualsiasi client di utilità, quindi, se desideri un overlay più pulito per le schede, vale la pena controllare l'elenco effettivo dei moduli di un client piuttosto che presumere che la denominazione sia corrispondente.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="L'elenco dei giocatori influisce sul gameplay?">
+No. Modifica soltanto l'aspetto della lista dei giocatori nel tuo schermo. Combattimenti, movimento, tutto ciò che il server tiene effettivamente traccia, non viene toccato.
+</FAQItem>
+
+<FAQItem question="L'anticheat può rilevare la lista dei giocatori?">
+No. La lista dei giocatori è un display puramente lato client e, poiché nessuna delle personalizzazioni viene mai inviata al server, non c'è nulla che un anticheat lato server possa vedere, figuriamoci segnalare.
+</FAQItem>
+
+<FAQItem question="Cos'è la lista dei tab in Minecraft?">
+È l'overlay predefinito che compare tenendo premuto il tasto Tab, mostrando tutti gli utenti attualmente connessi al server su cui ti trovi.
+</FAQItem>
+
+<FAQItem question="L'Array List è uguale alla Player List?">
+No. L'Array List mostra quali moduli sono attualmente attivi per un determinato client. La Player List riformatta il sovrapposizione a chiave tab dei giocatori online. Schermi diversi, ma la stessa idea generale di un modulo cosmetico adiacente all'HUD.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "Una categoria più ampia di cui un modulo di sovrapposizione di tab-list è un piccolo componente." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Dove l'obiettivo si sposta dal restyling di uno schermo alla sua completa sparizione." },
+  { href: "/it/learn/what-is-killaura", label: "Cos'è Killaura?", description: "Un modulo all'estremità opposta dello spettro del rischio rispetto a una semplice modifica estetica." },
+]} />
+
+<CTA href="/it/purchase">Un elenco di schede rielaborato è una bella aggiunta. La linea visiva di Opal va molto oltre.</CTA>

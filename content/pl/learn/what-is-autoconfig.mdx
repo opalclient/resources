@@ -1,0 +1,79 @@
+---
+title: Czym jest AutoConfig w klientach Minecraft?
+description: AutoConfig to moduł LiquidBounce, który wykrywa Twój serwer lub anticheat i automatycznie ładuje pasujące ustawienia. Oto jak działa system profili.
+excerpt: AutoConfig dobiera anticheat dla Ciebie. Połącz się z serwerem, a ono cicho załaduje ustawienia, które już działają przeciwko Watchdogowi, Grimowi lub innemu oprogramowaniu nasłuchującemu.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie zmienia AutoConfig?
+    a: Zapisuje nowe wartości do ustawień innych modułów klienta, takich jak zasięg, wygładzanie obrotu lub opóźnienia, w oparciu o profil dopasowany do wykrywanego serwera lub anticheatu. Nigdy nie modyfikujesz tych liczb ręcznie.
+  - q: Czy AutoConfig działa z jakimikolwiek programami anticheat?
+    a: Tylko antywiry z utrzymanymi profilami. LiquidBounce jest znany z przechowywania profili dla antywyrów, w tym Watchdog, Grim, Vulcan, Intave i Polar, a także ustawień dostosowanych do konkretnych serwerów.
+  - q: Czy AutoConfig sam w sobie jest modułem oszustwa?
+    a: Nie w sensie robienia czegoś, co system antycheat może bezpośrednio wychwycić. To warstwa konfiguracji. To moduł zasięgu lub rotacji, który on dostraja, faktycznie generuje zachowanie w grze, które jest oznaczane.
+  - q: Dlaczego po prostu nie zaimplementować dobrych ustawień bezpośrednio w każdym module?
+    a: Ponieważ ustawienie bezpieczne przed jednym systemem anticheat może powodować błędy wykrywania w innym. Przechowywanie konfiguracji na zewnątrz pozwala jednemu modułowi działać na różnych serwerach, a aktualizacja dotyczy tylko profilu, gdy system anticheat zmienia swoje progi.
+---
+
+<KeyTakeaways>
+
+- AutoConfig to moduł LiquidBounce, który wykrywa Twój serwer lub anticheat i automatycznie ładuje pasujące ustawienia.
+- Zapisuje wartości takie jak zasięg, wygładzanie obrotu i timing do innych modułów z pobranego profilu.
+- Istnieją utrzymywane profile dla anticheatów, w tym Watchdog, Grim, Vulcan, Intave i Polar.
+- AutoConfig nie wysyła żadnych dodatkowych pakietów, więc ryzyko wykrycia leży po stronie modułów, które konfiguruje.
+
+</KeyTakeaways>
+
+AutoConfig to moduł w LiquidBounce, który wykrywa, do jakiego serwera lub anticheatu połączono się i automatycznie ładuje pasujący profil ustawień do innych modułów klienta. Zamiast ręcznie dostosowywać zasięg, wygładzanie rotacji lub opóźnienia za każdym razem, gdy zmieniasz serwery, pobiera profil powiązany z tym, co znajduje (Watchdog, Grim, Vulcan, Intave, Polar, cokolwiek jest uruchomione) i zapisuje te wartości za Ciebie. Nie jest to oszustwo samo w sobie, a raczej infrastruktura, która utrzymuje prawidłowe dostrojenie pozostałych modułów.
+
+## Jak to działa
+
+AutoConfig zaczyna od ustalenia, gdzie się znajdujesz. Może to oznaczać odczyt adresu serwera bezpośrednio lub identyfikację aktywnego anticheatu po połączeniu. W każdym razie pobiera pasujący profil ze zdalnego źródła i zapisuje wartości bezpośrednio w ustawieniach Twoich innych modułów: zasięg używany przez moduł walki, wygładzanie stosowane przez moduł rotacji, przesunięcia czasowe wykorzystywane przez omijanie ruchu.
+
+Uzasadnienie takiego podziału jest proste. Pomocnik rotacji lub obejście ruchu jest pisane raz, jako kod ogólnego przeznaczenia z regulowanymi parametrami. Rzeczywiste liczby, które sprawiają, że te parametry przetrwają przeciwko Watchdogowi, nie są liczbami, które przetrwają przeciwko Grimowi lub Polarowi, a LiquidBounce utrzymuje tę różnicę poza kodem modułu, zamiast tego żyjąc w profilu, który pobiera AutoConfig. Kiedy anticheat zmienia progi wykrywania, poprawka to aktualizacja profilu, a nie nowa wersja klienta wysyłana do każdego użytkownika.
+
+## Czy AutoConfig sam w sobie jest wykrywalny?
+
+Nie, i to jest sedno budowania go w ten sposób. AutoConfig nie porusza twojej postaci, nie zmienia rotacji, ani nie wysyła niczego nietypowego przez sieć. Zapisuje wartości konfiguracyjne w innych modułach przed lub w trakcie sesji, a serwerowy anticheat nie ma możliwości stwierdzenia, czy liczba została wpisana ręcznie, czy też dodana przez pobrany profil.
+
+Rzeczywiste ryzyko leży o jeden poziom niżej, w tym, co AutoConfig konfiguruje. Jeśli profil dostraja moduł walki tak, aby znajdował się tuż przy krawędzi progu wykrywania, ten moduł niesie dokładnie to ryzyko, jakie nosiłby z dowolnym innym zestawem liczb. AutoConfig to warstwa konserwacji i wygody leżąca na szczycie klienta cheatów, a nie obejście samo w sobie, i nie dodaje ani nie usuwa ryzyka poza to, które już mają moduły, które dotyka.
+
+<Callout variant="info" title="Gdzie Opal zajmuje pozycję">
+Opal nie dostarcza modułu o nazwie AutoConfig. Warto to uczciwie powiedzieć, zamiast to pomijać: architektura zdalnych profili LiquidBounce istnieje w dużej mierze dzięki temu, że jest to oprogramowanie open source i musi utrzymywać w synchronizacji kilka różnych konfiguracji specyficznych dla anticheatów w jednej, współdzielonej bazie kodu. Płatny klient z ustalonym, utrzymywanym zestawem modułów rozwiązuje inne zadanie. Jeśli porównujesz klienty narzędziowe konkretnie pod kątem „czy automatycznie zmieniają ustawienia w zależności od wykrytego anticheata”, to jest to mechanizm LiquidBounce, a nie coś, czego można oczekiwać od Opala.
+</Callout>
+
+<Callout variant="warning" title="Ryzyko nie leży w AutoConfig, lecz w tym, co on konfiguruje">
+Sam AutoConfig nie spowoduje bana, jest niewidoczny dla serwera. Moduł zasięgu, moduł rotacji lub omijanie ruchu, które on cicho dostosowuje, działają dokładnie tak, jakbyś ustawił te wartości samodzielnie. Traktuj ustawienia oparte na profilu z taką samą ostrożnością, jak te skonfigurowane ręcznie.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co właściwie zmienia AutoConfig?">
+Zapisuje nowe wartości w ustawieniach innych modułów klienta, takich jak zasięg, wygładzanie obrotu lub opóźnienia, w oparciu o profil dopasowany do wykrywanego serwera lub anticheatu. Nigdy nie zmieniasz tych liczb ręcznie.
+</FAQItem>
+
+<FAQItem question="Czy AutoConfig działa z jakimikolwiek programami anticheat?">
+Tylko te anticheaty, które posiadają utrzymywane profile. LiquidBounce jest znany z przechowywania profili dla anticheatów, takich jak Watchdog, Grim, Vulcan, Intave i Polar, a także ustawień dostosowanych do konkretnych serwerów.
+</FAQItem>
+
+<FAQItem question="Czy AutoConfig sam w sobie jest modułem oszukiwania?">
+Nie w sensie robienia czegoś, co system anticheat mógłby bezpośrednio wychwycić. To warstwa konfiguracji. To moduł regulacji zasięgu lub obrotu, który on dostosowuje, faktycznie generuje zachowanie w grze, które jest oznaczane.
+</FAQItem>
+
+<FAQItem question="Dlaczego nie zakodować po prostu dobrych ustawień w każdym module?">
+Ponieważ ustawienie, które jest bezpieczne przed jednym systemem anticheat, może wywołać fałszywy alarm w innym. Przechowywanie konfiguracji na zewnątrz pozwala, aby kod jednego modułu działał na różnych serwerach, a aktualizować trzeba tylko profil, gdy system anticheat zmienia swoje progi.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szeroka kategoria AutoConfig oraz moduły, które ona konfiguruje, do niej należą." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Bycie subtelnym to inna strategia niż zmienianie profili pod każdą anticheatem." },
+  { href: "/pl/learn/what-is-reach", label: "Co to jest zasięg?", description: "Jednym z precyzyjnych ustawień, które AutoConfig dostosowuje, jest przesunięcie anticheatu do folderu anticheat – i to z uzasadnieniem." },
+]} />
+
+<CTA href="/pl/purchase">Pomijaj poszukiwania profili. Zobacz, co oferuje Opal $8.99.</CTA>

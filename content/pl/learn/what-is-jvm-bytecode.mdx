@@ -1,0 +1,97 @@
+---
+title: Czym jest bytecode JVM? Wyjaśnienie plików klas Java
+description: Kod bajtowy JVM to zwięzły zestaw instrukcji, na którym działa Java Virtual Machine. Dowiedz się, jak działają pliki .class, dlaczego mody przepisują kod bajtowy i jaką rolę pełni ASM.
+excerpt: Kod bajtowy to przenośny zestaw instrukcji, na którym działa JVM, a nie natywny kod maszynowy. Oto jak działają pliki .class i dlaczego modyfikacje je przepisują.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: Czy kod bajtowy JVM jest taki sam jak kod maszynowy?
+    a: Nie. Kod maszynowy to natywne instrukcje dla konkretnego procesora. Kod bajtowy to własny zestaw instrukcji JVM, który JVM tłumaczy na kod maszynowy w czasie działania. To dodatkowa warstwa sprawia, że plik .class może być uruchamiany na dowolnej platformie.
+  - q: Czy potrafisz odtworzyć kod źródłowy z kodu bajtowego?
+    a: Częściowo. Dekompilatory rekonstruują czytelny kod Java z kodu bajtowego i w przypadku zwykłego kodu robią to całkiem dobrze. Wynik nie zawsze jest identyczny z oryginałem, a komentarze i niektóre lokalne nazwy znikają, ale zazwyczaj wystarcza to do śledzenia.
+  - q: Dlaczego nie edytować po prostu kodu źródłowego Java?
+    a: Ponieważ modderzy zazwyczaj nie posiadają kodu źródłowego. Kompilują modyfikacje na podstawie skompilowanej gry. Przepisywanie kodu bajtowego pozwala modyfikacji zmieniać zachowanie bez dotykania, a nawet posiadania, oryginalnych plików Java.
+  - q: Czy muszę nauczyć się bytecode'u, żeby napisać moda?
+    a: Zazwyczaj nie. Frameworki modyfikacji i warstwy skryptowe zajmują się pracą z bytecode'em za Ciebie. Znajomość tego, jak to działa, pomaga, gdy debugujesz skomplikowany patch lub tworzysz narzędzia.
+---
+
+<KeyTakeaways>
+
+- Bajtkod JVM to kompaktowy zestaw instrukcji, który wykonuje Wirtualna Maszyna Java.
+- Kompilator Javy generuje bajtkod w plikach `.class`, a nie natywny kod maszynowy.
+- Ten sam plik `.class` działa na każdej platformie z uruchomionym środowiskiem Java, co jest celem tego formatu.
+- Mody przepisują bajtkod, aby zmieniać skompilowaną grę, nie mając do tego dostępu do jej kodu źródłowego.
+
+</KeyTakeaways>
+
+Kod bajtowy JVM to zestaw instrukcji, który wykonuje Wirtualna Maszyna Java. Podczas kompilacji kodu źródłowego Java, kompilator nie generuje kodu maszynowego dla Twojego procesora. Generuje on kod bajtowy, kompaktowy i przenośny format przechowywany w plikach `.class`. JVM odczytuje te instrukcje w czasie działania i przekształca je na kod natywny w trakcie działania.
+
+<Callout variant="info" title="Gdzie pasuje Opal">
+Opal to mod [Fabric](https://fabricmc.net/), a narzędzia modyfikacyjne, na których się on opiera, wykonują pracę z bytecode za Ciebie, więc nie musisz ręcznie manipulować opkodami. Jeśli chcesz dodać zachowanie w czystym JavaScript, zobacz [wprowadzenie do skryptów](/pl/docs/scripting).
+</Callout>
+
+## Jak kod źródłowy staje się bytecode
+
+Plik `.java` to tekst, który pisze człowiek. Plik `.class` to skompilowany wynik, który uruchamia JVM. Kompilator czyta twój kod źródłowy, sprawdza go i zapisuje jeden plik `.class` na każdą klasę, zawierający instrukcje bytecode oraz pulę stałych, tabele metod i inne metadane.
+
+Bytecode nie jest powiązany z żadnym konkretnym procesorem. Ten sam plik `.class` działa na Windows, macOS, Linux lub czymkolwiek z uruchomionym Java Runtime, ponieważ to JVM jest warstwą, która wie, jak wykonywać instrukcje na lokalnej maszynie. Taka przenośność jest celem tego formatu.
+
+## Jak wyglądają instrukcje
+
+Bytecode to zestaw instrukcji oparty na stosie. Większość operacji umieszcza wartości na stosie operandów, zdejmuje je i umieszcza wynik. Nie ma alokacji rejestrów, o których trzeba by myśleć; model jest celowo prosty, aby JVM mogła go szybko zweryfikować i wykonać.
+
+Kilka przykładowych opcode'ów daje wyobrażenie:
+
+| Opcode | Co robi |
+| :--- | :--- |
+| `iload` | Umieszcza lokalną zmienną int na stosie |
+| `iadd` | Zdejmuje dwa inty ze stosu, umieszcza ich sumę |
+| `invokevirtual` | Wywołuje metodę instancyjną |
+| `getfield` | Odczytuje pole instancyjne |
+| `return` | Zwraca z metody |
+
+Rzadko czytasz lub zapisujesz je ręcznie. Narzędzia je generują i konsumują, dlatego biblioteka taka jak [ASM](/pl/learn/what-is-asm) jest przydatna.
+
+## Dlaczego bytecode ma znaczenie dla modyfikacji
+
+Kod bajtowy ma znaczenie, ponieważ umożliwia zmianę zachowania bez dostępu do oryginalnego kodu źródłowego. Mod Minecraft prawie nigdy nie posiada kodu źródłowego gry. Posiada natomiast skompilowaną grę na dysku. Aby dodać lub zmodyfikować funkcję, mod odczytuje istniejący kod bajtowy, przepisuje go i przekazuje wynik z powrotem do JVM podczas ładowania klas.
+
+Właśnie tak działają frameworki patchowania, wstrzykując haki do metod, których nie posiadają. Znajdują odpowiednie miejsce w skompilowanej metodzie i wplatają wywołanie kodu modu. Praca na poziomie kodu bajtowego pozwala modowi dołączyć do gry, mimo że nigdy nie widzi ani jednej linii oryginalnej Javy.
+
+## Gdzie pasuje ASM
+
+[ASM](/pl/learn/what-is-asm) to biblioteka Java do odczytu, zapisu i transformacji kodu bajtowego. Parsuje plik `.class` na zdarzenia lub drzewo, umożliwia modyfikację instrukcji i emituje poprawny plik `.class`. Jest mały, szybki i działa blisko surowego formatu, dlatego narzędzia do modowania wyższego poziomu budują na nim, zamiast samodzielnie parsować pliki klas.
+
+Większość modderów nigdy nie wywołuje [ASM](/pl/learn/what-is-asm) bezpośrednio. Używają warstwy wyższego poziomu, która ukrywa opkody i udostępnia bardziej przyjazny sposób wyrażenia „uruchom mój kod na początku tej metody”. Pod spodem ta warstwa edytuje kod bajtowy, często za pomocą ASM.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy bytecode JVM jest tym samym co kod maszynowy?">
+Nie. Kod maszynowy to natywne instrukcje dla konkretnego procesora. Bytecode to własny zestaw instrukcji JVM, który JVM tłumaczy na kod maszynowy w czasie działania. To dodatkowa warstwa sprawia, że plik `.class` działa na każdej platformie.
+</FAQItem>
+
+<FAQItem question="Czy potrafisz odczytać bytecode z powrotem do kodu źródłowego?">
+Częściowo. Dekompilatory rekonstruują czytelny kod Java z bytecode, i zbliżają się do tego w przypadku zwykłego kodu. Wynik nie zawsze jest identyczny z oryginałem, a komentarze i niektóre lokalne nazwy znikają, ale zazwyczaj jest go wystarczająco dużo, żeby móc śledzić.
+</FAQItem>
+
+<FAQItem question="Dlaczego nie edytować bezpośrednio kodu źródłowego Java?">
+Modyfikacje zazwyczaj nie posiadają kodu źródłowego. Dostarczane są wraz ze skompilowaną grą. Przerabianie kodu bajtowego pozwala modyfikować zachowanie gry bez dotykania, a nawet posiadania, oryginalnych plików Java.
+</FAQItem>
+
+<FAQItem question="Czy muszę uczyć się bytecode'u, żeby napisać moda?">
+Zazwyczaj nie. Frameworki modowania i warstwy skryptowe zajmują się pracą z bytecode'em za Ciebie. Znajomość tego, jak to działa, pomaga, gdy debugujesz skomplikowany patch lub tworzysz narzędzia.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-the-jvm", label: "Czym jest JVM?", description: "Czas działania, który wykonuje ten bytecode." },
+  { href: "/pl/learn/what-is-asm", label: "Co to jest ASM?", description: "Biblioteka, która czyta i przepisuje pliki klas." },
+  { href: "/pl/learn/what-is-graalvm-javascript-scripting", label: "Jakie jest skryptowanie JavaScript w GraalVM?", description: "Dodawanie zachowania bez modyfikowania bytecode'u." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź Opala, klienta Fabric, za $8.99</CTA>

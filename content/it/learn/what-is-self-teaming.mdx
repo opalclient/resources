@@ -1,0 +1,81 @@
+---
+title: Cosa sono i Team Auto-organizzati (Teams) in Minecraft?
+description: L'auto-squadra (il modulo Teams) fa sì che ogni giocatore nella classifica appaia come tuo alleato, nascondendo gli avvisi di fuoco amico e le etichette identificative fuori squadra sui server FFA.
+excerpt: Trucchi di auto-team ingannano il tuo tabellone dei punteggi facendolo credere che tutti siano tuoi amici. Nessun exploit, nessuna scorciatoia, solo un client che mente a sé stesso.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cambia il self-teaming quello che il server pensa che sia il mio team?
+    a: No. La sovrascrittura avviene solo sul tuo client. Il server mantiene il suo record reale degli incarichi di squadra e non riceve mai nulla di diverso a causa di ciò.
+  - q: Possono gli altri giocatori capire che sto usando auto-team?
+    a: Non dallo schermo loro. I colori dei cartellini identificativi e gli avvisi di fuoco amico che nasconde sono renderizzati localmente utilizzando dati che il tuo cliente già possedeva, quindi non sono interessati i clienti altrui.
+  - q: È l'auto-squadra la stessa cosa di uno sfruttamento del fuoco amico?
+    a: Non da solo. Nasconde solamente l'avviso di fuoco amico del tuo cliente. Se un attacco colpisca effettivamente come danno, dipende comunque da come il server e qualsiasi plugin facciano rispettare le regole di squadra.
+  - q: Perché alcuni clienti chiamano questo il modulo Teams invece di auto-team?
+    a: Sono la stessa funzionalità con due nomi diversi. I team segnalano una manipolazione del sistema del tabellone, mentre l'auto-team descrive cosa il modulo fa al sistema.
+---
+
+<KeyTakeaways>
+
+- L'auto-squadra (il modulo Teams) rende ogni altro giocatore un tuo compagno di squadra nel tabellone dei punteggi.
+- Sovrascrive i dati di squadra che il tuo client ha già ricevuto; gli incarichi reali del server non cambiano mai.
+- Questo lo rende invisibile agli altri giocatori e difficile da segnalare per gli anticheat.
+- Utilizzato principalmente per nascondere le etichette dei giocatori fuori squadra e gli avvisi di fuoco amico sui server FFA.
+
+</KeyTakeaways>
+
+L'auto-team, a volte indicato come Teams nell'elenco dei moduli di un client, è una funzionalità di Minecraft che sovrascrive il tabellone del tuo client, facendo sì che ogni altro giocatore appaia come se appartenesse alla tua squadra. Spariscono l'etichetta colorata dei giocatori non di squadra e l'avviso di fuoco amico che normalmente segnalerebbe qualcuno come avversario. Si tratta di un trucco visivo, non di un hack di movimento o di combattimento, e si colloca tra le funzionalità meno utilizzate dei client di utilità.
+
+## Come funziona l'auto-team
+
+Il sistema di squadre del tabellone di Minecraft si basa su pacchetti. Il server assegna i giocatori alle squadre e trasmette tale assegnazione a ogni client connesso. Un client vanilla lo utilizza per alcune cose: colorare le etichette dei nomi in base alla squadra, applicare regole di collisione e fuoco amico legate all'appartenenza a una squadra e gestire qualsiasi altro indicatore basato sulla squadra aggiunto dal server o da un plugin.
+
+L'auto-team intercetta queste informazioni all'arrivo. Invece di visualizzare i dati di squadra effettivamente ricevuti, il client sostituisce il proprio valore e tratta ogni altro giocatore come se appartenesse alla tua squadra. Poiché lo scambio avviene interamente sul client, il server non apprende nulla di nuovo. Continua a inviare le assegnazioni reali; il tuo schermo sceglie semplicemente di ignorarle.
+
+Ecco anche il motivo per cui il modulo sembra un trucco così limitato. Non influenza movimento, mira o tempismo. Tocca esattamente una cosa: il modo in cui il tuo client visualizza le informazioni sulla squadra sul tuo schermo. Su un server FFA dove tutti sono tecnicamente avversari, questo è sufficiente per eliminare il segnale visivo che te lo ricorda costantemente.
+
+## È sicuro utilizzare il self-teaming?
+
+Gli anticheat lato server sono progettati per monitorare i dati in uscita: movimenti impossibili, rotazioni troppo precise, colpi con tempismi sovrumani. Il self-teaming non produce nessuno di questi. Non invia mai nulla di insolito al server, non influenza mai i pacchetti di combattimento e non presenta una firma comportamentale che un controllo automatizzato potrebbe rilevare come farebbe con qualcosa come [KillAura](/it/learn/what-is-killaura) o [Reach](/it/learn/what-is-reach).
+
+Questo non significa che sia privo di rischi. Modifica comunque il comportamento previsto del gioco in relazione alle informazioni sulla squadra, e la maggior parte dei server vieta qualsiasi modifica del client per principio, a prescindere dal fatto che un bot se ne accorga o meno.
+
+<Callout variant="warning" title="Bassa rilevabilità non equivale a permesso">
+L'auto-team è difficile da individuare per i sistemi automatizzati perché non lascia mai la tua macchina, ma questo non lo rende consentito. Le regole del server coprono tipicamente qualsiasi modifica lato client, e un membro dello staff che revisiona le registrazioni può comunque notare un'etichetta che non diventa mai rossa.
+</Callout>
+
+<Callout variant="tip" title="Dove si colloca in un toolkit più ampio">
+Opal non include un modulo dedicato all'auto-team o a Teams. È una scelta davvero di nicchia, costruita per un meta server specifico piuttosto che qualcosa che la maggior parte dei giocatori consulta di sessione in sessione, e si colloca al di fuori dei moduli di combattimento e movimento che un client di utilità presenta tipicamente.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Il self-teaming modifica ciò che il server pensa sia il mio team?">
+No. L'override avviene solo sul tuo client. Il server mantiene il suo record reale degli incarichi di squadra e non riceve mai nulla di diverso a causa di ciò.
+</FAQItem>
+
+<FAQItem question="Gli altri giocatori possono capire che sto usando l'auto-squadra?">
+No, non dalla loro schermata. I colori delle etichette dei nomi e gli avvisi di fuoco amico che nasconde vengono renderizzati localmente utilizzando dati che il tuo client già possedeva, quindi il client di nessun altro è interessato.
+</FAQItem>
+
+<FAQItem question="L'auto-team è la stessa cosa di uno sfruttamento di fuoco amico?">
+No, di per sé. Nasconde solamente l'avviso di fuoco amico del tuo client. Se un attacco infligga effettivamente danni dipende da come il server e i plugin applicano le regole di squadra.
+</FAQItem>
+
+<FAQItem question="Perché alcuni clienti chiamano questa funzionalità il modulo Teams invece di auto-team?">
+Si tratta della stessa funzionalità con due nomi diversi. Teams si riferisce al sistema di punteggio che viene manipolato, mentre auto-team descrive cosa fa il modulo a questo sistema.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "La categoria più ampia di moduli costruiti per rimanere inosservati." },
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "Un modulo di combattimento anti-cheat rileva le falle dovute a comportamenti scorretti da parte dello stesso team." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia di clienti a cui appartiene questo modulo." },
+]} />
+
+<CTA href="/it/purchase">Evita i trucchi del tabellone. Guarda cosa Opal spedisce effettivamente per $8.99.</CTA>

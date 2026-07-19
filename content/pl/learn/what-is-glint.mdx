@@ -1,0 +1,67 @@
+---
+title: Czym jest Glint? Moduł Fałszywego Rozświetlenia Czarodziejskiego
+description: Glint to moduł klienta Minecraft, który dodaje lub edytuje poświatę czaru na dowolnym przedmiocie. Jest to wyłącznie element kosmetyczny i niewidoczny dla antycheatów oraz innych graczy.
+excerpt: Spraw, by zwykła patyka lśniła jak w pełni zaczarowany miecz. Nikt inny tego nie widzi, a nic na przedmiocie się nie zmienia.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Glint zmienia, czy przedmiot faktycznie jest zaczarowany?
+    a: Nie. Glint zmienia jedynie połysk wyświetlany na przedmiocie dla Twojego klienta. Prawdziwe zaklęcia, statystyki i dane po stronie serwera przedmiotu pozostają dokładnie takie, jakimi były.
+  - q: Czy inni gracze widzą mój niestandardowy efekt blasku?
+    a: Nie. Renderowanie przedmiotu, łącznie z efektem błysku, zachodzi niezależnie na każdym kliencie. Pozostali widzą przedmiot dokładnie tak, jak opisują go rzeczywiste dane serwera, z efektem błysku lub bez.
+  - q: Czy używanie Glint jest wykrywane przez programy anticheat?
+    a: Nie. Glint zmienia tylko to, co jest rysowane lokalnie i nigdy nie wysyła innych danych do serwera, więc nie ma nic po stronie serwera, co mogłoby wykryć anticheat.
+  - q: Czy Glint to to samo co pak resursów, który zmienia kolory efektu czaru?
+    a: Nie do końca. Paczka zasobów zmienia teksturę blasku dla wszystkich zaczarowanych przedmiotów jednocześnie. Mod klienta może wymusić poświatę na konkretnych niezaczarowanych przedmiotach lub przełączać ją dla każdego przedmiotu osobno.
+---
+
+<KeyTakeaways>
+- Glint to moduł klienta Minecrafta kosmetycznego, który fałszuje lub usuwa efekt połysku czaru na dowolnym przedmiocie, niezależnie od tego, czy jest on faktycznie zaczarowany.
+- Działa całkowicie w potoku renderowania, więc dane przedmiotu, statystyki i czary po stronie serwera nigdy się nie zmieniają.
+- Inni gracze i anticheaty nigdy nie widzą efektu, ponieważ każdy klient renderuje przedmioty niezależnie od rzeczywistych danych serwera.
+</KeyTakeaways>
+
+Glint to moduł, który pozwala dodać efekt połysku Minecrafta do przedmiotu bez zaklęć, albo usunąć go z przedmiotu, który go posiada. To czysto kosmetyczne ustawienie, rodzaj zmiany, która wpływa na wygląd twojego wyposażenia, nie ingerując w jego działanie. Jeśli kiedykolwiek chciałeś, żeby zwykły drewniany miecz lśnił jak ten, który właśnie wyszedł z ostrza z trzema zaklęciami maksymalnego poziomu, to ten moduł to umożliwia.
+
+## Jak udaje się ten efekt
+
+Standardowy Minecraft renderuje efekt połysku jako nakładaną warstwę shader na teksturę przedmiotu i rysuje ją tylko wtedy, gdy dane przedmiotu faktycznie zawierają zaklęcie. Brak zaklęcia, brak połysku. Ta weryfikacja ma miejsce podczas renderowania, a Glint wkracza dokładnie w to miejsce: przechwytuje wywołanie renderowania i nakłada, usuwa lub zmienia styl połysku niezależnie od tego, co mówi dane zaklęcia przedmiotu.
+
+Nic nie zmienia się powyżej etapu renderowania. Dane NBT przedmiotu, jego statystyki, jakie obrażenia zadaje, co ma zarejestrowane na serwerze – nic z tego się nie rusza. Niezaklęty miecz może lśnić jak ten z maksymalnymi zaklęciami, albo faktycznie zaklęty przedmiot może stać się całkowicie matowy, a w obu przypadkach przedmiot działa dokładnie tak, jak wskazują jego rzeczywiste dane. To taki sam rodzaj zmiany jak wybór paczki zasobów lub skóry: lokalna, wizualna i niewidoczna dla każdego, kto nie jesteś tobą.
+
+## Czy jest bezpieczny w użyciu
+
+Tak, a to jest tak bezpiecznie, jak tylko mogą być modyfikacje klienta. Glint nigdy nie ingeruje w rzeczywiste dane zaklęć przedmiotu, nigdy nie wysyła nic do serwera, czego nie wysłałby niezmodyfikowany klient, i nigdy nie pokazuje innemu graczowi innej wersji twojego ekwipunku niż ta, którą dostarcza rzeczywisty stan serwera. Renderowanie odbywa się lokalnie i dla każdego klienta, więc nie ma pakietu, który anticheat mógłby sprawdzić i który ujawniłby fałszywy blask, ponieważ blask nigdy nie opuścił twojego komputera.
+
+Jedyna zastrzeżenie, które dotyczy każdej modyfikacji klienta, nadal ma zastosowanie tutaj: niektóre serwery zakazują zmodyfikowanych klientów wprost jako politykę ogólną, niezależnie od tego, co robi jakikolwiek indywidualny moduł. Warto sprawdzić zasady przed uruchomieniem czegokolwiek zmodyfikowanego, w tym Glinta.
+
+<Callout variant="tip" title="Gdzie to się mieści w Opal">
+Opal nie dostarcza modułu o nazwie Glint, ale jest to dokładnie rodzaj wizualnej modyfikacji po stronie klienta, wokół której zbudowane są ustawienia kosmetyczne i dostosowywania renderowania: rzeczy, które zmieniają to, co widzisz na własnym ekranie, nie ingerując ani w pojedynczy bajt tego, co śledzi serwer.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Czy Glint zmienia, czy przedmiot jest faktycznie zaczarowany?">
+Nie. Glint zmienia jedynie efekt połysku renderowany na przedmiocie w Twoim kliencie. Prawdziwe zaklęcia, statystyki i dane po stronie serwera pozostają dokładnie takie, jakimi były.
+</FAQItem>
+<FAQItem question="Czy inni gracze mogą widzieć mój niestandardowy efekt połysku?">
+Nie. Renderowanie przedmiotów, w tym efektu połysku, odbywa się niezależnie na każdym kliencie. Inni gracze widzą przedmiot dokładnie tak, jak opisują go dane serwera, z połyskiem lub bez.
+</FAQItem>
+<FAQItem question="Czy używanie Glint jest wykrywane przez programy anticheat?">
+Nie. Glint zmienia tylko to, co jest rysowane lokalnie i nigdy nie wysyła innych danych do serwera, więc nie ma nic po stronie serwera, co mogłoby zostać wykryte przez program anticheat.
+</FAQItem>
+<FAQItem question="Czy Glint jest tym samym co pakiet zasobów, który zmienia kolor efektu zaklęcia?">
+Nie do końca. Pakiet zasobów zmienia teksturę połysku dla każdego zaczarowanego przedmiotu jednocześnie. Mod klienta może wymusić efekt połysku na konkretnych niezaczarowanych przedmiotach lub przełączać go dla każdego przedmiotu oddzielnie.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Kategoria Glint oraz moduły do niej należące, a także to, co odróżnia klienta użytkowego od zhakowanego klienta." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kolejny styl klienta zbudowany wokół tego, co renderuje się lokalnie, a co serwer nigdy nie dowie się o tym." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Moduł znajdujący się po przeciwnej stronie spektrum ryzyka, który faktycznie zmienia to, co widzi serwer." }
+]} />
+
+<CTA href="/pl/purchase">Ustawienia wizualne Opal'a są w pełni po stronie klienta. Zobacz, co znajduje się w panelu dla $8.99.</CTA>

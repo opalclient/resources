@@ -1,0 +1,87 @@
+---
+title: Czym jest Freecam w Minecraft? Jak działa moduł
+description: Tryb freecam odrywa kamerę od twojej postaci, pozwalając ci zwiadywać teren lub nagrywać materiał wideo bez poruszania się. Oto jak to działa i jakie ryzyko wiąże się z jego użyciem.
+excerpt: Twój aparat lata swobodnie, twoje ciało ani drgnie, a serwer nie ma nic nowego do pokazania. Oto, co Freecam robi w rzeczywistości pod maską.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy używanie kamery Freecam przesuwa twoją postać?
+    a: Nie. Twoja postać pozostaje dokładnie w miejscu, w którym była, kiedy włączyłeś/włączyłaś widok z kamery. Wszystko, co robi później, wynika z innych poleceń, a nie z przesuwania kamery.
+  - q: Czy Freecam potrafi widzieć przez ściany?
+    a: Nie samodzielnie. Kamera może przenikać przez bloki i otwartą przestrzeń, ale nadal renderuje tylko teren i obiekty, które serwer już przesłał do Twojego klienta, więc sama funkcja Freecam nie ujawni niczego, co ujawniłby moduł ESP lub fullbright.
+  - q: Czy tryb Freecam to to samo co tryb obserwatora?
+    a: Nie. Tryb widza Vanilla zmienia twój rzeczywisty tryb gry, a serwer widzi tę zmianę. Freecam to trik aparatu tylko po stronie klienta, więc twój bohater pozostaje w trybie, w którym się znajdował.
+  - q: Czy Freecam jest wykrywany przez antywiry?
+    a: Rzadko. Nie wysyła żadnych pakietów powiązanych z pozycją kamery, tylko z pozycją twojej postaci, która się nie rusza. Niektóre serwery nadal to ograniczają zasadami, nawet tam, gdzie wykrywanie tego po stronie serwera jest niepraktyczne.
+  - q: Czy każdy klient użytkowy Minecrafta zawiera Freecam?
+    a: Nie, to opcjonalny moduł, który każdy klient wdraża samodzielnie. Niektórzy udostępniają go jako moduł kategorii graczy, inni pomijają go całkowicie, dlatego sprawdź listę modułów konkretnego klienta, zanim założysz, że on tam jest.
+---
+
+<KeyTakeaways>
+
+- Freecam odrywa kamerę z gry od twojej postaci, dzięki czemu możesz swobodnie latać kamerą, podczas gdy twoje ciało pozostaje nieruchome.
+- Serwer śledzi jedynie pozycję twojej postaci, a nie kamery, więc Freecam nie wysyła nietypowych pakietów.
+- Używany głównie do zwiadu ślepych punktów i ustawiania kątów nagrywania, a nie do walki lub poruszania się.
+- Ryzyko wykrycia jest niskie, ale wiele serwerów zakazuje wszelkich modyfikacji kamery zasadami, niezależnie od tego, czy można to udowodnić.
+
+</KeyTakeaways>
+
+Freecam to moduł klienta Minecraft, który odłącza kamerę od ciała twojej postaci. Włącz go, a klawisze ruchu przestaną kierować twoim graczem i zaczną kierować swobodnie unoszącą się perspektywą, podczas gdy twoja postać pozostanie nieruchoma lub będzie kontynuować to, co robiła wcześniej. To trik graficzny, a nie ruchowy: serwer nigdy nie widzi ruchu kamery, tylko ciała, które się nie porusza. Większość graczy sięga po niego, aby z przeszłością rozglądać się po bazie z kąta, którego normalnie by nie ryzykowało, albo żeby zrobić czysty kadr do filmu, a nie po to, żeby walczyć lub szybciej się przemieszczać.
+
+## Jak działa Freecam
+
+Freecam oddziela kamerę renderującą od podmiotu gracza, do którego jest normalnie przymocowana. Po aktywacji, zwykłe klawisze ruchu sterują tą odłączoną perspektywą przez świat zamiast twojej postaci, a perspektywa nie ma hitboxa ani kolizji. Przelatuje przez ściany, unosi się nad lawą, co tylko chcesz. Tymczasem twoja postać zatrzymuje się dokładnie tam, gdzie ją zostawiłeś, lub kontynuuje to, co robiła, gdy włączyłeś moduł.
+
+To rozdzielenie ma znaczenie ze względu na to, co faktycznie śledzi serwer. Serwer wie tylko o pozycji twojej postaci gracza, a nie kamery, więc nic się nie zmienia w twojej rzeczywistej lokalizacji ani hitboxie podczas aktywnego Freecamu. Kamera jest czysto lokalnym, renderowanym przez klienta obiektem, który nigdy nie dotyka sieci. Tenacity, żeby wymienić jeden przykład, udostępnia Freecam jako moduł kategorii gracza, zamiast łączyć go z walką lub ruchem, co jest sprawiedliwym odzwierciedleniem tego, co on faktycznie robi: niczego nie zmienia w twojej postaci.
+
+Dwa przypadki użycia pokrywają większość powodów, dla których ludzie go włączają. Zwiady: sprawdzanie układu bazy, zajrzenie za róg lub obserwowanie, co robi ktoś inny, bez eksponowania ani przestawiania twojej rzeczywistej postaci. Nagrywanie: oddalanie kamery dla szerokiego ujęcia, podążanie za walką z zewnątrz lub ustawianie kąta dla klipu, wszystko to bez zużywania drugiego konta lub powrotu do trybu widza vanilla, który ma własny problem: zmienia on twój rzeczywisty tryb gry, a serwer to rejestruje. Freecam w ogóle nie dotyka twojego trybu gry.
+
+## Czy Freecam jest faktycznie wykrywalny
+
+Freecam to zmiana renderowania, a nie ruchu ani walki, dlatego nie wysyła dodatkowych pakietów powiązanych z pozycją kamery. Twoje pakiety pozycji pozostają powiązane z postacią, a postać się nie porusza, więc serwer zazwyczaj nie ma nic niezwykłego do zaobserwowania, gdy kamera swobodnie się przemieszcza. To plasuje go znacznie poniżej modułów takich jak [KillAura](/pl/learn/what-is-killaura) lub [Reach](/pl/learn/what-is-reach) na skali ryzyka, ponieważ te zmieniają to, co twój gracz deklaruje, że robi, a ta deklaracja jest dokładnie tym, na co anticheaty są zbudowane.
+
+Ryzyko wykrycia to nie cała historia. Niektóre serwery wprowadzają zasady zakazujące jakichkolwiek modyfikacji kamery lub klienta, bez wyjątków, niezależnie od tego, czy można to udowodnić technicznie. Używanie Freecam do omijania ślepych punktów w trakcie walki nadal może być uznane za nieuczciwą przewagę zgodnie z tymi zasadami, nawet jeśli nic nigdy nie zostanie oznaczone. Czy jest to dozwolone, zależy bardziej od polityki serwera niż od tego, co mówią pakiety.
+
+<Callout variant="tip" title="Czy Opal ma tryb Freecam?">
+Nie, nie pod tą nazwą. Opal na razie nie oferuje dedykowanego modułu Freecam, ale narzędzia do skautingu i tworzenia klipów znajdują się w tej samej ogólnej kategorii co pozostałe funkcje wizualne i użytkowe: są zaprojektowane tak, aby pracować cicho po stronie serwera, a nie aby zapewnić Ci zwycięstwo. Jeśli szukasz czegoś takiego, to tam powinieneś szukać.
+</Callout>
+
+<Callout variant="warning" title="Niska detekcja, nie zerowe ryzyko">
+Freecam rzadko uruchamia system anticheat, ponieważ serwer widzi jedynie pozycję twojej postaci, a ta nigdzie się nie ruszyła. Ale wykrywalność i dozwoloność to nie to samo. Wiele zestawów zasad zakazuje wszelkich modyfikacji kamery lub klienta wprost, a pracownicy nadal mogą uznać to za nieuczciwą przewagę podczas udostępniania ekranu, nawet bez flagi wskazującej na to. Sprawdź zasady, zanim zaczniesz go używać w rozgrywce konkurencyjnej.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy używanie kamery swobodnego oglądania przesuwa twoją postać?">
+Nie. Twoja postać pozostaje dokładnie w tym samym miejscu, w którym była, gdy włączyłeś kamerę swobodnego oglądania. Wszystko, co robi później, wynika z innych poleceń, a nie z przesuwania kamery.
+</FAQItem>
+
+<FAQItem question="Czy Freecam widzi przez ściany?">
+Nie samodzielnie. Kamera może przechodzić przez bloki i otwartą przestrzeń, ale nadal renderuje tylko teren i obiekty, które serwer już przesłał do klienta, więc Freecam sam w sobie nie ujawni niczego, co ujawniłby moduł ESP lub fullbright.
+</FAQItem>
+
+<FAQItem question="Czy Freecam to to samo co tryb obserwatora?">
+Nie. Domyślny tryb obserwatora zmienia twój aktualny tryb gry, a serwer rejestruje tę zmianę. Freecam to trik kamerowy tylko po stronie klienta, więc twoja postać pozostaje w trybie, w którym się znajdowała.
+</FAQItem>
+
+<FAQItem question="Czy Freecam jest wykrywany przez antywiry?" >
+Rzadko. Nie wysyła żadnych pakietów powiązanych z pozycją kamery, tylko z pozycją Twojej postaci, która się nie rusza. Niektóre serwery nadal go ograniczają zasadami, nawet jeśli wykrywanie go po stronie serwera jest niepraktyczne.
+</FAQItem>
+
+<FAQItem question="Czy każdy klient Minecraft z dodatkowymi funkcjami zawiera Freecam?">
+Nie, jest to opcjonalny moduł, który każdy klient implementuje samodzielnie. Niektóre udostępniają go jako moduł kategorii gracza, inne pomijają go całkowicie, dlatego sprawdź listę modułów konkretnego klienta, zanim założysz, że on tam jest.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szersza kategoria Freecam i każdy moduł, do którego należy." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kolejny sposób, by pozostać niezauważalnym dla obserwujących." },
+  { href: "/pl/learn/what-is-reach", label: "Co to jest Reach?", description: "Moduł znajdujący się na przeciwnym końcu spektrum detekcji w stosunku do Freecam." },
+]} />
+
+<CTA href="/pl/purchase">Zobacz, co Opal przygotował(a) na zwiady, nagrywanie i wszystko, co pozwala Ci być o krok przed innymi</CTA>

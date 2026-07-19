@@ -1,0 +1,77 @@
+---
+title: Cos'è l'atmosfera in Minecraft? Modulo Spiegato
+description: Ambience è un modulo di Minecraft che modifica l'ora del giorno e l'illuminazione sullo schermo, mantenendo visibili grotte e tempeste senza alterare l'orologio del server.
+excerpt: Ambience sostituisce il cielo locale con l'ora del giorno che desideri, mentre l'orologio del server continua a funzionare. È una sovrascrittura dell'illuminazione, non un trucco.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Ambience modifica l'ora effettiva sul server?
+    a: No. Il server mantiene il proprio orario di sistema e lo invia a ogni client come di consueto. L'ambiente circostante sovrascrive soltanto il modo in cui quell'ora viene visualizzata sul tuo schermo locale.
+  - q: Possono gli altri giocatori capire che sto usando Ambience?
+    a: No. La modifica influisce solo su ciò che viene visualizzato per il tuo cliente. Gli altri giocatori continuano a vedere l'ora e l'illuminazione reali del server, indipendentemente da ciò che mostra il tuo schermo.
+  - q: Influisce l'ambiente sulla generazione dei mob o su altre meccaniche basate sul tempo?
+    a: No. La generazione di mob, le meccaniche basate sulla luce e qualsiasi altra cosa il server calcola, funzionano in base all'ora reale del server, non alla sovrascrittura del display locale.
+  - q: È Ambience come una risorsa?
+    a: Quasi. Un resource pack modifica le texture e i modelli. L'ambiente modifica l'ora del giorno e il valore di illuminazione che il tuo client renderizza. Entrambi sono cambiamenti di presentazione locali che lasciano inalterato lo stato di gioco del server.
+---
+
+<KeyTakeaways>
+
+- L'Ambience è un modulo lato client che sovrascrive l'ora del giorno e l'illuminazione, indipendentemente dall'orologio reale del server.
+- Intercetta il colore del cielo e i valori di luce che il tuo client disegna, sostituendoli poi con i propri.
+- La generazione dei mob e ogni altra meccanica lato server continuano a funzionare in base all'orologio reale; cambia solo ciò che vedi sullo schermo.
+- È puramente estetico, non offre alcun vantaggio di gioco.
+
+</KeyTakeaways>
+
+Ambience è un modulo di Minecraft che permette di impostare l'ora del giorno e l'illuminazione personalizzate, indipendentemente da quello che indica effettivamente l'orologio del server. Attivalo e il tuo schermo può mostrare un cielo di mezzogiorno limpido mentre il server continua a elaborare un temporale alle 2 del mattino per tutti gli altri. Non modifica lo stato del mondo del server; cambia soltanto ciò che viene disegnato sul tuo monitor.
+
+## Come funziona
+
+Il rendering del cielo, dei livelli di luce e delle ombre normalmente implica la lettura del valore dell'ora trasmesso dal server e il disegno di conseguenza. Ambience si interpone in questa fase e sostituisce il valore con il proprio. Il server continua a ticchettare il suo orologio reale e a trasmetterlo come se nulla fosse. Il tuo client semplicemente sceglie di non ascoltare quando disegna il frame.
+
+Questo è tutto il trucco, ed è per questo che l'effetto è interamente locale. La generazione di mob, le meccaniche basate sulla luce e qualsiasi altra cosa il server calcoli in base all'ora reale del mondo rimangono inalterate, perché il server non vede mai la tua sovrascrittura. Esiste solo nell'ultima fase della tua pipeline di rendering.
+
+L'attrattiva risiede principalmente nella visibilità. Il ciclo notturno e le condizioni meteorologiche di Minecraft possono seppellire il terreno, i mob e gli altri giocatori nell'oscurità, soprattutto sottoterra o durante una tempesta. Bloccare la tua visuale locale su un'impostazione luminosa e chiara elimina questo problema senza toccare alcuna impostazione del server o aspettare che l'orologio si muova da solo. Alcuni giocatori preferiscono semplicemente l'aspetto di un'illuminazione fissa durante una sessione prolungata.
+
+## È sicuro da usare
+
+L'Ambience è una modifica del rendering, non del gameplay. Non invia al server nulla che un client vanilla non invierebbe, e non ti fornisce informazioni che il server non stesse già trasmettendo a tutti, dato che l'ora reale e l'illuminazione sono identiche per ogni giocatore, indipendentemente da come il proprio client sceglie di rappresentarle. Si colloca nella stessa categoria di un cursore di luminosità o di un resource pack: una scelta di presentazione locale, non un'interazione con le regole del gioco.
+
+<Callout variant="tip" title="Opal lo distribuisce come Ambience">
+La versione di Opal del modulo fa esattamente ciò che suggerisce il nome: cambia l'ora del giorno localmente. È inclusa nella categoria sicura di Opal, cosmetica e di miglioramento della qualità della vita, la stessa categoria di un pacchetto di risorse o di un cursore della luminosità. Nulla qui attiva un controllo lato server, perché non c'è nulla che il server possa controllare.
+</Callout>
+
+Appare per i clienti come un modulo visivo standard o di miglioramento della qualità della vita, posizionato accanto ad altre opzioni di visualizzazione cosmetiche, piuttosto che all'automazione del combattimento o del movimento. Se un cliente lo offre, di solito viene archiviato insieme alle altre cose che modificano solo ciò che vedi personalmente.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Ambience modifica l'ora effettiva sul server?">
+No. Il server mantiene la propria ora di gioco e la invia a ogni client come di consueto. Ambience sovrascrive soltanto il modo in cui tale ora viene visualizzata sullo schermo locale.
+</FAQItem>
+
+<FAQItem question="Gli altri giocatori possono capire che sto usando Ambience?">
+No. La modifica influisce solo su ciò che viene visualizzato sul tuo client. Gli altri giocatori continuano a vedere l'ora del giorno e l'illuminazione reali del server, indipendentemente da ciò che mostra il tuo schermo.
+</FAQItem>
+
+<FAQItem question="L'Ambiente influenza la generazione dei mostri o altre meccaniche basate sul tempo?">
+No. La generazione dei mostri, le meccaniche basate sulla luce e qualsiasi altra cosa venga calcolato dal server, si basano sull'ora reale del server, non sulla tua sovrapposizione locale.
+</FAQItem>
+
+<FAQItem question="Ambience è la stessa cosa di un resource pack?">
+Non esattamente. Un resource pack modifica le texture e i modelli. Ambience modifica l'ora del giorno e il valore di illuminazione che il tuo client renderizza. Entrambi sono cambiamenti di presentazione locali che non alterano lo stato di gioco del server.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "I moduli di categoria più ampi a cui appartengono elementi come Ambience." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Dove il confine tra sottile e rilevabile si trovi effettivamente." },
+  { href: "/it/learn/what-is-reach", label: "Cos'è la portata?", description: "Un modulo che si colloca all'estremità opposta dello spettro del rischio rispetto ad Ambience." },
+]} />
+
+<CTA href="/it/purchase">Basta sforzarsi di vedere attraverso le notti e le tempeste. Scegli il tuo cielo con Opal.</CTA>

@@ -1,0 +1,93 @@
+---
+title: LWJGL Nedir? Java Oyun Kütüphanesi Açıklaması (2026)
+description: LWJGL, Java'nın yerel grafik, ses ve giriş API'lerine ulaşmasını sağlayan kütüphanedir. İşte neler yaptığı ve Minecraft ile modlarının neden buna bağımlı olduğu.
+excerpt: Java, OpenGL'i veya ses donanımınızı tek başına çağıramaz. LWJGL köprüdür ve Minecraft'ın tüm render yığını üzerine kurulu olduğu katmandır.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Libraries
+author: trq
+faqs:
+  - q: LWJGL'yi ayrı olarak yüklemem gerekiyor mu?
+    a: Hayır, Minecraft ihtiyaç duyduğu sürümle birlikte gelir ve başlatıcı, platformunuz için yerel dosyaları indirir, bu yüzden oyuncular nadiren LWJGL'ye doğrudan müdahale eder.
+  - q: LWJGL'deki "lightweight" ne anlama geliyor?
+    a: Kütüphane, ağır bir motora yerleştirmek yerine yerel API'lere yakın kalır, böylece kodunuz ile donanım arasında çok az şeyle doğrudan erişim elde edersiniz.
+  - q: LWJGL sadece Minecraft için mi?
+    a: Hayır, LWJGL birçok Java oyunu ve aracı tarafından kullanılan genel bir Java oyun kütüphanesidir; Minecraft, üzerine inşa edilmiş en iyi bilinen projedir ancak ona bağlı değildir.
+  - q: LWJGL hangi dilleri destekler?
+    a: Java Sanal Makinesi üzerinde çalışan, Java ve Kotlin dahil olmak üzere herhangi bir dil, çünkü bağlamalar Java API'leri olarak açığa çıkarılıyor.
+---
+
+<KeyTakeaways>
+
+- LWJGL, Lightweight Java Game Library'dir; Java'dan yerel grafiklere, seslere ve girdiye bir köprüdür.
+- Tek bir kütüphane değil, OpenGL, OpenAL, GLFW ve daha fazlasını içeren ince bağlama koleksiyonudur.
+- Minecraft'ın penceresi, işleme ve giriş yığını tamamen LWJGL üzerine kuruludur.
+- Bir mod veya mod yükleyici değil, bir kütüphanedir ve Minecraft zaten onu içerir.
+
+</KeyTakeaways>
+
+LWJGL, Hafif Java Oyun Kütüphanesi'dir. Java kodunun grafikler, ses ve giriş için yerel API'leri çağırmasını sağlayan köprüdür. Minecraft bir Java oyunudur, bu nedenle GPU'nuz ve ses donanımınızla iletişim kurmak için LWJGL kullanır. Özel arayüzler çizen veya ses çalan modlar da onun aracılığıyla aynı yerel katmana ulaşır.
+
+<Callout variant="info" title="Opal Nerede Çalışır">
+Opal, bir [Fabric](https://fabricmc.net/) mod'udur, bu nedenle oyunun zaten ayarladığı LWJGL grafik bağlamı üzerinden görüntülenir. [Kurulum rehberi](/tr/docs/setup), Opal'ı çalıştırmanıza yardımcı olur.
+</Callout>
+
+## LWJGL Aslında Ne Yapar
+
+LWJGL, Java'ya yerel C kütüphaneleri etrafında ince, doğrudan bir sarmal katman sunar. Java tek başına OpenGL veya OpenAL'i çağıramaz; bunlar C ile yazılmıştır ve işletim sisteminde veya sürücüde bulunur. LWJGL, bağlama kodunu ve yerel ikili dosyaları gönderir, böylece Java yöntemleri alttaki C fonksiyonlarına neredeyse bire bir eşlenir.
+
+Sarmal katman kasıtlı olarak incedir. LWJGL, OpenGL'i bir sahne grafiği veya bir oyun motoru arkasına gizlemez. Grafik kodunuzu API'ye yakın bir şekilde yazarsınız, bu nedenle kontrol ve öngörülebilir performans isteyen oyunlar için popülerdir.
+
+## Ne Bağlar
+
+LWJGL, tek bir kütüphane değil, bağlama koleksiyonudur. Minecraft ve modları için ilgili parçalar şunlardır:
+
+| Bağlama | Ne için |
+| :--- | :--- |
+| OpenGL | Ekrana çizim: oyunun kullandığı işleme API'si |
+| OpenAL | 3D konumlandırmalı ses |
+| GLFW | Pencere oluşturma, oyun döngüsü ve klavye/fare girişi |
+| stb | Görüntü ve yazı tipi yükleme yardımcıları |
+| NanoVG | Bazı UI kodları tarafından kullanılan anti-aliased 2D vektör çizimi |
+
+Her bağlama isteğe bağlıdır. Bir proje ihtiyaç duyduğu modülleri çeker.
+
+## Neden Minecraft ve Modları Ona Güveniyor
+
+Minecraft'ın tüm pencere, işleme ve giriş yığını LWJGL'nin üzerine oturur. Oyun bir pencere açtığında, farenizi okuduğunda veya GPU'ya üçgenler gönderdiğinde, bu çağrı yerel katmana LWJGL aracılığıyla yönlendirilir.
+
+Modlar bunu miras alırlar. Oyunda bir üstbilgi çizer veya özel bir menü kullanan bir mod, LWJGL aracılığıyla oyunun ayarladığı aynı OpenGL bağlamını kullanır. Bazı modlar ayrıca arayüzlerini [NanoVG](/tr/learn/what-is-nanovg) ile de çizer, bu da kendisi de LWJGL bağlamalarından biridir. Bu ortak temel, tek bir modun kendi grafik sistemini kurmadan oyunla birlikte çizmesinin nedenlerinden biridir.
+
+## LWJGL bir mod mudur?
+
+Hayır. LWJGL bir kütüphanedir, bir mod veya bir mod yükleyicisi değildir. Bir modu kurduğunuz gibi onu kurmazsınız. Minecraft zaten ihtiyaç duyduğu sürümü paketler ve başlatıcı, işletim sisteminiz için uygun yerel ikili dosyaları indirir. Mod geliştiricileri LWJGL'ye karşı derler, ancak nadiren kendi kopyalarını gönderirler.
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="LWJGL'yi ayrı olarak yüklemem gerekiyor mu?">
+Hayır. Minecraft, ihtiyaç duyduğu sürümle birlikte gelir ve başlatıcı, platformunuza özel yerel dosyaları indirir. Oyuncular nadiren LWJGL'yi doğrudan kullanır.
+</FAQItem>
+
+<FAQItem question="LWJGL'deki ‘lightweight’ ne anlama geliyor?">
+Bu, kütüphanenin yerel API'lere yakın kalması, onları ağır bir motorla sarmaması anlamına gelir. Kodunuz ile donanım arasında çok az şeyle doğrudan erişim elde edersiniz.
+</FAQItem>
+
+<FAQItem question="LWJGL sadece Minecraft için mi?">
+Hayır. LWJGL, birçok Java oyunu ve aracı tarafından kullanılan genel bir Java oyun kütüphanesidir. Üzerine inşa edildiği en tanınmış proje Minecraft olsa da, Minecraft'a bağlı değildir.
+</FAQItem>
+
+<FAQItem question="LWJGL hangi dillerde kullanılabilir?">
+Java Sanal Makinesi üzerinde çalışan herhangi bir dil kullanılabilir, Java ve Kotlin dahil. Bağlamalar Java API'leri olarak sunulmaktadır.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-nanovg", label: "NanoVG nedir?", description: "LWJGL aracılığıyla vektör çizim bağlama sahip istemciler." },
+  { href: "/tr/learn/what-is-the-fabric-api", label: "Fabric API nedir?", description: "Fabric modlarının üzerine inşa edildiği ortak katman." },
+  { href: "/tr/learn/what-is-graalvm-javascript-scripting", label: "GraalVM JavaScript betiği nedir?", description: "Opal ile oyunun kodlamasını JavaScript ile nasıl yapabileceğinizi." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

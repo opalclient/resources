@@ -1,0 +1,98 @@
+---
+title: Minecraft'ta Ölüm Efektleri Nedir? (Görsel Modül)
+description: Kill Effects, oyuncuları vurduğunuzda özel bir animasyon çalan, Entity Effects'ten ayrı ve tamamen istemci tarafında çalışan bir kozmetik modüldür.
+excerpt: Son vuruşun kendine özgü animasyonu vardır. Ondan önceki her şey vanilla ile aynı görünür.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Kill Etkileri savaşın gidişatını değiştiriyor mu?
+    a: Hayır, sadece bir öldürme anında gösterilen görseli değiştirir. Vuruş tespiti, hasar ve zamanlama, orijinal oyunda olduğu gibi aynı kalır.
+  - q: Kill Etkileri, Varlık Etkilerinden nasıl farklıdır?
+    a: Ölüm Etkileri yalnızca bir isabet hedefi bitirdiğinde etkinleşir. Varlık Etkileri, isabet olup olmadığına bakılmaksızın her bağlantıda etkinleşir. Ölüm Etkileri, aynı fikrin daha dar, yalnızca bitiş odaklı versiyonudur.
+  - q: Diğer oyuncular benim ölüm etkisini görebilir mi?
+    a: Hayır. Sadece istemcinizde yerel olarak oluşturulur. Sunucudaki herkes standart, varsayılan ölüm ekranını görür, ne tür bir etki yapılandırdığınız fark etmez.
+  - q: Kill Efektlerini kullanmak yasaklanma riskini taşıyacak mı?
+    a: Hayır. Müşterinin çizdiklerini değiştirir, gönderdiklerini değil. Sunucu tarafında bir antichiati yakalamak için bir paket farkı yoktur. Herhangi bir risk, sunucunun değiştirilmiş istemcilere karşı genel tutumundan kaynaklanır, bu modülden değil.
+---
+
+<KeyTakeaways>
+
+- Kill Effects, hedef bir düşmanı öldürdüğünüz an özel bir animasyon veya parçacık patlaması çalan bir kozmetik modüldür.
+- Sadece öldürme anında tetiklenir, her vuruşta değil; bu da onu daha geniş Varlık Efektleri modülünden ayıran şeydir.
+- Tamamen istemci tarafında render edilir. Paketlerde herhangi bir değişiklik olmaz, sunucu tarafından takip edilen değerlere dokunulmaz, bu nedenle anticheat'ın görebileceği hiçbir şey yoktur.
+- Tenacity gibi istemciler, bunu daha geniş bir görsel süsleme seçeneği olarak, hedef alma veya hasarla bağlantılı bir şey olarak değil, sunar
+
+</KeyTakeaways>
+
+Kill Effects, Minecraft yardımcı istemcilerinde bulunan bir kozmetik modülüdür ve vanilla ölüm animasyonunu özel bir animasyonla değiştirir (veya üzerine ekler), ancak yalnızca sizin isabetiniz savaşı bitirecek olan isabetse. Öldürmeyen on isabet darbesi atın ve hiçbir şey olmaz. Öldüren on birinci darbeyi atın ve efekt oynatılır. Bu, her salınım üzerine bir boya katmanı olmaktan ziyade, son darbe için bir ödülüdür.
+
+## Nasıl Çalışır
+
+Modül, tek bir özel olay için dövüşü izler: bir hedefi sıfıra düşüren bir isabet. Her şeyin dışındakini görmezden gelir. Bu öldürme koşulu ateşlendiğinde, seçtiğiniz animasyonu veya parçacık efektini oynatır; bu, düz vanilla ölümün yerini alır veya istemcinin uygulamanasına bağlı olarak onun üzerine yığılır.
+
+Tetikleyici "öldürmek" olduğundan, "isabet" değil, efekt, dövüş modülü için beklediğinizden çok daha az sıklıkta görünür. Gerçek bir dövüşteki çoğu salınım hiçbir şeyi bitirmez. Kill Effects, bunların hepsinde sessiz kalır ve yalnızca önemli olanı duyurur.
+
+Bu dar tetikleyici aynı zamanda Kill Effects ile en yakın akrabası olan Entity Effects arasındaki tek farktır. Entity Effects, sonuçtan bağımsız olarak herhangi bir bağlantılı isabet üzerine ateşlenir, bu nedenle dövüşün üzerine sürekli bir görsel katman olarak okunur. Kill Effects kendini sonuca ayırır, bu nedenle dövüşmekten ziyade değiş tokuşu kazanmaya bağlı bir süsleme olarak okunur.
+
+## Kill Effects vs. Entity Effects
+
+| | Öldürme Efektleri | Varlık Efektleri |
+|---|---|---|
+| Ateşler | Yalnızca öldürme vuruşu | Her bağlantı vuruşu |
+| Savaş sıklığı | Nadir (bir kere, hiç olmazsa) | Sabit |
+| Hissiyat | Öldürme için bir ödül | Ortam savaş katmanı |
+| Oyun akışını değiştirir mi? | Hayır | Hayır |
+
+Ne Kill Effects ne de Entity Effects menzili, zamanlamayı, hasarı veya isabet kaydını etkilemez. Her iki modülün de değiştirdiği tek şey, kendi ekranınızda neyin görüntülendiğidir.
+
+## Kullanımı Güvenli mi?
+
+Evet ve kozmetik modüller için olabilecek en güvenli seçeneklerden biri. Kill Effects, sunucunun takip ettiği hiçbir şeyi değiştirmez ve normal bir öldürme olayından farklı bir şey göndermez. Menzil uzatması, zamanlama manipülasyonu, paket spamı veya sunucu tarafı antichiati tetikleyecek bir şey yoktur, çünkü efekt istemcinizden ayrılmaz.
+
+Kozmetik modüller için geçerli olan tek uyarı burada da geçerlidir: Bazı sunucular, ne yaptığına bakılmaksızın, herhangi bir modülün ne yaptığına bakılmaksızın, değiştirilmiş istemcileri genel bir kural olarak yasaklayabilir. Kill Effects riskli olmadığı için değil, "herhangi bir değiştirilmiş istemci" bazen politika olduğu için bir modülü çalıştırmadan önce sunucu politikasını kontrol edin.
+
+<Callout variant="tip" title="Opal nereye uyum sağlar">
+
+Opal, Kill Effects adında özel bir modül göndermiyor olsa da, aynı fikir, bir anı değiştirmeden sadece görsel olarak süsleyen kozmetik katmanlar, Opal'ın görsel kategorisinin tam olarak ne olduğu. Eğer öldürmelerinizin, tek bir çarpışma kutusunu değiştirmeden size ait görünmesini istiyorsanız, işte tüm istemcinin dayandığı felsefe
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Kill Etkileri savaşın gidişatını değiştiriyor mu?">
+
+Hayır, sadece bir öldürme anında gösterilen görseli değiştirir. Vuruş tespiti, hasar ve zamanlama, orijinal oyundaki gibidir
+
+</FAQItem>
+
+<FAQItem question="Kill Etkileri, Varlık Etkilerinden nasıl farklıdır?">
+
+Ölüm Etkileri yalnızca bir isabet hedefi bitirdiğinde etkinleşir. Varlık Etkileri, isabet olup olmadığına bakılmaksızın her bağlantıda etkinleşir. Ölüm Etkileri, aynı fikrin daha dar, yalnızca bitişe odaklanan versiyonudur
+
+</FAQItem>
+
+<FAQItem question="Diğer oyuncular benim ölüm etkisini görebilir mi?">
+
+Hayır. Yalnızca istemcinizde yerel olarak oluşturulur. Sunucudaki herkes, yapılandırdığınız etkinliğe bakılmaksızın standart, sade ölüm ekranını görür
+
+</FAQItem>
+
+<FAQItem question="Kill Efektlerini kullanmak yasaklanma riskini taşıyacak mı?">
+
+Hayır. Müşterinin çizdiklerini değiştirir, gönderdiklerini değil. Sunucu tarafı bir anticheat tarafından yakalanabilecek bir paket farkı yoktur. Herhangi bir risk, sunucunun değiştirilmiş istemcilere karşı genel tutumundan kaynaklanır, bu modülden değil
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Bu sözlükteki Etki Sonuçları kategorisi ve diğer tüm modüller bu kategoriye aittir." },
+  { href: "/tr/learn/what-is-killaura", label: "Killaura nedir?", description: "Savaş modülü Kill Effects ile karıştırılır ancak hiçbir ilgisi yoktur." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Gerçek amaç destekleyici modüllerin bulunduğu yer, tamamen görsel olanlarla karşılaştırmak için." }
+]} />
+
+<CTA href="/tr/satin-al">Opal'ın tam görsel modül setini inceleyin ve her öldürmeyi kendi başınızdan geçmiş gibi gösterin.</CTA>

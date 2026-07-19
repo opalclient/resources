@@ -1,0 +1,82 @@
+---
+title: Minecraft'ta No Bob Nedir? Modül Açıklaması
+description: No Bob, yürürken kameranın yukarı ve aşağı sallanmasını iptal eden bir Minecraft modülüdür; böylece vanilla'nın kendi View Bobbing ayarında olduğu gibi sabit bir görüş sağlar.
+excerpt: Vanilla Minecraft her adımda kameranı sarsar. Bob onu sabit tutmaz, videonun ayarlarında zaten bulunan bir kutucuk numarası gibi.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: No Bob, vanilla'nın View Bobbing seçeneğiyle aynı şey mi?
+    a: Fonksiyonel olarak evet. Vanilla'nın video ayarları zaten kamera sallantısını ortadan kaldıran bir seçeneğe sahip. No Bob, aynı sabit kamera etkisini bir istemci modülü olarak yeniden üretiyor.
+  - q: No Bob'un PvP'de bir avantajı var mı?
+    a: Anlamlı bir şey değil. Zira her oyuncu zaten vanilla ayarlardan görüş sallanmasını kapatabiliyor, bir mod aracılığıyla kapatmak da sadece kutucuğu işaretleyen kişiden seni öne geçirmiyor.
+  - q: Bir sunucu No Bob'u tespit edebilir mi?
+    a: Görüş bobbing'i tamamen istemcinizde oluşturulur ve sunucuya bildirilmez, bu nedenle sunucu tarafında bir kontrolün fark etmesi için herhangi bir pakette bir şey bulunmaz.
+  - q: No Bob hareketi mi değiştiriyor, yoksa sadece kamerayı mı?
+    a: Sadece kamera. Yürüyüş hızı, zıplama yüksekliği ve çarpışma etkilenmedi. Modül, gördüğünüzü değiştirir, karakterinizin gerçek hareketlerini değil.
+---
+
+<KeyTakeaways>
+
+- No Bob, Minecraft için bir kozmetik moddur ve yürümekten kaynaklanan kamera sallantısını, yani görüş titremesini iptal eder.
+- Sadece render'ı değiştirir. Hareket hızı, çarpışma kutuları ve sunucu verileri etkilenmez.
+- Sıfır tespit riski taşır: görüş titremesi hiçbir zaman sunucuya ulaşmaz.
+- Aynı düzeltme zaten Seçenekler > Video Ayarları > Görüş Titremesi altında Vanilla'da mevcuttur.
+
+</KeyTakeaways>
+
+No Bob, her adımda vanilla tarafından oynatılan görüş sallantısını iptal eden bir Minecraft modülüdür; yürüme animasyonunuza senkronize edilmiş küçük yanlara doğru sallanma ve düşüş. Açtığınızda kamera, ne kadar hızlı hareket ederseniz edin, düz ve sabit bir yüksekliğe kilitlenir. Bu, bir oyun mekaniği değişikliği değil, bir render değişikliğidir: karakteriniz aynı hızda yürür, aynı şekilde vurulur ve her zaman gönderdiği aynı verileri sunucuya gönderir. Değişen tek şey, sizin kişisel olarak gördüğünüz şeydir.
+
+## Nasıl Çalışır
+
+Vanilla, yürürken atılan her adımda kameraya küçük, periyodik bir kaydırma uygular; bu yerleşik sallantıdır: yürüyüş döngüsüne doğrudan bağlı ritmik bir sallanma ve düşüş. No Bob, karenin çizilmesinden önce render yolunda oturur ve bu kaydırmayı iptal eder, kamerayı hareketten bağımsız olarak sabit bir baş yüksekliğinde tutar.
+
+Görüş sallantısı tamamen bir render adımı olduğundan, etkileşimde bulunacak bir şey yoktur. Hareket hızını, çarpışmayı veya isabet tespitini etkilemez ve bunların hiçbiri sunucu tarafından izlenen şeylerin bir parçası değildir. Sunucu başlangıçta "sallanma" kavramına sahip bile değildir. Her zamanki gibi konum güncellemeleri alır ve her istemciye yürüyüş döngüsünü istediği gibi çizme özgürlüğü tanır.
+
+Çoğunlukla rahatlık ve netlik çekiciliği söz konusu. Sabit bir görüntü, uzun süreli kullanımlarda gözü daha az yorar, sürekli ekran sallantısından kaynaklanan mide bulantısını azaltır ve yayın yaparken veya kayıt alırken daha temiz kayıtlar sağlar. Daha küçük bir grup ise hareketli dövüşler sırasında ekranda bir şey daha az sallanmasını beğenir.
+
+## Bob Yok vs. vanilla'nın View Bobbing Ayarı
+
+| | Vanilla View Bobbing | Bob Yok modülü |
+|---|---|---|
+| Nerede Bulunur | Seçenekler > Video Ayarları | İstemcinin modül listesi |
+| Etkisi | Kamera sallantısını kaldırır | Kamera sallantısını kaldırır |
+| Algılama Riski | Yok | Yok |
+| Maliyeti | Ücretsiz, oyuna dahildir | İstemci ile birlikte paketlenmiş |
+
+İkisi de aynı görüntüyü üretir. Tek gerçek fark, ayarı değiştirmek için nereye gideceğiniz ve görsel seçeneklerinizin diğer istemci seçeneklerinin yanında yer alıp almaması, ayarlar menüsünde kaybolmamasıdır.
+
+<Callout variant="tip" title="Bunların Opal'da Nerede Bulunabileceği">
+Opal özel bir No Bob geçiş anahtarıyla gelmiyor ve bunun pek bir nedeni de yok. Mojang zaten düzeltmeyi yaptı, şu anda Seçenekler > Video Ayarları > Görünüm Sallanması kısmında mevcut, indirme gerektirmiyor. Ücretli bir istemcinin modül yuvaları, gerçekten yapamadığı şeylere daha iyi harcanır; Opal'ın kendi görsel ve hareket çalışmaları da tam olarak buraya yöneliktir.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="No Bob, vanilla'nın View Bobbing seçeneğiyle aynı mı?">
+Fonksiyonel olarak evet. Vanilla'nın video ayarları zaten kamera sallantısını ortadan kaldıran bir seçeneğe sahip. No Bob, aynı sabit kamera etkisini bir istemci modülü olarak yeniden üretiyor.
+</FAQItem>
+
+<FAQItem question="No Bob PvP'de avantaj sağlar mı?">
+Anlamlı bir avantaj sağlamaz. Zira her oyuncu zaten vanilla ayarlarından görüş bobbing'ini kapatabiliyor, bir mod aracılığıyla kapatmak da checkbox'ı kendisi kapatan oyuncudan sizi öne geçirmeyecektir.
+</FAQItem>
+
+<FAQItem question="Bir sunucu No Bob'u tespit edebilir mi?">
+Hayır. Bobbing görüntülemesi tamamen istemcinizde oluşturulur ve hiçbir zaman sunucuya bildirilmez, bu nedenle sunucu tarafında bir kontrolün fark etmesi için herhangi bir pakette bir şey bulunmaz.
+</FAQItem>
+
+<FAQItem question="No Bob hareketleri değiştiriyor mu yoksa sadece kamerayı mı?">
+Sadece kamera. Yürüyüş hızı, zıplama yüksekliği ve çarpışma etkilenmez. Modül, gördüğünüz şeyi değiştirir, karakterinizin gerçekte nasıl hareket ettiğini değil.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Daha geniş kategori modüllerinin, örneğin No Bob gibi." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Hassas ile fark edilebilir arasındaki çizginin tam olarak nerede olduğu." },
+  { href: "/tr/learn/what-is-velocity-anti-knockback", label: "Hızlanma (geri tepme önleme) nedir?", description: "No Bob gibi yüzeysel bir düzeltmeye kıyasla risk spektrumunun tam tersi uçtaki bir modül." },
+]} />
+
+<CTA href="/tr/satın-alın">Vanilla zaten kameranızı sabitledi. Opal'ın her şey için vanilla'nın yapamadığını görün.</CTA>

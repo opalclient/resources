@@ -1,0 +1,98 @@
+---
+title: Minecraft'ta Outline ESP Nedir? (Modül Açıklaması)
+description: Outline ESP, bir Minecraft görsel modülüdür; varlıkların siluetini renklerle doldurmak yerine duvarların içinden izler. Çalışma şekli ve ban riskleri.
+excerpt: Bir duvar şekli gizlemeyi durdurur, tüm tabloyu değil. Outline ESP size duvarın içinden silueti verir ve geri kalan her şeyin olması gerektiği gibi görünmesini sağlar.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Outline ESP aslında ne çiziyor?
+    a: Bir varlığın modelinin görünür kenarı etrafında, o varlığın şeklini yansıtan ince bir çizgi çizilirken, modelin geri kalanı normal dokusunu ve animasyonunu korur.
+  - q: Outline ESP ile Glow ESP arasındaki fark nedir?
+    a: ESP ana hatları, varlığın kendi render'ını olduğu gibi bırakır ve yalnızca bir kenarlık ekler. Glow ESP ise, varlığı tek bir katı renkle doldurur, vanilla'daki Glowing efektine daha yakın bir şekilde.
+  - q: Outline ESP sunucuya ek veri gönderiyor mu?
+    a: Hayır. Çizdiği pozisyon ve duruş verileri zaten normal oyun akışı için müşteriye gönderildi. Modül yalnızca mevcut verilerin ekranda nasıl işlendiğini değiştirir.
+  - q: Outline ESP bir oyuncunun yasaklanmasına neden olabilir mi?
+    a: Evet, mümkün. Bir savaş modülüne göre daha az risk taşır çünkü istemcinin gönderdiği şeyi asla değiştirmez, ancak tepkileri sahip olmaması gereken bilgilere dayanarak açıkça belli olan bir oyuncu, personel tarafından yakalanabilir veya davranışa dayalı tespitlere maruz kalabilir.
+---
+
+<KeyTakeaways>
+
+- Outline ESP, bir Minecraft görsel modülüdür; varlıkların siluetlerinin etrafında ince bir çizgi çizer ve duvarların içinden görünür tutar, modelin dokusu, zırhı ve animasyonu ise normal şekilde görüntülenir.
+- Sıradan oyun için zaten istemciye gönderilen konum ve duruş verilerini kullanır, bu nedenle ek paketler gönderilmez.
+- GlowESP gibi katı dolgu tarzlarından farklı olarak, varlığın gerçek görünümünü ve ekipmanını ana hat çizgisinin altında görünür bırakır.
+- Algılama davranışsaldır, paket tabanlı değildir: görememeniz gereken bir hedefe tepki vermek, oyuncunun yakalanmasına neden olur
+
+</KeyTakeaways>
+
+Outline ESP, Minecraft'ta varlıkların modelinin kenarlarını çizen görsel bir modülüdür ve bu kenar çizgisini duvarların ve arazinin içinden geçerek görünür tutar, varlığı düz bir vurgu rengiyle kaplamak yerine. Varlığın geri kalanı, değiştirilmemiş bir istemcinin olduğu gibi render edilmeye devam eder; cilt, zırh ve animasyon bozulmadan kalır. Tek ekleme, şeklini çizen ince bir çizgidir; bu, birinin veya bir şeyin bir duvarın diğer tarafında olduğunu, herhangi bir meşru neden bilmenizden çok önce anlamanıza yeterlidir.
+
+## Nasıl Çalışır
+
+Outline ESP, bir hedef varlığın modelinin silüetini izler ve bu çizgiyi dünya geometrisinin üzerine çizer, böylece varlık ile kamera arasında bulunan herhangi bir duvar, zemin veya araziden bağımsız olarak hayatta kalır. Sunucu zaten, duvar ya da duvar olmaksızın normal oyun için, fizik ve normal render her ikisi de görüş hattından bağımsız olarak bu veriye bağlı olduğundan, her yakınlardaki varlığın konumunu ve duruşunu istemciye aktarıyor. Bir vanilla istemci, son adımda derinlik testi yoluyla bunların çoğunu atar, bu nedenle bir varlık önünde katı bir şey geçtiği anda kaybolur. Outline ESP, çizdiği kenar için bu atlama adımını atlar ve başka bir şey değil.
+
+İşte tüm mekanizma. Sunucuya yeni bir istek gönderilmez, giden paketlerin şekli değişmez, sadece istemcinin zaten oluşturduğu bir karede ne çizileceğine dair farklı bir karardır.
+
+## ESP ve GlowESP Karşılaştırması
+
+Her iki modül de aynı sorunu çözüyor: arazi içinden bir varlığı görme, modelin ne kadarının işlendiği konusunda farklı işleme seçimleri ile.
+
+| | Outline ESP | GlowESP |
+|---|---|---|
+| Ne işleniyor | Modelin silüetini çizen ince bir çizgi | Modelin tamamını kaplayan düz, tek renkli dolgu |
+| Doku ve cilt | Çizginin altında görünür kalır | Dolgu rengiyle değiştirilir |
+| En uygun olduğu durumlar | Varlıkları gerçek ciltleri veya ekipmanlarıyla ayırt etmek | Hızlı, renk kodlu bir okuma, genellikle takım veya varlık türü bazında |
+| Ağ imzası | Her iki durumda da yok, konum verisi zaten istemci tarafında |
+
+İkisi de ek veri göndermiyor, bu yüzden birini diğerine tercih etmek kişisel tercihe bağlı. Şekli ve altındaki detayları istiyorsanız Outline'ı, tek bir bakışta yakalayan bir şey istiyorsanız katı dolguyu seçin.
+
+<Callout variant="tip" title="Burada Opal'da nerede duruyor">
+
+Opal'ın görsel kategorisi, Entity ESP'yi diğerlerinin olduğu gibi kendi riskin altında kullanma etiketiyle konumlandırıyor. Temel fikir, Outline ESP'nin temsil ettiğiyle aynı: tek bir giden paket göndermeden bir varlığın konumunu arazi üzerinde göstermek. Belirli bir uygulamanın ince bir kenarlık mı yoksa katı bir dolgu mu çizdiği, istemciye göre değişen bir işleme detayıdır. Asıl önemli olan, bu tür bilgilerin kurulumunuzda olup olmamasıdır ve Entity ESP size bu kararı verme imkanı sunuyor
+
+</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapıldığı değil">
+
+Bu sayfa, Outline ESP'nin ne yaptığını ve neden kendi sorumluluğunuzda kullanılması gerektiğini, onu çalıştırmanın bir onaylanması anlamına gelmediğini açıklar. Paketlere asla dokunmaz, bu nedenle sunucunun yakalayabileceği temiz bir veri akışı yoktur, ancak personel incelemesi ve davranışa dayalı tespit, sahip olmaması gereken bilgilere dayanarak tepki veren oyuncuları yine de yakalar
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Outline ESP aslında ne çiziyor?">
+
+Bir varlığın modelinin görünür kenarı etrafında, o varlığın şeklini yansıtan ince bir çizgi çizilirken, modelin geri kalanı normal dokusunu ve animasyonunu korur
+
+</FAQItem>
+
+<FAQItem question="Outline ESP ile Glow ESP arasındaki fark nedir?">
+
+ESP taslağı, varlığın kendi render'ını olduğu gibi bırakır ve yalnızca bir kenarlık ekler. Glow ESP ise, varlığı tek bir katı renkle doldurur, vanilla'daki Glowing efektine daha yakın bir görünüm sunar
+
+</FAQItem>
+
+<FAQItem question="Outline ESP sunucuya ek veri gönderiyor mu?">
+
+Hayır. Çizdiği pozisyon ve duruş verileri zaten normal oyun akışı için müşteriye gönderildi. Modül yalnızca mevcut verilerin ekranda nasıl işlendiğini değiştirir
+
+</FAQItem>
+
+<FAQItem question="Outline ESP bir oyuncunun yasaklanmasına neden olabilir mi?">
+
+Evet, mümkün. Savaş modülüne göre daha az risk taşır çünkü istemcinin gönderdiği şeyi hiçbir zaman değiştirmez; ancak, sahip olmaması gereken bilgilere dayanarak tepkileri açıkça belli olan bir oyuncu, personel tarafından yakalanabilir veya davranışa dayalı tespit sistemleri tarafından tespit edilebilir
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Daha geniş kapsamlı Taslak ESP ve benzeri modüllerin ait olduğu kategori." },
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "ESP'nin nerede olduklarını zaten size bildirdiği bir hedef üzerinde etkili olan bir modül." },
+  { href: "/tr/learn/what-is-reach", label: "Reach nedir?", description: "Paket düzeyindeki hileleri, tamamen görsel kalarak ESP'yi tamamen atlar." }
+]} />
+
+<CTA href="/tr/satin-al">Opal'ın görsel kategorisinde bilgi ve risk arasındaki sınırı nerede çizdiğini görün.</CTA>

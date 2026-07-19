@@ -1,0 +1,93 @@
+---
+title: ImGui Nedir? Dear ImGui Açıklaması (2026)
+description: ImGui (Dear ImGui), C++ için anında modlu bir grafik kullanıcı arayüzü kütüphanesidir. Her karede menüleri çizerek, saklanan bir widget ağacı olmadan çalışır; oyun araçlarında ve yerel istemcilerde yaygın olarak kullanılır.
+excerpt: Sevgili ImGui, her karede basit fonksiyon çağrıları ile sıfırdan bir menü çiziyor. İşte immediate-mode'un ne anlama geldiği ve yerel istemcilerin neden buna yöneldiği.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Libraries
+author: trq
+faqs:
+  - q: ImGui sadece C++ için mi?
+    a: Çekirdek kütüphane C++'dır ve çoğu proje burada kullanır; diğer diller için topluluk bağlamaları mevcut olsa da, orijinal ve en yaygın kullanım C++ oyun araçları ve yerel uygulamalarda görülür.
+  - q: ImGui, kullanıcı arayüzünün gerçek görünümünü bir oyun menüsüne benzetir mi?
+    a: Kutudan çıktığı haliyle sade bir geliştirici aracı görünümüne sahiptir, bu nedenle özel bir tema stili isteyen veya menü varsayılan görünümünden tamamen farklı olacak şekilde kendi widget'larını üzerine çizen projeler için yoğun bir şekilde kullanılır.
+  - q: Bir Fabric modu ImGui kullanabilir mi?
+    a: Alışılmadık bir şekilde. Bir Fabric modu Java üzerinde çalışır ve oyunun GUI sistemini kullanır, oysa yerli bir C++ istemcisi ImGui için tipik bir evdir.
+  - q: ImGui her karede yeniden çizdiği için yavaş mı?
+    a: Hayır. Kullanıcı arayüzünü yeniden oluşturmak ucuz ve program zaten her kareyi çiziyor, bu yüzden menü de zaten yapılan işin üzerine ekleniyor.
+---
+
+<KeyTakeaways>
+
+- ImGui (Dear ImGui), C++ için küçük, anında modlu bir grafik kullanıcı arayüzü (GUI) kütüphanesidir.
+- Her karede, fonksiyon çağrıları aracılığıyla menüyü yeniden çizer, herhangi bir widget ağacı bakımını gerektirmez.
+- Yerel istemciler ve araçlar, 3D bir sahnenin üzerine düşük gecikmeli bir örtü için onu tercih ederler.
+- Bu, bir C++ kalıbıdır; Java Fabric modları, oyunun kendi GUI bağlantı noktalarını kullanır.
+
+</KeyTakeaways>
+
+ImGui, Dear ImGui'nin kısaltmasıdır, C++ için küçük, anında modlu bir grafik kullanıcı arayüzü (GUI) kütüphanesidir. Widget nesnelerinin bir ağacını korumak yerine, her karede düz fonksiyon çağrıları aracılığıyla menüyü yeniden çizer. Bu, kurulumunu hızla sağlamayı ve bir oyunun mevcut render döngüsünün üzerine kolayca yerleştirmeyi mümkün kılar; bu nedenle araçlar ve yerel istemciler düşük gecikmeli üst üste bindirmeler için onu kullanır.
+
+<Callout variant="info" title="Opal Nerede Çalışır">
+Opal, bir [Fabric](https://fabricmc.net/) mod'udur, bu nedenle oyunun kendi GUI bağlantı noktaları aracılığıyla arayüzünü oluşturur, ImGui yerine. Yerel kodu değiştirmeden özellikler eklemek istiyorsanız, GraalVM JavaScript betik çalıştırma motoru ile başlamak için doğru yerdir. [Kurulum rehberine](/tr/docs/setup) ve [betik çalıştırma rehberine](/tr/docs/scripting) bakın.
+</Callout>
+
+## Anlamı Ne Demek?
+
+ImGui, arayüzü her karede yeniden oluşturur. Bir buton nesnesi oluşturup saklamazsınız. "Buraya bir buton çiz" diyen bir fonksiyonu çağırırsınız ve bu çağrı hem butonu çizer hem de bu karede tıklanıp tıklanmadığını size bildirir.
+
+Saklı modlu bir araç seti tam tersi şekilde çalışır. Bellekte uzun ömürlü bir widget ağacı tutar ve durum değiştiğinde bu ağacı güncellersiniz. Anlık mod, bu kalıcı yapıyı, kendi durumunuzun yanında okunan ve yaşayan koda karşılık getirir.
+
+## Neden Araçlar ve İstemciler Bunu Seçiyor?
+
+ImGui, 3D bir sahnenin üzerine yerleştirilen menüler için popülerdir. Bunun pratik nedenleri vardır.
+
+- **Düşük gecikme süresi**: programın zaten oluşturduğu bir kareye bağlanır, böylece menü hemen tepki verir.
+- **Az ekleme**: bir pencere ve birkaç kontrol, sadece birkaç fonksiyon çağrısıdır. Yönetilmesi gereken bir düzen dosyası veya ayrı bir UI iş parçacığı yoktur.
+- **Bağımsız**: kütüphanenin az bağımlılığı vardır ve yaygın grafik arka uçlarına uyum sağlar, bu nedenle ağır bir çerçeve çekmez.
+- **Hata ayıklamaya uygun**: yayın menüsünü oluşturan aynı çağrılar, geliştiricilerin bir özelliği oluştururken kullandıkları geçici hata ayıklama panellerini de oluşturur.
+
+## Anlık Mod vs Saklı Mod
+
+| Yön | Anında Mod (ImGui) | Saklı Mod Araç Kiti |
+| :--- | :--- | :--- |
+| Durum sahipliği | Kodunuz veriyi tutar | Araç kiti bir widget ağacını tutar |
+| Kare başına çalışma | Her karede kullanıcı arayüzünü yeniden oluşturun | Değişiklikte ağacı güncelleyin |
+| Kurulum maliyeti | Birkaç fonksiyon çağrısı | Önceden daha fazla yapı |
+| En uygun | Üst üste binenler, araçlar, oyun menüleri | Büyük, belge tarzı uygulamalar |
+
+## Yerel bir istemciye nasıl uyum sağlıyor
+
+C++ ile oluşturulmuş yerel bir yardımcı istemci, genellikle oyunun çerçevesi üzerinde ImGui ile menüsünü çizer. Menü kodu, render döngüsünün içinde çalışır, istemcinin kendi ayarlarını okur ve değişiklikleri doğrudan yazar. Ayrı bir kullanıcı arayüzü süreci olmadığından, bir özelliği etkinleştirmek, istemcinin zaten sahip olduğu bir değere karşı yalnızca bir fonksiyon çağrısıdır.
+
+Bu, bir C++ kalıbıdır. [Fabric](https://fabricmc.net/) ile yazılmış bir Java modu, oyunun kendi GUI bağlantı noktaları aracılığıyla arayüzüne ulaşır, bu nedenle ImGui çoğunlukla yerel kod olarak gönderilen istemcilerde görünür, Java modları olarak değil.
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="ImGui sadece C++ için mi?">
+Çekirdek kütüphane C++ ile yazılmıştır ve çoğu proje de onu bu şekilde kullanır. Diğer diller için topluluk tarafından oluşturulmuş bağlayıcılar mevcut olsa da, orijinal ve en yaygın kullanımı C++ oyun araçları ve yerel uygulamalarda görülür.
+</FAQItem>
+
+<FAQItem question="ImGui, UI'nin gerçek görünümünü bir oyun menüsü gibi mi yapar?">
+Kutudan çıktığı haliyle sade bir geliştirici aracı görünümüne sahiptir. Özel bir stil teması isteyen veya kendi widget'larını üzerine çizen projeler, gönderilen bir menünün varsayılan görünümünden hiçbir şey gibi görünmesini sağlayabilir.
+</FAQItem>
+
+<FAQItem question="Bir Fabric modu ImGui kullanabilir mi?">
+Genellikle hayır. Bir Fabric modu Java üzerinde çalışır ve oyunun kendi GUI sistemini kullanır. ImGui için tipik ortam, yerli C++ istemcisidir.
+</FAQItem>
+
+<FAQItem question="ImGui yavaş mı çiziyor çünkü her kare yeniden çiziliyor?">
+Hayır. Arayüzü yeniden oluşturmak ucuzdur ve program zaten her kare çizim yapıyor, dolayısıyla menü de zaten yapılan işin üzerine ekleniyor.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-nanovg", label: "NanoVG nedir?", description: "Java istemcilerinin kullandığı vektör kütüphanesinin kullanıcı arayüzünü çizdiği." },
+  { href: "/tr/learn/what-is-graalvm-javascript-scripting", label: "GraalVM JavaScript betiği nedir?", description: "Opal'ın yerel kod olmadan nasıl genişletmenize olanak tanıdığı." },
+  { href: "/tr/learn/what-is-the-fabric-api", label: "Fabric API nedir?", description: "Fabric modlarının üzerine inşa edildiği ortak katman." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

@@ -1,0 +1,111 @@
+---
+title: Scrivi il tuo primo script JavaScript GraalVM (2026)
+description: "Scrivi il tuo primo script JavaScript GraalVM: registra un punto di ingresso, intercetta un evento e ricaricalo a caldo senza ricompilare Java. Con un esempio funzionante."
+excerpt: "Tre piccoli passaggi fanno partire uno script: registralo, collega un evento, salvalo nella cartella degli script. È vero JavaScript e si ricarica in pochi secondi, senza ricostruzione."
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: Devo installare GraalVM per scrivere uno script?
+    a: No. Il programma host include GraalVM e il suo motore JavaScript. Scrivi solo il file JavaScript e trascinalo nella cartella degli script.
+  - q: Posso usare la sintassi JavaScript moderna?
+    a: Sì. Il motore supporta le funzionalità ECMAScript più recenti, inclusi i moduli con importazione ed esportazione, quindi non si rimane bloccati con un vecchio sottoinsieme.
+  - q: Perché il mio script non si carica?
+    a: Verifica che il file si trovi nella cartella degli script dell'host, abbia l'estensione prevista dall'host e si registri con il punto di ingresso dell'host. Un errore di battitura nella chiamata di registrazione è la causa più comune.
+  - q: È la stessa cosa che scrivere uno script Node.js?
+    a: No. Il motore è integrato all'interno della JVM host, quindi il tuo script comunica con il programma host, non con un runtime Node.js autonomo.
+---
+
+<KeyTakeaways>
+
+- Un primo script è composto da tre passaggi: registrazione, aggancio di un evento, salvataggio nella cartella degli script.
+- L'host include [GraalVM](https://www.graalvm.org/), quindi si scrive JavaScript reale e non lo si installa mai da soli.
+- Gli script vengono ricaricati a caldo in pochi secondi, senza bisogno di ricostruire Java.
+- Uno script può chiamare solo gli oggetti esposti dall'host tramite la whitelist di accesso all'host.
+
+</KeyTakeaways>
+
+Scrivere il primo script JavaScript per GraalVM significa compiere tre semplici passaggi: registrare lo script con il punto di ingresso dell'host, associarlo a un evento o modulo e salvarlo nella cartella degli script, in modo che l'engine lo carichi. L'engine si basa sull'API Polyglot di [GraalVM](https://www.graalvm.org/), quindi lo script è JavaScript reale e si ricarica senza ricompilare alcun codice Java.
+
+<Callout variant="info" title="Dove si integra Opal">
+Opal è un mod [Fabric](https://fabricmc.net/) con un motore di scripting JavaScript [GraalVM](https://en.learn/what-is-graalvm-javascript-scripting), quindi questi passaggi si applicano direttamente. Per iniziare, consulta la [documentazione di scripting](/it/docs/scripting).
+</Callout>
+
+## Cosa ti serve innanzitutto
+
+Un programma host che integra il motore. L'host include GraalVM JavaScript, espone un insieme di oggetti che gli script possono chiamare e monitora una cartella degli script. Non devi installare GraalVM separatamente; l'host lo include. Scrivi JavaScript standard contro gli oggetti che l'host ti fornisce.
+
+Conoscere a cosa corrispondono quegli oggetti aiuta, ma non devi scrivere alcun codice Java per iniziare.
+
+## I tre passaggi
+
+<Steps>
+
+<Step number={1} title="Trova la cartella script">L'host carica gli script da una directory nota all'avvio. Consulta la documentazione dell'host per il percorso esatto</Step>
+
+<Step number={2} title="Crea un file script">
+Crea un nuovo file `.js` (o `.mjs`) in quella cartella. L'host lo rileverà la prossima volta che caricherà gli script.
+</Step>
+
+<Step number={3} title="Registra e aggancia">All'interno del file, registra lo script con il punto di ingresso dell'host, quindi associa un comportamento a un evento o definisci un modulo</Step>
+
+</Steps>
+
+## Un esempio minimo
+La maggior parte degli host fornisce uno script con un unico punto di ingresso per la registrazione e alcuni oggetti proxy che collegano JavaScript al programma. I nomi esatti dipendono dall'host, ma la struttura è la stessa. Uno script iniziale di solito si annuncia e reagisce a un solo evento:
+
+```js
+// Register the script with the host (names vary by host).
+script.register({
+  name: "hello-world",
+  version: "1.0.0",
+});
+
+// React to an event the host exposes.
+script.on("enable", () => {
+  client.print("Hello from my first script.");
+});
+```
+
+Consulta la documentazione API dell'host per i nomi reali degli oggetti e dei metodi. Il punto è il modello: registrare, quindi collegare un evento o definire un modulo
+## Ricaricamento a caldo mentre lavori
+Salva il file e ricarica gli script (o riavvia l'host se non supporta il live reload). La modifica ha effetto senza bisogno di ricostruire. Questo ciclo veloce è il motivo principale per cui è preferibile usare script invece di compilare un mod: uno script si ricarica in pochi secondi, mentre un mod compilato deve essere ricostruito e rilanciato.
+
+| Approccio | Ciclo di iterazione | Linguaggio | Quando è adatto |
+|----------|----------------|----------|--------------|
+| Script JavaScript GraalVM | Modifica, salva, ricarica | JavaScript | Piccole modifiche, comportamenti personalizzati |
+| Mod compilato | Ricostruisci, rilancia | Java o Kotlin | Funzionalità più ampie, hook più profondi |
+## Cosa possono e non possono fare gli script
+
+Uno script può accedere agli oggetti esposti dall'host e nient'altro. L'host dichiara quali classi e metodi gli script possono utilizzare tramite la whitelist di accesso polyglot di GraalVM, e l'impostazione predefinita è il blocco. Questo garantisce la sicurezza e la prevedibilità degli script. Se l'oggetto desiderato non è esposto, l'host deve aggiungerlo; non è possibile superare la whitelist dal lato script.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="È necessario installare GraalVM per scrivere uno script?">
+No. Il programma host include GraalVM e il suo motore JavaScript. Scrivi semplicemente il file JavaScript e inseriscilo nella cartella degli script.
+</FAQItem>
+
+<FAQItem question="Posso usare la sintassi JavaScript moderna?">
+Sì. Il motore supporta le funzionalità ECMAScript più recenti, inclusi i moduli con `import` ed `export`, quindi non si è bloccati con un vecchio sottoinsieme.
+</FAQItem>
+
+<FAQItem question="Perché il mio script non si carica?">
+Verifica che il file si trovi nella cartella degli script dell'host, abbia l'estensione prevista dall'host e si registri al punto di ingresso dell'host. Un errore di battitura nella chiamata di registrazione è la causa più comune.
+</FAQItem>
+
+<FAQItem question="È la stessa cosa che scrivere uno script Node.js?">
+No. Il motore è incorporato all'interno della JVM host, quindi il tuo script comunica con il programma host, non con un runtime Node.js autonomo.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-graalvm-javascript-scripting", label: "Cos'è la scripting JavaScript di GraalVM?", description: "L'esecuzione di questi script, spiegata." },
+  { href: "/it/learn/what-is-the-jvm", label: "Cos'è la JVM?", description: "La piattaforma in cui è integrato il motore." },
+  { href: "/it/blog/introducing-opal-scripting-engine", label: "Il motore di scripting Opal", description: "Cosa si può costruire con gli script in Opal." },
+]} />
+
+<CTA href="/it/purchase">Ottieni Opal, un client Fabric, per $8.99</CTA>

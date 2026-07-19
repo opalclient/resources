@@ -1,0 +1,90 @@
+---
+title: Minecraft'ta Mod Göstergesi Nedir?
+description: Bir mod göstergesi, Minecraft istemcisinde hangi modların etkin olduğunu listeleyen küçük bir HUD üst bilgisidir; bir Dizi Listesine benzer ancak oluşturması daha basittir.
+excerpt: Bir modül göstergesi, etkinleştirdiğiniz her şeyi ekranın köşesinde çalışan bir liste halinde gösterir. Bir Dizi Listesi ile aynı işlevi görür, ancak daha hafif bir şekilde oluşturulmuştur.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Bir mod göstergesi oyun akışını etkiler mi?
+    a: Hayır, sadece kendi ekranınızda metin çiziyor ve hareket, savaş veya başka herhangi bir oyun mantığıyla ilgili hiçbir şeyle etkileşime geçmiyor, bu yüzden oyun oynama şekliniz üzerinde hiçbir etkisi yok.
+  - q: Anticheat sistemleri modül göstergelerini tespit edebilir mi?
+    a: Hayır, hiçbir şey sunucuya göndermiyor, dolayısıyla sunucu tarafındaki hile önleme sisteminin gözlemleyip işaretleyebileceği hiçbir şey zaten yok.
+  - q: Modül göstergesi ile bir Dizi Listesi arasındaki fark nedir?
+    a: Aynı işi yapıyorlar, etkin modülleri listeliyorlar; ancak bir modül göstergesi genellikle, bir Dizi Listesi ile aynı uygulamayı paylaşmayan, daha basit ve ayrı kodlanmış versiyonudur.
+  - q: Bir müşterinin hem bir modül göstergesi hem de bir Dizi Listesi göndermesi neden olurdu?
+    a: Genellikle, ikisi farklı zamanlarda ayrı özellikler olarak inşa edildiği, tek bir şeye birleştirilmediği için. Bu, bir geliştirme detayıdır, ekranda gördüklerinizi değiştirecek bir şey değil.
+  - q: Diğer oyuncular tarafından mod göstergesi görülebiliyor mu?
+    a: Hayır. Sadece kendi istemcinizde oluşturulur ve asla sunucuya gönderilmez veya oyundaki başkalarına gösterilmez.
+---
+
+<KeyTakeaways>
+
+- Bir mod göstergesi, Minecraft yardımcı istemcisinde şu anda etkinleştirilmiş modüllerin hangileri olduğunu gösteren kompakt bir ekrandır.
+- Canlı olarak güncellenir: bir modülü etkinleştirin ve adı görünür, devre dışı bırakın ve adı kaybolur.
+- Tamamen istemci tarafında oluşturulur ve asla sunucuyla iletişime geçmez, bu nedenle herhangi bir anticheat riski taşımaz.
+- Aynı işlevi bir Dizi Listesi gibi yapar, ancak ayrı olarak oluşturulmuş, kod paylaşmayan daha basit bir moddur.
+- Fan gibi istemcilerde görünür.
+
+</KeyTakeaways>
+
+Modül göstergesi, genellikle ekranın bir köşesinde bulunan, Minecraft yardımcı istemcinizde şu anda çalışan modülleri size bildiren kısa metin listesidir. Killaura'yı açtığınızda adı görünür. Kapatırsanız ad kaybolur. Özelliğin tamamı budur: kendi istemci durumunuzun canlı bir göstergesi, başka bir şey değil. Bir Dizi Listesi ile aynı rolü oynar ve her ikisi de gönderiliyorsa, genellikle iki görünümle tek bir liste yerine ayrı, bağımsız olarak kodlanmış özellikler olarak yazılır. Fan gibi istemcilerde adının ima ettiği şeyi tam olarak yapanını bulacaksınız.
+
+## Nasıl Çalışır
+
+Her karede istemci, şu anda etkin olarak işaretlenmiş modülleri kontrol eder ve adlarını genellikle ekranın bir köşesine sabitlenmiş kısa bir liste olarak çizer. Bir modülü etkinleştirin ve bir satır eklenir. Devre dışı bırakın ve satır hemen kaybolur. Mekaniğin bundan fazlası yoktur.
+
+Liste yalnızca yerel istemci durumunu okur ve oyun görünümünün üzerine metin boyar, bu nedenle asla sunucuyla iletişim kurmaz. Paket gönderilmez, oyun mantığına dokunulmaz, yalnızca üzerine zaten yaptığınız şeyin üzerine yerleştirilmiş bir çizim çağrısı olur. Koordinat HUD'si veya FPS sayacı gibi aynı kategoriye girer: tamamen yerel, tamamen kozmetik ve ekranınıza bakmayanlar tarafından görünmeyen.
+
+## Modül Göstergesi vs Dizi Listesi
+
+Buradaki örtüşme tesadüf değil. Her iki özellik de aynı soruyu hızlıca yanıtlamak için var: Şu anda ne var? Farklılıkları ise amaç değil, kapsam.
+
+| | Modül Göstergesi | Dizi Listesi |
+|---|---|---|
+| Amaç | Şu anda aktif olan modülleri listeler | Aynı: Şu anda aktif olan modülleri listeler |
+| Özellik derinliği | Sadece isimden oluşan, minimal liste | Genellikle daha kapsamlı, sıralama veya stil seçenekleri gibi ek özelliklerle |
+| Geliştirme yaklaşımı | Ayrı kodlanmış, her iki özelliği gönderen istemcilerde bile kendi basit modülüdür | Sıklıkla daha gelişmiş, iki özellikten "birincil" olanıdır |
+| Sunucu etkileşimi | Yok | Yok |
+| Hile önleme riski | Yok | Yok |
+
+Bir istemci sadece birini, diğerini veya her ikisini yan yana gönderebilir. Hangisini gördüğünüz veya her ikisinin de bir köşede üst üste gelip gelmediği, geliştirme ekibinin HUD'unu nasıl yapılandırdığına, aslında ne yaptığını gördüğünüzdeki farka bağlı değildir. Daha derinlemesine ve daha özellikli kardeşi istiyorsanız, [Dizi Listesi](/tr/learn/what-is-array-list) sayfasına bakabilirsiniz.
+
+<Callout variant="tip" title="Opal bununla ilgili ne düşünüyor?">
+Opal, Module Indicator adlı bir modül göndermiyor. Bir yardımcı istemci için "şu anda neyin açık olduğu" göstergesi temel bir gerekliliktir, bir satış noktası değil, bu yüzden birinin var olup olmaması, üzerinde neyin göründüğünden çok daha az önemlidir. Dikkatleri modüllere yöneltin.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Modül göstergesi oyun akışını etkiler mi?">
+Hayır. Sadece kendi ekranınızda metin çizdirir ve hareket, savaş veya başka herhangi bir oyun mantığıyla ilgili hiçbir şeyi etkilemez, bu nedenle oyun oynama şekliniz üzerinde hiçbir etkisi olmaz.
+</FAQItem>
+
+<FAQItem question="Anticheat bir modül göstergesini tespit edebilir mi?">
+Hayır. Sunucuya hiçbir şey göndermediği için, sunucu tarafındaki bir anticheat'in gözlemleyip işaretleyebileceği hiçbir şey bulunmuyor.
+</FAQItem>
+
+<FAQItem question="Modül göstergesi ile Dizi Listesi arasındaki fark nedir?">
+İkisi de aynı işi yapar, aktif olan modülleri listeler, ancak bir modül göstergesi genellikle Dizi Listesi ile aynı uygulamayı paylaşmayan, daha basit ve ayrı kodlanmış bir versiyondur.
+</FAQItem>
+
+<FAQItem question="Bir müşteri hem modül göstergesi hem de Dizi Listesi neden gönderir?">
+Genellikle, bu iki özellik farklı zamanlarda ayrı ayrı geliştirilmiş ve tek bir özellik olarak birleştirilmemiştir. Bu, bir geliştirme detayıdır ve ekranda gördüğünüz şeyleri değiştirmez.
+</FAQItem>
+
+<FAQItem question="Modül göstergesi diğer oyunculara görünür mü?">
+Hayır. Sadece kendi istemcinizde görüntülenir ve hiçbir zaman sunucuya gönderilmez veya oyundaki başkalarına gösterilmez.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Bu HUD göstergesinin ait olduğu daha geniş kategori, küçük bir parçasıdır." },
+  { href: "/tr/learn/what-is-killaura", label: "Killaura nedir?", description: "O listede en çok görünmesi muhtemel modüllerden biri." },
+  { href: "/tr/learn/what-is-reach", label: "Ulaşmak nedir?", description: "Sunun gibi bir şeyin aksine, sunucunun gerçekten ölçebildiği bir modül." },
+]} />
+
+<CTA href="/tr/satin-al">Bir okuma çıktısı, okuduğu kadar ilginçtir. Opal'ın listesinde neler olduğuna bakın.</CTA>

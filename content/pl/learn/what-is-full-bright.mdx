@@ -1,0 +1,86 @@
+---
+title: Co to jest jasność maksymalna w Minecraft? Wyjaśnienie modułu wizualnego
+description: Tryb "Full Bright" ustawia każdy poziom oświetlenia w grze Minecraft na maksymalny, dzięki czemu jaskinie, nocne niebo i cienie są w pełni oświetlone. Jak to działa i czym różni się od trybu X-Ray.
+excerpt: Wanilia chce, żebyś niósł pochodnie przez każdą jaskinię. Pełny blask po prostu włącza światła i pomija to ćwiczenie.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy jasność maksymalna to to samo co podniesienie gamma?
+    a: Lądują w podobnym miejscu, ale działają inaczej. Zwiększenie jasności gamma lub monitora podnosi wszystko na ekranie, w tym obszary już oświetlone, co może wypłukać jasne sceny. Pełna jasność celuje bezpośrednio w obliczenia poziomu światła, dzięki czemu ciemne obszary renderują się jako oświetlone, nie wpływając na to, co już było jasne.
+  - q: Czy jasność wpływa na to, co widzą inni gracze?
+    a: Nie. To tylko lokalna zmiana renderowania. Wszyscy inni na serwerze widzą świat z normalnym oświetleniem, pochodniami, cieniami i wszystkim. Zmienia się tylko Twój własny widok.
+  - q: Czy można włączyć i wyłączyć pełny blask?
+    a: Tak. To przełącznik w liście modułów klienta lub ustawieniach wizualnych, włączany, gdy potrzebujesz widoczności, i wyłączany w przeciwnym razie, podobnie jak przełącznik klawisza powiększenia.
+  - q: Czy używanie pełnego blasku jest uważane za oszustwo?
+    a: Zazwyczaj nie. Zmienia tylko lokalne renderowanie i nie wysyła nic innego do serwera, dlatego większość serwerów i systemów anticheat traktuje to jako czysto kosmetyczne, bardziej zbliżone do suwaka jasności niż do cheatów.
+  - q: Czy pełne oświetlenie ujawnia rudę, czy ukryte struktury?
+    a: Nie. Ono usuwa ciemność, nie sprawia, że bloki stają się przezroczyste ani nie uwidacznia nic przez teren. To zadanie X-Ray'a, a nie pełnego światła.
+---
+
+<KeyTakeaways>
+
+- Full Bright to moduł wizualny, który wymusza renderowanie każdego bloku przy maksymalnym poziomie oświetlenia, dzięki czemu jaskinie, noc i cienie przestają wyglądać na ciemne.
+- Zmienia tylko to, co rysuje twój klient, a nie wartości oświetlenia, które faktycznie śledzi serwer.
+- Inni gracze widzą świat dokładnie tak, jak wcześniej, ponieważ zmiana ma miejsce wyłącznie w twoim kroku renderowania.
+- Nie ujawnia rud ani terenu w taki sposób, jak X-Ray, i nie wysyła nic dodatkowego przez sieć.
+
+</KeyTakeaways>
+
+Full Bright to moduł wizualny, który ustawia każdy poziom oświetlenia w świecie Minecraft na maksimum, dzięki czemu jaskinie, nocne niebo i zacienione zakątki renderują się tak, jakby były oświetlone pochodnią, nawet jeśli żadna nie znajduje się w pobliżu. Działa całkowicie w rendererze klienta: rzeczywiste wartości oświetlenia śledzone przez serwer nigdy się nie zmieniają, zmienia się jedynie obraz rysowany na ekranie. Wyłączony, świat wygląda dokładnie tak ciemno, jak zamierzone przez wersję bazową. Włączony, ciemność przestaje być zmienną – w jaskiniach, pod wodą lub o północy w grze, wszystko wygląda mniej więcej jak w południe.
+
+## Jak to działa
+
+Minecraft normalnie oblicza wartość oświetlenia dla każdego bloku na podstawie trzech czynników: tego, ile nieba widzi, jak blisko znajduje się do pochodni lub innego źródła światła oraz pory dnia. Ta wartość przyciemnia kolory bloku – im niższa liczba, tym ciemniej się renderuje. Full Bright całkowicie pomija to obliczenie po stronie wyjściowej. Zmusza renderer do traktowania każdego bloku tak, jakby znajdował się na maksymalnym poziomie oświetlenia, niezależnie od rzeczywistej wartości, która się pod nim kryje.
+
+Nic w symulacji się nie zmienia. Spawnowanie mobów wciąż opiera się na rzeczywistym poziomie światła śledzonym przez serwer, a nie na tym, który widzisz, więc pełne oświetlenie nie sprawia, że dobrze oświetlona baza jest bezpieczniejsza, ani że ciemna bardziej niebezpieczna. Pudełka kolizji się nie przesuwają. Dla wszystkich innych graczy na serwerze świat wygląda zupełnie normalnie, włącznie z pochodniami i cieniami, ponieważ zmiana zachodzi wyłącznie w etapie renderowania Twojego klienta. Nie rozjaśniasz świata. Rozjaśniasz swoją perspektywę.
+
+## Pełne oświetlenie vs. Przeźroczystość
+
+Pełne oświetlenie i Przeźroczystość często bywają łączone w jedną kategorię „widzenia rzeczy, których nie powinieneś widzieć”, ale nie pełnią tej samej funkcji. Pełne oświetlenie usuwa jedynie ciemność: pokazuje Ci dokładnie to, co już pokazałaby tunel wyłożony pochodniami, nic więcej. Przeźroczystość idzie dalej, sprawiając, że bloki stałe stają się przezroczyste lub podświetlając rudy przez skałę, ujawniając informacje, których nigdy nie ujawniłoby oświetlenie.
+
+| Moduł | Zmiany | Ujawnia |
+|---|---|---|
+| Pełne oświetlenie | Tylko renderowany poziom światła | Nic poza tym, co już pokazałoby pełne oświetlenie |
+| Przeźroczystość | Przezroczystość bloków i renderowanie | Rudy i struktury przez solidny teren |
+
+To rozróżnienie wyjaśnia, dlaczego te dwa elementy znajdują się w zupełnie różnych kategoriach. Pełne oświetlenie ogranicza się do „jakby był dzień”. Przeźroczystość ogranicza się do „jakby terenu nie było”
+
+<Callout variant="tip" title="Opal udostępnia to pod własną nazwą">
+Ta sama idea, oficjalna nazwa: Full Bright. Opis produktu Opal to dokładnie to, co sugeruje – „rozjaśnia grę, dzięki czemu nic nie ginie w ciemności”. Znajduje się w kategorii Opal Safe, obejmującej elementy kosmetyczne i ułatwiające rozgrywkę, rodzaj przełącznika, który anticheat nie ma czego sprawdzać, ponieważ nic z niego nie wpływa na sieć.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy pełny blask to to samo co podkręcenie gamma?">
+Docierają do podobnego miejsca, ale działają inaczej. Podkręcenie gamma lub jasności monitora podnosi wszystko na ekranie, w tym obszary, które już są oświetlone, co może wypłukać jasne sceny. Pełny blask celuje bezpośrednio w obliczenia poziomu światła, dzięki czemu ciemne obszary renderują się jako oświetlone, nie wpływając na to, co już było jasne.
+</FAQItem>
+
+<FAQItem question="Czy jasność wpływa na to, co widzą inni gracze?">
+Nie. To zmiana tylko w lokalnym renderowaniu. Wszyscy pozostali na serwerze nadal widzą świat z normalnym oświetleniem, pochodniami, cieniami i wszystkim. Zmienia się tylko Twój własny widok.
+</FAQItem>
+
+<FAQItem question="Czy można włączyć i wyłączyć pełne oświetlenie?">
+Tak. Jest to przełącznik w liście modułów klienta lub ustawieniach wizualnych, włączany, gdy potrzebujesz widoczności, i wyłączany w przeciwnym razie, podobnie jak przełącznik klawisza powiększenia.
+</FAQItem>
+
+<FAQItem question="Czy rozjaśnianie ekranu jest uważane za oszustwo?">
+Zazwyczaj nie. Zmienia ono jedynie lokalny rendering i nie wysyła nic innego do serwera, dlatego większość serwerów i systemów anticheat traktuje to jako element kosmetyczny, bardziej zbliżony do suwaka jasności niż do cheatów.
+</FAQItem>
+
+<FAQItem question="Czy pełne oświetlenie ujawnia rudy czy ukryte struktury?">
+Nie. Ono usuwa ciemność, nie sprawia, że bloki stają się przezroczyste ani nie podkreśla niczego przez teren. To zadanie X-Ray, a nie pełnego oświetlenia.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Szersza kategoria, do której należą jasność i każdy inny moduł tutaj." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Moduły zaprojektowane tak, by pozostać niezauważone, zamiast jedynie oświetlać pomieszczenie." },
+  { href: "/pl/learn/what-is-killaura", label: "Co to jest killaura?", description: "Moduł bojowy, który automatyzuje walki, to inna kategoria niż przełącznik wizualny." },
+]} />
+
+<CTA href="/pl/purchase">Full Bright to jeden przełącznik w Opal. Bez pochodni, bez suwaka gamma, bez czekania, aż oczy się przyzwyczają.</CTA>

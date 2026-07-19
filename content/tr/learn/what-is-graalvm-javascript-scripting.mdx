@@ -1,0 +1,71 @@
+---
+title: GraalVM JavaScript Betikleme Nedir? (2026)
+description: GraalVM JavaScript, JVM üzerinde çalışan hızlı bir JS motorudur. Uygulamalar onu yerleştirerek kullanıcıların JavaScript ile betik yazmasını ve Java'yı yeniden derlemeden sıcak yüklemesini sağlar.
+excerpt: GraalVM JavaScript, bir Java uygulamasının kullanıcı betiklerini JavaScript ile çalıştırmasına ve bunları anında yeniden yüklemesine olanak tanır. Bir istemcinin, bir mod derlemeden özellik eklemesinin yoludur.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: GraalVM JavaScript, Node.js ile aynı mı?
+    a: Hayır. Her ikisi de JavaScript çalıştırır, ancak GraalVM'nin motoru bir JVM uygulaması içine gömülmek üzere tasarlanmıştır, Node.js ise V8 üzerine kurulu bağımsız bir çalışma zamanıdır.
+  - q: Java bilmek gerekli mi, bir betik yazmak için?
+    a: Genellikle hayır. Ana uygulama tarafından sunulan nesnelere karşı JavaScript yazarsınız. Bu nesnelerin neye karşılık geldiğini bilmek, ileri düzey kullanım için yardımcı olur.
+  - q: Neden tam bir mod yerine betik kullanmalıyım?
+    a: Yineleme hızı. Bir betik anında yeniden yüklenirken, derlenmiş bir modun yeniden oluşturulup yeniden başlatılması gerekir.
+---
+
+<KeyTakeaways>
+
+- GraalVM JavaScript, JVM üzerinde çalışan, hızlı ve standartlara uygun bir JS motorudur.
+- Java uygulamaları onu yerleştirir, böylece kullanıcılar ana programa çağrı yapabilen JavaScript yazabilir.
+- Betikler sıcak yeniden yükleme yapar, böylece Java kodunu yeniden derlemeden davranışı değiştirebilirsiniz.
+- Ana program, bir betiğin hangi nesnelere ve sınıflara dokunabileceğini tam olarak belirler.
+
+</KeyTakeaways>
+
+GraalVM JavaScript, JVM üzerinde çalışan, [GraalVM](https://www.graalvm.org/) projesinin bir parçası olan, hızlı ve standartlara uygun bir JavaScript motorudur. Java uygulamaları bunu yerleştirir, böylece kullanıcılar, ana programa çağrı yapan ve anında yeniden yüklenen JavaScript kodları yazabilir. Bir Java uygulamasında bu, Java kodunu yeniden derlemeden JavaScript'te davranış eklemeyi veya değiştirmeyi ifade eder.
+
+<Callout variant="info" title="Opal'ın Nerede Kullanıldığı">
+Opal'ın betik çalıştırma motoru GraalVM JavaScript üzerine kuruludur. Beti yazmaya başlamak için [betik rehberine](/tr/docs/scripting) bakın.
+</Callout>
+
+## GraalVM ve GraalVM JavaScript
+
+GraalVM, JVM üzerinde birkaç dili çalıştırabilen yüksek performanslı bir çalışma zamanıdır. JavaScript motoru, son ECMAScript özelliklerini destekleyecek kadar modern. Bir uygulama motoru gönderir, betiklere çalışacak bir nesne kümesi verir ve bunları çalıştırır.
+
+## Neden uygulamalar onu yerleştiriyor
+
+- **Sıcak yeniden yükleme**: bir betiği değiştirin ve yeniden başlatma veya yeniden derleme olmadan etkiyi görün.
+- **Güvenli bir yüzey**: ana uygulama, bir betiğin hangi nesnelere ve Java sınıflarına dokunabileceğini tam olarak belirler.
+- **Java etkileşimi**: betikler, uygulamanın açtığı nesneler aracılığıyla uygulamanın kendi koduna çağrı yapabilir.
+
+## Bir istemcide nasıl görünüyor
+
+Motoru yerleştiren bir program genellikle betiklere kendilerini kaydetmek için bir giriş noktası verir, ardından JavaScript'i programın iç kısımlarına bağlayan küçük bir "vekil" nesne kümesi sunar. Kullanıcılar bir betik yazar, bir betikler klasörüne bırakır ve motor onu yükler. Bu, bir istemcinin kullanıcıların mod derlemesi yerine JavaScript ile özellik eklemesine olanak tanımasının bir yoludur.
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="GraalVM JavaScript, Node.js ile aynı mı?">
+Hayır. Her ikisi de JavaScript çalıştırır, ancak GraalVM'in motoru bir JVM uygulaması içine yerleştirilmek üzere tasarlanmıştır, Node.js ise V8 üzerine kurulu bağımsız bir çalışma zamanıdır.
+</FAQItem>
+
+<FAQItem question="Bir betik yazmak için Java bilmem gerekiyor mu?">
+Genellikle gerekmiyor. Ana uygulama tarafından sunulan nesnelere karşı JavaScript yazarsınız. Bu nesnelerin neye karşılık geldiğini bilmek, ileri düzey kullanım için yardımcı olur.
+</FAQItem>
+
+<FAQItem question="Neden tam bir mod yerine betik kullanmalıyız?">
+Yineleme hızı. Bir betik anında yeniden yüklenirken, derlenmiş bir mod yeniden oluşturulup yeniden başlatılmalıdır.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-the-jvm", label: "JVM nedir?", description: "Çalışma zamanı GraalVM JavaScript üzerine kurulur." },
+  { href: "/tr/learn/what-is-jni", label: "JNI nedir?", description: "Java programını genişletmenin daha basit bir yolu." },
+  { href: "/tr/blog/introducing-opal-scripting-engine", label: "Opal'in betik motoru", description: "GraalVM betik yazımının pratikte nasıl göründüğü." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

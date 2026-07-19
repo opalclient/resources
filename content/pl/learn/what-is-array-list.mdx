@@ -1,0 +1,83 @@
+---
+title: Czym jest lista tablic w Minecraft? Wyjaśnienie modułu
+description: Lista Tablic to nakładka HUD, która wyświetla aktywne moduły klienta narzędzi Minecraft w czasie rzeczywistym, umożliwiając sprawdzenie, które funkcje są włączone bez otwierania menu.
+excerpt: Lista tablicy przekształca włączone moduły w bieżącą listę w rogu ekranu. Nie trzeba zagłębiać się w menu.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy lista tablic wpływa na rozgrywkę?
+    a: Nie. Ono jedynie wyświetla tekst na Twoim ekranie i nigdy nie ingeruje w logikę gry ani nie komunikuje się z serwerem, więc nie ma żadnego wpływu na rozgrywkę.
+  - q: Czy system antycheat potrafi wykryć Array List?
+    a: Nie. Nigdy nic nie wysyła do serwera, więc nie ma nic, co serwerowa antywirusowa ochrona mogłaby zobaczyć lub oznaczyć.
+  - q: Czym jest ukryty moduł w liście tablicowym?
+    a: Moduł oznaczony jako taki, który ma działać normalnie w tle, mimo że nie znajduje się na widocznej liście, pozostaje aktywny, choć nigdy nie pojawia się na ekranie.
+  - q: Czy lista tablicowa jest taka sama w każdym kliencie?
+    a: Nie do końca. Pozycjonowanie, stylizacja i to, czy opcja ukrytego modułu w ogóle istnieje, różnią się w zależności od klienta, ale podstawowa koncepcja, czyli wyświetlanie aktualnie aktywnych elementów, pozostaje spójna.
+  - q: Dlaczego klient miałby ukrywać moduły na własnej liście?
+    a: Aby widoczny odczyt nie ujawniał wszystkich aktywnych modułów osobie oglądającej ekran, co najczęściej zdarza się podczas udostępniania ekranu.
+---
+
+<KeyTakeaways>
+
+- Array List to nakładka HUD, która wyświetla aktualnie aktywne moduły klienta w rogu ekranu, aktualizując się na żywo w miarę przełączania modułów.
+- Renderuje się tylko po stronie klienta, więc nigdy nie wpływa na serwer i anticheat go nie widzi.
+- Niektóre klienty pozwalają na uruchamianie modułów w trybie ukrytym: aktywnych, ale pominiętych z listy.
+- Znajduje się w klientach takich jak Fan, Tenacity i Rose.
+
+</KeyTakeaways>
+
+Lista modułów to element HUD w klientach narzędziowych do Minecrafta, który wyświetla nazwę każdego włączonego modułu, zazwyczaj ułożonych w stos w jednym rogu ekranu. Po włączeniu modułu pojawia się jego nazwa; po wyłączeniu znika, nie jest wymagane żadne menu. Występuje w klientach takich jak Fan, Tenacity i Rose, a chociaż pozycja i styl mogą się różnić, funkcja pozostaje taka sama wszędzie: stały, szybki wgląd w to, co faktycznie działa.
+
+## Jak to działa
+
+W każdej klatce klient sprawdza, które moduły są oznaczone jako włączone i rysuje ich nazwy jako krótki stos tekstu, zakotwiczony do rogu ekranu. Po włączeniu modułu dodawana jest linia; po wyłączeniu znika. To jest cała mechanika. Lista jest rysowana lokalnie nad widokiem gry, więc nigdy nie dotyka serwera, nigdy nie wysyła pakietu i nie ma wpływu na to, jak gra faktycznie się rozgrywa. To jest odczyt, a nie akcja.
+
+Urok polega głównie na wygodzie. Gdy klient oferuje więcej niż kilka modułów, śledzenie tego, co jest włączone, w pamięci przestaje być niezawodne, a ponowne otwieranie pełnego GUI klikalnego tylko po to, aby sprawdzić, szybko się nudzi. Rzut oka w róg ekranu rozwiązuje to w pół sekundy.
+
+Niektórzy klienci łączą listę z ukrytą kategorią modułów. Moduł oznaczony w ten sposób działa dokładnie tak, jak powinien, po prostu nie jest wyświetlany w tekście. Oznacza to, że lista tablic na ekranie nie zawsze jest pełnym wykazem aktywnych elementów, co ma większe znaczenie dla wyglądu ekranu dla osoby go obserwującej niż dla czegokolwiek, co dzieje się po stronie serwera.
+
+## Czy to bezpieczne w użyciu?
+
+Lista tablic sama w sobie nie niesie żadnego ryzyka związanego z modułami, które faktycznie zmieniają sposób działania gry. Renderuje tekst lokalnie i nigdy nie komunikuje się z serwerem, więc antywirus po stronie serwera nie ma czego obserwować, a tym bardziej oznaczać. Porównaj to z czymś takim jak celownik lub zasięg, gdzie serwer może mierzyć kąty i odległości trafień oraz wychwycić różnicę między tym, co jest fizycznie możliwe, a tym, co faktycznie się stało. Tutaj nie ma odpowiedniego sygnału, ponieważ nie ma żadnej interakcji z serwerem.
+
+Ukryte parowanie modułów to inny rodzaj rozważania. Jego celem jest ukrywanie informacji przed osobą patrzącą na ekran, przede wszystkim podczas udostępniania ekranu, a nie omijanie systemu wykrywania. Warto wiedzieć, jeśli traktujesz listę tablic jako pełny obraz tego, co działa: może nim nie być.
+
+<Callout variant="tip" title="Jak wypada Opal w tym aspekcie">
+Opal nie udostępnia funkcji o nazwie Lista Tablicowa. Bieżący przegląd modułów jest tak podstawowym udogodnieniem w tej kategorii, że to, czy klient ją posiada, jest mniej istotne niż to, co faktycznie na niej widnieje – czy nazwy za nią odpowiadają prawdziwemu zestawowi narzędzi, czy tylko długiej liście.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Lista Tablic wpływa na rozgrywkę?">
+Nie. Wpływa jedynie na wyświetlanie tekstu na Twoim ekranie i nigdy nie ingeruje w logikę gry ani nie komunikuje się z serwerem, więc nie ma żadnego wpływu na rozgrywkę.
+</FAQItem>
+
+<FAQItem question="Czy anticheat może wykryć Array List?">
+Nie. Nigdy niczego nie wysyła na serwer, więc nie ma nic, co serwerowy anticheat mógłby zobaczyć lub oznaczyć.
+</FAQItem>
+
+<FAQItem question="Co to jest ukryty moduł w liście tablic?">
+Moduł oznaczony jako taki, który ma działać normalnie w tle, mimo że nie znajduje się na widocznej liście, dzięki czemu pozostaje aktywny, choć nigdy nie pojawia się na ekranie.
+</FAQItem>
+
+<FAQItem question="Czy Lista Tablic jest taka sama w każdym kliencie?">
+Nie do końca. Pozycja, stylizacja oraz to, czy opcja ukrytego modułu w ogóle istnieje, różnią się w zależności od klienta, ale podstawowa koncepcja, czyli wyświetlanie aktualnie aktywnych elementów, pozostaje spójna.
+</FAQItem>
+
+<FAQItem question="Dlaczego klient może chcieć ukryć moduły na własnej liście?">
+Aby widoczny wykaz nie ujawniał wszystkich włączonych modułów osobie oglądającej ekran, najczęściej podczas udostępniania ekranu.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Szerszą kategorią, do której należy ArrayList, jest element stały." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Gdzie ukrywanie przestaje być kwestią listy HUD-u i staje się celem samym w sobie." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Moduł znajdujący się na przeciwnym końcu spektrum ryzyka w stosunku do kosmetycznego wskaźnika HUD." },
+]} />
+
+<CTA href="/pl/purchase">Lista modułów jest tak dobra, jak to, co się na niej znajduje. Sprawdź, co faktycznie znajduje się na Opal.</CTA>

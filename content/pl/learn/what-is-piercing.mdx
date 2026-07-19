@@ -1,0 +1,81 @@
+---
+title: Czym jest przebijanie w Minecraft? Uderzanie przez ściany
+description: Przebijanie to moduł bojowy w "Minecraftcie", który omija sprawdzanie linii widzenia, pozwalając na trafienia przez ściany. Oto jak działa i dlaczego jest łatwo go wykryć.
+excerpt: Przebijanie ścian zamienia je w sugestię. Oto jak to wpływa na raycast, i dlaczego serwery wychwytują to prawie zawsze.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie piercing umożliwia?
+    a: Pozwala ataku trafić w cel, nawet jeśli między tobą a nim znajduje się blok, taki jak ściana lub płot. Zwykłe bloki Minecrafta, które uderzają bezpośrednio.
+  - q: Czy Przebijanie jest tym samym co Zasięg?
+    a: Nie. Zasięg określa, jak daleko może się rozciągnąć atak. Przebijanie ignoruje wszystko, co fizycznie zasłania drogę. Rozwiązują różne problemy, choć często są używane razem.
+  - q: Klienci, którzy wysłali Piercing?
+    a: Slinky to jeden z klientów udokumentowanych w tym module. Nazewnictwo i dokładne zachowanie różnią się w zależności od klienta, ponieważ niektóre implementacje luzują tylko część kontroli zamiast całkowicie ją usuwać.
+  - q: Czy serwer może faktycznie wykryć kogoś używającego Piercingu?
+    a: Tak, z reguły. Serwer może w momencie trafienia przeprowadzić własną kontrolę linii widzenia między dwoma graczami, a solidna przeszkoda na tej trasie to coś, na co klient nie może znaleźć obejścia.
+---
+
+<KeyTakeaways>
+
+- Przebijanie pozwala atakowi dotrzeć przez ścianę lub inną stałą przeszkodę między atakującym a celem.
+- Działa poprzez pomijanie raycastu linii wzroku, który Minecraft normalnie wymaga przed zarejestrowaniem trafienia.
+- To nie jest Zasięg: Zasięg zwiększa odległość trafienia, Przebijanie całkowicie ignoruje przeszkody.
+- Serwery mogą niezależnie weryfikować linię wzroku, co czyni go jednym z bardziej niezawodnie wykrywanych modułów walki.
+
+</KeyTakeaways>
+
+Przebijanie to moduł bojowy, który pozwala atakowi trafić nawet wtedy, gdy solidny blok znajduje się bezpośrednio między atakującym a celem. Normalna walka w Minecrafcie najpierw wykonuje sprawdzenie: gra rysuje linię od ciebie do tego, w co celujesz, a jeśli ta linia trafi w teren zanim dotrze do celu, atak nie zostanie zarejestrowany. Przebijanie pomija to sprawdzenie. Żadna zasłona, ściana, płyta kamienna – to już nie ma znaczenia. Cel ma linię wzroku lub nie, a Przebijanie po prostu usuwa ten wymóg, co jest dokładnie tym, dlaczego jest to jedna z łatwiejszych rzeczy do wykrycia przez serwer.
+
+## Jak to działa
+
+Standardowy Minecraft wykonuje raycast zanim pozwoli na trafienie. Gra rysuje prostą linię od atakującego gracza do celu i zatrzymuje się na pierwszym solidnym bloku, który ta linia dotknie. Jeśli ten blok jest bliżej celu, atak mija, kropka. To pojedyncze sprawdzenie jest powodem, dla którego ściana, zamknięte drzwi, a nawet słupek ogrodzeniowy zwykle wystarczają, aby zamach nie zdziałał nic.
+
+Przebijanie usuwa lub omija promień rzutowania, dzięki czemu atak przechodzi, jakby bloku nie było. Usunięcie nie zawsze jest całkowite. Niektóre implementacje zachowują kolizję bloku podczas ruchu, ale wyłączają ją specjalnie podczas walki, a niektóre tylko przestają sprawdzać obecność obiektów na drodze, a nie terenu – to węższa wersja tej samej idei. Efekt końcowy we wszystkich przypadkach jest taki sam: coś stałego znajdowało się między dwoma graczami, a uderzenie i tak trafiło.
+
+Warto to oddzielić od [Zasięgu](/pl/learn/what-is-reach). Zasięg określa, jak daleko może dotrzeć uderzenie. Przebijanie nie ma nic wspólnego z odległością, chodzi o to, co znajduje się na linii między dwoma punktami, a nie o długość tej linii. Gracz może mieć całkowicie normalny zasięg i jednocześnie korzystać z przebijania, a oba te elementy pojawiają się razem wystarczająco często, że ludzie je mylą.
+
+## Czy przebijanie jest bezpieczne w użyciu?
+
+Krótka odpowiedź: nie. Traktuj to jako zakazaną funkcję, a nie obszar szarości. Sprawdzenie, które przebijanie łamie, jest jedną z najłatwiejszych rzeczy do zweryfikowania przez serwer niezależnie. W momencie trafienia serwer może uruchomić własne rzutowanie promienia między rzeczywistymi pozycjami dwóch graczy i, jeśli na tej ścieżce znajduje się solidny teren, nie ma żadnego uzasadnienia dla trafienia.
+
+W przeciwieństwie do wygładzania zasięgu lub obrotu, gdzie serwer musi uwzględnić opóźnienia i naturalną niedoskonałość ludzką, ściana albo była, albo jej nie było. To pozostawia bardzo mało miejsca na fałszywe alarmy, co również oznacza bardzo mało miejsca dla gracza, żeby się wymigać. Dlatego antycheaty traktują potwierdzone strzelanie przez ścianę jako twardy sygnał, a nie coś, co wymaga wielu punktów danych, aby udowodnić winę.
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona opisuje moduł w sposób ogólny, abyś wiedział, co ten termin oznacza. Nazewnictwo i dokładne zachowanie różnią się w zależności od klienta, a próby przechodzenia przez solidne bloki łamią zasady na praktycznie każdym serwerze, na którym działa kompetentny anticheat.
+</Callout>
+
+<Callout variant="tip" title="Opal wysyła Piercing">
+Wersja Opala robi dokładnie to, co sugeruje nazwa: pozwala trafiać w graczy przez bloki. Jest oznaczona jako używaj na własną odpowiedzialność na liście modułów, tak jak wszystko inne, co opiera się na tak łatwej do zweryfikowania przez serwer kontroli. Nie ma tu miejsca na udawanie, że jest bezpieczniejsza, niż jest w rzeczywistości.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co właściwie pozwala robić umiejętność Piercing?">
+Pozwala ona na trafienie atakiem w cel, nawet jeśli między tobą a nim znajduje się blok, taki jak ściana lub płot. Dotyczy to standardowych bloków Minecrafta, które zadają obrażenia bezpośrednio.
+</FAQItem>
+
+<FAQItem question="Czy Przebijanie jest tym samym co Zasięg?">
+Nie. Zasięg określa, jak daleko może sięgnąć atak. Przebijanie ignoruje wszystko, co fizycznie zasłania. Rozwiązują one różne problemy, choć często są używane razem.
+</FAQItem>
+
+<FAQItem question="Klienci, którzy wysłali Piercing?">
+Slinky to jeden z klientów, u którego udokumentowano użycie tego modułu. Nazewnictwo i dokładne zachowanie różnią się w zależności od klienta, ponieważ niektóre implementacje tylko częściowo osłabiają kontrolę, zamiast całkowicie ją usuwać.
+</FAQItem>
+
+<FAQItem question="Czy serwer może faktycznie wykryć użycie Piercingu?">
+Tak, z reguły. Serwer może przeprowadzić własną kontrolę linii wzroku między dwoma graczami w momencie trafienia, a solidna przeszkoda na tej trasie to coś, czego klient nie może obejść.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-reach", label: "Co to jest Reach?", description: "Moduł zasięgu Piercing bywa mylący." },
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Automatyczny atakier Piercing czasami łączy się z." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szersza kategoria, do której te moduły należą." },
+]} />
+
+<CTA href="/pl/purchase">Przecięcie to jeden moduł. Opal ocenia każdy z nich uczciwie.</CTA>

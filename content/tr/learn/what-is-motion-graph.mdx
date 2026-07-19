@@ -1,0 +1,88 @@
+---
+title: Minecraft'ta Hareket Grafiği Nedir?
+description: Hareket Grafiği, oyuncunun hızını ve hızlanmasını tek bir statik sayı yerine canlı kaydırılan bir grafiğe dönüştürür ve tamamen görsel olup tespit edilme riski yoktur.
+excerpt: Hareket Grafiği, HUD üzerinde bir sayı göstermek yerine hızınızın canlı bir grafiğini sunar. Hareket Grafiği hareket şeklinizi değiştirmez, sadece görmenizi sağlar.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Hareket Grafiği aslında ne gösteriyor?
+    a: "Oyuncunun zaman içindeki hareketi veya hızıyla ilgili canlı, kaydırılan bir grafik. Tek bir anlık hız okuması yerine, eğilimi görürsünüz: hız veya ivme hareket ettikçe nasıl yükselip alçalır."
+  - q: Hareket Grafiği oyun içindeki hareketlerimi etkiler mi?
+    a: Hayır, sadece istemcinin yerel olarak zaten sahip olduğu hareket verilerini okur ve görüntüler. Hareketlerinizi değiştirmez ve sunucuya farklı bir şey göndermez.
+  - q: Hareket Grafiği hile mi?
+    a: Hayır. Bu, kozmetik, bilgilendirici bir örtü; bir FPS sayacı veya koordinat göstergesi gibi aynı kategoride, oyun sonuçlarını değiştiren bir özellik değil.
+  - q: Hangi müşterinin Motion Graph'ında yer alıyor?
+    a: Tenacity kapsamında belgelenmiş durumda ve o müşterinin diğer görsel modüllerinin yanında yer alıyor.
+---
+
+<KeyTakeaways>
+
+- Motion Graph, oyuncunun hızını veya hızını tek bir sayı yerine canlı, kaydırılan bir çizgi olarak çizen bir kozmetik HUD modülüdür.
+- Zaten istemci tarafından sahip olunan hareket verilerini örnek alır ve yerel olarak çizer: hareket şekliniz değişmez ve sunucuya ek veri ulaşmaz.
+- Oyuncular, zıplama, iniş ve dönüşlerin momentumu zaman içinde nasıl etkilediğini görmek için bunu kullanır, özellikle hareket testi ve ayarlama için.
+- Okunabilir ve tamamen kozmetik olduğu için anlamlı bir tespit riski taşımaz, bir FPS sayacıyla aynı kategoridedir.
+- Tenacity'nin görsel modül setinin bir parçası olarak belgelenmiştir
+
+</KeyTakeaways>
+
+Hareket Grafiği, oyuncunun hızını veya hızlanmasını tek bir düz sayı yerine canlı, kaydırılan bir çizgi grafiğe dönüştüren görsel bir Minecraft modülüdür. "6,2 m/s" gibi bir sayıya bakıp bunun durum için hızlı olup olmadığını tahmin etmek yerine, zıplarken çizginin yükseldiğini, inişlerde düştüğünü ve tekrar sabit bir koşuya döndüğünüzde düzleştiğini gözlemlersiniz. Bu sadece okunabilir bir ek katmandır: oyuncunun hareket şekli değişmez ve sunucuya ek veri gönderilmez. Bunu karakterinizin momentumu için bir kalp atış hızı monitörü, bir hızlanma pedalı değil olarak düşünebilirsiniz.
+
+## Nasıl Çalışır
+
+Modül, oyuncunun hızını veya hızlanmasını belirli aralıklarla örnekler ve her örneği kaydırılan bir grafikte bir nokta olarak çizer. Yeni örnekler geldikçe, en eski örnekler kenardan kaydırılır, böylece her zaman tam bir geçmiş yerine hareketin yakın bir zaman aralığını görürsünüz. Çizginin şeklini herhangi bir çizgi grafikte olduğu gibi okuyun: yükselen bir çizgi hızlandığınızı, düşen bir çizgi yavaşladığınızı ve düz bir çizginin sabit bir hızda olduğunuzu gösterir.
+
+Sadece istemci tarafında zaten yerel olarak bulunan verileri okuyarak ve bunu ekrana çizerek, gerçek hareketinize dokunmaz. Ek paketler, değiştirilmiş fizik veya sunucu tarafında bir iz bırakmaz. Sıradan Minecraft hareketinin üzerine yerleştirilmiş bir ölçüm aleti, onu değiştiren bir mekanizma değildir.
+
+Pratik kullanım senaryosu, tek bir çıktıdaki eğilimleri tespit etmektir. Bir sayı, şu anda hızınızı size söylerken; bir grafik, bir zıplama tekniğinin gerçekten size momentum kazandırıp kazandırmadığını, bir inişin beklemediğiniz hızı kaybettirip kaybettirmediğini veya bir ayar değişikliğinin birkaç saniye boyunca nasıl geliştiğini tek donmuş bir an yerine gösterir. Bu, onu bir flex'ten çok bir ayarlama aracı yapar.
+
+## Kullanımı güvenli mi?
+
+Hareket Grafiği, bir FPS sayacı veya bir koordinat üstbilgisi gibi aynı kategoridedir: bilgilendirici, fonksiyonel değil. İstemcinin zaten sahip olduğu değerleri okur ve ekrana çizer, bu kadar. Paket manipülasyonu, fiziksel geçersiz kılma, hiçbir şey yok; sunucu tarafı bir antichi̇at'ın işaretlemesi için hiçbir nedeni yoktur, çünkü sadece bir grafik oluşturuluyor.
+
+Bu tür bir modülle ilgili tek gerçek risk, hangi şirketle birlikte çalıştığıdır. Aksi takdirde sıradan görünen bir istemciye yerleştirilmiş bir HUD öğesi, istemcinin geri kalanının modül listesini güvenli yapmaz, bu nedenle bu tür görsel bir özellik gibi bir şeyle birlikte neyin gönderildiğini bilmek, tüm bir yapıyı onunla yargılamadan önce değerlidir.
+
+<Callout variant="tip" title="Gerçek bir modül listesinde bunun nereye uyduğunu">
+
+Opal, Motion Graph adında bir modül göndermiyor. Ancak canlı hareket ölçüm araçlarına ihtiyacınız varsa, tam olarak ücretli bir yardımcı programın kapsaması gereken alan; dövüş ve hareket modüllerinin yanında yer alan görsel ve tanısal araçlar, sonradan eklenmiş bir özellik gibi değil. Tek başına bir hız grafiği küçük bir özelliktir. Bir yardımcı programın görsel tanıstiklere hiç birinci sınıf bir kategori olarak yaklaşması daha büyük bir göstergedir
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Hareket Grafiği aslında ne gösteriyor?">
+
+Oyuncunun zaman içindeki hareketi veya hızıyla ilgili canlı, kaydırılan bir grafik. Tek bir anlık hız okuması yerine, eğilimi görürsünüz: hareket ederken hız veya ivme nasıl yükselip alçalır
+
+</FAQItem>
+
+<FAQItem question="Hareket Grafiği oyun içindeki hareketlerimi etkiler mi?">
+
+Hayır, sadece istemcinin yerel olarak zaten sahip olduğu hareket verilerini okur ve görüntüler. Hareketlerinizi değiştirmez ve sunucuya farklı bir şey göndermez
+
+</FAQItem>
+
+<FAQItem question="Hareket Grafiği hile mi?">
+
+Hayır, bu sadece bir görsel kaplama, bilgilendirme amaçlı; bir FPS sayacı veya koordinat göstergesi gibi aynı kategoride. Oyunun sonuçlarını değiştiren bir özellik değil
+
+</FAQItem>
+
+<FAQItem question="Hangi müşterinin Motion Graph'ında yer alıyor?">
+
+Tenacity kapsamında belgelenmiş durumda ve o müşterinin diğer görsel modüllerinin yanında yer alıyor
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft Yardımcı İstemcisi Nedir?", description: "Hareket Grafiği kategorisi ve bu kılavuzdaki her modül aslında ona aittir." },
+  { href: "/tr/learn/what-is-velocity-anti-knockback", label: "Hız (Çarpma Geri Tepmesi Önleme) Nedir?", description: "Hareket verisi üzerine kurulu bir başka modül, bu sefer sadece çizenin aksine fiziği değiştiriyor." },
+  { href: "/tr/learn/what-is-reach", label: "Ulaşmak Ne Demektir?", description: "Savaş tarafı teşhisi de aynı şekilde: gizli bir sayıyı görünür hale getirmek." }
+]} />
+
+<CTA href="/tr/satin-alin">Hareketleriniz hakkında tek bir sabit sayı yerine gerçeği söyleyen bir HUD ister misiniz? Opal'ın görsel araçlarının nasıl göründüğünü görün.</CTA>

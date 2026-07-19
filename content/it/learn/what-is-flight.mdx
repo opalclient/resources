@@ -1,0 +1,87 @@
+---
+title: Cos'è il volo in Minecraft? Il modulo di movimento spiegato
+description: Il volo è un modulo di movimento che ignora la gravità e il movimento per un volo libero, senza elytra o modalità creativa. Ecco come funziona e perché è facile da ottenere.
+excerpt: Il volo riscrive gravità e movimento, permettendoti di staccarti da terra al comando. Niente ali, niente attivazione di una modalità di gioco, solo un override che il server non ha mai ricevuto.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: È volare la stessa cosa che usare un elitrio o la modalità creativa?
+    a: No. Un elytra e la modalità creativa sono entrambe meccaniche vanilla di Minecraft che vengono effettivamente concesse in condizioni specifiche. Il volo produce lo stesso movimento senza che nessuna delle due sia presente, ed è proprio questo che lo rende rilevabile.
+  - q: Può un comportamento scorretto da parte di un giocatore portare alla sua squalifica?
+    a: Sì. Il volo prolungato senza una fonte valida è una delle anomalie di movimento più evidenti che un anticheat lato server può rilevare, e utilizzarlo in genere viola le regole di qualsiasi server che lo implementa.
+  - q: Limita il movimento di Volo lo rende inosservabile?
+    a: "No. Agevolare la velocità verticale o limitare il tempo di volo rende meno certa la rilevazione, ma non elimina il segnale sottostante: movimento aereo senza elitre o modalità creativa associata."
+  - q: Perché alcuni clienti chiamano questo modulo Fly invece di Flight?
+    a: "Fly è un alias per la stessa funzione: volo verticale e orizzontale libero attraverso la gestione di movimento e gravità sovrascritta. Clienti diversi scelgono un nome o l'altro per lo stesso modulo."
+---
+
+<KeyTakeaways>
+- Il volo è un modulo di movimento che concede il volo verticale e orizzontale libero, ignorando la gravità e il movimento.
+- Salta completamente gli elytra e la modalità creativa, simulando lo stesso risultato aereo a livello client.
+- Il volo sostenuto senza una fonte valida è una delle anomalie più evidenti che un server può controllare.
+- Opal lo cataloga come Volo, archiviato in modo esplicito sotto l'utilizzo a proprio rischio, con la stessa storia di rilevamento di qualsiasi altro luogo.
+</KeyTakeaways>
+
+Il volo è un modulo di movimento che sovrascrive la gestione della gravità e del movimento di Minecraft, permettendoti di sollevarti, planare o attraversare il terreno senza un elytra o in modalità creativa. Vanilla permette di lasciare terra solo in due modi: indossare ali e planare sfruttando lo slancio della caduta, oppure passare alla modalità creativa o spettatore. Il volo simula il risultato mantenendo la velocità verticale ovunque tu la desideri, invece di lasciarla diminuire verso il suolo, e applicando direttamente il movimento orizzontale. Alcuni client etichettano lo stesso modulo come "Fly". Indipendentemente dal nome, è una delle frodi di movimento più facilmente rilevabili.
+
+## Come funziona il volo
+
+Il volo riscrive due elementi che normalmente Vanilla gestisce direttamente: la gravità e il movimento. Invece di lasciare che la velocità verticale diminuisca verso il suolo non appena non c'è un blocco sotto i piedi, il modulo imposta quella velocità e la mantiene, così la caduta si ferma e la scalata o la planata avvengono su comando. Il movimento orizzontale viene applicato nello stesso modo diretto, quindi ti muovi in avanti, lateralmente o direttamente verso l'alto senza mai toccare una superficie.
+
+Nessuno di questi elementi trae spunto da un elytra o dalla modalità creativa. Il modulo produce il movimento esatto che tali funzionalità concedono legittimamente, escludendo la fonte che dovrebbe sbloccarle. I giocatori lo utilizzano per saltare le sezioni del gioco in cui la gravità e il terreno dovrebbero applicarsi: raggiungere direttamente una destinazione invece di camminare o cadere intorno ad essa, evitare completamente i danni da caduta o arrivare in un punto in cui nessun percorso a terra permetterebbe, come librarsi sopra una base. In una fuga, rimanere in aria crea anche distanza da qualsiasi cosa si muova solo a terra.
+
+## Volo rispetto a un vero elytra o modalità creativa
+
+Vanilla spiega il movimento non supportato in aria solo in due modi. Il volo non corrisponde a nessuno dei due.
+
+| Modo per lasciare il suolo | Cosa lo concede effettivamente | Cosa vede un server |
+|---|---|---|
+| Elytra | Corazza equipaggiata più slancio di caduta | Un'entità in planata con uno stato di caduta corrispondente |
+| Creativa o spettatore | Un flag di modalità di gioco sull'account | Un giocatore contrassegnato come creativo o spettatore |
+| Modulo di volo | Gravità e movimento sovrascritti, nessuna fonte | Movimento aereo costante senza alcun flag presente |
+
+L'ultima riga è il problema principale. Un server che traccia la posizione nel tempo non deve indovinare: controlla semplicemente se è impostato uno dei flag legittimi e, se il giocatore è in aria senza uno di essi, il modello non corrisponde a nulla che la fisica vanilla produce.
+
+## Perché viene rilevato
+
+Poiché il controllo è semplice, le implementazioni di Flight incentrate sull'elusione cercano di mantenere il movimento risultante entro i limiti che un anticheat tollera già: attenuando la velocità verticale, imitando un arco di salto o limitando la durata del volo di un giocatore. Questo restringe il divario, ma non lo colma. Il comportamento sottostante, muoversi nell'aria aperta senza un meccanismo di supporto, rimane presente e rilevabile per un server. I client che hanno distribuito Flight, tra cui Fan, Tenacity e Silhouette, lo considerano una funzionalità a rischio noto piuttosto che sicura, e questa reputazione è guadagnata, non paranoica.
+
+<Callout variant="tip" title="Volo in Opale">
+Opal spedisce anche questo modulo, catalogato con lo stesso nome: Volo. La descrizione del catalogo non usa giri di parole: "Ti farai crescere le ali nella vita reale". Stessa sovrascrittura interna, lo stesso compromesso di qualsiasi altro client che lo trasporta.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina descrive il modulo in termini generali, così da farti capire cosa significa il termine. La denominazione e il comportamento esatto variano a seconda del client, e il volo prolungato senza una sorgente valida viola le regole di praticamente ogni server. Opal classifica l'uso del Volo a rischio del singolo utente proprio per questo motivo: è rilevabile e può portare alla sospensione dell'account, come su qualsiasi client che lo distribuisce.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Volare è la stessa cosa di usare un elytra o la modalità creativa?">
+No. Un elytra e la modalità creativa sono entrambe meccaniche che Minecraft concede effettivamente in condizioni specifiche. Volare produce lo stesso tipo di movimento senza l'una o l'altra, ed è proprio questo che lo rende rilevabile.
+</FAQItem>
+
+<FAQItem question="Il volo può portare a un ban per un giocatore?">
+Sì. Il volo prolungato senza una fonte valida è una delle anomalie di movimento più evidenti che un anticheat lato server può rilevare, e utilizzarlo in genere viola le regole di qualsiasi server che lo utilizza.
+</FAQItem>
+
+<FAQItem question="Limitare il movimento di Flight lo rende inosservabile?">
+No. Contenere il movimento risultante all'interno di limiti già tollerati da un anticheat rende la rilevazione meno certa, ma non elimina il segnale sottostante: movimento aereo senza esoscheletro o modalità creative.
+</FAQItem>
+
+<FAQItem question="Perché alcuni clienti chiamano questo modulo Fly invece di Flight?">
+Fly è un alias per la stessa funzione, un volo verticale e orizzontale libero attraverso una gestione delle motion e della gravità sovrascritta. Diverse implementazioni usano un nome o l'altro per quello che è funzionalmente lo stesso modulo.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria più ampia a cui appartengono Volo e moduli simili." },
+  { href: "/it/learn/what-is-scaffold", label: "Cos'è Scaffold?", description: "Un altro modulo adiacente al movimento che sacrifica il rischio di rilevamento per una maggiore velocità di attraversamento." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "La categoria di clienti che punta a passare inosservati, piuttosto che solo a muoversi velocemente." },
+]} />
+
+<CTA href="/it/purchase">Il modulo Opal's Flight rende letterale l'affermazione "ali nella vita reale". Vedi il resto dell'elenco.</CTA>

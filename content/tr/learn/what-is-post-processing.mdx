@@ -1,0 +1,86 @@
+---
+title: Minecraft'ta İşleme Sonrası Nedir? Görsel Modül
+description: Post İşlemi, oyunun oynanışını etkilemeden tüm oyun görünümü üzerinde renk düzenlemesi veya bulanıklık gibi bir ekran alanı shader geçişi çalıştıran bir Minecraft modülüdür.
+excerpt: Tek shader geçişi, tüm ekran, sıfır ban riski. Post-processing bir filtre gibi çalışır, hile gibi değil.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Minecraft'ta post-işlem oyun deneyimini etkiler mi?
+    a: Hayır, sadece render işleminden sonra ortaya çıkan karenin görünümünü değiştirir. Harekete, dövüşe, çarpışma kutularına veya sunucunun görebileceği hiçbir şeye etkisi olmaz.
+  - q: Post İşlemi sizi ban'layabilir mi?
+    a: Hayır. Tamamen görsel, istemci tarafında yapılan bir işleme sahip olup, ne ağ bağlantısı ne de oyun etkileşimi içerir, dolayısıyla herhangi bir tespit riski taşımaz.
+  - q: Hangi Minecraft istemcileri Post İşleme modülüne sahip?
+    a: İşlem sonrası, Tenacity'de görüldüğü gibi belgelenmiştir. Benzer ekran alanı efekt geçişleri, genel bir görüntü seçeneği olarak diğer istemcilerde farklı adlarla da karşımıza çıkar.
+  - q: Post İşlemlerinde hangi etkiler bulunur?
+    a: İki adet belgelenen etkisi ise renk derecelendirmesi, yani karenin rengini ve kontrastını değiştiren özellik ve bulanıklık, yani görüntünün tamamını yumuşatan etkidir. Her ikisi de aynı shader geçişi içinde çalışır.
+  - q: Post İşlemi, bir shader paketiyle aynı şey midir?
+    a: Tam olarak değil. Bir shader paketi genellikle tüm render işlem hattını değiştirir veya genişletir ve kurulum için ayrı bir yükleyiciye ihtiyaç duyar. Post Processing ise daha sınırlı, yerleşik bir efekt geçişidir ve doğrudan istemci üzerinden etkinleştirilir.
+---
+
+<KeyTakeaways>
+
+- Post İşlemi, renk düzenleme veya bulanıklık gibi tek bir ekran alanı gölgelendirici geçişi, tüm işlenen kare üzerinde çalıştıran istemci tarafı bir Minecraft modülüdür.
+- Dünya ve arayüz çizildikten sonra tetiklenir ve bitmiş görüntüyü, ayrı blokları veya varlıkları ayarlamak yerine tek bir katman olarak ele alır.
+- Konum, çarpışma kutuları, zamanlama veya sunucu tarafından izlenen herhangi bir değeri etkilemez, bu nedenle sunucu tarafı bir antichi̇at tarafından yakalanacak bir şey yoktur.
+- Tenacity'de görüldüğü gibi belgelendiği üzere, tam bir harici gölgelendirici paketi yüklemek için yerleşik bir alternatiftir.
+
+</KeyTakeaways>
+
+Post İşlemi, oyun görüşünüzün tamamı üzerinde ekran alanı gölgelendirici geçişi çalıştıran bir Minecraft modülüdür; aksi takdirde tam bir gölgelendirici paketiyle elde etmeye çalışacağınız türden bir efekt. Açtığınızda, istemci bitmiş kareyi yeniden renklendir veya yumuşatır, renk derecelendirmesi veya bulanıklaştırma geçişi uygular, monitörünüze ulaşmadan hemen önce. Tek bir oyun değerine dokunmaz. Bloklar olduğu yerde kalır, çarpışma kutuları aynı boyutta kalır ve sunucu modülün varlığından habersizdir. Bir oyun mekaniği değil, bir görüntü seçeneğidir ve ilk kareden son kareye kadar böyle davranır.
+
+## Nasıl Çalışır
+
+Bir Minecraft istemcisinin çizdiği şeylerin çoğu nesne nesne gerçekleşir: bir bloğa dokusu, bir varlığa modeli, HUD'a kendi geçişi verilir. Post İşlemi farklı çalışır. Dünyanın ve arayüzün zaten oluşturulmasını bekler, ardından ekrana ulaşmadan hemen önce tüm birleştirilmiş kare üzerinde tek bir gölgelendirici geçişi uygular. Bitmiş görüntüyü ayrı parçalarla dolu bir sahne yerine tek bir birim olarak ele aldığı için, her şeyi tek tek öğelere dokunmak yerine aynı anda yeniden renklendirebilir veya yumuşatabilir.
+
+Modül için belgelenen iki etki, rengi ve kontrastı değiştirerek bir sahneyi daha sıcak, daha soğuk veya daha düz hale getiren renk derecelendirmesi ve görüntüyü bütünüyle yumuşatan bulanıklık efektidir. Her ikisi de aynı işlemde yer alır, bu nedenle modülü açmak ekranda bulunan her öğe için ayrı bir işleme adımı eklemez, sadece sonuç üzerinde tek bir işlem yapar. Aynı zamanda, yeni bir aydınlatma modeli kullanmaya kıyasla çalıştırılması da ucuzdur: zaten var olan pikselleri yeniden renklendirir, dünyanın nasıl aydınlatıldığı yeniden hesaplanmaz.
+
+İnsanlar, onu bir shader paketi yüklemeye aynı sebepten başvururlar: ekran görüntülerini ve kliplerini varsayılan Minecraft görünümünden farklı bir şey gibi göstermek isterler. Renk derecelendirmesi, bir kaynak paketi gerektirmeden bir sahneye bir hava katar. Bulanıklık efekti, karmaşık veya sert bir görünümü yumuşatır. Dahili bir açma/kapama düğmesi olduğundan, harici bir yükleyici ve paket kombinasyonu olmadığından, indirilecek, yapılandırılacak veya güncellenecek bir şey yoktur.
+
+## Göresel İşleme vs. Tam Bir Shader Paketi
+
+| | İşlem Sonrası | Tam shader paketi |
+|---|---|---|
+| Kurulum | İstemciye entegre, tek bir açma/kapama düğmesi | Ayrı bir yükleyici (Iris, OptiFine) ve seçip yapılandırabileceğiniz bir paket |
+| Kapsam | Bitmiş kare üzerinde tek bir ekran alanı geçişi | Render işlem hattının çoğunu değiştirir veya genişletir |
+| Efektler | Renk düzeltme, bulanıklaştırma | Pakete bağlı olarak aydınlatma, gölgeler, yansımalar ve daha fazlası |
+| Kurulum | Anında | Bir paket seçmek, yüklemek ve ayarlamak |
+
+Her iki yaklaşım da sunucu tarafından görünen hiçbir şeyi değiştirmez. Fark, derinliktir: bir shader paketi dünyanın aydınlatılma biçimini yeniden inşa ederken, İşlem Sonrası oyunun zaten oluşturduğu şeyi yeniden renklendir veya yumuşatır.
+
+<Callout variant="tip" title="Burada Opal'da nerede duruyor">Opal, Post Processing adında bir modül göndermiyor. Ancak müşterinin görsel tarafı tam olarak aynı prensiple çalışıyor: yalnızca yerel düzenlemeler, makinenizi terk etmeyen ve sunucu tarafından izlenen bir değeri hiç etkilemeyen. Eğer shader paketi yüklemeden ekran görüntüleri veya klipler için belirli bir görünüm elde etmeye çalışıyorsanız, aradığınız özellik tam olarak bu kategori: tamamen kozmetik, sıfır risk, bir anticheat'in dahi istemesi halinde bile işaretleyemeyeceği bir şey</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Post İşlemi Minecraft'ta oyun akışını etkiler mi?">
+Hayır. Sadece render işleminden sonraki bitmiş karenin görünümünü değiştirir. Hareket, savaş, çarpışma kutuları veya sunucunun görebileceği hiçbir şeyi etkilemez.
+</FAQItem>
+
+<FAQItem question="Post İşlemi sizi ban'layabilir mi?">
+Hayır. Tamamen görsel, istemci tarafında yapılan bir işleme olup, ne ağda ne de oyun akışında bir etkisi vardır, dolayısıyla tespit edilme riski taşımaz.
+</FAQItem>
+
+<FAQItem question="Hangi Minecraft istemcileri Post Processing modülüne sahip?">
+Post Processing, Tenacity'de görüldüğü gibi belgelenmiştir. Benzer ekran alanı efekt geçişleri, farklı isimler altında genel bir görüntü seçeneği olarak diğer istemcilerde de görünür.
+</FAQItem>
+
+<FAQItem question="Post İşlemin hangi etkileri içerir?">
+Belgelenen iki etki, karenin rengini ve kontrastını değiştiren renk derecelendirmesi ve görüntünün tamamını yumuşatan bulanıklık etkisidir. Her ikisi de aynı shader geçişi içinde çalışır.
+</FAQItem>
+
+<FAQItem question="Post İşlemi, bir shader paketiyle aynı mı?">
+Tam olarak değil. Bir shader paketi genellikle tüm render işlem hattını değiştirir veya genişletir ve kurulum için ayrı bir yükleyiciye ihtiyaç duyar. Post İşlemi ise daha sınırlı, yerleşik bir efekt geçişidir ve doğrudan istemci üzerinden etkinleştirilebilir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Geniş kategori modülleri gibi Son İşlem'e aittir." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Estetik cilalama ile fark edilebilir davranış arasındaki çizginin tam olarak nerede çizildiği." },
+  { href: "/tr/learn/what-is-a-crystal-aura", label: "Kristal aura nedir?", description: "İşlem Sonrası'nın risk spektrumunun tam tersi ucunda bulunan bir modül." },
+]} />
+
+<CTA href="/tr/satin-alin">Kliplerinizin, sade renklerden çok daha canlı olmaya hakkı var. Opal'ın kutudan çıktığı görsel deneyimi keşfedin.</CTA>

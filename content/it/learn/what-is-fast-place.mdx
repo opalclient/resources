@@ -1,0 +1,72 @@
+---
+title: Qual è il posto più veloce in Minecraft?
+description: Fast Place elimina il ritardo standard tra il posizionamento dei blocchi, permettendo a un client di impostare i blocchi più velocemente di quanto consenta il semplice clic. Ecco come funziona e come può verificarsi un problema.
+excerpt: Vanilla Minecraft non ti permette di posizionare i blocchi velocemente come potresti cliccare. Fast Place mente silenziosamente al server su quel limite.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa cambia effettivamente Fast Place?
+    a: Rimuove o riduce il ritardo che il client vanilla impone tra il posizionamento di un blocco e il successivo, facendo sì che i blocchi atterrino a una velocità superiore a quella che un client legittimo può inviare.
+  - q: È Fast Place la stessa cosa di Scaffold?
+    a: No. Scaffold posiziona automaticamente i blocchi sotto un giocatore mentre cammina su spazi aperti. Fast Place modifica solo i tempi tra i posizionamenti, non decide autonomamente dove o quando posizionare un blocco.
+  - q: Fast Place offre un reale vantaggio?
+    a: Sì, in qualsiasi situazione in cui la velocità di posizionamento sia importante, come ad esempio la costruzione di ponti o la creazione di muri durante un combattimento. È proprio quel vantaggio misurabile a renderlo rilevabile.
+  - q: Può Fast Place far squalificare un giocatore?
+    a: Utilizzarlo viola le regole della maggior parte dei server che vietano le modifiche lato client e, poiché la differenza di tempi è facilmente misurabile da un anticheat, è una fonte comune di rilevamenti quando utilizzato in modo sconsiderato.
+---
+
+<KeyTakeaways>
+- Fast Place elimina il ritardo che Minecraft applica tra i posizionamenti dei blocchi, permettendo ai blocchi di atterrare più velocemente di quanto consenta il normale click.
+- Si tratta di una modifica dei tempi, non del targeting: non decide dove vadano i blocchi, ma solo quanto velocemente i pacchetti di posizionamento possono essere inviati.
+- Utile per costruire, creare ponti e per azioni difensive come erigere muri o posizionare ossidiana durante un combattimento.
+- Gli anticheat lo rilevano misurando l'intervallo tra i pacchetti di posizionamento rispetto al limite fisicamente producibile da un client vanilla.
+</KeyTakeaways>
+
+Fast Place è un modulo che rimuove o riduce il piccolo ritardo che normalmente Minecraft inserisce tra il posizionamento di un blocco e il successivo, permettendo a un giocatore di posizionare blocchi più velocemente di quanto consenta la tempistica di input vanilla. Si manifesta soprattutto in fase di costruzione e creazione di ponti, dove ogni blocco posizionato richiede tempo reale. Poiché modifica qualcosa che il server può effettivamente misurare, pacchetto per pacchetto, è un modello che gli anticheat monitorano specificamente, piuttosto che una semplice opzione di attivazione/disattivazione innocua.
+
+## Come funziona
+
+Minecraft vanilla distanzia i posizionamenti consecutivi di blocchi di un piccolo margine legato a come il client elabora gli input e invia i pacchetti di posizionamento. Clicca il più velocemente possibile, non importa: il client stesso impone un limite a quanto spesso agirà su una richiesta di posizionamento, prima che la tua connessione o il tuo mouse entrino in gioco.
+
+Fast Place aggira tale limite sul lato client. Le richieste di posizionamento vengono inviate una dopo l'altra invece di attendere l'intervallo imposto da vanilla, aumentando così il tasso di posizionamento effettivo dei blocchi a un valore superiore a quello che può produrre un client legittimo e non modificato, a prescindere dalla velocità di riflessi del giocatore. Non si tratta di un trucco di rendering o di una scorciatoia dell'interfaccia utente. Modifica ciò che il server riceve effettivamente: un pacchetto di posizionamento dopo l'altro con meno tempo tra di essi rispetto a quanto consenta vanilla.
+
+Ecco anche il motivo per cui è classificato come modulo di categoria giocatore piuttosto che visivo, e compare in client come Juul, Fan, Tenacity e Rose.
+
+## È sicuro da usare?
+
+Risposta breve: non proprio, e il meccanismo spiega il perché. Gli anticheat lato server misurano l'intervallo tra i pacchetti di posizionamento di un blocco di un giocatore e lo confrontano con il limite che un client vanilla può produrre. Questo limite è fisso e ben noto, quindi qualsiasi velocità di posizionamento che lo superi costantemente non è ambigua. Non può essere liquidata come un mouse veloce o una connessione fortunata, allo stesso modo in cui i pattern di tempistica in stile autoclicker non possono essere spiegati con "clicco semplicemente molto velocemente". L'anticheat non sta indovinando le intenzioni. Sta verificando se i numeri sono fisicamente possibili per il Minecraft originale.
+
+<Callout variant="warning" title="Considerato una violazione delle regole, non un'area grigia">
+Fast Place è una modifica che influisce sul gameplay e ha una firma misurabile, non una semplice modifica estetica. La maggior parte dei server che vietano le modifiche lato client la considerano una violazione diretta quando il sistema anti-cheat la segnala, e la rilevazione è un semplice controllo dei tempi piuttosto che un giudizio soggettivo.
+</Callout>
+
+<Callout variant="tip" title="Dove si integra Opal">
+Opal non distribuisce un modulo con questo nome esatto. In quanto client di utilità, i suoi moduli per giocatori e adiacenti agli edifici sono costruiti attorno alla stessa idea che Fast Place persegue (ottenere strutture più velocemente) senza fare affidamento su un exploit temporale che fornisce a un anticheat un segnale chiaro su cui concentrarsi.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+<FAQItem question="Cosa cambia effettivamente Fast Place?">
+Rimuove o riduce il ritardo che il client vanilla impone tra il posizionamento di un blocco e il successivo, facendo sì che i blocchi atterrino a una velocità superiore a quella che un client legittimo può inviare.
+</FAQItem>
+<FAQItem question="Fast Place è la stessa cosa di Scaffold?">
+No. Scaffold posiziona automaticamente i blocchi sotto un giocatore mentre cammina su uno spazio aperto. Fast Place modifica solo i tempi tra i posizionamenti, non decide dove o quando posizionare un blocco in autonomia.
+</FAQItem>
+<FAQItem question="Fast Place offre un reale vantaggio?">
+Sì, in qualsiasi situazione in cui la velocità di posizionamento sia importante, come nella costruzione di ponti o nella creazione di muri durante un combattimento. Questo vantaggio misurabile è anche ciò che lo rende rilevabile.
+</FAQItem>
+<FAQItem question="Fast Place può far bannare un giocatore?">
+Utilizzarlo viola le regole della maggior parte dei server che vietano le modifiche al client, e poiché la differenza di tempo è facilmente misurabile da un anticheat, è una fonte comune di rilevamenti quando utilizzato in modo sconsiderato.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-scaffold", label: "Cos'è Scaffold?", description: "Il modulo di auto-collegamento Fast Place viene più spesso confuso con." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "Come moduli come questo si inseriscono nella più ampia categoria dei clienti di utilità." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "La categoria di client creata per eludere le tecniche di cheating come questa, sfuggendo al radar dell'anticheat." }
+]} />
+
+<CTA href="/it/purchase">Costruisci come se il ritardo non fosse mai esistito. Guarda cosa spedisce Opal per $8.99.</CTA>

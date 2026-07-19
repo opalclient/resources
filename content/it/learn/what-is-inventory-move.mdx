@@ -1,0 +1,87 @@
+---
+title: Cos'è lo spostamento dell'inventario in Minecraft? Spiegazione del modulo
+description: Lo spostamento dell'inventario ti permette di continuare a muoverti mentre un forziere, un forno o una schermata di creazione rimane aperto, invece di bloccarsi completamente. Ecco come funziona e perché è rischioso.
+excerpt: La vaniglia ti congela non appena si apre la schermata dell'inventario. Lo spostamento nell'inventario viene rifiutato, e quel rifiuto è proprio ciò che lo tradisce.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa cambia effettivamente la Trasferta Inventario?
+    a: Impedisce al client di bloccare i tuoi movimenti nel momento in cui si apre uno schermo di tipo inventario, come un forziere o un tavolo da lavoro. L'input di movimento continua a essere elaborato invece di essere ignorato.
+  - q: Funziona Inventory Move su ogni server?
+    a: Non necessariamente. Se il movimento risultante verrà accettato dipende da come il server, e qualsiasi sistema anti-cheat in esecuzione, convalida la posizione del giocatore mentre la schermata dell'inventario è aperta.
+  - q: È rilevabile uno spostamento di magazzino?
+    a: È plausibile che anticheat lo segnali, dato che muoversi mentre un contenitore è aperto non è qualcosa che un client non modificato può fare. La rilevazione dipende dal server specifico e dall'anticheat utilizzato.
+  - q: Quali clienti hanno spedito l'Inventory Move?
+    a: È stato documentato in Fan, Tenacity e Rose, tra gli altri.
+  - q: È un modulo di combattimento lo spostamento dell'inventario?
+    a: No, è classificato come movimento. È importante nei combattimenti perché elimina l'immobilità forzata nell'apertura di un contenitore, ma ciò che cambia è il tuo movimento, non i tuoi attacchi.
+---
+
+<KeyTakeaways>
+
+- Inventory Move è un modulo di movimento che ti permette di continuare a camminare, scattare o riposizionarti mentre un forziere, un forno o una schermata di creazione è aperto, invece di rimanere bloccato come impone la versione base.
+- Sovrascrive il blocco del movimento dello schermo dell'inventario del client, in modo che la tua posizione continui ad aggiornarsi mentre la schermata rimane aperta.
+- Che questo movimento venga accettato, ignorato o segnalato dipende interamente da come il server e qualsiasi sistema anti-cheat validano la posizione durante una schermata aperta.
+- Opal lo distribuisce come Inventory Move, con utilizzo a proprio rischio perché è rilevabile.
+
+</KeyTakeaways>
+
+Inventory Move è un modulo di movimento che ti permette di continuare a muoverti mentre schermate di inventario, forzieri, forni o banchi da lavoro rimangono aperti. In Minecraft vanilla, vieni immobilizzato non appena una di queste schermate si apre; non potrai camminare di nuovo finché non la chiudi. Inventory Move rimuove questo blocco a livello client, in modo che l'input di movimento continui a essere elaborato indipendentemente da ciò che è aperto davanti a te. Ordina un forziere senza rimanere fermo ed esposto. Rifornisci un banco da lavoro durante un combattimento. Continua a schivare mentre controlli cosa stai trasportando. Se questo movimento sopravviva al contatto con il server è un'altra questione.
+
+## Come funziona Inventory Move
+
+Inventory Move sovrascrive il blocco del movimento del client per le schermate di inventario. Nel gioco vanilla, aprire un forziere, un forno o un banco da lavoro fa sì che il gioco entri in uno stato in cui l'input di movimento viene ignorato finché la schermata non si chiude. Il modulo intercetta questo stato e continua a elaborare l'input di movimento, in modo che la tua posizione continui ad aggiornarsi sul client per tutto il tempo in cui la schermata è aperta.
+
+Nessuno di questi aspetti garantisce nulla al di fuori della tua macchina. Muoversi mentre un contenitore è aperto non è uno stato che i server vanilla si aspettano, dato che il gioco base presuppone che non possa accadere. Cosa fa il server con gli aggiornamenti di posizione risultanti, li accetta, li ignora o li segnala, dipende interamente da come esso, e qualsiasi anticheat in esecuzione, valida il movimento rispetto allo stato dello schermo aperto. Questo è dipendente dal server per design, non un'opzione nelle impostazioni all'interno del modulo stesso. Questo comportamento è stato riscontrato in client tra cui Fan, Tenacity e Rose.
+
+L'appello è semplice: vanilla forza un momento di totale immobilità ogni volta che apri un contenitore, e in PvP o durante un inseguimento, rimanere fermi è proprio il momento in cui vieni colpito. Inventory Move semplicemente si rifiuta di rinunciare a quella finestra.
+
+## È sicuro da usare?
+
+Inventory Move si colloca più verso l'estremità rischiosa dello spettro rispetto a una modifica puramente cosmetica, lato client. Modifica un comportamento che vanilla considera fisso: nessun movimento mentre lo schermo del contenitore è aperto. Qualsiasi server o anticheat che controlla se la posizione di un giocatore è cambiata durante questo intervallo può ragionevolmente trattare il cambiamento come sospetto, dato che un client vanilla legittimo non dovrebbe essere in grado di produrlo.
+
+Che un determinato anticheat riesca effettivamente a intercettare qualcosa e con quale rigore, varia a seconda dell'implementazione. Non esiste una risposta universale in merito. I giocatori che lo utilizzano dovrebbero presumere che possa essere segnalato, piuttosto che presumere che passi inosservato.
+
+<Callout variant="tip" title="Spostamento Inventario in Opal">
+Opal include anche questo modulo, catalogato con lo stesso nome: Spostamento Inventario. La descrizione del catalogo è esattamente semplice come il modulo stesso: "Permette di spostarsi mentre un inventario è aperto". Stessa sovrascrittura anti-blocco, stesso compromesso di utilizzo a proprio rischio come in qualsiasi altro luogo in cui viene distribuito.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina descrive il modulo in termini generali, così da farti capire cosa significa il termine. La denominazione e il comportamento esatto variano a seconda del client, e lo spostamento durante una schermata di inventario è un modello che nessun client non modificato può produrre, cosa che i server monitorano attentamente. Opal classifica l'uso di Inventory Move come "use-at-own-risk" proprio per questo motivo: è rilevabile e può portare alla sospensione dell'account, come su qualsiasi client che lo distribuisce.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa cambia effettivamente l'abilità 'Sposta Inventario'?">
+Impedisce al client di bloccare i tuoi movimenti non appena si apre una schermata di tipo inventario, come un forziere o un tavolo da lavoro. L'input di movimento continua ad essere elaborato invece di essere ignorato.
+</FAQItem>
+
+<FAQItem question="Funziona l'Inventario Trasferimento su ogni server?">
+Non necessariamente. L'accettazione del trasferimento risultante dipende da come il server, e qualsiasi sistema anticheat in uso, valida la posizione del giocatore quando una schermata dell'inventario è aperta.
+</FAQItem>
+
+<FAQItem question="È rilevabile lo spostamento dell'inventario?">
+È plausibile che gli anticheat lo segnalino, dato che spostarsi mentre un contenitore è aperto non è qualcosa che un client non modificato possa fare. La rilevazione dipende dal server e dall'anticheat specifico in uso.
+</FAQItem>
+
+<FAQItem question="Quali clienti hanno spedito Inventory Move?">
+È stato documentato in Fan, Tenacity e Rose, tra gli altri.
+</FAQItem>
+
+<FAQItem question="Sposta Inventario è un modulo di combattimento?">
+No, è classificato come movimento. È importante negli scontri perché elimina l'immobilità forzata durante l'apertura di un contenitore, ma ciò che cambia è il tuo movimento, non i tuoi attacchi.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-scaffold", label: "Cos'è Scaffold?", description: "Un altro modulo di movimento costruito attorno all'elusione di ciò che la versione base normalmente vieta." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "La categoria furtiva basata sull'evitare di essere individuati mentre si eseguono moduli come questo." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia a cui appartengono questi moduli." },
+]} />
+
+<CTA href="/it/purchase">Lo spostamento dell'inventario di Opal fa esattamente ciò che dice: spostarsi mentre un inventario è aperto. Scopri il resto del kit.</CTA>

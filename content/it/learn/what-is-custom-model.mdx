@@ -1,0 +1,75 @@
+---
+title: Cosa sono i modelli personalizzati in Minecraft? Spiegazione del modulo
+description: Custom Model è un modulo visuale di Minecraft che sostituisce la tua skin o il tuo modello giocatore solo sul tuo schermo, senza alcun effetto su hitbox, portata o rilevamento.
+excerpt: Il Modello Personalizzato cambia solo l'aspetto del tuo personaggio sullo schermo, nient'altro. Nessuna modifica al hitbox, nessun pacchetto aggiuntivo, solo una skin diversa da quella fornita da Mojang.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Il Modello Personalizzato offre un vantaggio in termini di gameplay?
+    a: No. Cambia soltanto il modo in cui il modello o la skin del tuo personaggio vengono renderizzati localmente. Non influisce sulle hitbox, sulla portata, sul movimento o su qualsiasi altra cosa tracciata dal server, quindi non offre alcun vantaggio in combattimento o di movimento.
+  - q: Possono altri giocatori vedere il mio modello personalizzato?
+    a: Di solito no. Minecraft rende le skin per ogni client, quindi modificare il rendering personale non propaga la modifica sullo schermo di altri. L'effetto è generalmente visibile solo a te.
+  - q: Sono rilevabili i modelli personalizzati dagli anticheat?
+    a: A malapena, se non nulla. Non alterando movimento, combattimento o i pacchetti inviati al server, un anticheat lato server ha quasi nulla da segnalare. Il rischio di rilevamento è di gran lunga inferiore rispetto a quello per moduli di combattimento o di movimento.
+  - q: È un modello personalizzato come un pacchetto di risorse?
+    a: Non esattamente. Un pacchetto risorse proviene dal server e modifica ciò che vede ogni giocatore connesso. Custom Model è un modulo lato client che sostituisce il rendering localmente, nessun pacchetto risorse richiesto.
+---
+
+<KeyTakeaways>
+
+- Il Modello Personalizzato è un modulo visivo che sostituisce il modello o la skin del personaggio in gioco con uno personalizzato.
+- Modifica solo ciò che viene visualizzato localmente, non le hitbox, i movimenti o i dati inviati al server.
+- Gli altri giocatori non possono vedere la sostituzione, poiché Minecraft rende le skin per ogni client, non a livello server.
+- Il rischio di rilevamento è minimo: nessun valore di gameplay cambia, nessun pacchetto aggiuntivo viene inviato.
+
+</KeyTakeaways>
+
+Il Modello Personalizzato è un modulo visivo che permette a un giocatore di sostituire il proprio modello o la propria texture in gioco con qualcosa di completamente diverso, direttamente sul proprio client, senza toccare nulla che il server possa vedere. Si colloca nella stessa categoria di altre opzioni cosmetiche e di rendering: nessuna matematica di combattimento, nessuna matematica di movimento, solo un'immagine diversa disegnata al posto del tuo personaggio. Laddove un pacchetto di risorse modifica ciò che tutti vedono al tavolo, il Modello Personalizzato cambia solo la tua visualizzazione. È il modulo per i giocatori che si preoccupano di come appaiono in camera e non vogliono aspettare che il server gli fornisca una nuova skin.
+
+## Come funziona il Modello Personalizzato
+
+Il sistema di skin di Minecraft è normalmente legato all'account. Il tuo client recupera la skin associata al tuo account da Mojang, oppure la preleva dalla cache locale, e fornisce quella texture al renderer ogni volta che disegna un giocatore, compreso te. Il Modello Personalizzato interviene in quella chiamata di rendering e sostituisce qualcosa: una texture diversa, una forma di modello diversa, a volte proporzioni che il modello giocatore originale non era mai stato progettato per gestire.
+
+Lo scambio avviene interamente all'interno della pipeline di rendering locale. Non cambia nulla dei pacchetti che invii. I pacchetti di movimento, quelli di attacco e lo stato dell'inventario vengono inviati esattamente come farebbero senza il modulo. Il server vede ancora la stessa entità del giocatore, con la stessa hitbox e gli stessi dati della skin reali associati al tuo account. Cambia solo l'immagine che il tuo client disegna localmente.
+
+## È sicuro da usare?
+
+Custom Model non interferisce con nulla che un anticheat lato server sia progettato per rilevare. Non modifica la portata, la velocità di movimento, le dimensioni della hitbox né i tempi, e non aggiunge nuovi pacchetti al flusso tra client e server. Funzionalmente, non c'è nulla che un anticheat possa misurare, perché i valori che misura non si muovono mai.
+
+Questo lo pone in una categoria diversa rispetto a qualcosa come l'ESP o gli X-ray, che rivelano informazioni che il client originale è progettato per nascondere e vengono bannati specificamente perché forniscono un vantaggio informativo. Custom Model non tocca le informazioni, solo l'aspetto, quindi si avvicina molto a una funzionalità cosmetica piuttosto che di gameplay. Alcuni server applicano una politica generale contro qualsiasi client modificato, indipendentemente da ciò che la modifica fa, quindi le regole dipendono comunque da dove giochi. Il meccanismo stesso non comporta il rischio di rilevamento che invece presentano un modulo di combattimento o di movimento.
+
+<Callout variant="tip" title="Dove si inseriscono i cosmetici per un cliente come Opal">
+La categoria visiva di Opal si basa proprio su questo tipo di compromesso: modifiche che influenzano ciò che vedi e che non riguardano il server. Non distribuisce un modulo specificamente chiamato Custom Model, ma lo stesso principio è alla base di tutta questa categoria. Personalizza come preferisci senza toccare i numeri relativi al combattimento o al movimento che il server tiene traccia.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Il Modello Personalizzato offre un vantaggio di gioco?">
+No. Modifica solamente il modo in cui il modello o la skin del tuo personaggio vengono renderizzati localmente. Non influisce sulle hitbox, sulla portata, sui movimenti o su qualsiasi altra cosa tracciata dal server, quindi non offre alcun vantaggio in combattimento o di movimento.
+</FAQItem>
+
+<FAQItem question="Gli altri giocatori possono vedere il mio modello personalizzato?">
+Di solito no. Minecraft elabora le skin lato client, quindi modificare il rendering del tuo modello non propaga la modifica sullo schermo degli altri. L'effetto è generalmente visibile solo a te, a meno che un'implementazione specifica non lo condivida in altro modo.
+</FAQItem>
+
+<FAQItem question="È rilevabile il Modello Personalizzato dagli anticheat?">
+A malapena, se non affatto. Non alterando movimento, combattimento o i pacchetti inviati al server, un anticheat lato server ha quasi nulla da segnalare. Il rischio di rilevamento è di gran lunga inferiore rispetto a quello dei moduli di combattimento o di movimento.
+</FAQItem>
+
+<FAQItem question="Custom Model è come un resource pack?">
+Non esattamente. Un resource pack proviene dal server e modifica ciò che vede ogni giocatore connesso. Custom Model è un modulo lato client che sostituisce il rendering localmente, senza resource pack richiesto.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria più ampia Modello Personalizzato e ogni altro modulo vi appartiene." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Un'altra distinzione lato client da comprendere." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "L'estremità opposta dello spettro: un modulo che il server può assolutamente misurare." },
+]} />
+
+<CTA href="/it/purchase">Scopri come la scheda visiva di Opal gestisce il resto del tuo look per $8.99</CTA>

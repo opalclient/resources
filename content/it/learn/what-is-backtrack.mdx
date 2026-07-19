@@ -1,0 +1,74 @@
+---
+title: Cos'è il backtrack in Minecraft PvP?
+description: Backtrack è un modulo di combattimento per Minecraft che fa tornare indietro la posizione di un bersaglio, in modo che i colpi lo raggiungano dopo che si è spostato. Ecco come funziona e perché gli anticheat lo segnalano.
+excerpt: Backtrack trasforma il tuo ultimo colpo nel colpo corretto, a posteriori. Funziona, è dimostrabile ed è proprio per questo che anticheats ha implementato un controllo per rilevarlo.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Backtrack è la stessa cosa di lag o ping?
+    a: No. Ping e lag sono proprietà di una connessione, non una decisione presa da qualcuno. Backtrack è un modulo che sfrutta deliberatamente la tolleranza guidata dalla latenza integrata nella registrazione dei colpi, piuttosto che un effetto collaterale di una connessione lenta.
+  - q: Ha importanza Backtrack al di fuori del combattimento?
+    a: Non proprio. Influenza soltanto se un attacco in mischia viene registrato contro un bersaglio in movimento, quindi è rilevante durante i combattimenti diretti tra giocatori e in nessun altro caso.
+  - q: Possono i bersagli capire che Backtrack è stato usato contro di loro?
+    a: No, non direttamente. Il riavvolgimento avviene interamente nel modo in cui il client dell'attaccante temporizza e segnala il colpo. La rilevazione deve avvenire lato server, poiché il server è l'unico luogo che possiede sia la cronologia reale dei movimenti che la capacità di confrontarla con il colpo dichiarato.
+  - q: Come Backtrack si differenzia da Reach?
+    a: La portata indica la distanza massima a cui un bersaglio può trovarsi per essere colpito. Il backtracking modifica il momento in cui un bersaglio viene considerato colpito, utilizzando una posizione precedentemente registrata anziché una distanza maggiore. Sfruttano parti diverse della registrazione del colpo, e un client può eseguirle entrambe contemporaneamente.
+---
+
+<KeyTakeaways>
+- Backtrack è un modulo di combattimento che riavvolge la posizione di un bersaglio, in modo che un colpo vada a segno dove si trovava, non dove si trova ora.
+- Sfrutta la tolleranza alla latenza integrata nella registrazione dei colpi, non un bug o un problema di connessione.
+- Gli anticheat lo rilevano confrontando la posizione dichiarata di un colpo con il movimento registrato del bersaglio.
+- Influenza solo il PvP corpo a corpo, nient'altro.
+</KeyTakeaways>
+
+Backtrack è un modulo di combattimento che silenziosamente riavvolge la posizione di un avversario un istante prima, utilizzandola per determinare se il tuo colpo va a segno. Ogni sparatutto online o gioco corpo a corpo deve tollerare un certo divario tra ciò che il tuo client mostra e ciò che il server considera attualmente vero, altrimenti il combattimento risulterebbe ingiocabile su una connessione tutt'altro che perfetta. Backtrack sfrutta appositamente questa tolleranza intrinseca. Invece di mirare alla posizione attuale del bersaglio, mira a quella in cui si trovava di recente, così una schivata o un riposizionamento che avrebbe dovuto funzionare, perde di importanza.
+
+## Come funziona
+
+Backtrack mantiene un breve registro continuo della posizione di ogni giocatore visibile negli ultimi tick. Quando attacchi qualcuno, il modulo non deve utilizzare la sua posizione attuale, confermata dal server. Può attingere a quel registro e trattare una voce più datata come se fosse ancora valida, calcolando il colpo come se il bersaglio non si fosse mosso.
+
+Funziona solo perché la registrazione dei colpi lato server deve già perdonare un po' di lag. C’è sempre un ritardo tra ciò che mostra il tuo client e ciò che il server ha elaborato, e i server tollerano questo intervallo per evitare che il combattimento si disgreghi per chiunque abbia un ping reale. Backtrack estende deliberatamente la stessa tolleranza. Il risultato è un colpo che soddisfa le regole del server pur apparendo errato per la persona che lo riceve, che era sicura di essersi spostata.
+
+È più importante negli scambi di combattimento corpo a corpo rapidi, dove un rewind di una frazione di secondo è sufficiente a trasformare un colpo mancato in uno connesso senza che l’attacco appaia palesemente interrotto a un osservatore. I client costruiti attorno al combattimento anarchy-server, come Silhouette, hanno documentato Backtrack come uno dei loro moduli standard.
+
+## Perché gli anticheat lo intercettano (e perché le versioni più deboli sopravvivono)
+
+Backtrack è un reale vantaggio di gioco, non un’opzione estetica, quindi gli anticheat lo considerano uno sfruttamento piuttosto che una preferenza da tollerare. La rilevazione funziona confrontando il server con la posizione di un colpo dichiarata rispetto al movimento effettivo e registrato del bersaglio. Se un attacco ha senso solo contro un punto che il bersaglio ha chiaramente già lasciato, questo è motivo per segnalarlo.
+
+Questo crea un vero compromesso per chiunque lo utilizzi. Una finestra di riavvolgimento sufficientemente ampia da fare la differenza in una vera battaglia si estende anche abbastanza indietro nel tempo da produrre colpi che sembrano impossibili, esattamente il tipo di schema che il rilevamento è progettato per individuare. Una finestra più stretta e conservativa è più difficile da intercettare, ma rinuncia anche alla maggior parte del vantaggio che rendeva il modulo degno di essere utilizzato in primo luogo. La stessa spinta e tirata si manifesta in altri exploit di combattimento come Reach e KillAura: maggiore è il vantaggio concesso da un cheat, più facile tende ad essere individuarlo.
+
+<Callout variant="tip" title="Dove Opal pone il limite">
+Opal non spedisce un modulo Backtrack. I moduli che manipolano i tempi di impatto alle spalle di un avversario rientrano esattamente nella categoria che gli anticheat sono progettati per intercettare, e non è un compromesso che siamo disposti a fare per voi. Strumenti di combattimento che funzionano solo scommettendo sul vostro account non sono qualcosa che realizziamo.
+</Callout>
+
+<Callout variant="warning" title="Questo ti farà bannare">
+Backtrack è progettato per sfruttare la tolleranza nella registrazione dei colpi da parte del server, e i moderni sistemi anti-cheat sono progettati per intercettare proprio questo schema. Non esiste una configurazione che lo renda inosservabile, solo più o meno evidente. Consideralo come un riferimento su come funziona lo sfruttamento, non come una raccomandazione per eseguirlo.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+<FAQItem question="Backtrack è la stessa cosa di lag o ping?">
+No. Ping e lag sono proprietà di una connessione, non una decisione presa da qualcuno. Backtrack è un modulo che sfrutta deliberatamente la tolleranza guidata dalla latenza integrata nella registrazione dei colpi, piuttosto che un effetto collaterale di una connessione lenta.
+</FAQItem>
+<FAQItem question="Backtrack è importante al di fuori del combattimento?">
+Non particolarmente. Influenza solo se un attacco in mischia registra contro un bersaglio in movimento, quindi è rilevante durante i combattimenti diretti tra giocatori e in nessun altro caso.
+</FAQItem>
+<FAQItem question="Il bersaglio può capire se Backtrack è stato usato contro di lui?">
+No, non direttamente. Il rewind avviene interamente nel modo in cui il client dell'attaccante temporizza e segnala il colpo. La rilevazione deve avvenire lato server, poiché il server è l'unico luogo che dispone sia della reale cronologia dei movimenti che della capacità di confrontarla con il colpo dichiarato.
+</FAQItem>
+<FAQItem question="In che modo Backtrack è diverso da Reach?">
+Reach estende la distanza massima a cui un bersaglio può trovarsi e comunque essere colpito. Backtrack modifica quando il bersaglio è considerato colpito, utilizzando una posizione precedentemente registrata invece di una distanza maggiore. Sfruttano parti diverse della registrazione dei colpi, e un client può eseguirle entrambe contemporaneamente.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "Il modulo di combattimento Backtrack viaggia più spesso insieme." },
+  { href: "/it/learn/what-is-reach", label: "Cos'è Reach?", description: "Un'impresa di distanza che risolve una metà diversa dello stesso problema di registrazione dei colpi." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria Backtrack e i suoi vicini appartengono a." }
+]} />
+
+<CTA href="/it/purchase">Scopri come Opal gestisce i combattimenti competitivi senza il rischio di ban.</CTA>

@@ -1,0 +1,94 @@
+---
+title: Czym jest prędkość (odporność na odrzucenie) w Minecraft?
+description: Prędkość, czyli odporność na odrzut, to moduł bojowy, który zmniejsza lub eliminuje odrzut, który otrzymujesz po trafieniu. Oto jak działa i dlaczego jest wykrywany.
+excerpt: Prędkość zmniejsza odrzut, który otrzymujesz po trafieniu, dzięki czemu utrzymujesz pozycję i kontynuujesz atak. Oto, jak moduł modyfikuje ten odrzut i dlaczego serwery to zauważają.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Modules
+author: trq
+faqs:
+  - q: Jak rozumieć pojęcie Velocity w kliencie Minecraft?
+    a: W menu klienta Velocity to moduł antyodrzutowy. Zmniejsza odrzut, który otrzymuje gracz po uderzeniu, dzięki czemu pozostaje bliżej celu podczas walki.
+  - q: Czy odrzut jest taki sam jak prędkość?
+    a: "Tak. Odpór to potoczna nazwa, a Velocity to powszechnie używana nazwa modułu dla tego samego zachowania: zmniejszania odrzutu, który otrzymuje gracz podczas ataków."
+  - q: Dlaczego nie mogę po prostu ustawić odbicia na zero procent?
+    a: Możesz, ale pełne anulowanie jest najłatwiejszą wersją do wykrycia. Serwer wie, jak daleko powinnaś/powinieneś wrócić, więc brak jakiegokolwiek odrzucenia jest oczywistym niezgodnością.
+  - q: Czy Velocity pomaga w PvP?
+    a: Może to osiągnąć, utrzymując gracza w zasięgu walki wręcz zamiast odpychać go po każdym uderzeniu. To właśnie ta przewaga sprawia, że antywirusy tak dokładnie monitorują działanie odrzutu.
+---
+
+<KeyTakeaways>
+
+- Prędkość, zwana również antyuderzeniem, zmniejsza lub eliminuje cofnięcie, które odczuwasz po uderzeniu.
+- Serwer wysyła wektor uderzenia po trafieniu; Prędkość go skaluje przed ruchem gracza.
+- Pełne anulowanie jest łatwe do wykrycia; częściowe wartości lepiej mieszają się z opóźnieniem i normalnymi wymianami.
+- Wykrywanie odbywa się po stronie serwera, ponieważ serwer już wie, jak daleko powinien przesunąć się gracz.
+
+</KeyTakeaways>
+
+Prędkość to moduł bojowy, który zmniejsza lub anuluje odrzut, który otrzymuje gracz, gdy atak go trafi. Serwer informuje klienta, jak daleko ma się cofnąć po uderzeniu. Prędkość przechwytuje tę instrukcję i ją zmniejsza, dzięki czemu gracz ledwo się porusza. Jest też nazywana anty-odrzutem.
+
+## Jak działa Prędkość
+
+Prędkość edytuje odrzut, który serwer wysyła po uderzeniu. Kiedy byt zostaje uderzony w Minecraft, serwer wysyła do klienta aktualizację prędkości: wektor wskazujący, w którą i jak szybko się poruszać. Domyślny klient stosuje ten wektor w całości. Prędkość przechwytuje aktualizację jako pierwsza i ją skaluje przed poruszeniem gracza.
+
+Skalowanie zazwyczaj wyrażane jest jako procent na każdej osi. Odrzut poziomy jest ograniczany, aby gracz nie ślizgał się do tyłu, podczas gdy odrzut pionowy często pozostaje bliższy normalnemu, aby skoki i upadki wyglądały poprawnie. Przy zerowym procencie gracz nie otrzymuje żadnego odrzutu. Przy wartości częściowej otrzymuje on pewien odrzut, który jest trudniej zauważyć.
+
+Ten sam efekt można osiągnąć na dwa sposoby. Niektóre implementacje modyfikują pakiet prędkości w momencie jego przybycia. Inne pozwalają domyślnej mechanice ruchu przebiec, a następnie korygują pozycję w następnym cyklu. Oba kończą się tym, że gracz utrzymuje pozycję, którą powinien był stracić.
+
+## Popularne ustawienia
+
+Moduły Prędkości udostępniają kilka wartości, które wymieniają bezpieczeństwo na efekt.
+
+| Ustawienie | Kontroluje |
+|---|---|
+| Poziome | Procent odbicia w bok, który nadal otrzymuje gracz |
+| Pionowe | Procent odbicia w górę, który nadal otrzymuje gracz |
+| Tryb | Edycja pakietów vs korekta pozycji |
+| Szansa | Jak często dany trafienie zostaje zredukowane, zamiast każdego trafienia |
+
+Pełne anulowanie jest najsilniejsze i najbardziej oczywiste. Częściowe wartości lub szansa, że pomija niektóre trafienia, bardziej przypominają opóźnienie lub normalną wymianę ciosów i przyciągają mniejszą uwagę.
+
+## Dlaczego gracze to używają
+
+Prędkość daje przewagę w walce wręcz, utrzymując gracza w zasięgu. Odbicie zazwyczaj przerywa walkę: każde uderzenie odpycha obu graczy, więc muszą znowu zamykać lukę. Gracz, który otrzymuje mniejsze odbicie, pozostaje na wierzchu celu i kontynuuje wymachiwanie, podczas gdy drugi gracz odpływa. W bezpośredniej walce wręcz to duża przewaga.
+
+## Dlaczego to jest wykrywane
+
+Prędkość jest wykrywana, ponieważ serwer już wie, jak daleko gracz powinien się przesunąć. Serwer wysyła wektor odbicia, aby porównać oczekiwaną pozycję z pozycją zgłaszaną przez klienta. Kiedy gracz stale absorbuje uderzenia bez przemieszczania się o przewidywaną odległość, luka jest widoczna.
+
+Serwerowe antycheaty śledzą to bezpośrednio. Obserwują, ile knockbacku gracz faktycznie zastosował podczas wielu uderzeń. Gracz, który konsekwentnie utrzymuje więcej dystansu niż pozwala fizyka, zostaje oznaczony. Pełne anulowanie jest łatwe do wykrycia. Częściowe zmniejszenie jest trudniejsze, dlatego wiele implementacji nigdy nie osiąga zera.
+
+## Prędkość w porównaniu z innymi modułami walki
+
+Prędkość wyróżnia się spośród modułów walki, ponieważ zmienia to, co dzieje się z graczem, a nie to, co gracz robi z celem. [KillAura](/pl/learn/what-is-killaura) i [aimbot](/pl/learn/what-is-an-aimbot) działają na przeciwnika, automatyzując celowanie i ataki. Prędkość działa na pozycję gracza, nadpisując instrukcję serwera dotyczącą tego, jak daleko powinien się poruszyć po uderzeniu. Wspólną cechą jest to, że oba nadpisują coś, co serwer oczekuje, że będzie kontrolował.
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona opisuje moduł w sposób ogólny, abyś wiedział, co ten termin oznacza. Nazewnictwo i dokładne zachowanie różnią się w zależności od klienta, a nadpisywanie odrzutu serwera łamie zasady na praktycznie każdym serwerze.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co oznacza Velocity w kliencie Minecraft?">
+W menu klienta Velocity to moduł anty-knockback. Zmniejsza on odrzut, który otrzymuje gracz podczas uderzenia, dzięki czemu pozostaje bliżej celu podczas walki. Nie ma to nic wspólnego z programem proxy o tej samej nazwie.
+</FAQItem>
+
+<FAQItem question="Czy antyuderzenie jest tym samym co Prędkość?">
+Tak. Antyuderzenie to nazwa w języku potocznym, a Prędkość to powszechnie używana nazwa modułu dla tego samego zachowania: zmniejszania odrzutu, który otrzymuje gracz podczas ataków.
+</FAQItem>
+
+<FAQItem question="Dlaczego nie mogę po prostu ustawić odrzutu na zero procent?">
+Możesz, ale pełne anulowanie jest najłatwiejszą wersją do wykrycia. Serwer wie, jak daleko powinieneś zostać popchnięty do tyłu, więc brak odrzutu wcale jest oczywistym rozbieżnością. Częściowe wartości istnieją, ponieważ lepiej wpasowują się w całość.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Moduł walki z automatycznym atakiem." },
+  { href: "/pl/learn/what-is-reach", label: "Co to jest Reach?", description: "Moduły anticheat monitorujące zasięg uderzenia są pod ścisłą obserwacją." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szersza kategoria, do której te moduły należą." },
+]} />
+
+<CTA href="/pl/purchase">Zobacz, co Opal wysyła dla $8.99</CTA>

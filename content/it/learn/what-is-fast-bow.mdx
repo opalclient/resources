@@ -1,0 +1,84 @@
+---
+title: Cos'è il Fast Bow in Minecraft? Spiegazione del Modulo
+description: Fast Bow è un modulo di combattimento che elimina il ritardo di scatto dell'arco vanilla, scagliando frecce a piena potenza quasi istantaneamente. Ecco come funziona e perché viene segnalato.
+excerpt: La Vanilla ti fa aspettare quasi un secondo per un colpo a piena potenza. La Fast Bow decide semplicemente che hai già aspettato.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa cambia effettivamente Fast Bow?
+    a: Riduce o elimina il tempo necessario per tenere l'arco teso prima che scocchi con tutta la sua potenza, quindi le frecce che dovrebbero essere deboli e lente arrivano come frecce completamente cariche quasi istantaneamente.
+  - q: È Fast Bow come un aimbot?
+    a: No. Il Bow Fast influenza solo i tempi di carica e la potenza dello scatto, non la mira. Non posiziona il mirino sul bersaglio come farebbe un aimbot, ma semplicemente fa sì che ogni rilascio agisca come una trazione completa.
+  - q: Possono i server rilevare il Fast Bow?
+    a: Molti possono capirlo confrontando per quanto tempo un arco è stato visibilmente teso rispetto alla potenza della freccia scoccata. Un tiro a piena potenza con quasi nessun tempo di tensione è una chiara sproporzione, sebbene riduzioni più piccole del ritardo siano più difficili da cogliere rispetto alla sua completa eliminazione.
+  - q: Quali clienti hanno Fast Bow?
+    a: È documentato come da Tenacity, archiviato insieme ai suoi moduli di combattimento e ad altri scorciatoie basate sul tempismo.
+---
+
+<KeyTakeaways>
+
+- Fast Bow è un modulo di combattimento che salta o riduce il ritardo di tiro dell'arco vanilla, permettendo alle frecce di essere scagliate a potenza massima quasi istantaneamente al rilascio.
+- Vanilla lega il danno e la gittata dell'arco al tempo di tiro, quasi un secondo completo per la carica massima; Fast Bow segnala tale stato in anticipo.
+- Modifica solo i tempi di carica e la potenza, non la mira, quindi non è un aimbot.
+- I server deducono il tempo di tiro dalla cronologia dei pacchetti, e un colpo a piena potenza con un tempo di tiro reale quasi nullo è un facile segnale di anticheat.
+- Documentato come si può vedere nella categoria di combattimento di Tenacity.
+
+</KeyTakeaways>
+
+Fast Bow è un modulo di combattimento che elimina il ritardo standard per l'uso di un arco, in modo che il tiro colpisca con tutta la potenza quasi nel momento in cui lo si tende. Nella sopravvivenza normale, un arco necessita di quasi un secondo completo di tensione massima per infliggere danni reali o volare dritto. Rilasciare troppo presto e la freccia sarà debole e si allontanerà dal bersaglio. Fast Bow riduce questo intervallo di tempo o comunica al gioco che l'arco è già completamente caricato, trasformando un meccanismo costruito da Mojang come un compromesso deliberato in qualcosa di vicino a un fuoco istantaneo. La tua mira rimane esattamente quella che era. Cambia solo lo stato di carica.
+
+## Come funziona Fast Bow
+
+La versione standard lega il danno e la velocità di un arco alla durata della tensione. Rilasciare troppo presto e il tiro sarà debole e si allontanerà dal bersaglio. Tenere premuto per quasi un secondo lo rilascia completamente carico, colpendo più forte e volando più dritto. Fast Bow intercetta il timer di carica sul client e lo riduce o segnala una carica completa dal momento in cui l'arco viene sollevato, in modo che la freccia che viene scoccata trasporti tutta la potenza ben prima che un tiro legittimo avrebbe potuto produrla.
+
+Il client invia comunque un pacchetto di tiro dall'aspetto normale al server. Non c'è nulla di sbagliato nel pacchetto stesso. Ciò che cambia è la tempistica alla base: il giocatore tira e rilascia quasi immediatamente, e il gioco tratta il tiro come se fosse stato tenuto premuto per tutto il tempo.
+
+L'attrattiva è semplice: una freccia completamente carica colpisce più forte e vola più dritta, quindi ridurre il tempo di carica trasforma quasi ogni tiro in un colpo quasi istantaneo, quasi al massimo. In uno scambio di frecce, questa è la differenza tra assestare il primo colpo efficace e subire un colpo mentre la tua freccia è ancora in carica.
+
+## Fast Bow è sicuro da usare?
+
+No. Fast Bow altera l'esito di un combattimento a favore dello sparatore, e qualsiasi server che si preoccupi di combattimenti equi lo considera un cheat, non una comodità.
+
+Lo stato di carica risiede sul client prima che il pacchetto di tiro raggiunga mai il server, quindi il server non può semplicemente leggerlo dal giocatore. Gli anticheat deducono indirettamente il tempo di tiro: tracciano per quanto tempo un giocatore ha tenuto visibilmente un arco teso in base a pacchetti precedenti, quindi lo confrontano con la potenza della freccia che ne esce. Un tiro che arriva alla massima potenza molto prima di quanto qualsiasi tiro legittimo potrebbe produrre è una discrepanza facile da individuare.
+
+Quanto affidabile sia questo dipende dal server. Alcune configurazioni controllano solo il caso ovvio, un tiro sparato nel momento in cui l'arco viene sollevato. Una configurazione più sottile che riduce solo parte del ritardo è più difficile da distinguere dal lag o da un giocatore che è semplicemente molto veloce a tendere l'arco, motivo per cui alcune implementazioni offrono un'opzione di ritardo parziale invece di rimuovere completamente l'attesa.
+
+<Callout variant="tip" title="Dove Opal pone il limite">
+Opal non spedisce un modulo Fast Bow dedicato. Gli exploit relativi alla tempistica di tiro sono tra le categorie più facili da intercettare per un server, poiché quest'ultimo tiene già traccia di quanto tempo è stato teso l'arco; forzare una discrepanza in questo senso consegna semplicemente all'anticheat un segnale chiaro su cui agire. La lineup di combattimento di Opal copre gli stessi combattimenti a distanza, ma è costruita attorno a comportamenti che un server non può distinguere nettamente da quelli di un giocatore veloce e legittimo, piuttosto che attorno alla simulazione di uno stato di carica che il server possa misurare.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina spiega cos'è Fast Bow e come si comporta in termini generali. Non è una guida per farlo funzionare. Scoccare frecce a piena potenza prima di un'estrazione legittima viola le regole su qualsiasi server che controlla i tempi di combattimento, ed è uno dei pattern più facili da rilevare per un anticheat.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa cambia effettivamente Fast Bow?">
+Riduce o elimina il tempo necessario per tenere l'arco teso prima che scocchi con tutta la sua potenza, quindi le frecce che dovrebbero essere deboli e lente arrivano come frecce completamente cariche quasi istantaneamente.
+</FAQItem>
+
+<FAQItem question="Fast Bow è la stessa cosa di un aimbot?">
+No. Fast Bow influenza solo i tempi di carica e la potenza dello scatto, non la mira. Non posiziona il mirino su un bersaglio come farebbe un aimbot, semplicemente fa sì che ogni rilascio agisca come una completa estensione della corda.
+</FAQItem>
+
+<FAQItem question="I server possono rilevare il Fast Bow?">
+Molti sì, confrontando il tempo in cui l'arco è stato visibilmente teso con la potenza della freccia scoccata. Un tiro a piena potenza con quasi nessun tempo di tensione è una discrepanza evidente, anche se riduzioni minori del ritardo sono più difficili da individuare rispetto alla sua completa eliminazione.
+</FAQItem>
+
+<FAQItem question="Quali clienti hanno Fast Bow?">
+È documentato come si può vedere in Tenacity, archiviato insieme ad altri moduli di combattimento e scorciatoie basate sul tempismo.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "L'attaccante in mischia dello stesso modulo di combattimento." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Come l'automazione mirata si differisce da una scorciatoia temporale come Fast Bow." },
+  { href: "/it/learn/what-is-reach", label: "Cos'è Reach?", description: "Un altro modulo di combattimento basato sulla manipolazione di un singolo valore di base." },
+]} />
+
+<CTA href="/it/purchase">Il combattimento a distanza di Opal è progettato per vincere lo scontro, non per simularlo.</CTA>

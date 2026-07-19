@@ -1,0 +1,86 @@
+---
+title: ASM (Java Bytecode) Nedir? Kütüphane Açıklaması
+description: ASM, çalışma zamanında JVM bytecode'unu okuma ve yazma için bir Java kütüphanesidir. İşte ne yaptığı, nasıl çalıştığı ve neden Minecraft modlarının buna güvendiği.
+excerpt: Oyun kodları derlenmiş, yeniden inşa edebileceğiniz kaynak kod olarak değil. ASM, modların yükleme zamanında o bytecode'a ulaşmasını ve yamalamasını sağlayan yöntemdir.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Libraries
+author: trq
+faqs:
+  - q: ASM bir derleyici mi?
+    a: Hayır. Bir derleyici, bayt koduu okunabilir kaynak koduna geri çevirirken, ASM bayt kodu üzerinde çalışır ve onu değiştirmek için tasarlanmıştır, kaynak kodu kurtarmak için değil.
+  - q: Mod yapmak için ASM öğrenmem gerekiyor mu?
+    a: Genellikle hayır. Çoğu Fabric modları Mixin kullanır, bu da ASM detaylarını notasyonların arkasına saklar, bu yüzden yalnızca ince kontrol gerektirdiğinde ham ASM'ye başvurursunuz.
+  - q: ASM Minecraft'a özgü mü?
+    a: Hayır, ASM, bytecode ile çalışan birçok araçta kullanılan genel bir Java kütüphanesidir; Minecraft modlama yaygın bir kullanım şeklidir, tek değil.
+  - q: Kaynağı neden doğrudan düzenlemiyorsunuz?
+    a: Yapamazsınız. Oyun, değiştirebileceğiniz ve yeniden derleyebileceğin kaynak kod olarak değil, derlenmiş olarak gönderiliyor; bu nedenle, bytecode'u düzenlemek, sahip olmadığınız kodu yamalamanın pratik yoludur.
+---
+
+<KeyTakeaways>
+
+- ASM, JVM bytecode'u okuma, değiştirme ve yazma için bir Java kütüphanesidir.
+- Derlenmiş .class dosyaları üzerinde çalışır, böylece bir sınıfı yeniden derlemeden yeniden yazabilir.
+- Mod'lar, yükleme zamanında zaten derlenmiş oyunu yamalamak için bunu kullanır.
+- Çoğu mod yapımcısı, ASM'nin üzerine oturan ve detayları gizleyen Mixin'i kullanır.
+
+</KeyTakeaways>
+
+ASM, JVM bytecode'u okuma, değiştirme ve yazma için bir Java kütüphanesidir. Kaynak kod yerine derlenmiş `.class` dosyaları üzerinde çalışır, böylece bir sınıfı yeniden derlemeden inceleyebilir veya yeniden yazabilir. Minecraft modları, oyunun zaten derlenmiş olmasının ardından yükleme zamanında oyunu yamalamasına olanak tanıdığı için ASM'ye güvenir.
+
+<Callout variant="info" title="Opal Nerede Çalışır">
+Opal, bir [Fabric](https://fabricmc.net/) modudur ve Fabric modları bu bytecode katmanı aracılığıyla oyun koduna erişir. Onu doğrudan etkilemezsiniz: [betik motoru](/tr/docs/scripting) size Opal'ı bytecode yazmadan uzatmanın temiz bir yolunu sunar.
+</Callout>
+
+## ASM'nin aslında ne yaptığı
+ASM, derlenmiş bir sınıfı, bir programın düzenleyebileceği bir şeye dönüştürür. Bir `.class` dosyası sadece bayt kodudur; Java Sanal Makinesi'nin çalıştırdığı talimatlardır. ASM bu bayt kodunu ayrıştırır, size metotları ve alanları sunar ve talimatları eklemenize, silmenize veya değiştirmenize olanak tanır. Ardından yeni, geçerli bir sınıfı tekrar yazar.
+
+Basit Java, bunu kendi başına yapamaz. Derleyici, kaynak kodunuzu bir kez bayt koduna dönüştürür ve bundan sonra bayt kodu sabittir. ASM, normalde yazdığınız kaynak kodunun altındaki katman olan bayt koduna erişir
+## Nasıl çalışır
+ASM, bir `ClassReader` ile bir sınıf okur ve bir `ClassWriter` ile yazar. İki aralıkta, kodunuz sınıfın bölümlerini ziyaret eder ve neyi değiştireceğine karar verir. Bunu yapmanın iki yolu vardır.
+
+Ziyaretçi yaklaşımı, sınıfı birer birer elemanlar halinde akıtır. Bütün sınıfı aynı anda tutmadığı için hızlıdır ve az bellek kullanır. Ağaç yaklaşımı ise, sınıfı serbestçe gezinebileceğiniz ve düzenleyebileceğiniz nesnelere yükler; bu, daha büyük değişiklikler için akıl yürütmek daha kolay olsa da daha fazla bellek kullanır.
+
+| Yaklaşım | Nasıl çalışır | En iyi olduğu durumlar |
+| :--- | :--- | :--- |
+| Ziyaretçi API'si | Sınıf olaylarını okuma sırasında akıtır | Küçük, hızlı düzenlemeler ve düşük bellek kullanımı |
+| Ağaç API'si | Sınıfın düzenlenebilir bir nesne modelini oluşturur | Daha büyük veya daha karmaşık yeniden yazmalar
+## Neden Minecraft modları onu kullanır
+
+Modların, yazmadıkları ve yeniden derleyemedikleri oyun kodunu değiştirmesi gerekiyor. Oyun, derlenmiş sınıflar halinde gönderiliyor, bu yüzden tek yol bytecode seviyesinden girme yoludur ve ASM işte tam da bunu sağlar. Bir mod, bir oyun metoduna bir hook enjekte edebilir, bir çağrıyı yönlendirebilir veya başlatmada bir alan ekleyebilir.
+
+Çoğu mod yapımcısı ASM'yi doğrudan çağırmaz. ASM'nin üzerine oturan ve basit notasyonları alttaki bytecode düzenlemelerine dönüştüren daha üst düzey bir çerçeve olan [Mixin](/tr/learn/what-is-mixin)'i kullanırlar. Değişikliği açıklayan küçük bir Java sınıfı yazarsınız ve çerçeve ASM ile sizin için düşük seviyeli işleri yapar. Özellikle [Fabric](https://fabricmc.net/) modları bu zincire dayanır.
+
+## ASM'yi doğrudan ne zaman kullanırsınız
+
+Bir mod yazarı olarak nadiren ham ASM yazarsınız. Bu durum, bir yükleyici, bir karıştırıcı veya sınıfları bütünüyle yeniden yazan bir yamayı gibi bir aracın bir notasyonun ifade edebileceğinden daha fazla kontrole ihtiyaç duyduğu zaman ortaya çıkar. Günlük modlar için, üzerindeki notasyon katmanı yeterlidir ve çok daha hatasızdır.
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="ASM bir derleyici midir?">
+Hayır. Bir derleyici, bytecode'u okunabilir kaynak koduna geri çevirir. ASM ise bytecode üzerinde çalışır ve onu değiştirmek için tasarlanmıştır, kaynak kodu geri kazanmak için değil.
+</FAQItem>
+
+<FAQItem question="Mod yapmak için ASM öğrenmem gerekiyor mu?">
+Genellikle gerekmiyor. Çoğu Fabric modu, ASM detaylarını notasyonların arkasına gizleyen Mixin kullanır. Ham ASM'ye yalnızca ince kontrol gerektiğinde başvurursunuz.
+</FAQItem>
+
+<FAQItem question="ASM yalnızca Minecraft için mi geçerlidir?">
+Hayır. ASM, bytecode ile çalışan birçok araçta kullanılan genel bir Java kütüphanesidir. Minecraft modlama yaygın bir kullanım olsa da, tek kullanım alanı değildir.
+</FAQItem>
+
+<FAQItem question="Neden doğrudan kaynak kodu düzenlenmiyor?">
+Bunu yapamazsınız. Oyun, değiştirip yeniden derleyebileceğiniz kaynak kodu olarak değil, derlenmiş olarak gönderilir. Kodu düzenlemek, sahip olmadığınız kodu yamalamanın pratik bir yoludur.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-mixin", label: "Mixin nedir?", description: "ASM üzerine oturan açıklama çerçevesi." },
+  { href: "/tr/learn/what-is-jvm-bytecode", label: "JVM bytecode nedir?", description: "ASM komut seti okunur ve yeniden yazılır." },
+  { href: "/tr/learn/what-is-a-minecraft-mod-loader", label: "Minecraft mod yükleyici nedir?", description: "Oyuna yamalı sınıfların nasıl entegre edildiği." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

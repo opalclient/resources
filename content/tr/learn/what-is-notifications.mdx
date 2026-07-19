@@ -1,0 +1,94 @@
+---
+title: Minecraft'ta Bildirimler Modülü Nedir?
+description: Minecraft istemcilerindeki Bildirimler modülü, bir modül açılıp kapandığında veya bir görev tamamlandığında, hiçbir anticheat izi bırakmadan hızlı bir ekransağında uyarı gösterir.
+excerpt: Bir tetikleyici etkinleşir, bir görev tamamlanır ve küçük bir bildirim, işe yaradığını size haber verir, böylece kendiniz kontrol etmek zorunda kalmazsınız. İşte modülün tamamı.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Bildirimler bir hile modül mü?
+    a: Hayır, sadece istemci tarafında bir şey olduğunda bir mesaj gösterir; örneğin bir modülün açılıp kapanması veya otomatik bir görevin bitmesi gibi. Sizin adınıza işlem yapmaz veya herhangi bir oyun mekaniğini değiştirmez, bu yüzden otomasyon değil, geri bildirimdir.
+  - q: Ne tür olaylar bir bildirim tetikler?
+    a: İki yaygın olanı, genellikle bir kısayol tuşu veya tıklanabilir arayüzden açılıp kapanabilen bir modül veya bir görevi kendi başına tamamlayan otomatik bir modül, örneğin Göğüs Hırsızının bir sandıkta bir geçişi tamamlaması.
+  - q: Bildirimler antichipler tarafından tespit ediliyor mu?
+    a: Hayır, hiçbir sunucu tarafı izi yok. Oyuncuyu etkilemez, oyun mekaniğini değiştirmez ve hile önleme sistemleri hareket, savaş ve paket verilerini değerlendirir; bunların hiçbiri yalnızca görsel bir açılır pencere tarafından etkilenmez.
+  - q: Bildirimler, bir HUD modülünden nasıl farklıdır?
+    a: HUD modülü, koordinatlar veya FPS gibi sürekli olarak ekrana yansıyan bir örtüdür. Bildirimler ise belirli bir olaya yanıt olarak yalnızca kısa süreliğine belirir ve ardından kaybolur.
+  - q: Hangi müşterilerin Bildirimler modülü var?
+    a: Fan ve Tenacity gibi müşterilerde görülür, genellikle aynı pasif-görüntüleme kategorisi içinde bir HUD ve bir dizi listesiyle birlikte bulunur.
+---
+
+<KeyTakeaways>
+
+- Bildirimler modülü, belirli bir istem içi olay tetiklendiğinde kısa bir ekransağlama bildirimi gösterir; en sık modüllerin açılıp kapanması veya Sandık Hırsızı gibi otomatik bir modülün bir görevi tamamlamasıdır.
+- Olay odaklıdır, kalıcı değildir: uyarı belirir, bir veya iki saniye boyunca kalır ve ardından kendiliğinden kaybolur; her zaman görünür bir HUD'nin aksine.
+- Sadece yerel olarak çizilir. Paket yok, hareket veya savaş değişiklikleri yok, sunucu tarafı bir antichiati ölçebileceği hiçbir şey yok.
+- Fan ve Tenacity gibi istemlerde yaşam kalitesi katmanı olarak görülür, bir oyun mekaniği özelliği olarak değil.
+
+</KeyTakeaways>
+
+Bildirimler modülü, bazı Minecraft yardımcı istemcilerinde bulunan küçük bir uyarı sistemidir; belirli bir olay gerçekleştiğinde ekranda kısa bir açılır pencere gösterir; en yaygın olarak bir modülün açılıp kapanması veya arka plan görevinin tamamlanmasıdır. Oyunun oynanışını hiçbir şekilde değiştirmez. Onay olarak düşünün, otomasyon olarak değil: Bir anda altı modül arasında döndürdüğünüzde ve durup kontrol etmeden, yeni değiştirdiğiniz modülün etkinleştiğini bilmeniz gereken özellik türü.
+
+## Nasıl Çalışır
+
+Bildirimler, sunanda olup bitenlerden ziyade istemci içindeki olayları dinler. En yaygın tetikleyici, bir kısayol tuşu veya tıklama GUI geçişidir: Killaura'yı açın ve hızlı bir afiş bunu onaylar. Diğer sık görülen tetikleyici, kendi programına göre bir görevi otomatik olarak tamamlayan bir modülün olmasıdır; bunun en açık örneği [Sandık Hırsızı](/tr/learn/what-is-chest-stealer) tarafından yeni açtığınız bir sandık üzerinde yapılan bir geçişin tamamlanmasıdır.
+
+Açılır pencereler kendisi küçük: Bir satır metin veya kompakt bir afiş, genellikle ekranın bir köşesinde park edilmiş, kaybolmadan önce bir veya iki saniye görünür. Vanilla Minecraft'ın kendi tost mesajları gibi aynı şekilde çalışır (ilerleme açılır pencereleri, tarif kilidi afişi), ancak vanilla olanların yerine istemci tarafı olayları için yeniden amaçlanmıştır. Önemli olan, yapmadığı şeydir: Bildirimin gösterilmesi, bildirdiği olaya hiçbir etkisi yoktur. Anahtar zaten gerçekleşti. Açılır pencere sadece sonrasında size bundan bildirir.
+
+## Bildirimler vs. HUD modülü
+
+Bunu HUD başlığı altında dosyalamak cazip olabilir, ancak ikisi de farklı sorunları çözüyor. Bir HUD, bir şey olup olmadığını dikkate almadan koordinatlar veya FPS gibi sürekli bir okuma göstererek ekranda sürekli kalır. Bildirimlerin tam tersidir: Varsayılan olarak görünmez ve yalnızca belirli bir şey tetiklendiğinde yüzeye çıkar.
+
+| | Bildirimler | HUD |
+|---|---|---|
+| Varsayılan olarak görünür | Hayır, yalnızca bir olayda | Evet, sürekli |
+| Süre | Bir veya iki saniye, sonra temizler | Devre dışı bırakılana kadar kalır |
+| Gösterir | Tek bir olay (anahtar, görev tamamlandı) | Sürekli istatistikler (koordinatlar, FPS, savaş) |
+| Sunucu etkileşimi | Yok | Yok |
+
+Fan ve Tenacity gibi istemciler, her ikisini de birbirini kapsayan tek bir pasif görüntüleme kategorisinin parçaları yerine ayrı parçalar olarak gönderir. Bu ikilinin sürekli okuma tarafını istiyorsanız, o zaman [HUD modülü](/tr/learn/what-is-hud) sayfasıdır.
+
+## Kullanımı Güvenli mi?
+
+Bir istemci özelliğinin olabileceği kadar güvenli. Bildirimler yerel olarak çizilir ve orada durur. Ek paketler dışarı çıkmaz, hareket veya savaşla ilgili hiçbir şey değişmez ve hiçbir girdi otomatikleştirilmez. Sunucu tarafındaki bir hile önleme sistemi, istemcinizin gönderdiği şeyleri ve oyuncunuzun nasıl hareket ettiğini değerlendirir ve yalnızca kendi ekranınızda var olan bir açılır pencere, bunun hiçbir tarafına dokunmaz. Herhangi bir dönüş imzası, zaman belirtisi veya karşılaştırılabilecek bir şey yoktur.
+
+Tek uyarı bir tespit riski değildir: bir görünürlük uyarıdır. Açılır pencere doğrudan ekranda görüntülendiğinden, o ekranı izleyen herkes (bir yönetici, bir ekran paylaşımı, bir yayın) tam olarak ne yazdığını görür. Bilmek değerlidir, ancak bir hile önleme sisteminin bir oyuncuyu nasıl değerlendirdiğiyle hiçbir ilgisi yoktur.
+
+<Callout variant="tip" title="Opal'de Nerede Yer Alır">
+Opal, Notifications adında bir modül gönderimini yapmaz. Ancak, size neler olduğunu söyleyerek, bunları bulmak için çabalamanızı engelleme dürtüsü, arayüze işlemiştir. Modül durumları ve tamamlanmış arka plan görevleri, bir menüde avlanmak yerine, tek bakışta okunması gereken şeylerdir.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Bildirimler hile modülü müdür?">
+Hayır. Müşteride bir şey olduğunda, örneğin bir modülün açılıp kapanması veya otomatik bir görevin bitmesi gibi durumlarda sadece bir mesaj gösterir. Tarafınızdan herhangi bir işlem yapmaz veya oyun mekaniğini değiştirmez, bu nedenle bir otomasyon değil, geri bildirimdir.
+</FAQItem>
+
+<FAQItem question="Ne tür olaylar bir bildirim tetikler?">
+En yaygın olan ikisi, genellikle bir sıcak tuş veya tıklanabilir arayüzden bir modülün açılıp kapanması ve otomatik bir modülün kendi başına bir görevi tamamlamasıdır; örneğin, Sandık Hırsızının bir sandıkta bir geçişi tamamlaması.
+</FAQItem>
+
+<FAQItem question="Bildirimler antichipler tarafından tespit ediliyor mu?">
+Hayır. Sunucu tarafında hiçbir iz bırakmaz. Oyuncuya herhangi bir şey göndermez veya oyun mekaniğini değiştirmez. Antichipler, hareket, savaş ve paket verilerini değerlendirir; tamamen görsel bir açılır pencere bunların hiçbirini etkilemez.
+</FAQItem>
+
+<FAQItem question="Bildirimler, HUD modülünden nasıl farklıdır?">
+Bir HUD modülü, koordinatlar veya FPS gibi sürekli olarak ekranda gösterilen bir örtüdür. Bildirimler ise belirli bir olaya yanıt olarak yalnızca kısa bir süreliğine görünür ve ardından kendiliğinden kaybolur.
+</FAQItem>
+
+<FAQItem question="Hangi müşterilerde Bildirim modülü bulunuyor?">
+Fan ve Tenacity gibi müşterilerde görülür; genellikle aynı pasif görüntüleme kategorisi kapsamında bir HUD ve bir dizi listesiyle birlikte bulunur.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Bildirimler adlı daha geniş kategori, bunun sadece küçük bir parçasıdır." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Görünmez kalmaya odaklanarak, bilgi sahibi olmaktan ziyade farklı bir pasif-öncelikli felsefe." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Bildirim pop-up'ının onayladığı, otomatikleştirilmiş modüllerden biri henüz ateşlendi." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı alın ve son açılır menünüzün gerçekten çalışıp çalışmadığını merak etmeyi bırakın.</CTA>

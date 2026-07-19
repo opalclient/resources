@@ -1,0 +1,81 @@
+---
+title: Jakie są efekty zabijania w Minecraft? (Moduł kosmetyczny)
+description: Efekt Zabójstwa to moduł kosmetyczny, który odtwarza niestandardową animację w momencie, gdy twoje trafienie zabija gracza, niezależnie od Efektów Istot i wyłącznie po stronie klienta.
+excerpt: Ostatni cios ma własną animację. Wszystko przed nim wygląda dokładnie jak w wersji bazowej.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Efekt Zabójstwa wpływa na przebieg walki?
+    a: Nie. Modyfikuje jedynie wizualizację wyświetlaną w momencie zabójstwa. Wykrywanie trafień, obrażenia i czas pozostają identyczne jak w wersji podstawowej.
+  - q: Jak Kill Effects różni się od Entity Effects?
+    a: Efekty Zabójstwa aktywują się tylko wtedy, gdy trafienie kończy cel. Efekty Istoty aktywują się przy każdym trafieniu, niezależnie od tego, czy powoduje ono śmierć. Efekty Zabójstwa to węższa, wyłącznie kończąca wersja tego samego pomysłu.
+  - q: Czy inni gracze widzą mój efekt zabójstwa?
+    a: Nie. Renderuje się lokalnie tylko na Twoim kliencie. Wszyscy inni na serwerze widzą standardową, bazową śmierć, niezależnie od skonfigurowanego efektu.
+  - q: Czy używanie efektów zabijania grozi blokadą?
+    a: Nie. To zmienia to, co rysuje klient, a nie to, co wysyła. Serwerowy anticheat nie ma szans go wykryć, ponieważ nie ma różnicy w pakietach. Ryzyko wynika z ogólnego podejścia serwera do zmodyfikowanych klientów, a nie z tego modułu.
+---
+
+<KeyTakeaways>
+- Efekt Zabójstwa to moduł kosmetyczny, który odtwarza niestandardową animację lub wybuch cząstek w momencie, gdy eliminujesz cel.
+- Aktywuje się tylko przy zabójstwie, a nie przy każdym trafieniu, co odróżnia go od szerszego modułu Efektów Istot.
+- Jest to czysta renderowanie po stronie klienta. Nie zmienia się żaden pakiet, a serwer nie jest dotykany, więc nie ma nic, co mogłoby wykryć anticheat.
+- Klienci tacy jak Tenacity udostępniają go jako jedną z opcji w szerszym zestawie efektów wizualnych, a nie jako coś związanego z celowaniem lub obrażeniami.
+</KeyTakeaways>
+
+Kill Effects to moduł kosmetyczny w klientach użytkowych Minecrafta, który zastępuje (lub nakłada się na) standardową animację śmierci, ale tylko wtedy, gdy to Twój trafienie kończy walkę. Zadaj dziesięć trafień, które nie zabijają, a nic się nie dzieje. Zadaj jedenastą, która to robi, a efekt się uruchamia. To nagroda za ostateczne trafienie, a nie warstwa farby na każdym uderzeniu.
+
+## Jak to działa
+
+Moduł monitoruje walkę pod kątem jednego konkretnego zdarzenia: trafienia, które redukuje zdrowie celu do zera. Ignoruje wszystko inne. Gdy ten warunek zabicia się aktywuje, odtwarza wybraną animację lub efekt cząsteczkowy, zastępując standardową animację śmierci lub nakładając się na nią, w zależności od implementacji klienta.
+
+Ponieważ wyzwalaczem jest „zabicie”, a nie „uderzenie”, efekt pojawia się znacznie rzadziej, niż można by się spodziewać po module walki. Większość uderzeń w prawdziwej walce niczego nie kończy. Kill Effects pozostaje cichy przez wszystkie z nich i odzywa się tylko w tym, który się liczy.
+
+Wąski wyzwalacz stanowi również całą różnicę między Kill Effects a jego najbliższym krewnym, Entity Effects. Entity Effects aktywuje się przy każdym trafieniu, niezależnie od wyniku, więc odczytuje się jako stała warstwa wizualna nałożona na walkę. Kill Effects rezerwuje się dla wyniku, więc odczytuje się jako ozdobnik związany z wygrywaniem wymiany, a nie z walką.
+
+## Kill Effects vs. Entity Effects
+
+| | Efekty Zabójstw | Efekty Istot |
+|---|---|---|
+| Palą na | Trafienie zabójcze dotyczy tylko | Każde trafienie łączące |
+| Częstotliwość w walce | Rzadka (raz, jeśli w ogóle) | Stała |
+| Odczucia | Nagroda za zabójstwo | Warstwa walki w tle |
+| Zmienia rozgrywkę | Nie | Nie |
+
+Żaden z modułów nie wpływa na zasięg, czas, obrażenia ani rejestrację trafień. Jedyną rzeczą, którą którykolwiek z nich zmienia, jest to, co jest renderowane na Twoim ekranie.
+
+## Czy jest to bezpieczne w użyciu?
+
+Tak, i jest tak samo bezpieczne, jak moduły kosmetyczne. Efekty Zabójstw nie zmieniają niczego, czego śledzi serwer i nie wysyłają nic innego niż normalne zabójstwo. Nie ma wydłużenia zasięgu, manipulacji czasem, spamu pakietami, niczego, co mogłoby zostać wychwycone przez anticheat po stronie serwera, ponieważ efekt nigdy nie opuszcza Twojego klienta.
+
+Jedyna zastrzeżenie, która dotyczy modułów kosmetycznych, ma zastosowanie również tutaj: niektóre serwery zakazują zmodyfikowanych klientów jako ogólnej reguły, niezależnie od tego, co robi konkretny moduł. Sprawdź politykę serwera przed uruchomieniem, nie dlatego, że Efekty Zabójstw są ryzykowne, ale dlatego, że „dowolny zmodyfikowany klient” czasami jest polityką.
+
+<Callout variant="tip" title="Gdzie mieści się Opal">
+Opal nie wysyła modułu o nazwie Skutki Śmierci, ale ta sama koncepcja – warstwy kosmetyczne, które zdobią moment, nie ingerując w przebieg walki – to dokładnie, czym jest kategoria wizualna Opal. Jeśli chcesz, aby twoje eliminacje wyglądały tak, jak powinny, bez zmiany pojedynczego obszaru kolizyjnego, to właśnie na tej filozofii opiera się cały klient.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Czy Efekty Śmierci zmieniają przebieg walki?">
+Nie. Zmienia jedynie wyświetlany efekt w momencie śmierci. Wykrywanie trafień, obrażenia i czas pozostają identyczne jak w wersji podstawowej.
+</FAQItem>
+<FAQItem question="W czym różnią się Efekty Śmierci od Efektów Istot?">
+Efekty Śmierci uruchamiają się tylko wtedy, gdy trafienie kończy życie celu. Efekty Istot uruchamiają się przy każdym trafieniu, niezależnie od tego, czy prowadzi do śmierci. Efekty Śmierci to węższa, dotycząca tylko zakończenia wersji tej samej idei.
+</FAQItem>
+<FAQItem question="Czy inni gracze mogą widzieć mój efekt śmierci?">
+Nie. Renderowany jest lokalnie tylko na Twoim kliencie. Wszyscy inni na serwerze widzą standardowy, domyślny efekt śmierci, niezależnie od tego, jaki efekt skonfigurowałeś.
+</FAQItem>
+<FAQItem question="Czy używanie Efektów Śmierci grozi zablokowaniem konta?">
+Nie. Zmienia to, co Twój klient rysuje, a nie to, co wysyła. Serwerowy anticheat nie ma możliwości wykrycia różnicy w pakietach. Ryzyko wynika z ogólnego podejścia serwera do zmodyfikowanych klientów, a nie z tego modułu.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Kategoria „Skutki Zabójstwa” oraz każdy inny moduł w tym słowniku do niej należą." },
+  { href: "/pl/learn/what-is-killaura", label: "Co to jest Killaura?", description: "Moduł bojowy Kill Effects bywa mylony, ale nie ma z nim nic wspólnego." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Gdzie znajdują się rzeczywiste moduły wspomagające działanie, w odróżnieniu od czysto kosmetycznych." }
+]} />
+
+<CTA href="/pl/purchase">Przeglądaj pełen zestaw modułów wizualnych Opal i spraw, by każde zabójstwo wyglądało tak, jakbyś je sam/sama dokonał/dokonała.</CTA>

@@ -1,0 +1,85 @@
+---
+title: Was ist TPAKiller in Minecraft? Modul-Erklärung
+description: TPAKiller automatisiert das Senden einer Teleportanfrage und den Angriff im selben Moment, sobald diese eintrifft, und nutzt dabei das Sekundenbruchteil-Fenster aus, bevor ein Ziel reagieren oder zurückschlagen kann.
+excerpt: Sende eine Teleport-Anfrage, warte, bis sie ankommt, und schwinge dann, bevor der andere Spieler überhaupt geladen hat. Das ist der ganze Trick, und es zählt als Betrug.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was automatisiert TPAKiller eigentlich?
+    a: "Zwei Schritte: das Senden einer Teleportanforderung an ein Ziel, gefolgt vom Angriff im Moment der Annahme und Landung. Der Spieler muss beide Schritte nicht manuell timen, das Modul verknüpft sie miteinander."
+  - q: Warum ist der Moment direkt nach einer Teleportation gefährlich?
+    a: Ein Spieler, der gerade teleportiert wurde, befindet sich noch im Ladevorgang in der neuen Zone und hat auf vielen Servern noch nicht die volle Kontrolle zurückgewonnen. TPAKiller ist darauf ausgelegt, seinen Treffer in diesem kurzen Zeitraum zu erzielen, bevor das Ziel überhaupt reagieren kann.
+  - q: Ist TPAKiller dasselbe wie ein Aim-Bot oder ein KillAura?
+    a: "Nein. Es zielt nicht darauf ab, Kämpfe im Allgemeinen zu steuern oder zu automatisieren, sondern automatisiert eine spezifische Sequenz: eine Teleportation anfordern und im selben Moment, in dem sie ankommt, zuschlagen. Der Vorteil liegt in der Timing und der Überraschung, nicht in einer unterstützten Zielerfassung oder einer automatisierten Angriffssteuerung."
+  - q: Welche Mandantenakten dokumentiert TPAKiller?
+    a: Hartnäckigkeit ist der Client, in dem TPAKiller als Modul verfolgt wird.
+  - q: Können Server verhindern, dass TPAKiller funktioniert?
+    a: Ja. Eine kurze Unverwundbarkeit nach dem Teleportieren oder eine Beschränkung der Häufigkeit von Teleport-Anfragen beseitigt das verwundbare Zeitfenster, das das Modul benötigt. Beides sind gängige Gegenmaßnahmen.
+---
+
+<KeyTakeaways>
+
+- TPAKiller ist ein Exploit-Modul, das automatisch eine Teleport-Anfrage sendet und dann im selben Moment angreift, wenn das Ziel landet.
+- Es schlägt in dem kurzen Zeitfenster direkt nach dem Teleportieren ein, während das Ziel noch lädt und kaum reagieren kann.
+- Es ist weder ein Aim-Bot noch ein KillAura: Der Vorteil liegt in der Timing- und Überraschungseffekt, nicht in der Kampfauswertung.
+- Dokumentiert als Modul im Tenacity-Client; Server schließen den Exploit durch Spawn-Unverwundbarkeit oder Teleport-Ratenbegrenzungen.
+
+</KeyTakeaways>
+
+TPAKiller ist ein Exploit-Modul, das eine bestimmte Hinterhalt-Situation automatisiert: Es sendet eine Teleport-Anfrage, wartet auf die Annahme des Ziels und greift im Moment an, in dem dieses landet. Es basiert auf einem Fenster, an das die meisten Spieler nie denken: die ein oder zwei Sekunden direkt nach einem `/tpa`-Teleport, in denen man sich noch in der neuen Umgebung rendert und die volle Kontrolle noch nicht wiedererlangt hat. TPAKiller timt seinen Angriff so, dass er in diese Lücke fällt und einen routinemäßigen sozialen Befehl in die Vorbereitung für einen kostenlosen Kill verwandelt. Es ist als Modul im Tenacity-Client dokumentiert und liegt eindeutig auf der Exploit-Seite, nicht auf der Seite der Kampfautomatisierung, wo beispielsweise ein Aim-Bot angesiedelt ist.
+
+## Wie TPAKiller funktioniert
+
+TPAKiller führt die gesamte Sequenz aus, ohne dass der Spieler etwas manuell tun muss. Es sendet die Teleport-Anfrage (ein `/tpa`-Befehl oder ein Äquivalent) an ein ausgewähltes Ziel, beobachtet die Annahme und feuert einen Angriff ab, sobald das Ziel neben dem Spieler landet. Das Ziel sieht es nie kommen, da es einem Teleport und nicht einem Kampf zugestimmt hat.
+
+Der Exploit funktioniert, weil das Teleportieren einen Spieler an einer neuen Position ablässt, ohne Vorwarnung, und auf vielen Servern gibt es eine kurze Lücke, bevor er sich normal bewegen oder reagieren kann. TPAKiller ist darauf ausgelegt, in genau dieser Lücke zu agieren, bevor das Ziel die Kontrolle wiedererlangt oder sogar die Umgebung vollständig geladen hat.
+
+## Ist TPAKiller sicher zu verwenden
+
+Das Ausführen von TPAKiller ist keine Grauzone. Die Automatisierung einer sozialen Mechanik wie einer Teleport-Anfrage, um gezielt eine Hinterhaltsposition einzunehmen, ist ein Ausnutzen eines Spielvorteils: Es gewinnt Kämpfe, die der andere Spieler niemals akzeptiert hat und auf die er durch gutes Spielen keine Möglichkeit hatte, vorzubeugen. Die meisten Server, die `/tpa` anbieten, erwarten, dass es für Reisen und zum Gruppieren verwendet wird, nicht als Köder für einen Kill.
+
+Die Erkennung ist hier schwieriger als bei etwas wie der Automatisierung der Zielerfassung, da jede einzelne Aktion – das Senden einer Teleport-Anfrage und der anschließende Angriff – für sich genommen völlig legitim ist. Was es verrät, ist das Muster: eine Teleport-Anfrage, gefolgt von einem Angriff ohne nennenswerte Verzögerung, wiederholt über mehrere Ziele hinweg, ist ein Rhythmus, den echte Spieler fast nie versehentlich erzeugen. Eben deshalb ist die übliche Lösung nicht auf die Erkennung basiert. Ein kurzes Unverwundbarkeitsfenster nach dem Teleportieren oder eine Begrenzung der Häufigkeit, mit der `/tpa` gesendet werden kann, beseitigt den Ausnutzungsversuch, bevor er überhaupt entdeckt werden muss.
+
+<Callout variant="tip" title="Wo Opal die Grenze zieht">
+Opal versendet kein Modul im Stil von TPAKiller, und das ist kein Versehen. Eine Funktion, die eine spezifische Schwachstelle in der `/tpa`-Verarbeitung ausnutzt, funktioniert nicht mehr, sobald ein Server ein halbe-Sekunden-Unverwundbarkeitsfenster hinzufügt, was bei den meisten der Fall ist. Opals Kampfmmodule sind dazu da, sich durch ihre eigenen Leistungen zu empfehlen, nicht um eine zeitliche Lücke auszunutzen, bis ein Administrator sie behebt.
+</Callout>
+
+<Callout variant="warning" title="Dies ist ein bannwürdiger Exploit">
+TPAKiller ist ein Exploit, der einen klaren Vorteil im Spiel verschafft, und wird von den Mitarbeitern dementsprechend behandelt. Das Ausführen auf einem Server, der Cheat-Clients untersagt, setzt ein Konto dem gleichen Risiko aus wie jedes andere Modul in dieser Kategorie, unabhängig davon, ob der Server eine Anti-Exploit-Erkennung hat oder nicht. Diese Seite erklärt, wie es funktioniert, nicht wie man damit durchkommt.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was automatisiert TPAKiller eigentlich?">
+Zwei Schritte: das Senden einer Teleport-Anfrage an ein Ziel und dann der Angriff im Moment, in dem sie annehmen und landen. Der Spieler muss keinen der Schritte manuell timen, das Modul verkettet sie miteinander.
+</FAQItem>
+
+<FAQItem question="Warum ist der Moment direkt nach einem Teleport gefährlich?">
+Ein Spieler, der gerade teleportiert wurde, lädt noch in den neuen Bereich und hat auf vielen Servern noch nicht die volle Kontrolle zurückgewonnen. TPAKiller ist darauf ausgelegt, seinen Treffer in diesem kurzen Zeitfenster zu erzielen, bevor das Ziel überhaupt reagieren kann.
+</FAQItem>
+
+<FAQItem question="Ist TPAKiller dasselbe wie ein Aim-Bot oder KillAura?">
+Nein. Es zielt nicht und automatisiert keine Kämpfe im Allgemeinen, sondern automatisiert eine spezifische Sequenz: Es fordert einen Teleport an und schlägt im selben Moment, in dem er landet. Der Vorteil ergibt sich aus dem Timing und der Überraschung, nicht aus assistierter Zielerfassung oder Angriffsautomatisierung.
+</FAQItem>
+
+<FAQItem question="Welche Client-Dokumente werden von TPAKiller erfasst?">
+Tenacity ist der Client, bei dem TPAKiller als Modul verfolgt wird.
+</FAQItem>
+
+<FAQItem question="Können Server TPAKiller daran hindern, zu funktionieren?">
+Ja. Eine kurze Unverwundbarkeitsperiode nach dem Teleportieren oder eine Beschränkung, wie oft Teleport-Anfragen gesendet werden können, beseitigt das anfällige Zeitfenster, von dem das Modul abhängt. Beides sind gängige Gegenmaßnahmen.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-killaura", label: "Was ist KillAura?", description: "Das automatisierte Nahkampfmodul TPAKiller wird verglichen, ist es aber nicht." },
+  { href: "/de/learn/what-is-an-aimbot", label: "Was ist ein Aim-Bot?", description: "Assistierte Zielausrichtung versus TPAKillers Sofortzeit-Ausnutzung." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die Kundengruppe, die sich um Exploits dreht und still genug bleibt, um zu überleben." },
+]} />
+
+<CTA href="/de/purchase">Entdecken Sie die Kampffähigkeiten, die Opal tatsächlich versendet – ohne Hinterlist.</CTA>

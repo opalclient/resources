@@ -1,0 +1,86 @@
+---
+title: Minecraft'ta Hız Nedir? Hareket Modülü Açıklaması
+description: Hız, Minecraft'ın temel hız sınırının üzerinde yürüme ve sprint hızını artıran bir hareket modülüdür. İşte nasıl çalıştığı ve sunucuların neden bu kadar kolay tespit ettiği.
+excerpt: Hız, bacaklarınızı sunucudaki en hızlı şey haline getirir, iksir gerektirmez. Modülün nasıl bu hıza ulaştığını ve sunucunun neden her zaman bunu fark ettiğini aşağıda bulabilirsiniz.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Hız, bir iksir etkisiyle aynı mı?
+    a: Hayır. Bir vanilya hız iksiri geçici, sunucu tarafından tanınan bir etkidir. Bir Hız modülü ise hareketi istemci tarafında değiştirir, böylece sunucu arkasında herhangi bir iksir veya başka bir vanilya kaynağı olmadan hızı görür.
+  - q: Hız yürümeyi, koşmayı veya her ikisini de etkiler mi?
+    a: Her ikisi de. Modül, hem yürüyüş hem de koşu hızını artırıyor, çünkü her ikisi de aynı hareket hesaplamasından kaynaklandığı için bu hesaplama geçersiz kılınıyor.
+  - q: Neden Speed modülü bazı diğer modüllerden daha kolay yakalanabiliyor?
+    a: Hareketi, sunucu her oyuncu için her tick'ta zaten takip etmektedir, oyuncunun iddia ettiği şeyden bağımsız olarak. Bu durum, daha ince zamanlama veya dönüş bilgisine dayanan hilelerden ziyade, sürdürülebilir aşırı hızı daha güvenilir bir sinyal haline getirir.
+  - q: Speed'i, anticheat koruması olan bir sunucuda kullanmak güvenli midir?
+    a: Hayır. Hareket verisi, bir sunucunun sahip olduğu en güvenilir sinyallerden biridir, bu nedenle çalışan bir hareket kontrolüne sahip bir sunucuda Speed çalıştıran bir hesabın işaretlenmesi veya yasaklanma riski vardır.
+---
+
+<KeyTakeaways>
+
+- Hız, vanilla Minecraft'ın sabit oranının üzerinde yürüme ve sprint hızını artıran bir hareket modülüdür.
+- Ekstra hızı sağlayan herhangi bir iksir veya blok olmaksızın, doğrudan istemcinin hareket hesaplamalarını geçersiz kılar.
+- Modül açık olduğu sürece hem yürüyüşü hem de sprinti sürekli olarak etkiler.
+- Hareket kontrolleri, anticheat'in en eski araçlarından bazılarıdır ve tam olarak bu yüzden Speed yakalanır.
+
+</KeyTakeaways>
+
+Hız, oyuncunun yürüme ve koşma hızını, orijinal Minecraft'ın izin verdiğinden daha da ileriye taşıyan bir hareket modülüdür. Açtığınızda, üzerinde hiçbir değişiklik yapılmamış bir istemcinin asla başaramayacağı hızda arazide ilerlersiniz; oyun dünyasında bu ek hızı açıklayan hiçbir şey olmaz. Fan ve Tenacity gibi istemcilerde görünür ve sunucular onu diğer hareket hileleri gibi ele alır: adil bir ayar değil, bir seçenek olarak.
+
+## Nasıl Çalışır
+
+Orijinal Minecraft, her oyuncu için sabit bir yürüme hızı ve ayrı, daha hızlı bir koşu hızı hesaplar. Normalde, hızlanma iksiri veya hız etkileyen bir bloğun üzerinde durmak gibi durumlar dışında bu sayılara dokunan bir şey olmaz. Hız modülü tüm bunları atlar ve doğrudan hesaplamayı geçersiz kılar, böylece oyuncu yürüme ve koşma sırasında her bir tick'te daha fazla mesafe kat eder; herhangi bir iksir, blok veya başka bir orijinal açıklama olmadan.
+
+Değişiklik tamamen istemci tarafında gerçekleştiği için, oyuncunun kendi ekranında görsel olarak fark edilmemesi için herhangi bir takılma veya sarsıntı olmadan akıcı, daha hızlı hareketler görünür. Sunucuya ulaşan şey farklıdır: oyuncunun bilinen durumunun izin vereceğinden daha fazla mesafe kat eden konum güncellemelerinin bir akışı. Plausible olan ile gelen arasındaki bu boşluk, bir hareket kontrolünün fark etmesi için tam olarak tasarlanmıştır.
+
+## Neden Algılanır
+
+Hız, sunucunun yakalaması en kolay dolandırıcılıklardan biridir çünkü sunucu, oyuncunun iddia ettiği şeyden bağımsız olarak oyuncunun hareket etmesine izin verilen hızı zaten bilir.
+
+| Anticheat'ın ağırlık verdiği faktör | Neden önemli |
+|---|---|
+| Tick başına oyuncunun bilinen temel değerine göre hareket edilen mesafe | Oyunun izin verdiği hızdan daha hızlı hareket edildiğinin doğrudan kanıtı |
+| Aktif iksir etkileri ve hızı etkileyen bloklar | Oyuncunun hızlı hareket etmesinin meşru nedenleri; sunucunun önce bunları dışarıda bırakması gerekir |
+| Sprint durumu ve yön değişiklikleri | Hem sprint yapmak hem de dönmek, sunucunun ne kadar hız beklediğini etkiler |
+| Zaman içindeki tutarlılık | Tek bir hızlı tick gecikme olabilir; açıklamasız olarak tavanın üzerinde sürdürülen hız daha güçlü bir sinyaldir |
+
+Sunucu tarafı hareket kontrolleri, anticheat tasarımının en eski ve en olgun bölümlerinden bazılarıdır. Yetkin bir kontrolü olan bir sunucuda gerçek anlamda bir süre boyunca Hız kullanmak, fark edilmemesi pek olasıdır.
+
+<Callout variant="tip" title="Opal tarafından gönderiliyor">
+Opal'ın kendine özgü yaklaşımı başka bir şeymiş gibi görünmüyor: "Gerçek hayatta bir çita oluyorsunuz." Kullanıcıların kendi sorumluluğunda olduğu Opal kademesine kaydedilmiş durumda, tıpkı herhangi bir müşteride olduğu gibi, çünkü ham hareket hızı, sunucu tarafındaki bir kontrolün tasarlanmış olduğu tam olarak o tür bir sinyaldir.
+</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını anlatmıyor">
+Bu sayfa, terimin ne anlama geldiğini bilmeniz için modülü genel olarak açıklamaktadır. İsimlendirme ve kesin davranışlar müşteriye göre değişir ve vanilla fiziğinin izin verdiği hızdan daha hızlı hareket etmek, esasen her rekabetçi veya hayatta kalma sunucusunda kuralları ihlal eder.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Hız, bir iksir etkisiyle aynı mı?">
+Hayır. Orijinal swiftness iksiri, geçici ve sunucu tarafından tanınan bir etkidir. Bir Hız modülü ise hareketi istemci seviyesinde değiştirir, böylece sunucu arkasında hiçbir iksir veya başka bir orijinal kaynak olmadan hızı görür.
+</FAQItem>
+
+<FAQItem question="Hız, yürümeyi, koşmayı veya her ikisini de etkiler mi?">
+Her ikisi de. Modül, hem yürüyüş hem de koşu için oranı artırır, çünkü her ikisi de aynı hareket hesaplamasından kaynaklandığı için bu hesaplama geçersiz kılınır.
+</FAQItem>
+
+<FAQItem question="Neden Speed, bazı diğer modüllere göre yakalaması daha kolaydır?">
+Hız, sunucunun her oyuncu için her tick'ta zaten takip ettiği bir şeydir, istemin iddia ettiği şeyden bağımsız olarak. Bu, sürdürülebilir aşırı hızın, daha ince zamanlama veya dönüş bilgileri üzerine kurulu hilelerden daha güvenilir bir sinyal olmasını sağlar.
+</FAQItem>
+
+<FAQItem question="Speed, anticheat korumalı bir sunucuda kullanmak güvenli midir?">
+Hayır. Hareket verileri, bir sunucunun sahip olduğu en güvenilir sinyallerden biridir, bu nedenle Speed çalıştıran ve çalışan bir hareket kontrolüne sahip bir sunucuda çalışan bir hesap işaretlenme veya yasaklanma riski taşır.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-scaffold", label: "Scaffold nedir?", description: "Başka bir hareket modülü, sizi gitmemeniz gereken yerlerde dolaştırmaya yönelik." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Sessizliği öncelleyen yaklaşım, bu kadar açık sözlü bir modüle zıt bir durum." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Daha geniş Hız ve benzeri modüllerin ait olduğu kategori." },
+]} />
+
+<CTA href="/tr/satin-al">Sunucunun düşündüğünden daha hızlı yol katedin. Opal, riski göz önünde bulundurarak Speed gönderiyor.</CTA>

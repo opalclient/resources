@@ -1,0 +1,93 @@
+---
+title: AntiTabComplete Nedir? Minecraft Modülü Açıklaması
+description: AntiTabComplete, bazı sunucu eklentilerinin sessizce bir Minecraft istemcisini parmak izi almak için kullandığı sekme tamamlama isteklerini engeller. Nasıl çalıştığını ve neden önemli olduğunu öğrenin.
+excerpt: Sekme tamamlama masum görünür. Bazı sunucularda, hiçbir kullanıcı arayüzü olmayan pasif bir veri toplama kanalıdır. AntiTabComplete sadece yanıt vermeyi durdurur.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: AntiTabComplete aslında neyi engelliyor?
+    a: Oyuncunun istemcisinden pasif olarak bilgi toplamak için bir sunucu eklentisi tarafından gönderilen, sohbette veya ekranda başka bir yerde görünmeyen sekme tamamlama isteklerini engeller.
+  - q: AntiTabComplete hile mi?
+    a: Hayır, hareket, savaş veya bir sunucunun haksız bir avantaj olarak puanlayabileceği hiçbir şeyi değiştirmez. Sadece pasif veri toplama kanalını kapatan bir gizlilik özelliğidir, başka bir şey değil.
+  - q: AntiTabComplete rekabet avantajı sağlıyor mu?
+    a: Hayır, oyun mekaniği üzerinde hiçbir etkisi yok. Sadece sunucu eklentisinin oyuncu hakkında sekme tamamlama etkileşimi yoluyla öğrenebileceği şeyleri değiştirir, onların ne kadar hızlı vurduğunu veya hareket ettiğini değil.
+  - q: Hangi müşteri AntiTabComplete'ı engelliyor?
+    a: Azim, bilgi tabanında AntiTabComplete modülü ile izlenen müşteridir.
+  - q: Sunucu neden ilk etapta veri toplamak için otomatik tamamlama özelliğini kullanır ki?
+    a: Değişim, oyuncuya hiçbir zaman gösterilmediği ve arka planda gerçekleştiği için, eklentinin istek gönderebileceği ve yanıtları okuyabileceği sessiz bir kanal sunar; bu da AntiTabComplete'in devre dışı bıraktığı tam olarak pasif veri toplama türüdür.
+---
+
+<KeyTakeaways>
+
+- AntiTabComplete, oyuncuların istemeden profillenmesini sağlayan bazı sunucular tarafından kullanılan sekme tamamlama isteklerini engelleyen bir Minecraft modülüdür.
+- Minecraft'ın sekme tamamlama etkileşiminin istemci tarafını, Tab tuşuna basıldığında tetiklenen arka plan trafiğini kesintiye uğratır.
+- Bu, rekabetçi değil, bir gizlilik düzeltmesidir; hareket veya savaşla ilgili hiçbir şey üzerinde değişiklik yapmaz.
+- Tenacity, bu modülle belgelenen istemcidir
+
+</KeyTakeaways>
+
+AntiTabComplete, sunucunun Minecraft'ın sekme tamamlama özelliğini kullanarak oyuncuların istemcileri hakkında sessizce bilgi çekmesini engelleyen bir modülüdür. Bazı sunucu eklentileri, yazmayı kolaylaştırmak için değil, pasif veri toplama için düşük görünürlüklü bir kanal olarak sekme tamamlama istekleri gönderir. AntiTabComplete, bu isteklerin istemci tarafında yanıt alamayacağı şekilde o kanalı kapatır.
+
+## Nasıl Çalışır
+
+Sekme tamamlama, normal Minecraft davranışıdır. Bir komut yazmaya başlayın, Tab tuşuna basın ve oyun geçerli tamamlamaları önerebilmesi için istemci ve sunucu arka planda mesaj alışverişinde bulunur. Bu alışverişin hiçbir bölümü oyuncuya gösterilmez; bu da onu otomatik tamamlama dışında bir şey için yeniden kullanılabilir olmasını sağlayan şeydir. Bir eklenti, istemcileri sorgulamak ve geri gelen her şeyi okumak için bu istekleri bir istemciye ateşleyebilir; bunlardan hiçbiri sohbette görünmez.
+
+AntiTabComplete, bu boşluğa oturur. İstemci yanıt vermeden önce istekleri yakalar veya yok sayar, böylece sekme tamamlama kanalına güvenen bir eklenti hiçbir şey elde edemez. Oyuncuya normal sohbet ve komut kullanımı her zaman aynı görünür. Görünürde hiçbir şey değişmez; bu da amaçlanan şeydir.
+
+## Bir gizlilik düzeltmesi, bir oyun avantajı değil
+
+İşte AntiTabComplete'ın, insanların "Minecraft hilesi" derken kastettiğinin çoğundan ayrıldığı yer. [Reach](/tr/learn/what-is-reach) veya KillAura gibi bir modül, oyunun fiziksel olarak yapmanıza izin verdiği şeyleri değiştirir ve anticheat'ler, geride bıraktığı hareket ve zaman damgalarını yakalamak için özel olarak tasarlanmıştır. AntiTabComplete hareket veya savaşla ilgili hiçbir şeyi değiştirmez. Sadece sunucunun pasif olarak sizin hakkınızda öğrenebileceği şeyleri değiştirir, bu da onu rekabetçi değil, bir bilgi sorununa dönüştürür.
+
+Bu aynı zamanda onu çalıştırmak için düşük riskli hale getirir. Sunucunun savaşınız veya hareketleriniz hakkında doğrulayabileceği hiçbir şeyi sahte veriler göndermez veya değiştirmez, sadece oyuncunun ilk bakışta görmemesi gereken bir isteğe yanıt vermeyi geri tutar. Sunucunun tarafında, pasif bir sorguya yanıt vermeyen bir istemci, sahte paketler gönderdiği düşünülen bir istemci değil, sorgulanan davranışı eksik bir istemci gibi görünür. Diğer karşı-gözetim araçlarıyla aynı kategori: sessiz, savunmacı ve anticheat'lerin aslında yakalamak için tasarlandığı şey değil.
+
+<Callout variant="tip" title="Bununla ilgili Opal'in ne düşündüğü">
+
+Opal, AntiTabComplete adlı bir modül göndermiyor. Bu, dar bir sorun için dar bir çözüm ve yalnızca bu tür eklentileri çalıştıran belirli sunucularda önemli. Verimlilik istemcilerini yalnızca DPS açısından değil, gizlilik açısından karşılaştırıyorsanız adıyla sormaya değer
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="AntiTabComplete aslında neyi engelliyor?">
+
+Sunucu eklentisi tarafından oyuncunun istemcisi hakkında pasif olarak bilgi toplamak amacıyla gönderilen, sohbette veya ekranda başka bir yerde görünmeyen sekme tamamlama isteklerini engeller
+
+</FAQItem>
+
+<FAQItem question="AntiTabComplete hile mi?">
+
+Hayır, hareket, savaş veya bir sunucunun haksız bir avantaj olarak değerlendirebileceği hiçbir şeyi değiştirmiyor. Sadece pasif veri toplama kanalını kapatan bir gizlilik özelliğidir, başka bir şey değil
+
+</FAQItem>
+
+<FAQItem question="AntiTabComplete rekabet avantajı sağlıyor mu?">
+
+Hayır, oyun mekaniği üzerinde hiçbir etkisi yok. Sadece sunucu eklentisinin oyuncu hakkında sekme tamamlama etkileşimi yoluyla öğrenebileceği şeyleri değiştirir, onların ne kadar hızlı vurduğunu veya hareket ettiğini değil
+
+</FAQItem>
+
+<FAQItem question="Hangi müşteri AntiTabComplete'ı engelliyor?">
+
+Azim, bilgi tabanında AntiTabComplete modülü ile izlenen istemcidir
+
+</FAQItem>
+
+<FAQItem question="Sunucu neden ilk etapta veri toplamak için otomatik tamamlama özelliğini kullanır ki?">
+
+Değişim, oyuncuya gösterilmeden arka planda gerçekleştiği için, eklentilere istek göndermek ve yanıtları okumak için sessiz bir kanal sunar; bu da AntiTabComplete'in devre dışı bıraktığı tam olarak pasif veri toplama türüdür
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "AntiTabComplete kategorisi, faydayı açık bir hileden ayıran şeydir." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Müşteri yelpazesinin diğer ucu, hiç tespit edilmemeye odaklanmış durumda." },
+  { href: "/tr/learn/what-is-reach", label: "Ulaşmak nedir?", description: "Gerçek bir oyun deneyimini etkileyen bir modül, AntiTabComplete gibi yalnızca gizliliğe odaklanan birine kıyasla faydalı bir zıtlık." }
+]} />
+
+<CTA href="/tr/satin-al">Opal'ın modül listesi, gerçekten yer kaplayanlara göre oluşturulmuştur, boş dolguya göre değil. Gelin görün.</CTA>

@@ -1,0 +1,93 @@
+---
+title: FabricMODのインストール方法 (2026年版ガイド)
+description: FabricMod の導入は3つのステップで行います。Minecraftのバージョンに対応したFabricローダーをインストールし、FabricAPI を追加した後、Mod の jar ファイルを mods フォルダにドロップしてください.
+excerpt: Fabric Modをインストールするための3つのステップ：ローダー、Fabric API、そしてModのJARファイルです。完全な手順と、ロードに失敗した場合の修正方法はこちらです.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: すべてのMODにFabric APIが必要ですか？?
+    a: ほとんどのFabric製MODはこれに依存しているので、デフォルトでインストールしてください。いくつかの独立したMODは不要ですが、追加しても損はありません.
+  - q: 起動時に私のMODがクラッシュする原因は何ですか？?
+    a: 通常、バージョン不一致、またはFabric APIの欠落が原因です。ローダー、Fabric API、およびmodがすべて同じMinecraftバージョンを対象としていることを確認してください.
+  - q: FabricのMODはどこにインストールされますか？?
+    a: Minecraftのディレクトリ内のmodsフォルダ内です。Windowsの場合は、%appdata%\.minecraft\modsになります。フォルダが存在しない場合は、Fabricプロファイルを一度実行してください.
+  - q: 複数のFabric Modを同時に実行できますか？?
+    a: はい。各JARファイルを同じmodsフォルダにドロップしてください。それらがあなたのMinecraftのバージョンに対応しており、競合しない限り、ローダーはそれらを一緒に実行します.
+---
+
+<KeyTakeaways>
+
+- Fabric mod の導入は、ローダー、Fabric API、そして mod jar の 3 段階です。
+- ローダー、API、mod のいずれも、同じ Minecraft のバージョンを対象とする必要があります。
+- mod は、Minecraft ディレクトリ内の mods フォルダに置きます。
+- 多くの導入失敗の原因は、バージョンの不一致、または Fabric API の不足です.
+
+</KeyTakeaways>
+
+ファブリック（[Fabric](https://fabricmc.net/)）のModをインストールするには、3つのステップが必要です。まず、Minecraftの正確なバージョンに対応したFabricローダーをインストールし、次にFabric APIをmodsフォルダに配置します。最後に、Modのjarファイルをその隣に置きます。Fabricプロファイルを起動すると、Modがロードされます。インストールで問題が発生する主な原因はバージョン不一致なので、すべてのファイルをMinecraftの同じバージョンに合わせるようにしてください.
+
+<Callout variant="info" title="Opal のインストール">
+Opal は以下の手順に従います。これは Fabric の Mod です。正確なバージョンと推奨される JVM 引数の設定については、[セットアップガイド](/ja/docs/setup) を参照してください。
+</Callout>
+
+## 三つのステップ
+
+<Steps>
+
+<Step number={1} title="Fabricローダーのインストール">
+Minecraftのバージョンに合わせて、Fabricローダーを公式のFabricインストーラーまたはFabricに対応したランチャーを使用してインストールしてください。詳細な手順は[Fabricローダーのインストール方法](/ja/learn/how-to-install-fabric-loader)をご覧ください。
+</Step>
+
+<Step number={2} title="FabricAPIを追加する">[Fabric API](/ja/learn/what-is-the-fabric-api) のJARファイルを、modsフォルダに置いてください。ほとんどのMODはその依存関係となっています</Step>
+
+<Step number={3} title="モッドを追加する">モッズのJARファイルを、Fabric APIの隣にある同じモッズフォルダに置いてください</Step>
+
+</Steps>
+
+Fabric プロファイルを起動し、mod は起動時にロードされます。表示されない場合は、以下のトラブルシューティングリストを確認してください。
+
+## mod フォルダの場所
+
+| OS | パス |
+| :--- | :--- |
+| Windows | `%appdata%\.minecraft\mods` |
+| macOS | `~/Library/Application Support/minecraft/mods` |
+| Linux | `~/.minecraft/mods` |
+
+まだ `mods` フォルダが存在しない場合は、Fabric プロファイルを一度実行すると、自動的に作成されます。
+
+## mod がロードされない場合
+
+<Checklist>
+<ChecklistItem>Modが表示されません：JARファイルが間違ったフォルダにあるか、Fabric以外のプロファイルで起動しました.</ChecklistItem>
+<ChecklistItem>起動時にクラッシュし、クラスが見つからないエラーが発生しました。Fabric API が存在しないか、バージョンが正しくありません.</ChecklistItem>
+<ChecklistItem>バージョン不一致：ローダー、Fabric API、およびmodはすべて同じMinecraftバージョンを対象とする必要があります.</ChecklistItem>
+</Checklist>
+
+## よくある質問
+
+<FAQList>
+
+<FAQItem question="すべてのMODにFabric APIは必要ですか？">
+ほとんどのFabric MODはそれに依存しているため、デフォルトでインストールしてください。ごく一部のスタンドアロンMODは不要ですが、追加しても害はありません。
+</FAQItem>
+
+<FAQItem question="起動時にMODがクラッシュする原因は何ですか？">
+通常はバージョン不一致、またはFabric APIが不足していることが原因です。ローダー、Fabric API、そしてMODがすべて同じMinecraftバージョンを対象としているか確認してください。
+</FAQItem>
+
+<FAQItem question="ファブリックMODはどこに置けばいいですか？">
+Minecraftのディレクトリ内の`mods`フォルダに置いてください（上記のパスをご参照ください）。フォルダが存在しない場合は、Fabricプロファイルを一度実行してください。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/ja/learn/how-to-install-fabric-loader", label: "Fabricローダーのインストール方法", description: "最初の手順、詳細に." },
+  { href: "/ja/learn/what-is-the-fabric-api", label: "Fabric APIとは何ですか？?", description: "なぜほとんどのMODにそれがほぼ必須なのか." },
+  { href: "/ja/blog/essential-fabric-mods-every-player-should-have", label: "必須のFabricMOD", description: "一度設置が完了したら、そこにしっかりと基盤を置く." },
+]} />
+
+<CTA href="/ja/purchase">OpalFabricクライアントを8.99ドルで手に入れよう</CTA>

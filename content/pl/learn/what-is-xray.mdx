@@ -1,0 +1,83 @@
+---
+title: Czym jest XRay w Minecraft? Wyjaśnienie Widzenia Rud
+description: XRay to moduł Minecrafta, który renderuje rudy przez teren, zmieniając to, co klient rysuje, a nie to, co serwer wysyła, i dlatego serwery nadal go blokują.
+excerpt: Kamień ma skrywać to, co w nim jest. XRay po prostu przerywa tę zasadę, zamieniając każdą górę w schemat pokazujący, gdzie dokładnie leży ruda.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy używanie XRay jest uznawane za oszustwo?
+    a: Tak, na każdym serwerze, gdzie kopanie lub gospodarka zasobami ma znaczenie. Daje to bezpośrednią przewagę nad graczami, którzy znajdują rudę w normalny sposób, i jest traktowane jako nadużycie karane blokadą, a nie jako element kosmetyczny.
+  - q: Czy XRay potrzebuje czegoś jeszcze od serwera?
+    a: Nie. Serwer już wysyła pełne dane bloku, w tym rudy, w momencie, gdy blok ładuje się. XRay jedynie zmienia sposób, w jaki klient rysuje bloki, które już posiada. Nie wysyła ani nie odbiera nic nowego.
+  - q: Jak XRay różni się od ESP?
+    a: ESP ujawnia encje takie jak gracze i moby przez ściany. XRay stosuje tę samą sztuczkę do bloków, ujawniając rudy i inne zasoby przez teren. Oba działają poprzez modyfikację lokalnego renderowania, a nie pobieranie nowych danych z serwera.
+  - q: Czy promieniowanie rentgenowskie może zostać wykryte bez obserwacji sposobu gry?
+    a: Czasami. Skanowanie integralności po stronie klienta może wykryć znane haki XRay lub zmodyfikowane pliki renderowania, ale build stworzony, aby uniknąć tych kontroli, zazwyczaj wykrywany jest dopiero podczas analizy wzorców wydobycia.
+---
+
+<KeyTakeaways>
+
+- XRay to moduł wizualny, który renderuje rudę i inne cenne bloki przez teren, umożliwiając graczom zobaczenie żyły bez konieczności kopania w jej kierunku.
+- Działa całkowicie po stronie klienta: serwer już przesłał pełne dane bloku podczas ładowania, XRay po prostu zapobiega normalnemu renderowaniu, które ukrywa rudę.
+- Nie generuje dodatkowego ruchu sieciowego, więc wykrywanie zazwyczaj wynika z wzorców wydobycia i skanów integralności klienta, a nie z logów pakietów.
+- Na każdym serwerze z gospodarką wydobywczą, XRay jest traktowany jako nadający się do zbanowania exploit, a nie ustawienie kosmetyczne.
+
+</KeyTakeaways>
+
+XRay to moduł wizualny, który renderuje rudę i inne cenne bloki przez solidne podłoże, dzięki czemu gracz może dokładnie zobaczyć, gdzie znajduje się żyła, nawet bez użycia kilofa do jej poszukiwania. Nie wymaga od serwera żadnych specjalnych danych. Po prostu zmienia to, co klient decyduje się narysować. Ślepe kopanie oznacza drążenie tuneli w oparciu o przypuszczenia i nadzieję, że coś znajdzie się w pobliżu. XRay pomija ten krok i zamienia mapę w schemat tego, co faktycznie znajduje się pod ziemią.
+
+## Jak to działa
+
+Podczas ładowania fragmentu, serwer wysyła do klienta pełne dane bloków dla tego fragmentu, w tym rudy, niezależnie od tego, czy którykolwiek z nich jest obecnie wystawiony na otwartą przestrzeń. Normalny rendering odrzuca większość tych danych. Rysuje tylko powierzchnię zewnętrzną, bloki, które faktycznie dotykają widocznej ściany, ponieważ prawdziwy aparat nigdy nie mógłby zobaczyć przez solidny kamień.
+
+Moduł XRay łamie tę zasadę dla wybranych typów bloków. W zależności od wersji, albo wstrzymuje renderowanie otaczającego kamienia i ziemi, albo rysuje docelową rudę bezpośrednio na terenie, który w przeciwnym razie by ją zakrywał. W każdym razie żyła diamentów, znajdująca się trzy warstwy w górę w górze, pojawia się dokładnie tak samo, jak ta, która jest już wystawiona w jaskini. Kopanie przestaje być eksploracją i staje się prostą linią.
+
+Chodzi o szybkość, a nie o wyrafinowanie. Na każdym serwerze, gdzie wydobycie zasobów napędza gospodarkę – czy poprzez bezpośrednią sprzedaż rud, czy ich przetwarzanie na ekwipunek – pomijanie eksploracji daje bezpośrednią przewagę nad każdym, kto nadal kopa w intuicję.
+
+## Czy XRay jest bezpieczny w użyciu?
+
+XRay nie wysyła niczego dodatkowego przez sieć. Każdy blok, który ujawnia, został już przesłany do klienta w momencie załadowania fragmentu, zgodnie z tą samą zasadą, którą wykorzystują moduły takie jak ESP, aby pokazywać encje przez ściany. Serwer obserwujący pakiety w izolacji ma niewiele do wykrycia.
+
+Wykrywanie opiera się na zachowaniu. Gracz, który kopa tunel w idealnie prostej linii do żyły, wydobywa tylko cenne bloki i ignoruje wszystko inne, albo unika zagrożenia, o którym nie miałby żadnej wiedzy, generuje wzór wydobycia, którego ślepy gracz po prostu nie stworzyłby. Niektóre serwery również uruchamiają skanowanie integralności po stronie klienta, które szuka zmodyfikowanego kodu renderowania, na którym XRay polega – to samo podejście stosowane przeciwko innym oszukańcom wizualnym.
+
+Ponieważ ślad jest behawioralny, a nie pojedynczy, oczywisty pakiet, XRay może pozostać niezauważony dłużej niż oszustwo związane z walką. To nie oznacza, że jest bezpieczny. Serwery, które sprawdzają statystyki wydobycia lub badają podejrzane kopanie, traktują go jak każde inne wykorzystanie: pełny ban, bez ostrzeżenia.
+
+<Callout variant="tip" title="Gdzie to się znajduje w Opalu">
+Opal nie dostarcza dedykowanego modułu XRay. Własny katalog skupia się na modułach walki, ruchu i wizualnych, stworzonych do PvP, kategorii, w których pojedyncza klatka lub pojedynczy tick decyduje o walce. Czytanie rudy przez skałę to zupełnie inna gra, bliższa grindowi ekonomii przetrwania niż czegokolwiek, w oparciu o co zbudowany jest Opal.
+</Callout>
+
+<Callout variant="warning" title="Informacja, nie instrukcja">
+Ta strona wyjaśnia, czym jest XRay i dlaczego serwery go zabraniają, a nie zachęca do jego używania. Na każdym serwerze, gdzie wydobywanie jest powiązane z ekonomią, XRay traktowany jest tak samo jak wykorzystanie w walce: wykrywalne przewinienie, niezależnie od tego, czy administratorzy wykryją je poprzez skanowanie klienta, czy analizując podejrzaną historię wydobycia.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy XRay jest uważany za oszustwo?">
+Tak, na każdym serwerze, gdzie istotne jest wydobywanie lub gospodarka zasobami. Daje to bezpośrednią przewagę nad graczami, którzy znajdują rudy w normalny sposób, i jest traktowane jako nadużycie, które skutkuje zablokowaniem, a nie jako funkcja kosmetyczna.
+</FAQItem>
+
+<FAQItem question="Czy XRay potrzebuje czegoś dodatkowego od serwera?">
+Nie. Serwer już wysyła pełne dane bloku, w tym rudy, w momencie, gdy blok ładuje się. XRay jedynie zmienia sposób, w jaki klient rysuje bloki, które już posiada. Nie wysyła żadnych zapytań ani nie odbiera nic nowego.
+</FAQItem>
+
+<FAQItem question="W czym różni się XRay od ESP?">
+ESP pokazuje encje, takie jak gracze i moby, przez ściany. XRay stosuje tę samą sztuczkę do bloków, ujawniając rudy i inne zasoby przez teren. Oba działają poprzez modyfikację lokalnego renderowania, a nie pobieranie nowych danych z serwera.
+</FAQItem>
+
+<FAQItem question="Czy XRay można wykryć bez obserwowania rozgrywki?">
+Czasami. Skanowanie integralności po stronie klienta może wykryć znane haki XRay lub zmodyfikowane pliki renderowania, ale build zaprojektowany, aby omijać te sprawdzenia, zazwyczaj wykrywany jest dopiero poprzez analizę wzorców wydobycia.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Kategoria XRay i każdy inny moduł, do której/którego tutaj należą." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kategoria oparta na ukrytym działaniu i modułach, które nigdy nie wywołają kontroli na poziomie pakietów, w tym XRay." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Oszust na przeciwnym końcu spektrum: złapany na pakietach, które wysyła, a nie na śladzie, który pozostawia." },
+]} />
+
+<CTA href="/pl/purchase">Jeśli celem nie jest odnajdywanie łupów, zobacz, co Opal faktycznie buduje do walki.</CTA>

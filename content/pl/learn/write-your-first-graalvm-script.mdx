@@ -1,0 +1,113 @@
+---
+title: Napisz swój pierwszy skrypt JavaScript GraalVM (2026)
+description: "Napisz swój pierwszy skrypt JavaScript dla GraalVM: zarejestruj punkt wejścia, podłącz się do zdarzenia i hot-reloaduj go bez rekompilacji Javy. Z działającym przykładem."
+excerpt: "Trzy małe kroki wystarczą, by uruchomić skrypt: zarejestruj go, podłącz zdarzenie i zapisz w folderze skryptów. To jest prawdziwy JavaScript i przeładowuje się w kilka sekund, bez potrzeby przebudowy."
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: Czy muszę zainstalować GraalVM, żeby napisać skrypt?
+    a: Nie. Program hosta dołącza GraalVM i jego silnik JavaScript. Piszesz tylko plik JavaScript i wrzucasz go do folderu skryptów.
+  - q: Czy mogę używać nowoczesnej składni JavaScript?
+    a: Tak. Silnik obsługuje najnowsze funkcje ECMAScript, w tym moduły z importem i eksportem, więc nie utkniesz z przestarzałym podzbiorem.
+  - q: Dlaczego mój skrypt się nie ładuje?
+    a: Sprawdź, czy plik znajduje się w folderze skryptów hosta, ma oczekiwaną przez niego rozszerzenie i rejestruje się w punkcie wejścia hosta. Błąd w wywołaniu funkcji rejestracji jest zwykle przyczyną.
+  - q: Czy to to samo, co pisanie skryptu Node.js?
+    a: Nie. Silnik jest osadzony wewnątrz hostującego JVM, więc Twój skrypt komunikuje się z programem hosta, a nie z niezależnym środowiskiem uruchomieniowym Node.js.
+---
+
+<KeyTakeaways>
+
+- Pierwszy skrypt składa się z trzech kroków: rejestracja, przechwycenie zdarzenia, zapisanie go w folderze skryptów.
+- Host pakuje [GraalVM](https://www.graalvm.org/), więc piszesz prawdziwy JavaScript i nigdy go nie instalujesz samodzielnie.
+- Skrypty przeładowują się w kilka sekund bez konieczności ponownej kompilacji Javy.
+- Skrypt może wywoływać tylko obiekty, które host udostępnia poprzez listę dozwolonych dostępu do hosta.
+
+</KeyTakeaways>
+
+Pisanie pierwszego skryptu JavaScript dla GraalVM wymaga trzech małych kroków: zarejestrowanie skryptu w punkcie wejścia hosta, dołączenie go do zdarzenia lub modułu oraz zapisanie go w folderze skryptów, aby silnik mógł go załadować. Silnik działa na wielojęzykowym API [GraalVM](https://www.graalvm.org/), dzięki czemu skrypt jest prawdziwym JavaScriptem i przeładowuje się bez rekompilacji żadnej Javy.
+
+<Callout variant="info" title="Gdzie pasuje Opal">
+Opal to mod dla [Fabric](https://fabricmc.net/), wykorzystujący [silnik skryptów JavaScript GraalVM](/pl/learn/what-is-graalvm-javascript-scripting), więc te kroki mają zastosowanie bezpośrednio. Aby zacząć, zapoznaj się z [dokumentacją skryptów](/pl/docs/scripting).
+</Callout>
+
+## Co potrzebujesz na początek
+
+Program hostujący, który osadza silnik. Host zawiera GraalVM JavaScript, udostępnia zestaw obiektów, które skrypty mogą wywoływać, oraz monitoruje folder skryptów. Nie instalujesz GraalVM samodzielnie; host go dołącza. Piszesz zwykły JavaScript w oparciu o obiekty, które host udostępnia.
+
+Znajomość tego, do czego te obiekty odpowiadają, pomaga, ale nie musisz pisać żadnych fragmentów kodu Java, aby zacząć.
+
+## Trzy kroki
+
+<Steps>
+
+<Step number={1} title="Znajdź folder skryptów">Host ładuje skrypty z ustalonej lokalizacji podczas uruchamiania. Sprawdź dokumentację hosta, aby poznać dokładną ścieżkę</Step>
+
+<Step number={2} title="Utwórz plik skryptu">
+Utwórz nowy plik `.js` (lub `.mjs`) w tym folderze. Host automatycznie go wykryje przy następnym ładowaniu skryptów.
+</Step>
+
+<Step number={3} title="Zarejestruj i połącz">
+Wewnątrz pliku zarejestruj skrypt z punktem wejścia hosta, a następnie przypisz zachowanie do zdarzenia lub zdefiniuj moduł.
+</Step>
+
+</Steps>
+
+## Przykład minimalny
+Większość hostów udostępnia skryptowi pojedynczy punkt wejścia do rejestracji oraz kilka obiektów proxy, które łączą JavaScript z programem. Dokładne nazwy zależą od hosta, ale struktura jest taka sama. Pierwszy skrypt zazwyczaj tylko ogłasza swoją obecność i reaguje na jedno zdarzenie:
+
+```js
+// Register the script with the host (names vary by host).
+script.register({
+  name: "hello-world",
+  version: "1.0.0",
+});
+
+// React to an event the host exposes.
+script.on("enable", () => {
+  client.print("Hello from my first script.");
+});
+```
+
+Zapoznaj się z własną dokumentacją API hosta, aby poznać rzeczywiste nazwy obiektów i metod. Sedno sprawy to wzorzec: rejestracja, a następnie podłączenie zdarzenia lub zdefiniowanie modułu
+## Ładowanie na bieżąco podczas pracy
+Zapisz plik i przeładuj skrypty (lub uruchom ponownie hosta, jeśli nie obsługuje live reload). Zmiana wchodzi w życie bez potrzeby przebudowy. Ten szybki cykl jest głównym powodem, dla którego warto skryptować zamiast kompilować moda: skrypt przeładowuje się w kilka sekund, podczas gdy moda skompilowaną trzeba przebudować i ponownie uruchomić.
+
+| Podejście | Cykl iteracji | Język | Kiedy się sprawdza |
+|----------|----------------|----------|--------------|
+| Skrypt JavaScript GraalVM | Edycja, zapis, przeładowanie | JavaScript | Szybkie poprawki, niestandardowe zachowanie |
+| Skompilowany mod | Przebudowa, ponowne uruchomienie | Java lub Kotlin | Większe funkcje, głębsze integracje |
+## Co mogą, a czego nie mogą robić skrypty
+
+Skrypt może wywoływać obiekty udostępniane przez hosta i nic więcej. Hosta deklaruje, które klasy i metody skrypty mogą wywoływać, za pomocą białej listy dostępu do hosta w GraalVM Polyglot, a domyślnie jest to odmowa. To zapewnia bezpieczeństwo i przewidywalność skryptów. Jeśli żądany obiekt nie jest udostępniony, host musi go dodać; nie można obejść białej listy z poziomu skryptu.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy muszę instalować GraalVM, aby napisać skrypt?">
+Nie. Program hosta dołącza GraalVM i jego silnik JavaScript. Napisz tylko plik JavaScript i umieść go w folderze skryptów.
+</FAQItem>
+
+<FAQItem question="Czy mogę używać nowoczesnej składni JavaScript?">
+Tak. Silnik obsługuje najnowsze funkcje ECMAScript, w tym moduły z `import` i `export`, więc nie jesteś ograniczony do starego podzbioru.
+</FAQItem>
+
+<FAQItem question="Dlaczego mój skrypt się nie ładuje?">
+Sprawdź, czy plik znajduje się w folderze skryptów hosta, ma oczekiwaną przez niego rozszerzenie i jest zarejestrowany w punkcie wejścia hosta. Błąd w wywołaniu funkcji rejestracji jest najczęstszą przyczyną.
+</FAQItem>
+
+<FAQItem question="Czy to to samo, co pisanie skryptu Node.js?">
+Nie. Silnik jest osadzony wewnątrz hostującego JVM, więc Twój skrypt komunikuje się z programem hostującym, a nie z niezależnym środowiskiem uruchomieniowym Node.js.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-graalvm-javascript-scripting", label: "Jakie jest skryptowanie JavaScript w GraalVM?", description: "Działanie tych skryptów – wyjaśnienie." },
+  { href: "/pl/learn/what-is-the-jvm", label: "Czym jest JVM?", description: "Platforma, w której osadzony jest silnik." },
+  { href: "/pl/blog/introducing-opal-scripting-engine", label: "Silnik skryptów Opal", description: "Co możesz zbudować za pomocą skryptów w Opal." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź Opala, klienta Fabric, za $8.99</CTA>

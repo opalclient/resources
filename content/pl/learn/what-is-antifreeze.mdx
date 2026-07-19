@@ -1,0 +1,68 @@
+---
+title: Czym jest Antyfreeze w Minecraft?
+description: AntiFreeze zapobiega zawieszaniu się klienta Minecrafta podczas dużych obciążeń fragmentami terenu lub nagłych opóźnień serwera, nie ingerując w pakiety, rejestrację trafień ani ruch.
+excerpt: Zamarzanie w środku walki kosztuje więcej porażek, niż kiedykolwiek lag. AntiFreeze utrzymuje klienta responsywnym, nawet gdy świat wokół niego nie jest.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Antyfreez daje przewagę w rozgrywce?
+    a: Nie, nie w taki sposób, jak robi to moduł walki lub ruchu. Zapobiega szarpaniu klienta podczas ładowania fragmentów danych lub nagłych opóźnień, co jest poprawką stabilności, a nie czymś, co zmienia rejestrację trafień, ruch lub to, co otrzymuje serwer.
+  - q: Czy użycie AntiFreeze może skutkować zawieszeniem gracza?
+    a: Żaden znany mechanizm by to wychwycił. Działa całkowicie w oparciu o lokalne renderowanie i obsługę danych wejściowych po stronie klienta, a serwery nie mają możliwości obserwacji, jak płynnie działa klient, więc nie ma nic, co mogłoby zostać wykryte przez system anticheat.
+  - q: Co w ogóle powoduje, że Minecraft się zawiesza podczas ładowania fragmentów?
+    a: Ładowanie dużej partii fragmentów naraz lub nagłe opóźnienie danych z serwera podczas skoku opóźnień może zablokować główny wątek klienta na tyle długo, że okno przestaje odpowiadać, dopóki praca się nie zakończy.
+  - q: Czy AntiFreeze to to samo co modyfikacja wydajności, taka jak Sodium?
+    a: "Nie do końca. Ogólne mody wydajności podnoszą liczbę klatek na sekundę i skracają czasy ładowania w całym systemie. AntiFreeze jest bardziej wyspecjalizowany: celuje konkretnie w momenty, w których klient inaczej by się zawiesił, takie jak ładowanie fragmentów i skoki opóźnień."
+---
+
+<KeyTakeaways>
+- AntiFreeze to moduł po stronie klienta, który zapobiega zawieszaniu się klientów Minecrafta podczas dużych obciążeń fragmentami terenu lub nagłych spadków wydajności.
+- Dotyczy wyłącznie lokalnego renderowania i przetwarzania danych wejściowych, nigdy pakietów, rejestracji trafień ani ruchu.
+- Serwery nie mogą obserwować płynności działania po stronie klienta, więc nie ma sygnału, który mógłby zostać wykryty przez anticheat.
+- Jest to poprawka stabilności, bardziej zbliżona do ułatwień w użytkowaniu niż do walki czy ruchu.
+</KeyTakeaways>
+
+AntiFreeze to moduł klienta Minecrafta, który zapobiega zawieszaniu się gry w momentach, które normalnie obciążają wątek renderowania: duża ilość nowych fragmentów terenu wczytująca się naraz lub skok opóźnień, który powoduje, że klient czeka na serwer. Zamiast okna, które przestaje odpowiadać na ułamek sekundy (lub pięć), moduł utrzymuje rendering i obsługę danych na bieżąco, nawet podczas przestoju. Nie jest to narzędzie do walki ani do poruszania się. To coś, co pozwala utrzymać grę w stanie grywalnym, podczas gdy jakaś inna część systemu ma problemy.
+
+## Jak to działa
+
+AntiFreeze monitoruje momenty, w których klient ma tendencję do zawieszania się: duża ilość fragmentów terenu wczytująca się jednocześnie lub sytuacja, w której serwer nie nadąża i opóźnia dane, na które klient czeka. Zazwyczaj takie obciążenie blokuje główny wątek gry, a zablokowany główny wątek oznacza zamrożone okno, brak renderowania, brak obsługi danych, dopóki praca nie zostanie ukończona.
+
+Zamiast dopuścić do takiego zablokowania, AntiFreeze utrzymuje działanie pętli renderowania i obsługi danych klienta podczas przestoju. Zamrożenie, które rozwiązuje, jest lokalnym objawem dużego obciążenia procesora, a nie mechanizmem sieciowym lub rozgrywki, więc naprawa go nie wymaga ingerencji w nic, co widzi serwer. Stan świata, rejestracja trafień i pakiety opuszczające klienta pozostają nietknięte. Chodzi wyłącznie o to, aby okno pozostawało responsywne, podczas gdy silnik nadąża.
+
+To również tłumaczy, dlaczego gracze mają tendencję do pozostawiania tej opcji włączonej na stałe, zamiast przełączać ją tylko w określonych sytuacjach. Przeoczony skok przez platformę z powodu chwilowego zacięcia gry, utracona linia w czacie, zacięcie w najgorszym możliwym momencie walki – to wszystko nie podlega żadnej improwizacji. Jest to bardziej poprawka stabilności niż funkcja, do której się celowo sięga.
+
+## Czy jest bezpieczne w użyciu?
+
+AntiFreeze zmienia jedynie sposób, w jaki lokalny klient obsługuje renderowanie i przetwarzanie danych wejściowych pod obciążeniem. Nie wysyła innych pakietów, nie ingeruje w rejestrację trafień i nie modyfikuje niczego, co może zaobserwować serwer lub inny gracz. Serwer nie posiada kanału do raportowania wrażenia płynności lokalnemu klientowi, co oznacza, że nie ma sygnału, który system anty-cheat mógłby sprawdzić. Funkcjonalnie plasuje się w tej samej kategorii co inne narzędzia poprawiające wydajność i jakość życia po stronie klienta, z dala od modułów walki lub ruchu, które faktycznie zmieniają to, co otrzymuje serwer.
+
+<Callout variant="tip" title="Jak to współgra z Opalem">
+Opal nie traktuje tego zachowania jako oddzielnego przełącznika w liście modułów, a warto być precyzyjnym w tej kwestii, zamiast twierdzić inaczej. Ale płatny klient, którego sukces lub porażka zależy od odczuć, oznacza, że praca nad podstawowym silnikiem, utrzymująca responsywność pomimo dużych ilości danych i spadków wydajności, to dokładnie tego rodzaju fundament, którego oczekuje się od poważnej wersji, bez względu na to, czy zdasz sobie z tego sprawę, czy nie.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Czy AntiFreeze daje przewagę w rozgrywce?">
+Nie w taki sposób, jak moduł walki lub ruchu. Zapobiega szarpaninom klienta podczas ładowania chunków lub skoków opóźnień, co jest poprawką stabilności, a nie czymś, co zmienia rejestrację trafień, ruch lub to, co otrzymuje serwer.
+</FAQItem>
+<FAQItem question="Czy AntiFreeze może spowodować zbanowanie gracza?">
+Nie ma znanego mechanizmu, który by to wykrył. Działa całkowicie na lokalnym renderowaniu i obsłudze danych wejściowych klienta, a serwery nie mają możliwości obserwowania, jak płynnie działa klient, więc nie ma nic, co mógłby wykryć anticheat.
+</FAQItem>
+<FAQItem question="Co powoduje zamrożenie Minecrafta podczas ładowania chunków?">
+Ładowanie dużej partii chunków naraz lub nagłe opóźnienie danych z serwera podczas skoku opóźnień może zablokować główny wątek klienta na tyle długo, że okno przestaje odpowiadać, dopóki praca nie zostanie ukończona.
+</FAQItem>
+<FAQItem question="Czy AntiFreeze jest takie samo jak mod poprawiający wydajność, taki jak Sodium?">
+Nie do końca. Ogólne mody poprawiające wydajność podnoszą liczbę klatek na sekundę i skracają czasy ładowania. AntiFreeze jest bardziej wyspecjalizowany: celuje konkretnie w momenty, w których klient inaczej by się zablokował, takie jak ładowanie chunków i skoki opóźnień.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Kategoria AntiFreeze, w której się znajduje, oraz to, co odróżnia cheat utility od cheatów bojowych." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Jak klienci nastawieni na skradanie się różnią się od modułów skupionych na stabilności i jakości życia, takich jak ten." },
+  { href: "/pl/learn/what-is-killaura", label: "Co to jest Killaura?", description: "Rodzaj modułu, z którym porównywany jest AntiFreeze, oraz dlaczego nim nie jest." }
+]} />
+
+<CTA href="/pl/purchase">Gładkość nie powinna być czymś, za czym trzeba gonić. Zobacz Opal dla $8.99.</CTA>

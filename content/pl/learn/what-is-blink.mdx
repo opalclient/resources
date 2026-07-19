@@ -1,0 +1,82 @@
+---
+title: Co to jest "Blink" w Minecraft? Moduł Packet-Buffer
+description: Blink to moduł narzędziowy dla klienta Minecraft, który buforuje wychodzące pakiety, dzięki czemu serwer widzi, że stoisz w miejscu, a następnie uwalnia je wszystkie naraz.
+excerpt: Blink zamraża to, co widzi serwer, podczas gdy Ty nadal poruszasz się lokalnie, a następnie jednorazowo wysyła wszystkie pakiety. Nie jest to subtelne i nie jest wolne od ryzyka.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie robi Blink?
+    a: Buforuje wychodzące pakiety i je zatrzymuje, dzięki czemu serwer przez pewien czas widzi Cię jako nieruchomy, mimo że klient nadal działa lokalnie. Zwolnienie bufora wysyła wszystko, co się w nim nagromadziło, jednym razem.
+  - q: Czy Blink to to samo co opóźnienie?
+    a: Nie. Prawdziwe opóźnienia są nierówne, a połączenie stale próbuje wysyłać dane. Blink celowo wstrzymuje strumień wychodzących pakietów i wznowi go na żądanie, co jest bardziej spójnym wzorcem niż problemy z siecią.
+  - q: Jak Blink różni się od Fake Lag?
+    a: Fałszywe opóźnienia i wysyłanie pakietów krótkimi seriami bez przerywania połączenia, zaprojektowane do krótkotrwałych rozsynchronizowań walki. Blink całkowicie zawiesza połączenie na dłużej, stworzony, abyś zniknął z widoku serwera na pewien czas.
+  - q: Czy Blink może spowodować twoje zbanowanie?
+    a: Tak. To funkcja używana na własną odpowiedzialność. Zamrożona pozycja, a następnie nagły skok to wzorzec, na który mogą zwracać uwagę programy anticheat, więc jej używanie wiąże się z realnym ryzykiem wykrycia na każdym kliencie, który ją udostępnia, w tym Opal.
+  - q: Klienci, którzy wysłali Blink?
+    a: Zostało to udokumentowane u klientów takich jak Tenacity i Opal v1, a bieżąca lista modułów Opala wciąż zawiera ją pod tą samą nazwą.
+---
+
+<KeyTakeaways>
+- Buforowanie pakietów przez Blink zapewnia, że serwer stale wyświetla Twoją ostatnią znaną pozycję.
+- Ty stale się poruszasz i walczysz lokalnie; serwer nic nie widzi, dopóki nie zwolnisz.
+- Zwolnienie powoduje wysłanie wszystkich przechowywanych pakietów naraz, co przenosi Twoją rzeczywistą pozycję w pojedynczym skoku.
+- To funkcja używana na własną odpowiedzialność: wykrywalna i zawarta w klientach, w tym Opal.
+</KeyTakeaways>
+
+Blink to moduł sieciowy, który można znaleźć w niektórych klientach narzędziowych Minecrafta, buforujący wychodzące pakiety zamiast wysyłać je natychmiast po wygenerowaniu. Dopóki bufor jest aktywny, serwer nadal renderuje cię w pozycji, w której ostatnio otrzymał dane, nawet jeśli twój klient nadal porusza się, walczy lub buduje w czasie rzeczywistym. Po zwolnieniu bufora wszystkie pakiety wygenerowane podczas jego działania trafiają na serwer naraz, a twoja rzeczywista pozycja gwałtownie się aktualizuje. To manipulacja pakietami, a nie trik wizualny, a serwery z odpowiednim dziennikowaniem mogą rozpoznać różnicę.
+
+## Jak działa Blink
+
+Normalny klient wysyła ciągły strumień pakietów ruchu i akcji, a serwer aktualizuje twój stan na podstawie każdego z nich w momencie jego otrzymania. Blink przechwytuje ten strumień i zatrzymuje go na pewien czas. Lokalnie nic się nie zmienia: nadal poruszasz się, machasz, umieszczasz bloki – robisz wszystko, co chcesz, a twój ekran renderuje wszystko. Serwer po prostu nie ma nowych danych, więc utrzymuje cię w ostatniej otrzymanej pozycji. Zwolnij bufor, a wszystkie pakiety, które zgromadziły się podczas jego działania, dotrą do serwera jednocześnie, natychmiastowo aktualizując twoją rzeczywistą pozycję zamiast płynnego dopasowania.
+
+## Blink vs. Fałszywe Opóźnienie
+
+Oba moduły zatrzymują pakiety, ale robią to w inny sposób i z innego powodu.
+
+| | Fałszywe Opóźnienie | Blink |
+|---|---|---|
+| Co się dzieje z pakietami | Opóźnione, a następnie usunięte w jednym impulsie | Zawieszone całkowicie, nie podawane stopniowo |
+| Połączenie | Pozostaje aktywne przez cały czas | Utrzymywane w miejscu przez cały czas trwania |
+| Typowe zastosowanie | Krótkie rozsynchronizowania w walce | Dłuższe zatrzymania, zniknięcie z pola widzenia |
+| Cel | Krótka przewaga w trakcie walki | Zniknięcie z odczytu serwera |
+
+Praktyczna różnica to czas trwania i intencja. Fałszywe Opóźnienie ma na celu zyskanie pół sekundy w walce. Blink ma na celu sprawienie, żebyś przestał istnieć w odczycie serwera na dłużej.
+
+<Callout variant="tip" title="Blink w Opalu">
+Własna lista modułów Opala nosi tę nazwę dokładnie taką samą. Opis katalogowy jest w tej kwestii dosadny: Blink utrzymuje połączenie sieciowe, dzięki czemu pakiety czekają w kolejce. Ta sama mechanika, to samo kompromis, bez zbędnych ozdobników.
+</Callout>
+
+<Callout variant="warning" title="To może Cię zassać, czasami">
+Nagłe zamrożenie pozycji po stronie serwera, a następnie gwałtowny skok, nie przypomina zwykłej chwilowej przerwy w połączeniu, a systemy anticheatów wypatrują dokładnie takiego wzorca. Prawdziwy spadek powoduje nierówny przepływ pakietów i ostatecznie wygasza połączenie; moduł zawieszający i wznawiający przesyłanie pakietów na żądanie generuje czystszy, bardziej dogodny wzorzec, szczególnie gdy wznowienie zbiega się z walką lub ucieczką. Serwery, które rejestrują czas przesyłania pakietów lub oznaczają długotrwałe utrzymywanie pozycji po czym następuje skok, mogą to wykryć, a powtarzające się użycie jest sygnałem samym w sobie. Blink używaj na własną odpowiedzialność na każdym kliencie, który go udostępnia, w tym Opal: nic w nim nie jest gwarantowane, aby uniknąć wykrycia przez dany serwer.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Co właściwie robi Blink?">
+Buforuje wychodzące pakiety i zatrzymuje je, dzięki czemu serwer widzi Cię jako nieruchomego przez pewien czas, mimo że Twój klient cały czas działa lokalnie. Po zwolnieniu bufora, wszystko, co zostało ustawione w kolejce, dociera naraz.
+</FAQItem>
+<FAQItem question="Czy Blink to to samo co opóźnienie (lag)?">
+Nie. Prawdziwe opóźnienie jest nierówne, a połączenie cały czas próbuje przesyłać dane. Blink celowo zawiesza wypływ danych i wznawia go na żądanie, co jest znacznie bardziej spójnym wzorcem niż problemy z siecią.
+</FAQItem>
+<FAQItem question="W czym Blink różni się od Fałszywego Opóźnienia (Fake Lag)?">
+Fałszywe Opóźnienie opóźnia pakiety i zwalnia je w jednym burstu bez przerywania połączenia, przeznaczone do krótkotrwałych rozsynchronizowań w walce. Blink całkowicie zawiesza połączenie i utrzymuje je w zawieszeniu przez dłuższy czas, mając na celu zniknięcie z widoku serwera na pewien czas.
+</FAQItem>
+<FAQItem question="Czy Blink może spowodować bana?">
+Tak, jego używanie wiąże się z ryzykiem na własną odpowiedzialność. Wzór zamrożenia-a następnie skoku, który generuje, jest dokładnie tym, czego szukają programy anticheatowe, więc jego używanie wiąże się z realnym ryzykiem wykrycia, niezależnie od tego, który klient go udostępnia.
+</FAQItem>
+<FAQItem question="W jakich klientach Blink był dostępny?">
+Został udokumentowany w klientach takich jak Tenacity i Opal v1, i nadal znajduje się na aktualnej liście modułów Opal pod tą samą nazwą.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Kategoria Blink, w której ona funkcjonuje, oraz czym faktycznie zajmują się ci klienci." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Klienci konstruowali swoje działania tak, by pozostać niezauważonymi dla serwera, a nie tylko go przechytrzyć." },
+  { href: "/pl/learn/what-is-velocity-anti-knockback", label: "Czym jest Prędkość / Odpór od Odrzutu?", description: "Kolejny moduł, który zmienia to, co serwer myśli, że dzieje się z twoim ruchem." }
+]} />
+
+<CTA href="/pl/purchase">Blink to jedna pozycja na liście modułów Opal. Zobacz, co jeszcze czeka w kolejce.</CTA>

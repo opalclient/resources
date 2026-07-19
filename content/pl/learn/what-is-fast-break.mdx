@@ -1,0 +1,91 @@
+---
+title: Czym jest szybkie kopanie w Minecraft? Wyjaśnienie prędkości wydobywania
+description: Fast Break to moduł Minecrafta, który wydobywa bloki szybciej niż prędkość standardowa dla twojego narzędzia, całkowicie pomijając normalne obliczanie czasu wydobycia.
+excerpt: Blok, który powinien zarejestrować pełną sekwencję zamachu, aktywuje się natychmiast po dotknięciu. To jest Szybki Przełom, a serwery to zauważą.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co robi Fast Break w Minecraft?
+    a: Wydobywa bloki szybciej niż prędkość bazowa obliczana przez twoje narzędzie, twardość bloku oraz wszelkie zaklęcia lub efekty aktywne, przez co bloki rozpadają się w ułamku ich normalnego czasu.
+  - q: Czy Fast Break to to samo co Nuker?
+    a: Nie. Nuker niszczy kilka bloków wokół ciebie naraz. Szybki Rozbicie przyspiesza tempo, w jakim pojedynczy blok się kruszy. Niektórzy klienci wysyłają oba, ale to oddzielne mechaniki rozwiązujące różne problemy.
+  - q: Czy Fast Break to to samo co Instant Mine?
+    a: "Instant Mine to tylko potoczna nazwa dla tej samej idei: dowolnego modułu, który skraca czas łamania bloków poniżej wartości bazowej. Fast Break to jedna z jego implementacji."
+  - q: Czy serwery mogą wykryć Fast Break?
+    a: Tak. Serwer już wie, ile czasu zajmuje rozbicie danego narzędzia i bloku, więc może porównać to z tym, jak szybko klient zgłasza zniknięcie bloku.
+  - q: Czy używanie Fast Break jest karalne?
+    a: Na każdym serwerze, który faktycznie egzekwuje swoje zasady, tak. To czyste odejście od oryginalnej matematyki, a wykrycie tego nie wymaga zgadywania, jak w przypadku niektórych sprawdzeń ruchu.
+---
+
+<KeyTakeaways>
+- Fast Break to moduł, który wydobywa bloki szybciej niż w wersji podstawowej, zarówno dla narzędzi, jak i bloków.
+- Skrótuje obliczenia łamania, dzięki czemu bloki znikają niemal natychmiast, zamiast po kilku uderzeniach.
+- Serwery mogą porównywać oczekiwany czas łamania z raportowanym, co ułatwia identyfikację problemów.
+- Opal udostępnia go pod tą samą nazwą, oznaczony jako używaj na własne ryzyko, tak jak w innych miejscach.
+</KeyTakeaways>
+
+Fast Break to moduł, który wydobywa bloki szybciej niż prędkość bazowa, obliczana dla twojego narzędzia i bloku, który uderzasz. Zazwyczaj rozbijanie bloku to małe obliczenie: prędkość narzędzia, twardość bloku, wszelkie zaklęcia lub efekty, wykonywane krok po kroku, aż pasek postępu się wypełni. Fast Break omija to obliczenie, zamiast go wykonywać uczciwie, więc blok, który powinien zająć pełną sekwencję uderzeń, znika w ułamku czasu. Jest to moduł interakcji ze światem, a nie ruchu lub walki, choć pojawia się zarówno podczas sesji wydobywczych, jak i w środku walki, podczas przebijania ścian.
+
+## Jak to działa
+
+W Vanilla Minecraft czas rozbicia bloku jest obliczany na podstawie trzech czynników: prędkości wydobycia narzędzia, twardości bloku oraz aktywnych zaklęć lub efektów statusu. Klient śledzi ten postęp krok po kroku i informuje serwer o rozbiciu bloku dopiero po zakończeniu obliczeń. Fast Break przechwytuje ten proces. Bezpośrednio zwiększa lub nadpisuje wartość postępu, dzięki czemu klient zgłasza zakończenie rozbicia znacznie wcześniej, niż normalnie pozwoliłoby na to połączenie narzędzia i bloku.
+
+Nic w wyglądzie nie jest subtelne. Blok po prostu znika niemal natychmiast po rozpoczęciu uderzania, niezależnie od tego, co tabela prędkości wydobywania w Vanilla mówi, ile powinien kosztować drewniany kilof na kamieniu lub goła ręka na obsydianie.
+
+## Dlaczego ludzie go używają
+
+Czas to sedno działania. W trybie survival bez modyfikacji, wydobywanie, korytarze i oczyszczanie terenu kosztują określoną ilość czasu, a Fast Break redukuje ten koszt niemal do zera. Ma on zastosowanie również poza samym wydobyciem: pozwala na szybsze przebijanie się przez ściany, drzwi lub fortyfikacje niż przeciwnik jest w stanie zareagować, albo na oczyszczanie ścieżki w trakcie budowy bez przełączania się w tryb kreatywny. Fast Break pojawia się w klientach takich jak Wurst, obok innych modułów interakcji ze światem, które wymieniają możliwość wykrycia naruszenia zasad na bezpośrednią oszczędność czasu.
+
+## Fast Break vs. Nuker
+
+Ludzie mylą te dwa rozwiązania, ponieważ oba są klasyfikowane jako "cheaty wydobywcze", ale rozwiązują różne problemy.
+
+| | Fast Break | Nuker |
+|---|---|---|
+| Co zmienia | Szybkość rozpadu pojedynczego bloku | Liczbę bloków rozpadających się jednocześnie |
+| Typowe zastosowanie | Korytarze, szybkie przebijanie się przez ścianę lub drzwi | Oczyszczanie obszaru jednym ruchem |
+| Co sprawdza serwer | Zgłoszony czas rozpadu w porównaniu do oczekiwanego | Liczba jednoczesnych rozpadów związanych z jedną akcją |
+
+Nie wykluczają się one wzajemnie. Klient może udostępnić oba i pozwolić na rozbicie kilku bloków, każdy z nich natychmiast, ale są to oddzielne ustawienia odpowiadające na oddzielne pytania.
+
+<Callout variant="tip" title="Szybkie Przerwanie w Opal">
+Opal udostępnia to pod tą samą nazwą. Opis w katalogu jest rzeczowy: „Szybciej łamie bloki”. Taka sama mechanika, jak opisano powyżej, to samo kompromis, oznaczona jako używaj na własną odpowiedzialność, jak wszędzie indziej.
+</Callout>
+
+<Callout variant="warning" title="Jedna z łatwiejszych do wykrycia">
+Serwer już zna oczekiwany czas przerwy dla danej kombinacji narzędzia, bloku i efektu statusu, więc musi jedynie porównać to oczekiwanie z tym, jak szybko klient twierdzi, że blok zniknął. Przerwa kończąca się znacznie przed czasem to wyraźna niezgodność, a legalna prędkość kopania pozostawia bardzo mało miejsca na wariancję, dlatego wiele programów anticheat traktuje to jako twardy sygnał, a nie coś na granicy. Czy to faktycznie podlega karze, zależy wciąż od serwera: niektóre nie wykonują żadnych znaczących sprawdzeń interakcji ze światem i nigdy tego nie zauważają, inne rejestrują prędkość kopania, ponieważ jest tanie do zweryfikowania i trudne do przekłamania. Traktuj to jako jeden z bardziej wykrywalnych modułów w kliencie narzędziowym, a nie bezpieczny domyślny, na Opal lub gdziekolwiek indziej jest dystrybuowany.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co robi Fast Break w Minecraft?">Wydobywa bloki szybciej niż prędkość bazowa obliczana przez twoje narzędzie, twardość bloku oraz wszelkie czary lub efekty aktywne, dzięki czemu bloki rozpadają się w ułamku normalnego czasu</FAQItem>
+
+<FAQItem question="Czy Fast Break jest tym samym co Nuker?">
+Nie. Nuker niszczy kilka bloków naraz. Fast Break przyspiesza tempo łamania pojedynczego bloku. Niektórzy klienci wysyłają oba, ale to oddzielne mechanizmy rozwiązujące różne problemy.
+</FAQItem>
+
+<FAQItem question="Czy Fast Break to to samo co Instant Mine?">
+Instant Mine to po prostu popularna, alternatywna nazwa na tę samą ideę: dowolny moduł, który skraca czas łamania bloków poniżej wartości bazowej. Fast Break to jedna z jego implementacji.
+</FAQItem>
+
+<FAQItem question="Czy serwery wykrywają Przełamanie Szybkie?">
+Tak. Serwer już wie, ile czasu powinien zająć dany narzędzie i blok, więc może porównać to z tym, jak szybko klient zgłasza zniknięcie bloku.
+</FAQItem>
+
+<FAQItem question="Czy używanie Fast Break grozi zbanowaniem?">
+Na każdym serwerze, który faktycznie egzekwuje swoje zasady, tak. To czyste odejście od oryginalnej matematyki, a wykrycie tego nie wymaga zgadywania, jak w przypadku niektórych sprawdzeń ruchu.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Szeroką kategorią, do której należy Fast Break." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Segment klientów nastawiony na skrytość." },
+  { href: "/pl/learn/what-is-scaffold", label: "Co to jest Scaffold?", description: "Odpowiednik Fast Breaka pod względem umieszczania bloków." },
+]} />
+
+<CTA href="/pl/purchase">Fast Break to jedna pozycja w liście modułów Opal, umieszczona dokładnie tam, gdzie powinna się znajdować.</CTA>

@@ -1,0 +1,82 @@
+---
+title: Co to jest Bob w środku Minecraft? Moduł Wyjaśniony
+description: Żaden Bob to moduł Minecraft, który wyłącza kołysanie kamery w górę i w dół podczas chodzenia, zapewniając taki sam, stały widok jak wbudowane ustawienie View Bobbing.
+excerpt: Vanilla Minecraft kołysze kamerę przy każdym Twoim kroku. Żaden Bob jej nie stabilizuje, używając tego samego triku, co opcja już znajdująca się w ustawieniach Twojego wideo.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Is No Bob to to samo co opcja View Bobbing w vanilla?
+    a: Funkcjonalnie tak. Ustawienia wideo w Vanilla już zawierają przełącznik, który wyłącza kołysanie kamery. No Bob odtwarza ten sam efekt kamery nieruchomej jako moduł klienta.
+  - q: Czy brak Boba daje przewagę w PvP?
+    a: Żadnego znaczącego. Skoro każdy gracz może już wyłączyć drganie kamery z ustawień domyślnych, to wyłączenie go przez moduł nie daje Ci przewagi nad tym, kto po prostu odznaczył pole.
+  - q: Czy serwer może wykryć "No Bob"?
+    a: Nie. Obserwowanie bobingu odbywa się w całości po stronie klienta i nigdy nie jest zgłaszane serwerowi, więc nie ma nic w żadnym pakiecie, co mogłoby zostać wykryte przez kontrolę po stronie serwera.
+  - q: Czy No Bob zmienia ruch czy tylko kamerę?
+    a: Tylko kamera. Prędkość chodzenia, wysokość skoku i kolizje pozostają nietknięte. Moduł zmienia to, co widzisz, a nie sposób, w jaki porusza się twoja postać.
+---
+
+<KeyTakeaways>
+
+- No Bob to moduł kosmetyczny dla Minecrafta, który wyłącza kołysanie kamery, czyli bujanie obrazu podczas chodzenia.
+- Zmienia tylko renderowanie. Prędkość poruszania się, obszary kolizji i dane serwera pozostają niezmienione.
+- Nie niesie ze sobą żadnego ryzyka wykrycia: kołysanie kamery w ogóle nie dociera do serwera.
+- W vanilla już oferowane jest to samo rozwiązanie w Opcjach > Ustawienia wideo > Kołysanie kamery.
+
+</KeyTakeaways>
+
+No Bob to moduł Minecraft, który wyłącza ruch obracania głową (view-bobbing), który w standardowej wersji gry pojawia się przy każdym kroku – niewielkie chyłko-przechyły i zanurzenie zsynchronizowane z animacją chodzenia. Włącz go, a kamera zablokuje się na stałej wysokości, niezależnie od tego, jak szybko się poruszasz. To zmiana w renderowaniu, a nie w rozgrywce: twoja postać porusza się z tą samą prędkością, otrzymuje uderzenia w ten sam sposób i wysyła do serwera dokładnie te same dane, co zawsze. Zmienia się tylko to, co widzisz Ty.
+
+## Jak to działa
+
+Standardowa wersja gry nakłada niewielkie, okresowe przesunięcie na kamerę przy każdym kroku podczas chodzenia – to wbudowany ruch obracania głową (bob). No Bob wchodzi w ścieżkę renderowania i anuluje to przesunięcie zanim klatka zostanie narysowana, utrzymując kamerę na stałej wysokości głowy, niezależnie od ruchu.
+
+Ponieważ obracanie głową jest czysto etapem renderowania, nie ma pod nim nic, co mogłoby z nim współdziałać. Nie ma nic, co dotyka prędkości ruchu, kolizji ani wykrywania trafień, a żadna z tych rzeczy nie jest częścią czegokolwiek, co śledzi serwer. Serwer w ogóle nie ma pojęcia o „obracaniu głową”. Otrzymuje aktualizacje pozycji tak, jak zawsze, i pozostawia każdemu klientowi, aby narysował cykl chodzenia tak, jak chce.
+
+Odwołanie opiera się głównie na komforcie i czytelności. Stabilny obraz jest łagodniejszy dla oczu podczas długiej sesji, redukuje nudności, które niektórzy gracze odczuwają z powodu ciągłego kołysania się ekranu, i rejestruje czystszy obraz, jeśli nadajesz transmisję na żywo lub tworzysz materiały wideo. Mniejsza grupa po prostu lubi mieć o jedną rzecz mniej przeszkadzającą na ekranie podczas walk z dużą ilością ruchu.
+
+## Brak kołysania kamery vs. Przełącznik kołysania kamery w wersji standardowej
+
+| | Kołysanie kamery w wersji standardowej | Moduł „Brak kołysania” |
+|---|---|---|
+| Gdzie się znajduje | Opcje > Ustawienia wideo | Lista modułów klienta |
+| Efekt | Usuwa kołysanie kamery | Usuwa kołysanie kamery |
+| Ryzyko wykrycia | Brak | Brak |
+| Koszt | Bezpłatne, wbudowane w grę | Dołączone do klienta, który je udostępnia |
+
+Oba ustawienia dają ten sam obraz. Jedyna realna różnica to miejsce, w którym przełączasz opcję, oraz czy znajduje się ona obok innych opcji wizualnych klienta, zamiast być ukryta w menu ustawień.
+
+<Callout variant="tip" title="Gdzie to się znajduje w Opalu">
+Opal nie dostarcza dedykowanego przełącznika No Bob. Nie ma też do tego większego powodu. Mojang już wbudował to rozwiązanie, które teraz znajduje się w Opcjach > Ustawienia grafiki > Widok kołysania. Jest ono dostępne za darmo, bez konieczności pobierania. Miejsca na moduły płatnego klienta lepiej wykorzystać na rzeczy, których vanilla faktycznie nie potrafi zrobić – właśnie na to celują własne wizualne i ruchowe ulepszenia Opala.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy No Bob jest tym samym co opcja View Bobbing w vanilla?">
+Funkcjonalnie tak. Ustawienia wideo w vanilla już zawierają przełącznik, który usuwa drgania kamery. No Bob odtwarza ten sam efekt kamery bez drgań jako moduł klienta.
+</FAQItem>
+
+<FAQItem question="Czy wyłączenie Boba daje przewagę w PvP?">
+Żadnej znaczącej. Skoro każdy gracz może już wyłączyć podskoki kamery z ustawień gry, wyłączenie go za pomocą modułu nie daje przewagi nad kimś, kto po prostu odznaczył odpowiednie pole.
+</FAQItem>
+
+<FAQItem question="Czy serwer może wykryć No Bob?">
+Nie. Oglądanie bobingu odbywa się w całości po stronie klienta i nigdy nie jest zgłaszane serwerowi, więc nie ma nic w żadnym pakiecie, co pozwoliłoby serwerowi to zauważyć.
+</FAQItem>
+
+<FAQItem question="Czy No Bob zmienia ruch czy tylko kamerę?">
+Tylko kamera. Prędkość chodzenia, wysokość skoku i kolizje pozostają niezmienione. Moduł zmienia to, co widzisz, a nie sposób, w jaki porusza się twoja postać.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Moduły szerszej kategorii, do której należy np. No Bob." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Gdzie leży granica między subtelnym a wykrywalnym." },
+  { href: "/pl/learn/what-is-velocity-anti-knockback", label: "Czym jest prędkość (ochrona przed odrzutem)?", description: "Moduł znajdujący się po przeciwnej stronie spektrum ryzyka niż drobna poprawka, taka jak No Bob." },
+]} />
+
+<CTA href="/pl/purchase">Wanilia już ustabilizowała Twój aparat. Zobacz, co Opal tworzy, czego Wanilia nie potrafi.</CTA>

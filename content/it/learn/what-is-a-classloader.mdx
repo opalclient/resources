@@ -1,0 +1,93 @@
+---
+title: Cos'è un Classloader Java? (Spiegazione del 2026)
+description: Un classloader Java individua i file di classe e li carica nella JVM a runtime. Ecco cosa fa, come funziona la gerarchia dei loader e perché i mod si basano su di esso.
+excerpt: Un classloader è la parte della JVM che individua una classe su richiesta e la carica in memoria. È anche il punto di aggancio preciso che permette ai mod di Minecraft di modificare il gioco.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: Quando la JVM carica una classe?
+    a: Al primo utilizzo, non all'avvio. La prima volta che il tuo codice interagisce con un tipo, la JVM richiede a un classloader di trovarlo e definirlo. Questo viene chiamato caricamento pigro.
+  - q: Qual è il modello di delega?
+    a: Un caricatore chiede al suo genitore di caricare una classe prima di tentare di caricare sé stesso. La catena dei genitori risale fino al caricatore di bootstrap, che impedisce ai tipi Java principali di essere caricati due volte con lo stesso nome.
+  - q: Possono due classi avere lo stesso nome?
+    a: Sì, se classloader differenti li definiscono. La JVM identifica una classe in base al suo nome più il suo loader di definizione, quindi classi con lo stesso nome provenienti da loader separati sono tipi distinti.
+  - q: Per quale motivo i mod loader necessitano di un classloader personalizzato?
+    a: Per visualizzare le classi di gioco mentre vengono caricate e patchate in memoria. Un loader personalizzato può trasformare il bytecode prima che la JVM definisca la classe, ed è così che i mod modificano il gioco senza editarlo su disco.
+---
+
+<KeyTakeaways>
+
+- Un classloader trova un file di classe e lo carica nella JVM in modo che il programma possa utilizzarlo.
+- Le classi vengono caricate al primo utilizzo, non all'avvio, e il loader individua il bytecode ogni volta.
+- I loader integrati formano una catena genitore (bootstrap, platform, application) che delega verso l'alto.
+- I classloader personalizzati sono il motivo per cui i mod di Minecraft possono patchare le classi di gioco durante il caricamento.
+
+</KeyTakeaways>
+
+Un classloader è la parte del runtime Java che individua un file di classe e lo carica nella JVM in modo che il programma possa utilizzarlo. Le classi non vengono caricate tutte all'avvio. La JVM carica ciascuna di esse la prima volta che è necessaria, e un classloader è ciò che individua il bytecode, lo legge e lo passa alla JVM. Minecraft Java Edition si basa esattamente su questo meccanismo.
+
+<Callout variant="info" title="Dove si integra Opal">
+Opal è un mod [Fabric](https://fabricmc.net/), e Fabric carica il gioco tramite il proprio classloader, consentendo ai mod di modificare le classi durante il caricamento. La [guida all'installazione](/it/docs/setup) illustra come installarlo.
+</Callout>
+
+## Cosa fa effettivamente un classloader
+
+Un classloader trasforma un nome di classe in una classe utilizzabile all'interno della JVM in esecuzione. Richiedi un tipo, il loader individua i byte `.class` corrispondenti e la JVM definisce quel tipo in memoria.
+
+Il lavoro si svolge in tre fasi. Il loader trova il bytecode per una classe denominata. La JVM lo verifica e lo collega. Quindi la classe è pronta per essere utilizzata. Questo è il motivo per cui un programma Java può includere codice che non è stato menzionato al momento della compilazione: il nome è sufficiente per il loader per trovarlo.
+
+## La gerarchia dei loader
+
+I classloader sono organizzati in una catena genitore, e la maggior parte di essi chiede prima al genitore. Un'applicazione standard ha tre loader integrati impilati l'uno sull'altro.
+
+| Loader | Carica |
+| :--- | :--- |
+| Bootstrap | Le classi runtime Java di base |
+| Platform | Moduli della libreria standard al di fuori del core |
+| Application | Le classi del tuo programma dal classpath |
+
+Quando viene richiesto al loader dell'applicazione un classe, normalmente delega prima verso l'alto. Il genitore ha la possibilità di caricarla, e solo se nessun genitore può farlo, il figlio ci prova. Questo è chiamato modello di delega, e mantiene i tipi di base coerenti in tutto il programma.
+
+## Identità delle classi e loader personalizzati
+
+Una classe è identificata sia dal suo nome che dal loader che l'ha definita. Due loader possono caricare una classe con lo stesso nome, e la JVM le considera due tipi diversi. Potrebbe sembrare un dettaglio, ma è proprio questo il motivo per cui i classloader sono potenti.
+
+I programmi possono definire i propri classloader. Un loader personalizzato può leggere bytecode da qualsiasi fonte: un jar, la rete, un array di byte generato, persino bytecode che ha trasformato durante il processo. È così che i sistemi di plugin, i server di applicazioni e i framework di mod caricano codice che il programma host non conosceva al momento della compilazione.
+
+## Perché questo è importante per i mod di Minecraft
+
+I mod esistono grazie al classloading personalizzato. Un mod loader per Minecraft avvia il gioco attraverso il proprio classloader, in modo da poter vedere e modificare le classi di gioco durante il caricamento. È in quel punto di aggancio che avviene la patch del bytecode.
+
+Quando un loader si interpone tra il disco e la JVM, può trasformare una classe proprio prima che la JVM la definisca. Un mod può riscrivere un metodo di gioco, iniettare nuovi comportamenti o aggiungere campi, il tutto senza una copia modificata del gioco sul disco. La classe su cui la JVM finisce per eseguire è quella patchata. Per capire come questo si inserisce nel quadro generale, consulta [Cos'è un mod loader per Minecraft?](/it/learn/what-is-a-minecraft-mod-loader).
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Quando viene caricata una classe dalla JVM?">
+Al primo utilizzo, non all'avvio. La prima volta che il tuo codice interagisce con un tipo, la JVM richiede a un classloader di trovarlo e definirlo. Questo viene chiamato caricamento pigro.
+</FAQItem>
+
+<FAQItem question="Cos'è il modello di delega?">
+Un caricatore chiede al suo genitore di caricare una classe prima di tentare di farlo da solo. La catena dei genitori risale fino al caricatore di bootstrap, che impedisce che i tipi Java principali vengano caricati due volte con lo stesso nome.
+</FAQItem>
+
+<FAQItem question="Due classi possono avere lo stesso nome?">
+Sì, se classloader diversi le definiscono. La JVM identifica una classe dal suo nome più il suo loader di definizione, quindi classi con lo stesso nome provenienti da loader separati sono tipi distinti.
+</FAQItem>
+
+<FAQItem question="Perché i mod loader necessitano di un classloader personalizzato?">
+Per visualizzare le classi di gioco mentre vengono caricate e correggerle in memoria. Un loader personalizzato può trasformare il bytecode prima che la JVM definisca la classe, ed è così che i mod modificano il gioco senza editarlo su disco.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-the-jvm", label: "Cos'è la JVM?", description: "Il tempo di esecuzione in cui il classloader inietta bytecode." },
+  { href: "/it/learn/what-is-a-minecraft-mod-loader", label: "Cos'è un mod loader di Minecraft?", description: "Come il caricamento di classi personalizzato diventa caricamento di mod." },
+  { href: "/it/learn/what-is-graalvm-javascript-scripting", label: "Cos'è la scripting JavaScript di GraalVM?", description: "Un altro modo in cui i clienti caricano il codice a runtime." },
+]} />
+
+<CTA href="/it/purchase">Ottieni Opal, un client Fabric, per $8.99</CTA>

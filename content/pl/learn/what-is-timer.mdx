@@ -1,0 +1,79 @@
+---
+title: Czym jest Timer w Minecraft? Wyjaśnienie modułu prędkości ticków
+description: Timer to moduł, który przyspiesza lub zwalnia tempo przetwarzania przez klienta aktualizacji gry, od ataków po umieszczanie bloków, a serwery łatwo go wykrywają.
+excerpt: Stoper nie sprawia, że jesteś szybszy, on po prostu kłamie zegarowi. Oto jak działa manipulacja prędkością tyknięcia i dlaczego serwer zawsze to zauważa.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie zmienia moduł Timer?
+    a: Zmienia szybkość, z jaką klient przechodzi przez ticki gry, co przyspiesza lub zwalnia wszystko, co powiązane z czasem ticka, takie jak czasy odnowienia ataków, używanie przedmiotów i umieszczanie bloków.
+  - q: Czy Timer wpływa na liczbę taktowań serwera?
+    a: Nie. To tylko zmienia szybkość, z jaką klient przetwarza i wysyła własne akcje oparte na tickach. Serwer utrzymuje własną częstotliwość ticków i nadal może mierzyć tempo otrzymywanych danych.
+  - q: Czy Timer jest bezpieczny w użyciu?
+    a: Niesie to ze sobą realne ryzyko wykrycia. Ponieważ serwer może bezpośrednio mierzyć tempo akcji w stosunku do oczekiwanego tempa tyknięcia, wartość Timera, która wypycha akcje wyraźnie szybciej niż normalnie, stanowi prawdopodobny punkt ostrzegawczy dla programów anticheat, a korzystanie z niego odbywa się na własną odpowiedzialność.
+  - q: Dlaczego ktoś miałby spowolnić Timer, zamiast go przyspieszyć?
+    a: Niższe ustawienie czasami stosuje się, aby uzyskać większą precyzję w kontrolowaniu czasu pojedynczej akcji, zamiast skupiać się na surowej prędkości, poświęcając przepustowość na rzecz dokładności.
+---
+
+<KeyTakeaways>
+
+- Timer to moduł, który przyspiesza lub zwalnia tempo, w jakim klient przechodzi przez ticki gry.
+- Zmienia to wszystko, co związane z czasem trwania ticka: czasy odnowienia ataków, używanie przedmiotów, umieszczanie bloków i ładowanie łuku.
+- Własna częstotliwość ticków serwera nigdy się nie zmienia, zmienia się jedynie tempo wysyłanych przez klienta danych.
+- Łatwo go wykryć, ponieważ serwery mogą bezpośrednio mierzyć tempo akcji w porównaniu z normalnym tempem 20 ticków.
+
+</KeyTakeaways>
+
+Timer to moduł, który zmienia tempo, w jakim Twój klient przetwarza ticki gry Minecraft, czyli stałe zegarowe dwadzieścia na sekundę, na którym działa gra. Zwiększenie go powyżej normy powoduje, że wszystko, co związane z czasem trwania ticka – ataki, używanie przedmiotów, umieszczanie bloków i ładowanie łuku – zachodzi częściej niż pozwala na to niezmodyfikowany klient. Zmniejszenie go poniżej normy powoduje, że te same akcje zwalniają. Czasami nazywany jest TimerMod i pojawia się w klientach takich jak Fan i Tenacity. Serwer nie działa szybciej ani wolniej: klient decyduje o własnym tempie, a serwer po prostu obserwuje, co przybywa.
+
+## Jak to działa
+
+Minecraft działa na stałych tickach, domyślnie dwadzieścia na sekundę. Większość akcji związanych z czasem, odczekanie po ataku, jedzenie, łamanie bloków, ładowanie łuku, postępuje o jeden krok na tick zamiast zgodnie ze wskazówkami zegara. Timer wchodzi w interakcję z częstotliwością, z jaką klient przechodzi przez te ticki i skaluje ją za pomocą mnożnika. Ustawienie go powyżej normy powoduje, że klient przechodzi przez więcej ticków na sekundę rzeczywistego świata niż oczekuje serwer. Ustawienie go poniżej normy powoduje, że porusza się wolniej.
+
+Chodzi o to, czy to w ogóle są ticki danej osoby. Szybsze przetwarzanie ticków przez klienta nie przyspiesza działania serwera, po prostu zmienia to, co klient wysyła. Timer ustawiony znacznie powyżej normalnej wartości może próbować atakować, stawiać bloki lub używać przedmiotów częściej niż pozwala na to częstotliwość ticków. Uruchomienie go poniżej normalnej wartości robi odwrotnie, a niektórzy gracze wykorzystują to celowo, nie dla dodatkowej prędkości, ale dla większej kontroli nad dokładnym tickiem, na którym ma miejsce akcja.
+
+## Dlaczego serwery tak łatwo to wykrywają
+
+Timer pozostawia ślad, który trudno ukryć: strumień akcji napędzanych tickami, które docierają szybciej lub wolniej niż klient prawdziwego gracza. Serwer ma autorytet nad czasem gry. Nie musi ufać tempu klienta, może policzyć, ile ticków akcji dotarło w danym przedziale czasu rzeczywistego i porównać to z tym, jak powinno wyglądać dwadzieścia ticków na sekundę.
+
+To sprawia, że Timer jest jedną z bardziej oczywistych kategorii modyfikacji klienta, którą należy oznaczyć, przynajmniej w teorii. Odchylenie objawia się jako surowa wartość, a nie subtelny błąd pozycyjny ukryty w szumie. Anticheaty często rejestrują lub oznaczają graczy, których tempo akcji konsekwentnie wyprzedza oczekiwany rytm ticków. Czy konkretna wartość zostanie wychwycona na konkretnym serwerze, zależy od tego, jak dokładnie ten serwer sprawdza, ale sam mechanizm nie jest ukryty. Szybszy niż normalny strumień akcji napędzanych tickami to cały sygnał, zgodnie z założeniem, a nie przypadek implementacji.
+
+<Callout variant="tip" title="Opal to wysyła">
+Katalogowa pozycja Opala jest w tym rzecz jasna konkretna: "Zmienia prędkość ticków gry." Znajduje się w kategorii Opal'a, używaj na własną odpowiedzialność, tak jak byłoby to na każdym kliencie, ponieważ klient decydujący o własnym tempie to dokładnie taki sygnał, który ma mierzyć kontrola po stronie serwera.
+</Callout>
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona opisuje moduł w sposób ogólny, abyś wiedział, co oznacza ten termin. Nazewnictwo i dokładne zachowanie różnią się w zależności od klienta, a przekroczenie oczekiwanej przez serwer częstotliwości akcji narusza zasady na praktycznie każdym serwerze, który to sprawdza.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co tak naprawdę zmienia moduł Timer?">
+Zmienia to, jak szybko klient przechodzi przez ticki gry, co przyspiesza lub zwalnia wszystko, co powiązane z czasem ticka: czasy odnowienia ataków, używanie przedmiotów, ładowanie łuku, umieszczanie bloków.
+</FAQItem>
+
+<FAQItem question="Czy Timer wpływa na częstotliwość odtwarzania serwera?">
+Nie. Zmienia jedynie szybkość, z jaką klient przetwarza i wysyła własne akcje oparte na tickach. Serwer utrzymuje własną częstotliwość odtwarzania przez cały czas i nadal może mierzyć tempo otrzymywanych danych.
+</FAQItem>
+
+<FAQItem question="Czy Timer jest bezpieczny w użyciu?">
+Istnieje realne ryzyko wykrycia. Serwer może bezpośrednio mierzyć tempo akcji w porównaniu z oczekiwanym tempem tyknięć, więc wartość Timera, która wypycha akcje wyraźnie szybciej niż normalnie, może stanowić prawdopodobny punkt ostrzegawczy dla programów anticheat. Używanie odbywa się na własną odpowiedzialność.
+</FAQItem>
+
+<FAQItem question="Dlaczego ktoś mógłby zwolnić Timer zamiast go przyspieszyć?">
+Czasami niższe ustawienie jest używane, aby uzyskać większą precyzję w określeniu momentu wykonania pojedynczej akcji, kosztem przepustowości.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Moduł autoataku, którego wyjście Timer może mnożyć." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Podejście oparte na skrytości, w kontraście do takiego głośnego sygnału." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szersza kategoria, do której należy Timer i moduły tego typu." },
+]} />
+
+<CTA href="/pl/purchase">Przekraczaj oczekiwaną przez serwer liczbę klatek na sekundę. Opal wysyła Timer, oczy otwarte na ryzyko.</CTA>

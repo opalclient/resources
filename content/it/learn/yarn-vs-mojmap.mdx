@@ -1,0 +1,88 @@
+---
+title: "Yarn contro Mojmap: Confronto tra le Mappe di Minecraft (2026)"
+description: "Yarn contro Mojmap: spiegazione delle differenze tra i due set di mappe di Minecraft in termini di denominazione, licenza e strumenti, e quale scegliere per un mod Fabric."
+excerpt: Il mapping di Yarn è stato denominato e documentato dalla comunità; Mojmap corrisponde al codice sorgente di Mojang. Ecco le differenze tra i due set di mapping e quale si adatta meglio al tuo progetto.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Mappings
+author: trq
+faqs:
+  - q: Yarn o Mojmap sono migliori per un mod di Fabric?
+    a: Entrambi lavorano su Fabric. Yarn è stato l'impostazione predefinita dell'ecosistema e include parametri nominati oltre alla documentazione, mentre Mojmap corrisponde ai nomi utilizzati da Mojang; scegliete quello che il vostro team preferisce.
+  - q: I nomi Mojmap sono gli stessi dei nomi offuscati?
+    a: No. I nomi offuscati assomigliano a a.a.a; Mojmap li associa ai nomi leggibili utilizzati internamente da Mojang, pubblicati per ogni versione.
+  - q: Posso mescolare Yarn e Mojmap?
+    a: Sì, in un certo senso. Alcune configurazioni di Fabric si basano su una base Mojmap e applicano rimappature Yarn, quindi le due coesistono in un'unica catena di strumenti anziché competere direttamente.
+  - q: Yarn o Mojmap hanno sostituito MCP?
+    a: Entrambi hanno reso MCP e Searge obsoleti per i nuovi progetti a partire dalla versione 1.14.4, sebbene i progetti precedenti, dalla versione 1.7 alla 1.12, continuino a fare affidamento sulla nomenclatura MCP.
+---
+
+<KeyTakeaways>
+
+- Yarn è stato denominato dalla comunità, è una mappatura open source per Fabric con parametri di metodo completi.
+- Mojmap è la denominazione ufficiale di Mojang, pubblicata con ogni versione a partire dalla 1.14.4.
+- Entrambi si basano su livelli stabili, quindi i nomi leggibili possono cambiare senza interrompere i mod.
+- Molti progetti Fabric ora si basano su una base Mojmap e applicano le rimappature Yarn sopra di essa.
+
+</KeyTakeaways>
+
+Yarn è un sistema di nomenclatura open source, creato dalla comunità, per [Fabric](https://fabricmc.net/) che include nomi descrittivi e parametri completi dei metodi. Mojmap è il sistema di nomenclatura ufficiale di Mojang, pubblicato con ogni versione a partire dalla 1.14.4. Scegli Yarn se desideri uno schema di nomenclatura gratuito e ben documentato; scegli Mojmap se desideri nomi che corrispondano a quelli di Mojang e non si discostino mai.
+
+## Cosa sono
+
+Yarn è un set di mapping mantenuto da FabricMC. I volontari assegnano nomi leggibili alle classi, ai campi e ai metodi offuscati in Minecraft, e questi nomi si basano sullo stabile livello [Intermediario](/it/learn/what-is-intermediary) in modo da poter essere rinominati senza compromettere i mod compilati.
+
+Mojmap è la tabella di mapping ufficiale che Mojang pubblica insieme a ogni versione a partire dalla 1.14.4. I nomi provengono direttamente dal codice sorgente di Mojang, quindi corrispondono a ciò che gli sviluppatori chiamano internamente. Ha sostituito MCP e Searge come predefinito per qualsiasi nuovo progetto.
+
+## Come differiscono
+
+La differenza sta in chi sceglie i nomi e in come la licenza li tratta. I nomi di Yarn sono scelti dalla comunità e sono liberi di essere utilizzati e condivisi. I nomi di Mojmap appartengono a Mojang, e la licenza è stata storicamente generosa riguardo all'uso a tempo di compilazione, ma più attenta alla ridistribuzione. I moderni loader si occupano di questo per te.
+
+| | Yarn | Mojmap |
+| :--- | :--- | :--- |
+| Chi assegna i nomi | Comunità FabricMC | Mojang (ufficiale) |
+| Prima disponibile | Era Fabric | Dal 1.14.4 in poi |
+| Parametri del metodo | Nominati e documentati | Spesso mancanti |
+| Licenza | Aperta, libera da condividere | Permissiva al momento della compilazione |
+| Strato stabile sottostante | Intermediario | Mappa di offuscamento per ogni versione |
+| Migliore per | Mod Fabric che desiderano documentazione | Progetti che corrispondono al codice sorgente di Mojang |
+
+## Quale scegliere
+
+- Scegli Yarn se sviluppi su [Fabric](https://fabricmc.net/) e desideri nomi descrittivi, parametri di metodo nominati e documentazione inline. È l'opzione predefinita di lunga data per l'ecosistema Fabric.
+- Scegli Mojmap se desideri nomi che corrispondano al codice sorgente di Mojang, prevedi di condividere codice con persone che utilizzano altri loader o stai puntando a 1.21 o versioni successive, dove le mappature ufficiali sono la baseline comune.
+- Molti progetti Fabric ora si basano su una base Mojmap e applicano le rimappature Yarn sopra, quindi non è sempre necessario sceglierne solo uno.
+
+## Come si collegano alle altre mappature
+
+Entrambi si inseriscono in una storia più lunga. Prima che Mojang pubblicasse le mappature, la scena del modding utilizzava MCP e Searge per invertire i nomi offuscati. Dal 1.14.4, Mojmap ha reso disponibili i nomi ufficiali e Yarn è cresciuto come alternativa Fabric aperta, sovrapposta a [Intermediary](/it/learn/what-is-intermediary). Lo strato Intermediary è ciò che mantiene compatibili i mod attraverso le modifiche alle mappature.
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Yarn o Mojmap sono migliori per un mod Fabric?">
+Entrambi funzionano su Fabric. Yarn è lo standard dell'ecosistema e include parametri nominati oltre alla documentazione, mentre Mojmap utilizza le convenzioni di denominazione di Mojang. Scegli in base alle convenzioni di denominazione e agli strumenti preferiti dal tuo team.
+</FAQItem>
+
+<FAQItem question="I nomi di Mojmap sono gli stessi dei nomi offuscati?">
+No. I nomi offuscati assomigliano a `a.a.a`. Mojmap li mappa ai nomi leggibili che Mojang utilizza internamente, pubblicati per ogni versione.
+</FAQItem>
+
+<FAQItem question="Posso usare Yarn e Mojmap insieme?">
+Sì, in un certo senso. Alcune configurazioni di Fabric si basano su una base Mojmap e applicano i rimappaggi di Yarn, quindi i due coesistono in un'unica catena di strumenti piuttosto che competere direttamente.
+</FAQItem>
+
+<FAQItem question="Yarn o Mojmap hanno sostituito MCP?">
+Entrambi hanno reso MCP e Searge obsoleti per i nuovi progetti a partire dalla versione 1.14.4. I progetti precedenti, dalla versione 1.7 alla 1.12, continuano a utilizzare la nomenclatura MCP.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-are-minecraft-mappings", label: "Cosa sono le mappe di Minecraft?", description: "L'argomento più ampio a cui appartengono questi due." },
+  { href: "/it/learn/what-is-intermediary", label: "Cosa si intende per intermediario?", description: "Lo strato stabile su cui si basano entrambe le mappature." },
+  { href: "/it/learn/what-is-the-fabric-api", label: "Cos'è l'API Fabric?", description: "Lo strato comune su cui si basano la maggior parte delle mod di Fabric." },
+]} />
+
+<CTA href="/it/purchase">Ottieni Opal, un client Fabric, per $8.99</CTA>

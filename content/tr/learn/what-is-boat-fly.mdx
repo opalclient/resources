@@ -1,0 +1,92 @@
+---
+title: Tekne Uçuşu Nedir? Minecraft Araç Uçuşu Hilesi
+description: Boat Fly, Minecraft için bir hareket modülüdür; bir sandığın araç paketlerini ele geçirerek tırmanmasını ve havada asılı kalmasını sağlar, böylece yavaş bir sürüklenmeyi kısıtlanmamış bir uçuşa dönüştürür.
+excerpt: Dikey olarak tırmanan bir tekne yavaşlık değil. Boat Fly, ve vanilla fiziği buna onay vermedi.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Tekne Uçuşu tekne dışında çalışır mı?
+    a: Hayır, sadece bir teknede otururken çalışır, çünkü tüm numara teknenin hareket veri paketlerini manipüle etmeye dayanır. Yürüyerek hareket verisi kanalı olmadığı için modül hiçbir şey yapmaz.
+  - q: Boat Fly, normal bir fly hack ile aynı mı?
+    a: Sonuç benzer görünüyor, kısıtlanmamış uçuş, ancak mekanizma farklı. Standart bir uçuş hilesi, oyuncunun kendi hareket paketlerini yeniden yazar. Boat Fly ise, onu kullanırken tekne aracının hareket paketlerini yeniden yazar.
+  - q: Can Boat Fly üzerinde karada kullanılabilir mi?
+    a: Evet. Vanilla tekneleri zaten su yakınında karada kısa bir mesafe hareket edebiliyor, ancak Boat Fly bunu tam uçuşa dönüştürüyor, böylece tekne normal tekne fiziğinin asla götürmeyeceği, karayı da içeren herhangi bir mesafeyi aşabiliyor.
+  - q: Herhangi bir sunucuda Boat Fly tespit edilebilir mi?
+    a: Sadece, beklenen tekne fiziğine göre araç hareketini kontrol eden sunucularda. Oyuncu varlığına odaklanıp bindiği aracı göz ardı eden hile önleme sistemleri bunu tamamen kaçırabilir.
+---
+
+<KeyTakeaways>
+
+- Boat Fly, bir hareket modülüdür; bir teknenin paketlerini yeniden yazarak yüzmek yerine yükselmesini ve uçmasını sağlar.
+- Vanilla fiziği bir teknenin kendi başına kaldırma kuvveti üretmesini beklemediğinden, teknelerin ayrı araç-hareket paket kanallarından yararlanır.
+- Wurst gibi istemcilerde izlenen yasaklanabilir bir uçuş hilesidir ve araç-fizik kontrolleri tarafından hızlıca tespit edilir
+
+</KeyTakeaways>
+
+Tekne Uçuşu, tek bir dar hedef etrafında inşa edilmiş bir hareket modülüdür: orijinal Minecraft teknesi. Bir teknenin tasarım özeti, su üzerinde yüzmek ve kıyıya yakın karada hafifçe itmektir, başka bir şey değil. Tekne Uçuşu, bir oyuncu onu kullanırken teknenin gönderdiği araç hareket paketlerini yeniden yazarak bu özeti ortadan kaldırır, böylece tekne yükselir, irtifayı korur ve uçabilen bir varlığın gidebileceği her yere gider. Oyuncu asla koltuğu terk etmez. Dışarıdan bakıldığında, kendisini uçak sanmamış bir tekne gibi görünür.
+
+## Teknenin paketlerinin ele geçirilmesi
+
+Orijinal tekneler bağımsız aktörler değildir. Bir teknenin konum güncellemeleri, suyun yüzdürmesi ve yerçekimi ile bağlantılı araç hareket paketlerinden gelir; bu, yerde duran bir oyuncuyu hareket ettiren paketlerden ayrı bir kanaldır. Yalnız bırakıldığında, bu kanal kaldırma üretemez: gövde altında su yok, yukarı doğru bir kuvvet yok, teknenin yüzeyi terk etmesi için bir neden yok.
+
+Tekne Uçuşu, bu kanalı doğrudan hedef alır. Teknenin bildirdiği araç hareket değerlerini yeniden yazar veya enjekte eder, böylece sunucu yükselen, irtifayı koruyan veya gerçek su ve yerçekimi fiziğinin asla üretmeyeceği şekillerde yana doğru sürüklenen bir tekne görür. Sunucu, istemcinin gönderdiği şeye güvenir ve oyuncunun konumunu buna göre günceller.
+
+Oyuncunun bütün süre boyunca oturmuş kalması, bunun bariz şekilde hileli görünmesi yerine tuhaf görünmesine neden oluyor. Kimse gökyüzünde yüzen birini görmez. Bir yerde, olmaması gereken bir tekneyi görürler; bu, ne aradığınızı bilene kadar fark edilmeyen daha sessiz bir yanlıştır.
+
+## Neden bayraklanır, kontrol etmeyi önemseyen sunucularda
+
+Boat Fly, bir kozmetik geçersiz kılma veya kolaylık kısayolu değildir. Meşru bir oyuncunun eşleyemeyeceği hareket imkanı sunar: araziyi aşmak, haritanın normal geçiş kurallarını atlamak veya başkalarının takip edemeyeceği bir yere giderek bir savaştan kaçmak. Bu, onu diğer uçuş ve no-clip hileleriyle aynı kategoriye sokar, yeniden düzenlenmiş bir HUD öğesine yakın değildir.
+
+Beklenen tekne davranışını modelleyen, bir tekne ne kadar hızlı hareket etmeli, suda nasıl oturmalı ve yerçekiminin onu nasıl aşağı çekmesi gerektiğini modelleyen sunucu tarafı antichipler, kontrol ettiklerinde bunu hızla yakalar. Tırmanan veya asılı duran bir tekne, olduğu anda bu kalıbı bozar. Boşluk, birçok sunucunun yalnızca oyuncu-varlık hareketini doğrulayıp araçlar için ayrı bir kontrol oluşturmamasıdır ve Boat Fly tam olarak burada hayatta kalır.
+
+<Callout variant="warning" title="Bu, gizli bir özellik değil, yasaklanmaya yol açabilecek bir hiledir">
+
+Tekne Uçuşu, açıkça hareket hilesi kategorisine girer. Yüksekliği koruyan veya yerçekimini savuran bir tekneyi yakalayan herhangi bir sunucu harekete geçme hakkına sahiptir ve bunu gönderen istemciler tam olarak bu nedenle takip edilir ve adlandırılır (en sık anılan isim Wurst'tür). Bunu, hilenin nasıl çalıştığına dair arka plan bilgisi olarak kabul edin, onu çalıştırmanız için bir öneri olarak değil
+
+</Callout>
+
+<Callout variant="tip" title="Opal nerede çizgiyi çiziyor">
+
+Opal'ın hareket sistemi, gerçek fizik kurallarına dayanacak şekilde tasarlandı, paketle oluşturulmuş araç durumlarına değil. Bir hile yalnızca sunucu araç hareketini oyuncu hareketinden ayrı olarak kontrol etmemekten dolayı işliyorsa, bunu istemciye aktarmıyoruz. Ruhça Boat Fly ile aynı kategoride, ancak tamamen farklı bir bahis: fiziksel olarak mümkün olanın sınırlarını zorlayın, bunu bildiren paketleri taklit etmeyin
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Tekne Uçuşu tekne dışında çalışır mı?">
+
+Hayır, sadece bir teknenin içinde otururken çalışır, çünkü tüm numara teknenin hareket veri paketlerini manipüle etmeye dayanır. Sağlam zemine adım atın ve sömürülecek araç kanalı kalmaz, dolayısıyla modül hiçbir şey yapmaz
+
+</FAQItem>
+
+<FAQItem question="Boat Fly, normal bir fly hack ile aynı mı?">
+
+Sonuç benzer görünüyor, her iki yönde de kısıtlanmamış uçuş, ancak mekanizma değil. Standart bir uçuş hilesi, oyuncunun kendi hareket paketlerini doğrudan yeniden yazar. Tekne Uçuşu ise, içinde bulunurken teknenin araç hareket paketlerini yeniden yazar
+
+</FAQItem>
+
+<FAQItem question="Can Boat Fly üzerinde karada kullanılabilir mi?">
+
+Evet. Vanilya tekneleri zaten kıyı şeridi yakınında kısa mesafeler karada hareket edebiliyor, ancak Boat Fly bunu tam ve sürdürülebilir bir uçuşa dönüştürüyor, böylece tekne normal tekne fiziğinin asla götürmeyeceği, arazi dahil çok uzağa gidebiliyor
+
+</FAQItem>
+
+<FAQItem question="Herhangi bir sunucuda Boat Fly tespit edilebilir mi?">
+
+Sadece, araç hareketini beklenen tekne fiziğine göre kontrol eden sunucularda. Oyuncu varlığını izleyip altındaki aracı göz ardı eden hile önleme sistemleri bunu tamamen kaçırabilir
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-scaffold", label: "Scaffold nedir?", description: "Başka bir hareket modülü, sıradan bir Minecraft mekaniğini kısıtlama olmaksızın geçişe dönüştürüyor." },
+  { href: "/tr/learn/what-is-velocity-anti-knockback", label: "Hız (Çarpma Geri Tepmesi Önleyici) nedir?", description: "Oyuncunun istemcisinin geri tepme paketlerine verdiği tepkiyi yeniden yazan bir hareket modülü." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Tekne sineği ve benzeri modüllerin ait olduğu ve müşterileri aldatma çizgisinin çizildiği yer." }
+]} />
+
+<CTA href="/tr/satin-al">Opal'in fiziksel bütünlüğü korunarak gönderdiği hareket modüllerini görün.</CTA>

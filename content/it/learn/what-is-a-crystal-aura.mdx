@@ -1,0 +1,93 @@
+---
+title: Cos'è un'Aura di Cristallo in Minecraft? Spiegazione del Modulo
+description: Un'Aura Cristallina è un modulo di combattimento che posiziona e fa detonare automaticamente i cristalli finali per infliggere danni ad area. Ecco come funziona e perché viene rilevato.
+excerpt: Un'Aura Cristallina posiziona cristalli terminali accanto a un bersaglio e li fa detonare automaticamente per un enorme danno ad area. Ecco come funziona il ciclo e cosa lo tradisce.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Modules
+author: trq
+faqs:
+  - q: Qual è la differenza tra Crystal Aura e AutoCrystal?
+    a: Sono lo stesso modulo. AutoCrystal e Crystal Aura sono nomi alternativi per il modulo di combattimento che posiziona e fa detonare automaticamente i cristalli finali contro un bersaglio.
+  - q: È un'Aura di Cristallo un trucco o una modifica?
+    a: È un modulo truccato. Automatizza il combattimento posizionando e distruggendo cristalli autonomamente, infrangendo le regole di praticamente ogni server multiplayer, e quindi rientra nel conteggio delle attività di cheating.
+  - q: Perché un'Aura Cristallina viene rilevata?
+    a: Poiché il ciclo di posizionamento e interruzione è più veloce e preciso di quanto un essere umano possa gestire. Gli anticheat cercano tempistiche impossibili, colpi sui cristalli che il giocatore non ha mai affrontato e un raggio d'azione eccessivo.
+  - q: Fa male anche al giocatore l'Aura di Cristallo?
+    a: Può capitare. Le esplosioni di cristalli possono danneggiare tutti coloro che si trovano nelle vicinanze, quindi la maggior parte delle versioni aggiunge un controllo dei danni che si applica solo quando il bersaglio subisce più danni dell'attaccante.
+---
+
+<KeyTakeaways>
+
+- Un'Aura di Cristallo posiziona e fa detonare automaticamente i cristalli finali vicino a un bersaglio per danni ad area elevati.
+- Esegue un ciclo di posizionamento e rottura legato al tick di gioco, senza mirare o cliccare da parte del giocatore.
+- È anche conosciuto come AutoCrystal, ed è la forma automatizzata del PvP con i cristalli.
+- Viene rilevato tramite tempistiche, rotazioni e portata che nessun input umano può eguagliare.
+
+</KeyTakeaways>
+
+Un'Aura di Cristallo è un modulo di combattimento che posiziona automaticamente cristalli dell'end vicino a un bersaglio e li fa detonare per infliggere danni ad area elevati. Il giocatore non mira, non posiziona e non colpisce nulla. Il modulo trova un blocco valido, posiziona il cristallo e lo distrugge da solo. È una funzionalità da imbroglio, e i server la trattano come tale.
+
+## Come funziona un'Aura di Cristallo
+
+Un'Aura di Cristallo esegue un ciclo di posizionamento e distruzione legato al tick di gioco. Innanzitutto, cerca un nemico nelle vicinanze. Poi, scansiona i blocchi intorno a quel nemico per trovare un punto in cui un cristallo dell'end possa essere posizionato, di solito sopra ossidiana o bedrock. Posiziona il cristallo lì, quindi lo attacca immediatamente per farlo esplodere contro il bersaglio.
+
+I cristalli dell'end infliggono una grande quantità di danni da esplosione nella versione base, il che rende il ciclo pericoloso. Un umano che fa questo a mano deve posizionare un blocco, passare al cristallo, posizionarlo e poi cliccarci sopra, il tutto in meno di un secondo. Il modulo esegue ogni passaggio automaticamente e molto più velocemente di una persona, quindi un bersaglio subisce danni ad area senza preavviso.
+
+Questo stile di combattimento è spesso chiamato crystal PvP. L'Aura di Cristallo è la versione automatizzata di esso.
+
+## Impostazioni comuni
+
+Un'Aura di Cristallo espone delle manopole che scambiano velocità con quanto evidente appare il comportamento.
+
+| Impostazione | Cosa controlla |
+|---|---|
+| Raggio di posizionamento | Quanto lontano dal giocatore può essere posizionato un cristallo |
+| Raggio di attivazione | Quanto lontano il modulo farà detonare un cristallo posizionato |
+| Raggio bersaglio | Quanto vicino un nemico deve essere per attivare il ciclo |
+| Ritardo di posizionamento | Quanto tempo attende tra il posizionamento dei cristalli |
+| Ritardo di attivazione | Quanto tempo attende prima di far detonare |
+| Rotazioni | Se la visuale si rivolge al punto di posizionamento o di attivazione |
+| Controllo danni | Un danno minimo da infliggere al bersaglio prima del posizionamento, per evitare autolesioni |
+
+Il controllo danni è importante perché i cristalli finali danneggiano chiunque si trovi vicino all'esplosione, incluso l'attaccante. Una configurazione sicura posiziona un cristallo solo quando il bersaglio subisce più danni di quanto ne subirebbe il giocatore.
+
+## Perché viene rilevato
+
+Un'Aura di Cristallo viene rilevata perché posiziona e attiva più velocemente e con maggiore precisione di quanto possa fare un umano. Gli anticheat lato server monitorano i tempi di posizionamento e attivazione troppo stretti, le interazioni con i cristalli a cui il giocatore non ha mai guardato e la portata del posizionamento o dell'attivazione che supera il limite normale. Ognuna di queste è una firma di un ciclo automatizzato piuttosto che di un vero mouse e tastiera.
+
+Posizionare i cristalli è la parte facile. Il vero problema di ingegneria è mascherare il loop, perché il ritmo di posizionamento e rottura e il modo in cui la visuale si muove devono sembrare input umano, altrimenti un anticheat moderno segnala lo schema. Ecco perché molte versioni aggiungono ritardi, casualità e un limite di raggio che rientra nella distanza già consentita dal server.
+
+## Aura di Cristallo vs altri moduli di combattimento
+
+Un'Aura di Cristallo differisce da un auto-attaccante in mischia come [KillAura](/it/learn/what-is-killaura) in ciò che automatizza. KillAura mira e colpisce direttamente un'entità. Un'Aura di Cristallo combatte attraverso un oggetto, il cristallo finale, posizionandolo e detonandolo per infliggere danni da esplosione. Entrambi eseguono lo stesso loop di posizionamento, mira e tempismo senza input del giocatore, motivo per cui gli anticheat applicano controlli di tempismo e rotazione simili a entrambi. Il modulo è anche tracciato con il nome AutoCrystal in diversi client.
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina descrive il modulo in termini generali per far capire il significato del termine. La denominazione e il comportamento esatto variano a seconda del client e automatizzare il combattimento in questo modo viola le regole su praticamente ogni server.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Qual è la differenza tra Crystal Aura e AutoCrystal?">
+Sono lo stesso modulo. AutoCrystal e Crystal Aura sono nomi alternativi per il modulo di combattimento che posiziona e fa detonare automaticamente i cristalli finali contro un bersaglio.
+</FAQItem>
+
+<FAQItem question="È un Crystal Aura un hack o una mod?">
+È un modulo di trucco. Automatizza il combattimento per il giocatore posizionando e distruggendo cristalli autonomamente, infrangendo le regole di praticamente ogni server multiplayer, quindi rientra nella categoria di trucco piuttosto che di mod di fair play.
+</FAQItem>
+
+<FAQItem question="Perché viene rilevata un'Aura Cristallina?">
+Perché il ciclo di posizionamento e interruzione è più veloce e preciso di quanto un essere umano possa realizzare. Gli anticheat lato server cercano tempistiche impossibili, colpi sui cristalli che il giocatore non ha mai affrontato e una portata che va oltre il limite normale.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "La melee auto-attaccante assomiglia a questo ciclo." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Il modulo di combattimento mirato." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia a cui appartengono questi moduli." },
+]} />
+
+<CTA href="/it/purchase">Guarda cosa spedisce Opal per $8.99</CTA>

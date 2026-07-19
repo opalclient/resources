@@ -1,0 +1,79 @@
+---
+title: Czym jest długi skok w Minecraft? Wyjaśnienie modułu
+description: Skok w dal rozszerza zasięg pojedynczego skoku poprzez modyfikację sekwencji ruchów w powietrzu, pokonując dystanse niedostępne dzięki standardowej fizyce, a jest to ryzyko grożące zablokowaniem konta.
+excerpt: Skok, dłuższy niż powinien. Skok w dal zmienia liczby w powietrzu, a żadna kontrola po stronie serwera nie oszuka na zawsze.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie zmienia skok w dal?
+    a: Rozszerza ono poziomą odległość pokonywaną podczas skoku, modyfikując pakiety ruchowe wysyłane w trakcie skoku, a nie wysokość ani częstotliwość skoków gracza.
+  - q: Czy długi skok to to samo co Bhop?
+    a: Nie. Łańcuchy Bhop powtarzają skoki, aby budować lub utrzymywać prędkość w czasie, podczas gdy Skok w Dalek poszerza dystans pojedynczego skoku. Oba to moduły ruchu i oba przekraczają fizykę z podstawowej wersji, ale mechanizm jest inny.
+  - q: Czy długi skok może skutkować zawieszeniem zawodnika?
+    a: Tak. Generuje odległości skoków, których fizyka vanilla nie umożliwia, serwer sprawdzający ruch względem oczekiwanych wartości może to wykryć, a używanie tego zazwyczaj łamie zasady anty-cheat dotyczące ruchu, które obowiązują na większości serwerów.
+  - q: Czy manipulowanie pakietami ruchu utrudnia złapanie długiego skoku?
+    a: Niekoniecznie. Manipulacja pakietami może uniknąć jednego, ewidentnie niemożliwego ramu, ale wynikowa odległość jest wciąż mierzalna w porównaniu z tym, co powinny dać podana prędkość i pozycja, a dokładnie to, z czym porównują się mechanizmy po stronie serwera.
+---
+
+<KeyTakeaways>
+
+- Skok w dal to moduł ruchu, który zwiększa dystans pokonywany podczas pojedynczego skoku, wykraczając poza normalny zasięg w standardowym "Minecraftcie".
+- Działa poprzez modyfikację pakietów ruchu wysyłanych podczas trwającego skoku, a nie poprzez zmianę sposobu jego inicjacji.
+- Zysk jest niewielki przy każdym skoku, ale kumuluje się przy wielokrotnym używaniu, pokonując teren lub uciekając przed pościgiem.
+- Zmienia mierzalny ruch, więc serwer, który ponownie oblicza oczekiwany dystans skoku, może go oznaczyć równie łatwo, jak każde inne naruszenie fizyki.
+
+</KeyTakeaways>
+
+Skok w Dal to moduł ruchu, który rozszerza zasięg pojedynczego skoku, wykraczając poza możliwości fizyki standardowego Minecrafta. Zamiast zmieniać sposób wyzwalania skoku, działa na dane opisujące skok w trakcie jego trwania: pakiety raportujące pozycję i ruch gracza w trakcie lotu. W efekcie otrzymujemy skok, który ląduje dalej niż pozwala grawitacja, początkowa prędkość i istniejący pęd. Moduł ten mieści się w kategorii ruchu obok takich rzeczy jak moduły prędkości i pędu i jest dokładnie tego rodzaju mierzalnym odchyleniem, które system anticheat po stronie serwera jest zaprojektowany do wykrywania.
+
+## Jak działa Skok w Dal
+
+Standardowy Minecraft oblicza odległość poziomą skoku na podstawie niewielkiego zestawu danych fizycznych: jak szybko się poruszałeś, gdy oderwałeś się od ziemi, grawitacja ciągnąca cię w dół i pęd, który już miałeś. Nie ma ukrytej opcji „skacz dalej” czekającej w kliencie, gotowej do włączenia. Odległość wynika z tych liczb za każdym razem, w ten sam sposób, dla każdego gracza.
+
+Skok w Dal nie ingeruje w to, jak skok się rozpoczyna. Interweniuje później, w pakietach opisujących pozycję i ruch gracza, gdy skok jest już w powietrzu, wydłużając poziomą odległość pokonaną przed lądowaniem. Serwery zazwyczaj ufają zgłaszanej przez klienta pozycji z pewną tolerancją – nikt nie chce fałszywych alarmów przy każdym zakrztuszeniu połączenia, a ta tolerancja jest tym, na czym opiera się moduł. Może przenieść gracza dalej, niż pozwoliłaby na to legalna skok, bez wyraźnego, wyróżniającego się uszkodzonego kadru.
+
+## Czy Skok w Dal jest bezpieczny w użyciu?
+
+Zalety są oczywiste: pokonanie przepaści, na którą normalny skok nie wystarcza, skrócenie czasu spędzanego na pokonywaniu otwartego terenu lub postawienie kilku dodatkowych bloków między tobą a tym, kto cię goni. W pojedynczym skoku zysk wydaje się niewielki. Używany przy każdym pokonywaniu lub każdym odłączeniu, zyski się kumulują.
+
+Żaden z tych czynników nie sprawia, że jest niewidoczny. Skok w Dal to funkcja dająca przewagę w rozgrywce, a nie kosmetyczna, i przesuwa coś, co serwer może zmierzyć bezpośrednio: poziomą odległość na skok. Serwer, który ponownie oblicza, jaką odległość powinien obejmować skok na podstawie zgłaszanej prędkości i pozycji gracza, może oznaczyć skok, który ląduje dalej, niż pozwala na to fizyka, niezależnie od tego, jak czyste wyglądają poszczególne pakiety. Jest wykrywany w klientach, takich jak Fan i Tenacity. Traktuj go jako wykrywalny, a nie jako bezpieczne skróty.
+
+<Callout variant="tip" title="Opal wysyła, oznaczając uczciwie">
+Własny katalog Opal'a zawiera moduł Skoku w Dal, opisany jak najprościej: pozwala skakać dalej. Jest sklasyfikowany jako używaj na własną odpowiedzialność, tak jak byłby to przypadek z każdym klientem, ponieważ odległość skoku, której fizyka vanilla nie generuje, to dokładnie tego typu rzecz, na którą czuwa kontrola po stronie serwera.
+</Callout>
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona wyjaśnia, czym jest Skok Długi i jak ogólnie działa ten efekt, a nie jak go skonfigurować. Wydłużanie zasięgu skoku poza fizykę bazową łamie zasady oszukiwania ruchu na praktycznie każdej serwerze, która je egzekwuje, a złapanie na tym skutkuje zablokowaniem konta.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co właściwie zmienia Skok w Dal?">
+Zwiększa on poziomą odległość pokonywaną przez skok, modyfikując pakiety ruchowe wysyłane podczas trwania skoku, a nie wysokość ani częstotliwość skoków gracza.
+</FAQItem>
+
+<FAQItem question="Czy Long Jump to to samo co Bhop?">
+Nie. Bhop łączy powtarzające się skoki, aby budować lub utrzymywać prędkość w czasie, podczas gdy Long Jump rozciąga dystans pojedynczego skoku. Oba to moduły ruchu i oba przekraczają fizykę z podstawowej wersji gry, ale mechanizm jest inny.
+</FAQItem>
+
+<FAQItem question="Czy Long Jump może spowodować zbanowanie gracza?">
+Tak. Generuje on odległości skoków, które fizyka vanilla nie dopuszcza, a serwer sprawdzający ruch w odniesieniu do oczekiwanych wartości może to wykryć. Używanie go zazwyczaj narusza zasady oszukiwania związanych z ruchem, które obowiązują na większości serwerów.
+</FAQItem>
+
+<FAQItem question="Czy manipulowanie pakietami ruchu utrudnia złapanie dalekiego skoku?">
+Niekoniecznie. Manipulacja pakietami może uniknąć jednego oczywistego niemożliwego kadru, ale wynikowa odległość jest nadal mierzalna w odniesieniu do tego, co powinny produkować zgłoszone prędkość i pozycja – dokładnie tego, z czym porównują się mechanizmy po stronie serwera.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-scaffold", label: "Co to jest Scaffold?", description: "Kolejny moduł ruchu, automatycznie umieszczający bloki pod tobą, gdy schodzisz z krawędzi." },
+  { href: "/pl/learn/what-is-velocity-anti-knockback", label: "Czym jest Prędkość (ochrona przed odrzutem)?", description: "Moduł pokrewny ruchowi, który zwalcza opór, a nie grawitację." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Gdzie moduły, które mają pozostać niezauważone, jak ten, zwykle się znajdują." },
+]} />
+
+<CTA href="/pl/purchase">Zobacz długi skok i pozostałe moduły ruchu Opal, wraz z etykietami ryzyka.</CTA>

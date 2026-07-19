@@ -1,0 +1,79 @@
+---
+title: Cosa sono gli scheletri in Minecraft? Spiegazione del modulo
+description: "Skeletons è un modulo di Minecraft che trasforma ogni giocatore e mob in un modello essenziale: una modifica estetica senza alcun effetto sulle hitbox o sul rischio di essere individuati."
+excerpt: Skeletons trasforma ogni giocatore e mob in un ammasso di ossa ambulante, solo sul tuo schermo. Le hitbox, la portata e il modo in cui il server ti vede non si muovono di un millimetro.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cambiano gli scheletri il comportamento delle entità?
+    a: No. Modifica soltanto il modello visualizzato sul tuo schermo. Movimento, hitbox e comportamento in combattimento provengono tutti dal server e non vengono alterati.
+  - q: Sono Skeletons come una risorsa?
+    a: Quasi. Un pacchetto di risorse modifica le texture in modo generale per chiunque lo utilizzi. Skeletons è un modulo client che sostituisce modelli di entità specifici e viene attivato dal giocatore che esegue il client, senza necessità di installare un pacchetto.
+  - q: Possono gli scheletri far bandire qualcuno?
+    a: Il modulo in sé non offre alcun vantaggio di gioco ed è improbabile che venga segnalato da un anticheat di per sé. Le ban sono più probabilmente dovute alla politica generale di un server contro i client modificati che a questa specifica funzionalità.
+  - q: Quali clienti includono gli Scheletri?
+    a: Si può vedere in Fan, un client di utilità di terze parti.
+---
+
+<KeyTakeaways>
+
+- Skeletons è un modulo cosmetico che ridisegna giocatori e mob come scheletri spogli, reso solo localmente.
+- Sostituisce il modello visualizzato sullo schermo, non le hitbox, i movimenti o i dati di combattimento tracciati dal server.
+- Non si verifica traffico di rete aggiuntivo; l'override funziona come un resource pack ma risiede all'interno del client.
+- Il rischio di rilevamento è basso dato che nulla di misurabile cambia, sebbene sia stato osservato nel client modificato Fan.
+
+</KeyTakeaways>
+
+Skeletons è un modulo di Minecraft che ridisegna ogni giocatore e mob che vedi come uno scheletro spoglio, ridotto a ossa e nient'altro. Si tratta di una semplice sovrapposizione visiva: il gioco continua a inviare al tuo client le stesse informazioni su posizione, posa e hitbox che aveva sempre, questo modulo sostituisce semplicemente il modello che viene utilizzato per la visualizzazione. Non cambia nulla su come un'entità si muove, combatte o viene tracciata dal server. È una riskin privata che porti con te, un tipo di funzionalità che esiste perché qualcuno voleva che ogni partita avesse lo stesso aspetto, indipendentemente da chi sia effettivamente presente.
+
+## Come funziona la riskin dello scheletro
+
+Il renderer di Minecraft ha già tutto ciò di cui ha bisogno per disegnare qualsiasi entità: posizione, rotazione, posa, stato di animazione, tutto arriva attraverso la rete perché il gioco non può funzionare senza. Skeletons non tocca nessuno di questi dati. Intercetta la chiamata di disegno e sostituisce un modello e una texture di scheletro al posto di ciò che l'entità mostrerebbe normalmente, lo stesso tipo di sovrapposizione che applica una risorsa, tranne che vive all'interno del client invece di un file pack separato che installi e sostituisci.
+
+Poiché i dati dell'entità sottostante non cambiano mai, il modulo non aggiunge traffico di rete extra e non modifica lo stato lato server. Posizione, hitbox e animazione provengono ancora da dove il server le ha posizionate. L'unica differenza è ciò che viene disegnato sopra, localmente, ogni volta che l'entità viene visualizzata.
+
+## È sicuro da usare?
+
+Skeletons comporta un rischio competitivo minimo di per sé. Non rivela nessuno attraverso i muri, non aggiunge contorni o marcatori e non interferisce in alcun modo con la mira, il movimento o la matematica di combattimento che un anticheat misura. La posizione e la hitbox reali dell'entità sono esattamente quelle inviate dal server; solo l'immagine sullo schermo è diversa, quindi non c'è nulla che un controllo lato server possa segnalare.
+
+La trappola è il client in cui viene distribuito, non il modulo stesso. Skeletons appare in Fan, un client utility di terze parti, e molti server vietano qualsiasi client modificato, indipendentemente dai singoli moduli attivati. Una funzionalità puramente cosmetica come questa non crea rischi di per sé, ma eseguirla come parte di un client che include anche moduli di combattimento o movimento può comunque portare a un ban legato al client nel suo complesso.
+
+<Callout variant="warning" title="Il rischio di ban è il client, non questo modulo">
+Skeletons di per sé fornisce un anticheat lato server che non ha nulla da rilevare. Ma non funziona in modo autonomo, si esegue all'interno di un client modificato, e molti server bannano immediatamente i client modificati, indipendentemente dai moduli attivi. Valuta la reputazione del client nel suo complesso, non solo questa opzione cosmetica.
+</Callout>
+
+<Callout variant="tip" title="Cosmetici senza toccare i numeri">
+Opal non distribuisce un modulo con il nome Skeletons, ma la sua categoria visiva si basa sullo stesso principio: modifica ciò che vedi, mai ciò che misura il server. Questa è la linea di demarcazione tra una modifica estetica e un modulo di gioco effettivo, ed è sulla stessa linea su cui si colloca Skeletons.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Gli Scheletri modificano il comportamento delle entità?">
+No. Modifica soltanto il modello visualizzato sullo schermo. Movimento, hitbox e comportamento in combattimento provengono dal server e non vengono alterati.
+</FAQItem>
+
+<FAQItem question="Skeletons è la stessa cosa di un resource pack?">
+Non esattamente. Un resource pack modifica le texture in modo ampio per chiunque lo utilizzi. Skeletons è un modulo client che sostituisce modelli di entità specifici ed è attivato dal giocatore che esegue il client, senza necessità di installare un pack.
+</FAQItem>
+
+<FAQItem question="Gli scheletri possono far bannare qualcuno?">
+Il modulo stesso non offre alcun vantaggio di gioco ed è improbabile che venga segnalato da un anticheat di per sé. I ban sono più probabilmente dovuti alla politica generale di un server contro i client modificati che a questa specifica funzionalità.
+</FAQItem>
+
+<FAQItem question="Quali client includono gli Scheletri?">
+Si può trovare in Fan, un client di terze parti.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria più ampia Scheletri e ogni altro modulo vi appartiene." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Un'altra distinzione lato client da comprendere." },
+  { href: "/it/learn/what-is-killaura", label: "Cos'è Killaura?", description: "L'estremità opposta dello spettro: un modulo che un server può assolutamente misurare." },
+]} />
+
+<CTA href="/it/purchase">La scheda visiva di Opal si basa sulla stessa idea: cambiare l'aspetto del gioco, mai il suo funzionamento.</CTA>

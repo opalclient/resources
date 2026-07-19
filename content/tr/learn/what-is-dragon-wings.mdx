@@ -1,0 +1,83 @@
+---
+title: Minecraft'ta Ejderha Kanatları Nedir? (Modül Açıklaması)
+description: Ejderha Kanatları, hareket, savaş veya çarpışmaları etkilemeyen, bir pelerin yerine sırtınızda bir kanat modeli oluşturan, tamamen görsel bir Minecraft modülüdür.
+excerpt: Bir pelerin, kanatlara bırakıldı. Nasıl oynadığın değişmez, sadece nasıl göründüğün değişir.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Ejderha Kanatları ile uçabiliyor musun yoksa süzülüyor musun?
+    a: Hayır, sadece sırtınıza bir kanat modeli yerleştirir. Harekete, zıplamaya veya düşmeye etkisi yoktur ve elytra tarzı süzülme yeteneği de sağlamaz.
+  - q: Diğer oyuncular ejderha kanatlarımı görebiliyor mu?
+    a: Müşterilerinin aynı modeli oluşturup oluşturmamasına bağlıdır. Bu bir oluşturma özelliğidir, bu yüzden sunucu tarafından veri olarak izlenip yayınlanandan ziyade bir oyuncu modelinde ne gösterileceğini etkiler.
+  - q: Ejderha Kanatları, elytra takmakla aynı şey midir?
+    a: Hayır. Elytra, gerçek bir süzülme mekaniğine sahip bir vanilya eşyasıdır. Ejderha Kanatları ise herhangi bir mekanik etkisi olmayan, bir pelerin gibi, gerçek uçuş ekipmanına yakın olmayan bir kozmetik modeldir.
+  - q: Ejderha Kanatları kullanmak yasaklanma riskini taşıyor mu?
+    a: Hayır. Sadece görsel bir modül, sunucunun hareket veya savaşla ilgili takip ettiği hiçbir şeyi değiştirmiyor, bu yüzden diğer herhangi bir kozmetik görünüm seçeneğinden daha fazla risk taşımıyor.
+---
+
+<KeyTakeaways>
+
+- Dragon Wings, oyuncunun sırtında pelerin yerine bir kanat modeli oluşturan bir kozmetik modülüdür.
+- Sadece yerel oluşturmayı değiştirir, uçuşu, süzülmeyi, hareketi veya çarpışma algılamayı etkilemez.
+- Sunucuya gönderilen hiçbir şey değişmez, bu nedenle herhangi bir kozmetik seçiminden daha fazla yasak riski taşımaz.
+- Tenacity gibi istemcilerde standart bir kozmetik seçenek olarak görülebilir.
+
+</KeyTakeaways>
+
+Ejderha Kanatları, Minecraft yardımcı istemcilerinde kullanılan bir kozmetik modülüdür ve karakterinizin pelerin yuvasını oluşturulmuş bir kanat çifti ile değiştirir. Tam olarak bir pelerin seçmek gibi çalışır, sadece tüy yerine kumaşla. Açtığınızda, her karede oyuncunuzun sırtına takılı bir kanat modeli çizilir; bu, vanilla'da bir pelerin veya takılı bir elytra'nın çizildiği aynı yerdir. Bu, özelliğin tamamıdır. Hareket, savaş ve çarpışma, vanilla'da tanımlandığı gibi tam olarak kalır: modül, oyunun sunucu tarafından izlenen tarafına dokunmaz, yalnızca siz ve onu çalıştıran herkesin görebileceği istemci tarafı modeline dokunur.
+
+## Nasıl Çalışır
+
+Ejderha Kanatları, bir kanat modelini oyuncunun sırtına, vanilla bir pelerin veya elytra'nın oturduğu aynı konuma takar ve ardından oyuncu modeli çizildiğinde her karede yeniden çizer. Bu, bir mekanik değil, istemci tarafı bir render işlemidir. Modül, vanilla'nın bir pelerin için kullandığı aynı çizim çağrısına "kancalanır" ve kendi geometrisini değiştirir.
+
+Alttaki fizikle ilgili hiçbir şey değişmez. Uçuş, süzülme veya oyunun çarpışma veya hız kodlarıyla etkileşim yoktur, çünkü kanatlar mevcut oyuncu modelinin üzerine bir görsel katman olup elytra öğesinin veya arkasındaki mekaniklerin yerine geçmez. Sunucu, "bu oyuncu kanat takıyor" şeklinde bir sinyal almaz. Her zaman gönderdiği normal hareket ve ekipman paketlerini göndermeye devam eder ve istemci sadece bunların üzerine ek olarak bir şeyler çizmeye karar verir.
+
+## Ejderha Kanatları vs. Pelerin vs. Elytra
+
+| | Ejderha Kanatları | Vanilla Pelerin | Elytra |
+|---|---|---|---|
+| Nedir | İstemci tarafı kozmetik model | Vanilla kozmetik eşya | Vanilla süzülme eşyası |
+| Uçuş veya süzülme sağlar mı | Hayır | Hayır | Evet, takılıyken ve havada iken |
+| Oyun içi bir eşya gerektirir mi | Hayır | Evet, bir pelerin | Evet, takılı bir elytra |
+| Diğer oyuncular tarafından görülebilir mi | Sadece kendi istemcileri onu işliyorsa | Evet, herkes tarafından | Evet, herkes tarafından |
+| Hareketi veya çarpışmayı etkiler mi | Hayır | Hayır | Evet, süzülürken |
+
+Kanatlar, bir pelerin için aynı görsel yuvasını kaplar, ancak bir pelerin için genellikle gereken eşyayı, hesap bayrağını veya kaynak paketini gerektirmez. Bir elytra ise tamamen farklı bir kategoridedir: rastgele açıp kapatabileceğiniz bir görünüm değil, sunucu tarafından takip edilen fiziksel özelliklere sahip gerçek bir vanilla mekaniğidir.
+
+## Kullanımı Güvenli mi?
+
+Ejderha Kanatları sunucuya ek olarak hiçbir şey göndermez, çarpışma kutularına dokunmaz ve oyuncuya sunucunun zaten herkese verdiği bilgiyi vermez. Yerel bir görünüm ayarıdır, bir pelerin seçmek veya bir görünümü değiştirmek gibi aynı kategoridedir, bir oyun mekaniği değildir. Herhangi bir oyun etkisi olmadığı için, sunucu tarafı bir kontrolün bunu yakalaması için hiçbir şey yoktur, çünkü sunucunun hiçbir zaman farklı olarak algılayacağı hiçbir şey üretmez.
+
+<Callout variant="tip" title="Burada Opal'da nerede duruyor">Opal bu isim altında bir modül göndermiyor. Ancak görsel tarafı aynı mantıkla çalışıyor: örneğin, Animasyonlar modülü, sunucu tarafından takip edilen hiçbir şeyi değiştirmeden gördüklerinizi değiştirir. Amaç farklı görünmek ancak herhangi bir mekanik riski almak değilse, Opal zaten bu konuda oldukça başarılı. Wings ise şu anda kataloğunda bulunmuyor</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Ejderha Kanatları uçmanızı mı yoksa süzülmenizi mi sağlıyor?">
+Hayır. Sadece sırtınızda bir kanat modeli oluşturur. Harekete, zıplamaya veya düşmeye etkisi yoktur ve elytra tarzı süzülme yeteneği vermez.
+</FAQItem>
+
+<FAQItem question="Diğer oyuncular ejderha kanatlarım görünebilir mi?">
+Bu, onların istemcilerinin aynı modeli çizip çizmemesine bağlıdır. Bir çizim özelliğidir, bu nedenle oyuncu modelinde ne göründüğünü etkiler, sunucu tarafından izlenen veya veri olarak yayınlanan bir şey değil.
+</FAQItem>
+
+<FAQItem question="Ejderha Kanatları, elytra giymekle aynı şey mi?">
+Hayır. Bir elytra, gerçek bir süzülme mekaniği olan vanilla bir eşyadır. Ejderha Kanatları ise herhangi bir mekanik etkisi olmayan sadece bir kozmetik modeldir; gerçek uçuş ekipmanından ziyade bir pelerin gibidir.
+</FAQItem>
+
+<FAQItem question="Ejderha Kanatları kullanmak yasaklanma riskini taşır mı?">
+Hayır. Sunucu tarafından takip edilen hareket veya savaşla ilgili hiçbir şeyi değiştirmeyen yalnızca görsel bir modüldür, bu nedenle diğer herhangi bir kozmetik görünüm seçeneğinden daha fazla risk taşımaz.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Daha geniş kozmetik modüller kategorisi, örneğin Dragon Wings, bunların içinde yer alır." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Görünmemek, nasıl yaptığından daha önemlidir." },
+  { href: "/tr/learn/what-is-a-crystal-aura", label: "Kristal aura nedir?", description: "Tamamen yüzeysel birinden, risk spektrumunun tam tersi uçtaki bir modül." },
+]} />
+
+<CTA href="/tr/satın-al">Pikselli pelerin tartışmalarını geride bırakın. Opal, bir dövüşün gidişatını gerçekten değiştiren modülleri yönetir.</CTA>

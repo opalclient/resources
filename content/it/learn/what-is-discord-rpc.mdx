@@ -1,0 +1,75 @@
+---
+title: Cos'è Discord RPC in Minecraft? Spiegazione di Rich Presence
+description: Discord RPC mostra il tuo server Minecraft, l'attività e la durata della sessione sul tuo profilo Discord in tempo reale. Ecco come funziona il modulo di presenza ricca.
+excerpt: Il tuo profilo Discord sa su quale server ti trovi prima ancora che tu abbia detto una parola. Si tratta di Discord RPC, ed è solo una questione di apparenza, senza alcun effetto sul gameplay.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Il Discord RPC offre qualche vantaggio in gioco?
+    a: No. Mostra solo informazioni sullo stato nel tuo profilo Discord. Non modifica il movimento, il combattimento o qualsiasi altra cosa elaborata dal server.
+  - q: Devo tenere Discord aperto perché funzioni?
+    a: Sì. Rich Presence richiede l'app desktop di Discord in esecuzione insieme a Minecraft, poiché il client invia aggiornamenti di stato alla tua app Discord locale, che a sua volta aggiorna il tuo profilo.
+  - q: Possono altri giocatori vedere la mia presenza ricca di Discord in gioco?
+    a: No. È visibile solo su Discord, per le persone che possono visualizzare il tuo profilo Discord o la presenza condivisa del server. Non ha visibilità all'interno di Minecraft.
+  - q: Posso disattivare Discord RPC?
+    a: Sì. È un modulo estetico facoltativo, quindi puoi disabilitarlo ogni volta che non vuoi che il tuo server o la tua attività vengano visualizzati sul tuo profilo Discord.
+---
+
+<KeyTakeaways>
+
+- Discord RPC è un modulo cosmetico che mostra il tuo server Minecraft, l'attività e la durata della sessione sul tuo profilo Discord come Rich Presence.
+- Legge e segnala solo lo stato, non interferisce mai con il gameplay né invia nulla che il server possa vedere.
+- Richiede l'app desktop di Discord in esecuzione insieme a Minecraft.
+- Classificato come sicuro: non c'è nulla all'interno del gioco che un anticheat possa rilevare.
+
+</KeyTakeaways>
+
+Discord RPC è il modulo che trasforma una sessione di Minecraft in una card Rich Presence di Discord, mostrando il server a cui sei connesso, cosa stai facendo e da quanto tempo giochi, proprio sotto il tuo nome per chiunque controlli il tuo profilo. È uno dei componenti più visibili degli strumenti del client Minecraft e uno dei meno eclatanti: non cambia nulla riguardo a come ti muovi, miri o combatti. Abilitandolo, Discord inizia a mostrare il tuo stato non appena accedi. Disabilitandolo, il tuo profilo torna a riflettere la tua ultima attività.
+
+## Come funziona
+
+Il modulo mantiene una piccola connessione in background aperta tra il client di Minecraft e l'app desktop di Discord finché entrambi sono in esecuzione. Ogni tanto legge un piccolo numero di valori dal gioco, l'indirizzo del server, l'attività corrente e la durata della sessione, e li inoltra all'API Rich Presence di Discord. Discord fa il resto, rendendo i dati sulla tua card del profilo in modo che siano visibili a chiunque visualizzi il tuo profilo o passi il mouse sopra il tuo nome in un server condiviso.
+
+La maggior parte dei client inviano i dati tramite un wrapper SDK di gioco Discord, come discord-game-sdk4j, che gestisce la connessione e la formattazione dei messaggi. Il compito del client è semplicemente fornire il testo di stato, nient'altro. Poiché l'intero scambio avviene in una sola direzione, dal gioco a Discord, Discord RPC non invia mai input, non tocca mai i pacchetti in uscita e non modifica mai nulla che il server Minecraft vede. È un canale secondario verso Discord, non un aggancio nel gioco.
+
+<Callout variant="tip" title="Opal spedisce questo">
+Il modulo RPC di Opal fa esattamente ciò che suggerisce il nome: mostra la presenza ricca in Discord. Si colloca nella stessa categoria delle altre funzionalità cosmetiche e di miglioramento della qualità della vita di Opal, non della parte relativa al combattimento o al movimento del client.
+</Callout>
+
+## È sicuro utilizzarlo?
+
+Sì, senza riserve. Discord RPC legge e riporta solo lo stato. Non altera movimenti, combattimenti o qualsiasi cosa il server elabori, e non apre mai un canale all'interno del gioco. Non c'è nulla che un anticheat lato server possa intercettare, perché la funzione non lascia tracce all'interno di Minecraft. Ogni byte di essa risiede nella conversazione tra il tuo client e la tua app Discord locale.
+
+L'unica cosa da considerare non è la rilevazione, ma la privacy. Chiunque possa vedere il tuo profilo Discord, i tuoi amici, i membri del server, sconosciuti se la tua presenza è pubblica, può anche vedere su quale server Minecraft ti trovi e cosa stai facendo lì. Se non vuoi che queste informazioni vengano trasmesse, disattiva il modulo prima di accedere.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Il Discord RPC offre qualche vantaggio in gioco?">
+No. Mostra soltanto informazioni sullo stato nel tuo profilo Discord. Non modifica movimenti, combattimenti o qualsiasi processo del server.
+</FAQItem>
+
+<FAQItem question="È necessario avere Discord aperto perché funzioni?">
+Sì. Rich Presence richiede che l'applicazione desktop di Discord sia in esecuzione insieme a Minecraft, poiché il client invia aggiornamenti di stato alla tua app Discord locale, che a sua volta aggiorna il tuo profilo.
+</FAQItem>
+
+<FAQItem question="Possono altri giocatori vedere la mia presenza di Discord in Minecraft?">
+No. È visibile solo su Discord, per le persone che possono visualizzare il tuo profilo Discord o la presenza condivisa del server. Non ha visibilità all'interno di Minecraft stesso.
+</FAQItem>
+
+<FAQItem question="Posso disattivare Discord RPC?">
+Sì. È un modulo cosmetico facoltativo, quindi puoi disabilitarlo ogni volta che non desideri che il tuo server o la tua attività vengano visualizzati sul tuo profilo Discord.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "Le funzionalità cosmetiche di Discord RPC risiedono in questa categoria più ampia." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "L'obiettivo opposto: rimanere invisibili invece di ostentare il proprio status." },
+  { href: "/it/learn/what-is-scaffold", label: "Cos'è Scaffold?", description: "Un modulo Discord RPC non ha nulla in comune con un cheat di movimento bannabile." },
+]} />
+
+<CTA href="/it/purchase">Attiva Discord RPC e il resto dello strato cosmetico di Opal per $8.99.</CTA>

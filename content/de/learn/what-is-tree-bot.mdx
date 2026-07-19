@@ -1,0 +1,81 @@
+---
+title: Was ist Tree-bot in Minecraft? Automatisches Fällen erklärt
+description: Tree-Bot ist ein Minecraft-Modul, das Bäume automatisch fällt und Setzlinge für dich pflanzt. Hier erfährst du, wie die automatische Fällschleife funktioniert und ob es sicher ist, sie auszuführen.
+excerpt: Die Axt schwingt sich selbst. Der Baum-Roboter geht zum Baum, beseitigt den Stamm, lässt einen Setzling auf den Stumpf fallen und geht weiter, ohne Klickgeräusche.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Ist Tree-bot ein Betrüger?
+    a: Es automatisiert eine Aktion, die ein Spieler normalerweise manuell ausführen würde, was auf Servern, die unbeaufsichtigte Automatisierung verbieten, als Botting gilt. Es verschafft weder einen Vorteil im Kampf noch in der Bewegung, wie es Module wie Reichweite oder Flug tun.
+  - q: Kann Tree-bot dich sperren lassen?
+    a: Es kommt eher auf die Regeln des Servers an als auf die Erkennung von Anti-Cheat-Software. Server, die jede Form von automatisiertem oder Makro-Spiel verbieten, können dafür sperren. Server, die nur Exploits im Kampf und bei der Bewegung überwachen, markieren es typischerweise nicht.
+  - q: Replantet Tree-bot Bäume automatisch?
+    a: Normalerweise schon. Die meisten Implementierungen setzen direkt nach der Baumfällung einen Setzling auf den Stumpf, sodass der Baum wieder nachwächst, ohne dass Sie ihn selbst pflanzen müssen.
+  - q: Welcher Klient hat Tree-bot?
+    a: Tree-bot ist ein Wurst-Modul, das dort als Automatisierungs- oder Dienstleistungfunktion und nicht als Kampffunktion aufgeführt ist.
+---
+
+<KeyTakeaways>
+
+- Tree-Bot ist ein Minecraft-Modul, das Bäume automatisch fällt: Es geht zum nächsten Baumstamm, bricht jeden verbundenen Block im Stamm und geht zum nächsten Baum über.
+- Die meisten Implementierungen pflanzen direkt nach dem Fällen einen Setzling auf den Stumpf zurück, sodass der Baum ohne manuelles Pflanzen wieder wächst.
+- Es ist ein Automatisierungsmodul von Wurst, kein Combat- oder Bewegungs-Cheat. Es ist kein Zielen, Klicken oder Steuern erforderlich.
+- Das Risiko einer Erkennung durch Anticheat ist gering, da es niemals Reichweite, Drehungen oder Trefferregistrierung berührt. Das eigentliche Risiko besteht in Serverregeln gegen die Automatisierung selbst.
+
+</KeyTakeaways>
+
+Tree-Bot ist ein Minecraft-Modul, das Bäume automatisch fällt: Es findet den Baumstamm, geht dorthin, bricht den gesamten Stamm, pflanzt neu und wiederholt dies. Es wurde für Holzfarmen entwickelt, den Teil des Spiels, in dem man sonst zehn Minuten lang in einem Wald den linken Mausklick gedrückt halten würde. Es berührt weder PvP noch die Bewegung. Es ist ein Zeitsparer, kein Vorteilssucher.
+
+## Funktionsweise
+
+Sobald Tree-Bot aktiviert ist, scannt er die Umgebung des Spielers nach Baumstammblöcken ab. Findet er einen, bewegt er den Spieler zur Baumwurzel und bricht den Stamm von unten nach oben durch jeden verbundenen Baumstamm, einschließlich diagonaler oder geneigter Wachstumsmuster, die bestimmte Baumarten produzieren. Nachdem ein Baum gerodet wurde, bewegt er sich direkt zum nächsten Baum in Reichweite und wiederholt die Schleife, solange Bäume in der Nähe stehen.
+
+Das Anpflanzen ist die zweite Hälfte des Zyklus. Die meisten Versionen platzieren einen Setzling auf dem Baumstumpf, sobald der Stamm fällt, sodass der Spieler nicht später zu einer kahlen Stelle zurückkehren muss, sondern einen Baum vorfindet, der bereits wiederwächst. Der Spieler zielt, klickt oder lenkt dabei nichts. Tree-Bot übernimmt die Pfadfindung, das Fällen und das Platzieren von Anfang bis Ende.
+
+Der Reiz ist offensichtlich, wenn man schon einmal manuell Holz für einen Bau oder eine Ladenbestückung geschlagen hat: Es ist repetitiv und verschlingt Zeit, die man für buchstäblich alles andere nutzen könnte. Tree-bot verwandelt "Holz hacken gehen" in "Tree-bot starten, zurückkommen zu einem Stapel Holz." Es ist in Wurst neben anderen Utility- und Automatisierungsmodulen dokumentiert, nicht den Kampfanwendungen, was genau aussagt, in welchen Bereich es gehört.
+
+## Ist es sicher, es zu verwenden?
+
+Tree-bot greift weder den Reichweite-, Rotations- noch Trefferregistrierungsmechanismus an, die exakten Mechanismen, auf die die meisten Kampfanticheats ausgelegt sind, sodass es die Prüfungen nicht auslöst, die geschrieben wurden, um Killaura oder Reichhack zu fangen. Ein Log zu brechen und eine Setzling zu platzieren, sind keine übermenschlichen Aktionen an sich; ein Server, der Paketzeitpunkte für Kampfausnutzungen überwacht, hat hier nichts zu markieren.
+
+Die eigentliche Gefährdung liegt in der Automatisierung selbst, unabhängig davon, was ein Anticheat sehen kann. Viele Server verbieten jede clientseitige Makro- oder Bot-Verhalten, das ohne direkte Spielerinteraktion agiert, und zwar generell. Holzfällen bekommt keine Sonderbehandlung nur, weil es für alle anderen in der Welt harmlos ist. Ein Server mit einer solchen pauschalen Regel behandelt Tree-bot als Botting, egal wie sauber es in der Praxis aussieht. Ein Server, der nur Regeln für Kampffälle und Bewegungsausnutzungen aufschreibt, wird sich wahrscheinlich weniger darum kümmern, was deine Bäume fällt.
+
+<Callout variant="tip" title="Wo dies in Opal seinen Platz findet">
+Opal liefert kein Tree-bot-Modul mit. Es ist eine Wurst-spezifische Funktion, und Opals Katalog konzentriert sich stark auf Kampf-, Bewegungs- und visuelle Module, die Kategorien, in denen ein einzelner Frame über den Ausgang eines Kampfes entscheidet. Automatisches Holzbeschaffen verschiebt diese Nadel nicht wesentlich, daher stand es nie auf der Roadmap.
+</Callout>
+
+<Callout variant="warning" title="Erkennung ist nicht die ganze Geschichte">
+Diese Seite beschreibt Tree-bot allgemein, nicht als Opal-Funktion. Selbst auf einem Server, auf dem die Anti-Cheat-Software nichts zu melden hat, können die Regeln unbeaufsichtigte Automatisierung dennoch verbieten. Lesen Sie die Position des Servers bezüglich Makros und Bots, bevor Sie ihn unbeaufsichtigt durch einen Wald laufen lassen.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Ist Tree-bot ein Cheat?">
+Es automatisiert eine Aktion, die ein Spieler normalerweise manuell ausführen würde, was auf Servern, die unbeaufsichtigte Automatisierung verbieten, als Botting gilt. Es verschafft keinen Kampfvorteil oder Bewegungs-Vorteil, wie es Module wie Reichweite oder Fliegen tun.
+</FAQItem>
+
+<FAQItem question="Kann Tree-bot zu einer Sperre führen?">
+Das hängt eher von den Regeln des Servers ab als von der Erkennung durch Anticheat-Systeme. Server, die jede Form von automatisiertem oder Makro-Spiel verbieten, können dafür sperren. Server, die nur Exploits im Kampf und bei der Bewegung kontrollieren, markieren es in der Regel nicht.
+</FAQItem>
+
+<FAQItem question="Pflanzt Tree-bot Bäume automatisch wieder?">
+Normalerweise ja. Die meisten Implementierungen lassen direkt nach der Entfernung des Stammes einen Setzling auf dem Stumpf fallen, sodass der Baum ohne Ihre eigene Pflanzung wieder wächst.
+</FAQItem>
+
+<FAQItem question="Welcher Client hat Tree-bot?">
+Tree-bot ist ein Wurst-Modul, das dort als Automatisierungs- oder Dienstleistungsprogramm und nicht als Kampffunktion aufgeführt ist.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die breitere Kategorie Tree-bot und andere Automatisierungsmodule befinden sich darin." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Ein anderer Modultyp, der darauf ausgelegt ist, für andere Spieler unsichtbar zu bleiben, nicht für den Anti-Cheat." },
+  { href: "/de/learn/what-is-reach", label: "Was ist Reichweite?", description: "Die Art von Anti-Cheat-Systemen, auf die tatsächlich geachtet wird, und genau das, was Tree-bot niemals berührt." },
+]} />
+
+<CTA href="/de/purchase">Opal gibt sein Budget in den Kampf, nicht in den Wald. $8.99.</CTA>

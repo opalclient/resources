@@ -1,0 +1,83 @@
+---
+title: Minecraft'ta Tablo Nedir? Modül Açıklaması
+description: Puan Tablosu, sunucunun yan çubuğundaki puan tablosunu yeniden düzenleyen veya ping gibi istemci tarafından hesaplanan satırları ekleyen bir Minecraft modülüdür; bu, hiçbir hile önleme sisteminin işaretleyemeyeceği yalnızca görsel bir değişikliktir.
+excerpt: Skorboard oyunu etkilemez, sadece köşedeki kutuyu etkiler. Çizisini tekrar çiz, bir çizgi ekle, hayatına devam et.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Skorboard haksız bir avantaj mı sağlıyor?
+    a: Hayır, sadece mevcut skorboard verilerinin nasıl görüntülendiğini değiştirir veya istemcinin zaten yerel olarak hesaplayabileceği bilgiler ekler, örneğin ping. Oyuncunun zaten göremeyeceği hiçbir şeyi açığa çıkarmaz.
+  - q: Sunucu yöneticileri özel bir puan tablosunu tespit edebilir mi?
+    a: Skor tablosu üzerinden değil. Sunucu, her zamanki gibi kendi hedeflerini ve skorlarını hala gönderiyor. İstemci tarafındaki yeniden düzenleme ve eklenen satırlar geri iletilmediği için sunucunun fark etmesi için hiçbir şey yok.
+  - q: Scoreboard bir HUD moduyla aynı mı?
+    a: Tam olarak değil. Skor tablosu yalnızca yan çubuğa özel olarak ayarlanmış durumda. Daha kapsamlı bir HUD modifikasyonu, hızlı erişim çubuğunu, koordinat göstergesini, zırh durumunu ve daha fazlasını etkileyebilir. Skor tablosu sadece tek bir öğeyi yönetiyor.
+  - q: Müşteri neden hiç Scoreboard modülünü toplu olarak sunmayı tercih eder ki?
+    a: Sunucu puan tabloları, stilleri konusunda büyük farklılıklar gösterir ve yerleşik bir modül, ping gibi bir istatistiği ayrı bir menü açmadan sunucularda veya yüzeylerde tutarlı bir görünüm sağlar.
+---
+
+<KeyTakeaways>
+
+- Puan tablosu, sunucunun yan çubuğundaki puan tablosunu yeniden biçimlendiren veya istemci tarafından zaten bulunan ping gibi verilerden oluşturulan ek satırlar ekleyen istemci tarafı bir modüldür.
+- Yan çubuğun oluşturulma aşamasına müdahale eder: sunucunun gerçek hedefleri ve puanları bozulmadan kalır, modül sadece bunları farklı biçimlendirir veya yerel değerleri ekler.
+- Sunucuya hiçbir şey geri gönderilmez, bu nedenle değişiklik yöneticiler tarafından görünmez ve antichipler için alakasızdır.
+- Savaş veya hareket özelliği değil, koordinat üstbilgisi veya FPS sayacı gibi HUD kolaylıkları yanında bir dosya olarak kabul edilir.
+
+</KeyTakeaways>
+
+Puan Tablosu, Minecraft için bir modül olup, sunucu tarafındaki puan tablosu yan çubuğunun görünümünü veya içeriğini değiştirir. Sunucunun gönderdiği kutuyu yeniden şekillendirebilir, farklı yazı tipleri, renkler, köşe yuvarlamaları kullanabilir veya istemci tarafından zaten bulunan ping gibi verilere dayanarak hesaplanan ek satırlar ekleyebilir. Her neyse, yalnızca sunum kısmıyla sınırlıdır. Nasıl oynadığınızı, hareket ettiğinizi veya savaştığınızı değiştiren hiçbir şey yoktur.
+
+## Nasıl Çalışır
+
+Ekranın köşesinde gördüğünüz yan çubuk, varsayılan olarak sunucu tarafından kontrol edilir: sunucu hedefleri ve puanları gönderir ve istemci bunları Minecraft'ın birlikte gönderdiği genel stile göre çizer. Puan Tablosu, bu çizim aşamasına müdahale ederek kutuyu tamamen yeniden çizer veya sunucunun kendi girdilerinin yanında ek istemci tarafı satırları ekler. Sunucu tarafından sağlanan veriler tam olarak gönderildiği gibi kalır. Modül bunları okur, farklı biçimlendirir ve sunucu hiç iletmeyen değerleri de ekleyebilir, çünkü bu ek satırlar ağ üzerinden çekilmek yerine yerel olarak hesaplanır.
+
+Yeniden düzenleme, görsel katmanı kapsar: farklı bir arka plan, keskin köşeler yerine yuvarlak köşeler, özel bir yazı tipi veya bir değer yükselirken veya düşerken sadece yeni sayıya atlamak yerine animasyonlu bir geçiş. İçerik eklemeleri, modülün daha küçük, ikinci yarısıdır: müşterinin zaten kendi başına hesaplayabildiği şeyler, ping en bariz örnektir, sunucu hiçbir şey yayınlamadan ek bir satır olarak eklenir. Burada hiçbir şey sunucuya geri gönderilen bir paketten gelmediği için, her şey ekranınızda yereldir ve orada kalır.
+
+## Scoreboard aslında neye dokunuyor
+
+| Ayar | Ne değiştirir |
+|---|---|
+| Arka plan | Varsayılan yan panelin özel bir renk veya stil ile değiştirilmesi |
+| Köşe yuvarlama | Minecraft'ın getirdiği keskin kutu köşelerini yumuşatır |
+| Özel yazı tipleri | Varsayılan yan panel yazı tipini değiştirir |
+| Değer geçişleri | Bir sayı güncellenirken anında atlamak yerine animasyonlu bir geçiş sağlar |
+| Ek satırlar (örneğin, ping) | Sunucunun hiç göndermediği müşteri tarafından hesaplanan istatistikleri ekler |
+
+Bu satırların hiçbiri sunucu işbirliği gerektirmez. Bunların hepsi, sunucunun hedeflerinin ve puanlarının zaten gelmesinden sonra müşteri tarafından alınan kararlardır, bu da listenin neden burada durmasının da bir nedenidir. Scoreboard, sunucuya verilmediği hiçbir şeyi okumuyor, sadece zaten sahip olduğu şeyleri nasıl çizeceğini seçiyor.
+
+## Kullanmak güvenli mi
+
+Evet, ve bir modül olabileceği kadar güvenli. Tablo sadece sunucu tarafından zaten size yerel olarak gösterilenleri yeniden biçimlendirir veya uzatır. Erişmemeniz gereken verileri okumaz, ek paketler göndermez ve istemcinizin dünyayla etkileşim şeklini değiştirmez. Aynı vanilla tabloyu izleyen başka bir oyuncuya göre herhangi bir bilgi avantajı yoktur, sadece farklı bir görünüm. Antichipler burada işaretleyebilecek hiçbir şey yoktur, çünkü modül hareket, savaş veya kablo üzerinden gönderilen hiçbir şeye dokunmaz.
+
+<Callout variant="tip" title="Opal için buranın yeri neresi">Opal, Scoreboard adıyla bir mod gönderimini yapmıyor. Kapsadığı alan, sunucunun verilerini etkilemeden yerel görüntü ayarlamalarını içeren, Opal'ın HUD'sinin ve diğer kozmetik araçlarının bulunduğu görsel kategoriyle aynı. Temiz bir kenar çubuğu sizin için önemliyse, bunun eksik olduğunu varsaymak yerine, bir istemcinin görsel ayarları altında sunduğu şeyleri kontrol etmeye değer</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Scoreboard haksız bir avantaj sağlıyor mu?">
+Hayır. Sadece mevcut skorboard verilerinin nasıl görüntülendiğini değiştirir veya istemcinin zaten yerel olarak hesaplayabileceği bilgiler ekler, örneğin ping. Oyuncunun aksi takdirde göremeyeceği hiçbir şeyi ortaya çıkarmaz.
+</FAQItem>
+
+<FAQItem question="Sunucu yöneticileri özel bir puan tablosunu tespit edebilir mi?">
+Puan tablosu aracılığıyla değil. Sunucu, normalde olduğu gibi kendi hedeflerini ve puanlarını hala gönderiyor. İstemci tarafındaki yeniden düzenleme ve ek satırlar geri iletilmediği için, sunucunun fark etmesi için hiçbir şey yoktur.
+</FAQItem>
+
+<FAQItem question="Scoreboard bir HUD moduna aynı mı?" >
+Tam olarak değil. Scoreboard, özellikle yan çubuğa özeldir. Daha geniş bir HUD modu, hızlı erişim çubuğunu, koordinat göstergesini, zırh durumunu ve daha fazlasını etkileyebilir. Scoreboard sadece tek bir öğeyi yönetir.
+</FAQItem>
+
+<FAQItem question="Bir müşteri neden hiç Scoreboard modülünü toplu olarak kullanır?">
+Sunucu puan tabloları, nasıl biçimlendirildikleri konusunda büyük farklılıklar gösterir ve yerleşik bir modül, sunucular veya bir ping gibi bir istatistiği ayrı bir menü açmadan görünümü tutarlı tutar.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Daha geniş kategori modülleri gibi Skor Tablosu'nun ait olduğu." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Algılamaya odaklı spektrumun ucundaki Scoreboard hiç endişelenmek zorunda kalmaz." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Tamamen yüzeysel olanlardan tam tersi yöndeki risk skalasında yer alan bir modül." },
+]} />
+
+<CTA href="/tr/satin-al">Daha düzenli bir kenar çubuğu küçük bir şeydir. Opal'ın başka nelerini temizlediğine bakın.</CTA>

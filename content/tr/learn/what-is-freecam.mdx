@@ -1,0 +1,87 @@
+---
+title: Minecraft'ta Freecam Nedir? Modül Nasıl Çalışır
+description: Freecam, kameranızı karakterinizden ayırır, böylece bir alanı keşfedebilir veya hareket etmeden görüntü kaydedebilirsiniz. İşte nasıl çalıştığı ve ne kadar riskli olduğu.
+excerpt: Kameran özgürce uçuyor, vücudun kılpayım kadar bile kıpırdamıyor ve sunucuda yeni bir şey yok. İşte Freecam'in perde arkasındaki işleyişi.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Freecam kullanmak karakterinizi hareket ettirir mi?
+    a: Hayır. Karakteriniz, Freecam'i açtığınızda olduğu yerde tamamen kalır. Sonrasında yaptığınız her şey, kamerayı hareket ettirmekten değil, başka girdilerden kaynaklanır.
+  - q: Serbest kamera duvarlardan görebiliyor mu?
+    a: Tek başına değil. Kamera blokların içinden ve boşluklardan geçebilir, ancak yine de yalnızca sunucu tarafından istemcinize zaten gönderilen araziyi ve varlıkları oluşturur, bu nedenle Freecam tek başına bir ESP veya fullbright modülünün ortaya çıkaracağı hiçbir şeyi ortaya çıkarmaz.
+  - q: Ücretsiz kamera modu, izleyici moduna benzer mi?
+    a: Hayır, Vanilla gözlemci modu oyun modunuzu değiştirmez ve sunucu bu değişikliği fark etmez. Ücretsiz kamera yalnızca istemci tarafında bir numaradır, bu yüzden karakteriniz zaten bulunduğu modda kalır.
+  - q: Freecam anticheat sistemleri tarafından tespit edilebilir mi?
+    a: Nadir. Kameranın konumuna bağlı herhangi bir paket göndermiyor, yalnızca hareket etmeyen karakterinize bağlı olarak gönderiyor. Sunucuların birçoğu, bunu sunucu tarafında tespit etmenin pratik olmaması durumunda bile kural olarak kısıtlamaya devam ediyor.
+  - q: Her Minecraft yardımcı istemcisi Freecam içeriyor mu?
+    a: Hayır, bu isteğe bağlı bir modüldür ve her müşteri tarafından ayrı ayrı uygulanır. Bazıları bunu bir oyuncu kategorisi modülü olarak gönderirken, bazıları tamamen atlıyor; bu yüzden bir müşterinin modül listesini kontrol etmeden orada olduğunu varsaymayın.
+---
+
+<KeyTakeaways>
+
+- Freecam, oyun içindeki kamerayı karakterinizden ayırır, böylece vücudunuz sabit kalırken görüş açısını istediğiniz yere uçurabilirsiniz.
+- Sunucu yalnızca karakterinizin konumunu takip eder, kameranın konumunu değil; bu nedenle Freecam olağandışı paketler göndermez.
+- Çoğunlukla kör noktaları keşfetmek ve kayıt açılarını ayarlamak için kullanılır, savaş veya hareket için değil.
+- Algılanma riski düşüktür, ancak birçok sunucu, kanıtlanabilir olup olmadığına bakılmaksızın, kamera modifikasyonunu kural olarak yasaklar.
+
+</KeyTakeaways>
+
+Freecam, Minecraft için bir istemci modülüdür ve kameranızı karakterinizin vücudundan ayırır. Açtığınızda, hareket tuşları oyuncunuzu yönlendirmeyi bırakır ve bunun yerine serbestçe yüzen bir bakış açısını yönlendirmeye başlar; gerçek karakteriniz yerinde sabit kalır veya zaten yaptığı şeyi yapmaya devam eder. Bu, bir işleme hilesidir, bir hareket hilesi değil: sunucu kameranın hareketini değil, yalnızca hareket etmeyen vücudu görür. Çoğu kişi, yürümeye asla cesaret edemeyeceği bir açıyla bir üssü keşfetmek veya temiz bir çekim yakalamak için, dövüşmek veya daha hızlı konum değiştirmek için değil, ona başvurur.
+
+## Freecam nasıl çalışır
+
+Freecam, genellikle bağlı olduğu oyuncu varlığından ayrılan işleme (rendering) kamerayı ayırır. Etkinleştirildikten sonra, normalde karakterinizi yönlendirmek için kullandığınız hareket tuşları bunun yerine o ayrık bakış açısını dünyada yönlendirir ve bu bakış açısının çarpışma kutusu (hitbox) ve çarpışması yoktur. Duvarlardan geçer, lavın üzerinde yüzer, ne olursa olsun. Bu arada karakteriniz bıraktığınız yerde durur veya modülü etkinleştirdiğinizde zaten yaptığı şeyi yapmaya devam eder.
+
+Bölünme, sunucunun aslında ne izlediği nedeniyle önemlidir. Sunucu yalnızca oyuncu varlığınızın konumunu bilir, kameranızın konumunu değil; bu nedenle Freecam aktifken gerçek konumunuz veya hitbox'ınızla ilgili hiçbir şey değişmez. Kamera, tamamen yerel, istemci tarafından oluşturulan bir şeydir ve asla ağa dokunmaz. Tenacity, örneğin, Freecam'i dövüş veya hareket altında toplamak yerine bir oyuncu kategorisi modülü olarak gönderir; bu, aslında yaptığı şeyin adil bir yansımasıdır: oyuncunuza hiçbir şey yapmaz.
+
+İnsanların çoğunlukla neden açtığı iki kullanım durumu vardır. Keşif: bir üssün düzenini kontrol etmek, bir köşeye göz atmak veya karakterinizi açığa çıkarmadan veya yeniden konumlandırmadan başka birinin neler yaptığını izlemek. Kayıt: kamerayı geniş bir çekim için geri çekmek, bir dövüşü dışarıdan takip etmek veya bir klip için bir açıyı hizalamak, tüm bunlar bir hesap saniyesini yakmadan veya kendi sorunlarını getiren varsayılan gözlemci moduna geri dönmeden. Freecam oyun modunuza dokunmaz.
+
+## Freecam gerçekten tespit edilebilir mi
+
+Freecam, bir hareket veya savaşla ilgili değil, yalnızca bir render değişikliğidir, bu nedenle kameranın konumuna bağlı ek paketler göndermez. Konum paketleriniz karakterinize bağlı kalır ve karakter hareket etmediği için, sunucu kamera dolaşırken genellikle olağandışı bir şey gözlemlemez. Bu durum, oyuncunuzun ne yaptığını iddia eden değişiklikler getirdiği [KillAura](/tr/learn/what-is-killaura) veya [Reach](/tr/learn/what-is-reach) gibi modüllerin risk skalasında çok altında yer alır, çünkü hile önleme sistemleri tam olarak bu iddiaları yakalamak için tasarlanmıştır.
+
+Algılama riski tek başına tüm hikâyeyi anlatmaz. Bazı sunucular, teknik olarak kanıtlanabilir olsa bile, kamera veya istemci modifikasyonlarına karşı kurallar koyar. Freecam'i bir savaşın ortasında görüş açısını açmak için kullanmak, sizi hileli olarak işaretlemese bile, bu tür kurallar altında yine de haksız bir avantaj olarak sayılabilir. İzin verilip verilmediği, paketlerin ne söylediğinden çok sunucu politikasına bağlıdır.
+
+<Callout variant="tip" title="Opal'da Ücretsiz Kamera Var mı?">
+Hayır, o isim altında yok. Opal şu anda özel bir Ücretsiz Kamera modülüyle gelmiyor, ancak keşif ve klip araçları, görsel ve yardımcı özelliklerinin geri kalanıyla aynı genel alanda yer alıyor: sunucunun sonundaki sessizliği korumak için tasarlandı, doğrudan savaşı kazanmak için değil. Eğer bu kategori için geldiniz, aramanız gereken yer burası.
+</Callout>
+
+<Callout variant="warning" title="Düşük tespit, sıfır risk değil">
+Freecam nadiren bir anticheat'i tetikler, çünkü sunucu yalnızca karakterinizin konumunu görür ve karakteriniz hiçbir yere gitmemiştir. Ancak tespit edilebilir ve izinli olmak aynı şey değildir. Birçok kural seti, herhangi bir kamera veya istemci değişikliğini doğrudan yasaklamaktadır ve personel, bir işaret olmasa bile ekran paylaşımında bunu haksız bir avantaj olarak değerlendirebilir. Rekabetçi olarak kullanmadan önce kuralları kontrol edin.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Serbest Kamera kullanmak karakterinizi hareket ettirir mi?">
+Hayır. Karakteriniz, Serbest Kamera’yı açtığınızda olduğu yerde kalır. Sonrasında yaptığı her şey, kamerayı hareket ettirmekten değil, başka girdilerden kaynaklanır.
+</FAQItem>
+
+<FAQItem question="Freecam duvarlardan görebiliyor mu?">
+Tek başına göremiyor. Kamera blokların ve açık alanların içinden geçebilir, ancak yine de yalnızca sunucu tarafından istemcinize zaten gönderilen araziyi ve varlıkları oluşturur, bu nedenle Freecam tek başına bir ESP veya fullbright modülünün ortaya çıkarabileceği hiçbir şeyi ortaya çıkarmaz.
+</FAQItem>
+
+<FAQItem question="Serbest Kamera, izleyici moduna aynı mı gelir?">
+Hayır. Orijinal izleyici modu oyun modunuzu değiştirir ve sunucu bu değişikliği fark eder. Serbest Kamera ise yalnızca istemci tarafında çalışan bir kamera hilesidir, bu yüzden karakteriniz zaten bulunduğu modda kalır.
+</FAQItem>
+
+<FAQItem question="Freecam hile tespit sistemleri tarafından tespit edilebilir mi?">
+Nadir durumlarda. Kamera pozisyonuna bağlı paket göndermez, yalnızca hareket etmeyen karakterinize gönderir. Bazı sunucular, sunucu tarafında tespit etmenin pratik olmadığı durumlarda bile, kural olarak bunu kısıtlayabilir.
+</FAQItem>
+
+<FAQItem question="Her Minecraft yardımcı istemcisi Freecam içerir mi?">
+Hayır, isteğe bağlı bir modüldür ve her istemci bunu kendi başına uygular. Bazıları oyuncu kategorisi modülü olarak sunarken, bazıları tamamen atlıyor; bu yüzden bir istemcinin modül listesini kontrol ederek orada olduğunu varsaymayın.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Daha geniş kategori Freecam ve burada bulunan her modül." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Sizi izleyen insanlar için sıradan kalmanın bir başka yolu." },
+  { href: "/tr/learn/what-is-reach", label: "Reach nedir?", description: "Freecam'in tespit spektrumunun tam tersi yöndeki bir modül." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ın izcilik, kayıt ve sizi her zaman bir adım önde tutan her şey için neler hazırladığını görün</CTA>

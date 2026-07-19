@@ -1,0 +1,98 @@
+---
+title: Minecraft'ta Bir Seyirci Dedektör Modülü Nedir?
+description: İzleyici Dedektörü, Minecraft'ta bir moderatörün izleyip izlemediğini, herhangi bir teyit edilmiş izleyici durumundan ziyade dolaylı sinyaller kullanarak tahmin eder. İşte nasıl çalıştığı.
+excerpt: Seyirci görmez hiç. Bıraktığı gölgeyi görür ve buna göre bahse girer.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Seyirci Dedektörü aslında ne algılıyor?
+    a: Seyirci modunu doğrudan algılamıyor, Minecraft bunu hiçbir zaman istemciye sunmuyor. Bir varlığın istemcide var olması ancak görüntülenmemesi veya aktif bir oyuncunun normalde gönderdiği hareket paketlerinin olmaması gibi dolaylı işaretlerden bir gözlemcinin olası varlığını çıkarıyor.
+  - q: Kimlerin izlediğini söyleyebilir mi?
+    a: Hayır. Heuristikler birinin izleyebileceğini öne sürebilir, ancak kesinlikle bir kimliği ortaya çıkaramaz veya izleyici statüsünü doğrulayamazlar. Bir olasılık sinyali, bir arama değil.
+  - q: Spectator Detector başlı başına yasaklayıcı bir hile mi?
+    a: Oyun mekaniğini değiştirmeyebilir veya tek başına herhangi bir oyun içi avantaj sağlamaz. Görevi, diğer modüllerin etkilerini bir moderatörden gizlemeye yardımcı olmaktır, bu nedenle bir destek aracı olarak hileye yönelik bir özellikten ziyade bağımsız bir avantaj özelliği gibi çalışır ve genellikle koruduğu modüllerle birlikte gönderilir.
+  - q: Gerçek bir seyirciden nasıl kaçırabilirdi?
+    a: Doğrudan bir seyirci durum okuması yerine dolaylı işaretlere dayandığı için. O özel işaretleri tetiklemeyen bir seyirci fark edilmez. Bu yanlış negatif, daha önemli bir hata modudur, çünkü kullanıcıya hiçbir şeyin değişmesine gerek olmadığı yanılgısı verir.
+---
+
+<KeyTakeaways>
+
+- Seyirci Dedektörü, birilerinin seyirci modunda olabileceğini işaret eden bir modüldür, böylece bir yönetici bir şey görmeden önce diğer modüller müdahale edebilir.
+- Doğrudan bir sinyal almaz, Minecraft seyirci durumunu doğrudan açığa çıkarmaz. Yakındaki işlenmemiş varlıklar ve eksik hareket paketleri gibi dolaylı ipuçlarından çıkarım yapar.
+- Sonuç bir olasılıktır, bir gerçeklik değil: Yanlış pozitifler tedbirli olmayı boşa harcar, yanlış negatifler ise gerçek bir gözlemciyi tamamen kaçırır.
+- Tek başına oyun akışını değiştirmez. Tamamı diğer modülleri kapsamak için vardır
+
+</KeyTakeaways>
+
+Bir seyirci algılayıcı, başka bir oyuncunun sizi izlemek için seyirci moduna geçtiğini tahmin etmeye çalışan istemci tarafı bir modüldür, böylece bir moderatör ekran görüntüsü almaya değer bir şey görmeden önce daha belirgin modüller susturulabilir. Herhangi bir şeyi doğrulamaz. Gerçek bir sinyal yerine yerel sezgisellerden yararlanır, bu da tahminin her iki yönde de yanlış olabileceği ve modülün ne kadar yanlış olduğunu çok geçtiğinde bile bilemeyeceği anlamına gelir.
+
+## Nasıl Çalışır
+
+Oyun asla bir istemciye "bir seyirci sizi izlemeye başladı" demez. Bu bilgi telde mevcut değildir; seyirciler tasarım gereği etkisizdir. Bu nedenle modül, kendisi yerine yan etkileri arayarak bunu aşmalıdır.
+
+İşin büyük kısmını iki sezgisel yapar. İlk olarak, istemcinin dünya durumunda var olan ancak asla görünür olarak oluşturulmayan bir varlık olup olmadığını izler; bu, normal bir oyuncu gibi görüntülenmeden yakındaki bir seyirci oyuncusu olduğunda ortaya çıkan bir kalıptır. İkincisi, normal bir oyuncunun üretmesi beklenecek hareket paketlerinin yokluğunu izler, çünkü bir seyircinin varlığı aktif bir oyuncunun yaptığı kadar aynı ağ trafiğini oluşturmaz. Bunların hiçbiri kimin seyirci olduğunu doğrudan okumaz. Her ikisi de istemcinin zaten elinde bulunan verilerden oluşturulan çıkarımlardır.
+
+Göründüğünde, savaş otomasyonu veya bir moderatörün farkında olduğu diğer modüllerle eşleştirilir. Dedektör savaşı kazanmaz veya isabet sağlamaz, sadece daha gösterişli modüllerin önce sessizleşmesini sağlayacak birkaç saniye uyarı verir.
+
+## Yanlış pozitifler ve yanlış negatifler
+
+Her iki sinyal de dolaylı olduğundan, modül iki farklı yönde hata yapar ve bunlar eşit derecede kötü değildir.
+
+| Arıza modu | Ne olur | Sonuç |
+|---|---|---|
+| Yanlış pozitif | İzlenmeyen bir oyuncuyu seyirci olarak işaretler | Kullanıcı boşuna kendini geri çeker, kaybedilen tempo dışında gerçek bir maliyeti yoktur |
+| Yanlış negatif | Gerçek bir seyirciyi tamamen kaçırır | Kullanıcı yanlış bir güven duyar, geri çekilmez ve yakalanma olasılığı daha yüksektir |
+
+Yanlış negatif daha maliyetlisidir. Yanlış pozitif sadece biraz dikkat gerektirir. Yanlış negatif, aslında güvenli olmadığı halde kıyıların temiz olduğunu söyler, bu da hiç dedektör olmamaktan daha kötüdür, çünkü gerçek belirsizliği yanlış yerleştirilmiş bir güvenle değiştirir.
+
+<Callout variant="info" title="Burada Opal'ın oturduğu yer">
+
+Opal bu isim altında bir modül göndermiyor ve göndermeye çalışmıyor. Seyirci tespiti, diğer, daha bariz modüllerin bir moderatörün gözünden gizli kalmasına yardımcı olmak için vardır ve bu, Opal'in aslında geliştirdiği fayda araçları ve dünya etkileşim araçlarından farklı bir problemdir. Bir istemci izleniyor muyum diye tahmin etmeye dayanıyorsa, bu genellikle modül listesinin geri kalanının örtbas etmeye ihtiyacı olduğunun bir işaretidir
+
+</Callout>
+
+<Callout variant="warning" title="Ne sakladığını da içinde barındırıyor">
+
+Seyirci tespit cihazı nadiren tek başına gönderilir. Savaş otomasyonu ve benzer modülleri görünür olmaktan korumak için vardır, bu da onu kullanmak, koruduğu şeyle aynı hesap risk kategorisine sokar. Tespit cihazı kendisi yasaklanmanıza neden olmaz. Genellikle onu kuran kişinin nedeni olur
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Seyirci Dedektörü aslında ne algılıyor?">
+
+Seyirci modunu doğrudan algılamıyor, Minecraft bunu hiçbir zaman istemciye sunmuyor. Bir varlığın istemcide var olması ancak görüntülenmemesi veya aktif bir oyuncunun normalde gönderdiği hareket paketlerinin olmaması gibi dolaylı işaretlerden bir gözlemcinin olası varlığını çıkarıyor
+
+</FAQItem>
+
+<FAQItem question="Kimlerin izlediğini söyleyebilir mi?">
+
+Hayır. Heuristikler, birinin izlediğini önerebilir, ancak kesinlikle bir kimliği ortaya çıkaramaz veya izleyici statüsünü doğrulayamazlar. Bir olasılık sinyali, bir arama değil
+
+</FAQItem>
+
+<FAQItem question="Spectator Detector başlı başına yasaklayıcı bir hile mi?">
+
+Oyun mekaniğini değiştirmeyebilir veya tek başına herhangi bir oyun içi avantaj sağlamaz. Görevi, diğer modüllerin etkilerini bir moderatörden gizlemeye yardımcı olmaktır, bu nedenle bir destek aracı olarak hileye yardımcı olur, bağımsız bir avantaj özelliği olarak değil ve genellikle koruduğu modüllerle birlikte gönderilir
+
+</FAQItem>
+
+<FAQItem question="Gerçek bir seyirciden nasıl kaçırabilirdi?">
+
+Doğrudan bir izleyici durumu okuması yerine dolaylı işaretlere dayandığı için. O özel işaretleri tetiklemeyen bir izleyici fark edilmez. Bu yanlış negatif, hiçbir şeyin değiştirilmesine gerek olmadığı yanılgısına düşürerek daha önemli bir hata modudur
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-killaura", label: "Killaura nedir?", description: "Seyirci dedektörünün kapsama alanını oluşturmak için gereken modül türü." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Müşteriler, yakalanmamaktan öte, görünmez kalmaya odaklanmışlardı." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Böylesi modüllerin daha büyük resimde nereye uyduğunu." }
+]} />
+
+<CTA href="/tr/satın-al">Opal, tahmin yürütme modüllerini tamamen atlıyor. Kesin olarak neler seçildi, görün.</CTA>

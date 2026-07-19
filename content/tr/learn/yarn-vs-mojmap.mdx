@@ -1,0 +1,88 @@
+---
+title: "Yarn vs Mojmap: Minecraft Haritaları Karşılaştırması (2026)"
+description: "Yarn ve Mojmap karşılaştırması: İki Minecraft haritalama setinin adlandırma, lisanslama ve araçlar açısından nasıl farklılaştığı ve Fabric modu için hangisinin seçileceği."
+excerpt: Yarn topluluk tarafından adlandırılmış ve belgelenmiştir; Mojmap, Mojang'ın kendi kaynak koduna uyumludur. İşte bu iki haritalama setinin nasıl farklılaştığı ve projenize hangisinin uygun olduğuna dair bilgiler.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Mappings
+author: trq
+faqs:
+  - q: Yarn mı yoksa Mojmap mı, Fabric modu için daha iyidir?
+    a: Her ikisi de Fabric üzerinde çalışıyor. Yarn, ekosistem varsayılanı ve adlandırılmış parametreler artı dokümantasyon içerirken, Mojmap ise Mojang'ın kendi adlandırmasına uyuyor; ekibinizin tercih ettiğiyle seçin.
+  - q: Mojmap isimleri, karartılmış isimlerle aynı mı?
+    a: Hayır. Karışık isimler a.a.a gibi görünüyor; Mojmap, bunları Mojang'ın dahili olarak kullandığı okunabilir isimlere eşliyor, her sürümde yayınlanıyor.
+  - q: Yarn ve Mojmap'ı karıştırabilir miyim?
+    a: Evet, bir bakıma. Bazı Fabric kurulumları bir Mojmap tabanına dayanır ve Yarn yeniden eşlemelerini uygular, böylece iki proje doğrudan rekabet etmek yerine aynı araç zincirinde bir arada bulunur.
+  - q: Yarn veya Mojmap, MCP'nin yerini aldı mı?
+    a: 1.14.4'ten itibaren yeni çalışmalar için hem MCP hem de Searge'i geçersiz kıldı, ancak 1.7 ile 1.12 arasındaki eski projeler hala MCP adlandırmasına bağımlı.
+---
+
+<KeyTakeaways>
+
+- Yarn, Fabric için topluluk tarafından belirlenmiş, açık kaynaklı bir haritalama çözümüdür ve tam yöntem parametrelerini içerir.
+- Mojmap, Mojang'ın resmi adıdır ve 1.14.4'ten beri her sürümle birlikte yayınlanmıştır.
+- Her ikisi de kararlı katmanların üzerinde yer alır, bu nedenle okunabilir adlar modları bozmadan değiştirilebilir.
+- Birçok Fabric projesi artık Mojmap tabanı üzerine inşa edilmekte ve Yarn yeniden eşlemelerini üzerine uygulamaktadır.
+
+</KeyTakeaways>
+
+Yarn, topluluk tarafından belirlenen, açık kaynaklı bir haritalama aracıdır ve [Fabric](https://fabricmc.net/) için gönderilir; tanımlayıcı isimler ve tam yöntem parametreleri içerir. Mojmap ise Mojang'ın kendi resmi adlandırma sistemidir ve 1.14.4'ten beri her sürümle birlikte yayınlanmıştır. Ücretsiz, iyi belgelenmiş bir adlandırma şeması istiyorsanız Yarn'ı, Mojang'ınkine uygun ve asla kaymayan isimler istiyorsanız Mojmap'ı seçin.
+
+## Bunların ne olduğu
+
+Yarn, FabricMC tarafından bakımı yapılan bir haritalama setidir. Gönüllüler, Minecraft'taki karartılmış sınıflara, alanlara ve yöntemlere okunabilir isimler atar ve bu isimler, derlenmiş modları bozmadan yeniden adlandırılabilmeleri için kararlı [Intermediary](/tr/learn/what-is-intermediary) katmanının üzerine yerleştirilir.
+
+Mojmap, Mojang'ın 1.14.4'ten itibaren her sürümle birlikte yayınladığı resmi haritalama tablosudur. İsimler doğrudan Mojang'ın kendi kaynak kodundan gelir, böylece geliştiricilerin dahili olarak şeyleri nasıl adlandırdığıyla eşleşir. MCP ve Searge'ın yerini yeni projeler için varsayılan olarak almıştır.
+
+## Nasıl farklılık gösterirler
+
+Bölünme, isimleri kimin seçtiği ve lisansın bunları nasıl ele aldığına dayanır. Yarn isimleri topluluk tarafından seçilir ve kullanıma ve paylaşmaya açıktır. Mojmap isimleri Mojang'a aittir ve lisans tarihsel olarak derleme zamanı kullanımına karşı cömert ancak yeniden dağıtıma karşı daha dikkatli olmuştur. Modern yükleyiciler bunu sizin için halleder.
+
+| | Yün | Mojmap |
+| :--- | :--- | :--- |
+| İsimlendirme | FabricMC topluluğu | Mojang (resmi) |
+| İlk olarak kullanıma sunuldu | Fabric çağı | 1.14.4 ve sonrası |
+| Metot parametreleri | Adlandırılmış ve belgelenmiş | Genellikle eksik |
+| Lisanslama | Açık, paylaşmaya izin verilir | Derleme zamanında izin verici |
+| Altındaki kararlı katman | Ara katman | Sürüm başına karartma haritası |
+| En uygun | Dokümantasyon isteyen Fabric modları | Mojang kaynaklarıyla eşleşen projeler |
+
+## Hangisini seçmeli
+
+- Açıklayıcı isimler, adlandırılmış metot parametreleri ve satır içi dokümantasyon istiyorsanız ve [Fabric](https://fabricmc.net/) üzerine inşa ediyorsanız Yarn'ı seçin. Fabric ekosisteminin köklü varsayılanıdır.
+- Mojang'ın kendi kaynaklarıyla eşleşen isimler istiyorsanız, kodu diğer yükleyicilerdeki kişilerle paylaşmayı planlıyorsanız veya resmi eşlemelerin yaygın bir temel oluşturduğu 1.21 veya sonraki sürümleri hedefliyorsanız Mojmap'ı seçin.
+- Birçok Fabric projesi artık Mojmap tabanında inşa ediyor ve üzerine Yarn yeniden eşlemeleri uyguluyor, bu nedenle her zaman sadece birini seçmek zorunda değilsiniz.
+
+## Diğer eşlemelerle nasıl bağlantı kurarlar
+
+Her ikisi de daha uzun bir tarihin içindedir. Mojang eşlemeleri yayınlamadan önce modlama sahnesi, karartılmış isimleri tersine çevirmek için MCP ve Searge'ı kullanıyordu. 1.14.4'ten itibaren Mojmap resmi adlandırmayı mümkün kıldı ve Yarn, [Intermediary](/tr/learn/what-is-intermediary) üzerine katman oluşturarak açık Fabric alternatifi olarak büyüdü. Intermediary katmanı, modların eşleme yeniden adlandırmaları arasında uyumlu kalmasını sağlar.
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Yarn mı Mojmap mı Fabric modu için daha iyidir?">
+Her ikisi de Fabric üzerinde çalışır. Yarn, ekosistem varsayılanıdır ve adlandırılmış parametreler ile dokümantasyon içerirken, Mojmap Mojang'ın kendi adlandırmasına uygundur. Ekibinizin hangi adlandırma ve araçları tercih ettiğine göre seçim yapın.
+</FAQItem>
+
+<FAQItem question="Mojmap isimleri karıştırılmış isimlerle aynı mı?">
+Hayır. Karıştırılmış isimler `a.a.a` gibi görünür. Mojmap, bunları Mojang'ın dahili olarak kullandığı okunabilir isimlere eşler; her sürümde yayınlanır.
+</FAQItem>
+
+<FAQItem question="Yarn ve Mojmap'ı karıştırabilir miyim?">
+Evet, bir bakıma. Bazı Fabric kurulumları Mojmap tabanı üzerine inşa eder ve Yarn yeniden eşlemelerini uygular, bu nedenle iki araç zinciri doğrudan rekabet etmek yerine bir arada var olur.
+</FAQItem>
+
+<FAQItem question="Yarn veya Mojmap, MCP'nin yerini aldı mı?">
+Her ikisi de 1.14.4 ve sonrasındaki yeni çalışmalar için MCP ve Searge'i geçersiz kıldı. Daha eski 1.7 ila 1.12 projeleri hala MCP adlandırmasına dayanıyor.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-are-minecraft-mappings", label: "Minecraft haritaları nedir?", description: "Bu ikisinin de ait olduğu daha geniş konu." },
+  { href: "/tr/learn/what-is-intermediary", label: "Aracı ne demektir?", description: "Katı tabaka, her iki eşlemeyi de kapsar." },
+  { href: "/tr/learn/what-is-the-fabric-api", label: "Fabric API nedir?", description: "Fabric modlarının üzerine inşa edildiği ortak katman." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

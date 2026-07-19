@@ -1,0 +1,79 @@
+---
+title: Minecraft İstemcilerinde AutoConfig Nedir?
+description: AutoConfig, LiquidBounce modülüdür; sunucunuzu veya anticheat sisteminizi algılar ve buna uygun ayarları otomatik olarak yükler. İşte profil sisteminin nasıl çalıştığı.
+excerpt: AutoConfig, anticheat'ınızın zehriyi sizin için seçer. Bir sunucuya bağlanın ve Watchdog, Grim veya başka bir şey tarafından izleniyor olsa bile, zaten çalışan ayarları sessizce yükler.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: AutoConfig aslında neyi değiştiriyor?
+    a: Sunucuya veya tespit ettiği hile önleme sistemine eşleşen bir profile göre, ulaşım mesafesi, dönüş yumuşatma veya zamanlama gibi bir istemcinin diğer modüllerinin ayarlarında yeni değerler yazar. Bu sayıları asla elle değiştirmeyin.
+  - q: AutoConfig herhangi bir anticheat ile çalışıyor mu?
+    a: Sadece geçmişte korunan profilleri olan anticheat'ler. LiquidBounce, Watchdog, Grim, Vulcan, Intave ve Polar gibi anticheat'ler için profilleri korumasıyla bilinir, ayrıca belirli sunuculara göre ayarlanmış ön ayarları da içerir.
+  - q: AutoConfig kendisi bir hile modülü mü?
+    a: Doğrudan bir anticheat'in işaretleyebileceği bir şey yapmak anlamında değil. Bir yapılandırma katmanı. Ayarladığı erişim veya rotasyon modülü, işaretlenen oyun davranışını yaratan şeydir.
+  - q: Neden her bir modüle doğrudan iyi ayarları kodlanmış olarak yerleştirmeyelim?
+    a: Bir anticheat sisteminden kaçınmak için ayarlanmış bir ortam, başka bir anticheat sisteminde tespitleri tetikleyebilir. Ayarları harici tutmak, bir modülün kod tabanının sunucular arasında çalışmasını sağlar ve anticheat sistemleri eşiklerini değiştirdiğinde yalnızca profilin güncellenmesi gerekir.
+---
+
+<KeyTakeaways>
+
+- AutoConfig, LiquidBounce modülüdür; sunucunuzu veya anticheat'ınızı algılar ve eşleşen ayarları otomatik olarak yükler.
+- Ulaşma mesafesi, dönüş yumuşatma ve zamanlama gibi değerleri, alınan bir profilden diğer modüllere yazar.
+- Watchdog, Grim, Vulcan, Intave ve Polar gibi anticheat'lar için bakımlı profiller mevcuttur.
+- AutoConfig kendisi ek paket göndermez, bu nedenle tespit riski, yapılandırdığı modüllerle ilgilidir.
+
+</KeyTakeaways>
+
+AutoConfig, LiquidBounce içinde yer alan bir modül olup, bağlandığınız sunucuyu veya antichiati tespit eder ve otomatik olarak eşleşen bir ayar profilini istemcinin diğer modüllerine yükler. Her sunucu değiştirdiğinizde ulaşma mesafesini, dönüş yumuşatmasını veya zamanlamayı elle ayarlamak yerine, bulduğu şeye (Watchdog, Grim, Vulcan, Intave, Polar, çalışan herhangi biri) göre anahtarlanan bir profil çeker ve bu değerleri sizin için yazar. Kendi başına bir hile olmaktan ziyade, her şeyin doğru şekilde ayarlanmasını sağlayan tesisat işlevini görür.
+
+## Nasıl Çalışır
+
+AutoConfig, öncelikle nerede olduğunuzu belirleyerek başlar. Bu, sunucu adresini doğrudan okumak veya bağlandıktan sonra hangi antichiatin etkin olduğunu parmak iziyle belirlemek anlamına gelebilir. Her iki durumda da, eşleşen bir profil uzaktan bir kaynaktan çekilir ve diğer modüllerinizin ayarlarının içine doğrudan yazılır: bir dövüş modülünün kullandığı ulaşma mesafesi, bir dönüş modülünün uyguladığı yumuşatma, bir hareket atlatmasının dayandığı zamanlama kaydırmaları.
+
+Bölünmenin arkasındaki mantık basit. Bir dönüşüm yardımcısı veya hareket atlatma, ayarlanabilir parametrelerle genel kod olarak bir kez yazılır. Bu parametreleri Watchdog'a karşı hayatta tutan sayılar, Grim veya Polar'a karşı hayatta kalan sayılar değildir ve LiquidBounce bu farkı modül kodundan tamamen dışarıda tutar, bunun yerine profil AutoConfig tarafından alınır. Bir anticheat tespit eşiklerini değiştirdiğinde, düzeltme bir profil güncellemesi, her kullanıcıya gönderilen yeni bir istemci sürümü değildir.
+
+## AutoConfig kendisi tespit edilebilir mi?
+
+Hayır ve bunun inşa edildiği şeklin tam da amacı bu. AutoConfig karakterinizi hareket ettirmez, dönüşlerinizi değiştirmez veya kablo üzerinden olağandışı bir şey göndermez. Diğer modüllere oturumdan önce veya sırasında yapılandırma değerleri yazar ve sunucu tarafı bir anticheat'in bir sayının elle girilip girilmediğini veya bir profil tarafından getirildiğini anlamasının bir yolu yoktur.
+
+Gerçek risk, AutoConfig'in yapılandırdığı katmanın bir altındaki yerde yaşar. Bir profil bir savaş modülünü bir tespit eşiğinin hemen kenarına ayarlarsa, bu modül başka bir sayı kümesiyle taşıdığı tam riski taşır. AutoConfig, bir hile istemcisinin üzerinde oturan bir bakım ve kolaylık katmanıdır, tek başına bir atlatma değildir ve dokunduğu modüllerin zaten sahip olduğu riskten fazlasını eklemez veya kaldırmaz.
+
+<Callout variant="info" title="Opal Burada Nerede Yer Alıyor?">
+Opal, AutoConfig adlı bir modül göndermiyor. Bununla açık olmak, geçiştirerek konuşmaktan daha değerli: LiquidBounce'un uzaktan profil mimarisi büyük ölçüde açık kaynaklı olması ve birden fazla anticheat'e özgü ayarı tek bir ortak kod tabanında senkronize tutması nedeniyle var. Sabit, bakımı yapılan bir modül setiyle ücretli bir istemci farklı bir sorunu çözüyor. Eğer araç istemcilerini özellikle "algılanan anticheat'e göre ayarları otomatik olarak değiştiriyor mu?" şeklinde karşılaştırıyorsanız, bu LiquidBounce'un bir mekanizmasıdır, Opal'dan beklenecek bir şey değildir.
+</Callout>
+
+<Callout variant="warning" title="Risk, AutoConfig'den değil, yapılandırdığı şeyden kaynaklanır">
+AutoConfig kendisi sizi yasaklatmayacaktır; bir sunucu için görünmezdir. Erişim modülü, dönüş modülü veya hareket atlatma, sayıları kendiniz ayarlamış olsaydınız olduğu gibi, tam olarak aynı hızda ince ayar yapabilir. Profil odaklı bir ayarı, manuel olarak yapılandırılmış birine gösterdiğiniz aynı dikkatle ele alın.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="AutoConfig aslında ne değiştiriyor?">
+Bir istemcinin diğer modüllerinin ayarlarında, tespit ettiği sunucuya veya anticheat sistemine eşleşen bir profile göre, ulaşım mesafesi, dönüş yumuşatması veya zamanlama gibi yeni değerler yazar. Bu sayıları asla elle değiştirmezsiniz.
+</FAQItem>
+
+<FAQItem question="AutoConfig herhangi bir anticheat ile çalışır mı?">
+Sadece arkasında güncel bir profil bulunduran anticheat'lar. LiquidBounce, Watchdog, Grim, Vulcan, Intave ve Polar gibi anticheat'lar için profilleri korumasıyla bilinir, ayrıca belirli sunuculara göre ayarlanmış ön ayarları da içerir.
+</FAQItem>
+
+<FAQItem question="AutoConfig kendisi bir hile modülü müdür?">
+Hayır, bir anticheat sisteminin doğrudan işaretleyebileceği bir şey anlamında değil. Bu, bir yapılandırma katmanıdır. Ayarladığı erişim veya dönüş modülü, işaretlenmeye neden olan oyun davranışını üreten şeydir.
+</FAQItem>
+
+<FAQItem question="Neden iyi ayarları her modüle doğrudan kodlamıyoruz?">
+Çünkü bir ayar, bir antichiati geçersiz kılarken başka bir antichiati tetikleyebilir. Ayarları harici tutmak, bir modülün kod tabanının sunucular arasında çalışmasını sağlar ve bir antichiatin eşik değerleri değiştiğinde yalnızca profilin güncellenmesi gerekir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "AutoConfig ve ayarladığı modüller, daha geniş bir kategoriye aittir." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Hassas kalmak, her anticheat için profilleri değiştirmekten farklı bir stratejidir." },
+  { href: "/tr/learn/what-is-reach", label: "Ulaşmak nedir?", description: "AutoConfig'un tam olarak ayarladığı ayardan biri ve güvenli sayının neden anticheat'i anticheat klasörüne taşıdığından." },
+]} />
+
+<CTA href="/tr/purchase">Profil avını bırakın. Opal'ın $8.99 için gönderdiklerine bakın.</CTA>

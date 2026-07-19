@@ -1,0 +1,88 @@
+---
+title: "Przędza vs Mojmap: Porównanie Map w Minecraft (2026)"
+description: "Wyjaśnienie Yarn vs Mojmap: jak różnią się te dwa zestawy map do Minecrafta pod względem nazywania, licencji i narzędzi, oraz który z nich wybrać do moda Fabric."
+excerpt: Praca nad Yarnem jest prowadzona przez społeczność i udokumentowana; Mojmap odpowiada kodowi źródłowemu Mojang. Poniżej przedstawiono różnice między tymi dwoma zestawami map oraz wskazówki, który z nich lepiej pasuje do Twojego projektu.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Mappings
+author: trq
+faqs:
+  - q: Czy Yarn czy Mojmap jest lepszy dla moda Fabric?
+    a: Obydwoje pracują z Fabric. Yarn był domyślnym ekosystemem i oferuje nazwane parametry oraz dokumentację, podczas gdy Mojmap odpowiada nazwom używanym przez Mojang; wybierz ten, który bardziej odpowiada preferencjom Twojego zespołu.
+  - q: Czy nazwy Mojmap są takie same jak nazwy zamazane?
+    a: Nie. Zamazane nazwy wyglądają jak a.a.a; Mojmap mapuje je na czytelne nazwy używane wewnętrznie przez Mojang, publikowane wraz z każdą wersją.
+  - q: Czy mogę mieszać Yarn z Mojmapem?
+    a: Tak, w pewnym sensie. Niektóre konfiguracje Fabric bazują na Mojmapie i nakładają remappingi Yarn, więc te dwa rozwiązania współistnieją w jednym środowisku programistycznym, zamiast bezpośrednio konkurować.
+  - q: Czy Yarn lub Mojmap zastąpiły MCP?
+    a: Obie te biblioteki uczyniły MCP i Searge przestarzałymi dla nowych projektów od wersji 1.14.4, choć starsze projekty z zakresu 1.7 do 1.12 nadal wykorzystują nazewnictwo MCP.
+---
+
+<KeyTakeaways>
+
+- Yarn to nazwa nadana przez społeczność, open-source'owy mapping dla Fabric z pełnymi parametrami metod.
+- Mojmap to oficjalna nazwa nadana przez Mojang, publikowana z każdą wersją od 1.14.4.
+- Oba opierają się na stabilnych warstwach, dzięki czemu czytelne nazwy mogą się zmieniać bez łamania modów.
+- Wiele projektów Fabric teraz buduje w oparciu o bazę Mojmap i nakłada remappingi Yarn na jej szczycie.
+
+</KeyTakeaways>
+
+Yarn to nazwa społecznościowa, otwartoźródłowe mapowanie dla [Fabric](https://fabricmc.net/) które udostępnia opisowe nazwy i pełne parametry metod. Mojmap to oficjalna nazwa używana przez Mojang, publikowana z każdą wersją od 1.14.4. Wybierz Yarn, jeśli chcesz darmowego, dobrze udokumentowanego schematu nazewnictwa; wybierz Mojmap, jeśli chcesz nazw, które odpowiadają tym używanym przez Mojang i nigdy się nie zmieniają.
+
+## Czym się różnią
+
+Yarn to zestaw map utrzymywany przez FabricWolontariusze przypisują czytelne nazwy zasłoniętym klasom, polom i metodom Minecraft, i te nazwy znajdują się na szczycie warstwy pośredniej [Intermediary](/pl/learn/what-is-intermediary), aby można je było zmieniać bez psucia skompilowanych modów.
+
+Mojmap to oficjalna tabela mapowania publikowana przez Mojang wraz z każdą wersją od 1.14.4. Nazwy pochodzą bezpośrednio z kodu źródłowego Mojang, więc odpowiadają temu, jak programiści nazywają rzeczy wewnętrznie. Zastąpił MCP i Searge jako domyślny dla każdego nowego projektu.
+
+## Jak się różnią
+
+Podział wynika z tego, kto wybiera nazwy i jak licencja na nie wpływa. Nazwy Yarn są wybierane przez społeczność i można ich używać oraz udostępniać bez ograniczeń. Nazwy Mojmap należą do Mojang, a licencja historycznie była hojna w kwestii użycia w czasie kompilacji, ale bardziej ostrożna w kwestii dystrybucji. Nowoczesne loadery zajmują się tym za Ciebie.
+
+| | Yarn | Mojmap |
+| :--- | :--- | :--- |
+| Kto nadaje nazwy | Społeczność FabricMC | Mojang (oficjalnie) |
+| Pierwsza dostępność | Era Fabric | Od wersji 1.14.4 |
+| Parametry metod | Nazwane i udokumentowane | Często brakujące |
+| Licencjonowanie | Otwarta, możliwość swobodnego udostępniania | Pozwalająca na kompilację |
+| Stabilna warstwa podstawy | Warstwa pośrednia | Mapa zaciemnień dla każdej wersji |
+| Najlepsze dopasowanie | Mody Fabric wymagające dokumentacji | Projekty odpowiadające kodowi źródłowemu Mojang |
+
+## Co wybrać
+
+- Wybierz Yarn, jeśli budujesz na [Fabric](https://fabricmc.net/) i chcesz opisowe nazwy, nazwane parametry metod oraz dokumentację inline. Jest to standardowy wybór w ekosystemie Fabric od dawna.
+- Wybierz Mojmap, jeśli chcesz nazw, które odpowiadają własnemu kodowi źródłowemu Mojang, planujesz udostępniać kod osobom korzystającym z innych loaderów lub celujesz w wersję 1.21 lub nowszą, gdzie oficjalne mapowania stanowią powszechną bazę.
+- Wiele projektów Fabric obecnie buduje na bazie Mojmap i nakłada na to ponowne mapowania Yarn, więc nie zawsze musisz wybierać tylko jedną opcję.
+
+## Jak łączą się z innymi mapowaniami
+
+Oba znajdują się w dłuższej historii. Zanim Mojang opublikował mapowania, scena modderska używała MCP i Searge do odwrócenia zaciemnionych nazw. Od wersji 1.14.4, Mojmap udostępnił oficjalne nazewnictwo, a Yarn rozwinął się jako otwarta alternatywa Fabric, warstwą nakładaną na [Intermediary](/pl/learn/what-is-intermediary). Warstwa Intermediary to to, co zapewnia kompatybilność modów pomimo zmian nazw mapowań.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Yarn czy Mojmap jest lepszy dla moda Fabric?">
+Oba działają na Fabricu. Yarn jest standardem ekosystemu i oferuje nazwane parametry oraz dokumentację, podczas gdy Mojmap używa nazw zgodnych z Mojangiem. Wybierz ten, którego nazewnictwo i narzędzia bardziej odpowiadają Twojemu zespołowi.
+</FAQItem>
+
+<FAQItem question="Czy nazwy Mojmap są takie same jak nazwy zaciemnione?">
+Nie. Nazwy zaciemnione wyglądają jak `a.a.a`. Mojmap mapuje je na czytelne nazwy, których używa wewnętrznie Mojang, publikowane wraz z każdą wersją.
+</FAQItem>
+
+<FAQItem question="Czy mogę łączyć Yarn z Mojmap?">
+Tak, w pewnym sensie. Niektóre konfiguracje Fabric budują na bazie Mojmap i nakładają remapowania Yarn, więc oba te narzędzia współistnieją w jednym łańcuchu narzędzi, zamiast konkurować bezpośrednio.
+</FAQItem>
+
+<FAQItem question="Czy Yarn czy Mojmap zastąpiły MCP?">
+Obie uczyniły MCP i Searge przestarzałymi dla nowych projektów od wersji 1.14.4. Starsze projekty z zakresu 1.7 do 1.12 nadal korzystają z nazewnictwa MCP.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-are-minecraft-mappings", label: "Co są Minecraft mapowania?", description: "Szerszy temat, do którego ci dwaj należą." },
+  { href: "/pl/learn/what-is-intermediary", label: "Co to jest pośrednik?", description: "Stabilna warstwa leży nad obiema mapowaniami." },
+  { href: "/pl/learn/what-is-the-fabric-api", label: "Czym jest Fabric API?", description: "Wspólna warstwa, na której budowane są większość modyfikacji Fabric." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź Opala, klienta Fabric, za $8.99</CTA>

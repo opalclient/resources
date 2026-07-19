@@ -1,0 +1,85 @@
+---
+title: Minecraft'ta TPAKiller Nedir? Mod Açıklaması
+description: TPAKiller, bir hedefin tepki vermesi veya karşılık vermesi öncesinde oluşan o kısa anı değerlendirerek, teleport isteğini otomatik olarak göndermeyi ve indiği anda saldırmayı sağlar.
+excerpt: Teleport isteği gönder, yere inmesini bekle, sonra diğer oyuncu bile yüklenmeden önce saldırmaya başla. İşte tüm hile bu kadar ve bu, hile sayılır.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: TPAKiller aslında neyi otomatikleştiriyor?
+    a: "İki aşama: Bir hedefe teleport isteği göndermek, ardından kabul edip indiği an saldırmak. Oyuncunun ne ilk adımı ne de ikinci adımı elle zamanlamasına gerek yoktur, modül bunları birbirine bağlar."
+  - q: Teleportasyonun hemen ardından gelen an neden tehlikelidir?
+    a: Oyuncu yeni bir yere ışınlandığında, hala yeni alana yükleniyor ve birçok sunucuda kontrolü henüz tam olarak geri kazanmamış oluyor. TPAKiller, hedef tepki vermeden önceki kısa süreliğine isabetini gerçekleştirmek üzere tasarlandı.
+  - q: TPAKiller, aimbot veya KillAura ile aynı şey mi?
+    a: "Hayır, genel olarak savaşmayı hedeflemiyor veya otomatikleştirmiyor; yalnızca belirli bir diziyi otomatikleştiriyor: teleport isteği ve indiği an saldırı. Avantaj, destekli nişan alma veya saldırı otomasyonundan değil, zamanlama ve sürprizden kaynaklanıyor."
+  - q: Hangi müşteri TPAKiller belgelerini?
+    a: Azim, TPAKiller modülü olarak izlenen müşteri yeridir.
+  - q: Sunucular TPAKiller'ın çalışmasını engelleyebilir mi?
+    a: Evet. Teleportasyondan sonraki kısa süreli dokunulmazlık dönemi veya teleport isteklerinin gönderilme sıklığına getirilen kısıtlama, modülün dayandığı savunmasız anı ortadan kaldırır. Her iki çözüm de yaygın karşı önlemlerdir.
+---
+
+<KeyTakeaways>
+
+- TPAKiller, hedef teleport istedikten sonra anında saldıran bir exploit modülüdür.
+- Hedef teleport ettikten hemen sonraki kısa sürede, yüklenirken ve neredeyse tepki veremezken saldırır.
+- Bu, bir aimbot veya KillAura değildir: avantaj, zamanlama ve sürprizden, savaş otomasyonundan değil gelir.
+- Tenacity istemcisinde bir modül olarak belgelenmiştir; sunucular, doğuş dayanıklılığı veya teleport hız sınırlamalarıyla bu açığı kapatır.
+
+</KeyTakeaways>
+
+TPAKiller, belirli bir pusu işlemini otomatikleştiren bir istismar modülüdür: bir ışınlanma isteği gönderin, hedef kabul edene kadar bekleyin ve yere bastığı an saldırın. Oyuncuların çoğu hiç düşünmediği, `/tpa` ışınlanmasından hemen sonraki, yeni alana yüklenirken ve tam kontrolü geri kazanmamışkenki saniyenin veya birkaç saniyesinin etrafında inşa edilmiştir. TPAKiller, rutin bir sosyal komutu ücretsiz bir öldürme kurulumuna dönüştüren, o boşluğa denk gelecek şekilde zamanlanmış bir saldırı yapar. Tenacity istemcisinde bir modül olarak belgelenmiştir ve bir hedefi otomatik olarak hedefleyen bir nişan alma botu gibi, savaş otomasyonu tarafında değil, istismar tarafında yer alır.
+
+## TPAKiller nasıl çalışır
+
+TPAKiller, oyuncunun el ile herhangi bir şey yapmadan tüm diziyi çalıştırır. Seçilen bir hedefe bir ışınlanma isteği (bir `/tpa` komutu veya eşdeğeri) gönderir, kabulü izler ve hedef oyuncunun yanına indiği an bir saldırı başlatır. Hedef, bir ışınlanmaya, bir savaşa değil, kabul ettiğinden dolayı bunu fark etmez.
+
+Bu istismar, ışınlanmanın oyuncuyu herhangi bir uyarı olmadan yeni bir konuma düşürmesi ve birçok sunucuda hareket etme veya normal tepki verme konusunda kısa bir boşluk olması gerçeğinden faydalanır. TPAKiller, hedef kontrolü geri kazanmadan veya alanı tamamen yüklemeden önce tam olarak bu boşlukta hareket etmek üzere tasarlanmıştır.
+
+## TPAKiller kullanmak güvenli mi
+
+TPK katili olmak kesinlikle gri bir alan değil. Bir teleportal isteği gibi bir sosyal mekaniği, bir pusu kurmak amacıyla özel olarak otomatikleştirmek, oyun avantajı elde etme hilesidir: Rakibin asla kabul etmediği ve iyi oynamakla engelleyemediği savaşları kazanır. `/tpa` komutunu sunan çoğu sunucu, bunun seyahat ve gruplaşmak için kullanılmasını bekler, öldürmek için yem olarak değil.
+
+Burada tespit, hedef alma otomasyonu gibi bir şey için olduğundan daha karmaşıktır, çünkü teleportal istek gönderme ve ardından saldırma gibi her bir eylem tek başına tamamen meşrudur. Bunu ele veren şey örüntüdür: Anlamsız bir gecikme olmadan bir teleportal isteği ve ardından bir saldırı, birden fazla hedef üzerinde tekrarlanır, bu da gerçek oyuncuların neredeyse hiçbir zaman kazara üretmediği bir ritmdir. İşte bu yüzden genellikle düzeltme tespit tabanlı değildir. Teleporttan sonra kısa bir dayanıklılık penceresi veya `/tpa` komutunun ne sıklıkta gönderilebileceğine ilişkin bir hız sınırı, onu yakalamak zorunda kalmadan hileyi ortadan kaldırır.
+
+<Callout variant="tip" title="Opal nerede çizgiyi çiziyor">
+Opal, TPAKiller tarzı bir modül göndermiyor ve bu bir eksiklik değil. `/tpa` işleme özelindeki belirli bir boşluğu istismar eden bir özellik, çoğu sunucuda artık bulunan yarım saniyelik dayanıklılık penceresi eklendiği anda çalışmayı durduruyor. Opal'ın savaş modülleri, bir yönetici tarafından düzeltilene kadar bir zamanlama boşluğunu sömürmek yerine, kendi değerleriyle hak ettikleri yere sahip olacak şekilde tasarlanmıştır.
+</Callout>
+
+<Callout variant="warning" title="Bu, yasaklanmaya yol açabilecek bir istismardır">
+TPAKiller, klasik bir oyun avantajı istismarıdır ve ekip liderleri de bunu böyle değerlendirir. Hile istemini yasaklayan bir sunucuda bunu çalıştırmak, sunucuda anti-hile algılama olup olmadığına bakılmaksızın, o kategorideki diğer modüllerle aynı şekilde bir hesabı riske sokar. Bu sayfa nasıl çalıştığını açıklar, nasıl kurtulmayı denediğinizi değil.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="TPAKiller aslında neyi otomatikleştiriyor?">
+İki aşama: Bir hedefe teleport isteği göndermek, ardından kabul edip indiği an saldırmak. Oyuncunun ne ilk ne de ikinci adımı elle zamanlamasına gerek yoktur, modül bunları birbirine bağlar.
+</FAQItem>
+
+<FAQItem question="Teleport olduktan sonraki an neden tehlikelidir?">
+Teleport eden bir oyuncu, henüz yeni alana yükleniyor ve birçok sunucuda kontrolü henüz tam olarak geri kazanmamıştır. TPAKiller, hedef tepki vermeden önce bile o kısa süre içinde isabet etmesi için tasarlanmıştır.
+</FAQItem>
+
+<FAQItem question="TPAKiller bir aimbot veya KillAura ile aynı mı?">
+Hayır. Genel olarak nişan alma veya dövüşü otomatikleştirme gibi bir işlevi yok, yalnızca belirli bir diziyi otomatikleştiri: teleport isteği gönderip, indiği an saldırı yapar. Avantaj, zamanlama ve sürprizden kaynaklanır, desteklenmiş nişan alma veya saldırı otomasyonundan değil.
+</FAQItem>
+
+<FAQItem question="TPAKiller hangi müşteri belgelerini izler?">
+TPAKiller, Tenacity müşterisinde bir modül olarak takip edilir.
+</FAQItem>
+
+<FAQItem question="Sunucular TPAKiller'ın çalışmasını engelleyebilir mi?">
+Evet. Teleport ettikten sonraki kısa süreli dokunulmazlık dönemi veya teleport isteklerinin gönderilme sıklığına getirilen kısıtlama, modülün ihtiyaç duyduğu savunmasız anı ortadan kaldırır. Her ikisi de yaygın karşı önlemlerdir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "Otomatik yakın dövüş modülü TPAKiller'a benzetiliyor, ancak değil." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Destekli hedefleme ile TPAKiller'ın tek vuruş zamanlama açığı." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Sessiz kalmaya yeterince dayanıklı olan, sömürü odaklı müşteri kategorisi." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'in gerçekte gönderdiği savaş modüllerini görün, pusuya gerek yok.</CTA>

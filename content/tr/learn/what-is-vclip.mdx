@@ -1,0 +1,82 @@
+---
+title: Minecraft'ta VClip (Dikey Klip) Nedir?
+description: VClip, oyuncunun katı blokların içinden dikey olarak geçmesini sağlayan bir hareket modülüdür; çarpışma normale dönmeden önce bir zeminden veya tavandan geçiş yapabilir.
+excerpt: VClip, bir oyuncuyu saniyeliğine bir zemin veya tavandan geçirir, sonra çarpışma hiçbir şey olmamış gibi geri döner.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: VClip, noclip ile aynı mı?
+    a: Tam olarak değil. Tam noclip, her yönde çarpışmayı devre dışı bırakır, böylece oyuncu her şeyin içinden geçebilir. VClip yalnızca dikey eksende çalışır ve oyuncunun önündeki zemini, tavanı veya ince duvarı geçebileceği kadar kısa bir süre çarpışma yeniden başlamadan önce.
+  - q: VClip yan yatarken de çalışır mı?
+    a: Hayır. İsim sözcükseldir. VClip yalnızca dikey olarak, arazi yukarı veya aşağı doğru keser. Oyuncuyu yanlarında dururken bir duvardan geçirmeyecektir.
+  - q: Anticheat yazılımları VClip'i gerçekten tespit edebiliyor mu?
+    a: Evet. Oyuncu, aralarında yasal, açık bir alan olmadan, katı zeminin uzak tarafında son bulur; bu durum, sürekli ve çarpışma kontrolünden geçen hareketlerle elde edilemez. Konumları dünya haritasına göre doğrulayan sunucu tarafı antichipleri tam olarak bu zıplamayı tespit etmek üzere tasarlanmıştır.
+  - q: Hangi müşteri VClip'i bir modül olarak kaydeder?
+    a: Juul, VClip'i diğer hareket ve dünya araçlarının yanında, savaşla ilgili bir şey olmaktan ziyade bir modül olarak belgeliyor.
+---
+
+<KeyTakeaways>
+
+- VClip (Dikey Klip), oyuncunun katı blokların kısa süreliğine içinden geçmesini sağlayan bir hareket modülüdür; bir zeminden, tavandan veya ince bir duvardan düz yukarı veya aşağı hareket etmeyi mümkün kılar.
+- Sadece dikey eksende çalışır. Tam noclip'de olduğu gibi yana doğru geçişe izin vermez.
+- Çarpışma, oyuncu geçişi tamamladığı anda geri döner, böylece dünyada hiçbir şey bozulmaz.
+- Katları atlamak veya kapısız odalara inmek için kullanılır, savaşta avantaj elde etmek için değil.
+- Hile önleme sistemleri bunu yakalar çünkü ortaya çıkan konum, tek bir, çarpışma kontrolünden geçmiş sürekli bir hareketin asla üretemeyeceği bir konumdur.
+
+</KeyTakeaways>
+
+VClip, dikey kesme anlamına gelen Vertical Clip'in kısaltmasıdır ve bir oyuncunun bir anlığına katı blokların içinden doğrudan geçmesini sağlayan bir hareket modülüdür; aksi takdirde onları durduracak bir zeminden, tavandan veya ince bir duvardan yukarı veya aşağı hareket etmelerini sağlar. Tek bir eksende noclip'i düşünün: çarpışma, yolundaki engeli geçmek için gereken kadar kısa bir süre için devre dışı bırakılır ve hiç gitmemiş gibi geri açılır. Savaş veya nişan alma ile ilgili değildir; sadece oyuncuyu, motorun onları dışarıda tutmak üzere tasarlandığı arazi boyunca yeniden konumlandırır.
+
+## VClip sizi aslında nasıl hareket ettirir
+
+Her tick'te, istemci bir oyuncunun hitbox'ını etrafındaki bloklara göre kontrol eder ve bir şeyle örtüşeceği an hareketi durdurur. Bu kontrol, bir oyuncunun bir duvara yürümesini veya kendi zemininden düşmesini engeller. VClip, her yerde değil, sadece dikey eksende ve yalnızca doğrudan üstünde veya altında olanı geçmek için gereken süre boyunca geçici olarak devre dışı bırakarak çalışır.
+
+Oyuncu, sanki hava ise, bloğun içinden hareket eder. Diğer tarafta engelsiz olduklarında, çarpışma yeniden başlar ve oyunun onları hiçbir zaman başka bir yerde olmamış gibi ele aldığı bir noktaya geri dönerler. Hiçbir blok kırılmaz, merdiven veya elytra dahil değildir, arazinin kendisinde hiçbir şey değişmez. Konum, oyuncunun başladığı yerden fiziksel olarak ulaşılamayacak bir noktaya güncellenir.
+
+Çoğunlukla katlar arasında bir kat atlamak veya kapılar ve koridorlardan geçmeden doğrudan bir odaya inmek için kullanılır; harita içindeki bir savaş kazanma aracı olmaktan ziyade bir kısayoldur. Aynı zamanda onu ele vermesinin tam da budur.
+
+## VClip tespit edilebilir mi?
+
+Evet, ve kolayca. Katı bloklar içinden geçmek, sunucunun kontrol edebileceği bir iz bırakır: oyuncunun darbesi (hitbox), aralarında yasal, açık bir alan hiç işgal etmeden bir zeminin veya duvarın bir tarafında sonlanır. Vanilla hareket devamlıdır, bu nedenle bir oyuncuyu katı blokların içine yerleştiren veya etrafında geçerli bir yol olmadan bir engeli sıçrayarak geçen bir konum güncellemesi, normal oyundan kaynaklanan bir şey değildir.
+
+Bu, VClip'i kozmetik bir kolaylık olmaktan ziyade gerçek bir hareket istismarı yapar. Bir HUD ayarlaması veya renk ayarı gibi değil, oyuncunun aslında bulunmasına izin verilen yeri değiştirir ve her tik'te konumu ve çarpışmayı doğrulayan sunucu tarafı antichipler, tam olarak bu tür atlamaları yakalamak için özel olarak tasarlanmıştır.
+
+<Callout variant="tip" title="Opal nerede çizgiyi çiziyor">
+Opal, VClip veya normal bir çarpışmanın asla üretmeyeceği bir konumu taklit etmek için tasarlanmış hiçbir şeyi göndermez. Sizin için daha hızlı hareket etmenizi veya daha sıkı bir açıyı korumanızı sağlayan bir modül bile, sunucunun kontrol ettiği fiziksel sınırlar içinde hala bir avantajdır. Hitbox'unuzu bir zeminden teleport eden bir modül ise farklı bir risk kategorisine girer ve Opal'ın modül seti bu çizginin ilk tarafında kalır.
+</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını değil">
+VClip, bir oyuncunun çarpışma fiziğinin normalde izin vermediği pozisyonlarda hareket etmesini sağlar; bu, hile önleme sistemlerinin ilk olarak işaretlemeyi hedeflediği hareket türüdür. Bu sayfa mekaniği açıklar, uygulamayı değil. Yetenekli bir hile önleme sistemine sahip herhangi bir sunucuda çalıştırmak, hesabınızı kaybetmenin hızlı bir yoludur.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="VClip, noclip ile aynı mı?">
+Tam olarak değil. Tam noclip, her yönde çarpışmayı devre dışı bırakır, böylece oyuncu her şeyin içinden geçebilir. VClip yalnızca dikey eksende çalışır ve önündeki zemini, tavanı veya ince duvarı geçmek için yalnızca yeterince uzun sürer, ardından çarpışma yeniden başlar.
+</FAQItem>
+
+<FAQItem question="VClip yanlara da çalışır mı?">
+Hayır. İsim sözcüğü sözlüdür. VClip yalnızca dikey olarak, arazi boyunca yukarı veya aşağı doğru çalışır. Oyuncuyu yanlarında dururken bir duvardan geçiremez.
+</FAQItem>
+
+<FAQItem question="Anticheatler VClip'i gerçekten tespit edebilir mi?">
+Evet. Oyuncu, aralarında yasal, açık bir alan olmadan katı zeminin diğer tarafında bulur, bu da sürekli, çarpışma kontrolünden geçen hareketlerle üretilemez. Konumu dünya haritasına göre doğrulayan sunucu tarafı anticheat'ler tam olarak bu zıplamayı yakalamak üzere tasarlanmıştır.
+</FAQItem>
+
+<FAQItem question="Hangi müşteri belgeleri VClip'i bir modül olarak kaydeder?">
+Juul, VClip'i diğer hareket ve dünya araçlarının yanında, savaşla ilgili herhangi bir şeyden ayrı olarak bir modül olarak kaydeder.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Daha geniş VClip ve benzeri modüllerin ait olduğu kategori." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Bu türden açıkların gizlenmesini amaçlayan, gizliliğe öncelik veren müşteri kategorisi." },
+  { href: "/tr/learn/what-is-scaffold", label: "Scaffold nedir?", description: "Başka bir hareket modülü, yasal konumlandırmayı bir kısayol ile takas ediyor ve bunun bedelini tespit edilebilirliğin artmasıyla ödüyor." },
+]} />
+
+<CTA href="/tr/purchase">İncelemeye dayanacak, baskı altında yıkılmayacak hareket modülleri edinin.</CTA>

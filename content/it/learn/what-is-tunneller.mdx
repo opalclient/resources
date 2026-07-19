@@ -1,0 +1,82 @@
+---
+title: Cosa sono i Tunneller in Minecraft? Spiegazione del Modulo
+description: Tunneller è un modulo Wurst che scava automaticamente un tunnel di larghezza, altezza e direzione impostate, aprendo un percorso rettilineo attraverso i blocchi senza utilizzare un'ascia.
+excerpt: Il tunnelatore seleziona una dimensione e una direzione, poi scava la roccia solida senza che tu tocchi una piccozza. È automazione, e lo fa in modo automatizzato.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Tunneller è una truffa o una funzionalità utile?
+    a: Automatizza qualcosa che un giocatore potrebbe fare manualmente, come scavare un tunnel, trasformandolo in una funzionalità di automazione del gameplay piuttosto che puramente cosmetica. Se questo ti crea problemi dipende interamente dalle regole del server e dall'anticheat, non dal modulo stesso.
+  - q: Funziona Tunneller sui server multiplayer di sopravvivenza?
+    a: "Tecnicamente, sì. Invia gli stessi pacchetti di interruzione del blocco che invierebbe un giocatore normale, quindi nulla impedisce che funzioni su un server attivo. La parte più difficile è rimanere inosservato: il monitoraggio delle interruzioni dei blocchi può rilevare i tempi meccanici e i percorsi perfettamente rettilinei lasciati dallo scavo automatizzato."
+  - q: Qual è la differenza tra Tunneller e Nuker?
+    a: Il Nuker distrugge ogni blocco distruttibile entro un raggio attorno al giocatore, ovunque si trovi. Il Tunneller, invece, crea una forma definita in una direzione, comportandosi più come uno scavo automatizzato che come una bonifica di area.
+  - q: L'uso di Tunneller può portare alla squalifica?
+    a: Su un server con un anticheat attivo o personale di supporto che monitora l'attività dei blocchi, sì, può essere trattato come qualsiasi altro comportamento automatizzato. In singleplayer o su un server non moderato, non c'è nessuno che applichi una ban inizialmente.
+---
+
+<KeyTakeaways>
+
+- Tunneller è un modulo Wurst che scava automaticamente un tunnel di larghezza, altezza e direzione impostate, senza necessità di estrazione manuale.
+- Crea una sezione trasversale fissa in avanti, blocco per blocco, a differenza della rimozione a raggio del Nuker.
+- Comune su server singleplayer e anarchy non moderati dove il monitoraggio della rottura dei blocchi è limitato.
+- Il ritmo meccanico e rettilineo è esattamente ciò che i sistemi anti-cheat per la rottura dei blocchi sono progettati per segnalare.
+
+</KeyTakeaways>
+
+Tunneller è un modulo di categoria mondiale in Wurst che scava automaticamente un tunnel di qualsiasi larghezza, altezza e direzione tu imposti, distruggendo ogni blocco sul suo percorso, così non dovrai mai più toccare un piccone. Definisci le dimensioni e la direzione, attiva il modulo e questo si espanderà a partire dalla tua posizione, rimuovendo il blocco trasversale alla sua avanzata. Non c'è bisogno di mirare, di cliccare o di camminare a testa in giù contro un muro per iniziare uno scavo. Alcune implementazioni addirittura riparano il pavimento mentre procedono, perché un tunnel scavato automaticamente che apre un buco sotto i tuoi piedi è un pericolo, non un vantaggio.
+
+## Come funziona
+
+Tunneller richiede tre input: larghezza, altezza e direzione. A partire da questi, si espande a partire dalla tua posizione, distruggendo ogni blocco nella sezione trasversale prima di farti avanzare nello spazio liberato. Il modulo decide quale blocco esaminare, invia il comando di distruzione e avanza solo quando il percorso è effettivamente libero. Non stai guidando nulla di tutto ciò, ti limiti a osservare il processo. Alcune implementazioni riempiono anche le fessure che si aprono sotto di te durante lo scavo, perché cadere nel buco che stai scavando vanifica lo scopo dell'automazione.
+
+## Impostazioni comuni
+
+| Impostazione | Cosa controlla |
+|---|---|
+| Larghezza e altezza | La sezione trasversale del tunnel che viene scavato |
+| Direzione | La direzione in cui il tunnel si estende rispetto alla tua direzione attuale |
+| Lunghezza | Quanto si estende prima di fermarsi da solo |
+| Gestione dei blocchi | Se i liquidi e i minerali preziosi vengono saltati o sfondati come tutto il resto |
+
+Larghezza, altezza e direzione sono ciò che distingue Tunneller da un semplice interruttore per l'auto-miniera. Invece di rompere ciò che capita di fronte a te, si impegna a creare una forma in anticipo e scava esattamente quella, nient'altro, nient'altro.
+
+<Callout variant="tip" title="Dove si colloca in Opal">
+Opal non include un modulo Tunneller. Questa è una funzionalità Wurst, creata per il mondo dei server anarchici dove sgomberare un miglio di pietra a mano è il vero lavoro. Il catalogo di Opal si concentra su combattimento, movimento e grafica, le categorie in cui un singolo tick decide una battaglia. L'escavazione automatizzata non è il problema che Opal sta cercando di risolvere.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina descrive Tunneller in termini generali, per far capire cosa significa il termine, non come documentazione per qualcosa che Opal fornisce. Su un server con anticheat attivo, scavare automaticamente è più facile da individuare di quanto sembri. I giocatori reali si fermano, tornano indietro e rimuovono occasionalmente un blocco fuori asse durante lo scavo, mentre un tunnel meccanicamente temporizzato e perfettamente dritto non lo fanno. La registrazione della rottura dei blocchi può segnalare tale regolarità nello stesso modo in cui segnala qualsiasi altra azione automatizzata, e su un server moderato questo è un comportamento che può portare al ban, indipendentemente dal client che lo ha prodotto.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Tunneller è un imbroglio o una funzionalità utile?">
+Automatizza qualcosa che un giocatore potrebbe fare manualmente, scavando un tunnel, il che lo rende una funzionalità di automazione del gameplay piuttosto che puramente cosmetica. Se ti mette nei guai dipende interamente dalle regole del server e dall'anticheat, non dal modulo stesso.
+</FAQItem>
+
+<FAQItem question="Tunneller funziona su server multiplayer di sopravvivenza?">
+Tecnicamente, sì. Invia gli stessi pacchetti di rottura dei blocchi che invierebbe un giocatore normale, quindi nulla impedisce che funzioni su un server attivo. Restare inosservati è la parte più difficile, poiché il monitoraggio della rottura dei blocchi può rilevare i tempi meccanici e i percorsi perfettamente rettilinei lasciati dallo scavo automatizzato.
+</FAQItem>
+
+<FAQItem question="Qual è la differenza tra Tunneller e Nuker?">
+Nuker distrugge ogni blocco distruttibile entro un raggio attorno al giocatore, ovunque esso si trovi. Tunneller invece crea un taglio di forma definita in una direzione, comportandosi più come uno scavo automatizzato che come una bonifica di area.
+</FAQItem>
+
+<FAQItem question="L'utilizzo di Tunneller può portare a un ban?">
+Su un server con anticheat attivo o con personale di supporto che monitora l'attività dei blocchi, sì, può essere trattato come qualsiasi altro comportamento automatizzato. In singleplayer o su un server non moderato, non c'è nessuno che applichi un ban in primo luogo.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria più ampia Tunneller e moduli simili vivono all'interno." },
+  { href: "/it/learn/what-is-scaffold", label: "Cos'è Scaffold?", description: "Un altro modulo di automazione, questa volta che posiziona i blocchi invece di rimuoverli." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "La categoria incentrata sulla discrezione, creata appositamente per i server non moderati dove Tunneller eccelle." },
+]} />
+
+<CTA href="/it/purchase">Opal investe il suo budget di costruzione in combattimento e movimento, non in picconi. Scopri cosa c'è veramente in dotazione.</CTA>

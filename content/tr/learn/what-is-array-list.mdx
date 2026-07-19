@@ -1,0 +1,83 @@
+---
+title: Minecraft'ta Dizi Listesi Nedir? Modül Açıklaması
+description: Dizi Listesi, Minecraft yardımcı istemcisinin etkin modüllerini gerçek zamanlı olarak listeleyen ve bir menü açmadan hangi özelliklerin açık olduğunu kontrol etmeni sağlayan HUD üst katmanıdır.
+excerpt: Dizi Listi, etkinleştirdiğiniz tüm modülleri ekranda bir liste olarak gösterir. Menüleri karıştırmaya gerek yok.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Dizi listesi oyun akışını etkiler mi?
+    a: Hayır. Sadece kendi ekranınızda metin oluşturur, oyun mantığına dokunmaz veya sunucuyla iletişim kurmaz, bu nedenle oyun akışını hiçbir şekilde etkilemez.
+  - q: Anticheat sistemleri Array List'i tespit edebilir mi?
+    a: Hayır, hiçbir şey sunucuya göndermiyor, dolayısıyla sunucu tarafındaki hile önleme sisteminin ilk etapta göreceği veya işaretleyeceği bir şey de yok.
+  - q: Bir Dizi Listesinde gizli modül nedir?
+    a: Görünür listede yer almasa bile arka planda normal şekilde çalışmaya devam etmesi işaretlenmiş bir modül, böylece ekranda görünmese bile aktif kalır.
+  - q: Dizi Listesi her istemcide aynı mıdır?
+    a: Tam olarak değil. Konum, stil ve gizli modül seçeneğinin var olup olmaması bile müşteriye göre değişir, ancak temel fikir, şu anda aktif olanları listelemek, tutarlı kalır.
+  - q: Bir müşterinin kendi listesinden modülleri neden gizlerdi?
+    a: Görünürdeki gösterge, bir ekran paylaşımı sırasında genellikle bir başkasının ekranı incelerken etkinleştirilmiş tüm modülleri göstermez.
+---
+
+<KeyTakeaways>
+
+- Dizi Listesi, bir HUD üst bilgisidir ve bir ekran köşesinde istemcinin şu anda etkin olan modüllerini listeler, modüller değiştiği anda canlı olarak güncellenir.
+- Yalnızca istemci tarafında oluşturulur, bu nedenle sunucuya dokunmaz ve antichi̇at bunu göremez.
+- Bazı istemciler modüllerin gizli çalışmasına izin verir: etkin, ancak listeden çıkarılmış.
+- Fan, Tenacity ve Rose gibi istemcilerde bulunur.
+
+</KeyTakeaways>
+
+Dizi Listesi, Minecraft yardımcı istemcilerinde bulunan bir HUD öğesidir ve şu anda etkinleştirilmiş her modülün adını görüntüler; genellikle ekranın bir köşesine istiflenir. Bir modülü geçiş yapın ve adı görünür; kapatın ve kaybolur, menüye gerek yoktur. Fan, Tenacity ve Rose gibi istemcilerde görünür ve konum ve stil bunlardan farklı olsa da, her yerde iş aynı kalır: aslında çalışanların sürekli, hızlıca görülebilen bir göstergesi.
+
+## Nasıl Çalışır
+
+Her karede, istemci hangi modüllerin etkin olarak işaretlendiğini kontrol eder ve adlarını ekranın bir köşesine bağlı kısa bir metin yığını olarak çizer. Bir modülü etkinleştirin ve bir satır eklenir. Devre dışı bırakın ve satır kaybolur. Bu tüm mekanizmadır. Liste, oyun görünümünün üzerinde yerel olarak çizilir, bu nedenle asla sunucuya dokunmaz, hiçbir paket göndermez ve oyunun nasıl oynandığıyla hiçbir ilgisi yoktur. Bir göstergedir, bir eylem değildir.
+
+Çekiciliği çoğunlukla kullanışlılıktan gelir. Bir istemci, bir avuçtan fazla modül gönderdikten sonra, etkinleştirilenleri hafızadan takip etmek güvenilir olmaktan çıkar ve sadece kontrol etmek için tam bir tıklama GUI'sini yeniden açmak hızla sıkıcı hale gelir. Ekranın bir köşesine bakmak bunu yarım saniyede çözer.
+
+Bazı müşteriler, bu listeyi gizli bir modül kategorisiyle eşleştiriyor. Bu şekilde işaretlenen bir modül, tamamen normal şekilde çalışmaya devam eder, sadece oluşturulan metinde görünmez. Bu, ekrandaki Dizi Listesi'nin her zaman aktif olanların eksiksiz bir envanteri olmadığı anlamına gelir; bu durum, sunucu tarafında neler olup bittiğinden ziyade, birinin ekrana bakarken gördüğü şeye göre daha önemlidir.
+
+## Kullanımı Güvenli mi?
+
+Dizi Listesi, oyunun oynanışını değiştiren modüllere bağlı risklerden herhangi birini taşımaz. Metni yerel olarak oluşturur ve asla sunucuyla iletişim kurmaz, bu nedenle sunucu tarafındaki bir antichi̇at sisteminin gözlemlemesi, hele ki işaretlemesi için hiçbir şey yoktur. Bunu, sunucunun isabet açılarını ve mesafeleri ölçüp, fiziksel olarak mümkün olan ile gerçekleşen arasındaki boşluğu yakaladığı bir nişan alma botu veya erişim gibi bir şeyle karşılaştırın. Burada eşdeğer bir sinyal yoktur, çünkü sunucuyla hiçbir etkileşim söz konusu değildir.
+
+Gizli modül eşleştirmesi farklı bir husustur. Amacı, bir kişinin ekrana baktığında göreceği bilgileri gizlemektir; özellikle bir ekran paylaşımı sırasında, bir tespit sisteminden kaçınmak değil. Bir Dizi Listesini çalışanların eksiksiz bir resmi olarak değerlendiriyorsanız bilmeniz gereken bir şey: bu böyle olmayabilir.
+
+<Callout variant="tip" title="Opal bununla ilgili ne durumda?">
+Opal, Dizi Listi adlı bir özelliği göndermiyor. Bu kategori genelinde çalışan bir modül çıktısı, bu konudaki bir müşterinin olup olmaması, listede yer alanlara, arkasındaki isimlerin gerçek bir araç takımı mı yoksa sadece uzun bir menü mü oluşturduğuna göre daha az önemlidir.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Dizi Listesi oyun akışını etkiler mi?">
+Hayır. Sadece kendi ekranınızın üzerine metin çizer ve oyun mantığına dokunmaz veya sunucuyla iletişim kurmaz, bu nedenle oyun akışını hiçbir şekilde etkilemez.
+</FAQItem>
+
+<FAQItem question="Anticheat Array List'i tespit edebilir mi?">
+Hayır. Sunucuya hiçbir şey göndermez, bu yüzden sunucu tarafındaki bir anticheat'in göreceği veya işaretleyeceği hiçbir şey bulunmaz.
+</FAQItem>
+
+<FAQItem question="Dizi Listesinde gizli modül nedir?">
+Görünür listeden çıkarılmış olmasına rağmen arka planda normal şekilde çalışmaya devam eden ve böylece ekranda görünmese bile aktif kalmaya devam eden bir modüldür.
+</FAQItem>
+
+<FAQItem question="Dizi Listesi her istemcide aynı mı?">
+Tam olarak değil. Konum, stil ve gizli modül seçeneğinin var olup olmaması istemciye göre değişir, ancak temel fikir, şu anda aktif olanları listelemek, tutarlıdır.
+</FAQItem>
+
+<FAQItem question="Bir müşteri neden kendi listesinden modülleri gizler?">
+Görünürde olan ekran, bir başkasının ekranı incelerken görebildiği etkinleştirilmiş tüm modülleri göstermez, en sık ekran paylaşımı sırasında.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Dizi Listesi'nin içinde bulunduğu daha geniş kategori." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Gizlenmenin HUD listesi olmaktan çıkıp, kendisi amaç haline geldiği yer." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Risk spektrumunun tam tersi uçtaki bir modül, kozmetik bir HUD göstergesiyle kıyaslandığında." },
+]} />
+
+<CTA href="/tr/satin-al">Modül listesi, içinde bulunduğu şeylerin kalitesiyle doğru orantılıdır. Opal'daki mevcut modülleri inceleyin.</CTA>

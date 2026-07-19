@@ -1,0 +1,117 @@
+---
+title: Minecraft'ta Başlatıcılar ve İstemciler Arasındaki Fark Açıklanıyor
+description: Bir başlatıcı oyunu başlatır ve bir sürüm seçer; bir istemci ise değiştirilmiş oyunun kendisidir. İşte aralarındaki fark, nasıl bir araya geldikleri ve hangisine ihtiyacınız olduğu.
+excerpt: Başlatıcı kapıdır; istemci ise girdiğiniz odadır. İşte ikisinin işleri nasıl böldüğü ve modların nerede çalıştığı.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: Bir başlatıcı bir istemciyle aynı mı?
+    a: Hayır. Bir başlatıcı, sizi oyuna girişini sağlayan ve oyunu başlatan programdır. Bir istemci ise, başlatıldıktan sonra çalışan, modları da dahil olmak üzere oyundur. Bir istemciyi başlatmak için bir başlatıcı kullanırsınız.
+  - q: Modları çalıştırmak için özel bir başlatıcıya ihtiyacım var mı?
+    a: Her zaman değil. Resmi başlatıcı, Fabric veya başka bir yükleyici yüklendikten sonra bir mod yükleyici profilini çalıştırabilir. Bazı üçüncü taraf başlatıcılar kurulumu kolaylaştırmak için yükleyiciyi paketler, ancak onlar da sadece oyunu başlatıyorlar.
+  - q: Mod'lar aslında nerede çalışıyor, başlatıcıda mı yoksa istemcide mi?
+    a: Müşteri. Başlatıcı, değiştirilmiş bir profil seçer, ancak mod yükleyici oyun başladığında modlarınızı yükler, böylece modlar müşterinin içinde çalışır.
+  - q: Özel bir istemci bir başlatıcı türü müdür?
+    a: Hayır. Bir özel düzenleme veya yardımcı program istemcisi, bir mod yükleyici aracılığıyla yüklenen değiştirilmiş bir oyundur. Oyun başlatıcısı oyunu başlattıktan sonra çalışır.
+---
+
+<KeyTakeaways>
+
+- Başlatıcı, sizi oyuna giriş yapan, bir sürüm seçen ve oyunu başlatan programdır.
+- İstemci, oyunu kendisini, içine yüklenen modları da dahil ederek ifade eder.
+- Başlatıcı, oynamadan önce çalışır; istemci, oyun oynarken çalışır.
+- Modlar istemci içinde yüklenir. Başlatıcı yalnızca profili seçer ve başlatır.
+
+</KeyTakeaways>
+
+Bir başlatıcı, sürümünüzü seçen, oturum açmanızı sağlayan ve Minecraft'ı başlatan programdır. İstemci ise, başladıktan sonra çalışan ve içine yüklenen tüm modları içeren gerçek oyundur. Başlatıcı ön kapıdır; istemci ise girdiğiniz odadır. İkisi de kullanılır ve farklı işlevleri vardır.
+
+## Bir Başlatıcının Görevleri
+
+Bir başlatıcı, oyun oynamadan önce açtığınız küçük bir uygulamadır. Hazırlık işini yapar ve ardından oyuna devreder.
+
+Bir başlatıcı genellikle şunları yapar:
+
+- Microsoft hesabınızla oturum açma.
+- Çalıştırılacak bir Minecraft sürümü seçme.
+- O sürüm için oyun dosyalarını ve Java'yı indirme.
+- Bir profil veya kurulum seçme, [mod yükleyicisi](/tr/learn/what-is-a-minecraft-mod-loader) için ayarlanan birini de dahil ederek.
+- Bellek ve diğer başlatma seçeneklerini ayarlama ve ardından oyunu başlatma.
+
+Oyun oynat düğmesine bastığınızda, başlatıcı oyunu başlatan komutu oluşturur ve ardından kenara çekilir. Oyun oynarken çalışmaz.
+
+## Bir İstemcinin Görevleri
+
+Bir istemci, oyunun kendisidir: gördüğünüz ve kontrol ettiğiniz Minecraft'ın çalışan örneğidir. "Saf istemci" (vanilla client) değiştirilmemiş oyunu ifade eder. Modlu bir istemci ise, [mod yükleyicisi](/tr/learn/what-is-a-minecraft-mod-loader) gibi [Fabric](https://fabricmc.net/) aracılığıyla içine modlar yüklenmiş aynı oyundur.
+
+İnsanlar "yardımcı istemci" veya "özel istemci" derken, ayrı bir başlatıcı değil, çalışan oyunun değiştirilmiş bir versiyonunu kastediyorlar. Modlar, oyun zaten çalışır durumda olduğunda özellikler ekler.
+
+## Birbirleriyle nasıl etkileşim kurar
+
+Başlatıcı istemciyi başlatır. Bu, tek ilişkidir.
+
+<Steps>
+
+<Step number={1} title="Başlatıcıyı açın ve giriş yapın">Başlatıcıyı açıp hesabınızla giriş yapın</Step>
+
+<Step number={2} title="Bir sürüm veya profil seçin">Bir sürüm veya düzenlenmiş bir profil seçersiniz</Step>
+
+<Step number={3} title="Oyunu başlat">Başlatıcı, ihtiyaç duyduğu şeyleri indirir ve oyunu başlatır</Step>
+
+<Step number={4} title="Müşteri çalışıyor">Müşteri çalışıyor. Bir mod yükleyici profili seçtiyseniz, modlarınız şimdi yüklenecektir</Step>
+
+</Steps>
+
+Bir [mod yükleyici](/tr/learn/what-is-a-minecraft-mod-loader) ikisinin arasında oturur. Sürümünüz için [Fabric](https://fabricmc.net/)’i kurarsınız; bu, bir başlatma profili ekler. Başlatıcı daha sonra oyunu o profil aracılığıyla başlatır ve yükleyici, istemci başlatılırken modlarınızı çeker. Başlatıcı hangi modlarınız olduğunu bilmez veya umursamaz; sadece seçtiğiniz sürümü başlatır.
+
+<Callout variant="info" title="Opal Nerede Çalışır">
+Opal bir [Fabric](https://fabricmc.net/) mod'udur, bu yüzden çalıştırmak için özel bir başlatıcıya ihtiyacınız yok. Genellikle kullandığınız başlatıcıda bir Fabric profili ayarlayın, ardından Opal'i diğer modlar gibi ekleyin. Başlamak için [kurulum kılavuzuna](/tr/docs/setup) bakın veya yüklendikten sonra [betik tanıtımına](/tr/docs/scripting).
+</Callout>
+
+## Başlatıcı ve İstemci: Hızlı Bir Bakış
+
+| | Başlatıcı | İstemci |
+| :--- | :--- | :--- |
+| Nedir | Oyunu başlatan uygulama | Çalışan oyun kendisi |
+| Ne zaman çalışır | Oynamadan önce | Oyun oynarken |
+| Görevi | Giriş yap, sürüm seç, başlat | Dünyayı oluştur, modları çalıştır |
+| Modlar | Modlu bir profil seçer | Modları gerçekten yükler ve çalıştırır |
+| Örnek | Resmi Minecraft başlatıcısı | Orijinal veya modlu oyun |
+
+## Üçüncü taraf başlatıcılar istemciyi değiştirir mi?
+
+Bazı başlatıcılar resmiden daha fazlasını yapar. Mod paketlerini yönetir, birçok sürüm arasında geçiş yapar veya manuel kurulumdan kaçınmanızı sağlayan bir [mod yükleyici](/tr/learn/what-is-a-minecraft-mod-loader) ile birlikte gelir. Birkaç popüler istemci de kendi başlatıcılarıyla birlikte gelir.
+
+Hatta bu durumda bile ayrım geçerlidir: başlatıcının görevi hala oyunu başlatmaktır ve istemci hala oyunu çalıştıran şeydir. Sizin için modları yükleyen bir başlatıcı, sadece kurulum adımını önceden yapıyordur. Modların kendisi yalnızca istemci çalışmaya başladıktan sonra önemlidir.
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Bir başlatıcı, istemciyle aynı mı?">
+Hayır. Bir başlatıcı, sizi oyuna giriş yapıp oyunu başlatan programdır. İstemci ise, başlatıldıktan sonra çalışan ve herhangi bir modu içeren oyundur. Bir istemciyi başlatmak için bir başlatıcı kullanırsınız.
+</FAQItem>
+
+<FAQItem question="Modları çalıştırmak için özel bir başlatıcıya ihtiyacım var mı?">
+Her zaman değil. Resmi başlatıcı, [Fabric](https://fabricmc.net/) veya başka bir yükleyici yüklendikten sonra bir mod yükleyici profilini çalıştırabilir. Bazı üçüncü taraf başlatıcılar kurulumu kolaylaştırmak için yükleyiciyi paketler, ancak onlar yine de sadece oyunu başlatıyorlar.
+</FAQItem>
+
+<FAQItem question="Modlar aslında nerede çalışıyor, başlatıcıda mı yoksa istemcide mi?">
+İstemci. Başlatıcı modlu bir profil seçer, ancak mod yükleyici oyun açılırken modlarınızı yükler, böylece modlar istemci içinde çalışır.
+</FAQItem>
+
+<FAQItem question="Özel bir istemci bir başlatıcı çeşidi midir?">
+Hayır. Özel veya yardımcı istemci, bir mod yükleyici aracılığıyla yüklenen değiştirilmiş bir oyundur. Oyun başlatıcısı oyunu başlattıktan sonra çalışır.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-mod-loader", label: "Minecraft mod yükleyici nedir?", description: "Müşteri başlatılırken modlarınızı yükleyen katman." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Değiştirilmiş bir istemci, ayrı bir başlatıcı değil." },
+  { href: "/tr/learn/how-to-install-a-fabric-mod", label: "Bir Fabric modunun nasıl kurulacağı", description: "Fabric profili oluşturun ve modlar ekleyin." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

@@ -1,0 +1,83 @@
+---
+title: Was ist XRay in Minecraft? Erklärungen zur Ore-Vision
+description: XRay ist ein Minecraft-Modul, das Erze durch das Terrain rendert, indem es ändert, was der Client zeichnet, nicht was der Server sendet, und warum Server deswegen immer noch verbieten.
+excerpt: Stein soll das Verbergen tun, was in ihm liegt. XRay setzt dem gerade ein Ende, und verwandelt jeden Berg in ein Diagramm, das genau zeigt, wo die Erze liegen.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Gilt XRay als Betrug?
+    a: Ja, auf jedem Server, auf dem Abbau oder eine Ressourcenwirtschaft wichtig ist. Es verschafft einen direkten Vorteil gegenüber Spielern, die Erze auf die normale Weise finden, und wird als bannwürdiger Exploit und nicht als kosmetisches Feature behandelt.
+  - q: Benötigt XRay etwas Zusätzliches vom Server?
+    a: Nein. Der Server sendet bereits die vollständigen Chunk-Daten, einschließlich Erze, sobald ein Chunk geladen wird. XRay verändert lediglich, wie der Client Blöcke darstellt, die er bereits besitzt. Es fordert nichts Neues an oder empfängt etwas Neues.
+  - q: Wie unterscheidet sich XRay von ESP?
+    a: ESP zeigt Entitäten wie Spieler und Mobs durch Wände. XRay wendet den gleichen Trick auf Blöcke an und enthüllt so Erze und andere Ressourcen durch das Terrain. Beide funktionieren, indem sie die lokale Darstellung verändern, anstatt neue Daten vom Server abzurufen.
+  - q: Kann XRay ohne Beobachtung der Spielweise eines Spielers entdeckt werden?
+    a: Manchmal. Client-seitige Integritätsprüfungen können bekannte XRay-Hooks oder modifizierte Rendering-Dateien erkennen, aber ein Build, der diese Prüfungen umgeht, wird in der Regel nur durch eine Analyse der Mining-Muster aufgedeckt.
+---
+
+<KeyTakeaways>
+
+- XRay ist ein visuelles Modul, das Erze und andere wertvolle Blöcke durch das Terrain hindurch rendert, sodass Spieler eine Ader sehen können, ohne sie zuerst ausgraben zu müssen.
+- Es funktioniert vollständig clientseitig: Der Server hat bereits alle Chunk-Daten gesendet, als der Chunk geladen wurde; XRay verhindert lediglich, dass normale Renderprozesse die Erze verbergen.
+- Es entsteht kein zusätzlicher Netzwerkverkehr, daher resultiert die Erkennung meist aus Abbau-Mustern und Client-Integritäts-Scans, nicht aus Paketprotokollen.
+- Auf jedem Server mit einer Mining-Wirtschaft wird XRay als bannbarer Exploit und nicht als kosmetische Einstellung betrachtet.
+
+</KeyTakeaways>
+
+XRay ist ein visuelles Modul, das Erze und andere wertvolle Blöcke durch festes Gestein hindurch rendert, sodass ein Spieler genau sehen kann, wo eine Erzader liegt, ohne jemals einen Pickel schwingen zu müssen, um danach zu suchen. Es benötigt vom Server nichts Besonderes. Es ändert lediglich, was der Client zu zeichnen wählt. Blindes Abbauen bedeutet, Tunnel zu graben, basierend auf einer Vermutung und in der Hoffnung, dass in der Nähe etwas gefunden wird. XRay überspringt diesen Schritt und verwandelt die Karte in ein Diagramm dessen, was sich tatsächlich unterirdisch befindet.
+
+## Funktionsweise
+
+Wenn ein Chunk geladen wird, sendet der Server dem Client die vollständigen Blockdaten für diesen Chunk, einschließlich Erze, unabhängig davon, ob eines davon derzeit der offenen Luft ausgesetzt ist. Normale Darstellung verwirft den Großteil dieser Daten. Sie zeichnet nur die äußere Oberfläche, die Blöcke, die tatsächlich eine sichtbare Fläche berühren, da eine echte Kamera niemals durch festes Gestein sehen könnte.
+
+Ein XRay-Modul bricht diese Regel für die von ihm angezielten Blocktypen. Je nach Version unterlässt es entweder die Darstellung des umgebenden Steins und Bodens vollständig oder zeichnet das Zielerz direkt auf das Terrain, das es andernfalls verbergen würde. Wie auch immer, eine Diamantader drei Schichten tief in einem Berg erscheint genau wie eine, die bereits in einer Höhle freigelegt ist. Tunnelbau wird nicht mehr zur Erkundung, sondern zu einer geraden Linie.
+
+Die Anziehungskraft liegt in der Geschwindigkeit, nicht in der Raffinesse. Auf jedem Server, auf dem das Abbauen eine Wirtschaft speist, sei es durch den direkten Verkauf von Erzen oder die Verarbeitung in Ausrüstung, ist das Weglassen der Erkundung ein direkter Vorteil gegenüber allen, die immer noch auf Vermutung schürfen.
+
+## Ist XRay sicher zu verwenden?
+
+XRay sendet nichts Zusätzliches über das Netzwerk. Jeder Block, den es offenbart, wurde dem Client bereits zum Zeitpunkt des Ladens des Chunk zugestellt – dasselbe Prinzip, das ein Modul wie ESP verwendet, um Entitäten durch Wände zu zeigen. Ein Server, der Pakete isoliert beobachtet, hat kaum etwas zu fassen.
+
+Die Erkennung ergibt sich aus dem Verhalten. Ein Spieler, der in gerader Linie zu einer Erzader tunnelt, nur die wertvollen Blöcke abbaute und alles andere ignoriert oder einer Gefahr ausweicht, von der er keine Kenntnis haben könnte, erzeugt ein Abbauverhalten, das ein blinder Spieler einfach nicht erzeugen würde. Einige Server führen auch clientseitige Integritätsprüfungen durch, die nach dem modifizierten Rendering-Code suchen, von dem XRay abhängt – derselbe Ansatz, der auch gegen andere visuelle Cheats eingesetzt wird.
+
+Da die Spur verhaltensbezogen ist und nicht auf einem einzelnen offensichtlichen Paket beruht, kann XRay länger unentdeckt bleiben als ein Combat-Cheat. Das bedeutet nicht, dass es sicher ist. Server, die Abbau-Statistiken überprüfen oder verdächtiges Schürfen untersuchen, behandeln es wie jeden anderen Exploit: vollständiger Bann, ohne Warnschuss.
+
+<Callout variant="tip" title="Wo dies in Opal seinen Platz findet">
+Opal liefert kein dediziertes XRay-Modul mit. Der eigene Katalog konzentriert sich auf Kampf-, Bewegungs- und visuelle Module, die für PvP entwickelt wurden – die Kategorien, in denen ein einzelner Frame oder ein einzelner Tick den Ausgang eines Kampfes entscheidet. Das Auslesen von Erz durch Stein ist ein völlig anderes Spiel, eher ein Survival-Economy-Grind als etwas, worum Opal aufgebaut ist.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite erklärt, was XRay tut und warum Server dafür sperren, und ist keine Ermutigung, es zu verwenden. Auf jedem Server, auf dem das Abbauen mit einer Wirtschaft verbunden ist, wird XRay wie ein Kampfausnutzung behandelt: ein bannwürdiges Vergehen, unabhängig davon, ob das Personal es durch Client-Scannen oder durch Lesen einer verdächtigen Abbauhistorie entdeckt.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Gilt XRay als Betrug?">
+Ja, auf jedem Server, auf dem Abbau oder eine Ressourcenwirtschaft wichtig ist. Es verschafft einen direkten Vorteil gegenüber Spielern, die Erze auf normale Weise finden, und wird als bannwürdiger Exploit und nicht als kosmetisches Feature behandelt.
+</FAQItem>
+
+<FAQItem question="Benötigt XRay zusätzliche Daten vom Server?">
+Nein. Der Server sendet bereits vollständige Chunk-Daten, einschließlich Erze, sobald ein Chunk geladen wird. XRay verändert lediglich, wie der Client Blöcke darstellt, die er bereits besitzt. Es fordert keine neuen Daten an und empfängt auch keine.
+</FAQItem>
+
+<FAQItem question="Wie unterscheidet sich XRay von ESP?">
+ESP zeigt Entitäten wie Spieler und Mobs durch Wände an. XRay wendet den gleichen Trick auf Blöcke an und enthüllt so Erze und andere Ressourcen durch das Terrain. Beide funktionieren, indem sie die lokale Darstellung verändern, anstatt neue Daten vom Server abzurufen.
+</FAQItem>
+
+<FAQItem question="Kann XRay ohne Beobachtung des Spielverhaltens entdeckt werden?">
+Manchmal. Client-seitige Integritätsprüfungen können bekannte XRay-Hooks oder modifizierte Renderdateien erkennen, aber ein Build, der diese Prüfungen umgeht, wird in der Regel nur durch eine Überprüfung der Abbau-Muster aufgedeckt.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die breitere Kategorie, zu der XRay und jedes andere Modul hier gehören." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die Kategorie, die auf Modulen basiert, die niemals eine Paket-Level-Prüfung auslösen – einschließlich XRay." },
+  { href: "/de/learn/what-is-an-aimbot", label: "Was ist ein Aim-Bot?", description: "Ein Betrüger am anderen Ende des Spektrums: er wurde durch die Pakete, die er verschickt, und nicht durch das Muster, das er hinterlässt, erwischt." },
+]} />
+
+<CTA href="/de/kaufen">Wenn es nicht darum geht, Beute auszugraben, schauen Sie, was Opal tatsächlich für den Kampf erschafft.</CTA>

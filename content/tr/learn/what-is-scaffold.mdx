@@ -1,0 +1,96 @@
+---
+title: Minecraft'ta Kazık Nedir? (Modül Açıklaması)
+description: Kazık, yürürken blokları otomatik olarak yerleştiren bir hareket modülüdür, böylece nişan almadan köprü kurabilirsiniz. İşte nasıl çalıştığı ve neden antichipler bunu işaretliyor.
+excerpt: Yürüdüğünüzde iskele ayaklarınızın altında bir zemin oluşturur, böylece ellerinizi serbest bırakarak boşlukları aşarsınız. İşte modülün blokları nasıl yerleştirdiği ve rotasyonun neden ipucu verdiğinin açıklaması.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Modules
+author: trq
+faqs:
+  - q: Scaffold ve köprü makrosu arasında ne fark var?
+    a: Bir köprü makrosu, belirli tuş basışlarını bir zamanlayıcıyla tekrar eder. Kazık ise, her birimde canlı konumunuza ve rotasyonunuza tepki verir, böylece dönüşlere ve hız değişikliklerine uyum sağlar, tek bir önceden belirlenmiş hareketi tekrarlamaz.
+  - q: Neden Scaffold bu kadar kolay yakalanıyor?
+    a: "Genellikle kullanılan yöntem dönüş: modül, görünür kameranın bakmadığı açılarda bloklar yerleştirir ve sunucu tarafındaki hile önleme sistemleri bu iki değeri karşılaştırır. Kusursuz zamanlama ise ikinci bir belirtidir."
+  - q: Scaffold bir hareket mi yoksa dünya modülü mü?
+    a: Hareket modülü olarak sınıflandırılır çünkü amacı oyuncunun boşlukları geçmesini sağlamaktır. Blok yerleştirme bir araçtır, amaç değil.
+  - q: Scaffold tespit edilemez hale getirilebilir mi?
+    a: Hayır. Gecikme eklemek ve sahte dönüşler tespit etmeyi zorlaştırsa da, modern bir antichi̇t sistemi karşılaştırmak için hala birçok sinyal içerir ve herhangi bir tutarlı otomasyon sonunda bir örüntü bırakır.
+---
+
+<KeyTakeaways>
+
+- Scaffold, yürüdüğünüzde ayaklarınızın altına otomatik olarak blok yerleştiren bir hareket modülüdür.
+- Bir hotbar bloğunu seçer, arkadaki boşluğa doğru döner ve düşmeden önce yerleştirir.
+- Zor kısım, anticheatların aradığı ana belirti olan rotasyondur.
+- Size, her bloğu elle kontrol etmeden ve aşağı bakıp zamanlamadan bağımsız olarak köprü kurmanızı sağlar.
+
+</KeyTakeaways>
+
+Kazık, yürürken ayaklarınızın altına otomatik olarak blok yerleştiren bir hareket modülüdür, böylece kamerayı aşağıya doğru çevirmeden boşlukları geçebilirsiniz. Sırtınızdaki açık alana doğru dönerek ve kenardan düşecekmişsiniz gibi o anda hotbarınızdan bir blok seçer ve yerleştirir. Sonuç, eller serbest köprü kurmaktır.
+
+## Kazık Ne Yapar
+
+Kazık, manuel köprü kurmayı otomatik bir eyleme dönüştürür. Normal köprü kurmak için aşağıya bakmanız, yer tutma tuşunu basılı tutmanız ve sabit bir hızda geriye doğru yürümeniz gerekir. Kazık, zamanlamayı ve yerleştirmeyi sizin için halleder. Bir hareket tuşuna basılı tutarsınız ve modül size bir zemin sağlar.
+
+Çoğu uygulama birkaç seçenek sunar:
+
+| Seçenek | Ne Kontrol Eder |
+|--------|------------------|
+| Kule modu | Yerinde zıplarken aynı zamanda blokları dümdüz yerleştirip yerleştirmemesi |
+| Dönüş işleme | Görüşünüzü aniden mi yakalar yoksa yerleştirme açısını sessizce taklit mi eder |
+| Yerleştirme gecikmesi | Daha mekanik görünmemek için bloklar arasında ne kadar beklediğini |
+| Sprint izni | Yerleştirirken sprint hızını koruyup koruyamayacağınızı |
+| Blok seçimi | Hotbar'dan hangi yuvasından çekim yapacağını |
+
+Hareket kategorisi davranışlarından biri olduğu için, Kazık oyuncunun dünyayı nasıl geçtiğini değiştiren, savaşmasını değiştiren diğer modüllerin yanında yer alır.
+
+## Nasıl Çalışır (İç Yapı)
+
+Scaffold, her tick'ta konumunuzu ve hızınızı takip eder. Bir sonraki adımınızın havaya düşeceğini tahmin ettiğinde, düşmeden önce sunucuya bir blok yerleştirme gönderir. Zor olan kısım rotasyon. Oyun normalde baktığınız yüze bir blok yerleştirir, bu nedenle modülün oyuncunun yöneldiği yeri boşluktan geride ve aşağıda göstermesi, yerleştirmesi ve genellikle orijinal görünümü geri yüklemesi gerekir.
+
+İki geniş stil vardır. Bir tanesi, gerçek kamerayı bir kare boyunca yerleştirme açısına aniden getirir; bu hızlıdır ancak fark edilir. Diğeri, ekranda görüntülenen kamerayı değiştirmeden sahte bir rotasyonla yerleştirme paketleri gönderir; bu diğer oyunculara daha temiz görünür ancak tam olarak dedektörlerin aradığı desendir.
+
+## Neden anticheat sistemleri bunu işaretler
+
+Scaffold, insanların nadiren yaptığı hareket ve rotasyon desenleri üretir. Sunucu tarafındaki anticheat sistemleri birkaç belirti arar:
+
+- Görüntülenen kamera açısıyla eşleşmeyen rotasyona sahip blok yerleştirmeleri.
+- Hiç kaçırmayan ve hiç örtüşmeyen, kusursuz zamanlı yerleştirmeler.
+- Her blok sınırında yerleştirirken sürekli hızda geriye doğru yürümek.
+- Oyuncunun gerçekçi olarak göremeyeceği bir blok yüzüne yerleştirmek.
+
+Modern bir hile önleme sistemi modülü "görmeye" gerek duymaz. Sadece yerleştirme açıları ile bakış açıları arasında uyumsuzluk olduğunu veya köprü kurma ritminin insan olamayacak kadar tutarlı olduğunu fark etmesi yeterlidir. Bu nedenle Scaffold ayarları çoğu zaman hızdan ödün vererek inandırıcı rastgeleliğe öncelik verir.
+
+## Meşru vs. hile durumu
+
+Otomatik köprü kurma, vanilla'ya yakın formlarda da mevcuttur. Bazı antrenman sunucuları ve eğitim haritaları bir köprü eğitmeni içerir ve belirli yaratıcı araçlar, yapımcılar için blok sıraları yerleştirir. Scaffold modülü, normal hayatta kalma veya rekabetçi oyun sırasında haksız bir avantaj elde etmek için çalıştığı için farklıdır ve bu nedenle yapım araçları yerine hile tespit materyallerinde yer alır.
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını anlatmıyor">
+Bu sayfa, terimin ne anlama geldiğini bilmeniz için modülü genel olarak tanımlar. İsimlendirme ve kesin davranışlar müşteriye göre değişir ve blokları otomatik yerleştirerek bağlantıları kapatmak, esasen her rekabetçi sunucuda kuralları ihlal eder.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Scaffold ile köprü makrosu arasındaki fark nedir?">
+Bir köprü makrosu, belirli aralıklarla sabit tuş basımlarını tekrar eder. Scaffold ise her birimde canlı konumunuza ve rotasyonunuza tepki verir, böylece tek bir önceden belirlenmiş hareketi tekrarlamak yerine dönüşlere ve hız değişikliklerine uyum sağlar.
+</FAQItem>
+
+<FAQItem question="Neden Scaffold bu kadar kolay yakalanıyor?">
+Genellikle, belirleyici unsur dönüşüm. Modül, görünür kameranın bakmadığı açılarda blok yerleştiriyor ve sunucu tarafındaki antichipler bu iki değeri karşılaştırıyor. Kusursuz, asla kaçırılmayan yerleştirme zamanlaması da ikinci bir işaret.
+</FAQItem>
+
+<FAQItem question="Scaffold bir hareket mi yoksa dünya modülü müdür?">
+Oyuncunun boşluklar üzerinde hareket etmesini sağlamak amacıyla bir hareket modülü olarak sınıflandırılır. Blok yerleştirme bir araçtır, amaç değildir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-velocity-anti-knockback", label: "Hız (çarpma geri tepmesi önleme) nedir?", description: "Hareketle ilişkili bir başka savaş modülü." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Bu tür modülleri gizleyen gizlilik kategorisi." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Bu modüllerin ait olduğu daha geniş kategori." },
+]} />
+
+<CTA href="/tr/purchase">Opal $8.99 için ne gönderiyor, bak</CTA>

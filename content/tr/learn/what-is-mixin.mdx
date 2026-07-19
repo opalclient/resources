@@ -1,0 +1,93 @@
+---
+title: Mixin Nedir? Minecraft Bytecode Modlama (2026)
+description: Mixın, Minecraft modlarının oyunun sınıflarını yükleme zamanında yamamasına olanak tanıyan bytecode enjeksiyon kütüphanesidir. İşte neler yaptığı ve modların neden buna ihtiyaç duyduğu.
+excerpt: Mixin, mod'un oyun yüklendiği sırada Minecraft'ın derlenmiş sınıflarına kod eklemesini sağlar; kaynak kodunda herhangi bir değişiklik yapılmasına gerek yoktur. İşte bunun nasıl çalıştığı ve Fabric'in neden üzerine inşa edildiği.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Frameworks
+author: trq
+faqs:
+  - q: Mixin bir mod mu?
+    a: Hayır. Mixin, modların oluşturulduğu bir kütüphanedir; Fabric gibi bir yükleyici onu paketler ve modlarınızın sağladığı mixin'leri uygular.
+  - q: MixIn oyun dosyalarımı değiştirir mi?
+    a: Hayır. Yamalar, sınıflar yüklendiğinde bellekte oluşur, bu nedenle diskteki dosyalar bozulmadan kalır ve bir modu temiz bir şekilde kaldırmak, değişikliklerini ortadan kaldırır.
+  - q: Mixin aracılığıyla iki mod bazen neden çatışıyor?
+    a: Eğer her iki yamada da aynı yöntem uyumsuz şekillerde düzeltilirse, özellikle de @Overwrite ile, biri diğerini iptal edebilir veya bozabilir; daraltılmış enjeksiyon noktaları bunu önler.
+  - q: Mixin sadece Minecraft için mi?
+    a: Hayır. Mixin genel bir Java bytecode çerçevesidir, ancak Minecraft modlamada en çok burada kullanılır ve Fabric'in onu benimsemesiyle orada standart hale geldi.
+---
+
+<KeyTakeaways>
+
+- Mixin, Minecraft'ın derlenmiş sınıflarını yükleme zamanında yamalayan bir Java kütüphanesidir.
+- Mod'lar, kodun enjekte edileceği yeri tanımlar, dosyanın nasıl göründüğünü değil, böylece yamalar oyun güncellemelerinden kurtulur.
+- [Fabric](https://fabricmc.net/), Mixin üzerine inşa edilmiştir ve sınıf yükleme sırasında her modun mixin'lerini uygular.
+- Mixin'i asla kendiniz yüklemezsiniz; yükleyici onu paketler.
+
+</KeyTakeaways>
+
+Mixin, bir Java kütüphanesidir ve oyun yüklendiği sırada bir modun Minecraft'ın derlenmiş sınıflarını düzenlemesine olanak tanır, orijinal kaynağı düzenlemeden. Mod'lar, "bu oyun metodunun bu noktasında bu kodu ekleyin" diyen küçük sınıflar yazar ve Mixin, bunları çalışma zamanında bytecode'a işler. [Fabric](https://fabricmc.net/) bunu temel modlama mekanizması olarak kullanır.
+
+<Callout variant="info" title="Opal Nerede Çalışır">
+Opal bir Fabric modudur, bu nedenle arka planda Mixin üzerine kuruludur. Mixin'i kendiniz yüklemenize gerek yoktur; [kurulum rehberi](/tr/docs/setup) Opal ve Fabric'in çalıştırılmasını içerir.
+</Callout>
+
+## Mixin Nasıl Çalışır
+
+Mixin, sınıfları derledikten sonra ancak JVM tarafından çalıştırılmadan önce düzenler. Bir mod, gerçek bir oyun sınıfını hedefleyen bir mixin sınıfı gönderir. Bu sınıf üzerindeki işaretlemeler, enjekte edilecek kodun nereye gideceğini belirtir: bir metodun başlangıcı, sonu, belirli bir metod çağrısı veya bir dönüş değeri. Minecraft hedef sınıfı yüklediğinde, Mixin, modun kodunu eklemek için bytecode'unu yeniden yazar.
+
+Bunun nedeni, Minecraft genişletmek için tasarlanmamış olmasıdır. Oyunun çoğu davranış için resmi eklenti noktaları bulunmamaktadır. Mixin, derlenmiş oyunu bir uzatma yüzeyi olarak ele alarak modlara bir yol sunar.
+
+## Neden Modlar Oyunu Düzenlemek Yerine Bunu Kullanır
+
+İki neden: uyumluluk ve güncellemeler.
+
+Oyunun kaynak kodunu doğrudan düzenlemek, herkesin üzerine inşa edemeyeceği ve oyun güncellendiği anda bozulacak olan değiştirilmiş bir kopyanın gönderilmesi anlamına gelir. Mixin yamaları küçük ve cerrahi müdahalelerdir, bu nedenle birçok mod aynı oyunu değiştirebilir ve her biri tam bir çatallağa ihtiyaç duymadan bunu yapabilir.
+
+Yamalar, dosyanın nasıl göründüğünü değil, enjekte etme yerini tanımladığından, bir sürüm versiyonuna karşı yazılan bir mixin, hedef metod hala mevcut olduğu sürece bir oyun güncellemesinden sonra bile genellikle geçerliliğini korur.
+
+## Fabric ile İlişkisi
+
+Fabric, Mixin üzerine inşa edilmiştir. Yükleyici, her bir modun mixin yapılandırmasını okur ve ardından listelenen mixin sınıflarını, sınıf yükleme sırasında uygulanmaları için Mixin'e iletir. Tipik bir Fabric modu, çoğunlukla kendi sınıfları ve değiştirmek istediği birkaç oyun yöntemine müdahale eden birkaç mixinden oluşur.
+
+## Yaygın enjeksiyon noktaları
+
+| Açıklama | Ne yapar |
+|---|---|
+| `@Inject` | Kodunuzu hedef yöntemin içindeki seçilen bir noktada çalıştırır |
+| `@Redirect` | Hedef içindeki belirli bir yöntem çağrısını değiştirir |
+| `@ModifyArg` | Hedef içindeki bir çağrıya iletilen bir argümanı değiştirir |
+| `@ModifyVariable` | Yöntem ortasında yerel bir değişkeni yeniden yazar |
+| `@Overwrite` | Tüm bir yöntemi değiştirir (son çare; kolayca bozulur) |
+
+`@Inject`, en az müdahaleci ve bir oyun güncellemesinden kurtulma olasılığı en yüksek olduğu için varsayılan araçtır. `@Overwrite` ise aynı yönteme dokunan diğer modlarla çakıştığı için kaçınılmalıdır.
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="Mixin bir mod mu?">
+Hayır. Mixin, modların üzerine inşa edildiği bir kütüphanedir. Tek başına kurmazsınız; [Fabric](https://fabricmc.net/) gibi bir yükleyici, onu paketler ve modlarınızın sağladığı mixin'leri uygular.
+</FAQItem>
+
+<FAQItem question="Mixin oyun dosyalarımı değiştirir mi?">
+Hayır. Yamalar, sınıflar yüklendiğinde bellekte gerçekleşir. Disk üzerindeki dosyalar bozulmadan kalır, bu nedenle bir modu temiz bir şekilde kaldırmak değişikliklerini ortadan kaldırır.
+</FAQItem>
+
+<FAQItem question="Mixin kullanıldığında iki mod bazen neden çakışır?">
+Eğer her iki mod da aynı metodu uyumsuz şekillerde, özellikle de `@Overwrite` ile yamalıyorsa, biri diğerini iptal edebilir veya bozabilir. İyi yazılmış mixin'ler, birbirlerinin önüne geçmemek için dar enjeksiyon noktaları kullanır.
+</FAQItem>
+
+<FAQItem question="Mixin sadece Minecraft için mi?">
+Hayır. Mixin genel bir Java bytecode çerçevesidir, ancak Minecraft modlamada en çok kullanıldığı yerdir ve [Fabric](https://fabricmc.net/) tarafından benimsenmesi, orada standart olmasını sağladı.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-mod-loader", label: "Minecraft mod yükleyici nedir?", description: "Oyun çıktığında modların nasıl sisteme entegre edildiği." },
+  { href: "/tr/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "İki modlama ekosisteminin karşılaştırması." },
+  { href: "/tr/learn/what-is-asm", label: "ASM nedir?", description: "Mixin'in altındaki bytecode araç seti." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

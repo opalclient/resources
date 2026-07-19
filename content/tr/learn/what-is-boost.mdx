@@ -1,0 +1,88 @@
+---
+title: Minecraft'ta Boost Nedir? (Hareket Modülü Açıklaması)
+description: Hız artışı, kademeli olarak değil, kısa bir hız patlaması sağlayan bir hareket modülüdür. İşte nasıl çalıştığı ve neden işaretlendiği.
+excerpt: "Boost, karakterinizi yaklaşık bir saniye boyunca bir şişe roketi gibi yapar: bir boşluğu kapatmak veya bir kavgadan kaçmak için yeterli, ve sunucunun fark etmesi için daha da fazlası."
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Minecraft istemcisinde Boost ne işe yarar?
+    a: Boost, oyuncuya kısa süreli bir hız veya ivme artışı sağlar; genellikle bir hedefe hızlıca yaklaşmak veya kaybedilen bir mücadeleden hızlıca uzaklaşmak için kullanılır.
+  - q: Boost tespit edilebilir mi?
+    a: Evet. Sunucu, belirli bir tick için vanilla fiziğinin izin verdiği maksimum hıza göre karşılaştırabileceği ani bir hareket hızı artışı üretir, bu da büyük veya tekrarlayan hızlanmaları tespit etmeyi kolaylaştırır.
+  - q: Hangi müşterilerimizin Boost'u var?
+    a: Modül, Juul ve Rose gibi müşterilerde görüldüğü gibi belgelenmiştir.
+  - q: Boost, bir hızlanma veya sprint hilesiyle aynı şey mi?
+    a: Aynı genel fikri ifade eder; vanilla hareketin izin verdiği hızdan daha yüksek, kısa ömürlü bir hız artışı, ancak tam adlandırma ve uygulama istemcilere göre değişiklik gösterir.
+  - q: Boost kullanmak yasaklanmanıza neden olabilir mi?
+    a: Oyunun izin verdiği hızın ötesinde bir hız elde etmesini sağlayan herhangi bir hareket hilesi, anticheat kullanan hemen hemen her sunucunun kurallarını ihlal eder ve Boost, oyuncuyu normal fiziğin dışına taşıdığı için bu kategoriye girer.
+---
+
+<KeyTakeaways>
+
+- Boost, kademeli olarak artırmak yerine kısa bir hız artışı sağlayan bir hareket modülüdür.
+- Kaçan bir hedefe yaklaşmak veya kaybedilen bir mücadeleden sıyrılmak için kullanılır, ardından normal hıza geri döner.
+- Sunucular, hareket edilen mesafeyi vanilla fiziğinin izin verdiği ile karşılaştırarak bunu yakalar.
+
+</KeyTakeaways>
+
+Hız artışı, oyuncuya kısa bir süreliğine ek hız veya ivme veren bir hareket modülüdür; bu etki, normal koşu ve momentumda olduğu gibi kademeli olarak artmak yerine anında uygulanır. Hız artışı, Minecraft yardımcı istemci (utility client) için iki durumda vazgeçilmezdir: kaçmaya çalışan bir oyuncuya yaklaşmak ve ters giden bir çatışmadan kurtulmak. Etki kasıtlı olarak kısadır, sürdürülebilir bir hız artışı yerine tek bir ani hız artışı sağlar.
+
+## Nasıl Çalışır
+
+Normal Minecraft'ta hız kademeli olarak artar. Koşma, zıplama ve momentumun hepsi, sunucunun her bir zaman diliminde tahmin edebileceği sabit formülleri takip eder. Hız artışı bu kademeli artışı tamamen atlar: oyuncunun hızını kısa bir süre için doğrudan ayarlar ve ardından ani hız artışı sona erdiğinde normal değerine geri dönmesine izin verir.
+
+Bu hız artışı istemci tarafında gerçekleştiği için, oyuncunun sonrasında nerede olduğuna dair bilgiyi veren istemcidir. Sunucunun iki seçeneği vardır: oyuncunun bildirdiği konumu kabul etmek veya aynı zaman dilimlerinde meşru bir oyuncunun üretebileceği momentumu yeniden hesaplamak ve ikisini karşılaştırmak.
+
+## İnsanların Aslında Neden Kullandığı
+
+Temel kullanım alanı konum değiştirmektir. Kısa bir hız artışı, kaçmaya çalışan bir hedefe olan mesafeyi kapatarak oyuncunun boşluğu çok genişlemeden önce yetişmesini veya bir vuruş yapmasını sağlar. Aynı hile ters yönde de işe yarar: bir rakibin sizi takip edemeyeceği kadar hızlı bir şekilde bir çatışmadan uzaklaşarak iyileşmek veya sadece ayrılmak için bir anlık fırsat kazanır.
+
+Her iki durum da aynı şekle sahiptir. Bu, bir savaşın tamamına yayılmak yerine, birkaç saniyeye sıkıştırılmış bir hareket avantajıdır.
+
+## Kullanımı güvenli mi?
+
+Boost, bir kozmetik özellik değil, bir oyun avantajı özelliğidir ve ani hareket, sunucu tarafı antichiplerinin gözlemlediği en belirgin şeylerden biridir. Sunucu, oyuncunun durumu (koşma, zıplama, yerde olma vb.) göz önüne alındığında, vanilla fiziğinin izin verdiği mesafeye karşı, tick tick pozisyonu izler. Bu sınırı aşan bir patlama, gerçekleştiği tick için çok büyük bir konum değişimi üretir ve bu, işaretlenmesi için net bir sinyaldir.
+
+Patlama küçükse veya normal hızlanmaya karışırsa tespit zorlaşır, çünkü bir gecikme artışı veya iyi zamanlanmış bir zıplama olarak geçebilir. Hızda büyük, tekrarlayan veya açıkça anında bir artış yakalanması kolaydır; mütevazı bir artış ise değildir, bu da radar altında kalmaya çalışan uygulamaların tam olarak neden boost'u kısa ve seyrek tuttuğunun nedenidir.
+
+<Callout variant="tip" title="Opal kataloğunda nerede yer aldığı">Opal, Hareket kategorisinin tamamını, Hız, Yavaşlama Olmadan, Faz, Adım ve diğerlerini içeriyor, ancak özellikle Güçlendirme olarak markalanmış bir şey yok. Bu modüller, sürdürülebilir hareket ve arazi geçişi üzerine kurulu, tek bir ani hız artışı üzerine değil; bu yüzden Opal'ın menüsünde tam olarak o modül adını arıyorsanız, o isim altında orada bulunmayacaktır</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını anlatmıyor">
+Bu sayfa, terimin ne anlama geldiğini bilmeniz için modülü genel olarak açıklamaktadır. İsimlendirme ve kesin davranışlar müşteriye göre değişir ve vanilla fiziğinin izin verdiği hızın ötesindeki herhangi bir hız, anticheat çalışan neredeyse tüm sunucularda kuralları ihlal eder.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Boost, bir Minecraft istemcisinde ne işe yarar?">
+Boost, oyuncuya kısa bir süreliğine ek hız veya ivme kazandırır; genellikle bir hedefe hızlıca yaklaşmak veya kaybedilen bir mücadeleden hızlıca uzaklaşmak için kullanılır.
+</FAQItem>
+
+<FAQItem question="Boost tespit edilebilir mi?">
+Evet. Sunucu, bir tick için izin verilen maksimum hıza göre ani bir hareket hızı artışı olduğunu karşılaştırabilir, bu da büyük veya tekrarlayan hızlanmaları tespit etmeyi kolaylaştırır.
+</FAQItem>
+
+<FAQItem question="Hangi müşteriler Boost kullanıyor?">
+Modül, Juul ve Rose gibi müşterilerde görüldüğü gibi belgelenmiştir.
+</FAQItem>
+
+<FAQItem question="Boost, bir dash veya sprint hilesiyle aynı mı?">
+Aynı genel fikri tanımlar; bunlar, vanilla hareketin izin verdiği şeyin ötesinde, kısa ömürlü bir hız artışıdır, ancak tam adlandırma ve uygulama istemciden istemciye değişir.
+</FAQItem>
+
+<FAQItem question="Boost sizi banlanabilir mi?">
+Oyunun izin verdiği hızın ötesinde hız sağlayan herhangi bir hareket hilesi, bir anticheat çalıştıran hemen hemen her sunucunun kurallarını ihlal eder ve Boost, oyuncuyu normal fizik dışına taşıdığı için bu kategoriye girer.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-scaffold", label: "Scaffold nedir?", description: "Hareket etmenizi kolaylaştırmak, savaşmanızı değil, tasarlanmış bir başka hareket modülü." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Görünmezlik üzerine kurulu, dikkat çekmemeyi esas alan kategori." },
+  { href: "/tr/learn/what-is-reach", label: "Reach nedir?", description: "Savaş modülü, farklı bir şekilde aynı boşlukları dolduran." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı edinin ve dürüst bir hareket kategorisinin nasıl görünüşünü görün.</CTA>

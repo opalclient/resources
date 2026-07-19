@@ -1,0 +1,89 @@
+---
+title: Was ist die Ziel-HUD in Minecraft? (Modul erklärt)
+description: Target HUD ist eine Minecraft-Kampfüberlagerung, die den Namen, die Gesundheit und die Entfernung eines festgelegten Ziels anzeigt, ohne jemals deine Zielerfassung, Eingabe oder Netzwerkverkehr zu beeinträchtigen.
+excerpt: Name, Gesundheit, Entfernung – alles auf einen Blick. Das Ziel-HUD ist so aufregend wie ein Nährwertausweis, und genau das macht es so sicher, damit man loslegen kann.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Ist das Ziel-HUD ein Cheat?
+    a: Nein. Es zeigt lediglich Informationen an, die der Klient bereits über Ihr aktuelles Ziel hat, wie Name, Gesundheit und Entfernung. Es zielt nicht, greift nicht an oder bewegt sich nicht für Sie, sodass es keine der Risiken birgt, die automatisierte Kampffähigkeiten mit sich bringen.
+  - q: Was zeigt die Ziel-HUD?
+    a: Typischerweise werden Name, aktueller Gesundheitszustand und Entfernung der jeweiligen Einheit angezeigt, auf die du im Kampf fokussiert bist. Einige Versionen ersetzen die Zahl durch eine grafische Darstellung oder ein Symbol für die Gesundheit, und das genaue Layout variiert je nach Client und ausgewähltem visuellen Stil.
+  - q: Kann die Verwendung eines Target-HUD zu einer Sperre führen?
+    a: Nicht für sich allein. Es verändert weder Pakete noch Bewegungsmuster, die an den Server gesendet werden, sodass es nichts gibt, was ein Anticheat-System markieren könnte. Es ändert lediglich das, was auf Ihrem Bildschirm dargestellt wird.
+  - q: Ist TargetInfo dasselbe wie das Ziel-HUD?
+    a: "Ja. TargetInfo ist nur ein alternativer Name, den einige Kunden für dieselbe Idee verwenden: eine Anzeige auf dem Bildschirm Ihres aktuellen Kampfziels."
+  - q: Welche Kunden haben Target HUD versendet?
+    a: Es ist im Laufe der Jahre bei mehreren Klienten aufgetaucht, darunter Fan, Tenacity und Opal v1, meist als eines von wenigen HUD-ähnlichen visuellen Modulen, aus denen ein Spieler wählen kann.
+---
+
+<KeyTakeaways>
+
+- Das Ziel-HUD ist eine Kampfübersicht, die den Namen, die Gesundheit und die Entfernung Ihres aktuellen Ziels auf dem Bildschirm anzeigt.
+- Es liest nur Daten, die der Client bereits besitzt: keine zusätzlichen Pakete, keine veränderten Eingaben, keine Automatisierung.
+- Da es verändert, was Sie sehen, anstatt was Sie tun, gibt es für Anticheats nichts zu markieren.
+- Auch als TargetInfo bekannt, und es ist in Fan, Tenacity und Opal v1 enthalten.
+
+</KeyTakeaways>
+
+Das Target HUD ist eine On-Screen-Kampfanzeige, die Informationen über das jeweilige Ziel anzeigt, auf das du im Kampf fokussiert bist – meistens den Namen, die aktuelle Gesundheit und den Abstand zu dir. Minecrafts Standard-Angriffsindikator liefert dir lediglich eine grobe Gesundheitsanzeige im Fadenkreuz und nichts weiter: keinen Namen, keine Entfernung, keine Möglichkeit zu erkennen, gegen wen du tatsächlich kämpfst, wenn drei Spieler gleichzeitig ausholen. Das Target HUD fasst all das in einem Panel zusammen. Es ist ein reines Informationsmodul, manchmal als TargetInfo bezeichnet, das Daten liest, die der Client bereits besitzt, und sie an einem Ort anzeigt, an dem du sie während des Kampfes nutzen kannst.
+
+## Funktionsweise
+
+Das Target HUD beobachtet das aktuell als dein Kampffokus geltende Ziel, meistens die Person, auf die du schaust, oder die Person, die du zuletzt getroffen hast, und zeichnet ein kleines Panel mit Details dazu.
+
+| Was es anzeigt | Detail |
+|---|---|
+| Name | Der In-Game-Benutzername des Ziels |
+| Gesundheit | Aktuelle HP, die sich während des Kampfes live aktualisiert |
+| Entfernung | Wie weit das Ziel sich aktuell befindet |
+
+Einige Implementierungen ersetzen die einfache Gesundheitszahl durch eine Balkengrafik oder ein Symbol. Clients, die mehrere visuelle Varianten des Moduls mitliefern, ermöglichen es dir, zwischen einer kompakten Leiste und einem ausführlicheren Karten-Panel zu wählen, wobei die zugrunde liegenden Daten in jedem Fall gleich bleiben.
+
+Keiner dieser Vorgänge holt neue Daten vom Server. Der Name, die Gesundheit und die Position, die es anzeigt, liegen bereits auf dem Client als Teil des normalen Spielverlaufs vor – genau wie die Daten, die Vanilla Minecraft verwendet, um Namensschilder und den Angriffspfeil darzustellen. Target HUD verpackt diese Informationen lediglich in einen Blick, anstatt Sie einen Namen, dann die Fadenkreuzleiste und dann die Entfernung selbst abschätzen zu lassen. Es beeinflusst weder Ihre Zielgenauigkeit, Ihre Angriffe noch Ihre Bewegung und sendet keine zusätzlichen Daten über die Verbindung. Es ist eine passive Anzeige, die über den Kampf gelegt wird, den Sie bereits führen.
+
+## Ist es sicher zu verwenden?
+
+Target HUD ist so sicher wie ein Minecraft-Modul nur sein kann. Es rendert nur Informationen, die der Client bereits lokal gespeichert hat, und greift niemals in den Spielzustand, die Eingabe oder den Netzwerkverkehr ein. Daher gibt es für einen serverseitigen Anticheat nichts, worauf es sich verlassen könnte. Es gehört in dieselbe Kategorie wie andere schreibgeschützte HUD-Overlays: Module, die verändern, was Sie sehen, nicht was Sie oder Ihr Client tun.
+
+Das ist eine echte Unterscheidung, kein technisches Detail. Vergleichen Sie es mit etwas wie [killaura](/de/learn/what-is-killaura) oder einem [aimbot](/de/learn/what-is-an-aimbot], die beide in Ihrem Namen handeln und eine Spur in Bewegungs- oder Zeitdaten hinterlassen, die ein Anticheat messen kann. Target HUD sendet niemals einen Angriff, dreht niemals Ihre Kamera und klickt niemals etwas an. Es sagt Ihnen lediglich, was bereits wahr ist, schneller, als Sie es selbst bemerken würden.
+
+<Callout variant="tip" title="Wo dies seinen Platz findet in Opal">
+Das Ziel-HUD ist hier kein unbekanntes Terrain. Eine frühere Version, Opal v1, lieferte ein Ziel-HUD-Stil-Panel als eines seiner Combat-HUD-Module mit. Der gleiche schreibgeschützte Ansatz findet sich in der aktuellen visuellen Kategorie wieder: Overlays, die Ihnen mehr Informationen über einen Kampf liefern, ohne jemals Ihr Zielfernrohr, Ihre Klicks oder ein einzelnes Paket, das Sie senden, zu berühren.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Ist das Ziel-HUD ein Cheat?">
+Nein. Es zeigt lediglich Informationen an, die der Client bereits über Ihr aktuelles Ziel hat, wie Name, Gesundheit und Entfernung. Es zielt nicht, greift nicht an und bewegt sich nicht für Sie, daher birgt es keine der Risiken, die automatisierte Kampfmodule mit sich bringen.
+</FAQItem>
+
+<FAQItem question="Was zeigt die Ziel-HUD?">
+Typischerweise den Namen, die aktuelle Gesundheit und die Entfernung der Einheit, auf die du im Kampf ein Ziel gewählt hast. Einige Versionen tauschen die Zahl gegen eine grafische Darstellung oder ein Symbol für die Gesundheit aus, und das genaue Layout variiert je nach Client und ausgewähltem visuellen Stil.
+</FAQItem>
+
+<FAQItem question="Kann Target HUD zu einem Bann führen?">
+Nicht von selbst. Es verändert weder Pakete noch Bewegungsmuster, die an den Server gesendet werden, sodass es nichts gibt, was ein Anti-Cheat-System auslösen könnte. Es ändert lediglich das, was auf Ihrem Bildschirm dargestellt wird.
+</FAQItem>
+
+<FAQItem question="Ist TargetInfo dasselbe wie Target HUD?">
+Ja. TargetInfo ist lediglich ein alternativer Name, den einige Kunden für dasselbe Konzept verwenden: eine Anzeige auf dem Bildschirm Ihres aktuellen Kampfziels.
+</FAQItem>
+
+<FAQItem question="Welche Kunden haben Target HUD versendet?">
+Es ist im Laufe der Jahre bei mehreren Kunden aufgetaucht, darunter Fan, Tenacity und Opal v1, meist als eines von wenigen HUD-ähnlichen visuellen Modulen, aus denen ein Spieler wählen kann.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die breitere Kategorie, zu der Ziel-HUDs und ähnliche Module gehören." },
+  { href: "/de/learn/what-is-killaura", label: "Was ist KillAura?", description: "Das automatisierte Gegenteil eines schreibgeschützten HUD: Es handelt für Sie, anstatt Sie nur zu informieren." },
+  { href: "/de/learn/what-is-an-aimbot", label: "Was ist ein Aim-Bot?", description: "Ein weiteres Kampanmodul, das jedoch im eigenen Namen für dich agiert, anstatt dir nur den Kampf zu zeigen." }
+]} />
+
+<CTA href="/de/purchase">Klare Kampfinformationen ohne integrierte Automatisierung – das ist die ganze Idee hinter Opal.</CTA>

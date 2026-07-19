@@ -1,0 +1,82 @@
+---
+title: Czym jest VClip (Vertical Clip) w Minecraft?
+description: VClip to moduł ruchu, który umożliwia graczowi przecinanie solidnych bloków w pionie, pozwalając mu na chwilę przejść przez podłogę lub sufit, zanim kolizja wznawia się normalnie.
+excerpt: VClip przenika gracza prosto przez podłogę lub sufit na sekundę, a następnie pozwala kolizji powrócić tak, jakby nic się nie stało.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy VClip to to samo co noclip?
+    a: Nie do końca. Pełne noclip wyłącza kolizję we wszystkich kierunkach, dzięki czemu gracz może poruszać się przez wszystko. VClip działa tylko w osi pionowej i tylko przez czas wystarczający do pokonania podłogi, sufitu lub cienkiej ściany przed nim, zanim kolizja zostanie wznowiona.
+  - q: Czy VClip działa również na boku?
+    a: Nie. Nazwa jest dosłowna. VClip klipuje tylko w pionie, w górę lub w dół przez teren. Nie przeniesie gracza przez ścianę stojącą obok.
+  - q: Czy antywirusy mogą wykrywać VClip?
+    a: Tak. Gracz kończy na dalekiej stronie stałego terenu, nie zajmując nigdy legalnej, otwartej przestrzeni pomiędzy, co nie jest efektem ciągłego, sprawdzanego pod kątem kolizji ruchu. Serwerowe antywiry, które weryfikują pozycję względem mapy świata, zostały zaprojektowane właśnie po to, by wykrywać taki skok.
+  - q: Które dokumenty klienta VClip rejestruje jako moduł?
+    a: Juul dokumentuje VClip jako moduł, umieszczając go wraz z innymi narzędziami do poruszania się i interakcji ze światem, a nie w sekcji związanej z walką.
+---
+
+<KeyTakeaways>
+
+- VClip (Vertical Clip) to moduł ruchu, który pozwala graczowi na chwilę przeniknąć przez solidne bloki, poruszając się prosto w górę lub w dół przez podłogę, sufit lub cienką ścianę.
+- Działa wyłącznie na osi pionowej. Nie ma przesuwania w bok, w przeciwieństwie do pełnego noclip.
+- Kolizja wraca natychmiast po tym, jak gracz przejdzie, więc nic w świecie nie pozostaje zepsute.
+- Wykorzystywany jest do pomijania pięter lub wchodzenia do pomieszczeń bez drzwi, a nie do uzyskania przewagi w walce.
+- Anticheaty go wykrywają, ponieważ wynikowa pozycja jest czymś, czego nie mogłaby wygenerować jedna, ciągła, sprawdzana pod kątem kolizji ruch.
+
+</KeyTakeaways>
+
+VClip, skrót od Vertical Clip, to moduł ruchu, który pozwala graczowi na chwilę przejść prosto przez solidne bloki, poruszając się w górę lub w dół przez podłogę, sufit lub cienką ścianę, która w innym przypadku zatrzymałaby go w miejscu. Wyobraźcie sobie noclip z pojedynczą osią: kolizje wyłączają się na tyle długo, by przejść przez przeszkodę, a następnie włączają się z powrotem, jakby nigdy się nie wyłączyły. Nie wpływa na walkę ani celowanie. Po prostu przenosi gracza przez teren, który silnik został zaprojektowany, aby go od niego odizolować.
+
+## Jak VClip faktycznie przenosi gracza
+
+Co tick, klient sprawdza hitbox gracza względem bloków wokół niego i zatrzymuje ruch w momencie, gdy miałby się z czymś solidnym pokryć. To sprawdzenie zapobiega chodzeniu w ścianę lub przechodzeniu przez własną podłogę. VClip działa, krótko obejmując to, nie wszędzie, tylko na osi pionowej i tylko tak długo, jak potrzeba, by przejść przez to, co jest bezpośrednio nad lub pod.
+
+Gracz porusza się przez blok, jakby był powietrzem. Gdy już znajdzie się po drugiej stronie, kolizje się wznawiają i gra traktuje go tak, jakby nigdy tam nie był. Żaden blok nie zostaje zniszczony, nie ma udziału drabiny ani elytra, nic w terenie się nie zmienia. Pozycja po prostu aktualizuje się do miejsca, które fizycznie było niedostępne z miejsca, z którego gracz rozpoczął.
+
+Głównie służy to pomijaniu pięter lub wpadaniu prosto do pomieszczenia, omijając drzwi i korytarze – jest to skrót przez mapę, a nie narzędzie do wygrywania walk. To również dokładnie zdradza jego istnienie.
+
+## Czy VClip jest wykrywalny?
+
+Tak, i łatwo. Przesuwanie się przez ściany pozostawia ślad, który serwer może sprawdzić: hitbox gracza pojawia się po jednej stronie podłogi lub ściany, nie zajmując wcześniej legalnej, otwartej przestrzeni pomiędzy nimi. Standardowy ruch jest ciągły, więc aktualizacja pozycji, która umieszcza gracza wewnątrz ścian, albo przeskakuje barierę bez możliwej drogi omijającej, nie jest czymś, co generuje normalna rozgrywka.
+
+To sprawia, że VClip jest prawdziwym wykorzystaniem luki w ruchu, a nie tylko kosmetyczną zmianą. W przeciwieństwie do zmiany interfejsu użytkownika lub ustawień kolorów, zmienia to, gdzie graczowi faktycznie wolno się znajdować. Serwerowe anticheaty, które weryfikują pozycję i kolizje co tick, są specjalnie zaprojektowane, aby wykrywać tego typu skoki.
+
+<Callout variant="tip" title="Gdzie Opal wyznacza granicę">
+Opal nie wysyła VClip ani niczego, co miałoby symulować pozycję, której naturalna kolizja nigdy nie wygenerowałaby. Moduł umożliwiający szybszy ruch lub utrzymywanie bardziej stromego kąta nadal stanowi przewagę w ramach fizyki sprawdzanej przez serwer. Moduł teleportujący hitbox przez podłogę to inna kategoria ryzyka, a zestaw modułów Opal pozostaje po właściwej stronie tej granicy.
+</Callout>
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+VClip przesuwa hitbox gracza przez pozycje, których fizyka kolizji w standardowej wersji gry uniemożliwia. To dokładnie ten rodzaj ruchu, który systemy anticheat są zaprojektowane do oznaczania jako nieprawidłowy. Ta strona wyjaśnia mechanikę, a nie implementację. Uruchomienie tego na jakimkolwiek serwerze z działającym anticheatem to szybki sposób na utratę konta.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy VClip jest tym samym co noclip?">
+Nie do końca. Pełny noclip wyłącza kolizję we wszystkich kierunkach, dzięki czemu gracz może poruszać się przez wszystko. VClip działa tylko na osi pionowej i tylko przez krótki czas, wystarczający do przejścia przez podłogę, sufit lub cienką ścianę przed nim, zanim kolizja wznowi się.
+</FAQItem>
+
+<FAQItem question="Czy VClip działa również na boku?">
+Nie. Nazwa jest dosłowna. VClip klipsuje tylko w pionie, w górę lub w dół przez teren. Nie przeniesie gracza przez ścianę, stojąc obok niej.
+</FAQItem>
+
+<FAQItem question="Czy antywiry mogą wykryć VClip?">
+Tak. Gracz pojawia się po drugiej stronie stałego terenu, nie zajmując nigdy legalnej, otwartej przestrzeni pomiędzy, co nie jest możliwe dzięki ciągłemu, sprawdzanemu kolizjami poruszaniu się. Serwerowe antywiry, które weryfikują pozycję gracza względem mapy świata, zostały zaprojektowane właśnie do wykrywania takich skoków.
+</FAQItem>
+
+<FAQItem question="Które dokumenty klienta VClip jest dokumentowane jako moduł?">
+Juul dokumentuje VClip jako moduł, traktując go jako część zestawu narzędzi do ruchu i świata, a nie narzędzi związanych z walką.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Szeroka kategoria, do której należą VClip i moduły tego typu." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kategoria klientów nastawiona na skrytość, stworzona, by ukrywać luki, takie jak ta." },
+  { href: "/pl/learn/what-is-scaffold", label: "Co to jest Scaffold?", description: "Kolejny moduł ruchu, który poświęca legalne pozycjonowanie na rzecz skrótu, a płaci za to zwiększoną wykrywalnością." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź moduły ruchu, które wytrzymają weryfikację, a nie ugną się pod nią.</CTA>

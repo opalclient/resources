@@ -1,0 +1,85 @@
+---
+title: Minecraft'ta Keep Sprint Nedir? Modül Açıklaması
+description: Keep Sprint, saldırı veya ani dönüş yaptığınızda sprintinizi iptal etmeyi engelleyen bir modüldür. İşte nasıl çalıştığı ve riskin buna değip değmediği.
+excerpt: Sprint tutuşu, seni çarpmalı veya seni öldürmesi gereken dönüşte hızını korur. Bu bir hız hilesi değil, ancak sunucu yine de farkı anlayabilir.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Keep Sprint aslında ne değiştiriyor?
+    a: Sürüşü, normalde bitirecek eylemler sırasında iptal edilmesini engeller, örneğin saldırmak veya sertçe dönmek gibi; böylece yürüyüşe geçmek yerine sürüş hızında hareket etmeye devam edersiniz.
+  - q: Keep Sprint, hız hilesiyle aynı şey mi?
+    a: Hayır, hareket hızını normal sprint bonusunun ötesine taşımıyor. Sadece, Minecraft'ın aksi takdirde iptal edeceği anlarda o mevcut bonusun aktif kalmasını sağlıyor.
+  - q: İlk başta neden ani dönüşler veya saldırılar sprinti iptal ediyor?
+    a: Vanilla Minecraft, bu hareketleri ileri doğru koşmakla tutarsız olarak değerlendirir, bu nedenle sprint bayrağını sıfırlar ve sprint yeniden tetiklenene kadar yürüyüş hızına düşürür.
+  - q: Can Keep Sprint anticheat sistemleri tarafından işaretlenebilir mi?
+    a: Bununla birlikte, oyuncunun bildirdiği hızın, eylemlerinin ima ettiği hareketle eşleşip eşleşmediğini kontrol eden sunucularda olabilir. Sprint tuşunu, sıfırlanması gereken bir anda basılı tutmak, bu kontrollerin aradığı eşleşmezlik türüdür.
+  - q: Hangi müşterilerimizin Keep Sprint modülü var?
+    a: Tenacity ve Rose gibi müşterilerde görüldüğü gibi takip ediliyor. Diğer müşteriler aynı fikri farklı bir isim altında gönderebilir ve Opal, kendi versiyonunu Sprint olarak gönderiyor.
+---
+
+<KeyTakeaways>
+
+- Keep Sprint, saldırı yaptığınızda veya sertçe döndüğünüzde sprintin iptal olmasını engelleyen bir modüldür.
+- Normal Minecraft'ta sprint, bu tetikleyicilerde, geriye doğru hareket ettiğinizde veya bir engelle çarptığınızda sıfırlanır.
+- Etki, sadece bir kez değil, bir savaş boyunca sürekli olarak devam eder.
+- Normal sprint bonusunun ötesine geçirmemesi, sadece bu bonusu daha uzun süre aktif tutması.
+
+</KeyTakeaways>
+
+Keep Sprint, oyununuzun normalde sprintinizi iptal eden anlarda, örneğin saldırmak, keskin dönüşler yapmak, geriye doğru adım atmak veya bir engelle çarpışmak gibi durumlarda sprintinizi kesmesini engelleyen bir hareket modülüdür. Vanilla Minecraft, bu eylemleri sprintinizi durdurduğunuzun kanıtı olarak okur ve sizi tekrar ileriye basana kadar yürüyüş hızınıza geri düşürür. Keep Sprint, bu sıfırlamayı gerçekleşmeden önce yakalar ve sprint bayrağını yerinde tutar, böylece hız bonusu kesintiden etkilenmez. Bir hareket modülü olarak sınıflandırılmış olsa da, düz bir çizgide yürürken neredeyse kimse fark etmez. Gerçek evidir, çünkü bu kesintiler sürekli olarak gerçekleşen savaş alanında.
+
+## Keep Sprint nasıl çalışır
+
+Keep Sprint, vanilla Minecraft'ın normalde sprint bayrağınızı sıfırlayacağı tam anlarda bir kontrol yapar. Vanilla istemcisi, sprinti kısa bir koşul listesi altında bırakır: saldırırsanız, seyahat yönünüze göre belirli bir açıyı aşarsanız, geriye hareket ederseniz veya bir şeye çarparsanız. Bunların her biri, vanilla'nın hareketinizin artık sprint gibi görünmediğine karar verme yoludur, bu nedenle size sprint hızını vermeyi bırakır.
+
+Modül, o kararın önünde duruyor. Bu tetikleyicilerden biri ateşlendiğinde, Keep Sprint onu yakalıyor ve istemci yürüyüşe geçmek yerine bayrağı ayarlıyor. Sprint, tek seferlik bir animasyon yerine gerçek, sürekli bir hız bonusu kontrol ettiği için, efekt tek bir hileli kare olmaktan ziyade, sizi yavaşlatması gereken tetikleyici boyunca sürdürülüyor. Bir oyuncu, bir rakibe dönmek için dönebilir, bir vuruş yapabilir ve ileriye tekrar dokunarak yeniden tetiklemeyi normalde gerektiren duraklama olmadan tam sprint hızıyla hareket etmeye devam edebilir. Tenacity ve Rose gibi istemcilerde görüldüğü gibi takip ediliyor ve hareket kategorisi altında kataloglanmış olsa da, pratik kullanım durumu neredeyse her zaman bir savaş.
+
+## Keep Sprint kullanmak güvenli mi?
+
+Keep Sprint, vanilla Minecraft'ın kasıtlı olarak uyguladığı bir mekaniği geçersiz kılıyor. Sprint, hareketinizin koşma gibi görünmemesi anı geldiğinde sıfırlanması gerekiyor ve beklenen hızınızı bildirdiğiniz eylemlerinizden yeniden hesaplayan bir sunucu, sprinti sıfırlanması gereken bir an boyunca sürdürdüğünüzü fark edebilir. Bu, diğer sprint ve hız modülleriyle karşı kullanılan kontrol türüyle aynıdır: "hızınız çok mu yüksek" değil, "hızınız eylemlerinizin söylediğiyle eşleşiyor mu?"
+
+Düz bir hız artışından çok daha ince bir belirti, çünkü Keep Sprint zaten sprintin izin verdiği hızdan daha fazla bir hız vaat etmiyor. İçinde aimbot veya sürekli blok yerleştirmeye benzeyen hiçbir şey yok. Ancak bu sadece kozmetik bir değişiklik de değil. Sunucunun belirli bir tick'ta hareketinizin nasıl görünmesi gerektiğini değiştirmekte ve bu uyumsuzluk tam olarak bir hareket kontrolünün yakalamaya çalıştığı şeydir. Bare minimumdan daha fazlasını çalıştıran herhangi bir sunucuda kullan-riski-üstlen özelliği olarak değerlendirin.
+
+<Callout variant="tip" title="Opal bunu Sprint olarak gönderiyor">
+Opal'ın kataloğu bunu açıkça belirtiyor: Sprint, "Sprinting'in arkasındaki mantığı değiştirir." Bu sayfanın geri kalanındakiyle aynı sınıflandırma: kendi sorumluluğunuzda kullanın.
+</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını anlatmıyor">
+Bu sayfa, terimin ne anlama geldiğini bilmeniz için modülü genel olarak açıklamaktadır. İsimlendirme ve kesin davranışlar müşteriye göre değişir ve gerçek hareket kontrolleri çalışırken sıfırlanması gereken bir anda sprint'i durdurmak, sunuculardaki kuralları ihlal eder.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Keep Sprint aslında ne değiştirir?">
+Sprinting sırasında, normalde onu sonlandıran eylemler esnasında iptal edilmesini engeller; örneğin saldırmak veya sert bir şekilde dönmek gibi. Böylece yürüyüş hızına düşmek yerine sprint hızında hareket etmeye devam edersiniz.
+</FAQItem>
+
+<FAQItem question="Keep Sprint, hız hilesiyle aynı mı?">
+Hayır. Normal sprint bonusunun ötesinde hareket hızını hiçbir zaman artırmaz. Sadece, Minecraft'ın normalde iptal edeceği anlarda bile mevcut bonusun aktif kalmasını sağlar.
+</FAQItem>
+
+<FAQItem question="Neden saldırmak veya sertçe dönmek sprinti iptal ediyor?">
+Vanilla Minecraft, bu eylemleri ileriye doğru sprint yapmaya aykırı olarak değerlendirir, bu nedenle sprint bayrağını sıfırlar ve sprint yeniden tetiklenene kadar yürüyüş hızına düşersiniz.
+</FAQItem>
+
+<FAQItem question="Keep Sprint anticheat tarafından işaretlenebilir mi?">
+Evet, oyuncunun rapor edilen hızı, eylemlerinin ima ettiği hareketle eşleşip eşleşmediğini kontrol eden sunucularda olabilir. Sprint tuşunu, sıfırlanması gereken bir anlık süreden sonra basılı tutmak, bu kontrollerin aradığı türden bir uyumsuzluktur.
+</FAQItem>
+
+<FAQItem question="Hangi müşterilerde Keep Sprint modülü bulunuyor?">
+Bu durum, Tenacity ve Rose gibi müşterilerde görüldüğü gibi takip ediliyor. Diğer müşteriler aynı fikri farklı bir isim altında sunabilir ve Opal, Sprint adıyla kendi versiyonunu sunuyor.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-velocity-anti-knockback", label: "Hız (çarpma geri tepmesi önleme) nedir?", description: "Sunucu tarafından beklenen fiziksel tepkileri geçersiz kılan başka bir modül." },
+  { href: "/tr/learn/what-is-scaffold", label: "Scaffold nedir?", description: "Tamamen farklı bir sorun için tasarlanmış, bir hareket modülü daha." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Bu gibi, fark edilmesi zor, ince modüllerin bir müşterinin tasarımına nerede uyduğunu." },
+]} />
+
+<CTA href="/tr/satin-al">Dövüşün ortasında asla adımını bozma. Opal gemileri, $8.99 hareket setinin bir parçası olarak Süratleniyor.</CTA>

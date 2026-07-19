@@ -1,0 +1,95 @@
+---
+title: Cosa sono le mappe di Minecraft? Nomi spiegati
+description: "La mappatura di Minecraft spiegata: come MCP, Yarn e Mojmap trasformano i nomi di classe offuscati in codice leggibile, consentendo a mod e client di intercettare il gioco."
+excerpt: Mojang distribuisce Minecraft con nomi confusi come a.a.a. Le mappature sono il dizionario che li trasforma di nuovo in codice leggibile a cui i mod possono accedere.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Mappings
+author: trq
+faqs:
+  - q: Le rimappature modificano il funzionamento del gioco?
+    a: No. Una mappatura rinomina soltanto le cose per lo sviluppatore, e il mod compilato viene rimappato per corrispondere al gioco offuscato, quindi i nomi usati nel codice non vengono mai distribuiti ai giocatori.
+  - q: Per quale motivo esistono diversi sistemi di cartografia?
+    a: Storia. MCP è arrivato per le versioni di Minecraft precedenti alla 1.14, Yarn si è sviluppato insieme a Fabric come alternativa aperta, e le mappature di Mojang sono state pubblicate quando Mojang ha iniziato a pubblicare i nomi ufficiali nella versione 1.14.4.
+  - q: Quale mappatura dovrebbe utilizzare un nuovo progetto?
+    a: Per Minecraft moderno, le scelte standard sono le mappature di Mojang o Yarn. MCP è rilevante principalmente per lavori dell'era legacy 1.8.9, dove il vecchio toolchain è ancora in uso.
+  - q: Le mappe sono la stessa cosa di un mod loader?
+    a: No. Una mappatura è una tabella di nomi; un mod loader come Fabric è l'ambiente di runtime che carica i mod nel gioco. Lavorano insieme ma risolvono problemi diversi.
+---
+
+<KeyTakeaways>
+
+- Le mappature sono tabelle di nomi che traducono il codice offuscato di Minecraft in nomi leggibili.
+- Mojang mescola i nomi di classi, campi e metodi, e questi cambiano ad ogni versione.
+- Le tre che sentirai nominare sono MCP, Yarn e le mappature di Mojang (Mojmap).
+- Una mappatura viene applicata in fase di compilazione, non in fase di esecuzione, quindi non viene mai distribuita ai giocatori.
+
+</KeyTakeaways>
+
+Le mappature di Minecraft sono tabelle di nomi che traducono il codice offuscato del gioco in nomi leggibili. Mojang distribuisce Minecraft con nomi di classi e campi offuscati come `a.a.a`, quindi gli sviluppatori di mod e client applicano un set di mappature come MCP, Yarn o le mappature di Mojang per ottenere nomi che possono effettivamente leggere e a cui possono fare riferimento.
+
+<Callout variant="info" title="Dove si integra Opal">
+Opal è un mod [Fabric](https://fabricmc.net/), quindi si basa su mappings moderni a livello interno ed espone una pulita API di scripting JavaScript GraalVM. Scrivi script utilizzando nomi leggibili senza dover toccare direttamente i mappings. Consulta la [guida allo scripting](/it/docs/scripting).
+</Callout>
+
+## Perché esistono le mappe
+
+Mojang offusca Minecraft prima del rilascio. Il file jar distribuito rinomina classi, metodi e campi con stringhe corte e senza significato per ridurre le dimensioni del file e rendere il codice difficile da leggere. È per questo scrambling che non puoi semplicemente aprire il gioco e iniziare a modificarlo.
+
+Una mappa è il dizionario che annulla questa operazione. Abbina ogni nome offuscato a uno leggibile, quindi un campo chiamato `field_70181_x` diventa `motionY`. Con una mappa applicata, uno sviluppatore vede un codice sorgente dall'aspetto normale e può scrivere mod su di esso.
+
+C'è un aspetto da considerare. I nomi offuscati cambiano con ogni versione di Minecraft, quindi lo stesso campo può essere `a` in una versione e `bk` nella successiva. Le mappe assorbono questo cambiamento, ed è per questo che sono il fulcro di ogni toolchain di modding.
+
+## Le tre di cui sentirai parlare
+
+MCP (Mod Coder Pack) è la mappa della comunità che ha reso possibile il modding precedente alla versione 1.14. Utilizzava uno schema a due livelli: il progetto Searge produceva nomi intermedi stabili ma brutti come `field_70181_x`, e MCP li avvolgeva con nomi amichevoli come `motionY`. La maggior parte dei client standalone 1.8.9 più datati compilano rispetto a un albero sorgente mappato da MCP e basano la loro reflection sui nomi MCP e Searge.
+
+Yarn è la mappatura open-source mantenuta da FabricMC per l'ecosistema [Fabric](https://fabricmc.net/). È guidata dalla comunità, con licenza libera e si aggiorna rapidamente quando viene rilasciata una nuova versione di Minecraft, il che è in parte il motivo per cui i mod di Fabric raggiungono rapidamente le nuove versioni.
+
+Le mappature di Mojang, spesso chiamate Mojmap, sono la mappatura proprietaria di Mojang, pubblicata insieme a ogni versione ufficiale a partire dalla 1.14.4. Poiché provengono direttamente da Mojang, i nomi corrispondono a quelli che gli sviluppatori utilizzano effettivamente. Hanno sostituito efficacemente MCP e Searge come standard predefinito per qualsiasi client che punta alla 1.21 o versioni successive.
+
+## Come si confrontano
+
+| | MCP | Yarn | Mappature di Mojang |
+| :--- | :--- | :--- | :--- |
+| Mantenute da | Comunità (Searge + MCP) | FabricMC | Mojang |
+| Era | Pre-1.14 (1.7-1.12) | 1.14+ | 1.14.4+ |
+| Fonte | Derivate dalla comunità | Derivate dalla comunità | Ufficiali |
+| Utilizzate con | Client legacy, modding datato | Fabric | Fabric, Forge |
+| Stato | Deprecate a favore delle mappature di Mojang | Attive | Attive di default |
+
+## Come le mappature si inseriscono in una toolchain di modding
+
+Una mappatura viene applicata in fase di compilazione, non in fase di runtime. Lo strumento di build prende il gioco offuscato, applica la mappatura e ti fornisce una versione leggibile su cui scrivere codice. Il tuo mod completato viene quindi rimappato in modo che corrisponda ai nomi offuscati che il gioco del giocatore utilizza effettivamente.
+
+Diversi loader gestiscono questa cosa in modi differenti. [Fabric](https://fabricmc.net/) compila rispetto a Yarn o a una base di mapping di Mojang, a seconda del progetto. Forge storicamente divideva il compito, utilizzando una mappa per il codice sorgente che si legge e un'altra per quello che viene eseguito. La licenza delle mappe di Mojang è sufficientemente permissiva da poterle utilizzare in fase di compilazione, motivo per cui le moderne toolchain si basano su di esse.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Le rimappature modificano il funzionamento del gioco?">
+No. Una rimappatura serve solo a rinominare gli elementi per lo sviluppatore. La mod compilata viene rimappata per corrispondere al gioco offuscato, quindi i nomi che vedi durante la programmazione non vengono distribuiti ai giocatori.
+</FAQItem>
+
+<FAQItem question="Perché esistono diversi sistemi di mapping?">
+Storia. MCP è arrivato per primo e ha accompagnato la comunità attraverso il Minecraft pre-1.14. Yarn è cresciuto con Fabric come alternativa aperta, e le mappature di Mojang sono arrivate quando Mojang ha iniziato a pubblicare nomi ufficiali con la versione 1.14.4.
+</FAQItem>
+
+<FAQItem question="Quale mapping dovrebbe utilizzare un nuovo progetto?">
+Per Minecraft moderno, le mappature di Mojang o Yarn sono le scelte standard. MCP è rilevante principalmente per lavori dell'era legacy 1.8.9 in cui il vecchio toolchain è ancora in uso.
+</FAQItem>
+
+<FAQItem question="Le mappature sono la stessa cosa di un mod loader?">
+No. Una mappatura è una tabella di nomi; un mod loader come Fabric è l'ambiente di runtime che carica i mod nel gioco. Lavorano insieme ma risolvono problemi diversi.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-intermediary", label: "Cosa si intende per intermediario?", description: "Lo strato di nomi del mod che ha compilato le mod." },
+  { href: "/it/learn/yarn-vs-mojmap", label: "Yarn contro Mojmap", description: "Quale mappa leggibile scegliere per un mod di Fabric." },
+  { href: "/it/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "I caricatori servono queste mappature." },
+]} />
+
+<CTA href="/it/purchase">Ottieni Opal, un client Fabric, per $8.99</CTA>

@@ -1,0 +1,75 @@
+---
+title: Cos'è un contatore FPS in Minecraft?
+description: Un contatore FPS è un modulo HUD che mostra il frame rate live del tuo client di Minecraft sullo schermo. Ecco come funziona, perché i giocatori lo usano e se è sicuro da eseguire.
+excerpt: È solo un numero sullo schermo, che indica le tue componenti, mai te.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Un contatore di FPS offre qualche vantaggio in gioco?
+    a: No. Mostra soltanto un numero che indica la velocità con cui il tuo client sta renderizzando i fotogrammi. Non influisce sul combattimento, sul movimento o su qualsiasi cosa venga elaborata dal server.
+  - q: Mostrare i FPS è la stessa cosa che aumentare i FPS?
+    a: No. Un contatore misura e visualizza soltanto il tuo frame rate attuale. Alzare effettivamente il frame rate richiede modifiche separate, come ridurre la distanza di rendering o le impostazioni grafiche.
+  - q: Possono i server rilevare o bannare un contatore di FPS?
+    a: No. Il modulo non invia mai nulla al server. Legge soltanto i dati locali del client e li mostra sullo schermo, quindi non c'è nulla che il server possa osservare o segnalare.
+  - q: È presente un contatore FPS integrato nella versione base di Minecraft?
+    a: Vanilla ha la schermata di debug F3, che include il frame rate insieme a una miriade di altri dati diagnostici. Un modulo FPS dedicato mostra solo il numero, solitamente come un piccolo elemento HUD sempre visibile.
+---
+
+<KeyTakeaways>
+
+- Un contatore FPS è un modulo HUD che mostra il frame rate live del tuo client di Minecraft sullo schermo.
+- Espone semplicemente un numero che il gioco tiene già traccia internamente, non viene calcolato nulla di nuovo.
+- Puramente cosmetico: non influisce mai su movimento, combattimento o qualsiasi cosa inviata al server.
+- Nulla viene inviato dal client, quindi non c'è nulla che un anticheat lato server possa segnalare.
+
+</KeyTakeaways>
+
+Un contatore FPS è un piccolo elemento dell'HUD che mostra quanti frame al secondo il tuo client di Minecraft sta attualmente renderizzando, aggiornato continuamente mentre giochi. Non è una funzionalità di gameplay. Il numero varia in base all'hardware e alle impostazioni, non a ciò che accade sul server, quindi rientra nella stessa categoria di un orologio o di un display delle coordinate: informativo, non competitivo. La maggior parte dei client di utilità ne include uno come modulo HUD predefinito, perché è il modo più veloce per rispondere a "perché si sente a scatti" senza dover cercare in un menu di debug.
+
+## Come funziona
+
+Minecraft calcola già internamente il proprio frame rate per gestire il ciclo di rendering. Il modulo FPS non esegue nuovi calcoli: legge quel valore esistente ogni frame e lo visualizza da qualche parte sullo schermo, di solito un piccolo numero nascosto in un angolo o integrato in un HUD più ampio accanto a elementi come le coordinate o il ping.
+
+Poiché la visualizzazione si aggiorna continuamente, riflette le prestazioni reali in tempo reale, inclusi i cali dovuti al caricamento intensivo di chunk, effetti particellari densi o aree con molti entity. Minecraft vanilla ha la sua versione di questo nella schermata di debug F3, che nasconde il frame rate in una miriade di altri dati diagnostici. Un modulo FPS dedicato lo riduce a quel singolo numero che le persone guardano effettivamente, mantenendolo visibile senza dover tenere premuto un tasto.
+
+## È sicuro da usare
+
+Sì, senza riserve. Un contatore FPS legge e visualizza solo dati già presenti sul tuo computer. Non interferisce con i movimenti, il combattimento, la sincronizzazione dei pacchetti o qualsiasi cosa venga elaborata dal server, quindi non c'è alcun segnale rilevabile per un anticheat lato server. I sistemi di rilevamento monitorano input e schemi di rete sospetti. Un numero visualizzato localmente sul tuo schermo è invisibile a tutti questi sistemi.
+
+L'unico vero svantaggio è l'ingombro. Impila un contatore FPS con un display del ping, una lettura delle coordinate e una sovrapposizione delle sequenze di tasti, e il tuo schermo inizierà a somigliare a una cabina di pilotaggio. Si tratta di un problema di gusto, non di rischio.
+
+<Callout variant="tip" title="Perché questo rimane a basso rischio">
+L'intera categoria, di sola lettura, solo schermo, insensibile al server, è il motivo per cui raramente viene menzionata quando si parla di ciò che è rischioso in un client di utilità. Anche l'HUD di Opal segue questa linea: moduli che riportano informazioni sul tuo stato di gioco senza mai interagire con il server.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Un contatore FPS offre un vantaggio in gioco?">
+No. Mostra soltanto un numero che indica la velocità con cui il client sta renderizzando i fotogrammi. Non modifica il combattimento, il movimento o qualsiasi cosa venga elaborata dal server.
+</FAQItem>
+
+<FAQItem question="Mostrare gli FPS è la stessa cosa che aumentare gli FPS?">
+No. Un contatore misura e visualizza semplicemente il tuo frame rate attuale. Aumentarlo effettivamente richiede modifiche separate, come ridurre la distanza di rendering o le impostazioni grafiche.
+</FAQItem>
+
+<FAQItem question="I server possono rilevare o bannare un contatore di FPS?">
+No. Il modulo non invia mai nulla al server. Legge solamente dati locali del client e li mostra sullo schermo, quindi non c'è nulla che un server possa osservare o segnalare.
+</FAQItem>
+
+<FAQItem question="Esiste un contatore FPS integrato nel Minecraft vanilla?">
+Vanilla ha lo schermo di debug F3, che include il frame rate insieme a una miriade di altri dati diagnostici. Un modulo FPS dedicato mostra solo il numero, solitamente come un piccolo elemento HUD sempre visibile.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "A cui categoria più ampia appartengono moduli HUD come questo." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Dove la sottigliezza conta davvero, a differenza di un display HUD in sola lettura." },
+  { href: "/it/learn/what-is-reach", label: "Cos'è la portata?", description: "Un modulo che interagisce con il server e che viene monitorato a tal fine." },
+]} />
+
+<CTA href="/it/purchase">Scopri cosa traccia ulteriormente l'HUD di Opal, per $8.99</CTA>

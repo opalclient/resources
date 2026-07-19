@@ -1,0 +1,88 @@
+---
+title: Cosa si intende per post-elaborazione in Minecraft? Modulo Visivo
+description: La post-elaborazione è un modulo di Minecraft che esegue una passata di shader in spazio schermo, come la correzione del colore o la sfocatura, sull'intera visuale di gioco senza interferire con il gameplay.
+excerpt: Un passaggio shader, l'intero schermo, zero rischio di ban. La post-elaborazione funziona come un filtro fotografico, non come un imbroglio.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: L'elaborazione post-partita influisce sul gameplay in Minecraft?
+    a: No. Cambia soltanto l'aspetto del frame una volta renderizzato. Non ha alcun effetto sui movimenti, sul combattimento, sulle hitbox o su qualsiasi cosa il server possa vedere.
+  - q: Può il post-processing farti squalificare?
+    a: No. È un passaggio di rendering puramente visivo, lato client, senza impatto sulla rete o sul gameplay, quindi non comporta alcun rischio di rilevamento.
+  - q: Quali client di Minecraft hanno un modulo di Post Processing?
+    a: La post-elaborazione è documentata come si vede in Tenacity. Passaggi simili di effetti sullo spazio dello schermo compaiono in altri client con nomi diversi, come opzione di visualizzazione generale.
+  - q: Quali effetti include l'elaborazione post-produzione?
+    a: I due effetti documentati sono la correzione del colore, che modifica la tonalità e il contrasto dell'immagine, e la sfocatura, che ammorbidisce l'intera immagine. Entrambi vengono eseguiti all'interno della stessa pass shader.
+  - q: È la post-elaborazione la stessa cosa di un pacchetto shader?
+    a: Non esattamente. Un shader pack sostituisce o estende di solito l'intera pipeline di rendering e necessita di un loader separato per l'installazione. Post Processing è un effetto integrato più ristretto, attivabile direttamente nel client.
+---
+
+<KeyTakeaways>
+
+- Post Processing è un modulo client-side per Minecraft che esegue un singolo passaggio shader in screen-space, come la correzione del colore o la sfocatura, sull'intero frame renderizzato.
+- Si attiva dopo che il mondo e l'interfaccia sono già stati disegnati, trattando l'immagine finita come un unico livello invece di modificare singoli blocchi o entità.
+- Non influenza posizione, hitboxes, tempistiche o qualsiasi valore tracciato dal server, quindi non c'è nulla che un anticheat server-side possa rilevare.
+- Documentato come si vede in Tenacity, è un sostituto integrato per l'installazione di un pacchetto shader esterno completo.
+
+</KeyTakeaways>
+
+La post-elaborazione è un modulo di Minecraft che esegue una passata di shader in spazio schermo sull'intera visuale di gioco, l'effetto che altrimenti otterresti con un pacchetto shader completo. Attivalo e il client riccolora o ammorbidisce il frame finale, applicando una correzione colore o una passata di sfocatura, proprio prima che raggiunga il tuo monitor. Non modifica un singolo valore di gioco. I blocchi rimangono dove sono, le hitbox mantengono le stesse dimensioni e il server non ha modo di sapere che il modulo esiste. È un'opzione di visualizzazione, non di gameplay, e si comporta come tale dal primo all'ultimo frame.
+
+## Come funziona
+
+La maggior parte di ciò che un client di Minecraft disegna avviene oggetto per oggetto: un blocco ottiene la sua texture, un'entità ottiene il suo modello, l'HUD ottiene la sua passata. La post-elaborazione funziona in modo diverso. Attende che il mondo e l'interfaccia siano già renderizzati, quindi applica una singola passata di shader sull'intero frame composito proprio prima che raggiunga lo schermo. Poiché tratta l'immagine finita come un'unità singola piuttosto che come una scena piena di elementi separati, può ricollorare o ammorbidire tutto in una volta invece di toccare gli elementi uno alla volta.
+
+I due effetti documentati per il modulo sono la correzione colore, che modifica il colore e il contrasto dell'immagine per rendere una scena più calda, più fredda o più neutra, e la sfocatura, che ammorbidisce l'immagine nel suo complesso. Entrambi operano in un unico passaggio, quindi l'attivazione del modulo non aggiunge un passaggio di rendering per ogni elemento sullo schermo, bensì un unico passaggio sul risultato. Ecco perché è economico da eseguire rispetto alla sostituzione di un intero modello di illuminazione: si tratta di rimodellare i pixel esistenti, non di ricalcolare l'illuminazione del mondo.
+
+Le persone lo utilizzano per lo stesso motivo per cui installerebbero un pacchetto di shader: vogliono che i loro screenshot e clip abbiano un aspetto diverso da quello predefinito di Minecraft. La correzione colore conferisce a una scena un'atmosfera senza la necessità di un pacchetto di risorse corrispondente. Un passaggio di sfocatura ammorbidisce una visuale affollata o dura. Essendo un interruttore integrato piuttosto che una combinazione di loader e pacchetto esterni, non c'è nulla da scaricare, configurare o mantenere aggiornato.
+
+## Post-elaborazione rispetto a un pacchetto di shader completo
+
+| | Post-elaborazione | Pacchetto shader completo |
+|---|---|---|
+| Installazione | Integrato nel client, un'unica opzione | Loader separato (Iris, OptiFine) più un pacchetto da scegliere e configurare |
+| Ambito | Un singolo passaggio in screen-space sull'immagine finale | Sostituisce o estende gran parte della pipeline di rendering |
+| Effetti | Correzione colore, sfocatura | Illuminazione, ombre, riflessi e altro, a seconda del pacchetto |
+| Configurazione | Istantanea | Scelta, installazione e messa a punto di un pacchetto |
+
+Nessun approccio modifica ciò che vede il server. La differenza è la profondità: un pacchetto shader ricostruisce come il mondo è illuminato, la post-elaborazione colora o ammorbidisce ciò che il gioco ha già renderizzato.
+
+<Callout variant="tip" title="Dove si colloca in Opal">
+Opal non include un modulo chiamato Post Processing. Ma la parte visiva del client si basa esattamente sullo stesso principio: rifiniture locali che non lasciano mai la tua macchina e non toccano mai un valore tracciato dal server. Se stai cercando un aspetto specifico per screenshot o clip senza installare un pacchetto shader, questa è la famiglia di funzionalità da cercare, puramente cosmetica, a rischio zero, niente che un anti-cheat potrebbe segnalare, anche volendo.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="L'elaborazione post-rendering influisce sul gameplay in Minecraft?">
+No. Modifica soltanto l'aspetto del frame finale dopo il rendering. Non ha alcun effetto su movimento, combattimento, hitbox o qualsiasi cosa il server possa vedere.
+</FAQItem>
+
+<FAQItem question="L'elaborazione post-produzione può portare alla squalifica?">
+No. È un passaggio di rendering puramente visivo, lato client, senza alcun impatto sulla rete o sul gameplay, quindi non comporta alcun rischio di rilevamento.
+</FAQItem>
+
+<FAQItem question="Quali client di Minecraft hanno un modulo di Post Processing?">
+Il Post Processing è documentato come si vede in Tenacity. Passaggi simili di effetti screen-space compaiono in altri client con nomi diversi come opzione di visualizzazione generale.
+</FAQItem>
+
+<FAQItem question="Quali effetti include l'elaborazione post-produzione?">
+I due effetti documentati sono la correzione del colore, che modifica il colore e il contrasto dell'immagine, e la sfocatura, che ammorbidisce l'immagine nel suo complesso. Entrambi vengono eseguiti all'interno della stessa pass shader.
+</FAQItem>
+
+<FAQItem question="L'elaborazione post-produzione è la stessa di un pacchetto shader?">
+Non esattamente. Un pacchetto shader di solito sostituisce o estende l'intera pipeline di rendering e necessita di un loader separato per l'installazione. L'elaborazione post-produzione è un passaggio di effetti più ristretto, integrato, attivabile direttamente nel client.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "I moduli di categoria più ampi, come l'elaborazione successiva, appartengono." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Dove risiede il confine tra una rifinitura estetica e un comportamento percepibile." },
+  { href: "/it/learn/what-is-a-crystal-aura", label: "Cos'è un'aura cristallina?", description: "Un modulo che si colloca all'estremità opposta dello spettro del rischio rispetto all'Elaborazione Post-Processo." },
+]} />
+
+<CTA href="/it/purchase">I tuoi clip meritano colori migliori di quelli offerti da vanilla. Scopri cosa offre Opal in termini di resa visiva fin da subito.</CTA>

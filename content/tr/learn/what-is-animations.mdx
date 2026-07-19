@@ -1,0 +1,77 @@
+---
+title: Minecraft'ta Animasyon Modülü Nedir?
+description: Animasyonlar modülü, Minecraft'ın varsayılan kılıç sallama ve eşya tutma pozisyonlarını özel bir pozisyonla değiştirir. İşte bunun nasıl çalıştığı ve neden asla oyun mekaniklerini etkilemediği.
+excerpt: Vanilla'nın kılıç vuruşu her oyuncuda aynı görünüyor. Animasyonlar onu sana ait olan bir şeyle değiştiriyor ve sunucu bunu fark etmiyor.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Animasyonlar modülü dövüşü veya oyun akışını etkiler mi?
+    a: Hayır, sadece kılıç savurma ve eşya tutma pozisyonları gibi eylemlerin görsel görünümünü değiştirir. Vuruş algılama, zamanlama ve sunucu tarafından işlenen her şey vanilla ile aynı kalır.
+  - q: Diğer oyuncular özel animasyonlarımı görebilir mi?
+    a: Hayır. Animasyon oluşturma, kendi istemcinizde yerel olarak gerçekleşir. Diğer herkes, ekranınızda ne görüyorsanız fark etmeksizin, standart, sade sallanma ve duruşu görür.
+  - q: Animasyonlar, kaynak paketiyle aynı şey mi?
+    a: Tam olarak değil. Bir kaynak paketi, vanilla'nın dosya yapısı aracılığıyla animasyon zamanlamasını da değiştirebilir, ancak bir istemci modülü takası kod aracılığıyla yönetir ve sıradan bir kaynak paketinin sunamayacağı değiştirilebilir ön ayarlar sunabilir.
+  - q: Animasyon kullanmak anticheat sistemleri tarafından tespit ediliyor mu?
+    a: Hayır, sadece kendi ekranınızda nasıl görüntülendiğini değiştirir ve sunucuya gönderilen verilere dokunmaz, bu yüzden sunucu tarafı bir anticheat tarafından tespit edilecek bir şey yoktur.
+---
+
+<KeyTakeaways>
+
+- Animasyonlar, Minecraft'ın varsayılan kılıç sallama ve eşya tutma pozisyonlarını özel bir pozisyonla değiştiren bir kozmetik modülüdür.
+- Yalnızca yerel olarak görüntülenen şeyleri değiştirir; isabet tespiti, zamanlama ve sunucu paketleri vanilla ile aynı kalır.
+- Diğer oyuncular özel animasyonlarınızı değil, yalnızca standart vanilla olanları görür.
+- Sunucuya gönderilen hiçbir şey değişmediği için herhangi bir tespit riski taşımaz.
+
+</KeyTakeaways>
+
+Animasyonlar modülü, Minecraft'ın yerleşik animasyonlarını, en yaygın olarak kılıç sallamayı ve bir eşyayı tuttuğunuz duruşu değiştiren veya ayarlayan, özel bir versiyonuyla değiştiren bir kozmetik özelliktir. Eylemlerin ekranda nasıl göründüğünü, çarpışma algılamayı, hareketi veya sunucunun gerçekte işlediği hiçbir şeyi etkilemeden değiştirir. Bunu bir savaşta size avantaj sağlamak değil, hareketinize bir cilt gibi düşünün.
+
+## Nasıl Çalışır
+
+Animasyonlar, istemcinin belirli eylemlerin oluşturulmasını kullanır ve özel bir hareketi, varsayılan olanın yerine koyar. Bir kılıç sallaması farklı bir yay çizebilir, farklı bir ritimde inebilir veya farklı bir açıda durabilir, bu, ön ayara bağlıdır. Bunların hiçbiri alttaki oyun mantığını etkilemez: aynı etkileşim hala tetiklenir, aynı paket sunucuya aynı zamanda gönderilir.
+
+İşte püf noktası bu. Modül yalnızca çizilen şeylere dokunur, bu nedenle çarpışma pencereleri, saldırı soğutma süreleri veya sunucunun takip ettiği başka bir şeyle anlaşmak zorunda kalmaz. Farklı görünen bir sallama görürsünüz. Sunucu, tam olarak aldığı sıradan bir saldırıyı görür.
+
+Fan, Tenacity ve Rose gibi bunu gönderen istemciler, genellikle özel HUD'ler gibi diğer görünüm seçeneklerinin yanında Animasyonlar'ı da paketlerler; bu, bir savaşın nasıl oynandığını değiştiren bir şey değildir. Kaynak paketi seçmeye benzer bir özellik kategorisidir, ancak bir doku dosyası yerine kod aracılığıyla işlenir.
+
+## Kullanımı güvenli mi?
+
+Evet, ve bunda pek bir incelik yok. Animasyonlar sadece kendi istemcinizde görüntülenen şeyleri değiştirir. Erişimi, zamanlamayı veya sunucu tarafından bir eylemi çözmek için kullanılan herhangi bir değeri değiştirmez, bu nedenle işaretlenecek sunucu tarafında hiçbir şey yoktur. Animasyonun kendisi asla makinenizden ayrılmaz; yalnızca temel etkileşim, vanilla'nın göndereceği tam biçimde gönderilen etkileşim sunucuya ulaşır.
+
+Tek gerçek uyarı: Bazı sunucular, ne yaptığına bakılmaksızın, istemci değişikliklerini genel olarak yasaklayabilir. Bu bir tespit sorunu değil, bir kural sorunu olduğundan, değiştirilmiş bir istemci çalıştırmadan önce sunucunun şartlarını okumaya yine de değer.
+
+<Callout variant="tip" title="Opal olduğu gibi gönderiyor">
+Opal'ın kataloğu Animasyonları açıkça listeler: oyun içi animasyonları ayarlar. Hiçbir nitelik belirtilmez, kozmetik değişikliklerin üzerindeki risk seviyesi bulunmaz. Opal bunu GÜVENLİ olarak sınıflandırır; oyunun hissini değiştirmeden oyunun oynanışını değiştiren diğer yaşam kalitesi ayarlamalarıyla aynı kategoriye koyar.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Animasyonlar modülü dövüşü veya oyun mekaniğini etkiler mi?">
+Hayır. Sadece kılıç sallama ve eşya tutma pozisyonları gibi eylemlerin görsel görünümünü değiştirir. Vuruş algılama, zamanlama ve sunucu tarafından işlenen her şey vanilla ile aynı kalır.
+</FAQItem>
+
+<FAQItem question="Diğer oyuncular özel animasyonlarımı görebilir mi?">
+Hayır. Animasyon oluşturma işlemi kendi istemcinizde yerel olarak gerçekleşir. Başkaları, ekranınızda ne görüyorsanız önemli olmaksızın, standart varsayılan salınım ve duruşu görür.
+</FAQItem>
+
+<FAQItem question="Animasyonlar, kaynak paketiyle aynı mı?">
+Tam olarak değil. Bir kaynak paketi, oyunun varsayılan dosya yapısı aracılığıyla animasyon zamanlamasını da değiştirebilir, ancak bir istemci modülü takası kodu aracılığıyla yönetir ve basit bir kaynak paketinin sunamayacağı değiştirilebilir ön ayarlar sunabilir.
+</FAQItem>
+
+<FAQItem question="Animasyon kullanmak anticheat sistemleri tarafından tespit edilir mi?">
+Hayır. Sadece kendi ekranınızda görünen şeyleri değiştirir ve sunucuya gönderilen veriye dokunmaz, bu yüzden sunucu tarafındaki bir anticheat sisteminin tespit etmesi için hiçbir şey yoktur.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Bunun gibi kozmetik modüllerinin ait olduğu daha geniş kategori." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Gizliliğe odaklı müşteriler, yalnızca estetik kaygıları olanlardan nasıl ayrılır." },
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "Dövüş modülü anticheat'leri aslında, tezatlık yaratmak için takip eder." },
+]} />
+
+<CTA href="/tr/satin-al">Vuruşunuzun görünümünü tek bir bayrağı devirmeden değiştirin. Opal, $8.99 için Animasyonlar gönderir.</CTA>

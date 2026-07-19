@@ -1,0 +1,79 @@
+---
+title: Czym jest Wyszukiwarka (Znajdź Zasoby) w Minecraft?
+description: Wyszukiwanie to moduł Minecraft, który skanuje załadowane już bloki w poszukiwaniu wybranego bloku i oznacza każde dopasowanie – znajdź ore, który nigdy nie przebija się przez ściany.
+excerpt: Wyszukiwanie nie widzi przez ściany, po prostu pamięta to, co klient już wie. Skieruj je na blok i uzyskasz współrzędne, zamiast kilofa i przeczuć.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czego właściwie wyszukiwarka wyszukuje?
+    a: Fragmenty danych, które klient już załadował, nic więcej. Przeszukuje te dane w poszukiwaniu określonego typu bloku i oznacza lub listuje każde dopasowanie, dzięki czemu wyniki są ograniczone do tego, co aktualnie załadowane w pobliżu gracza.
+  - q: Czy wyszukiwarka pozwala zobaczyć przez ściany?
+    a: Nie. Wyszukiwanie nie renderuje bloków przez teren w taki sposób, jak robi to pakiet tekstur rentgenowskich lub shader. Zgłasza współrzędne lub umieszcza znacznik, ale nigdy nie zmienia tego, co jest faktycznie rysowane na ekranie.
+  - q: Czy serwery mogą automatycznie wykrywać Wyszukiwarkę?
+    a: Rzadko poprzez inspekcję pakietów, ponieważ moduł nigdy nie wysyła niczego, czego normalny klient nie wysłałby. Zwykle wychwytywany jest przez członka zespołu analizującego wzorce rozgrywki, a nie przez automatyczny flag.
+  - q: Czy Wyszukiwarka to to samo co Zdjęcie rentgenowskie?
+    a: Rozwiązują ten sam problem, znajdując zasoby bez konieczności ich poszukiwania, lecz różnymi metodami. Rentgen zazwyczaj zmienia renderowanie, aby móc zobaczyć przez bloki. Skanowanie wyszukuje dane, które klient już posiada, i raportuje dopasowania, nie ingerując w to, co jest rysowane.
+---
+
+<KeyTakeaways>
+
+- Wyszukiwanie to moduł (widoczny w klientach takich jak Wurst), który skanuje załadowane fragmenty w poszukiwaniu wybranego typu bloku i oznacza każde dopasowanie.
+- Odczytuje dane, które klient już posiada, więc nie wysyła żadnych dodatkowych pakietów.
+- Zasięg jest ograniczony przez zasięg renderowania, nie widzi niezaładowanych fragmentów.
+- W przeciwieństwie do rentgena, nigdy nie rysuje przez ściany, tylko raportuje współrzędne.
+
+</KeyTakeaways>
+
+Wyszukiwarka to moduł Minecrafta, który skanuje każdy załadowany fragment (chunk) pod kątem wybranego typu bloku i oznacza lub tworzy listę wszystkich jego wystąpień. Zamiast kopać bez celu lub wędrować po mapie w nadziei na przypadkowe trafienie żyły, podajesz nazwę bloku i otrzymujesz natychmiastową odpowiedź. Znajduje się w kategorii świata, w tym samym miejscu co inne narzędzia, które odczytują lub wchodzą w interakcję ze środowiskiem, a nie służą do walki lub poruszania się.
+
+## Jak to działa
+
+Wyszukiwarka odczytuje dane fragmentów (chunków), które klient już ma w pamięci. W momencie załadowania fragmentu, gra otrzymuje kompletną strukturę bloków w nim zawartą – tak po prostu działa renderowanie, klient musi wiedzieć, co jest tam, żeby to narysować. Wyszukiwarka przegląda te dane w poszukiwaniu dopasowań do wybranego bloku, a następnie umieszcza znacznik, punkt orientacyjny lub wpis na liście dla każdego znalezionego.
+
+Do tego nie jest potrzebna żadna komunikacja z serwerem. Skanowanie odbywa się w całości na podstawie informacji, które klient już posiada, więc nie wysyłane są nowe pakiety, a istniejące nie są modyfikowane. Jedynym ograniczeniem jest zasięg renderowania: Wyszukiwarka może wyświetlać bloki tylko w fragmentach (chunkach), które faktycznie załadowałeś, a nie w całym świecie. Idź dalej, załaduj więcej fragmentów, znajdź więcej dopasowań. To jest cały cykl.
+
+## Czy jest bezpieczne do użycia
+
+Wyszukiwanie nie jest czysto kosmetyczne. Znajdowanie zasobów bez konieczności ich poszukiwania to realna przewaga w rozgrywce, ta sama kategoria zalet, co narzędzie rentgenowskie, nawet jeśli Wyszukiwanie nigdy nie przenika przez ściany ani nie zmienia ani jednego piksela na ekranie. To, co oddziela je od oszustwa bojowego, takiego jak zasięg czy celownik, to historia wykrywania. Te wysyłają pakiety, które serwer może wychwycić: niemożliwy obrót, trafienie z odległości, która nie powinna być możliwa. Wyszukiwanie niczego nadzwyczajnego nie wysyła. Przeczytuje jedynie dane, które serwer już przekazał klientowi w sposób legalny, więc nie ma żadnego sygnatur na poziomie pakietów, które system anticheat mógłby oznaczyć.
+
+To nie czyni go uczciwym wszędzie. Większość serwerów, które zakazują znajdowania zasobów w stylu rentgenowskim, egzekwuje to na zasadzie polityki, a nie automatycznego wykrywania, i wykrywa naruszenia poprzez zachowanie: gracz pędzący prosto do żyły rudy bez wcześniejszych poszukiwań, albo obsługa sprawdzająca podejrzewaną sesję ręcznie. Ryzyko tutaj jest społeczne i oparte na zasadach, a nie kontrolą po stronie serwera, która automatycznie oznaczylaby klienta, dlatego właśnie przetrwało na serwerach, gdzie oszustwa bojowe są wykrywane w ciągu kilku minut.
+
+<Callout variant="tip" title="Gdzie to się znajduje w Opalu">
+Opal nie dostarcza dedykowanego modułu wyszukiwania ani lokalizatora zasobów. Ten jest udokumentowany jako funkcja kategorii świata Wurst. Własny katalog Opala skupia się na modułach walki, ruchu i wizualnych – kategoriach, w których pojedynczy tik lub pojedyncza klatka decydują o wyniku walki. Czytanie danych fragmentów dla żył rudy to nie jest taka walka.
+</Callout>
+
+<Callout variant="warning" title="Zasady mogą tego zakazać, nawet jeśli wykrywanie nie jest możliwe">
+Ta strona opisuje Wyszukiwanie ogólnie, a nie jako coś, co Opal udostępnia. Nawet na serwerze, który nigdy nie wykryje tego na poziomie pakietów, wiele zestawów reguł całkowicie zabrania wyszukiwanie zasobów w stylu rentgenowskim, niezależnie od metody. Czysty zapis wykrywania nie pomoże, jeśli sama reguła tego zabrania, więc sprawdź to, zanim skierujesz go na żyłę diamentów.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co właściwie wyszukuje funkcja Wyszukiwania?">
+Fragmenty danych, które klient już załadował – nic więcej. Przeszukuje te dane w poszukiwaniu określonego typu bloku i oznacza lub wyświetla wszystkie dopasowania, dzięki czemu wyniki są ograniczone do tego, co aktualnie załadowane w pobliżu gracza.
+</FAQItem>
+
+<FAQItem question="Czy Wyszukiwanie pozwala zobaczyć przez ściany?">
+Nie. Wyszukiwanie nie renderuje bloków przez teren w taki sposób, jak robi to pakiet tekstur rentgenowskich lub shader. Zgłasza współrzędne lub umieszcza znacznik, ale nigdy nie zmienia tego, co jest faktycznie rysowane na ekranie.
+</FAQItem>
+
+<FAQItem question="Czy serwery mogą automatycznie wykrywać Search?">
+Rzadko poprzez inspekcję pakietów, ponieważ moduł nigdy nie wysyła niczego, czego normalny klient nie wysłałby. Zwykle wykrywane jest to przez członka personelu analizującego wzorce rozgrywki, a nie przez automatyczny flag.
+</FAQItem>
+
+<FAQItem question="Czy Wyszukiwanie jest tym samym co Zdjęcie rentgenowskie?">
+Rozwiązują ten sam problem, znajdując zasoby bez konieczności ich poszukiwania, ale różnymi metodami. Zdjęcie rentgenowskie zazwyczaj zmienia renderowanie, aby zobaczyć przez bloki. Wyszukiwanie skanuje dane, które klient już posiada, i raportuje dopasowania, nie ingerując w to, co jest rysowane.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Szersza kategoria Wyszukiwanie i inne moduły świata znajdują się wewnątrz." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kategoria ukryta, oparta na modułach, które nigdy nie wywołają wykrycia na poziomie pakietów." },
+  { href: "/pl/learn/what-is-reach", label: "Co to jest zasięg?", description: "Moduł znajdujący się po drugiej stronie spektrum ryzyka: łapią go pakiety, które wysyła, a nie zasady, które łamie." },
+]} />
+
+<CTA href="/pl/purchase">Opal przeznacza swój budżet inżynieryjny na walkę, a nie na żyłę rudy. Zobacz katalog dla $8.99.</CTA>

@@ -1,0 +1,82 @@
+---
+title: Was ist ein Tunneler in Minecraft? Modul erklärt
+description: Tunneller ist ein Wurst-Modul, das automatisch einen Tunnel in einer festgelegten Breite, Höhe und Richtung gräbt und so einen geraden Weg durch Blöcke schafft, ohne einen Pickel zu berühren.
+excerpt: Der Tunneler wählt eine Größe und eine Richtung und frisst sich dann durch festes Gestein, ohne dass Sie einen Pickel berühren müssen. Es ist Automatisierung, und es sieht wie Automatisierung aus.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Ist Tunneller ein Betrug oder eine nützliche Funktion?
+    a: Es automatisiert etwas, das ein Spieler manuell tun könnte, wie das Graben eines Tunnels, was es zu einer Spielfunktion zur Automatisierung macht, anstatt zu einer rein kosmetischen. Ob es zu Problemen führt, hängt vollständig von den Serverregeln und dem Anti-Cheat-System ab, nicht vom Modul selbst.
+  - q: Funktioniert Tunneller auf Survival-Multiplayer-Servern?
+    a: "Technisch gesehen ja. Es sendet die gleichen Block-Break-Pakete wie ein normaler Spieler, sodass nichts dagegen spricht, es auf einem Live-Server laufen zu lassen. Unauffällig zu bleiben ist der schwierigere Teil: die Überwachung von Block-Brechern kann die mechanische Timing-Genauigkeit und die geradlinigen Pfade erkennen, die automatisches Graben hinterlässt."
+  - q: Was ist der Unterschied zwischen Tunneller und Nuker?
+    a: Nuker zerstört jeden zerstörbaren Block in einem Umkreis um den Spieler, egal wo sich dieser befindet. Tunneller hingegen schneidet eine definierte Form in eine Richtung und verhält sich eher wie eine automatisierte Ausgrabung als wie eine Flächenbereinigung.
+  - q: Kann die Verwendung von Tunneller zu einer Sperre führen?
+    a: Auf einem Server mit aktivierter Anticheat-Software oder mit Mitarbeitern, die Blockaktivitäten überwachen, kann dies wie jedes andere automatisiertes Verhalten behandelt werden. Auf einem Singleplayer-Server oder einem unmoderierten Server wird ein Bann überhaupt nicht durchgesetzt.
+---
+
+<KeyTakeaways>
+
+- Tunneller ist ein Wurst-Modul, das automatisch einen Tunnel in einer festgelegten Breite, Höhe und Richtung gräbt, ohne manuelles Abbauen zu erfordern.
+- Es schneidet einen festen Querschnitt vorwärts, Block für Block, im Gegensatz zur radikalen Freiräumung des Nukers.
+- Häufig auf Singleplayer- und unmoderierten Anarchie-Servern, wo die Überwachung des Blockabbruchs gering ist.
+- Das mechanische, geradlinige Tempo ist genau das, worauf Blockabbruch-Anticheats ausgelegt sind.
+
+</KeyTakeaways>
+
+Tunneller ist ein weltweites Modul in Wurst, das automatisch einen Tunnel in jeder beliebigen Breite, Höhe und Richtung gräbt und dabei jeden Block auf seinem Weg zerstört, sodass du nie wieder einen Pickaxe anfassen musst. Du wählst die Dimensionen und eine Richtung, aktivierst das Modul, und es arbeitet von deinem Standort aus, räumt den Querschnitt Block für Block frei, während es voranschreitet. Es gibt kein Zielen, kein Klicken, kein Laufen frontal gegen eine Wand, um einen Schacht zu beginnen. Einige Konstruktionen flicken sogar den Boden währenddessen, da ein automatisch gegrabener Tunnel, der ein Loch unter deinen Füßen öffnet, eine Gefahr und keine Bequemlichkeit darstellt.
+
+## Funktionsweise
+
+Tunneller benötigt drei Eingaben: Breite, Höhe und Richtung. Von dort aus arbeitet es von deiner Position aus, zerstört jeden Block in diesem Querschnitt, bevor es dich in den freigeräumten Raum vorwärts bewegt. Das Modul entscheidet, welchen Block es betrachten soll, sendet den Befehl zum Zerstören und bewegt sich erst vorwärts, wenn der Weg tatsächlich frei ist. Du steuerst nichts davon, sondern beobachtest nur, wie es geschieht. Einige Implementierungen füllen auch Lücken, die sich während des Grabens unter dir öffnen, denn in das Loch zu fallen, das du gerade gräbst, zunichte macht den Sinn der Automatisierung.
+
+## Häufige Einstellungen
+
+| Einstellung | Was es steuert |
+|---|---|
+| Breite und Höhe | Der Querschnitt des Tunnels, der ausgebrochen wird |
+| Richtung | In welche Richtung sich der Tunnel von Ihrer aktuellen Ausrichtung erstreckt |
+| Länge | Wie weit er läuft, bevor er von selbst stoppt |
+| Blockbehandlung | Ob Flüssigkeiten und wertvolle Erze übersprungen oder wie alles andere durchbrochen werden |
+
+Breite, Höhe und Richtung unterscheiden Tunneller von einem einfachen Auto-Mine-Schalter. Anstatt einfach zu brechen, was direkt vor Ihnen ist, verpflichtet er sich im Voraus zu einer Form und schneidet genau diese aus, nicht mehr, nicht weniger.
+
+<Callout variant="tip" title="Wo dies in Opal seinen Platz findet">
+Opal versendet kein Tunneller-Modul. Dieses ist eine Wurst-Funktion, entwickelt für die Anarchie-Server-Welt, in der das Räumen einer Meile Steine mit der Hand die eigentliche Arbeit ist. Opals Katalog konzentriert sich eher auf Kampf, Bewegung und Optik, die Bereiche, in denen ein einziger Tick den Ausgang eines Kampfes entscheidet. Automatisierte Ausgrabung ist nicht das Problem, das Opal lösen möchte.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite beschreibt Tunneller allgemein, damit Sie wissen, was der Begriff bedeutet, und nicht als Dokumentation für etwas, das Opal liefert. Auf einem Server mit Anticheat ist automatisches Graben einfacher zu erkennen, als es scheint. Echte Spieler machen Pausen, gehen zurück und schneiden gelegentlich einen abweichenden Block beim Abbauen ab, während ein mechanisch getimter, geradliniger Tunnel das nicht tut. Block-Break-Protokolle können diese Konsistenz kennzeichnen, genauso wie sie jede andere automatisierte Aktion kennzeichnen, und auf einem moderierten Server ist dies ein bannbares Muster, unabhängig davon, welcher Client es erzeugt hat.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Ist Tunneller ein Cheat oder eine nützliche Funktion?">
+Es automatisiert etwas, das ein Spieler manuell tun könnte – das Graben eines Tunnels – und ist daher eine Funktion zur Automatisierung des Spielverlaufs und nicht nur eine rein kosmetische. Ob es zu Problemen führt, hängt vollständig von den Regeln des Servers und der Anti-Cheat-Software ab, nicht vom Modul selbst.
+</FAQItem>
+
+<FAQItem question="Funktioniert Tunneller auf Survival-Mehrspieler-Servern?">
+Technisch gesehen ja. Es sendet die gleichen Block-Break-Pakete wie ein normaler Spieler, sodass es nichts davon abhält, auf einem Live-Server zu laufen. Unbemerkt zu bleiben ist der schwierigere Teil, da die Überwachung des Block-Brechens die mechanische Timing und die geradlinigen Pfade erkennen kann, die automatisches Graben hinterlässt.
+</FAQItem>
+
+<FAQItem question="Was ist der Unterschied zwischen Tunneller und Nuker?">
+Nuker zerstört jeden zerstörbaren Block in einem Umkreis um den Spieler, egal wo er sich befindet. Tunneller hingegen schneidet eine definierte Form in eine Richtung und verhält sich eher wie eine automatisierte Ausgrabung als wie eine Flächenräumung.
+</FAQItem>
+
+<FAQItem question="Kann die Verwendung von Tunneller zu einem Bann führen?">
+Auf einem Server mit aktivierter Anticheat-Software oder aufmerksamkeitsstarkem Personal, das Blockaktivitäten überwacht, ja, kann dies wie jedes andere automatisiertes Verhalten behandelt werden. Auf einem Einzelspieler-Server oder einem unmoderierten Server wird ein Bann erst einmal nicht durchgesetzt.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die breitere Kategorie Tunneller und Module wie dieses leben im Inneren." },
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Ein weiteres Automatisierungsmodul, das Blöcke platziert, anstatt sie zu entfernen." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die Kategorie, die auf unmoderierte Server ausgelegt ist, auf denen Tunneller optimal funktioniert." },
+]} />
+
+<CTA href="/de/kaufen">Opal investiert sein Entwicklungsgeld in Kampf und Bewegung, nicht in Spitzhacken. Sehen Sie, was sich tatsächlich darin befindet.</CTA>

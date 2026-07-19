@@ -1,0 +1,86 @@
+---
+title: Cos'è la luminosità massima in Minecraft? Spiegato il modulo visivo
+description: Full Bright imposta ogni livello di luminosità in Minecraft al massimo, facendo sì che grotte, cieli notturni e ombre vengano renderizzati completamente illuminate. Come funziona e in cosa si differisce da X-Ray.
+excerpt: Vanilla vuole che tu porti torce attraverso ogni grotta. La luminosità massima si limita ad accendere le luci e a saltare tutto quell'esercizio.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: È la luminosità massima la stessa cosa di alzare la gamma?
+    a: Atterrano in un luogo simile ma funzionano in modo diverso. Aumentare la gamma o la luminosità del monitor illumina tutto sullo schermo, comprese le aree già illuminate, il che può sbiadire le scene luminose. La luminosità massima agisce direttamente sul calcolo del livello di luce, facendo apparire le aree scure illuminate senza intaccare ciò che era già luminoso.
+  - q: Influisce l'illuminazione completa su ciò che vedono gli altri giocatori?
+    a: No. È solo una modifica locale alla visualizzazione. Tutti gli altri sul server vedono ancora il mondo con l'illuminazione normale, le torce, le ombre e tutto il resto. Cambia solo la tua visualizzazione.
+  - q: Si può attivare e disattivare la luminosità massima?
+    a: Sì. È un interruttore presente nell'elenco dei moduli del cliente o nelle impostazioni visive, attivato quando è necessaria la visibilità e disattivato altrimenti, proprio come si farebbe con un tasto zoom.
+  - q: È considerato imbroglio l'uso di full bright?
+    a: Generalmente no. Modifica solo il rendering locale e non invia nulla di diverso al server, quindi la maggior parte dei server e degli anticheat lo considerano puramente estetico, più simile a un regolatore di luminosità che a un cheat.
+  - q: Rivelare la luminosità massima mostra minerali o strutture nascoste?
+    a: No. Elimina l'oscurità, non rende trasparenti i blocchi né evidenzia nulla attraverso il terreno. Quello è il compito della vista a raggi X, non dell'illuminazione completa.
+---
+
+<KeyTakeaways>
+
+- Full Bright è un modulo visivo che forza ogni blocco a renderizzarsi al massimo livello di luminosità, eliminando così l'aspetto buio di grotte, notte e ombre.
+- Modifica solo ciò che il tuo client disegna, non i valori di luce che il server tiene traccia effettivamente.
+- Gli altri giocatori vedono il mondo esattamente come prima, dato che la modifica risiede interamente nel tuo passaggio di rendering.
+- Non rivela minerali o terreno come fa X-Ray, e non invia dati aggiuntivi sulla rete.
+
+</KeyTakeaways>
+
+Full Bright è un modulo visivo che porta ogni livello di luminosità in un mondo di Minecraft al massimo, in modo che grotte, cieli notturni e angoli in ombra vengano resi come se fossero illuminati da una torcia, anche in assenza di essa. Funziona interamente nel renderer del client: i valori di luce effettivi che il server tiene traccia non cambiano, cambia soltanto l'immagine che viene disegnata sullo schermo. Disattivandolo, il mondo appare esattamente buio come previsto dalla versione originale. Attivandolo, l'oscurità non è più una variabile: in una grotta, sott'acqua o a mezzanotte nel gioco, tutto appare più o meno come a mezzogiorno.
+
+## Come funziona
+
+Normalmente, Minecraft calcola un valore di luminosità per ogni blocco a partire da tre input: la quantità di cielo che riesce a vedere, la vicinanza a una torcia o ad un'altra fonte di luce, e l'ora del giorno. Quel valore poi attenua i colori del blocco; più basso è il numero, più scuro viene reso. Full Bright salta completamente quel calcolo sul lato dell'output. Forza il renderer a trattare ogni blocco come se si trovasse al livello di luminosità massimo, indipendentemente dal valore reale sottostante.
+
+Niente nella simulazione cambia. La generazione dei mob continua a basarsi sul livello di luce reale tracciato dal server, non su quello che vedi, quindi la luminosità massima non rende una base ben illuminata più sicura né una base buia più pericolosa. Le hitbox non si muovono. Il mondo appare completamente normale a tutti gli altri sul server, torce e ombre comprese, perché la modifica risiede interamente nel passaggio di rendering del tuo client. Non stai rendendo il mondo più luminoso, stai rendendo più luminoso la tua visuale di esso.
+
+## Luminosità massima vs Raggi X
+
+La luminosità massima e i Raggi X vengono spesso raggruppati nella stessa categoria di "vedere cose che non dovresti", ma non svolgono lo stesso compito. La luminosità massima elimina solo l'oscurità: ti mostra esattamente ciò che un tunnel illuminato da torce mostrerebbe già, nient'altro. I Raggi X vanno oltre, rendendo i blocchi solidi trasparenti o evidenziando il minerale attraverso la pietra, rivelando informazioni che nessuna illuminazione potrebbe mai svelare.
+
+| Modulo | Modifiche | Rivelazioni |
+|---|---|---|
+| Luminosità massima | Livello di luce renderizzato solo | Niente di più di quanto già farebbe una piena illuminazione |
+| Raggi X | Trasparenza dei blocchi e rendering | Minerale e strutture attraverso il terreno solido |
+
+È proprio questa distinzione che fa sì che i due si trovino in categorie completamente diverse. La luminosità massima raggiunge un limite di "come se fosse giorno". I Raggi X raggiungono un limite di "come se il terreno non ci fosse"
+
+<Callout variant="tip" title="Opal lo distribuisce con il suo marchio">
+La stessa idea, nome ufficiale: Full Bright. La descrizione del catalogo di Opal è esattamente quello che sembra: "schiarisce il gioco in modo che nulla si nasconda nell'oscurità". È classificato nella categoria sicura di Opal, cosmetici e miglioramento della qualità della vita, il tipo di opzione che un anticheat non ha nulla da controllare perché non ne tocca la rete.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="La luminosità massima è la stessa di alzare la gamma?">
+Arrivano a risultati simili, ma funzionano in modo diverso. Alzare la gamma o la luminosità del monitor illumina tutto sullo schermo, comprese le aree già illuminate, il che può sbiadire le scene luminose. La luminosità massima agisce direttamente sul calcolo del livello di luce, quindi le aree scure vengono illuminate senza intaccare ciò che era già luminoso.
+</FAQItem>
+
+<FAQItem question="L'illuminazione completa influisce su ciò che vedono gli altri giocatori?">
+No. È una modifica di rendering locale. Tutti gli altri sul server vedono ancora il mondo con l'illuminazione normale, le torce, le ombre e tutto il resto. Solo la tua visualizzazione cambia.
+</FAQItem>
+
+<FAQItem question="È possibile attivare e disattivare la luminosità massima?">
+Sì. È un interruttore nell'elenco dei moduli del client o nelle impostazioni visive, attivato quando è necessaria la visibilità e disattivato altrimenti, proprio come si farebbe con un tasto zoom.
+</FAQItem>
+
+<FAQItem question="L'utilizzo della luminosità massima è considerato imbroglio?">
+Generalmente no. Modifica solo il rendering locale e non invia nulla di diverso al server, quindi la maggior parte dei server e dei sistemi anti-cheat lo considerano cosmetico, più simile a un cursore di luminosità che a un imbroglio.
+</FAQItem>
+
+<FAQItem question="La luminosità massima rivela minerali o strutture nascoste?">
+No. Elimina l'oscurità, ma non rende i blocchi trasparenti né evidenzia nulla attraverso il terreno. Quello è il compito delle X-Ray, non della luminosità massima.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria più ampia a cui appartengono full bright e ogni altro modulo qui presente." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Moduli progettati per rimanere inosservati, anziché semplicemente illuminare una stanza." },
+  { href: "/it/learn/what-is-killaura", label: "Cos'è la killaura?", description: "Un modulo di combattimento che automatizza gli scontri, una categoria diversa da un interruttore visivo." },
+]} />
+
+<CTA href="/it/purchase">Full Bright è un'unica opzione all'interno di Opal. Niente torce, niente regolazione della gamma, niente attesa che gli occhi si abituino.</CTA>

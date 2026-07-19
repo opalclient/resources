@@ -1,0 +1,75 @@
+---
+title: Cos'è un FPS spoofer in Minecraft?
+description: FPS Spoofer sostituisce il contatore di frame visualizzato in Minecraft con un numero falso, mentre il rendering effettivo, l'input e il traffico di rete rimangono completamente inalterati.
+excerpt: Il numero nell'angolo può mentire senza che il tuo gioco se ne accorga. Lo Spoofer FPS modifica solo l'etichetta, mai il frame rate sottostante.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Un FPS Spoofer modifica effettivamente il mio frame rate?
+    a: No. Cambia soltanto il numero visualizzato sullo schermo. Il gioco continua a renderizzare al suo frame rate reale, senza alterare le prestazioni effettive.
+  - q: Un server o un anticheat può rilevare un FPS spoofer?
+    a: No. Il numero finto esiste solo sul tuo display locale e non raggiunge mai nulla che viene inviato al server, come pacchetti di movimento o dati temporali, quindi non c'è nulla che un anticheat possa rilevare.
+  - q: Perché qualcuno vorrebbe un numero FPS falso?
+    a: Principalmente per lo streaming o la registrazione, sia per mostrare un numero più alto per le apparizioni, sia per nasconderne uno basso. È una scelta di presentazione, non di gameplay.
+  - q: FPS Spoofer è la stessa cosa di un FPS booster?
+    a: No. Un booster FPS modifica il rendering effettivo per farlo funzionare più velocemente. Uno spoofer FPS cambia soltanto il numero visualizzato e lascia le prestazioni reali esattamente come erano.
+---
+
+<KeyTakeaways>
+
+- Un FPS Spoofer sostituisce il contatore FPS visualizzato con un numero scelto da te, oppure con uno che fluttua vicino a un valore target.
+- La velocità di rendering reale, la gestione degli input, la sincronizzazione dei tick e il traffico di rete non cambiano mai, solo l'etichetta è ingannevole.
+- Utilizzato principalmente per lo streaming e la registrazione, per sembrare più veloce di quanto tu sia o per nascondere un numero approssimativo.
+- Puramente cosmetico, quindi non ci sono segnali di gameplay che un anticheat del server possa rilevare.
+
+</KeyTakeaways>
+
+FPS Spoofer è un modulo client utility per Minecraft che sovrascrive il contatore di frame-rate sullo schermo con un numero di tua scelta, o uno che fluttua attorno a un valore target, invece di mostrare i tuoi FPS reali. È solo un trucco visivo. Il client continua a eseguire il rendering alla velocità effettiva, cambiano soltanto le cifre nell'angolo dello schermo. Questo lo rende uno dei cheat più onesti di cui parlare, dato che non pretende mai di influenzare il gameplay.
+
+## Come funziona
+
+FPS Spoofer intercetta il punto esatto in cui il client legge o formatta la sua cifra di frame-rate, solitamente l'overlay di debug F3 o un contatore HUD aggiunto dal client utility che stai utilizzando, e sostituisce il numero con uno falso appena prima che raggiunga lo schermo. Tutto a monte di quell'intercettazione, il loop di rendering effettivo, il caricamento delle texture, le chiamate alla GPU, rimane completamente intatto. Il gioco esegue il rendering alla velocità che riesce a mantenere. Il modulo mente soltanto sull'etichetta.
+
+Il numero falso è disponibile in due varianti: puoi bloccarlo a un valore fisso, in modo che non si muova, oppure puoi permettergli di fluttuare leggermente attorno a un valore target, in modo che sembri un FPS reale, variabile, invece di uno statico e sospetto incollato all'angolo dello schermo. In ogni caso, la pipeline di rendering stessa non cambia mai. Si tratta di una modifica dell'etichetta, non di una modifica delle prestazioni.
+
+<Callout variant="tip" title="Un espediente che abbiamo evitato">
+Opal non spedisce un finto contatore di FPS. Se vuoi il tuo frame rate reale, l'overlay F3 te lo dice già gratuitamente. Preferiremmo dedicare uno slot di modulo a qualcosa che cambia ciò che accade sullo schermo, non a ciò che uno screenshot afferma sia accaduto.
+</Callout>
+
+## È sicuro usarlo?
+
+Sì, tanto quanto possa esserlo una funzionalità puramente estetica. Gli anticheat funzionano campionando le informazioni che un client invia effettivamente al server: pacchetti di movimento, tempistiche tra azioni, dati di rotazione, e così via. FPS Spoofer non interferisce con nessuno di questi. Il numero cambia solo nel tuo overlay locale e nient'altro, quindi non c'è alcun pacchetto modificato, nessuna discrepanza nei tick, nessun modello comportamentale che un server possa notare, perché il server non è mai stato coinvolto nella comunicazione.
+
+Questo lo colloca nella stessa categoria di qualsiasi altro toggle HUD puramente estetico: il rischio di rilevamento non è solo basso, è strutturalmente nullo. Non c'è nulla da rivelare perché non sta succedendo nulla al di fuori del tuo client.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="L'FPS Spoofer modifica effettivamente il mio frame rate?">
+No. Modifica soltanto il numero visualizzato sullo schermo. Il gioco continua a renderizzare al suo frame rate reale, senza alterare le prestazioni effettive.
+</FAQItem>
+
+<FAQItem question="Un server o un anticheat possono rilevare un FPS Spoofer?">
+No. Il numero finto esiste solo sul tuo display locale e non tocca mai nulla che viene inviato al server, come pacchetti di movimento o dati temporali, quindi non c'è nulla che un anticheat possa osservare.
+</FAQItem>
+
+<FAQItem question="Perché qualcuno vorrebbe un FPS finto?">
+Principalmente per lo streaming o la registrazione, sia per mostrare un numero più alto a fin di bene, sia per nasconderne uno basso. È una scelta di presentazione, non di gameplay.
+</FAQItem>
+
+<FAQItem question="Un FPS Spoofer è la stessa cosa di un FPS booster?">
+No. Un FPS booster modifica l'effettiva resa grafica per velocizzare l'esecuzione. Un FPS Spoofer cambia soltanto il numero visualizzato e lascia le prestazioni reali esattamente come erano.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "Gli strumenti cosmetici della categoria più ampia FPS Spoofer sono contenuti al suo interno." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Dove un trucco visivo cessa e inizia un reale rischio di rilevamento." },
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "L'estremità opposta dello spettro del rischio rispetto a una minima modifica estetica." },
+]} />
+
+<CTA href="/it/purchase">Moduli reali, non un numero finto nell'angolo. Opal è $8.99.</CTA>

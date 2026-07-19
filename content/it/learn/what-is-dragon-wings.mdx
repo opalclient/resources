@@ -1,0 +1,85 @@
+---
+title: Cosa sono le ali da drago in Minecraft? (Modulo Spiegato)
+description: Dragon Wings è un modulo cosmetico per Minecraft che visualizza un modello di ali sulla schiena al posto di un mantello, senza alcun effetto su movimento, combattimento o collisioni.
+excerpt: Un mantello scambiato con un paio d'ali. Non cambia nulla del modo in cui giochi, solo del tuo aspetto mentre lo fai.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Dragon Wings ti permette di volare o planare?
+    a: No. Rende soltanto un modello alare sulla schiena. Non ha alcun effetto sul movimento, sul salto o sulla caduta, e non concede il planare a stile elitra.
+  - q: Possono gli altri giocatori vedere le mie Ali di Drago?
+    a: Dipende dal fatto che il loro cliente renda lo stesso modello. È una funzionalità di rendering, quindi influisce su ciò che si vede su un modello di personaggio piuttosto che su qualcosa che il server traccia o trasmette come dati.
+  - q: Le ali di drago sono la stessa cosa che indossare un elitro?
+    a: No. Un elytra è un oggetto di vanilla con una vera meccanica di planata. Le Dragon Wings sono un modello cosmetico senza alcun effetto meccanico, più simile a un mantello che a un'equipaggiamento per il volo vero e proprio.
+  - q: L'utilizzo di Dragon Wings rischia un divieto?
+    a: No. È un modulo puramente visivo che non modifica nulla di ciò che il server traccia riguardo a movimento o combattimento, quindi non comporta alcun rischio maggiore rispetto a qualsiasi altra scelta di visualizzazione cosmetica.
+---
+
+<KeyTakeaways>
+
+- Dragon Wings è un modulo cosmetico che visualizza un modello di ali sulla schiena del giocatore al posto di un mantello.
+- Modifica solo il rendering locale, non il volo, il planare, il movimento o il rilevamento dei colpi.
+- Nulla viene inviato al server, quindi non comporta un rischio di ban maggiore rispetto a qualsiasi altra scelta cosmetica.
+- Presente in client come Tenacity come opzione cosmetica standard.
+
+</KeyTakeaways>
+
+Dragon Wings è un modulo cosmetico nei client utility di Minecraft che sostituisce lo slot del mantello del tuo personaggio con una coppia di ali renderizzate. Funziona esattamente come scegliere un mantello, solo con piume invece di tessuto. Attivalo e ogni frame disegnerà un modello di ala attaccato alla schiena del tuo giocatore, nella stessa posizione in cui vanilla renderizza un mantello o un elytra equipaggiato. Questa è l'intera funzionalità. Movimento, combattimento e collisioni rimangono esattamente come definiti da vanilla: il modulo non tocca mai il lato del gioco tracciato dal server, solo il modello client che tu e chiunque altro lo stia eseguendo potete vedere.
+
+## Come funziona
+
+Dragon Wings attacca un modello di ala alla schiena del giocatore nella stessa posizione in cui si trova un mantello o un elytra vanilla, quindi lo ridisegna ogni volta che viene disegnato il modello del giocatore. Si tratta di un passaggio di rendering client, non di una meccanica. Il modulo intercetta la stessa chiamata di disegno che vanilla usa per un mantello e sostituisce la propria geometria.
+
+Non cambia nulla della fisica sottostante. Non c'è volo, non c'è planata, non c'è interazione con il codice di collisione o velocità del gioco, perché le ali sono un livello visivo sopra il modello del giocatore esistente, non un sostituto per l'oggetto elytra o le meccaniche sottostanti. Il server non riceve mai un segnale che dice "questo giocatore indossa ali". Continua a inviare i normali pacchetti di movimento e di equipaggiamento che invia sempre, e il client sceglie semplicemente di disegnare qualcosa di extra sopra di essi.
+
+## Dragon Wings vs un mantello vs un elytra
+
+| | Dragon Wings | Mantello vanilla | Elytra |
+|---|---|---|---|
+| Cosa sono | Modello cosmetico lato client | Oggetto cosmetico vanilla | Oggetto di planata vanilla |
+| Concede il volo o la planata | No | No | Sì, mentre è equipaggiato e in aria |
+| Richiede un oggetto di gioco | No | Sì, un mantello | Sì, un elytra equipaggiato |
+| Visibile agli altri giocatori | Solo se il loro client lo rende | Sì, a tutti | Sì, a tutti |
+| Influenza movimento o collisione | No | No | Sì, mentre si plana |
+
+Le ali occupano lo stesso slot visivo di un mantello senza richiedere l'oggetto, il flag dell'account o il resource pack che un mantello di solito richiede. Un elytra si trova in un compartimento completamente diverso: è una vera meccanica vanilla con fisica tracciata dal server, non un aspetto che puoi attivare a tuo piacimento.
+
+## È sicuro usarlo
+
+Dragon Wings non invia nulla di extra al server, non tocca le hitbox e non fornisce al giocatore alcuna informazione che il server non stesse già fornendo a tutti. È un'impostazione di aspetto locale, la stessa categoria della scelta di un mantello o della modifica di una skin, non una meccanica di gioco. Poiché non c'è alcun effetto di gioco, non c'è nulla che un controllo lato server possa intercettare, dato che non produce nulla che il server vedrebbe mai come diverso da un giocatore vanilla che si trova nella stessa posizione.
+
+<Callout variant="tip" title="Dove si colloca in Opal">
+Opal non spedisce un modulo con questo nome. Il suo aspetto estetico funziona comunque con la stessa logica: ad esempio, il modulo Animazioni modifica ciò che vedi senza alterare nulla che il server traccia. Se l'obiettivo è apparire diversi senza rischiare nulla di meccanico, è un ambito in cui Opal è già ben attrezzata. Wings, nello specifico, non sono attualmente presenti nel catalogo.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Dragon Wings ti permette di volare o planare?">
+No. Riproduce soltanto un modello di ali sulla schiena. Non ha alcun effetto sui movimenti, i salti o le cadute, e non concede il planare tipico degli elytra.
+</FAQItem>
+
+<FAQItem question="Gli altri giocatori possono vedere le mie Ali di Drago?">
+Dipende se il loro client rende lo stesso modello. È una funzionalità di rendering, quindi influisce su ciò che viene visualizzato sul modello del giocatore, piuttosto che su qualcosa tracciato o trasmesso dal server come dati.
+</FAQItem>
+
+<FAQItem question="Le Dragon Wings sono la stessa cosa che indossare un elitra?">
+No. Un elitra è un oggetto vanilla con una vera meccanica di planata. Le Dragon Wings sono un modello cosmetico senza alcun effetto meccanico, più simile a un mantello che a un'equipaggiamento per il volo vero e proprio.
+</FAQItem>
+
+<FAQItem question="L'utilizzo di Dragon Wings comporta il rischio di un ban?">
+No. È un modulo puramente estetico che non modifica nulla di ciò che il server traccia riguardo a movimento o combattimento, quindi non comporta alcun rischio maggiore rispetto a qualsiasi altra scelta di visualizzazione cosmetica.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "All'interno si trovano moduli cosmetici più ampi, come le Dragon Wings." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Dove rimanere invisibili conta più dell'aspetto con cui lo fai." },
+  { href: "/it/learn/what-is-a-crystal-aura", label: "Cos'è un'aura cristallina?", description: "Un modulo all'estremità opposta dello spettro del rischio rispetto a uno puramente estetico." },
+]} />
+
+<CTA href="/it/purchase">Basta con la discussione sulla veste pixelata. Opal gestisce i moduli che cambiano davvero l'andamento di uno scontro.</CTA>

@@ -1,0 +1,81 @@
+---
+title: Minecraft'ta "No Rotate" Nedir? Modül Açıklaması
+description: No Rotate, Minecraft için bir yardımcı modül olup, sunucunun istemcinizin bakış yönünü zorlamasını engelleyerek, antichiplerin işaretleyip cezalandırabileceği bir uyumsuzluğa neden olur.
+excerpt: Sunucu, dilediği zaman seni döndürebileceğini düşünüyor. "Döndürme" ise istemediğini sessizce söyleyen istemci.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Minecraft'ta "No Rotate" ne işe yarar?
+    a: Sunucu, istemcinizin bakış yönünü zorla ayarlamasını engeller. Kameranız, sunucu ayarlamaya çalıştığı dönüşe geçmek yerine, siz yönelttiğiniz yöne bakmaya devam eder; bu, bir teleport, bir izleyici geçişi veya betiksel bir olaydan kaynaklanabilir.
+  - q: No Rotasyon, baktığım yeri değiştirir mi?
+    a: Hayır. Gerçek kamera yönünüz asla değişmez. Değişen, sunucunun yönünüzü ne sandığıdır ve bu ikisi arasındaki fark, tam olarak neden uyumsuzluğun ortaya çıkmasının sebebidir.
+  - q: No Rotate, Anti-Aim gibi bir dönüş engelleyici ile aynı şey mi?
+    a: Tam olarak değil. No Rotate, sunucunun dayattığı bir dönüşü göndermek yerine, uydurma bir dönüş göndermez. Anti-Aim ve benzeri modüller her tick'ta yüzünüzle ilgili yalan söylerken; No Rotate, sunucunun bunu üzerine yazmasına izin vermeyi reddeder.
+  - q: Anticheat sistemleri No Rotate'ı tespit edebilir mi?
+    a: Evet, prensipte. Sunucu tarafından atanan dönüşü, istemci sonrasında bildirdiğine göre karşılaştıran herhangi bir kontrol, bu tutarsızlığı yakalayabilir; bu nedenle güvenli bir modül olmaktan ziyade, kullanıcı kendi sorumluluğunda kullanılabilecek tespit edilebilir bir modül olarak kabul edilir.
+---
+
+<KeyTakeaways>
+
+- No Rotate, istemcinizin bakış yönünü zorla değiştirmesini engelleyen bir yardımcı modüldür.
+- Kendi değerini göndermek yerine sunucunun dönüş paketlerini atar.
+- Sonuç, bir senkronizasyon hatasıdır: sunucunun yüzünüzle ilgili kopyası, aslında baktığınız yerle eşleşmeyi bırakır.
+- Herhangi bir sunucu ve istemci verilerini çelişkili hale getiren modül gibi tespit edilebilir ve kendi sorumluluğunuzda kullanmanız önerilir.
+
+</KeyTakeaways>
+
+No Rotate, Minecraft için bir yardımcı modül olup, sunucunun istemcinizin bakış yönünü zorlamasını engeller. Belirli sunucu eylemleri – bir teleportalama, bir izleyiciye geçiş, betiğe dayalı bir sahne – genellikle kameranızı sunucunun seçtiği bir rotasyona kilitleme yetkisiyle gelir. No Rotate, istemcinin bu talimata uymamasını ve aslında baktığınız yöne dönmeye devam etmesini sağlar. Yerel görüşünüzle ilgili hiçbir şey değişmez. Değişen, sunucunun kendi rotasyon kaydıdır; bu kayıt artık gerçeklikle uyuşmak zorunda değildir. Bu boşluk, modülün tamamı ve aynı zamanda tüm riski oluşturur.
+
+## Nasıl Çalışır
+
+No Rotate, sunucunun bakış yönünüzü ayarlamak için kullandığı paketleri yakalar ve bunların sizin tarafınızda etkili olmasını engeller. Kameranız, aslında hedeflediğiniz yöne dönmeye devam eder; kameranızı döndürecek olan talimat atılır atılmaz bertaraf edilir.
+
+Sunucu ise bundan haberdar olmaz. Kendi kayıtlarına göre, rotasyon güncellemesini gönderdi ve istemci de onu uyguladı; diğer paketler için olduğu gibi. Artık aynı oyuncu için iki farklı sayı mevcuttur: kameranızın kullandığı gerçek olan ve sunucunun şu anki olarak düşündüğü eski olan. Bunlar artık uyuşmuyor ve onları tekrar senkronize edecek hiçbir şey yok.
+
+Bu, belgelenmiş bir istismar kategorisi modülüdür ve Tenacity gibi istemcilerde ortaya çıkmıştır. Dar bir hile olsa da, ısrarcı bir hiledir: Şu anda hangi yöne baktığınızı bilmeye dayanan herhangi bir sunucu mekaniği, doğru olmayan bir değer okur.
+
+## Dönmeyi Engelle vs. Dönme Sahtekarlığı
+
+Dönmeyi Engelle, [Anti-Aim](/tr/learn/what-is-anti-aim) gibi modüllerle aynı kategoriye atılır ve bunun nedenini görmek kolaydır. Her ikisi de sunucunun gerçeklikle uyuşmayan bir dönüşü tutmasıyla sonuçlanır. Ancak, altta yatan mekanizma farklıdır. Anti-Aim, her tick'ta sunucuya sahte bir yaw ve pitch göndererek, kasıtlı olarak yönünüz hakkında yalan söyler. Dönmeyi Engelle ise hiçbir yanlış veri göndermez. Sunucunun dayattığı bir dönüşü reddeder ve diğer her yerde gerçek değeri olduğu gibi bırakır.
+
+Bu ayrım, her birinin nasıl yakalandığı açısından önemlidir. Anti-Aim, sahte sayılarını hareketinizle tutarlı tutmak zorundadır, aksi takdirde yalan inceleme altında çöker. Dönmeyi Engelle ise daha düz bir uyumsuzluk yaratır: sunucunun açıkça atadığı ancak diğer uçta hiçbir zaman görünmeyen bir dönüş. Bir talimata doğrudan itiraz etmek, sayıyı sessizce değiştirmekten daha büyük ve daha bariz bir boşluk bırakma eğilimindedir ve bu da bu modülün bir sunucu kontrol etmeye karar verdiği anda yakalanmasının kolay kabul edilmesinin bir parçasıdır.
+
+<Callout variant="tip" title="Opal'da Dönüşü Engelleme Nerede Yer Alıyor">
+Opal, Dönüşü Engelleme özelliğini Yardımcı Araçlar kategorisi altında gönderiyor; burada olduğu gibi tanımlanıyor: sunucunun dönüşünüzü zorlamasını engelliyor. Opal'ın kendi kataloğunda kullanımın kendi sorumluluğunda olarak kaydedilmiştir; güvenli bir kozmetik anahtar değil, çünkü yarattığı uyumsuzluk tam olarak sunucu tarafı bir kontrolün işaretleyebileceği şeydir.
+</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını anlatmıyor">
+Bu sayfa, No Rotate'in ne olduğunu ve genel olarak nasıl davrandığını açıklar. Bir tane çalıştırma talimatları değildir ve güvenli olduğu iddiası da değildir. Bir sunucu, atadığı rotasyonu daha sonra istemcinin bildirdiğine karşı karşılaştırdığında, böyle bir boşluk yakalanır ve yakalanmak, tespit edilen herhangi bir hileyle aynı yasağı taşıma riskini beraberinde getirir.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Minecraft'ta 'No Rotate' ne işe yarar?">
+Sunucunun istemcinizin bakış yönünü zorlamasını engeller. Kameranız, sunucu ne döndürmeye çalışırsa o yöne değil, sizin aslında baktığınız yöne doğru kalır; ister bir teleportal, ister bir izleyici moduna geçiş veya betiksel bir olaydan kaynaklanmış olsun.
+</FAQItem>
+
+<FAQItem question="No Rotate, bakış açımı değiştirir mi?">
+Hayır. Gerçek kamera yönünüz hiçbir zaman değişmez. Değişen, sunucunun yönünüzü ne sandığıdır ve bu ikisi arasındaki fark, eşleşme olmamasının tam sebebidir.
+</FAQItem>
+
+<FAQItem question="No Rotate, Anti-Aim gibi bir dönüş spooferiyle aynı şey mi?">
+Tam olarak değil. No Rotate, sunucunun dayattığı bir dönüşü reddederken, Anti-Aim gibi modüller her tick'ta sahte bir yön gönderir. No Rotate sadece sunucunun onu üzerine yazmasına izin vermez.
+</FAQItem>
+
+<FAQItem question="Anticheat No Rotate'ı tespit edebilir mi?">
+Evet, prensipte evet. Sunucu tarafından atanan rotasyon ile istemci tarafından daha sonra bildirilen rotasyon karşılaştıran herhangi bir kontrol, bu tutarsızlığı yakalayabilir. Bu nedenle, güvenli bir modül olmaktan ziyade, kendi sorumluluğunuzda kullanmanız gereken tespit edilebilir bir modül olarak kabul edilir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Bu türden sömürülerin genellikle bulunduğu, gizliliğe odaklanan kategori." },
+  { href: "/tr/learn/what-is-velocity-anti-knockback", label: "Hız (Çarpma Geri Tepmesi Önleyici) nedir?", description: "Sunucu atadığı bir değeri sessizce geçersiz kılmaya odaklanan başka bir modül." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Daha geniş No Rotate kategorisi ve buna benzer modüllerin ait olduğu yer." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ın Yardımcı Araçlar sekmesi, döndürülmeden gönderilir; güvenliymiş gibi gösterilmek yerine, kendi sorumluluğunuzda kullanılması koşuluyla kayıt altına alınmıştır.</CTA>

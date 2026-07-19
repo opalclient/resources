@@ -1,0 +1,94 @@
+---
+title: Minecraft'ta Yay Aimbot Nedir? Modül Açıklaması
+description: Bow Aimbot, okunacak bir yayın otomatik olarak nişan alıp ateşlemesini sağlayan, okunuş süresi, yerçekimi düşüşü ve hedef hareketini otomatik olarak hesaba katan bir muharebe modülüdür.
+excerpt: Oklar anında isabetli değil. Yay Aimbot, okun uçuş süresi boyunca hareket eden bir hedefi yönlendirerek ve yay gerginliği hazır olduğunda ateşleyerek, yayıza olan yay eğrisini sizin için düzeltir.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Bow Aimbot aslında ne değiştiriyor?
+    a: Çekilmiş yayın nişan alıp atışını devralır. Oyuncunun kurşun mesafesini ve bırakma zamanlamasını değerlendirmesi yerine, modül okun okun ulaşacağı noktayı hesaplar ve bırakmadan önce o noktaya görüşü döndürür.
+  - q: Bow Aimbot, KillAura ile aynı şey mi?
+    a: Hayır. KillAura, düz bir nişanla yakın mesafedeki melee aralıklarında otomatik saldırı yapar. Yay Aimbot, menzilli yay dövüşünü hedefler ve seyahat süresi ve yerçekimi için balistik bir öndeği hesaplamak zorundadır, bu da eğimli bir dönüş deseni üretir.
+  - q: Bow Aimbot sadece yaylarla mı çalışır?
+    a: Evet, belgelere göre. Tahminlere dayalı matematik, ulaşması zaman alan ve hareket ederken düşen bir mermiyi temel alır; bu, bir ok gibi bir yay okunu, anında yakın dövüş isabetini değil tanımlar.
+  - q: Hangi müşterilerimizin Bow Aimbot'u var?
+    a: Raven B++'da görüldüğü gibi belgelenmiş olup, diğer otomatik hedefleme modülleriyle birlikte muharebe kategorisinde yer alıyor.
+---
+
+<KeyTakeaways>
+
+- Yay Aimbot, hedefe otomatik olarak nişan alıp ok atan bir muharebe modülüdür.
+- Okun uçuş süresi boyunca, yerçekimini de hesaba katarak, hedefin pozisyonunu tahmin ederek atışı yönlendirir.
+- Sonuç, düz çizgiye kıyasla kavisli bir rotasyondur.
+- Rotasyon verilerini izleyen antichipler, yakın dövüş aimbot'larını işaretledikleri gibi bunu da işaretleyebilir.
+
+</KeyTakeaways>
+
+Yay Nişan Botu, oyuncu mesafeyi değerlendirmeden veya yayın bırakılmasını elle zamanlamadan otomatik olarak bir hedefi hedef alıp ateşleyen bir savaş modülüdür. Okun seyahat süresi, yerçekimi düşüşü ve hedefin aslında nereye gittiği gibi faktörleri hesaba katan tahmin edici bir önde gelme hesaplar, böylece atış hareket eden bir oyuncuya, onların arkasındaki boşluğa değil isabet eder. Yakın dövüş nişan botunun menzilli karşılığıdır ve kullanılan matematik çok daha zordur.
+
+## Yay Nişan Botu nasıl çalışır
+
+Yay okları anında isabet etmez. Mesafeyi kat etmeleri ve ilerlerken düşmeleri zaman alır, bu nedenle hareketli bir hedefe doğrudan nişanlanmış bir atış, o hedefin yarım saniye sonraki konumunun gerisinde ve altında kalır. Yay Nişan Botu, okun beklenen uçuş süresi boyunca hedefin konumunu öne doğru yansıtarak ve ardından bu mesafedeki düşüşü telafi eden bir fırlatma açısı çözerek telafi eder.
+
+Yay gerilirken modül, hedefin mevcut konumuna bakmak yerine, hesaplanan çözüme doğru oyuncunun görüşünü döndürür ve hedef hareket ettikçe sürekli olarak yeniden çözer. Çekme kullanılabilir bir şarja ulaştığında, otomatik olarak bırakmayı tetikler. Çıktı, hedefe düz bir çizgi yerine eğri, balistik bir nişan kalıbıdır ve bu eğri, onu yakın dövüş nişan botundan veya [KillAura](/tr/learn/what-is-killaura) ayırır.
+
+Hedef tahtasına birkaç atış kaçırdıktan sonra çekiciliği hemen anlaşılıyor. Hareketli bir hedefe karşı, nişan almayı, mesafeyi ve bırakma zamanlamasını ayarlamak genellikle gerçek bir pratik gerektirir. Bow Aimbot, hedef ne kadar uzak olursa olsun veya ne kadar hızlı savrulursa olsun, her tam çekimi isabet eden bir atışa dönüştürür; bu, bir kolaylık olmaktan ziyade doğrudan bir oyun avantajıdır.
+
+## Bow Aimbot vs KillAura
+
+Her ikisi de otomatik nişan alma sistemleridir, ancak farklı sorunları çözerler.
+
+| | Bow Aimbot | KillAura |
+|---|---|---|
+| Menzil | Uzak, bir yay çekildiğinde | Yakın, isabet mesafesine bağlı |
+| Nişan şekli | Eğri, düşüşü ve uçuş süresini hesaba katar | Hedefe düz bir çizgi |
+| Tetikleyici | Tam çekimde ateşler | Saldırı soğuma süresinde ateşler |
+| Ne çözer | Hareketli bir hedefin gelecekteki konumu | Hedefin mevcut konumu |
+
+KillAura, hedef zaten nerede ise oraya düz bir çizgi çeker. Bow Aimbot ise, hedef nereye gidecekken nişan almalıdır; bu daha zor bir problemdir ve fark edildiğinde daha belirgin bir rotasyon imzasıdır.
+
+<Callout variant="tip" title="Opal nerede çizgiyi çiziyor">
+Opal, özel bir Yay Aimbot göndermiyor. Savaş kataloğu, [KillAura](/tr/learn/what-is-killaura) ve [Aim Assist](/tr/learn/what-is-aim-assist) gibi yakın dövüş otomasyonunu kapsıyor; bunlar, bir sunucunun bir insandan ayırt edemeyeceği sınırlar içinde kalacak şekilde tasarlandı. Hareketli bir hedefe yansıtılan bir öngörülen nişanlamayı yazan bir balistik çözücü ise farklı, daha yüksek sesli bir otomasyon türüdür ve Opal'ın listesinde yer almaz.
+</Callout>
+
+## Yay Aimbot kullanmak güvenli mi?
+
+Hayır. Çünkü modül, oyuncunun görüş açılarını kendisi yazıyor ve bunları hareket eden bir hedefinin yörüngelenmiş konumuna bağlıyor, ürettiği dönüş verileri bir insanın çiziminde olmayan kalıplar taşıyor. Nişan eğrisi, çözülmüş önde olma noktasını da çok hassas bir şekilde takip ediyor ve dönüş, bir elin fare üzerinde yapabileceğinden daha hızlı veya daha istikrarlı olabilir. Dönüş verilerini izleyen sunucu tarafı antilerinleri, yakın dövüş aimbot'larını işaret ettiği gibi bunu da işaretleyebilir.
+
+Tespiti hala, belirli bir sunucunun dönüşleri ve bırakma zamanlamasını ne kadar yakından kontrol etmesine bağlıdır. Dönüşlerde yoğun yumuşatma ve normal bir çizime benzeyen bir şarj eşiği, davranışı yetenekli bir insan okçusundan ayırmayı zorlaştırır, ancak temel sinyali ortadan kaldırmaz, yalnızca onu daha sessiz hale getirir.
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını anlatmıyor">
+Bu sayfa, terimin ne anlama geldiğini bilmeniz için modülü genel olarak açıklamaktadır. İsimlendirme ve kesin davranışlar müşteriye göre değişir ve otomatik menzilli nişan alma, esasen her sunucuda kuralları ihlal eder.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Bow Aimbot aslında neyi değiştiriyor?">
+Ok atışını ve ateş etmeyi devralır. Oyuncunun nişan alıp atış zamanlamasını ayarlaması yerine, modül okun hedefe ulaşacağı zaman hedefin nerede olacağını hesaplar ve bırakmadan önce görüşü o noktaya döndürür.
+</FAQItem>
+
+<FAQItem question="Bow Aimbot, KillAura ile aynı mı?">
+Hayır. KillAura, düz bir hat üzerinde yakın mesafede otomatik saldırır. Bow Aimbot ise menzilli yay savaşını hedefler ve seyahat süresi ile yerçekimi için balistik bir öngörüye ihtiyaç duyar, bu da eğimli bir dönüş deseni oluşturur.
+</FAQItem>
+
+<FAQItem question="Bow Aimbot sadece yaylarla mı çalışır?">
+Evet, belgelere göre. Tahminsel öngörü matematiği, ulaşması zaman alan ve hareket ederken düşen bir mermiye dayanır; bu da bir yay oku, anında bir yakın dövüş isabeti değil, onu tanımlar.
+</FAQItem>
+
+<FAQItem question="Hangi müşterilerde Bow Aimbot var?">
+Raven B++'da görüldüğü gibi belgelenmiştir; otomatik hedefleme modülleriyle birlikte dövüş kategorisinde yer almaktadır.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "Yoğun yakın dövüş otomatik saldırısı yapan Yay Aimbot'a benzetilen." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Bow Aimbot, yalnızca yaylara özel olarak tasarlanmış genel amaçlı bir hedefleme botudur." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Bu modüllerin ait olduğu daha geniş kategori." },
+]} />
+
+<CTA href="/tr/satin-al">Uzak mesafeli otomasyon, Opal'in savaş kataloğunda bulunmuyor. Nelerin olduğunu görün.</CTA>

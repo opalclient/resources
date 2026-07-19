@@ -1,0 +1,119 @@
+---
+title: Fabric Geliştirme Ortamını Kurulumu (2026)
+description: "Fabric mod geliştirme ortamını kurun: bir JDK yükleyin, örnek mod şablonunu klonlayın, Yarn eşlemelerini seçin, ardından gradle genSources ve runClient komutlarını çalıştırın. Kapsamlı rehber."
+excerpt: "Dört adım sizi sıfırdan çalışan bir geliştirme istemcisine götürür: bir JDK, örnek mod şablonu, eşlemeleriniz ve ardından iki Gradle görevi. Yapı eklentisi geri kalanını halleder."
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: Gradle'ı kendim mi yüklemem gerekiyor?
+    a: Hayır. Fabric örnek şablonu, ilk çalıştırmada doğru Gradle sürümünü çeken bir Gradle wrapper içerir. Sistem Gradle'ı yerine gradlew komut dosyasını kullanın.
+  - q: Başlangıcı sıfırdan yapayım mı, yoksa şablonu kullayım mı?
+    a: Resmi örnek mod şablonunu kullanın. Yapı eklentisi, Yarn eşleştirmeleri ve çalıştırma görevleri zaten yapılandırıldığı için, karmaşık kurulumu atlayıp kod yazmaya başlayabilirsiniz.
+  - q: Yarn eşlemelerini kullanmak zorunda mıyım?
+    a: Yarn, varsayılan Fabric seçeneğidir ve belgelenmiş isimlerle birlikte gelir, bu yüzden kolay bir seçimdir. Resmi Mojang eşlemelerine karşı da geliştirebilirsiniz, ancak şablon kutudan çıktığı haliyle Yarn için hazırlanmıştır.
+  - q: Hangi JDK sürümünü yüklemeliyim?
+    a: Hedef Minecraft sürümünüzün gerektirdiği olanı. Yeni sürümler daha yeni JDK'ler gerektirir, bu yüzden yüklemeden önce sürümü kontrol edin ve IDE'nizi o JDK'ye yönlendirin.
+  - q: GenSources ne iş yapar?
+    a: Minecraft'ı seçtiğiniz Yarn eşlemelerine göre derlemesini bozarak, oyunun kodunu okuyabilmenizi ve geliştirme sürecinde sınıflarını okunabilir isimlerle referanslayabilmenizi sağlar.
+---
+
+<KeyTakeaways>
+
+- Kurulum dört adımdan oluşur: bir JDK, örnek mod şablonu, kendi eşleştirmeleriniz ve ardından Gradle.
+- Fabric build eklentisi Minecraft'ı indirir ve sizin için çalıştırma görevlerini hazırlar.
+- Gradle'ı asla kendiniz yüklemezsiniz: şablonda bir wrapper bulunur.
+- `gradle.properties` dosyasındaki sürüm uyuşmazlığı, yeni bir projenin başarısız olmasının en yaygın nedenidir.
+
+</KeyTakeaways>
+
+[Fabric](https://fabricmc.net/) geliştirme ortamını ayarlamak dört adımdan oluşur: bir JDK kurun, resmi örnek mod şablonundan başlayın, haritalamalarınızı seçin (genellikle [Yarn](/tr/learn/yarn-vs-mojmap)), ardından Minecraft'ı indiren ve bir test istemcisini başlatan Gradle görevlerini çalıştırın. Yapı eklentisi zorlu işleri halleder. JDK'nuzu ve Minecraft sürümünüzü baştan eşleştirin ve geri kalanı kendiliğinden gelir.
+
+<Callout variant="info" title="Opal Nerede Kullanılır">
+Opal, bir Fabric modudur ve [GraalVM JavaScript betik çalıştırma motoruna](/tr/learn/what-is-graalvm-javascript-scripting) sahiptir, bu nedenle tam bir mod araç zinciri kurmadan betiklerle genişletebilirsiniz. Sadece yüklemek ve çalıştırmak istiyorsanız, [kurulum kılavuzunu](/tr/docs/setup) izleyin; betik yazmaya başlamak için [betik dokümanlarına](/tr/docs/scripting) bakın.
+</Callout>
+
+## Öncelikle İhtiyacınız Olanlar
+
+Kod yazmaya başlamadan önce üç şeye ihtiyacınız var: bir Java Development Kit, bir IDE ve Git.
+
+- **Bir JDK.** Hedeflediğiniz Minecraft sürümüne uygun olanı seçin. Daha yeni Minecraft sürümleri daha yeni bir JDK gerektirir, bu yüzden başlamadan önce sürümün gereksinimlerini kontrol edin.
+- **Bir IDE.** IntelliJ IDEA veya Eclipse ikisi de işe yarar. Çoğu Fabric geliştiricisi, Gradle ve decompiler entegrasyonu daha sorunsuz olduğu için IntelliJ kullanır.
+- **Git.** Şablon deposunu klonlayacak ve kendi değişikliklerinizi takip edeceksiniz.
+
+[Gradle](https://gradle.org/)’ı kendiniz yüklemeyeceksiniz. Şablon, ilk çalıştırmada doğru sürümü indiren bir Gradle wrapper betiğiyle birlikte gelir.
+
+## Adım Adım
+
+<Steps>
+
+<Step number={1} title="Bir JDK kurun">Hedef Minecraft sürümünüzle uyumlu bir JDK yükleyin ve IDE'nizi ona yönlendirin</Step>
+
+<Step number={2} title="Örnek mod şablonunu alın">[Fabric](https://fabricmc.net/) resmi bir başlangıç deposu yayınlıyor. Klonlayın veya şablon olarak kullanın, ardından paketi ve mod kimliğini kendi değerlerinize göre yeniden adlandırın</Step>
+
+<Step number={3} title="Haritalamayı seçin">Şablon, varsayılan olarak [Yarn](/tr/learn/yarn-vs-mojmap) kullanır. Yarn, Minecraft'ın sınıfları ve metotları için okunabilir, belgelenmiş isimler sağlar. Minecraft sürümünü, yükleyici sürümünü ve Yarn eşleme sürümünü `gradle.properties` dosyasında ayarlayın</Step>
+
+<Step number={4} title="Kaynakları oluştur ve çalıştır">IDE'nizde projeyi açın, Gradle'ın senkronize olmasını bekleyin, ardından Yarn isimlerine göre Minecraft'ı decompile etmek için `genSources` komutunu çalıştırın. Modunuz yüklü olan bir geliştirme istemcisini başlatmak için `runClient` görevini çalıştırın</Step>
+
+</Steps>
+
+## Yapı Eklentisi Size Neler Yapar
+
+[Fabric](https://fabricmc.net/) için Gradle yapı eklentisi, Minecraft'ı indirir, seçtiğiniz eşlemelere göre yeniden düzenler ve çalıştırma yapılandırmalarını bağlar. Bunu `build.gradle` içindeki küçük bir blok aracılığıyla yapılandırırsınız.
+
+| Siz Ayarlarsınız | Nerede | Ne Kontrol Eder |
+|---|---|---|
+| Minecraft sürümü | `gradle.properties` | Hangi oyun sürümüne karşı derleme yaptığınız |
+| Yükleyici sürümü | `gradle.properties` | Modunuzun çalıştığı Fabric yükleyicisi |
+| Yarn sürümü | `gradle.properties` | Kaynak kodunuzda kullanılan eşleme adları |
+| Bağımlılıklar | `build.gradle` | [Fabric API](/tr/learn/what-is-the-fabric-api) ve herhangi bir kütüphane |
+
+Üç sürümü de `gradle.properties` içinde tutarlı tutun. Minecraft sürümü ile Yarn eşleme sürümü arasındaki uyumsuzluk, yeni bir projenin senkronize olmaması için en yaygın nedendir.
+
+## Eşlemelerin Burada Neden Önemli Olduğu
+
+Minecraft karartılmış olarak gelir, bu nedenle sınıflarının adları `a.a.a` gibi olur. [Yarn](/tr/learn/yarn-vs-mojmap), bu adları okunabilir adlara eşler ve kararlı [intermediary](/tr/learn/what-is-intermediary) katmanının üzerine oturur. `genSources` komutunu çalıştırdığınızda, yapı eklentisi, Yarn adlarını kullanarak oyunu derler, böylece doğrudan Minecraft kodunu okuyabilir ve referans alabilirsiniz. Modunuzu derlerken, Yarn adlandırılmış kodunuzu intermediary'ye geri eşler, böylece bitmiş jar, eşleme yeniden adlandırmalarından bağımsız olarak herhangi bir uyumlu kurulumda çalışır.
+
+## Proje Derlenmediğinde
+
+<Checklist>
+<ChecklistItem>Gradle senkronizasyonu, içe aktar hemen ardından başarısız oluyor: genellikle `gradle.properties` dosyasındaki Minecraft, yükleyici ve Yarn sürümleri uyumlu değil. Bunları bilinen uyumlu bir sete ayarlayın.</ChecklistItem>
+<ChecklistItem>Yanlış Java sürümü: derleme, Minecraft sürümünün ihtiyaç duyduğundan daha eski bir JDK'niz olduğunda desteklenmeyen bir sınıf dosya sürümü hakkında şikayet ediyor. Daha yeni bir JDK yükleyin ve projeyi ona yönlendirin.</ChecklistItem>
+<ChecklistItem>Okunacak derlenmiş kaynak yok: `genSources` komutunu çalıştırın ve yeniden yükleyin. İlk çalıştırma, tüm oyunu derlediği için biraz zaman alabilir.</ChecklistItem>
+<ChecklistItem>`runClient` hiçbir şey yapmıyor: herhangi bir görevi çalıştırmadan önce ilk Gradle senkronizasyonunun tamamlanmasına izin verin. Çalıştırma yapılandırmaları senkronizasyon sırasında oluşturulur.</ChecklistItem>
+</Checklist>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Gradle'i kendim yüklemem gerekiyor mu?">
+Hayır. Fabric örnek şablonu, ilk çalıştırmada doğru Gradle sürümünü çeken bir Gradle wrapper içerir. Sisteminizdeki Gradle yerine `./gradlew` kullanın.
+</FAQItem>
+
+<FAQItem question="Sıfırdan başlamalıyım yoksa şablonu kullanmalımış?">
+Resmi örnek mod şablonunu kullanın. Yapı eklentisi, Yarn eşleştirmeleri ve çalıştırma görevleri zaten hazır olduğundan, karmaşık kurulumu atlayıp kod yazmaya başlayabilirsiniz.
+</FAQItem>
+
+<FAQItem question="Yarn eşlemelerini kullanmak zorunda mıyım?">
+Yarn, Fabric'in varsayılanıdır ve belgelenmiş isimlerle birlikte gelir, bu yüzden kolay seçimdir. Resmi Mojang eşlemelerine karşı da derleyebilirsiniz, ancak şablon kutudan çıktığı gibi Yarn için hazırlanmıştır.
+</FAQItem>
+
+<FAQItem question="Hangi JDK sürümünü yüklemeliyim?">
+Hedef Minecraft sürümünüzün gerektirdiği olanı. Yeni sürümler daha yeni JDK'lar gerektirir, bu yüzden yüklemeden önce sürümü kontrol edin ve IDE'nizi o JDK'ya yönlendirin.
+</FAQItem>
+
+<FAQItem question="GenSources ne işe yarar?">
+Minecraft'ı seçtiğiniz Yarn eşlemelerine göre derlerterek, oyunun kodunu okuyabilmenizi ve geliştirmeleriniz sırasında sınıflarını okunabilir isimlerle referans alabilmenizi sağlar.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/how-to-install-a-fabric-mod", label: "Bir Fabric modunun nasıl kurulacağı", description: "Oyuncu tarafındaki karşılığı olanı inşa etmeye benziyor." },
+  { href: "/tr/learn/what-is-the-fabric-api", label: "Fabric API nedir?", description: "Neredeyse her modun beyan ettiği bağımlılık." },
+  { href: "/tr/learn/yarn-vs-mojmap", label: "Yarn mı, Mojmap mı", description: "Kaynakınızın okuduğu eşlemeleri seçmek." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

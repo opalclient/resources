@@ -1,0 +1,83 @@
+---
+title: Cosa sono i raggi X in Minecraft? Spiegazione della Visione delle Ore
+description: XRay è un modulo di Minecraft che rende i minerali attraverso il terreno modificando ciò che il client disegna, non ciò che il server invia, ed è per questo che i server lo vietano ancora.
+excerpt: La pietra dovrebbe nascondere ciò che contiene. XRay smette semplicemente di rispettare questa regola, trasformando ogni montagna in un diagramma preciso della posizione del minerale.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Si considera imbroglio l'uso di XRay?
+    a: Sì, su qualsiasi server dove l'estrazione mineraria o un'economia basata sulle risorse siano importanti. Offre un vantaggio diretto rispetto ai giocatori che trovano il minerale nel modo consueto, ed è considerata una pratica di cheating punibile con il ban, non una caratteristica estetica.
+  - q: Ha bisogno che il server gli fornisca altro?
+    a: No. Il server invia già i dati completi del blocco, inclusi gli OR, non appena un blocco viene caricato. XRay modifica solo il modo in cui il client disegna i blocchi che già possiede. Non richiede né riceve nulla di nuovo.
+  - q: Come si differenzia XRay da ESP?
+    a: ESP rivela entità come giocatori e mob attraverso i muri. XRay applica lo stesso trucco ai blocchi, rivelando minerali e altre risorse attraverso il terreno. Entrambi funzionano modificando il rendering locale anziché estrarre nuovi dati dal server.
+  - q: Si può rilevare la presenza di XRay senza osservare come gioca qualcuno?
+    a: A volte. Le scansioni di integrità lato client possono intercettare hook XRay noti o file di rendering modificati, ma una build progettata per eludere tali controlli viene solitamente rilevata solo attraverso un'analisi dei pattern di mining.
+---
+
+<KeyTakeaways>
+
+- XRay è un modulo visivo che rende i minerali e altri blocchi preziosi trasparenti attraverso il terreno, permettendo ai giocatori di vedere un filone senza doverlo scavare.
+- Funziona interamente lato client: il server ha già inviato tutti i dati del chunk al momento del caricamento, XRay semplicemente impedisce la normale visualizzazione che nasconde i minerali.
+- Non viene generito traffico di rete aggiuntivo, quindi la rilevazione avviene solitamente tramite schemi di estrazione e scansioni dell'integrità del client, non tramite log dei pacchetti.
+- Su qualsiasi server con un'economia mineraria, XRay è considerato un exploit bannabile, non una semplice impostazione estetica.
+
+</KeyTakeaways>
+
+XRay è un modulo visivo che rende i minerali e altri blocchi preziosi attraverso il terreno solido, permettendo al giocatore di vedere esattamente dove si trova una vena senza dover mai usare un piccone per cercarla. Non richiede nulla di speciale al server; si limita a modificare ciò che il client sceglie di disegnare. L'estrazione alla cieca significa scavare basandosi su un'intuizione e sperando che qualcosa compaia nelle vicinanze. XRay evita questo passaggio e trasforma la mappa in un diagramma di ciò che si trova effettivamente sottoterra.
+
+## Come funziona
+
+Quando un chunk viene caricato, il server invia al client i dati completi dei blocchi di quel chunk, inclusi i minerali, indipendentemente dal fatto che siano o meno attualmente esposti all'aria aperta. Il rendering normale scarta la maggior parte di questi dati; disegna solo la superficie esterna, i blocchi che effettivamente toccano una faccia visibile, perché una vera telecamera non potrebbe mai vedere attraverso la roccia solida.
+
+Un modulo XRay infrange questa regola per i tipi di blocco target. A seconda della versione, impedisce il rendering della pietra e del terreno circostante oppure disegna direttamente il minerale target sopra il terreno che altrimenti lo seppellirebbe. In entrambi i casi, una vena di diamanti a tre strati all'interno di una montagna appare esattamente come una già esposta in una caverna. Scavare smette di essere esplorazione e diventa una linea retta.
+
+L'attrattiva risiede nella velocità, non nella raffinatezza. Su qualsiasi server dove l'estrazione alimenta un'economia, sia vendendo direttamente il minerale o trasformandolo in equipaggiamento, eliminare l'esplorazione offre un vantaggio diretto su chiunque stia ancora scavando a tentoni.
+
+## XRay è sicuro da usare?
+
+XRay non invia nulla di aggiuntivo sulla rete. Ogni blocco che rivela era già stato inviato al client nel momento in cui il chunk è stato caricato, lo stesso principio utilizzato da un modulo come l'ESP per mostrare le entità attraverso i muri. Un server che osserva i pacchetti isolatamente ha quasi nulla da intercettare.
+
+La rilevazione deriva dal comportamento. Un giocatore che scava in linea retta verso una vena, estrae solo i blocchi preziosi e ignora il resto, o schiva un pericolo di cui non avrebbe modo di essere a conoscenza, produce uno schema di estrazione che un giocatore non vedente non farebbe mai. Alcuni server eseguono anche scansioni di integrità lato client che cercano il codice di rendering modificato su cui XRay dipende, lo stesso approccio utilizzato contro altri cheat visivi.
+
+Poiché la traccia è comportamentale piuttosto che un singolo pacchetto ovvio, XRay può rimanere inosservato più a lungo di un cheat di combattimento. Questo non significa che sia sicuro. I server che esaminano le statistiche di estrazione o indagano su scavi sospetti lo trattano come qualsiasi altro exploit: ban totale, nessuna ammonizione.
+
+<Callout variant="tip" title="Dove si colloca in Opal">
+Opal non include un modulo XRay dedicato. Il suo catalogo si concentra su moduli di combattimento, movimento e visivi, progettati per il PvP, le categorie in cui un singolo frame o un singolo tick decidono una battaglia. Leggere il minerale attraverso la pietra è un gioco completamente diverso, più simile a una sessione di grinding economico-sopravvivenza di quanto Opal sia progettato per supportare.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina spiega cosa fa XRay e perché i server lo vietano, non una raccomandazione per eseguirlo. In qualsiasi server in cui l'estrazione è legata a un'economia, XRay è trattato come un'imbroglio di combattimento: un'offesa punibile con il ban, sia che lo staff lo rilevi tramite la scansione del client, sia leggendo una storia di estrazione sospetta.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="XRay è considerato imbroglio?">
+Sì, su qualsiasi server in cui l'estrazione mineraria o un'economia di risorse siano importanti. Offre un vantaggio diretto rispetto ai giocatori che trovano il minerale nel modo normale, ed è considerato un exploit passibile di ban, non una funzionalità estetica.
+</FAQItem>
+
+<FAQItem question="XRay necessita di qualcosa in più dal server?">
+No. Il server invia già i dati completi dei blocchi, inclusi gli oggetti, nel momento in cui un blocco viene caricato. XRay modifica soltanto il modo in cui il client visualizza i blocchi che già possiede. Non richiede né riceve nulla di nuovo.
+</FAQItem>
+
+<FAQItem question="In che modo XRay è diverso da ESP?">
+ESP rivela entità come giocatori e mob attraverso i muri. XRay applica lo stesso trucco ai blocchi, rivelando minerali e altre risorse attraverso il terreno. Entrambi funzionano modificando il rendering locale anziché estrarre nuovi dati dal server.
+</FAQItem>
+
+<FAQItem question="È possibile rilevare XRay senza monitorare il modo in cui qualcuno gioca?">
+A volte. Le scansioni di integrità lato client possono intercettare hook di XRay noti o file di rendering modificati, ma una build progettata per eludere tali controlli viene solitamente rilevata solo attraverso l'analisi dei pattern di estrazione.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria più ampia XRay e ogni altro modulo qui presente." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "La categoria incentrata sulla furtività, basata su moduli che non attivano mai un controllo a livello di pacchetto, XRay compreso." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Un imbroglione all'estremità opposta dello spettro: scoperto dai pacchetti che invia, non dalla traccia che lascia." },
+]} />
+
+<CTA href="/it/purchase">Se scavare alla ricerca di tesori non è l'obiettivo, scopri cosa costruisce effettivamente Opal per la battaglia.</CTA>

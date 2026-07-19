@@ -1,0 +1,87 @@
+---
+title: Czym jest target strafe w Minecraft? Wyjaśnienie modułu
+description: Target Strafe to moduł ruchu w "Minecraftcie", który automatycznie okrąża zablokowany cel bojowy. Oto jak on działa, jego cicha wersja i dlaczego serwery go oznaczają.
+excerpt: Automatycznie krąży wokół celu, nie wymaga żadnych ruchów nóg. Jest to również jeden z łatwiejszych sposobów na złapanie gracza przez administratora.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie robi Target Strafe?
+    a: Automatycznie okrąża cię wokół zablokowanego celu bojowego, przejmując boczne ruchy, którymi gracz normalnie sterowałby za pomocą klawiszy A i D.
+  - q: Jaka jest cicha wersja Target Strafe?
+    a: Podtryb, udokumentowany w LiquidBounce, który zmienia rzeczywisty kierunek twojego ruchu na serwerze, nie obracając kamery, którą widzisz ty lub ktokolwiek inny, odłączając to, w którą stronę patrzysz, od tego, dokąd faktycznie się poruszasz.
+  - q: Czy target strafe wykrywany jest przez antywiry?
+    a: Tak. Regularna wersja generuje nienaturalnie gładki ruch okrężny, a wersja cicha powoduje niezgodność między kierunkiem a ruchem, której zwykły klient nie jest w stanie wygenerować – oba te aspekty mogą być mierzone przez systemy anticheat.
+  - q: Klienci, którzy wysłali Target Strafe?
+    a: Zostało to udokumentowane w LiquidBounce i Fan, a Opal udostępnia własną wersję pod tą samą nazwą, Target Strafe.
+  - q: Czy Target Strafe to to samo co pomoc w poruszaniu?
+    a: Nie. Asysta ruchu może wyświetlać informacje lub wygładzać wprowadzane dane. Cel Strafe zastępuje całkowicie Twoje polecenia kierunkowe, dlatego jest klasyfikowana jako moduł oszukiwania, a nie moduł pomocniczy.
+---
+
+<KeyTakeaways>
+
+- Target Strafe to moduł ruchu, który automatycznie krąży wokół zablokowanego celu bojowego, zastępując ręczne boczki.
+- Cicha wersja rozłącza twój widoczny kierunek z rzeczywistym ruchem, czego nie potrafi zrobić standardowy klient.
+- Oba warianty są wykrywalne: nienaturalnie płynne krążenie i niezgodność kierunku/ruchu to realne sygnały anticheatowe.
+- Opal dostarcza własny moduł Target Strafe i oznaczona jego użycie na własną odpowiedzialność.
+
+</KeyTakeaways>
+
+Target Strafe to moduł ruchu, który automatycznie krąży wokół celu bojowego, na który się zablokowałeś, zamiast sam trzymać A lub D i sam rysować okrąg. Oblicza kierunek ruchu w każdym cyklu i przekazuje go bezpośrednio do systemu ruchu, dzięki czemu okrąg pozostaje płynny, niezależnie od tego, co robisz rękami. Niektórzy klienci udostępniają cichą wersję, która przesuwa twoją postać w jedną stronę, podczas gdy kamera nadal patrzy w drugą. To niewielki fragment automatyzacji, który zyskał dużą sławę za to, że doprowadza ludzi do kłopotów.
+
+## Jak działa Target Strafe
+
+Target Strafe integruje się z systemem celowania bojowego klienta i przejmuje boczne ruchy w momencie zablokowania celu, zwykle w tym samym momencie, gdy uruchamia się moduł walki lub celowania. Zamiast naciskać A lub D, aby rysować okrąg, moduł ponownie oblicza kierunek ruchu w każdym cyklu i zapisuje go bezpośrednio w obsługiwanie ruchu. Rezultatem jest czysty, mechanicznie spójny obrót wokół tego, z czym walczysz, o promieniu i prędkości, których zwykłe unikanie bokiem nie dorównuje.
+
+Cicha wariant, udokumentowana w LiquidBounce, idzie o krok dalej. Zamiast po prostu automatyzować ruchy boczne, zmienia kierunek, w którym twój bohater faktycznie porusza się na serwerze, pozostawiając nienaruszony obrót kamery, który widzisz. Każdy, kto ogląda, widzi gracza skierowanego w jedną stronę i dryfującego w inną – kombinację, której normalny input klienta fizycznie nie jest w stanie wygenerować.
+
+Połączony z modułem celowania lub walki, Target Strafe eliminuje kolejny element ręcznej koordynacji w walce na krótkim dystansie: nie tracisz kąta podczas zamachu, nie zostajesz oskrzydlony, ponieważ twoje stopy i mysz nie robiły tego samego w tym samym czasie.
+
+<Callout variant="tip" title="Opal nazywa to Target Strafe">
+W katalogu Opala ten element robi dokładnie to, co sugeruje nazwa: krąży wokół celu. Ten sam moduł, ta sama kategoria, te same kompromisy omówione poniżej.
+</Callout>
+
+## Czy używanie Target Strafing jest bezpieczne?
+
+Dwa oddzielne elementy są tu oznaczane jako problematyczne. Podstawowa wersja generuje ruch, który jest zbyt płynny i zbyt konsekwentny, by można go uznać za działanie osoby pracującej na klawiaturze, a serwer śledzący wzorce ruchu może bezpośrednio zmierzyć tę konsekwencję.
+
+Cicha wersja jest bardziej ryzykowna z obu. Niezgodność między kierunkiem, w którym skierowane jest ciało gracza, a kierunkiem, w którym się porusza, nie jest czymś, co może wygenerować legalny input klienta, więc każdy system antycheat, który porównuje rotację z ruchem, ma czysty sygnał, aby go wykryć. Czy dany serwer faktycznie go wykrywa, zależy od tego, jak dokładnie ten serwer sprawdza konsekwencję ruchu, ale żadna z wersji nie jest bezpiecznym założeniem.
+
+<Callout variant="warning" title="Odniesienie, nie instrukcja">
+Target Strafe, cichy czy nie, jest wykrywalną automatyzacją ruchu i łamie zasady praktycznie na każdym serwerze wieloosobowym. Każdy klient, w tym Opal, umieszcza go na liście używania na własną odpowiedzialność. To nie jest obietnica, że zostaniesz zbanowany. To przyznanie, że to możliwe.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co właściwie robi Target Strafe?">
+Automatycznie krąży wokół zablokowanego celu bojowego, przejmując kontrolę nad ruchem bocznym, który gracz zwykle obsługuje za pomocą klawiszy A i D.
+</FAQItem>
+
+<FAQItem question="Co to jest cicha wersja Target Strafe?">
+Tryb, udokumentowany w LiquidBounce, który zmienia Twoją rzeczywistą kierunek ruchu po stronie serwera, nie obracając kamery, którą widzisz Ty lub ktokolwiek inny, odłączając to, w którą stronę patrzysz, od tego, gdzie faktycznie się poruszasz.
+</FAQItem>
+
+<FAQItem question="Czy Target Strafe wykrywany jest przez antywiry?">
+Tak. Regularna wersja generuje nienaturalnie płynne, okrągłe ruchy, a wersja cicha powoduje niezgodność między kierunkiem a ruchem, której zwykły klient nie jest w stanie wygenerować – oba te aspekty mogą być mierzone przez antywiry.
+</FAQItem>
+
+<FAQItem question="Klienci, którzy wysłali Target Strafe?">
+Zostało to udokumentowane w LiquidBounce i Fan, a Opal wysyła własną wersję pod tą samą nazwą, Target Strafe.
+</FAQItem>
+
+<FAQItem question="Czy Target Strafe to to samo co pomoc w poruszaniu się?">
+Nie. Pomoc w poruszaniu się może wyświetlać informacje lub wygładzać dane wejściowe. Target Strafe całkowicie zastępuje Twoje kierunkowe polecenia, dlatego jest klasyfikowany jako moduł oszukiwania, a nie pomocnik.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Moduł autoataku Target Strafe zazwyczaj towarzyszy." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Moduł walki skoncentrowany wyłącznie na celach, z którym jest często łączony." },
+  { href: "/pl/learn/what-is-velocity-anti-knockback", label: "Czym jest Prędkość / Odpór od Odrzutu?", description: "Kolejny moduł ruchu, który pozwoli Ci dłużej wytrzymać w walce." },
+]} />
+
+<CTA href="/pl/purchase">Myśl strategicznie. Opal wysyła Target Strafe i resztę zestawu bojowego wokół niego.</CTA>

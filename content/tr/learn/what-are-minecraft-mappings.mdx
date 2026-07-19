@@ -1,0 +1,95 @@
+---
+title: Minecraft Haritaları Nedir? İsimler Açıklanıyor
+description: "Minecraft haritaları nasıl açıklanır: MCP, Yarn ve Mojmap, karıştırılmış sınıf adlarını modların ve istemcilerin oyuna müdahale edebilmesi için okunabilir koda nasıl dönüştürür."
+excerpt: Mojang, a.a.a. gibi karıştırılmış isimlerle birlikte Minecraft’ı piyasaya sürüyor. Eşlemeler, bunları okunabilir kod modlarına geri çeviren sözlüktür.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Mappings
+author: trq
+faqs:
+  - q: Haritalar oyunun nasıl çalıştığını değiştirir mi?
+    a: Hayır. Bir eşleme yalnızca şeyleri geliştirici için yeniden adlandırır ve derlenmiş mod, karartılmış oyuna uyacak şekilde yeniden eşlenir, bu nedenle kod adları hiçbir zaman oyunculara gönderilmez.
+  - q: Neden birkaç haritalama sistemi var?
+    a: Tarihçe. MCP, 1.14'ten önce Minecraft için geldi, Yarn ise Fabric'in açık bir alternatifi olarak büyüdü ve Mojang eşleştirmeleri, Mojang'ın 1.14.4 sürümünde resmi adları yayınlamaya başlamasıyla ortaya çıktı.
+  - q: Yeni bir proje hangi eşlemeyi kullanmalı?
+    a: Modern Minecraft için, Mojang eşlemeleri veya Yarn standart seçeneklerdir. MCP, eski 1.8.9 dönemine ait çalışmalarda, eski araç zinciri hala kullanılıyor olduğunda öncelikli olarak geçerlidir.
+  - q: Haritalamalar, bir mod yükleyicisiyle aynı şey midir?
+    a: Hayır. Bir eşleme, bir isim tablosudur; Fabric gibi bir mod yükleyici ise, modları oyuna yükleyen çalışma zamanıdır. Birlikte çalışırlar ancak farklı sorunları çözerler.
+---
+
+<KeyTakeaways>
+
+- Eşleştirmeler, Minecraft'ın karartılmış kodunu okunabilir isimlere çeviren isim tablolarıdır.
+- Mojang, sınıf, alan ve yöntem adlarını karıştırır ve bunlar her sürümde değişir.
+- Bahsedeceğiniz üç tanesi MCP, Yarn ve Mojang eşleştirmeleri (Mojmap)'tır.
+- Bir eşleştirme, çalışma zamanında değil, derleme zamanında uygulanır, bu nedenle oyunculara gönderilmez.
+
+</KeyTakeaways>
+
+Minecraft haritaları, oyunun karmaşıklaştırılmış kodunu okunabilir isimlere çeviren isim tablolarıdır. Mojang, Minecraft'ı `a.a.a` gibi karıştırılmış sınıf ve alan adlarıyla gönderir, bu nedenle mod ve istemci geliştiricileri MCP, Yarn veya Mojang haritaları gibi bir haritalama seti uygulayarak okuyup bağlantı kurabilecekleri isimleri elde ederler.
+
+<Callout variant="info" title="Opal Nerede Çalışır">
+Opal, bir [Fabric](https://fabricmc.net/) mod'udur, bu nedenle arka planda modern mapping'lere karşı derlenir ve bunun yerine temiz bir GraalVM JavaScript betik oluşturma API'si sunar. Betiklerinizi kendiniz mapping'lere dokunmadan okunabilir isimlere karşı yazarsınız. [Betik oluşturma kılavuzunu](/tr/docs/scripting) inceleyin.
+</Callout>
+
+## Neden Eşleştirmeler Vardır
+
+Mojang, Minecraft'ı piyasaya sürmeden önce karartır. Dağıtılan jar dosyası, dosyayı küçültmek ve kodu okumayı zorlaştırmak için sınıfları, metotları ve alanları kısa, anlamsız dizelere yeniden adlandırır. Bu karıştırma, oyunun içine girip düzenlemeye başlamanızı engeller.
+
+Bir eşleştirme, bu durumu tersine çeviren sözlüktür. Her karartılmış adı okunabilir bir adıyla eşleştirir, böylece `field_70181_x` gibi bir alan `motionY` olur. Bir eşleştirme uygulandığında, bir geliştirici normal görünümlü bir kod tabanı görür ve buna mod yazabilir.
+
+İşte burada önemli olan bir nokta var. Karartılmış adlar her Minecraft sürümünde değişir, bu nedenle aynı alan bir sürümde `a` olabilir ve bir sonraki sürümde `bk` olabilir. Eşleştirmeler bu değişimi emer, bu nedenle mod araç zincirinin temelini oluştururlar.
+
+## Duyacağınız Üç Tanesi
+
+MCP (Mod Coder Pack), 1.14'ten önceki modlamayı mümkün kılan topluluk eşlemesidir. İki katmanlı bir şema kullanır: Searge projesi, `field_70181_x` gibi kararlı ancak çirkin ara adlar üretir ve MCP bunları `motionY` gibi dost canlısı adlarla sarar. Çoğu eski 1.8.9 bağımsız istemci, MCP eşlenmiş kaynak ağacına karşı derlenir ve yansımalarını MCP ve Searge adlarına göre anahtalar.
+
+Yarn, FabricMC tarafından [Fabric](https://fabricmc.net/) ekosistemi için geliştirilen, açık kaynaklı bir eşlemedir. Topluluk tarafından yönetilir, özgür lisanslıdır ve yeni bir Minecraft sürümü çıktığında hızla güncellenir; bu da Fabric modlarının yeni sürümlere hızlıca ulaşmasının nedenlerinden biridir.
+
+Mojang eşlemeleri, genellikle Mojmap olarak anılır, Mojang'ın kendi birinci taraf eşlemesidir ve 1.14.4'ten beri her resmi sürümle birlikte yayınlanmıştır. Doğrudan Mojang'dan geldikleri için, adlar geliştiricilerin şeyleri aslında nasıl adlandırdığıyla eşleşir. Etkili bir şekilde, 1.21 veya sonraki sürümleri hedefleyen yeni istemciler için MCP ve Searge'ın yerini almıştır.
+
+## Karşılaştırma
+
+| | MCP | Yarn | Mojang eşlemeleri |
+| :--- | :--- | :--- | :--- |
+| Geliştirici | Topluluk (Searge + MCP) | FabricMC | Mojang |
+| Dönem | 1.14 öncesi (1.7-1.12) | 1.14+ | 1.14.4+ |
+| Kaynak | Topluluk tarafından türetilmiş | Topluluk tarafından türetilmiş | Resmi |
+| Kullanıldığı yerler | Eski istemciler, eski modlama | Fabric | Fabric, Forge |
+| Durum | Mojang eşlemeleri tarafından kullanımdan kaldırıldı | Aktif | Aktif varsayılan |
+
+## Eşlemeler bir mod araç zincirine nasıl uyum sağlar
+
+Bir eşleme, çalışma zamanında değil, derleme zamanında uygulanır. Derleme aracı, karartılmış oyunu alır, eşlemeyi onun üzerinde çalıştırır ve kod yazmak için okunabilir bir sürüm sunar. Bitmiş modunuz daha sonra, oyuncunun oyununun aslında kullandığı karartılmış adlarla uyumlu olacak şekilde tekrar eşlenir.
+
+Farklı yükleyiciler bunu farklı şekillerde ele alır. [Fabric](https://fabricmc.net/), projeye bağlı olarak Yarn veya bir Mojang haritalama tabanına göre derlenir. Forge, tarihsel olarak bu işi böler, okuduğunuz kaynak için bir haritalama ve çalıştırılan için başka bir haritalama kullanırdı. Mojang haritalamalarının lisansı, derleme zamanında kullanıma izin verecek kadar esnektir, bu nedenle modern araç zincirleri buna dayanır.
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="Eşlemeler oyunun nasıl çalıştığını değiştirir mi?">
+Hayır. Bir eşleme sadece geliştirici için şeylerin adını değiştirir. Derlenmiş mod, karartılmış oyuna uyacak şekilde yeniden eşlenir, bu yüzden kodlarken gördüğünüz adlar oyunculara gönderilmez.
+</FAQItem>
+
+<FAQItem question="Neden birden fazla haritalama sistemi var?">
+Geçmişte MCP ilk olarak ortaya çıktı ve topluluğu Minecraft 1.14'ten önceki sürümlerinde destekledi. Yarn, Fabric ile birlikte açık bir alternatif olarak büyüdü ve Mojang haritalamaları, Mojang'ın 1.14.4 sürümünde resmi isimleri yayınlamaya başlamasıyla birlikte geldi.
+</FAQItem>
+
+<FAQItem question="Yeni bir proje hangi mapping'i kullanmalı?">
+Modern Minecraft için, Mojang mapping'leri veya Yarn standart seçimlerdir. MCP ise, eski araç zincirinin hala kullanıldığı 1.8.9 dönemine ait eski çalışmalar için geçerlidir.
+</FAQItem>
+
+<FAQItem question="Haritalamalar mod yükleyicisiyle aynı mı?">
+Hayır. Bir haritalama bir isim tablosudur; Fabric gibi bir mod yükleyicisi ise, modları oyuna yükleyen çalışma zamanıdır. Birlikte çalışırlar ancak farklı sorunları çözerler.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-intermediary", label: "Aracı ne demektir?", description: "Modları derleyen, gemilere karşı kullanılan sabit isim katmanı." },
+  { href: "/tr/learn/yarn-vs-mojmap", label: "Yarn mı, Mojmap mı", description: "Fabric modu için hangi okunabilir harita seçeneğini tercih etmeli." },
+  { href: "/tr/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "Bu eşlemeleri kullanan yükleyiciler." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

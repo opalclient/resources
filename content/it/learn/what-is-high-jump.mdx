@@ -1,0 +1,79 @@
+---
+title: Cos'è l'Alto Salto in Minecraft? Spiegazione del Modulo
+description: L'High Jump è un modulo di movimento che aumenta l'altezza del salto oltre il limite di Minecraft vanilla modificando i pacchetti di movimento, non l'input del salto. Ecco come funziona.
+excerpt: L'High Jump trasforma una semplice pressione di un tasto in un salto che la fisica vanilla non produce mai. Ecco come funziona il trucco del pacchetto e perché è facile per un server individuarlo.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa cambia effettivamente l'Alto?
+    a: Aumenta l'altezza massima che un giocatore raggiunge quando salta, superando il limite fisso imposto dalla fisica vanilla di Minecraft.
+  - q: Come funziona tecnicamente il salto in alto?
+    a: Manipola i pacchetti di movimento inviati al server, facendo sì che la posizione riportata sia superiore a quella che si otterrebbe con un salto standard, anziché modificare l'input del salto stesso.
+  - q: È l'alto salto come il volo?
+    a: No. L'Alto Salto influenza solo l'altezza di un singolo salto. Non permette a un giocatore di mantenere l'altitudine o di muoversi liberamente in aria come fa un modulo di volo.
+  - q: Può un fallo in alto far ammonire o squalificare un giocatore?
+    a: Può farlo. L'altezza del salto è un valore che un server può misurare e confrontare con la fisica vanilla, quindi salti insolitamente alti rappresentano una base plausibile per il rilevamento e l'utilizzo del modulo in genere viola le regole del server contro i cheat di movimento.
+---
+
+<KeyTakeaways>
+
+- High Jump è un modulo di movimento che aumenta l'altezza del salto di un giocatore al di sopra del limite di Minecraft vanilla.
+- Modifica i pacchetti di movimento inviati al server invece dell'input del salto, in modo che il server rilevi un picco che un salto normale non raggiunge.
+- Utilizzato per superare ostacoli o saltare il terreno senza posizionare un singolo blocco.
+- Poiché l'altezza del salto è facile da misurare, è un bersaglio comune per il rilevamento anticheat.
+
+</KeyTakeaways>
+
+L'High Jump è un modulo di movimento che permette a un giocatore di saltare più in alto di quanto consentirebbe la fisica di Minecraft nella versione originale. Non modifica ciò che accade quando si preme il tasto per saltare. Modifica invece ciò che il server vede in seguito: il client modifica i pacchetti di movimento in uscita in modo che la posizione segnalata raggiunga un'altezza superiore a qualsiasi salto normale possa mai raggiungere. È uno dei trucchi più datati nel repertorio della manipolazione dei pacchetti, economico da realizzare e altrettanto facile da individuare per un server se presta attenzione.
+
+## Come funziona l'High Jump
+
+L'altezza del salto nella versione originale è fissa. Il gioco applica una velocità verso l'alto predefinita nel momento in cui si lascia terra, la gravità ti riporta giù secondo un programma prestabilito e questo è il budget a disposizione. L'High Jump non modifica questa formula, né i tuoi input. Premi la barra spaziatrice esattamente come hai sempre fatto.
+
+Ciò che cambia è la posizione che il client comunica al server in seguito. Il modulo riscrive i pacchetti di movimento in modo che le coordinate segnalate durante il salto siano più alte di quanto il motore fisico produrrebbe da solo. Dal punto di vista del server, nulla nel tuo tasto premuto è apparso insolito. Il tuo personaggio è semplicemente andato in un punto che un salto legittimo non potrebbe raggiungere.
+
+## L'High Jump è sicuro da usare
+
+L'idea è semplice una volta che la si visualizza. Qualche blocco di altezza in più permette di superare sporgenze e vuoti che un salto normale non raggiungerebbe, saltare terreni che altrimenti richiederebbero tempo e blocchi per aggirarli, e in combattimento offre un istante di separazione, sufficiente per interrompere la linea di vista dell'avversario o uscire dalla sua portata prima che possa reagire.
+
+Nessuno di questi elementi lo rende silenzioso. High Jump è un vantaggio di gameplay, non puramente estetico, e l'altezza del salto è una delle cose più facili da verificare per un server. Ogni salto legittimo ha un limite massimo noto stabilito dalla fisica vanilla, quindi un server che registra la posizione verticale deve solo confrontare ciò che vede con tale limite. High Jump rientra nella stessa categoria di movimento di altri trucchi basati su pacchetti come [Bhop](/it/learn/what-is-bhop) e [Velocity](/it/learn/what-is-velocity-anti-knockback), e dovrebbe essere trattato allo stesso modo: rilevabile, non una comoda risorsa sicura.
+
+<Callout variant="tip" title="Dove Opal traccia il limite">
+La categoria di movimento di Opal copre un ampio spettro, ma non include un modulo Salto Alto con quel nome. Una funzionalità il cui unico scopo è gonfiare un numero che il server può banalmente verificare rispetto alla fisica, non è il tipo di scorciatoia che si adatta a come Opal crea strumenti di movimento.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina spiega cosa significa High Jump e come l'effetto funziona in generale. L'implementazione esatta varia a seconda del client e superare il limite di altezza di vanilla viola le regole su praticamente ogni server che prende sul serio il movimento.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa cambia effettivamente l'High Jump?">
+Aumenta l'altezza massima che un giocatore raggiunge quando salta, superando il limite fisso imposto dalla fisica standard di Minecraft.
+</FAQItem>
+
+<FAQItem question="Come funziona tecnicamente l'High Jump?">
+Modifica i pacchetti di movimento inviati al server, in modo che la posizione riportata sia più alta di quella che si otterrebbe con un salto standard, anziché alterare l'input del salto stesso.
+</FAQItem>
+
+<FAQItem question="L'Alto Salto è la stessa cosa del volo?">
+No. L'Alto Salto influenza solo l'altezza di un singolo salto. Non permette a un giocatore di mantenere l'altitudine o di muoversi liberamente nell'aria come fa un modulo di volo.
+</FAQItem>
+
+<FAQItem question="Può High Jump far segnalare o bannare un giocatore?">
+Può darsi. L'altezza del salto è un valore che un server può misurare e confrontare con la fisica vanilla, quindi salti insolitamente alti sono una base plausibile per la rilevazione e l'utilizzo del modulo in genere viola le regole del server contro i cheat di movimento.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-scaffold", label: "Cos'è Scaffold?", description: "Un modulo di movimento che posiziona automaticamente i blocchi mentre ti muovi." },
+  { href: "/it/learn/what-is-velocity-anti-knockback", label: "Cos'è la Velocità (anti-knockback)?", description: "Un modulo affine al movimento che combatte la resistenza invece della gravità." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "La categoria costruita per evitare controlli come questo." },
+]} />
+
+<CTA href="/it/purchase">Scopri come Opal gestisce il movimento senza basarsi su un numero che il server può semplicemente misurare.</CTA>

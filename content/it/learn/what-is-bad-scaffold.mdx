@@ -1,0 +1,81 @@
+---
+title: Cosa si intende per "scaffold" difettoso in Minecraft? (Modulo Spiegato)
+description: Bad Scaffold è una versione più grezza del modulo ponte automatico Scaffold, che omette i controlli di rotazione e le variazioni di tempistica per rendere più difficile la sua rilevazione da parte degli anticheat.
+excerpt: Stessa idea di auto-ponte di Scaffold, costruita in fretta. Tempi più lenti e meno controlli ti permettono di superare il divario e finire nella lista dei banditi più velocemente.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: È Bad Scaffold come Scaffold?
+    a: No. Scaffold è il modulo generico di auto-ponteggio, e Bad Scaffold è una versione più grezza della stessa idea, con tempistiche di posizionamento più lasche e meno controlli di validità.
+  - q: Perché un cliente includerebbe una variante più grezza di Scaffold?
+    a: È più veloce da realizzare. Saltare l'abbinamento della rotazione e la varianza dei tempi significa scrivere e ottimizzare meno codice, quindi alcuni clienti lo distribuiscono come un'opzione rapida, anche se una versione più accurata sarebbe più difficile da rilevare.
+  - q: È sicuro utilizzare Bad Scaffold?
+    a: No. Automatizza il posizionamento dei blocchi per colmare le lacune, il che viola le regole su qualsiasi server che le controlla, e la temporizzazione meno precisa e le verifiche mancanti lo rendono più facile da segnalare rispetto a un'implementazione di Scaffold più raffinata.
+  - q: Quali documenti del cliente segnala Bad Scaffold?
+    a: Fan elenca Bad Scaffold nella sua categoria movimento, insieme agli altri strumenti di collegamento e attraversamento.
+---
+
+<KeyTakeaways>
+
+- Scaffold Difettoso è una versione più grezza di Scaffold, il modulo ponte automatico, che fa cadere blocchi sotto i piedi con una tempistica più libera e meno controlli di validità.
+- Salta l'abbinamento della rotazione e la variazione dei tempi che una versione raffinata di Scaffold utilizza per sembrare umana, sacrificando la credibilità per la velocità.
+- La community lo elenca nella categoria movimento; come qualsiasi posizionatore automatico, è bannabile ovunque l'anticheat lo rilevi.
+
+</KeyTakeaways>
+
+Bad Scaffold è una versione più grezza del modulo ponte automatico Scaffold. Posiziona blocchi sotto i tuoi piedi mentre ti muovi verso un varco, come qualsiasi Scaffold, ma con tempistiche più lasche e meno controlli sull'effettiva legittimità del posizionamento. Non è rotto, fa ancora il suo lavoro di ponte. Il termine "bad" si riferisce a quanto poco si preoccupa di nascondere ciò che sta facendo. Un'implementazione di Scaffold più raffinata si impegna a fondo per sembrare umana. Bad Scaffold salta la maggior parte di questo lavoro, il che lo rende più veloce da costruire e utilizzare, e notevolmente più facile da individuare per un server
+## Come si differenzia dallo Scaffold standard
+Un modulo Scaffold raffinato esegue tre verifiche prima di rilasciare un blocco: la rotazione del posizionamento corrisponde alla direzione in cui è puntata la telecamera, il ritardo tra i blocchi è sufficientemente variabile da evitare un ritmo meccanico e la faccia di destinazione è una che il giocatore potrebbe plausibilmente vedere. Uno Scaffold scadente trascura alcune o tutte e tre queste verifiche. Continua a tracciare la tua posizione ad ogni tick e a posizionare un blocco sotto i tuoi piedi prima che tu cada. Semplicemente non si preoccupa di mascherare il processo.
+
+Questo richiede meno lavoro a chi lo scrive: meno verifiche, meno messa a punto, nessuna necessità di modellare un ritardo plausibile tra i posizionamenti. La lista dei fan include Bad Scaffold nella sua categoria di movimento, accanto agli altri strumenti di collegamento e attraversamento, come l'opzione veloce piuttosto che quella accurata
+## Impalcatura standard vs impalcatura inadeguata
+
+| Controllo | Piattaforma Standard | Piattaforma Inadeguata |
+|---|---|---|
+| Rotazione sincronizzata con la telecamera | Sì | Rara o saltata |
+| Tempistica di posizionamento | Variabile, ottimizzata per evitare schemi | Fissa o ritardo minimo |
+| Filtraggio della visibilità del volto | Filtra posizionamenti irrealistici | Saltata |
+| Impegno per la costruzione e l'ottimizzazione | Maggiore | Minore |
+| Quanto è facile segnalare | Inferiore, ma comunque reale | Superiore |
+
+Il compromesso è la storia completa. Meno codice e meno ottimizzazione da un lato, più evidenza dall'altro. Una tempistica di posizionamento che non varia mai e una rotazione che ignora dove stai effettivamente guardando sono esattamente gli schemi a cui gli anticheat confrontano il gioco normale, e Bad Scaffold li consegna entrambi gratuitamente.
+
+<Callout variant="tip" title="Opal spedisce anche Scaffold">
+Il catalogo di Opal elenca Scaffold in una sola riga: posiziona automaticamente i blocchi sotto di te. Stessa categoria di modulo di quello descritto qui. Opal lo contrassegna come farebbe qualsiasi client, con l'avvertenza di utilizzarlo a proprio rischio, perché il posizionamento automatico è posizionamento automatico. Qualunque build sia in esecuzione, è un modello rilevabile non appena un server lo cerca.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina spiega il termine affinché tu sappia cosa significa quando lo vedi in una lista di moduli, non come costruirlo o configurarlo. Il posizionamento automatico dei blocchi per colmare le lacune viola le regole su qualsiasi server che lo controlla, e la tempistica meno rigorosa e le verifiche mancanti di Bad Scaffold lo rendono più facile da intercettare rispetto a un'implementazione più raffinata.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Bad Scaffold è la stessa cosa di Scaffold?">
+No. Scaffold è il modulo di auto-ponteggio generale. Bad Scaffold è una versione più grezza della stessa idea, con tempistiche di posizionamento più lasche e meno controlli di validità.
+</FAQItem>
+
+<FAQItem question="Perché un cliente includerebbe una variante di Scaffold meno raffinata?">
+Perché è più veloce da realizzare. Saltare l'abbinamento delle rotazioni e la varianza dei tempi significa scrivere e ottimizzare meno codice, quindi alcuni clienti lo distribuiscono come un'opzione rapida, anche se una versione più accurata sarebbe più difficile da rilevare.
+</FAQItem>
+
+<FAQItem question="È sicuro usare Bad Scaffold?">
+No. Automatizza il posizionamento dei blocchi per colmare le lacune, il che viola le regole su qualsiasi server che lo controlla. I tempi più lenti e le verifiche mancanti lo rendono più facile da segnalare rispetto a una build di Scaffold più raffinata.
+</FAQItem>
+
+<FAQItem question="Quali documenti client vengono gestiti da Bad Scaffold?">
+Fan lo elenca nella categoria dei movimenti, proprio accanto ai suoi altri strumenti di bridging e traversal.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-scaffold", label: "Cos'è Scaffold?", description: "Questo modulo standard è una variante più grezza." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "La categoria furtiva basata su moduli di occultamento come questo." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia a cui appartengono Scaffold e le sue varianti." },
+]} />
+
+<CTA href="/it/purchase">Salta la bozza, scopri cosa spedisce Opal per $8.99</CTA>

@@ -1,0 +1,80 @@
+---
+title: Czym jest Anti-Aim w Minecraft? Wyjaśnienie podmieniania rotacji
+description: Anti-Aim fałszuje obrót i kąt nachylenia, które klient Minecrafta zgłasza serwerowi, ukrywając Twój rzeczywisty cel przed antywłamaniami i innymi graczami śledzącymi Twoją rotację.
+excerpt: Twój celowniczek wygląda inaczej, serwer informuje o czymś innym. Anti-Aim rozdziela Twój prawdziwy cel od wersji, którą widzą inni.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Anti-Aim to to samo co KillAura?
+    a: "Nie. Anti-Aim jedynie fałszuje rotację, którą zgłasza twój klient, nie celuje ani nie atakuje za ciebie. Czasami te dwie rzeczy działają razem, ale pełnią różne funkcje: jedna ukrywa twój kierunek, druga automatyzuje ruch."
+  - q: Czy inni gracze widzą moją rzeczywistą kierunek celowania, gdy używam Anti-Aim?
+    a: Nie. Inni klienci otrzymują tylko wartości obrotu, które wysyła twój klient, więc jeśli te wartości są fałszowane, wszyscy inni widzą fałszywy kierunek zamiast tego, w którą stronę patrzysz naprawdę.
+  - q: Czy Anti-Aim zmienia miejsce trafienia moich ataków?
+    a: Nie samodzielnie. Anti-Aim zmienia jedynie wartość obrotu zgłaszaną serwerowi, nie wykonuje ani nie przekierowuje ataków. Trafienia to zadanie zupełnie innego modułu.
+  - q: Czy używanie Anti-Aim jest bezpieczne?
+    a: Nie w sensie braku ryzyka. To oszustwo łamiące zasady, stworzone, by ukrywać informacje przed systemami anty-cheat i innymi graczami, a jeśli serwer wykryje tę niezgodność, możesz zostać zbanowany tak samo, jak w przypadku każdego innego cheatowania.
+---
+
+<KeyTakeaways>
+
+- Anti-Aim fałszuje kąt obrotu i nachylenie, które klient Minecrafta zgłasza serwerowi, dzięki czemu nikt nie widzi Twojego rzeczywistego kierunku celowania.
+- Lokalny widok pozostaje normalny; tylko dane rotacji wysyłane do innych graczy i anticheatów są modyfikowane.
+- Ukrywa dowody celowania, zamiast trafiać w cele, i jest to nadający się do zbanowania, łamiący zasady cheat, jeśli serwer wykryje niezgodność.
+
+</KeyTakeaways>
+
+Anti-Aim to moduł bojowy, który fałszuje kąt obrotu (yaw) i nachylenie (pitch) raportowane przez klienta Minecrafta do serwera, dzięki czemu obrót widoczny dla innych graczy i antywłamaniowych systemów nie odpowiada temu, w którą stronę faktycznie patrzysz. Twój własny ekran zachowuje się dokładnie tak, jak zawsze, fałszowane są jedynie dane wysyłane na zewnątrz. Istnieje wyłącznie po to, by uniemożliwić odczytanie kierunku, w który celujesz, i z tego powodu jest uznawany za oszustwo: celowo powoduje, że serwer ma błędną kopię wartości.
+
+## Jak to działa
+
+Netcode Minecrafta jest zaprojektowany tak, aby wartość obrotu wysyłana przez klienta była zsynchronizowana z kierunkiem, w którym faktycznie wskazuje kamera. Anti-Aim celowo przerywa to połączenie. Lokalnie, Twój widok porusza się dokładnie tak, jak zawsze, patrzysz tam, gdzie patrzysz, obracasz się tak, jak się obracasz. Jednak kąt obrotu (yaw) i nachylenie (pitch), które wysyła Twój klient przez sieć, są zastępowane innymi liczbami zanim opuszczą Twój komputer.
+
+Ponieważ obrót jest autorytatywny dla serwera z punktu widzenia wszystkich innych, to właśnie ta substytucja jest jedyną wersją Twojego celowania, którą widzi ktokolwiek dalej. Serwer odczytuje fałszywe wartości. Każdy inny połączony klient odczytuje fałszywe wartości. Logika walki, widok obserwatora i wszelkie mechanizmy antywłamaniowe oparte na obrocie przejmują to samo kłamstwo – nie ma drugiego kanału, przez który mogłaby się przedostać prawda.
+
+Powód, dla którego w ogóle warto to udawać, polega na tym, że rotacja jest traktowana jako dowód. Głowa i ciało prawdziwego gracza obracają się w sposób, który śledzi ruch celu i jego własny ruch, podczas gdy automatyczne celowanie ma tendencję do nagłego przeskakiwania lub utrzymywania nienaturalnych kątów, co dokładnie jest tym, do czego mają zapobiegać serwerowe antycheaty. Anti-Aim neguje ten dowód dwukrotnie: ukrywa sygnał przed antycheatami i ukrywa Twój rzeczywisty kierunek przed każdym przeciwnikiem, którego własna pomoc w celowaniu lub przewidywanie celu zależy od odczytu, w którą stronę jesteś skierowany.
+
+## Anti-Aim vs KillAura
+
+Te dwie funkcje są łączone, ponieważ obie należą do kategorii walki i są związane z tą samą epoką oszustw PvP, ale nie pełnią tej samej roli. Anti-Aim wpływa tylko na wartość rotacji, którą Twój klient zgłasza; nigdy nie celuje w nic i nigdy nie wysyła ataku. [KillAura](/pl/learn/what-is-killaura) działa w przeciwnym kierunku: wybiera cel, obraca gracza w jego stronę i oddaje strzał, wszystko to bez fałszowania tego, co jest zgłaszane.
+
+Uruchom je razem i uzyskasz klienta, który walczy za Ciebie, kłamiąc o tym, w którą stronę był skierowany podczas walki. Każda z tych funkcji działa dobrze samodzielnie, a żadna z nich nie zależy od drugiej, aby funkcjonować.
+
+<Callout variant="tip" title="Gdzie Opal wyznacza granicę">
+Opal nie udostępnia dedykowanego Anti-Aim. Dostarczanie serwerowi rotacji, która nigdy nie odpowiada Twojej rzeczywistej, to tak bezpośrednie naruszenie integralności danych, jak to tylko możliwe w module bojowym. To dokładnie taki brak zgodności, na który serwerowy anticheat jest zaprojektowany, aby reagować w momencie, gdy Twoje zgłaszane kierunki strzału przestają odpowiadać Twoim ruchom. Kategoria bojowa Opala istnieje, ale opiera się na modułach, których serwer nie jest w stanie odróżnić od dobrze grającego gracza, a nie na przekazywaniu serwerowi liczby, która jest błędna z założenia.
+</Callout>
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona wyjaśnia, czym jest Anti-Aim i jak zachowuje się ogólnie. Nie są to instrukcje, jak go uruchomić. Podrabianie danych rotacji to oszustwo na poziomie pakietów, a każdy serwer, który karze za oszustwa związane z zasięgiem lub celowaniem, traktuje fałszowaną orientację w ten sam sposób. Jeśli niezgodność zostanie wykryta, spodziewaj się tej samej blokady, jaką otrzyma użytkownik KillAura lub zasięgu.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Anti-Aim jest tym samym co KillAura?">
+Nie. Anti-Aim jedynie fałszuje obrót, który raportuje Twój klient, nie celuje ani nie atakuje za Ciebie. Czasami są uruchamiane razem, ale pełnią różne funkcje: jeden ukrywa Twój kierunek, a drugi automatyzuje ruch.
+</FAQItem>
+
+<FAQItem question="Czy inni gracze widzą mój rzeczywisty cel, jeśli używam Anti-Aim?">
+Nie. Każdy inny klient otrzymuje jedynie wartości rotacji, które wysyła twój klient, więc jeśli te wartości są fałszywe, wszyscy inni widzą fałszywy kierunek, a nie to, w którą stronę naprawdę patrzysz.
+</FAQItem>
+
+<FAQItem question="Czy Anti-Aim zmienia miejsce trafienia moich ataków?">
+Nie, samodzielnie nie zmienia. Anti-Aim modyfikuje jedynie wartość rotacji zgłaszaną serwerowi, nie wykonuje ani nie przekierowuje ataków. Trafianie w cel to zadanie zupełnie innego modułu.
+</FAQItem>
+
+<FAQItem question="Czy korzystanie z Anti-Aim jest bezpieczne?">
+Nie w sensie braku ryzyka. To oszustwo łamiące zasady, stworzone, aby ukrywać informacje przed systemami anty-cheat i innymi graczami. Jeśli serwer wykryje niezgodność, jaką ono powoduje, możesz zostać zbanowany, tak jak w przypadku każdego innego oszustwa.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Auto-atakujący Anti-Aim jest łączony, a nie mylony." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Kolejny moduł nastawiony na cel, który zmienia miejsce, gdzie faktycznie wskazuje celownik." },
+  { href: "/pl/learn/what-is-velocity-anti-knockback", label: "Czym jest Prędkość (ochrona przed odrzutem)?", description: "Inną wartość, którą serwer otrzymuje, będącą cichą, fałszywą wersją." },
+]} />
+
+<CTA href="/pl/purchase">Moduły bojowe Opala zostały zaprojektowane, by wytrzymać wnikliwą analizę, a nie tylko się przed nią ukrywać.</CTA>

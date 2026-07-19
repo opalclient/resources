@@ -1,0 +1,81 @@
+---
+title: Was ist Self-Teaming (Teams) in Minecraft?
+description: Selbst-Teaming (das Teams-Modul) lässt jeden Spieler auf der Punktestafel als deinen Verbündeten erscheinen, wobei freundliches Feuer unterdrückt und Namensschilder von Spielern außerhalb deines Teams auf FFA-Servern ausgeblendet werden.
+excerpt: Selbst-Teaming täuscht dein eigenes Punktekonto und lässt es glauben, jeder sei dein Freund. Kein Exploit, kein Umgehungstrick, nur ein Client, der sich selbst anlügt.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Ändert die Selbstorganisation, was der Server über mein Team annimmt?
+    a: Nein. Die Überschreibung findet nur auf Ihrem eigenen Client statt. Der Server behält seine tatsächliche Aufzeichnung der Teamzuordnungen und erhält deswegen nichts anderes.
+  - q: Können andere Spieler erkennen, dass ich Selbst-Teaming nutze?
+    a: Nicht von ihrem Bildschirm. Die Namensschildfarben und freundliche-Feuer-Warnungen, die es verbirgt, werden lokal mit Daten gerendert, die Ihr Mandant bereits hatte, sodass die Mandanten anderer nicht betroffen sind.
+  - q: Ist Selbstteamspiel dasselbe wie ein freundliches Feuer-Exploit?
+    a: Nicht für sich allein. Es verbirgt lediglich die freundliche Warnung vor Eigenbeschuss deines Kunden. Ob ein Angriff tatsächlich als Schaden landet, hängt immer noch davon ab, wie der Server und etwaige Plugins die Teamregeln durchsetzen.
+  - q: Warum bezeichnen manche Kunden dies als das Teams-Modul und nicht als Selbstorganisation?
+    a: Es handelt sich um dasselbe Feature unter zwei Namen. Teams weist auf ein manipuliertes Punktestandsystem hin, während Self-Teaming beschreibt, was das Modul damit tut.
+---
+
+<KeyTakeaways>
+
+- Self-Teaming (das Teams-Modul) zeigt jeden anderen Spieler auf der Punktestandliste als deinen Teamkollegen an.
+- Es überschreibt die Teamdaten, die dein Client bereits erhalten hat; die tatsächlichen Zuweisungen des Servers ändern sich nie.
+- Das macht es für andere Spieler unsichtbar und erschwert es Anticheats, es zu erkennen.
+- Es wird hauptsächlich verwendet, um off-Team-Namensschilder und Friendly-Fire-Warnungen auf FFA-Servern zu verbergen.
+
+</KeyTakeaways>
+
+Selbst-Teaming, manchmal als Teams in der Mod-Liste eines Clients bezeichnet, ist eine Minecraft-Funktion, die die Punktetafel deines Clients überschreibt, sodass alle anderen Spieler so angezeigt werden, als gehörten sie zu deinem Team. Die Namensschilder-Farbe für Spieler außerhalb deines Teams und die Warnung vor freundlichem Feuer, die normalerweise jemanden als Gegner kennzeichnen würde, entfallen. Es ist ein Anzeigetrick, kein Bewegung- oder Kampfhack, und findet sich eher im Bereich der Utility-Clients.
+
+## Wie Self-Teaming funktioniert
+
+Minecrafts Punktetafel-Team-System basiert auf Paketen. Der Server weist Spieler Teams zu und streamt diese Zuweisung an jeden verbundenen Client. Ein Standard-Client nutzt dies für einige Dinge: das Einfärben von Namensschildern nach Team, das Anwenden von Kollisions- und freundlichem Feuer-Regeln, die an die Teamzugehörigkeit gebunden sind, und das Steuern aller anderen Team-basierten Anzeigen, die der Server oder ein Plugin hinzufügt.
+
+Self-Teaming fängt dies auf dem Weg an. Anstatt die Teamdaten zu rendern, die es tatsächlich erhalten hat, ersetzt der Client seinen eigenen Wert und behandelt jeden anderen Spieler so, als gehörten er zu deinem Team. Da der Austausch vollständig auf der Empfängerseite stattfindet, erfährt der Server nichts Neues. Er setzt weiterhin die tatsächlichen Zuweisungen aus; dein Bildschirm entscheidet sich nur, diese zu ignorieren.
+
+Deshalb wirkt das Modul auch wie ein so enger Trick. Es berührt keine Bewegung, keine Zielerfassung und keine Timing-Problematik. Es berührt genau eine Sache: wie dein eigener Client Teaminformationen auf deinem eigenen Bildschirm darstellt. Auf einem FFA-Server, auf dem jeder technisch gesehen ein Gegner ist, reicht das aus, um den visuellen Hinweis zu entfernen, der dich ständig daran erinnert.
+
+## Ist das Verwenden von Selbst-Teaming sicher?
+
+Serverseitige Anti-Cheat-Systeme sind darauf ausgelegt, ausgehende Daten zu überwachen: Bewegungen, die nicht möglich sein sollten, Drehungen, die zu sauber erfolgen, Treffer, die mit übermenschlichem Timing landen. Self-Teaming erzeugt keines davon. Es sendet niemals etwas Ungewöhnliches an den Server, es berührt niemals Kampfpakete, und es gibt keine Verhaltensmuster, die eine automatisierte Prüfung wie bei etwas wie [KillAura](/de/learn/what-is-killaura) oder [Reach](/de/learn/what-is-reach) erkennen könnte.
+
+Das bedeutet nicht, dass es risikofrei ist. Es verändert immer noch das beabsichtigte Spielverhalten in Bezug auf Teaminformationen, und die meisten Server verbieten jede Client-Modifikation grundsätzlich, unabhängig davon, ob ein Bot sie bemerkt oder nicht.
+
+<Callout variant="warning" title="Geringe Erkennbarkeit bedeutet nicht Erlaubnis">
+Selbst-Teaming ist für automatisierte Systeme schwer zu erkennen, da es nie die eigene Maschine verlässt, aber das macht es nicht zum Erlaubten. Serverregeln decken typischerweise jede clientseitige Modifikation ab, und ein Mitarbeiter, der Aufnahmen überprüft, kann immer noch einen Namensschild bemerken, der nie rot wird.
+</Callout>
+
+<Callout variant="tip" title="Wo es in einem breiteren Werkzeugkasten sitzt">
+Opal wird nicht mit einem dedizierten Self-Teaming- oder Teams-Modul ausgeliefert. Es ist eine wirklich spezielle Wahl, die für eine bestimmte Server-Meta entwickelt wurde und nicht etwas, das die meisten Spieler von Session zu Session verwenden, und es steht außerhalb der Module für Kampf und Bewegung, mit denen ein Utility-Client typischerweise beginnt.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Ändert das Selbsteaming, was der Server über mein Team denkt?">
+Nein. Die Überschreibung findet nur auf Ihrem eigenen Client statt. Der Server behält seine korrekte Aufzeichnung der Teamzuweisungen und erhält aufgrund dessen nichts anderes.
+</FAQItem>
+
+<FAQItem question="Können andere Spieler sehen, dass ich Selbst-Teaming nutze?">
+Nein, das ist auf deren Bildschirm nicht sichtbar. Die Namensfarben und freundliche Feuer-Warnungen, die es verbirgt, werden lokal mit Daten gerendert, die dein Client bereits hatte, sodass der Client anderer Spieler nicht beeinflusst wird.
+</FAQItem>
+
+<FAQItem question="Ist Selbstteaming dasselbe wie ein freundliches Feuer Ausnutzen?">
+Nicht für sich allein. Es verbirgt lediglich die freundliche Feuer Warnung Ihres Clients. Ob ein Angriff tatsächlich Schaden anrichtet, hängt davon ab, wie der Server und etwaige Plugins die Teamregeln durchsetzen.
+</FAQItem>
+
+<FAQItem question="Warum nennen einige Kunden dies das Teams-Modul anstatt Selbstteamierung?">
+Es handelt sich um dasselbe Feature unter zwei Namen. „Teams“ verweist auf das manipulierbare Punktesystem, während „Selbstteamierung“ beschreibt, was das Modul damit tut.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die breitere Kategorie von Modulen, die darauf ausgelegt sind, unauffällig zu bleiben." },
+  { href: "/de/learn/what-is-killaura", label: "Was ist KillAura?", description: "Ein Combat-Modul-Anticheat fängt aus genau den Gründen ab, weil Selbst-Teaming entgeht." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Klientenkategorie, zu der dieses Modul gehört." },
+]} />
+
+<CTA href="/de/kaufen">Schluss mit den Spielplatzkniffen. Sehen Sie, was Opal tatsächlich für $8.99 versendet.</CTA>

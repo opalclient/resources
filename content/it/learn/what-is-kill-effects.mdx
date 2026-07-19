@@ -1,0 +1,81 @@
+---
+title: Quali sono gli effetti di morte in Minecraft? (Modulo estetico)
+description: Kill Effects è un modulo cosmetico che riproduce un'animazione personalizzata nel momento in cui il tuo colpo elimina un giocatore, separato dagli Effetti Entità e puramente client-side.
+excerpt: Un colpo finale ha la sua animazione dedicata. Tutto ciò che lo precede è identico alla versione originale.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cambia il funzionamento del combattimento l'effetto Kill Effects?
+    a: No. Cambia soltanto l'aspetto visivo mostrato nel momento di un'uccisione. Il rilevamento dei colpi, il danno e la tempistica rimangono identici a quelli della versione originale.
+  - q: Come si differenziano gli Effetti Kill dagli Effetti Entità?
+    a: Gli Effetti Uccisione si attivano solo quando un colpo determina la fine del bersaglio. Gli Effetti Entità si attivano ad ogni colpo che va a segno, indipendentemente dal fatto che uccida o meno. Gli Effetti Uccisione rappresentano la versione più specifica, dedicata esclusivamente alla conclusione, dello stesso concetto.
+  - q: Possono altri giocatori vedere il mio effetto di uccisione?
+    a: No. Viene renderizzato localmente solo sul client. Tutti gli altri sul server vedono la morte standard e vanilla, qualunque effetto tu abbia configurato.
+  - q: L'utilizzo di Kill Effects rischia un ban?
+    a: No. Modifica ciò che il tuo cliente disegna, non ciò che invia. Non c'è alcuna differenza nel pacchetto che un anticheat lato server possa intercettare. Qualsiasi rischio deriva dalla politica indiscriminata del server nei confronti dei client modificati, non da questo modulo.
+---
+
+<KeyTakeaways>
+- Kill Effects è un modulo cosmetico che riproduce un'animazione personalizzata o un'esplosione di particelle nel momento in cui un bersaglio viene eliminato.
+- Si attiva solo al momento dell'eliminazione, non ad ogni colpo, il che lo distingue dal più ampio modulo Entity Effects.
+- È un rendering puramente client-side. Nessun pacchetto viene modificato, nessun valore tracciato dal server viene toccato, quindi non c'è nulla che un anticheat possa rilevare.
+- Client come Tenacity lo includono come una delle opzioni in un set più ampio di elementi visivi, non come qualcosa legato a mira o danno.
+</KeyTakeaways>
+
+Kill Effects è un modulo cosmetico nei client utility di Minecraft che sostituisce (o si sovrappone a) l'animazione di morte vanilla con una personalizzata, ma solo quando il tuo colpo è quello che pone fine al combattimento. Sferra dieci colpi che non uccidono e non succede nulla. Sferra l'undicesimo che lo fa, e l'effetto si attiva. È una ricompensa per il colpo di grazia, non una mano di vernice su ogni colpo.
+
+## Come funziona
+
+Il modulo monitora il combattimento per un evento specifico: un colpo che riduce la salute di un bersaglio a zero. Ignora tutto il resto. Quando si verifica tale condizione di uccisione, riproduce qualsiasi animazione o effetto particellare tu abbia scelto, sostituendo la semplice morte vanilla o sovrapponendosi ad essa, a seconda dell'implementazione del client.
+
+Poiché il trigger è "uccisione", non "colpo", l'effetto si manifesta molto meno frequentemente di quanto ci si aspetterebbe da un modulo di combattimento. La maggior parte dei colpi in una vera lotta non finisce nulla. Kill Effects rimane in silenzio attraverso tutti questi e parla solo quando conta.
+
+Questo trigger ristretto è anche l'unica differenza tra Kill Effects e il suo parente più stretto, Entity Effects. Entity Effects si attiva su qualsiasi colpo di connessione indipendentemente dall'esito, quindi si legge come un costante strato visivo sopra il combattimento. Kill Effects si riserva per l'esito, quindi si legge come un tocco di classe legato a vincere lo scambio piuttosto che a combatterlo.
+
+## Kill Effects vs. Entity Effects
+
+| | Effetti di Uccisione | Effetti Entità |
+|---|---|---|
+| Innesca su | Il colpo mortale colpisce solo | Ogni colpo di connessione |
+| Frequenza in combattimento | Rara (una volta, se mai) | Costante |
+| Sensazione | Una ricompensa per l'uccisione | Uno strato di combattimento ambientale |
+| Modifica il gameplay | No | No |
+
+Nessuno dei due moduli influenza portata, tempismo, danno o registrazione dei colpi. L'unica cosa che cambia è ciò che viene visualizzato sul tuo schermo.
+
+## È sicuro da usare?
+
+Sì, ed è sicuro quanto lo siano i moduli cosmetici. Gli Effetti di Uccisione non altera nulla che il server traccia e non invia nulla di diverso da un'uccisione normale. Non c'è estensione della portata, manipolazione del tempismo, spam di pacchetti, nulla che possa essere segnalato da un anticheat lato server, perché l'effetto non lascia mai il tuo client.
+
+L'unica avvertenza che si applica ai moduli cosmetici si applica anche qui: alcuni server vietano i client modificati in toto come regola generale, indipendentemente da ciò che fa un modulo specifico. Controlla le politiche del server prima di eseguirne uno, non perché Kill Effects sia rischioso, ma perché a volte la politica è "qualsiasi client modificato".
+
+<Callout variant="tip" title="Dove si integra Opal">
+Opal non include un modulo chiamato Kill Effects specificamente, ma la stessa idea, ovvero strati cosmetici che abbelliscono un momento senza alterare il modo in cui la battaglia è stata combattuta, è esattamente ciò che rappresenta la categoria visiva di Opal. Se desideri che le tue uccisioni abbiano un aspetto personale senza modificare neanche un singolo hitbox, è questa la filosofia su cui si basa l'intero client.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+<FAQItem question="Gli Effetti Uccisione modificano il modo in cui si svolge il combattimento?">
+No. Modifica solo l'aspetto visivo mostrato al momento di un'uccisione. Il rilevamento dei colpi, il danno e la tempistica rimangono identici a quelli della versione base.
+</FAQItem>
+<FAQItem question="In che modo gli Effetti Uccisione differiscono dagli Effetti Entità?">
+Gli Effetti Uccisione si attivano solo quando un colpo termina il bersaglio. Gli Effetti Entità si attivano ad ogni colpo che va a segno, indipendentemente dall'uccisione. Gli Effetti Uccisione sono la versione più specifica, basata solo sulla conclusione, della stessa idea.
+</FAQItem>
+<FAQItem question="Gli altri giocatori possono vedere il mio effetto uccisione?">
+No. Viene renderizzato localmente solo sul tuo client. Tutti gli altri sul server vedono la morte standard della versione base, qualunque sia l'effetto che hai configurato.
+</FAQItem>
+<FAQItem question="L'utilizzo degli Effetti Uccisione comporta il rischio di un ban?">
+No. Modifica ciò che il tuo client visualizza, non ciò che invia. Non c'è differenza nei pacchetti che un anticheat lato server può rilevare. Qualsiasi rischio deriva dalla politica generale di un server sui client modificati, non da questo modulo.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria Effetti Uccisione e ogni altro modulo in questo glossario vi appartiene." },
+  { href: "/it/learn/what-is-killaura", label: "Cos'è Killaura?", description: "Il modulo di combattimento Kill Effects viene confuso con, ma non ha nulla a che fare con." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Dove risiedono i moduli di assistenza funzionale, in contrasto con quelli puramente estetici." }
+]} />
+
+<CTA href="/it/purchase">Esplora l'intera gamma di moduli visivi di Opal e fai in modo che ogni eliminazione sembri opera tua.</CTA>

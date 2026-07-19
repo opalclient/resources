@@ -1,0 +1,79 @@
+---
+title: Minecraft'ta AntiKB Nedir?
+description: AntiKB, oyuncuların aldığı geri tepmeyi azaltan veya ortadan kaldıran bir Minecraft modülüdür. Vektörü nasıl yakaladığını, Velocity ile karşılaştırdığını ve sunucuların neden onu yakaladığını görün.
+excerpt: AntiKB, bir darbe isabet ettikten sonra neler olduğunu yeniden yazar, bu yüzden yumruk yemek sizi neredeyse hiç hareket ettirmez. İşte bunun arkasındaki mekanizma ve sunucunun her zaman neden fark etmesi.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: AntiKB, bir Hız modülüyle aynı şey midir?
+    a: Evet. AntiKB ve bir Hız modülü aynı davranışı tanımlar; oyuncunun aldığı geri tepmeyi azaltır veya iptal eder. Bazı istemciler bunu Savaş yerine Oyuncu olarak sınıflandırır, ancak alttaki mekanizma aynıdır.
+  - q: AntiKB knockback'i tamamen ortadan kaldırır mı?
+    a: Kurulumuna bağlıdır. AntiKB, knockback'i tamamen iptal edebilir veya sadece etkisini azaltabilir, ancak her iki durumda da darbeden beklenen itişten daha az olur.
+  - q: AntiKB kullanmak kurallara aykırı mı?
+    a: Evet. Oyuncunun diğer oyuncuların bağlı olduğu bir mekaniği görmezden geçmesine izin vererek gerçek bir savaş avantajı sağlıyor, bu yüzden sunucular bunu diğer savaş manipülasyonu hileleri gibi değerlendiriyor.
+  - q: Diğer oyuncular birinin AntiKB kullandığını anlayabilir mi?
+    a: Bazen bir rakip, yere serilmemesi gereken bir darbeden sonra hedefin neredeyse hiç hareket etmediğini fark eder, ancak güvenilir yakalama, bir isabetin neden olması gereken hareketi, sunucu tarafından alınan gerçek hareketle karşılaştıran sunucu tarafında gerçekleşir.
+---
+
+<KeyTakeaways>
+
+- AntiKB, oyuncunun hasar alması sonucu aldığı geri tepmeyi azaltır veya iptal eder.
+- Minecraft'ın geri tepme vektörünü kesintiye uğratır, böylece darbe gerçekleşir ancak itme azalır veya ortadan kalkar.
+- Mekanik olarak bir Hız modülüne aynıdır, bazı istemcilerde farklı bir menü altında listelenir.
+- Antichipler, darbenin beklenen hareketi ile oyuncunun gönderdiği gerçek hareket arasındaki karşılaştırmayı sunucu tarafında yakalar.
+
+</KeyTakeaways>
+
+AntiKB, oyuncuların aldığı darbeden kaynaklanan geri tepmeyi azaltan veya tamamen ortadan kaldıran bir Minecraft modülüdür; bu darbe bir kılıç vuruşu, bir ok, bir patlama veya Geri Tepme büyüsünden kaynaklanabilir. Orijinal Minecraft, oyuncuyu bir an için geriye doğru iterek o an için hareketini kontrol dışına çıkarır. AntiKB, bu itmenin önüne geçerek onu küçültür veya sıfırlar, böylece darbe hala kaydedilir ancak arenada fırlatılma nedeniyle savaş kesintiye uğramaz. Bazı istemciler bu özelliği savaş araçlarıyla gruplandırırken, bazıları her iki durumda da etki aynı olsa bile genel oyuncu ayarları altında sınıflandırır.
+
+## Nasıl Çalışır
+
+Orijinal geri tepme bir öneri değil, bir vektördür. Darbe alın ve oyun sizi hasarın kaynağına doğru bir anlığına iter, aslında hangi yöne doğru hareket ettiğinizi geçersiz kılar. AntiKB, bu vektörü karakterinizin hareketiyle buluşmadan önce keser ve onu küçültür, bazen tamamen sıfıra indirir. Saldırı hala bağlantı kurar, hasar hala uygulanır, vuruş hala sayılır, ancak darbedilmenin fiziksel tepkisi geri çekilir veya tamamen ortadan kaldırılır.
+
+İtiraz basittir. Geri tepme olmaksızın, bir oyuncu yakın mesafeyi koruyabilir ve her vuruştan sonra itilmek yerine hasar vermeye devam edebilir; bu normalde mesafeyi tekrar kapatmak için bir kovalamacayı zorunlu kılar. Ayrıca, bir oyuncunun bir kenardan, bir boşluğa veya bir köprüden düşme riskini de ortadan kaldırır; bu anlar, vanilla geri tepmesi kimin kazandığına bakılmaksızın bir dövüşü tek başına bitirebilir. Bunu kullanmayan birine karşı eşitsizlik açıktır: bir oyuncu hasar alır ve yerinde kalır, diğeri ise her seferinde itilir.
+
+## AntiKB vs Hız: aynı numara, farklı menü
+
+AntiKB ve bir [Hız modülü](/tr/learn/what-is-velocity-anti-knockback) kuzenler değil, aynı özelliğin iki farklı adıdır. Her ikisi de aynı sunucu tarafından kontrol edilen geri tepme vektörünü kesintiye uğratır, her ikisi de oyuncu hareketine ulaşmadan önce ölçeklendirir veya sıfırlar ve her ikisi de aynı tespit yöntemine yakalanır. Tek gerçek fark ambalajlamadır. Bazı istemciler bu etkiyi dövüş araçlarıyla, yani menzile veya nişan alma botuna yakın yerlere yerleştirir. Diğerleri ise bunu genel Oyuncu kategorisine yerleştirir; bu, istemciyi kimin inşa ettiği tarafından alınan bir menü kararıdır ve kodun aslında ne yaptığıyla bir fark değildir.
+
+Bir özellik listesinde bu iki isimden herhangi birini görürseniz, aynı şekilde okuyun: bu istemci, vurulduğunuzda ne kadar uzağa itildiğinizi azaltabilir.
+
+<Callout variant="ipucu" başlık="Opal nerede çizgiyi çiziyor">
+Opal'ın savaş ve hareket modülleri, BedWars ve SkyWars tarzı dövüşler için tasarlandı: nişan alma yardımı, hareket araçları, bir takası kazanmak için her zamanki kit. Özel bir geri tepme iptal edici bu kadroda yer almıyor. Tam olarak, bir sunucunun isabet kaydında temiz bir iz bırakan bu tür bir hareket manipülasyonu, bir hesabı buna göre riske atmak garip bir şey olurdu.
+</Callout>
+
+<Callout variant="uyarı" başlık="Bu sunucu tarafında gerçekleşen bir dağıtım">
+AntiKB kozmetik değildir. Pozisyonunuzun dövüşe tepki verme şeklini değiştirir ve tam olarak bir sunucu yetkili antichi̇atın kontrol etmesi gereken şey budur. Sunucu bir vuruşta geri tepme uyguladığında, önümüzdeki birkaç tick boyunca ne kadar hareket etmeniz gerektiği konusunda bir beklentisi vardır. Uçmanız gereken bir vuruştan sonra neredeyse hiç hareket etmemek, antichi̇atın tahmin etmek zorunda olmadığı bir uyumsuzluktur. Etkiyi tamamen iptal etmek yerine azaltmak yalnızca bu boşluğu daraltır, kapatmaz.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="AntiKB, bir Hız modülüyle aynı mı?">
+Evet. AntiKB ve bir Hız modülü aynı davranışı tanımlar; oyuncunun aldığı geri tepmeyi azaltır veya iptal eder. Bazı istemciler bunu Savaş yerine Oyuncu olarak kaydeder, ancak altta yatan mekanizma aynıdır.
+</FAQItem>
+
+<FAQItem question="AntiKB geri tepmeyi tamamen ortadan kaldırır mı?">
+Bu, kurulumuna bağlıdır. AntiKB geri tepmeyi tamamen engelleyebilir veya sadece etkisini azaltabilir, ancak her iki durumda da darbeden beklenen itme miktarından daha az olur.
+</FAQItem>
+
+<FAQItem question="AntiKB kullanmak kurallara aykırı mı?">
+Evet. Oyuncunun diğer oyuncuların uymak zorunda olduğu bir mekaniği görmezden geçmesini sağlayarak gerçek bir savaş avantajı sağlar, bu nedenle sunucular bunu diğer savaş manipülasyonu hileleri gibi değerlendirir.
+</FAQItem>
+
+<FAQItem question="Diğer oyuncular AntiKB kullanıldığını anlayabilir mi?">
+Bazen bir rakip, isabet etmesi gereken bir oyuncunun, fırlatılması gerekirken neredeyse hiç hareket etmediğini fark eder. Ancak güvenilir tespit, sunucu tarafında gerçekleşir; isabetin neden olması gereken hareketi, sunucunun aslında aldığı hareketle karşılaştırılır.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-velocity-anti-knockback", label: "Hız (çarpma geri tepmesi önleme) nedir?", description: "AntiKB modülü, daha yaygın adıyla işlevsel olarak aynıdır." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Bu türden, fark edilmesi zor, ince modüllerin bir müşterinin genel tasarımına nerede uyduğunu." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "AntiKB ve benzeri modüllerin ait olduğu daha geniş kapsamlı müşteri kategorisi." },
+]} />
+
+<CTA href="/tr/satin-al">Çalışmayan bir geri tepme hilesine ihtiyaç duymadan avantajı yakalayın.</CTA>

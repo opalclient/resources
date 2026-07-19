@@ -1,0 +1,79 @@
+---
+title: Co to jest faza w Minecraft? Wyjaśnienie modułu Noclip
+description: Faza to moduł ruchu, który pozwala przenikać przez stałe bloki, rozsynchronizowując swoją pozycję względem tego, co pozwoliłaby na to rzeczywista kolizja. Oto jak to działa.
+excerpt: Faza podaje serwerowi pozycję, której kolizja nigdy nie byłaby w stanie wygenerować, i na ułamek sekundy ściany po prostu nie ma. To również jeden z najłatwiejszych oszustw do wykrycia w grze.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie robi Faza?
+    a: Pozwala to graczowi przejść przez stałe bloki, zgłaszając serwerowi pozycję, której prawdziwe wykrywanie kolizji nigdy nie wygenerowałoby, w efekcie umożliwiając szybkie przejście przez ścianę bez usuwania ograniczeń.
+  - q: Czy Phase to to samo co fly hack?
+    a: Nie. Hack z muchą usuwa grawitację, dzięki czemu możesz swobodnie poruszać się w otwartej przestrzeni. Fazowanie natomiast pokonuje kolizję z solidnymi blokami, pozwalając ci przejść przez teren, który normalnie cię zatrzyma.
+  - q: Czy używanie Phase może skutkować zbanowaniem?
+    a: Tak. Nie ma żadnego legalnego sposobu, aby znaleźć się po drugiej stronie solidnego bloku, a anticheaty po stronie serwera sprawdzają pozycję względem kolizji ze światem niezależnie od klienta, co sprawia, że tego typu ruch jest łatwy do wykrycia i zareagowania.
+  - q: Klienci, którzy wysłali Fazę?
+    a: Udokumentowano to, jak widać w Fan i Opal v1, zgłoszone jako moduł ruchu w obu. Inni klienci mogą udostępniać podobne zachowanie noclip pod inną nazwą modułu.
+---
+
+<KeyTakeaways>
+- Faza to moduł ruchu, który pozwala graczowi przechodzić przez stałe bloki, odrywając jego pozycję od rzeczywistego wykrywania kolizji.
+- Nie usuwa kolizji ze świata, lecz przekazuje serwerowi pozycję, której kolizja nigdy nie wygenerowałaby.
+- Desynchronizacja musi utrzymywać się tylko do momentu, gdy gracz pokona ścianę, po czym ruch powraca do normalnego stanu.
+- Anticheaty wykrywają to, sprawdzając pozycję gracza bezpośrednio względem geometrii świata, co jest jednym z bardziej niezawodnych sposobów wykrywania.
+</KeyTakeaways>
+
+Faza to moduł ruchu, który pozwala graczowi przechodzić przez stałe bloki – krótkodystansowy noclip, osiągany poprzez podawanie serwerowi fałszywych informacji o swojej lokalizacji. Standardowe kolizje uniemożliwiają przejście przez ścianę, niezależnie od wciśniętych przycisków. Faza omija to, zgłaszając pozycję po drugiej stronie, której normalna detekcja kolizji nigdy nie byłaby w stanie wygenerować samodzielnie. Serwer zazwyczaj ufa współrzędnym przesyłanym przez klienta w pewnym zakresie tolerancji, więc aktualizuje pozycję gracza poza blokiem, który powinien go zatrzymać. Przechodzimy przez niego, a ruch może wrócić do normalnego, jakby nic się nie stało.
+
+## Jak działa Faza
+
+Faza nie ingeruje w kolizje świata. Bloki pozostają stałe, obliczenia hitboxa się nie zmieniły, a gracz bez działającego modułu, który wchodzi w tę samą ścianę, zatrzymuje się na niej, jak zawsze. Zmienia się to, co klient zgłasza. Moduł śledzi, gdzie gracz faktycznie stoi w stosunku do siatki bloków, a następnie przesyła serwerowi współrzędne, które omijają ścianę zamiast się na niej zatrzymywać. Ponieważ serwer zazwyczaj ufa pozycji, którą otrzymuje, w pewnym zakresie tolerancji, aktualizuje pozycję gracza po drugiej stronie bloku, który powinien go zablokować.
+
+Kłamstwo musi znieść tylko przez chwilę. Gdy gracz jest już poza ścianą, ruch wraca do normy, co jest częścią tego, co sprawia, że moduł trudno wychwycić na pierwszy rzut oka: nie ma trwałego dziwactwa do zauważenia, tylko jeden moment, w którym ktoś stał w miejscu, do którego nie powinien mieć dostępu.
+
+Zaleta jest prosta. Omija teren, który w innym przypadku oznaczałby objazd: ścianę, płot, jednoblokową lukę, wokół której celowo zbudowano mapę. Najczęściej pojawia się w grze skupionej na ruchu, gdzie przejście prosto przez solidną geometrię oszczędza dystans lub otwiera miejsce, do którego mapa nigdy nie miała pozwolić. Udokumentowano go jako moduł kategorii ruchu, spotykany w klientach takich jak Fan i Opal v1.
+
+## Czy jest bezpieczny do użycia?
+
+Nie, w żaden sposób, który wytrzymałby weryfikację. Nie ma żadnej legalnej sekwencji standardowych akcji, która umieści gracza po drugiej stronie solidnego bloku bez ominięcia go, przeskoczenia lub przejścia przez rzeczywistą szczelinę. To sprawia, że pierwsza faza jest jedną z bardziej oczywistych oszustw, a nie jedną z bardziej subtelnych. Nie ma szarej strefy i nie ma żadnego uzasadnienia, które serwer musi najpierw wykluczyć.
+
+Serwerowe antywiry sprawdzają ruch gracza względem kolizji świata niezależnie od tego, co twierdzi klient. Gracz, który znajduje się poza blokiem w jednym takcie i jest już poza nim w następnym, bez żadnej prawidłowej ścieżki między tymi dwoma punktami, nie zdaje tego testu. To problem geometrii, a nie statystyczna ocena tego, jak ludzki wygląda ruch myszy, dlatego wykrywanie tego typu noclip jest zwykle niezawodne. Sztuczki czasowe i losowość, które łagodzą wykrywanie innych oszustw, tutaj działają bardzo słabo, ponieważ test zależy tylko od tego, gdzie gracz się znalazł względem siatki, a nie od tego, jak tam dotarł.
+
+<Callout variant="tip" title="Wprowadzanie Opalu">
+Opal dostarcza również ten moduł, skatalogowany pod tą samą nazwą: Faza. Opis w katalogu nie owija w bawełnę: "Pozwala chodzić przez ściany." Taka sama krótkodystansowa funkcja noclip jak wszędzie indziej, ta sama historia wykrywania.
+</Callout>
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona opisuje moduł w sposób ogólny, abyś wiedział, co ten termin oznacza. Nazewnictwo i dokładne zachowanie różnią się w zależności od klienta, a przechodzenie przez solidne bloki nie ma żadnego uzasadnienia na żadnym serwerze z systemem anticheat. Opal klasyfikuje użycie fazy jako użycie na własne ryzyko z tego właśnie powodu: jest to wykrywalne i może skutkować zablokowaniem konta, tak jak na każdym kliencie, który go udostępnia.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co właściwie robi Faza?">
+Pozwala graczowi poruszać się przez stałe bloki, zgłaszając serwerowi pozycję, której normalna detekcja kolizji nigdy by nie dopuściła – w efekcie umożliwia przejście przez ścianę bez usuwania blokady.
+</FAQItem>
+
+<FAQItem question="Czy Fazowanie jest tym samym co trik z muchą?">
+Nie. Trik z muchą usuwa grawitację i pozwala graczowi swobodnie poruszać się w otwartej przestrzeni. Fazowanie natomiast specyficznie pokonuje kolizję z blokami, dzięki czemu gracz może przejść przez teren, który powinien go zatrzymać.
+</FAQItem>
+
+<FAQItem question="Czy Phase może skutkować zbanowaniem?">
+Tak. Przechodzenie przez stałe bloki nie ma uzasadnienia, a serwerowe anticheaty sprawdzają pozycję gracza względem kolizji ze światem niezależnie od klienta, co sprawia, że tego typu ruch jest łatwy do wykrycia i podjęcia działań.
+</FAQItem>
+
+<FAQItem question="Klienci, którzy wysłali Fazę?">
+Jest to udokumentowane, jak widać w Fan i Opal v1. Inni klienci mogą zaimplementować podobne zachowanie noclip pod inną nazwą modułu.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-scaffold", label: "Co to jest Scaffold?", description: "Kolejny moduł ruchu oparty na wykorzystaniu tego, co serwer musi zakładać na temat pozycji." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kategoria klientów oparta na byciu niezauważanym, a nie tylko na szybkim działaniu." },
+  { href: "/pl/learn/what-is-velocity-anti-knockback", label: "Czym jest prędkość (ochrona przed odrzutem)?", description: "Inny moduł kategorii ruchu o tym samym profilu użytkowania na własną odpowiedzialność." },
+]} />
+
+<CTA href="/pl/purchase">Moduł Phase od Opal sprawia, że twierdzenie o przechodzeniu przez ściany staje się faktem. Zobacz pozostałe pozycje.</CTA>

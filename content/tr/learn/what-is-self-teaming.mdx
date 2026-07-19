@@ -1,0 +1,81 @@
+---
+title: Minecraft'ta Kendini Yöneten Takımlar (Takımlar) Nedir?
+description: Kendiliğinden takım oluşturma (Takımlar modülü) sayesinde puan tablosundaki her oyuncu sizin müttefikiniz olarak görünür, dost ateş uyarıları ve FFA sunucularındaki takım dışı isim etiketleri gizlenir.
+excerpt: Kendini takım olarak ayarlamak, kendi puan tablosunu herkesin senin arkadaşın zannettiriyor. Açıkta bir hata, atlatma veya dolambaçlı yol yok, sadece istemci kendine yalan söylüyor.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Kendiliğinden takım oluşturmak, sunucunun benim takımımı nasıl gördüğünü değiştirir mi?
+    a: Hayır. Üstünlük yalnızca kendi istemcinizde gerçekleşir. Sunucu, ekip atamalarının gerçek kaydını korur ve bunun sebebiyle hiçbir farklı şey almaz.
+  - q: Diğer oyuncular benim self-teaming kullandığımı anlayabilirler mi?
+    a: Ekranlarından değil. Gizlediği isimlik renkleri ve dost ateşi uyarıları, müşterinizin zaten sahip olduğu verilerle yerel olarak oluşturulur, böylece başka bir müşteriyi etkilemez.
+  - q: Kendiliğinden takım oluşturmak, dost ateşi istismarı ile aynı şey midir?
+    a: Tek başına değil. Sadece istemcinin dost ateşi uyarısını gizler. Bir saldırının gerçekten hasar olarak gerçekleşip gerçekleşmemesi, sunucunun ve herhangi bir eklentinin takım kurallarını nasıl uyguladığına bağlıdır.
+  - q: Bazı müşteriler neden bunu "Teams modülü" olarak, kendi kendine takım oluşturma özelliği yerine adlandırıyor?
+    a: Bunlar, iki farklı isim altında aynı özellik. Takımlar, skorboard sisteminin manipüle edildiğini gösterirken, kendi kendine takım kurma özelliği modülün sisteme yaptığı şeyi tanımlar.
+---
+
+<KeyTakeaways>
+
+- Self-teaming (Takımlar modülü) diğer tüm oyuncuları puan tablosunda takım arkadaşınız gibi gösterir.
+- İstemcinizin zaten aldığı takım verilerini geçersiz kılar; sunucunun gerçek atamaları hiçbir zaman değişmez.
+- Bu, diğer oyuncular tarafından görünmez hale getirir ve hile önleme sistemlerinin işaretlemesini zorlaştırır.
+- Genellikle FFA sunucularında takım dışı isim etiketlerini ve dost ateşi uyarılarını gizlemek için kullanılır.
+
+</KeyTakeaways>
+
+Kendine takım oluşturma, bazen bir istemcinin modül listesinde Takımlar olarak etiketlenir, Minecraft'ın bir özelliğidir ve istemcinizin puan tablosunu geçersiz kılarak diğer tüm oyuncuların sizin takımınızda olduğu gibi görünmesini sağlar. Normalde bir rakip olarak işaretleyecek olan takım dışı isim etiketi rengi ve dost ateş uyarısı ortadan kalkar. Bu, bir hareket veya savaş hilesi değil, yalnızca bir görüntüleme numarasıdır ve yardımcı program istemcilerinin daha sessiz özelliklerinden biridir.
+
+## Kendine takım oluşturma nasıl çalışır
+
+Minecraft'ın puan tablosu takım sistemi paketler üzerine kuruludur. Sunucu oyuncuları takımlara atar ve bu atamayı her bağlı istemciye iletir. Bir vanilla istemcisi bunu birkaç şey için kullanır: takım bazında isim etiketlerini renklendirme, takım üyeliğiyle ilişkili çarpışma ve dost ateş kurallarını uygulama ve sunucu veya bir eklenti tarafından eklenen diğer takım tabanlı göstergeleri çalıştırma.
+
+Kendine takım oluşturma, bu verilerin istemciye gelmeden önce kesiştiği noktada devreye girer. Gerçekte aldığı takım verilerini oluşturmak yerine, istemci kendi değerini kullanır ve her diğer oyuncunun sizin takımınızda olduğunu varsayar. Takası tamamen alıcı tarafında gerçekleştirdiği için sunucu hiçbir şey öğrenmez. Gerçek atamaları yayınlamaya devam eder; ekranınız sadece bunları görmezden gelmeyi seçer.
+
+Modülün de bu yüzden bu kadar dar bir hile gibi algılanmasına sebep oluyor. Hareket, nişan alma veya zamanlamayla ilgili bir şey içermiyor. Tam olarak tek bir şeye dokunuyor: kendi istemcinizin takım bilgilerini kendi ekranınızda nasıl çizdiği. Herkesin teknik olarak rakip olduğu bir FFA sunucusunda, bu, sizi sürekli olarak bunun farkında tutan görsel ipucunu ortadan kaldırmak için yeterli oluyor.
+
+## Kendi takımını kurmak güvenli mi?
+
+Sunucu tarafı antichipleri, gerçekleşmemesi gereken hareketleri, çok temiz şekilde dönen dönüşleri ve insanüstü zamanlamayla gelen vuruşları izlemek üzere tasarlanmıştır. Kendi takımını kurmak bunlardan hiçbirini üretmez. Sunucuya hiçbir zaman olağandışı bir şey göndermez, savaş paketlerine dokunmaz ve otomatik bir kontrolün [KillAura](/tr/learn/what-is-killaura) veya [Reach](/tr/learn/what-is-reach) gibi bir şeyle yakaladığı şekilde bir davranışsal imza yoktur.
+
+Bu, risksiz olduğu anlamına gelmiyor. Hala takım bilgileri etrafında amaçlanan oyun davranışını değiştiriyor ve çoğu sunucu, bir bot bunun farkına kapsa da kapmasa da prensip olarak herhangi bir istemci değişikliğini yasaklıyor.
+
+<Callout variant="uyarı" başlık="Düşük tespit edilebilirlik, izin verildiği anlamına gelmez">
+Öz-takım oluşturmak, otomatik sistemlerin fark etmesi zordur çünkü asla makinenizden ayrılmaz, ancak bu onu onaylı yapmaz. Sunucu kuralları genellikle herhangi bir istemci tarafı değişikliğini kapsar ve görüntüleri inceleyen bir ekip üyesi, asla kırmızıya dönmeyen bir isim etiketini fark edebilir.
+</Callout>
+
+<Callout variant="ipucu" başlık="Bu aracın daha geniş bir araç kutusunda nerede yer aldığı">
+Opal, özel bir kendi kendine takım kurma veya Teams modülüyle birlikte gelmiyor. Gerçekten de niş bir seçim, çoğu oyuncunun oturumdan oturuma başvurduğu bir şeyden ziyade, belirli bir sunucu meta'sı için üretilmiş ve tipik bir yardımcı istemcinin öne çıkardığı dövüş ve hareket modüllerinin dışında yer alıyor.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Self-takım özelliği, sunucunun ekibimi nasıl gördüğünü değiştirir mi?">
+Hayır. Bu geçersiz kılma yalnızca kendi istemcinizde gerçekleşir. Sunucu, ekip atamalarına ilişkin gerçek kaydını korur ve bundan dolayı farklı bir şey almaz.
+</FAQItem>
+
+<FAQItem question="Diğer oyuncular kendi kendine takım kurduğumu anlayabilir mi?">
+Ekranlarından değil. Kimlik etiketindeki renkler ve dost ateşli uyarıları gizlediği şekilde, bunlar zaten istemcinde bulunan veriler kullanılarak yerel olarak oluşturulur, böylece başkalarının istemcisi etkilenmez.
+</FAQItem>
+
+<FAQItem question="Kendiliğinden takım oluşturmak, dost ateşi istismarı ile aynı mı?">
+Tek başına değil. Sadece istemcinizin dost ateşi uyarısını gizler. Bir saldırının gerçekten hasar olarak gerçekleşip gerçekleşmemesi, sunucunun ve eklentilerin takım kurallarını nasıl uyguladığına bağlıdır.
+</FAQItem>
+
+<FAQItem question="Bazı müşteriler neden bunu 'Takımlar' modülü olarak, 'özel ekipler' olarak değil de adlandırıyor?">
+Bunlar, iki farklı isim altında aynı özelliği ifade ediyor. 'Takımlar' terimi, üzerinde değişiklik yapılan skorboard sistemine işaret ederken, 'özel ekipler' modülün bu sisteme yaptığı şeyi tanımlar.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Gözden uzak kalmak üzere tasarlanmış, daha geniş bir modüller kategorisi." },
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "Dövüş modülü hile önleme sistemleri, tam olarak bu yüzden kendi takımlarına karşı yapılan hileleri yakalayamıyor." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Bu modülün ait olduğu daha geniş müşteri kategorisi." },
+]} />
+
+<CTA href="/tr/satin-al">Skorboard numaralarını atlayın. Opal'in $8.99 için ne gönderdiğini görün.</CTA>

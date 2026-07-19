@@ -1,0 +1,88 @@
+---
+title: Minecraft'ta Menzil Nedir? (Savaş Modülü Açıklaması)
+description: Ulaşım, hedeflediğiniz mesafeyi vanilla sınırının ötesine taşıyan bir savaş modülüdür. İşte nasıl çalıştığı, anticheatların neden yakaladığı ve riskleri.
+excerpt: Reach, rakipleriniz gerçek yakın dövüş aralığına girmeden önce vuruş yapmanızı sağlar. İşte bu modülün saldırı mesafesini nasıl uzattığı ve sunucuların neden bunu bu kadar yakından ölçtüğünün açıklaması.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Modules
+author: trq
+faqs:
+  - q: Minecraft'ta normal erişim mesafesi ne kadardır?
+    a: Hayatta kalma yakın dövüş saldırı menzili üç bloktur. Bir Menzil modülü, bu sınırı yükseltir ve istemcinin, vanilla'da izin verilen mesafeden daha uzaktaki hedeflere saldırmasını sağlar.
+  - q: Reach, istemci tarafı mı yoksa sunucu tarafı mı bir özelliktir?
+    a: "Hile istemci tarafında: değiştirilmiş bir istemci, normal aralığın ötesinde vuruşlar bildiriyor. Algılama sunucu tarafında gerçekleşiyor; antichi̇at, mesafeyi yeniden hesaplayarak çok uzun olan vuruşları işaretli̇yor."
+  - q: Küçük Reach, büyük Reach'ten daha zor tespit ediliyor neden?
+    a: Sunucular, gecikme ve gecikme telafisi için bir tolerans sağlar. Küçük bir ek mesafe, bu toleransın içinde saklanabilirken, büyük bir değer herhangi inandırıcı bir mesafeyi aşar.
+  - q: Reach kullanmak yasak mı?
+    a: Evet. Reach, bir savaş hilesidir. Bunu kullanmak, esasen her sunucunun hizmet şartlarını ihlal eder ve tespit edildiğinde genellikle yasaklanmaya yol açar.
+---
+
+<KeyTakeaways>
+
+- Reach, vanilla saldırı mesafesini aşarak hedeflere ulaşmanı sağlayan bir savaş modülüdür.
+- Vanilla hayatta kalma modu yakın dövüşü üç blokla sınırlandırır; Reach bu denetimi daha büyük bir sayıyla değiştirir.
+- Algılama sunucu tarafında gerçekleşir: sunucu isabet mesafesini yeniden hesaplar ve uzun isabetleri işaretler.
+- Küçük Reach, sunucuların zaten sağladığı gecikme toleransı içinde saklandığı için yakalanması daha zordur.
+
+</KeyTakeaways>
+
+Ulaşan, oyuncunun normalde izin verilen mesafeden daha uzaktaki bir hedefe vurmasını sağlayan bir savaş modülüdür. Vanilla Minecraft, saldırı mesafesini sabit bir aralıkla sınırlandırır. Ulaşan modülü bu sınırı yükseltir, böylece saldırılar rakip gerçek yakın mesafe aralığına girmeden önce gerçekleşir. Bu bir hile özelliğidir ve sunucular da onu böyle değerlendirir.
+
+## Ulaşan nasıl çalışır
+
+Ulaşan, istemcinin bir saldırıyı kaydettiği ve gönderdiği mesafeyi değiştirir. Vanilla hayatta kalma dövüşü, üç blokluk bir saldırı menzili kullanır ve istemci bundan daha uzaktaki hiçbir şeye saldırmayı reddeder. Ulaşan modülü bu denetimi daha büyük bir sayıyla değiştirir, böylece istemci varlık hala birkaç blok uzaktayken sunucuya "O varlığı vurdum" der.
+
+İşin püf noktası sunucudur. Saldıran oyuncunun istemcisi kimin vurulduğunu belirlediğinden, değiştirilmiş bir istemci sunucunun beklemediği vuruşları iddia edebilir. Saf bir sunucu vuruşu kabul eder. Daha katı bir sunucu mesafeyi kendisi yeniden hesaplar ve küçük bir toleransın ötesindeki her şeyi reddeder.
+
+## Neden insanlar kullanır
+
+Çekiciliği kaybetmeniz gereken dövüşleri kazanmaktır. Ekstra menzil, ilk vuruşu yapmayı, asla mesafeyi kapatamayan bir rakibi taciz etmeyi ve yakın dövüşte olumlu bir şekilde takas yapmayı sağlar. Bir bir mücadelede, bile küçük bir mesafe avantajı kimin önce vurduğunu ve kimin kombinlendiğini belirler.
+
+Hedef yardımı ve isabet zamanlaması modülleri, farklı bir açıyla aynı amaca yönelir: dövüşü fark edilmeyecek kadar küçük bir marjla eğerek, kurban normal bir düelloyu deneyimlerken kazanması gerekeni sessizce kaybeder.
+
+## Anticheat'ler Reach'i Nasıl Yakalar
+
+Anticheat'ler, isabet mesafesini sunucuda yeniden hesaplayarak ve bunu makul bir maksimum değerle karşılaştırarak Reach'i yakalar. Matematik kontrolün temelini oluşturur, ancak gerçek tespit gürültüyü hesaba katmalıdır.
+
+| Anticheat'in ağırlık verdiği faktör | Neden önemli |
+|---|---|
+| İsabet anındaki oyuncu ve hedef konumları | İddia edilen ham mesafe |
+| Ağ gecikmesi ve tik zamanlaması | Gecikme, meşru bir isabetin uzun görünmesine neden olabilir |
+| Varlık çarpışma kutusu boyutu ve gecikme telafisi | Sunucular, yüksek ping'li oyunculara adil olmak için konumları geri sarar |
+| Hareket ve momentum | Her iki savaşçı da isabet anında hareket halindedir |
+
+Modern bir anticheat, gürültüyü emmek için gerçek limiti biraz üzerinde bir eşik belirler ve ardından bunu aşan isabetleri işaretler. Bir blok sınırın üzerinde küçük bir miktar olan ince Reach, büyük bir değerden yakalanması daha zordur çünkü sunucunun zaten verdiği gecikme toleransı içinde saklanır. Bu nedenle, bariz büyük menzil ayarları hızla yakalanırken, küçük olanlar daha zayıf kontrollerden kaçabilir.
+
+## Savaş Modülü Olarak Reach
+
+Reach, hedef ve zamanlama modülleriyle aynı ailede yer alır. Bir kavram olarak, en eski ve en basit savaş hilelerinden biridir ve tam da bu yüzden sunucu tarafı antilerineler, mesafeleri kontrol etmeyi doğru yapmaları gereken temel bir şey olarak ele alır. Doğal olarak [KillAura](/tr/learn/what-is-killaura) ile eşleşir; KillAura saldırıyı otomatikleştirirken, Reach o saldırının menzilini uzatır.
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını anlatmıyor">
+Bu sayfa, terimin ne anlama geldiğini bilmeniz için modülü genel olarak tanımlar. İsimlendirme ve kesin davranışlar müşteriye göre değişir ve temel sınırlamanın ötesine geçmek, esasen her sunucuda kuralları ihlal eder.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Minecraft'ta normal erişim mesafesi nedir?">
+Hayatta kalma yakın dövüş saldırı mesafesi üç bloktur. Bir Erişim modülü, bu sınırı yükselterek istemin, normalde izin verilenden daha uzaktaki hedeflere saldırmasını sağlar.
+</FAQItem>
+
+<FAQItem question="Reach, istemci tarafı mı sunucu tarafı mı bir özellik?">
+Hile istemci tarafındadır: değiştirilmiş bir istemci, normal aralığın ötesinde vuruşlar iddia eder. Algılama sunucu tarafında gerçekleşir; hileye karşı önlem sistemi mesafeyi yeniden hesaplar ve çok uzun olan vuruşları reddeder veya işaretler.
+</FAQItem>
+
+<FAQItem question="Neden küçük Reach, büyük Reach'den daha zor tespit edilir?">
+Sunucular, gecikme ve gecikme telafisi için bir tolerans payı sağlar. Küçük bir ek ulaşım mesafesi bu toleransın içinde kaybolabilirken, büyük bir değer herhangi bir makul mesafeyi aşıyor olarak işaretlenir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "Otomatik saldırganın sıkça eşleştiği Reach." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Sadece hedef odaklı savaş modülü." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Bu modüllerin ait olduğu daha geniş kategori." },
+]} />
+
+<CTA href="/tr/purchase">Opal $8.99 için ne gönderiyor, bak</CTA>

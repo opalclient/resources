@@ -1,0 +1,79 @@
+---
+title: Czym jest moduł detektora obserwatora w Minecraft?
+description: Detektor Widza zgaduje, kiedy moderator może obserwować w Minecraft, wykorzystując pośrednie sygnały zamiast potwierdzonego statusu widza. Oto jak to działa.
+excerpt: Nigdy nie widzi widza. Widzi cień, który ktoś zostawia, i obstawia na jego podstawie.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie wykrywa Spectator Detector?
+    a: Nie wykrywa trybu widza bezpośrednio; Minecraft nigdy nie udostępnia tej informacji klientowi. Wywnioskowuje prawdopodobieństwo obecności obserwatora na podstawie pośrednich sygnałów, takich jak encja, która istnieje po stronie klienta, ale nigdy nie jest renderowana, albo brak pakietów ruchu, które normalnie wysyła aktywny gracz.
+  - q: Czy może ci powiedzieć, kto ogląda?
+    a: Nie. Heurystyki mogą zasugerować, że ktoś może obserwować, ale nie mogą ujawnić tożsamości ani potwierdzić statusu widza z całą pewnością. To sygnał prawdopodobieństwa, a nie wyszukiwanie.
+  - q: Czy Spectator Detector sam w sobie jest oszustwem, które można zbanować?
+    a: Nie zmienia rozgrywki ani samodzielnie nie daje żadnej przewagi w grze. Ma za zadanie ukrywać efekty innych modułów przed moderatorem, więc pełni rolę narzędzia wspierającego oszustwa, a nie samodzielnej funkcji zapewniającej przewagę i zazwyczaj jest dołączane do modułów, które chroni.
+  - q: Dlaczego miałoby to przegapić prawdziwego widza?
+    a: Ponieważ opiera się na pośrednich sygnałach, a nie na bezpośrednim odczycie statusu widza. Widz, który nie wywołuje tych konkretnych sygnałów, pozostaje niezauważony. To fałszywie negatywny wynik jest bardziej poważnym trybem awarii, ponieważ daje użytkownikowi fałszywe poczucie, że nic nie wymaga zmian.
+---
+
+<KeyTakeaways>
+- Wykrywacz Widza to moduł, który sygnalizuje potencjalną obecność widza, aby inne moduły mogły zareagować zanim moderator cokolwiek zauważy.
+- Nie otrzymuje bezpośredniego sygnału; Minecraft nie udostępnia statusu widza. Wywnioskowuje to na podstawie pośrednich wskazówek, takich jak nieprzetwarzane pobliskie byty i brakujące pakiety ruchu.
+- Wynikiem jest prawdopodobieństwo, a nie fakt: fałszywie pozytywne wyniki marnują ostrożność, fałszywie negatywne pomijają prawdziwego obserwatora.
+- Sam w sobie nie zmienia nic w rozgrywce. Jego jedynym zadaniem jest zabezpieczanie działania innych modułów.
+</KeyTakeaways>
+
+Wykrywacz widza to moduł po stronie klienta, który próbuje zgadnąć, czy inny gracz przeszedł w tryb widza, aby Cię obserwować, aby bardziej oczywiste moduły mogły zostać wyciszone, zanim moderator zobaczy coś wartego zrzutu ekranu. Nie potwierdza niczego. Działa na podstawie lokalnych heurystyk, a nie rzeczywistego sygnału, co oznacza, że zgadywanie może być błędne w obu kierunkach, a moduł nie ma pojęcia, w którym kierunku się myli, zanim będzie za późno.
+
+## Jak to działa
+
+Gra nigdy nie informuje klienta: „widz właśnie zaczął Cię obserwować”. Te informacje nie istnieją w transmisji, widzowie są z założenia niewidoczni. Dlatego moduł musi omijać to, szukając skutków ubocznych, zamiast samej rzeczy.
+
+Dwie heurystyki wykonują pracę. Pierwsza obserwuje istnienie encji w stanie świata klienta, która nigdy nie jest renderowana jako widoczna – jest to wzorzec, który pojawia się, gdy pobliski gracz w trybie widza nie jest wyświetlany jak normalny. Druga obserwuje brak pakietów ruchu, które normalny gracz powinien generować, ponieważ obecność widza nie generuje takiego samego ruchu sieciowego jak aktywny gracz. Żadna z nich nie jest bezpośrednim odczytem tego, kto ogląda. Obie to wnioski zbudowane z danych, które klient już posiadał.
+
+Gdzie się pojawia, jest połączone z automatyzacją walki lub innymi modułami, które moderator rozpozna od razu. Detektor nie wygrywa walki ani nie zadaje ciosu, po prostu zyskuje kilka sekund ostrzeżenia, aby bardziej efektowne moduły mogły się najpierw wyciszyć.
+
+## Fałszywe alarmy i fałszywe negatywy
+
+Ponieważ oba sygnały są pośrednie, moduł myli się w dwóch różnych kierunkach, a nie są one równie złe.
+
+| Tryb awarii | Co się dzieje | Konsekwencja |
+|---|---|---|
+| Fałszywy alarm | Oznacza zwykłego gracza jako widza, gdy nikt nie patrzy | Użytkownik wstrzymuje się bez powodu, bez realnego kosztu poza utratą tempa |
+| Fałszywy negatyw | Pomija rzeczywistego widza | Użytkownik zyskuje fałszywe poczucie bezpieczeństwa, nie wycofuje się i jest bardziej narażony na wykrycie |
+
+Fałszywy negatyw jest droższy. Fałszywy alarm kosztuje tylko odrobinę ostrożności. Fałszywy negatyw mówi ci, że jest bezpiecznie, gdy nie jest, co jest gorsze niż w ogóle nie posiadanie detektora, ponieważ zastępuje prawdziwą niepewność błędnym poczuciem pewności.
+
+<Callout variant="info" title="Pozycja Opal w tym względzie">
+Opal nie udostępnia modułu o tej nazwie i nie zamierza tego robić. Wykrywanie obserwatorów ma na celu pomóc innym, bardziej oczywistym modułom pozostać ukrytymi przed wzrokiem moderatora, a to jest inny problem niż użyteczność i narzędzia interakcji ze światem, które faktycznie tworzy Opal. Jeśli klient opiera się na zgadywaniu, czy jest obserwowany, zazwyczaj jest to znak, że reszta jego listy modułów potrzebuje osłony.
+</Callout>
+
+<Callout variant="warning" title="Dostarczane z ukrytymi elementami">
+Detektor obserwatorów rzadko wysyłany jest samodzielnie. Istnieje po to, aby chronić automatyzację walki i podobne moduły przed wykryciem, co oznacza, że jego użycie umieszcza cię w tej samej kategorii ryzyka związanego z kontem, co to, co ma chronić. Sam detektor nie spowoduje twojego zbanowania. Powodem, dla którego ktoś go zainstalował, raczej tak.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Co właściwie wykrywa Spectator Detector?">
+Nie wykrywa bezpośrednio trybu widza; Minecraft nigdy nie udostępnia tej informacji klientowi. Wywnioskowuje prawdopodobieństwo obecności obserwatora na podstawie pośrednich sygnałów, takich jak encja, która istnieje po stronie klienta, ale nie jest renderowana, lub brak pakietów ruchu, które normalnie wysyła aktywny gracz.
+</FAQItem>
+<FAQItem question="Czy potrafi powiedzieć, kto ogląda?">
+Nie. Heurystyki mogą zasugerować, że ktoś może obserwować, ale nie potrafią ujawnić tożsamości ani potwierdzić statusu widza z całą pewnością. To sygnał prawdopodobieństwa, a nie wyszukiwanie.
+</FAQItem>
+<FAQItem question="Czy Spectator Detector sam w sobie jest wykrywalnym oszustwem, które grozi zbanowaniem?">
+Nie modyfikuje rozgrywki ani nie daje żadnej przewagi w grze. Jego zadaniem jest pomaganie w ukrywaniu efektów innych modułów przed moderatorem, więc działa jako narzędzie wspierające oszustwa, a nie jako samodzielna funkcja przewagi i zazwyczaj jest dołączany do modułów, które chroni.
+</FAQItem>
+<FAQItem question="Dlaczego może pominąć prawdziwego widza?">
+Ponieważ opiera się na pośrednich sygnałach, zamiast na bezpośrednim odczycie statusu widza. Widz, który nie wywołuje tych konkretnych sygnałów, pozostaje niezauważony. Ten fałszywy negatyw jest poważniejszym błędem, ponieważ daje użytkownikowi fałszywe poczucie bezpieczeństwa, że nic nie musi się zmieniać.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-killaura", label: "Co to jest Killaura?", description: "Rodzaj modułu, który ma pokrywać detektor widza." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Klienci, którzy dążą do tego, by pozostać niezauważeni, a nie tylko niewykryci." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Gdzie takie moduły wpisują się w szerszy kontekst." }
+]} />
+
+<CTA href="/pl/purchase">Opal całkowicie pomija moduły zgadywania. Zobacz, co faktycznie przeszło selekcję.</CTA>

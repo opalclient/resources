@@ -1,0 +1,79 @@
+---
+title: Czym jest Outline ESP w Minecraft? (Wyjaśnienie modułu)
+description: Outline ESP to moduł wizualny w „Minecraftcie”, który śledzi zarys postaci przez ściany, zamiast wypełniać go kolorem. Jak to działa i ryzyko bana.
+excerpt: Ściana zatrzymuje ukrycie kształtu, a nie całego obrazu. Outline ESP pozwala dostrzec sylwetkę przez nią, pozostawiając wszystko inne wyglądającym dokładnie tak, jak powinno.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie rysuje Outline ESP?
+    a: Cienka linia biegnąca wzdłuż widocznej krawędzi modelu istoty, dopasowana do kształtu tej istoty, podczas gdy reszta modelu zachowuje swoją normalną teksturę i animację.
+  - q: Jak różni się Outline ESP od Glow ESP?
+    a: Kontur ESP pozostawia własne renderowanie encji nietknięte i dodaje jedynie obramowanie. Glow ESP z kolei wypełnia encję jednolitym, stałym kolorem, zbliżonym do efektu Glowing z wersji bazowej.
+  - q: Czy Outline ESP wysyła dodatkowe dane do serwera?
+    a: Nie. Dane pozycji i postawy, z których korzysta, zostały już przesłane klientowi do normalnej rozgrywki. Moduł jedynie zmienia sposób, w jaki te istniejące dane są renderowane na ekranie.
+  - q: Czy Outline ESP może skutkować zbanowaniem gracza?
+    a: Tak, jest to możliwe. Posiada ono mniejsze ryzyko niż moduł bojowy, ponieważ nigdy nie zmienia tego, co przesyła klient, ale gracz, którego reakcje wyraźnie zależą od informacji, do których nie powinien mieć dostępu, nadal może zostać wykryty przez personel lub systemy wykrywania oparte na zachowaniu.
+---
+
+<KeyTakeaways>
+- Outline ESP to moduł wizualny dla Minecrafta, który rysuje cienką linię wokół sylwetki encji, utrzymując ją widoczną przez ściany, podczas gdy tekstura, zbroja i animacja modelu renderują się normalnie.
+- Korzysta z danych o pozycji i postawie, które vanilla już wysyła do klienta podczas zwykłej rozgrywki, więc nie są wysyłane żadne dodatkowe pakiety.
+- W przeciwieństwie do stylu wypełnionego kolorem, takiego jak GlowESP, pozostawia widoczną rzeczywistą skórę i ekwipunek encji pod obrysem.
+- Wykrywanie jest behawioralne, a nie oparte na pakietach: reakcja na cel, którego nie powinieneś widzieć, jest tym, co doprowadza gracza do wykrycia.
+</KeyTakeaways>
+
+Outline ESP to moduł wizualny w Minecraft, który śledzi krawędzie modelu jednostki i utrzymuje ten zarys widocznym przez ściany i teren, zamiast pokrywać jednostkę płaskim kolorem wyróżniającym. Wszystko inne dotyczące jednostki renderuje się tak, jak renderowałby to zmodyfikowany klient – skóra, zbroja i animacje pozostają nietknięte. Jedynym dodatkiem jest cienka linia, która podąża za kształtem, wystarczająca, by wiedzieć, że ktoś lub coś jest po drugiej stronie ściany, zanim miałoby się jakikolwiek uzasadniony powód, by to wiedzieć.
+
+## Jak to działa
+
+Outline ESP śledzi sylwetkę modelu docelowej jednostki i rysuje tę linię na wierzchu geometrii świata, dzięki czemu przetrwa wszelkie ściany, podłogi lub teren znajdujący się między jednostką a kamerą. Serwer już przesyła pozycję i postawę każdej pobliskiej jednostki do klienta do zwykłej rozgrywki, z lub bez ściany, ponieważ fizyka i normalne renderowanie zależą od tych danych niezależnie od linii wzroku. Domyślny klient odrzuca większość tych danych na ostatnim etapie poprzez testowanie głębi, dlatego jednostka znika w momencie, gdy coś stałego pojawi się przed nią. Outline ESP po prostu pomija ten krok odrzucania dla rysowanej przez niego obrysu i nic więcej.
+
+To cała mechanika. Żadna nowa prośba nie trafia do serwera, żadna wychodząca paczka nie zmienia kształtu, to po prostu inna decyzja dotycząca tego, co ma być rysowane w kadrze, którą klient już budował.
+
+## Zarys ESP vs GlowESP
+
+Oba moduły rozwiązują ten sam problem – widzenie encji przez przeszkody – z różnymi wyborami renderowania dotyczącymi tego, jak duża część modelu jest dotknięta.
+
+| | Outline ESP | GlowESP |
+|---|---|---|
+| Co renderuje | Cienką linię podążającą za zarysem modelu | Płynne, jednolite wypełnienie kolorem na całym modelu |
+| Tekstura i skóra | Pozostają widoczne pod zarysem | Zastąpione kolorem wypełnienia |
+| Najlepsze do | Rozróżniania encji po ich rzeczywistej skórze lub ekwipunku | Szybkiego, kolorowego rozpoznawania, często według drużyny lub typu encji |
+| Sygnatura sieciowa | Brak, w obu przypadkach dane o pozycji są już po stronie klienta |
+
+Żaden z nich nie wysyła niczego dodatkowego przez sieć, więc wybór jednego nad drugim zależy od preferencji. Outline, jeśli chcesz widzieć kształt i detale pod nim, wypełnienie kolorem, jeśli chcesz czegoś, co można natychmiast dostrzec na pierwszy rzut oka.
+
+<Callout variant="tip" title="Gdzie to się znajduje w Opalu">
+Entity ESP w Opalu jest dostarczane z tą samą etykietą „używaj na własne ryzyko”, co reszta tego kanału. Podstawowa koncepcja jest identyczna z tym, co reprezentuje Outline ESP: pokazuje, gdzie znajduje się encja przez teren, nie wysyłając ani jednego pakietu. Czy dana implementacja rysuje cienką obwódkę, czy też wypełnienie, to szczegół renderowania, który różni się w zależności od klienta. Rzeczywiste znaczenie ma to, czy tego typu informacje w ogóle powinny znajdować się w Twojej konfiguracji, a to Entity ESP stawia przed Tobą.
+</Callout>
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona wyjaśnia, czym jest Outline ESP i dlaczego korzystanie z niego odbywa się na własną odpowiedzialność, a nie jest to rekomendacja do jego uruchomienia. Nie ingeruje w pakiety, więc serwer nie przechwyci niczego czystego, ale recenzje moderatorów i wykrywanie oparte na zachowaniu nadal wychwycą graczy, których reakcje wyraźnie zależą od informacji, do których nie powinni mieć dostępu.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Co tak naprawdę rysuje Outline ESP?">
+Cienka linia obrysowująca widoczną krawędź modelu encji, dopasowana do kształtu tej encji, podczas gdy reszta modelu zachowuje swoją normalną teksturę i animację.
+</FAQItem>
+<FAQItem question="W czym Outline ESP różni się od Glow ESP?">
+Outline ESP pozostawia własne renderowanie encji nietknięte i dodaje jedynie obramowanie. Glow ESP zamiast tego wypełnia encję pojedynczym, jednolitym kolorem, zbliżonym do efektu Glowing w wersji bazowej.
+</FAQItem>
+<FAQItem question="Czy Outline ESP wysyła dodatkowe dane do serwera?">
+Nie. Pozycja i dane dotyczące postury, z których korzysta, są już wysyłane do klienta w celu normalnej rozgrywki. Moduł jedynie zmienia sposób renderowania tych istniejących danych na ekranie.
+</FAQItem>
+<FAQItem question="Czy używanie Outline ESP może skutkować zbanowaniem gracza?">
+Tak, jest to możliwe. Stanowi mniejsze ryzyko niż moduł bojowy, ponieważ nigdy nie zmienia tego, co klient wysyła, ale gracz, którego reakcje wyraźnie zależą od informacji, do których nie powinien mieć dostępu, nadal może zostać wykryty przez administratorów lub system detekcji oparty na zachowaniu.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Szeroką kategorią, do której należą Outline ESP i moduły tego typu." },
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Moduł, który działa na cel, gdy ESP już poinformowało cię, gdzie się znajdują." },
+  { href: "/pl/learn/what-is-reach", label: "Co to jest Reach?", description: "Unikatowy cheat na poziomie pakietów omija ESP całkowicie, pozostając czysto wizualny." }
+]} />
+
+<CTA href="/pl/purchase">Zobacz, gdzie Opal wyznacza granicę między informacją a ryzykiem w swojej kategorii wizualnej.</CTA>

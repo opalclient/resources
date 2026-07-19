@@ -1,0 +1,83 @@
+---
+title: Was ist Streamer-Modus in Minecraft?
+description: Streamer-Modus ist ein Minecraft-Modul, das deinen Benutzernamen, deine Koordinaten und deine Kontodaten auf dem Bildschirm verbirgt, sodass Streams und Aufnahmen niemals persönliche Informationen preisgeben.
+excerpt: Dein Basisspeicherort ist nicht sichtbar. Streamer-Modus hält ihn vor dem Start der Aufnahme außerhalb des Bildschirms.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Verbirgt der Streamer-Modus auch meine Informationen vor anderen Spielern?
+    a: Nein. Es ändert lediglich, was auf deinem eigenen Bildschirm oder in der Aufzeichnung angezeigt wird. Der Server sendet weiterhin deinen echten Benutzernamen und deine Position an alle anderen genau wie zuvor.
+  - q: Wird der Streamer-Modus mein Gameplay beeinflussen?
+    a: Nein. Es ist ein Modul zur Anzeige. Bewegung, Kampf und alles, was an den Server gesendet wird, verhält sich gleich, ob es aktiviert ist oder nicht.
+  - q: Welche Informationen verbirgt der Streamer-Modus typischerweise?
+    a: Die typischen Ziele sind dein Benutzername, dein Kontoname in Menüs und Koordinatenanzeigen wie der F3-Debug-Bildschirm oder ein HUD-Element mit Koordinaten.
+  - q: Warum nennen manche Kunden es Streamer anstatt Streamer-Modus?
+    a: Es handelt sich um dasselbe Feature unter zwei client-spezifischen Namen. Rose dokumentiert es als Streamer-Modus, Tenacity nennt das entsprechende Modul Streamer, und beide verbergen sensible On-Screen-Daten für Content Creator.
+---
+
+<KeyTakeaways>
+
+- Streamer-Modus ist ein Modul, das sensible On-Screen-Daten, deinen Benutzernamen, deinen Kontonamen und deine Koordinaten verbirgt, sodass du streamen oder aufnehmen kannst, ohne diese preiszugeben.
+- Es ändert lediglich das, was auf deinem Bildschirm dargestellt wird, nicht deine tatsächliche Position oder Identität.
+- Einige Clients ersetzen den ausgeblendeten Text durch einen Platzhalter anstatt eine Lücke zu lassen, damit sich der Rest des HUD nicht verschiebt.
+- Rein kosmetisch: es greift nichts am Server an, sodass es für ein Anti-Cheat-System nicht markiert wird.
+
+</KeyTakeaways>
+
+Streamer-Modus ist ein Modul, das identifizierende Informationen auf deinem Minecraft-Bildschirm verbirgt, wie deinen Benutzernamen, deinen Kontonamen und deine Koordinaten, sodass eine Übertragung oder Aufnahme diese nicht preisgibt. Es ist kein Cheat. Es macht dich nicht schneller, lässt dich härter zuschlagen oder sendet etwas anderes an den Server. Es ändert lediglich, was auf deinem Bildschirm dargestellt wird, bevor ein Zuschauer oder eine OBS-Aufnahme es sieht.
+
+## Wie es funktioniert
+
+Der Streamer-Modus scannt die Bereiche der Benutzeroberfläche, die normalerweise identifizierenden Text anzeigen, und maskiert oder blendet diese, bevor der Frame gezeichnet wird. Typische Ziele sind der Benutzername, der über deinem Spielermodell schwebt, der Kontoname in Menüs und Koordinatenanzeigen, sei es der Standard-F3-Debug-Bildschirm oder ein dediziertes Koordinaten-HUD-Element. Die zugrunde liegenden Daten ändern sich nie. Deine Position und dein Konto sind genau das, was sie waren, nur die Darstellung ist anders.
+
+Eine einfache Version würde einfach eine leere Lücke an der Stelle des Textes hinterlassen, was abgehackt aussieht und alles darum herum verschiebt. Bessere Implementierungen ersetzen den ausgeblendeten Text stattdessen durch einen Platzhalter, wie Sterne oder ein generisches Label, sodass das Layout stabil bleibt. Das ist wichtiger, als es klingt: Ein HUD-Element, das jedes Mal springt, wenn es eine Zahl ausblendet, ist eine eigene Art von Ablenkung und eine eigene Art von verräterischem Zeichen.
+
+## Was der Streamer-Modus verbirgt
+
+| Was es verbirgt | Wo es normalerweise erscheint | Was das Modul bewirkt |
+|---|---|---|
+| Dein Benutzername | Über deinem Spieler-Modell schwebend | Vor dem Rendern des Frames maskiert oder ausgeblendet |
+| Dein Kontoname | Menüs und Einstellungsbildschirme | Durch eine Platzhalterbezeichnung ersetzt |
+| Deine Koordinaten | F3-Debug-Bildschirm oder ein Koordinaten-HUD-Element | Ausgeblendet oder mit Sternchen ersetzt |
+
+Der Grund, warum dies die Bearbeitung des Aufgenommenen nachträglich übertrifft, ist das Timing. Wenn die Informationen bereits zur Renderzeit ausgeblendet werden, werden sie von vornherein nicht erfasst, sodass es keinen Clip zum Bearbeiten, keine VOD zum erneuten Hochladen und keine fünf Minuten in 2x-Geschwindigkeit zu Beginn eines Streams gibt, um sicherzustellen, dass nichts durchrutscht. Eine sichtbare Koordinatenanzeige kann einem Zuschauer deinen Basenstandort auf einem öffentlichen Server verraten. Ein sichtbarer Benutzername kann mit anderen Konten verglichen oder für Belästigungen missbraucht werden. Streamer-Modus entfernt beides, bevor eines davon zu einem Problem wird.
+
+## Ist es sicher, es zu verwenden?
+
+Ja, ohne Sternchen. Streamer-Modus beeinflusst nur das lokale Rendern. Er verändert weder die Bewegung, den Kampf noch ein einziges Paket, das an den Server gesendet wird. Aus Sicht des Servers hat sich also nichts an deiner Spielweise geändert. Es gibt hierfür kein Signal, das ein Anti-Cheat-System erfassen könnte, da nichts zu beobachten ist.
+
+<Callout variant="tip" title="Opal versendet es unter demselben Namen">
+Opals eigener Modul-Katalog listet Streamer-Modus genau so: ein Modul, das sensible Informationen für Content Creator verbirgt. Es ist im SAFE-Bereich von Opal eingeordnet, der sich auf kosmetische und Komfortverbesserungen konzentriert – demselben Bereich wie alles andere, was nie eine Verbindung zum Server herstellt. Aktiviere es, bevor du live gehst, und vergiss es.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Verbirgt der Streamer-Modus auch meine Informationen vor anderen Spielern?">
+Nein. Er ändert lediglich, was auf Ihrem Bildschirm oder in der Aufzeichnung angezeigt wird. Der Server sendet Ihren echten Benutzernamen und Ihre Position weiterhin an alle anderen Spieler genau wie zuvor.
+</FAQItem>
+
+<FAQItem question="Beeinflusst der Streamer-Modus mein Gameplay?">
+Nein. Es ist ein rein visuelles Modul. Bewegung, Kampf und alles, was an den Server gesendet wird, verhält sich unabhängig davon, ob er aktiviert ist oder nicht, gleich.
+</FAQItem>
+
+<FAQItem question="Welche Informationen verbirgt der Streamer-Modus typischerweise?">
+Häufige Ziele sind Ihr Benutzername, Ihr Kontoname in Menüs sowie Koordinatenanzeigen wie der F3-Debug-Bildschirm oder ein Koordinaten-HUD-Element.
+</FAQItem>
+
+<FAQItem question="Warum nennen einige Kunden es Streamer anstatt Streamer-Modus?">
+Es handelt sich um dasselbe Feature unter zwei client-spezifischen Namen. Rose dokumentiert es als Streamer-Modus, Tenacity nennt das entsprechende Modul Streamer, und beide verbergen sensible On-Screen-Daten für Content Creator.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Diese Art von breiteren Kategorien für Kosmetikmodule." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Unsichtbar zu bleiben auf einer tieferen Ebene als das, was dein eigenes HUD anzeigt." },
+  { href: "/de/learn/what-is-killaura", label: "Was ist Killaura?", description: "Das andere Ende des Risikospektrums: ein Modul, das der Server absolut sehen kann." },
+]} />
+
+<CTA href="/de/kaufen">Gehe live, ohne deine Basis zu enttarnen, für $8.99</CTA>

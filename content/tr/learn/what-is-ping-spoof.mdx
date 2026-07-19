@@ -1,0 +1,99 @@
+---
+title: Minecraft'ta Ping Spoof Nedir?
+description: Ping Spoof, Minecraft sekme listesindeki ping numarasını belirlediğiniz sahte bir değerle değiştirir; gerçek bağlantınızı veya gecikmenizi hiçbir zaman etkilemeyen, tamamen görsel bir değişikliktir.
+excerpt: Bu sadece bir kozmetik değişiklik, gecikme düzeltmesi değil. Sekme listesindeki sayı yalan söylüyor; gerçek bağlantınız asla söylemez.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Ping Spoof'un gerçek ping'inizi etkiliyor mu?
+    a: Hayır, sadece sekme listesinde gösterilen sayıyı değiştirir. Sunucuyla gerçek bağlantınız ve sunucunun ölçtüğü gidiş-dönüş süresi ise tam olarak aynı kalır.
+  - q: Ping Spoof size savaşta avantaj sağlıyor mu?
+    a: Hayır, isabet tespiti, hareket veya saldırı zamanlaması gibi, bir dövüşü aslında belirleyen şeyleri etkilemez. Değiştirdiği şey, diğer oyuncuların gördüğü bir sayıdır, oyunun dövüşü işleme şeklini değil.
+  - q: Düşük bir ping tek başına birinin hile yaptığını kanıtlar mı?
+    a: Tek başına değil. İyi bir bağlantısı olan veya sunucuya yakın olan oyuncular için düşük ping normaldir. Şüpheli hale gelmesi gereken diğer sinyallerin yanında, fiziksel olarak mümkün olmayan tepki süreleri gibi. Ping Spoof bunları oluşturmaz.
+  - q: Ping Spoof, takılmayı düzeltmekle aynı şey midir?
+    a: Hayır, gerçek bağlantınızı hiçbir şekilde iyileştirmez veya kötüleştirmez. 200 ms gerçek gecikmeye sahip bir oyuncu 200 ms'de kalır; sadece başkalarına gösterilen sayı değişir.
+  - q: Ping'ini neden sahteleyebilir biri?
+    a: "Çoğunlukla diğer oyuncuların onlardan okuduklarını kontrol etmek için: belirsiz bir bağlantıyı gizlemek, şüpheli derecede düşük bir sayıyı yumuşatmak veya sadece bir şaka değeri girip kimin fark edeceğini görmek."
+---
+
+<KeyTakeaways>
+
+- Ping Spoof, sekme listesindeki ping numarasını belirlediğiniz sahte bir değerle değiştiren bir oyuncu modülüdür.
+- Sadece görsel bir değişikliktir: gerçek bağlantınız ve sunucu tarafından ölçülen gidiş-dönüş süresi hiçbir zaman değişmez.
+- İsabet tespiti, hareket veya saldırı zamanlamasına dokunmaz; bunlar aslında hile önleme sistemlerinin izlediği alanlardır.
+- Kötü bir bağlantıyı gizlemek, şüpheli derecede düşük bir ping'i azaltmak veya sadece insanları şaşırtmak için kullanılır
+
+</KeyTakeaways>
+
+Ping Spoof, Minecraft yardımcı istemcilerinde bulunan bir oyuncu modülüdür ve adınızın yanındaki sekme listesinde görüntülenen ping sayısını, gerçek değeri seçtiğiniz değerle değiştirerek geçersiz kılar. Herhangi bir genel sunucudaki sekme listesini açtığınızda, iyi niyet varsayımıyla okuduğunuz sayılar vardır: bu gösterimin bağlantınızın aslında yaptığı şeyle eşleşmesi için hiçbir şey zorlamaz. Ping Spoof, birisi iyi niyeti uzatmamaya karar verdiğinde gerçekleşen şeydir. Diğer oyuncuların sizden okuduğu şeyi değiştirir. İstemcinizin ve sunucunun birbirleriyle aslında neler yaptığını değiştirmez.
+
+## Nasıl Çalışır
+
+Modül, oyuncunuz için oluşturulan sekme listesi girişine müdahale eder ve gerçek olanın yerine yapılandırılmış bir sayı koyar; herkesin bağlantı kalitenizin kabaca bir göstergesi olarak göz attığı aynı sayıdır. İşte mekanizmanın tamamı. Paket zamanlamasına, sunucunun aslında yaptığı gecikme ölçümüne dokunmaz ve girişlerinizin sunucuya ne kadar hızlı ulaştığını veya dünyanın ekranda ne kadar hızlı güncellendiğini değiştirmez. Sahtekarlık tamamen etikette, boru hattında değil yaşar.
+
+Hareketi, dövüşü ve diğer tüm paket değişimleri, modül kapalıyken olduğu gibi tam olarak gerçekleşir. Gerçek ping 140 ms ise, sekme listesinde herkese gösterilen sayı ne olursa olsun sunucu tarafında 140 ms kalır.
+
+<Callout variant="tip" title="Opal'in modül listesinde yer almıyor">
+
+Özel bir Ping Spoof modülü göndermiyoruz. Sekme listesinde bir numara sahte göstermek kağıt üzerinde küçük bir şey gibi görünse de, mühendislik zamanımızı buna ayırmıyoruz. Opal'ın faydalılık tarafı, bir eşleşmede gerçekten yapabildiklerinizi değiştiren modüllere yöneliktir, sadece diğer oyuncuların sizi nasıl gördüğünü değiştirmeye değil
+
+</Callout>
+
+## Ping Spoof tespit edilebilir mi?
+
+Kısa cevap: pek değil, ve bu tasarıma uygun. Dövüş hilelerini yakalamaya yönelik antichipler, isabet kaydını, saldırı aralıklarını ve hareketleri izler; killaura ve ulaşım gibi modüllerin, kazanmamaları gereken dövüşleri kazanmak için kötüye kullandığı tam yüzeyler bunlar. Ping Spoof bunların hiçbirine bulaşmaz. Sunucu tarafından ölçülen gecikme süresi değişmeden kalır, böylece sunucu tarafındaki bir kontrolün işaretlemesi için oyun etkileyen bir uyumsuzluk olmaz. İstemcinin sunucuyla konuşma şekli değişmez, sadece istemci tarafından yerel olarak işlenen bir etiket.
+
+Bu, bir yardımcı istemci özelliğinin karşılaştığı en düşük riskli durumları ifade ediyor. Yakalama noktası, diğer oyuncuların gördüğü sayının hala bir yalan olmasıdır; rekabetçi değil, sadece kozmetik bir yalandır, ancak prensip olarak değiştirilmiş bir istemciyi bir ihlal olarak sayan bir sunucu, yakalanmanız durumunda bunu size karşı kullanacaktır.
+
+<Callout variant="warning" title="Estetik görünmez olmak demek değildir">
+
+Ping Spoof, savaş hileleri için tasarlanmış antichipleri yakalamaya yönelik oluşturulan uyumsuzluk türünü yaratmaz. Ancak yine de bir istemci değişikliğidir ve prensip olarak herhangi bir değiştirilmiş istemciyi yasaklayan bir sunucu, hitbox'unuzu değil, yalnızca bir etiketi değiştirdiğinizin farkını önemsemez
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Ping Spoof'un gerçek ping'inizi etkiliyor mu?">
+
+Hayır, sadece sekme listesinde gösterilen sayıyı değiştirir. Sunucuyla gerçek bağlantınız ve sunucunun ölçtüğü gidiş-dönüş süresi ise tam olarak aynı kalır
+
+</FAQItem>
+
+<FAQItem question="Ping Spoof size savaşta avantaj sağlıyor mu?">
+
+Hayır, isabet tespiti, hareket veya saldırı zamanlaması gibi, bir dövüşü aslında belirleyen şeyleri etkilemez. Sadece diğer oyuncuların gördüğü bir sayıyı değiştirir, oyunun dövüşü işleme şeklini değil
+
+</FAQItem>
+
+<FAQItem question="Düşük bir ping tek başına birinin hile yaptığını kanıtlar mı?">
+
+Tek başına değil. İyi bir bağlantısı olan veya sunucuya yakın olan oyuncular için düşük ping normaldir. Şüpheli hale gelmesi gereken diğer sinyallerin yanında, fiziksel olarak mümkün olmayan tepki süreleri gibi. Ping Spoof bu tür sinyalleri oluşturmaz
+
+</FAQItem>
+
+<FAQItem question="Ping Spoof, takılmayı düzeltmekle aynı şey midir?">
+
+Hayır, gerçek bağlantınızı hiçbir şekilde iyileştirmez veya kötüleştirmez. 200 ms gerçek gecikmesi olan bir oyuncu 200 ms'de kalır; sadece başkalarına gösterilen sayı değişir
+
+</FAQItem>
+
+<FAQItem question="Ping'ini neden sahteleyebilir biri?">
+
+Çoğunlukla diğer oyuncuların onlardan okuduklarını kontrol etmek için: belirsiz bir bağlantıyı gizlemek, şüpheli derecede düşük bir sayıyı yumuşatmak veya sadece bir şaka değeri vererek kimin fark ettiğini görmek
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Fayda-istemci spektrumunun gizleme ucundaki kısmı ve Ping Spoof gibi yüzeysel bir değişiklikten nasıl farklılaştığı." },
+  { href: "/tr/learn/what-is-killaura", label: "Killaura nedir?", description: "Dövüş modülü anticheat'leri aslında yakalamak için tasarlanmıştır ve risk ölçeğinin tam tersi ucunda oturmasının sebebi de budur." },
+  { href: "/tr/learn/what-is-reach", label: "Ulaşmak nedir?", description: "Sunucu tarafında Ping Spoof'un asla bırakmadığı, savaş etkileyen başka bir modül." }
+]} />
+
+<CTA href="/tr/satin-al">Opal'in gerçekten gönderdiği modülleri görün</CTA>

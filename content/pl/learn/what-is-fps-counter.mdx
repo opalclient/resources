@@ -1,0 +1,75 @@
+---
+title: Czym jest licznik FPS w Minecraft?
+description: Licznik FPS to moduł HUD, który wyświetla aktualną liczbę klatek na sekundę klienta Minecrafta na ekranie. Oto jak on działa, dlaczego gracze go używają i czy jest bezpieczne, aby go uruchomić.
+excerpt: To tylko liczba na ekranie, informująca o sprzęcie, a nie o tobie.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy licznik FPS daje jakąś przewagę w grze?
+    a: Nie. Wyświetla jedynie liczbę pokazującą, jak szybko klient renderuje klatki. Nie wpływa na walkę, ruch ani nic, co przetwarza serwer.
+  - q: Czy wyświetlanie FPS to to samo co podkręcanie FPS?
+    a: Nie. Licznik mierzy i wyświetla jedynie aktualną liczbę klatek na sekundę. Zwiększenie jej wymaga oddzielnych zmian, takich jak zmniejszenie zasięgu renderowania lub ustawień graficznych.
+  - q: Czy serwery mogą wykrywać lub blokować licznik FPS?
+    a: Nie. Moduł nigdy nic nie wysyła do serwera. Czyta tylko dane klienta zlokalizowane i wyświetla je na ekranie, więc nie ma nic, co serwer mógłby zaobserwować lub oznaczyć.
+  - q: Czy licznik FPS jest wbudowany w oryginalną wersję Minecrafta?
+    a: Vanilla posiada ekran debugowania F3, który zawiera liczbę klatek na sekundę spośród wielu innych danych diagnostycznych. Oddzielny moduł FPS wyświetla tylko tę liczbę, zazwyczaj jako mały, zawsze widoczny element HUD.
+---
+
+<KeyTakeaways>
+
+- Licznik FPS to moduł HUD, który wyświetla aktualną liczbę klatek na sekundę Twojego klienta Minecraft na ekranie.
+- Wyświetla jedynie liczbę, którą gra śledzi wewnętrznie, nic nowego nie jest obliczane.
+- Wyłącznie kosmetyczne: nigdy nie wpływa na ruch, walkę ani nic wysyłane do serwera.
+- Nic nie opuszcza klienta, więc serwerowy anticheat nie może tego wychwycić.
+
+</KeyTakeaways>
+
+Licznik FPS to mały element HUD, który pokazuje, ile klatek na sekundę aktualnie renderuje klient Minecrafta, aktualizowany w sposób ciągły podczas gry. Nie jest to funkcja rozgrywki. Liczba ta zmienia się wraz z Twoim sprzętem i ustawieniami, a nie w zależności od tego, co dzieje się na serwerze, więc mieści się w tej samej kategorii co zegar lub wyświetlacz współrzędnych: informacyjna, a nie konkurencyjna. Większość klientów użytkowych domyślnie zawiera jeden taki moduł HUD, ponieważ jest to najszybszy sposób na odpowiedź na pytanie „dlaczego to działa szarpie”, bez konieczności zagłębiania się w menu debugowania.
+
+## Jak to działa
+
+Minecraft już wewnętrznie oblicza własną liczbę klatek na sekundę, aby napędzać pętlę renderowania. Moduł FPS nie wykonuje żadnych nowych obliczeń: odczytuje istniejącą wartość w każdej klatce i wyświetla ją gdzieś na ekranie, zwykle małą liczbę schowaną w rogu lub wbudowaną w szerszy HUD obok takich rzeczy jak współrzędne lub ping.
+
+Ponieważ odczyt jest aktualizowany w sposób ciągły, odzwierciedla rzeczywistą wydajność w czasie rzeczywistym, w tym spadki spowodowane intensywnym ładowaniem chunków, gęstymi efektami cząsteczkowymi lub zatłoczonymi obszarami z bytami. Standardowy Minecraft ma własną wersję tego w ekranie debugowania F3, który ukrywa liczbę klatek na sekundę wśród morza innych danych diagnostycznych. Dedykowany moduł FPS sprowadza to do jednej liczby, którą ludzie faktycznie obserwują, zachowując ją w widoczności bez konieczności wciskania klawisza.
+
+## Czy jest bezpieczne do użycia
+
+Tak, bez zastrzeżeń. Licznik FPS jedynie odczytuje i wyświetla dane, które już istnieją na Twoim komputerze. Nie wpływa na ruch, walkę, opóźnienia pakietów ani nic, co przetwarza serwer, więc nie ma tutaj sygnału, który mógłby wykryć anticheat po stronie serwera. Systemy detekcji monitorują podejrzane wzorce wejścia i sieci. Liczba renderowana lokalnie na Twoim ekranie jest niewidoczna dla wszystkich z nich.
+
+Jedyną realną wadą jest zaśmiecenie. Nałóż licznik FPS na wyświetlacz pinga, odczyt współrzędnych i nakładkę na naciśnięcia klawiszy, a Twój ekran zacznie przypominać kokpit. To kwestia gustu, a nie ryzyka.
+
+<Callout variant="tip" title="Dlaczego to pozostaje ryzykowne na niskim poziomie">
+Cała ta kategoria – tylko do odczytu, tylko na ekranie, niewidoczna dla serwera – sprawia, że rzadko pojawia się w rozmowach o tym, co ryzykowne w kliencie narzędziowym. Własny HUD Opal również zmierza w tym samym kierunku: moduły, które raportują stan gry, nigdy nie kontaktując się z serwerem.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy licznik FPS daje przewagę w grze?">
+Nie. Wyświetla jedynie liczbę pokazującą, jak szybko Twój klient renderuje klatki. Nie wpływa na walkę, ruch ani nic, co przetwarza serwer.
+</FAQItem>
+
+<FAQItem question="Czy wyświetlanie FPS to to samo co podkręcanie FPS?">
+Nie. Licznik jedynie mierzy i wyświetla bieżącą liczbę klatek na sekundę. Zwiększenie jej wymaga oddzielnych zmian, takich jak zmniejszenie zasięgu renderowania lub ustawień graficznych.
+</FAQItem>
+
+<FAQItem question="Czy serwery mogą wykryć lub zbanować licznik FPS?">
+Nie. Moduł nigdy nie wysyła nic do serwera. Odczytuje jedynie dane lokalne klienta i wyświetla je na ekranie, więc nie ma nic, co serwer mógłby zaobserwować lub oznaczyć.
+</FAQItem>
+
+<FAQItem question="Czy licznik FPS jest wbudowany w oryginalnego Minecrafta?">
+Oryginalna wersja Minecrafta posiada ekran debugowania F3, który zawiera liczbę klatek na sekundę wśród wielu innych danych diagnostycznych. Dedykowany moduł FPS wyświetla tylko tę liczbę, zwykle jako mały, zawsze widoczny element HUD.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Do których szerszych kategorii modułów HUD należy ten." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Gdzie subtelność naprawdę ma znaczenie, w przeciwieństwie do statycznego wyświetlacza HUD-u." },
+  { href: "/pl/learn/what-is-reach", label: "Co to jest zasięg?", description: "Moduł, który łączy się z serwerem i jest za nim obserwowany." },
+]} />
+
+<CTA href="/pl/purchase">Zobacz, co jeszcze śledzi HUD Opala, dla $8.99</CTA>

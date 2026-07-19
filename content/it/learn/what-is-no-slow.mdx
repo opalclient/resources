@@ -1,0 +1,79 @@
+---
+title: Cos'è il No Slow in Minecraft?
+description: No Slow è un modulo di movimento per Minecraft che elimina le penalità di velocità vanilla derivanti dal mangiare, dal bloccare e dall'attraversare ragnatele. Ecco come funziona e qual è il rischio.
+excerpt: No Slow elimina la tassa vanilla su mangiare, bloccare e farsi strada tra le ragnatele, così non perdi mai un colpo mentre fai una di queste cose. Ecco il meccanismo e il motivo per cui i server possono ancora intercettarla.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Quali azioni influisce No Slow?
+    a: Tendere l'arco, mangiare, bere pozioni, bloccare e muoversi attraverso blocchi come sabbia dell'anima, ragnatele o acqua. Minecraft vanilla ti rallenta in ognuna di quelle situazioni, e No Slow cancella la riduzione.
+  - q: No Slow cambia qualcosa negli oggetti o nei blocchi?
+    a: No. Il cibo ripristina ancora la stessa fame, i blocchi continuano a bloccare i danni in arrivo nello stesso modo e la sabbia dell'anima è ancora sabbia dell'anima. Solo Slow rimuove la penalità di velocità legata all'interazione con essi.
+  - q: È considerato un imbroglio No Slow?
+    a: Sì. Produce una velocità di movimento che un client vanilla non può raggiungere nello stesso stato, il che lo rende un modulo di vantaggio in termini di gameplay piuttosto che puramente estetico, e qualsiasi server che controlla i movimenti lo considera tale.
+  - q: No Slow è la stessa cosa di un modulo velocità?
+    a: No. Un modulo Velocità aumenta la tua velocità di movimento al di sopra del massimo vanilla in ogni luogo. No Rallentamento annulla solo penalità situazionali specifiche, quindi senza un modulo Velocità attivo, ti muovi ancora alla velocità vanilla ordinaria per il resto del tempo.
+---
+
+<KeyTakeaways>
+
+- No Slow è un modulo di movimento che elimina le penalità di velocità vanilla di Minecraft per mangiare, bere, bloccare e camminare attraverso sabbia dell'anima o ragnatele.
+- Funziona perché il movimento è autoritativo lato client: il client segnala semplicemente una posizione più veloce di quanto farebbe un client vanilla nello stesso stato.
+- I server lo intercettano confrontando la velocità segnalata con la velocità massima vanilla per quello stato.
+- È classificato come utilizzo a proprio rischio sui client che lo distribuiscono, Opal incluso.
+
+</KeyTakeaways>
+
+No Slow è un modulo che impedisce a Minecraft nella sua versione originale di ridurre la tua velocità mentre mangi, bevi, tiri con l'arco, blocchi o ti muovi attraverso sabbia dell'anima, ragnatele e acqua. Il gioco normalmente considera ognuna di queste situazioni come un motivo per rallentarti, sulla base del principio che l'uso di un oggetto o il combattimento attraverso il terreno dovrebbero costarti terreno. No Slow rimuove completamente questo costo. Mantieni il tuo normale passo o ritmo di corsa, qualunque cosa tu stia facendo, il che può sembrare poco importante finché non ti ritrovi a non essere interrotto a metà colpo.
+
+## Come funziona
+
+Minecraft nella sua versione originale ti rallenta in una serie specifica e nota di situazioni: tirare con l'arco, mangiare cibo, bere una pozione, bloccare e camminare attraverso sabbia dell'anima, ragnatele o acqua, ognuna di queste riduce la tua velocità di una quantità fissa. No Slow intercetta questo calcolo sul client e impedisce che la riduzione venga applicata, quindi la tua velocità riportata rimane al normale passo o ritmo di corsa, indipendentemente dallo stato in cui ti trovi.
+
+Questo funziona perché il movimento in Minecraft è in gran parte client-autoritativo. Il tuo client calcola la propria posizione ogni tick e la invia al server, che generalmente si fida di quella posizione a meno che non stia eseguendo i propri controlli. No Slow non tocca ciò che l'arco, la pozione o la ragnatela fanno effettivamente, cambia semplicemente la posizione che il tuo client segnala mentre li stai gestendo.
+
+L'attrattiva è evidente in una lotta. Il blocco è il caso più chiaro: vanilla rallenta un giocatore che sta attivamente bloccando, con uno scudo nelle versioni moderne o una spada in quelle più datate, permettendo all'avversario di semplicemente allontanarsi e resettare la distanza. No Slow permette di bloccare un colpo e mantenere il passo contemporaneamente. Mangiare durante una lotta, bere una pozione mentre si insegue qualcuno, attraversare una ragnatela senza perdere terreno, lo stesso trucco, lo stesso effetto. Si manifesta in client come Fan e Tenacity, solitamente abbinato ad altri moduli di movimento e combattimento piuttosto che distribuito come un'opzione indipendente.
+
+## No Slow vs un modulo di Velocità
+
+A volte le persone confondono i due, ma risolvono problemi diversi. Un modulo di Velocità aumenta la tua velocità di movimento al di sopra del massimo vanilla in generale, corri più velocemente di quanto il gioco permetta, punto e basta. No Slow non tocca mai la tua velocità di base. Cancella solo le penalità specifiche legate a stati specifici: mangiare, bloccare, stare in una ragnatela. Disattiva qualunque cosa stia innescando uno di quegli stati e un utente di No Slow si muove esattamente come un giocatore vanilla, perché al di fuori di quei momenti non c'è nulla che il modulo debba fare.
+
+<Callout variant="tip" title="Niente Rallentamenti in Opal">
+La descrizione di Opal per questo prodotto è sorprendentemente poco patinata: "Rimuove i rallentamenti tipici di vanilla, come l'utilizzo di oggetti." Questa è l'intera funzionalità, senza marketing elaborato. È classificato come utilizzo a proprio rischio, lo stesso gruppo di qualsiasi altra cosa che lasci una firma di movimento che un server può cercare.
+</Callout>
+
+<Callout variant="warning" title="Rilevabile per progettazione">
+L'intero valore di No Slow risiede nel discostarsi dalla fisica standard, e questa deviazione è esattamente ciò che un controllo di movimento autoritario del server è progettato per intercettare. Un server che tiene traccia se un oggetto è in uso, se un giocatore sta bloccando o se sta in piedi in una ragnatela può calcolare la velocità massima che un client standard segnalerebbe in quello stato e confrontarla con ciò che effettivamente arriva. Mantenere la velocità massima mentre uno di questi stati è attivo significa aver fornito una discrepanza evidente. Se un determinato server applichi questa regola rigorosamente può variare, ma la traccia è sempre presente, su Opal o su qualsiasi altro client.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Quali azioni sono influenzate da No Slow?">
+Scoccare un arco, mangiare, bere pozioni, bloccare e muoversi attraverso blocchi come sabbia dell'anima, ragnatele o acqua. In Minecraft vanilla, queste situazioni ti rallentano, e No Slow annulla questa riduzione.
+</FAQItem>
+
+<FAQItem question="No Slow modifica gli oggetti o i blocchi?">
+No. Il cibo ripristina ancora la stessa fame, i blocchi impediscono ancora lo stesso tipo di danno e la sabbia dell'anima è ancora sabbia dell'anima. No Slow rimuove solo la penalità di velocità legata all'interazione con essi.
+</FAQItem>
+
+<FAQItem question="No Slow è considerato un cheat?">
+Sì. Produce una velocità di movimento che un client vanilla non può raggiungere nello stesso stato, il che lo rende un modulo di vantaggio di gioco piuttosto che cosmetico, e qualsiasi server che controlla il movimento lo tratta come tale.
+</FAQItem>
+
+<FAQItem question="No Slow è come un modulo Velocità?">
+No. Un modulo Velocità aumenta la tua velocità di movimento al di sopra del massimo vanilla ovunque. No Slow annulla solo penalità situazionali specifiche, quindi, senza un modulo Velocità attivo, ti muovi ancora alla normale velocità vanilla per il resto del tempo.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-velocity-anti-knockback", label: "Cos'è la Velocità (anti-knockback)?", description: "Un altro modulo che annulla una penalità standard invece di aggiungere una nuova abilità." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Dove moduli più silenziosi e facili da non notare come questo si inseriscono nel design di un cliente." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria più ampia a cui appartengono No Slow e moduli simili." },
+]} />
+
+<CTA href="/it/purchase">Smetti di perdere terreno contro la sabbia spirituale. Scopri cosa spedisce anche Opal per $8.99.</CTA>

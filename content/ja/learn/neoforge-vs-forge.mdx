@@ -1,0 +1,81 @@
+---
+title: "NeoForge vs Forge: Minecraft MODローダー (2026)"
+description: NeoForge」とForgeの違い：コミュニティフォークが、ガバナンス、バージョンサポート、MODにおいてオリジナルローダーとどのように異なるか、そしてどちらを選ぶべきか.
+excerpt: NeoForgeはForgeをコミュニティが派生させたもので、現在MinecraftのForge系統シーンをリードしています。この二つの違いと、どちらを実行すべきかをご紹介します.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Frameworks
+author: trq
+faqs:
+  - q: NeoForgeはForgeの代替ですか？?
+    a: 現在のMinecraftバージョンでは、多くのコミュニティがNeoForgeを後継として扱っていますが、Forgeは依然として存在し、古いバージョンをサポートしているので、どちらも互いを消し去っていません.
+  - q: ForgeのMODをNeoForgeで動かすことはできますか？?
+    a: 確実ではありません。両者は起源を共有していますが、APIが分岐しているため、一方を対象としたMODがもう一方にロードされる保証はありません。対応するビルドをインストールしてください.
+  - q: NeoForgeとFabricは同じものですか？?
+    a: いいえ。NeoForgeは、イベントバスとレジストリモデルを備えたForgeファミリーに由来しますが、Fabricは独自のMixinベースのパッチングを行う、より軽量な独立したローダーです.
+---
+
+<KeyTakeaways>
+
+- NeoForgeは、2023年にコミュニティが派生させたForgeであり、現在ではMinecraftのForge系統シーンをリードしています。
+- Forgeは、長年モッド化されたエコシステムを支えてきたオリジナルのローダーであり、現在でも古いModpackに利用されています。
+- 分裂は書き換えではなく、ガバナンスに関するものでした。両者は当初は共通の理念を共有していましたが、その後、それぞれの方向へと進んでいます。
+- 新しいバージョンや活発なModのためにNeoForgeを選び、古いModpackのためにForgeを選んでください.
+
+</KeyTakeaways>
+
+NeoForge コミュニティ主導のフォークです Forge 2023年に始まり、現在ではデフォルトのローダーとなっています Forge-現在進行中のリネージMODシーン Minecraft バージョン. Forge 長年、改造されたエコシステムを運んできたオリジナルのローダーです NeoForge 新しいバージョンとアクティブなMODの場合、選択してください Forge それに対して構築された古いModpack用.
+
+<Callout variant="info" title="どこ Opal 合う">OpalはForgeファミリーではなく、Fabric(https://fabricmc.net/)上で動作します。したがって、このいずれもOpal用に設定したローダーではありません。Opalのセットアップを始める場合は、[セットアップガイド](/ja/docs/setup)を参照してFabricのインストール手順を確認してください</Callout>
+
+## それぞれが何であるか
+Forgeは、元々のMinecraftのMODローダーです。1.6時代から大規模なMODパックシーンを牽引し、アノテーションベースのイベントバス、意見のあるライフサイクル、そして内部ではASMクラス変換器を備えていました。
+
+NeoForgeは、2023年にForgeプロジェクトのリーダーシップ対立が表面化した際に派生したForgeのフォークです。同じ広いアーキテクチャ（レジストリ、キャパビリティ、イベントバス）を維持していますが、よりオープンな貢献モデルでコミュニティのガバナンスの下で動作しています
+## なぜフォークが起きたのか
+分割は書き換えではなく、ガバナンスに関するものでした。Forgeの貢献者グループは、Forgeの運営方法に関する意見の相違から、コミュニティが所有するプロジェクトへと移行しました。NeoForgeはForgeのコードベースから始まったため、両方のローダーはコアとなるアイデアを大部分共有しており、Forgeに慣れたmod作者はNeoForgeをすぐに認識できるでしょう。
+
+しかし、時間の経過とともに、両者は徐々に離れていきました。NeoForgeはAPIの一部を書き換え、独自の規約を採用しているため、現在のNeoForge用に構築されたmodがForgeで動作する保証はなく、その逆もまた同様です
+## それらがどのように異なるか
+
+| | NeoForge | Forge |
+| :--- | :--- | :--- |
+| 起源 | 2023年、Forgeからのコミュニティフォーク | 元のローダー |
+| 運営 | コミュニティが所有、オープンな貢献 | 伝統的なForgeプロジェクトのリーダーシップ |
+| アーキテクチャ | 同じ基盤（レジストリ、キャパビリティ、イベントバス） | レジストリ、キャパビリティ、イベントバス |
+| 新バージョンへの注力 | 最新のMinecraftバージョン | 古いMODシーンを引き継ぐ |
+| MODカタログ | 近代バージョンで成長中 | 古いバージョンで豊富なカタログ |
+
+## どちらを選ぶか
+
+<Checklist>
+<ChecklistItem>最新のMinecraftバージョンをプレイしており、MODがNeoForgeに移行している場合は、NeoForgeを選択してください。現在、活発にメンテナンスされているForgeスタイルのMODのほとんどが、新しいリリースでNeoForgeをターゲットにしています.</ChecklistItem>
+<ChecklistItem>Forge を選んでください。古い Modpack を使用している場合や、Forge 向けにのみ提供されるコンテンツ Mod の場合です。多くの実績のある Modpack はまだ Forge を採用しています.</ChecklistItem>
+<ChecklistItem>各MODのバージョンページを確認してください。同じ作者が古いバージョン向けにForgeビルド、新しいバージョン向けにNeoForgeビルドを配布することがあります.</ChecklistItem>
+</Checklist>
+
+## よくある質問
+
+<FAQList>
+
+<FAQItem question="NeoForgeはForgeの代替ですか？">
+現在のMinecraftバージョンにおいて、多くのコミュニティはNeoForgeをForge系のMODの後継として扱っています。Forgeは依然として存在し、古いバージョンをサポートしているので、どちらも完全に相手を駆逐したわけではありません。
+</FAQItem>
+
+<FAQItem question="ForgeのMODをNeoForgeで実行できますか？">
+安定して動作しません。ForgeとNeoForgeは共通の基盤を持っていますが、APIが分岐しているため、単純なMODであれば動作する可能性があります。ただし、あるローダーを対象としたMODが、別のローダーで動作する保証はありません。使用しているローダーに合ったビルドをインストールしてください。
+</FAQItem>
+
+<FAQItem question="NeoForgeとFabricは同じものですか？">
+いいえ。NeoForgeはForgeファミリーに由来し、イベントバスとレジストリモデルを共有しています。Fabric([https://fabricmc.net/](https://fabricmc.net/))は、独自のMixinベースのパッチ適用モデルを備えた、別の軽量ローダーです。これらは異なるエコシステムです。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/ja/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "Forgeファミリーの隣にある、より軽い生態系." },
+  { href: "/ja/learn/what-is-a-minecraft-mod-loader", label: "何ですか Minecraft mODローダー?", description: "まず、ローダーは何をするのか." },
+  { href: "/ja/learn/what-is-asm", label: "ASMとは何ですか？?", description: "バイトコードツールキットは、Forgeトランスフォーマーが使用します." },
+]} />
+
+<CTA href="/ja/purchase">OpalFabricクライアントを8.99ドルで手に入れよう</CTA>

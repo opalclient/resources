@@ -1,0 +1,85 @@
+---
+title: Czym jest sprint w Minecraft? Wyjaśnienie modułu
+description: Sprint to moduł ruchu w "Minecraftcie", który osłabia sprawdzanie głodu i linii wzroku, które wersja podstawowa wykorzystuje, aby ograniczać sprint. Oto jak to działa i jakie jest ryzyko.
+excerpt: Vanilla Minecraft ciągle przerywa Ci sprint z powodu głodu i linii widzenia. Sprint po prostu przestaje pytać o zgodę.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie zmienia moduł Sprintu?
+    a: Zmienia warunki, które Minecraft sprawdza przed umożliwieniem lub utrzymaniem sprintu, takie jak wymaganie pełnego paska głodu lub sprawdzanie, które przerywa sprint, gdy droga przed tobą wydaje się zablokowana.
+  - q: Czy sprint to to samo co moduł prędkości?
+    a: Nie. Mod prędkości sprawia, że poruszasz się szybciej. Sprint sam w sobie nie dodaje prędkości, tylko zmienia moment, kiedy gra pozwala na sprint.
+  - q: Klienci, którzy uwzględnili moduł Sprint?
+    a: Zmiany logiczne w stylu sprintu pojawiły się u wielu klientów na przestrzeni lat, w tym u Juul, Fan, Tenacity i Rose. Opal również oferuje takie rozwiązanie, skatalogowane jako Sprint.
+  - q: Czy używanie Sprinta może skutkować zbanowaniem gracza?
+    a: Tak. Serwer śledzi ten sam stan głodu i ruchu, który manipuluje moduł, niezależnie od klienta, więc serwerowa anticheat weryfikująca uprawnienia do sprintu może oznaczyć lub zbanować konto za sprintowanie w warunkach, które nie byłyby dozwolone w wersji vanilla.
+  - q: Czy Sprint to poważny oszustwo w porównaniu z modułami bojowymi?
+    a: To jest mniej rzucająca się w oczy zmiana niż coś w rodzaju zautomatyzowanej walki, ale nadal modyfikuje stan, który serwer sprawdza samodzielnie, więc wiąże się z realnym ryzykiem wykrycia, a nie jest to bezpieczna kosmetyczna poprawka.
+---
+
+<KeyTakeaways>
+
+- Sprint to moduł ruchu, który łagodzi ograniczenia dotyczące rozpoczęcia lub utrzymania sprintu w wersji podstawowej, takie jak minimalny poziom głodu i sprawdzanie linii wzroku.
+- Sam w sobie nie dodaje prędkości, zmienia tylko to, kiedy gra w ogóle pozwala na sprint.
+- Serwer śledzi ten sam stan głodu i ruchu niezależnie, więc poluzowanie tego po stronie klienta wiąże się z realnym ryzykiem wykrycia, a nie jest to tylko kosmetyczna zmiana.
+- Opal udostępnia moduł Sprint i umieszcza go z zastrzeżeniem używania na własną odpowiedzialność, tak jak w każdym innym miejscu, gdzie się on pojawia.
+
+</KeyTakeaways>
+
+Sprint to moduł ruchu, który zmienia warunki, które Minecraft sprawdza, zanim pozwoli graczowi zacząć lub kontynuować sprint. W wersji bazowej obowiązują pewne ograniczenia: pasek głodu musi znajdować się powyżej określonego poziomu, a gra obserwuje teren przed tobą, przerywając sprint w momencie, gdy ścieżka wydaje się zablokowana. Sprint przechwytuje te sprawdzenia i przepisuje, co one oceniają, dzięki czemu klient stale zgłasza, że gracz jest uprawniony do sprintu w sytuacjach, w których niezmodyfikowana gra by tego nie dopuściła. To nie jest przyspieszenie. Domyślna prędkość sprintu pozostaje dokładnie taka sama, Sprint po prostu zapobiega jej cofnięciu.
+
+## Jak to działa
+
+Pod maską Sprint włącza się przed dwoma sprawdzeniami, które wersja bazowa wykonuje podczas poruszania się: progiem głodu, który musi zostać przekroczony, zanim sprint w ogóle zostanie uruchomiony, oraz sprawdzaniem przeszkód przed tobą, które normalnie zmuszają cię do przejścia na chodzenie, gdy droga przed tobą wydaje się zablokowana. Moduł przechwytuje oba i zmienia, co one oceniają, dzięki czemu klient stale traktuje cię jako uprawnionego do sprintu w sytuacjach, w których niezmodyfikowana instalacja by ci go zabrała.
+
+Chodzi o konsekwencję. Sprint jest szybszy niż chodzenie, a każda chwila, w której vanilla spowodowałaby spowolnienie, to moment, w którym poruszasz się wolniej, niż musisz. Eliminacja tych przerw oznacza bardziej stałą prędkość podczas pokonywania odległości, podążania za kimś lub po prostu przemieszczania się po terenie bez zastanawiania się gry. Nie jest to też nowe rozwiązanie: zmiany oparte na logice sprintu pojawiały się w kilku klientach na przestrzeni lat, w tym w Juul, Fan, Tenacity i Rose.
+
+## Czy Sprint jest bezpieczny w użyciu?
+
+W zasadzie nie, a powód jest strukturalny. Serwer śledzi ten sam stan, który vanilla wykorzystuje do blokowania sprintu, w tym poziom głodu, niezależnie od tego, co raportuje klient. Jeśli gracz sprintuje lub nadal sprintuje w warunkach, których własna kontrola serwera nie dopuszcza, to jest to niezgodność, którą serwerowy anticheat jest dobrze przygotowany do wykrycia. Uprawnienia do sprintu to nie ukryte informacje, którymi kontroluje sam klient, to stan, który serwer już oblicza dla własnych celów. Poluzowanie go po stronie klienta jest prawdopodobnym powodem do wykrycia, a nie czymś, co umknie uwadze.
+
+To również jest mniej rzucająca się w oczy zmiana niż coś w rodzaju zautomatyzowanej walki. Nikt nie obserwuje, żeby twoja postać robiła coś wyraźnie nieludzkiego – po prostu sprintujesz, kiedy technicznie nie powinnaś. Ale wykrywanie po stronie serwera nie przejmuje się tym, jak to wygląda dla innego gracza, liczy się dla niego, czy liczby się zgadzają, a tutaj się nie zgadzają.
+
+<Callout variant="tip" title="Opal udostępnia moduł Sprint">
+Katalog Opal podaje to wprost: Sprint, opisany w aplikacji jako „modyfikuje logikę sprintowania”. Bez zbędnych ozdobników. Plik jest oznaczony jako używaj na własną odpowiedzialność, tak jak wszędzie indziej, gdzie pojawiają się moduły tego typu, ponieważ historia wykrywania, o której mowa powyżej, się nie zmienia, tylko dlatego, że to Opal wykonuje sprawdzanie.
+</Callout>
+
+<Callout variant="warning" title="Informacja, nie instrukcja">
+Ta strona opisuje moduł w sposób ogólny, abyś wiedział, co ten termin oznacza. Nazewnictwo i dokładne zachowanie różnią się w zależności od klienta, a modyfikowanie śledzonego przez serwer stanu, takiego jak ten, wiąże się z realnym ryzykiem bana na serwerze chronionym przez system anticheat.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co właściwie zmienia moduł Sprintu?">
+Zmienia warunki, które Minecraft sprawdza przed umożliwieniem rozpoczęcia lub utrzymania sprintu, takie jak wymaganie pełnego paska głodu lub sprawdzanie, które przerywa sprint, gdy droga przed tobą wydaje się zablokowana.
+</FAQItem>
+
+<FAQItem question="Czy Sprint to to samo co moduł prędkości?">
+Nie. Moduł prędkości sprawia, że poruszasz się szybciej. Sprint sam w sobie nie dodaje prędkości, tylko zmienia moment, w którym gra pozwala na sprintowanie.
+</FAQItem>
+
+<FAQItem question="Którzy klienci wdrożyli moduł Sprint?">
+Logika w stylu Sprinta pojawiała się u wielu klientów na przestrzeni lat, w tym u Juul, Fan, Tenacity i Rose. Opal również posiada taki moduł, oznaczony jako Sprint w jego katalogu.
+</FAQItem>
+
+<FAQItem question="Czy używanie sprintu może spowodować zbanowanie gracza?">
+Tak. Serwer śledzi ten sam stan głodu i ruchu, który modyfikuje moduł, niezależnie od klienta, więc serwerowa antywirusowa weryfikacja uprawnień do sprintu może oznaczyć lub zbanować konto za sprintowanie w warunkach, które nie byłyby dozwolone w wersji vanilla.
+</FAQItem>
+
+<FAQItem question="Czy Sprint to poważny cheat w porównaniu z modułami walki?">
+To zmiana o mniejszym profilu niż na przykład automatyczna walka, ale nadal modyfikuje stan, który serwer sprawdza samodzielnie, więc wiąże się z realnym ryzykiem wykrycia, a nie jest to bezpieczna kosmetyczna modyfikacja.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-scaffold", label: "Co to jest Scaffold?", description: "Kolejny moduł ruchu, który manipuluje stanem śledzonym przez serwer." },
+  { href: "/pl/learn/what-is-velocity-anti-knockback", label: "Czym jest Prędkość (ochrona przed odrzutem)?", description: "Inny rodzaj anticheatów sprawdzających stan ruchu weryfikuje się niezależnie od klienta." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Do szerszej kategorii, do której należą Sprint i moduły tego typu." },
+]} />
+
+<CTA href="/pl/purchase">Sprawdź, co jest używane na własną odpowiedzialność w Opal, zanim zainstalujesz cokolwiek.</CTA>

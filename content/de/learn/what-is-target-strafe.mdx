@@ -1,0 +1,87 @@
+---
+title: Was ist Target Strafe in Minecraft? Modul erklärt
+description: Zielstrafe ist ein Minecraft-Bewegungsmodul, das automatisch einen festgelegten Kampfziel umkreist. Hier ist beschrieben, wie es funktioniert, seine stumme Variante und warum Server es melden.
+excerpt: Es umkreist dich automatisch um dein Ziel, ohne dass du dich bewegen musst. Außerdem ist es einer der leichteren Bewegungscrheats, die ein Server erkennen kann.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was genau bewirkt der Zielstrafen-Modus?
+    a: Es umkreist dich automatisch um ein blockiertes Kampffahrzeug und übernimmt die seitliche Bewegung, die ein Spieler normalerweise mit A und D steuern würde.
+  - q: Was ist die stumme Variante von Zielstrafe?
+    a: Ein Submodus, dokumentiert in LiquidBounce, der deine tatsächliche Bewegungsrichtung auf dem Server verändert, ohne die Kamerarichtung, die du oder andere sehen, zu drehen, wodurch die Richtung, in die du blickst, von der Richtung, in die du dich tatsächlich bewegst, entkoppelt wird.
+  - q: Ist Target Strafen von Anticheats erkennbar?
+    a: Ja. Die reguläre Version erzeugt eine unnatürlich glatte, kreisende Bewegung, und die stumme Version erzeugt eine Diskrepanz zwischen Ausrichtung und Bewegung, die ein Standard-Client nicht erzeugen kann – beides Signale, die Anticheatsysteme messen können.
+  - q: Welche Kunden haben Target Strafe versendet?
+    a: Es wurde in LiquidBounce und Fan dokumentiert, und Opal liefert seine eigene Version unter demselben Namen, Target Strafe.
+  - q: Ist Zielstrafe dasselbe wie eine Bewegungsunterstützung?
+    a: Nein. Eine Bewegungsassistent kann Informationen anzeigen oder Eingaben glätten. Ziel-Strafe ersetzt deine Richtungssteuerung vollständig, weshalb sie als Cheatmoodul und nicht als Helfer eingestuft wird.
+---
+
+<KeyTakeaways>
+
+- Zielstrafen ist ein Bewegungsmodul, das dich automatisch um ein festes Kampffahrzeug kreisen lässt und manuelles Ausweichen ersetzt.
+- Eine stumme Variante entkoppelt deine sichtbare Ausrichtung von deiner tatsächlichen Bewegung, was ein Standard-Client nicht leisten kann.
+- Beide Varianten sind erkennbar: unnatürlich glattes Kreisen und Abweichungen zwischen Ausrichtung und Bewegung sind echte Anti-Cheat-Signale.
+- Opal liefert sein eigenes Zielstrafen-Modul und kennzeichnet dessen Nutzung mit einem Haftungsausschluss.
+
+</KeyTakeaways>
+
+Zielstrafe ist ein Bewegungsmodul, das dich automatisch um das Ziel kreist, auf das du dich eingeschossen hast, anstatt A oder D gedrückt zu halten und den Kreis selbst zu gehen. Es berechnet in jedem Takt eine Strafrichtung und speist sie direkt in deine Bewegung ein, sodass der Kreis auch dann glatt bleibt, wenn du andere Dinge mit den Händen machst. Einige Clients liefern eine stumme Variante mit, die deinen Charakter in eine Richtung bewegt, während deine Kamera in eine andere Richtung zeigt. Es ist ein kleines Stück Automatisierung mit einem überproportionalen Ruf dafür, Leute in Schwierigkeiten zu bringen.
+
+## Wie Zielstrafe funktioniert
+
+Zielstrafe greift in das Kampfsystem des Clients ein und übernimmt die seitliche Bewegung, sobald ein Ziel erfasst ist, meist im selben Moment, in dem ein Kampf- oder Zielmodul beginnt zu schwingen. Anstatt A oder D zu drücken, um den Kreis zu gehen, berechnet das Modul in jedem Takt die Strafrichtung neu und schreibt sie direkt in den Bewegungs-Handler. Das Ergebnis ist eine saubere, mechanisch konsistente Umlaufbahn um das, was du bekämpfst, mit einem Radius und einer Geschwindigkeit, die manuelles Strafen nicht erreicht.
+
+Die stille Variante, dokumentiert in LiquidBounce, geht einen Schritt weiter. Anstatt nur die Strafe-Eingabe zu automatisieren, ändert sie die Richtung, in die dein Charakter tatsächlich auf dem Server bewegt wird, während die gerenderte Kamerarotation unverändert bleibt. Jeder, der zusieht, sieht einen Spieler, der in eine Richtung blickt und sich in eine andere driftet – eine Kombination, die ein normaler Client-Input physikalisch nicht erzeugen kann.
+
+In Kombination mit einem Aim- oder Combat-Modul entfernt Target Strafe ein weiteres Element manueller Koordination aus einem Nahkampf: kein Verlust des Winkels während des Schlags, kein Flankieren, weil deine Füße und deine Maus nicht gleichzeitig das Gleiche tun.
+
+<Callout variant="tip" title="Opal nennt es auch Target Strafe">
+Der Katalogeintrag von Opal für dieses Modul macht genau das, was der Name verspricht: Er kreist dich um dein Ziel. Das gleiche Modul, die gleiche Kategorie, der gleiche Kompromiss wird weiter unten behandelt.
+</Callout>
+
+## Ist Target Strafe sicher einsetzbar?
+
+Hier werden zwei verschiedene Dinge markiert. Die Basisversion erzeugt Bewegungen, die zu glatt und zu konsistent sind, um als eine Person vorzugeben, die eine Tastatur bedient. Ein Server, der Bewegungsmuster verfolgt, kann diese Konsistenz direkt messen.
+
+Die stumme Variante ist die riskantere der beiden. Eine Diskrepanz zwischen der Ausrichtung des Körpers eines Spielers und seiner tatsächlichen Bewegung ist etwas, das eine legitime Client-Eingabe nicht erzeugen kann. Daher hat jede Anti-Cheat-Software, die die Rotation mit der Bewegung abgleicht, ein klares Signal, um sie zu erkennen. Ob ein bestimmter Server dies tatsächlich erkennt, hängt davon ab, wie genau dieser Server die Bewegungskonsistenz überprüft, aber keine der beiden Varianten ist eine sichere Annahme.
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Zielstrafe, ob lautlos oder nicht, ist eine nachweisbare Bewegungsimplementierung und bricht die Regeln auf praktisch jedem Mehrspieler-Server. Jeder Client, der sie anbietet, darunter auch Opal, listet sie mit dem Hinweis auf eigene Gefahr auf. Das ist keine Zusage, dass Sie gebannt werden. Es ist die Feststellung, dass dies möglich ist.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was genau bewirkt Target Strafe?">
+Es führt dich automatisch in einem Kreis um ein festes Kampffahrzeug herum, wobei es die seitliche Bewegung übernimmt, die ein Spieler normalerweise mit A und D steuern würde.
+</FAQItem>
+
+<FAQItem question="Was ist die stille Variante von Target Strafe?">
+Ein Submodus, dokumentiert in LiquidBounce, der Ihre tatsächliche Bewegungsrichtung auf dem Server verändert, ohne die Kamera zu drehen, die Sie oder andere sehen. Dadurch wird entkoppelt, in welche Richtung Sie schauen, und wohin Sie sich tatsächlich bewegen.
+</FAQItem>
+
+<FAQItem question="Ist Target Strafe von Anticheats erkennbar?">
+Ja. Die reguläre Version erzeugt eine unnatürlich glatte, kreisförmige Bewegung, und die stumme Version erzeugt eine Diskrepanz zwischen Blickrichtung und Bewegung, die ein Vanilla-Client nicht erzeugen kann. Beides sind Signale, die Anticheats messen können.
+</FAQItem>
+
+<FAQItem question="Welche Clients haben Target Strafe ausgeliefert?">
+Es wurde in LiquidBounce und Fan dokumentiert, und Opal liefert seine eigene Version unter demselben Namen, Target Strafe.
+</FAQItem>
+
+<FAQItem question="Ist Target Strafe dasselbe wie eine Bewegungsunterstützung?">
+Nein. Eine Bewegungsunterstützung kann Informationen anzeigen oder Eingaben glätten. Target Strafe ersetzt Ihre Richtungssteuerung vollständig, weshalb sie als Cheatmoodul und nicht als Hilfsmittel eingestuft wird.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-killaura", label: "Was ist KillAura?", description: "Das Auto-Angriffsmodul Zielausweichung begleitet meistens." },
+  { href: "/de/learn/what-is-an-aimbot", label: "Was ist ein Aim-Bot?", description: "Das kampforientierte Modul, mit dem es oft gekoppelt wird." },
+  { href: "/de/learn/what-is-velocity-anti-knockback", label: "Was ist Geschwindigkeit / Rückstoßvermeidung?", description: "Ein weiteres Bewegungsmodul, das dich länger im Kampf hält." },
+]} />
+
+<CTA href="/de/kaufen">Denke intelligenter. Opal versendet Zielstrafen und den Rest des Kampfpakets darum herum.</CTA>

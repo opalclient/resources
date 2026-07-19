@@ -1,0 +1,85 @@
+---
+title: Cos'è Keep Sprint in Minecraft? Spiegazione del Modulo
+description: Keep Sprint è un modulo di movimento che impedisce all'sprint di interrompersi quando si attacca o si svolta bruscamente. Ecco come funziona e se ne vale la pena.
+excerpt: Keep Sprint mantiene la tua velocità durante l'impatto o la svolta che avrebbero dovuto fermarti. Non è un trucco per la velocità, ma il server può comunque notare la differenza.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa cambia effettivamente Keep Sprint?
+    a: Impedisce all'accelerazione di interrompersi durante azioni che normalmente la terminerebbero, come attaccare o sterzare bruscamente, così da continuare a muoversi alla velocità massima invece di rallentare a passo.
+  - q: Keep Sprint è la stessa cosa di un trucco per aumentare la velocità?
+    a: No. Non aumenta la velocità di movimento oltre il bonus dello sprint normale. Mantiene solo attivo quel bonus esistente nei momenti in cui Minecraft vanilla lo annullerebbe altrimenti.
+  - q: Perché attaccare o sterzare bruscamente dovrebbe annullare lo sprint in primo luogo?
+    a: Vanilla Minecraft considera tali azioni incompatibili con lo sprint in avanti, quindi reimposta il flag di sprint e ti riporta alla velocità di camminata finché lo sprint non viene riattivato.
+  - q: Può Keep Sprint essere segnalato dall'anticheat?
+    a: Può accadere su server che verificano se la velocità che hai segnalato corrisponde al movimento che le tue azioni implicano. Mantenere lo sprint per un istante in cui avrebbe dovuto resettarlo è il tipo di discrepanza che tali controlli cercano.
+  - q: Quali clienti hanno il modulo Keep Sprint?
+    a: Viene tracciato come si può vedere in clienti come Tenacity e Rose. Altri clienti potrebbero spedire la stessa idea con un nome diverso, e Opal spedisce la propria versione come Sprint.
+---
+
+<KeyTakeaways>
+
+- Keep Sprint è un modulo di movimento che impedisce l'interruzione dello sprint quando si attacca o si svolta bruscamente.
+- In Minecraft vanilla, lo sprint viene normalmente resettato in queste situazioni, oltre che quando ci si muove all'indietro o si colpisce un ostacolo.
+- L'effetto persiste continuamente durante un combattimento, non solo una volta.
+- Non aumenta mai la velocità oltre il bonus sprint normale, semplicemente mantiene attivo quel bonus più a lungo.
+
+</KeyTakeaways>
+
+Keep Sprint è un modulo di movimento che impedisce al gioco di interrompere la tua corsa in momenti in cui normalmente la farebbe terminare: attaccando, svoltando bruscamente, arretrando o urtando un ostacolo. Minecraft vanilla interpreta queste azioni come prova che hai smesso di correre e ti riporta alla velocità di camminata finché non la riattivi premendo in avanti di nuovo. Keep Sprint intercetta questo reset prima che avvenga e mantiene inalterata la bandiera della corsa, in modo che il bonus di velocità persista durante l'interruzione. È classificato come modulo di movimento, ma quasi nessuno se ne accorge mentre si cammina in linea retta. Il suo vero ambiente è il combattimento, dove queste interruzioni si verificano costantemente.
+
+## Come funziona Keep Sprint
+
+Keep Sprint esegue un controllo esattamente nei momenti in cui Minecraft vanilla resettarebbe normalmente la tua bandiera della corsa. Il client vanilla interrompe la corsa in base a una breve lista di condizioni: attacchi, superi un certo angolo rispetto alla tua direzione di marcia, ti muovi all'indietro o colpisci qualcosa di solido. Ognuna di queste è la modalità di Minecraft vanilla per decidere che il tuo movimento non assomiglia più a una corsa, quindi smette di premiarti con la velocità della corsa.
+
+Il modulo si posiziona di fronte a quella decisione. Quando uno di quei trigger si attiva, Keep Sprint lo intercetta e lascia il flag impostato invece di permettere al client di tornare a camminare. Poiché lo sprint controlla un bonus di velocità reale e continuo, piuttosto che un'animazione una tantum, l'effetto non è un singolo frame di imbroglio, ma viene mantenuto per tutto il tempo in cui il trigger avrebbe altrimenti rallentato il giocatore. Un giocatore può ruotare per affrontare un avversario, sferrare un colpo e continuare a muoversi alla massima velocità di sprint senza la pausa normalmente necessaria per riattivare lo sprint toccando nuovamente in avanti. Viene tracciato come si vede nei client, tra cui Tenacity e Rose, e sebbene sia catalogato come movimento, il caso d'uso pratico è quasi sempre un combattimento.
+
+## Keep Sprint è sicuro da usare?
+
+Keep Sprint sovrascrive una meccanica che Minecraft vanilla applica intenzionalmente. Lo sprint dovrebbe resettarsi nel momento in cui il tuo movimento smette di assomigliare a uno sprint, e un server che ricalcola la tua velocità prevista in base alle tue azioni segnalate può notare che stai mantenendo lo sprint durante un momento in cui avrebbe dovuto resettarsi. Questa è la stessa categoria di controllo utilizzata contro altri moduli di sprint e velocità: non "la tua velocità è troppo alta", ma "la tua velocità corrisponde a quella che le tue azioni dovrebbero indicare"
+
+È un segnale più sottile rispetto a un semplice aumento della velocità, dato che Keep Sprint non rivendica mai una velocità superiore a quella che lo sprint già permette di raggiungere autonomamente. Non c'è nulla nel suo funzionamento che assomigli a un aimbot o a uno spam di blocchi. Ma non è nemmeno puramente estetico. Modifica ciò che il server dovrebbe aspettarsi dal tuo movimento in un determinato istante, e questa discrepanza è proprio ciò che un controllo del movimento è progettato per intercettare. Consideralo una funzionalità da utilizzare a proprio rischio su qualsiasi server che esegua più del minimo indispensabile.
+
+<Callout variant="tip" title="Opal lo spedisce come Sprint">
+Il catalogo di Opal lo indica chiaramente: Sprint, "Modifica la logica alla base della corsa veloce". Stessa classificazione di tutto il resto di questa pagina: utilizzalo a tuo rischio e pericolo.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina descrive il modulo in termini generali, così da far capire cosa significa il termine. La denominazione e il comportamento esatto variano a seconda del client, e bloccare uno sprint in un momento in cui avrebbe dovuto resettarsi viola le regole sui server con controlli di movimento reali.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa cambia effettivamente lo Sprint Continuo?">
+Impedisce allo sprint di interrompersi durante azioni che normalmente lo terminerebbero, come attaccare o sterzare bruscamente, così continuerai a muoverti alla velocità dello sprint invece di rallentare a passo.
+</FAQItem>
+
+<FAQItem question="Keep Sprint è come un hack della velocità?">
+No. Non aumenta mai la velocità di movimento oltre il bonus dello sprint normale. Mantiene attivo solo quel bonus esistente nei momenti in cui Minecraft di default lo annullerebbe.
+</FAQItem>
+
+<FAQItem question="Perché attaccare o sterzare bruscamente interrompe lo sprint in primo luogo?">
+Minecraft Vanilla considera queste azioni incompatibili con lo sprint in avanti, quindi reimposta il flag dello sprint e ti riporta alla velocità di camminata finché lo sprint non viene riattivato.
+</FAQItem>
+
+<FAQItem question="Keep Sprint può essere segnalato dall'anticheat?">
+Può succedere, su server che verificano se la velocità segnalata corrisponde al movimento implicito dalle tue azioni. Mantenere lo sprint durante un momento in cui dovrebbe essere resettato è proprio il tipo di discrepanza che questi controlli cercano.
+</FAQItem>
+
+<FAQItem question="Quali clienti hanno il modulo Keep Sprint?">
+È tracciato come si può vedere in clienti come Tenacity e Rose. Altri clienti potrebbero implementare la stessa idea con un nome diverso, e Opal offre la propria versione come Sprint.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-velocity-anti-knockback", label: "Cos'è la Velocità (anti-knockback)?", description: "Un altro modulo che sovrascrive la risposta fisica prevista dal server." },
+  { href: "/it/learn/what-is-scaffold", label: "Cos'è Scaffold?", description: "Un altro modulo di movimento progettato per un problema completamente diverso." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Dove moduli sottili e difficilmente individuabili come questo si inseriscono nel design di un cliente." },
+]} />
+
+<CTA href="/it/purchase">Non interrompere mai il tuo passo durante un combattimento. Le navi Opal Sprint fanno parte del suo kit di movimento $8.99.</CTA>

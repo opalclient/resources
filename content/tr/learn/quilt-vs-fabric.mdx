@@ -1,0 +1,90 @@
+---
+title: "Quilt ve Fabric: Hangi Minecraft Mod Yükleyici (2026)"
+description: "Quilt ve Fabric Arasındaki Fark Açıklaması: Topluluk çatallanmasının, uyumluluk, API'ler ve benimsenme açısından orijinal yükleyiciye göre nasıl farklılaştığı ve hangisini çalıştırdığınız."
+excerpt: Quilt, Fabric'in bir çatallanmasıdır ve Fabric modlarını değiştirilmeden çalıştırır. İşte iki yükleyicinin uyumluluk, API'ler ve benimsenme konularında nasıl farklılaştığı ve hangisini seçeceğiniz.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Frameworks
+author: trq
+faqs:
+  - q: Quilt, Fabric modlarıyla uyumlu mu?
+    a: "Evet. Quilt, Quilted Fabric API katmanı aracılığıyla Fabric modlarını yükler, ancak bunun tersi doğru değildir: Fabric, yalnızca Quilt'e özel QSL API'lerine ihtiyaç duyan modları çalıştıramaz."
+  - q: Neden Quilt varsa eğer Fabric zaten çalışıyor?
+    a: Quilt, 2021'de yönetim anlaşmazlıkları nedeniyle FabricMC'den ayrılmış olup, Fabric uyumluluğunu korurken QSL aracılığıyla kendi API tasarımını sunmayı hedefliyor.
+  - q: Bir hizmet müşterisi Fabric mi yoksa Quilt'i hedeflemeli mi?
+    a: Çoğu hedef kumaş, kullanıcı tabanı ve sürüm desteği daha geniş olduğu için tercih edilir; ayrıca bir Fabric derlemesi de Quilt üzerinde çalıştığı için yalnızca Quilt için bir derleme yapmak pek fazla fayda sağlamaz.
+  - q: Diğeri diğerinden daha hızlı mı?
+    a: Anlamlı bir fark yok. Quilt, Fabric'in mixin modelini devraldığı için, performans yüklediğiniz modlardan kaynaklanır, yükleyiciden değil.
+---
+
+<KeyTakeaways>
+
+- Quilt, 2021 yılında [Fabric](https://fabricmc.net/) topluluk çatallanmasıdır ve Fabric modlarını değiştirilmeden çalıştırır.
+- Fabric, çok daha geniş bir mod ekosistemine ve kullanıcı tabanına sahip orijinal yükleyicidir.
+- Uyumluluk tek yönlüdür: Quilt, Fabric modlarını yükler, ancak Fabric yalnızca Quilt modlarını yükleyemez.
+- Çoğu oyuncu için Fabric güvenli bir seçenektir; Quilt, ek API'lerini isteyenler için uygundur.
+
+</KeyTakeaways>
+
+Quilt, [Fabric](https://fabricmc.net/) topluluğu tarafından oluşturulmuş bir çataldır ve Fabric modlarıyla ikili uyumluluğu korurken üzerine kendi kütüphanelerini ekler. Fabric, orijinal yükleyici olup çok daha geniş bir mod ekosistemine ve kullanıcı tabanına sahiptir. Çoğu oyuncu için Fabric güvenli bir seçenektir. Quilt, ek API'lerini isteyen veya çatalı prensip olarak desteklemek isteyenler için uygundur.
+
+<Callout variant="info" title="Opal Nerede Çalışır">
+Opal bir Fabric modudur, bu nedenle ona ihtiyacınız olan yükleyici Fabric'tir. Bir Fabric sürümü ayrıca Quilt üzerinde de çalışır, eğer o çatala tercih ederseniz. [kurulum rehberini](https://example.com/en/docs/setup) inceleyin.
+</Callout>
+
+## Her Birinin Ne Olduğu
+
+Fabric, FabricMC tarafından bakımı yapılan hafif, modüler bir mod yükleyicisidir. Küçük bir çekirdekle ayrı sürümlere sahip [Fabric API](/tr/learn/what-is-the-fabric-api) ile eşleşir ve mixin tabanlı bir yamalama modeli kullanır. Yeni Minecraft sürümlerine hızla güncellenir ve en büyük performans ve yardımcı mod kataloğuna sahiptir.
+
+Quilt, FabricMC içindeki yönetim anlaşmazlıklarının ardından 2021'de başlayan Fabric'in bir çatallamasıdır. Fabric modlarını değiştirilmeden çalıştırır, kendi Quilted Fabric API'sini bir Fabric API uyumluluk katmanı olarak gönderir ve kendi API'leri için QSL, Quilt Standart Kütüphaneleri'ni ekler. Benimsemesi, Fabric'e göre düşüktür.
+
+## Aralarındaki Farklar
+
+Büyük pratik nokta, uyumluluk yönüdür. Quilt, Fabric modlarını yükleyebilir, ancak Fabric, yalnızca Quilt'e özgü QSL özelliklerine bağımlı modları yükleyemez. Bu nedenle, düz Fabric için yazılan bir mod her iki kitleye de ulaşırken, QSL'ye bağımlı bir mod yalnızca Quilt kullanıcılarına ulaşır.
+
+| | Fabric | Quilt |
+| :--- | :--- | :--- |
+| Köken | FabricMC tarafından orijinal yükleyici | Fabric'in 2021 topluluk çatallaması |
+| Mod ekosistemi | Modern Minecraft'ta en büyük | Fabric modlarını ve QSL modlarını çalıştırır |
+| Kendi API'si | Fabric API | Quilted Fabric API (uyumluluk) + QSL |
+| Uyumluluk | Yalnızca Quilt modlarını yükleyemez | Fabric modlarını değiştirilmeden yükler |
+| Benimseme | Çok büyük | Fabric'e göre küçük |
+| Yamalama modeli | Mixin'ler | Mixin'ler (Fabric'ten miras) |
+
+## Hangisini Seçmeli
+
+<Checklist>
+<ChecklistItem>Geniş mod yelpazesi, en hızlı sürüm desteği ve çoğu istemci ve modun varsayılan olarak hedeflediği yükleyici istiyorsanız Fabric seçeneğini seçin.</ChecklistItem>
+<ChecklistItem>QSL özelliklerini kullanmak, belirli bir Quilt modunu çalıştırmak veya çatalların yönetimini tercih etmek istiyorsanız Quilt seçeneğini seçin. Mevcut Fabric modlarınız hala çalışır.</ChecklistItem>
+<ChecklistItem>İkisini aynı anda çalıştırmayın. Her profil için bir yükleyici seçin ve Quilt, Fabric modlarını okuduğundan, hangi yöne olursa olsun geçişin maliyeti düşüktür.</ChecklistItem>
+</Checklist>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Quilt, Fabric modlarıyla uyumlu mu?">
+Evet. Quilt, ikili uyumluluğu korur ve Quilted Fabric API katmanı aracılığıyla Fabric modlarını yükler. Bunun tersi geçerli değildir: Fabric, Quilt'e özel QSL API'lerine ihtiyaç duyan modları çalıştıramaz.
+</FAQItem>
+
+<FAQItem question="Quilt neden var, Fabric zaten çalışıyor iken?">
+Quilt, 2021 yılında yönetim anlaşmazlıkları nedeniyle FabricMC'den ayrıldı. Fabric ile uyumlu kalmayı hedeflerken QSL aracılığıyla kendi API tasarımını sunuyor.
+</FAQItem>
+
+<FAQItem question="Bir uygulama istemcisi Fabric mi yoksa Quilt'i hedeflemeli mi?">
+Çoğu kişi, kullanıcı tabanı ve sürüm desteği daha geniş olduğu için Fabric'i hedefler; ayrıca bir Fabric derlemesi de Quilt üzerinde çalışır. Çoğu durumda yalnızca Quilt için derlemek, kitleyi küçültür ve herhangi bir kazanç sağlamaz.
+</FAQItem>
+
+<FAQItem question="Diğeri daha hızlı mı?">
+Anlamlı bir fark yok. Quilt, Fabric'in mixin modelini devraldığı için performans, yüklediğiniz modlardan, yükleyici değil, kaynaklanır.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "Diğer büyük mod-yükleyici ayrımı." },
+  { href: "/tr/learn/what-is-the-fabric-api", label: "Fabric API nedir?", description: "Kütüphane hem yükleyicilerin hem de üzerine inşa edildiği yerdir." },
+  { href: "/tr/learn/what-is-a-minecraft-mod-loader", label: "Minecraft mod yükleyici nedir?", description: "Oyunda modların nasıl bağlandığı." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

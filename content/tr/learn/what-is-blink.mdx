@@ -1,0 +1,104 @@
+---
+title: Minecraft'ta Blink Nedir? Paket-Tampon Modülü
+description: Blink, Minecraft için bir yardımcı istemci modülüdür; giden paketlerinizi tamponlayarak sunucunun sizi yerinde donmuş görmesini sağlar ve ardından hepsini tek bir seferde serbest bırakır.
+excerpt: Blink, sunucuya yansıyanı dondurur, siz yerel olarak hareket etmeye devam ederken, ardından tüm paketleri tek seferde boşaltır. Bu, ince bir yöntem değildir ve risksiz de değildir.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Blink aslında ne işe yarıyor?
+    a: Giden paketlerinizi tamponlayarak tutar, böylece sunucu sizi bir süre hareketsiz görse de istemci yerel olarak işlemeye devam eder. Tamponu serbest bırakmak, birikmiş olan her şeyi tek seferde gönderir.
+  - q: Blink, takılma ile aynı şey mi?
+    a: Hayır. Gerçek gecikme düzensizdir ve bağlantı sürekli olarak veri göndermeye çalışır. Blink, giden paket akışını kasıtlı olarak askıya alır ve komutla yeniden başlatır; bu, gerçek ağ sorunlarından daha tutarlı bir kalıptır.
+  - q: Blink, Fake Lag'den nasıl farklıdır?
+    a: Sahte gecikmeler ve paketleri kısa bir süre içinde gönderir, bağlantıyı kesmeden, kısa süreli savaş senkronizasyon hataları için tasarlanmıştır. Blink ise bağlantıyı tamamen daha uzun süre askıya alır, sunucunun görüş alanından bir süre kaybolmanızı sağlamak için geliştirilmiştir.
+  - q: Blink seni banlanmana neden olabilir mi?
+    a: Evet. Kullanıcı riskini içeren bir özelliktir. Dondurulmuş bir pozisyonun ardından gelen ani bir zıplama, antichiplerin dikkat edebileceği bir kalıptır, bu nedenle onu kullanmak, Opal dahil olmak üzere herhangi bir istemci için gerçek bir tespit riski taşır.
+  - q: Hangi müşteriler Blink gönderimi yaptı?
+    a: Tenacity ve Opal v1 gibi müşterilerde belgelenmiş olup, Opal'ın mevcut modül listesinde de aynı adla yer almaya devam ediyor.
+---
+
+<KeyTakeaways>
+
+- Blink, gönderdiğin paketleri tamponlayarak sunucunun son bilinen konumunu göstermesini sağlar.
+- Sen hareket etmeye ve yerel olarak savaşmaya devam ediyorsun; sunucu, bırakana kadar hiçbir şey görmez.
+- Bırakmak, tutulan tüm paketleri aynı anda gönderir ve gerçek konumunu tek bir atlayışta yerleştirir.
+- Bu, kendi sorumluluğunuzda kullanabileceğiniz bir özelliktir: tespit edilebilir ve Opal dahil olmak üzere istemcilerde yerleşik olarak bulunur
+
+</KeyTakeaways>
+
+Blink, bazı Minecraft yardımcı istemcilerinde bulunan bir ağ modülüdür ve giden paketlerinizi oluşturuldukları anda göndermek yerine bir aralıkta depolar. Arabelleğin tutulduğu süre boyunca, sunucu sizi son olarak aldığı konuma göre çizmeye devam eder, istemciniz hareket etmeye, savaşmaya veya gerçek zamanlı olarak inşa etmeye devam etse bile. Arabelleği bıraktığınızda, tutma süresi boyunca oluşturduğunuz tüm paketler tek seferde sunucuya ulaşır ve gerçek konumunuz tek bir atlayışla yakalar. Bu, bir görüntüleme hilesi değil, paket manipülasyonudur ve iyi günlük kaydı olan sunucular farkı anlayabilir.
+
+## Blink nasıl çalışır
+
+Normal bir istemci, sürekli bir hareket ve eylem paketi akışı gönderir ve sunucu, her birinin geldiği anda durumunuzu günceller. Blink, bu akışı keser ve bir süre boyunca istemciden çıkmasını engeller. Yerel olarak hiçbir şey değişmez: hareket etmeye, salmaya, blok yerleştirmeye, ne yapıyorsanız onu yapmaya devam edersiniz ve kendi ekranınız bunların hepsini işler. Sunucunun çalışabileceği yeni bir şey yoktur, bu nedenle sizi son olarak aldığı konumda sabitler. Arabelleği bırakın ve tutma süresi boyunca kuyruğa alınan tüm paketler aynı anda sunucuya ulaşır, gerçek durumunuzu tek bir atlayışla yerine getirir, yumuşak bir yakalamanın aksine.
+
+## Blink vs. Sahte Gecikme
+
+Her iki modül de paketleri geri tutar, ancak aynı şekilde veya aynı nedenle yapmazlar.
+
+| | Sahte Gecikme | Işınlanma |
+|---|---|---|
+| Paketlere Ne Olur | Gecikmeli, ardından bir anda atılır | Tamamen askıya alınır, sızdırılmaz |
+| Bağlantı | Sürekli aktif kalır | Süre boyunca sabit kalır |
+| Tipik Kullanım | Kısa dövüş senkronizasyonu bozulmaları | Daha uzun bekleme süreleri, görüş alanından kaybolma |
+| Amaç | Dövüşün ortasında kısa bir avantaj | Sunucunun sizi okumasından kaybolmak |
+
+Pratik fark, süre ve niyettir. Sahte Gecikme, bir dövüşte yarım saniye kazanmak için tasarlanmıştır. Işınlanma ise sizi sunucunun sonunda o andan daha uzun süre var olmamanız için tasarlanmıştır.
+
+<Callout variant="tip" title="Opallerde Işıltı">
+
+Opal'ın kendi modül listesinde de aynı isim altında yer alıyor. Katalog açıklamasında da dürüstçe belirtilmiş: Blink, ağ bağlantınızı koruyor ve paketler kuyruğa giriyor. Aynı mekanizma, aynı ödünleşim, süslemesiz bir şekilde
+
+</Callout>
+
+<Callout variant="warning" title="Bu seni yakalar, bazen">
+
+Donaklayan sunucu tarafı pozisyonu, ardından ani bir sıçrama, sıradan bir bağlantı takılması gibi görünmüyor ve antichipler tam olarak o şekli arıyor. Gerçek bir düşüş düzensiz paket akışına ve sonunda zaman aşımına yol açar; bir modülün talep üzerine paketleri askıya alıp yeniden başlatması daha temiz ve kullanışlı bir örüntü oluşturur, özellikle yeniden başlatma dövüşle veya bir kaçışla hizalandığında. Paket zamanlamasını kaydeden veya uzun pozisyon tutmalarının ardından bir sıçramayı işaret eden sunucular bunu yakalayabilir ve tekrarlanan kullanım başlı başına bir işarettir. Blink, her gönderilen istemcide, Opal dahil olmak üzere, kullan-riski-üstüne kullanıma sahiptir: bununla ilgili hiçbir şey belirli bir sunucunun kontrollerinden sıyrılacağı garanti edilmez
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Blink aslında ne işe yarıyor?">
+
+Giden paketlerinizi tamponlar ve sunucu sizi bir süre hareketsiz görsün diye onları bekletir, istemciniz tüm bu süreçte yerel olarak işlem görmeye devam etse bile. Tampon boşaldığında, kuyruğa girmiş olan her şey aynı anda sunucuya ulaşır
+
+</FAQItem>
+
+<FAQItem question="Blink, takılma ile aynı şey mi?">
+
+Hayır. Gerçek gecikme düzensizdir ve bağlantı sürekli olarak veri itmeye çalışır. Blink, gönderilen akışı kasıtlı olarak askıya alır ve komutla yeniden başlatır; bu, gerçek ağ sorunlarından çok daha tutarlı bir kalıptır
+
+</FAQItem>
+
+<FAQItem question="Blink, Fake Lag'den nasıl farklıdır?">
+
+Sahte Gecikme, bağlantıyı kesmeden paketleri geciktirip bir anda serbest bırakır, kısa süreli savaş senkronizasyon hatalarını gidermek için tasarlanmıştır. Blink ise bağlantıyı tamamen askıya alır ve daha uzun süre tutar, sunucunun görüş alanından bir süre kaybolmanızı sağlamak için düşünülmüştür
+
+</FAQItem>
+
+<FAQItem question="Blink seni banlanmana neden olabilir mi?">
+
+Evet, sınıflandırılmış kullan-riski-üstüne. Ürettiği dondur-sonra-atlama kalıbı tam olarak anticheatların aradığı şey, bu yüzden hangi istemci tarafından gönderilirse gönderilsin kullanmak gerçek bir tespit riski taşır
+
+</FAQItem>
+
+<FAQItem question="Hangi müşteriler Blink gönderimi yaptı?">
+
+Tenacity ve Opal v1 gibi müşterilerde belgelenmiş olup, aynı isim altında Opal'ın mevcut modül listesinde de yer almaya devam ediyor
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Blink'in bulunduğu kategori ve bu müşterilerin aslında ne yaptığı." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Sunucuya görünmez kalmaya odaklanarak, sadece onu geçmeyi değil." },
+  { href: "/tr/learn/what-is-velocity-anti-knockback", label: "Hız / Çarpma Geri Tepmesi Nedir?", description: "Sunuzun hareketiniz hakkında ne düşündüğünü değiştiren başka bir modül." }
+]} />
+
+<CTA href="/tr/satin-al">Blink, Opal'ın modül listesinde bir satırdır. Kuyrukta neler olduğunu görün.</CTA>

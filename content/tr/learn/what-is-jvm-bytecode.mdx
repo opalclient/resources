@@ -1,0 +1,97 @@
+---
+title: JVM Bytecode'u Nedir? Java Sınıf Dosyaları Açıklaması
+description: JVM bytecode'u, Java Sanal Makinesi'nin çalıştırdığı kompakt komut kümesidir. .class dosyalarının nasıl çalıştığını, modların bytecode'u neden yeniden yazdığını ve ASM'nin burada nasıl devreye girdiğini öğrenin.
+excerpt: Bayt kodu, JVM'nin çalıştırdığı taşınabilir komut kümesidir, yerel makine kodu değil. İşte .class dosyalarının nasıl çalıştığı ve modların neden bunları yeniden yazdığı.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: JVM bytecode'u makine koduyla aynı mı?
+    a: Hayır. Makine kodu, belirli bir CPU için yerel talimatlardır. Bytecode ise JVM'nin kendi talimat setidir; JVM bu bytecode'u çalışma zamanında makine koduna çevirir. Bu ek katman, bir .class dosyasının herhangi bir platformda çalışmasını sağlayan şeydir.
+  - q: Bayt kodu kaynağa geri okunabilir mi?
+    a: Kısmen. Decompiler'lar, bytecode'tan okunabilir Java kodunu yeniden yapılandırır ve sıradan kod için oldukça başarılıdır. Sonuç her zaman orijinaline birebir aynı olmayabilir ve yorumlar ile bazı yerel isimler kaybolmuş olabilir, ancak genellikle takip etmek için yeterlidir.
+  - q: Neden Java kaynak kodunu doğrudan düzenlemiyoruz?
+    a: Modlar genellikle kaynak koduna sahip olmadıkları için, derlenmiş oyuna karşı gönderilirler. Bytecode'u yeniden yazmak, bir modun orijinal Java dosyalarına dokunmadan veya sahip olmadan bile davranışını değiştirmesini sağlar.
+  - q: Mod yazmak için bytecode öğrenmem gerekiyor mu?
+    a: Genellikle hayır. Modlama çerçeveleri ve betik katmanları, bytecode işini sizin için halleder. Nasıl çalıştığını bilmek, karmaşık bir yamayı ayıklarken veya araç geliştirirken işinize yarar.
+---
+
+<KeyTakeaways>
+
+- JVM bytecode, Java Sanal Makinesi tarafından yürütülen kompakt komut kümesidir.
+- Java derleyicisi, yerel makine kodu yerine `.class` dosyalarında bytecode üretir.
+- Aynı `.class` dosyası, bir Java çalışma zamanına sahip herhangi bir platformda çalışır; bu da formatın amacıdır.
+- Modlar, kaynağını asla değiştirmeden derlenmiş oyunu değiştirmek için bytecode'u yeniden yazar.
+
+</KeyTakeaways>
+
+JVM bytecode'u, Java Sanal Makinesi'nin (JVM) çalıştırdığı komut kümesidir. Java kaynak kodunu derlediğinizde, derleyici CPU'nuz için makine kodu üretmez. Bunun yerine, `.class` dosyalarında saklanan kompakt ve taşınabilir bir biçim olan bytecode üretir. JVM, bu komutları çalışma zamanında okur ve bunları çalışırken yerel koda dönüştürür.
+
+<Callout variant="info" title="Opal Nerede Çalışır">
+Opal, bir [Fabric](https://fabricmc.net/) modudur ve üzerine inşa ettiği modlama araçları sizin için bytecode işlerini yapar, bu yüzden elle opcode'lara dokunmanıza gerek kalmaz. Düz JavaScript ile davranış eklemek istiyorsanız, [scripting tanıtımını](/tr/docs/scripting) inceleyin.
+</Callout>
+
+## Kaynak nasıl bytecode'a dönüşür
+
+Bir `.java` dosyası, bir kişinin yazdığı bir metindir. Bir `.class` dosyası ise, JVM'nin çalıştırdığı derlenmiş çıktıdır. Derleyici, kaynak kodunuzu okur, kontrol eder ve her sınıf için bir `.class` dosyası yazar; her dosya, bytecode talimatları, sabit havuz, yöntem tabloları ve diğer meta verileri içerir.
+
+Bytecode herhangi bir işlemciye bağlı değildir. Aynı `.class` dosyası, Windows, macOS, Linux veya bir Java çalışma zamanına sahip herhangi bir şeyde çalışır, çünkü JVM, yerel makinede talimatları yürütmeyi bilen katmandır. Bu taşınabilirlik, formatın tamamı işte budur.
+
+## Talimatlar nasıl görünür
+
+Bytecode, yığın tabanlı bir talimat kümesidir. Çoğu işlem, değerleri bir operand yığına iterek, onlardan çıkararak ve bir sonuç iterek çalışır. Düşünülmesi gereken kayıt ayırma yoktur; model, JVM'nin bunu hızlı bir şekilde doğrulayabilmesi ve çalıştırabilmesi için kasıtlı olarak basittir.
+
+Birkaç örnek opcode, genel bir fikir verir:
+
+| Opcode | Ne yapar |
+| :--- | :--- |
+| `iload` | Bir int yerel değişkeni yığına iter |
+| `iadd` | İki int'i yığından çıkarır, toplamlarını iter |
+| `invokevirtual` | Bir örnek yöntemi çağırır |
+| `getfield` | Bir örnek alanı okur |
+| `return` | Bir yöntemden döner |
+
+Bunları nadiren elle okur veya yazarız. Araçlar bunları oluşturur ve tüketir; bu da [ASM](/tr/learn/what-is-asm) gibi bir kütüphanenin devreye girdiği yerdir.
+
+## Modlar için bytecode neden önemlidir
+
+Bytecode önemlidir çünkü orijinal kaynağı olmadan davranışı değiştirmenizi sağlar. Bir Minecraft modunun neredeyse hiç oyunun kaynak kodunu yoktur. Sahip olduğu şey, diskteki derlenmiş oyundur. Bir özelliği eklemek veya değiştirmek için bir mod, mevcut bytecode'u okur, yeniden yazar ve sonucu sınıflar yüklendiğinde JVM'ye geri gönderir.
+
+İşte yamalama çerçevelerinin, sahip olmadıkları yöntemlere nasıl yerleştirme (hook) yaptığı. Doğru yeri derlenmiş bir yöntemde bulurlar ve modun koduna bir çağrı eklerler. Bytecode düzeyinde çalışmak, bir modun orijinal Java'nın bir satırını bile görmeden bile oyuna bağlanmasını sağlar.
+
+## ASM'nin Yeri
+
+[ASM](/tr/learn/what-is-asm), bytecode'u okuma, yazma ve dönüştürme için bir Java kütüphanesidir. Bir `.class` dosyasını olaylara veya bir ağaca ayrıştırır, kodun talimatları değiştirmesine izin verir ve geçerli bir `.class` dosyasını geri verir. Küçük, hızlıdır ve ham formata yakın çalışır, bu nedenle daha üst düzey modlama araçları, sınıf dosyalarını kendileri ayrıştırmak yerine bunun üzerine inşa eder.
+
+Çoğu mod yapımcısı [ASM](/tr/learn/what-is-asm)'yi doğrudan çağırmaz. Opcodları gizleyen ve "bu yöntemin başında benim kodumu çalıştır" demek için daha kullanıcı dostu bir yol sunan daha üst düzey bir katmanı kullanır. Altında, o katman bytecode düzenler, genellikle ASM aracılığıyla.
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="JVM bytecode'u makine koduyla aynı mı?">
+Hayır. Makine kodu, belirli bir CPU için yerel talimatlardır. Bytecode ise JVM'in kendi komut kümesidir ve JVM, bu bytecode'u çalışma zamanında makine koduna çevirir. Bu ek katman, `.class` dosyasının herhangi bir platformda çalışmasını sağlayan şeydir.
+</FAQItem>
+
+<FAQItem question="Bytecodu kaynağa geri okuyabiliyor musunuz?">
+Kısmen. Decompiler'lar, bytecode'dan okunabilir Java kodunu yeniden yapılandırır ve sıradan kod için oldukça yakın sonuçlar elde ederler. Sonuç her zaman orijinaline birebir aynı olmayabilir ve yorumlar ile bazı yerel isimler kaybolabilir, ancak genellikle takip etmek için yeterlidir.
+</FAQItem>
+
+<FAQItem question="Neden Java kaynak kodunu doğrudan düzenlemiyoruz?">
+Çünkü modlar genellikle kaynak koduna sahip olmazlar. Derlenmiş oyuna dağıtılırlar. Bytecode'u yeniden yazmak, bir modun orijinal Java dosyalarına dokunmadan veya hatta sahip olmadan oyunun davranışını değiştirmesini sağlar.
+</FAQItem>
+
+<FAQItem question="Mod yazmak için bytecode öğrenmem gerekiyor mu?">
+Genellikle gerekmiyor. Modlama araçları ve betik katmanları bytecode ile ilgili işlemleri sizin için halleder. Nasıl çalıştığını bilmek, karmaşık bir yamayı ayıklarken veya araç geliştirirken işinize yarar.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-the-jvm", label: "JVM nedir?", description: "Bu bytecode'u çalıştıran çalışma zamanı." },
+  { href: "/tr/learn/what-is-asm", label: "ASM nedir?", description: "Kitaplar okur ve sınıf dosyalarını yeniden yazar." },
+  { href: "/tr/learn/what-is-graalvm-javascript-scripting", label: "GraalVM JavaScript betiği nedir?", description: "Bayt koduna dokunmadan davranış eklemek." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

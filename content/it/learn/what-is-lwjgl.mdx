@@ -1,0 +1,93 @@
+---
+title: Cos'è LWJGL? La libreria di giochi Java spiegata (2026)
+description: LWJGL è la libreria che consente a Java di accedere alle API native per grafica, audio e input. Ecco cosa fa e perché Minecraft e i suoi mod si basano su di essa.
+excerpt: Java non può chiamare direttamente OpenGL o l'hardware audio. LWJGL è il ponte, ed è lo strato su cui si basa l'intero stack di rendering di Minecraft.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Libraries
+author: trq
+faqs:
+  - q: Devo installare LWJGL separatamente?
+    a: No. Minecraft viene fornito con la versione necessaria e il launcher scarica i file nativi per la tua piattaforma, quindi i giocatori raramente interagiscono direttamente con LWJGL.
+  - q: Cosa significa "lightweight" in LWJGL?
+    a: Significa che la libreria rimane vicina alle API native invece di avvolgerle in un motore pesante, così si ottiene l'accesso diretto con pochissimo tra il tuo codice e l'hardware.
+  - q: È LWJGL solo per Minecraft?
+    a: No. LWJGL è una libreria Java generica utilizzata da molti giochi e strumenti Java; Minecraft è il progetto più noto costruito su di essa, ma non legato ad essa.
+  - q: Quali lingue possono utilizzare LWJGL?
+    a: Qualsiasi linguaggio che funzioni sulla Java Virtual Machine, inclusi Java e Kotlin, poiché i binding sono esposti come API Java.
+---
+
+<KeyTakeaways>
+
+- LWJGL è la Lightweight Java Game Library, un ponte tra Java e la grafica, l'audio e l'input nativi.
+- È una raccolta di binding leggeri (OpenGL, OpenAL, GLFW e altro ancora), non una singola libreria.
+- Lo stack delle finestre, del rendering e dell'input di Minecraft si basa tutti su LWJGL.
+- È una libreria, non una mod o un mod loader, e Minecraft la include già.
+
+</KeyTakeaways>
+
+LWJGL è la Lightweight Java Game Library. È il ponte che permette al codice Java di chiamare le API native per grafica, audio e input. Minecraft è un gioco Java, quindi utilizza LWJGL per comunicare con la GPU e l'hardware audio. I mod che disegnano interfacce personalizzate o riproducono suoni raggiungono lo stesso livello nativo tramite esso.
+
+<Callout variant="info" title="Dove si integra Opal">
+Opal è un mod [Fabric](https://fabricmc.net/), quindi viene renderizzato tramite lo stesso contesto grafico LWJGL già impostato dal gioco. La [guida all'installazione](/it/docs/setup) spiega come avviare Opal.
+</Callout>
+
+## Cosa fa realmente LWJGL
+
+LWJGL fornisce a Java un wrapper sottile e diretto attorno alle librerie C native. Java di per sé non può chiamare OpenGL o OpenAL; questi sono scritti in C e risiedono nel sistema operativo o nel driver. LWJGL include il codice di binding e i binari nativi in modo che i metodi Java si mappino quasi uno a uno sulle funzioni C sottostanti.
+
+Il wrapper è intenzionalmente sottile. LWJGL non nasconde OpenGL dietro un grafo della scena o un motore. Scrivi codice grafico vicino all'API, motivo per cui è popolare tra i giochi che desiderano controllo e prestazioni prevedibili.
+
+## A cosa si lega
+
+LWJGL è una collezione di binding piuttosto che una singola libreria. I componenti rilevanti per Minecraft e i suoi mod includono:
+
+| Binding | A cosa serve |
+| :--- | :--- |
+| OpenGL | Disegno sullo schermo: l'API di rendering utilizzata dal gioco |
+| OpenAL | Audio posizionale 3D |
+| GLFW | Creazione della finestra, il game loop e l'input da tastiera/mouse |
+| stb | Utilità per il caricamento di immagini e font |
+| NanoVG | Disegno vettoriale 2D anti-aliased, utilizzato da alcuni codici UI |
+
+Ogni binding è opzionale. Un progetto include solo i moduli di cui ha bisogno.
+
+## Perché Minecraft e i suoi mod si basano su di esso
+
+L'intero stack di finestre, rendering e input di Minecraft si basa su LWJGL. Quando il gioco apre una finestra, legge il mouse o invia triangoli alla GPU, quella chiamata passa attraverso LWJGL al livello nativo.
+
+I mod ereditano questo. Un mod che disegna un overlay di gioco o un menu personalizzato utilizza lo stesso contesto OpenGL impostato dal gioco tramite LWJGL. Alcuni mod disegnano anche la loro interfaccia con [NanoVG](/it/learn/what-is-nanovg), che a sua volta è uno dei binding di LWJGL. Quella base condivisa è parte del motivo per cui un singolo mod può renderizzare insieme al gioco senza dover creare un proprio sistema grafico.
+
+## LWJGL è un mod?
+
+No. LWJGL è una libreria, non un mod e non un mod loader. Non lo installi come faresti con un mod. Minecraft include già la versione necessaria e il launcher scarica i binari nativi corrispondenti per il tuo sistema operativo. Gli sviluppatori di mod compilano con LWJGL ma raramente distribuiscono una propria copia.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="È necessario installare LWJGL separatamente?">
+No. Minecraft include la versione necessaria e il launcher scarica i file nativi per la tua piattaforma. I giocatori raramente interagiscono direttamente con LWJGL.
+</FAQItem>
+
+<FAQItem question="Cosa significa 'lightweight' in LWJGL?">
+Significa che la libreria rimane vicina alle API native invece di avvolgerle in un motore pesante. Si ottiene l'accesso diretto con pochissimo tra il tuo codice e l'hardware.
+</FAQItem>
+
+<FAQItem question="LWJGL è solo per Minecraft?">
+No. LWJGL è una libreria Java generica utilizzata da molti giochi e strumenti Java. Minecraft è il progetto più noto basato su di essa, ma non è legato a Minecraft.
+</FAQItem>
+
+<FAQItem question="Quali linguaggi possono utilizzare LWJGL?">
+Qualsiasi linguaggio che funzioni sulla Java Virtual Machine, inclusi Java e Kotlin. I binding sono esposti come API Java.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-nanovg", label: "Cos'è NanoVG?", description: "I disegni vettoriali che legano i client raggiungono tramite LWJGL." },
+  { href: "/it/learn/what-is-the-fabric-api", label: "Cos'è l'API Fabric?", description: "Lo strato comune su cui si basano la maggior parte delle mod di Fabric." },
+  { href: "/it/learn/what-is-graalvm-javascript-scripting", label: "Cos'è la scripting JavaScript di GraalVM?", description: "Come Opal ti permette di programmare il gioco in JavaScript." },
+]} />
+
+<CTA href="/it/purchase">Ottieni Opal, un client Fabric, per $8.99</CTA>

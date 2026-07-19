@@ -1,0 +1,83 @@
+---
+title: Czym jest Jump Circle w Minecraft? Wyjaśnienie efektu pierścienia
+description: "Jump Circle to moduł klienta Minecrafta kosmetyczny, który rysuje pierścień pod stopami przy każdym skoku: czysto wizualny, bez wpływu na rozgrywkę ani wykrywalność."
+excerpt: Pierścień pojawia się pod twoimi stopami za każdym razem, gdy skaczesz. Wygląda świetnie na kamerze i nie ma żadnego znaczenia dla serwerowej antywiry.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Jump Circle wpływa na wysokość skoku, ani na jego częstotliwość?
+    a: Nie. Dodaje jedynie wizualny pierścień tam, gdzie lądujesz podczas skoku. Wysokość skoku, czas i odnowienie pozostają dokładnie takie, jakie oblicza standardowy Minecraft.
+  - q: Czy inni gracze widzą efekt mojego Jump Circle?
+    a: Nie. Pierścień jest renderowany lokalnie, tylko na kliencie uruchamiającym moduł. Wszyscy inni widzą, jak skaczesz normalnie, bez pierścienia, chyba że oni sami uruchamiają ten sam lub podobny moduł.
+  - q: Czy Jump Circle jest wykrywany przez programy anticheat?
+    a: Nie. Ono nic nie wysyła do serwera i nie zmienia żadnej wartości, którą serwer śledzi, więc serwerowa weryfikacja nigdy nie byłaby w stanie tego wykryć.
+  - q: Czy Jump Circle to to samo co ślad cząstki?
+    a: Podobna koncepcja, inny wyzwalacz. Oba są czysto wizualne i związane z ruchem, ale ślad cząstek pojawia się nieustannie podczas poruszania się, a Jump Circle aktywuje się tylko podczas skoku.
+---
+
+<KeyTakeaways>
+- Jump Circle to moduł kosmetyczny, który rysuje pierścień na ziemi pod postacią gracza przy każdym skoku.
+- Zmienia jedynie lokalne renderowanie, więc wysokość skoku, czas i fizyka pozostają w czystej wersji bazowej.
+- Serwer nigdy nie widzi efektu, co oznacza zerowe ryzyko wykrycia.
+- Inni gracze nie widzą go, chyba że uruchomią ten sam moduł.
+</KeyTakeaways>
+
+Jump Circle to moduł klienta Minecrafta kosmetycznego, który rysuje pierścień lub koło na ziemi pod graczem za każdym razem, gdy ten skacze. Zmienia jedynie to, co wyświetla się na lokalnym ekranie: nie wpływa na ruch, wykrywanie kolizji ani nic, co przetwarza serwer. Należy go traktować jako element z kategorii śladu cząstek lub niestandardowego płaszcza – ozdobę wizualną, a nie funkcję rozgrywki.
+
+## Jak to działa
+
+Jump Circle nasłuchuje skoków gracza i w momencie ich wykrycia renderuje pierścień lub koło u stóp gracza. Efekt rysowany jest tylko po stronie klienta, na wierzchu normalnej geometrii świata i krótko po tym zanika. Nic się nie zmienia w samym skoku: wysokość, czas i fizyka pozostają dokładnie takie, jakie oblicza wersja bazowa, a serwer widzi ten sam pakiet skoku, jakby moduł był wyłączony.
+
+Ponieważ pierścień jest dodatkiem do renderowania, a nie zmianą jakiejkolwiek wartości, na której opiera się logika gry, nie wchodzi w interakcje z kolizjami, obszarami kolizji ani niczym, co oblicza klient innego gracza. Istnieje, aby być widzianym, a nie przetwarzanym.
+
+Atrakcyjność jest prosta: pierścień na każdym skoku dodaje odrobinę charakteru zwykłym, podstawowym ruchom – tak jak ludzie wybierają niestandardowy zestaw animacji lub ślad cząsteczek. To taki detal, który dobrze wygląda w krótkich filmach, gdzie widoczny wskaźnik na każdym skoku dodaje trochę polerki, czego brakuje samej podstawowej wersji. Klienci, którzy to wdrażają, jak Tenacity, grupują to z innymi opcjami kosmetycznego wyglądu, a nie z modułami ruchu lub walki.
+
+## Pierścień skoku vs. ślady cząsteczek
+
+Oba są dekoracyjne, oba związane z ruchem i oba często sortowane do tej samej zakładki ustawień wizualnych. Różnica polega na tym, kiedy się uruchamiają.
+
+| | Pierścień skoku | Ślad cząsteczek |
+|---|---|---|
+| Aktywacja | Uruchamia się podczas skoku | Działa stale podczas poruszania się |
+| Czas trwania | Krótki, znika po lądowaniu | Ciągły, podąża za każdym krokiem |
+| Kategoria | Wizualne / kosmetyczne | Wizualne / kosmetyczne |
+| Widoczne dla innych | Nie, tylko render lokalny | Nie, tylko render lokalny |
+| Wpływ na rozgrywkę | Brak | Brak |
+
+Żaden z nich nie wpływa na to, co śledzi serwer. Wybór między nimi jest czysto estetyczny: ciągły charakter versus znak interpunkcyjny na każdym skoku.
+
+<Callout variant="tip" title="Gdzie Opal wyznacza granicę">
+Opal nie wysyła modułu o nazwie Jump Circle. Ale podział, który ten moduł reprezentuje – efekty dekoracyjne utrzymane w oddzielnej kategorii, niezależne od wszystkiego, co wpływa na ruch lub walkę – jest dokładnie taki, jak Opal organizuje własną kategorię wizualną: wyglądaj tak, jak chcesz, bez cichej zmiany sposobu gry.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Jump Circle zmienia wysokość skoków ani ich częstotliwość?">
+Nie. Dodaje jedynie wizualny pierścień w miejscu lądowania podczas skoku. Wysokość skoku, czas i czas odnowienia pozostają dokładnie takie, jakie oblicza podstawowa wersja Minecrafta.
+</FAQItem>
+
+<FAQItem question="Czy inni gracze widzą efekt mojego Kręgu Skoku?">
+Nie. Pierścień jest renderowany lokalnie, tylko na kliencie uruchamiającym moduł. Wszyscy inni widzą, jak skaczesz normalnie, bez pierścienia, chyba że oni sami uruchamiają ten sam lub podobny moduł.
+</FAQItem>
+
+<FAQItem question="Czy Jump Circle jest wykrywany przez antywiry?" >
+Nie. Nie wysyła nic na serwer i nie zmienia żadnej wartości, którą serwer śledzi, więc serwerowa kontrola nie może go wykryć.
+</FAQItem>
+
+<FAQItem question="Czy Jump Circle to to samo co ślad cząsteczkowy?">
+Podobna koncepcja, inny wyzwalacz. Oba są czysto kosmetyczne i związane z ruchem, ale ślad cząsteczkowy działa nieustannie podczas ruchu, a Jump Circle aktywuje się tylko podczas skoku.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Szerokiej kategorii Jump Circle i setek innych modułów, do których one należą." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Jak zachowanie oparte wyłącznie po stronie klienta może się wahać od dekoracji po unikanie wykrywania." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Drugi biegun spektrum: moduł, który realnie zmienia sposób rozgrywki." },
+]} />
+
+<CTA href="/pl/purchase">Kosmetyki to dopiero początek. Zobacz, co Opal wysyła wszędzie indziej.</CTA>

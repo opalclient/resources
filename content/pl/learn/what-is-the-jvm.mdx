@@ -1,0 +1,93 @@
+---
+title: Czym jest JVM? Wyjaśnienie Java Virtual Machine
+description: JVM uruchamia bytecode Java na każdym systemie operacyjnym. Dzięki temu Minecraft Java Edition i każdy mod Fabric działają identycznie na Windows, macOS i Linuxie.
+excerpt: JVM uruchamia skompilowany bytecode w Minecraft Java Edition oraz każdy mod do niego napisany. Oto co robi i dlaczego jest to ważne.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: Czy JVM to to samo co Java?
+    a: Nie. Java to język; JVM to środowisko uruchomieniowe, które wykonuje skompilowany wynik. Inne języki, takie jak Kotlin, również kompilują się do kodu bajtowego i działają na tej samej JVM.
+  - q: Czy muszę zainstalować JVM, żeby grać w Minecrafta?
+    a: Potrzebujesz środowiska uruchomieniowego Java, które zawiera JVM. Wiele programów uruchamiających dołącza je do siebie, więc możesz już je mieć, nie instalując nic osobno.
+  - q: Jaka jest różnica między JVM a JDK?
+    a: JVM wykonuje bytecode. JDK to pełny zestaw narzędzi dla programistów, w tym kompilator i narzędzia, które wykorzystujesz do tworzenia programów Java.
+  - q: Dlaczego JVM uruchamia się wolno, ale działa szybko później?
+    a: Najpierw interpretuje bytecode, a następnie kompilator JIT konwertuje najczęściej używany kod na natywny kod maszynowy w trakcie działania programu. Ten rozruch to koszt startowy; przyspieszenie następuje później.
+---
+
+<KeyTakeaways>
+
+- JVM (Java Virtual Machine) to program, który uruchamia skompilowany kod bajtowy Javy.
+- Ten sam kod bajtowy działa na Windows, macOS i Linux, więc modyfikacji nie trzeba rekompilować.
+- Gracze potrzebują środowiska uruchomieniowego Javy (JRE); modderzy potrzebują pełnego JDK z kompilatorem.
+- Minecraft Java Edition i każdy mod Fabric, w tym Opal, działają na JVM.
+
+</KeyTakeaways>
+
+JVM, czyli Java Virtual Machine, to program, który uruchamia kod Java. Piszesz w Javie, kompilator zamienia go w bytecode, a JVM uruchamia ten bytecode na dowolnym systemie operacyjnym. Dlatego też Minecraft Java Edition i mody do niego działają identycznie na Windows, macOS i Linux bez potrzeby rekompilacji.
+
+<Callout variant="info" title="Gdzie pasuje Opal">
+Opal jest modem [Fabric](https://fabricmc.net/), więc działa na tej samej JVM co gra. Jeśli go instalujesz, [przewodnik instalacyjny](/pl/docs/setup) przeprowadzi Cię przez ten proces.
+</Callout>
+
+## Co właściwie robi JVM
+
+JVM wykonuje bytecode, a nie kod źródłowy. Kiedy kompilujesz program Java, nie otrzymujesz wykonywalnego pliku dla Windows lub Mac. Otrzymujesz pliki klas pełne bytecode, czyli kompaktowego zestawu instrukcji, które JVM rozumie. JVM odczytuje te instrukcje i wykonuje je na Twoim komputerze.
+
+Ten dodatkowy poziom jest sednem sprawy. Ten sam bytecode działa wszędzie tam, gdzie istnieje JVM, dlatego "napisz raz, uruchom gdziekolwiek" to skrócona wersja wyjaśnienia, dlaczego Java tak szeroko się rozprzestrzeniła. JVM to element, który sprawia, że ta obietnica staje się prawdą.
+
+## JVM, JRE i JDK
+
+Te trzy terminy są często mylone, dlatego oto podział.
+
+| Termin | Co to jest | Kiedy tego potrzebujesz |
+| :--- | :--- | :--- |
+| JVM | Silnik, który wykonuje bytecode | Zawsze, aby uruchomić dowolny program Java |
+| JRE | JVM plus standardowe biblioteki | Do uruchamiania programów Java |
+| JDK | JRE plus kompilator i narzędzia programistyczne | Do tworzenia programów Java |
+
+Gracz potrzebuje tylko środowiska uruchomieniowego do uruchomienia gry. Programista tworzący mod potrzebuje pełnego JDK, aby móc najpierw skompilować Javę do bytecode.
+
+## Jak JVM uruchamia Twój kod szybko
+
+JVM zaczyna od interpretowania bytecode instrukcję po instrukcji. Podczas działania obserwuje, które metody są wywoływane najczęściej. Te "gorące ścieżki" są przekazywane do kompilatora JIT, który zamienia je na natywny kod maszynowy w locie. Po rozgrzewce najbardziej obciążony kod działa z prędkością zbliżoną do natywnej.
+
+JVM zarządza również pamięcią za Ciebie. Odzyskujący śmieci garbage collector odzyskuje obiekty, z których zaprzestajesz korzystania, dzięki czemu nie musisz ręcznie zwalniać pamięci, jak w C. To jeden z powodów, dla których pisanie w Javie jest tak łatwe i dlaczego jest to popularny pierwszy język dla twórców modyfikacji.
+
+## Dlaczego to ma znaczenie dla Minecrafta
+
+Minecraft Java Edition działa na JVM, podobnie jak każdy klient i mod, który go targetuje. Kod klienta może być napisany w Javie, Kotlinie lub innym języku JVM, ponieważ wszystkie kompilują się do tego samego bytecode’u, który uruchamia JVM. Mod [Fabric](https://fabricmc.net/) jest dostarczany jako plik jar zawierający bytecode, ładowacz podłącza go do gry podczas uruchamiania, a JVM uruchamia całość jako jeden proces.
+
+Dlatego też launchery pozwalają na dostosowywanie takich rzeczy jak rozmiar sterty i wersja Javy. Konfigurujesz JVM, która hostuje grę, a nie samą grę.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy JVM jest tym samym co Java?">
+Nie. Java to język; JVM to środowisko uruchomieniowe, które wykonuje skompilowany kod. Inne języki, takie jak Kotlin, również kompilują się do kodu bajtowego i działają na tej samej JVM.
+</FAQItem>
+
+<FAQItem question="Czy muszę zainstalować JVM, żeby grać w Minecrafta?">
+Potrzebujesz środowiska uruchomieniowego Java, które obejmuje JVM. Wiele uruchomiaczy zawiera je dla Ciebie, więc możesz już je mieć, nie instalując niczego oddzielnie.
+</FAQItem>
+
+<FAQItem question="Jaka jest różnica między JVM a JDK?">
+JVM wykonuje bytecode. JDK to pełny zestaw narzędzi dla programistów, zawierający kompilator i narzędzia, których używasz do tworzenia programów Java.
+</FAQItem>
+
+<FAQItem question="Dlaczego JVM uruchamia się wolno, ale działa szybko później?">
+Początkowo interpretuje bytecode, a następnie kompilator JIT konwertuje najczęściej używany kod na natywny kod maszynowy podczas działania programu. Ten czas rozgrzewki to koszt uruchomienia; przyspieszenie pojawia się później.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-jvm-bytecode", label: "Czym jest bytecode JVM?", description: "Zbiór instrukcji, który faktycznie wykonuje JVM." },
+  { href: "/pl/learn/what-is-graalvm-javascript-scripting", label: "Jakie jest skryptowanie JavaScript w GraalVM?", description: "Środowisko uruchomieniowe JavaScript działające na JVM." },
+  { href: "/pl/learn/what-is-a-minecraft-mod-loader", label: "Czym jest ładowacz modów do Minecrafta?", description: "Jak modyfikacje są integrowane z grą przy premierze." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź Opala, klienta Fabric, za $8.99</CTA>

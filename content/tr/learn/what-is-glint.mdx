@@ -1,0 +1,84 @@
+---
+title: Glint Nedir? Sahte Büyü Işıltısı Modülü
+description: Glint, Minecraft için bir istemci modülüdür ve herhangi bir eşyada büyülü parıltıyı ekler veya düzenler; tamamen kozmetik olup antichipler ve diğer oyuncular tarafından görünmezdir.
+excerpt: Sıradan bir çubuğu, tamamen büyülü bir kılıç gibi parlat. Başka kimse bunu görmesin ve eşyanın hiçbir özelliği aslında değişmesin.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Glint, bir eşyanın gerçekten büyülenmiş olup olmadığını değiştirir mi?
+    a: Hayır, Parlama yalnızca kendi istemcinizdeki eşyanın üzerine yansıtılan ışıltıyı değiştirir. Eşyanın gerçek büyüsü, istatistikleri ve sunucu tarafındaki verileri tam olarak olduğu gibi kalır.
+  - q: Diğer oyuncular özel parıltı efektimi görebilir mi?
+    a: Hayır, öğenin oluşturulması ve parıltısı dahil olmak üzere, her istemcide bağımsız olarak gerçekleşir. Diğer herkes, parıltısı olsun olmasın, sunucunun gerçek verileri tanımladığı gibi öğeyi tam olarak görür.
+  - q: Glint kullanmak anticheat sistemleri tarafından tespit ediliyor mu?
+    a: Hayır, Glint yalnızca yerel olarak çizilen şeyleri değiştirir ve asla sunucuya farklı veri göndermez, bu nedenle anticheat'in yakalayabileceği sunucu tarafında hiçbir şey yoktur.
+  - q: Glint, büyü efekti renk değiştiren bir kaynak paketiyle aynı şey mi?
+    a: Tam olarak değil. Bir kaynak paketi, her büyülü eşya için parıltı dokusunu tek seferde yeniden şekillendirir. Bir istemci modülü, belirli büyülü olmayan eşyalara parıltıyı zorlayabilir veya eşya başına açıp kapatabilir.
+---
+
+<KeyTakeaways>
+
+- Glint, eşyalar üzerindeki büyü parıltısını, eşyanın gerçekten büyülü olup olmadığına bakılmaksızın sahteleştiren veya kaldıran bir Minecraft görsel modülüdür.
+- Tamamen render işlem hattında çalıştığı için, eşya verileri, istatistikleri ve sunucu tarafındaki büyüler hiçbir zaman değişmez.
+- Diğer oyuncular ve antichipler bu efekti asla görmezler, çünkü her istemci eşyaları sunucunun gerçek verilerinden bağımsız olarak oluşturur
+
+</KeyTakeaways>
+
+Glint, eşyalarınızın üzerine Minecraft'ın büyü parıltısını sıfır büyüsü olmayan bir eşyaya uygulamasına veya bolca büyüsü olan bir eşyadan parıltıyı silmesine olanak tanıyan modüldür. Tamamen kozmetik bir ayardır, ekipmanınızın görünümünü değiştirirken nasıl oynadığına dokunmayan bir şeydir. Hiç bir çıplak ahşap kılıcın, üç maksimum seviyeli büyülü bir taşından yeni çıkmış gibi parlamasını istemişseniz, işte bunu yapan modül.
+
+## Parıltının nasıl taklit edildiği
+
+Vanilla Minecraft, parıltı efektini, bir eşyanın dokusunun üzerine çizilen bir shader örtüsü olarak işler ve bu örtüyü yalnızca eşyanın verisi aslında bir büyü içerdiğinde çizer. Büyü yoksa, parıltı da yoktur. Bu kontrol, işleme zamanında gerçekleşir ve Glint tam olarak burada devreye girer: işleme çağrısını keser ve eşyanın büyü verisi ne derse bakılmaksızın parıltıyı uygular, kaldırır veya yeniden şekillendirir.
+
+İşleme adımından yukarıda hiçbir şey değişmez. Eşyanın NBT'si, istatistikleri, verdiği hasar, sunucunun kaydettiği bilgiler, bunların hiçbiri hareket etmez. Büyülenmemiş bir kılıç, maksimum seviyeli bir kılıç gibi parlayabilir veya gerçekten büyülenmiş bir eşya tamamen mat olabilir ve her iki durumda da eşya gerçek verilerinin belirttiği gibi tam olarak aynı şekilde çalışır. Kaynak paketi veya bir cilt seçmek gibi aynı tür bir değişikliktir: yerel, görsel ve sizi görmeyen herkes için görünmez.
+
+## Kullanmak güvenli mi
+
+Evet, ve istemci modifikasyonları düşünüldüğünde bu kadar güvenli pek az şey var. Glint, hiçbir zaman eşyanın gerçek büyü verilerini etkilemez, değiştirilmemiş bir istemci tarafından gönderilmeyen hiçbir şey sunucuya göndermez ve envanterinizin sunucunun gerçek durumunu yansıtmamasından başka bir oyuncuya farklı bir görünüm sağlamaz. İşlem yerel ve istemci bazındadır, bu nedenle bir antichi̇at'ın inceleyebileceği ve sahte bir parıltıyı ortaya çıkaracak bir paket bulunmaz, çünkü parıltı asla makinenizden ayrılmaz.
+
+Her istemci modifikasyonuna uygulanan tek uyarı burada da geçerlidir: bazı sunucular, herhangi bir modülün ne yaptığına bakılmaksızın, genel bir politika olarak değiştirilmiş istemcileri doğrudan yasaklamaktadır. Glint dahil olmak üzere herhangi bir değiştirilmiş şeyi çalıştırmadan önce kuralları kontrol etmeye değer.
+
+<Callout variant="tip" title="Opal'ta bunun yeri neresi">
+
+Opal, Glint adında özel bir modül göndermese de, bu tam olarak kozmetik ve render özelleştirme ayarlarıyla oluşturulan, yalnızca istemci tarafında yapılan görsel düzenlemelerden biridir: sunucu tarafından izlenen tek bir baytı bile etkilemeden kendi ekranınızda gördüğünüz şeyleri değiştiren şeyler
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Glint, bir eşyanın gerçekten büyülenmiş olup olmadığını değiştirir mi?">
+
+Hayır, Parlama yalnızca kendi istemcinizdeki eşyaya yansıyan ışıltıyı değiştirir. Eşyanın gerçek büyüsü, istatistikleri ve sunucu tarafındaki verileri tam olarak olduğu gibi kalır
+
+</FAQItem>
+
+<FAQItem question="Diğer oyuncular özel parıltı efektimi görebilir mi?">
+
+Hayır, öğenin oluşturulması ve parıltısı dahil olmak üzere, her istemcide bağımsız olarak gerçekleşir. Diğer herkes, parıltısı olsun olmasın, sunucunun gerçek verileri tanımladığı şekilde öğeyi görür
+
+</FAQItem>
+
+<FAQItem question="Glint kullanmak anticheat sistemleri tarafından tespit ediliyor mu?">
+
+Hayır, Glint yalnızca yerel olarak çizilen şeyleri değiştirir ve asla sunucuya farklı veri göndermez, bu nedenle anticheat'in yakalayabileceği sunucu tarafında hiçbir şey yoktur
+
+</FAQItem>
+
+<FAQItem question="Glint, büyü efekti renk değiştiren bir kaynak paketiyle aynı şey mi?">
+
+Tam olarak değil. Bir kaynak paketi, her büyülü eşya için parıltı dokusunu tek seferde yeniden şekillendirir. Bir istemci modülü, belirli büyülü olmayan eşyalara parıltıyı zorlayabilir veya eşya başına açıp kapatabilir
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Glint kategorisi ve benzeri modüllerin ait olduğu şey ve bir yardımcı istemciyi bir hileli istemciden ayıran şey." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Başka bir müşteri stili, yerel olarak sunulanlar ve sunucu hiçbir zaman öğrenemeyeceği şeylere göre şekilleniyor." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Risk spektrumunun tam tersi uçtaki bir modül, sunucuya yansıyan şeyleri değiştiren bir modül." }
+]} />
+
+<CTA href="/tr/satin-al">Opal'ın görsel ayarları tasarım gereği tamamen istemci tarafındadır. $8.99 için panelde neler olduğunu görün.</CTA>

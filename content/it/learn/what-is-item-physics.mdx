@@ -1,0 +1,70 @@
+---
+title: Cos'è la fisica degli oggetti in Minecraft?
+description: Item Physics è un modulo cosmetico per Minecraft che sostituisce il movimento rigido degli oggetti caduti previsto da vanilla con una fisica più fluida e personalizzata, resa interamente lato client.
+excerpt: La vanilla fa cadere gli oggetti che rimbalzano come se avessero dimenticato come funziona la gravità. La fisica degli oggetti conferisce loro un po' di dignità, solo per il tuo piacere visivo.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Influisce la fisica degli oggetti sulla posizione in cui atterrano gli oggetti caduti?
+    a: No. Cambia soltanto il modo in cui l'animazione della caduta viene resa sul tuo schermo. Dove l'oggetto finisce effettivamente e come il server lo gestisce, è identico alla versione originale.
+  - q: Possono gli altri giocatori vedere le proprietà fisiche personalizzate dell'oggetto?
+    a: No. È solo una modifica di rendering locale. Tutti gli altri vedono le gocce muoversi in base al proprio client, che sia l'impostazione predefinita di vanilla o la propria fisica personalizzata.
+  - q: L'utilizzo di Item Physics viene rilevato dagli anticheat?
+    a: No. Non invia nulla di diverso al server rispetto a un client non modificato, quindi non c'è nulla che un anticheat lato server possa rilevare, figuriamoci segnalare.
+  - q: È Item Physics la stessa cosa di una resource pack o di uno shader?
+    a: Non proprio. Le texture e l'illuminazione vengono modificate da resource pack e shader. La fisica degli oggetti altera il percorso reale che seguono, una modifica a livello di codice, non uno scambio di risorse.
+---
+
+<KeyTakeaways>
+- Item Physics è un modulo estetico che sostituisce il movimento predefinito degli oggetti caduti in Minecraft con un calcolo fisico personalizzato e più fluido.
+- È renderizzato interamente lato client: la caduta, il prelievo e tutto ciò che il server tiene traccia funzionano esattamente come nella versione originale.
+- Niente di esso è visibile agli altri giocatori o rilevabile da un anticheat lato server.
+- Si tratta di una modifica dell'animazione, non di una modifica della texture o dello shader, quindi è indipendente dalle resource pack.
+</KeyTakeaways>
+
+Item Physics è un modulo visivo presente in alcuni client di utilità per Minecraft che sovrascrive il modo in cui gli oggetti caduti si muovono e si depositano, conferendo loro un movimento più fluido o più distinto rispetto a quello predefinito di vanilla. Non influisce su come gli oggetti cadono, si impilano o vengono raccolti; modifica semplicemente ciò che il tuo client disegna sullo schermo.
+
+## Come funziona
+
+Minecraft in versione vanilla fa cadere un oggetto con un calcolo base di velocità e gravità, e l'oggetto si ferma ovunque quel calcolo lo posizioni. Funziona, ma è rigido e diventa notevolmente più rigido non appena diversi oggetti colpiscono il terreno contemporaneamente, ad esempio dopo aver svuotato una fattoria di mob o un inventario pieno sul pavimento.
+
+Item Physics intercetta quel movimento sul client e lo ricalcola localmente. Invece dell'arco piatto di vanilla, le cadute si muovono e si depositano con una fisica personalizzata che risulta più fluida o più distinta a seconda dell'implementazione. Poiché il modulo modifica solo il rendering e l'animazione, e non nulla di ciò che il server tiene traccia, la caduta stessa si comporta in modo identico sottostante. È uno strato di presentazione che si sovrappone a una logica del server invariata.
+
+Lo troverai in client come Tenacity, solitamente archiviato accanto ad altri moduli cosmetici e di miglioramento della qualità della vita, piuttosto che a qualcosa che influisce sul combattimento o sul movimento.
+
+## È sicuro da usare
+
+Sì, ed è sicuro quanto possa esserlo un modulo. Item Physics non modifica mai il rilevamento dei colpi, il movimento o qualsiasi pacchetto ricevuto dal server. Modifica solo ciò che viene visualizzato sul tuo schermo, punto e basta, il che significa che il movimento modificato non lascia mai il tuo client. Non c'è nulla qui che un anticheat lato server possa osservare, perché i tuoi dati di gioco effettivi non sono diversi.
+
+La solita avvertenza rimane valida: alcuni server vietano tutte le modifiche lato client per principio, indipendentemente da ciò che fa un modulo specifico. Vale la pena controllare rapidamente le regole del server prima di installare qualsiasi cosa, anche qualcosa di così innocuo.
+
+<Callout variant="tip" title="Dove si inserisce in un contesto più ampio per il cliente">
+Opal non distribuisce un modulo con questo nome esatto, ma lo stesso principio guida il suo set di moduli visivi: vanilla presenta spigoli ruvidi che è sicuro smussare perché non toccano ciò che vede il server. Se desideri quel tipo di rifinitura insieme a strumenti di gioco reali, è questo il territorio coperto dalla categoria visual di Opal.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+<FAQItem question="La fisica degli oggetti influisce sulla posizione in cui atterrano gli oggetti caduti?">
+No. Modifica solo il modo in cui il movimento di caduta viene visualizzato sullo schermo. La posizione in cui l'oggetto finisce effettivamente e come il server lo gestisce, è identica a quella vanilla.
+</FAQItem>
+<FAQItem question="Gli altri giocatori possono vedere la fisica personalizzata degli oggetti?">
+No. È una modifica di rendering locale. Tutti gli altri vedono gli oggetti cadere in base al proprio client, che sia quello predefinito di vanilla o la propria fisica personalizzata.
+</FAQItem>
+<FAQItem question="L'utilizzo della fisica degli oggetti viene segnalato dagli anticheat?">
+No. Non invia nulla di diverso al server rispetto a un client non modificato, quindi non c'è nulla che un anticheat lato server possa vedere, figuriamoci segnalare.
+</FAQItem>
+<FAQItem question="La fisica degli oggetti è la stessa di un resource pack o di una shader?">
+Non proprio. I resource pack e le shader modificano le texture e l'illuminazione. La fisica degli oggetti modifica il percorso di movimento effettivo degli oggetti, che è una modifica dell'animazione a livello di codice, non uno scambio di risorse.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria Fisica degli oggetti e moduli simili vi risiedono." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Un'altra funzionalità in stile utilità-cliente, basata sull'evitare di essere scoperti piuttosto che sul modificare il combattimento." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "L'estremità opposta dello spettro: un modulo che viene segnalato, e il perché." }
+]} />
+
+<CTA href="/it/purchase">La lucidatura cosmetica è il minimo indispensabile. Scopri cosa copre l'elenco completo dei moduli di Opal.</CTA>

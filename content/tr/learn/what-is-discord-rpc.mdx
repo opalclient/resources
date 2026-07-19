@@ -1,0 +1,75 @@
+---
+title: Minecraft'ta Discord RPC Nedir? Zengin Varlık Açıklaması
+description: Discord RPC, Minecraft sunucunuzu, etkinliğinizi ve oturum sürenizi Discord profilinizde gerçek zamanlı olarak gösterir. Zengin varlık modülünün nasıl çalıştığı aşağıda açıklanmıştır.
+excerpt: Discord profilin, bir kelime etmeden hangi sunucuda olduğunu bilir. Bu Discord RPC, tamamen gösteriş, oyun içi hiçbir etkisi yok.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Discord RPC oyun içinde herhangi bir avantaj sağlıyor mu?
+    a: Hayır, sadece Discord profilinizde durum bilgilerini gösterir. Hareket, savaş veya sunucu tarafından işlenen herhangi bir şeyi değiştirmez.
+  - q: Çalışması için Discord'un açık olması gerekiyor mu?
+    a: Evet. Zengin Varlık, Minecraft ile birlikte çalışan Discord masaüstü uygulamasını gerektirir, çünkü istemci durum güncellemelerini yerel Discord uygulamanıza gönderir ve bu da profilinizi günceller.
+  - q: Oyuncular benim Discord zengin varlığımı oyunda görebilir mi?
+    a: Hayır, yalnızca Discord'da görünür; Discord profilinizi görüntüleyebilen veya paylaştığınız sunucu varlığınızı görebilen kişiler için. Minecraft içinde hiçbir görünürlüğü yoktur.
+  - q: Discord RPC'yi kapatabilir miyim?
+    a: Evet. İsteğe bağlı bir görsel düzenleme modülüdür, bu yüzden Discord profilinizde sunucunuzu veya etkinliğinizi göstermek istemediğinizde istediğiniz zaman devre dışı bırakabilirsiniz.
+---
+
+<KeyTakeaways>
+
+- Discord RPC, Rich Presence olarak Discord profilinizde Minecraft sunucunuzu, etkinliğinizi ve oturum sürenizi gösteren bir görsel modüldür.
+- Sadece durumu okur ve raporlar, oyun akışını etkilemez veya sunucunun görebileceği hiçbir şey göndermez.
+- Minecraft ile birlikte çalışan Discord masaüstü uygulamasını gerektirir.
+- Güvenli olarak sınıflandırılmıştır: hile önleme sistemlerinin yakalayabileceği hiçbir şey oyun içinde bulunmaz.
+
+</KeyTakeaways>
+
+Discord RPC, Minecraft oturumunuzu bir Discord Zengin Varlık kartına dönüştüren modüldür; içinde bulunduğunuz sunucu, neler yaptığınız ve ne kadar süredir oynadığınız bilgileri, profilinizi kontrol eden herkes için kullanıcı adınızın hemen altında görünür. Minecraft istemci araçlarının daha görünür parçalarından biri ve en az dramatik olanıdır: hareketlerinize, nişan almanıza veya savaşmanıza ilişkin hiçbir şey bundan etkilenmez. Etkinleştirin ve Discord, oturum açtığınız andan itibaren durumunuzu göstermeye başlar. Devre dışı bırakın ve profiliniz son etkinliğinizdeki gibi olur.
+
+## Nasıl Çalışır
+
+Modül, her iki uygulama da çalışırken Minecraft istemcisi ve Discord masaüstü uygulaması arasında küçük bir arka plan bağlantısı açık tutar. Ara sıra oyundan birkaç değer okur, sunucu adresi, mevcut etkinlik ve oturumun ne kadar sürdüğünü ve bunları Discord'un Zengin Varlık API'sine iletir. Discord, verileri profil kartınızda işleyerek, profilinizi görüntüleyen veya ortak bir sunucuda adınızın üzerine imleci getiren herkesin görebileceği hale getirir.
+
+Çoğu kullanıcı, discord-game-sdk4j gibi bir Discord oyun SDK sarmalayıcısı aracılığıyla bunu yapar; bu, bağlantı el sıkışmasını ve mesaj biçimlendirmesini yönetir. İstemcinin görevi sadece durum metnini sağlamaktır, başka bir şey değil. Tüm iletişim tek yönlü gerçekleştiği için, oyundan Discord'a doğru, Discord RPC hiçbir zaman girdi göndermez, giden paketlere dokunmaz ve Minecraft sunucusunun gördüğü hiçbir şeyi değiştirmez. Bu, Discord'a bir yan kanal, oyuna bir bağlantı noktası değil.
+
+<Callout variant="tip" title="Opal tarafından gönderiliyor">
+Opal'ın Discord RPC modülü adının tam olarak ne ifade ettiğini yapar: Discord'da zengin varlık gösterir. Müşterinin savaş veya hareket yönüyle değil, Opal'ın kozmetik ve yaşam kalitesini artıran özelliklerinin bulunduğu aynı alanda yer alır.
+</Callout>
+
+## Kullanımı Güvenli mi?
+
+Evet, kesinlikle. Discord RPC yalnızca durumu okur ve raporlar. Sunucunun işlediği hareketleri, dövüşleri veya herhangi bir şeyi değiştirmez ve oyuna bir kanal geri açmaz. Sunucu tarafı antichipleri tarafından yakalanacak bir şey yoktur, çünkü bu özellik Minecraft içinde hiçbir iz bırakmaz. Bütün verisi, istemciniz ile yerel Discord uygulamanız arasındaki konuşmada yaşar.
+
+Düşünülmesi gereken tek şey tespit değil, gizlilik. Discord profilinizi, arkadaşlarınızı, sunucu üyelerinizi ve varlığınız herkese açık ise rastgele kişileri görebilen herkes, aynı zamanda hangi Minecraft sunucusunda olduğunuzu ve orada neler yaptığınızı da görebilir. Eğer bu bilgilerin yayınlanmasını istemiyorsanız, oturum açmadan önce modülü kapatın.
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Discord RPC oyun içinde herhangi bir avantaj sağlar mı?">
+Hayır. Sadece Discord profilinizde durum bilgilerini gösterir. Hareketi, dövüşü veya sunucu tarafından işlenen herhangi bir şeyi değiştirmez.
+</FAQItem>
+
+<FAQItem question="Çalışması için Discord'un açık olması gerekiyor mu?">
+Evet. Zengin Varlık, Minecraft ile birlikte Discord masaüstü uygulamasının çalışmasını gerektirir, çünkü istemci durum güncellemelerini yerel Discord uygulamanıza gönderir ve ardından profilinizi günceller.
+</FAQItem>
+
+<FAQItem question="Diğer oyuncular oyun içindeyken Discord Zengin Varlığım'u görebilir mi?">
+Hayır. Sadece Discord'da, Discord profilinizi veya paylaşılan sunucu varlığınızı görebilen kişiler için görünür. Minecraft içinde görünürlüğü yoktur.
+</FAQItem>
+
+<FAQItem question="Discord RPC'yi kapatabilir miyim?">
+Evet, isteğe bağlı bir görsel öğe modülüdür, bu yüzden Discord profilinizde sunucunuzun veya etkinliğinizin görünmesini istemediğiniz herhangi bir zamanda devre dışı bırakabilirsiniz.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Discord RPC'sinin daha geniş kapsamlı, görsel öğelere yönelik özellikleri içinde barınır." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Zıt amaç: statünüzü duyurmak yerine görünmez kalmak." },
+  { href: "/tr/learn/what-is-scaffold", label: "Scaffold nedir?", description: "Bir Discord RPC modülü ile hiçbir alakası olmayan şey: yasaklanabilir bir hareket hilesi." },
+]} />
+
+<CTA href="/tr/satin-al">Discord RPC'yi ve $8.99 için Opal'ın kozmetik katmanını açın.</CTA>

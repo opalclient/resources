@@ -1,0 +1,80 @@
+---
+title: Minecraft'ta CPS Nedir? Saniyedeki Tıklama Sayısı Açıklandı
+description: CPS, saniyede fare tıklamalarınızı sayan ve oynarken canlı sayıyı gösteren HUD modülüdür; sıfır sunucu etkisi ve sıfır yasak riskiyle.
+excerpt: Tıklama hızınızın tam olarak ne kadar olduğunu hiç merak ettiniz mi? İşte bunu sayıya döken modül, harici bir siteye gerek yok.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: CPS herhangi bir oyun avantajı sağlıyor mu?
+    a: Hayır, sadece daha önce yaptığınız tıklamalara göre HUD üzerinde bir sayı gösterir. Tıklama zamanlamasını, hasarı veya sunucu tarafından işlenen hiçbir şeyi değiştirmez.
+  - q: Bir CPS sayacı bir autoclicker ile aynı mı?
+    a: Hayır, onlar zıt şeyler. Bir CPS sayacı, zaten ürettiğiniz girdileri ölçer. Bir autoclicker ise kendi kendine girdi üretir. Otomatik tıklama hile yapmak anlamına gelirken, bir CPS göstergesi sadece kendi başınıza yaptığınız tıklamalar üzerinde matematik yapar.
+  - q: Bir CPS modülü beni banlanmama neden olabilir mi?
+    a: Hayır, yalnızca yerel girdileri okur ve bunları kendi ekranınızda görüntüler, bu yüzden sunucu veya antichiatin algılayacağı veya işaretleyeceği hiçbir şey yoktur.
+  - q: Ekran üzerinde CPS numarası genellikle nerede beliriyor?
+    a: Çoğunlukla nişan işaretinin yakınında küçük bir gösterge olarak veya HUD'un bir köşesine yerleştirilmiş, tıklarken sürekli güncellenir. Tam konumu, istemcinin HUD düzenine bağlıdır.
+  - q: PvP oyuncuları CPS'lerine neden önem veriyor?
+    a: Tıklama tabanlı savaşlarda daha yüksek meşru tıklama hızı önemlidir, bu yüzden oyuncular tekniği takip etmek için sayaç kullanır; kelebek veya titrek tıklama gibi yöntemleri izler ve web sitesine geçmek yerine gerçek zamanlı olarak ilerlemelerini ölçer.
+---
+
+<KeyTakeaways>
+
+- CPS (saniyedeki tıklama sayısı), oyun oynarken fare tıklamalarınızı gerçek zamanlı olarak sayan ve ekranda görüntüleyen bir HUD modülüdür.
+- Sadece yerel girdileri okur ve metin çizer, bu nedenle bir antichiatin işaretleyebileceği hiçbir şey yoktur.
+- Otomatik tıklayıcıların tam tersidir: Ürettiği yeni tıklamalar yerine, zaten yaptığınız tıklamaları ölçer.
+
+</KeyTakeaways>
+
+CPS, saniyedeki tıklamalar anlamına gelir ve Minecraft modülü olarak, tıkladığınız hızı sayan ve sayıyı gerçek zamanlı olarak ekranda gösteren küçük bir HUD göstergesidir. Oyunun ortasında harici bir tıklama sayacı web sitesine alt-tab yapmaktansa, nişangahınızın yakınında sabitlenmiş veya bir HUD köşesinde bulunan canlı bir sayı elde edersiniz; tıkladığınız her saniyede yenilenir. Bir mekanik değil, bir ölçüm aracıdır. Modül, zaten ürettiğiniz girdiyi izler ve size geri raporlar. Girdiye kendisi dokunmaz.
+
+## Nasıl Çalışır
+
+CPS, kayan bir saniyelik pencere içinde fare düğmesi basımlarını sayar ve devam eden toplamı HUD'a yazar. Her tıklama, şu anda açık olan pencere için sayacı artırır. Bir saniye geçtiğinde, gösterge yeni toplam değerine geçer ve tekrar saymaya başlar. Pencere, daha uzun bir süre boyunca ortalama almak yerine sıfırlanmaya devam ettiği için, sayı tıklama hızınızı takip eder; on saniye önceki yumuşatılmış bir değeri değil.
+
+Modül, fare ile sunucu arasına asla girmez. Bir giriş olayını oku, bir sayacı artır, bir dize çiz, bu tüm işlem hattı. Ateşlenen bir tıklama bile sunucuya tam olarak bir tıklama olarak ulaşır: aynı zamanlama, aynı paket, her şey aynı. Rose, bir CPS okuma değerini gönderen belgelenmiş bir istemci ve savaş veya hareket ile hiçbir ilgisi olmayan görsel kategoride diğer ekransağlayıcıların yanında yer alır, çünkü savaş veya harekete hiçbir etkisi yoktur.
+
+## Kullanımı Güvenli mi?
+
+Evet, temiz bir şekilde. Bir CPS sayacı yerel fare girişini okur ve kendi HUD'unuzda bir sayı gösterir, bu kadar. Asla ek bir paket göndermez, sunucunun aldığı şeyi asla değiştirmez, sunucunun bir eylemi çözmek için kullanacağı bir değeri asla etkilemez. Sunucu tarafı bir antichi̇at değerlendirmek için burada hiçbir şey yoktur, çünkü özellik asla makinenizi terk etmez.
+
+Otomatik tıklayıcılarla olan karışıklık anlaşılabilir çünkü her iki terim de tıklama hızını içeriyor, ancak aynı fiksin zıt uçlarında bulunurlar. Bir otomatik tıklayıcı kendi başına tıklamalar üretir ve gerçek, yasaklanabilir bir hiledir. Bir CPS sayacı ise tam tersini yapar: zaten bir insan tarafından yapılan tıklamaları ölçer. Birisi giriş üretirken, diğeri sadece bundan rapor verir.
+
+<Callout variant="tip" title="Opal modül bütçesini nereye harcıyor">
+Opal, özel bir CPS sayacıyla gönderilmiyor. Bu, bir gözden kaçırmaktan ziyade bir bütçe kararı: modül bir sayı bildiriyor ancak kendisiyle ilgili hiçbir şeyi değiştirmiyor, ekstra bir vuruş yapmıyor veya sunucu ölçtüğü hiçbir şeyden milisaniye kadar azaltmıyor. Opal'ın savaş ve hareket modülleri, gerçek bir savaşta fark yaratmak için var. Bir tıklama sayacı, akış esnekliğinden ziyade bir avantaj sağlamıyor ve Opal, modül sayısını sonuncusuna harcıyor.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="CPS herhangi bir oyun avantajı sağlıyor mu?">
+Hayır. Sadece zaten yaptığınız tıklamalara göre HUD üzerinde bir sayı gösterir. Tıklama zamanlamasını, hasarı veya sunucu tarafından işlenen herhangi bir şeyi değiştirmez.
+</FAQItem>
+
+<FAQItem question="Bir CPS sayacı autoclicker ile aynı mı?">
+Hayır, bunlar zıt şeylerdir. Bir CPS sayacı, zaten ürettiğiniz girdiyi ölçerken, bir autoclicker kendi başına girdi üretir. Otomatik tıklama bir hiledir. Bir CPS göstergesi sadece kendi başınıza yaptığınız tıklamalar üzerinde matematik yapar.
+</FAQItem>
+
+<FAQItem question="Bir CPS modülü banlanmama neden olabilir mi?">
+Hayır. Sadece yerel girdileri okur ve bunları kendi ekranınızda görüntüler, bu nedenle sunucu veya anticheat sisteminin ilk etapta tespit edeceği veya işaretleyeceği bir şey bulunmaz.
+</FAQItem>
+
+<FAQItem question="CPS numarası genellikle ekranda nerede görünür?">
+Çoğu zaman, nişan işaretinin yakınında küçük bir gösterge olarak veya HUD köşesine gizlenmiş olarak görünür ve tıklarken sürekli güncellenir. Tam konumu, istemcinin HUD düzenine bağlıdır.
+</FAQItem>
+
+<FAQItem question="PvP oyuncuları CPS'lerine neden önem verirler?">
+Tıklamaya dayalı savaşlarda daha yüksek, meşru tıklama hızı önemlidir, bu nedenle oyuncular tekniği takip etmek için sayaç kullanır, örneğin kelebek veya titrek tıklama gibi, ve web sitesine geçmek yerine gerçek zamanlı olarak ilerlemelerini ölçerler.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Bir CPS okumasının ait olduğu daha geniş kategori, küçük bir donanım parçasıdır." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Risk spektrumunun tam tersi uçtaki bir modül, kozmetik bir HUD sayaçtan farklı." },
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "Hızlı tıklamanın otomatikleştirilmiş hali ve bunun nasıl hileye dönüşebileceği." },
+]} />
+
+<CTA href="/tr/satın-al">Bir CPS sayacı, ne kadar hızlı tıkladığınızı gösterir. Opal'ın modülleri, sonraki olaylar için, $8.99 için üretilmiştir.</CTA>

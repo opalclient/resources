@@ -1,0 +1,99 @@
+---
+title: Minecraft'ta AntiServer Nedir? Nasıl Çalışır
+description: AntiServer, zorla konum sıfırlamaları ve hız sıfırlamaları gibi sunucu düzeltmelerini yok sayan veya yumuşatan bir Minecraft modülüdür, ayrıca tespit riskini de içerir.
+excerpt: Sunucu "geri dön" diyor. AntiSunucu, "hayır" diyor. İşte sunucu düzeltmelerini sessizce geçersiz kılan modül ve neden buna güvenmenin cesur bir şey olduğu.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: AntiServer bir hile modülü mü?
+    a: Hangi düzeltmeleri görmezden gelecekte kuruluma bağlıdır. Arada bir oyun içi düzeltmeyi yumuşatmak gri bir alandır, ancak özellikle anticheat kararlarını uygulamak için tasarlanmış düzeltmeleri görmezden gelmek için oluşturulmuş bir modül, anticheat kaçınmasıdır ve çoğu sunucu bunu kurallara aykırı olarak değerlendirir.
+  - q: AntiServer hangi sunucu düzeltmelerini hedefliyor?
+    a: Belgelenen davranışlar, zorla pozisyon sıfırlamalarını ve hız sıfırlamalarını kapsıyor; yani sunucunun istemciye bir konuma aniden yerleşmesini veya istemcinin zaten kabul etmediği bir geri tepme vektörünü uygulamasını söylediği güncellemeleri ifade ediyor.
+  - q: AntiServer, AntiDesync’den nasıl farklıdır?
+    a: "AntiDesync, istemci ve sunucu durumları arasındaki farkı daraltarak ikisinin de uyumlu kalmasını sağlar. AntiServer ise tam tersini yapar: istemcinin durumunun sunucunun gönderdiği düzeltmeyle eşleşmesini engelleyerek kasıtlı olarak uyumsuzluğa neden olur."
+  - q: AntiServer, bir oyun avantajı sağlıyor mu?
+    a: Blokladığı düzeltmelere bağlı olarak değişebilir. Bir darbeden sonraki hız sıfırlamasını göz ardı etmek, anti-knockback ile aynı şekilde çalışır; oyuncuyu sunucunun niyet ettiğinden daha yakın bir hedefe konumlandırır, bu nedenle sadece görsel bir değişiklik değildir.
+  - q: Hangi müşteri AntiServer'ı belgeliyor?
+    a: Fan, AntiServer'i gönderilen olarak belgelenen ve oyuncu-kategori modülleri arasında listelenen istemcidir.
+---
+
+<KeyTakeaways>
+
+- AntiServer, zorla konum sıfırlamaları veya hız sıfırlamaları gibi istenmeyen sunucu düzeltmelerini göz ardı eden veya yumuşatan bir modüldür.
+- Düzeltmeyi hedefe ulaşmadan yakalar, ardından tamamen yerine getirmek yerine düşürür, geciktirir veya kısmen uygular.
+- Bu, istemcinin durumunun sunucunun durumundan ayrılmasına neden olur; bu da hile önleme sistemlerinin doğrudan tespit edebileceği bir boşluk hareketidir.
+- Fan belgelerinde bunu oyuncu kategorisi modülü olarak gönderdiklerini belirtiyor.
+
+</KeyTakeaways>
+
+AntiServer, oyuncunun beğenmediği sunucu düzeltmelerine karşı koyan bir Minecraft istemci modülüdür; en sık karşılaşılan durumlar, zorla konum sabitlemesi veya bir darbeden sonra hız sıfırlamasıdır. Minecraft'ın ağ kodu, oyuncunun nerede olduğu ve ne kadar hızlı hareket ettiği konusunda sunucuya son yetkiyi verir ve varsayılan bir istemci, kendisine söylenen her şeyi olduğu gibi kabul eder. AntiServer ise bunu yapmaz. Bu özel güncelleme türünü izler ve her bir durumu ayrı ayrı değerlendirerek, buna uymayı, hafifletmeyi veya tamamen atlamayı seçer. Sonuç, istemcinin sunucunun versiyonunun yanında kendi olay versiyonunu sessizce çalıştırmasıdır.
+
+## Nasıl Çalışır
+
+Minecraft'taki hareket, sunucu tarafından yetkilendirilir. İstemciniz nereye gittiğinizi yerel olarak tahmin eder ve bunu hemen işler, ancak sunucu son sözü söyleyebilir: konumunuzu geçerli gördüğü bir yere geri sabitleyebilir veya bir darbe aldıktan sonra hızınızı sıfırlayabilir. Varsayılan bir istemci, kendisine söylendiği gibi yapar.
+
+AntiServer, gelen düzeltme ile normalde uygulanacağı an arasında oturur ve ne yapacağına karar verir. Modül, güncellemenin istenip istemediğini işaretleyip işaretlemediğine bağlı olarak, düzeltmeyi düşürebilir, geciktirebilir veya yalnızca bir kısmının geçmesine izin verebilir. Sunucu belirli bir düzeltmeyi neden gönderdiğini bilmenin bir yolu olmadığından – bu rutin desenkronizasyon temizliği mi yoksa hareketlerinize tepki veren bir anticheat mı – hepsini aynı şekilde ele alır: bir etraf yolu.
+
+Motivasyon, oyuncu açısından açıktır. Bir konum sabitlemesi, bir zıplayı geri alabilir veya salınımdayken bir köprü yerleşimini bozabilir. Bir hız sıfırlaması, bir boşluğu kapatmak veya kaçmak için güvendiğiniz momentumu silebilir. AntiServer, sunucu neden farklı düşündüğüne bakılmaksızın, yaptığınız şeylere daha yakın yerel olay sürümünüzü korur.
+
+Fan, bu isimle bir modül gönderilen ve diğer hareket ve savunma araçlarının yanında oyuncu kategorisi araçları arasında sınıflandırılan istemci tarafından belgelenmiştir.
+
+## AntiServer vs Hız ve AntiDesenk
+
+AntiServer, [Velocity](/tr/learn/what-is-velocity-anti-knockback) gibi geri tepme önleme modülleriyle aynı aileye mensuptur; bunlar da kendi hareketinize ilişkin belirli bir sunucu talimatını geçersiz kılar. Ancak AntiServer daha kapsamlıdır. Sadece geri tepmeyi iptal etmekle kalmaz, aynı zamanda istenmeyen olduğunu düşündüğü her türlü düzeltmeyi reddedebilir; bu da, hile önleme sisteminin kasıtlı olarak gönderdiği sıfırlamalarla yalnızca sıradan oyun düzeltmeleri arasındaki müdahaleyi mümkün kılar.
+
+Bu, iki tarafın uyum içinde kalmasını sağlayan küçük istemci-sunucu uyumsuzluklarını daraltan bir modül olan AntiDesync'in tam tersi uçtadır. AntiServer ise tam tersini yapar: sunucu tarafından gönderilen bir düzeltmeyi istemcinin eşleşmesini engelleyerek kasıtlı olarak ayrık kalmasını sağlar.
+
+| Modül | Hedeflediği şey | Yön |
+|---|---|---|
+| AntiServer | İstenmeyen olarak işaretlenmiş her türlü düzeltme (konum sıfırlamaları, hız sıfırlamaları) | Sunucunun düzeltmesine karşı direnir |
+| Velocity (geri tepme önleme) | Sadece geri tepme | Bir düzeltme türüne karşı direnir |
+| AntiDesync | Sıradan istemci-sunucu durum kayması | Sunucuyla uyum sağlar |
+
+## Neden tespit edilir
+
+AntiServer'ın temel sorunu, istemcinin bildirdiği durumun, sunucunun zaten gönderdiğini bildiği durumdan ayrışmasıdır. Çoğu hareket hilesinden daha net bir sinyaldir. Bir zamanlama veya rotasyon istismarı, gürültülü verilerden zamanla çıkarım yoluyla anlaşılmalıdır. AntiServer çıkarım gerektirmez: sunucu açık bir düzeltme yayınlar, ardından istemciye yapmasını söylediği şey ile istemcinin sonraki birkaç konum veya hız raporunda aslında gösterilenler arasındaki farkı karşılaştırır. Düzeltme asla tamamen gerçekleşmezse, bu olasılıksal bir işaret değildir, doğrudan bir çelişkidir.
+
+<Callout variant="tip" title="Opal nerede çizgiyi çiziyor">
+Opal, sunucunun kendi konumunuz üzerindeki yetkisini geçersiz kılacak bir modül göndermez, bu kadar. Hareket ve savaş özelliklerinin herhangi bir şey yayınlanmadan önce sıkı bir şekilde incelenmesi, düzeltilemeyen davranışların sunucu tarafı anticheat'lerin en yakından takip ettiği kategori olduğu için tam olarak bundandır. Bir özellik dürüstçe açıklanamıyorsa, yapım sürecine dahil olmaz.
+</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını anlatmıyor">
+Bu sayfa, terimin ne anlama geldiğini bilmeniz için modülü genel olarak tanımlar. Sunucunun kasıtlı olarak gönderdiği düzeltmeleri, anticheat tarafından tetiklenen sıfırlamalar dahil olmak üzere, görmezden gelmek işlevsel olarak anticheat kaçınma anlamına gelir ve çoğu sunucu bunu anti-knockback için yaptıkları gibi yasaklar.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="AntiServer hile modülü müdür?">
+Bu, hangi düzeltmeleri görmezden geldiğine bağlıdır. Arada bir oyun düzeltmesini yumuşatmak gri bir alandır, ancak özellikle anticheat kararlarını uygulamak için tasarlanmış düzeltmeleri görmezden kalmak için oluşturulmuş bir modül, anticheat kaçınma anlamına gelir ve çoğu sunucu bunu kurallara aykırı olarak değerlendirir.
+</FAQItem>
+
+<FAQItem question="AntiServer hangi sunucu düzeltmelerini hedefliyor?">
+Belgelenen davranış, zorla konum sıfırlamalarını ve hız sıfırlamalarını kapsar: sunucunun istemciye konum belirlemek veya istemcinin zaten kabul etmediği bir geri tepme vektörünü uygulamak için bildirdiği güncellemeler.
+</FAQItem>
+
+<FAQItem question="AntiServer, AntiDesync'den nasıl farklıdır?">
+AntiDesync, istemci ve sunucu durumları arasındaki farkı daraltarak ikisinin de uyumlu kalmasını sağlar. AntiServer ise tam tersini yapar: istemcinin durumunun sunucunun gönderdiği düzeltmeyle eşleşmesini engelleyecek şekilde tasarlanmıştır.
+</FAQItem>
+
+<FAQItem question="AntiServer oyun avantajı sağlıyor mu?">
+Evet, engellediği düzeltmelere bağlı olarak sağlayabilir. Bir vuruştan sonra hız sıfırlamasını göz ardı etmek, anti-knockback ile aynı şekilde çalışır ve oyuncuyu sunucunun niyet ettiğinden daha yakın bir hedefe konumlandırır, bu nedenle sadece kozmetik bir değişiklik değildir.
+</FAQItem>
+
+<FAQItem question="AntiServer hangi istemci tarafından belgeleniyor?">
+Fan, oyuncu-kategori modülleri arasında listelenen AntiServer'ın sevkiyatı belgelenen istemcidir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-velocity-anti-knockback", label: "Hız (çarpma geri tepmesi önleme) nedir?", description: "Daha dar modül, belirli bir düzeltmeyi, geri tepmeyi geçersiz kılar." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Bu modüllerin ait olduğu daha geniş kategori." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Gizlilik odaklı müşterilerin tespit riskine yaklaşımı genel olarak." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ın adını vermek istediği savaş ve hareket araçlarını inceleyin</CTA>

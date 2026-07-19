@@ -1,0 +1,75 @@
+---
+title: Czym jest AutoAuthenticate w Minecraft?
+description: AutoAuthenticate to moduł klienta Minecraft, który automatycznie ponownie wysyła zapisane hasło jako polecenie logowania za każdym razem, gdy dołączasz do serwera z wtyczką uwierzytelniania.
+excerpt: Zapamiętuje Twoje hasło, żebyś nie musiał wpisywać /loginu pięćdziesiąt razy w tygodniu. To jest cały moduł.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy AutoAuthenticate daje jakąkolwiek przewagę w rozgrywce?
+    a: Nie. Automatyzuje jedynie wysyłanie komendy czatu logowania lub rejestracji z zapisanym hasłem. Nie ma wpływu na walkę, ruch ani nic innego, co serwer śledzi jako rozgrywkę.
+  - q: Czy serwer może zbanować kogoś za używanie AutoAuthenticate?
+    a: Nie ma żadnych akcji rozgrywki do wykrycia, ponieważ wysyłane polecenie jest identyczne z tym, które wpisuje gracz ręcznie. Serwery zazwyczaj nie mają powodu, by je oznaczać.
+  - q: Gdzie jest przechowywane moje hasło?
+    a: Moduł przechowuje zapisane hasło lokalnie na Twoim urządzeniu, aby móc je ponownie wysłać przy kolejnych logowaniach. Jego bezpieczeństwo zależy całkowicie od zabezpieczeń urządzenia, na którym jest przechowywane.
+  - q: Którzy klienci korzystają z AutoAuthenticate?
+    a: Pojawia się w Tenacity, zwykle katalogowany jako moduł ułatwiający rozgrywkę lub poprawiający jakość życia, a nie związany z walką czy ruchem.
+---
+
+<KeyTakeaways>
+- AutoAuthenticate to moduł, który automatycznie loguje Cię na serwery auth-plugin, ponownie wysyłając zapisane hasło jako polecenie logowania lub rejestracji.
+- Zastępuje jedynie wpisywanie, a nie rozgrywkę, więc nie wpływa na walkę, ruch ani na nic, co śledzi anticheat, i wygląda identycznie jak wpisywanie przez gracza.
+- Znajduje się w klientach takich jak Tenacity, sklasyfikowany jako ułatwienie, a nie element walki.
+</KeyTakeaways>
+
+**AutoAuthenticate** to moduł klienta Minecraft, który automatycznie loguje Cię na serwer w momencie dołączenia, wysyłając zapisane hasło jako komendę logowania lub rejestracji w czacie. Jeśli kiedykolwiek grałeś na serwerze skręconym lub w trybie offline, wiesz, o co chodzi: dołączasz, wpisujesz `/login twojehasło`, a następnie wreszcie zaczynasz grać. AutoAuthenticate pomija drugi krok, robiąc to za Ciebie, natychmiast, za każdym razem.
+
+## Jak to działa
+
+Wiele serwerów działających na kontach skręconych lub w trybie offline chroni się za pomocą wtyczki uwierzytelniającej. Zanim będziesz mógł się poruszać, rozmawiać lub wchodzić w interakcje z czymkolwiek, musisz wykonać komendę logowania (istniejące konto) lub komendę rejestracji (pierwsze dołączenie), każda z hasłem. Pominiesz ten krok i zostaniesz zamrożony w miejscu, dopóki nie wpiszesz go poprawnie.
+
+AutoAuthenticate przechowuje hasło na każdy serwer i obserwuje dokładny moment, w którym kończysz dołączać do serwera, który tego wymaga. Po wykryciu tego stanu wysyła pasującą komendę z zapisanym hasłem w Twoim imieniu, bez potrzeby wpisywania czegokolwiek. To jest cała mechanika. Nie ma sztuczek z pakietami, żadnego ukrytego protokołu, niczego, czego serwer i tak nie zaakceptowałby od człowieka po naciśnięciu Enter po wpisaniu go.
+
+## Co dotyczy, a czego nie
+
+| Obszar | Czy dotyczy AutoAuthenticate? |
+|---|---|
+| Komenda czatu logowania/rejestracji | Tak, wysyłana automatycznie po dołączeniu |
+| Walka (zasięg, czas trafienia, celowanie) | Nie |
+| Ruch (prędkość, skoki, ścieżka) | Nie |
+| Wszystko, co serwer rejestruje jako akcję rozgrywki | Nie |
+| Przechowywanie haseł | Lokalne dla klienta i komputera |
+
+Ten ostatni wiersz to jedyna prawdziwa "powierzchnia ustawień": zapisane hasło na serwer, przechowywane lokalnie, aby można je było odtworzyć przy kolejnym dołączeniu. Wszystko poza tym to tylko automatyzacja wiadomości czatu, którą i tak miałeś prawo wysyłać.
+
+Serwery, które opierają się na wtyczkach uwierzytelniania, proszą o tę samą komendę przy każdym ponownym połączeniu, a jeśli często rozłączasz się i dołączasz ponownie, wpisywanie hasła za każdym razem staje się prawdziwą uciążliwością podczas sesji. AutoAuthenticate eliminuje tę uciążliwość całkowicie, nie ingerując w nic, co serwer lub anticheat musi mierzyć.
+
+<Callout variant="tip" title="Jak to się wpisuje w szerszy kontekst">
+Opal nie udostępnia modułu o tej nazwie i nie zamierza tego robić. AutoAuthenticate znajduje się w sekcji ułatwiającej życie w liście modułów, a nie w sekcji walki lub ruchu, gdzie płatny klient uzasadnia swoją cenę. Jeśli priorytetem jest „przestanie wpisywać moje hasło”, to dedykowany pomocnik uwierzytelniania, taki jak ten, jest naprawdę odpowiednim narzędziem. Jeśli chodzi o „przestanie umierać w walce”, to to zupełnie inna półka.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Czy AutoAuthenticate daje jakąkolwiek przewagę w rozgrywce?">
+Nie. Automatyzuje jedynie wysyłanie komendy logowania lub rejestracji z zapisanym hasłem. Nie wpływa na walkę, ruch ani nic innego, co serwer śledzi jako rozgrywkę.
+</FAQItem>
+<FAQItem question="Czy serwer może zbanować kogoś za używanie AutoAuthenticate?">
+Nie ma żadnych akcji rozgrywki, które mogłyby to wykryć, ponieważ komenda, którą wysyła, jest identyczna z tą, którą gracz wpisuje ręcznie. Serwery zazwyczaj nie mają powodu, by ją oznaczać.
+</FAQItem>
+<FAQItem question="Gdzie przechowywane jest moje hasło?">
+Moduł przechowuje zapisane hasło lokalnie na Twoim urządzeniu, aby móc je ponownie wysłać przy kolejnych dołączaniach. Jego bezpieczeństwo zależy wyłącznie od bezpieczeństwa urządzenia, na którym jest przechowywane.
+</FAQItem>
+<FAQItem question="W których klientach znajduje się AutoAuthenticate?">
+Pojawia się w Tenacity, zwykle umieszczone w folderze pod nazwą „ułatwienia” lub „podniesienie jakości rozgrywki” zamiast „walka” lub „ruch”.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Kategoria AutoAuthenticate należy do, oraz co jeszcze w niej żyje." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Niewykrywalny z założenia, dokładnie taki sam cel projektowy, który AutoAuthenticate przypadkowo spełnia." },
+  { href: "/pl/learn/what-is-killaura", label: "Co to jest Killaura?", description: "Drugi biegun spektrum ryzyka: moduł, który skutkuje zbanowaniem, a nie tylko zalogowaniem." }
+]} />
+
+<CTA href="/pl/purchase">Opal obsługuje moduły, które faktycznie rozstrzygają walki. Wypróbuj za $8.99.</CTA>

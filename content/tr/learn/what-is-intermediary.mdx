@@ -1,0 +1,96 @@
+---
+title: Ara Katman Nedir? Minecraft Haritaları Açıklandı
+description: Fabric, Minecraft kodunun gizlenmiş katmanıdır ve bu sayede modlar, alan adlarının yeniden adlandırılması durumunda bile sürümler arasında sorunsuz çalışmaya devam eder.
+excerpt: Gizlenmiş isimler her yayınla değişir. Arabulucular bunları dondurur, böylece derlenmiş bir Fabric modu oyun güncellemelerinden sonra yamadığı kodu sürekli olarak bulmaya devam eder.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Mappings
+author: trq
+faqs:
+  - q: Aracı, iplik ile aynı şey midir?
+    a: Hayır. Yarn, geliştiricilerin kodunu okunabilir bir şekilde eşlediği bir şeydir; Aracı, derlenmiş modların aslında üzerine inşa edildiği, kararlı, makine tarafından oluşturulan katmandır ve Yarn adları buna göre derlenir.
+  - q: Aracı isimler neden bu kadar çirkin?
+    a: Bunlar yazılmıyor, üretiliyor. class_1234 gibi isimlerin güzel olmasına gerek yok, sadece benzersiz ve kalıcı olmaları yeterli; okunabilirlik ise Yarn veya Mojmap tarafından üzerine ekleniyor.
+  - q: Aracı, bir modun her sürümde sonsuza kadar çalışacağı anlamına mı geliyor?
+    a: Hayır. İsimleri sabit tutar, ancak Mojang bir metodu siler veya yeniden yazarsa, kodun kendisi isimden bağımsız olarak kaybolur, bu nedenle kırılmaları ortadan kaldırmaktan ziyade azaltır.
+  - q: Aracı oyuncu olarak düşünmem gerekiyor mu?
+    a: Aslında değil. Fabric'in içinde, arka planda çalışıyor; onu bir geliştirici olarak karşılaşırsınız ya da bir ara sembolü andıran bir çökme günlüğünü okuduğunuzda.
+---
+
+<KeyTakeaways>
+
+- Intermediary, Minecraft'ın karartılmış kodunun üzerine Fabric'in yerleştirdiği sabit adlandırma katmanıdır.
+- Her karartılmış sembole, sürümler arasında aynı kalan sabit bir isim verir.
+- Derlenmiş Fabric modları, okunabilir değil, Intermediary isimleri üzerinden yayınlanır.
+- Güncellemelerde kırılmaları azaltır ancak bir modu kaldırılan oyun kodundan kurtaramaz.
+
+</KeyTakeaways>
+
+Ara Katman, Minecraft'ın karartılmış kodunun üzerine [Fabric](https://fabricmc.net/) tarafından yerleştirilen sabit adlandırma katmanıdır. Mojang, her sürümde değişen karıştırılmış sınıf, alan ve yöntem adlarıyla oyunu gönderir. Ara Katman, bunların her birine, oyun güncellenmiş olsa bile derlenmiş bir modun yamadığı kodu sürekli olarak bulmasını sağlayan sabit bir ad verir.
+
+<Callout variant="info" title="Opal Nerede Çalışır">
+Opal bir Fabric modudur, bu nedenle diğer Fabric modları gibi bu eşleme katmanına ihtiyaç duyar. El ile yapılandırma yapmanız gerekmez; [kurulum rehberi](/tr/docs/setup) size başlamanız için gerekenleri sağlar.
+</Callout>
+
+## Ara Katman Aslında Nedir
+
+Ara katman, bir dizi eşlemedir: her karmaşıklaştırılmış Minecraft sembolünü, kalıcı, makine tarafından üretilen bir adla eşleştiren bir arama tablosudur. Oyunun `a` olarak çağırdığı bir sınıf, Ara Katman'da `class_1234` olabilir. Ad çirkin olsa da, o sembol için yayınlardan yayınlara kalıcıdır.
+
+Mojang, her derlemede oyunu karmaşıklaştırır. `field_5678` gibi adlar, aksi takdirde yayınlardan yayınlara kayacaktır; bu nedenle ham karmaşıklaştırılmış adlara karşı derlenen bir mod, oyun güncellendiği anda bozulur. Ara katman bu adları dondurur, böylece eşleme, mod değil, değişimi absorbe eder.
+
+## Neden Fabric Modları Ona İhtiyaç Duyar
+
+Modlar, geliştiricinin yazdığı okunabilir adlar yerine Ara Katman adlarına karşı derlenerek dağıtılır. Bu tek karar, bir [Fabric](https://fabricmc.net/) modunun, birçok durumda yeniden derleme olmadan yeni bir oyun derlemesi üzerinde çalışmaya devam etmesini sağlar.
+
+Oyun başladığında, Fabric o sürüm için Ara Katman eşlemesini yükler ve karmaşıklaştırılmış oyun sınıflarını, modun beklediği kararlı adlara yeniden eşler. Mod ve oyun, her ikisi de ham olarak göndermediği bir ad kümesi üzerinde buluşur.
+
+## Ara Katman vs Geliştirici Eşlemeleri
+
+Geliştiriciler `class_1234` okumaz veya yazmaz. Yarn veya Mojmap gibi sembollere açıklayıcı adlar veren insan tarafından okunabilir bir eşlemeye karşı çalışırlar. Derleme zamanında, okunabilir adlar dağıtım için Ara Katman'a indirilir.
+
+| Katman | Örnek İsim | Kim Kullanır | Sürümler Arası İstikrarlı |
+| :--- | :--- | :--- | :--- |
+| Karartılmış | `a`, `field_5678` | Elle kimse | Hayır |
+| Ara | `class_1234` | Gönderilen mod ikili dosyaları | Evet |
+| Yarn / Mojmap | `MinecraftClient` | Derleme zamanında geliştiriciler | Okunabilir, sürüm takibi yapılmış |
+
+Bölme, geliştiricilerin kullanıcı dostu isimlere kod yazmasına olanak tanırken, gönderilen şey sürüm açısından istikrarlı kalır. Okunabilir eşlemeler değiştirilebilir; Ara, herkesin üzerinde anlaştığı ortak zemindir.
+
+## Bir Modun Yaşam Döngüsüne Nasıl Uyar
+
+- Bir geliştirici, Yarn veya Mojmap gibi okunabilir bir eşlemeye göre kod yazar.
+- Derleme, bu isimleri Ara isimlerine dönüştürür.
+- Mod, Ara sembollerine referans veren bir jar olarak gönderilir.
+- Başlangıçta, Fabric, çalışan oyunu karartılmış isimlerden Ara isimlerine yeniden eşler, böylece mod ve oyun her güncellemeden sonra doğru koda işaret eder.
+
+İşte mappings'in [Fabric](https://fabricmc.net/) modlamanın sessiz ama taşıyıcı bir parçası olmasının nedeni: Her güncellemeden sonra modların doğru koda işaret etmesini sağlayan sözleşmedir.
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Intermediary, Yarn ile aynı mı?">
+Hayır. Yarn, geliştiricilerin kod yazdığı okunabilir bir eşlemedir. Intermediary ise, derlenmiş modların aslında gönderildiği kararlı, makine tarafından oluşturulan katmandır. Yarn adları, derleme zamanında Intermediary'ye dönüşür.
+</FAQItem>
+
+<FAQItem question="Ara aracı adları neden bu kadar çirkin?">
+Bunlar yazılmak yerine üretiliyor. `class_1234` gibi adların sadece benzersiz ve kalıcı olması, güzel olması gerekmiyor. Okunabilirlik Yarn veya Mojmap tarafından ek olarak sağlanıyor.
+</FAQItem>
+
+<FAQItem question="Ara Katman, bir modun her sürümde sonsuza kadar çalışacağı anlamına mı gelir?">
+Hayır. Ara Katman isimleri sabit tutar, ancak Mojang bir metodu siler veya yeniden yazarsa, isme bakılmaksızın temel kod kaybolur. Kırılmaları azaltır, ortadan kaldırmaz.
+</FAQItem>
+
+<FAQItem question="Ara Katmanı bir oyuncu olarak düşünmem gerekiyor mu?">
+Aslında hayır. Fabric'in içinde, arka planda çalışır. Sadece bir geliştiriciyseniz veya ara katman sembolünden bahseden bir çökme günlüğünü okuyorsanız onunla karşılaşırsınız.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-are-minecraft-mappings", label: "Minecraft haritaları nedir?", description: "Aracı daha geniş konu içeride yer alıyor." },
+  { href: "/tr/learn/yarn-vs-mojmap", label: "Yarn mı, Mojmap mı", description: "Okunabilir katmanlar, Aracı üzerinde yer alıyor." },
+  { href: "/tr/learn/what-is-the-fabric-api", label: "Fabric API nedir?", description: "Fabric modlarının üzerine inşa edildiği ortak katman." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

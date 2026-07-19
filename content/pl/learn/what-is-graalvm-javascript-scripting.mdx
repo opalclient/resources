@@ -1,0 +1,71 @@
+---
+title: Czym jest skryptowanie JavaScript w GraalVM? (2026)
+description: GraalVM JavaScript to szybki silnik JS, który działa na JVM. Aplikacje go osadzają, aby użytkownicy mogli programować w JavaScript i ładować go na gorąco bez rekompilacji Javy.
+excerpt: GraalVM JavaScript umożliwia aplikacji Java uruchamianie skryptów użytkownika w JavaScript i ich dynamiczne przeładowywanie. To sposób, w jaki klient dodaje funkcje bez kompilowania moda.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: Czy GraalVM JavaScript to to samo co Node.js?
+    a: Nie. Oba działają na JavaScript, ale silnik GraalVM ma być osadzony w aplikacji JVM, podczas gdy Node.js to autonomiczny środowisko uruchomieniowe zbudowany na V8.
+  - q: Czy muszę znać Javę, żeby napisać skrypt?
+    a: Zazwyczaj nie. Piszesz w JavaScript na obiektach, które udostępnia aplikacja hostująca. Znajomość tego, do czego te obiekty odpowiadają, pomaga przy bardziej zaawansowanym użytkowaniu.
+  - q: Dlaczego używać skryptów zamiast pełnego moda?
+    a: Prędkość iteracji. Skrypt przeładowuje się natychmiast, podczas gdy mod skompilowany musi zostać ponownie zbudowany i uruchomiony.
+---
+
+<KeyTakeaways>
+
+- GraalVM JavaScript to szybki, zgodny ze standardami silnik JS, który działa na JVM.
+- Aplikacje Java go osadzają, umożliwiając użytkownikom pisanie JavaScriptu, który wywołuje funkcje programu hosta.
+- Skrypty przeładowują się na bieżąco, dzięki czemu można zmieniać zachowanie bez rekompilacji kodu Java.
+- Host decyduje dokładnie, które obiekty i klasy skrypt może modyfikować.
+
+</KeyTakeaways>
+
+GraalVM JavaScript to szybki, zgodny ze standardami silnik JavaScript, który działa na JVM, będący częścią projektu [GraalVM](https://www.graalvm.org/). Aplikacje Java go osadzają, aby użytkownicy mogli pisać kod JavaScript, który wywołuje funkcje programu hosta i przeładowuje go w locie. W aplikacji Java oznacza to dodawanie lub zmienianie zachowania w JavaScript bez rekompilacji kodu Java.
+
+<Callout variant="info" title="Gdzie pasuje Opal">
+Silnik skryptów Opal działa na GraalVM JavaScript. Aby zacząć pisać skrypty, zobacz [przewodnik po skryptach](/pl/docs/scripting).
+</Callout>
+
+## GraalVM i GraalVM JavaScript
+
+GraalVM to wysokowydajny środowisko uruchomieniowe, które może wykonywać wiele języków na JVM. Jego silnik JavaScript jest wystarczająco nowoczesny, aby obsługiwać najnowsze funkcje ECMAScript. Aplikacja dostarcza silnik, przekazuje skryptom zestaw obiektów do pracy i je uruchamia.
+
+## Dlaczego aplikacje go osadzają
+
+- **Gorące przeładowanie**: zmień skrypt i zobacz efekt bez konieczności ponownego uruchamiania lub przebudowywania.
+- **Bezpieczna powierzchnia**: host decyduje dokładnie, które obiekty i klasy Java skrypt może dotykać.
+- **Interoperacyjność z Javą**: skrypty mogą wywoływać własny kod aplikacji poprzez obiekty, które ona udostępnia.
+
+## Jak pojawia się w kliencie
+
+Program osadzający silnik zazwyczaj udostępnia skryptom punkt wejścia do rejestrowania się, a następnie mały zestaw „obiektów proxy”, które łączą JavaScript z wnętrznościami programu. Użytkownicy piszą skrypt, wrzucają go do folderu ze skryptami, a silnik go ładuje. W ten sposób klient może pozwolić użytkownikom na dodawanie funkcji w JavaScript zamiast kompilowania moda.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy GraalVM JavaScript to to samo co Node.js?">
+Nie. Oba uruchamiają JavaScript, ale silnik GraalVM ma być osadzony w aplikacji JVM, podczas gdy Node.js to autonomiczny środowisko uruchomieniowe zbudowany na V8.
+</FAQItem>
+
+<FAQItem question="Czy muszę znać Javę, żeby napisać skrypt?">
+Zazwyczaj nie. Piszesz JavaScript w oparciu o obiekty, które udostępnia aplikacja hostująca. Znajomość tych obiektów pomaga przy bardziej zaawansowanym użytkowaniu.
+</FAQItem>
+
+<FAQItem question="Dlaczego używać skryptów zamiast pełnej modyfikacji?">
+Szybkość iteracji. Skrypt przeładowuje się natychmiast, podczas gdy skompilowaną modyfikację trzeba ponownie zbudować i uruchomić.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-the-jvm", label: "Czym jest JVM?", description: "Na którym działa środowisko uruchomieniowe GraalVM JavaScript." },
+  { href: "/pl/learn/what-is-jni", label: "Co to jest JNI?", description: "Mniej zaawansowany sposób rozszerzania programu Java." },
+  { href: "/pl/blog/introducing-opal-scripting-engine", label: "Silnik skryptów Opala", description: "Jak wygląda w praktyce skryptowanie w GraalVM." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź Opala, klienta Fabric, za $8.99</CTA>

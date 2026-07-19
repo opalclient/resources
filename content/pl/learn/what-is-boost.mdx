@@ -1,0 +1,90 @@
+---
+title: Czym jest boost w Minecraft? (Wyjaśnienie modułu ruchu)
+description: Wzmocnienie to moduł ruchu, który zapewnia krótkotrwały skok prędkości zamiast stopniowo ją zwiększać. Oto jak działa i dlaczego jest oznaczany.
+excerpt: "Boost zamienia twoją postać w rakietę na sekundę: wystarczy, żeby zamknąć lukę lub uciec z walki, a na pewno zwróci uwagę administratora serwera."
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co robi Boost w kliencie Minecraft?
+    a: Boost daje graczowi krótkotrwały zastrzyk dodatkowej prędkości, zwykle wykorzystywany do szybkiego zmniejszenia dystansu do celu lub ucieczki z przegranej walki w pośpiechu.
+  - q: Czy Boost jest wykrywalny?
+    a: Tak. Generuje to nagły skok prędkości poruszania się, który serwer może porównać z maksymalną prędkością, jaką fizyka vanilla dopuszcza w danym ticku, co ułatwia oznaczanie dużych lub powtarzających się wybuchów prędkości.
+  - q: Klienci, którzy mają Boost?
+    a: Moduł jest udokumentowany, jak widać na przykładzie klientów takich jak Juul i Rose.
+  - q: Czy Boost to to samo co sprint lub hack przyspieszenia?
+    a: Opisuje to tę samą ogólną ideę, krótkotrwały wzrost prędkości przekraczający to, co umożliwia standardowy ruch, choć dokładna nazwa i implementacja różnią się w zależności od klienta.
+  - q: Czy Boost może skutkować zablokowaniem?
+    a: Każde obejście mechaniki gry, które generuje prędkość przekraczającą dozwoloną przez nią, narusza zasady praktycznie każdego serwera z aktywnym systemem anticheat, a Boost się kwalifikuje, ponieważ przenosi gracza poza normalną fizykę.
+---
+
+<KeyTakeaways>
+
+- Boost to moduł ruchu, który wstrzykuje krótkotrwały zastrzyk prędkości zamiast stopniowo ją zwiększać.
+- Pozwala na zniwelowanie dystansu do uciekającego celu lub wydostanie się z przegrywającej walki, po czym prędkość wraca do normalnej.
+- Serwery wykrywają go, porównując pokonany dystans na ticka z tym, co dopuszczają standardowe fizyki.
+
+</KeyTakeaways>
+
+Boost to moduł ruchu, który zapewnia graczowi krótkotrwały przypływ dodatkowej prędkości lub pędu, aplikowany jednorazowo, a nie stopniowo, jak w przypadku standardowego sprintu i momentu. Jest to podstawowy element narzędzi klienta Minecraft w dwóch sytuacjach: doganiania kogoś, kto próbuje uciekać, oraz ucieczki z walki, która się źle potoczyła. Efekt jest celowo krótki – pojedynczy skok, a nie trwały wzrost prędkości.
+
+## Jak to działa
+
+Standardowy Minecraft stopniowo zwiększa prędkość. Sprint, skakanie i moment podążają za ustalonymi wzorami, które serwer może przewidzieć co tick. Boost pomija ten wzrost całkowicie: ustawia prędkość gracza bezpośrednio na krótki czas, a następnie pozwala jej powrócić do normalnej, gdy przypływ się kończy.
+
+Ponieważ to wstrzyknięcie następuje po stronie klienta, to klient raportuje, gdzie gracz się znajdzie później. Serwer ma dwie opcje: zaufać raportowi o pozycji, albo ponownie obliczyć, co mogłaby wyprodukować legalna prędkość gracza w tym samym czasie i porównać te dwie wartości.
+
+## Dlaczego ludzie go używają
+
+Głównym zastosowaniem jest przemieszczanie się. Krótki skok prędkości pozwala dogonić cel próbujący uciekać, umożliwiając graczowi dogonienie lub trafienie, zanim przerwa się powiększy. Ta sama sztuczka działa w odwrotnym kierunku: oddalanie się od walki wystarczająco szybko, aby przeciwnik nie mógł nadążyć, zyskując chwilę na leczenie lub po prostu odejście.
+
+Oba przypadki mają ten sam kształt. To przewaga w ruchu skompresowana do kilku sekund, zamiast jednej rozłożonej równomiernie na całą walkę.
+
+## Czy to jest bezpieczne?
+
+Boost to funkcja zapewniająca przewagę w rozgrywce, a nie kosmetyczna, a nagły ruch jest jedną z bardziej widocznych rzeczy, na które zwraca uwagę serwerowy anticheat. Serwer śledzi pozycję od razu do razu i porównuje pokonaną odległość z tym, co fizyka vanilla dopuszcza, biorąc pod uwagę stan gracza (sprint, skok, uziemienie i tak dalej). Wybuch, który przekracza ten limit, generuje zmianę pozycji zbyt dużą jak na dany tick, co jest jasnym sygnałem do oznaczenia.
+
+Wykrywanie staje się trudniejsze, gdy wybuch jest mały lub wtopiony w normalne przyspieszenie, ponieważ może być mylony z opóźnieniem lub dobrze wyczuwanym skokiem. Duży, powtarzający się lub wyraźnie natychmiastowy skok prędkości jest łatwy do wychwycenia; umiarkowany nie jest, dlatego implementacje starające się pozostać niezauważone utrzymują boost krótki i rzadki.
+
+<Callout variant="tip" title="Gdzie to się znajduje w katalogu Opal">
+Opal oferuje pełną kategorię Ruchu, Speed, No Slow, Phase, Step i resztę, ale nie ma modułów oznaczonych konkretnie jako Boost. Te moduły są skonstruowane z myślą o ciągłym ruchu i pokonywaniu terenu, a nie o pojedynczym, gwałtownym wzroście prędkości, więc jeśli szukałeś dokładnej nazwy modułu w menu Opal, nie znajdziesz go pod tą nazwą.
+</Callout>
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona opisuje moduł w sposób ogólny, abyś wiedział, co ten termin oznacza. Nazewnictwo i dokładne zachowanie różnią się w zależności od klienta, a wszelkie przyspieszenia wykraczające poza możliwości standardowej fizyki łamią zasady na praktycznie każdej serwerze z aktywnym anticheatem.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co robi Boost w kliencie Minecrafta?">
+Boost daje graczowi krótkotrwały zastrzyk dodatkowej prędkości lub pędu, zwykle używany do szybkiego zmniejszenia dystansu do celu lub ucieczki z przegrywającej walki w pośpiechu.
+</FAQItem>
+
+<FAQItem question="Czy Boost jest wykrywalny?">
+Tak. Powoduje nagły skok prędkości poruszania się, który serwer może porównać z maksymalną prędkością, jaką fizyka w wersji podstawowej pozwala na dany tick, co ułatwia oznaczanie dużych lub powtarzających się wybuchów prędkości.
+</FAQItem>
+
+<FAQItem question="Klienci, którzy mają Boost?">
+Moduł jest udokumentowany, jak widać na przykładach klientów takich jak Juul i Rose.
+</FAQItem>
+
+<FAQItem question="Czy Boost jest tym samym co dash lub sprint hack?">
+Opisuje to tę samą ogólną ideę, krótkotrwały wzrost prędkości przekraczający to, co pozwala standardowy ruch, choć dokładne nazewnictwo i implementacja różnią się między klientami.
+</FAQItem>
+
+<FAQItem question="Czy Boost może spowodować zbanowanie?">
+Wszelkie cheat'y związane z ruchem, które generują prędkość przekraczającą dozwoloną przez grę, naruszają zasady praktycznie każdego serwera z anticheatem, a Boost się kwalifikuje, ponieważ przenosi gracza poza normalną fizykę.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-scaffold", label: "Co to jest Scaffold?", description: "Kolejny moduł ruchu, zaprojektowany, byś się poruszał, a nie walczył." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kategoria skradania się, oparta na pozostawaniu niezauważonym." },
+  { href: "/pl/learn/what-is-reach", label: "Co to jest Reach?", description: "Moduł bojowy, który zamyka te same luki w inny sposób." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź Opal i zobacz, jak wygląda uczciwa kategoria ruchu.</CTA>

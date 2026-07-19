@@ -1,0 +1,79 @@
+---
+title: Cosa sono le fasi in Minecraft? Spiegato il modulo Noclip
+description: La Fase è un modulo di movimento che permette di attraversare blocchi solidi disconnettendo la tua posizione da ciò che una collisione reale consentirebbe. Ecco come funziona.
+excerpt: La fase fornisce al server una posizione che una collisione non potrebbe mai generare, e per un istante il muro semplicemente non esiste. È anche uno dei trucchi più facili da smascherare nel gioco.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa fa effettivamente la Fase?
+    a: Permette a un giocatore di attraversare blocchi solidi segnalando al server una posizione che un rilevamento delle collisioni reale non produrrebbe mai, ottenendo di fatto un noclip abbreviato attraverso un muro.
+  - q: È Phase la stessa cosa di un hack del moscerino?
+    a: No. Un hack della mosca rimuove la gravità, permettendoti di muoverti liberamente nell'aria aperta. La fase specifica annulla le collisioni contro i blocchi solidi, consentendoti di attraversare il terreno che altrimenti ti bloccherebbe.
+  - q: Può l'uso di Phase portare a un divieto?
+    a: Sì. Non esiste un modo legittimo per ritrovarsi sul lato opposto di un blocco solido, e gli anticheat lato server controllano la posizione rispetto alla collisione con il mondo indipendentemente dal client, il che rende questo tipo di movimento facile da rilevare e sanzionare.
+  - q: Quali clienti hanno spedito la Fase?
+    a: È documentato come si può vedere in Fan e Opal v1, archiviato come modulo di movimento in entrambi. Altri clienti potrebbero distribuire un comportamento simile di noclip con un nome di modulo diverso.
+---
+
+<KeyTakeaways>
+- Phase è un modulo di movimento che permette a un giocatore di attraversare blocchi solidi disconnettendo la propria posizione dalla collisione reale.
+- Non elimina la collisione dal mondo, ma invia al server una posizione che la collisione non produrrebbe mai.
+- La disconnessione deve durare solo finché il muro non è stato superato, dopodiché il movimento torna alla normalità.
+- Gli anticheat lo rilevano controllando la posizione rispetto alla geometria del mondo, una delle rilevazioni più affidabili che esistano.
+</KeyTakeaways>
+
+Phase è un modulo di movimento che permette a un giocatore di attraversare blocchi solidi, un noclip a corto raggio creato mentendo al server sulla propria posizione. La collisione standard ti mantiene da un lato di un muro, indipendentemente dai pulsanti che premi. Phase aggira questa limitazione segnalando al server una posizione dall'altra parte, una che la normale rilevazione delle collisioni non potrebbe mai generare autonomamente. Il server generalmente si fida delle coordinate inviate dal client entro una certa tolleranza, quindi aggiorna la tua posizione oltre il blocco che avrebbe dovuto fermarti. Attraversa il blocco e il movimento può tornare alla normalità come se nulla fosse.
+
+## Come funziona Phase
+
+Phase non modifica le scatole di collisione del mondo. I blocchi rimangono solidi, la matematica delle hitbox non è cambiata e un giocatore senza nulla in esecuzione che cammina contro lo stesso muro si ferma come sempre. Ciò che cambia è ciò che il client segnala. Il modulo tiene traccia della posizione effettiva del giocatore rispetto alla griglia dei blocchi, quindi invia al server coordinate che superano il muro invece di fermarsi contro di esso. Poiché il server si fida generalmente della posizione che gli viene fornita, entro una certa tolleranza, aggiorna la posizione del giocatore sul lato opposto di un blocco che avrebbe dovuto bloccarlo completamente.
+
+La menzogna deve reggere solo un istante. Una volta che il giocatore è fuori dalla parete, il movimento torna alla normalità, il che fa parte di ciò che rende difficile individuare il modulo a una rapida occhiata: non c'è stranezza prolungata da notare, solo un attimo in cui qualcuno si trovava in un punto in cui non avrebbe dovuto essere in grado di arrivare.
+
+L'attrattiva è semplice. Permette di saltare il terreno che altrimenti richiederebbe una deviazione: un muro, una recinzione, un vuoto di un blocco per cui una mappa è stata costruita appositamente. Si manifesta soprattutto in un gioco incentrato sul movimento, dove attraversare direttamente la geometria solida fa risparmiare distanza o apre un punto che la mappa non era mai stata destinata a consentire. È documentato come un modulo di categoria movimento riscontrato in client come Fan e Opal v1.
+
+## È sicuro da usare?
+
+No, in nessun modo che resista a un esame approfondito. Non esiste una sequenza legittima di input vanilla che posizioni un giocatore sul lato opposto di un blocco solido senza aggirarlo, superarlo o attraversare un'apertura reale. Questo rende la Fase uno dei cheat più evidenti piuttosto che uno dei più sottili. Non esiste una versione grigia e non c'è una spiegazione legittima che un server debba escludere per prima.
+
+I controlli anticheat lato server verificano il movimento rispetto alle collisioni del mondo indipendentemente da ciò che il client dichiara. Un giocatore che si trova fuori da un blocco in un determinato istante e lo supera nel successivo, senza un percorso valido tra quei due punti, fallisce tale verifica senza appello. Si tratta di un problema di geometria, non di un giudizio statistico sull'aspetto umano del mouse, ed è proprio per questo che la rilevazione di questo tipo di noclip tende ad essere affidabile. Le tecniche di tempismo e la randomizzazione che attenuano la rilevazione su altri cheat qui non servono a molto, dato che il controllo si interessa solo alla posizione finale del giocatore rispetto alla griglia, non a come ci è arrivato.
+
+<Callout variant="tip" title="Introduzione di Phase">
+Anche Opal fornisce questo modulo, catalogato con lo stesso nome: Phase. La descrizione del catalogo non lo abbellisce: "Permette di attraversare i muri". Stessa modalità noclip a corto raggio come altrove, stessa storia per quanto riguarda il rilevamento.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina descrive il modulo in termini generali, così da farti capire cosa significa il termine. La denominazione e il comportamento esatto variano a seconda del client, e il passaggio attraverso blocchi solidi non ha una spiegazione legittima su nessun server che esegue un anticheat. Opal classifica l'uso di Phase come a rischio del singolo utente per questo preciso motivo: è rilevabile e può portare alla sospensione dell'account, come su qualsiasi client che lo distribuisce.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa fa effettivamente la Fase?">
+Permette a un giocatore di attraversare blocchi solidi segnalando al server una posizione che la normale rilevazione delle collisioni non consentirebbe, in pratica un noclip attraverso un muro.
+</FAQItem>
+
+<FAQItem question="Fase è la stessa cosa di un hack per i moscerini?">
+No. Un hack per i moscerini rimuove la gravità e permette a un giocatore di muoversi liberamente nello spazio aperto. La Fase specifica annulla la collisione contro blocchi solidi, permettendo al giocatore di attraversare il terreno che altrimenti lo bloccherebbe.
+</FAQItem>
+
+<FAQItem question="Phase può farti bannare?">
+Sì. Attraversare blocchi solidi non ha una spiegazione legittima, e gli anticheat lato server controllano la posizione del giocatore rispetto alla collisione del mondo indipendentemente dal client, il che rende questo tipo di movimento facile da rilevare e sanzionare.
+</FAQItem>
+
+<FAQItem question="Quali clienti hanno spedito la Fase?">
+È documentato come da Fan e Opal v1. Altri clienti potrebbero implementare un comportamento simile di noclip sotto un nome di modulo diverso.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-scaffold", label: "Cos'è Scaffold?", description: "Un altro modulo di movimento costruito attorno allo sfruttamento di ciò che un server deve ritenere affidabile riguardo alla posizione." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "La categoria di clienti basata sul rimanere invisibili, piuttosto che muoversi velocemente." },
+  { href: "/it/learn/what-is-velocity-anti-knockback", label: "Cos'è la velocità (anti-knockback)?", description: "Un diverso modulo di categoria di movimento con lo stesso profilo di utilizzo a proprio rischio e pericolo." },
+]} />
+
+<CTA href="/it/purchase">Il modulo Phase di Opal rende letterale l'affermazione "attraverso i muri". Scopri il resto dell'elenco.</CTA>

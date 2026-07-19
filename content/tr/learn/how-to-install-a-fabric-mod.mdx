@@ -1,0 +1,91 @@
+---
+title: Fabric Modunu Nasıl Kurulur (2026 Kılavuzu)
+description: "Bir Fabric modunu kurmak üç adımdan oluşur: Minecraft sürümünüz için Fabric yükleyiciyi kurun, Fabric API'yi ekleyin ve ardından modu mods klasörüne bırakın."
+excerpt: "Herhangi bir Fabric modunu kurmak için üç adım: loader, Fabric API ve ardından mod jar dosyası. İşte adım adım rehber ve yüklenmediğinde yapmanız gereken düzeltmeler."
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: Her mod için Fabric API'ye ihtiyaç var mı?
+    a: Çoğu Fabric moduna bağımlı olduğu için, varsayılan olarak yükleyin. Kendiliğinden çalışan birkaç mod buna ihtiyaç duymasa da, eklemek zarar vermez.
+  - q: Başlangıçta modum neden çöküyor?
+    a: Genellikle bir sürüm uyumsuzluğu veya eksik bir Fabric API'si söz konusudur. Yükleyiciyi, Fabric API'sini ve modu hedefleyen Minecraft sürümünün aynı olduğundan emin olun.
+  - q: Fabric modları nereye gidiyor?
+    a: Minecraft dizininizin içindeki "mods" klasöründe. Windows'ta bu, %appdata%\.minecraft\mods'tur. Klasör henüz yoksa Fabric profilini bir kez çalıştırın.
+  - q: Birden fazla Fabric modu aynı anda çalıştırabilir miyim?
+    a: Evet. Her bir dosyayı aynı mods klasörüne bırakın. Hedefledikleri Minecraft sürümünüzle uyumlu olup çakışmadıkları sürece, yükleyici bunları birlikte çalıştırır.
+---
+
+<KeyTakeaways>
+
+- Bir Fabric modu kurmak üç adımdan oluşur: loader, Fabric API ve ardından mod jar dosyası.
+- Her bir parça (loader, API, mod) aynı Minecraft sürümünü hedeflemelidir.
+- Modlar, Minecraft dizininizdeki mods klasöründe bulunur.
+- Çoğu kurulum hatası, sürüm uyumsuzluğu veya eksik bir Fabric API'sinden kaynaklanır.
+
+</KeyTakeaways>
+
+[Fabric](https://fabricmc.net/) modunu kurmak üç adımdan oluşur: Minecraft sürümünüz için Fabric yükleyiciyi kurun, Fabric API'yi mods klasörünüze atın ve ardından modun jar dosyasını yanına bırakın. Fabric profilini başlatın ve mod yüklenir. Çoğu kurulum sorunu sürüm uyumsuzluğundan kaynaklanır, bu yüzden her parçayı aynı Minecraft sürümüne uygun hale getirin.
+
+<Callout variant="info" title="Opal Kurulumu">
+Opal da aynı adımları izler: bu bir Fabric modudur. Kesin sürüm ve önerilen JVM argümanları için [kurulum rehberini](https://example.com/en/docs/setup) kullanın.
+</Callout>
+
+## Üç Adım
+
+<Steps>
+
+<Step number={1} title="Fabric yükleyiciyi kurun">Minecraft sürümünüz için [Fabric](https://fabricmc.net/) yükleyiciyi, resmi Fabric yükleyicisini veya Fabric'i destekleyen bir başlatıcıyı kullanarak yükleyin. Fabric yükleyiciyi yükleme sürecini görmek için [yükleme kılavuzuna](/tr/learn/how-to-install-fabric-loader) bakın</Step>
+
+<Step number={2} title="Fabric API'sini ekleyin">[Fabric API](/tr/learn/what-is-the-fabric-api) jar dosyasını mods klasörüne yerleştirin. Çoğu mod onun bağımlıdır</Step>
+
+<Step number={3} title="Modu ekle">Modun jar dosyasını, Fabric API'nin yanına, aynı mods klasörüne yerleştirin</Step>
+
+</Steps>
+
+Ardından Fabric profilini başlatın ve mod, başlatıldığında yüklenecektir. Görünmüyorsa, aşağıda yer alan sorun giderme listesini kontrol edin.
+
+## Mod klasörünün yeri
+
+| İşletim Sistemi | Yol |
+| :--- | :--- |
+| Windows | `%appdata%\.minecraft\mods` |
+| macOS | `~/Library/Application Support/minecraft/mods` |
+| Linux | `~/.minecraft/mods` |
+
+Eğer `mods` klasörü henüz yoksa, Fabric profilini bir kez çalıştırın ve sizin için oluşturulacaktır.
+
+## Bir modun yüklenmemesi durumunda
+
+<Checklist>
+<ChecklistItem>Mod görünmüyor: jar dosyası yanlış klasörde veya Fabric olmayan bir profil başlattınız.</ChecklistItem>
+<ChecklistItem>Başlangıçta eksik sınıf hatasıyla çökme: Fabric API eksik veya yanlış sürümde.</ChecklistItem>
+<ChecklistItem>Sürüm uyumsuzluğu: yükleyici, Fabric API ve modun hepsi aynı Minecraft sürümünü hedeflemelidir.</ChecklistItem>
+</Checklist>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Her mod için Fabric API'ye ihtiyacım var mı?">
+Çoğu Fabric modları ona bağlıdır, bu yüzden varsayılan olarak onu yükleyin. Birkaç bağımsız mod buna ihtiyaç duymaz, ancak eklemek zarar vermez.
+</FAQItem>
+
+<FAQItem question="Modum neden başlatıldığında çöküyor?">
+Genellikle bir sürüm uyumsuzluğu veya eksik bir Fabric API'sidir. Yükleyicinin, Fabric API'sinin ve modun hepsinin aynı Minecraft sürümünü hedeflediğinden emin olun.
+</FAQItem>
+
+<FAQItem question="Fabric mod'ları nereye konulmalı?">
+Minecraft dizininizdeki `mods` klasörünün içine (yukarıdaki yollar). Klasör henüz yoksa, Fabric profilini bir kez çalıştırın.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/how-to-install-fabric-loader", label: "Fabric yükleyiciyi nasıl kurarım", description: "İlk adım, tüm detaylarıyla birlikte." },
+  { href: "/tr/learn/what-is-the-fabric-api", label: "Fabric API nedir?", description: "Neden neredeyse her mod bunu gerektiriyor." },
+  { href: "/tr/blog/essential-fabric-mods-every-player-should-have", label: "Zorunlu Fabric modlar", description: "Kurulumunuz tamamlandıktan sonra takabileceğiniz sağlam bir temel." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

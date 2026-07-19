@@ -1,0 +1,93 @@
+---
+title: Cos'è Mixin? Modding del bytecode di Minecraft (2026)
+description: Mixin è la libreria di bytecode injection che permette ai mod di Minecraft di patchare le classi del gioco al momento del caricamento. Ecco cosa fa e perché i mod ne hanno bisogno.
+excerpt: Mixin permette a un mod di inserire codice nelle classi compilate di Minecraft mentre il gioco si carica, senza necessità di modificare il codice sorgente. Ecco come funziona e perché Fabric è costruito su di esso.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Frameworks
+author: trq
+faqs:
+  - q: È Mixin una mod?
+    a: No. Mixin è una libreria con cui vengono creati i mod; un loader come Fabric la include e applica i mixin forniti dai tuoi mod.
+  - q: Mixin modifica i miei file di gioco?
+    a: No. Le patch si verificano in memoria mentre le classi vengono caricate, quindi i file su disco rimangono intatti e la rimozione di una mod elimina correttamente le sue modifiche.
+  - q: Perché a volte due mod si scontrano tramite Mixin?
+    a: Se entrambi applicano la stessa modifica in modi incompatibili, soprattutto con @Overwrite, si può annullare o compromettere l'altro; punti di iniezione più ristretti evitano ciò.
+  - q: Mixin è solo per Minecraft?
+    a: No. Mixin è un framework generale per bytecode Java, ma è nel modding di Minecraft che viene utilizzato maggiormente, e l'adozione da parte di Fabric lo ha reso lo standard in quel contesto.
+---
+
+<KeyTakeaways>
+
+- Mixin è una libreria Java che applica patch alle classi compilate di Minecraft al momento del caricamento.
+- I mod descrivono dove iniettare il codice, non l'aspetto del file, quindi le patch sopravvivono agli aggiornamenti del gioco.
+- [Fabric](https://fabricmc.net/) si basa su Mixin e applica i mixin di ciascun mod durante il caricamento delle classi.
+- Non installi mai Mixin direttamente; il loader lo include.
+
+</KeyTakeaways>
+
+Mixin è una libreria Java che consente a un mod di modificare le classi compilate di Minecraft durante il caricamento del gioco, senza modificare il codice sorgente originale. I mod scrivono piccole classi che indicano "aggiungi questo codice in questo punto in questo metodo di gioco", e Mixin le integra nel bytecode a runtime. [Fabric](https://fabricmc.net/) lo utilizza come meccanismo di modding principale.
+
+<Callout variant="info" title="Dove si integra Opal">
+Opal è un mod per Fabric, quindi si basa su Mixin internamente. Non è necessario installare Mixin separatamente; la [guida all'installazione](/it/docs/setup) spiega come far funzionare Opal e Fabric.
+</Callout>
+
+## Come funziona Mixin
+
+Mixin modifica le classi dopo la loro compilazione ma prima che la JVM le esegua. Una mod spedisce una classe Mixin che prende di mira una classe reale del gioco. Le annotazioni su quella classe indicano dove inserire il codice iniettato: l'inizio di un metodo, la fine, una specifica chiamata di metodo o un valore restituito. Quando Minecraft carica la classe di destinazione, Mixin riscrive il suo bytecode per inserire il codice della mod.
+
+Questo è importante perché Minecraft non è progettato per essere esteso. Il gioco non ha punti di plugin ufficiali per la maggior parte dei comportamenti. Mixin offre alle mod un modo per entrare trattando il gioco compilato stesso come superficie di estensione.
+
+## Perché le mod lo usano invece di modificare il gioco
+
+Ci sono due ragioni: compatibilità e aggiornamenti.
+
+Modificare direttamente il codice sorgente del gioco significa spedire una copia modificata completa, su cui nessuno può costruire e che si rompe non appena il gioco viene aggiornato. Le patch di Mixin sono piccole e mirate, quindi molte mod possono patchare lo stesso gioco senza dover spedire ciascuna una fork completa.
+
+Le patch descrivono anche dove iniettare piuttosto che come appare il file, quindi una mixin scritta per una versione spesso funziona ancora dopo un aggiornamento del gioco, a condizione che il metodo di destinazione esista ancora.
+
+## Come si integra con Fabric
+
+Fabric è costruito su Mixin. Il loader legge la configurazione mixin di ogni mod, quindi passa le classi mixin elencate a Mixin affinché vengano applicate durante il caricamento delle classi. Una tipica mod Fabric è costituita principalmente dalle proprie classi più un numero limitato di mixin che agganciano i pochi metodi di gioco che deve modificare.
+
+## Punti di iniezione comuni
+
+| Annotazione | Cosa fa |
+|---|---|
+| `@Inject` | Esegue il tuo codice in un punto scelto all'interno di un metodo di destinazione |
+| `@Redirect` | Sostituisce una specifica chiamata di metodo all'interno del target |
+| `@ModifyArg` | Modifica un argomento passato a una chiamata all'interno del target |
+| `@ModifyVariable` | Riscrive una variabile locale a metà metodo |
+| `@Overwrite` | Sostituisce un intero metodo (ultima risorsa; si rompe facilmente) |
+
+`@Inject` è lo strumento predefinito perché è il meno invasivo e il più probabile che sopravviva a un aggiornamento del gioco. `@Overwrite` è evitato perché entra in conflitto con qualsiasi altra mod che tocca lo stesso metodo.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Mixin è un mod?">
+No. Mixin è una libreria con cui vengono creati i mod. Non lo installi separatamente; un loader come [Fabric](https://fabricmc.net/) lo include e applica i mixin forniti dai tuoi mod.
+</FAQItem>
+
+<FAQItem question="Mixin modifica i miei file di gioco?">
+No. Le patch avvengono in memoria durante il caricamento delle classi. I file su disco rimangono intatti, motivo per cui la rimozione di un mod elimina correttamente le sue modifiche.
+</FAQItem>
+
+<FAQItem question="Perché a volte due mod si scontrano tramite Mixin?">
+Se entrambe modificano lo stesso metodo in modi incompatibili, soprattutto con `@Overwrite`, una può annullare o compromettere l'altra. I mixin ben scritti utilizzano punti di iniezione ristretti per evitare di interferire tra loro.
+</FAQItem>
+
+<FAQItem question="Mixin è solo per Minecraft?">
+No. Mixin è un framework generale per bytecode Java, ma la modding di Minecraft è dove viene utilizzato più intensamente, e l'adozione da parte di [Fabric](https://fabricmc.net/) ne ha fatto lo standard lì.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-mod-loader", label: "Cos'è un mod loader di Minecraft?", description: "Come i mod vengono integrati nel gioco al lancio." },
+  { href: "/it/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "I due ecosistemi di modding confrontati." },
+  { href: "/it/learn/what-is-asm", label: "Cos'è l'ASM?", description: "Il toolkit bytecode sottostante a Mixin." },
+]} />
+
+<CTA href="/it/purchase">Ottieni Opal, un client Fabric, per $8.99</CTA>

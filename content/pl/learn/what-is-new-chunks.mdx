@@ -1,0 +1,79 @@
+---
+title: Co nowego w bloku Minecraft? (Wyjaśnienie modułu)
+description: New Chunks to moduł exploita dla Minecrafta, który odczytuje dane pakietów i oświetlenia, aby ujawnić nowo wygenerowany teren i ukryte bazy na serwerach takich jak 2b2t.
+excerpt: Nie kopie, nie bada. Po prostu odczytuje oświetlenie i mówi ci dokładnie, gdzie mapa przestaje być aktualna.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie wykrywa New Chunks?
+    a: Czy fragment aktualnie ładowany wokół gracza został właśnie wygenerowany przez serwer po raz pierwszy, czy też jest to fragment, który już istniał i jest po prostu ponownie wysyłany do klienta.
+  - q: Czy New Chunks to to samo co X-ray?
+    a: Nie. Zdjęcie rentgenowskie ujawnia, co już znajduje się w terenie, który już został załadowany, zazwyczaj rudy. Nowe Chunks informują, czy teren jest nowy, czy już wcześniej zbadany – to zupełnie inne informacje.
+  - q: Czy New Chunks wysyła na serwer coś nietypowego?
+    a: Nie. Odczytuje tylko pakiety i sygnały oświetleniowe, które klient już otrzymuje podczas normalnego ładowania fragmentów, i nigdy nie wysyła zmodyfikowanych danych z powrotem, co dokładnie tłumaczy, dlaczego kontrola po stronie serwera nie może jej wychwycić bezpośrednio.
+  - q: Dlaczego to ma znaczenie konkretnie na serwerach anarchii?
+    a: Serwery anarchy, takie jak 2b2t, nie posiadają chronionych działek, a wokół punktu startowego nagromadziły się lata eksploracji. Znalezienie granicy między przebytymi a niezbadanymi terenami to jeden z nielicznych sposobów na odnalezienie niezajętej ziemi lub bazy, którą ktoś próbował ukryć.
+---
+
+<KeyTakeaways>
+
+- New Chunks to moduł exploita, który odróżnia nowo generowany teren od terenu, który serwer już wygenerował i wysłał wcześniej.
+- Czyta pakiety i wskazówki dotyczące oświetlenia z normalnego ładowania chunków, bez konieczności eksploracji, kopania czy sprawdzania mapy.
+- Na serwerach typu anarchy, takich jak 2b2t, ta granica oznaczają krawędź zbadanego terenu i wskazuje, gdzie ukrywają się bazy.
+- Nigdy nie wysyła do serwera niczego nietypowego, dlatego zasady fair play wykrywają go częściej niż antywirusy.
+
+</KeyTakeaways>
+
+New Chunks to moduł wykorzystujący luki, który rozróżnia teren wygenerowany przez serwer po raz pierwszy od terenu, który już istniał i jest tylko przeładowywany. Dzieje się to poprzez odczyt pakietów i sygnałów oświetleniowych wysyłanych podczas zwykłego ładowania fragmentów – tych samych danych, które każdy klient otrzymuje niezależnie od tego, czy moduł jest uruchomiony, czy nie. Nie jest wymagana żadna akcja gracza. Na świecie, który przez lata był przeszukiwany wokół punktu startu, to pojedyncze rozróżnienie jest najszybszym sposobem na znalezienie faktycznej granicy i wszystkiego, co ktoś próbował zakopać za nią.
+
+## Jak New Chunks odczytuje świat
+
+Moduł obserwuje dane przesyłane w miarę pojawiania się fragmentów w zasięgu renderowania. Świeżo wygenerowany teren i teren, który już istniał, wysyłają subtelnie różne sygnatury pakietów i oświetleniowe podczas ładowania, a to jest cała sztuczka: New Chunks odczytuje różnicę, która już istniała – po prostu stawia na niej etykietę. Nie ma nic, co gracz musiałby interpretować na oko. Moduł działa pasywnie w tle i oznacza rozróżnienie w momencie załadowania pobliskiego fragmentu, dzięki czemu widoczna linia między starym a nowym światem podąża za Tobą podczas podróży.
+
+Ta linia jest warta pościgu z dwóch powodów. Teren eksplorowany od lat wokół punktu startowego na serwerze, takim jak 2b2t, został już przeszukany, więc wiedza, które bloki są nowe, mówi ci, gdzie faktycznie zaczyna się granica. Działa to również w drugą stronę: baza zbudowana z dala od punktu startowego znajduje się w blokach, które zostały wygenerowane dawno temu, więc przeszukiwanie nieznanego terenu w poszukiwaniu granicy starego i nowego zawęża obszar, w którym prawdopodobnie znajduje się ukryta baza.
+
+## Dlaczego antycheaty nie mogą po prostu to oznaczyć
+
+New Chunks nie kłamie serwerowi na temat niczego. Odczytuje dane pakietów i oświetlenia, które serwer już wysyła do każdego połączonego klienta jako część normalnego ładowania bloków, a następnie wyciąga z tego wniosek wyłącznie po stronie klienta. Nie ma spreparowanego pakietu, zmienionego ruchu, niczego, co można by porównać z punktem odniesienia, w taki sposób, jak antycheat porównuje zasięg lub czas ataku w przypadku cheatów bojowych.
+
+To umieszcza go w innej kategorii niż np. aimbot lub rusztowanie. To wykorzystanie informacji: przewaga pochodzi z odczytywania danych, które i tak miałeś otrzymać, po prostu interpretujesz je inaczej niż zamierzał serwer, a nie z wysyłania czegokolwiek fałszywego. Większość serwerów, które banują narzędzia tego typu, opiera się na ogólnych zasadach fair play, a nie na flagi anomalii pakietów, ponieważ zazwyczaj nie ma konkretnej anomalii, do której można by się odnieść.
+
+<Callout variant="tip" title="Nie do końca specjalizacja Opal">
+Opal został stworzony do PvP: walki, poruszania się, przełącznika duch kontra oczywisty. Rozpoznanie na serwerach Anarchy, takie jak New Chunks, znajduje się zupełnie w innym miejscu listy modułów i nie jest czymś, co Opal oferuje. Jeśli czytanie granic chunków to funkcja, po której naprawdę przychodzisz, poszukaj jej po nazwie na liście modułów klienta przed zakupem. "Klient użytkowy" obejmuje szeroki zakres bardzo różnych zadań.
+</Callout>
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona wyjaśnia, co dany termin oznacza ogólnie. Dokładne zachowanie i nazewnictwo różnią się w zależności od klienta, a większość serwerów zakazuje narzędzi eksploracji i anarchii, takich jak ten, na mocy ogólnych zasad fair play, nawet jeśli za blokadą nie stoi konkretna flaga anticheat.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co właściwie wykrywa New Chunks?">
+Czy fragment terenu aktualnie ładowany w pobliżu gracza został wygenerowany przez serwer po raz pierwszy, czy też jest to fragment, który już istniał i jest po prostu ponownie wysyłany do klienta.
+</FAQItem>
+
+<FAQItem question="Czy New Chunks to to samo co X-ray?">
+Nie. X-ray pokazuje, co jest już w terenie, który został już załadowany, zazwyczaj rudy. New Chunks informuje, czy dany teren jest nowy, czy też był już wcześniej zbadany – to zupełnie inny rodzaj informacji.
+</FAQItem>
+
+<FAQItem question="Czy New Chunks wysyła cokolwiek nietypowego do serwera?">
+Nie. Odczytuje jedynie pakiety i sygnały oświetleniowe, które klient otrzymuje podczas normalnego ładowania fragmentów, i nigdy nie wysyła zmodyfikowanych danych z powrotem. Właśnie dlatego kontrola po stronie serwera nie może tego wychwycić bezpośrednio.
+</FAQItem>
+
+<FAQItem question="Dlaczego to ma znaczenie konkretnie na serwerach anarchy?">
+Serwery anarchy, takie jak 2b2t, nie posiadają chronionych działek, a wokół spawnu nagromadziło się wiele lat eksploracji. Znalezienie granicy między obszarem zbadanym a niezbadanym jest jednym z niewielu sposobów na zlokalizowanie niezajętej ziemi lub bazy, którą ktoś próbował ukryć.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szeroka kategoria, do której należą moduły tego typu." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kategoria oparta na subtelności i dążąca do niezauważalności." },
+  { href: "/pl/learn/what-is-reach", label: "Co to jest zasięg?", description: "Inny rodzaj ostrości, dotykający walki, a nie terenu." },
+]} />
+
+<CTA href="/pl/purchase">Opal gra w grze PvP, a nie na mapie. Zobacz listę modułów dla $8.99.</CTA>

@@ -1,0 +1,81 @@
+---
+title: Czym jest Tree-bot w Minecraft? Wyjaśnienie automatycznego ścinania drzew
+description: Tree-bot to moduł Minecraft, który automatycznie ścina drzewa i sadzi nowe sadzonki. Oto jak działa pętla automatycznego ścinania i czy jest bezpieczne jej używanie.
+excerpt: Topór sam się porusza. Robot-drwal podchodzi do drzewa, oczyszcza pień, kładzie sadzonkę na pniu i odchodzi, bez potrzeby klikania.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Tree-bot oszukuje?
+    a: Automatyzuje akcję, którą gracz normalnie wykonywałby ręcznie, co jest traktowane jako botowanie na serwerach, które zakazują niezauważonej automatyzacji. Nie daje przewagi w walce ani w ruchu, tak jak moduły takie jak zasięg czy lot.
+  - q: Czy Tree-bot może spowodować twoje zbanowanie?
+    a: Sprowadza się to bardziej do zasad serwera niż do wykrywania oszustw. Serwery, które zakazują jakiejkolwiek formy automatyzacji lub używania makr, mogą zbanować za to. Serwery, które pilnują jedynie wykorzystywania błędów w walce i ruchu, zazwyczaj tego nie wykrywają.
+  - q: Czy Robot-Drzewo automatycznie sadzi drzewa?
+    a: Zazwyczaj tak. Większość implementacji sadzi sadzonkę na pniu od razu po usunięciu pnia, dzięki czemu drzewo odrasta bez potrzeby samodzielnego sadzenia.
+  - q: Który klient ma Tree-bota?
+    a: Tree-bot to moduł Wurst, wymieniony tam jako funkcja automatyzacji lub narzędziowa, a nie bojowa.
+---
+
+<KeyTakeaways>
+
+- Tree-bot to moduł Minecraft, który automatycznie ścina drzewa: podchodzi do najbliższej pnia, niszczy każdy połączony blok w pniu i przechodzi do następnego drzewa.
+- Większość implementacji sadzi sadzonkę na pniu bezpośrednio po ścięciu, dzięki czemu drzewo odrasta bez konieczności ręcznego sadzenia.
+- Jest to moduł automatyzacji Wurst, a nie oszustwo związane z walką lub ruchem. Nie wymaga celowania, klikania ani sterowania.
+- Ryzyko wykrycia przez anticheat jest niskie, ponieważ nigdy nie dotyka zasięgu, rotacji ani rejestracji trafień. Prawdziwym ryzykiem są zasady serwera dotyczące automatyzacji.
+
+</KeyTakeaways>
+
+Tree-bot to moduł Minecraft, który sam ścina drzewa: znajduje pień, podchodzi do niego, łamie całą kłodę, sadzi ponownie, powtarza. Jest przeznaczony do farmy drewna, czyli do tej części gry, w której inaczej stałbyś w lesie, trzymając lewy przycisk myszy przez dziesięć minut. Nic w nim nie dotyczy walki z graczami ani poruszania się. To zabójca nudy, a nie narzędzie do znajdowania przewagi.
+
+## Jak to działa
+
+Tree-bot skanuje otoczenie gracza w poszukiwaniu bloków pnia po włączeniu. Gdy znajdzie jeden, podchodzi z graczem do podstawy drzewa i łamie pień od dołu do góry przez wszystkie połączone kłody, w tym ukośne lub pochylone wzorce wzrostu, które tworzą niektóre typy drzew. Czyści jedno drzewo i przechodzi prosto do następnego w zasięgu, powtarzając tę samą pętlę tak długo, jak w pobliżu stoją drzewa.
+
+Sadzenie to druga połowa cyklu. Większość wersji umieszcza sadzonkę na pniu w momencie, gdy ten pada, więc zamiast wracać później do nagiej plamy ziemi, gracz znajduje drzewo, które już odrasta. Gracz niczego nie celuje, nie klika, nie steruje. Tree-bot kontroluje ścieżkę, łamanie i umieszczanie od początku do końca.
+
+Zalety są oczywiste, jeśli kiedykolwiek ręcznie zbierałeś drewno na budowę lub uzupełnienie zapasów w sklepie: jest to powtarzalne i pochłania czas, który mógłbyś poświęcić na dosłownie cokolwiek innego. Tree-bot zamienia "idź rąbać drewno" w "uruchom Tree-bota, wróć do stosu bali". Jest udokumentowany w Wurst, obok innych modułów użytecznościowych i automatyzacji, a nie modułów bojowych, co dokładnie wskazuje, do jakiej kategorii należy.
+
+## Czy jest bezpieczny w użyciu?
+
+Tree-bot nie ingeruje w zasięg, rotacje ani rejestrację trafień – to dokładnie te mechaniki, na których opierają się większość anticheatów bojowych, więc nie uruchamia testów przeznaczonych do wykrywania killaury lub haków zasięgu. Łamanie kłody i sadzenie sadzonki to same w sobie nie nadludzkie działania; serwer monitorujący czas przesyłania pakietów w poszukiwaniu luk w walce nie ma czego oznaczyć tutaj.
+
+Prawdziwym zagrożeniem jest sama automatyzacja, niezależnie od tego, co może zobaczyć anticheat. Wiele serwerów zakazuje jakiegokolwiek zachowania makr lub botów po stronie klienta, które działają bez bezpośredniego wejścia gracza, kropka. Zbieranie drewna nie ma wyjątków tylko dlatego, że jest nieszkodliwe dla wszystkich innych w świecie. Serwer z takim ogólnym przepisem traktuje Tree-bota jako botowanie, bez względu na to, jak czysto wygląda w praktyce. Serwer, który pisze zasady tylko wokół luk w walce i ruchu, ma znacznie mniejsze szanse, żeby przejmował się tym, co ścina twoje drzewa.
+
+<Callout variant="tip" title="Gdzie to się znajduje w Opalu">
+Opal nie dostarcza modułu Tree-bota. To specyficzna funkcja Wurst, a katalog Opala mocno skupia się na modułach walki, ruchu i wizualnych – kategoriach, w których pojedynczy klatka decyduje o walce. Automatyczne pozyskiwanie drewna nie przesądza o wiele, dlatego nigdy nie znajdowało się na planie rozwoju.
+</Callout>
+
+<Callout variant="warning" title="Wykrywanie to nie wszystko">
+Ta strona opisuje Tree-bota ogólnie, a nie jako funkcję Opal. Nawet na serwerze, gdzie anticheat nie ma nic do oznaczenia, zasady same w sobie mogą zablokować niepilnowaną automatyzację. Zapoznaj się ze stanowiskiem serwera w kwestii makr i botów, zanim pozwolisz mu działać w lesie bez nadzoru.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Tree-bot to oszustwo?">
+Automatyzuje akcję, którą gracz normalnie wykonywałby ręcznie, co jest uznawane za botowanie na serwerach, które zakazują niezauważonej automatyzacji. Nie daje przewagi w walce ani w ruchu w taki sposób, jak moduły takie jak zasięg czy lot.
+</FAQItem>
+
+<FAQItem question="Czy Tree-bot może spowodować zbanowanie?">
+Wszystko zależy od zasad serwera, a nie od wykrywania oszustw. Serwery, które zakazują jakiejkolwiek formy automatycznej gry lub makr, mogą zbanować za to. Serwery, które pilnują jedynie oszustw związanych z walką i ruchem, zazwyczaj tego nie wykrywają.
+</FAQItem>
+
+<FAQItem question="Czy Tree-bot automatycznie sadzi drzewa ponownie?">
+Zazwyczaj tak. Większość implementacji pozostawia siewkę na pniu bezpośrednio po usunięciu pnia, dzięki czemu drzewo odrasta bez konieczności sadzenia go przez Ciebie.
+</FAQItem>
+
+<FAQItem question="Który klient posiada Tree-bota?">
+Tree-bot to moduł Wurst, wymieniony tam jako funkcja automatyzacji lub narzędziowa, a nie bojowa.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "W środku znajduje się szersza kategoria Robot-drzewa i inne moduły automatyzacji." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Inny rodzaj modułu, stworzony tak, by pozostać niezauważonym przez innych graczy, a nie przez system anticheat." },
+  { href: "/pl/learn/what-is-reach", label: "Co to jest zasięg?", description: "Rodzaj oszustw, na które zwracają uwagę mechanizmy anty-cheat, i dokładnie to, czego Tree-bot nigdy nie dotyka." },
+]} />
+
+<CTA href="/pl/purchase">Opal wydaje pieniądze na walkę, a nie na las. 8,99 $.</CTA>

@@ -1,0 +1,94 @@
+---
+title: Cos'è il modulo delle notifiche in Minecraft?
+description: Il modulo delle Notifiche nei client di Minecraft mostra un avviso rapido a schermo quando un modulo viene attivato o disattivato, o quando un'attività è completata, senza lasciare alcuna traccia per gli anticheat.
+excerpt: Un interruttore si attiva, un'attività termina e una piccola barra ti informa che ha funzionato, così non devi controllare di persona. Questo è l'intero modulo.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: È un modulo di imbroglio Notifications?
+    a: No. Mostra un messaggio solo quando succede qualcosa nel client, come l'attivazione di un modulo o il completamento di un'attività automatica. Non agisce per tuo conto né modifica alcuna meccanica di gioco, quindi si tratta di un feedback, non di automazione.
+  - q: Che tipo di eventi attivano una notifica?
+    a: I due più comuni sono un modulo che si attiva o si disattiva, solitamente da una scorciatoia o dall'interfaccia grafica, e un modulo automatizzato che completa un compito in autonomia, come ad esempio un Chest Stealer che esegue un passaggio su un forziere.
+  - q: Vengono rilevate le notifiche dagli anticheat?
+    a: No. Non ha assolutamente alcuna impronta lato server. Non invia nulla e non modifica nulla del gameplay, e gli anticheat valutano movimento, combattimento e dati dei pacchetti, nessuno dei quali è toccato da un semplice pop-up visivo.
+  - q: Come si differenzia Notifications da un modulo HUD?
+    a: Un modulo HUD è un overlay persistente visualizzato continuamente, come coordinate o FPS. Le notifiche appaiono solo brevemente in risposta a un evento specifico, per poi scomparire.
+  - q: Quali clienti hanno un modulo Notifiche?
+    a: Si riscontra in clienti come Fan e Tenacity, di solito posizionato accanto a un HUD e a un elenco di array come parte della stessa categoria di visualizzazione passiva.
+---
+
+<KeyTakeaways>
+
+- Il modulo Notifiche mostra un breve pop-up a schermo quando si verifica un evento specifico all'interno del client, più spesso l'attivazione o la disattivazione di un modulo, oppure il completamento di un'attività da parte di un modulo automatizzato come Chest Stealer.
+- È basato su eventi, non persistente: l'avviso appare, rimane visualizzato per un secondo o due, quindi si chiude da solo, a differenza di un HUD sempre visibile.
+- Disegna solo localmente. Nessun pacchetto, nessuna modifica al movimento o al combattimento, niente che possa essere rilevato da un anticheat lato server.
+- Presente in client come Fan e Tenacity come un elemento di miglioramento della qualità della vita, non come una funzionalità di gioco.
+
+</KeyTakeaways>
+
+Il modulo Notifiche è un piccolo sistema di avvisi presente in alcuni client utility di Minecraft che mostra un breve pop-up sullo schermo ogni volta che si verifica un evento specifico, più comunemente l'attivazione o la disattivazione di un modulo, o il completamento di un'attività in background. Non modifica in alcun modo il modo in cui il gioco viene giocato. Consideralo come una conferma, non come un'automazione: quel tipo di funzionalità a cui non pensi finché non stai gestendo sei moduli contemporaneamente e hai bisogno di sapere, senza dover controllare, che quello che hai appena attivato o disattivato sia effettivamente stato applicato.
+
+## Come funziona
+
+Le Notifiche ascoltano gli eventi all'interno del client stesso, piuttosto che qualsiasi cosa accada sul server. Il trigger più comune è un tasto di scelta rapida o un toggle GUI: attiva Killaura e un banner rapido lo conferma. L'altro trigger frequente è un modulo automatizzato che completa un'attività secondo il proprio programma, l'esempio più chiaro è [Chest Stealer](/it/learn/what-is-chest-stealer) che termina una scansione di un forziere che hai appena aperto.
+
+La finestra pop-up in sé è piccola: una riga di testo o un banner compatto, solitamente posizionato in un angolo dello schermo, visibile per un secondo o due prima di svanire. Funziona come i messaggi toast di Minecraft vanilla (le finestre pop-up di avanzamento, il banner di sblocco della ricetta), ma riadattati per eventi lato client invece che vanilla. La parte importante è cosa non fa: mostrare la notifica non ha alcun effetto sull'evento che sta segnalando. L'interruttore è già stato attivato. La finestra pop-up ti informa solo a posteriori.
+
+## Notifiche vs modulo HUD
+
+Potrebbe essere allettante classificarlo sotto HUD, ma i due risolvono problemi diversi. Un HUD rimane sullo schermo continuamente, mostrando una lettura continua come coordinate o FPS, indipendentemente dal fatto che stia accadendo qualcosa o meno. Le notifiche sono l'opposto: invisibili per impostazione predefinita e appaiono solo quando si verifica qualcosa di specifico.
+
+| | Notifiche | HUD |
+|---|---|---|
+| Visibili per impostazione predefinita | No, solo all'evento | Sì, continuamente |
+| Durata | Un secondo o due, poi si chiude | Rimane finché non viene disattivato |
+| Mostra | Un singolo evento (attivazione, compito completato) | Statistiche in corso (coordinate, FPS, combattimento) |
+| Interazione con il server | Nessuna | Nessuna |
+
+I clienti come Fan e Tenacity spediscono entrambi, trattandoli come pezzi separati della stessa categoria di visualizzazione passiva piuttosto che uno che copre l'altro. Se desideri il lato di lettura costante di quella coppia, quella è la pagina [modulo HUD](/it/learn/what-is-hud).
+
+## È sicuro da usare?
+
+Così sicuro come può essere una funzionalità client. Le notifiche vengono visualizzate localmente e si fermano lì. Nessun pacchetto extra viene inviato, niente riguardo a movimenti o combattimenti cambia, e nessun input viene automatizzato. Un anticheat lato server valuta ciò che il tuo client invia e come il tuo giocatore si muove, e un pop-up che esiste solo sul tuo schermo non tocca nessuna delle due parti. Non c'è una firma di rotazione, nessun indizio temporale, niente da correlare.
+
+L'unica avvertenza non è un rischio di rilevamento: è un problema di visibilità. Poiché il pop-up viene renderizzato direttamente sullo schermo, chiunque guardi quello schermo (un moderatore, una condivisione dello schermo, uno streaming) vede esattamente ciò che dice. Vale la pena saperlo, ma non ha nulla a che fare con il modo in cui un anticheat valuta un giocatore.
+
+<Callout variant="tip" title="Dove si inserisce in Opal">
+Opal non include un modulo chiamato Notifiche. Ma l'istinto che lo guida, quello di informarti su ciò che sta accadendo invece di farti cercare, è presente nell'interfaccia in ogni caso. Lo stato dei moduli e le attività di background completate sono cose che dovresti leggere a colpo d'occhio, non andare a cercarle in un menu.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Le Notifiche sono un modulo di cheat?">
+No. Mostra semplicemente un messaggio quando qualcosa accade nel client, come l'attivazione di un modulo o il completamento di un'attività automatizzata. Non agisce in tuo favore né modifica alcuna meccanica di gioco, quindi si tratta di un feedback, non di automazione.
+</FAQItem>
+
+<FAQItem question="Quali tipi di eventi attivano una notifica?">
+I due casi più comuni sono l'attivazione o la disattivazione di un modulo, solitamente tramite una scorciatoia da tastiera o l'interfaccia grafica, e il completamento autonomo di un compito da parte di un modulo automatizzato, come ad esempio il Chest Stealer che completa un passaggio su un forziere.
+</FAQItem>
+
+<FAQItem question="Le Notifiche vengono rilevate dagli anticheat?">
+No. Non lascia alcuna traccia sul server. Non invia nulla e non modifica nulla del gameplay, e gli anticheat valutano movimento, combattimento e dati dei pacchetti, nessuno dei quali è toccato da un semplice pop-up visivo.
+</FAQItem>
+
+<FAQItem question="In che modo le Notifiche differiscono da un modulo HUD?">
+Un modulo HUD è un overlay persistente visualizzato continuamente, come le coordinate o gli FPS. Le notifiche appaiono solo brevemente in risposta a un evento specifico, per poi scomparire.
+</FAQItem>
+
+<FAQItem question="Quali clienti hanno un modulo Notifiche?">
+È presente in clienti come Fan e Tenacity, di solito affiancato da un HUD e un array list come parte della stessa categoria di visualizzazione passiva.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria più ampia delle Notifiche è solo una piccola parte." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Una diversa filosofia incentrata sull'essere invisibili piuttosto che sull'essere informati." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Uno dei moduli automatizzati, un pop-up di Notifiche potrebbe aver appena confermato, è stato appena attivato." },
+]} />
+
+<CTA href="/it/purchase">Acquista Opal e smetti di chiederti se l'ultimo interruttore è stato attivato.</CTA>

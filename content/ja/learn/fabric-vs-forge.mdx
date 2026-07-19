@@ -1,0 +1,77 @@
+---
+title: FabricとForge：どのMinecraftMODローダーか？（2026年）
+description: FabricとForgeの違い：2つのMinecraftMODローダーが、速度、バージョンサポート、MODにおいてどのように異なるのか、そしてあなたの環境に最適なのはどちらか.
+excerpt: Fabricは、パフォーマンスやユーティリティMOD向けの軽量でアップデートの速いローダーです。Forgeは、コンテンツカタログが最も充実した、重厚なものです。選び方はこちらです.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Frameworks
+author: trq
+faqs:
+  - q: Fabricの方がForgeより速いですか？?
+    a: ローダー自体は軽くなっており、それに組み合わせて人気のあるパフォーマンスMOD（Sodium、Lithium）はFabric上で動作します。生の速度は、ローダー単体ではなく、インストールするMODによって決まります.
+  - q: ForgeのMODをFabricで動かすことはできますか？?
+    a: 直接ではありません。あるローダー用に作成されたMODは、互換性レイヤーがないと別のローダーでは動作しません。そのため、MODをインストールする前に、どのローダーを対象としているか確認してください.
+  - q: どちらが新しいバージョンに早くアップデートされる？?
+    a: Fabric 数日以内に通常準備が整います Minecraft 解放. Forge 通常、APIの表面積が大きいので、時間がかかります.
+---
+
+<KeyTakeaways>
+
+- Fabric は、パフォーマンスやユーティリティ MOD に好まれる、軽量でアップデートの速いローダーです。
+- Forge は、より古く、より重く、大規模なコンテンツ MOD の最も豊富なカタログを持つローダーです。
+- 早期バージョンのサポートや小さいサイズを求めるなら Fabric を、大規模な MOD パックなら Forge を選択してください。
+- MOD はどちらかのローダーを対象としているため、使用するローダーに合わせて MOD を選択してください.
+
+</KeyTakeaways>
+
+[Fabric](https://fabricmc.net/ は、軽量で高速な動作を実現する、新しいmodをサポートするmodローダーです Minecraft 数日のうちにバージョンが提供され、パフォーマンスやユーティリティMODによって好まれる. Forge より古く、より大きく、最も豊富な大型MODカタログを持つ選択肢です Fabric スピードと初期バージョンサポートのため、選択してください Forge 大規模なMODパックやコンテンツMODで、それらが存在する場所でのみ.
+
+<Callout variant="info" title="どこ Opal 合う">Opalはバージョン1.21.10でFabric上で動作します。そのため、Opalの設定を行う場合は、Fabricをローダーとして使用してください。詳細は[セットアップガイド](/ja/docs/setup)を参照してください</Callout>
+
+## それぞれが何であるか
+
+Fabricは、小さなコアと個別にバージョン管理されている[Fabric API](/ja/learn/what-is-the-fabric-api)を中心に構築されたモジュール式のModローダーです。Minecraftの新しいリリースに迅速に対応し、クリーンなMixinベースのパッチングモデルで知られています。
+
+Forgeは、長年にわたり多くの大規模なModパックを動力としてきた、確立されたローダーです。広範なAPI表面を備えており、大規模なコンテンツModを構築しやすくしますが、ローダーのバージョンごとのアップデートが遅くなるという欠点があります。
+
+## 違い
+
+| | Fabric | Forge |
+| :--- | :--- | :--- |
+| サイズ | 軽量コア + Fabric API | 巨大で、大規模な組み込みAPI |
+| 新バージョン対応 | リリース後数日 | 数週間から数ヶ月 |
+| 得意分野 | パフォーマンス + ユーティリティMod | 大規模なコンテンツMod + Modパック |
+| パッチングモデル | Mixins | Coremodsと独自のフック |
+| Mod間の互換性 | ModごとのAPI | 広範な共有API |
+
+## どちらを選ぶか
+
+- Minecraftの最新バージョンをいち早く利用したい場合、パフォーマンスModを実行したい場合、または最小限のフットプリントにしたい場合はFabricを選択してください。
+- お気に入りのコンテンツModやModパックがForge専用である場合、または構築するための大規模な共有APIが必要な場合はForgeを選択してください。
+- 多くのプレイヤーは、Modの多くがどちらか一方をターゲットにしているため、ローダーごとにプロファイルを作成して両方を保持しています。
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Fabric は Forge よりも高速ですか？">
+ローダー自体はより軽量で、それに組み合わせてよく使われるパフォーマンスmod（Sodium、Lithium）も Fabric 上で動作します。生の速度は、ローダー単体ではなく、インストールするmodによって異なります。
+</FAQItem>
+
+<FAQItem question="ForgeのMODをFabricで実行できますか？">
+直接的にはできません。ForgeのMODは、別のローダーであるFabricでそのまま動作しません。互換レイヤーがないと、MODは別のローダーで動作しません。インストールする前に、MODがどのローダーを対象としているか確認してください。
+</FAQItem>
+
+<FAQItem question="どちらのアップデートの方が新しいバージョンに早く対応しますか？">
+Fabricは通常、Minecraftのリリースから数日で利用可能になります。Forgeは、より大きなAPI表面積を持つため、通常は時間がかかります。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/ja/learn/what-is-the-fabric-api", label: "Fabric APIとは何ですか？?", description: "FabricのほとんどのMODに必要な共有ライブラリ." },
+  { href: "/ja/learn/how-to-install-fabric-mods", label: "FabricMODのインストール方法", description: "エンドツーエンドでFabric環境を構築してください." },
+  { href: "/ja/learn/what-is-a-minecraft-mod-loader", label: "何ですか Minecraft mODローダー?", description: "まず、ローダーは何をするのか." },
+]} />
+
+<CTA href="/ja/purchase">OpalFabricクライアントを8.99ドルで手に入れよう</CTA>

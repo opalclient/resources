@@ -1,0 +1,86 @@
+---
+title: Minecraft'ta Tam Parlaklık Nedir? Görsel Modül Açıklaması
+description: Full Bright, Minecraft'taki her ışık seviyesini maksimuma çıkarır, böylece mağaralar, gece gökyüzü ve gölgeler tamamen aydınlatılmış olarak görüntülenir. Nasıl çalıştığı ve X-Ray'den nasıl farklılaştığı.
+excerpt: Vanilya, her bir mağarada meşaleler taşımanı istiyor. Tam parlak sadece ışıkları yakıyor ve o tüm egzersizi atlıyor.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Parlaklık, gama ayarını yükseltmekle aynı şey midir?
+    a: Benzer bir yerde iniş yaparlar ancak farklı çalışırlar. Gamma veya monitör parlaklığını artırmak, zaten aydınlık olan alanlar da dahil olmak üzere ekranda her şeyi yükseltir, bu da parlak sahneleri soldurabilir. Tam parlaklık, ışık seviyesi hesaplamasına doğrudan etki eder, böylece karanlık alanlar aydınlık olarak görüntülenir ve zaten parlak olan hiçbir şeyi etkilemez.
+  - q: Oyuncuların gördüğü şeyleri parlaklık ayarı etkiler mi?
+    a: Hayır, bu sadece yerel bir görüntüleme değişikliği. Sunucudaki herkes, normal aydınlatma, meşaleler, gölgeler ve her şeyle dünyayı görmeye devam ediyor. Sadece sizin görüşünüz değişiyor.
+  - q: Tam parlaklık açılıp kapatılabilir mi?
+    a: Evet. Bu, bir istemcinin modül listesinde veya görsel ayarlarda bulunan bir geçiş düğmesidir; ihtiyaç duyduğunuzda görünürlüğü açıp, aksi takdirde kapatırsınız; tıpkı bir yakınlaştırma tuşunu çevirir gibi.
+  - q: Full bright hile sayılır mı?
+    a: Genellikle hayır. Sadece yerel görüntülemeyi değiştirir ve sunucuya farklı bir şey göndermez, bu yüzden çoğu sunucu ve antichipler bunu kozmetik olarak değerlendirir; bir hileden ziyade parlaklık ayarı gibidir.
+  - q: Tam parlaklık cevherleri mi ortaya çıkarır, yoksa gizli yapıları mı?
+    a: Hayır. Karanlığı giderir, blokları şeffaflaştırmaz veya arazi içinden bir şeyleri vurgulamaz. Bu X-Ray'in işi, full bright'ın değil.
+---
+
+<KeyTakeaways>
+
+- Tam parlak, her bloğun maksimum ışık seviyesinde render edilmesini sağlayan bir görsel modüldür, böylece mağaralar, gece ve gölgeler karanlık görünmeyi bırakır.
+- Sadece istemcinizin çizdiği şeyleri değiştirir, sunucunun aslında takip ettiği ışık değerlerini değil.
+- Diğer oyuncular, değişiklik tamamen kendi render adımınızda gerçekleştiği için dünyayı olduğu gibi görürler.
+- X-Ray gibi cevherleri veya araziyi ortaya çıkarmaz ve ek olarak ağ üzerinden hiçbir şey göndermez.
+
+</KeyTakeaways>
+
+Tam parlak, Minecraft dünyasındaki her ışık seviyesini maksimuma çıkaran bir görsel modüldür; böylece mağaralar, gece gökyüzü ve gölgeli köşeler, yakında hiç biri olmasa bile bir meşale tarafından aydınlatılmış gibi görüntülenir. Tamamen istemcinin oluşturucusunda çalışır: sunucunun takip ettiği gerçek ışık değerleri değişmez, yalnızca ekranınızda çizilen resim değişir. Kapatırsanız dünya, orijinal haliyle amaçlandığı kadar karanlık görünür. Açarsanız karanlık bir değişken olmaktan çıkar; bir mağarada, su altında veya oyun içinde gece yarısı, her şey öğle saatleri gibi görünür.
+
+## Nasıl Çalışır
+
+Minecraft normalde her blok için bir ışık değeri üç girdiden hesaplar: gökyüzünü ne kadar gördüğü, bir meşale veya başka bir ışık kaynağına ne kadar yakın olduğu ve günün saati. Bu değer daha sonra bloğun renklerini karartır; sayı ne kadar düşükse, o kadar karanlık görüntülenir. Tam parlak, çıktıda bu hesabı tamamen atlar. Oluşturucuyu her bloğun maksimum ışık seviyesindeymiş gibi işlem görmeye zorlar, gerçek değer ne olursa olsun.
+
+Simülasyonla ilgili hiçbir şey değişmiyor. Canavar üremesi hala sunucunun takip ettiği gerçek ışık seviyesinde çalışıyor, sizin gördüğünüz gibi değil; bu yüzden tam parlaklık, iyi aydınlatılmış bir üssü daha güvenli veya karanlık birini daha tehlikeli yapmıyor. Vuruş kutuları hareket etmiyor. Sunucudaki herkes için dünyadaki fenerler ve gölgeler dahil her şey tamamen normal görünüyor, çünkü değişiklik tamamen kendi istemcinizin işleme adımında yaşıyor. Siz dünyayı aydınlatmıyorsunuz. Siz dünyanın görünümünü aydınlatıyorsunuz.
+
+## Tam Parlaklık vs X-Ray
+
+Tam parlaklık ve X-Ray her ikisi de "görmemesi gereken şeyleri görme" kategorisine dahil ediliyor olsa da, aynı işi yapmıyorlar. Tam parlaklık sadece karanlığı ortadan kaldırır: size zaten bir fenerle aydınlatılmış bir tünelde göreceğiniz şeyi gösterir, başka bir şey değil. X-Ray daha ileri giderek katı blokları şeffaf hale getirir veya taşın içindeki cevherleri vurgular, hiçbir aydınlatma yönteminin asla ortaya çıkaramayacağı bilgileri gün yüzüne çıkarır.
+
+| Modül | Değişiklikler | Ortaya Çıkarır |
+|---|---|---|
+| Tam parlaklık | Yalnızca işlenen ışık seviyesi | Tam aydınlatmanın zaten göstereceğinden fazlası değil |
+| X-Ray | Blok şeffaflığı ve işleme | Katı zeminin içindeki cevher ve yapılar |
+
+İşte bu ayrım, bu iki özelliğin tamamen farklı kategorilerde yer almasının nedenini açıklıyor. Tam parlaklık "gündüz gibi" seviyesinde sınırlanırken, X-Ray "zemin yokmuş gibi" seviyesinde sınırlanır
+
+<Callout variant="tip" title="Opal, bunu kendi markası altında gönderiyor">
+Aynı fikir, resmi adı: Full Bright. Opal'ın ürün açıklaması tam olarak tarif ettiği gibi; "oyunu aydınlatır, karanlıkta hiçbir şey kaybolmaz." Opal'ın güvenli kategorisi altında sınıflandırılmıştır; kozmetik ve yaşam kalitesini iyileştiren, bir anticheat'in kontrol etmesi gereken hiçbir şey içermeyen, ağla herhangi bir bağlantısı olmayan türden bir ayar.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Tam parlaklık, gama ayarını yükseltmekle aynı şey midir?">
+İkisi de benzer bir noktaya ulaşır ancak farklı şekilde çalışır. Gama ayarını yükseltmek veya monitör parlaklığını artırmak, zaten aydınlık olan alanlar da dahil olmak üzere ekrandaki her şeyi etkiler ve parlak sahneleri solgun hale getirebilir. Tam parlaklık ise ışık seviyesi hesaplamasına doğrudan müdahale eder, böylece zaten parlak olan hiçbir şeyi etkilemeden karanlık alanlar aydınlık olarak görüntülenir.
+</FAQItem>
+
+<FAQItem question="Tam parlaklık diğer oyuncuların gördüğünü etkiler mi?">
+Hayır. Bu yalnızca yerel bir görüntüleme değişikliğidir. Sunucudaki herkes hala normal aydınlatma, meşaleler, gölgeler ve bunların hepsiyle dünyayı görür. Yalnızca kendi görünümünüz değişir.
+</FAQItem>
+
+<FAQItem question="Tam parlaklık açılıp kapatılabilir mi?">
+Evet. Müşteri modül listesinde veya görsel ayarlarda bir geçiş düğmesi olarak bulunur; ihtiyaç duyduğunuzda görünürlüğü açın ve aksi takdirde kapatın, tıpkı bir yakınlaştırma tuşunu açıp kapatır gibi.
+</FAQItem>
+
+<FAQItem question="Tam parlaklık hile sayılır mı?">
+Genellikle hayır. Sadece yerel işleme şeklini değiştirir ve sunucuya farklı bir şey göndermez, bu nedenle çoğu sunucu ve hile önleme sistemi bunu kozmetik olarak değerlendirir; bir parlaklık ayarı kaydırıcısına daha yakın bir şeydir.
+</FAQItem>
+
+<FAQItem question="Tam parlaklık cevherleri veya gizli yapıları ortaya çıkarır mı?">
+Hayır. Karanlığı giderir, blokları şeffaf yapmaz veya arazinin içinden hiçbir şeyi vurgulamaz. Bu, X-Ray'in işi, tam parlaklığın değil.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Daha geniş kategori, parlak ve burada bulunan diğer tüm modüllerin ait olduğu kategori." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Görülmemek üzere inşa edilmiş modüller, sadece bir odayı aydınlatmak yerine." },
+  { href: "/tr/learn/what-is-killaura", label: "Killaura nedir?", description: "Savaşları otomatikleştirme modülü, görsel bir açma-kapama düğmesinden farklı bir kategori." },
+]} />
+
+<CTA href="/tr/satin-al">Full Bright, Opal içinde bulunan tek bir açılır menü seçeneğidir. Meşale gerekmez, gama kaydırıcısı gerekmez, gözlerinizin alışmasını beklemeniz de gerekmez.</CTA>

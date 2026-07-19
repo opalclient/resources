@@ -1,0 +1,79 @@
+---
+title: Minecraft'ta İzleyiciler Nedir? Modül Açıklaması
+description: Tracers, nişanınızdan görünürdeki her varlığa bir çizgi çizer, duvarlardan geçmez. Modülün nasıl çalıştığı ve Minecraft'ta çalıştırılmasının güvenli olup olmadığı aşağıda açıklanmıştır.
+excerpt: Oyuncuya zaten görebildiğin bir çizgi, bir duvar hack'in sana göstermeyeceği bir şey değil. İşte mekanizma ve neden hala şüpheli işlerle birlikte anılıyor.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Tracers, ESP ile aynı şey mi?
+    a: Hayır. ESP, derinlik testini atlayarak duvarları ve araziyi aşan varlıkları gösterir, bu da normal bir kamera görüşünün asla ortaya çıkaramayacağı şeyleri ortaya çıkarır. İzleyiciler yalnızca zaten ekranda görüntülenen varlıklara bir çizgi çizer, bu nedenle asla gizli bilgi eklemez.
+  - q: Traceler oyunculara duvarların içinden bakabiliyor mu?
+    a: Hayır. İzleyiciler, istemcinin zaten ekranda çizdiği varlıkları işaretler. Bir duvar bir varlığa görüş hattını engelliyorsa, modülün işaretleyebileceği bir şey olmaz, bu yüzden hiçbir şey çizilmez.
+  - q: Traceler bir oyuncunun yasaklanmasına neden olabilir mi?
+    a: Çoğunlukla, birlikte olduğu şirket yüzünden olabilir. İzleyiciler genellikle ESP ve aimbotlarla aynı istemci içinde gönderilir ve değiştirilmiş işleme kodu taraması yapan bir sunucu, hangi modül etkinleştirilmiş olursa olsun, kancayı kendisi işaretler. Tek başına, mekanizma çok az şey ifşa eder.
+  - q: Neden kamu hizmetleri müşterileri, Tracers'ı ESP modüllerine dahil ediyor?
+    a: "Aynı işleme hattından okurlar ve aynı amaca hizmet ederler: varlıkların daha kolay fark edilmesini sağlamak. Onları tek bir görsel kategori altında toplamak çoğunlukla bir derleme kararıdır, kapalı çalışmada aynı şekilde çalıştıklarının kanıtı değildir."
+---
+
+<KeyTakeaways>
+
+- İzleyiciler, nişan teğetinden ekrana zaten çizim yapan her varlığa doğru bir çizgi çizer.
+- Duvarlardan geçmez: bir varlık görüş alanından çıktığında veya engellendiğinde, çizgisi de kaybolur.
+- Derinlik testini tamamen atlayarak arazi boyunca çizim yapan ESP'den farklıdır.
+- Tek başına çok az işlevsel avantaj sağlar, ancak genellikle kurallara aykırı olduğu açıkça görülen modüllerle birlikte gönderilir.
+
+</KeyTakeaways>
+
+Tracers, ekranda görünen her varlığa, ekranınızın merkezinden bir çizgi çizen görsel bir modüldür; böylece bir oyuncu veya yaratık kalabalığın içinde kaybolmak yerine öne çıkar. Yalnızca istemcinizin zaten çizdiği şeyleri işaretler. Bir duvarın arkasında gizli olan hiçbir şey çizgi almaz, çünkü bir duvarın arkasında gizli olan hiçbir şey zaten oluşturulmaz.
+
+## Tracers nasıl çalışır
+
+Tracers her karede çalışır ve istemcinin şu anda oluşturduğu varlıkları, ayarlara bağlı olarak oyuncuları, yaratıkları veya her ikisini kontrol eder. Ekranda olan her birine, nişan noktası ile varlığın konumuna düz bir çizgi çizer ve varlık görüş alanından çıktığında veya görüşten engellendiğinde çizgiyi anında bırakır. Modül, varlığı kendisini çizmek için zaten kullandığı aynı oluşturma verilerini okur. Sunucudan ek bir şey çekmez ve normal bir istemcinin istemeyeceği hiçbir şey istemez.
+
+Tam da bu son kısım, Tracers'ı gerçek bir duvar hack'inden ayırır. ESP, derinlik testini atlayarak varlıkları katı bloklar aracılığıyla oluşturur ve böylece normal bir kamera görüşünün asla gösteremeyeceği şeyleri oyuncuya gösterir. Tracers bunun hiçbirini yapmaz. Sadece zaten monitörünüze gelmesi gereken bilgilere bir çizgi çizer, böylece ekranı kendiniz tarayarak olduğunuzdan yarım saniye önce fark edersiniz.
+
+İtiraz, yeni bilgi değil, tanıma hızıdır. Kalabalık bir savaşta veya kalabalıklarla dolu bir ormanda, hareket eden bir oyuncuyu karmaşadan ayırmak, bilinçli taramanın bir anını alır. Her varlığa doğru yöneltilmiş bir çizgi, bu anı atlar. Fan, genellikle nametag'larla ve çarpışma kutularıyla aynı görsel kategori altında gruplandırılan Tracers'ı gönderen bir istemcidir, çünkü her üçü de oyun dünyasını daha okunabilir kılmak için vardır, daha görünür kılmak için değil.
+
+## Tracers kullanmak güvenli mi?
+
+Mekanizma olarak, Tracers bir oyun avantajı hilesinden çok bir kolaylık özelliğine daha yakındır. Duvarlardan görüşü genişletmez, menzil veya nişanlığı etkilemez ve istemcinin zaten hallettiği hiçbir şeyi göndermez veya almaz. Bir oyuncunun erişebileceği bilgiye göre yargılayan bir sunucunun işaretleyeceği pek bir şey yoktur: yakından dikkat eden bir insan, teorik olarak, aynı ekranın aynı kısmına bakarak aynı varlığı fark edebilir.
+
+Risk, mekanizmadan ziyade bağlamdır. İzleyiciler (Tracers) neredeyse her zaman, ESP, nişan alma botları ve diğer tartışmasız hile modüllerini de içeren istemcilerle birlikte gönderilir. Bu nedenle, istemci tarafında değiştirilmiş işleme kodunu tarayan bir sunucu, enjeksiyonu kendisini yakalar, çizdiği belirli çizgiyi değil. Sıfır toleranslı sunucular, hangi kutucuk işaretlenmiş olursa olsun, herhangi bir değiştirilmiş istemciyi aynı şekilde ele alır. Kurulum yerine davranışa göre yargı veren sunucularda ise, Tracers tek başına neredeyse hiçbir şey vermez, çünkü oyuncunun aslında görebileceği şeyleri asla değiştirmez.
+
+<Callout variant="warning" title="Bağlam, mekanizma değil, risktir">
+Tek başına Tracer hiçbir şey ortaya koymaz, bir insan kendi başına fark edemeyeceği bir şey değil. Ancak genellikle tek başına gönderilmez. Aynı istemci içinde ESP veya nişan alma botuyla birlikte gönderiliyorsa ve sunucu değişikliği tararken davranışları taramıyorsa, etkinleştirmemiş olan modül de etkinleştirdiğiniz kadar hızlı bir şekilde yakalanmanıza neden olur.
+</Callout>
+
+Opal'in görsel kategorisi de aynı ayrımı temel alıyor: Oyuncunun zaten yasal olarak erişimi olan bilgileri daha net bir şekilde yüzeye çıkarmak, normal bir kamera görüşünün gösteremeyeceği hiçbir şeyi dahil etmekten ziyade. Aynı tasarım dürtüsü, bir çizginin duvarhack'e dönüşmesini engelliyor.
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="Tracers, ESP ile aynı mı?">
+Hayır. ESP, derinlik testini atlayarak duvarların ve arazinin içinden varlıkları gösterir; bu, normal bir kamera görüşünün asla ortaya çıkaramayacağı şeyleri gösterir. Tracers ise yalnızca istemci tarafından zaten ekranda çizilen varlıklara bir çizgi çizer, bu nedenle gizli bilgi eklemez.
+</FAQItem>
+
+<FAQItem question="Tracers oyuncuların duvarların içinden görünmesini sağlıyor mu?">
+Hayır. Tracers, istemci tarafından zaten ekranda çizilen varlıkları işaretler. Bir duvar bir varlığa görüş hattını engelliyorsa, modülün işaretleyebileceği bir şey çizilmez, dolayısıyla hiçbir şey çizilmez.
+</FAQItem>
+
+<FAQItem question="Traceler oyuncu banlanmasına neden olabilir mi?">
+Evet, çoğunlukla birlikte bulunduğu şirket yüzünden. Traceler genellikle ESP ve aimbot'larla aynı istemci içinde çalışır ve değiştirilmiş işleme kodu taraması yapan bir sunucu, hangi modül etkinleştirilmiş olursa olsun, hook'u kendisini işaretler. Tek başına, mekanizma çok az şey ifşa eder.
+</FAQItem>
+
+<FAQItem question="Neden hizmet müşterileri Tracers'ı ESP modüllerine dahil ediyorlar?">
+Bunlar aynı render işlem hattından okuyor ve aynı amaca hizmet ediyor: varlıkları fark etmeyi kolaylaştırmak. Bunları tek bir görsel kategori altında gruplamak çoğunlukla bir derleme kararıdır, dahili olarak aynı şekilde çalıştıklarına dair bir kanıt değildir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Traceler'in daha geniş kategorisi." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Savaş modülü İzleyiciler'in sık sık yanında gönderildiği modül." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Hassas ve açık arasındaki çizginin tam olarak nerede çizildiği." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ın görsel araç kutuğunun neler kapsadığını görün, $8.99</CTA>

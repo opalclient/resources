@@ -1,0 +1,79 @@
+---
+title: Minecraft'ta Timer Nedir? Tick Hızı Modülü Açıklaması
+description: Zamanlayıcı, saldırılardan blok yerleştirmeye kadar oyun döngülerini işlemede istemcinizin hızını artırabilen veya yavaşlatabilen bir modüldür ve sunucuların tespit etmesi kolaydır.
+excerpt: Zamanlayıcı seni daha hızlı yapmaz, saatin yalan söylemesini sağlar. İşte zaman hızlandırma işleminin nasıl çalıştığı ve sunucunun neden her zaman fark ettiği.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Zamanlayıcı modülü aslında neyi değiştiriyor?
+    a: Oyun tiklamalarındaki ilerlemeyi etkileyerek istemcinin hızını değiştirir, böylece saldırı bekleme süreleri, eşya kullanımı ve blok yerleştirme gibi tik zamanına bağlı olan her şeyi hızlandırır veya yavaşlatır.
+  - q: Zamanlayıcı, sunucunun tick oranını etkiler mi?
+    a: Hayır, sadece istemcinin kendi tik tabanlı işlemlerini ne kadar hızlı işlediğini ve gönderdiğini değiştirir. Sunucu kendi tik oranını korur ve aldığı şeyin hızını ölçmeye devam edebilir.
+  - q: Timer kullanmak güvenli midir?
+    a: Gerçek bir tespit riski taşır. Sunucu, eylem oranını beklenen tik hızına karşı doğrudan ölçebildiğinden, eylemleri normalden belirgin şekilde daha hızlı çıkaran bir Zamanlayıcı değeri, anticheat sistemleri için olası bir işaret noktasıdır ve kullanım oyuncunun kendi sorumluluğundadır.
+  - q: Neden biri Zamanlayıcı'yı hızlandırmak yerine yavaşlatır ki?
+    a: Daha düşük bir ayar, bazen ham hız yerine tek bir eylemin zamanlaması üzerinde daha fazla kontrol sağlamak için, verimden ödün vererek hassasiyet karşılığında kullanılır.
+---
+
+<KeyTakeaways>
+
+- Timer, oyun ticks'i boyunca istemcinin ilerleme hızını hızlandıran veya yavaşlatan bir modüldür.
+- Bu, tick zamanlamasıyla ilgili her şeyi etkiler: saldırı bekleme süreleri, eşya kullanımı, blok yerleştirme ve yay şarjı.
+- Sunucunun kendi tick oranı asla değişmez, yalnızca istemcinin gönderdiği hız değişir.
+- Yakalaması kolaydır, çünkü sunucular eylem oranını normal 20 tick hızına karşı doğrudan ölçebilirler.
+
+</KeyTakeaways>
+
+Timer, istemcinizin Minecraft'ın oyun tiklerinin işlenme hızını değiştiren bir modülüdür; oyunun çalıştığı sabit saniyede yirmi olan saat mekanizmasıdır. Bunu normalin üzerine çektiğinizde, tik zamanlamasıyla ilişkili her şey – saldırılar, eşya kullanımı, blok yerleştirme ve yay şarjı – değiştirilmemiş bir istemcinin izin verdiğinden daha sık saniyede gerçekleşir. Bunu normalin altına çektiğinizde, aynı eylemler yavaşlar. Bazen TimerMod olarak adlandırılır ve Fan ve Tenacity gibi istemcilerde görünür. Sunucu ne daha hızlı ne de daha yavaş çalışır: istemci kendi hızını belirler ve sunucu sadece gelenleri izler.
+
+## Nasıl Çalışır
+
+Minecraft, varsayılan olarak saniyede yirmi sabit tik üzerinde çalışır. Çoğu zamanlı eylem, saldırı soğuma süreleri, yemek yeme, blok kırma, yay şarjı, bir tik başına bir adım ilerler, bir duvar saatiyle değil. Timer, istemcinin bu tikler arasından geçme hızına müdahale eder ve bunu bir çarpanla ölçeklendirir. Bunu normalin üzerine ayarlarsanız, istemci sunucunun beklediğinden daha fazla tik saniyede geçer. Bunu normalin altına ayarlarsanız, daha az tikten geçer.
+
+Tıkların aslında kime ait olduğu yakalanması gereken şey bu. Müşteri, tıkları daha hızlı işlese bile sunucunun daha hızlı çalışmasını sağlamaz, sadece müşterinin gönderdiği şeyi değiştirir. Normalden çok daha yüksek bir Timer, tık oranının izin vermesinden daha sık saldırı girişiminde bulunabilir, blok yerleştirebilir veya eşya kullanabilir. Normalin altında çalıştırıldığında bunun tersi olur ve bazı oyuncular bunu kasıtlı olarak kullanır; ekstra hız için değil, bir eylemin tam olarak hangi tik üzerinde gerçekleştiği üzerinde daha ince bir kontrol için.
+
+## Neden sunucular bunu bu kadar kolay yakalar
+
+Timer, saklanması zor bir iz bırakır: gerçek bir oyuncunun istemcisi üreteceğinden daha hızlı veya daha yavaş gelen, tik odaklı eylemler akışı. Sunucu, oyun zamanı üzerinde yetkilidir. Müşterinin hızına güvenmek zorunda değildir, belirli bir süre içinde gelen tik değerindeki eylemlerin sayısını sayabilir ve bunu saniyede yirmi tik olması gerekenle karşılaştırabilir.
+
+Bu durum, Timer'ı en belirgin müşteri modifikasyon kategorilerinden biri olarak işaretlemek için uygun hale getiriyor, en azından prensipte. Sapma, gürültüye gömülü ince bir konum hatası değil, ham bir oran olarak kendini gösterir. Hile önleme sistemleri genellikle, eylem oranı beklenen tick hızının sürekli olarak üzerinde olan oyuncuları kaydeder veya işaretler. Belirli bir değerin belirli bir sunucuda yakalanıp yakalanmayacağı, o sunucunun ne kadar sık kontrol ettiğine bağlıdır, ancak mekanizma kendisi gizli değildir. Tick ile tetiklenen eylemlerin normalden daha hızlı bir akışı, tasarım gereği bütün sinyaldir, uygulamanın bir tesadüfü değil.
+
+<Callout variant="tip" title="Opal tarafından gönderiliyor">
+Opal'ın kendi katalog girişi konuyu açıkça ifade ediyor: "Oyun tick hızını değiştirir." Opal'ın kendi sorumluluğunda kullanılması gereken seviyesinde sınıflandırılmış durumda; tıpkı herhangi bir istemcide olduğu gibi. Çünkü kendi hızını belirleyen bir istemci, sunucu tarafındaki bir kontrolün ölçümünü yapmaya yönelik tam olarak o tür bir sinyaldir.
+</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını anlatmıyor">
+Bu sayfa, terimin ne anlama geldiğini bilmeniz için modülü genel olarak açıklamaktadır. İsimlendirme ve kesin davranışlar müşteriye göre değişir ve sunucunun beklediğinden daha yüksek bir işlem hızıyla çalışmak, bunu kontrol eden hemen hemen her sunucunun kurallarını ihlal eder.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Zamanlayıcı modülü aslında neyi değiştiriyor?">
+Oyun zaman atlamalarını ne kadar hızlı ilerlettiğini değiştirir, bu da zamanlamaya bağlı olan her şeyi hızlandırır veya yavaşlatır: saldırı soğuma süreleri, eşya kullanımı, yay şarjı, blok yerleştirme.
+</FAQItem>
+
+<FAQItem question="Zamanlayıcı sunucunun tick oranını etkiler mi?">
+Hayır. Sadece istemcinin tick tabanlı eylemlerini ne kadar hızlı işlediğini ve gönderdiğini değiştirir. Sunucu, tüm süreç boyunca kendi tick oranını korur ve aldığı verilerin hızını ölçmeye devam edebilir.
+</FAQItem>
+
+<FAQItem question="Timer kullanmak güvenli mi?">
+Gerçek bir tespit riski taşır. Sunucu, eylem oranını beklenen tik hızına karşı doğrudan ölçebilir, bu nedenle normalden belirgin şekilde daha hızlı eylemleri dışarı atan bir Timer değeri, anticheat sistemleri için olası bir işaret noktasıdır. Kullanım oyuncunun kendi sorumluluğundadır.
+</FAQItem>
+
+<FAQItem question="Neden biri Zamanlayıcı'yı hızlandırmak yerine yavaşlatmayı tercih eder?">
+Daha hassas kontrol için, tek bir eylemin tam olarak ne zaman gerçekleştiğini ayarlamak amacıyla bazen daha düşük bir ayar kullanılır; bu, ham verimden ödün vererek hassasiyet kazandırır.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "Çıktı Zamanlayıcısı katlanabilen bir otomatik saldırı modülü." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Sessizliği öncelendiren yaklaşım, bu kadar yüksek bir sinyalin tam tersi." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Daha geniş Timer ve benzeri modüllerin ait olduğu kategori." },
+]} />
+
+<CTA href="/tr/satin-al">Sunucunun beklediğinden daha yüksek bir tick oranı elde edin. Opal Timer'ı gönderiyor, riskin farkında.</CTA>

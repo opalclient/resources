@@ -1,0 +1,87 @@
+---
+title: Cosa è ResetVL in Minecraft? Spiegazione del modulo
+description: ResetVL è un modulo exploit che tenta di resettare o abbassare il contatore di violazioni dell'anti-cheat di un server prima che scatti un flag o un ban. Ecco come funziona.
+excerpt: ResetVL non cancella la tua partita, ma cancella la memoria dell'anti-cheat su di essa, e solo per il tempo in cui lo sfruttamento sottostante rimane non corretto.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: È ResetVL un modulo di trucco?
+    a: Sì. È documentato come un modulo di categoria exploit, e il suo scopo è interferire con la capacità di un anti-cheat lato server di segnalare o punire un giocatore.
+  - q: Qual è il livello di violazione in un sistema anti-cheat?
+    a: È un punteggio dinamico che un sistema anti-cheat lato server tiene traccia per ogni giocatore e spesso per ogni controllo, che aumenta quando rileva comportamenti sospetti e di solito diminuisce se il giocatore si comporta correttamente. Il superamento di una soglia attiva un segnale di allarme, un avviso allo staff o un'espulsione.
+  - q: ResetVL offre un vantaggio diretto nel gameplay?
+    a: No. Non modifica né il movimento né il combattimento di per sé. Funziona in modo indiretto, impedendo al sistema anti-cheat di raggiungere il livello di sospetto interno che lo porterebbe ad agire contro i moduli che effettivamente offrono un vantaggio.
+  - q: Come si differenzia ResetVL da un disattivatore?
+    a: Un disattivatore cerca di impedire che un controllo rilevi comportamenti sospetti fin dall'inizio. ResetVL, invece, si rivolge al punteggio che il controllo ha già accumulato, dopo che il comportamento è stato osservato.
+  - q: È affidabile ResetVL su diversi server?
+    a: No. Dipende da una specifica vulnerabilità nel modo in cui un sistema anti-cheat traccia i propri contromisure, quindi può smettere di funzionare non appena quel sistema anti-cheat viene aggiornato o corretto.
+---
+
+<KeyTakeaways>
+
+- ResetVL è un modulo exploit che tenta di resettare o abbassare il contatore interno di livello di violazione (VL) anti-cheat lato server per il giocatore che lo esegue.
+- VL è un punteggio per giocatore e per controllo che aumenta in caso di comportamento sospetto e normalmente diminuisce quando un giocatore sembra pulito; il superamento di una soglia attiva un flag, un avviso o un'espulsione.
+- ResetVL non aggiunge vantaggi in combattimento o di movimento di per sé. Impedisce semplicemente che le sospettosità accumulate da altri moduli raggiungano tale soglia.
+- Documentato come spedito in Tenacity; dipende da una specifica lacuna nell'implementazione anti-cheat, quindi tende a rompersi non appena tale lacuna viene corretta.
+
+</KeyTakeaways>
+
+ResetVL è un modulo di categoria exploit nei cheat client di Minecraft che tenta di resettare o abbassare il contatore interno di violazioni del sistema anti-cheat lato server, solitamente abbreviato in VL, per il giocatore che lo utilizza. La maggior parte degli anti-cheat non reagisce a un singolo pacchetto dall'aspetto sospetto. Mantengono invece un punteggio in continuo aggiornamento, aumentandolo quando i movimenti o i combattimenti di un giocatore sembrano errati e facendolo diminuire quando il giocatore sembra pulito. È il superamento di una soglia stabilita a innescare effettivamente una risposta. ResetVL non interferisce con il modo in cui un giocatore si muove o combatte. Va dritto a quel punteggio, cercando di riportarlo indietro prima che raggiunga il punto in cui l'anti-cheat agisce.
+
+## Come funziona
+
+Gli anti-cheat lato server generalmente non condannano in base a un singolo pacchetto sospetto. Ogni controllo mantiene il proprio punteggio in continuo aggiornamento per ogni giocatore, aumentandolo quando il comportamento sembra errato e facendolo tipicamente diminuire se il giocatore sembra pulito. Una volta che il punteggio supera una soglia, l'anti-cheat intensifica: avvisa il personale, segnala l'account per la revisione o espelle il giocatore. ResetVL prende di mira direttamente quel punteggio piuttosto che il comportamento che lo produce, cercando di riportare il contatore indietro prima che raggiunga il punto in cui l'anti-cheat risponderebbe.
+
+È documentato nella knowledge base come incluso in Tenacity, archiviato tra i moduli di categoria exploit di quel client insieme ad altri strumenti rivolti agli anti-cheat.
+
+## Perché le persone lo usano
+
+L'attrattiva sta nell'acquistare tempo per tutto il resto della configurazione. Un giocatore che utilizza cheat di combattimento o di movimento dovrà superare diversi controlli durante una sessione, e ogni superamento aumenta il livello di violazione di quel controllo. Se il livello sale verso una soglia di espulsione o ban, ResetVL non lascia spazio all'accumulo di sospetti, permettendo così ai moduli che effettuano l'effettivo cheating di continuare a funzionare senza che il conteggio interno dell'anti-cheat raggiunga il punto in cui si attiva. ResetVL non è ciò che vince la battaglia o colma il divario; è ciò che fa dimenticare all'anti-cheat di doversi preoccupare.
+
+<Callout variant="tip" title="Non fa parte del catalogo Opal">
+Opal non spedisce un modulo con il nome ResetVL. Manipolare i contatori interni di un anti-cheat ha una durata di vita altrettanto breve quanto quella di uno exploit: il valore esiste solo fino a quando un fornitore non si accorge che i suoi contatori possono essere spostati dall'esterno, e colmare questa lacuna tende a essere trattata come una priorità non appena viene scoperta, perché mina l'intero meccanismo su cui l'anti-cheat si basa per punire chiunque.
+</Callout>
+
+## È sicuro utilizzarlo?
+
+No, non in modo affidabile, e questo è intenzionale piuttosto che accidentale. ResetVL colpisce direttamente lo stato decisionale dell'anti-cheat stesso, una forma di elusione più diretta rispetto alla smussatura di una rotazione o all'aggiunta di un timer. Poiché il contatore delle violazioni risiede sul server, un modulo in grado di spostarlo deve sfruttare una specifica lacuna o bug nell'implementazione di un anti-cheat piuttosto che utilizzare una tecnica generale, proprio come un disabler dipende da una peculiarità in un controllo lato server. Questo tipo di exploit tende ad essere di breve durata. Una volta che un fornitore si accorge che i propri contatori possono essere manipolati dall'esterno, la correzione di solito balza in cima alla lista.
+
+<Callout variant="warning" title="Riferimento, non una guida">
+ResetVL è documentato come un modulo di categoria exploit progettato per interferire con la capacità di un anti-cheat lato server di segnalare o punire un giocatore, la stessa categoria di rischio di ban di qualsiasi altro exploit anti-cheat. Questa pagina spiega cos'è il modulo e come si comporta, non come eseguirne uno.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="ResetVL è un modulo trucchetto?">
+Sì. È documentato come modulo di categoria exploit e il suo scopo è interferire con la capacità di un sistema anti-cheat lato server di segnalare o punire un giocatore.
+</FAQItem>
+
+<FAQItem question="Cos'è un livello di violazione in un anti-cheat?">
+È un punteggio dinamico che un anti-cheat lato server tiene traccia per ogni giocatore e spesso per ogni controllo, che aumenta quando rileva comportamenti sospetti e di solito diminuisce se il giocatore si comporta correttamente. Il superamento di una soglia attiva un segnale di allarme, un avviso allo staff o un'espulsione.
+</FAQItem>
+
+<FAQItem question="ResetVL offre un vantaggio diretto nel gameplay?">
+No. Non modifica direttamente movimento o combattimento. Funziona in modo indiretto, impedendo al punteggio di sospetto interno dell'anti-cheat di raggiungere il punto in cui agisce contro i moduli che offrono un vantaggio.
+</FAQItem>
+
+<FAQItem question="In che modo ResetVL si differisce da un disattivatore?">
+Un disattivatore cerca di impedire che un controllo registri un comportamento sospetto fin dall'inizio. ResetVL, invece, si rivolge al punteggio che il controllo ha già accumulato, dopo che il comportamento è stato rilevato.
+</FAQItem>
+
+<FAQItem question="ResetVL è affidabile su tutti i server?">
+No. Dipende da una specifica vulnerabilità nel modo in cui una determinata versione anti-cheat traccia i propri contatori, quindi potrebbe smettere di funzionare non appena l'anti-cheat viene aggiornato o corretto.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "L'aspetto di rilevamento-elusione dello stesso exploit family ResetVL ne fa parte." },
+  { href: "/it/learn/what-is-killaura", label: "Cos'è Killaura?", description: "Un modulo da combattimento che supera rapidamente i controlli, proprio il tipo di equipaggiamento per cui ResetVL è stato progettato." },
+  { href: "/it/learn/what-is-velocity-anti-knockback", label: "Cos'è la Velocità / l'Anti-Recoil?", description: "Un altro modulo che si basa sul layer anti-cheat invece che sul gioco stesso." },
+]} />
+
+<CTA href="/it/purchase">Opal non ha bisogno di cancellare ciò che l'anti-cheat ricorda. Scopri cosa viene effettivamente fornito.</CTA>

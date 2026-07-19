@@ -1,0 +1,96 @@
+---
+title: Co to jest pośrednik? Wyjaśnione mapowania w Minecraft
+description: Pośrednik to stabilna warstwa nazewnicza Fabric dla zaciemnionego kodu Minecraft, dzięki czemu mody działają w kolejnych wersjach bez problemów związanych z przemianowanymi polami.
+excerpt: Zamazane nazwy zmieniają się z każdą wersją. Pośrednik je zamraża, przez co skompilowany mod Fabric wciąż znajduje kod, który patchuje po aktualizacji gry.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Mappings
+author: trq
+faqs:
+  - q: Czy Intermediary to to samo co Yarn?
+    a: Nie. Yarn to czytelna mapa, do której programiści dopasowują swój kod; Intermediary to stabilna, generowana maszynowo warstwa, do której kompilowane mody faktycznie są dopasowywane, a nazwy Yarn kompilują się do niej.
+  - q: Dlaczego nazwy pośredników są takie brzydkie?
+    a: Generowane są, a nie pisane. Nazwy takie jak class_1234 muszą być jedynie unikalne i trwałe, a nie ładne, a czytelność jest obsługiwana przez Yarn lub Mojmap na wyższym poziomie.
+  - q: Czy "intermediary" oznacza, że mod działa na każdej wersji na zawsze?
+    a: Nie. Utrzymuje stabilność nazw, ale jeśli Mojang usunie lub przepiśe metodę, kod bazowy zniknie niezależnie od nazwy, więc redukuje awarie, zamiast ich eliminować.
+  - q: Czy powinienem traktować Intermediary'ego jako gracza?
+    a: W zasadzie nie. Działa pod spodem, wewnątrz Fabric; jako programista napotkasz go dopiero wtedy, gdy czytasz logi błędów, w których pojawia się pośredni symbol.
+---
+
+<KeyTakeaways>
+
+- Intermediary to stabilna warstwa nazewnicza, którą Fabric nakłada na zaciemniony kod Minecrafta.
+- Nadaje każdemu zaciemnionemu symbolowi stałą nazwę, która pozostaje taka sama w różnych wersjach.
+- Skompilowane mody Fabric są dystrybuowane z nazwami Intermediary, a nie czytelnymi.
+- Zmniejsza ona awarie podczas aktualizacji, ale nie może ocalić moda przed usuniętym kodem gry.
+
+</KeyTakeaways>
+
+Pośrednik to stabilna warstwa nazw, którą [Fabric](https://fabricmc.net/) nakłada na zaciemniony kod Minecrafta. Mojang udostępnia grę ze zmienionymi nazwami klas, pól i metod, które zmieniają się z każdą wersją. Pośrednik nadaje każdemu z nich stałą nazwę, która pozostaje taka sama w różnych wersjach, dzięki czemu skompilowany mod zawsze znajduje kod, który modyfikuje, nawet po aktualizacji gry.
+
+<Callout variant="info" title="Gdzie pasuje Opal">
+Opal jest modyfikacją dla Fabric, więc polega na tej warstwie mapowania, podobnie jak każdy inny mod dla Fabric. Nie konfigurujesz go ręcznie; [przewodnik konfiguracji](/pl/docs/setup) pozwoli Ci zacząć.
+</Callout>
+
+## Co tak naprawdę jest Intermediary
+
+Intermediary to zestaw odwzorowań: tabela wyszukiwania, która przyporządkowuje każdy zaciemniony symbol Minecrafta stabilnej, generowanej maszynowo nazwie. Klasa, do której odwołuje się gra, o nazwie `a`, może stać się `class_1234` w Intermediary. Nazwa jest brzydka, ale jest trwała dla tego symbolu w kolejnych wersjach.
+
+Mojang zaciemnia grę przy każdej kompilacji. Nazwy takie jak `field_5678` inaczej zmieniałyby się od wersji do wersji, dlatego mod skompilowany z użyciem surowych, zaciemnionych nazw przestaje działać w momencie aktualizacji gry. Intermediary ustala te nazwy, dzięki czemu to mapowanie, a nie mod, absorbuje zmiany.
+
+## Dlaczego mody Fabric potrzebują tego
+
+Mody są dystrybuowane skompilowane z użyciem nazw Intermediary, a nie nazw czytelnych dla programisty. To jedna decyzja sprawia, że mod [Fabric](https://fabricmc.net/) może działać na nowej wersji gry bez rekompilacji w wielu przypadkach.
+
+Podczas uruchamiania gry Fabric ładuje mapowanie Intermediary dla danej wersji i przekształca zaciemnione klasy gry na stabilne nazwy, których oczekuje mod. Mod i gra spotykają się pośrodku na zestawie nazw, których żadna z nich nie udostępnia w postaci surowej.
+
+## Intermediary w porównaniu z mapowaniem programistów
+
+Programiści nie czytają ani nie piszą `class_1234`. Pracują z mapowaniem czytelnym dla człowieka, takim jak Yarn lub Mojmap, które nadają symbolom opisowe nazwy. Podczas kompilacji czytelne nazwy są przekształcane do Intermediary w celu dystrybucji.
+
+| Poziom | Przykład nazwy | Kto go używa | Stabilny między wersjami |
+| :--- | :--- | :--- | :--- |
+| Obfuscowany | `a`, `field_5678` | Nikt ręcznie | Nie |
+| Pośredni | `class_1234` | Dołączone binaria modów | Tak |
+| Yarn / Mojmap | `MinecraftClient` | Deweloperzy w czasie kompilacji | Czytelny, śledzony pod względem wersji |
+
+Podział pozwala programistom kodować przy użyciu przyjaznych nazw, podczas gdy wersja, która trafia do dystrybucji, pozostaje stabilna pod względem wersji. Czytelne mapowania można wymieniać; Pośredni to wspólny mianownik, z którym zgadza się każdy.
+
+## Jak to pasuje do cyklu życia moda
+
+- Programista pisze kod w oparciu o czytelne mapowanie, takie jak Yarn lub Mojmap.
+- Kompilacja przekształca te nazwy na nazwy Pośrednie.
+- Mod jest dostarczany jako plik jar, który odwołuje się do symboli Pośrednich.
+- Podczas uruchamiania Fabric remapuje działającą grę z jej obfuscated nazw na Pośrednie, aby mod i gra były ze sobą zgodne.
+
+Dlatego mapowania są cichą, ale nośną częścią modowania [Fabric](https://fabricmc.net/): są to umowa, która zapewnia, że mody wskazują na właściwy kod po każdej aktualizacji.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Intermediary to to samo co Yarn?">
+Nie. Yarn to czytelna mapa, do której programiści piszą kod. Intermediary to stabilna, generowana maszynowo warstwa, na którą kompilowane mody są faktycznie wysyłane. Nazwy Yarn kompilują się do Intermediary w czasie budowania.
+</FAQItem>
+
+<FAQItem question="Dlaczego nazwy pośredników są takie brzydkie?">
+Są generowane, a nie pisane. Nazwy takie jak `class_1234` muszą być jedynie unikalne i trwałe, a nie ładne. Czytelność jest obsługiwana przez Yarn lub Mojmap na wyższym poziomie.
+</FAQItem>
+
+<FAQItem question="Czy Intermediary oznacza, że mod działa na każdej wersji na zawsze?">
+Nie. Intermediary utrzymuje stabilne nazwy, ale jeśli Mojang usunie lub przepiśe metodę, kod źródłowy znika niezależnie od nazwy. Zmniejsza to awarie, ale ich nie eliminuje.
+</FAQItem>
+
+<FAQItem question="Czy muszę traktować Intermediary jako gracza?">
+W zasadzie nie. Działa ono pod maską wewnątrz Fabric. Spotkasz je tylko jako programista lub czytając logi błędów, w których pojawia się symbol pośredniczący.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-are-minecraft-mappings", label: "Co są Minecraft mapowania?", description: "Szerszy temat Pośrednik znajduje się wewnątrz." },
+  { href: "/pl/learn/yarn-vs-mojmap", label: "Włókno kontra Mojmap", description: "Czytelne odwzorowania nakładające się na Intermediary." },
+  { href: "/pl/learn/what-is-the-fabric-api", label: "Czym jest Fabric API?", description: "Wspólna warstwa, na której budowane są większość modyfikacji Fabric." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź Opala, klienta Fabric, za $8.99</CTA>

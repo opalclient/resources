@@ -1,0 +1,67 @@
+---
+title: GraalVM JavaScript スクリプティングとは？ (2026)
+description: GraalVM JavaScript は、JVM 上で動作する高速な JS エンジンです。アプリケーションはこれに組み込まれ、ユーザーは JavaScript でスクリプトを実行し、Java を再コンパイルすることなくホットリロードできます.
+excerpt: GraalVM JavaScript により、Java アプリケーションは JavaScript で記述されたユーザー スクリプトを実行し、その場でリロードできます。クライアントがモッドをコンパイルせずに機能を追加する方法です.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: GraalVM JavaScript は Node.js と同じですか？?
+    a: いいえ、どちらもJavaScriptを実行しますが、GraalVMのエンジンはJVMアプリケーション内に組み込むことを想定して設計されており、Node.jsはV8を基盤としたスタンドアロンのランタイムです.
+  - q: Java を知らなくても、スクリプトを書くことはできますか？?
+    a: 普段はそうではありません。ホストアプリが公開するオブジェクトに対してJavaScriptを書きます。それらのオブジェクトが何に対応しているかを知っておくと、より高度な利用に役立ちます.
+  - q: フルmodではなく、スクリプトを使う理由は何ですか？?
+    a: 反復速度。スクリプトは瞬時に再読み込みされますが、コンパイルされたMODは再構築と再起動が必要です.
+---
+
+<KeyTakeaways>
+
+- GraalVM JavaScript は、高速で標準に準拠した JS エンジンであり、JVM 上で動作します。
+- Java アプリケーションはそれを組み込み、ユーザーはホストプログラムに呼び出しを行う JavaScript を記述できます。
+- スクリプトはホットリロードされるため、Java コードを再コンパイルせずに動作を変更できます。
+- ホストは、スクリプトが触れることができるオブジェクトとクラスを正確に決定します.
+
+</KeyTakeaways>
+
+GraalVM JavaScript は、JVM 上で動作する、高速かつ標準に準拠した JavaScript エンジンです。[GraalVM](https://www.graalvm.org/) プロジェクトの一部です。Java アプリケーションに組み込むことで、ユーザーはホストプログラムを呼び出し、実行時に再読み込みできる JavaScript を記述できます。Java アプリケーションにおいては、Java コードを再コンパイルすることなく、JavaScript での動作を追加したり変更したりすることを意味します.
+
+<Callout variant="info" title="どこ Opal 合う">Opalのスクリプティングエンジンは GraalVM JavaScript上で動作します。スクリプトの書き方を始めるには、[スクリプティングガイド](/ja/docs/scripting)を参照してください</Callout>
+
+## GraalVM と GraalVM JavaScript
+
+GraalVM は、JVM 上で複数の言語を実行できる高性能なランタイムです。その JavaScript エンジンは、最新の ECMAScript の機能をサポートするのに十分なほどモダンです。アプリケーションはエンジンを同梱し、スクリプトに操作するためのオブジェクトのセットを渡し、それらを実行します。
+
+## なぜアプリケーションに組み込むのか
+
+- **ホットリロード**: スクリプトを変更すると、再起動や再ビルドなしにその効果を確認できます。
+- **安全なインターフェース**: ホストがスクリプトがアクセスできるオブジェクトと Java クラスを正確に決定します。
+- **Java 相互運用**: スクリプトは、公開されているオブジェクトを通じて、アプリケーション自身のコードを呼び出すことができます。
+
+## クライアントでの表示方法
+
+エンジンを組み込んだプログラムは、通常、スクリプトに自身を登録するためのエントリポイントを与え、次に JavaScript とプログラムの内部を接続する少数の「プロキシ」オブジェクトを提供します。ユーザーはスクリプトを作成し、スクリプトフォルダにドロップし、エンジンがそれをロードします。これにより、クライアントは、モッドをコンパイルする代わりに、JavaScript で機能を追加できるようにすることができます。
+
+## よくある質問
+
+<FAQList>
+
+<FAQItem question="GraalVM JavaScriptはNode.jsと同じですか？">
+いいえ。どちらもJavaScriptを実行しますが、GraalVMのエンジンはJVMアプリケーションに組み込まれることを目的としているのに対し、Node.jsはV8を基盤としたスタンドアロンのランタイムです。
+</FAQItem>
+
+<FAQItem question="スクリプトを書くにはJavaの知識は必要ですか？">
+通常は必要ありません。ホストアプリが公開するオブジェクトに対してJavaScriptを書きます。それらのオブジェクトが何に対応しているかを知っておくと、より高度な利用に役立ちます。
+</FAQItem>
+
+<FAQItem question="フルmodではなく、スクリプトを使う理由は何ですか？?">反復速度。スクリプトは瞬時に再読み込みされますが、コンパイルされたMODは再構築と再起動が必要です</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/ja/learn/what-is-the-jvm", label: "JVMとは何ですか？?", description: "GraalVM JavaScript が動作する環境." },
+  { href: "/ja/learn/what-is-jni", label: "JNIとは何ですか？?", description: "Javaプログラムを拡張する、より簡単な方法." },
+  { href: "/ja/blog/introducing-opal-scripting-engine", label: "Opal'スクリプティングエンジン", description: "GraalVMスクリプティングが実際にどのようなものか." },
+]} />
+
+<CTA href="/ja/purchase">OpalFabricクライアントを8.99ドルで手に入れよう</CTA>

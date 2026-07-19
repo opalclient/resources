@@ -1,0 +1,88 @@
+---
+title: Czym jest zasięg w Minecraft? (Wyjaśnienie modułu walki)
+description: Zasięg to moduł bojowy, który zwiększa odległość, z jakiej możesz trafić w cel, wykraczając poza standardowe ograniczenia. Oto jak on działa, dlaczego systemy anticheat go wykrywają i jakie są związane z nim ryzyka.
+excerpt: Reach umożliwia zadawanie ciosów zanim przeciwnik znajdzie się w pełnym zasięgu walki wręcz. Oto jak moduł rozszerza zasięg ataku i dlaczego serwery mierzą go tak precyzyjnie.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Modules
+author: trq
+faqs:
+  - q: Jaki jest normalny zasięg w Minecraft?
+    a: Zasięg ataku w zwarciu Survivalu wynosi trzy bloki. Moduł Zasięgu zwiększa ten limit, pozwalając klientowi atakować cele oddalone bardziej niż to, co umożliwia wersja podstawowa.
+  - q: Czy Reach jest funkcją po stronie klienta czy po stronie serwera?
+    a: "Oszustwo ma miejsce po stronie klienta: zmodyfikowany klient zgłasza trafienia poza normalnym zasięgiem. Wykrywanie odbywa się po stronie serwera, gdzie anticheat ponownie oblicza odległość i oznaczają trafienia zbyt dalekie."
+  - q: Dlaczego mały Reach jest trudniejszy do wykrycia niż duży Reach?
+    a: Serwery pozwalają na tolerancję opóźnień i kompensację opóźnień. Niewielka nadwyżka zasięgu może ukryć się w tej tolerancji, podczas gdy duża wartość wyraźnie przekracza jakąkolwiek wiarygodną odległość.
+  - q: Czy używanie Reach jest niezgodne z regulaminem?
+    a: Tak. Reach to oszustwo w grze. Używanie go narusza regulamin zasad praktycznie każdego serwera i zazwyczaj skutkuje zablokowaniem konta, gdy zostanie wykryte.
+---
+
+<KeyTakeaways>
+
+- Reach to moduł bojowy, który pozwala na atakowanie celów oddalonych poza standardowy zasięg ataku.
+- Standardowa wersja survival ogranicza walkę w zwarciu do trzech bloków; Reach zastępuje to sprawdzenie większą liczbą.
+- Wykrywanie odbywa się po stronie serwera: serwer ponownie oblicza zasięg trafienia i oznacza trafienia z dużej odległości.
+- Mały Reach jest trudniejszy do wykrycia, ponieważ ukrywa się w tolerancji opóźnień, którą serwery już przyznają.
+
+</KeyTakeaways>
+
+Zasięg to moduł walki, który pozwala graczowi trafić w cel z większej odległości, niż pozwala na to normalnie gra. Standardowa wersja Minecrafta ogranicza zasięg ataku do stałej odległości. Moduł Zasięgu podnosi to ograniczenie, dzięki czemu ataki trafiają zanim przeciwnik znajdzie się w zasięgu walki wręcz. Jest to funkcja oszukiwania, a serwery traktują ją jako taką.
+
+## Jak działa Zasięg
+
+Zasięg zmienia odległość, w której klient zarejestruje i wyśle atak. Standardowa walka w trybie przetrwania wykorzystuje zasięg ataku wynoszący trzy bloki, a klient odmawia atakowania czegokolwiek dalej. Moduł Zasięgu zastępuje tę weryfikację większą liczbą, dzięki czemu klient informuje serwer „Trafiłem tę jednostkę”, podczas gdy jednostka jest wciąż kilka bloków dalej.
+
+To serwer sprawia, że to ma znaczenie. Ponieważ klient atakującego gracza decyduje, kto został trafiony, zmodyfikowany klient może twierdzić trafienia, których serwer się nie spodziewał. Naiwny serwer akceptuje trafienie. Bardziej restrykcyjny serwer ponownie oblicza odległość i odrzuca wszystko, co przekracza niewielki próg tolerancji.
+
+## Dlaczego ludzie z niego korzystają
+
+Atrakcyjność polega na wygrywaniu walk, które powinny zostać przegrane. Dodatkowy zasięg oznacza zadanie pierwszego ciosu, zwabienie przeciwnika, który nigdy nie może się zbliżyć, oraz korzystną wymianę ciosów w walce wręcz. W pojedynku jeden na jeden, nawet niewielka przewaga zasięgu decyduje, kto uderza pierwszy i kto otrzymuje kombinację ciosów.
+
+Moduły wspomagania celowania i synchronizacji trafień dążą do tego samego celu z innego punktu widzenia: przechylają walkę o margines zbyt mały, by go zauważyć, dzięki czemu ofiara doświadcza normalnego pojedynku, cicho przegrywając ten, który powinna była wygrać.
+
+## Jak anticheaty wykrywają Reach
+
+Anticheaty wykrywają Reach, ponownie obliczając odległość trafienia po stronie serwera i porównując ją z wiarygodnym maksimum. Matematyka jest rdzeniem tej weryfikacji, ale realne wykrywanie musi uwzględniać szumy.
+
+| Czynnik, który anticheat uwzględnia | Dlaczego to ma znaczenie |
+|---|---|
+| Pozycje gracza i celu w momencie trafienia | Zgłaszana odległość |
+| Opóźnienia sieciowe i synchronizacja ticków | Opóźnienia mogą sprawić, że legalne trafienie będzie wyglądać na dalekie |
+| Rozmiar hitboxa encji i kompensacja opóźnień | Serwery cofają pozycje, aby być sprawiedliwym wobec graczy z dużym pingiem |
+| Ruch i pęd | Obaj walczący poruszają się, gdy trafienie następuje |
+
+Nowoczesny anticheat ustawia próg nieco powyżej rzeczywistego limitu, aby uwzględnić te szumy, a następnie oznaczają trafienia, które go przekraczają. Subtelny Reach, o ułamek bloku przekraczający limit, jest trudniejszy do wykrycia niż duża wartość, ponieważ ukrywa się w tolerancji opóźnień, jaką serwer już przyznaje. Dlatego oczywiste, duże ustawienia Reach są wykrywane szybko, podczas gdy małe mogą umknąć słabszym weryfikacjom.
+
+## Reach jako moduł walki
+
+Reach należy do tej samej rodziny co moduły celowania i synchronizacji. Jako koncepcja jest to jeden z najstarszych i najprostszych sposobów oszukiwania w grach, co jest dokładnie tym powodem, dla którego antywirusy po stronie serwera traktują sprawdzanie odległości jako podstawową rzecz, którą muszą opanować. Naturalnie łączy się z [KillAura](/pl/learn/what-is-killaura], które automatyzuje sam atak, podczas gdy Reach rozszerza zasięg tego ataku.
+
+<Callout variant="warning" title="Informacja, nie instrukcja">
+Ta strona opisuje moduł w sposób ogólny, abyś wiedział, co ten termin oznacza. Nazewnictwo i dokładne zachowanie różnią się w zależności od klienta, a wszelkie rozszerzenia poza standardowe ograniczenia łamią zasady na praktycznie każdym serwerze.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Jaki jest normalny zasięg w grze Minecraft?">
+Zasięg podstawowego ataku w walce w trybie przetrwania to trzy bloki. Moduł zasięgu podnosi ten limit, umożliwiając klientowi atakowanie celów oddalonych bardziej niż to, na co pozwala wersja podstawowa.
+</FAQItem>
+
+<FAQItem question="Czy Reach to funkcja kliencka czy serwerowa?">
+Oszustwo jest klienckie: zmodyfikowany klient zgłasza trafienia poza normalnym zasięgiem. Wykrywanie odbywa się po stronie serwera, gdzie anticheat ponownie oblicza odległość i odrzuca lub oznaczają trafienia, które są zbyt długie.
+</FAQItem>
+
+<FAQItem question="Dlaczego mały zasięg jest trudniejszy do wykrycia niż duży zasięg?">
+Serwery dopuszczają pewien margines błędu i kompensację opóźnień. Niewielka dodatkowa wartość zasięgu może ukryć się w tym marginesie, podczas gdy duża wartość wyraźnie przekracza wiarygodną odległość i jest szybko oznaczana.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Automatyczny atakujący często współpracuje z Reach." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Moduł walki wyłącznie celami." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szersza kategoria, do której te moduły należą." },
+]} />
+
+<CTA href="/pl/purchase">Zobacz, co Opal wysyła dla $8.99</CTA>

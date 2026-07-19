@@ -1,0 +1,84 @@
+---
+title: Czym jest Crasher w Minecraft? Wyjaśnienie modułu niszczycielskiego
+description: Crasher to moduł exploita w Minecraft, który wysyła sfałszowane pakiety, aby spowodować awarię klienta wybranego gracza, bez żadnej korzyści bojowej ani ruchowej dla użytkownika.
+excerpt: Crasher nie sprawia, że stajesz się lepszy w grze. On po prostu próbuje zakończyć sesję komuś innemu.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Crasher daje graczowi jakąkolwiek przewagę w rozgrywce?
+    a: Nie. Crasher nie celuje, nie porusza się i nie walczy za gracza, który go używa. Każda korzyść wynika z usunięcia przeciwnika z gry, a nie z lepszego grania z nim.
+  - q: Czy Efekt Roztrzaskujący może wpływać na graczy innych niż cel?
+    a: Nie. Z założenia atakuje klienta jednego gracza na raz. Ma na celu zablokowanie sesji konkretnego przeciwnika, a nie zakłócić działanie całego serwera.
+  - q: Czy Crasher to oszust czy narzędzie do psucia gry?
+    a: Traktowane jest jako narzędzie do psucia gry. Nie wpływa na statystyki, celność ani ruch, więc nie pasuje do typowej definicji cheatów w grach konkurencyjnych, ale wysyłanie pakietów mających na celu spowodowanie awarii klienta innego gracza jest naruszeniem zasad na niemal każdym serwerze.
+  - q: Dlaczego Crasher atakuje klienta, a nie serwer?
+    a: Ponieważ celem jest zrujnowanie rozgrywki jednego gracza, a nie meczu, którym dzielą się wszyscy. Wysyłanie uszkodzonych danych do konkretnego klienta usuwa tego gracza o wiele bardziej bezpośrednio, niż próba ingerencji w współdzielony serwer.
+  - q: Jakie klienty Minecrafta dostarczono z Crasherem?
+    a: Wytrwałość to klient, w którym Crasher został udokumentowany jako moduł.
+---
+
+<KeyTakeaways>
+- Crasher to moduł wykorzystujący lukę, który wysyła sformatowane nieprawidłowo pakiety w celu spowodowania awarii klienta wybranego gracza.
+- Nie daje żadnej przewagi w walce ani w ruchu, jedynie usuwa jednego przeciwnika.
+- Jest udokumentowany w Tenacity, zgłoszony w kategorii exploitów, a nie oszustw związanych z walką lub ruchem.
+- Serwery blokują za jego użycie jako formę obrażania, niezależnie od systemu anticheat, ponieważ intencja jest oczywista.
+</KeyTakeaways>
+
+Crasher to moduł wykorzystujący luki w grze Minecraft, który wysyła sformatowane nieprawidłowo lub zbyt duże pakiety do klienta innego gracza, mając na celu jego awarię. Nie poprawia celności ani nie przyspiesza ruchu. Po prostu próbuje zakończyć sesję konkretnej osoby. To coś innego niż większość rzeczy, które ludzie rozumieją pod pojęciem "oszustwo", i warto zrozumieć dlaczego.
+
+## Jak to działa
+
+Crasher nie ingeruje w serwer. Buduje pakiet zaprojektowany tak, aby zepsuć klienta celu, zazwyczaj zawierający nieprawidłowe dane lub ładunek, którego parser klienta nie jest w stanie bezpiecznie obsłużyć, i wysyła go bezpośrednio do tego gracza. Jeśli ich klient nie jest w stanie poprawnie go przetworzyć, może się zawiesić, zgłosić błąd lub ulec awarii, powodując zakończenie całej sesji gry.
+
+Ponieważ atak wykorzystuje sposób, w jaki klient celu odczytuje przychodzące dane, a nie to, co egzekwuje serwer, wyniki są niespójne. Klient z rygorystyczną walidacją pakietów odrzuca te dane i nic się nie dzieje. Klient bez takiego zabezpieczenia może ulec awarii natychmiast. Ten sam moduł, zupełnie różne rezultaty, w zależności wyłącznie od tego, co uruchamia osoba po drugiej stronie.
+
+## Crasher w porównaniu z oszustwem walki lub ruchu
+
+Większość modułów nazywanych "oszustwami" ma na celu poprawę możliwości osoby, która je uruchamia: lepsza celność, szybszy ruch, więcej informacji niż normalnie miałaby. Crasher nie robi tego dla swojego użytkownika. Kieruje się na zewnątrz, a nie do wewnątrz.
+
+| | Podstęp/oszustwo związane z walką/ruchem (KillAura, Reach) | Crasher |
+|---|---|---|
+| Kogo to dotyczy | Użytkownika | Nikogo |
+| Co to zmienia | Celność, zasięg lub prędkość użytkownika | Stabilność klienta celu |
+| Wpływ na cel | Brak bezpośredniego | Zawieszenie, błąd lub awaria |
+| Kategoria | Walka / Ruch | Wyzysk (nękanie) |
+
+Dlatego jest klasyfikowane jako wyzysk, a nie umieszczane obok modułu, takiego jak [KillAura](/pl/learn/what-is-killaura) lub [Reach](/pl/learn/what-is-reach). Jest to bardziej rodzaj ukierunkowanego ataku typu denial-of-service skierowanego do jednego klienta, niż cokolwiek przypominającego uczciwą (a nawet nieuczciwą) grę.
+
+<Callout variant="tip" title="Nie do tego służy Opal">
+Cały zestaw modułów Opala, związany z walką, ruchem, wizualizacją i narzędziami świata, został stworzony, aby uczynić Cię lepszym graczem. Moduł, którego jedynym zadaniem jest zakończenie sesji komuś innemu, nie pasuje do tego założenia i nie znajdziesz go w katalogu. Jeśli „funkcja” działa tylko poprzez uszkodzenie klienta kogoś innego, to nie jest to funkcja, to atak.
+</Callout>
+
+<Callout variant="warning" title="Traktowane jako griefing, ban na widok">
+Crasher to nie subtelna przewaga statystyczna, którą anticheat musi wywnioskować z zachowania. Serwer może bezpośrednio rejestrować uszkodzone pakiety, a każdy członek personelu sprawdzający zgłoszenie widzi, jak gra gracza zamarza lub się zamyka w momencie wystrzelenia. Ponieważ intencja zakłócania sesji jest niezaprzeczalna, serwery banują za to, gdy jest to zgłoszone, niezależnie od tego, czy anticheat kiedykolwiek cokolwiek oznaczył.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Czy Crasher daje graczowi przewagę w rozgrywce?">
+Nie. Crasher nie celuje, nie porusza się i nie walczy za gracza, który go uruchamia. Każda korzyść wynika z usunięcia przeciwnika z gry, a nie z jego pokonania.
+</FAQItem>
+<FAQItem question="Czy Crasher może wpływać na graczy innych niż wyznaczony cel?">
+Nie. Z założenia celuje w klienta jednego gracza na raz. Został zaprojektowany, aby rozbić sesję konkretnego przeciwnika, a nie zakłócić cały serwer.
+</FAQItem>
+<FAQItem question="Czy Crasher to oszustwo czy narzędzie do obrażania graczy?">
+Traktowany jest jako narzędzie do obrażania graczy. Nie wpływa na statystyki, celowanie ani ruch, więc nie pasuje do typowej definicji oszustwa w grze, ale wysyłanie pakietów mających na celu rozbicie klienta innego gracza jest naruszeniem zasad na prawie każdym serwerze.
+</FAQItem>
+<FAQItem question="Dlaczego Crasher celuje w klienta, a nie w serwer?">
+Ponieważ celem jest zepsucie gry jednego gracza, a nie całej rozgrywki, którą dzielą wszyscy. Wysyłanie nieprawidłowych danych do konkretnego klienta usuwa gracza o wiele bardziej bezpośrednio niż próba zakłócania działania współdzielonego serwera.
+</FAQItem>
+<FAQItem question="W których klientach Minecrafta Crasher był dystrybuowany?">
+Tenacity to klient, w którym Crasher został udokumentowany jako moduł.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Moduł bojowy Crasher jest porównywany, a dlaczego te dwa nie należą do tej samej kategorii." },
+  { href: "/pl/learn/what-is-reach", label: "Co to jest zasięg?", description: "Oszustwo bojowe nastawione na korzyść własną, przeciwieństwo modułu wpływającemu tylko na cel." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Kategoria Crasher znajduje się na granicy wykorzystania luk, a także tam, gdzie klient, taki jak Opal, wyznacza granicę." }
+]} />
+
+<CTA href="/pl/purchase">Opal tworzy moduły, które uczynią cię lepszym w Minecraft, a nie takie, które kończą sesję komuś innemu. Zobacz, co jest w środku.</CTA>

@@ -1,0 +1,98 @@
+---
+title: Minecraft'ta Nuker Nedir? Anında Blok Kırma Açıklaması
+description: Nuker, bir Minecraft modülü olup, blokları tek tek kırmanın aksine, belirli bir yarıçaptaki tüm blokları aynı anda kırar. Nasıl çalıştığı, neden kullanıldığı ve neden hızlıca işaretlendiği.
+excerpt: Tek geçiş, tüm yarıçap, gitti. Nuker, blok kırmayı tek bir düğmeye basmak haline getiriyor ve bu, anticheat'lerin yakalayabileceği en kolay şeylerden biri.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Nuker hile mi yoksa meşru bir mod mu?
+    a: Hileli bir şey. Bir yarıçaptaki birden fazla bloğu tek seferde kırmak, vanilla Minecraft'ta bir oyuncunun yapabildiği bir şey değil, bu yüzden sadece bir kozmetik kolaylık değil, adil olmayan bir oyun avantajı olarak sayılır.
+  - q: Nuker hayatta kalma modunda çalışıyor mu?
+    a: İşte önemli olan yer burası. Atladığı kurallar, blok sertliği zamanlaması, tek blok tek blok etkileşimi ve menzil, sadece hayatta kalma ve çok oyunculu modlarda var. Yaratıcı mod zaten blokları anında kırıyor, bu yüzden Nuker orada hızlandırmak için hiçbir şeye sahip değil.
+  - q: Nuker ile Scaffold arasındaki fark nedir?
+    a: Nuker blokları toplu olarak kaldırır. Scaffold ise bunları toplu olarak yerleştirir, yürürken otomatik olarak köprü kurar. Her ikisi de yavaş, kasıtlı bir vanilla etkileşimini anında, otomatik bir etkileşime dönüştürür.
+  - q: Sunucu eklentileri, hile önleme sistemleri olmadan Nuker'ları engelleyebilir mi?
+    a: Bazı sunucu yazılımları, bir tick veya bir eylem başına kırılabilen blok sayısını sınırlar, bu da Nuker'ın etkisini kendi başına zayıflatır. Ancak bu davranışı tespit etmek ve yasaklamak hala bir anticheat'in görevidir.
+---
+
+<KeyTakeaways>
+
+- Nuker, oyuncunun etrafındaki belirli bir yarıçap içindeki tüm uygun blokları tek seferde parçalayan bir dünya modülüdür, tek tek blokları kazmak yerine.
+- Vanilla'nın hedefle-ve-kır döngüsünü, tarama ile değiştirir: menzildeki her blok konumunu kontrol edin, uygun olmayanları filtreleyin ve geri kalanını aynı anda kırın.
+- Genellikle araziyi hızla temizlemek veya kimsenin tepki vermeden önce korunan yapılar veya iddiaları yok etmek için kullanılır.
+- Antichipler, blok kırma oranını ve dağılımını gerçek bir giriş akışının üretebileceğinden farklı olarak karşılaştırarak bunu yakalar
+
+</KeyTakeaways>
+
+Nuker, dünya kategorisindeki bir modül olup, oyuncunun etrafındaki belirli bir yarıçap içindeki tüm uygun blokları, normalde Minecraft'ın uyguladığı blok bazında madencilik yerine tek seferde kırar. Genellikle onlarca ayrı vuruş gerektiren bir arazi parçası, tek bir eylemde yıkılır. [[Wurst]] gibi istemcilerde, dünya kategorisindeki diğer kütle otomasyon modüllerinin yanında, daha doğrudan araçlardan biri olarak yer alır.
+
+## Nuker nasıl çalışır
+
+Normal madencilik, tasarım gereği kasıtlıdır. Bir bloğa bakarsınız, fare tuşunu basılı tutarsınız ve o bloğun sertliğine ve kullandığınız araca göre belirlenen bir kırılma süresini beklersiniz. Bir blok, bir eylem, bir bekleme.
+
+Nuker bu döngüyü ortadan kaldırır. Nereye baktığınızı takip etmek yerine, yanınızdaki belirli bir yarıçap içindeki her blok konumunu tarar, uygun olmayanları (hava, temel kaya, yarıçapın dışındaki bloklar) filtreler ve geriye kalan her şey için aynı anda bir kırılma isteği gönderir. Her bloğa nişan almazsınız. Her bir kırılma zamanlayıcısını beklemezsiniz. İstemci sadece tüm alanı bir anda işler ve devam eder.
+
+İşte bunun da nedeni, çekiciliğinin dar ama bariz olması: bir tüneli temizlemek, bir arazinin bölümünü düzleştirmek veya iddia edilen bir üssü kayaya kadar sökmek, normal madenciliğe kıyasla çok daha az zaman alır. Arazi korunduğu veya kaynaklar için mücadele edildiği sunucularda, aynı hız onu sadece bir kolaylık değil, aynı zamanda bir taciz aracı yapar.
+
+## Nuker vs. Scaffold
+
+Her iki modül de yavaş, orijinal etkileşimi anında toplu bir versiyonuna dönüştürür. Yön ise zıt.
+
+| | Nuker | Scaffold |
+|---|---|---|
+| Otomatik hale getirdiği vanilla eylemi | Blokları kırmak | Blokları yerleştirmek |
+| Nasıl tetiklenir | Bir yarıçapta tek bir patlama | Sürekli olarak, bir kenardan yürürken |
+| Tipik kullanım | Araziyi hızlı bir şekilde temizlemek veya taciz etmek | Aşağıya bakmadan boşlukları köprülemek |
+| Oyundan neyi kaldırır | Kırarken bekleme, nişan alma ve tek tek sınır | Yerleştirirken bekleme, nişan alma ve tek tek sınır
+
+<Callout variant="tip" title="Opal araç setine dahil değil">
+
+Opal bir Nuker modülü göndermiyor, ve bu bir hata değil. Ücretli bir müşterinin temel amacı, dikkat çekmeden bir sunucuda kalmak, ve toplu blok yıkımı, personel veya anticheat sistemlerinin önünde yapabileceğiniz en dikkat çekici şeylerden biri. Opal'in üzerine inşa edildiği türden bir avantaj bu değil
+
+</Callout>
+
+<Callout variant="warning" title="Bunları yakalamak daha kolay dolandırıcılıklardan biridir">
+
+Nuker, gerçek bir giriş akışının asla üretmeyeceği bir deseni bırakır: aynı tik içinde kırılan birkaç blok, karşılaştığınız yönde kümelenmek yerine bir yarıçap içinde dağılmış, bazen tamamen normal menzilinin dışında. Sunucu tarafındaki antichipler, blok kırma oranını ve yayılımı, vanilla'nın zorluk ve menzil sınırlarına karşı ölçer ve bu tür bir patlama, güçlü ve kolay bir sinyaldir. Bunu, arazi temizleme kısayolu olarak değil, hızlı bir ban yoluna işaret olarak kabul edin
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Nuker hile mi yoksa meşru bir mod mu?">
+
+Hileli bir şey. Bir yarıçapta birden fazla bloğu tek seferde kırmak, vanilla Minecraft'ta bir oyuncunun yapabileceği bir şey değil, bu yüzden sadece bir kozmetik kolaylık değil, adil olmayan bir oyun avantajı olarak sayılır
+
+</FAQItem>
+
+<FAQItem question="Nuker hayatta kalma modunda çalışıyor mu?">
+
+İşte önemli olan yer burası. Atladığı kurallar, blok sertliği zamanlaması, tek blok tek blok etkileşimi ve menzil, sadece hayatta kalma ve çok oyunculu modlarda var. Yaratıcı modda zaten bloklar anında kırılıyor, bu yüzden Nuker orada hızlandırmak için hiçbir şeye sahip değil
+
+</FAQItem>
+
+<FAQItem question="Nuker ile Scaffold arasındaki fark nedir?">
+
+Nuker blokları toplu olarak kaldırır. Scaffold ise bunları toplu olarak yerleştirir, yürürken otomatik olarak köprüler kurar. Her ikisi de yavaş, kasıtlı bir vanilla etkileşimini anında, otomatik bir etkileşime dönüştürür
+
+</FAQItem>
+
+<FAQItem question="Sunucu eklentileri, hile önleme sistemleri olmadan Nuker'ları engelleyebilir mi?">
+
+Bazı sunucu yazılımları, bir tick veya bir eylemde kırılabilen blok sayısını sınırlar, bu da Nuker'ın etkisini kendi başına zayıflatır. Ancak bu davranışı tespit etmek ve yasaklamak hala bir anticheat'ın görevidir
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-scaffold", label: "Scaffold nedir?", description: "Blok yerleştirme eşdeğeri olan Nuker, yürürken otomatik köprü kurar." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Personelden saklanmaya, araziyi temizlememeye odaklanan müşteri kategorisi." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Nuker gibi modüllerin daha geniş kapsamlı yardımcı program istemci kategorisine nerede uyduğu." }
+]} />
+
+<CTA href="/tr/satın-al">Opal, dünyayı bitiren numaralardan kaçınıyor ve sizi hayatta tutan modülleri keskinleştiriyor.</CTA>

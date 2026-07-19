@@ -1,0 +1,93 @@
+---
+title: Cos'è l'Aura di Ancora in Minecraft? Spiegazione del Modulo
+description: L'Aura di Ancora è un modulo di combattimento che posiziona e fa detonare automaticamente gli ancoraggi di rinascita accanto a un bersaglio per danni esplosivi, ed è un modo semplice per essere bannati.
+excerpt: "Anchor Aura trasforma una meccanica vanilla esclusiva del Nether in un'arma PvP: posiziona un ancora di respawn accanto a qualcuno, attivala e osserva i danni infliggersi automaticamente."
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: È Anchor Aura la stessa cosa di Crystal Aura?
+    a: No, ma funzionano allo stesso modo. Entrambi posizionano automaticamente un esplosivo accanto a un bersaglio e lo fanno detonare. L'Aura di Ancoraggio usa gli ancoraggi di resurrezione, l'Aura di Cristallo usa i cristalli finali.
+  - q: È un imbroglio Anchor Aura?
+    a: Sì. Automatizza il posizionamento e la detonazione di un esplosivo contro un bersaglio, senza che il giocatore debba mirare o impostare i tempi manualmente, il che rappresenta un vantaggio di gioco che quasi tutte le regole dei server vietano.
+  - q: Quali clienti hanno Anchor Aura?
+    a: È documentato come si può vedere in Wurst e Meteor Client, inserito nelle loro categorie di combattimento insieme ad altri moduli auto-esplosivi.
+  - q: Possono gli ancoraggi di resurrezione esplodere anche al di fuori del Nether?
+    a: "Sì. Quello è il meccanismo di base, il \"vanilla\", su cui si basa il modulo: un ancora di resurrezione caricata che detona se colpita al di fuori del Nether. L'Aura dell'Ancora automatizza semplicemente l'impatto."
+  - q: Perché Anchor Aura viene bannata così velocemente?
+    a: Poiché la tempistica di piazzamento e detonazione è più precisa e costante rispetto al gioco manuale, e il posizionamento stesso spesso mira a un punto che il giocatore non ha mai guardato, entrambe queste situazioni sono esattamente ciò che i sistemi antichet anti-server monitorano.
+---
+
+<KeyTakeaways>
+
+- Anchor Aura posiziona automaticamente un ancora di respawn accanto a un bersaglio e lo fa detonare per danni esplosivi, senza posizionamento o tempistica manuale.
+- Funziona con lo stesso ciclo di posizionamento e detonazione di un'Aura di Cristallo, sostituendo i cristalli finali con ancora.
+- Trovato in Wurst e Meteor Client, classificato come combattimento con altri moduli auto-esplosivi.
+- La sua velocità e il posizionamento ad angolo off-sono esattamente ciò che gli anticheat monitorano.
+
+</KeyTakeaways>
+
+Anchor Aura è un modulo di combattimento che posiziona automaticamente un ancora di resurrezione accanto a un bersaglio e lo fa detonare, trasformando un blocco che la maggior parte dei giocatori vede solo nel Nether in un'arma PvP ovunque nel mondo. Il giocatore non posiziona l'ancora, non la carica e non la colpisce. Il modulo esegue l'intera sequenza da solo, più velocemente di quanto una mano possa fare.
+
+## Come funziona
+
+Anchor Aura esegue un ciclo di posizionamento e detonazione contro un bersaglio nelle vicinanze, e questo ciclo è una copia quasi fedele di quello che fa una [Crystal Aura](/it/learn/what-is-a-crystal-aura) con i cristalli dell'End. Seleziona un bersaglio, scansiona per un punto valido per posizionare un'ancora di resurrezione accanto a quel bersaglio, posiziona l'ancora e poi la attiva in modo che l'esplosione colpisca il nemico.
+
+La meccanica alla base di tutto questo è vanilla: un'ancora di resurrezione carica esplode se viene colpita al di fuori del Nether. Normalmente ciò significa posizionare il blocco, riempirlo di cariche di glowstone e colpirlo al momento giusto, tre azioni separate che una persona deve eseguire in sequenza. Anchor Aura collassa tutte e tre in un unico passaggio automatizzato, e lo fa in modo più coerente di quanto farebbe qualcuno che gestisce gli input a mano.
+
+Lo troverai in Wurst e Meteor Client, dove si trova nella categoria combattimento accanto agli altri moduli esplosivi automatizzati.
+
+## Anchor Aura vs Crystal Aura
+
+Togli il nome del blocco e si tratta dello stesso modulo. Entrambi posizionano automaticamente un esplosivo accanto a un bersaglio e lo fanno detonare in loop senza alcun input manuale. L'unica vera differenza è l'esplosivo stesso. Un [Aura di Cristallo](/it/learn/what-is-a-crystal-aura) utilizza cristalli terminali, che possono essere posizionati su ossidiana o bedrock quasi ovunque sulla mappa. L'Aura di Ancora è vincolata da una regola specifica del Nether: l'ancora deve essere colpita al di fuori del Nether per attivarsi, che è proprio il punto debole che il modulo sfrutta per armarla nell'Overworld o nell'End.
+
+Puoi scegliere qualsiasi blocco sia disponibile e l'automazione sottostante non se ne preoccupa. Anche gli anticheat li trattano allo stesso modo.
+
+## Perché viene rilevato
+
+L'Aura di Ancora è un cheat che offre un vantaggio di gioco, non cosmetico, quindi i server la controllano allo stesso modo in cui controllano un'Aura di Cristallo o qualsiasi altro modulo di combattimento automatico. I tempi di posizionamento e detonazione sono più rapidi di quanto consenta il gioco manuale, e l'ancora spesso cade in un punto in cui la telecamera del giocatore non è mai stata effettivamente puntata.
+
+Gli anticheat lato server sono progettati per intercettare esattamente quel tipo di schema: blocchi posizionati e attivati in rapida successione vicino a un'entità, interazioni senza una corrispondente rotazione del giocatore e danni da esplosione che si allineano a un ciclo anziché a una sequenza umana di posizionamento, carica e colpo. Un numero sufficiente di questi elementi fa segnalare l'account per una revisione o, a seconda del server, comporta il ban definitivo.
+
+<Callout variant="tip" title="Dove Opal traccia il limite">
+Opal non spedisce un'Aura Ancoraggio dedicata. Loop auto-esplosivi come questo sono rumorosi quanto la combat automation possa essere: la firma temporale e i posizionamenti fuori asse sono la prima cosa che un anticheat lato server cerca, il che rende questo modulo un modo rapido per perdere un account. I moduli di combattimento di Opal esistono, ma sono costruiti per rimanere all'interno di ciò che un server non può distinguere da un umano, non per far detonare blocchi a cui nessuno ha mirato.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina spiega cos'è l'Anchor Aura e come si comporta genericamente. Non sono istruzioni per eseguirne una. Automatizzare il combattimento in questo modo viola le regole su praticamente ogni server ed è progettato per essere scoperto.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Anchor Aura è la stessa cosa di Crystal Aura?">
+No, ma funzionano allo stesso modo. Entrambe posizionano automaticamente un esplosivo accanto a un bersaglio e lo fanno detonare. Anchor Aura utilizza ancoraggi di respawn, Crystal Aura utilizza cristalli finali.
+</FAQItem>
+
+<FAQItem question="Anchor Aura è un imbroglio?">
+Sì. Automatizza il posizionamento e la detonazione di un esplosivo contro un bersaglio, senza che il giocatore debba mirare o impostare i tempi manualmente, il che costituisce un vantaggio di gioco che quasi tutti i server vietano.
+</FAQItem>
+
+<FAQItem question="Quali client hanno Anchor Aura?">
+È documentato come si può vedere in Wurst e Meteor Client, catalogato nelle loro categorie di combattimento insieme ad altri moduli auto-esplosivi.
+</FAQItem>
+
+<FAQItem question="Gli ancoraggi di resurrezione possono esplodere anche al di fuori del Nether?">
+Sì. È la meccanica vanilla di base su cui si basa il modulo: un ancoraggio di resurrezione carico colpito al di fuori del Nether detona. Anchor Aura automatizza semplicemente l'azione di colpire.
+</FAQItem>
+
+<FAQItem question="Perché Anchor Aura viene bannata così velocemente?">
+Perché la tempistica di posizionamento e detonazione è più precisa e costante rispetto al gioco manuale, e il posizionamento stesso spesso mira a un punto che il giocatore non ha mai guardato. Entrambe queste caratteristiche sono ciò che i sistemi antichet anti-server monitorano.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-crystal-aura", label: "Cos'è un'Aura Cristallina?", description: "La versione a cristallo finale dello stesso ciclo di localizzazione e detonazione." },
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "L'attaccante in mischia della stessa famiglia di combattimento." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia in cui vengono spediti questi moduli di combattimento." },
+]} />
+
+<CTA href="/it/purchase">I moduli di combattimento di Opal sono progettati per rimanere inafferrabili, non solo per infliggere danni.</CTA>

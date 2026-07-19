@@ -1,0 +1,78 @@
+---
+title: Co to jest jasność w Minecraft? Wyjaśnienie modułu wizualnego
+description: Jasność podnosi limit renderowania, dzięki czemu jaskinie, Nether i nocne niebo renderują w pełni oświetlone, nie są potrzebne pochodnie. Jak działa ten moduł i czy może spowodować zbanowanie.
+excerpt: Wanilia utrzymuje ciemność w jaskiniach, Netherze i w nocy celowo. Jasność po prostu wyłącza tę zasadę, bez pochodni, bez eliksirów, bez wiedzy serwera.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy jasność daje rzeczywistą przewagę w rozgrywce?
+    a: Tak. Usuwa ciemność z jaskiń, Netheru i nocy, dzięki czemu możesz dostrzec moby, rudę i innych graczy w miejscach, które w wersji podstawowej miały być ukryte. Nie wpływa na ruch ani walkę, tylko na to, co możesz zobaczyć.
+  - q: Czy antycheaty wykrywają Brightness?
+    a: Nie poprzez standardowe mechanizmy po stronie serwera. Jasność wpływa jedynie na sposób, w jaki Twój klient rysuje światło na ekranie. Nic z tego nie dotyka sieci, więc nie ma żadnego pakietu ani wzorca czasowego, który serwer mógłby wychwycić.
+  - q: Czy jasność to to samo co modyfikator gamma w paczce zasobów?
+    a: Ta sama koncepcja, inne wykonanie. Paczka tekstur gamma-hacka nadpisuje tę samą warstwę renderowania, ale jasność to wbudowany przełącznik klienta, zazwyczaj o szerszym zakresie i bez potrzeby instalowania dodatków.
+  - q: Czy używanie Jasności spowoduje, że zostanę zbanowany?
+    a: Automatyczne wykrywanie prawie nigdy tego nie wychwyci, ponieważ nigdy nie dotyka serwera. Niektóre serwery nadal wymieniają zmodyfikowane oświetlenie jako naruszenie zasad na papierze, więc moderator oglądający transmisję lub nagranie nadal może na to zareagować.
+---
+
+<KeyTakeaways>
+
+- Jasność to moduł wizualny, który podnosi górną granicę domyślnego suwaka gamma, dzięki czemu jaskinie, Nether i noc renderują tak, jakby były w pełni oświetlone.
+- Zmienia on tylko to, co klient rysuje na ekranie, a nie wartości oświetlenia, które serwer faktycznie śledzi.
+- Oznacza to brak ruchu w sieci dla anticheatów, choć niektóre serwery nadal go zakazują poprzez reguły.
+
+</KeyTakeaways>
+
+Jasność to moduł wizualny, który pozwala na wyrenderowanie oświetlenia w grze Minecraft poza granicami, jakie umożliwia domyślny suwak gamma. Przesuń w grze suwak gamma do góry, a jaskinie, Nether i nocne niebo i tak zaciemnią się po przekroczeniu pewnego progu – jest to celowe ograniczenie wbudowane w domyślny silnik renderowania. Moduł Jasności to usuwa. Przełącz przełącznik, a świat renderuje się tak, jakby każdy blok znajdował się pod pochodnią, niezależnie od rzeczywistego poziomu oświetlenia. Zazwyczaj jest to jeden suwak ukryty w ustawieniach wizualnych klienta i nie zmienia nic w samym świecie, tylko w tym, jak ten świat wygląda na Twoim ekranie.
+
+## Jak działa Jasność
+
+Domyślny Minecraft oblicza wartość oświetlenia dla każdego bloku na podstawie dwóch czynników: tego, jak bardzo jest wystawiony na niebo, i jak blisko znajduje się do źródła światła, takiego jak pochodnia lub glowstone. Suwak gamma w menu opcji rozciąga tę wartość do tego, co faktycznie wyświetla się na ekranie, ale tylko do ustalonego maksimum. Po przekroczeniu tego punktu słabo oświetlony blok nadal renderuje się jako ciemny, niezależnie od tego, jak daleko przesuniesz suwak.
+
+Jasność podnosi lub obniża ten limit. Silnik renderujący pobiera tę samą wartość światła, którą gra już obliczyła, i odwzorowuje ją na jaśniejszy wynik, niż byłby możliwy w standardowej wersji, aż po pełne oświetlenie, niezależnie od rzeczywistego poziomu światła bloku. Podstawowe symulacje nigdy się nie zmieniają. Serwer nadal śledzi rzeczywisty poziom światła każdego bloku, ponieważ zasady spawnowania i inne mechanizmy zależne od światła na to polegają. Tylko obraz, który karta graficzna rysuje, jest inny, co dokładnie wyjaśnia, dlaczego zmiana pozostaje niewidoczna dla każdego poza Tobą.
+
+## Czy Jasność jest sprzeczna z zasadami
+
+Jasność zajmuje dziwne miejsce: technicznie legalne do włączenia, ale nie powszechnie mile widziane, gdy już to zrobisz. Ponieważ zmiana zachodzi w całości w silniku renderującym, nigdy nie generuje pakietu, wzorca czasowego ani wartości po stronie serwera, którą mógłby sprawdzić anticheat. Nie ma czego skanować. Anticheat po stronie serwera obserwuje, co klient wysyła, a przełącznik Jasności wysyła dokładnie to, co standardowy klient.
+
+To nie sprawia, że przewaga staje się fikcyjna. Jasne widzenie w jaskini, w której gracz z pochodnią ledwo co widzi, to prawdziwa zaleta, niezależnie od tego, czy wypatrujesz rudy, moba, czy kogoś czyhającego w zasadzie. Niektóre serwery i tak wprowadzają zmodyfikowane oświetlenie do swoich regulaminów, traktując je tak, jak traktowałyby nieautoryzowany pakiet zasobów: sprzeczne z duchem zasad, bez możliwości wykrycia go technicznie. Członek personelu przeglądający nagranie nie potrzebuje flagi anticheat, aby działać na podstawie tego, co widzi.
+
+<Callout variant="tip" title="Nie znajduje się na liście modułów Opal, i tak ma być">
+Jasność nie jest modułem, który Opal udostępnia pod tą nazwą. Nie musi: to po prostu jeden suwak nadpisujący jedną granicę renderowania i w żaden sposób nie dotyka sieci. Kategoria wizualna Opal znajduje się dokładnie w tej przestrzeni, zmiany zachodzą wyłącznie w tym, co jest rysowane, a nie w tym, co jest wysyłane, skierowane do problemów o większej powierzchni niż nakładka świetlna.
+</Callout>
+
+<Callout variant="warning" title="Niewykrywalność nie oznacza dozwolenia">
+Żaden system anticheat nie wykryje włączenia Brightness, ponieważ zmienia on jedynie to, co renderuje twój klient, a nie to, co wysyłane jest przez sieć. Nie ma to nic wspólnego z rzeczywistymi zasadami serwera. Niektórzy dopisują zmodyfikowane oświetlenie do listy naruszeń, a moderator oglądający nagranie lub rozpatrujący zgłoszenie nie potrzebuje automatycznego oznaczenia, aby działać na podstawie tego, co widzi.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Jasność daje rzeczywistą przewagę w rozgrywce?">
+Tak. Usuwa mrok z jaskiń, Netheru i nocy, dzięki czemu możesz dostrzec moby, rudę i innych graczy w miejscach, które w wersji podstawowej miały być ukryte. Nie wpływa na ruch ani walkę, tylko na to, co możesz zobaczyć.
+</FAQItem>
+
+<FAQItem question="Czy antywirusy mogą wykryć jasność ekranu?">
+Nie, za pomocą standardowych sprawdzeń po stronie serwera. Jasność ekranu wpływa jedynie na to, jak twój klient rysuje światło na ekranie. Nic z tego nie dotyczy sieci, więc nie ma żadnego pakietu ani wzorca czasowego, który serwer mógłby oznaczyć.
+</FAQItem>
+
+<FAQItem question="Czy Jasność to to samo co modyfikacja gamma w paczce tekstur?">
+Podobna idea, inny sposób działania. Paczka tekstur z modyfikacją gamma nadpisuje ten sam limit renderowania, natomiast Jasność to wbudowany przełącznik klienta, zazwyczaj o szerszym zakresie i bez potrzeby instalowania dodatków.
+</FAQItem>
+
+<FAQItem question="Czy używanie jasności spowoduje, że zostanę zbanowany?">
+Automatyczne wykrywanie tego zdarzenia praktycznie nigdy nie następuje, ponieważ nie wpływa to na serwer. Niektóre serwery nadal wymieniają zmodyfikowane oświetlenie jako naruszenie zasad na papierze, więc moderator oglądający transmisję lub nagranie nadal może podjąć działania.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Szersza kategoria Jasność oraz każdy inny moduł, do którego tutaj należy." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Drugi koniec widma wzrokowego: ukrywanie tego, co jest, zamiast oświetlać." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Moduł bojowy, który automatyzuje celowanie, zamiast tylko zasłaniać widok." },
+]} />
+
+<CTA href="/pl/purchase">Zobacz, co faktycznie znajduje się w kategorii wizualnej Opal dla $8.99.</CTA>

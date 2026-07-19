@@ -1,0 +1,79 @@
+---
+title: Czym jest Teleport Aura w Minecraft? Wyjaśnienie modułu
+description: Teleport Aura to oszustwo do walki w Minecraft, które teleportuje gracza obok celu, a następnie automatycznie atakuje. Oto jak to działa i dlaczego łatwo go zidentyfikować.
+excerpt: "Teleport Aura zmienia KillAura w narzędzie do zbliżania się: teleportuje cię w zasięg, a następnie wykonuje za ciebie atak. Dodatkowy krok ruchu to również powód, dla którego zostaje ono wychwycone dwa razy szybciej."
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Teleport Aura to to samo co KillAura?
+    a: Nie do końca. KillAura automatyzuje celowanie i atakowanie pobliskich celów. Teleport Aura dodaje krok ruchu przed tym, zamykając dystans do celu przed atakiem, dzięki czemu gra się jak KillAura zbudowany wokół umiejętności zamykania dystansu.
+  - q: Czy Aura Teleportacji działa tylko na cele, które są już blisko?
+    a: Nie, to jest wręcz przeciwieństwo tego, o co chodzi. Przesuwa gracza w stronę celu, który jest poza zasięgiem normalnego walki wręcz, a następnie atakuje, gdy ten cel znajdzie się w zasięgu. Docieranie do celów, które nie są już blisko, to cała przyczyna istnienia tego modułu.
+  - q: Czy Teleport Aura ma uzasadnione zastosowanie?
+    a: Nie. Poruszanie się szybciej niż pozwala na to wprowadzanie oraz automatyczne ataki bez celowania lub klikania przez gracza to korzyści z rozgrywki, a nie funkcje ułatwiające grę, więc liczy się to jako oszustwo na każdym serwerze, który egzekwuje normalne zasady poruszania się i walki.
+  - q: Dlaczego Teleport Aura wykrywany jest szybciej niż zwykła KillAura?
+    a: Ponieważ tworzy dwie anomalie zamiast jednej. Nagły skok pozycji to dokładnie to, co anticheaty oparte na ruchu sprawdzają, niezależnie od tego, czym zajmuje się strona walki w kwestii rotacji, zasięgu i czasu reakcji.
+---
+
+<KeyTakeaways>
+
+- Teleport Aura to moduł bojowy, który teleportuje lub błyskawicznie przemieszcza gracza obok celu, a następnie automatycznie atakuje, pokonując dystans, na który zwykły klient nie jest w stanie.
+- Jest to wariant KillAura, który zamyka dystans: automatyzacja rozciąga się na ruch, a nie tylko na celowanie i atak.
+- Łatwiej go złapać niż zwykłego KillAura, ponieważ nakłada na siebie anomalię ruchu na anomalię bojową w tym samym krótkim oknie czasowym.
+- Widoczny w klientach takich jak Rise Nextgen.
+
+</KeyTakeaways>
+
+Teleport Aura to moduł bojowy, który skraca dystans do celu poprzez teleportację lub szybką zmianę pozycji gracza w jego kierunku, a następnie automatycznie atakuje, gdy znajdzie się w zasięgu. Działa w oparciu o ten sam system celowania i ataku, co KillAura, ale dodaje krok ruchu na początku: zamiast czekać, aż gracz sam wejdzie w zasięg, on sam przenosi gracza tam. To właśnie sprawia, że jest to narzędzie do zamykania dystansu, a nie zwykły auto-atakujący, a także powoduje, że serwer musi zwrócić na nie uwagę.
+
+## Jak to działa
+
+Teleport Aura skanuje otoczenie w poszukiwaniu celu w taki sam sposób, jak KillAura, wybierając encję w określonym obszarze i blokując na nią cel. Różnica pojawia się przed atakiem. Jeśli cel jest poza zasięgiem walki wręcz, moduł przesuwa gracza w jego kierunku, albo poprzez jeden duży skok, albo serię szybkich zmian pozycji, aż będzie wystarczająco blisko, aby trafić. Gdy znajdzie się w zasięgu, atakuje w taki sam sposób, jak zwykły moduł auto-ataku – niczym regularny atak KillAury.
+
+Widoczne w Rise Nextgen, wygląda to jak KillAura z narzędziem do zamykania dystansu przymocowanym na początku. Automatyzacja nie ogranicza się już do celowania i czasu ataku. Jest wbudowana w ruch, który najpierw przenosi gracza na miejsce.
+
+## Dlaczego łatwiej go wykryć niż zwykłego KillAury
+
+To jest oszustwo dające przewagę w rozgrywce, a nie kosmetyczne, i jest szybsze niż zwykłe KillAura, ponieważ przekazuje serwerowi dwie anomalie zamiast jednej. Pozycja legalnego gracza zmienia się z ograniczoną prędkością co tick, ograniczoną przez zwykłą mechanikę ruchu: chodzenie, sprint, skakanie. Teleport lub nagły ruch zmieniają pozycję na takim dystansie, jakiego nie da się osiągnąć za pomocą legalnej sekwencji komend w tym czasie.
+
+Anticheaty po stronie serwera już śledzą zmiany pozycji między tickami, aby wykrywać hacki związane z prędkością i lataniem. Nagły skok w kierunku celu bojowego ląduje dokładnie w obrębie tej samej kontroli, nakładając się na to, co anticheat już robi z rotacją, zasięgiem i czasem ataku. Pojawienie się anomalii ruchu i anomalii bojowej w tym samym krótkim oknie czasowym to jeden z najsilniejszych sygnałów, dlatego moduły tego typu szybko są wykrywane przez systemy z podstawową walidacją ruchu.
+
+<Callout variant="tip" title="Gdzie Opal stawia granicę">
+Opal dostarcza moduły bojowe, ale teleportowa umiejętność zamykania dystansu nie należy do nich. Nakładanie anomalii ruchu na moduł bojowy daje serwerowi dwie przyczyny, by zbanować gracza w tym samym cyklu, zamiast jednej, a to nie jest warta ryzyka.
+</Callout>
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona wyjaśnia, czym jest Teleport Aura i dlaczego dochodzi do jej blokowania, a nie jak ją skonfigurować. Automatyzacja ruchu nałożona na automatyzację walki łamie zasady na praktycznie każdym serwerze z podstawową ochroną przed oszustwami i jest jednym z najszybszych powodów banów na liście.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Teleport Aura to to samo co KillAura?">
+Nie do końca. KillAura automatyzuje celowanie i atakowanie pobliskich celów. Teleport Aura dodaje krok ruchu przed tym, zamykając dystans do celu przed atakiem, dzięki czemu działa jak KillAura z umiejętnością skracania dystansu.
+</FAQItem>
+
+<FAQItem question="Czy Teleport Aura działa tylko na celach, które są już blisko?">
+Nie, jest to wręcz przeciwieństwo idei. Przesuwa gracza w stronę celu, który jest poza zasięgiem normalnego ataku wręcz, a następnie atakuje, gdy znajdzie się w zasięgu. Docieranie do celów, które nie są już blisko, jest całym powodem istnienia tego modułu.
+</FAQItem>
+
+<FAQItem question="Czy istnieje uzasadniony powód używania Teleport Aura?">
+Nie. Poruszanie się szybciej niż pozwala na to wejście oraz automatyczne ataki bez celowania lub klikania przez gracza to przewagi w rozgrywce, a nie funkcje ułatwiające grę, więc jest to traktowane jako oszustwo na każdym serwerze, który egzekwuje normalne zasady poruszania się i walki.
+</FAQItem>
+
+<FAQItem question="Dlaczego Teleport Aura jest wykrywana szybciej niż zwykła KillAura?">
+Ponieważ tworzy dwie anomalie zamiast jednej. Nagły skok pozycji to dokładnie to, na co sprawdzają systemy anticheat oparte na ruchu, oprócz tego, co robi strona walki z rotacją, zasięgiem i czasem.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Moduł autoataku Teleport Aura jest na nim oparty." },
+  { href: "/pl/learn/what-is-reach", label: "Co to jest Reach?", description: "Sprawdzanie anticheatów dotyczącego anomalii zasięgu odbywa się równolegle z analizą ruchu." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szersza kategoria, do której należą te moduły bojowe." },
+]} />
+
+<CTA href="/pl/purchase">Zestaw bojowy Opal'a pomija zakłady na dwie anomalie. Zobacz pełny zestaw dla $8.99.</CTA>

@@ -1,0 +1,92 @@
+---
+title: NanoVG Nedir? OpenGL için Vektör Grafikleri
+description: NanoVG, OpenGL için küçük, antialiaslı bir 2D vektör grafikler kütüphanesidir. Minecraft istemcileri, LWJGL aracılığıyla keskin HUD'lar, menüler ve şekiller çizmek için onu kullanır.
+excerpt: NanoVG, tek bir kompakt API'den GPU üzerinde pürüzsüz 2D şekiller ve metin çiziyor. İşte Minecraft istemcilerinin arayüzlerini çizmek için ona yönelmesinin nedeni.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Libraries
+author: trq
+faqs:
+  - q: NanoVG bir Minecraft mod'u mu?
+    a: Hayır, NanoVG, OpenGL için genel bir C grafik kütüphanesidir ve Minecraft'a özel değildir; bir istemci, kendi arayüzünü çizmek için LWJGL aracılığıyla onu yerleştirir.
+  - q: NanoVG hangi dilde yazılmıştır?
+    a: C. Java programları, LWJGL gibi yerel bağlamalar aracılığıyla bunu kullanır, elle C kodunu çağırmak yerine.
+  - q: NanoVG oyun dünyasını çiziyor mu?
+    a: Hayır. HUD'lar, menüler, şekiller ve metin gibi 2D üst üste bindirmeler çiziyor; oyun dünyası kendisi Minecraft'ın kendi motoru tarafından oluşturuluyor.
+  - q: Neden kullanıcı arayüzü için doğrudan görseller kullanılmasın?
+    a: Görüntüler ölçeklendirildiğinde bulanıklaşır veya bozulur ve her biri bellek tüketirken, NanoVG şekilleri matematikten oluşturur, böylece herhangi bir grafik arayüzü ölçeğinde keskinliğini korur ve az yer kaplar.
+---
+
+<KeyTakeaways>
+
+- NanoVG, OpenGL için yazılmış, C ile kodlanmış küçük bir antialiaslı 2D vektör grafikler kütüphanesidir.
+- Her boyutta pürüzsüz kenarlarla birlikte, yollardan şekil, metin ve gradyanlar çizer.
+- Minecraft istemcileri, HUD'ları ve menüleri çizmek için LWJGL bağlamaları aracılığıyla ona erişir.
+- Yeniden boyutlandırılabilir kullanıcı arayüzü için vektör çizimi kazanır; sabit sanat eserleri için bit haritaları hala kazanır.
+
+</KeyTakeaways>
+
+NanoVG, OpenGL için yazılmış, C ile kodlanmış küçük bir antialiaslı vektör grafikler kütüphanesidir. Tek bir kompakt API ile pürüzsüz kenarlara sahip 2D şekiller, metin ve gradyanlar çizer. Bir Minecraft istemcisinde, [LWJGL](https://www.lwjgl.org/) bağlayıcıları aracılığıyla erişilebilir, böylece Java kodu oyunun üzerine net HUD'lar ve menüler çizebilir.
+
+<Callout variant="info" title="Opal Nerede Çalışır">
+Opal, oyunun üzerine kendi arayüzünü çizen bir [Fabric](https://fabricmc.net/) modudur. Kendi özelliklerinizi eklemek isterseniz, [betik yazma kılavuzu](/tr/docs/scripting) JavaScript ile nasıl yapılacağını gösterir.
+</Callout>
+
+## NanoVG Ne İşe Yarar
+
+NanoVG, OpenGL aracılığıyla GPU üzerinde 2D vektör grafiklerini oluşturur. Şekilleri yollarla (çizgiler, eğriler, dikdörtgenler, daireler) tanımlarsınız, ardından bunları doldurur veya hatlarıyla belirtirsiniz. Kütüphane antialiasing'i yönetir, böylece kenarlar herhangi bir boyutta pürüzsüz kalır ve gerdirilmiş bir bitmap gibi blok blok görünmez.
+
+Kasıtlı olarak küçüktür. Tüm kütüphane, odaklanmış bir API'ye sahip tek bir C dosyasıdır ve bunun bir kısmı, grafik demolarında ve hafif UI katmanlarında ağır motor kodu yerine görünmesinin nedenidir.
+
+## Neden Bir Minecraft İstemcisi Bunu Kullanır
+
+Bir istemci, Minecraft'ın üzerine kendi arayüzünü çizer: arraylist'ler, menüler, şekil göstergeleri, özel HUD öğeleri. NanoVG, o arayüze herhangi bir çözünürlüğe ölçeklenebilen vektör şekilleri ve metinleri temiz bir şekilde çizlemenin bir yolunu sunar.
+
+Renderlama yol tabanlı olduğundan, bir geliştirici önceden pişirilmiş görüntüler yerine ilkel nesnelerden yuvarlak paneller, gradyanlar ve taslaklar oluşturabilir. Bu, GUI ölçekleri ve ekran boyutları arasında tutarlı bir görünüm sağlar.
+
+## NanoVG ve LWJGL
+
+Minecraft ve modları JVM üzerinde çalışır, ancak NanoVG bir C kütüphanesidir. [LWJGL](/tr/learn/what-is-lwjgl), bu boşluğu doldurur. NanoVG ve OpenGL gibi yerel kütüphanelere Java bağlamaları gönderir, böylece Java kodu yerel işlevleri doğrudan çağırabilir.
+
+Bir istemci, LWJGL NanoVG modülüne karşı bağlantı kurar, bir çizim bağlamı açar ve oyunun render döngüsü içinde yol ve boya çağrıları yapar. Yerel taraf, GPU üzerinde gerçek rasterizasyonu gerçekleştirir.
+
+## NanoVG vs bitmap çizimi
+
+| Özellik | NanoVG (vektör) | Bitmap dokular |
+| :--- | :--- | :--- |
+| Kenarlar | Her boyutta yumuşatılmış | Ölçeklendiğinde bulanıklaşır veya pikselleşir |
+| Şekiller | Çalışma zamanında yollardan oluşturulur | Önceden hazırlanmış görüntü varlıkları |
+| Bellek | Hafif, büyük dokular yok | Görüntü sayısıyla birlikte artar |
+| En uygun olduğu durumlar | Arayüz, şekiller, dinamik metin | Fotoğraflar, sabit sanat eserleri, simgeler |
+
+Vektör çizimi, boyutu veya rengi değişen arayüz öğeleri için kazanır. Bitmap'ler hala detaylı, sabit sanat eserleri için üstündür.
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="NanoVG bir Minecraft mod'u mu?">
+Hayır. NanoVG, OpenGL için genel bir C grafik kütüphanesidir. Minecraft'a özel değildir. Bir istemci, kendi arayüzünü çizmek için LWJGL aracılığıyla onu yerleştirir.
+</FAQItem>
+
+<FAQItem question="NanoVG hangi dilde yazılmıştır?">
+C. Java programları, LWJGL'nin sağladığı yerel bağlama benzeri araçlar aracılığıyla onu kullanır, doğrudan C kodunu çağırmazlar.
+</FAQItem>
+
+<FAQItem question="NanoVG oyun dünyasını çiziyor mu?">
+Hayır. 2D üst üste bindirmeleri çizer: HUD'lar, menüler, şekiller ve metinler. Oyun dünyası kendisi Minecraft'ın kendi motoru tarafından oluşturulur.
+</FAQItem>
+
+<FAQItem question="Neden kullanıcı arayüzü için doğrudan resimler kullanmayalım?">
+Resimler ölçeklendirildiğinde bulanıklaşır veya bozulur ve her biri bellek maliyetine yol açar. NanoVG, matematiksel şekillerden oluşturulduğu için herhangi bir kullanıcı arayüzü ölçeğinde net kalır ve az yer kaplar.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-lwjgl", label: "LWJGL nedir?", description: "Java'nın NanoVG'ye ulaşmasını sağlayan bağlayıcılar." },
+  { href: "/tr/learn/what-is-graalvm-javascript-scripting", label: "GraalVM JavaScript betiği nedir?", description: "Opal'ın JavaScript'te nasıl genişletildiğine dair." },
+  { href: "/tr/learn/what-is-the-fabric-api", label: "Fabric API nedir?", description: "Fabric modlarının üzerine inşa edildiği ortak katman." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

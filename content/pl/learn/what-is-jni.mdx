@@ -1,0 +1,100 @@
+---
+title: Co to jest JNI? Wyjaśnienie Java Native Interface
+description: JNI (Java Native Interface) to mostek, który umożliwia kodowi Java wywoływanie natywnych funkcji C lub C++, a także umożliwia natywemu kodowi wywoływanie funkcji zwrotnych w JVM.
+excerpt: JNI to wbudowany most między Javą a natywnym kodem C lub C++. Oto jak działa ta granica oraz jakie są koszty jej przekroczenia.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: Czy JNI jest częścią standardowej Javy?
+    a: Tak. JNI jest dołączone do JDK i JVM. Po stronie Java nie musisz instalować niczego dodatkowo, choć do kompilacji części C lub C++ potrzebujesz natywnego łańcucha narzędzi.
+  - q: Czy używanie JNI sprawia, że mój kod jest niezależny od platformy?
+    a: Nie. Strona Java pozostaje przenośna, ale biblioteka natywna jest kompilowana dla jednego systemu operacyjnego i procesora, więc wysyłasz oddzielny build natywny dla każdej platformy.
+  - q: Czy JNI to jedyna metoda wywoływania kodu natywnego z Javy?
+    a: Nie. To jest oryginalny, wbudowany sposób. Nowsze wersje Javy dodają bardziej nowoczesne API funkcji obcych, które ma być bezpieczniejsze i łatwiejsze, ale JNI jest wciąż szeroko używane i dobrze rozumiane.
+  - q: Dlaczego klient Minecrafta miałby używać JNI?
+    a: Klient napisany głównie w Javie czasami potrzebuje biblioteki natywnej do czegoś, czego JVM nie potrafi zrobić bezpośrednio. JNI jest standardowym mostem do ładowania i wywoływania tej biblioteki.
+---
+
+<KeyTakeaways>
+
+- JNI to wbudowany interfejs, który umożliwia kodowi JVM wywoływanie natywnych funkcji C lub C++, a także umożliwia natywnego kodu wywoływanie funkcji zwrotnych w Java.
+- Metoda `native` nie posiada ciała w Java; JVM łączy ją z skompilowaną funkcją w czasie działania.
+- Programy wykorzystują go do ponownego wykorzystania natywnych bibliotek, dostępu do systemu operacyjnego, przyspieszania krytycznych ścieżek lub interakcji z urządzeniami.
+- Granica jest wyraźna: awarie natywne mogą spowodować awarię JVM, a kompilacje natywne są specyficzne dla platformy.
+
+</KeyTakeaways>
+
+JNI to Java Native Interface, wbudowany element języka Java, który umożliwia kodowi działającemu na JVM wywoływanie funkcji napisanych w C lub C++, a także pozwala natywnemu kodowi wywoływać funkcje z powrotem do Javy. Dzięki JNI program Java może sięgnąć poza JVM, aby użyć biblioteki platformowej lub fragmentu skompilowanego kodu maszynowego.
+
+<Callout variant="info" title="Gdzie pasuje Opal">
+Opal to mod dla Fabricu ([https://fabricmc.net/](https://fabricmc.net/)), więc większość jego kodu jest napisana w zwykłym Java, a skrypty piszesz w JavaScript, zamiast ingerować w kod natywny. Jeśli dopiero zaczynasz, zapoznaj się z [instrukcją konfiguracji](/pl/docs/setup).
+</Callout>
+
+## Co robi JNI
+
+JNI łączy dwie sfery: zarządzany kod Java na JVM i natywny kod skompilowany do instrukcji maszynowych. Metoda Java jest oznaczana jako `native` i nie posiada ciała w Javie. W czasie działania JVM ładuje bibliotekę natywną i łączy tę metodę z pasującą funkcją C lub C++. Następnie obie strony przekazują argumenty i zwracają wartości tam i z powrotem.
+
+Strona natywna otrzymuje wskaźnik `JNIEnv`. Ten uchwyt jest bramą: udostępnia funkcje do odczytu pól Java, wywoływania metod Java, tworzenia obiektów i rzucania wyjątkami. Zatem pomost działa w obie strony, a nie tylko Java sięga do niego.
+
+## Dlaczego program go używa
+
+Większość kodu Java nigdy nie potrzebuje JNI. Program sięga po niego w kilku sytuacjach:
+
+- **Ponowne wykorzystanie istniejącego kodu natywnego.** Dojrzała biblioteka C lub C++ już wykonuje zadanie, a przepisanie jej na Javę nie jest warte zachodu.
+- **Dostęp do systemu operacyjnego.** Niektóre funkcje platformy nie mają czysto-javańskiego API, więc wywołanie natywne jest jedyną drogą.
+- **Prędkość dla krytycznej ścieżki.** Szczególnie szybki numeryczny lub niskopoziomowy fragment kodu może działać szybciej jako skompilowany kod natywny niż na JVM.
+- **Dotykanie sprzętu lub sterowników.** Grafika, audio i dostęp do urządzeń często znajdują się za bibliotekami natywnymi.
+
+## Jak działa wywołanie JNI
+
+Kroki są takie same na każdej platformie.
+
+| Krok | Co się dzieje |
+|------|--------------|
+| Deklaracja | Metoda Java jest napisana ze słowem kluczowym `native` i bez ciała. |
+| Kompilacja | Funkcja C lub C++ jest kompilowana do biblioteki współdzielonej (`.dll`, `.so`, `.dylib`). |
+| Ładowanie | Java wywołuje `System.loadLibrary` w celu załadowania tej biblioteki w czasie działania. |
+| Łączenie | JVM dopasowuje metodę `native` do funkcji C po nazwie. |
+| Wywołanie | Java wywołuje metodę; sterowanie przechodzi do kodu natywnego i z powrotem. |
+
+Nazwy funkcji podążają za ustalonym wzorcem, aby JVM mogło je znaleźć, a wygenerowany plik nagłówkowy podaje dokładną sygnaturę do zaimplementowania.
+
+## Koszty i ryzyka
+
+JNI jest potężne, ale ma ostre krawędzie. Awaria w kodzie natywnym może spowodować awarię całego JVM, ponieważ ten kod działa poza siecią bezpieczeństwa JVM. Pamięć przydzielona po stronie natywnej nie jest odśmieczana, więc wycieki są łatwe. Każde przejście między Javą a kodem natywnym wiąże się z narzutem, więc wywoływanie go w ciasłej pętli może być wolne. A biblioteki natywne są specyficzne dla platformy: kompilacja dla systemu Windows nie będzie działać na Linuksie bez oddzielnej kompilacji.
+
+<Callout variant="warning" title="Używaj go oszczędnie">
+Ponieważ natywny kod omija zabezpieczenia JVM, JNI to narzędzie, sięgaj po nie tylko wtedy, gdy nie ma czysto-javańskiego rozwiązania. Większość modyfikacji, w tym Opal, nigdy go nie potrzebuje.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy JNI jest częścią standardowej Javy?">
+Tak. JNI jest dołączone do JDK i JVM. Nie musisz instalować niczego dodatkowo po stronie Javy, choć potrzebujesz natywnego środowiska kompilacji, aby skompilować część C lub C++.
+</FAQItem>
+
+<FAQItem question="Czy używanie JNI sprawia, że mój kod jest niezależny od platformy?">
+Nie. Strona Java pozostaje przenośna, ale biblioteka natywna jest kompilowana dla jednego systemu operacyjnego i procesora, więc wysyłasz oddzielną natywną wersję dla każdej platformy.
+</FAQItem>
+
+<FAQItem question="Czy JNI to jedyny sposób wywoływania kodu natywnego z Javy?">
+Nie. Jest to oryginalny, wbudowany sposób. Nowsze wersje Javy dodają bardziej nowoczesne API funkcji obcych, które ma być bezpieczniejsze i łatwiejsze, ale JNI jest nadal szeroko stosowane i dobrze rozumiane.
+</FAQItem>
+
+<FAQItem question="Dlaczego klient Minecrafta używałby JNI?">
+Klient napisany głównie w Javie czasami potrzebuje biblioteki natywnej do czegoś, czego JVM nie potrafi zrobić bezpośrednio. JNI jest standardowym mostem do ładowania i wywoływania takiej biblioteki.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-the-jvm", label: "Czym jest JVM?", description: "Wywołania JNI wykonywane podczas działania i z powrotem do niego." },
+  { href: "/pl/learn/what-is-graalvm-javascript-scripting", label: "Jakie jest skryptowanie JavaScript w GraalVM?", description: "Bardziej zaawansowany sposób rozszerzania aplikacji Java." },
+  { href: "/pl/learn/what-is-a-minecraft-mod-loader", label: "Czym jest ładowacz modów do Minecrafta?", description: "Jak kod jest wbudowywany w grę przy premierze." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź Opala, klienta Fabric, za $8.99</CTA>

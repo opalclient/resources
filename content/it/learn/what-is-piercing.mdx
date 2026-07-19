@@ -1,0 +1,81 @@
+---
+title: Cosa significa "piercing" in Minecraft? Attraversare i muri
+description: Il piercing è un modulo di combattimento in Minecraft che ignora il controllo della linea di vista, permettendo ai colpi di raggiungere i bersagli anche attraverso i muri. Ecco come funziona e perché è facile da individuare.
+excerpt: I fori trasformano le pareti in un suggerimento. Ecco come interrompono il raggio, e perché i server lo intercettano quasi ogni volta.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa permette effettivamente un piercing di fare?
+    a: Permette a un attacco di raggiungere un bersaglio anche quando un blocco, come un muro o una recinzione, si trova direttamente tra te e lui. Blocchi vanilla di Minecraft che colpiscono direttamente.
+  - q: È piercing come reach?
+    a: No. La portata indica la distanza massima che può percorrere un attacco. Perforante ignora qualsiasi ostacolo fisico. Risolvono problemi diversi, sebbene vengano spesso usati insieme.
+  - q: Quali clienti hanno spedito Piercing?
+    a: Slinky è un cliente documentato con questo modulo. La denominazione e il comportamento esatto variano a seconda del cliente, poiché alcune implementazioni allentano solo parte del controllo anziché rimuoverlo completamente.
+  - q: Può un server davvero intercettare qualcuno che usa Piercing?
+    a: Sì, generalmente. Il server può effettuare un controllo visivo diretto tra i due giocatori nel momento dell'impatto, e un blocco solido in quel percorso non è qualcosa che il client possa aggirare.
+---
+
+<KeyTakeaways>
+
+- Il piercing permette a un attacco di raggiungere il bersaglio attraverso un muro o un blocco solido interposto tra attaccante e bersaglio.
+- Funziona saltando il raggio di linea di vista che Minecraft normalmente richiede prima che un colpo venga registrato.
+- Non è Reach: Reach estende la distanza di contatto, Piercing ignora completamente gli ostacoli.
+- I server possono verificare la linea di vista in modo indipendente, rendendolo uno dei moduli di combattimento più affidabili rilevabili.
+
+</KeyTakeaways>
+
+Il piercing è un modulo di combattimento che permette a un attacco di connettersi anche quando un blocco solido si interpone direttamente tra l'attaccante e il bersaglio. Il normale combattimento di Minecraft esegue prima un controllo: il gioco traccia una linea da te a ciò che stai colpendo, e se quella linea colpisce il terreno prima di raggiungere il bersaglio, l'attacco non viene registrato. Il piercing salta questo controllo. Una recinzione, un muro, una lastra di pietra, non importa più. Il bersaglio ha o meno la linea di vista, e il piercing semplicemente elimina il requisito, ed è esattamente per questo che è una delle cose più facili da individuare per un server.
+
+## Come funziona
+
+Il Minecraft vanilla esegue un raycast prima di permettere a un colpo di andare a segno. Il gioco traccia una linea retta dal giocatore attaccante al bersaglio e si ferma al primo blocco solido che la linea tocca. Se quel blocco è più vicino del bersaglio, l'attacco fallisce, punto e basta. Quel singolo controllo è il motivo per cui normalmente un muro, una porta chiusa o anche un palo della recinzione sono sufficienti a far sì che un colpo non abbia effetto.
+
+Il piercing ignora o aggira quel raggio, quindi l'attacco passa come se il blocco non ci fosse. La rimozione non è sempre totale. Alcune implementazioni mantengono l'urto del blocco per il movimento ma lo disattivano specificamente per il combattimento, e poche si limitano a interrompere il controllo delle entità presenti lungo il percorso, una versione più ristretta della stessa idea. Il risultato finale in tutti i casi è lo stesso: qualcosa di solido si frapponeva tra due giocatori, eppure il colpo andava a segno.
+
+Vale la pena separare questo concetto da [Reach](/it/learn/what-is-reach). Reach estende la distanza che un colpo può percorrere. Il piercing non ha nulla a che fare con la distanza, riguarda ciò che si trova sulla linea tra due punti, non la lunghezza di quella linea. Un giocatore può avere una portata completamente normale e comunque utilizzare il piercing, e i due effetti si combinano abbastanza spesso da farli confondere.
+
+## Il piercing è sicuro da usare?
+
+Risposta breve: no. Consideralo una funzionalità bannabile, non un'area grigia. Il controllo che il piercing interrompe è una delle cose più facili da verificare in modo indipendente da parte di un server. Nel momento dell'impatto, il server può eseguire il proprio raggio lungo il percorso tra le posizioni effettive dei due giocatori e, se del terreno solido si trova lungo quel percorso, non c'è una spiegazione legittima per il colpo che va a segno.
+
+A differenza dello smoothing basato sulla portata o sulla rotazione, dove un server deve prevedere spazio per la latenza e l'imprecisione umana normale, un muro o c'era o non c'era. Questo lascia pochissimo spazio per falsi positivi, il che significa anche pochissimo spazio per un giocatore che possa cavarsela. Per questo motivo, gli anticheat tendono a trattare un colpo attraverso il muro confermato come un segnale definitivo piuttosto che qualcosa che necessita di diversi punti dati per costruire una prova.
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina descrive il modulo in termini generali, per far capire il significato del termine. La denominazione e il comportamento esatto variano a seconda del client, e forzare il passaggio attraverso blocchi solidi viola le regole su praticamente ogni server che esegue un sistema anticheat competente.
+</Callout>
+
+<Callout variant="tip" title="Opal ships Piercing">
+La versione di Opal fa esattamente ciò che suggerisce il nome: permette di colpire i giocatori attraverso i blocchi. È classificata come "da usare a proprio rischio" nell'elenco dei moduli, la stessa designazione di qualsiasi altra funzionalità che si basa su una verifica così semplice per un server. Non illudiamoci che sia più sicura di quanto non lo sia.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa permette effettivamente di fare Piercing?">
+Permette a un attacco di colpire un bersaglio anche quando un blocco, come un muro o una recinzione, si trova direttamente tra te e lui. Blocchi di Minecraft standard che colpiscono direttamente.
+</FAQItem>
+
+<FAQItem question="Il piercing è la stessa cosa del Raggio d'azione?">
+No. Il Raggio d'azione determina la distanza massima di un attacco. Il piercing ignora ciò che si trova fisicamente in mezzo. Risolvono problemi diversi, anche se vengono spesso usati insieme.
+</FAQItem>
+
+<FAQItem question="Quali clienti hanno spedito Piercing?">
+Slinky è un cliente documentato con questo modulo. La denominazione e il comportamento esatto variano a seconda del cliente, poiché alcune implementazioni allentano solo parte del controllo anziché rimuoverlo completamente.
+</FAQItem>
+
+<FAQItem question="Un server può effettivamente intercettare l'uso di Piercing?">
+Sì, generalmente. Il server può eseguire un controllo visivo diretto tra i due giocatori nel momento dell'impatto, e un blocco solido in quel percorso non è qualcosa che il client può aggirare.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-reach", label: "Cos'è Reach?", description: "Il modulo Distanza Perforante crea confusione." },
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "L'auto-attaccante Perforante a volte si abbina." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia a cui appartengono questi moduli." },
+]} />
+
+<CTA href="/it/purchase">Il piercing è un modulo. Opal valuta onestamente ognuno di essi.</CTA>

@@ -1,0 +1,85 @@
+---
+title: Cos'è il rilevatore di hacker in Minecraft? Spiegazione del modulo
+description: Hacker Detector è un modulo di Minecraft che assegna un punteggio agli avversari in base alla loro portata, agli attacchi in stile KillAura e alle rotazioni dell'aimbot, segnalando così i possibili imbroglioni durante i combattimenti.
+excerpt: Osserva ogni combattimento per i tells, il raggio, la precisione, la fluidità dell'aimbot e tiene il punteggio, così non devi indovinare chi sta imbrogliando. Non è una prova. Solo un'ipotesi molto informata.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Hacker Detector è una truffa?
+    a: No. Legge soltanto informazioni già visibili al cliente, come la posizione dell'avversario e il tempismo dei colpi, e non modifica mai come il personaggio dell'utente si muove o attacca. Segnala gli altri giocatori, ma non agisce in loro vece né compie azioni per l'utente.
+  - q: Cosa include Hacker Detector per i clienti?
+    a: Tenacity include un modulo HackerDetector, e lo stesso schema si ritrova con nomi diversi in diversi clienti a pagamento sviluppati per il PvP competitivo dell'era 1.8. Anche Opal include la propria versione, catalogata come modulo Safe.
+  - q: L'utilizzo di Hacker Detector può comportare un ban?
+    a: No. Perché si limita a osservare lo stato che il client riceve e non altera mai movimento, combattimento o i pacchetti inviati al server; eseguirlo non comporta alcun rischio rispetto a quello dei cheat che sta cercando.
+  - q: L'individuazione di Hacker Detector è affidabile?
+    a: È una stima, non una sentenza. Ragiona a partire dallo stato visibile al cliente anziché dai dati autorevoli del server, quindi si verificano sia falsi positivi, un giocatore legittimo che attiva un controllo, sia falsi negativi, un bypass ottimizzato che si trova al di sotto della soglia.
+  - q: Perché alcuni clienti che spediscono cheat spediscono anche un rilevatore di hacker?
+    a: Poiché il rilevatore funge anche da banco di prova per i bypass del cliente. Gli sviluppatori lo eseguono localmente contro i propri moduli offensivi e li ottimizzano finché il rilevatore non smette di segnalarli, un ciclo simile a quello di un anticheat lato server.
+---
+
+<KeyTakeaways>
+
+- Hacker Detector è un modulo lato client che assegna un punteggio agli avversari in base a comportamenti simili a quelli di un imbroglione: superamento del limite vanilla, auto-attacco in stile KillAura, curve di rotazione dell'aimbot e soppressione dell'anti-knockback.
+- Assegna un punteggio di sospetto in un intervallo di tick, non per un singolo colpo, quindi un picco di lag o un click fortunato non attivano un flag autonomamente.
+- Legge solo lo stato che il client riceve già. Non modifica mai la mira, il movimento o gli attacchi dell'utente.
+- Opal include la propria versione, catalogata come Sicura poiché segnalare altri giocatori non tocca mai i tuoi input.
+
+</KeyTakeaways>
+
+Hacker Detector è un modulo di Minecraft che osserva gli altri giocatori durante un combattimento e tiene traccia di un punteggio di sospetto su chi potrebbe barare. Ogni tick controlla gli avversari nelle vicinanze confrontandoli con un insieme di firme note: raggio che supera il limite vanilla, auto-attacco in stile KillAura, curve di rotazione fluide come un aimbot, soppressione dell'anti-knockback, schemi di click troppo puliti per essere fatti da una mano. Se si supera la soglia, il modulo alza un segnale di allarme. È lo stesso giudizio che ogni esperto giocatore PvP fa già quando un combattimento non convince, solo trasformato in un numero invece di un'intuizione che ti convinci a ignorare.
+
+## Come funziona
+
+Ogni tick, Hacker Detector campiona i giocatori avversari nelle vicinanze e confronta i loro movimenti, rotazioni e comportamenti di combattimento con le firme di cheat note: raggio che supera il limite vanilla, auto-attacco in stile KillAura, curve di rotazione dell'aimbot, soppressione della velocità o dell'anti-knockback e intervalli di click che non sembrano quelli di una persona che clicca. Una corrispondenza con una qualsiasi firma aumenta il punteggio di sospetto di quel giocatore. Se si supera la soglia, il modulo li segnala.
+
+Il sistema di punteggio si basa su un intervallo di tick anziché reagire a un singolo momento. Un calo di ping occasionale, un click fortunato o un frame di movimento coincidentale non sono sufficienti di per sé; un comportamento di cheat reale tende a ripetersi costantemente durante un combattimento, mentre un evento anomalo no. Questo intervallo fa la differenza tra un modulo effettivamente utile e uno che dà l'allarme al primo pacchetto strano.
+
+## Un banco di prova di bypass integrato
+
+I client che distribuiscono moduli offensivi, come KillAura, un aimbot o una portata estesa, tendono a distribuire anche Hacker Detector, e non è un caso. Eseguire il proprio detector contro il proprio client mentre un bypass è attivo mostra a uno sviluppatore quali controlli vengono attivati e quali no. Regolare il bypass finché il detector locale non smette di segnalare e si sarà eseguito un loop simile a quello su cui un anticheat lato server ti controlla. I client che costruiscono entrambi i componenti affiancati tendono ad avere moduli offensivi più puliti, il detector funge anche da controllo qualità.
+
+## È sicuro da usare
+
+Sì, eseguirlo non comporta alcun rischio di cheat che sta cercando. Il rilevatore di hacker legge solo informazioni che il client possiede già, posizioni, rotazioni, tempistiche dei colpi, intervalli di clic, mai dati del server autorevole, e non modifica mai ciò che l'account dell'utente stesso invia. Nessun colpo alterato, nessun movimento alterato, nessun pacchetto diverso. Non c'è nulla che un anticheat lato server possa intercettare, perché non ha fatto nulla.
+
+Che abbia ragione sull'altro è un'altra questione. Poiché ragiona a partire dallo stato visibile al client anziché dalla verità effettiva del server, il suo punteggio è una stima, non un verdetto. Un avversario con ping elevato, una configurazione del mouse insolita o una serie di tempistiche casuali possono comunque far scattare un flag, e un bypass ben tarato può rimanere al di sotto di ogni soglia senza attivare nulla. Considera un flag come un motivo per osservare più attentamente, non come una segnalazione su cui scommetteresti un account.
+
+<Callout variant="tip" title="Spedito da Opal">
+Il rilevatore di hacker di Opal fa la stessa cosa: segnala i giocatori che sembrano barare. È catalogato come Sicuro, nello stesso gruppo delle altre funzionalità di Opal che migliorano l'esperienza di gioco, perché valutare un avversario non influisce sui tuoi input e non lascia tracce per un anticheat.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Hacker Detector è un imbroglio?">
+No. Legge solamente informazioni già visibili al cliente, come la posizione dell'avversario e il tempismo dei colpi, e non modifica mai il modo in cui il personaggio dell'utente si muove o attacca. Segnala altri giocatori, non agisce in loro vece né intraprende azioni per l'utente.
+</FAQItem>
+
+<FAQItem question="Chi include Hacker Detector?">
+Tenacity include un modulo HackerDetector, e lo stesso schema si ritrova con nomi diversi in diversi client a pagamento costruiti per il PvP dell'era 1.8. Anche Opal include la propria versione, catalogata come modulo Safe.
+</FAQItem>
+
+<FAQItem question="L'utilizzo di Hacker Detector può comportare un ban?">
+No. Poiché osserva soltanto lo stato che il client riceve già e non altera mai movimenti, combattimenti o i pacchetti inviati al server, l'utilizzo non comporta alcun rischio rispetto a quelli dei cheat che sta cercando.
+</FAQItem>
+
+<FAQItem question="L'individuazione di Hacker Detector è affidabile?">
+È una stima, non una sentenza. Ragiona a partire dallo stato visibile al client anziché dai dati autorevoli del server, quindi sia falsi positivi, un giocatore legittimo che attiva un controllo, sia falsi negativi, un bypass ottimizzato che si trova al di sotto della soglia, possono verificarsi.
+</FAQItem>
+
+<FAQItem question="Perché alcuni clienti che spediscono cheat spediscono anche un rilevatore di hacker?">
+Poiché il rilevatore funge anche da banco di prova per i bypass del cliente stesso. Gli sviluppatori lo eseguono localmente contro i propri moduli offensivi e li ottimizzano finché il rilevatore non smette di segnalarli, un ciclo simile a quello di un anticheat lato server.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "Una delle firme su cui si basa il punteggio di sospetto di Hacker Detector." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Le curve di rotazione fluide sono un altro elemento contro cui vengono valutati i punteggi del modulo." },
+  { href: "/it/learn/what-is-reach", label: "Cos'è Reach?", description: "Oltre il limite della vaniglia, la firma più facile da segnalare." },
+]} />
+
+<CTA href="/it/purchase">Scopri chi stai affrontando prima che arrivi il terzo colpo. Opal parte da $8.99.</CTA>

@@ -1,0 +1,79 @@
+---
+title: Cosa sono i Nuker in Minecraft? Spiegato il blocco istantaneo
+description: Nuker è un modulo di Minecraft che distrugge tutti i blocchi in un raggio contemporaneamente, invece che uno alla volta. Come funziona, perché viene utilizzato e perché viene segnalato rapidamente.
+excerpt: Un passaggio, raggio intero, sparito. Il nucleo trasforma la distruzione dei blocchi in una singola pressione di un pulsante, ed è una delle cose più facili che un anti-cheat potrà mai rilevare.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Nuker è un imbroglione o una mod legittima?
+    a: È una truffa. Rompere più blocchi in un raggio con un solo colpo non è qualcosa che la versione base di Minecraft permette a un giocatore di fare, quindi si conta come un vantaggio di gioco sleale, non come una semplice comodità estetica.
+  - q: Lavora Nuker in modalità sopravvivenza?
+    a: È lì che conta. Le regole che elude, l'aggiramento dei tempi di indurimento, l'interazione blocco per blocco e la portata, esistono solo in modalità sopravvivenza e multigiocatore. La modalità creativa già distrugge i blocchi istantaneamente, quindi Nuker non ha nulla da accelerare lì.
+  - q: Qual è la differenza tra Nuker e Scaffold?
+    a: Nuker rimuove i blocchi in blocco. Scaffold li posiziona in blocco, creando automaticamente dei ponti mentre ti muovi. Entrambi trasformano un'interazione vanilla lenta e ponderata in una istantanea e automatizzata.
+  - q: Possono i plugin del server bloccare i Nuker senza un anticheat?
+    a: Alcuni software server limitano il numero di blocchi che possono essere distrutti per tick o per azione, il che smorza l'effetto di Nuker da solo. Ma individuare e bannare questo comportamento rimane comunque il compito di un anticheat.
+---
+
+<KeyTakeaways>
+- Nuker è un modulo di gioco che distrugge tutti i blocchi idonei entro un raggio attorno al giocatore in un'unica passata, invece di estrarre un blocco alla volta.
+- Sostituisce il loop "punta e distruggi" della versione base con una scansione: controlla ogni posizione dei blocchi nel raggio, esclude quelli non idonei, distrugge il resto contemporaneamente.
+- Viene utilizzato per ripulire rapidamente il terreno e, più spesso, per danneggiare costruzioni o rivendicazioni protette prima che qualcuno possa reagire.
+- Gli anticheat lo rilevano confrontando il tasso di distruzione dei blocchi e la dispersione con ciò che un flusso di input reale può produrre.
+</KeyTakeaways>
+
+Nuker è un modulo di categoria mondiale che distrugge ogni blocco idoneo all'interno di un raggio attorno al giocatore in un'unica passata, invece del solito estrazione blocco per blocco imposta da Minecraft vanilla. Un tratto di terreno che richiederebbe decine di colpi separati collassa in un'unica azione. Compare in client come [[Wurst]], a fianco di altri moduli di automazione di massa come uno degli strumenti più diretti nella categoria degli strumenti.
+
+## Come funziona Nuker
+
+L'estrazione vanilla è deliberata per design. Guardi un blocco, tieni premuto il pulsante del mouse e aspetti il tempo di rottura impostato dalla durezza di quel blocco e dallo strumento che stai utilizzando. Un blocco, un'azione, un'attesa.
+
+Nuker esce da questo ciclo. Invece di tracciare dove stai guardando, scansiona ogni posizione del blocco all'interno di un raggio impostato attorno a te, filtra qualsiasi cosa non si qualifichi (aria, bedrock, blocchi oltre il limite del raggio) e invia una richiesta di rottura per tutto ciò che rimane nella stessa passata. Non miri a ogni blocco. Non aspetti il tempo di rottura individuale. Il client elabora semplicemente l'intera area in una volta e passa oltre.
+
+Ecco perché l'attrattiva è limitata ma evidente: sgomberare un tunnel, appianare una sezione di terreno o ridurre una base rivendicata alla roccia viva richiede una frazione del tempo necessario per l'attività mineraria normale. Sui server dove il terreno è protetto o le risorse sono contese, è proprio quella stessa velocità a trasformarlo in uno strumento di griefing, non solo in un comodo strumento.
+
+## Nuker vs. Scaffold
+
+Entrambi i moduli trasformano un'interazione vanilla lenta in una versione istantanea e di massa di sé stessi. La direzione è opposta.
+
+| | Nuker | Scaffold |
+|---|---|---|
+| Azione vanilla che automatizza | Distruzione di blocchi | Posizionamento di blocchi |
+| Come si attiva | Con un'esplosione in un raggio | Continuamente, mentre ci si allontana da un bordo |
+| Utilizzo tipico | Pulizia o griefing del terreno velocemente | Creazione di ponti senza guardare in basso |
+| Cosa rimuove dal gioco | L'attesa, la mira e il limite di un blocco alla volta nella distruzione | L'attesa, la mira e il limite di un blocco alla volta nel posizionamento |
+
+<Callout variant="tip" title="Non fa parte del toolkit di Opal">
+Opal non include un modulo Nuker, e non si tratta di una dimenticanza. L'obiettivo principale di un cliente pagante è rimanere su un server senza attirare l'attenzione, e la rimozione massiccia di blocchi è una delle azioni meno discrete che si possano compiere di fronte allo staff o a un anticheat. Non è il tipo di vantaggio su cui Opal è costruito.
+</Callout>
+
+<Callout variant="warning" title="Questo è uno dei trucchi più facili da individuare">
+Il Nuker lascia una traccia che un flusso di input reale non produrrebbe mai: diversi blocchi distrutti nello stesso tick, distribuiti su un raggio anziché raggruppati nella direzione in cui ti trovi, a volte al di fuori della portata normale. Gli anticheat lato server misurano il tasso di distruzione dei blocchi e la loro dispersione rispetto ai limiti di difficoltà e portata della versione vanilla, e un'esplosione di questo tipo è un segnale forte e facile da rilevare. Consideralo come una via rapida verso il ban, non come una scorciatoia per spianare il terreno.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+<FAQItem question="Nuker è un hack o una mod legittima?">
+È un cheat. Rompere più blocchi in un raggio con un solo passaggio non è qualcosa che la versione base di Minecraft permette a un giocatore di fare, quindi si conta come un vantaggio di gioco sleale, non una semplice convenienza estetica.
+</FAQItem>
+<FAQItem question="Nuker funziona in modalità sopravvivenza?">
+È lì che conta. Le regole che aggira, la tempistica della durezza dei blocchi, l'interazione blocco per blocco e la portata, esistono solo in modalità sopravvivenza e multiplayer. La modalità creativa già fa sì che i blocchi si rompano istantaneamente, quindi Nuker non ha nulla da accelerare in quel caso.
+</FAQItem>
+<FAQItem question="Qual è la differenza tra Nuker e Scaffold?">
+Nuker rimuove i blocchi in massa. Scaffold li posiziona in massa, creando automaticamente dei ponti mentre ti muovi. Entrambi trasformano un'interazione vanilla lenta e ponderata in un'azione istantanea e automatizzata.
+</FAQItem>
+<FAQItem question="I plugin del server possono bloccare Nuker senza un anticheat?">
+Alcuni software server limitano il numero di blocchi che possono essere distrutti per tick o per azione, il che smorza l'effetto di Nuker di per sé. Ma intercettare e bannare il comportamento è comunque compito di un anticheat.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-scaffold", label: "Cos'è Scaffold?", description: "Il corrispettivo basato sul posizionamento dei blocchi di Nuker, con creazione automatica di ponti mentre ti muovi." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "La categoria di clienti basata sull'evitare il personale, non sulla pulizia del terreno." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "Dove moduli come Nuker si inseriscono nella più ampia categoria di client per utility." }
+]} />
+
+<CTA href="/it/purchase">Opal evita i trucchi apocalittici e affina i moduli che ti tengono realmente in vita.</CTA>

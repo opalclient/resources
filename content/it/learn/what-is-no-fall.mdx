@@ -1,0 +1,85 @@
+---
+title: Cosa sono i blocchi No Fall in Minecraft? Spiegazione del Modulo
+description: No Fall impedisce al server di registrare i danni da caduta in Minecraft. Ecco come l'annullamento dei pacchetti, lo spoofing del terreno e il rilevamento funzionano effettivamente nella pratica.
+excerpt: Il modulo che trasforma una caduta di dodici cuori in un gesto di spalla. Ecco il meccanismo, e il rischio che nessuno indica sulla confezione.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa fa effettivamente No Fall?
+    a: Impedisce al server di registrare i danni da caduta per il tuo personaggio, quindi una caduta che normalmente ti farebbe male o ti ucciderebbe non ha alcun effetto.
+  - q: Come fa No Fall a evitare i danni da caduta?
+    a: "Tre approcci documentati: annullare il pacchetto di movimento che il server utilizzerebbe per calcolare la caduta, simulare uno stato a terra in modo che non venga mai registrata una caduta, oppure manipolare i dati sulla posizione prevista in modo che il tracciamento della caduta da parte del server non accumuli mai abbastanza informazioni per applicare danni."
+  - q: È rilevabile No Fall?
+    a: Sì. Il server si aspetta che i danni da caduta derivino da un movimento verticale tracciato, e una discrepanza tra il tuo stato segnalato e il danno che avrebbe dovuto verificarsi è un segnale che gli anticheat possono ragionevolmente controllare.
+  - q: No Fall è lo stesso per ogni cliente?
+    a: No. È un concetto generale di modulo che si presenta in diversi clienti, ma il metodo esatto (cancellazione pacchetti, contraffazione a terra o manipolazione dello stato previsto) varia a seconda dell'implementazione.
+  - q: Influisce No Fall su qualcosa oltre al danno da caduta?
+    a: Non intenzionalmente. Mira specificamente il controllo dei danni da caduta, anche se l'imitazione del terreno può, a seconda di come è implementata, influenzare altri controlli relativi al movimento.
+---
+
+<KeyTakeaways>
+- No Fall impedisce al server di registrare i danni da caduta, quindi le cadute da qualsiasi altezza non hanno costo.
+- Funziona interrompendo il controllo della caduta: cancellazione dei pacchetti, falsificazione dello stato a terra o simulazione della posizione prevista.
+- Una discrepanza tra il movimento segnalato e il danno previsto è esattamente ciò che i sistemi anti-cheat cercano.
+- Opal lo distribuisce come No Fall, con uso a proprio rischio e pericolo, come ogni modulo rilevabile.
+</KeyTakeaways>
+
+No Fall è un modulo di Minecraft che impedisce al server di registrare mai danni da caduta sul tuo personaggio. Invece di lasciare che la normale matematica dei danni del gioco faccia il suo corso, interferisce con il controllo lato server che altrimenti deciderebbe che hai appena perso dodici cuori da una scogliera. Salta da una torre, esci da una lotta a mezz'aria, precipita dritto in un pozzo minerario: nessuno di questi eventi ti costa punti vita. È un piccolo pezzo di codice che svolge un grande compito, ed è anche uno dei trucchi più facilmente rilevabili nella cassetta degli attrezzi dei client di utilità, il che vale la pena sapere prima di affidarti ad esso.
+
+## Come funziona
+
+Il server tiene traccia costantemente della tua posizione verticale. Quando rileva un atterraggio dopo una caduta di una certa distanza, applica danni proporzionali alla distanza di caduta. Il compito di No Fall è interferire con questo processo prima che il danno venga applicato.
+
+Ci sono tre modi comuni in cui questo viene fatto:
+
+**Cancellazione dei pacchetti.** Il client semplicemente trattiene il pacchetto di movimento che il server utilizzerebbe per calcolare la caduta, quindi il server non riceve mai i dati necessari per addebitarti il danno.
+
+**Falsificazione del terreno.** Il client comunica al server che sei in piedi su terreno solido quando non lo sei. Nessun atterraggio significa nessuna caduta da registrare in primo luogo.
+
+**Manipolazione dello stato previsto.** Il client regola silenziosamente i dati di posizione che riporta, in modo che il tracker della distanza di caduta del server non accumuli mai abbastanza da superare la soglia di danno.
+
+Stesso obiettivo, tre diverse bugie raccontate al server. Quella che un client utilizza determina quanto sia evidente.
+
+## È sicuro da usare?
+
+No, in nessun senso assoluto. No Fall è una soluzione client-side per un controllo server-side, e questa discrepanza è proprio il tipo di cosa per cui gli anticheat sono progettati. Il server si aspetta che i danni da caduta derivino dal movimento tracciato. Quando la tua posizione o il tuo stato segnalati non corrispondono più ai danni che avrebbero dovuto verificarsi, questa incongruenza è un segnale di rilevamento plausibile e un anticheat ragionevole la segnalerà.
+
+Che venga effettivamente rilevato dipende dal server e dal metodo utilizzato. La cancellazione dei pacchetti e la falsificazione del terreno tendono a lasciare tracce più evidenti nei log di movimento rispetto all'approccio più sottile della previsione dello stato, ma nessuno dei tre è invisibile per impostazione predefinita. Considera No Fall come un utilizzo a proprio rischio e pericolo, e prevedi che un anticheat severo lo rilevi più spesso di uno indulgente.
+
+<Callout variant="tip" title="Opal lo spedisce">
+Il catalogo dei moduli di Opal lo indica chiaramente: **No Fall**, "Rimuove i danni da caduta". Nessuna esagerazione, nessun nome di marketing separato. È archiviato come utilizzo a proprio rischio nel client, nello stesso gruppo di qualsiasi altra cosa che un server possa plausibilmente rilevare.
+</Callout>
+
+<Callout variant="warning" title="Questo potrebbe farti bannare">
+Non lasciare tracce di caduta: un'impronta meccanica, un danno che avrebbe dovuto verificarsi e non si è verificato. Gli anticheat cercano proprio quella lacuna. Utilizzarlo comporta un reale rischio di ban su qualsiasi server che lo controlli, esattamente come per qualsiasi altro client.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+<FAQItem question="Cosa fa effettivamente No Fall?">
+Impedisce al server di registrare i danni da caduta sul tuo personaggio, quindi una caduta che normalmente ti farebbe male o ti ucciderebbe non ha alcun effetto.
+</FAQItem>
+<FAQItem question="Come evita No Fall di innescare i danni da caduta?">
+Tre approcci documentati: annullare il pacchetto di movimento che il server utilizzerebbe per calcolare la caduta, falsificare uno stato a terra in modo che No Fall non venga mai registrato, o manipolare i dati di posizione previsti in modo che il tracciamento delle cadute del server non accumuli mai abbastanza da applicare danni.
+</FAQItem>
+<FAQItem question="No Fall è rilevabile?">
+Sì. Il server si aspetta che i danni da caduta derivino da un movimento verticale tracciato, e una discrepanza tra il tuo stato segnalato e il danno che dovrebbe essere accaduto è un segnale che gli anticheat possono ragionevolmente controllare.
+</FAQItem>
+<FAQItem question="No Fall è lo stesso su ogni client?">
+No. È un concetto generale di modulo che si presenta su più client, ma il metodo esatto (cancellazione del pacchetto, falsificazione a terra o manipolazione dello stato previsto) varia a seconda dell'implementazione.
+</FAQItem>
+<FAQItem question="No Fall influisce su qualcosa oltre ai danni da caduta?">
+No, non intenzionalmente. È progettato per colpire specificamente il controllo dei danni da caduta, anche se la falsificazione a terra può in particolare influenzare altre verifiche relative al movimento a seconda di come è costruito.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria No Fall risiede, e ciò che distingue un client utility da un client cheat completo." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Dove vengono costruiti moduli come No Fall per nascondersi da più del semplice server." },
+  { href: "/it/learn/what-is-velocity-anti-knockback", label: "Cos'è la velocità/resistenza allo shock?", description: "Un altro modulo che elimina un costo che normalmente il gioco ti fa pagare." }
+]} />
+
+<CTA href="/it/purchase">No Fall è una voce nella lista dei moduli di Opal. Scopri cosa altro è stato selezionato.</CTA>

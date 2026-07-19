@@ -1,0 +1,94 @@
+---
+title: Was ist Geschwindigkeit (Rückstoßreduktion) in Minecraft?
+description: Geschwindigkeit, oder Rückstoßvermeidung, ist ein Kampfmoodul, das die durch Schläge verursachte Rückstoßkraft reduziert oder aufhebt. So funktioniert es und warum es entdeckt wird.
+excerpt: Geschwindigkeit reduziert den Rückstoß, den du nach einem Treffer erleidest, sodass du deinen Stand hältst und weiter schwingst. Hier erfährst du, wie das Modul diesen Rückstoß umschreibt und warum Server das bemerken.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Modules
+author: trq
+faqs:
+  - q: Was bedeutet "Velocity" in einem Minecraft-Client?
+    a: In einem Client-Menü ist Velocity das Modul gegen Rückstoß. Es reduziert den Rückstoß, den der Spieler beim Treffer erleidet, sodass er während eines Kampfes näher an seinem Ziel bleibt.
+  - q: Ist Anti-Knockback dasselbe wie Geschwindigkeit?
+    a: "Ja. Anti-Rückstoß ist der verständliche Name und Geschwindigkeit der gebräuchliche Modulname für dasselbe Verhalten: die Reduzierung des Rückstoßes, den ein Spieler von Angriffen erfährt."
+  - q: Warum kann ich den Rückstoß nicht einfach auf null Prozent setzen?
+    a: Du kannst das zwar, aber eine vollständige Stornierung ist die einfachste Variante, um sie zu erkennen. Der Server weiß, wie weit du zurückgeflogen hättest, daher ist ein vollständiges Fehlen von Rückschlägen ein offensichtlicher Widerspruch.
+  - q: Hilft Velocity im PvP?
+    a: Es kann, indem ein Spieler in Nahkampfreichweite gehalten wird, anstatt bei jedem Treffer weggestoßen zu werden. Dieser Vorteil ist auch der Grund, warum Anticheats die Anwendung von Rückstoß so genau messen.
+---
+
+<KeyTakeaways>
+
+- Geschwindigkeit, auch Anti-Knockback genannt, reduziert oder negiert den Rückstoß, den man beim Treffer erleidet.
+- Der Server sendet einen Rückstoßvektor nach einem Treffer; Geschwindigkeit skaliert diesen herunter, bevor sich der Spieler bewegt.
+- Eine vollständige Aufhebung ist leicht zu erkennen; partielle Werte fügen sich besser in Lags und normale Tauschgeschäfte ein.
+- Die Erkennung erfolgt auf dem Server, da dieser bereits weiß, wie weit sich der Spieler hätte bewegen sollen.
+
+</KeyTakeaways>
+
+Geschwindigkeit ist ein Kampanmodul, das die Rückstoßwirkung reduziert oder aufhebt, die ein Spieler erleidet, wenn ihn ein Angriff trifft. Der Server teilt dem Client mit, wie weit er nach einem Treffer zurückgeschleudert werden soll. Geschwindigkeit fängt diese Anweisung ab und verkleinert sie, sodass der Spieler kaum bewegt wird. Es wird auch als Anti-Rückstoß bezeichnet.
+
+## Wie Geschwindigkeit funktioniert
+
+Geschwindigkeit bearbeitet den Rückstoß, den der Server nach einem Treffer sendet. Wenn eine Entität in Minecraft getroffen wird, sendet der Server einen Geschwindigkeits-Update an den Client: einen Vektor, der angibt, in welche Richtung und wie schnell sich bewegen soll. Der Standard-Client wendet diesen Vektor vollständig an. Geschwindigkeit fängt das Update zuerst ab und skaliert es herunter, bevor sich der Spieler bewegt.
+
+Die Skalierung ist normalerweise ein Prozentsatz auf jeder Achse. Horizontale Rückstoßwirkungen werden reduziert, sodass der Spieler nicht zurückgeschleudert wird, während vertikale Rückstoßwirkungen oft näher an der Normalität bleiben, sodass Sprünge und Stürze immer noch richtig aussehen. Bei null Prozent erfährt der Spieler überhaupt keinen Rückstoß. Bei einem teilweisen Wert erfährt er etwas davon, was schwerer zu bemerken ist.
+
+Den gleichen Effekt kann man auf zwei Arten erreichen. Einige Implementierungen modifizieren das Geschwindigkeits-Paket, sobald es ankommt. Andere lassen die Standard-Bewegung ablaufen und korrigieren dann die Position im nächsten Takt. Beide Enden damit, dass der Spieler den Boden hält, den er verloren haben sollte.
+
+## Häufige Einstellungen
+
+Geschwindigkeits-Module bieten einige Werte an, die Sicherheit gegen Effekt austauschen.
+
+| Einstellung | Was sie steuert |
+|---|---|
+| Horizontal | Prozent der seitlichen Rückstoßkraft, die der Spieler weiterhin erfährt |
+| Vertikal | Prozent der aufwärts gerichteten Rückstoßkraft, die der Spieler weiterhin erfährt |
+| Modus | Paketbearbeitung vs. Positionskorrektur |
+| Wahrscheinlichkeit | Wie oft ein bestimmter Treffer reduziert wird, anstatt jeden Treffer |
+
+Ein vollständiger Abbruch ist am stärksten und offensichtlichsten. Teilwerte oder eine Wahrscheinlichkeit, die einige Treffer überspringt, wirken eher wie Lag oder ein normaler Tausch und ziehen weniger Aufmerksamkeit auf sich.
+
+## Warum Spieler es nutzen
+
+Geschwindigkeit verleiht einen Nahkampf-Vorteil, indem sie den Spieler in Reichweite hält. Rückstoßkraft unterbricht normalerweise einen Kampf: Jeder Treffer stößt beide Spieler auseinander, sodass sie den Abstand wieder schließen müssen. Ein Spieler, der weniger Rückstoßkraft erfährt, bleibt auf dem Ziel und schwingt weiter, während der andere Spieler abdriftet. In einem direkten Nahkampfduell ist das ein großer Vorteil.
+
+## Warum es entdeckt wird
+
+Geschwindigkeit wird entdeckt, weil der Server bereits weiß, wie weit sich der Spieler bewegt haben sollte. Der Server sendet den Rückstoßvektor, um die erwartete Position mit der vom Client gemeldeten Position zu vergleichen. Wenn ein Spieler weiterhin Treffer absorbiert, ohne die vorhergesagte Distanz zurückzulegen, fällt der Abstand ins Auge.
+
+Server-seitige Anti-Cheats verfolgen dies direkt. Sie beobachten, wie viel Rückstoß der Spieler bei vielen Treffern tatsächlich ausgeübt hat. Ein Spieler, der konstant mehr Boden hält, als die Physik zulässt, wird markiert. Ein vollständiger Abbruch ist leicht zu erkennen. Eine teilweise Reduktion ist schwieriger, weshalb viele Implementierungen niemals auf Null gehen.
+
+## Geschwindigkeit im Vergleich zu anderen Kampanmodulen
+
+Geschwindigkeit unterscheidet sich von anderen Kampanmodulen dadurch, dass sie verändert, was mit dem Spieler passiert, anstatt was der Spieler mit einem Ziel macht. [KillAura](/de/learn/what-is-killaura) und ein [AimBot](/de/learn/what-is-an-aimbot) wirken sich auf den Gegner aus und automatisieren so das Zielen und Angreifen. Geschwindigkeit wirkt sich auf die eigene Position des Spielers aus und überschreibt eine Server-Anweisung darüber, wie weit er sich nach einem Treffer bewegen soll. Das gemeinsame Merkmal ist, dass beide etwas überschreiben, das der Server kontrollieren sollte.
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite beschreibt das Modul allgemein, damit Sie wissen, was der Begriff bedeutet. Die Benennung und das genaue Verhalten können je nach Client variieren, und das Überschreiben des Server-Rückstoßes verstößt gegen die Regeln auf praktisch jedem Server.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was bedeutet Velocity in einem Minecraft-Client?">
+In einem Client-Menü ist Velocity das Anti-Knockback-Modul. Es reduziert den Rückstoß, den der Spieler beim Treffer erfährt, sodass er während eines Kampfes näher an seinem Ziel bleibt. Es hat nichts mit der Proxy-Software gleichen Namens zu tun.
+</FAQItem>
+
+<FAQItem question="Ist Anti-Knockback dasselbe wie Geschwindigkeit?">
+Ja. Anti-Knockback ist der Name in einfacher Sprache und Geschwindigkeit ist der gebräuchliche Modulname für dasselbe Verhalten: die Reduzierung des Rückstoßes, den ein Spieler von Angriffen erfährt.
+</FAQItem>
+
+<FAQItem question="Warum kann ich den Rückstoß nicht einfach auf null Prozent setzen?">
+Sie können das, aber eine vollständige Abbestellung ist die einfachste Version, die man erkennen kann. Der Server weiß, wie weit Sie zurückgeschleudert werden sollten, daher ist ein Rückstoß von null ein offensichtlicher Widerspruch. Teilwerte existieren, weil sie sich besser einfügen.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-killaura", label: "Was ist KillAura?", description: "Das Auto-Angriffs-Kampfmodul." },
+  { href: "/de/learn/what-is-reach", label: "Was ist Reichweite?", description: "Die Anti-Cheat-Module überwachen die Trefferdistanz genau." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Kategorie, zu der diese Module gehören." },
+]} />
+
+<CTA href="/de/purchase">Was Opal für $8.99 versendet, siehst du</CTA>

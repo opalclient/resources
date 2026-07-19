@@ -1,0 +1,85 @@
+---
+title: Czym jest TPAKiller w Minecraft? Moduł wyjaśniający
+description: TPAKiller automatycznie wysyła prośbę o teleportację i atakuje w momencie jej zakończenia, wykorzystując krótką chwilę przed tym, jak cel zdąży zareagować lub się bronić.
+excerpt: Wyślij prośbę o teleportację, poczekaj aż się zakończy, a następnie atakuj, zanim w ogóle załaduje się drugi gracz. To jest cała sztuczka i liczy się to jako oszustwo.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie automatyzuje TPAKiller?
+    a: "Dwa kroki: wysłanie żądania teleportacji do celu, a następnie atakowanie go w momencie, gdy akceptuje i ląduje. Gracz nie musi ręcznie wyznaczać czasu dla żadnego z tych kroków, moduł łączy je ze sobą."
+  - q: Dlaczego moment bezpośrednio po teleportacji jest niebezpieczny?
+    a: Gracz, który właśnie teleportował się, wciąż ładowuje się do nowego obszaru i, na wielu serwerach, jeszcze nie odzyskał pełnej kontroli. TPAKiller został zaprojektowany tak, aby trafić w tym krótkim oknie czasowym, zanim cel zdąży zareagować.
+  - q: Czy TPAKiller to to samo co aimbot lub KillAura?
+    a: "Nie. Nie ma na celu ani nie automatyzuje walki w ogóle, automatyzuje tylko jedną konkretną sekwencję: prosi o teleportację, a następnie uderza w momencie lądowania. Zaleta wynika z momentu i zaskoczenia, a nie z wspomaganym celowaniem lub automatyzacją ataku."
+  - q: Które dokumenty klienta dokumentuje TPAKiller?
+    a: Wytrwałość to klient, w którym TPAKiller jest śledzony jako moduł.
+  - q: Czy serwery mogą uniemożliwić działanie TPAKiller?
+    a: Tak. Krótki okres niewrażliwości po teleportacji lub ograniczenie częstotliwości wysyłanych żądań teleportacji eliminuje wrażliwy moment, na którym polega moduł. Oba to są powszechne środki zaradcze.
+---
+
+<KeyTakeaways>
+
+- TPAKiller to moduł exploita, który automatycznie wysyła żądanie teleportacji, a następnie atakuje w momencie, gdy cel ląduje.
+- Uderza w krótkim oknie czasowym tuż po teleportacji, kiedy cel wciąż się ładuje i ledwo może zareagować.
+- Nie jest to aimbot ani KillAura: przewaga wynika z wyczucia czasu i zaskoczenia, a nie z automatyzacji walki.
+- Udokumentowany jako moduł w kliencie Tenacity; serwery zamykają ten exploit za pomocą odporności na spawnowanie lub ograniczeń szybkości teleportacji.
+
+</KeyTakeaways>
+
+TPAKiller to moduł exploita, który automatyzuje jedną konkretną zasadzkę: wysyła prośbę o teleportację, czeka na akceptację celu, a następnie atakuje w momencie, gdy ten ląduje. Opiera się na oknie, o którym większość graczy nawet nie myśli – na tych kilku sekundach po użyciu komendy `/tpa` teleportacji, kiedy wciąż renderujesz w nowym obszarze i nie odzyskałeś pełnej kontroli. TPAKiller wyznacza moment ataku tak, aby trafić w tę lukę, zamieniając rutynową komendę społeczną w przygotowanie do darmowego zabójstwa. Jest udokumentowany jako moduł w kliencie Tenacity i wyraźnie mieści się po stronie exploitów, a nie po stronie automatyzacji walki, gdzie znajduje się na przykład aimbot.
+
+## Jak działa TPAKiller
+
+TPAKiller wykonuje całą sekwencję bez żadnej interwencji gracza. Wysyła prośbę o teleportację (komendę `/tpa` lub jej odpowiednik) do wybranego celu, obserwuje akceptację i atakuje natychmiast po tym, jak cel ląduje obok gracza. Cel nigdy nie spodziewa się tego, ponieważ zgodził się na teleportację, a nie na walkę.
+
+Exploit działa, ponieważ teleportacja umieszcza gracza w nowej pozycji bez ostrzeżenia, a na wielu serwerach istnieje krótka przerwa, zanim będzie mógł się poruszać lub reagować normalnie. TPAKiller został zaprojektowany, aby działać w tej konkretnej przerwie, zanim cel odzyska kontrolę lub nawet zakończy ładowanie obszaru.
+
+## Czy TPAKiller jest bezpieczny w użyciu
+
+Uruchamianie TPAKiller to nie zona szarości. Automatyzacja mechaniki społecznej, takiej jak prośba o teleportację, w celu przygotowania zasadzki, jest wykorzystaniem przewagi w rozgrywce: pozwala wygrywać walki, do których drugi gracz nigdy się nie zgodził i nie miał możliwości zapobiec dzięki dobrej grze. Większość serwerów, które oferują `/tpa`, oczekuje, że będzie on używany do podróży i grupowania się, a nie jako przynęta do zabójstwa.
+
+Wykrywanie jest tu trudniejsze niż w przypadku automatyzacji celowania, ponieważ każda pojedyncza akcja – wysłanie prośby o teleportację i atak – jest sama w sobie całkowicie legalna. Zdradza ją jednak wzorzec: prośba o teleportację, a następnie atak bez znaczącego opóźnienia, powtarzany wobec wielu celów, to rytm, którego prawdziwi gracze prawie nigdy nie wytworzą przypadkowo. Dlatego też zwykłym rozwiązaniem nie jest wykrywanie. Krótki czas nieśmiertelności po teleportacji lub limit szybkości wysyłania `/tpa` eliminuje wykorzystanie, zanim w ogóle będzie trzeba je wykrywać.
+
+<Callout variant="tip" title="Gdzie Opal stawia granicę">
+Opal nie udostępnia modułu w stylu TPAKiller, a to nie jest przeoczenie. Funkcja, która wykorzystuje konkretną lukę w obsłudze `/tpa`, przestaje działać w momencie, gdy serwer dodaje półsekundową odporność na obrażenia, co ma już miejsce w większości z nich. Moduły bojowe Opala są tworzone, aby zasłużyć na swoje miejsce we własnym zakresie, a nie po to, by wykorzystywać lukę czasową, dopóki administrator jej nie załatwi.
+</Callout>
+
+<Callout variant="warning" title="To jest nadużycie, które może skutkować zablokowaniem konta">
+TPAKiller to klasyczny przykład wykorzystania gry w celu uzyskania przewagi, a zespoły administracyjne traktują go jako taki. Uruchomienie go na serwerze, który zabrania korzystania z klientów oszukiwaczy, naraża konto na ryzyko na takim samym poziomie jak inne moduły z tej kategorii, niezależnie od tego, czy serwer posiada system wykrywania exploitów, czy nie. Ta strona wyjaśnia, jak on działa, a nie jak go uniknąć.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co właściwie automatyzuje TPAKiller?">
+Dwa kroki: wysłanie prośby o teleportację do celu, a następnie atakowanie go w momencie, gdy akceptuje i ląduje. Gracz nie musi ręcznie wyznaczać czasu dla żadnego z tych kroków, moduł łączy je ze sobą.
+</FAQItem>
+
+<FAQItem question="Dlaczego moment po teleportacji jest niebezpieczny?">
+Gracz, który właśnie się teleportował, nadal ładowuje się do nowej lokacji i, na wielu serwerach, jeszcze nie odzyskał pełnej kontroli. TPAKiller został zaprojektowany tak, aby trafić w tym krótkim oknie czasowym, zanim cel zdąży zareagować.
+</FAQItem>
+
+<FAQItem question="Czy TPAKiller jest tym samym co aimbot lub KillAura?">
+Nie. Nie celuje ani nie automatyzuje walki w ogóle, automatyzuje jedną konkretną sekwencję: żąda teleportacji, a następnie uderza w momencie lądowania. Zaleta wynika z odpowiedniego wyboru czasu i zaskoczenia, a nie z wspomaganego celowania lub automatyzacji ataków.
+</FAQItem>
+
+<FAQItem question="Które dokumenty klienta obejmuje TPAKiller?">
+Tenacity to klient, w którym TPAKiller jest śledzony jako moduł.
+</FAQItem>
+
+<FAQItem question="Czy serwery mogą uniemożliwić działanie TPAKiller?">
+Tak. Krótki okres niewrażliwości po teleportacji lub ograniczenie częstotliwości wysyłanych żądań teleportacji eliminuje wrażliwy moment, na którym polega moduł. Obie te środki są powszechne.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Moduł automatycznego starcia TPAKiller bywa porównywany do czegoś, a nie jest." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Celowanie wspomagane w porównaniu z wykorzystaniem luki czasowej jednorazowego działania TPAKillera." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kategoria klientów oparta na wykorzystywaniu luk, zachowująca wystarczająco dużą dyskrecję, by przetrwać." },
+]} />
+
+<CTA href="/pl/purchase">Zobacz moduły bojowe, które Opal faktycznie wysyła, bez zasadzek.</CTA>

@@ -1,0 +1,93 @@
+---
+title: JVM Nedir? Java Sanal Makinesi Açıklaması
+description: JVM, Java bytecode'unu herhangi bir işletim sisteminde çalıştırır. Minecraft Java Edition ve her Fabric modunun Windows, macOS ve Linux'ta aynı şekilde çalışmasının nedeni budur.
+excerpt: Minecraft Java Edition ve bunun için oluşturulmuş her modun derlenmiş bytecode'unu JVM çalıştırır. İşte bunun ne yaptığı ve neden önemli olduğu.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: JVM Java ile aynı mı?
+    a: Hayır, Java dilidir; derlenmiş çıktıyı çalıştıran şey JVM'dir. Kotlin gibi diğer diller de bytecode'a derlenir ve aynı JVM üzerinde çalışır.
+  - q: Minecraft oynamak için JVM'yi yüklemem gerekiyor mu?
+    a: Java çalışma zamanına ihtiyacınız var; bu, JVM'yi içerir. Birçok başlatıcı sizin için bir tane paketler, bu yüzden ayrı olarak bir şey yüklemeden zaten sahip olabilirsiniz.
+  - q: JVM ile JDK arasındaki fark nedir?
+    a: JVM bytecode'u çalıştırır. JDK ise, derleyici ve araçlar dahil olmak üzere, Java programlarını ilk etapta oluşturmak için kullandığınız eksiksiz geliştirici kitidir.
+  - q: JVM neden yavaş başlar ama sonra hızlanır?
+    a: Öncelikle bytecode'u yorumlar, ardından JIT derleyicisi program çalıştığı sırada en çok kullanılan koda yerel makine koduyla dönüştürür. Bu ısınma süreci başlangıç maliyetidir; hızlanma ise sonrasında gerçekleşir.
+---
+
+<KeyTakeaways>
+
+- JVM (Java Sanal Makinesi), derlenmiş Java bytecode'unu çalıştıran programdır.
+- Aynı bytecode Windows, macOS ve Linux üzerinde çalışır, bu nedenle modların yeniden derlenmesine gerek yoktur.
+- Oyunculara bir Java çalışma zamanı (JRE) gerekir; mod yapımcılarına ise derleyiciyle birlikte tam JDK gerekir.
+- Minecraft Java Sürümü ve her Fabric modu, Opal dahil olmak üzere, JVM üzerinde çalışır.
+
+</KeyTakeaways>
+
+JVM, yani Java Sanal Makinesi, Java kodunu çalıştıran programdır. Siz Java ile kod yazarsınız, bir derleyici bunu bytecode'a dönüştürür ve JVM, bu bytecode'ı herhangi bir işletim sisteminde çalıştırır. Bu nedenle Minecraft Java Sürümü ve onun için oluşturulan modlar, yeniden derlenmeden Windows, macOS ve Linux'ta aynı şekilde davranır.
+
+<Callout variant="info" title="Opal Nerede Çalışır">
+Opal, bir [Fabric](https://fabricmc.net/) mod'udur, bu yüzden oyunla aynı JVM üzerinde çalışır. Kurulumunu yapıyorsanız, [kurulum rehberi](/tr/docs/setup) size yol gösterecektir.
+</Callout>
+
+## JVM Aslında Ne Yapar
+
+JVM, kaynak kodu değil, bytecode'u çalıştırır. Bir Java programını derlediğinizde, Windows veya Mac için bir yürütülebilir dosya elde etmezsiniz. Bunun yerine, JVM'nin anladığı kompakt bir komut seti olan bytecode ile dolu sınıf dosyaları elde edersiniz. JVM, bu komutları okur ve makinenizde yürütür.
+
+Ek katman tam olarak budur. Aynı bytecode, bir JVM var olduğu her yerde çalışır, bu nedenle "bir kez yaz, her yerde çalıştır" Java'nın yaygınlaşmasının kısa versiyonudur. JVM, bu vaadi gerçeğe dönüştüren parçadır.
+
+## JVM, JRE ve JDK
+
+Bu üç terim sık sık karıştırılır, bu yüzden bir ayrım yapalım.
+
+| Terim | Nedir | Ne zaman gerekir |
+| :--- | :--- | :--- |
+| JVM | Bytecode'u çalıştıran motor | Her zaman, herhangi bir Java programını çalıştırmak için |
+| JRE | JVM artı standart kütüphaneler | Java programlarını çalıştırmak için |
+| JDK | JRE artı derleyici ve geliştirme araçları | Java programları oluşturmak için |
+
+Bir oyuncu, oyunu başlatmak için yalnızca bir çalışma zamanına ihtiyaç duyar. Bir mod oluşturmak için geliştirme yapan bir geliştirici, Java'yı ilk etapta bytecode'a derleyebilmesi için tam JDK'ye ihtiyaç duyar.
+
+## JVM Kodunuzu Nasıl Hızlı Çalıştırır
+
+JVM, bytecode'u birer birer yorumlayarak başlar. Çalışırken, hangi yöntemlerin en çok çağrıldığını izler. Bu "sıcak" yollar, bunları anında yerel makine koduna dönüştüren JIT derleyicisine verilir. Isınma aşamasından sonra, en yoğun kod yerel hıza yakın bir hızda çalışır.
+
+JVM, hafızayı da sizin için yönetir. Bir çöp toplayıcı, artık kullanmadığınız nesneleri geri kazanır, böylece C'de olduğu gibi elle hafıza boşaltmanız gerekmez. Java'nın yazımı kolay olmasının ve mod yapımcıları için yaygın ilk dil olmasının başlıca nedenlerinden biridir.
+
+## Minecraft için neden önemli?
+
+Minecraft Java Sürümü JVM üzerinde çalışır ve ona hedefleyen her yardımcı istemci ve mod da öyle. Bir istemcinin kendi kodu Java, Kotlin veya başka bir JVM dili olabilir, çünkü hepsi JVM'nin çalıştırdığı aynı bytecode'a derlenir. Bir [Fabric](https://fabricmc.net/) modu, bytecode'dan oluşan bir jar dosyası olarak gönderilir, yükleyici oyuna başlatmada bağlanır ve JVM her şeyi tek bir işlem olarak çalıştırır.
+
+Bunun nedeni, başlatıcıların yığın boyutu ve kullanılacak Java sürümü gibi şeyleri ayarlamanıza izin vermesidir. Oyunu değil, oyunu barındıran JVM'yi yapılandırıyorsunuz.
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="JVM Java ile aynı mı?">
+Hayır. Java bir programlama dilidir; JVM ise derlenmiş çıktıyı çalıştıran çalışma zamanıdır. Kotlin gibi diğer diller de bytecode'a derlenir ve aynı JVM üzerinde çalışır.
+</FAQItem>
+
+<FAQItem question="Minecraft oynamak için JVM yüklemem gerekiyor mu?">
+Minecraft oynamak için bir Java çalışma zamanına ihtiyacınız var; bu, JVM'yi içerir. Birçok başlatıcı sizin için bir tane paketler, bu yüzden ayrı olarak bir şey yüklemeden zaten sahip olabilirsiniz.
+</FAQItem>
+
+<FAQItem question="JVM ile JDK arasındaki fark nedir?">
+JVM, bytecode'u çalıştırır. JDK ise, derleyici ve araçlar dahil olmak üzere, Java programlarını ilk etapta oluşturmak için kullandığınız eksiksiz geliştirici kiti anlamına gelir.
+</FAQItem>
+
+<FAQItem question="JVM neden yavaş başlar ama sonra hızlanır?">
+İlk başta bytecode'u yorumlar, ardından JIT derleyicisi program çalıştığı sırada en çok kullanılan kodu yerel makine koduna dönüştürür. Bu ısınma süreci başlangıç maliyetidir; hızlanma ise sonrasında gerçekleşir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-jvm-bytecode", label: "JVM bytecode nedir?", description: "JVM'nin gerçekte çalıştırdığı komut kümesi." },
+  { href: "/tr/learn/what-is-graalvm-javascript-scripting", label: "GraalVM JavaScript betiği nedir?", description: "JVM üzerinde çalışan bir JavaScript çalışma zamanı." },
+  { href: "/tr/learn/what-is-a-minecraft-mod-loader", label: "Minecraft mod yükleyici nedir?", description: "Oyun çıktığında modların nasıl sisteme entegre edildiği." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

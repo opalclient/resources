@@ -1,0 +1,96 @@
+---
+title: Cosa sono i Chest Stealer in Minecraft? Spiegazione del Modulo
+description: Chest Stealer è un modulo client di utilità per Minecraft che svuota un forziere, una botte o uno shulker box aperto nel tuo inventario in un'unica passata automatizzata di movimenti rapidi.
+excerpt: Un istante è pieno, il successivo è nella tua borsa. Ecco come Chest Stealer ci riesce, e perché un server potrebbe accorgersene.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa fa esattamente il Ladro di Petto?
+    a: Svuota un forziere aperto, una botte o uno shulker box nel tuo inventario in un colpo solo, attivando un rapido spostamento su ogni slot occupato non appena il contenitore si apre.
+  - q: È Chest Stealer come ChestAssist?
+    a: No. ChestAssist è un modulo separato e non documentato, appartenente alla stessa famiglia di client. Chest Stealer è quello che svuota in massa un contenitore; ciò che fa ChestAssist non è documentato qui.
+  - q: Per quale motivo le implementazioni aggiungono ritardo a Chest Stealer?
+    a: Dato che svuotare un intero container in un singolo tick non è qualcosa che un essere umano può fare. Un ritardo casuale per mossa, un limite di oggetti per tick e un ordine di slot mescolato rendono il tutto meno meccanico a chiunque lo osservi.
+  - q: Filtra ciò che prende, il Rubacorpi?
+    a: Alcune versioni lo fanno. Una lista di filtri salta gli elementi che non desideri, quindi gli oggetti inutili rimangono indietro e solo l'equipaggiamento utile o potenziato viene aggiunto al tuo inventario.
+  - q: Quali clienti hanno spedito Chest Stealer?
+    a: È documentato in Fan, Tenacity, Rose e Augustus, e anche Opal fornisce la propria versione.
+---
+
+<KeyTakeaways>
+
+- Chest Stealer (o ChestStealer) svuota un forziere aperto, una botte o un box di shulker nel tuo inventario in un'unica passata.
+- Spara un movimento rapido su ogni slot pieno nel momento in cui il contenitore si apre.
+- Nessun umano svuota un contenitore così velocemente, quindi le build aggiungono un ritardo e un ordine mescolato per dissimularlo.
+- È separato da ChestAssist; Opal fornisce la propria versione, utilizzarla a proprio rischio.
+
+</KeyTakeaways>
+
+Chest Stealer è un modulo client di utilità per Minecraft che svuota completamente un forziere, una botte o uno shulker box aperto nel tuo inventario in un'unica passata, senza dover fare clic trascinando gli oggetti uno alla volta, senza lasciare alcun oggetto indietro perché hai scartato la pagina. Non appena la schermata del contenitore si apre, sposta tutto prima che un essere umano possa finire di leggere cosa c'è dentro. È scritto come una sola parola, ChestStealer, lo stesso modulo, ed è facile confonderlo con ChestAssist, una funzionalità diversa che capita di condividere una famiglia di client e un nome simile.
+
+## Come funziona
+
+Chest Stealer intercetta la schermata del contenitore non appena si apre e percorre ogni slot pieno sul lato del forziere del menu. Per ognuno invia un movimento rapido, la stessa azione che viene attivata da un clic trascinando, quindi il server vede solo una sequenza di pacchetti di clic su slot ordinari. Non c'è nulla di sbagliato in nessuno dei singoli pacchetti.
+
+Ciò che lo smaschera è il ritmo. Un giocatore che fa clic trascinando attraverso un forziere pieno impiega diversi secondi, con qualche slot mancato e un nuovo clic lungo il percorso. Chest Stealer non deve guardare nulla o muovere il mouse, semplicemente percorre l'elenco degli slot e spara, quindi l'intero contenitore si svuota in un tempo pari a un singolo tick. Questa compressione, diversi secondi di lavoro ridotti a quasi nessuno, è la parte che nessun client legittimo produce da solo.
+
+## Impostazioni comuni
+
+Poiché la velocità grezza è il segnale rivelatore, la maggior parte delle implementazioni espone alcune impostazioni che sacrificano la completezza per apparire meno simili a uno script:
+
+| Impostazione | Cosa controlla |
+|---|---|
+| Ritardo movimento | Pausa randomizzata tra ogni movimento rapido per evitare che atterrino tutti insieme |
+| Limite per tick | Numero massimo di slot che il modulo libera in un singolo tick di gioco |
+| Ordine degli slot | Mescola l'ordine di pulizia invece di procedere dall'alto verso il basso come farebbe un bot |
+| Filtro oggetti | Salta gli oggetti che non desideri, in modo che vengano recuperati solo l'equipaggiamento utile o potenziato |
+
+<Callout variant="tip" title="Opal lo spedisce come Chest Stealer">
+Il catalogo di Opal lo elenca in una sola riga: "Preleva solo gli oggetti utili o potenziati dai forzieri". La stessa idea, lo stesso istinto di filtro degli oggetti, marchio ufficiale. E la stessa onestà riguardo al compromesso: Opal lo classifica come utilizzo a proprio rischio, rilevabile come qualsiasi altra azione automatizzata dell'inventario.
+</Callout>
+
+## È sicuro utilizzarlo?
+
+Chest Stealer è una funzionalità da utilizzare a proprio rischio e pericolo, non una miglioria della qualità della vita. Uno svuotamento istantaneo e completo dei container non è qualcosa che un client legittimo produce, e qualsiasi server o anticheat che monitori le interazioni con i container può plausibilmente segnalare il modello, a prescindere dal fatto che ritardi e jitter lo mascherino. La temporizzazione randomizzata e la rimescolanza degli slot rendono il comportamento meno meccanico. Non rendono invisibile al server, che controlla effettivamente, l'azione sottostante: prendere ogni oggetto in un colpo solo, un'azione che nessun umano può eguagliare.
+
+Quanto un determinato server monitori l'attività dei container varia notevolmente, e questa varianza è il vero rischio. Assumi che il rilevamento sia possibile, piuttosto che assumere che le misure di travestimento lo sconfiggano.
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina spiega cos'è Chest Stealer e perché viene segnalato, non istruzioni per eseguirne uno. Automatizzare lo svuotamento di un container viola le regole su praticamente ogni server che si preoccupa del gioco corretto, e la velocità coinvolta è proprio il tipo di segnale che gli anticheat sono progettati per intercettare.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa fa esattamente il Chest Stealer?">
+Svuota un forziere, una botte o uno shulker box aperto nel tuo inventario in un'unica passata, eseguendo un rapido movimento su ogni slot occupato nel momento in cui il contenitore si apre.
+</FAQItem>
+
+<FAQItem question="Chest Stealer è la stessa cosa di ChestAssist?">
+No. ChestAssist è un modulo separato e non documentato, appartenente alla stessa famiglia di client. Chest Stealer è quello che svuota in blocco un contenitore; cosa faccia ChestAssist non è documentato qui.
+</FAQItem>
+
+<FAQItem question="Perché le implementazioni aggiungono un ritardo a Chest Stealer?">
+Poiché svuotare un intero contenitore in un singolo tick non è qualcosa che un essere umano può fare. Un ritardo casuale per mossa, un limite di oggetti per tick e un ordine di slot mescolato rendono il modello meno meccanico a qualsiasi cosa lo osservi.
+</FAQItem>
+
+<FAQItem question="Chest Stealer filtra ciò che prende?">
+Alcune versioni lo fanno. Una lista di filtri salta gli oggetti che non desideri, quindi gli oggetti inutili rimangono indietro e solo l'equipaggiamento utile o potenziato viene inserito nel tuo inventario.
+</FAQItem>
+
+<FAQItem question="Quali clienti hanno spedito Chest Stealer?">
+È documentato in Fan, Tenacity, Rose e Augustus, e Opal ne spedisce una propria versione.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria a cui appartiene il Ladro di Tesori e cosa altro vi risiede al suo interno." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Una filosofia diversa: moduli costruiti per rimanere completamente invisibili." },
+  { href: "/it/learn/what-is-velocity-anti-knockback", label: "Cos'è la velocità (anti-knockback)?", description: "Un altro modulo quotidiano con i suoi compromessi di rilevamento." },
+]} />
+
+<CTA href="/it/purchase">Lascia che Opal si prenda il bottino migliore mentre tu continui a combattere.</CTA>

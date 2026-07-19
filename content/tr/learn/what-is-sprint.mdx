@@ -1,0 +1,85 @@
+---
+title: Minecraft'ta Sprint Nedir? Modül Açıklaması
+description: Sprint, Minecraft için bir hareket modülüdür ve koşma hızını kısıtlamak için kullandığı açlık ve görüş alanı kontrollerini esnetir. İşte nasıl çalıştığı ve riskleri.
+excerpt: Vanilla Minecraft sürekli olarak açlık ve görüş hatları yüzünden sprint yaparken seni kesintiye uğratıyor. Sprint artık izin sormayı bırakıyor.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Sprint modülü aslında neyi değiştiriyor?
+    a: Minecraft'ta koşmaya başlamanıza veya koşuyu sürdürmenize izin vermeden önce kontrol ettiği koşulları değiştirir, örneğin doygunluk çubuğunun dolu olmasını veya ilerideki yolun engellendiğini tespit ettiğinde koşuyu kesen kontrolü gerektirmesi gibi.
+  - q: Sprint bir hız modülüyle aynı şey midir?
+    a: Hayır. Bir hız modülü sizi daha hızlı hareket ettirir. Sprint tek başına hız katmaz, sadece oyunun sprint yapmaya izin vermesini sağlayan zamanı değiştirir.
+  - q: Hangi müşteriler Sprint modülü eklemiş?
+    a: Yıl içinde Juul, Fan, Tenacity ve Rose gibi birçok müşteride sprint tarzı mantık değişiklikleri görüldü. Opal da bir tane kullanıyor, kataloğunda "Sprint" olarak listelenmiş.
+  - q: Sprint kullanmak bir oyuncunun yasaklanmasına neden olabilir mi?
+    a: Evet. Sunucu, modülün değiştirdiği aynı açlık ve hareket durumunu, istemciden bağımsız olarak takip eder, böylece koşu uygunluğunu doğrulayan sunucu tarafı bir anticheat, vanilla'da izin verilmeyecek koşullarda koşu yapan bir hesabı işaretleyebilir veya yasaklayabilir.
+  - q: Sprint mi, dövüş modüllerine göre ciddi bir hile mi?
+    a: Otomatik savaş gibi bir şeyden daha az dikkat çekici bir değişiklik olsa da, sunucunun kendi başına kontrol ettiği bir durumu yine de değiştiriyor, bu yüzden güvenli bir kozmetik değişiklik olmaktan ziyade gerçek bir tespit riski taşıyor.
+---
+
+<KeyTakeaways>
+
+- Sprint, vanilla'daki sprint başlatma veya sürdürme kurallarını gevşeten bir hareket modülüdür; örneğin açlık barı minimumu ve görüş hattı kontrolü.
+- Tek başına hız katmaz, oyunun herhangi bir zamanda sprint yapılmasına izin verdiğinde ne zaman gerçekleştiğini değiştirir.
+- Sunucu, aynı açlık ve hareket durumunu bağımsız olarak takip eder, bu nedenle istemci tarafında gevşetmek gerçek bir tespit riski, sadece bir görsel değişikliktir.
+- Opal bir Sprint modülü gönderir ve kullanımını kendi sorumluluğunuzda listeler; tıpkı başka yerlerde göründüğü gibi.
+
+</KeyTakeaways>
+
+Sprint, oyuncunun koşmaya başlamasına veya koşmaya devam etmesine izin vermeden önce Minecraft'ın kontrol ettiği koşulları değiştiren bir modüldür. Vanilla, bununla ilgili birkaç kısıtlama getirir: açlık barınız belirli bir seviyenin üzerinde olmalı ve oyun önünüzdeki alanı izler, yolun engellendiği an koşuyu sonlandırır. Sprint, bu kontrolleri kesintiye uğratır ve bunların neyi değerlendirdiğini yeniden yazar, böylece istemci, değiştirilmemiş oyunun reddedeceği durumlarda bile koşuya uygun olduğunuzu bildirmeye devam eder. Bu bir hız artışı değildir. Vanilla koşu hızı tam olarak aynı kalır, Sprint sadece bunun iptal edilmesini engeller.
+
+## Nasıl Çalışır
+
+İçeride, Sprint, hareket ederken vanilla tarafından yapılan iki kontrolün önünde oturur: koşuya başlamanıza izin verilmeden önce geçilmesi gereken açlık eşiği ve normalde yolun önü engellendiği anda yürüyüşe dönmenizi zorlayan ileri engel kontrolü. Modül her ikisini de kesintiye uğratır ve bunların neyi değerlendirdiğini değiştirir, böylece istemci, değiştirilmemiş bir kurulum sizi kesintiye uğratırken bile koşuya uygun olduğunuzu kabul etmeye devam eder.
+
+Tutarlılık çekiciliği oluşturuyor. Koşmak yürümekten daha hızlıdır ve her an vanilya sizi yavaşlatmaya zorlayacaksa, olması gerekenden daha yavaş hareket ettiğiniz bir andır. Bu kesintileri ortadan kaldırmak, mesafeyi kapatmak, birinin hızına yetişmek veya oyun sizi şüpheye düşürmeden sadece araziyi geçmek için daha istikrarlı bir hız demektir. Yeni bir fikir de değil: Koşu tarzı mantık değişiklikleri, Juul, Fan, Tenacity ve Rose dahil olmak üzere yıllar içinde birkaç müşteride kendini göstermiştir.
+
+## Sprint kullanmak güvenli mi?
+
+Aslında değil, bunun nedeni yapısal bir sorun. Sunucu, açlığın seviyesi de dahil olmak üzere vanilya'nın koşuyu tetiklemek için kullandığı aynı durumu, istemci ne rapor ederse rapor etsin bağımsız olarak takip eder. Bir oyuncu koşuyorsa veya koşmaya devam ediyorsa ve sunucunun kendi kontrolü izin vermeyecek koşullarda koşuyorsa, bu sunucu tarafı bir antichi̇at'ın fark etmesi için iyi bir konumda olduğu bir uyumsuzluktur. Sprint uygunluğu gizli bir bilgi değildir, istemci tarafından tek başına kontrol edilen bir bilgi değildir; sunucu zaten kendi amaçları için hesapladığı bir durumdur. İstemci tarafında gevşetmek yakalanma olasılığı olan bir şeydir, görünmez bir şekilde kaçabilecek bir şey değildir.
+
+Otomatik savaş gibi bir şeyden çok daha düşük profilli bir değişiklik. Kimse karakterinizin görünürde insan dışı bir şey yapmasını izlemiyor, sadece teknik olarak yapmaması gereken bir şekilde koşuyorsunuz. Ancak sunucu tarafı algılama, diğer oyunculara nasıl göründüm umursamaz, sayılar uyuşuyor mu onu umursar ve burada uyuşmuyor.
+
+<Callout variant="tip" title="Opal, Sprint modülünü gönderiyor">
+Opal'ın kataloğu bunu açıkça belirtiyor: Sprint, uygulama içinde "sprint'in arkasındaki mantığı değiştiren" olarak tanımlanmış. Abartı yok. Bu tür modüllerin göründüğü diğer yerlerde olduğu gibi, kullanımı kendi sorumluluğunuzda olarak işaretlenmiş, çünkü yukarıdaki tespit hikayesi Opal kontrolü yaptığı için değişmiyor.
+</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını anlatmıyor">
+Bu sayfa, terimin ne anlama geldiğini bilmeniz için modülü genel olarak açıklamaktadır. İsimlendirme ve kesin davranışlar müşteriye göre değişiklik gösterir ve bu gibi sunucu tarafından takip edilen durumları değiştirmek, herhangi bir antichi̇at korumalı sunucuda gerçek bir yasak riski taşır.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Sprint modülü aslında neyi değiştiriyor?">
+Sizlere sprint başlatma veya sprinti sürdürme izni vermeden önce Minecraft'ın kontrol ettiği koşulları değiştirir; örneğin, açlık barının dolu olmasını gerektirmesi veya ilerideki yolun engellendiğini tespit ettiğinde sprinti kesmesi gibi.
+</FAQItem>
+
+<FAQItem question="Sprint bir hız modülüyle aynı mı?">
+Hayır. Bir hız modülü sizi daha hızlı hareket ettirir. Sprint tek başına hız katmaz, sadece oyunun koşma olayını ne zaman tetiklediğini değiştirir.
+</FAQItem>
+
+<FAQItem question="Hangi müşteriler Sprint modülü dahil etmişlerdir?">
+Yıllar içinde Juul, Fan, Tenacity ve Rose gibi birçok müşteride Sprint tarzı mantık değişiklikleri görülmüştür. Opal da bir tane kullanmaktadır; kataloğunda Sprint olarak listelenmiştir.
+</FAQItem>
+
+<FAQItem question="Sprint kullanmak bir oyuncunun yasaklanmasına neden olabilir mi?">
+Evet. Sunucu, modül tarafından değiştirilen aynı açlık ve hareket durumunu, istemdenden bağımsız olarak takip eder, bu nedenle sprint uygunluğunu doğrulayan sunucu tarafı bir antichi, vanilla'da izin verilmeyecek koşullar altında sprint yapan bir hesabı işaretleyebilir veya yasaklayabilir.
+</FAQItem>
+
+<FAQItem question="Sprint, savaş modüllerine göre ciddi bir hile mi?">
+Otomatik savaş gibi bir şeyden daha düşük profilli bir değişiklik olsa da, sunucunun kendi başına kontrol ettiği durumu değiştirir, bu nedenle güvenli bir kozmetik değişiklik olmaktan ziyade gerçek bir tespit riski taşır.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-scaffold", label: "Scaffold nedir?", description: "Sunucu tarafından izlenen durumu değiştiren başka bir hareket modülü." },
+  { href: "/tr/learn/what-is-velocity-anti-knockback", label: "Hız (çarpma geri tepmesi önleme) nedir?", description: "Hareket durumuyla ilgili farklı anticheat sistemleri, istemci bağımsız olarak kendileri doğrular." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Daha geniş kategori, Sprint ve benzeri modüllerin ait olduğu kategoridir." },
+]} />
+
+<CTA href="/tr/purchase">Opal'i kurmadan önce, kendi sorumluluğunuzda neyin kullanılabileceğini kontrol edin.</CTA>

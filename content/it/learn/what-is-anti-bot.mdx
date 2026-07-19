@@ -1,0 +1,77 @@
+---
+title: Cos'è un anti-bot in Minecraft? Spiegazione del modulo
+description: Anti Bot è un modulo di combattimento che esclude i giocatori falsi e di disturbo dal sistema di puntamento automatico, impedendo così alla tua automazione di sprecare un colpo su un bot di screenshare piazzato.
+excerpt: "Anti Bot mantiene onesti i tuoi attacchi: i giocatori reali vengono attaccati, le esche piazzate vengono ignorate."
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa si intende per bot esca in Minecraft?
+    a: Un bot esca è un'entità dalla forma di un giocatore, spesso generata da un server, un plugin o un revisore di screenshare, che sembra un account reale ma non lo è. Esiste unicamente per verificare se la tua automazione reagisce a esso.
+  - q: Anti Bot modifica il combattimento, o solo il sistema di mira?
+    a: Solo targeting. L'anti-bot non aumenta la portata, la precisione o la velocità d'attacco. Rimuove soltanto le entità esca dalla lista delle cose che la tua automazione di combattimento può colpire.
+  - q: È Anti Bot di per sé una forma di imbroglio?
+    a: No. Di per sé, Anti Bot non attacca, non mira e non ti muove. Filtra quali entità la tua automazione di combattimento può vedere, quindi funge da controllo di qualità per tale automazione piuttosto che da automazione autonoma.
+  - q: Come si differenzia Anti Bot dal rilevamento di bot di un anti-cheat?
+    a: Sono seduti ai lati opposti della stessa piattaforma. Un anti-cheat piazza un esca e osserva come reagisci. Anti Bot è il modulo lato client che impedisce alla tua automazione di reagire all'esca in primo luogo.
+---
+
+<KeyTakeaways>
+
+- Anti Bot è un modulo di combattimento che filtra le entità di giocatori falsi e di esca dall'auto-targeting.
+- I revisori di server e di condivisione dello schermo creano account bot per vedere come reagiscono gli strumenti di un sospetto imbroglione.
+- Controlla ogni entità nelle vicinanze prima che un attacco venga scatenato, saltando tutto ciò che sembra un'esca piantata.
+- Interviene solo sulla selezione del bersaglio, non sulla mira, sulla portata o sulla velocità d'attacco.
+
+</KeyTakeaways>
+
+Anti Bot è un modulo di combattimento che filtra le entità di giocatori falsi e di esca dalla logica di puntamento automatico di un client. I revisori di screenshare e alcuni server creano account bot travestiti da giocatori normali specificamente per vedere se gli strumenti di un presunto imbroglione reagiscono a essi. Anti Bot riconosce queste esche per quello che sono e impedisce all'automazione del combattimento di sprecare un attacco su di esse, proprio come un avversario reale ignorerebbe semplicemente un personaggio che sta lì fermo a non fare nulla.
+
+## Come funziona Anti Bot
+
+Il modulo si posiziona prima di qualsiasi logica che selezioni un bersaglio per l'automazione del combattimento. Prima che un attacco venga lanciato, Anti Bot controlla ogni entità a forma di giocatore nelle vicinanze e scarta quelle che risultano essere esche piantate piuttosto che avversari autentici. Le entità che superano il controllo rimangono nel normale pool di puntamento. Le entità contrassegnate come esche vengono semplicemente saltate, quindi l'attacco non si attiva mai su di esse.
+
+Questo è importante perché un bot che viene attaccato consegna al revisore esattamente la reazione che stava cercando. Anti Bot non cerca di nascondere nulla o di fingere innocenza. Si limita a rifiutare l'esca, il che significa che l'automazione del combattimento spende i suoi attacchi solo su entità che sono effettivamente lì per combattere.
+
+Nella pratica, questo si manifesta come un controllo a strati aggiunto a ciò che il combat suite di un cliente sta già facendo, non come una funzionalità autonoma. Rise Nextgen, un client utility basato su Fabric, lo esegue esattamente in questo modo: catalogato nella categoria combat, filtra silenziosamente la lista dei bersagli prima che il resto dell'automazione possa agire.
+
+## Rilevamento di bot anti-cheat rispetto al rilevamento di bot
+
+Questi due termini condividono un nome ma puntano in direzioni opposte. Il rilevamento di bot di un anticheat lato server funziona piazzando un esca e osservando come il client di un sospetto imbroglione reagisce ad essa. È una trappola, e mira a catturare l'automazione che non riesce a distinguere un giocatore finto da uno reale.
+
+Anti Bot è l'altra metà di questo scambio. È un filtro lato client che riconosce l'esca prima che un attacco venga lanciato, quindi non c'è alcuna reazione da osservare per l'anticheat. Uno è un metodo di rilevamento mirato agli imbroglioni. L'altro è un modulo che silenziosamente rifiuta di entrarvi.
+
+<Callout variant="tip" title="Spedito da Opal">
+Il modulo Anti Bot di Opal svolge esattamente questo compito: ulteriori controlli di rilevamento dei bot, in modo che il targeting ignori i giocatori falsi. È classificato come Sicuro nell'elenco dei moduli, poiché non interferisce mai con la mira, la portata o il comportamento d'attacco, ma solo con ciò che la tua automazione di combattimento è autorizzata a vedere.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa si intende per bot esca in Minecraft?">
+Un bot esca è un'entità a forma di giocatore, spesso generato da un server, un plugin o un revisore di screenshare, che assomiglia a un account reale ma non lo è. Esiste unicamente per verificare se la tua automazione reagisce a esso.
+</FAQItem>
+
+<FAQItem question="Anti Bot modifica il combattimento, o solo il targeting?">
+Solo il targeting. Anti Bot non aggiunge gittata, mira o velocità d'attacco. Rimuove solamente le entità esca dalla lista delle cose che la tua automazione di combattimento può colpire.
+</FAQItem>
+
+<FAQItem question="Anti Bot è un cheat di per sé?">
+No. Di per sé, Anti Bot non attacca, non mira e non muove il giocatore. Filtra quali entità la tua automazione di combattimento può vedere, quindi funge da strumento di miglioramento della qualità per tale automazione, piuttosto che da automazione autonoma.
+</FAQItem>
+
+<FAQItem question="In che modo Anti Bot è diverso dal rilevamento di bot di un anticheat?">
+Si trovano su lati opposti della stessa interazione. Un anticheat piazza un esca e osserva come reagisci. Anti Bot è il modulo lato client che impedisce alla tua automazione di reagire all'esca in primo luogo.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "Il filtro di destinazione di Anti Bot alimenta il modulo di attacco automatico." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Un altro modulo basato sul targeting, che sopravvive o fallisce in base alla sua lista di destinatari." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia a cui appartengono questi moduli." },
+]} />
+
+<CTA href="/it/purchase">Combatti l'automazione che riconosce subito una esca. Opal parte da $8.99.</CTA>

@@ -1,0 +1,87 @@
+---
+title: Czym jest fizyka przedmiotów w Minecraft?
+description: Item Physics to moduł kosmetyczny dla Minecrafta, który zastępuje sztywne zachowanie poruszających się przedmiotów z wersji bazowej, bardziej płynną i konfigurowalną fizyką, renderowaną wyłącznie po stronie klienta.
+excerpt: Wanilia powoduje, że porzucone przedmioty chybotają się, jakby zapomniały, jak działa grawitacja. Fizyka przedmiotów nadaje im godności, wyłącznie dla Twojej przyjemności.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Fizyka Przedmiotów wpływa na to, gdzie faktycznie lądują porzucone przedmioty?
+    a: Nie. To tylko zmienia sposób renderowania animacji upuszczania na Twoim ekranie. Gdzie przedmiot faktycznie się znajdzie i jak serwer go obsłuży, jest identyczne jak w wersji podstawowej.
+  - q: Czy inni gracze widzą niestandardową fizykę przedmiotów?
+    a: Nie. To tylko lokalna zmiana renderowania. Wszyscy inni widzą, jak krople poruszają się zgodnie z własnym klientem, niezależnie od tego, czy jest to domyślna fizyka vanilla, czy też ich własna, niestandardowa fizyka.
+  - q: Czy używanie Fizyki Przedmiotów jest wykrywane przez antycheaty?
+    a: Nie. Ono nie wysyła nic innego do serwera niż zmodyfikowany klient, więc nie ma nic, co serwerowy anticheat mógłby zobaczyć, a co dopiero oznaczyć.
+  - q: Czy Item Physics to to samo co pakiet zasobów lub shader?
+    a: W zasadzie nie. Paczki zasobów i shadery zmieniają tekstury i oświetlenie. Fizyka przedmiotów modyfikuje rzeczywistą ścieżkę ruchu przedmiotów, co jest zmianą na poziomie kodu, a nie zamianą zasobu.
+---
+
+<KeyTakeaways>
+
+- Fizyka przedmiotów to moduł kosmetyczny, który zastępuje domyślny ruch spadających przedmiotów w Minecraft bardziej płynną, niestandardową kalkulacją fizyczną.
+- Renderowany jest w całości po stronie klienta: upadek, podniesienie i wszystko, co śledzi serwer, działa dokładnie tak samo jak w wersji vanilla.
+- Nic z tego nie jest widoczne dla innych graczy ani wykrywalne przez antywiry oparte na stronie serwera.
+- To zmiana animacji, a nie zmiana tekstury lub shaderu, więc nie ma związku z pakietami zasobów
+
+</KeyTakeaways>
+
+Fizyka przedmiotów to moduł wizualny, spotykany w niektórych klientach narzędziowych do Minecrafta, który nadpisuje sposób poruszania się i osadzania się porzuconych przedmiotów, nadając im bardziej płynne lub wyraźniejsze ruchy niż domyślne w wersji vanilla. Nie ingeruje w sposób, w jaki przedmioty spadają, układają się w stosy ani są podnoszone. Zmienia jedynie to, co Twój klient rysuje na ekranie.
+
+## Jak to działa
+
+W vanilla Minecraft przedmioty spadają zgodnie z podstawowym obliczeniem prędkości i grawitacji, a ostateczny punkt spoczynku zależy od wyniku tych obliczeń. Działa to dobrze, ale jest sztywne, a sztywność staje się szczególnie zauważalna, gdy kilka przedmiotów uderza o ziemię jednocześnie, na przykład po wyczyszczeniu farmy mobów lub wyładowaniu pełnego ekwipunku na podłogę.
+
+Fizyka przedmiotów przechwytuje ten ruch po stronie klienta i ponownie oblicza go lokalnie. Zamiast płaskiej trajektorii vanilla, przedmioty poruszają się i osadzają się zgodnie z niestandardową fizyką, która wydaje się bardziej płynna lub wyraźniejsza, w zależności od implementacji. Ponieważ moduł zmienia tylko renderowanie i animację, a nie nic, co serwer faktycznie śledzi, sam upadek zachowuje się identycznie. Jest to warstwa prezentacji, która osiada na niezmienionej logice serwera.
+
+Znajdziesz go w klientach takich jak Tenacity, zwykle umieszczony obok innych modułów kosmetycznych i poprawiających jakość życia, a nie tych, które wpływają na walkę lub ruch.
+
+## Czy jest bezpieczne do użycia
+
+Tak, a to jest tak bezpieczne, jak moduł tylko może być. Item Physics nigdy nie zmienia wykrywania kolizji, ruchu ani żadnego pakietu, który otrzymuje serwer. Zmienia to, co jest rysowane na Twoim ekranie, kropka. Oznacza to, że zmodyfikowany ruch nigdy nie opuszcza Twojego klienta. Nie ma tu nic, co serwerowy anticheat mógłby zaobserwować, ponieważ nic w Twoich danych dotyczących rozgrywki się nie zmienia.
+
+Zazwyczaj obowiązuje zastrzeżenie: niektóre serwery zakazują wszelkich modyfikacji klienta z zasady, niezależnie od tego, co robi dany moduł. Warto szybko sprawdzić zasady serwera przed zainstalowaniem czegokolwiek, nawet czegoś tak niewinnego.
+
+<Callout variant="tip" title="Gdzie to się wpisuje w szerszy kontekst klienta">
+
+Opal nie udostępnia modułu o dokładnie takiej nazwie, ale ta sama zasada leży u podstaw zestawu modułów wizualnych: vanilla ma szorstkie krawędzie, które można bezpiecznie wygładzić, ponieważ nigdy nie wpływają na to, co widzi serwer. Jeśli zależy Ci na takim dopracowaniu wraz z rzeczywistymi narzędziami do rozgrywki, to jest to obszar, który obejmuje kategoria wizualna Opal
+
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Fizyka Przedmiotów wpływa na to, gdzie faktycznie lądują porzucone przedmioty?">
+
+Nie. Zmienia to jedynie sposób renderowania ruchu przedmiotu na Twoim ekranie. Miejsce, w którym przedmiot faktycznie się znajdzie, oraz sposób, w jaki serwer go obsługuje, są identyczne jak w wersji podstawowej
+
+</FAQItem>
+
+<FAQItem question="Czy inni gracze widzą niestandardową fizykę przedmiotów?">
+
+Nie. To tylko lokalna zmiana renderowania. Wszyscy inni widzą, jak krople poruszają się zgodnie z własnym klientem, niezależnie od tego, czy jest to domyślna fizyka vanilla, czy też ich własna, niestandardowa
+
+</FAQItem>
+
+<FAQItem question="Czy używanie Fizyki Przedmiotów jest wykrywane przez antycheaty?">
+
+Nie. Ono nie wysyła nic innego do serwera niż zmodyfikowany klient, więc serwerowy anticheat nie ma czego zobaczyć, a co dopiero oznaczyć
+
+</FAQItem>
+
+<FAQItem question="Czy Item Physics to to samo co pakiet zasobów lub shader?">
+
+W zasadzie nie. Paczki zasobów i shadery zmieniają tekstury i oświetlenie. Fizyka przedmiotów modyfikuje rzeczywistą ścieżkę ruchu przedmiotów, co jest zmianą na poziomie kodu, a nie zamianą zasobu
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Kategoria Fizyka Przedmiotów oraz moduły tego typu znajdują się w niej." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kolejna funkcja w stylu narzędzia-klienta, skonstruowana tak, by pozostać niezauważoną, a nie zmieniać przebieg walki." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Drugi biegun spektrum: moduł, który jest oznaczany i dlaczego." }
+]} />
+
+<CTA href="/pl/purchase">Poliż kosmetyczny to podstawa. Zobacz, co obejmuje pełna lista modułów Opal.</CTA>

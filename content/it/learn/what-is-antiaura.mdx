@@ -1,0 +1,87 @@
+---
+title: Cos'è AntiAura in Minecraft? Spiegazione del Modulo
+description: AntiAura prevede il momento in cui l'avversario utilizzerà il cristallo, l'ancora o il totem e ti riposiziona fuori dalla portata dell'esplosione. Ecco come funziona e se può essere considerato imbroglio.
+excerpt: AntiAura legge la configurazione di cristalli o ancoraggi del tuo avversario e ti allontana dal raggio d'esplosione prima che detonino, senza richiedere riflessi. È un'esca infallibile, ed è proprio questo il problema.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Influisce AntiAura sul cliente dell'avversario?
+    a: No. AntiAura modifica solo il movimento del giocatore che lo utilizza. Legge i tempi del cristallo, dell'ancora o del totem dell'avversario e schiva l'esplosione, senza mai toccare o interferire con nulla sul lato dell'altro giocatore.
+  - q: AntiAura è la stessa cosa di un disabilitatore?
+    a: No. Un disabilitatore interferisce direttamente con il client o la connessione del bersaglio. AntiAura non tocca mai l'avversario, si limita a calcolare i tempi del movimento dell'utente attorno a un attacco che sta già per verificarsi.
+  - q: Quali clienti hanno AntiAura?
+    a: È documentato come si può vedere in Tenacity, dove si colloca nella categoria degli exploit insieme ad altri moduli che leggono e reagiscono allo stato dell'avversario.
+  - q: Può AntiAura essere rilevato nello stesso modo di CrystalAura?
+    a: Non proprio. CrystalAura e Anchor Aura lasciano una traccia di posizionamenti di blocchi e interazioni che un server può controllare direttamente nei suoi log. AntiAura produce solo movimento, quindi intercettarlo significa individuare tempistiche evasive più costanti di qualsiasi schivata umana, un segnale molto più difficile da isolare.
+  - q: AntiAura è considerato un imbroglio?
+    a: Nella maggior parte dei server che vietano l'automazione PvP di crystal o anchor, sì. Automatizza un'abilità reattiva, schivando un'esplosione a tempo, che i giocatori manuali devono allenare da soli e che conta come un vantaggio di gioco, anche se funziona in modo difensivo piuttosto che offensivo.
+---
+
+<KeyTakeaways>
+
+- AntiAura è un modulo difensivo che prevede il tempismo di cristallo, ancora o totem dell'avversario e riposiziona il giocatore fuori dalla zona d'esplosione.
+- Calcola il tempismo dell'esplosione nello stesso modo in cui Minecraft vanilla lo risolve.
+- Modifica solo il movimento del giocatore stesso, mai il client dell'avversario.
+- È documentato in Tenacity, e la maggior parte dei ban per crystal-PvP lo copre anche.
+
+</KeyTakeaways>
+
+AntiAura è un modulo difensivo per Minecraft che prevede quando un cristallo dell'end, un ancora di respawn o un totem di un avversario sta per esplodere e muove il giocatore fuori dal raggio dell'esplosione prima che avvenga. Non interferisce con il client del nemico, non posiziona blocchi né sferra colpi. Modifica soltanto il movimento del portatore, con una precisione che nessun insieme di riflessi umani può raggiungere autonomamente. Laddove un modulo come Crystal Aura automatizza l'offesa, AntiAura automatizza la lettura: nota la preparazione, calcola l'esplosione, spostati.
+
+## Come funziona AntiAura
+
+AntiAura monitora la configurazione esatta su cui si basa ogni modulo Aura offensivo: un cristallo dell'end prossimo a essere colpito, un ancora di respawn in carica prossima a essere raggiunta, o un attacco innescato da un totem prossimo a partire. Una volta individuata tale configurazione, calcola il momento in cui l'esplosione avverrà utilizzando la stessa matematica temporale che Minecraft vanilla già usa per risolvere l'esplosione. Niente di esotico, solo il client che esegue i calcoli più velocemente di una persona.
+
+Da lì, riposiziona il giocatore, facendolo avanzare, muoverlo lateralmente o saltare, in modo che si trovi fuori dal raggio d'esplosione nel momento esatto in cui l'esplosione avviene. Questa è la distinzione fondamentale: si tratta di una previsione eseguita prima dell'impatto, non di una reazione a danni già subiti. È documentato come si può vedere in Tenacity, dove si trova nella categoria degli exploit accanto ad altri moduli che leggono e agiscono sullo stato dell'avversario invece degli input del giocatore stesso.
+
+## AntiAura rispetto ai moduli che contrasta
+
+AntiAura esiste a causa di moduli come [Crystal Aura](/it/learn/what-is-a-crystal-aura) e Anchor Aura, che posizionano e fanno detonare automaticamente un esplosivo accanto a un bersaglio. Un giocatore senza assistenza deve individuare il cristallo o l'ancora, giudicare i tempi e muoversi prima che esploda, il tutto in una frazione di secondo. AntiAura automatizza quella sequenza di lettura ed elusione nello stesso modo in cui i moduli offensivi automatizzano la sequenza di posizionamento e detonazione dall'altra parte del combattimento.
+
+I due non sono identici in ciò che influenzano, tuttavia. Un modulo Aura offensivo invia pacchetti di posizionamento e interazione che il server può ispezionare direttamente, blocco per blocco. AntiAura modifica solo il movimento, la stessa categoria di input che il client sta già inviando ad ogni tick, ed è proprio questo che fa sì che il suo output si confonda con il gioco normale a una prima occhiata.
+
+## È sicuro usarlo
+
+Principalmente no, anche se il profilo di rischio appare diverso da quello di un modulo Aura offensivo. AntiAura non posiziona blocchi, non attacca e non supera alcun limite di movimento vanilla di per sé, quindi manca degli indicatori evidenti, della portata impossibile, delle interazioni con un blocco che il giocatore non ha mai affrontato, che renderebbero facile segnalare qualcosa come Crystal Aura solo dai log del server.
+
+Ciò che automatizza ancora è una schivata che atterra con una costanza e una velocità di reazione che nessun umano può eguagliare a occhio. I server che utilizzano anticheat basati su Crystal o Anchor PvP tendono a considerare quel tipo di movimento evasivo perfetto come un vantaggio di gioco piuttosto che una coincidenza fortunata, soprattutto quando si ripete per l'intera durata di una partita piena di esplosioni. Individuarlo richiede un'analisi del movimento invece di un semplice controllo dei pacchetti, ma sui server che vietano l'assistenza automatizzata al combattimento in generale, rientra nella stessa regola dei moduli che sta schivando.
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina spiega cos'è AntiAura e come si comporta, non come eseguirne uno. La denominazione e l'implementazione esatta variano a seconda del client e automatizzare un'elusione di cristallo o di ancoraggio come questo viola le regole su praticamente ogni server che consente questo stile di PvP.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="AntiAura influenza il client dell'avversario?">
+No. AntiAura modifica solo il movimento del giocatore che lo utilizza. Legge i tempi del cristallo, dell'ancora o del totem dell'avversario e schiva l'esplosione, senza mai toccare o interferire con nulla sul lato dell'altro giocatore.
+</FAQItem>
+
+<FAQItem question="AntiAura è come un disattivatore?">
+No. Un disattivatore interferisce direttamente con il client o la connessione del bersaglio. AntiAura non tocca mai l'avversario, si limita a calcolare i tempi dei movimenti dell'utente attorno a un attacco che sta già per verificarsi.
+</FAQItem>
+
+<FAQItem question="Quali clienti hanno AntiAura?">
+È documentato come si può vedere in Tenacity, dove si trova nella categoria degli exploit insieme ad altri moduli che leggono e reagiscono allo stato dell'avversario.
+</FAQItem>
+
+<FAQItem question="AntiAura può essere rilevato nello stesso modo di CrystalAura?">
+Non proprio. CrystalAura e Anchor Aura lasciano una traccia di posizionamenti di blocchi e interazioni che un server può controllare direttamente nei suoi log. AntiAura produce solo movimento, quindi individuarlo significa cogliere tempistiche evasive più consistenti di un'esione umana, un segnale molto più difficile da isolare.
+</FAQItem>
+
+<FAQItem question="AntiAura è considerato un cheat?">
+Nella maggior parte dei server che vietano l'automazione PvP di cristalli o ancore, sì. Automatizza un'abilità reattiva, schivando un'esplosione temporizzata, che i giocatori manuali devono allenare da soli e che conta come un vantaggio di gioco, anche se funziona in modo difensivo piuttosto che offensivo.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-crystal-aura", label: "Cos'è un'Aura Cristallina?", description: "Il modulo auto-posiziona-e-fai-detonare AntiAura è progettato per schivare." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "La parte di rilevamento ed elusione della stessa famiglia di exploit." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "A cui categoria più ampia appartengono moduli come questo." },
+]} />
+
+<CTA href="/it/purchase">Scopri cosa crea Opal quando non è impegnata a evitare ban</CTA>

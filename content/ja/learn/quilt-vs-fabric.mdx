@@ -1,0 +1,88 @@
+---
+title: QuiltとFabric：どのMinecraftModローダー（2026年）
+description: QuiltとFabricの違い：コミュニティフォークが、互換性、API、採用においてオリジナルのローダーとどのように異なるか、そしてどちらを実行すべきか.
+excerpt: QuiltはFabricをフォークしたもので、FabricのMODをそのまま動作させます。以下に、互換性、API、採用状況の違いと、どちらを選ぶべきかについて説明します.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Frameworks
+author: trq
+faqs:
+  - q: Quilt は Fabric 製の MOD と互換性がありますか？?
+    a: はい。QuiltはQuilted Fabric APIレイヤーを通してFabric modsをロードしますが、その逆は当てはまりません。FabricはQuilt固有のQSL APIを必要とするmodsを実行できません.
+  - q: なぜ Quilt 存在するならば Fabric すでに働いている?
+    a: Quiltは2021年にFabricMCから派生し、Fabricとの互換性を維持しつつ、QSLによる独自のAPI設計を提供することを目指した.
+  - q: ユーティリティのクライアントは、FabricとQuiltのどちらをターゲットにするべきでしょうか？?
+    a: 多くのターゲットはFabricになる傾向があります。なぜなら、ユーザーベースとバージョンサポートがより大きく、またFabricのビルドはQuilt上でも動作するため、Quiltのみをビルドしてもほとんど得はありません.
+  - q: どちらが速いですか？?
+    a: 意味のある違いはありません。Quilt は Fabric の Mixin モデルを継承しているので、パフォーマンスはインストールする MOD から来るもので、ローダーそのものではありません.
+---
+
+<KeyTakeaways>
+
+- Quiltは、2021年に[Fabric](https://fabricmc.net/)から派生したコミュニティフォークであり、FabricのModをそのまま動作させます。
+- Fabricは、はるかに大規模なModエコシステムとユーザーベースを持つオリジナルのローダーです。
+- 互換性は一方通行です。QuiltはFabricのModを読み込むことができますが、FabricはQuilt専用のModを読み込むことはできません。
+- ほとんどのプレイヤーにとってFabricが安全なデフォルトであり、Quiltは追加のAPIを求める人に適しています.
+
+</KeyTakeaways>
+
+Quiltは、[Fabric](https://fabricmc.net/)をコミュニティが派生させたもので、既存のFabric製MODとのバイナリ互換性を維持しつつ、独自のライブラリを追加しています。Fabricはオリジナルローダーであり、MODのエコシステムとユーザーベースは圧倒的に大きいです。多くのプレイヤーにとって、Fabricが安全なデフォルトです。Quiltは、追加のAPIが必要な人や、原理的に派生版を支持する人に適しています.
+
+<Callout variant="info" title="どこ Opal 合う">OpalはFabricのModなので、Fabricがそれを使用するためのローダーです。また、FabricのビルドはQuiltでも動作します。ご希望であれば、そちらのフォークも利用できます。セットアップガイドについては、[こちら](/ja/docs/setup)をご覧ください</Callout>
+
+## それぞれが何であるか
+
+Fabricは、FabricMCによって維持されている軽量でモジュール式のModローダーです。小さなコアと、個別にバージョン管理されている[Fabric API](/ja/learn/what-is-the-fabric-api)を組み合わせ、Mixinベースのパッチングモデルを使用しています。Minecraftの新しいリリースに迅速にアップデートされ、パフォーマンスとユーティリティModの最大のカタログを持っています。
+
+Quiltは、FabricMC内部のガバナンス紛争の後、2021年にFabricから派生したものです。Fabric Modをそのまま実行し、独自のQuilted Fabric APIをFabric APIの互換性レイヤーとして搭載し、独自のAPIのためにQSL（Quilt Standard Libraries）を追加しています。Fabricと比較すると、採用数は少ないです。
+
+## 違い
+
+重要な実用的な点は、互換性の方向性です。QuiltはFabric Modをロードできますが、FabricはQuilt専用のQSL機能に依存するModをロードすることはできません。したがって、プレーンなFabric用に書かれたModは両方のユーザーに届きますが、QSLに依存するModはQuiltユーザーにのみ届きます。
+
+| | Fabric | Quilt |
+| :--- | :--- | :--- |
+| 起源 | FabricMCによるオリジナルローダー | 2021年のFabricコミュニティフォーク |
+| Modエコシステム | 最新のMinecraftで最大 | Fabric ModとQSL Modの両方を実行 |
+| 独自のAPI | Fabric API | Quilted Fabric API（互換性）+ QSL |
+| 互換性 | Quilt専用Modをロードできない | Fabric Modをそのままロード |
+| 採用 | 非常に大きい | Fabricと比較して小さい |
+| パッチングモデル | Mixins | Mixins（Fabricから継承） |
+
+## どちらを選ぶか
+
+<Checklist>
+<ChecklistItem>最も幅広いMODセレクション、最も迅速なバージョンサポート、そして多くのクライアントやMODがデフォルトでターゲットとするローダーが必要な場合は、Fabricを選択してください.</ChecklistItem>
+<ChecklistItem>Quilt を選ぶと、その QSL 機能を利用したり、Quilt 専用の MOD を実行したり、フォークのガバナンスを好むことができます。既存の Fabric MOD は引き続き動作します.</ChecklistItem>
+<ChecklistItem>同時に両方を実行しないでください。プロファイルごとに1つのローダーを選び、QuiltがFabricのModを読むので、どちらを選んでもコストはほとんど変わりません.</ChecklistItem>
+</Checklist>
+
+## よくある質問
+
+<FAQList>
+
+<FAQItem question="QuiltはFabricのMODに対応していますか？">
+はい。Quiltはバイナリ互換性を維持し、Quilted Fabric APIレイヤーを通してFabricのMODをロードします。逆は成り立ちません。FabricはQuilt専用のQSL APIを必要とするMODを実行できません。
+</FAQItem>
+
+<FAQItem question="なぜQuiltはFabricが既に機能しているのに存在するのですか？">
+Quiltは、2021年にFabricMCとのガバナンスに関する意見の相違により派生しました。Fabricとの互換性を維持しつつ、QSLを通じて独自のAPI設計を提供することを目指しています。
+</FAQItem>
+
+<FAQItem question="ユーティリティクライアントはFabricとQuiltのどちらをターゲットにすべきか？">
+多くの場合は、Fabricをターゲットにする方が良いでしょう。なぜなら、Fabricの方がユーザーベースとバージョンサポートが大きく、FabricのビルドはQuilt上でも動作するからです。Quiltのみを対象にビルドすると、ほとんどの場合、オーディエンスが縮小するだけでメリットはありません。
+</FAQItem>
+
+<FAQItem question="片方がもう片方より速いですか？">
+意味のある差はありません。QuiltはFabricのMixinモデルを受け継いでいるため、パフォーマンスはインストールするMODに由来し、ローダーそのものではありません。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/ja/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "もう一つの大きなMODローダーの分裂." },
+  { href: "/ja/learn/what-is-the-fabric-api", label: "Fabric APIとは何ですか？?", description: "図書館は両方のローダーが構築する." },
+  { href: "/ja/learn/what-is-a-minecraft-mod-loader", label: "何ですか Minecraft mODローダー?", description: "ゲームにMODを組み込む方法." },
+]} />
+
+<CTA href="/ja/purchase">OpalFabricクライアントを8.99ドルで手に入れよう</CTA>

@@ -1,0 +1,77 @@
+---
+title: Minecraft'ta Anti Bot Nedir? Modül Açıklaması
+description: Anti Bot, otomatik hedeflemeyi tarayan ve sahte yem oyuncularını eleyerek, otomasyonunuzun yerleştirilmiş bir ekran paylaşım botuna asla israf etmediği bir savaş modülüdür.
+excerpt: "Anti Bot, hedeflemenizi dürüst tutar: gerçek oyuncular saldırıya uğrarken, yerleştirilmiş yemler görmezden gelinir."
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Minecraft'ta bir yanıltma botu ne olarak kabul edilir?
+    a: Bir yanıltma botu, genellikle bir sunucu, eklenti veya ekran paylaşımı inceleyicisi tarafından oluşturulan, gerçek bir hesap gibi görünen ancak olmayan, oyuncu şeklindeki bir varlıktır. Otomasyonunuzun buna tepki verip vermediğini görmek için yalnızca bunun için vardır.
+  - q: Anti Bot dövüşü mü değiştiriyor, yoksa sadece hedeflemeyi mi?
+    a: Sadece hedefleme. Anti Bot, menzili, isabet oranını veya saldırı hızını artırmaz. Sadece savaş otomasyonunuzun vurabileceği şeylerin listesinden sahte varlıkları kaldırır.
+  - q: Anti Bot tek başına bir hile midir?
+    a: Hayır. Tek başına Anti Bot, saldırmaz, nişan almaz veya sizi hareket ettirmez. Savaş otomasyonunuzun görebileceği varlıkları filtreleyerek çalışır, bu nedenle kendi başına bir otomasyon değil, o otomasyon için bir yaşam kalitesi kontrolü gibidir.
+  - q: Anti Bot, bir anticheat'ın bot tespitinden nasıl farklıdır?
+    a: Aynı takasın zıt taraflarında oturuyorlar. Bir hile önleyici, bir yem yerleştirir ve sizin ona nasıl tepki verdiğinizi izler. Anti Bot, otomasyonunuzun öncelikle o yeme tepki vermesini engelleyen istemci tarafı modülüdür.
+---
+
+<KeyTakeaways>
+
+- Anti Bot, otomatik hedeflemeye dahil olan sahte yemci oyuncu varlıklarını filtreleyen bir savaş modülüdür.
+- Sunucu ve ekran paylaşımı inceleyicileri, şüpheli bir hileyecinin araçlarının nasıl tepki vereceğini görmek için bot hesapları yerleştirirler.
+- Bir saldırı ateşlenmeden önce yakındaki her varlığı kontrol eder ve yerleştirilmiş bir yem gibi görünenleri atlar.
+- Sadece hedef seçimine dokunur, nişan alma, menzil veya saldırı hızına değil.
+
+</KeyTakeaways>
+
+Anti Bot, sahte yem oyuncu varlıklarını bir istemcinin otomatik hedefleme mantığından filtreleyen bir muharebe modülüdür. Ekran paylaşımı inceleyicileri ve bazı sunucular, şüpheli hile kullanıcısının araçlarının tepkilerini görmek için sıradan oyuncular gibi giydirilmiş bot hesapları yerleştirirler. Anti Bot, bu yemleri oldukları gibi tanır ve gerçek bir rakip bir karakterin orada hiçbir şey yapmazken görmezden geleceği gibi, muharebe otomasyonunun birine saldırmasını engeller.
+
+## Anti Bot nasıl çalışır
+
+Bu modül, hedef seçimi yapan mantığın önünde yer alır. Bir saldırı çıkmadan önce, Anti Bot yakındaki her oyuncu şeklindeki varlığı kontrol eder ve gerçek rakipler yerine yerleştirilmiş yemler gibi görünenleri eleyip atar. Kontrolü geçen varlıklar normal hedefleme havuzunda kalır. Yem olarak işaretlenen varlıklar basitçe atlanır, böylece saldırı hiç ateşlenmez.
+
+Bu önemlidir çünkü saldırıya uğrayan bir bot, incelemeciye tam olarak aradığı tepkiyi verir. Anti Bot hiçbir şeyi gizlemeye veya masumiyet fekelemeye çalışmaz. Sadece oltayı kapmamasını sağlar, yani muharebe otomasyonu yalnızca gerçekten savaşmak için orada olan varlıklara saldırmasına olanak tanır.
+
+Uygulamada, bu katmanlı bir kontrol olarak, müşterinin savaş paketinin yaptığı diğer şeylere eklenmiş bir şekilde ortaya çıkar, bağımsız bir özellik olarak değil. Fabric tabanlı bir yardımcı istemci olan Rise Nextgen, tam olarak bu şekilde çalışır: savaş kategorisi altında dosyalanmış, diğer otomasyon işlemleri başlamadan önce hedef listesini sessizce filtreler.
+
+## Bot karşıtı ve anticheat bot algılama
+
+Bu iki şey isimlerini paylaşsa da zıt yönlere işaret eder. Sunucu tarafındaki bir anticheat'in bot algılama yöntemi, bir yem yerleştirmek ve şüpheli bir hileyecinin istemcisinin buna nasıl tepki verdiğini izlemek suretiyle çalışır. Bu bir tuzaktır ve sahte bir oyuncuyu gerçek bir oyuncudan ayıramayan otomasyonu yakalamak için tasarlanmıştır.
+
+Bot karşıtı ise bu değiş tokuşun diğer yarısıdır. Bir saldırı ateşlenmeden önce yemi tanıyan istemci tarafı bir filtre olup, böylece anticheat'in izlemesi için herhangi bir tepki olmaz. Biri, hileyecilere yönelik bir algılama yöntemidir. Diğeri ise sessizce içine girmeyi reddeden bir modüldür.
+
+<Callout variant="tip" title="Opal bunu gönderiyor">
+Opal'ın kendi Anti Bot modülü tam olarak bu işi yapıyor: hedefleme sahte oyuncuları görmezden gelebilmesi için ek bot tespit kontrolleri. Modül listesinde Güvenli olarak sınıflandırılmıştır, çünkü asla nişan alma, menzil veya saldırı davranışını etkilemez, yalnızca savaş otomasyonunuzun görmesine izin verilenleri etkiler.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Minecraft'ta bir yem botu ne sayılır?">
+Bir yem botu, genellikle bir sunucu, bir eklenti veya bir ekran paylaşımı inceleyicisi tarafından oluşturulan, gerçek bir hesap gibi görünen ancak olmayan, oyuncu şeklindeki bir varlıktır. Otomasyonunuzun buna tepki verip vermediğini görmek için yalnızca bunun için vardır.
+</FAQItem>
+
+<FAQItem question="Anti Bot dövüşü mü değiştiriyor, yoksa sadece hedeflemeyi mi?">
+Sadece hedeflemeyi. Anti Bot menzili, nişan alma veya saldırı hızını artırmaz. Sadece dövüş otomasyonunuzun vurabileceği şeylerin listesinden yemlik varlıkları kaldırır.
+</FAQItem>
+
+<FAQItem question="Anti Bot tek başına bir hile midir?">
+Hayır. Tek başına Anti Bot saldırmaz, nişan almaz veya sizi hareket ettirmez. Savaş otomasyonunuzun görebileceği varlıkları filtreleyerek çalışır, bu nedenle kendi başına bir otomasyon değil, o otomasyon için bir yaşam kalitesi kontrolü gibidir.
+</FAQItem>
+
+<FAQItem question="Anti Bot, bir anticheat'ın bot tespitinden nasıl farklıdır?">
+Bunlar aynı etkileşimin zıt kutuplarında oturuyor. Bir anticheat bir yem yerleştirir ve sizin ona tepkinizi izler. Anti Bot ise, otomasyonunuzun o yeme tepki vermesini engelleyen istemci tarafı modülüdür.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "Anti Bot'un hedef filtresi, otomatik saldırı modülüne veri sağlar." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Hedef listesine göre yaşayan veya ölen, başka bir hedef odaklı modül." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Bu modüllerin ait olduğu daha geniş kategori." },
+]} />
+
+<CTA href="/tr/satın-al">Bir sahtekarı gördüğünde bile fark eden otomasyonu yenin. Opal $8.99'dan başlıyor.</CTA>

@@ -1,0 +1,81 @@
+---
+title: Cosa si intende per "spoofer" in Minecraft?
+description: Uno spoofer è un modulo client di Minecraft che sostituisce un valore reale, come il ping o un contatore di FPS, con uno falso prima che venga visualizzato o inviato al server.
+excerpt: "Un nome di modulo, due profili di rischio completamente diversi: alcuni spacciatori non lasciano mai il tuo schermo, altri si infiltrano direttamente in un pacchetto."
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa fa effettivamente un modulo spoofer?
+    a: Intercetta un valore reale da qualche parte nel client e lo sostituisce con uno falso scelto dall'utente, quindi qualsiasi cosa legga quel valore in seguito, un display, un pacchetto o entrambi, visualizza il numero falso invece di quello reale.
+  - q: Spoofer è lo stesso modulo di Ping Spoof o FPS Spoofer?
+    a: No. Ping Spoof e FPS Spoofer sono moduli specifici che mirano ciascuno a un valore denominato. Spoofer è una voce separata, più generica, il cui valore target esatto non è documentato.
+  - q: Quale cliente ha un modulo Spoofer?
+    a: Spoofer è stato rilevato a Rose. Nessun dettaglio sull'esatto valore sovrascritto è stato registrato.
+  - q: È rilevabile un imbroglione dai sistemi anti-cheat?
+    a: Dipende interamente dal valore che sovrascrive. Un falsificatore limitato a una visualizzazione locale non può essere rilevato perché nulla lascia il client. Uno che modifica un valore inviato al server può esserlo, se quel server lo verifica.
+---
+
+<KeyTakeaways>
+
+- Spoofer è un termine generico per un modulo che sovrascrive un valore reale con uno falso, scelto dall'utente, prima che venga visualizzato o inviato.
+- Il rischio dipende dal target: un valore locale (FPS) è inosservabile; uno inviato al server (ping, versione) non lo è.
+- Distinto da moduli specifici come Ping Spoof o FPS Spoofer, che mirano a un singolo valore.
+
+</KeyTakeaways>
+
+Uno spoofer, in termini di client di Minecraft, è qualsiasi modulo che intercetta un valore prima che raggiunga la sua destinazione e lo sostituisce con qualcosa scelto dall'utente. Questa è l'intera definizione: nessun bersaglio fisso, nessun effetto fisso, solo un modello applicato a qualsiasi valore un determinato modulo decida di modificare. Alcuni spoofers sono pura vanità, un contatore FPS falso che non impressiona nessuno tranne te. Altri toccano dati che il server legge effettivamente, come un ping riportato, ed è qui che la stessa parola inizia a coprire due cose molto diverse: un accessorio cosmetico da un lato, qualcosa che può influire sull'equità dall'altro.
+
+## Come funziona
+
+"Spoofer" indica un modello, non un comportamento fisso. Il modulo si interpone tra un valore reale e chiunque lo legga successivamente, che si tratti di un elemento HUD sullo schermo, di un pacchetto diretto al server o di entrambi, e sostituisce il valore reale con uno diverso prima che arrivi. Implementazioni specifiche di questo modello, come Ping Spoof e FPS Spoofer, si bloccano su un valore specifico e vengono documentate separatamente, poiché il loro meccanismo e il loro effetto sugli altri giocatori (o la sua mancanza) differiscono.
+
+Spoofer, come tracciato nei registri attuali, è la voce generica: un modulo autonomo riscontrato in Rose, senza ulteriori indicazioni su quale valore esattamente sovrascriva. Questa lacuna non è un dettaglio minore. È l'unico elemento di informazione di cui avresti bisogno per giudicare il modulo, dato che il profilo di rischio di uno spoofer dipende interamente da ciò che sta falsificando.
+
+## Perché il rischio dipende da ciò che viene falsificato
+
+| Tipo di valore falsificato | Dove è visibile | Rischio tipico |
+|---|---|---|
+| Solo visualizzazione locale (esempio: un contatore FPS falso) | Solo il tuo schermo | Nessuno. Puramente cosmetico |
+| Valore segnalato al server (esempio: ping, stringa di versione) | Server e, potenzialmente, altri giocatori | Dipende dal fatto che il server verifichi quel valore |
+
+Poiché la voce Spoofer di Rose non specifica in quale riga rientra, la mossa onesta è trattarla come sconosciuta piuttosto che presumere uno degli estremi. "Uno spoofer è sicuro?" non è una domanda con una sola risposta. È una domanda su quale valore, nello specifico, viene sovrascritto.
+
+<Callout variant="tip" title="Dove Opal traccia il limite">
+Opal non spedisce un modulo chiamato Spoofer. Il suo catalogo di utilità documenta ogni sovrascrittura di valore indicando precisamente cosa tocca, sia a livello estetico che lato server, piuttosto che archiviarla sotto un nome generico che potrebbe significare entrambe le cose. Se lo spoofer di un client non specifica quale valore modifica, è bene informarsi prima di presumere che sia innocuo.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida pratica">
+Questa pagina descrive il modello genericamente, non un'implementazione specifica. Se un imbroglione modifica un valore letto dal server, come il ping o una stringa di versione, quel numero esiste da qualche parte in un pacchetto che il server può confrontare con la realtà, e l'esecuzione di questo confronto è esattamente ciò per cui sono progettati i sistemi antichet.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa fa effettivamente un modulo spoofer?">
+Intercetta un valore reale da qualche parte nel client e lo sostituisce con uno falso scelto dall'utente, quindi qualsiasi cosa legga quel valore successivamente, un display, un pacchetto o entrambi, visualizza il numero falso invece di quello reale.
+</FAQItem>
+
+<FAQItem question="Spoofer è lo stesso modulo di Ping Spoof o FPS Spoofer?">
+No. Ping Spoof e FPS Spoofer sono moduli specifici che mirano ciascuno a un valore denominato. Spoofer è una voce separata, più generica, il cui valore di destinazione esatto non è documentato.
+</FAQItem>
+
+<FAQItem question="Quale cliente ha un modulo Spoofer?">
+Spoofer è rilevato in Rose. Nessun dettaglio su quale valore viene sovrascritto è stato registrato.
+</FAQItem>
+
+<FAQItem question="Un falsificatore è rilevabile dagli anticheat?">
+Dipende interamente dal valore che sovrascrive. Un falsificatore limitato a una visualizzazione locale non può essere rilevato perché nulla lascia il client. Uno che modifica un valore inviato al server può esserlo, se quel server lo verifica.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "I moduli di categoria più ampia a cui appartengono." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "La sottigliezza come obiettivo progettuale, non solo un singolo modulo." },
+  { href: "/it/learn/what-is-velocity-anti-knockback", label: "Cos'è la Velocità (anti-knockback)?", description: "Un altro modulo che sovrascrive un valore che il server si aspetta di controllare." },
+]} />
+
+<CTA href="/it/purchase">Opal chiama le sue sovrascritture con nomi che indicano esattamente cosa toccano. Consulta l'elenco.</CTA>

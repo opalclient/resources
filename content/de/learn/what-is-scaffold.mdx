@@ -1,0 +1,96 @@
+---
+title: Was ist Gerüst in Minecraft? (Modul erklärt)
+description: Gerüste sind Bewegungselemente, die automatisch Blöcke unter dir platzieren, während du läufst, sodass du Brücken bauen kannst, ohne zielen zu müssen. Hier ist, wie es funktioniert und warum Anticheats es melden.
+excerpt: Gerüste legen eine Fläche unter deine Füße, während du gehst, sodass du Lücken freihändig überbrückst. Hier erfährst du, wie das Modul Blöcke platziert und warum die Rotation es verrät.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Modules
+author: trq
+faqs:
+  - q: Was ist der Unterschied zwischen einem Scaffold und einem Bridge-Makro?
+    a: Eine Bridge-Makro spielt festgelegte Tastendrücke zeitgesteuert ab. Scaffold reagiert auf deine aktuelle Position und Rotation bei jedem Tick, sodass es sich an Kurven und Geschwindigkeitsänderungen anpasst, anstatt eine vorgegebene Bewegung zu wiederholen.
+  - q: Warum wird Scaffold so leicht erwischt?
+    a: "Die übliche Verräterrolle spielt die Rotation: Das Modul platziert Blöcke in einem Winkel, auf den die sichtbare Kamera nicht ausgerichtet ist, und serverseitige Anti-Cheat-Systeme vergleichen diese beiden Werte. Perfektes Timing ist ein weiteres Zeichen."
+  - q: Ist Scaffold eine Bewegung oder ein Weltmodul?
+    a: Es wird als Bewegungsmodul kategorisiert, da sein Zweck darin besteht, den Spieler über Abgründe hinweg in Bewegung zu halten. Die Platzierung der Blöcke ist das Mittel, nicht das Ziel.
+  - q: Kann man Scaffold unentdeckbar machen?
+    a: Nein. Verzögerungen und gefälschte Rotationen erschweren die Erkennung, aber ein modernes Anti-Cheat-System hat immer noch viele Signale zum Vergleich, und jede konsistente Automatisierung hinterlässt irgendwann ein Muster.
+---
+
+<KeyTakeaways>
+
+- Scaffold ist ein Bewegungsmodul, das automatisch Blöcke unter deine Füße platziert, während du läufst.
+- Es wählt einen Hotbar-Block aus, dreht sich in Richtung des freien Raums hinter dir und platziert ihn vor dir, bevor du fällst.
+- Der schwierige Teil ist die Drehung, nach der auch Anticheats hauptsächlich suchen.
+- Es ermöglicht dir, brückenbauend freihändig zu arbeiten, anstatt nach unten zu schauen und jeden Block manuell zu timen.
+
+</KeyTakeaways>
+
+Gerüst ist ein Bewegungsmodul, das automatisch Blöcke unter deine Füße legt, während du läufst, sodass du Lücken überbrücken kannst, ohne die Kamera nach unten richten zu müssen. Es wählt einen Block aus deiner Schnellleiste aus, dreht sich in Richtung des freien Raums hinter dir und platziert ihn im Moment, in dem du von einer Kante treten würdest. Das Ergebnis ist brückenbauen ohne Hand.
+
+## Was Gerüst macht
+
+Gerüst verwandelt manuelles Brückenbauen in eine automatische Aktion. Normales Brückenbauen erfordert, dass du nach unten schaust, die Platzierungs-Taste hältst und langsam rückwärts gehst. Gerüst übernimmt das Timing und die Platzierung für dich. Du hältst eine Bewegungs-Taste und das Modul hält einen Boden unter dir.
+
+Die meisten Implementierungen bieten ein paar Optionen an:
+
+| Option | Was sie steuert |
+|--------|------------------|
+| Turmmodus | Ob es auch Blöcke direkt nach unten platziert, während du an Ort und Stelle springst |
+| Drehungsbehandlung | Ob es deine Ansicht einrastet oder den Platzierungswinkel still und leise vortäuscht |
+| Platzierungsverzögerung | Wie lange es zwischen den Blöcken wartet, um weniger mechanisch zu wirken |
+| Sprint-Toleranz | Ob du die Sprintgeschwindigkeit beibehalten kannst, während es Blöcke platziert |
+| Blockauswahl | Aus welchem Schnellleisten-Slot es zieht |
+
+Da es sich um ein Verhalten der Bewegungs-Kategorie handelt, steht Gerüst neben anderen Modulen, die verändern, wie der Spieler die Welt durchquert, anstatt wie er kämpft.
+
+## Wie es im Hintergrund funktioniert
+
+Scaffold überwacht deine Position und Geschwindigkeit bei jedem Tick. Wenn es vorhersagt, dass dein nächster Schritt in die Luft fällt, sendet es einen Block-Platzierungsbefehl an den Server, bevor du herunterfällst. Der schwierige Teil ist die Rotation. Normalerweise platziert das Spiel einen Block gegen die Fläche, die du ansiehst, sodass das Modul die Blickrichtung des Spielers auf den leeren Bereich hinter und unter ihm ausrichten, platzieren und oft die ursprüngliche Ansicht wiederherstellen muss.
+
+Es gibt zwei Hauptstile. Einer schnappt die echte Kamera für einen Frame auf den Platzierungswinkel, was schnell, aber sichtbar ist. Der andere sendet Platzierungs-Pakete mit einer gefälschten Rotation, während die On-Screen-Kamera unverändert bleibt, was sauberer aussieht, aber genau das Muster ist, nach dem Anticheats suchen.
+
+## Warum Anticheats dies erkennen
+
+Scaffold erzeugt Bewegungs- und Rotationsmuster, die Menschen selten erzeugen. Serverseitige Anticheats suchen nach mehreren Hinweisen:
+
+- Blockplatzierungen, deren Rotation nicht mit dem sichtbaren Kamerawinkel übereinstimmt.
+- Perfekt getimete Platzierungen, die nie verfehlen und nie überlappen.
+- Rückwärtsgehen mit konstanter Geschwindigkeit, während auf jedem Blockrand platziert wird.
+- Platzieren gegen eine Blockfläche, die der Spieler realistisch nicht sehen könnte.
+
+Ein modernes Anti-Cheat-System muss das Modul nicht "sehen". Es muss lediglich feststellen, dass die Platzierungswinkel und die Blickwinkel nicht übereinstimmen oder dass die Brücken-Kadenz zu konstant ist, um von einem Menschen ausgeführt zu werden. Deshalb tauschen Scaffold-Einstellungen oft Geschwindigkeit gegen glaubwürdige Zufälligkeit aus.
+
+## Legitimer vs. Cheat-Kontext
+
+Auto-Bridging existiert auch in vanilla-ähnlichen Formen. Einige Trainingsserver und Trainingskarten beinhalten einen Bridging-Trainer, und bestimmte kreative Werkzeuge platzieren Reihen von Blöcken für Baumeister. Das Scaffold-Modul unterscheidet sich dadurch, dass es während des normalen Überlebens- oder kompetitiven Spiels ausgeführt wird, um einen unfairen Vorteil zu erlangen, weshalb es in Cheat-Erkennungs-Materialien und nicht in Build-Werkzeugen auftaucht.
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite beschreibt das Modul allgemein, damit Sie wissen, was der Begriff bedeutet. Die Benennung und das genaue Verhalten können je nach Client variieren, und das automatische Platzieren von Blöcken, um Lücken zu schließen, verstößt gegen die Regeln auf praktisch jedem kompetitiven Server.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was ist der Unterschied zwischen einem Scaffold und einem Bridge-Makro?">
+Ein Bridge-Makro spielt festgelegte Tastendrücke zeitgesteuert ab. Scaffold reagiert auf deine aktuelle Position und Rotation bei jedem Tick und passt sich so Kurven und Geschwindigkeitsänderungen an, anstatt eine vorgegebene Bewegung zu wiederholen.
+</FAQItem>
+
+<FAQItem question="Warum wird Scaffold so leicht entdeckt?">
+Das übliche Zeichen ist die Rotation. Das Modul platziert Blöcke in einem Winkel, auf den die sichtbare Kamera nicht gerichtet ist, und serverseitige Anti-Cheat-Systeme vergleichen diese beiden Werte. Perfektes, niemals fehlerhaftes Platzierungszeitfenster ist ein weiteres verräterisches Merkmal.
+</FAQItem>
+
+<FAQItem question="Ist Scaffold eine Bewegung oder ein Weltmodul?">
+Es wird als Bewegungsmodul kategorisiert, da sein Zweck darin besteht, den Spieler über Abgründe hinweg in Bewegung zu halten. Das Platzieren der Blöcke ist das Mittel, nicht das Ziel.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-velocity-anti-knockback", label: "Was ist Velocity (Rückstoßvermeidung)?", description: "Ein weiteres kampfbezogenes Modul, das mit der Bewegung verbunden ist." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die Stealth-Kategorie, in der Module wie dieses verborgen sind." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Kategorie, zu der diese Module gehören." },
+]} />
+
+<CTA href="/de/purchase">Was Opal für $8.99 versendet, siehst du</CTA>

@@ -1,0 +1,79 @@
+---
+title: Czym jest AntiKB w Minecraft?
+description: AntiKB to moduł Minecrafta, który zmniejsza lub anuluje odbijanie od uderzeń. Zobacz, jak przechwytuje wektor, porównuje go z Velocity i dlaczego serwery to wychwytują.
+excerpt: AntiKB przepisuje to, co dzieje się po uderzeniu, więc cios ledwo cię przesunie. Oto mechanizm tego i dlaczego serwer i tak zawsze to zauważa.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy AntiKB to to samo co moduł Velocity?
+    a: Tak. AntiKB i moduł Velocity opisują tę samą zachowanie, zmniejszając lub eliminując odrzut, który otrzymuje gracz. Niektórzy klienci zgłaszają to jako problem związany z graczem, zamiast walką, ale mechanizm leżący u jego podstaw jest identyczny.
+  - q: Czy AntiKB całkowicie eliminuje odrzut?
+    a: Zależy od konfiguracji. AntiKB może całkowicie anulować odrzucenie lub tylko je złagodzić, ale w każdym przypadku siła pchnięcia jest mniejsza niż powinna być.
+  - q: Czy używanie AntiKB jest sprzeczne z regulaminem?
+    a: Tak. Daje to realną przewagę bojową, pozwalając graczowi zignorować mechanikę, którą muszą przestrzegać pozostali gracze, dlatego serwery traktują to tak samo jak każde inne oszustwo związane z manipulacją walką.
+  - q: Czy inni gracze mogą zauważyć, że ktoś używa AntiKB?
+    a: Czasami przeciwnik zauważa, że cel ledwo się porusza po trafieniu, które miało go odesłać w powietrze, ale niezawodne przechwytywanie odbywa się po stronie serwera, porównując ruch, jaki uderzenie powinno spowodować, z ruchem, który serwer faktycznie otrzymuje.
+---
+
+<KeyTakeaways>
+
+- AntiKB redukuje lub anuluje odrzut, który otrzymuje gracz po trafieniu.
+- Przechwytuje wektor odrzutu w "Minecraftcie", dzięki czemu trafienie następuje, ale cofnięcie się zmniejsza lub znika.
+- Mechanicznie jest tożsame z modułem Velocity, ale znajduje się w innym menu w niektórych klientach.
+- Anticheaty wykrywają to po stronie serwera, porównując oczekiwany ruch trafienia z tym, co faktycznie wysyła gracz.
+
+</KeyTakeaways>
+
+AntiKB to moduł Minecraft, który zmniejsza lub całkowicie anuluje odrzut, który otrzymuje gracz po uderzeniu, niezależnie od tego, czy uderzenie pochodzi od zamachu mieczem, strzały, eksplozji, czy też zaklęcia Knockback. Standardowy Minecraft odrzuca gracza uderzonego do tyłu na krótką chwilę, odbierając mu kontrolę nad ruchem w tym momencie. AntiKB stawia się na drodze temu odrzutowi, zmniejszając go lub redukując do zera, dzięki czemu uderzenie nadal się rejestruje, ale walka nie zostaje przerwana przez wyrzucenie gracza na arenę. Niektórzy użytkownicy grupują tę funkcję z narzędziami bojowymi; inni umieszczają ją w ogólnych ustawieniach gracza, mimo że efekt jest identyczny w każdym przypadku.
+
+## Jak to działa
+
+Standardowy odrzut to wektor, a nie sugestia. Zostaniesz uderzony, a gra odrzuca cię od źródła obrażeń na krótką chwilę, ignorując kierunek, w którym się poruszałeś. AntiKB przechwytuje ten wektor zanim dotrze do ruchu twojej postaci i skaluje go, czasami aż do zera. Atak nadal trafia, obrażenia nadal są zadawane, zamach nadal się liczy, ale fizyczna reakcja na uderzenie zostaje wyciszona lub całkowicie usunięta.
+
+Odwołanie jest proste. Bez odbicia, gracz może utrzymać zasięg walki wręcz i kontynuować wymianę ciosów, zamiast być odpychanym po każdym uderzeniu, co normalnie zmusza do ponownego pościgu, aby zbliżyć się. Eliminuje to również ryzyko wpadnięcia z krawędzi, w dziurę lub z mostu, sytuacje, w których standardowe odbicie może zakończyć walkę samo w sobie, niezależnie od tego, kto wygrywa wymianę. W starciu z kimś, kto tego nie używa, brak jest wyrównania: jeden gracz przyjmuje ciosy i utrzymuje pozycję, a drugi jest odpychany za każdym razem.
+
+## AntiKB vs Velocity: ta sama sztuczka, inne menu
+
+AntiKB i moduł [Velocity](/pl/learn/what-is-velocity-anti-knockback) to nie kuzyni, to ta sama funkcja pod dwoma nazwami. Oba przechwytują ten sam wektor odbicia kontrolowany przez serwer, oba go skalują lub zerują zanim dotrze do ruchu gracza, a oba są wykrywane tą samą metodą. Jedyną realną różnicą jest opakowanie. Niektórzy klienci umieszczają efekt w narzędziach bojowych, gdzie oczywiście należy go umieścić obok takich rzeczy jak zasięg czy celownik. Inni chowają go w ogólnej kategorii gracza, co jest decyzją menu osoby, która zbudowała klienta, a nie różnicą w tym, co robi kod.
+
+Jeśli widzisz którąkolwiek z tych nazw na liście funkcji, czytaj to tak samo: ten klient może zmniejszyć odległość, na jaką uderzenie cię odrzuca.
+
+<Callout variant="tip" title="Gdzie Opal stawia granicę">
+Moduły walki i ruchu Opala zostały zaprojektowane z myślą o walkach w stylu BedWars i SkyWars: pomoc w celowaniu, narzędzia do poruszania się, standardowy zestaw do wygranej w wymianie. Dedykowany anulujący odrzut nie należy do tej linii produktów. To dokładnie taki rodzaj manipulacji ruchem, który pozostawia czysty ślad w dzienniku trafień serwera, co sprawia, że jest to dziwne ryzyko dla konta.
+</Callout>
+
+<Callout variant="warning" title="To jest konkurs organizowany po stronie serwera">
+AntiKB nie jest elementem kosmetycznym. Zmienia sposób, w jaki Twoja pozycja reaguje na walkę, a to dokładnie to, do czego ma służyć autoryzowany przez serwer system antycheatowy. Kiedy serwer nakłada odrzut na trafienie, ma oczekiwania co do tego, jak daleko powinieneś się przesunąć w ciągu następnych cykli. Ledwo poruszanie się po trafieniu, które powinno Cię wystrzelić w powietrze, to niezgodność, o którą antycheat nie musi zgadywać. Zmniejszenie efektu zamiast całkowitego wyłączenia go jedynie zawęża tę lukę, nie zamyka jej.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy AntiKB to to samo co moduł Velocity?">
+Tak. AntiKB i moduł Velocity opisują tę samą zachowanie, zmniejszając lub eliminując odrzut, który otrzymuje gracz. Niektórzy klienci zgłaszają to jako problem związany z graczem, zamiast walką, ale mechanizm leżący u jego podstaw jest identyczny.
+</FAQItem>
+
+<FAQItem question="Czy AntiKB całkowicie eliminuje odrzut?">
+Zależy od konfiguracji. AntiKB może całkowicie anulować odrzut lub tylko złagodzić go, ale w każdym przypadku oznacza to mniejszy nacisk niż powinien wywołać uderzenie.
+</FAQItem>
+
+<FAQItem question="Czy używanie AntiKB jest sprzeczne z regulaminem?">
+Tak. Daje to realną przewagę bojową, pozwalając graczowi ignorować mechanikę, którą muszą przestrzegać pozostali gracze, dlatego serwery traktują to tak samo jak każde inne oszustwo związane z manipulacją walką.
+</FAQItem>
+
+<FAQItem question="Czy inni gracze mogą zauważyć, że ktoś używa AntiKB?">
+Czasami przeciwnik zauważa, że cel ledwo się porusza po trafieniu, które powinno go odrzucić, ale wiarygodne wykrywanie jest po stronie serwera, porównując ruch, jaki trafienie powinno spowodować, do ruchu, który serwer faktycznie otrzymuje.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-velocity-anti-knockback", label: "Czym jest Prędkość (ochrona przed odrzutem)?", description: "Moduł AntiKB jest funkcjonalnie identyczny, znany również pod bardziej popularną nazwą." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Gdzie takie subtelne, ledwo zauważalne moduły, jak ten, wpisują się w ogólną koncepcję projektu klienta." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Szersza kategoria, do której należą AntiKB i moduły tego typu." },
+]} />
+
+<CTA href="/pl/purchase">Zyskaj przewagę w walce, która nie wymaga wykorzystywania błędów gry.</CTA>

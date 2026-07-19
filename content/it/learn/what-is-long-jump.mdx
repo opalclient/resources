@@ -1,0 +1,79 @@
+---
+title: Cosa sono i salti in lungo in Minecraft? Spiegazione del modulo
+description: Il salto in lungo estende la distanza di un singolo salto modificando i pacchetti di movimento in aria, coprendo terreno che la fisica standard non permetterebbe mai, ed è un rischio passibile di ban.
+excerpt: Un salto, più lungo del dovuto. Il salto in lungo riscrive i numeri a mezz'aria, e nessuna verifica lato server rimane ingannata per sempre.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa cambia effettivamente il salto in lungo?
+    a: Estende la distanza orizzontale percorsa da un salto modificando i pacchetti di movimento inviati mentre il salto è già in corso, non l'altezza o la frequenza con cui il giocatore salta.
+  - q: È salto in lungo come Bhop?
+    a: No. Le catene di Bhop ripetono salti per costruire o mantenere velocità nel tempo, mentre il Salto Lungo estende la distanza di un singolo salto. Entrambi sono moduli di movimento e entrambi superano la fisica vanilla, ma il meccanismo è diverso.
+  - q: Può un salto in lungo far squalificare un giocatore?
+    a: Sì. Produce distanze di salto che la fisica vanilla non permette, un server che controlla i movimenti rispetto ai valori attesi può rilevarlo, e usarlo di solito viola le regole anti-cheat sui movimenti che la maggior parte dei server applica.
+  - q: Manipolare i pacchetti di movimento rende difficile l'acquisizione del salto in lungo?
+    a: Non intrinsecamente. La manipolazione dei pacchetti può evitare un frame palesemente impossibile, ma la distanza risultante è comunque misurabile rispetto a quanto dovrebbero produrre la velocità e la posizione riportate, ed è proprio a questo che i controlli lato server si confrontano.
+---
+
+<KeyTakeaways>
+
+- Il Salto Lungo è un modulo di movimento che estende la distanza di un singolo salto, superando quella normale di Minecraft.
+- Funziona modificando i pacchetti di movimento inviati mentre un salto è già in corso, non alterando il modo in cui il salto viene attivato.
+- Il guadagno è minimo in ogni singolo salto, ma si accumula con l'uso ripetuto per attraversare il terreno o allontanarsi da un inseguimento.
+- Modifica il movimento misurabile, quindi un server che ricalcola la distanza di salto prevista può segnalarlo facilmente come qualsiasi altra violazione della fisica.
+
+</KeyTakeaways>
+
+Il Salto Lungo è un modulo di movimento che estende la distanza che un singolo salto può raggiungere, superando i limiti della fisica di Minecraft nella sua versione originale. Invece di modificare il modo in cui un salto viene attivato, opera sui dati che lo descrivono mentre è già in corso: i pacchetti che riportano la posizione e il movimento del giocatore durante la traiettoria. Il risultato è un salto che atterra più lontano di quanto permetterebbero la gravità, la velocità iniziale e lo slancio esistente. Si colloca nella categoria del movimento insieme a moduli di velocità e slancio, ed è esattamente il tipo di deviazione misurabile che un anticheat lato server è progettato per rilevare.
+
+## Come funziona il Salto Lungo
+
+Minecraft nella sua versione originale calcola la distanza orizzontale di un salto a partire da un piccolo insieme di input fisici: la velocità con cui ti muovevi quando hai lasciato terra, la gravità che ti riporta verso il basso e qualsiasi slancio che avevi già in quel momento. Non esiste un'impostazione nascosta per "saltare più lontano" che si trovi nel client in attesa di essere attivata. La distanza deriva da questi numeri ogni volta, allo stesso modo, per ogni giocatore.
+
+Il Long Jump non influenza l'inizio del salto. Interviene in seguito, nei pacchetti che descrivono la posizione e il movimento del giocatore mentre il salto è già in aria, allungando la distanza orizzontale percorsa prima dell'atterraggio. I server generalmente si fidano della posizione segnalata da un client entro una certa tolleranza, nessuno vuole un falso allarme ogni volta che la connessione di qualcuno vacilla, e quella tolleranza è su cui si basa il modulo. Può portare un giocatore oltre il punto in cui un salto legittimo finirebbe senza un singolo frame palesemente compromesso.
+
+## Long Jump è sicuro da usare?
+
+La sua attrattiva è semplice: superare un divario che un salto normale non permetterebbe, ridurre il tempo impiegato ad attraversare terreno aperto, o mettere qualche blocco extra tra te e chi ti sta inseguendo. In un singolo salto, il guadagno sembra minimo. Usato ad ogni attraversamento o ad ogni disimpegno, si accumula.
+
+Nessuno di questi aspetti lo rende invisibile. Long Jump è una funzionalità di vantaggio di gioco, non cosmetica, e modifica qualcosa che un server può misurare direttamente: la distanza orizzontale per salto. Un server che ricalcola la distanza che un salto dovrebbe coprire sulla base della velocità e della posizione segnalate dal giocatore può segnalare un salto che atterra più lontano di quanto la fisica permetta, indipendentemente da quanto siano puliti i singoli pacchetti. È stato rilevato in client come Fan e Tenacity. Consideralo rilevabile, non come una scorciatoia sicura.
+
+<Callout variant="tip" title="Opal lo spedisce, con un'etichetta onesta">
+Il catalogo di Opal include un modulo per il salto in lungo, descritto nel modo più semplice possibile: ti permette di saltare più lontano. È classificato come utilizzo a proprio rischio, come sarebbe per qualsiasi cliente, perché una distanza di salto che la fisica vanilla non produce è proprio il tipo di cosa che un controllo lato server sta monitorando.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina spiega cosa significa Long Jump e come l'effetto funziona in generale, non come configurarlo. Estendere la distanza del salto oltre la fisica vanilla viola le regole anti-cheat di movimento su praticamente ogni server che le applica, e farsi beccare costa l'account.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa cambia effettivamente il Salto Lungo?">
+Estende la distanza orizzontale percorsa da un salto modificando i pacchetti di movimento inviati durante l'esecuzione del salto, non l'altezza o la frequenza con cui il giocatore salta.
+</FAQItem>
+
+<FAQItem question="Long Jump è la stessa cosa di Bhop?">
+No. Bhop consiste in una catena di salti ripetuti per accumulare o mantenere velocità nel tempo, mentre Long Jump estende la distanza di un singolo salto. Entrambi sono moduli di movimento e entrambi superano la fisica di base, ma il meccanismo è diverso.
+</FAQItem>
+
+<FAQItem question="Long Jump può portare alla squalifica di un giocatore?">
+Sì. Produce distanze di salto che la fisica vanilla non permette, un server che controlla i movimenti rispetto ai valori attesi può rilevarlo e, in genere, il suo utilizzo viola le regole contro i cheat di movimento applicate dalla maggior parte dei server.
+</FAQItem>
+
+<FAQItem question="La manipolazione dei pacchetti di movimento rende difficile intercettare il Salto Lungo?">
+Non intrinsecamente. La manipolazione dei pacchetti può evitare un singolo frame ovviamente impossibile, ma la distanza risultante è comunque misurabile rispetto a ciò che la velocità e la posizione dichiarate dovrebbero produrre, ed è proprio a questo che i controlli lato server si confrontano.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-scaffold", label: "Cos'è Scaffold?", description: "Un altro modulo di movimento, che posiziona automaticamente dei blocchi sotto di te mentre ti allontani dai bordi." },
+  { href: "/it/learn/what-is-velocity-anti-knockback", label: "Cos'è la Velocità (anti-knockback)?", description: "Un modulo affine al movimento che combatte la resistenza invece della gravità." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Dove i moduli costruiti per rimanere discreti, come questo, tendono a trovarsi." },
+]} />
+
+<CTA href="/it/purchase">Scopri Long Jump e gli altri moduli di movimento di Opal, con etichette di rischio incluse.</CTA>

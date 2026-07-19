@@ -1,0 +1,121 @@
+---
+title: Uruchomienie vs. Klienci w Minecraft – Wyjaśnienie
+description: Launcher uruchamia grę i wybiera wersję; klient to sama zmodyfikowana gra. Oto różnica, jak one współgrają i czego potrzebujesz.
+excerpt: Launcher to jak drzwi wejściowe; klient to pokój, do którego wchodzisz. Oto jak dzielą się pracą i gdzie faktycznie działają mody.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: Czy program uruchamiający jest tym samym co klient?
+    a: Nie. Launcher to program, który loguje Cię i uruchamia grę. Klient to gra, która działa po uruchomieniu, włącznie z modami. Launcherem uruchamiasz klienta.
+  - q: Czy potrzebuję specjalnego launchera do uruchamiania modów?
+    a: Nie zawsze. Oficjalny launcher może uruchomić profil ładowarki modów, gdy zainstalowany jest Fabric lub inny loader. Niektóre zewnętrzne launchery dołączają loader, aby ułatwić konfigurację, ale i tak tylko uruchamiają grę.
+  - q: Gdzie właściwie działają mody, w launcherze czy w kliencie?
+    a: Klient. Uruchomiacz wybiera zmodyfikowany profil, ale ładowacz modów ładuje Twoje mody podczas uruchamiania gry, więc mody działają w kliencie.
+  - q: Czy klient niestandardowy to rodzaj launchera?
+    a: Nie. Klient niestandardowy lub narzędziowy to zmodyfikowana gra, ładowana za pomocą programu ładującego mody. Uruchamia się po tym, jak uruchomiacz uruchomi grę.
+---
+
+<KeyTakeaways>
+
+- Uruchomienie to program, który loguje Cię, wybiera wersję i uruchamia grę.
+- Klient to sama gra, włącznie z wszystkimi załadowanymi modami.
+- Uruchomienie działa przed rozpoczęciem gry; klient działa podczas gry.
+- Mody ładują się w kliencie. Uruchomienie jedynie wybiera profil i go uruchamia.
+
+</KeyTakeaways>
+
+Launcher to program, który wybiera Twoją wersję, loguje Cię i uruchamia Minecrafta. Klient to właściwa gra, która działa po uruchomieniu, włącznie z wszystkimi załadowanymi do niej modami. Launcher to drzwi wejściowe; klient to pokój, do którego wchodzisz. Używasz obu, a one pełnią różne funkcje.
+
+## Co robi launcher
+
+Launcher to mała aplikacja, którą uruchamiasz przed rozpoczęciem gry. Wykonuje przygotowania, a następnie przekazuje sterowanie grze.
+
+Launcher zazwyczaj obsługuje:
+
+- Logowanie za pomocą konta Microsoft.
+- Wybór wersji Minecrafta do uruchomienia.
+- Pobieranie plików gry i Javy dla tej wersji.
+- Wybór profilu lub instalacji, w tym takiej, która została skonfigurowana dla [ładowarki modów](/pl/learn/what-is-a-minecraft-mod-loader).
+- Ustawianie pamięci i innych opcji uruchamiania, a następnie uruchamianie gry.
+
+Po naciśnięciu przycisku „Graj”, launcher buduje polecenie, które uruchamia grę, a następnie ustępuje. Nie działa podczas gry.
+
+## Co robi klient
+
+Klient to sama gra: działająca instancja Minecrafta, którą widzisz i kontrolujesz. „Klient vanilla” oznacza grę niezmienioną. Klient z modami to ta sama gra z załadowanymi do niej modami za pomocą [ładowarki modów](/pl/learn/what-is-a-minecraft-mod-loader) takiej jak [Fabric](https://fabricmc.net/).
+
+Więc kiedy ludzie mówią o „klientcie użytkowym” lub „klientcie niestandardowym”, mają na myśli zmodyfikowaną wersję działającej gry, a nie oddzielny program uruchamiający. Modyfikacje dodają funkcje dopiero po uruchomieniu gry.
+
+## Jak one współgrają
+
+Program uruchamiający startuje klienta. To jest cała relacja.
+
+<Steps>
+
+<Step number={1} title="Otwórz uruchomienie i zaloguj się">Otwierasz uruchomienie i logujesz się za pomocą swojego konta</Step>
+
+<Step number={2} title="Wybierz wersję lub profil">
+Wybierz wersję lub zmodyfikowany profil do uruchomienia.
+</Step>
+
+<Step number={3} title="Uruchom grę">Launcher pobiera potrzebne pliki i uruchamia grę</Step>
+
+<Step number={4} title="Klient uruchamia">
+Klient uruchamia się. Jeśli wybrałeś profil ładowarki modów, Twoje mody ładują się teraz.
+</Step>
+
+</Steps>
+
+Modyfikator modów znajduje się pomiędzy nimi. Instalujesz Fabric dla swojej wersji, co dodaje profil startowy. Launcher następnie uruchamia grę za pomocą tego profilu, a modyfikator pobiera Twoje mody podczas uruchamiania klienta. Launcher nie wie ani nie przejmuje się tym, jakie mody posiadasz; po prostu uruchamia wybraną wersję.
+
+<Callout variant="info" title="Gdzie pasuje Opal">
+Opal to mod dla [Fabric](https://fabricmc.net/), więc nie potrzebujesz specjalnego launchera, aby go uruchomić. Skonfiguruj profil Fabric w swoim zwykłym launcherze, a następnie dodaj Opal jak każdy inny mod. Zobacz [przewodnik instalacji](/pl/docs/setup), aby zacząć, lub [wprowadzenie do skryptów](/pl/docs/scripting), gdy już się załaduje.
+</Callout>
+
+## Launcher vs klient – szybki przegląd
+
+| | Launcher | Klient |
+| :--- | :--- | :--- |
+| Czym jest | Aplikacja, która uruchamia grę | Sama gra, która jest uruchomiona |
+| Kiedy działa | Przed rozpoczęciem gry | Podczas gry |
+| Zadanie | Logowanie, wybór wersji, uruchomienie | Renderowanie świata, uruchamianie modyfikacji |
+| Modyfikacje | Wybiera profil z modyfikacjami | Rzeczywiście ładuje i uruchamia modyfikacje |
+| Przykład | Oficjalny launcher Minecraft | Gra vanilla lub z modyfikacjami |
+
+## Czy zewnętrzne launchery zastępują klienta?
+
+Niektóre launchery robią więcej niż oficjalny. Zarządzają paczkami modyfikacji, pozwalają na szybkie przełączanie się między wersjami lub zawierają [loader modów](/pl/learn/what-is-a-minecraft-mod-loader), dzięki czemu można pominąć ręczną konfigurację. Kilka popularnych klientów dostarcza również własny launcher.
+
+Niemniej jednak podział pozostaje: zadaniem launchera jest nadal uruchamianie gry, a klientem jest to, co działa. Launcher, który instaluje modyfikacje, po prostu wykonuje krok konfiguracji z wyprzedzeniem. Modyfikacje stają się istotne dopiero, gdy klient jest uruchomiony.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy uruchomienie gry to to samo co klient?">
+Nie. Uruchomienie gry to program, który umożliwia zalogowanie się i uruchomienie gry. Klient to gra, która działa po uruchomieniu, włącznie z modyfikacjami. Używasz uruchomienia gry, aby uruchomić klienta.
+</FAQItem>
+
+<FAQItem question="Czy potrzebuję specjalnego launchera do uruchamiania modów?">
+Nie zawsze. Oficjalny launcher może uruchomić profil mod loadera po zainstalowaniu [Fabric](https://fabricmc.net/) lub innego loadera. Niektóre zewnętrzne launchery dołączają loader, aby ułatwić konfigurację, ale wciąż jedynie uruchamiają grę.
+</FAQItem>
+
+<FAQItem question="Gdzie w zasadzie działają mody, uruchamiacz czy klient?">
+Klient. Uruchamiacz wybiera profil z modami, ale ładowacz modów ładuje Twoje mody podczas uruchamiania gry, więc mody działają w kliencie.
+</FAQItem>
+
+<FAQItem question="Czy klient niestandardowy to rodzaj launchera?">
+Nie. Niestandardowy lub klient użytkowy to zmodyfikowana gra, ładowana przez mod loader. Uruchamia się po tym, jak launcher uruchomi grę.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-mod-loader", label: "Czym jest ładowacz modów do Minecrafta?", description: "Warstwa ładująca mody podczas uruchamiania klienta." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Zmodyfikowany klient, a nie oddzielny launcher." },
+  { href: "/pl/learn/how-to-install-a-fabric-mod", label: "Jak zainstalować modyfikację Fabric", description: "Utwórz profil Fabric i dodaj mody." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź Opala, klienta Fabric, za $8.99</CTA>

@@ -1,0 +1,124 @@
+---
+title: Minecraft'a JVM Argümanları Nasıl Eklenir (Kılavuz)
+description: Minecraft'a JVM argümanları eklemek için, başlatıcınızdaki profilin JVM argümanları alanını düzenleyin. Güvenli -Xmx yığın ayarı ve yaygın çözümlerle adım adım.
+excerpt: JVM argümanları, Minecraft'ı barındıran Java çalışma zamanını ayarlar, oyun değil. İşte bunları ayarlayabileceğiniz yer, çoğu oyuncunun istediği yığın bayrağı ve güvenli sınırlar.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: Minecraft'ta -Xmx ne işe yarar?
+    a: Java çalışma zamanının kullanabileceği maksimum yığın boyutunu belirler. -Xmx4G, oyunun 4 gigabayta sınırlandırılmasını sağlar. Daha fazla RAM ekleme rehberlerinin arkasındaki bayraktır.
+  - q: Minecraft'a ne kadar RAM ayırmalıyım?
+    a: Çoğu oyuncu için 4 ila 6 gigabayt yeterli olacaktır. Çok daha fazlasını ayırmak nadiren yardımcı olur ve çöp toplama duraklamalarını uzatabilir, bu yüzden JVM'e tüm belleğinizi vermeyin.
+  - q: Modlar ihtiyaç duyacağım JVM argümanlarını değiştirir mi?
+    a: Genellikle hayır. Modlar aynı Java sürecinde yüklendiğinden, zaten ayarladığınız yığını paylaşırlar. Birkaç mod belirli bir sistem özelliği belirtse de, yığın bayrakları çoğu durumu kapsar.
+  - q: JVM argümanları oyun ayarlarıyla aynı mı?
+    a: Hayır, JVM argümanları oyun yüklenmeden önce Java çalışma zamanını yapılandırır ve başlatıcıda yer alır. Oyun ayarları ise oyun içindeki seçenekler menüsünde bulunur.
+---
+
+<KeyTakeaways>
+
+- JVM argümanları, oyun içi seçeneklerde değil, başlatıcınızın profilinde yer alır.
+- Bunlar, oyunu barındıran [Java çalışma zamanı](/tr/learn/what-is-the-jvm) yapılandırmasını kontrol eder, bu nedenle bir yazım hatası oyunun başlamasını etkiler, dünyanızı değil.
+- Çoğu oyuncunun istediği işaretleyici `-Xmx`'tir; bu, oyunun kullanabileceği bellek miktarını sınırlar.
+- Çoğu kurulum için 4 ila 6 gigabayt yeterlidir. Daha fazlası takılmayı kötüleştirebilir.
+
+</KeyTakeaways>
+
+Minecraft'ta başlatıcınızdaki profil ayarlarından JVM argümanlarını ekliyorsunuz. Başlattığınız profili açın, JVM argümanları alanını bulun ve oradaki boşlukla ayrılmış bayraklar listesini düzenleyin. Bu bayraklar, oyunu barındıran [Java sanal makinesi](https://en.learn/what-is-the-jvm) yapılandırmasını, oyunu değil, bu nedenle bir yazım hatası dünyaya değil, başlatmaya etki eder.
+
+<Callout variant="info" title="Opal Nerede Çalışır">
+Opal, bir [Fabric](https://fabricmc.net/) modudur, bu nedenle içinde çalıştığı oyunla aynı JVM argümanlarını kullanır. Hedeflediği sürüm ve kesin kurulum için [kurulum rehberini](/tr/docs/setup) takip edin.
+</Callout>
+
+## JVM Argümanı Nedir
+
+Bir JVM argümanı, oyun başladığında Java çalışma zamanına ilettiğiniz bir bayraktır. Başlatıcı, her oyun oynat tuşuna bastığınızda uzun bir komut satırı oluşturur ve JVM argümanları, bu satırın çalışma zamanını ayarlayan kısmıdır. En yaygın olanı, oyunun kullanabileceği bellek miktarını ayarlar.
+
+Bu bayraklar Minecraft ayarları değildir. Bunlar, oyunun bile yüklenmesinden önce JVM tarafından okunur, bu nedenle bunları başlatıcıda ve oyun içi seçenekler menüsünde değil, başlatıcıda ayarlarsınız.
+
+## Bunları nereye koymalı
+
+Neredeyse her başlatıcı, her profil içinde bir JVM argümanları alanı bulundurur. Etiket değişebilir, ancak konum tutarlıdır.
+
+| Başlatıcı türü | Alan nerede bulunur |
+| :--- | :--- |
+| Resmi başlatıcı | Kurulumlar, bir profil düzenle, Daha Fazla Seçenek, JVM Argümanları |
+| Üçüncü taraf bir başlatıcı | Profil veya örnek ayarları, genellikle Java veya Gelişmiş sekmesi altında |
+| Komut satırı / betikler | Çalıştırdığınız `java` komutu, `-jar`'dan önce |
+
+Mevcut listeyi değiştirmeniz yerine düzenleyin. Başlatıcılar makul varsayılan değerlerle gönderilir ve bunları silmek başlangıcı bozabilir.
+
+## Resmi başlatıcıda adım adım
+
+<Steps>
+
+<Step number={1} title="Açık Kurulumlar">Başlatıcıyı açın ve **Yüklemeler** bölümüne gidin</Step>
+
+<Step number={2} title="Profilinizi düzenleyin">Kullanmakta olduğunuz profilin üzerine gelin ve düzenleme (kalem) simgesine tıklayın</Step>
+
+<Step number={3} title="Daha Fazla Seçenek Aç">**Daha Fazla Seçenek**'i açın. Bir **JVM Argümanları** kutusu belirir</Step>
+
+<Step number={4} title="Bayrakları düzenle">O kutudaki bayrakları düzenle. Aralarında boşluklar var</Step>
+
+<Step number={5} title="Kaydet ve başlat">Kaydet, sonra o profili başlat</Step>
+
+</Steps>
+
+## İnsanların İstediği Argüman: Yığın Boyutu
+
+Oyuncuların en çok başvurduğu işaret bayrağı `-Xmx`, JVM'nin kullanabileceği maksimum yığını sınırlandırır. `-Xmx4G`, 4 gigabyte'a kadar izin verir. Ayrıca `-Xms`, başlangıç yığınıdır.
+
+```
+-Xmx4G -Xms2G
+```
+
+Bu durumun güvenli kalmasını sağlayan iki kural vardır. Sahip olduğunuzdan daha fazla yer ayırmayın, çünkü Java işlemi için boş alan ve işletim sistemi için geri kalan gerekir. Daha fazla her zaman daha iyi değildir; çok büyük yığınlar çöp toplama duraklamalarını daha kötü, daha küçük hale getirmez. Çoğu kurulum için 4 ila 6 gigabyte yeterlidir.
+
+## Sık Görülecek Bayraklar
+
+- `-Xmx<boyut>`, örneğin `-Xmx4G` gibi maksimum yığını ayarlar.
+- `-Xms<boyut>`, örneğin `-Xms2G` gibi başlangıç yığını ayarlar.
+- `-XX:+UseG1GC`, yaygın bir varsayılan olan G1 çöp toplayıcıyı seçer.
+- `-Dproperty=value`, oyunun veya bir modun başlangıçta okuduğu bir sistem özelliğini ayarlar.
+
+Yığın bayraklarından daha fazlasına nadiren ihtiyacınız olur. Eski kılavuzlardan uzunca kopyalanıp yapıştırılmış argüman listeleri, modern bir Java çalışma zamanında daha çok zarar verir.
+
+## Bir Şey Yanlış Gittiğinde
+
+<Checklist>
+<ChecklistItem>Oyun, düzenleme sonrası başlamıyor: bayraklarında bir yazım hatası var. Varsayılan argümanları geri yükleyin ve değişiklikleri teker teker yeniden ekleyin.</ChecklistItem>
+<ChecklistItem>`-Xmx` göz ardı ediliyor veya hata veriyor: yanlış birim veya sözdizimi. Boşluksuz olarak `G` veya `M` kullanın, örneğin `-Xmx4G`, `-Xmx 4 GB` değil.</ChecklistItem>
+<ChecklistItem>Belleği artırdıktan sonra takılma daha da kötüleşti: çok büyük bir yığın, çöp toplama duraklamalarını uzatabilir. `-Xmx` değerini 4 ila 6 gigabayta geri düşürün.</ChecklistItem>
+</Checklist>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Minecraft'ta -Xmx ne işe yarar?">
+Java çalışma zamanının kullanabileceği maksimum yığın boyutunu ayarlar. `-Xmx4G` oyunun kullanımını 4 gigabayta sınırlar. "Daha fazla RAM ayır" rehberlerinin arkasındaki bayraktır.
+</FAQItem>
+
+<FAQItem question="Minecraft'a ne kadar RAM vermeliyim?">
+Çoğu oyuncu için 4 ila 6 gigabayt yeterli olacaktır. Çok daha fazlasını ayırmak nadiren yardımcı olur ve çöp toplama duraklamalarını uzatabilir, bu yüzden JVM'e tüm belleğinizi ayırmayın.
+</FAQItem>
+
+<FAQItem question="Modlar ihtiyaç duyduğum JVM argümanlarını değiştirir mi?">
+Genellikle hayır. Modlar, zaten ayarladığınız heap'i paylaştıkları aynı Java sürecinde yüklenir. Birkaç mod belirli bir sistem özelliği belirtse de, heap bayrakları çoğu durumu kapsar.
+</FAQItem>
+
+<FAQItem question="JVM argümanları oyun ayarlarıyla aynı mı?">
+Hayır. JVM argümanları, oyun yüklenmeden önce Java çalışma zamanını yapılandırır ve başlatıcıda yer alır. Oyun ayarları ise oyun içindeki seçenekler menüsünde bulunur.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-the-jvm", label: "JVM nedir?", description: "Bu bayrakların gerçekte yapılandırdığı çalışma zamanı." },
+  { href: "/tr/learn/how-to-install-a-fabric-mod", label: "Bir Fabric modunun nasıl kurulacağı", description: "Modların öncelikle yüklenmesini sağla." },
+  { href: "/tr/blog/how-to-get-more-fps-in-minecraft", label: "Daha fazla FPS nasıl alınır", description: "Yığın bayrağının ötesindeki performans artışları." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

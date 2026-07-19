@@ -1,0 +1,78 @@
+---
+title: Cos'è un mod loader di Minecraft? (Guida del 2026)
+description: "Un mod loader di Minecraft corregge il gioco all'avvio in modo che i mod possano essere eseguiti. Ecco cosa fa un loader e le opzioni principali: Fabric, Forge, NeoForge, Quilt."
+excerpt: Vanilla Minecraft non può eseguire mod autonomamente. Un mod loader è lo strato che applica delle patch al gioco all'avvio e fornisce alle mod un modo per intercettare le funzioni.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: Ho bisogno di un mod loader per usare i mod?
+    a: Sì. Le mod che modificano il gioco richiedono un loader. Le texture pack e gli shader sono una cosa a parte e non sempre ne hanno bisogno.
+  - q: Posso usare un mod senza un loader?
+    a: No. Il gioco non caricherà un file jar di mod da solo.
+  - q: Quale caricatore dovrei scegliere?
+    a: Quello per cui sono stati creati i tuoi mod preferiti. Se stai iniziando da zero e vuoi velocità più l'ultima versione in anteprima, Fabric è una scelta comune.
+---
+
+<KeyTakeaways>
+
+- Un mod loader è lo strato che permette a Minecraft di eseguire mod; la versione vanilla non supporta mod.
+- Il gioco viene patchato all'avvio e fornisce a ciascuna mod un modo per intercettare il codice.
+- Lo installi una volta per la tua versione di Minecraft, poi trascini i file jar delle mod nella cartella mods.
+- Le opzioni principali sono Fabric, Forge, NeoForge e Quilt; scegli quella a cui mirano le tue mod.
+
+</KeyTakeaways>
+
+Un mod loader è lo strato che permette a Minecraft di eseguire mod. Minecraft nella sua versione originale non supporta le mod, quindi un loader applica una patch al gioco all'avvio e fornisce alle mod un modo per intercettarlo. Si installa il loader una volta per la versione di Minecraft, poi si inseriscono i file jar delle mod nella cartella "mods" e queste vengono caricate all'avvio.
+
+<Callout variant="info" title="Dove si integra Opal">
+Opal è un mod [Fabric](https://fabricmc.net/), quindi Fabric è il loader che ti serve. La [guida all'installazione](/it/docs/setup) lo spiega.
+</Callout>
+
+## Perché ne hai bisogno
+
+Le mod cambiano il comportamento del gioco, il che significa che devono essere eseguite all'interno del codice di gioco. Il loader è ciò che rende tutto questo possibile. Senza di esso, un file jar della mod è semplicemente un file che il gioco ignora.
+
+## Come funziona
+
+Al lancio, il loader si inserisce prima che il gioco inizi, legge la cartella delle mod e collega ogni mod ai punti di aggancio appropriati. [Fabric](https://fabricmc.net/) lo fa con i mixin, un approccio di patch del bytecode mirato. Forge utilizza il proprio sistema di aggancio più ampio. In ogni caso, il gioco finisce per essere eseguito con le mod integrate.
+
+## I principali loader
+
+| Loader | Conosciuto per |
+| :--- | :--- |
+| Fabric | Leggero, veloce da aggiornare, mod di prestazioni e utilità |
+| Forge | Mod di contenuti di grandi dimensioni e modpack consolidati |
+| NeoForge | Una fork guidata dalla comunità di Forge |
+| Quilt | Una fork di Fabric con funzionalità aggiuntive |
+
+## Sceglierne uno
+
+Utilizza il loader a cui sono indirizzate le tue mod. La maggior parte delle mod viene fornita per un solo loader, non per entrambi, quindi le mod che desideri di solito lo decidono per te. Per una divisione più approfondita, consulta [Fabric vs Forge](/it/learn/fabric-vs-forge).
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="È necessario un mod loader per usare i mod?">
+Sì. I mod che modificano il gioco richiedono un loader. Le texture pack e gli shader sono un'altra cosa e non sempre ne hanno bisogno.
+</FAQItem>
+
+<FAQItem question="Posso eseguire un mod senza un loader?">
+No. Il gioco non caricherà un file jar del mod da solo.
+</FAQItem>
+
+<FAQItem question="Quale loader dovrei scegliere?">
+Quello per cui sono stati creati i tuoi mod preferiti. Se stai iniziando da zero e vuoi velocità più l'ultima versione in anticipo, [Fabric](https://fabricmc.net/) è una scelta comune.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "I due principali caricatori, confrontati in dettaglio." },
+  { href: "/it/learn/what-is-the-fabric-api", label: "Cos'è l'API Fabric?", description: "La libreria condivisa da cui dipendono la maggior parte dei mod di Fabric." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "Cosa si posiziona sopra un caricatore una volta installato." },
+]} />
+
+<CTA href="/it/purchase">Ottieni Opal, un client Fabric, per $8.99</CTA>

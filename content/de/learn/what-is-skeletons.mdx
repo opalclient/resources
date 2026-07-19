@@ -1,0 +1,79 @@
+---
+title: Was sind Skelette in Minecraft? Modul erklärt
+description: Skeletons ist ein Minecraft-Modul, das jeden Spieler und jedes Mob in ein schlichtes Modell umwandelt – eine rein kosmetische Änderung, die keinen Einfluss auf Trefferbereiche oder die Wahrscheinlichkeit, entdeckt zu werden, hat.
+excerpt: Skelette verwandelt jeden Spieler und jede Kreatur in eine wandelnde Knochensammlung, und das nur auf deinem Bildschirm. Trefferbereiche, Reichweite und wie der Server dich wahrnimmt, ändern sich keinen Zentimeter.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Verändern Skelette das Verhalten von Entitäten?
+    a: Nein. Es ändert lediglich das Modell, das auf Ihrem Bildschirm dargestellt wird. Bewegung, Hitboxen und Kampftaktiken stammen alle vom Server und bleiben unverändert.
+  - q: Ist Skeletons dasselbe wie ein Ressourcennpaket?
+    a: Fast nicht ganz. Ein Resource Pack verändert Texturen grundsätzlich für alle Nutzer. Skeletons ist ein Client-Modul, das spezifische Entity-Modelle austauscht und vom Spieler aktiviert wird, der den Client ausführt, ohne dass eine Pack-Installation erforderlich ist.
+  - q: Können Skelette dazu führen, dass jemand gesperrt wird?
+    a: Das Modul selbst bietet keinen spielerischen Vorteil und wird wahrscheinlich auch nicht von einem Anti-Cheat-System aufgerufen. Sperren entstehen eher durch die pauschalen Richtlinien eines Servers gegen modifizierte Clients als durch diese Funktion an sich.
+  - q: Welche Klienten beinhalten Skelette?
+    a: Man findet es in Fan, einem Client von Drittanbietern.
+---
+
+<KeyTakeaways>
+
+- Skeletons ist ein kosmetisches Modul, das Spieler und Mobs als bloße Skelette umgestaltet, und zwar nur lokal gerendert.
+- Es tauscht das auf dem Bildschirm angezeigte Modell aus, nicht aber die Trefferbereiche, die Bewegung oder die Kampfdaten, die der Server verfolgt.
+- Es entsteht kein zusätzlicher Netzwerkverkehr; die Override-Funktion funktioniert wie ein Ressourcennpack, befindet sich aber im Client.
+- Das Risiko einer Erkennung ist gering, da sich nichts Messbares ändert, obwohl es im modifizierten Client Fan sichtbar ist.
+
+</KeyTakeaways>
+
+Skeletons ist ein Minecraft-Modul, das jeden Spieler und jedes Mob, den du siehst, als schlichtes Skelett neu zeichnet, reduziert auf Knochen und nichts weiter. Es handelt sich um eine rein visuelle Überschreibung: das Spiel sendet deinen Client weiterhin dieselben Positions-, Pose- und Hitbox-Daten, wie immer, dieses Modul ersetzt lediglich das Modell, das über diese Daten gezeichnet wird. Nichts an der Art und Weise, wie eine Entität sich bewegt, kämpft oder vom Server verfolgt wird, ändert sich. Es ist eine private Umgestaltung, die du mit dir führst, eine Art Funktion, die existiert, weil jemand wollte, dass jedes Match gleich aussieht, unabhängig davon, wer tatsächlich dort steht.
+
+## Wie die Skelett-Umgestaltung funktioniert
+
+Minecrafts Renderer hat bereits alles, was er benötigt, um jede Entität zu zeichnen: Position, Rotation, Pose, Animationszustand – all das kommt über das Netzwerk an, da das Spiel ohne es nicht funktionieren kann. Skeletons greift keines dieser Daten an. Es hakt den Zeichenaufruf selbst ab und ersetzt das Modell und die Textur eines Skeletts anstelle dessen, was die Entität normalerweise anzeigen würde, die gleiche Art von Überschreibung, die ein Resource Pack anwendet, nur dass es im Client statt in einer separaten Pack-Datei lebt, die du installierst und austauschst.
+
+Da die zugrunde liegenden Entitätsdaten niemals geändert werden, erzeugt das Modul keinen zusätzlichen Netzwerkverkehr und greift nicht in den serverseitigen Zustand ein. Position, Hitbox und Animation stammen weiterhin von dort, wo der Server sie platziert hat. Das einzige, was sich ändert, ist, was lokal jedes Mal, wenn die Entität gezeichnet wird, darübergelegt wird.
+
+## Ist es sicher zu verwenden?
+
+Skeletons birgt an sich kaum ein Wettbewerbsrisiko. Es enthüllt niemanden durch Wände, fügt keine Umrisse oder Markierungen hinzu und greift in keiner Weise in die Zielerfassung, Bewegung oder Kampfrechnung ein, wie sie von Anticheat-Systemen gemessen werden. Die tatsächliche Position und Hitbox der Entität entsprechen genau dem, was der Server gesendet hat; nur das Bild auf Ihrem Bildschirm ist anders, sodass es nichts gibt, was eine serverseitige Prüfung als verdächtig einstufen könnte.
+
+Das Problem ist der mitgelieferte Client, nicht das Modul selbst. Skeletons wird in Fan, einem Client eines Drittanbieters, angezeigt, und viele Server verbieten jegliche modifizierte Clients ohne Ausnahme, unabhängig davon, welche einzelnen Module aktiviert sind. Ein rein kosmetisches Feature wie dieses erzeugt an sich kein Risiko, aber die Ausführung im Rahmen eines Clients, der auch Kampfb- oder Bewegungsmodule enthält, kann dennoch zu einer Sperre führen, die sich auf den gesamten Client bezieht.
+
+<Callout variant="warning" title="Die Gefahr eines Banns geht vom Client aus, nicht von diesem Modul">
+Skelette selbst bietet dem serverseitigen Anti-Cheat nichts, was er fangen könnte. Es läuft aber nicht eigenständig, sondern in einem modifizierten Client, und viele Server verbieten modifizierte Clients sofort, unabhängig davon, welche Module aktiv sind. Beurteile den Ruf des Clients als Ganzes, nicht nur diese kosmetische Option.
+</Callout>
+
+<Callout variant="tip" title="Kosmetik ohne Manipulation der Zahlen">
+Opal versendet kein Modul unter dem Namen Skeletons, aber seine visuelle Kategorie basiert auf demselben Prinzip: Verändere, was du siehst, niemals das, was der Server misst. Das ist die Grenze zwischen einem rein kosmetischen Austausch und einem tatsächlichen Gameplay-Modul, und genau auf dieser Grenze sitzt Skeletons.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Verändert Skeletons das Verhalten von Entitäten?">
+Nein. Es ändert lediglich das Modell, das auf Ihrem Bildschirm dargestellt wird. Bewegung, Trefferbereiche und Kampftaktiken stammen vom Server und bleiben unberührt.
+</FAQItem>
+
+<FAQItem question="Ist Skeletons dasselbe wie ein Resource Pack?">
+Nicht ganz. Ein Resource Pack verändert Texturen im Allgemeinen für jeden Nutzer. Skeletons ist ein Client-Modul, das spezifische Entity-Modelle austauscht und vom Spieler aktiviert wird, der den Client ausführt – keine Pack-Installation erforderlich.
+</FAQItem>
+
+<FAQItem question="Können Skelette dazu führen, dass jemand gesperrt wird?">
+Das Modul selbst bietet keinen spielerischen Vorteil und wird wahrscheinlich nicht von einem Anti-Cheat-System aufgerufen. Sperren entstehen eher durch die allgemeine Richtlinie eines Servers gegen modifizierte Clients als durch diese Funktion.
+</FAQItem>
+
+<FAQItem question="Welche Clients beinhalten Skelette?">
+Es ist in Fan, einem Client eines Drittanbieters, zu sehen.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die breitere Kategorie, zu der Skelette und jedes andere Modul gehören." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Eine weitere, ausschließlich clientseitige Unterscheidung, die es wert ist, verstanden zu werden." },
+  { href: "/de/learn/what-is-killaura", label: "Was ist Killaura?", description: "Das andere Ende des Spektrums: ein Modul, das ein Server absolut messen kann." },
+]} />
+
+<CTA href="/de/kaufen">Opal's visueller Tab basiert auf derselben Idee: verändern Sie das Aussehen des Spiels, nie aber die Art, wie es gespielt wird.</CTA>

@@ -1,0 +1,79 @@
+---
+title: Minecraft'ta Spoof Nedir?
+description: Bir spoofer, gerçek bir değeri, örneğin ping veya FPS sayacını, görüntülenmeden veya sunucuya gönderilmeden önce sahte bir değerle değiştiren bir Minecraft istemci modülüdür.
+excerpt: "Bir modül adı, iki tamamen farklı risk profili: bazı taklitçiler ekrandan hiç ayrılmazken, diğerleri doğrudan bir pakete atlar."
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Bir spoofing modülü aslında ne işe yarar?
+    a: Müşteri tarafında bir yerde gerçek değeri yakalayıp, kullanıcının seçtiği sahte bir değerle değiştiriyor; böylece o değeri okuyan her şey – bir ekran, bir paket ya da her ikisi birden – gerçek sayı yerine sahte sayıyı görüyor.
+  - q: Spoofer, Ping Spoof veya FPS Spoofer ile aynı modül mü?
+    a: Hayır. Ping Spoof ve FPS Spoofer, her biri belirli bir değer hedefini alan özel modüllerdir. Spoofer ise, tam hedef değeri belgelenmemiş, ayrı ve daha genel bir giriştir.
+  - q: Hangi müşterinin Spoof modülü var?
+    a: Spoofer, Rose'da tespit edildi. Hangi değeri geçersiz kıldığına dair daha fazla ayrıntı kaydedilmedi.
+  - q: Hile kullanıcısı anticheat sistemleri tarafından tespit edilebilir mi?
+    a: Üzerine yazdığı değere tamamen bağlıdır. Yerel bir ekrana sınırlı bir sahtekar tespit edilemez çünkü hiçbir şey istemciyi terk etmez. Ancak sunucuya gönderilen bir değeri değiştiren bir sahtekar, eğer o sunucu bunu kontrol ederse, tespit edilebilir.
+---
+
+<KeyTakeaways>
+
+- Spoofer, gerçek bir değeri, görüntülenmeden veya gönderilmeden önce kullanıcı tarafından seçilen sahte bir değerle değiştiren genel bir terimdir.
+- Risk, hedefe bağlıdır: yalnızca yerel bir değer (FPS) tespit edilemez; sunucuya gönderilen (ping, sürüm) bir değer ise tespit edilebilir.
+- Ping Spoof veya FPS Spoofer gibi adlandırılmış modüllerden farklıdır; bunlar her biri tek bir değeri hedefler.
+
+</KeyTakeaways>
+
+Minecraft istemci terimlerinde bir spoofer, bir değerin hedefine ulaşmadan önce onu kesen ve kullanıcı tarafından seçilen bir şeyle değiştiren herhangi bir modüldür. Bu, tüm tanımıdır: sabit bir hedef yok, sabit bir etki yok, sadece belirli bir modülün dokunduğu herhangi bir değere uygulanan bir örüntü. Bazı spoofer'lar saf gösteriş olup, kimseyi etkilemeyen ancak sizi etkileyen sahte bir FPS sayacıdır. Diğerleri ise sunucu tarafından aslında okunan verileri etkiler, örneğin bildirilen ping gibi, ve işte tam da burada aynı kelime iki çok farklı şeyi kapsamaya başlar: bir tarafta kozmetik bir oyuncak, diğer tarafta adaleti etkileyebilecek bir şey.
+
+## Nasıl Çalışır
+
+"Spoofer" bir örüntüyü, sabit bir davranışı değil adlandırır. Modül, bir sonraki okuma gerçekleşene kadar gerçek bir değer ile neyin okuduğunun arasına oturur; bu, ekrandaki bir HUD öğesi, sunucuya gönderilen bir paket veya her ikisi olabilir ve gerçek değeri oraya ulaşmadan önce farklı bir şeyle değiştirir. Ping Spoof ve FPS Spoofer gibi bu örüntünün adlandırılmış uygulamaları, her biri tek bir belirli değere kilitlenir ve mekanizmaları ve diğer oyuncular üzerindeki (veya olmaması) etkileri farklı olduğu için ayrı ayrı belgelenir.
+
+Spoofer, mevcut kayıtlarda izlendiği gibi, genel bir giriş: Rose'da görünen, hangi değeri geçersiz kıldığına dair daha fazla bir not bulunmayan bağımsız bir modül. Bu boşluk önemsiz bir detay değil. Bir spoofer'ın tüm risk profili neyi taklit ettiğine bağlı olduğundan, modülü değerlendirmek için aslında ihtiyacınız olan tek bilgi parçası bu.
+
+## Riskin ne taklit edildiğine bağlılığı
+
+| Taklit edilen değer türü | Nerede görünür | Tipik risk |
+|---|---|---|
+| Yalnızca yerel görüntüleme (örneğin: sahte FPS sayacı) | Sadece kendi ekranınız | Yok. Tamamen kozmetik |
+| Sunucuya bildirilen değer (örneğin: ping, sürüm dizesi) | Sunucu ve olası diğer oyuncular | Sunucu bu değeri kontrol edip etmediğine bağlı |
+
+Rose'un Spoofer girişi hangi satıra düştüğünü belirtmediği için, dürüst hareket onu her iki uç noktayı da varsaymak yerine bilinmeyen olarak ele almak. "Bir spoofer güvenli mi?" diye sorulacak tek bir cevap yok. Bu, hangi değerin özellikle geçersiz kılındığı sorusudur.
+
+<Callout variant="tip" title="Opal nerede çizgiyi çiziyor">Opal, Spoofer adlı bir modül göndermiyor. Yardımcı programlar kataloğu, her değerin üzerine yazılmasını, kozmetik veya sunucu tarafı olup neye dokunduğunu tam olarak belirtiyor; bunun yerine, her ikisi de olabilecek tek bir genel ad altında kaydetmiyor. Bir istemcinin spooferi hangi değeri değiştirdiğini belirtmiyorsa, bunun zararsız olduğunu varsaymadan önce mutlaka sorulması gereken bir durumdur</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını anlatmıyor">
+Bu sayfa, belirli bir uygulama değil, deseni genel olarak açıklamaktadır. Bir hileci, sunucunun okuduğu bir değeri, örneğin ping veya bir sürüm dizesini değiştirirse, o sayı sunucunun gerçeklikle karşılaştırılabileceği bir pakette bir yerde bulunur ve bu karşılaştırmayı yapmak tam olarak antichi̇t sistemlerinin üzerine kurulu olduğu şeydir.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Bir sahtekarlık modülü aslında ne işe yarar?">
+Bir yerde istemci tarafındaki gerçek bir değeri keserek, kullanıcının seçtiği sahte bir değerle değiştirir; böylece o değeri bir sonraki okuyan bir görüntü, bir paket veya her ikisi de, gerçek sayı yerine sahte sayıyı görür.
+</FAQItem>
+
+<FAQItem question="Spoofer, Ping Spoof veya FPS Spoofer modüllerinden biri mi?">
+Hayır. Ping Spoof ve FPS Spoofer, her biri belirli bir değeri hedefleyen özel modüllerdir. Spoofer ise tam hedef değeri belgelenmemiş, daha genel bir giriştir.
+</FAQItem>
+
+<FAQItem question="Hangi müşterinin Spoofer modülü var?">
+Spoofer, Rose'da tespit edildi. Hangi değerin üzerine yazıldığına dair daha fazla ayrıntı kaydedilmedi.
+</FAQItem>
+
+<FAQItem question="Spoofer'lar anticheat sistemleri tarafından tespit edilebilir mi?">
+Bu tamamen üzerine yazılan değere bağlıdır. Yerel bir görüntüleme üzerinde sınırlı bir spoofer tespit edilemez, çünkü hiçbir şey istemciden ayrılmaz. Ancak, sunucuya gönderilen bir değeri değiştiren bir spoofer, eğer o sunucu bunu kontrol ediyorsa tespit edilebilir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Bunun ait olduğu daha geniş kategori modüller." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "İnce ayrıntılara dikkat, yalnızca bir modül değil, bir tasarım hedefi olarak." },
+  { href: "/tr/learn/what-is-velocity-anti-knockback", label: "Hız (çarpma geri tepmesi önleme) nedir?", description: "Sunucu kontrol etmesini beklediği bir değeri geçersiz kılan başka bir modül." },
+]} />
+
+<CTA href="/tr/satin-al">Opal, etkileşimde bulunduğu alanlara özel adlar veriyor. Listeyi inceleyin.</CTA>

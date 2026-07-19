@@ -1,0 +1,100 @@
+---
+title: JNI Nedir? Java Yerel Arayüzü Açıklaması
+description: JNI (Java Yerel Arayüzü), Java kodunun yerel C veya C++ fonksiyonlarını çağırmasına ve yerel kodun JVM'ye geri çağrı yapmasına olanak tanıyan köprüdür.
+excerpt: JNI, Java ile yerel C veya C++ kodu arasındaki yerleşik köprüdür. Sınırın nasıl çalıştığı ve onu geçmenin neye mal olduğu aşağıdadır.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: JNI Java'nın standart bir parçası mıdır?
+    a: Evet. JNI, JDK ve JVM ile birlikte gelir. Java tarafında ekstra bir şey yüklemenize gerek yok, ancak C veya C++ kısmını derlemek için yerel bir araç zincirine ihtiyacınız var.
+  - q: JNI kullanmak kodumu platformdan bağımsız yapar mı?
+    a: Hayır. Java kısmı taşınabilirliğini koruyor, ancak yerel kütüphane tek bir işletim sistemi ve CPU için derleniyor, bu yüzden her platform için ayrı bir yerel derleme gönderiyorsunuz.
+  - q: JNI, Java'dan yerel kodu çağırmanın tek yolu mudur?
+    a: Hayır, bu orijinal, yerleşik yol. Daha yeni Java sürümleri, daha güvenli ve kullanımı daha kolay olmayı hedefleyen daha modern bir yabancı fonksiyon API'si ekler, ancak JNI hala yaygın olarak kullanılıyor ve iyi anlaşılıyor.
+  - q: Neden bir Minecraft istemcisi JNI kullanır?
+    a: Java ile büyük ölçüde yazılmış bir istemci, bazen JVM'nin doğrudan yapamadığı bir şey için yerel bir kütüphaneye ihtiyaç duyabilir. JNI, o kütüphaneyi yüklemek ve çağırmak için standart köprüdür.
+---
+
+<KeyTakeaways>
+
+- JNI, JVM kodunun yerel C veya C++ fonksiyonlarını çağırmasına ve yerel kodun Java'ya geri çağırmasına olanak tanıyan yerleşik arayüzdür.
+- Bir `native` metodunun Java gövdesi yoktur; JVM, çalışma zamanında derlenmiş bir fonksiyona bağlar.
+- Programlar, yerel kütüphaneleri yeniden kullanmak, işletim sistemine erişmek, sık kullanılan yolları hızlandırmak veya donanımla etkileşim kurmak için bunu kullanır.
+- Sınır nettir: yerel çökmeler JVM'yi çökletebilir ve yerel derlemeler platforma özgüdür.
+
+</KeyTakeaways>
+
+JNI, Java Yerel Arayüzü'dür; Java'nın yerleşik bir parçası olup, JVM üzerinde çalışan kodun C veya C++ ile yazılmış fonksiyonları çağırmasına ve bu yerel kodun Java'ya geri çağrı yapmasına olanak tanır. Bir Java programının JVM'nin dışına uzanarak bir platform kütüphanesini veya derlenmiş makine kodu parçasını kullanmasının yoludur.
+
+<Callout variant="info" title="Opal Nerede Çalışır">
+Opal, bir [Fabric](https://fabricmc.net/) modudur, bu yüzden çoğunluğu düz Java'dır ve JavaScript ile kodlama yaparsınız, yerel kodu elle değiştirmeniz gerekmez. Başlamak için [kurulum rehberine](/tr/docs/setup) göz atın.
+</Callout>
+
+## JNI Ne İşe Yarar
+
+JNI, iki dünyayı birbirine bağlar: JVM üzerindeki yönetilen Java kodu ve makine talimatlarına derlenmiş yerel kodu. Bir Java metodu `native` olarak işaretlenir ve Java'da gövdesi bulunmaz. Çalışma zamanında JVM, yerel bir kütüphane yükler ve bu metodu eşleşen bir C veya C++ fonksiyonuyla ilişkilendirir. Ardından iki taraf, argümanları ve değerleri karşılıklı olarak iletir.
+
+Yerel taraf bir `JNIEnv` işaretçisi alır. Bu tanıtıcı kapıdır: Java alanlarını okumak, Java metotlarını çağırmak, nesneler oluşturmak ve istisnalar fırlatmak için fonksiyonları açığa çıkarır. Böylece köprü tek yönlü değil, her iki yönde de çalışır.
+
+## Bir Program Neden Kullanır
+
+Çoğu Java kodu JNI'ye ihtiyaç duymaz. Bir program, birkaç durumda ona uzanır:
+
+- **Mevcut yerel kodu yeniden kullanmak.** Olgun bir C veya C++ kütüphanesi zaten işi yapıyor ve onu Java'da yeniden yazmak değmez.
+- **İşletim sistemine ulaşmak.** Bazı platform özelliklerinin saf Java API'si yoktur, bu nedenle yerel bir çağrı tek yoldur.
+- **Sıcak bir yolda hız.** Sıkı bir sayısal veya düşük seviyeli rutin, JVM'de olduğundan daha hızlı derlenmiş yerel kod olarak çalışabilir.
+- **Donanım veya sürücülere dokunmak.** Grafik, ses ve cihaz erişimi genellikle yerel kütüphanelerin arkasında yaşar.
+
+## Bir JNI Çağrısı Nasıl Çalışır
+
+Adımlar her platformda aynıdır.
+
+| Adım | Olay |
+|------|--------------|
+| Bildir | Bir Java metodu, `native` anahtar kelimesiyle yazılır ve gövdesi olmaz. |
+| Oluştur | Bir C veya C++ fonksiyonu, çalışma zamanında kullanılabilen bir paylaşımlı kütüphaneye (`.dll`, `.so`, `.dylib`) derlenir. |
+| Yükle | Java, çalışma zamanında bu kütüphaneyi yüklemek için `System.loadLibrary`'yi çağırır. |
+| Bağla | JVM, `native` metodunu, adıyla C fonksiyonuna eşler. |
+| Çağır | Java metodu çağırır; kontrol yerel koda geçer ve geri döner. |
+
+Fonksiyon adları, JVM'nin bunları bulabilmesi için sabit bir kalıbı takip eder ve oluşturulan başlık, uygulanacak kesin imzayı size bildirir.
+
+## Maliyetler ve riskler
+
+JNI güçlüdür ancak keskin kenarları vardır. Yerel kodda bir çökme, JVM'nin tamamını düşürebilir çünkü bu kod JVM'nin güvenlik ağı dışında çalışır. Yerel tarafın ayırdığı bellek çöp toplama işlemine tabi olmadığından, sızıntılar kolayca oluşabilir. Java ve yerel kod arasında yapılan her geçişte ek yük vardır, bu nedenle sıkı bir döngüde sınırı aşmak yavaş olabilir. Ve yerel kütüphaneler platforma özeldir: Windows için oluşturulan bir derleme, ayrı bir derleme olmadan Linux'ta çalışmaz.
+
+<Callout variant="warning" title="Dikkatli kullanın">
+Yerel sınır, JVM'nin güvenlik garantilerini atladığı için, JNI yalnızca saf Java ile çözülemeyen durumlarda başvurulan bir araçtır. Çoğu mod, Opal dahil, buna hiç ihtiyaç duymaz.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="JNI Java'nın bir parçası mıdır?">
+Evet. JNI, JDK ve JVM ile birlikte gelir. Java tarafında ek bir şey yüklemenize gerek olmasa da, C veya C++ kısmını derlemek için yerel bir araç zincirine ihtiyacınız vardır.
+</FAQItem>
+
+<FAQItem question="JNI kullanmak kodumu platformdan bağımsız yapar mı?">
+Hayır. Java tarafı taşınabilirliğini korur, ancak yerel kütüphane bir işletim sistemi ve CPU için derlenir, bu nedenle her platform için ayrı bir yerel derleme dağıtmanız gerekir.
+</FAQItem>
+
+<FAQItem question="JNI, Java'dan yerel kodu çağırmanın tek yolu mudur?">
+Hayır. Orijinal, yerleşik yöntemdir. Daha yeni Java sürümleri, daha güvenli ve kullanımı daha kolay olmayı hedefleyen daha modern bir yabancı fonksiyon API'si ekler, ancak JNI hala yaygın olarak kullanılmakta ve iyi anlaşılmaktadır.
+</FAQItem>
+
+<FAQItem question="Neden bir Minecraft istemcisi JNI kullanır?">
+Çoğunlukla Java ile yazılmış bir istemci, JVM'nin doğrudan yapamadığı bir şey için bazen yerel bir kütüphaneye ihtiyaç duyar. JNI, bu kütüphaneyi yüklemek ve çağırmak için standart köprüdür.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-the-jvm", label: "JVM nedir?", description: "Çalışma zamanı JNI çağrıları, dışarıdan ve içeriden." },
+  { href: "/tr/learn/what-is-graalvm-javascript-scripting", label: "GraalVM JavaScript betiği nedir?", description: "Java uygulamasını genişletmenin daha üst düzey bir yolu." },
+  { href: "/tr/learn/what-is-a-minecraft-mod-loader", label: "Minecraft mod yükleyici nedir?", description: "Oyunun piyasaya sürüldüğünde kodun nasıl entegre edildiği." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

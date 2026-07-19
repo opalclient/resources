@@ -1,0 +1,73 @@
+---
+title: Cosa è AntiTabComplete? Spiegazione del Modulo Minecraft
+description: AntiTabComplete blocca le richieste di completamento automatico con tab che alcuni plugin server utilizzano per tracciare silenziosamente un client di Minecraft. Scopri come funziona e perché è importante.
+excerpt: Il completamento automatico sembra innocuo. Su alcuni server è un canale passivo di raccolta dati senza interfaccia utente. AntiTabComplete semplicemente smette di rispondere.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa blocca effettivamente AntiTabComplete?
+    a: Blocca le richieste di completamento automatico della tab inviate da un plugin del server per raccogliere passivamente informazioni sul client del giocatore, richieste che non compaiono mai in chat o in nessun altro punto dello schermo.
+  - q: È un imbroglio AntiTabComplete?
+    a: No. Non modifica il movimento, il combattimento o qualsiasi altra cosa che un server possa valutare come un vantaggio sleale. È una funzione di privacy che chiude un canale di raccolta dati passiva, nient'altro.
+  - q: AntiTabComplete offre un vantaggio competitivo?
+    a: No, non ha alcun effetto sul gameplay. Modifica soltanto cosa un plugin del server può apprendere sul giocatore tramite lo scambio di completamento automatico, non la velocità con cui colpiscono o si muovono.
+  - q: Quali documenti del cliente AntiTabComplete?
+    a: La tenacia è il cliente tracciato con un modulo AntiTabComplete nella knowledge base.
+  - q: Perché un server dovrebbe utilizzare il completamento automatico per raccogliere dati in primo luogo?
+    a: Poiché lo scambio avviene dietro le quinte e non viene mai mostrato al giocatore, offre a un plugin un canale silenzioso per inviare richieste e leggere le risposte, che è esattamente il tipo di raccolta passiva che AntiTabComplete disabilita.
+---
+
+<KeyTakeaways>
+- AntiTabComplete è un modulo di Minecraft che blocca le richieste di completamento automatico tramite tab che alcuni server utilizzano per profilare silenziosamente il client di un giocatore.
+- Intercetta la parte client dello scambio di completamento automatico di Minecraft, il traffico di sfondo attivato dalla pressione del tasto Tab.
+- È una correzione per la privacy, non per la competizione; non tocca mai movimento o combattimento.
+- Tenacity è il client documentato con questo modulo.
+</KeyTakeaways>
+
+AntiTabComplete è un modulo che impedisce a un server di utilizzare lo scambio di completamento automatico di Minecraft per raccogliere silenziosamente informazioni sul client di un giocatore. Alcuni plugin del server inviano richieste di completamento automatico non per aiutare con la digitazione, ma come un canale a bassa visibilità per la raccolta passiva di dati. AntiTabComplete chiude quel canale dal lato client, quindi tali richieste non ricevono alcuna risposta.
+
+## Come funziona
+
+Il completamento automatico è un comportamento normale di Minecraft. Inizia a digitare un comando, premi Tab e il client e il server scambiano messaggi dietro le quinte in modo che il gioco possa suggerire completamenti validi. Nessuno di questi scambi è mostrato al giocatore, il che è esattamente ciò che lo rende riutilizzabile per qualcosa di diverso dall'autocompletamento. Un plugin può inviare queste richieste a un client per esaminarlo e leggere tutto ciò che viene restituito, senza che una singola riga appaia nella chat.
+
+AntiTabComplete si interpone in questa lacuna. Intercetta o ignora le richieste prima che il client possa rispondere, quindi un plugin che si basa sul canale di completamento automatico non riceve nulla di utile. L'utilizzo normale della chat e dei comandi appare identico al giocatore in ogni momento. Non cambia nulla di visibile, ed è questo il punto.
+
+## Una correzione per la privacy, non un vantaggio di gioco
+
+Questo è il punto in cui AntiTabComplete si discosta dalla maggior parte di ciò che le persone intendono quando dicono "cheat" per Minecraft. Un modulo come [Reach](/it/learn/what-is-reach) o KillAura modifica ciò che il gioco permette fisicamente di fare, e gli anticheat esistono specificamente per intercettare le impronte digitali di movimento e tempistiche che lascia dietro di sé. AntiTabComplete non tocca mai movimento o combattimento. Modifica solo ciò che un server può imparare passivamente su di te, il che lo rende un problema di informazioni, non competitivo.
+
+Questo lo rende anche a basso rischio da utilizzare. Non invia dati falsificati né altera nulla che il server possa verificare riguardo al tuo combattimento o movimento, si limita a trattenere una risposta a una richiesta che il giocatore non avrebbe mai dovuto vedere. Dal lato del server, un client che non risponde a una sonda passiva appare semplicemente come un client che manca del comportamento sondato, non come uno che sta inviando pacchetti falsi. Nella stessa categoria di altri strumenti di controsorveglianza: silenzioso, difensivo e non ciò per cui gli anticheat sono effettivamente progettati.
+
+<Callout variant="tip" title="La posizione di Opal in merito">
+Opal non distribuisce un modulo chiamato AntiTabComplete. Si tratta di una soluzione specifica per un caso specifico, e ha rilevanza solo sui server che eseguono questo tipo di plugin. Vale la pena chiedere informazioni a riguardo per nome se si stanno confrontando client di utilità in base alla privacy, piuttosto che solo al DPS.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+<FAQItem question="Cosa blocca effettivamente AntiTabComplete?">
+Blocca le richieste di completamento automatico della tab inviate da un plugin del server per raccogliere passivamente informazioni sul client del giocatore, richieste che non compaiono mai nella chat o in qualsiasi altra parte dello schermo.
+</FAQItem>
+<FAQItem question="AntiTabComplete è un cheat?">
+No. Non modifica il movimento, il combattimento o qualsiasi altra cosa che un server possa considerare un vantaggio sleale. È una funzionalità per la privacy che chiude un canale di raccolta dati passiva, nient'altro.
+</FAQItem>
+<FAQItem question="AntiTabComplete offre un vantaggio competitivo?">
+No, non ha alcun effetto sul gameplay. Modifica solo ciò che un plugin del server può apprendere sul giocatore attraverso lo scambio di completamento automatico della tab, non quanto velocemente colpiscono o si muovono.
+</FAQItem>
+<FAQItem question="Quale client viene tracciato da AntiTabComplete?">
+Tenacity è il client tracciato con un modulo AntiTabComplete nella knowledge base.
+</FAQItem>
+<FAQItem question="Perché un server dovrebbe usare il completamento automatico della tab per raccogliere dati in primo luogo?">
+Poiché lo scambio avviene dietro le quinte e non viene mai mostrato al giocatore, offre a un plugin un canale silenzioso per inviare richieste e leggere le risposte, che è esattamente il tipo di raccolta passiva che AntiTabComplete blocca.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria AntiTabComplete appartiene a ciò che distingue l'utilità dalla truffa." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "L'altra estremità dello spettro dei clienti, basata sull'evitare di essere assolutamente rilevati." },
+  { href: "/it/learn/what-is-reach", label: "Cos'è la portata?", description: "Un modulo che influisce realmente sul gameplay, un contrasto utile rispetto a uno incentrato esclusivamente sulla privacy come AntiTabComplete." }
+]} />
+
+<CTA href="/it/purchase">L'elenco dei moduli di Opal si basa su ciò che effettivamente merita uno slot, non su riempitivi. Scopritelo.</CTA>

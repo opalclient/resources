@@ -1,0 +1,85 @@
+---
+title: Jakie są skrzydła smoka w Minecraft? (Wyjaśnienie modułu)
+description: Dragon Wings to moduł kosmetyczny dla Minecrafta, który wyświetla model skrzydeł na plecach zamiast płaszcza, nie wpływając w żaden sposób na ruch, walkę ani kolizje.
+excerpt: Peleryna zamieniona na parę skrzydeł. Nic się nie zmienia w sposobie, w jaki grasz, tylko w tym, jak wyglądasz, grając.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Dragon Wings pozwala latać, czy szybować?
+    a: Nie. Ono jedynie renderuje model skrzydła na twoich plecach. Nie wpływa na ruch, skakanie ani upadek, i nie daje możliwości szybowania w stylu elytra.
+  - q: Czy inni gracze widzą moje Skrzydła Smoka?
+    a: Zależy od tego, czy ich klient renderuje ten sam model. To funkcja renderowania, więc wpływa na to, co wyświetla się na modelu gracza, a nie na to, co serwer śledzi lub nadaje jako dane.
+  - q: Czy Skrzydła Smoka to to samo co noszenie elytra?
+    a: Nie. Elytra to przedmiot z wanilii z prawdziwą mechaniką szybowania. Skrzydła Smoka to model kosmetyczny bez efektu mechanicznego, bardziej przypominający płaszcz niż faktyczny ekwipunek do latania.
+  - q: Czy korzystanie ze Skrzydeł Smoka grozi banem?
+    a: Nie. To jest moduł wyłącznie wizualny, który nie zmienia niczego z tego, co serwer śledzi odnośnie ruchu czy walki, więc niesie za sobą nie więcej ryzyka niż jakikolwiek inny wybór kosmetycznego wyglądu.
+---
+
+<KeyTakeaways>
+
+- Dragon Wings to moduł kosmetyczny, który wyświetla model skrzydeł na plecach gracza zamiast płaszcza.
+- Zmienia jedynie lokalny rendering, a nie lot, szybowanie, ruch ani wykrywanie kolizji.
+- Nic nie jest wysyłane na serwer, więc nie niesie ze sobą większego ryzyka bana niż jakikolwiek wybór kosmetyczny.
+- Widoczne u klientów takich jak Tenacity jako standardowa opcja kosmetyczna.
+
+</KeyTakeaways>
+
+Dragon Wings to moduł kosmetyczny w klientach użytkowych Minecraft, który zamienia slot na płaszcz twojej postaci na renderowany model pary skrzydeł. Działa dokładnie jak wybieranie płaszcza, tylko z piórami zamiast materiału. Włącz go, a każdy klatka rysuje model skrzydła przymocowanego do pleców twojej postaci, w tym samym miejscu, w którym vanilla renderuje płaszcz lub wyposażony elytra. To cała funkcja. Ruch, walka i kolizje pozostają dokładnie takie, jak definiuje je vanilla: moduł nigdy nie ingeruje w po stronie serwera gry, tylko w model po stronie klienta, który ty i każdy inny, kto go uruchamia, mogą zobaczyć.
+
+## Jak to działa
+
+Dragon Wings dołącza model skrzydła do pleców gracza w tej samej pozycji, w której znajduje się zwykły płaszcz lub elytra, a następnie rysuje go na nowo za każdym razem, gdy rysowany jest model gracza. To krok renderowania po stronie klienta, a nie mechanika. Moduł przechwytuje tę samą komendę rysowania, którą vanilla używa dla płaszcza i zastępuje ją własną geometrią.
+
+Pod spodem nic się nie zmienia w fizyce. Nie ma lotu, nie ma szybowania, nie ma interakcji z kodem kolizji lub prędkości gry, ponieważ skrzydła są warstwą wizualną na istniejącym modelu gracza, a nie zamiennikiem przedmiotu elytra ani mechanikami za nim. Serwer nigdy nie otrzymuje sygnału mówiącego „ten gracz nosi skrzydła”. Nadal wysyła normalne pakiety ruchu i wyposażenia, które zawsze wysyła, a klient po prostu decyduje się narysować coś dodatkowego na ich szczycie.
+
+## Skrzydła Smoka vs. płaszcz vs. elytra
+
+| | Skrzydła Smoka | Płaszcz (domyślny) | Elytra |
+|---|---|---|---|
+| Co to jest | Model kosmetyczny po stronie klienta | Domyślny przedmiot kosmetyczny | Domyślny przedmiot do szybowania |
+| Umożliwia lot lub szybowanie | Nie | Nie | Tak, gdy jest wyposażone i w powietrzu |
+| Wymaga przedmiotu w grze | Nie | Tak, płaszcz | Tak, wyposażone elytra |
+| Widoczne dla innych graczy | Tylko jeśli ich klient je renderuje | Tak, dla wszystkich | Tak, dla wszystkich |
+| Wpływa na ruch lub kolizje | Nie | Nie | Tak, podczas szybowania |
+
+Skrzydła Smoka zajmują tę samą pozycję wizualną co płaszcz, nie wymagając przedmiotu, flagi konta ani pakietu zasobów, które zwykle są wymagane dla płaszcza. Elytra plasuje się w zupełnie innej kategorii: to prawdziwa, domyślna mechanika z fizyką śledzoną przez serwer, a nie wygląd, który można włączyć i wyłączyć w dowolnym momencie.
+
+## Czy jest bezpieczne do użycia
+
+Skrzydła Smoka nie wysyłają nic dodatkowego do serwera, nie wpływają na obszary kolizji i nie przekazują graczowi żadnych informacji, których serwer już nie przekazywałby wszystkim. To ustawienie wyglądu po stronie klienta, ta sama kategoria co wybór płaszcza lub zmiana skóry, a nie mechanika rozgrywki. Ponieważ nie ma żadnego efektu na rozgrywce, nie ma nic, co serwer mógłby wykryć, ponieważ nie generuje niczego, co serwer uznałby za inne niż zachowanie się domyślnego gracza stojącego w tym samym miejscu.
+
+<Callout variant="tip" title="Gdzie to się znajduje w Opal">
+Opal nie udostępnia modułu o tej nazwie. Jednak jego wygląd opiera się na tej samej logice: na przykład moduł Animacji zmienia to, co widzisz, nie wpływając na to, co śledzi serwer. Jeśli celem jest wyglądanie inaczej bez ryzykowania niczego mechanicznego, to Opal już dobrze radzi sobie w tej dziedzinie. Skrzydła po prostu nie znajdują się w aktualnym katalogu.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Dragon Wings pozwala latać czy szybować?">
+Nie. Przedstawia jedynie model skrzydła na plecach. Nie wpływa na ruch, skakanie ani upadek i nie nadaje możliwości szybowania w stylu elytra.
+</FAQItem>
+
+<FAQItem question="Czy inni gracze widzą moje Skrzydła Smoka?">
+Zależy to od tego, czy ich klient renderuje ten sam model. To funkcja renderowania, więc wpływa na to, co wyświetla się na modelu gracza, a nie na cokolwiek, co serwer śledzi lub nadaje jako dane.
+</FAQItem>
+
+<FAQItem question="Czy Dragon Wings to to samo co noszenie elytra?">
+Nie. Elytra to przedmiot z wersji bazowej, posiadający realną mechanikę szybowania. Dragon Wings to model kosmetyczny, który nie ma żadnego efektu mechanicznego, bardziej przypominający płaszcz niż faktyczny ekwipunek do latania.
+</FAQItem>
+
+<FAQItem question="Czy używanie Skrzydeł Smoka grozi blokadą?">
+Nie. To moduł wyłącznie wizualny, który nie zmienia niczego, co serwer śledzi w odniesieniu do ruchu lub walki, więc nie niesie ze sobą większego ryzyka niż jakikolwiek inny wybór kosmetycznego wyglądu.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "W środku znajdują się szersze kategorie modułów kosmetycznych, takie jak Dragon Wings." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Gdzie niezauważony bycie jest ważniejsze niż to, jak wyglądasz, robiąc to." },
+  { href: "/pl/learn/what-is-a-crystal-aura", label: "Czym jest kryształowa aura?", description: "Moduł znajdujący się na przeciwnym końcu spektrum ryzyka w porównaniu z czysto kosmetycznym." },
+]} />
+
+<CTA href="/pl/purchase">Zapomnij o dyskusji o pikselowej pelerynie. Opal zajmuje się modułami, które naprawdę zmieniają przebieg walki.</CTA>

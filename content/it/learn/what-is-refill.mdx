@@ -1,0 +1,98 @@
+---
+title: Cos'è il Refill in Minecraft? Come funziona il modulo
+description: Refill è un modulo client di utilità per Minecraft che sostituisce automaticamente uno stack di blocchi esaurito, di solito blocchi per ponti, con uno nuovo dal tuo inventario.
+excerpt: Esaurimento dei blocchi a metà ponte, ma Refill l'ha già sistemato prima che te ne accorgessi. Nessun controllo dell'inventario, nessun passo interrotto.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Refill offre un reale vantaggio di gioco?
+    a: Non meccanicamente. Risparmia tempo e attenzione piuttosto che concedere qualcosa che non avresti potuto fare a mano. Un giocatore che osserva attentamente la propria barra degli oggetti potrebbe rifornire da solo una pila esaurita; Rifornisci fa semplicemente il monitoraggio e lo scambio per te.
+  - q: È rilevabile Refill da un anticheat?
+    a: È plausibile. Lo scambio è identico a una normale movimentazione di magazzino, ma la velocità e la costanza di un rifornimento automatizzato possono apparire diverse dal comportamento umano a un server che monitora attentamente le azioni di inventario.
+  - q: Quali clienti includono Refill?
+    a: È documentato in Juul, raggruppato con altri moduli di convenienza per le categorie di giocatori piuttosto che con tecnologie di combattimento o movimento. Moduli di rifornimento automatico comparabili compaiono con nomi diversi altrove.
+  - q: Refill è la stessa cosa di Auto Armor?
+    a: Stessa filosofia, slot diverso. Il rifornimento ripristina una pila di barra degli strumenti esaurita, di solito per collegare blocchi. L'Armatura Automatica sostituisce le armature migliori quando le raccogli. Entrambe automatizzano un movimento di inventario che sei già autorizzato a fare.
+  - q: Funziona con qualsiasi oggetto, o solo con i blocchi?
+    a: È documentato specificamente per quanto riguarda le pile di blocchi utilizzati per costruire ponti. Non c'è alcuna indicazione che sia costruito per rifornire ogni tipo di oggetto nel tuo inventario.
+---
+
+<KeyTakeaways>
+
+- Il Refill sostituisce automaticamente una pila di blocchi esaurita, di solito blocchi di ponte, con una pila fresca prelevata dal tuo inventario.
+- Si attiva nel momento in cui la tua pila attiva nella barra degli strumenti si esaurisce o scende, invece di aspettare che tu te ne accorga e la ricarichi manualmente.
+- È un modulo di convenienza, non una truffa meccanica: lo scambio rispecchia un normale trasferimento di inventario, solo automatizzato e più veloce.
+- È documentato in client come Juul, e viene classificato come convenienza per il giocatore insieme a moduli come Auto Armor.
+
+</KeyTakeaways>
+
+Refill è un modulo presente nei client di utilità di Minecraft che sostituisce automaticamente uno stack di blocchi esaurito con uno nuovo preso dal tuo inventario. La maggior parte delle persone lo incontra durante la costruzione di ponti: posizioni blocco dopo blocco, lo stack in mano raggiunge lo zero e normalmente ti fermeresti, apriresti l'inventario e trascineresti manualmente un nuovo stack nello slot. Refill esegue quel trasferimento per te nel momento in cui lo stack vecchio si esaurisce, quindi l'unica cosa che cambia è che non devi mai distogliere lo sguardo dal bordo che stai costruendo.
+
+## Come funziona
+
+Refill monitora ciò che si trova nello slot della tua barra degli strumenti attiva, che per la maggior parte dei giocatori significa il blocco che hanno selezionato per la costruzione di ponti. Una volta che quello stack si esaurisce, o scende al di sotto di una soglia minima, Refill scansiona il resto del tuo inventario alla ricerca di uno stack corrispondente e lo sposta al suo posto.
+
+A livello meccanico, non succede nulla di esotico. È lo stesso trasferimento dall'inventario alla barra degli strumenti che puoi già attivare tu stesso trascinando uno stack. Refill attiva semplicemente quel trasferimento nel momento in cui lo slot si svuota, invece che dopo che te ne sei accorto, hai dato un'occhiata al tuo inventario e hai trascinato manualmente la sostituzione. Su un server dove un blocco di ponte mancato ti costa l'intero attraversamento, quel mezzo secondo di ritardo è l'intero scopo del modulo.
+
+## Refill vs Auto Armor
+
+Refill viene spesso paragonato a [Auto Armor](/it/learn/what-is-auto-armor), ed è un paragone azzeccato: entrambi sono moduli di convenienza per categorie di giocatori che automatizzano un'azione di inventario che puoi già fare manualmente. La differenza sta nello slot che ciascuno monitora.
+
+| | Refill | Auto Armor |
+|---|---|---|
+| Monitora | Slot della barra degli strumenti attivo | Quattro slot delle armature |
+| Si attiva quando | Lo stack si esaurisce o sta per esaurirsi | Un pezzo migliore entra nel tuo inventario |
+| Caso d'uso tipico | Attraversamento di ponti e altri movimenti dipendenti dai blocchi | Qualsiasi combattimento in cui l'equipaggiamento viene potenziato durante il combattimento |
+| Cosa viene sostituito | Uno stack corrispondente dal tuo inventario | Il pezzo con la protezione più alta che stai trasportando |
+
+La stessa idea, un lavoro diverso. Uno tiene occupate le tue mani, l'altro protegge il tuo corpo.
+
+<Callout variant="tip" title="Dove si inserisce Opal">
+Il catalogo dei moduli di Opal rientra nello stesso ambito di praticità per il giocatore, come l'Auto Armatura, senza sconfinare in qualcosa che un umano non possa fare fisicamente a mano. Un modulo dedicato al rifornimento dei blocchi non è qualcosa che Opal spedisce con il suo marchio attuale, ma l'idea di fondo, automatizzare i compiti ripetitivi per permetterti di tenere gli occhi sul ponte invece che sull'inventario, è esattamente la filosofia su cui si basa il resto della linea di utilità di Opal.
+</Callout>
+
+## È sicuro usarlo?
+
+Il refill non influisce sulla portata, sulla registrazione dei colpi o sulla velocità di movimento. Automatizza solamente un trasferimento di inventario che è già legale da eseguire manualmente, il che lo rende molto più simile a una funzionalità che migliora la qualità della vita che a un cheat meccanico. Nulla riguardo allo scambio stesso è qualcosa che un server possa dimostrare essere fisicamente impossibile per un umano.
+
+Detto questo, "azione legale, automatizzata" non significa automaticamente "invisibile". Alcuni anticheat considerano azioni di inventario rapide o insolitamente consistenti come meritevoli di segnalazione di per sé, indipendentemente da ciò che l'azione realizza. Un rifornimento che si attiva esattamente nel momento in cui una pila raggiunge lo zero, ogni volta, si distingue da una persona che occasionalmente lascia cadere un oggetto trascinandolo.
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Refill si colloca più vicino ad Auto Armor che ai moduli incentrati sulla rilevazione come Reach o KillAura, ma è comunque un'azione automatizzata che un server può intercettare. Trattalo come rilevabile e usalo a tuo rischio e pericolo, come qualsiasi altro modulo di automazione su qualsiasi client che lo distribuisca.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Refill offre un reale vantaggio nel gameplay?">
+Non meccanicamente. Risparmia tempo e attenzione piuttosto che concedere qualcosa che non potresti fare manualmente. Un giocatore che osserva attentamente la propria barra degli strumenti potrebbe rifornire da solo una pila esaurita; Refill fa semplicemente il controllo e lo scambio al posto tuo.
+</FAQItem>
+
+<FAQItem question="Refill è rilevabile da anticheat?">
+È plausibile. Lo scambio è identico a un normale spostamento dell'inventario, ma la velocità e la costanza di un rifornimento automatizzato potrebbero apparire diverse dal comportamento umano a un server che monitora attentamente le azioni dell'inventario.
+</FAQItem>
+
+<FAQItem question="Quali clienti includono Refill?">
+È documentato in Juul, raggruppato con altri moduli di convenienza per le categorie di giocatori piuttosto che con tecnologie di combattimento o movimento. Moduli di rifornimento automatico comparabili compaiono con nomi diversi altrove.
+</FAQItem>
+
+<FAQItem question="Refill è la stessa cosa di Auto Armor?">
+Stessa filosofia, slot diverso. Refill ricarica una pila della barra degli strumenti esaurita, di solito per colmare spazi. Auto Armor sostituisce armature migliori quando le raccogli. Entrambi automatizzano uno spostamento dell'inventario che sei già autorizzato a fare.
+</FAQItem>
+
+<FAQItem question="Funziona con qualsiasi oggetto, o solo con i blocchi?">
+È documentato specificamente per gli stack di blocchi utilizzati per creare ponti. Non ci sono indicazioni che sia progettato per rifornire ogni tipo di oggetto nel tuo inventario.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria Ricarica appartiene a, e cosa altro vi risiede al suo interno." },
+  { href: "/it/learn/what-is-scaffold", label: "Cos'è Scaffold?", description: "La tecnologia di collegamento Refill esiste per supportarti quando ti trovi a corto di carburante durante l'attraversamento." },
+  { href: "/it/learn/what-is-reach", label: "Cos'è Reach?", description: "Un modulo incentrato sulla rilevazione, agli antipodi dello spettro del rischio rispetto a Refill." },
+]} />
+
+<CTA href="/it/purchase">La gamma di prodotti utilitari di Opal è progettata per giocatori che preferiscono organizzare piuttosto che gestire il proprio inventario.</CTA>

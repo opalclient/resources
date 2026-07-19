@@ -1,0 +1,79 @@
+---
+title: Cosa sono i Tracer in Minecraft? Spiegazione del Modulo
+description: Tracers disegna una linea dal tuo mirino a ogni entità visibile, ma non attraverso i muri. Ecco come funziona il modulo e se è sicuro eseguirlo in Minecraft.
+excerpt: Una linea visibile al giocatore, niente che un wallhack ti mostrerebbe. Ecco il meccanismo e il motivo per cui finisce comunque raggruppato con le cose sospette.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Tracers è la stessa cosa che ESP?
+    a: No. ESP visualizza le entità attraverso muri e terreno saltando il test di profondità, il che mostra cose che una normale visuale della telecamera non potrebbe mai rivelare. I tracciatori disegnano una linea solo per le entità che il client sta già visualizzando sullo schermo, quindi non aggiungono mai informazioni nascoste.
+  - q: Mostra Tracers ai giocatori attraverso i muri?
+    a: No. I Tracers marcano le entità su cui il cliente sta già disegnando sullo schermo. Se un muro blocca la linea di vista verso un'entità, non viene renderizzato nulla per il modulo a cui puntare, quindi non disegna nulla.
+  - q: Possono i Tracer far bannare un giocatore?
+    a: Può capitare, soprattutto per la compagnia che tiene. I tracer vengono solitamente caricati all'interno dello stesso client di ESP e aimbot, e un server che scansiona il codice di rendering modificato segnala l'hook stesso, indipendentemente dal modulo attivato. Da solo, il meccanismo rivela molto poco.
+  - q: Per quale motivo i clienti delle utenze abbinano i Tracer ai moduli ESP?
+    a: "Traggono dallo stesso pipeline di rendering e hanno lo stesso scopo: rendere più facili da notare le entità. Raggrupparle in un'unica categoria visiva è perlopiù una scelta di implementazione, non la prova che funzionino allo stesso modo a livello interno."
+---
+
+<KeyTakeaways>
+
+- I Tracers disegnano una linea dalla mira a ogni entità che il client sta già rendendo sullo schermo.
+- Non vede attraverso i muri: quando un'entità esce dalla visuale o viene bloccata, anche la sua linea scompare.
+- Si differenzia da ESP, che rende attraverso il terreno saltando completamente i test di profondità.
+- Da solo offre un piccolo vantaggio funzionale, ma di solito viene fornito in bundle con moduli che sono chiaramente contrari alle regole.
+
+</KeyTakeaways>
+
+Tracers è un modulo visivo che disegna una linea dal centro dello schermo a ogni entità attualmente visibile, in modo che un giocatore o un mob smetta di confondersi con la folla e inizi a risaltare. Segna solo ciò che il client sta già disegnando: nulla di nascosto dietro un muro riceve una linea, perché nulla di nascosto dietro un muro viene renderizzato in primo luogo.
+
+## Come funziona Tracers
+
+Tracers viene eseguito ogni frame e verifica quali entità il client sta attualmente renderizzando, giocatori, mob o entrambi a seconda delle impostazioni. Per ognuna a schermo, disegna una linea retta dalla mira alla posizione dell'entità, per poi interrompere la linea non appena l'entità esce dalla visuale o viene bloccata. Il modulo legge gli stessi dati di rendering che il gioco utilizza già per disegnare l'entità stessa. Non estrae nulla di aggiuntivo dal server e non richiede al server nulla che un client vanilla non richiederebbe.
+
+Quest'ultima parte è ciò che distingue Tracers da un vero e proprio wallhack. L'ESP rende le entità attraverso blocchi solidi saltando il depth testing, mostrando al giocatore cose che una normale visuale della telecamera non potrebbe mai mostrare. Tracers non fa nulla di tutto ciò. Mette semplicemente una linea su informazioni che avrebbero comunque raggiunto il tuo monitor, così te ne accorgi mezzo secondo prima di quanto faresti scansionando tu stesso lo schermo.
+
+L'attrattiva risiede nella velocità di riconoscimento, non in nuove informazioni. In una mischia affollata o in una foresta piena di nemici, individuare un giocatore in movimento tra il caos richiede un attimo di scansione cosciente. Una linea diretta verso ogni entità evita questo attimo. Fan è un client che distribuisce Tracers, solitamente raggruppati con etichette e hitbox sotto la stessa categoria visiva, poiché tutti e tre esistono per rendere il mondo di gioco più leggibile piuttosto che più facile da vedere attraverso.
+
+## L'uso di Tracers è sicuro?
+
+Per meccanismo, Tracers si avvicina di più a una funzione di comodità che a un trucco di vantaggio di gioco. Non estende la visuale attraverso i muri, non influisce sulla portata o sulla mira, e non invia o riceve nulla che il client non stesse già gestendo. Un server che giudica esclusivamente in base alle informazioni a cui un giocatore ha accesso ha poco da segnalare: un essere umano che presta molta attenzione potrebbe, in teoria, notare la stessa entità guardando la stessa parte dello schermo.
+
+Il rischio è il contesto, non il meccanismo. I tracer vengono quasi sempre forniti insieme a client che includono anche ESP, aimbot e altri moduli che sono chiaramente cheat, quindi un server che esegue scansioni lato client per codice di rendering modificato intercetta l'iniezione stessa, non la linea specifica che disegna. I server a tolleranza zero trattano qualsiasi client modificato allo stesso modo, indipendentemente dalla casella di controllo selezionata. Nei server che giudicano il comportamento invece dell'installazione, Tracers da solo rivela quasi nulla, perché non modifica mai ciò che il giocatore è effettivamente in grado di vedere.
+
+<Callout variant="warning" title="Il contesto, non il meccanismo, è il rischio">
+I tracer da soli non rivelano nulla che un essere umano non potrebbe notare da solo. Ma raramente vengono distribuiti singolarmente. Se vengono inclusi insieme a ESP o aimbot nello stesso client, e un server scansiona la modifica piuttosto che il comportamento, il modulo che non hai abilitato ti farà scovare tanto quanto quello che hai attivato.
+</Callout>
+
+La categoria visiva di Opal si basa sulla stessa distinzione: rendere più chiare le informazioni a cui un giocatore ha già legittimo accesso, piuttosto che introdurre elementi che una normale visuale dalla telecamera non potrebbe mostrare. È lo stesso principio progettuale che impedisce a una linea di trasformarsi in un wallhack.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Tracers è la stessa cosa di ESP?">
+No. ESP rende le entità attraverso muri e terreno saltando il test di profondità, il che mostra cose che una normale visuale della telecamera non potrebbe mai rivelare. Tracers disegna solo una linea verso le entità che il client sta già rendendo sullo schermo, quindi non aggiunge mai informazioni nascoste.
+</FAQItem>
+
+<FAQItem question="Tracers mostra ai giocatori attraverso i muri?">
+No. Tracers evidenzia le entità che il client sta già disegnando sullo schermo. Se un muro blocca la linea di vista verso un'entità, non c'è nulla da rendere per il modulo a cui puntare, quindi non disegna nulla.
+</FAQItem>
+
+<FAQItem question="Tracers possono portare a un divieto per un giocatore?">
+Può capitare, soprattutto per via della compagnia che tiene. Tracers viene solitamente distribuito all'interno dello stesso client di ESP e aimbot, e un server che scansiona il codice di rendering modificato segnala l'hook stesso, indipendentemente dal modulo che è stato attivato. Da solo, il meccanismo rivela molto poco.
+</FAQItem>
+
+<FAQItem question="Perché i clienti di utility raggruppano i Tracers con i moduli ESP?">
+Traggono dati dallo stesso pipeline di rendering e hanno lo stesso scopo: rendere più facili da notare le entità. Raggrupparli sotto un'unica categoria visiva è principalmente una decisione di build, non la prova che funzionino allo stesso modo a livello interno.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "A cui categoria più ampia appartengono i Tracers." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Il modulo di combattimento Tracers che spesso viene spedito insieme." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Dove il confine tra sottile e sfacciato si trovi realmente." },
+]} />
+
+<CTA href="/it/purchase">Scopri cosa copre il toolkit visivo di Opal, da $8.99</CTA>

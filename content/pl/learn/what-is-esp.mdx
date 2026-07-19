@@ -1,0 +1,87 @@
+---
+title: Czym jest ESP w Minecraft? (Wyjaśnienie modułu)
+description: ESP to oszustwo wizualne, które pozwala graczom i obiektom przenikać ściany w grze Minecraft. Oto jak to działa, dlaczego nie pozostawia śladu pakietów oraz ryzyko bana.
+excerpt: Ściana powinna oznaczać, że nie widać tego, co za nią. ESP cicho się z tym nie zgadza i robi to bez wysyłania serwerowi ani jednego dodatkowego pakietu.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy ESP to to samo co wallhack?
+    a: Tak. Wallhack to ogólna nazwa potoczna dla tej rodziny modułów, a ESP to konkretne określenie, którego większość klientów narzędzi używa dla niej w menu ustawień.
+  - q: Czy programy anticheat potrafią bezpośrednio wykrywać ESP?
+    a: Nie tylko dzięki ruchowi w sieci. ESP zmienia jedynie sposób, w jaki Twój klient rysuje dane, które już posiada, więc nic dodatkowego nie przekracza sieci. Wykrywanie natomiast pochodzi ze skanów integralności po stronie klienta lub z zachowań, które zdradzają, że widzisz przez ściany.
+  - q: Czy ESP wysyła dodatkowe dane z serwera?
+    a: Nie. Serwer już przesyła pozycję każdej pobliskiej jednostki podczas normalnej rozgrywki, z murami czy bez. ESP zmienia jedynie sposób, w jaki klient rysuje te istniejące dane, nie żąda ani nie odbiera nic nowego.
+  - q: Czy ESP jest zabronione na większości serwerów?
+    a: Tak. Prawie każdy serwer wieloosobowy traktuje ESP jako oszustwo, a wykrycie, czy to przez skanowanie klienta, czy przez zachowanie, zazwyczaj kończy się blokadą.
+---
+
+<KeyTakeaways>
+
+- ESP pozwala graczom i obiektom przebijać ściany i teren, utrzymując ich widoczność niezależnie od przeszkód.
+- Zmienia tylko lokalne renderowanie. Serwer już przesyła pozycje obiektów do normalnej rozgrywki, więc nic dodatkowego nie jest żądane ani wysyłane.
+- Nie pozostawia śladu pakietów, więc wykrywanie opiera się na skanowaniu integralności klienta lub na zachowaniu, które zdradza, co widzisz.
+- Wallhack to ogólna nazwa potoczna, a ESP to termin parasolowy dla całej rodziny powiązanych modułów wizualnych.
+
+</KeyTakeaways>
+
+ESP, czyli extra-sensory perception, to moduł oszukiwania wizualnego w Minecraft, który renderuje innych graczy i byty przez ściany i teren, dzięki czemu pozostają widoczne niezależnie od tego, gdzie skierowany jest Twój aparat i co stoi między Tobą a nimi. Jest to termin parasolowy dla rodziny wallhacków: dowolny moduł, który rysuje to, czego normalny klient nie powinien być w stanie pokazać.
+
+## Jak to działa
+
+Serwer już śledzi każdego pobliskiego gracza, moba i przedmiotu i przesyła ich pozycje do Twojego klienta, z przeszkodą czy bez. To nie jest wyciek, to po prostu sposób działania gry: fizyka, wykrywanie kolizji i zwykłe renderowanie wymagają tych danych niezależnie od tego, co znajduje się między Tobą a celem. Normalny klient odrzuca większość z nich w ostatniej chwili. Test głębi sprawdza, co jest przed czym i rysuje tylko byty, które Twój aparat mógłby prawdopodobnie zobaczyć, pozwalając solidnym blokom ukryć resztę.
+
+ESP pomija ten krok odrzucania dla wybranych bytów. Zamiast znikać za ścianą, jak wymaga renderowanie standardowe, byt jest rysowany jako kontur, pudełko lub pełny model na geometrii świata, przed wszystkim, co powinno go zasłaniać. Ponieważ dane o pozycji i tak docierają do zwykłej rozgrywki, nic z tego nie wymaga nowego żądania do serwera i nic dodatkowego nie jest wysyłane z powrotem. To decyzja podejmowana wyłącznie na Twoim komputerze, co narysować, a nie zmiana tego, co Twój klient wie.
+
+## Dlaczego ludzie z niego korzystają
+
+Przyczyną jest dostęp do wczesnych informacji. Zauważenie gracza z ekwipunkiem za rogiem, dostrzeżenie kogoś podchodzącego od tyłu lub śledzenie mobów i łupów bez bezsensownego eksplorowania – wszystko to wynika z tej samej sztuczki. Podczas walki ESP eliminuje zaskoczenie, które ma zapewniać ściana lub róg, ponieważ pozycja każdej pobliskiej istoty jest widoczna przez cały czas.
+
+Fan to jeden z klientów, który zawiera dedykowany moduł ESP, a także powiązane funkcje wizualne, takie jak Tracery i Etykiety, które opierają się na tej samej idei: widzieć więcej mapy, niż kiedykolwiek pokazałby normalny klient.
+
+## Dlaczego jest oznaczany jako problematyczny
+
+ESP sam w sobie nie generuje dużego ruchu w sieci. Nie żąda nic od serwera i nie wysyła niczego nietypowego, więc serwer monitorujący pakiety w izolacji nie ma czego bezpośrednio wychwycić. Wykrywanie zwykle pochodzi z dwóch innych źródeł.
+
+Niektóre anticheaty przeprowadzają integralność sprawdzeń po stronie klienta, skanując pod kątem znanych haków ESP, wstrzykniętego kodu renderowania lub zmodyfikowanych plików gry, zamiast obserwować, co robisz w meczu. Inne obserwują gracza: obracanie się, aby stanąć twarzą do ukrytego zagrożenia przez ścianę, unikanie podstępnego wroga bez linii wzroku lub śledzenie ruchu celu bez widocznego powodu – to wszystko sygnały, że ktoś widzi więcej, niż pokazuje normalny klient.
+
+Taka kombinacja sprawia, że ESP jest bardziej ryzykowne niż sugeruje jego opis jako "tylko zmiana renderowania". Brak śladu pakietów nie oznacza braku śladu. Serwery łączące skanowanie klienta z analizą zachowań regularnie to wykrywają, dlatego powinno to znaleźć się w kolumnie do zbanowania, a nie w bezpiecznej.
+
+<Callout variant="tip" title="Gdzie to się znajduje w Opalu">
+Opal wysyła to bezpośrednio. Moduł ESP znajduje się w kategorii wizualnej i robi dokładnie to, co sugeruje nazwa: podświetla graczy i obiekty na świecie. Jest oznaczony jako używaj na własną odpowiedzialność bezpośrednio w liście modułów Opal, dokładnie taką samą uczciwą etykietą, jaką otrzymują wszystkie funkcje w stylu wallhacka, bez żadnych obiecujących haseł o całkowitym bezpieczeństwie.
+</Callout>
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona wyjaśnia, czym jest ESP i dlaczego serwery traktują to jako naruszenie, a nie zgodę na jego używanie. Widzenie dokładnej pozycji przeciwnika przez ścianę to informacja, którą gra w wersji podstawowej celowo ukrywa, a jest zakazana na praktycznie każdym serwerze, niezależnie od tego, czy jest to skanowanie klienta, czy zachowanie.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy ESP to to samo co wallhack?">
+Tak, to ta sama idea pod dwoma nazwami. Wallhack to pseudonim; ESP to nazwa, której używają zazwyczaj klienci programów do ustawień.
+</FAQItem>
+
+<FAQItem question="Czy antywiry mogą wykryć ESP bezpośrednio?">
+Nie tylko na podstawie ruchu sieciowego, ponieważ ESP zmienia lokalny rendering bez wysyłania dodatkowych danych do serwera. Wykrywanie zazwyczaj opiera się na skanach integralności po stronie klienta lub na zachowaniu, które ujawnia, że gracz reaguje na coś, czego nie powinien widzieć.
+</FAQItem>
+
+<FAQItem question="Czy ESP wysyła dodatkowe dane z serwera?">
+Nie. Serwer już wysyła pozycje obiektów do normalnej rozgrywki. ESP zmienia jedynie sposób, w jaki klient rysuje te istniejące dane; nie wysyła ani nie odbiera nic nowego.
+</FAQItem>
+
+<FAQItem question="Czy ESP jest sprzeczne z zasadami na większości serwerów?">
+Tak. Prawie każdy serwer wieloosobowy traktuje ESP jako oszustwo, a wykrycie, czy to poprzez skanowanie klienta, czy przez zachowanie, zazwyczaj skutkuje zablokowaniem konta.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Szersza kategoria ESP i każdy inny moduł, do którego to należy." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Moduł, który działa na cel, gdy ESP już poinformowało cię, gdzie się znajdują." },
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Cele i ataki, działające samodzielnie, to druga połowa kombinacji ujawnij-potem-działaj, którą tworzą zestawy ESP." },
+]} />
+
+<CTA href="/pl/purchase">Zobacz, gdzie Entity ESP mieści się w pełnym zestawie narzędzi wizualnych Opal.</CTA>

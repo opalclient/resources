@@ -1,0 +1,85 @@
+---
+title: Czym jest wykrywacz hakera w Minecraft? Wyjaśnienie modułu
+description: Wykrywacz Hakera to moduł Minecraft, który ocenia przeciwników pod kątem zasięgu, ataków w stylu KillAura oraz rotacji celownika, a następnie oznaczają potencjalnych oszustów w trakcie walki.
+excerpt: Obserwuje każdy pojedynek pod kątem celownika, zasięgu, KillAury, płynności celowania i prowadzi statystyki, żebyś nie musiał zgadywać, kto oszukuje. Nie jest to dowód. Tylko bardzo trafne podejrzenie.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Hacker Detector to oszustwo?
+    a: Nie. Odczytuje jedynie informacje już widoczne dla klienta, takie jak pozycja przeciwnika i czas trafienia, i nigdy nie zmienia sposobu poruszania się ani atakowania własnej postaci. Oznacza innych graczy, ale nie działa w ich imieniu ani nie podejmuje żadnych akcji w imieniu użytkownika.
+  - q: Kto jest uwzględniony w bazie danych Hacker Detector?
+    a: Tenacity wyposażony jest w moduł HackerDetector, a ten sam schemat pojawia się pod różnymi nazwami w kilku płatnych klientach stworzonych dla rywalizacyjnych rozgrywek PvP z ery 1.8. Opal również posiada własną wersję, skatalogowaną jako moduł Bezpieczny.
+  - q: Czy używanie Wykrywacza Hakerów może spowodować bana?
+    a: Nie. Ponieważ jedynie obserwuje stan, który klient już otrzymuje i nigdy nie modyfikuje ruchu, walki ani pakietów wysyłanych do serwera, uruchomienie go nie niesie ze sobą żadnego ryzyka, jakie wiążą się z oszustwami, których szuka.
+  - q: Czy oznaczanie przez Wykrywacz Hakera jest wiarygodne?
+    a: To jest szacunek, a nie wyrok. Opiera się na stanie widocznym dla klienta, zamiast na autorytatywnych danych serwera, więc zdarzają się zarówno fałszywie pozytywne wyniki, kiedy legalny gracz uruchamia kontrolę, jak i fałszywie negatywne, kiedy ominięcie jest dostrojone i znajduje się poniżej progu.
+  - q: Dlaczego niektórzy klienci, którzy wysyłają oszustwa, wysyłają również wykrywacz hakera?
+    a: Ponieważ detektor pełni również funkcję stanowiska testowego dla obejściu klienta. Deweloperzy uruchamiają go lokalnie w stosunku do własnych modułów atakujących i dostrajają je, aż detektor przestaje je oznaczać, co jest zbliżone do pętli, w jakiej działa antywirus serwerowy.
+---
+
+<KeyTakeaways>
+
+- Wykrywacz Hakera to moduł po stronie klienta, który ocenia graczy przeciwnych pod kątem zachowań przypominających oszukiwanie: przekraczanie limitu standardowej wersji, automatyczne ataki w stylu KillAura, krzywe rotacji celownika oraz tłumienie odrzutu.
+- Ocenia podejrzenia w oparciu o serię klatek, a nie pojedyncze trafienie, więc chwilowe opóźnienie lub szczęśliwe kliknięcie nie uruchomią flagi samodzielnie.
+- Odczytuje tylko dane, które klient już otrzymuje. Nigdy nie zmienia własnego celownika, ruchu ani ataków użytkownika.
+- Opal dostarcza własną wersję, oznaczona jako Bezpieczna, ponieważ oznaczanie innych graczy nigdy nie wpływa na Twoje dane wejściowe.
+
+</KeyTakeaways>
+
+Wykrywacz Hakera to moduł Minecrafta, który obserwuje innych graczy podczas walki i prowadzi ciągłą ocenę prawdopodobieństwa oszukiwania. Co tick sprawdza pobliskich przeciwników pod kątem znanych sygnatur: zasięgu przekraczającego limit wersji vanilla, automatycznego ataku w stylu KillAura, płynnych krzywych obrotu jak w aimbotcie, tłumienia odrzutu, a także zbyt regularnych wzorców klikania, by mogły pochodzić z ludzkiej ręki. Przekroczenie progu powoduje podniesienie flagi. To tak, jak czytają to wszyscy doświadczeni gracze PvP, gdy walka wydaje się podejrzana – tylko zamiast przeczuć, które sam/a odrzucasz, to przekształcone w liczbę.
+
+## Jak to działa
+
+Co tick, Wykrywacz Hakera pobiera dane o pobliskich graczach i analizuje ich ruch, obrót oraz zachowanie bojowe pod kątem znanych sygnatur oszustw: zasięgu przekraczającego limit wersji vanilla, automatycznego ataku w stylu KillAura, płynnych krzywych obrotu jak w aimbotcie, tłumienia prędkości lub odrzutu, a także odstępów między kliknięciami, które nie przypominają klikania przez człowieka. Dopasowanie do dowolnej sygnatury zwiększa bieżący wskaźnik podejrzliwości tego gracza. Przekroczenie progu powoduje oznaczenie go przez moduł.
+
+System oceniania rozciąga się na zakres odliczeń, a nie reaguje na pojedynczy moment. Izolowany spadk spóźnienia, jedno szczęśliwe kliknięcie lub przypadkowy kadr ruchu to za mało, aby samodzielnie coś znaczyć; prawdziwe oszukiwanie ma tendencję do powtarzania się konsekwentnie podczas walki, a fluktuacja nie. Ten zakres to różnica między modułem, który jest faktycznie użyteczny, a tym, który reaguje na najmniejszą dziwną paczkę.
+
+## Wbudowany testowy zestaw obejściowy
+
+Klienci, którzy dystrybuują szkodliwe moduły, takie jak KillAura, celownik, zwiększony zasięg, często dołączają do nich Hacker Detector, i to nie jest przypadkowe. Uruchamianie własnego detektora przeciwko własnemu klientowi podczas aktywnego obejścia pokazuje programiście, które testy są aktywowane, a które nie. Dopasuj obejście, aż lokalny detektor ucichnie, a uruchomisz coś bardzo zbliżonego do pętli, na której serwerowa ochrona przed oszustwami działa na ciebie. Klienci, którzy budują oba elementy obok siebie, często kończą z czystszymi szkodliwymi modułami, a detektor pełni funkcję kontroli jakości.
+
+## Czy jest to bezpieczne w użyciu
+
+Tak, uruchomienie tego nie niesie ze sobą żadnego ryzyka związanego z oszustami, których szuka. Wykrywacz Hakerów odczytuje tylko informacje, które klient już posiada: pozycje, rotacje, czas trafienia, interwały kliknięć, nigdy dane z autorytatywnego serwera i nigdy nie zmienia tego, co wysyła własne konto użytkownika. Żadnych zmienionych trafień, żadnych zmienionych ruchów, żadnych innych pakietów. Nie ma nic, co serwerowy anticheat mógłby wykryć, ponieważ niczego nie zrobił.
+
+Czy ma rację co do drugiej osoby, to oddzielne pytanie. Ponieważ wnioskuje na podstawie stanu widocznego dla klienta, a nie rzeczywistej prawdy serwera, jego ocena jest szacunkiem, a nie wyrokiem. Gracz z wysokim pingiem, nietypowa konfiguracja myszy lub seria przypadkowych zbiegów okoliczności nadal mogą spowodować podniesienie flagi, a dobrze dostrojony obejście może pozostać poniżej każdego progu bez jej uruchomienia. Traktuj flagę jako powód, aby obserwować uważniej, a nie jako raport, na którym postawiłbyś swoje konto.
+
+<Callout variant="tip" title="Opal to wysyła">
+Własny Detektor Hackerów od Opal robi dokładnie to samo: oznaczają graczy, którzy wyglądają, jakby oszukiwali. Są skatalogowane jako Bezpieczne, w tej samej kategorii co pozostałe udogodnienia od Opal, ponieważ ocenianie przeciwnika nie wpływa na Twoje własne działania i nie pozostawia niczego, co mógłby wykryć anticheat.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Hacker Detector to oszustwo?">
+Nie. Czyta jedynie informacje, które są już widoczne dla klienta, takie jak pozycja przeciwnika i czas trafienia, i nigdy nie zmienia sposobu poruszania się ani atakowania własnej postaci. Oznacza innych graczy, ale nie działa w ich imieniu ani nie podejmuje żadnych działań w imieniu użytkownika.
+</FAQItem>
+
+<FAQItem question="Kto zawiera Hacker Detector?">
+Tenacity posiada moduł HackerDetector, a ten sam wzorzec pojawia się pod różnymi nazwami w kilku płatnych klientach stworzonych do rywalizacji PvP z ery 1.8. Opal również posiada własną wersję, skatalogowaną jako moduł Bezpieczny.
+</FAQItem>
+
+<FAQItem question="Czy używanie Wykrywacza Hakerów może spowodować bana?">
+Nie. Ponieważ obserwuje tylko stan, który klient już otrzymuje i nigdy nie modyfikuje ruchu, walki ani pakietów wysyłanych do serwera, jego używanie nie niesie ze sobą żadnego ryzyka, jakie wiążą się z oszustwami, których szuka.
+</FAQItem>
+
+<FAQItem question="Czy oznaczanie przez Hacker Detector jest wiarygodne?">
+To szacunek, a nie wyrok. Opiera się na stanie widocznym dla klienta, a nie na autorytatywnych danych serwera, więc zdarzają się zarówno fałszywe alarmy (legitymny gracz uruchamiający kontrolę), jak i fałszywe negatywy (dostosowany obejście działające poniżej progu).
+</FAQItem>
+
+<FAQItem question="Dlaczego niektórzy klienci wysyłający cheat'y wysyłają również Wykrywacz Hakera?">
+Ponieważ detektor pełni funkcję stanowiska testowego dla własnych obejść klienta. Deweloperzy uruchamiają go lokalnie w stosunku do własnych modułów ofensywnych i dostrajają je, aż detektor przestaje je oznaczać, co jest zbliżone do pętli, jaką uruchamia antywirus po stronie serwera.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Jednym z czynników, które budują wynik podejrzliwości Hacker Detector, jest to, by wychwytywać takie sygnatury." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Gładkie krzywe rotacji to kolejna wskazówka, z którą porównywane są wyniki modułu." },
+  { href: "/pl/learn/what-is-reach", label: "Co to jest Reach?", description: "Przekroczenie limitu wanilii, najłatwiejszy sygnatur do oznaczenia." },
+]} />
+
+<CTA href="/pl/purchase">Poznaj przeciwnika zanim trzeci cios go trafi. Opal zaczyna się od $8.99.</CTA>

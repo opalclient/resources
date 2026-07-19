@@ -1,0 +1,87 @@
+---
+title: Czym jest AntiAura w Minecraft? Wyjaśnienie modułu
+description: AntiAura przewiduje moment użycia kryształu, kotwicy lub totemem przeciwnika i przesuwa cię z dala od wybuchu. Oto jak to działa i czy można to uznać za oszustwo.
+excerpt: AntiAura odczytuje ustawienie kryształów lub kotwic przeciwnika i wyprowadza Cię z promienia wybuchu zanim nastąpi detonacja, bez konieczności używania refleksu. To uniku, który nigdy nie chybia, co stanowi problem.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy AntiAura wpływa na klienta przeciwnika?
+    a: Nie. AntiAura zmienia jedynie ruch gracza, który go używa. Odczytuje czas kryształu, kotwicy lub totemów przeciwnika i unika wybuchu, nigdy nie dotyka ani nie ingeruje w nic po drugiej stronie.
+  - q: Czy AntiAura to to samo co disable?
+    a: Nie. Wyłącznik zakłóca bezpośrednio klienta lub połączenie celu. AntiAura nigdy nie dotyka przeciwnika w ogóle, po prostu wyznacza czas własnego ruchu użytkownika wokół ataku, który i tak ma nastąpić.
+  - q: Jakich klientów mają AntiAura?
+    a: Udokumentowano to, jak widać w Tenacity, gdzie znajduje się w kategorii exploit obok innych modułów, które odczytują i reagują na stan przeciwnika.
+  - q: Czy AntiAura można wykryć w ten sam sposób, co CrystalAura?
+    a: Wcale nie. CrystalAura i Anchor Aura pozostawiają ślad umieszczania bloków i interakcji, które serwer może sprawdzić bezpośrednio w swoich logach. AntiAura generuje jedynie ruch, więc wykrycie go wymaga zauważenia unikania, którego czas jest bardziej regularny niż jakikolwiek ludzki unik, co stanowi o wiele trudniejszy sygnał do wyizolowania.
+  - q: Czy AntiAura jest uważane za oszustwo?
+    a: Na większości serwerów, które zakazują automatyzacji PvP z użyciem kryształów lub kotwic, tak. Automatyzuje to reaktywną umiejętność, unikanie wybuchu o określonym czasie, którą gracze grający ręcznie muszą sami wytrenować, a to stanowi przewagę w rozgrywce, nawet jeśli działa defensywnie, a nie ofensywnie.
+---
+
+<KeyTakeaways>
+
+- AntiAura to moduł obronny, który przewiduje czas użycia kryształu, kotwicy lub totemem przez przeciwnika i przesuwa gracza z dala od wybuchu.
+- Oblicza czas wybuchu w taki sam sposób, jak w standardowym Minecraftcie.
+- Zmienia tylko ruch gracza, nigdy klienta przeciwnika.
+- Jest udokumentowany w Tenacity, a większość banów za crystal-PvP go obejmuje.
+
+</KeyTakeaways>
+
+AntiAura to moduł obronny dla Minecrafta, który przewiduje, kiedy przeciwnik zamierza zdetonować kryształ końca, kotwicę respawnu lub totemowy atak i przesuwa gracza poza zasięg wybuchu zanim ten nastąpi. Nie ingeruje w klienta przeciwnika, nie stawia bloków ani nie zadaje ciosów. Zmienia jedynie ruch gracza, z precyzją, której żaden zestaw ludzkich refleksów nie osiągnie samodzielnie. Tam gdzie moduł typu Crystal Aura automatyzuje atak, AntiAura automatyzuje analizę: zauważ ustawienie, oblicz wybuch, odejdź w bezpieczne miejsce.
+
+## Jak działa AntiAura
+
+AntiAura obserwuje dokładne ustawienie, na którym polegają wszystkie moduły ofensywne Aura: kryształ końca gotowy do uderzenia, naładowana kotwica respawnu gotowa do trafienia lub atak wywołany totemem, który ma się rozpocząć. Po wykryciu takiego ustawienia oblicza moment, w którym nastąpi wybuch, używając tej samej matematyki czasowej, którą standardowy Minecraft wykorzystuje do rozstrzygania wybuchu. Nic egzotycznego, tylko klient wykonujący obliczenia szybciej niż człowiek.
+
+Stamtąd przesuwa gracza, wykonując krok, boczny ruch lub skok, tak aby znajdował się poza promieniem wybuchu w momencie, gdy ten faktycznie następuje. To jest kluczowa różnica: jest to przewidywanie wykonane przed trafieniem, a nie reakcja na już poniesione obrażenia. Jest to udokumentowane, jak widać w Tenacity, gdzie znajduje się w kategorii exploit obok innych modułów, które odczytują i działają na stan przeciwnika, a nie na własne polecenia gracza.
+
+## AntiAura w stosunku do modułów, które neutralizuje
+
+AntiAura istnieje z powodu modułów takich jak [Crystal Aura](/pl/learn/what-is-a-crystal-aura) i Anchor Aura, które automatycznie umieszczają i detonują materiał wybuchowy obok celu. Gracz bez żadnej pomocy musi wypatrzeć kryształ lub kotwicę, ocenić czas i poruszyć się zanim to nastąpi, wszystko w ułamku sekundy. AntiAura automatyzuje sekwencję odczytu i uniku w taki sam sposób, w jaki moduły ofensywne automatyzują sekwencję umieszczania i detonacji po drugiej stronie walki.
+
+Chociaż nie są one identyczne pod względem tego, co dotykają. Moduł Aura ofensywny wysyła pakiety umieszczania i interakcji, które serwer może sprawdzić bezpośrednio, blok po bloku. AntiAura zmienia tylko ruch, tę samą kategorię danych wejściowych, które klient wysyła co tick, co dokładnie sprawia, że jego wynik zlewa się z normalną rozgrywką na pierwszy rzut oka.
+
+## Czy jest bezpieczne do użycia
+
+Zazwyczaj nie, chociaż profil ryzyka wygląda inaczej niż w przypadku agresywnego modułu Aury. AntiAura nie stawia bloków, nie atakuje i samodzielnie nie przekracza żadnych standardowych ograniczeń ruchu, dlatego też brakuje mu oczywistych oznak, niemożliwego zasięgu, interakcji z blokiem, z którym gracz nigdy się nie spotkał – cech, które sprawiają, że coś w rodzaju Crystal Aury można łatwo zidentyfikować tylko na podstawie logów serwera.
+
+Automatyzuje natomiast uniki, które lądują z taką spójnością i szybkością reakcji, jakiej żaden człowiek nie dorówna wzrokiem. Serwery z systemami antycheatowymi opartymi na PvP z kryształową lub kotwiczną Aurą, traktują tego typu perfekcyjnie wyczuwalne, unikowe ruchy jako przewagę nad grą, a nie szczęśliwy zbieg okoliczności, zwłaszcza gdy powtarzają się w trakcie całego meczu pełnego eksplozji. Wyłapanie tego wymaga analizy ruchu, a nie prostego sprawdzenia pakietów, ale na serwerach, które zakazują automatycznego wsparcia w walce, podpada to pod tę samą zasadę, co moduły, których unika.
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona wyjaśnia, czym jest AntiAura i jak się zachowuje, a nie jak ją uruchomić. Nazewnictwo i dokładna implementacja różnią się w zależności od klienta, a automatyzacja unikania kryształu lub kotwicy w ten sposób narusza zasady na praktycznie każdym serwerze, który pozwala na ten styl PvP.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy AntiAura wpływa na klienta przeciwnika?">
+Nie. AntiAura zmienia jedynie ruch gracza, który go używa. Odczytuje czas kryształu, kotwicy lub totemów przeciwnika i unika wybuchu, nigdy nie wpływa ani nie ingeruje w nic po drugiej stronie.
+</FAQItem>
+
+<FAQItem question="Czy AntiAura to to samo co disable?">
+Nie. Disable zakłóca bezpośrednio klienta lub połączenie celu. AntiAura w ogóle nie dotyka przeciwnika, po prostu wyznacza czas ruchu użytkownika wokół ataku, który i tak ma nastąpić.
+</FAQItem>
+
+<FAQItem question="Klienci, którzy posiadają AntiAura?">
+Jest to udokumentowane w Tenacity, gdzie znajduje się w kategorii exploit wraz z innymi modułami, które odczytują i reagują na stan przeciwnika.
+</FAQItem>
+
+<FAQItem question="Czy AntiAura można wykryć w ten sam sposób, co CrystalAura?">
+Nie do końca. CrystalAura i Anchor Aura pozostawiają ślad w postaci umieszczania bloków i interakcji, które serwer może sprawdzić bezpośrednio w swoich logach. AntiAura generuje jedynie ruch, więc wykrycie go oznacza zauważenie uników o taktyce bardziej konsekwentnej niż ludzkie uniki, co stanowi o wiele trudniejszy sygnał do wyizolowania.
+</FAQItem>
+
+<FAQItem question="Czy AntiAura jest uważane za oszustwo?">
+Na większości serwerów, które zakazują automatyzacji PvP z użyciem kryształów lub kotwic, tak. Automatyzuje ono reaktywną umiejętność, unikanie wybuchu o określonym czasie, którą gracze grający ręcznie muszą sami wytrenować, a to stanowi przewagę w rozgrywce, nawet jeśli działa defensywnie, a nie ofensywnie.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-crystal-aura", label: "Co to jest aura krystaliczna?", description: "Moduł Auto-Umiejscowienie-i-Detonacja AntiAura został zaprojektowany, aby unikać." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Wykrywanie i omijanie – część tej samej rodziny exploitów." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Do których szerszych kategorii moduły takie jak ten należą." },
+]} />
+
+<CTA href="/pl/purchase">Zobacz, co buduje Opal, gdy nie goni zakazów</CTA>

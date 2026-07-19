@@ -1,0 +1,124 @@
+---
+title: Come Aggiungere Argomenti JVM a Minecraft (Guida)
+description: Aggiungi argomenti JVM a Minecraft modificando il campo argomenti JVM nel profilo del tuo launcher. Passo dopo passo, con l'impostazione sicura della heap -Xmx e le correzioni più comuni.
+excerpt: Gli argomenti della JVM regolano il runtime Java che ospita Minecraft, non il gioco stesso. Ecco dove impostarli, il flag dell'heap che la maggior parte dei giocatori desidera e i limiti di sicurezza.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: Cosa fa -Xmx in Minecraft?
+    a: Imposta la dimensione massima dell'heap che il runtime Java può utilizzare. -Xmx4G limita il gioco a 4 gigabyte. È il flag alla base di ogni guida sull'allocazione di più RAM.
+  - q: Quanta RAM dovrei assegnare a Minecraft?
+    a: Per la maggior parte dei giocatori, 4-6 gigabyte sono più che sufficienti. Allocare una quantità molto maggiore raramente aiuta e può allungare le pause della garbage collection, quindi non assegnare alla JVM tutta la tua memoria.
+  - q: I mod cambiano quali argomenti JVM devo usare?
+    a: Di solito no. Le mod si caricano all'interno dello stesso processo Java, quindi condividono l'heap che hai già impostato. Alcune mod documentano una specifica proprietà di sistema, ma i flag dell'heap coprono la maggior parte dei casi.
+  - q: Gli argomenti della JVM sono equivalenti alle impostazioni di gioco?
+    a: No. Gli argomenti della JVM configurano il runtime Java prima che il gioco si carichi e risiedono nel launcher. Le impostazioni di gioco si trovano nel menu delle opzioni in-game.
+---
+
+<KeyTakeaways>
+
+- Gli argomenti della JVM si trovano nel profilo del tuo launcher, non nelle opzioni di gioco.
+- Essi configurano il [runtime Java](/it/learn/what-is-the-jvm) che ospita il gioco, quindi un errore di battitura influisce sull'avvio, non sul tuo mondo.
+- Il flag che la maggior parte dei giocatori desidera è `-Xmx`, che limita la quantità di memoria che il gioco può utilizzare.
+- Per la maggior parte delle configurazioni, da 4 a 6 gigabyte sono sufficienti. Un valore superiore può peggiorare i rallentamenti.
+
+</KeyTakeaways>
+
+Aggiungi gli argomenti JVM a Minecraft nelle impostazioni del profilo del tuo launcher. Apri il profilo con cui avvii il gioco, trova il campo degli argomenti JVM e modifica l'elenco di flag separati da spazi presenti lì. Questi flag configurano la [macchina virtuale Java](/it/learn/what-is-the-jvm) che ospita il gioco, non il gioco stesso, quindi un errore di battitura influisce sull'avvio, non sul tuo mondo.
+
+<Callout variant="info" title="Dove si integra Opal">
+Opal è un mod [Fabric](https://fabricmc.net/), quindi condivide le stesse argomentazioni JVM del gioco in cui è eseguito. Per la versione a cui si rivolge e la configurazione esatta, segui la [guida alla configurazione](/it/docs/setup).
+</Callout>
+
+## Cosa sia un argomento della JVM
+Un argomento JVM è un flag che si passa al runtime Java all'avvio del gioco. Il launcher costruisce una lunga riga di comando ogni volta che premi "play", e gli argomenti JVM sono la parte di quella riga che regola il runtime. Il più comune imposta la quantità di memoria che il gioco può utilizzare.
+
+Questi flag non sono impostazioni di Minecraft. Vengono letti dal JVM prima ancora che il gioco si carichi, motivo per cui li imposti nel launcher e non nel menu delle opzioni di gioco
+## Dove metterli
+Quasi tutti i launcher mantengono un campo degli argomenti JVM all'interno di ogni profilo. L'etichetta può variare, ma la posizione è coerente.
+
+| Tipo di launcher | Dove si trova il campo |
+| :--- | :--- |
+| Il launcher ufficiale | Installazioni, modifica profilo, Altre opzioni, Argomenti JVM |
+| Un launcher di terze parti | Impostazioni del profilo o dell'istanza, spesso sotto una scheda Java o Avanzate |
+| Riga di comando / script | Il comando `java` che esegui, prima di `-jar` |
+
+Modifica l'elenco esistente anziché sostituirlo. I launcher includono impostazioni predefinite sensate, e cancellarle può impedire l'avvio
+## Passo dopo passo nel launcher ufficiale
+
+<Steps>
+
+<Step number={1} title="Apri Installazioni">
+Apri il launcher e vai su **Installazioni**.
+</Step>
+
+<Step number={2} title="Modifica il tuo profilo">Passa il mouse sul profilo che utilizzi e clicca sull'icona modifica (a matita)</Step>
+
+<Step number={3} title="Apri altre opzioni">Apri **Altre Opzioni**. Appare una casella **Argomenti JVM**</Step>
+
+<Step number={4} title="Modifica le bandiere">
+Modifica le bandiere in quella casella. Sono separate da spazi.
+</Step>
+
+<Step number={5} title="Salva e avvia">Salva, poi avvia quel profilo</Step>
+
+</Steps>
+
+## L'argomento che la maggior parte delle persone desidera: dimensione dell'heap
+
+Il flag che la maggior parte degli utenti cerca è `-Xmx`, che limita la dimensione massima dell'heap che la JVM può utilizzare. `-Xmx4G` consente fino a 4 gigabyte. Esiste anche `-Xms`, l'heap iniziale.
+
+```
+-Xmx4G -Xms2G
+```
+
+Due regole mantengono tutto sicuro. Non allocare più di quanto hai a disposizione, perché il processo Java ha bisogno di spazio di manovra e il sistema operativo ha bisogno del resto. Più non è sempre meglio; heap molto grandi possono rendere le pause della garbage collection peggiori, non migliori. Per la maggior parte delle configurazioni, da 4 a 6 gigabyte sono sufficienti.
+
+## Flag comuni che vedrai
+
+- `-Xmx<dimensione>` imposta l'heap massimo, ad esempio `-Xmx4G`.
+- `-Xms<dimensione>` imposta l'heap iniziale, ad esempio `-Xms2G`.
+- `-XX:+UseG1GC` seleziona il garbage collector G1, un default comune.
+- `-Dproprietà=valore` imposta una proprietà di sistema che il gioco o una mod leggono all'avvio.
+
+Hai raramente bisogno di più dei flag dell'heap. Lunghe liste di argomenti copiati e incollati da vecchie guide spesso fanno più male che bene su un runtime Java moderno.
+
+## Quando qualcosa va storto
+
+<Checklist>
+<ChecklistItem>Il gioco non si avvia dopo la modifica: un errore nei flag. Ripristina gli argomenti predefiniti e riaggiungi le modifiche una alla volta.</ChecklistItem>
+<ChecklistItem>`-Xmx` viene ignorato o genera errori: unità o sintassi errate. Usa `G` o `M` senza spazio, come in `-Xmx4G`, non `-Xmx 4 GB`.</ChecklistItem>
+<ChecklistItem>Lo stutter è peggiorato dopo aver aumentato la memoria: un heap troppo grande può allungare le pause della garbage collection. Abbassa `-Xmx` verso i 4-6 gigabyte.</ChecklistItem>
+</Checklist>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa fa -Xmx in Minecraft?">
+Imposta la dimensione massima dell'heap che la Java Virtual Machine può utilizzare. `-Xmx4G` limita il gioco a 4 gigabyte. È il flag alla base di ogni guida sull'allocazione di più RAM.
+</FAQItem>
+
+<FAQItem question="Quanta RAM dovrei assegnare a Minecraft?">
+Per la maggior parte dei giocatori, da 4 a 6 gigabyte sono più che sufficienti. Assegnarne molto di più raramente aiuta e può allungare le pause dovute alla garbage collection, quindi non assegnare alla JVM tutta la tua memoria.
+</FAQItem>
+
+<FAQItem question="I mod cambiano gli argomenti della JVM necessari?">
+Di solito no. I mod vengono caricati all'interno dello stesso processo Java, quindi condividono l'heap che hai già impostato. Alcuni mod documentano una proprietà di sistema specifica, ma i flag dell'heap coprono la maggior parte dei casi.
+</FAQItem>
+
+<FAQItem question="Gli argomenti della JVM sono gli stessi delle impostazioni di gioco?">
+No. Gli argomenti della JVM configurano l'ambiente di runtime Java prima che il gioco si carichi e si trovano nel launcher. Le impostazioni di gioco si trovano nel menu delle opzioni di gioco.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-the-jvm", label: "Cos'è la JVM?", description: "I flag che configurano effettivamente il tempo di esecuzione." },
+  { href: "/it/learn/how-to-install-a-fabric-mod", label: "Come installare un mod di Fabric", description: "Carica prima i tuoi mod." },
+  { href: "/it/blog/how-to-get-more-fps-in-minecraft", label: "Come ottenere più FPS", description: "Guadagni di performance al di là del flag dell'heap." },
+]} />
+
+<CTA href="/it/purchase">Ottieni Opal, un client Fabric, per $8.99</CTA>

@@ -1,0 +1,84 @@
+---
+title: Czym jest ESP 2D w Minecraft? Wyjaśnienie modułu
+description: ESP 2D to moduł Minecrafta, który oznacza graczy i byty płaskim prostokątem wyświetlanym na ekranie, zamiast trójwymiarowego obrysu świata. Jak jest renderowany i jakie ryzyko bana niesie.
+excerpt: Pudełko nad blaskiem. ESP 2D przypina płaski znacznik nad każdą encją na twoim ekranie, zamiast otaczać je trójwymiarowym obrysem, dzięki czemu nigdy nie zniknie za ścianą.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Jaka jest różnica między ESP 2D a Glow ESP?
+    a: ESP 2D rysuje płaski prostokąt lub znacznik w przestrzeni ekranu, który nie podąża za kształtem encji. Glow ESP obrysowuje encję w świecie gry, dzięki czemu porusza się i skaluje jak prawdziwy efekt w świecie gry, gdy kamera się obraca.
+  - q: Czy ESP 2D widzi przez ściany?
+    a: Tak. Rysuje znacznik dla każdej śledzonej jednostki, niezależnie od tego, czy między tobą a nimi znajduje się ściana, czy teren, co dokładnie czyni go funkcją klasy wallhacka.
+  - q: Czy programy anticheat potrafią wykrywać ESP 2D?
+    a: Nie ma metody detekcji stworzonej specjalnie dla kształtu pudełka. Anticheaty, które potrafią wykrywać ESP, zazwyczaj nie przejmują się tym, czy zostało ono wyrenderowane jako pudełko 2D, czy obrys 3D. Ryzyko wynika z posiadania i działania na podstawie informacji, do których nie powinieneś mieć dostępu, a nie z geometrii znacznika.
+  - q: Klienci, którzy uwzględniają ESP 2D?
+    a: Pojawiło się u klientów takich jak Fan i Tenacity, zwykle obok Glow ESP jako druga opcja renderowania dla tych samych danych encji. Opal przyjmuje inne podejście i dostarcza jeden zunifikowany moduł Entity ESP zamiast dzielić te dwa style.
+---
+
+<KeyTakeaways>
+
+- ESP 2D to moduł wizualny, który oznacza graczy i obiekty płaskim prostokątem lub znacznikiem rysowanym w przestrzeni ekranu, a nie 3D obrysem otaczającym obiekt w świecie.
+- Jest to jeden z dwóch popularnych stylów renderowania ESP, drugi to Glow ESP; klienci, którzy udostępniają oba, pozwalają wybrać.
+- Rysowanie w przestrzeni ekranu oznacza, że znacznik nie jest zasłonięty przez teren i zawsze ma spójny rozmiar, niezależnie od odległości.
+- Umożliwia on ujawnienie pozycji obiektów przez ściany, dlatego antywirusy traktują go jako funkcję klasy wallhacka, niezależnie od tego, który styl renderowania narysował prostokąt.
+
+</KeyTakeaways>
+
+ESP 2D to moduł wizualny, który oznacza innych graczy i obiekty płaskim prostokątem, kropką lub etykietą rysowaną bezpośrednio na Twoim ekranie, zamiast 3D obrysu otaczającego obiekt w świecie. Jest to jeden z dwóch popularnych sposobów, w jaki klienci renderują ESP obiektów – drugim jest Glow ESP – a klienci, którzy oferują obie opcje, pozwalają wybrać, który wolisz. Celem jest jednakowe: wiedzieć, gdzie wszyscy są, bez konieczności obracania kamery, żeby sprawdzić.
+
+## Jak działa ESP 2D
+
+ESP 2D rzutuje rzeczywistą pozycję każdego śledzonego obiektu na przestrzeń ekranu w każdej klatce i rysuje znacznik w tym punkcie – prostokątny obrys, kropkę lub małą etykietę. Różni się to od ESP 3D lub „światowego”, które rysuje obrys bezpośrednio na samym obiekcie, dzięki czemu porusza się i skaluje wraz z modelem w trzech wymiarach, gdy kamera się obraca. Znak 2D zachowuje się bardziej jak zawieszka z imieniem nad czyjąś głową: jest płaski, zablokowany na ekranie i nie reaguje na kąt lub animację rzeczywistego modelu pod nim.
+
+Ponieważ wywołanie rysowania odbywa się w przestrzeni ekranu, a nie w przestrzeni świata, prostokąt 2D nie jest zasłaniany przez ścianę lub zbocze w taki sposób, jak czasami dzieje się to z obrysem w przestrzeni świata, i może utrzymywać stały rozmiar na ekranie, niezależnie od odległości obiektu. Niektóre implementacje skalują prostokąt wraz z odległością, więc cel stojący obok ciebie wydaje się większy niż cel na drugim końcu mapy. Niezależnie od tego, pozycja bazowego obiektu steruje znacznikiem, dzięki czemu odczyt pozostaje, gdy obiekt skrywa się za skałą lub gdy kamera znajduje się w niekorzystnej pozycji.
+
+## ESP 2D vs Glow ESP
+
+| Aspekt | ESP 2D | Glow ESP |
+|---|---|---|
+| Gdzie rysuje | Płaski prostokąt, kropka lub etykieta w przestrzeni ekranu | Obrys owinięty wokół obiektu w przestrzeni świata |
+| Zasłanianie przez teren | Pozostaje widoczny przez ściany i przeszkody | Również widzi przez teren, ale wygląda jak poświatę w świecie gry |
+| Rozmiar w odległości | Często stały; niektóre wersje skalują go wraz z zasięgiem | Skala naturalnie, jak prawdziwy efekt w grze |
+| Odczyt wizualny | Jednolity i łatwy do skanowania na całej mapie | Bardziej przypomina normalną miksturę świetlną lub efekt spektralny |
+
+Oba style czerpią z tego samego śledzenia obiektów. Wybór zależy wyłącznie od czytelności w stosunku do immersji: 2D dla czystego, spójnego odczytu w stylu HUD-u na każdej odległości, Glow, gdy chcesz mieć informacje, ale nie chcesz, żeby wyglądały tak bardzo jak HUD.
+
+<Callout variant="tip" title="Gdzie ląduje Opal na tym">
+Opal nie dzieli ESP jednostek na przełącznik 2D i przełącznik Glow. Jego katalog wymienia jeden moduł kategorii Wizualnej, ESP jednostek, opisany po prostu jako podświetlanie graczy i jednostek w świecie. Jeden przełącznik, brak decyzji dotyczących stylu renderowania, zanim zobaczysz kogokolwiek.
+</Callout>
+
+<Callout variant="warning" title="Odniesienie, a nie instrukcja">
+Żadna forma ESP dla encji nie jest bezpieczna do założenia, że jest niewykrywalna, niezależnie od kształtu czy efektu świetlnego. Przekazuje Ci informacje, do których nie powinieneś mieć dostępu, bez faktycznego kontaktu wzrokowego, a system anticheat zaprojektowany do wykrywania ESP zazwyczaj nie przejmuje się, jaki kształt wyznaczył znacznik. Zasady dotyczące wallhacka i X-ray'a dotyczą ESP 2D tak samo, jak dowolnego 3D konturu. Traktuj to jako używanie na własną odpowiedzialność na serwerach chronionych przez anticheat.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Jaka jest różnica między ESP 2D a Glow ESP?">
+ESP 2D rysuje płaski prostokąt lub znacznik w przestrzeni ekranu, który nie podąża za kształtem encji. Glow ESP obrysowuje encję w świecie gry, dzięki czemu porusza się i skaluje się jak prawdziwy efekt w świecie gry, gdy kamera się obraca.
+</FAQItem>
+
+<FAQItem question="Czy ESP 2D widzi przez ściany?">
+Tak. Umieszcza znacznik dla każdej śledzonej jednostki, niezależnie od tego, czy między tobą a nimi znajduje się ściana, czy teren. To właśnie sprawia, że jest to funkcja klasy wallhacka.
+</FAQItem>
+
+<FAQItem question="Czy anticheaty potrafią wykryć ESP 2D konkretnie?">
+Nie ma dedykowanej metody wykrywania opartej tylko na kształcie prostokąta. Anticheaty, które potrafią wychwycić ESP, zazwyczaj nie przejmują się tym, czy renderowane było jako 2D prostokąt, czy 3D obrys. Ryzyko wynika z posiadania i działania na podstawie informacji, do których nie powinieneś mieć dostępu, a nie z geometrii znacznika.
+</FAQItem>
+
+<FAQItem question="Klienci, którzy używają ESP 2D?">
+Pojawia się u klientów takich jak Fan i Tenacity, zwykle obok Glow ESP jako druga opcja renderowania dla tych samych danych encji. Opal stosuje inne podejście i dostarcza jeden, zunifikowany moduł Entity ESP zamiast dzielić te dwa style.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szeroka kategoria ESP oraz inne moduły podnoszące świadomość znajdują się wewnątrz." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Dlaczego ciche informacje, takie jak ESP, są budowane tak, by pozostać subtelne." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Moduł ESP zwykle się uruchamia, gdy wiesz, gdzie dokładnie szukać." },
+]} />
+
+<CTA href="/pl/purchase">Sprawdź, gdzie są wszyscy, zanim skręcisz za róg. Opal to $8.99.</CTA>

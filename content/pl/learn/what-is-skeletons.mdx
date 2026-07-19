@@ -1,0 +1,79 @@
+---
+title: Co to są szkielety w Minecraft? Wyjaśnienie modułu
+description: Skeletons to moduł Minecrafta, który zmienia wygląd każdego gracza i moba na podstawowy model szkieletu – czysto kosmetyczną zmianą, nie wpływającą na obszary kolizji ani ryzyko wykrycia.
+excerpt: Szkielety zamieniają każdego gracza i moba w chodzącą stertę kości, wyłącznie na twoim ekranie. Pole hitboxów, zasięg i sposób, w jaki serwer cię widzi, nie poruszają się ani o cal.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Szkielety zmieniają zachowanie bytów?
+    a: Nie. Zmienia to jedynie model wyświetlany na Twoim ekranie. Ruch, obszary kolizji i zachowanie bojowe pochodzą z serwera i pozostają niezmienione.
+  - q: Czy Skeletons to to samo co paczka zasobów?
+    a: Nie do końca. Paczka zasobów zmienia tekstury w sposób ogólny dla każdego jej użytkownika. Moduł kliencki, taki jak Skeletons, wymienia konkretne modele jednostek i jest włączany przez gracza uruchamiającego klienta, bez konieczności instalowania paczki.
+  - q: Czy szkielety mogą spowodować zbanowanie kogoś?
+    a: Moduł sam w sobie nie daje żadnej przewagi w rozgrywce i raczej nie zostanie wykryty przez system anticheat. Zablokowania są bardziej prawdopodobne w wyniku ogólnej polityki serwera dotyczącej zmodyfikowanych klientów, niż tej konkretnej funkcji.
+  - q: Którzy klienci obejmują Skeletons?
+    a: Widoczne jest to w Fan, narzędziu klienckim tworzonym przez osoby trzecie.
+---
+
+<KeyTakeaways>
+
+- Skeletons to moduł kosmetyczny, który zmienia wygląd graczy i mobów na gołe szkielety, renderowane wyłącznie lokalnie.
+- Zmienia model wyświetlany na ekranie, a nie kolizje, ruch ani dane walki śledzone przez serwer.
+- Nie generuje dodatkowego ruchu w sieci; nadpisanie działa jak pakiet zasobów, ale znajduje się w kliencie.
+- Ryzyko wykrycia jest niskie, ponieważ nic mierzalnego się nie zmienia, choć zostało zaobserwowane w zmodyfikowanym kliencie Fan.
+
+</KeyTakeaways>
+
+Skeletons to moduł Minecrafta, który rysuje każdego gracza i moba, których widzisz, jako zwykły szkielet – sprowadzając ich do samych kości. To czysta wizualna nakładka: gra nadal wysyła Twojemu klientowi te same dane o pozycji, postawie i obszarze kolizyjnym, co zawsze, ten moduł po prostu zamienia model, który jest malowany na tych danych. Nic się nie zmienia w sposobie poruszania się, walki lub śledzenia encji przez serwer. To prywatny wygląd, który nosisz ze sobą, rodzaj funkcji, która powstała, ponieważ ktoś chciał, aby każdy mecz wyglądał tak samo, niezależnie od tego, kto tam faktycznie stoi.
+
+## Jak działa zmiana wyglądu na szkielet
+
+Silnik renderujący Minecrafta już posiada wszystko, czego potrzebuje do rysowania każdej encji: pozycję, rotację, postawę, stan animacji – wszystko to dociera przez sieć, ponieważ gra nie może funkcjonować bez tego. Skeletons nie ingeruje w żadne z tych danych. Przechwytuje wywołanie rysowania i zastępuje model szkieletu oraz teksturę w miejsce tego, co encja normalnie by pokazywała, taki sam rodzaj nakładki, jak ta, którą stosuje pakiet zasobów, z wyjątkiem tego, że znajduje się w kliencie, a nie w osobnym pliku pakietu, który instalujesz i wymieniasz.
+
+Ponieważ dane podstawowej jednostki nigdy się nie zmieniają, moduł nie generuje dodatkowego ruchu w sieci i nie ingeruje w stan po stronie serwera. Pozycja, hitbox i animacja nadal pochodzą z miejsca, w którym umieścił je serwer. Jedyna różnica polega na tym, co jest rysowane na ekranie, lokalnie, za każdym razem, gdy ta jednostka jest rysowana.
+
+## Czy jest bezpieczne do użycia
+
+Skeletons samo w sobie nie niesie ze sobą dużego ryzyka w kontekście rozgrywki. Nie ujawnia nikogo przez ściany, nie dodaje obrysów ani znaczników i w żaden sposób nie ingeruje w celowanie, ruch ani obliczenia bojowe, które mierzy anticheat. Rzeczywista pozycja i hitbox jednostki są dokładnie takie, jakie zostały wysłane przez serwer; różni się jedynie obraz na Twoim ekranie, więc nie ma nic, co serwer mógłby oznaczyć podczas kontroli.
+
+Problem leży w kliencie, w którym jest dystrybuowany, a nie w samym module. Skeletons pojawia się w Fan, narzędziu klienckim tworzonym przez osoby trzecie, a wiele serwerów zakazuje wszelkich zmodyfikowanych klientów, niezależnie od tego, które konkretne moduły są włączone. Czysto kosmetyczna funkcja, taka jak ta, sama w sobie nie stwarza ryzyka, ale uruchamianie jej jako część klienta, który zawiera również moduły związane z walką lub ruchem, nadal może skutkować zablokowaniem konta związanym z całym klientem.
+
+<Callout variant="warning" title="Ryzyko bana leży po stronie klienta, a nie tego modułu">
+Sama baza danych Skeletons nie daje serwerowym anticheatom nic do złapania. Ale nie działa samodzielnie, działa w zmodyfikowanym kliencie, a wiele serwerów banuje zmodyfikowanych klientów w mgnieniu oka, niezależnie od aktywnych modułów. Oceń reputację klienta jako całość, a nie tylko ten kosmetyczny przełącznik.
+</Callout>
+
+<Callout variant="tip" title="Kosmetyki bez ingerencji w liczby">
+Opal nie udostępnia modułu pod nazwą Skeletons, ale jego kategoria wizualna opiera się na tej samej zasadzie: zmieniaj to, co widzisz, a nigdy to, co mierzy serwer. To jest granica między zamianą kosmetyczną a rzeczywistym modułem rozgrywki, a Skeletons na niej stoi.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Szkielety zmieniają zachowanie obiektów?">
+Nie. Zmieniają one jedynie model renderowany na Twoim ekranie. Ruch, obszary kolizji i zachowanie bojowe pochodzą z serwera i pozostają niezmienione.
+</FAQItem>
+
+<FAQItem question="Czy Skeletons to to samo co pakiet zasobów?">
+Nie do końca. Pakiet zasobów zmienia tekstury w sposób ogólny dla każdego, kto go używa. Skeletons to moduł klienta, który wymienia konkretne modele jednostek i jest przełączany przez gracza uruchamiającego klienta, bez konieczności instalowania pakietu.
+</FAQItem>
+
+<FAQItem question="Czy szkielety mogą spowodować zbanowanie gracza?">
+Sam moduł nie daje żadnej przewagi w rozgrywce i mało prawdopodobne jest, aby został wykryty przez system anticheat. Zablokowania są bardziej prawdopodobne w wyniku ogólnej polityki serwera dotyczącej zmodyfikowanych klientów, niż tej konkretnej funkcji.
+</FAQItem>
+
+<FAQItem question="Kto używa Skeletons?">
+Występuje w Fan, narzędziu klienckim tworzonym przez osoby trzecie.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Szeroka kategoria, do której należą Szkielety i każdy inny moduł." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kolejna, dotycząca tylko klienta, różnica, którą warto zrozumieć." },
+  { href: "/pl/learn/what-is-killaura", label: "Co to jest Killaura?", description: "Drugi biegun spektrum: moduł, który serwer może bezwzględnie zmierzyć." },
+]} />
+
+<CTA href="/pl/purchase">Wizualna zakładka Opal jest zbudowana w oparciu o tę samą ideę: zmienia wygląd gry, nigdy sposób w jaki się gra.</CTA>

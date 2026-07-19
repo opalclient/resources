@@ -1,0 +1,85 @@
+---
+title: Was ist ein Sprint in Minecraft? Modul erklärt
+description: Sprint ist ein Minecraft-Bewegungsmodul, das die Hunger- und Sichtfeldprüfungen lockert, die in der Basisversion verwendet werden, um das Sprinten einzuschränken. Hier ist, wie es funktioniert, und welches Risiko damit verbunden ist.
+excerpt: Vanilla Minecraft reißt dich ständig wegen Hunger und Sichtlinien aus dem Sprint heraus. Der Sprint fragt einfach nicht mehr nach Erlaubnis.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was genau ändert das Sprint-Modul?
+    a: Es ändert die Bedingungen, die Minecraft vor dem Starten oder Aufrechterhalten eines Sprints prüft, wie zum Beispiel die Anforderung einer vollen Hungerleiste oder die Prüfung, die einen Sprint abbricht, wenn der Weg vor einem blockiert erscheint.
+  - q: Ist ein Sprint dasselbe wie ein Geschwindigkeitsmodul?
+    a: Nein. Ein Geschwindigkeitsmodul lässt dich schneller laufen. Sprint erhöht die Geschwindigkeit nicht von selbst, er ändert lediglich, wann das Spiel das Sprinten überhaupt zulässt.
+  - q: Welche Kunden haben ein Sprint-Modul hinzugefügt?
+    a: Sprint-artige Logikänderungen haben sich im Laufe der Jahre bei einer Reihe von Kunden gezeigt, darunter Juul, Fan, Tenacity und Rose. Opal bietet ebenfalls eine solche an, die in seinem Katalog als Sprint aufgeführt ist.
+  - q: Kann die Verwendung von Sprint zu einem Bann für einen Spieler führen?
+    a: Ja. Der Server verfolgt denselben Hunger- und Bewegungszustand, den das Modul manipuliert, unabhängig vom Client, sodass ein serverseitiges Anticheat, das die Sprintberechtigung überprüft, ein Konto sperren oder verbieten kann, wenn es unter Bedingungen sprintet, die Vanilla nicht zulassen würden.
+  - q: Ist Sprint im Vergleich zu Kampanwendungen ein ernstzunehmender Betrug?
+    a: Es ist eine weniger auffällige Änderung als beispielsweise automatisierte Kämpfe, aber sie verändert dennoch einen Zustand, den der Server selbst überprüft, sodass ein echtes Risiko der Erkennung besteht, anstatt einer harmlosen, rein optischen Anpassung.
+---
+
+<KeyTakeaways>
+
+- Sprint ist ein Bewegungsmodul, das die Regeln für den Start oder die Fortsetzung eines Sprints lockert, wie beispielsweise die Mindestanforderung an die Hungerleiste und die Sichtprüfung.
+- Es erhöht die Geschwindigkeit nicht von selbst, sondern ändert, wann das Spiel überhaupt das Sprinten zulässt.
+- Der Server verfolgt denselben Hunger- und Bewegungszustand unabhängig, daher stellt das Aufheben dieser Einschränkung auf der Client-Seite ein echtes Risiko für die Erkennung dar, und keine rein kosmetische Änderung.
+- Opal liefert ein Sprint-Modul und listet dessen Verwendung auf eigene Gefahr auf, wie überall sonst, wo es auftaucht.
+
+</KeyTakeaways>
+
+Sprint ist ein Bewegungsmodul, das die Bedingungen verändert, die Minecraft prüft, bevor ein Spieler mit dem Sprinten beginnen oder es fortsetzen darf. Vanilla erzwingt hierfür einige Einschränkungen: Ihre Hungerleiste muss über einem bestimmten Wert liegen, und das Spiel beobachtet den Bereich vor Ihnen und bricht den Sprint ab, sobald der Weg blockiert erscheint. Sprint fängt diese Prüfungen ab und überschreibt, was sie bewerten, sodass der Client weiterhin meldet, dass Sie sprintfähig sind, auch in Situationen, in denen das unveränderte Spiel dies verweigern würde. Es handelt sich nicht um einen Geschwindigkeitsboost. Die ursprüngliche Sprintgeschwindigkeit bleibt exakt gleich; Sprint verhindert lediglich, dass sie entzogen wird.
+
+## Wie es funktioniert
+
+Im Hintergrund sitzt Sprint vor den beiden Prüfungen, die Vanilla durchführt, während Sie sich bewegen: der Hunger-Schwellenwert, der vor dem Start eines Sprints überschritten werden muss, und die Vorwärts-Hindernisprüfung, die Sie normalerweise zurück auf einen Lauf zwingt, sobald der Weg blockiert erscheint. Das Modul fängt beide ab und ändert, was sie bewerten, sodass der Client Sie weiterhin als sprintfähig behandelt, wo eine unveränderte Installation Sie abbrechen würde.
+
+Die Anziehungskraft liegt in der Konsistenz. Sprinten ist schneller als Gehen, und jeder Moment, in dem Vanilla eine Verlangsamung erzwingen würde, ist ein Moment, in dem du langsamer bist, als du sein musst. Das Weglassen dieser Unterbrechungen bedeutet eine gleichmäßigere Geschwindigkeit, um Distanz zu schließen, mit jemandem Schritt zu halten oder einfach nur das Gelände zu überqueren, ohne dass das Spiel dich in Frage stellt. Es ist auch keine neue Idee: Änderungen im Sprint-Stil sind im Laufe der Jahre bei einer Handvoll Kunden aufgetaucht, darunter Juul, Fan, Tenacity und Rose.
+
+## Ist Sprint sicher zu verwenden?
+
+Nicht wirklich, und der Grund dafür ist struktureller Natur. Der Server verfolgt denselben Zustand, den Vanilla verwendet, um das Sprinten zu steuern, einschließlich des Hungerlevels, unabhängig davon, was der Client meldet. Wenn ein Spieler sprintet oder weiterhin sprintet, unter Bedingungen, die die eigene Prüfung des Servers nicht zulassen würde, entsteht eine Diskrepanz, die ein serverseitiges Anticheat-System gut erkennen kann. Die Sprintberechtigung ist keine versteckte Information, die der Client allein kontrolliert, sondern ein Zustand, den der Server bereits für seine eigenen Zwecke berechnet. Eine Lockerung clientseitig ist ein plausibler Fall, um erwischt zu werden, nicht etwas, das unbemerkt bleibt.
+
+Es ist auch eine unauffälligere Änderung als beispielsweise automatisierter Kampf. Niemand beobachtet, wie dein Charakter etwas offensichtlich Unmenschliches tut; du läufst einfach schneller, als du eigentlich solltest. Aber die serverseitige Erkennung kümmert sich nicht darum, wie es für einen anderen Spieler aussieht, sondern ob die Zahlen stimmen – und hier stimmen sie nicht.
+
+<Callout variant="tip" title="Opal versendet ein Sprint-Modul">
+Im Opal-Katalog steht es klar und deutlich: Sprint, im App-Kontext als „Änderung der Logik hinter dem Sprinten“ beschrieben. Keine Umschweife. Es wird mit der Warnung „Nutzung auf eigene Gefahr“ geführt, wie überall sonst, wo solche Module auftauchen, denn die Erkennungsgeschichte oben ändert sich nicht, nur weil Opal die Prüfung durchführt.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite beschreibt das Modul allgemein, damit Sie wissen, was der Begriff bedeutet. Die Benennung und das genaue Verhalten können je nach Client variieren, und das Ändern des vom Server verfolgten Zustands birgt auf Servern mit Anticheat-Schutz ein echtes Bannrisiko.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Was genau ändert das Sprint-Modul?">
+Es ändert die Bedingungen, die Minecraft prüft, bevor du einen Sprint starten oder aufrechterhalten darfst, wie zum Beispiel die Anforderung einer vollen Hungerleiste oder die Prüfung, die einen Sprint abbricht, wenn der Weg vor dir versperrt erscheint.
+</FAQItem>
+
+<FAQItem question="Ist Sprint dasselbe wie ein Geschwindigkeitsmodul?">
+Nein. Ein Geschwindigkeitsmodul lässt dich schneller laufen. Sprint erhöht die Geschwindigkeit nicht von selbst, sondern ändert lediglich, wann im Spiel das Sprinten möglich ist.
+</FAQItem>
+
+<FAQItem question="Welche Kunden haben ein Sprint-Modul verwendet?">
+Im Laufe der Jahre sind Sprint-ähnliche Logikänderungen bei einer Reihe von Kunden aufgetaucht, darunter Juul, Fan, Tenacity und Rose. Auch Opal bietet eines an, das in seinem Katalog als Sprint aufgeführt ist.
+</FAQItem>
+
+<FAQItem question="Kann die Verwendung von Sprint zu einem Bann des Spielers führen?">
+Ja. Der Server verfolgt den gleichen Hunger- und Bewegungszustand, den das Modul manipuliert, unabhängig vom Client, sodass ein serverseitiger Anti-Cheat, der die Sprint-Berechtigung überprüft, ein Konto sperren kann, wenn es unter Bedingungen sprintet, die im Originalspiel nicht erlaubt wären.
+</FAQItem>
+
+<FAQItem question="Ist Sprint ein ernsthafter Betrug im Vergleich zu Kampanmodulen?">
+Es ist eine weniger auffällige Änderung als beispielsweise automatisierte Kämpfe, aber sie verändert dennoch den Zustand, den der Server selbst überprüft, und birgt daher ein reales Risiko der Erkennung, anstatt eine sichere, rein kosmetische Anpassung zu sein.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Ein weiteres Bewegungsmodul, das den Status manipuliert, den der Server selbst verfolgt." },
+  { href: "/de/learn/what-is-velocity-anti-knockback", label: "Was ist Velocity (Rückstoßvermeidung)?", description: "Ein anderer Teil der Bewegungszustands-Anticheats überprüft sich unabhängig vom Client." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die breitere Kategorie, zu der Sprints und ähnliche Module gehören." },
+]} />
+
+<CTA href="/de/purchase">Überprüfen Sie, was im Opal-System mit Risiken verbunden ist, bevor Sie etwas installieren.</CTA>

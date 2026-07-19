@@ -1,0 +1,72 @@
+---
+title: Cos'è Regen in Minecraft? Spiegazione dello sfruttamento della salute
+description: Regen è un exploit di Minecraft che velocizza la rigenerazione naturale della salute oltre il tasso di saturazione vanilla. Ecco come funziona e perché i server lo rilevano.
+excerpt: La tua barra della salute non dovrebbe riempirsi così velocemente. Ecco come Regen aggira il meccanismo di saturazione, e perché è una delle exploit più facili da individuare.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa cambia effettivamente Regen?
+    a: Modifica la velocità con cui la salute di un giocatore torna completa, superando il tasso di rigenerazione naturale consentito dalla guarigione basata sulla saturazione di vanilla.
+  - q: È Regen la stessa cosa di usare mele d'oro o pozioni?
+    a: No. Quegli sono oggetti di guarigione legittimi all'interno del gioco, con i propri tempi di ricarica e costi. La rigenerazione manipola la guarigione passiva, il tic di guarigione fuori dal combattimento, piuttosto che consumare qualcosa.
+  - q: Funziona Regen su ogni server?
+    a: No. I server che calcolano e applicano la rigenerazione naturale lato server, anziché fidarsi dei tempi segnalati dal client, non sono interessati da un modulo Regen lato client.
+  - q: È considerato un imbroglione Regen?
+    a: Sì. Modifica un meccanismo di sopravvivenza fondamentale a favore del giocatore, andando oltre ciò che consentono le regole originali, motivo per cui è classificato come modulo exploit anziché come caratteristica cosmetica o legittima.
+---
+
+<KeyTakeaways>
+- Regen è un modulo exploit che velocizza la rigenerazione naturale della salute di un giocatore oltre il tasso di guarigione basato sulla saturazione di Minecraft.
+- Funziona intercettando o accorciando il timer di rigenerazione lato client, non utilizzando pozioni, mele d'oro o qualsiasi oggetto.
+- I server che calcolano la rigenerazione naturale lato server, invece di fidarsi dei tempi del client, sono immuni per progettazione.
+- È uno sfruttamento che offre un vantaggio di gioco, non una modifica estetica, e viene rilevato confrontando la salute nel tempo con la curva di saturazione prevista.
+</KeyTakeaways>
+
+Regen (abbreviazione di rigenerazione) è un modulo exploit che velocizza il recupero della salute di un giocatore, superando il limite imposto dal sistema di saturazione di Minecraft nella sua versione originale. Non interferisce con le pozioni, le mele d'oro o qualsiasi oggetto. Modifica semplicemente il timer della rigenerazione passiva del gioco, facendo sì che i danni subiti durante un combattimento scompaiano più velocemente del dovuto.
+
+## Come funziona
+
+La rigenerazione naturale standard rigenera una frazione di un cuore a intervalli fissi, e tale intervallo è determinato dalla saturazione del cibo: un giocatore ben nutrito si rigenera più velocemente di uno affamato, ma esiste comunque un limite alla velocità con cui la salute può ripristinarsi. In molte implementazioni client, il timing di quel "tick" di rigenerazione è deciso dal client e semplicemente segnalato al server. Regen sfrutta questo aspetto accorciando o eliminando l'attesa tra le rigenerazioni, spingendo i cambiamenti di salute che il server non si aspetterebbe mai che la curva di saturazione producesse autonomamente.
+
+L'attrattiva è evidente: rimanere più a lungo in un combattimento. Un giocatore che utilizza Regen assorbe danni che un avversario normale non può superare, e non deve mai interrompere il combattimento per mangiare e attendere un normale recupero. Raramente si presenta come un'opzione attivabile singolarmente. Di solito è un componente di un client incentrato sul combattimento o sull'utilizzo di exploit, che si affianca a moduli progettati per prolungare un combattimento piuttosto che terminarlo in modo pulito.
+
+## È sicuro utilizzarlo
+
+Regen è un'elusione del vantaggio di gioco, non un elemento cosmetico, ed è proprio per questo che è facile da individuare. Modifica qualcosa che un server può misurare direttamente: quanta salute ha un giocatore in un determinato momento, rispetto a quanto la meccanica di saturazione dovrebbe aver prodotto fino a quel punto. Un server che registra la salute nel tempo e la confronta con la curva di saturazione prevista può segnalare un tasso di rigenerazione che nessuna combinazione legittima di cibo e tempo può spiegare.
+
+La soluzione più efficace, e quella già utilizzata dalla maggior parte dei server competitivi, è smettere di fidarsi del tutto dei tempi del client. Una volta che la rigenerazione naturale viene calcolata e applicata lato server, un modulo Regen lato client non ha più nulla da sfruttare, a prescindere da ciò che riporta.
+
+<Callout variant="tip" title="Dove Opal pone il limite">
+Opal non spedisce un modulo Regen. Non perché sia difficile da costruire, ma perché nel momento in cui un server calcola autonomamente lo stato di salute invece di fidarsi dell'orologio del client, l'intero exploit si trasforma in una prova di un ban dal quale non ci si può sottrarre.
+</Callout>
+
+<Callout variant="warning" title="Questo ti farà bannare">
+Regen è un exploit per ottenere un vantaggio di gioco piuttosto semplice. Qualsiasi server che tenga traccia della salute rispetto alla curva di saturazione prevista, o che calcoli la rigenerazione stessa, rileverà una velocità che non dovrebbe essere possibile. Questo è materiale di riferimento, non una raccomandazione.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+<FAQItem question="Cosa cambia effettivamente Regen?">
+Modifica la velocità con cui la salute di un giocatore torna al massimo, superando il tasso di rigenerazione naturale consentito dal sistema di guarigione basato sulla saturazione di vanilla.
+</FAQItem>
+<FAQItem question="Regen è la stessa cosa di usare mele d'oro o pozioni?">
+No. Queste sono legittime risorse di guarigione di gioco con i propri tempi di ricarica e costi. Regen manipola direttamente il tick passivo di guarigione fuori dal combattimento, piuttosto che consumare qualcosa.
+</FAQItem>
+<FAQItem question="Regen funziona su ogni server?">
+No. I server che calcolano e applicano la rigenerazione naturale lato server, piuttosto che fidarsi dei tempi segnalati dal client, non sono influenzati da un modulo Regen lato client.
+</FAQItem>
+<FAQItem question="Regen è considerato un hack?">
+Sì. Modifica un meccanismo di sopravvivenza fondamentale a favore del giocatore oltre ciò che le regole vanilla permettono, motivo per cui è classificato come modulo exploit piuttosto che come funzionalità cosmetica o legittima.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-killaura", label: "Cos'è Killaura?", description: "Un'altra impresa di combattimento, questa volta automatizza la mira e il tempismo degli attacchi, che il PvP vanilla richiede al giocatore di fare manualmente." },
+  { href: "/it/learn/what-is-velocity-anti-knockback", label: "Cos'è la Velocità (Anti-Rallentamento)?", description: "Un'abilità che annulla la repulsione in arrivo, la controparte difensiva dell'imbroglio di salute di Regen." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "Dove moduli come Regen si inseriscono nella più ampia categoria di clienti, e cosa distingue l'utilità dalla truffa palese." }
+]} />
+
+<CTA href="/it/purchase">Salta le scappatoie che vengono corrette. Opal è progettato per il lungo termine.</CTA>

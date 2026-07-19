@@ -1,0 +1,75 @@
+---
+title: Czym jest model niestandardowy w Minecraft? Moduł wyjaśniający
+description: Model niestandardowy to wizualny moduł Minecraft, który zamienia twój wygląd lub model gracza tylko na twoim ekranie, bez wpływu na kolizje, zasięg czy wykrywanie.
+excerpt: Model niestandardowy zmienia wygląd twojej postaci na twoim ekranie, i tylko tyle. Bez zmian w hitboxie, bez dodatkowych pakietów, tylko inna skóra niż ta, którą dała ci Mojang.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy niestandardowy model daje przewagę w rozgrywce?
+    a: Nie. Zmienia to jedynie sposób renderowania lokalnego twojego modelu gracza lub wyglądu. Nie wpływa na hitboxe, zasięg, ruch ani na nic, co śledzi serwer, więc nie daje żadnej przewagi w walce ani w ruchu.
+  - q: Czy inni gracze mogą zobaczyć mój model niestandardowy?
+    a: Zazwyczaj nie. Minecraft renderuje skórki po stronie klienta, więc zmiana własnego renderowania nie wpływa na ekran nikogo innego. Efekt jest zazwyczaj widoczny tylko dla Ciebie.
+  - q: Czy anticheaty potrafią wykryć niestandardowe modele?
+    a: Ledwo, jeśli w ogóle. Ponieważ nie wpływa na ruch, walkę ani pakiety wysyłane do serwera, anticheat po stronie serwera ma niemal nic do oznaczenia. Ryzyko wykrycia jest znacznie niższe niż w przypadku modułów walki lub ruchu.
+  - q: Czy Model Niestandardowy to to samo co pakiet zasobów?
+    a: Nie do końca. Paczka zasobów pochodzi z serwera i zmienia to, co widzi każdy połączony gracz. Model niestandardowy to moduł po stronie klienta, który wymienia renderowanie lokalnie, bez potrzeby paczki zasobów.
+---
+
+<KeyTakeaways>
+
+- Model niestandardowy to moduł wizualny, który wymienia model gracza w grze lub jego wygląd na model niestandardowy.
+- Zmienia tylko to, co jest rysowane lokalnie, nie zmieniając hitboxów, ruchu ani danych wysyłanych do serwera.
+- Inni gracze nie widzą tej podmiany, ponieważ Minecraft renderuje skórki po stronie klienta, a nie globalnie na serwerze.
+- Ryzyko wykrycia jest minimalne: nie zmienia się żadna wartość rozgrywki, nie wysyła się żadnych dodatkowych pakietów.
+
+</KeyTakeaways>
+
+Model niestandardowy to moduł wizualny, który pozwala graczowi zastąpić swój model lub teksturę w grze czymś zupełnie innym, na własnym kliencie, bez ingerencji w to, co widzi serwer. Umieszczony jest w tej samej kategorii co inne opcje kosmetyczne i renderowania: bez obliczeń związanych z walką, bez obliczeń ruchu, tylko inny obraz tam, gdzie wcześniej był twój bohater. Tam, gdzie pakiet zasobów zmienia to, co widzą wszyscy przy stole, Model niestandardowy zmienia tylko twoje widzimisię. To moduł dla graczy, którym zależy na tym, jak wyglądają w kadrze i którzy nie chcą czekać, aż serwer przekaże im nową skórkę.
+
+## Jak działa Model niestandardowy
+
+System skórek w Minecraft jest zwykle powiązany z kontem. Twój klient pobiera skórkę przypisaną do twojego konta z Mojang lub pobiera ją z lokalnej pamięci podręcznej i przekazuje tę teksturę rendererowi za każdym razem, gdy rysowany jest gracz, w tym ty. Model niestandardowy wkracza w to wywołanie renderowania i zastępuje je czymś innym: inną teksturą, inną formą modelu, czasami proporcjami, których model gracza z oryginalnej wersji nigdy nie obsługiwał.
+
+Wymiana odbywa się całkowicie w lokalnym potoku renderowania. Nic się nie zmienia w pakietach, które wysyłasz. Pakiety ruchu, pakiety ataków i stan ekwipunku wychodzą dokładnie tak, jakby moduł nie istniał. Serwer nadal widzi tę samą encję gracza, z tym samym obszarem kolizyjnym i tymi samymi danymi skóry przypisanymi do Twojego konta. Inna jest tylko grafika, którą rysuje Twój własny klient lokalnie.
+
+## Czy jest to bezpieczne w użyciu?
+
+Custom Model nie ingeruje w nic, co serwerowy anticheat ma za zadanie wykryć. Nie zmienia zasięgu, prędkości ruchu, rozmiaru obszaru kolizyjnego ani czasu reakcji, i nie dodaje nowych pakietów do strumienia między klientem a serwerem. Funkcjonalnie nie ma nic, co anticheat mógłby zmierzyć, ponieważ mierzone wartości nigdy się nie zmieniają.
+
+To umieszcza go w innej kategorii niż np. ESP lub X-ray, które ujawniają informacje, które domyślny klient ma za zadanie ukrywać i są blokowane właśnie dlatego, że przekazują przewagę informacyjną. Custom Model nie ingeruje w informacje, tylko w wygląd, dlatego bardziej przypomina funkcję kosmetyczną niż element rozgrywki. Niektóre serwery stosują ogólną politykę zakazującą wszelkich zmodyfikowanych klientów, niezależnie od tego, co modyfikacja robi, więc zasady nadal zależą od miejsca, w którym grasz. Mechanizm sam w sobie nie niesie ze sobą ryzyka wykrycia, jakie wiąże się z modułem walki lub ruchu.
+
+<Callout variant="tip" title="Jak kosmetyki wpisują się w klienta takiego jak Opal">
+Kategoria wizualna Opala opiera się właśnie na takim kompromisie: zmianach, które wpływają na to, co widzisz, i niczym, co robi serwer. Nie udostępnia modułu o nazwie „Model niestandardowy”, ale ta sama zasada przechodzi przez całą tę kategorię. Patrz jak chcesz, nie ingerując w statystyki walki i ruchu, które śledzi serwer.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy niestandardowy model daje przewagę w rozgrywce?">
+Nie. Zmienia on jedynie sposób renderowania lokalnego twojego modelu gracza lub skórki. Nie wpływa na hitboxe, zasięg, ruch ani nic, co śledzi serwer, więc nie zapewnia żadnej przewagi bojowej ani ruchowej.
+</FAQItem>
+
+<FAQItem question="Czy inni gracze widzą mój niestandardowy model?">
+Zazwyczaj nie. Minecraft renderuje skórki po stronie klienta, więc zmiana własnego renderowania nie wpływa na ekran nikogo innego. Efekt jest widoczny zazwyczaj tylko dla Ciebie, chyba że konkretna implementacja udostępnia go w inny sposób.
+</FAQItem>
+
+<FAQItem question="Czy Custom Model wykrywany jest przez antywiry?" >
+Prawie wcale, jeśli w ogóle. Ponieważ nie modyfikuje ruchu, walki ani pakietów wysyłanych do serwera, antywirus po stronie serwera ma niemal nic, co mogłoby wzbudzić podejrzenia. Ryzyko wykrycia jest znacznie niższe niż w przypadku modułów walki lub ruchu.
+</FAQItem>
+
+<FAQItem question="Czy Model Dostosowany to to samo co pakiet zasobów?">
+Niezupełnie. Pakiet zasobów pochodzi od serwera i zmienia to, co widzi każdy połączony gracz. Model Dostosowany to moduł kliencki, który wymienia renderowanie lokalnie, bez potrzeby pakietu zasobów.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Szersza kategoria, do której należy model niestandardowy, oraz każdy inny moduł." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kolejna, dotycząca tylko klienta, różnica, którą warto zrozumieć." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Drugi biegun spektrum: moduł, który serwer absolutnie może zmierzyć." },
+]} />
+
+<CTA href="/pl/purchase">Zobacz, jak wizualna zakładka Opal poradzi sobie z resztą Twojego wyglądu na $8.99</CTA>

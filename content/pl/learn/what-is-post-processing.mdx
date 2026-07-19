@@ -1,0 +1,88 @@
+---
+title: Co to jest przetwarzanie końcowe w Minecraft? Moduł wizualny
+description: Postprzetwarzanie to moduł Minecrafta, który uruchamia efekt shadera w przestrzeni ekranu, taki jak korekcja kolorów lub rozmycie, na całą widok gry, nie ingerując w rozgrywkę.
+excerpt: Jedna warstwa шейдера, cały ekran, zerowe ryzyko bana. Post Processing działa jak filtr fotograficzny, a nie jak oszustwo.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy przetwarzanie końcowe wpływa na rozgrywkę w Minecraft?
+    a: Nie. To tylko zmienia wygląd gotowego kadru po renderowaniu. Nie wpływa to na ruch, walkę, obszary kolizji ani na nic, co widzi serwer.
+  - q: Czy postprocessing może skutkować zablokowaniem konta?
+    a: Nie. To czysto wizualna, renderowana po stronie klienta operacja, która nie wpływa na rozgrywkę ani połączenie sieciowe, więc nie niesie ze sobą ryzyka wykrycia.
+  - q: Jakie klienty Minecrafta posiadają moduł Post Processingu?
+    a: Przetwarzanie końcowe jest udokumentowane, jak widać w Tenacity. Podobne efekty przestrzeni ekranu pojawiają się w innych klientach pod różnymi nazwami jako ogólna opcja wyświetlania.
+  - q: Jakie efekty obejmuje postobróbka?
+    a: "Zauważono dla niego dwa efekty: korekcję kolorów, która zmienia kolor i kontrast kadru, oraz rozmycie, które ogólnie zmiękcza obraz. Oba działają w ramach tego samego przejściu шейдера."
+  - q: Czy przetwarzanie końcowe to to samo co pakiet shaderów?
+    a: Nie do końca. Shaderpack zazwyczaj zastępuje lub rozszerza cały potok renderowania i wymaga oddzielnego loadera do instalacji. Post Processing to węższa, wbudowana passa efektów, przełączana bezpośrednio w kliencie.
+---
+
+<KeyTakeaways>
+
+- Post Processing to moduł Minecraft działający po stronie klienta, który wykonuje pojedynczy przebieg shadera w przestrzeni ekranu, taki jak korekcja kolorów lub rozmycie, na całym wyrenderowanym obrazie.
+- Działa po zakończeniu rysowania świata i interfejsu, traktując gotowy obraz jako jedną warstwę, zamiast modyfikować poszczególne bloki lub byty.
+- Nie wpływa na pozycję, obszary kolizji, czas, ani żadną wartość śledzoną przez serwer, więc nie ma nic, co mogłoby wykryć anticheat po stronie serwera.
+- Udokumentowany, jak widać w Tenacity, jest wbudowanym substytutem dla instalowania pełnego zewnętrznego pakietu shaderów.
+
+</KeyTakeaways>
+
+Przetwarzanie Post jest modułem Minecrafta, który uruchamia przejście shaderu w przestrzeni ekranu nad całym widokiem gry – efekt, do którego inaczej sięgnęłbyś po pełny pakiet shaderów. Włącz go, a klient przebarwia lub wygładza gotowy obraz, wykonuje grading kolorystyczny lub efekt rozmycia, tuż przed wyświetleniem na monitorze. Nie modyfikuje żadnej wartości gry. Bloki pozostają na swoich miejscach, obszary kolizji zachowują ten sam rozmiar, a serwer nie ma możliwości wiedzy o istnieniu modułu. Jest to opcja wyświetlania, a nie rozgrywki i zachowuje się jak taka od pierwszej do ostatniej klatki.
+
+## Jak to działa
+
+Większość tego, co klient Minecrafta rysuje, dzieje się obiekt po obiekcie: blok otrzymuje swoją teksturę, byt – swój model, HUD – własne przejście. Przetwarzanie Post działa inaczej. Czeka, aż świat i interfejs zostaną już wyrenderowane, a następnie nakłada jedno przejście shaderu nad całą skomponowaną klatką tuż przed wyświetleniem na ekranie. Ponieważ traktuje gotowy obraz jako pojedynczą całość, a nie scenę pełną oddzielnych elementów, może przebarwić lub wygładzić wszystko na raz, zamiast modyfikować elementy pojedynczo.
+
+Dwa efekty udokumentowane dla modułu to korekcja kolorów, która zmienia kolor i kontrast kadru, aby nadać scenie cieplejszy, chłodniejszy lub bardziej płaski wygląd, oraz rozmycie, które wygładza obraz jako całość. Oba efekty działają w jednym przejściu, więc włączenie modułu nie dodaje kroku renderowania dla każdego elementu na ekranie, tylko jednego przejściu nad wynikiem. Dlatego też jest on tani w działaniu w porównaniu z wymianą całego modelu oświetlenia: polega na ponownym kolorowaniu istniejących pikseli, a nie na ponownym obliczaniu oświetlenia świata.
+
+Ludzie sięgają po niego z tego samego powodu, z jakiego zainstalowaliby pakiet shaderów: chcą, aby ich zrzuty ekranu i klipy wyglądały inaczej niż domyślny Minecraft. Korekcja kolorów nadaje scenie nastrój bez konieczności instalowania pasującego pakietu zasobów. Przejście rozmycia wygładza zatłoczone lub ostre widoki. Ponieważ jest to wbudowany przełącznik, a nie kombinacja zewnętrznego ładowacza i pakietu, nie ma nic do pobrania, skonfigurowania ani aktualizowania.
+
+## Przetwarzanie obrazu po renderowaniu vs. pełny pakiet shaderów
+
+| | Przetwarzanie Post | Pełny pakiet shaderów |
+|---|---|---|
+| Instalacja | Wbudowane w klienta, jeden przełącznik | Oddzielny loader (Iris, OptiFine) plus pakiet do wyboru i konfiguracji |
+| Zakres | Jedno przejście w przestrzeni ekranu nad gotowym kadrem | Zastępuje lub rozszerza dużą część potoku renderowania |
+| Efekty | Korekcja kolorów, rozmycie | Oświetlenie, cienie, odbicia i więcej, w zależności od pakietu |
+| Konfiguracja | Natychmiastowa | Wybór, instalacja i dostrajanie pakietu |
+
+Żadne z podejść nie zmienia niczego, co widzi serwer. Różnica polega na głębi: pakiet shaderów odtwarza, jak oświetlony jest świat, przetwarzanie postkolorystyczne przebarwia lub wygładza to, co gra już wyrenderowała.
+
+<Callout variant="tip" title="Gdzie to się znajduje w Opalu">
+Opal nie dostarcza modułu o nazwie Przetwarzanie Post. Jednak strona wizualna klienta działa w oparciu o dokładnie tę samą zasadę: lokalne udoskonalenia, które nigdy nie opuszczają Twojego komputera i nigdy nie dotykają wartości śledzonych przez serwer. Jeśli dążysz do konkretnego wyglądu na zrzutach ekranu lub klipach bez instalowania pakietu shaderów, to właśnie ta rodzina funkcji jest warta uwagi – kosmetyczna, bez ryzyka, coś, co antywirus nie mógłby oznaczyć, nawet gdyby chciał.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Obróbka Post-Rendering wpływa na rozgrywkę w Minecraft?">
+Nie. Zmienia jedynie wygląd gotowego obrazu po renderowaniu. Nie ma wpływu na ruch, walkę, obszary kolizji ani nic, co widzi serwer.
+</FAQItem>
+
+<FAQItem question="Czy przetwarzanie po stronie klienta może skutkować zablokowaniem konta?">
+Nie. Jest to czysto wizualna operacja renderowania po stronie klienta, która nie wpływa na rozgrywkę ani sieć, więc nie niesie ze sobą ryzyka wykrycia.
+</FAQItem>
+
+<FAQItem question="Które klienty Minecrafta posiadają moduł Post Processing?">
+Post Processing jest udokumentowany, jak widać w Tenacity. Podobne efekty screen-space pojawiają się w innych klientach pod różnymi nazwami jako ogólna opcja wyświetlania.
+</FAQItem>
+
+<FAQItem question="Jakie efekty obejmuje Przetwarzanie Post?">
+Zadokumentowane efekty to korekcja kolorów, która zmienia kolor i kontrast kadru, oraz rozmycie, które wygładza obraz w całości. Oba działają w ramach tej samej operacji shaderów.
+</FAQItem>
+
+<FAQItem question="Czy Obróbka Post-Processing jest tym samym co shader pack?">
+Nie do końca. Shader pack zwykle zastępuje lub rozszerza cały potok renderowania i wymaga oddzielnego programu instalacyjnego. Obróbka Post-Processing to węższa, wbudowana passa efektów, którą można włączyć bezpośrednio w kliencie.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Moduły szerszej kategorii, takie jak Przetwarzanie Post, do których należą." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Gdzie leży granica między kosmetycznym dopieszczeniem a zauważalnym zachowaniem." },
+  { href: "/pl/learn/what-is-a-crystal-aura", label: "Czym jest kryształowa aura?", description: "Moduł, który znajduje się po przeciwnej stronie spektrum ryzyka niż Przetwarzanie Post." },
+]} />
+
+<CTA href="/pl/purchase">Twoje klipy zasługują na lepszy kolor niż oferuje domyślny. Zobacz, co Opal oferuje od razu po wyjęciu z pudełka.</CTA>

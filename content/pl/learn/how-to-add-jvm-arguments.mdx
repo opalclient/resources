@@ -1,0 +1,128 @@
+---
+title: Jak dodać argumenty JVM do Minecrafta (poradnik)
+description: Dodaj argumenty JVM do Minecrafta, edytując pole argumentów JVM w profilu uruchomiacza. Krok po kroku, z bezpiecznym ustawieniem sterty -Xmx i typowymi poprawkami.
+excerpt: Argumenty JVM dostrajają środowisko uruchomieniowe Javy, które hostuje Minecraft, a nie samą grę. Poniżej znajduje się miejsce, gdzie można je ustawić, flaga sterty, której większość graczy potrzebuje, oraz bezpieczne limity.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: Co robi opcja -Xmx w Minecraft?
+    a: Ustawia maksymalny rozmiar sterty, z jakiej środowisko uruchomieniowe Java może korzystać. -Xmx4G ogranicza grę do 4 gigabajtów. To flaga, która stoi za każdym poradnikiem rozszerzania pamięci RAM.
+  - q: Ile pamięci RAM powinienem przydzielić Minecraftowi?
+    a: Dla większości graczy 4 do 6 gigabajtów wystarczy. Przydzielanie znacznie więcej rzadko pomaga i może wydłużać przerwy związane z odśmieczaniem pamięci, więc nie oddawaj JVM całej swojej pamięci.
+  - q: Czy modyfikacje wpływają na to, jakie argumenty JVM muszę używać?
+    a: Zazwyczaj nie. Mody ładują się w tym samym procesie Java, więc współdzielą stertę, którą już ustawiłeś. Kilka modów dokumentuje konkretną właściwość systemową, ale flagi sterty obejmują większość przypadków.
+  - q: Czy argumenty JVM to to samo co ustawienia gry?
+    a: Nie. Argumenty JVM konfigurują środowisko uruchomieniowe Java przed załadowaniem gry i znajdują się w uruchamiaczu. Ustawienia gry znajdują się w menu opcji w grze.
+---
+
+<KeyTakeaways>
+
+- Argumenty JVM znajdują się w profilu uruchomiacza, a nie w opcjach gry.
+- Konfigurują one środowisko uruchomieniowe Java (/pl/learn/what-is-the-jvm), które hostuje grę, więc błąd w pisowni wpływa na uruchomienie, a nie na świat gry.
+- Flaga, której pragnie większość graczy, to `-Xmx`, która ogranicza ilość pamięci, jaką może używać gra.
+- W większości konfiguracji 4 do 6 gigabajtów wystarczy. Więcej może pogorszyć zacinanie się.
+
+</KeyTakeaways>
+
+Dodajesz argumenty JVM do Minecrafta w ustawieniach profilu uruchomienia w swoim launcherze. Otwórz profil, z którego uruchamiasz grę, znajdź pole argumentów JVM i edytuj listę flag oddzielonych spacjami. Te flagi konfigurują [maszynę wirtualną Java](/pl/learn/what-is-the-jvm), która hostuje grę, a nie samą grę, więc błąd w pisowni wpływa na uruchomienie, a nie na twój świat.
+
+<Callout variant="info" title="Gdzie pasuje Opal">
+Opal jest modem [Fabric](https://fabricmc.net/), więc dzieli te same argumenty JVM z grą, w której działa. Aby dowiedzieć się, na jaką wersję jest skierowany i jak go dokładnie skonfigurować, zapoznaj się z [instrukcją konfiguracji](/pl/docs/setup).
+</Callout>
+
+## Czym jest argument JVM
+
+Argument JVM to flaga, którą przekazujesz do środowiska uruchomieniowego Java podczas uruchamiania gry. Launcher buduje długą linię poleceń za każdym razem, gdy naciskasz przycisk „Play”, a argumenty JVM stanowią część tej linii, która dostraja środowisko uruchomieniowe. Najczęściej używany argument określa, ile pamięci gra może wykorzystać.
+
+Te flagi nie są ustawieniami Minecrafta. Są odczytywane przez JVM zanim gra w ogóle się załaduje, dlatego ustawia się je w launcherze, a nie w menu opcji w grze.
+
+## Gdzie je umieścić
+
+Prawie każdy launcher przechowuje pole „argumenty JVM” wewnątrz każdego profilu. Etykieta może się różnić, ale lokalizacja jest spójna.
+
+| Typ launchera | Gdzie znajduje się pole |
+| :--- | :--- |
+| Oficjalny launcher | Instalacje, edytuj profil, Więcej opcji, Argumenty JVM |
+| Launcher firm trzecich | Ustawienia profilu lub instancji, często w zakładce Java lub Zaawansowane |
+| Linia poleceń / skrypty | Polecenie `java`, które uruchamiasz, przed `-jar` |
+
+Edytuj istniejącą listę, zamiast ją zastępować. Launchery dostarczają rozsądne domyślne ustawienia, a ich usunięcie może spowodować problemy z uruchomieniem.
+
+## Krok po kroku w oficjalnym launcherze
+
+<Steps>
+
+<Step number={1} title="Otwórz Instalacje">
+Otwórz uruchomienie i przejdź do **Instalacji**.
+</Step>
+
+<Step number={2} title="Edytuj swój profil">Przesuń wskaźnik myszy nad profilem, którego używasz, i kliknij ikonę edycji (ołówek)</Step>
+
+<Step number={3} title="Opcje rozszerzone">Otwórz **Więcej opcji**. Pojawi się okno **Argumenty JVM**</Step>
+
+<Step number={4} title="Edytuj flagi">
+Edytuj flagi w tym polu. Są oddzielone spacjami.
+</Step>
+
+<Step number={5} title="Zapisz i uruchom">
+Zapisz, a następnie uruchom ten profil.
+</Step>
+
+</Steps>
+
+## Argument, którego oczekuje większość użytkowników: rozmiar sterty
+
+Flaga, po którą najczęściej sięgają gracze, to `-Xmx`, która ogranicza maksymalny rozmiar sterty, jaką może użyć JVM. `-Xmx4G` pozwala na wykorzystanie do 4 gigabajtów. Istnieje również `-Xms`, czyli rozmiar początkowej sterty.
+
+```
+-Xmx4G -Xms2G
+```
+
+Dwa zasady zapewniają bezpieczeństwo. Nie przydzielaj więcej pamięci, niż jest dostępna, ponieważ proces Java potrzebuje przestrzeni manewru, a system operacyjny potrzebuje reszty. Więcej nie zawsze jest lepsze; bardzo duże sterty mogą pogorszyć przerwy w działaniu garbage collectora, zamiast je zmniejszyć. W większości konfiguracji 4 do 6 gigabajtów wystarczy.
+
+## Popularne flagi, które się spotyka
+
+- `-Xmx<rozmiar>` ustawia maksymalny rozmiar sterty, np. `-Xmx4G`.
+- `-Xms<rozmiar>` ustawia początkowy rozmiar sterty, np. `-Xms2G`.
+- `-XX:+UseG1GC` wybiera garbage collector G1, który jest częstym ustawieniem domyślnym.
+- `-Dproperty=value` ustawia właściwość systemu, którą gra lub mod odczytuje podczas uruchamiania.
+
+Rzadko potrzebujesz więcej niż flagi sterty. Długie, skopiowane i wklejane listy argumentów ze starych poradników często przeszkadzają bardziej, niż pomagają w nowoczesnym środowisku uruchomieniowym Java.
+
+## Kiedy coś pójdzie nie tak
+
+<Checklist>
+<ChecklistItem>Gra nie uruchamia się po edycji: błąd w flagach. Przywróć domyślne argumenty i dodawaj zmiany pojedynczo.</ChecklistItem>
+<ChecklistItem>`-Xmx` jest ignorowany lub powoduje błąd: nieprawidłowa jednostka lub składnia. Używaj `G` lub `M` bez spacji, jak w `-Xmx4G`, a nie `-Xmx 4 GB`.</ChecklistItem>
+<ChecklistItem>Zajęczenie pamięci pogorszyło się po zwiększeniu jej: zbyt duży stertownik może wydłużać przerwy w zbieraniu śmieci. Obniż wartość `-Xmx` z powrotem do 4–6 gigabajtów.</ChecklistItem>
+</Checklist>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co robi opcja -Xmx w Minecraft?">Ustawia maksymalny rozmiar sterty, z jakiego środowisko uruchomieniowe Java może korzystać. `-Xmx4G` ogranicza grę do 4 gigabajtów. To flaga, która stoi za każdą poradą „przydziel więcej pamięci RAM”</FAQItem>
+
+<FAQItem question="Ile pamięci RAM powinienem przydzielić Minecraftowi?">
+Dla większości graczy 4 do 6 gigabajtów jest wystarczające. Przydzielanie znacznie więcej rzadko pomaga i może wydłużać przerwy związane z usuwaniem śmieci, więc nie przydzielaj JVM całej swojej pamięci.
+</FAQItem>
+
+<FAQItem question="Czy mody zmieniają argumenty JVM, których potrzebuję?">
+Zazwyczaj nie. Mody ładują się w tym samym procesie Java, więc dzielą stertę, którą już ustawiłeś. Kilka modów dokumentuje konkretną właściwość systemową, ale flagi sterty pokrywają większość przypadków.
+</FAQItem>
+
+<FAQItem question="Czy argumenty JVM to to samo co ustawienia gry?">
+Nie. Argumenty JVM konfigurują środowisko uruchomieniowe Java przed załadowaniem gry i znajdują się w uruchomiaczu. Ustawienia gry znajdują się w menu opcji w grze.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-the-jvm", label: "Czym jest JVM?", description: "Czas działania, które faktycznie konfigurują te flagi." },
+  { href: "/pl/learn/how-to-install-a-fabric-mod", label: "Jak zainstalować modyfikację Fabric", description: "Najpierw załaduj swoje mody." },
+  { href: "/pl/blog/how-to-get-more-fps-in-minecraft", label: "Jak uzyskać więcej FPS", description: "Zyski wydajnościowe wykraczające poza flagę stosu." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź Opala, klienta Fabric, za $8.99</CTA>

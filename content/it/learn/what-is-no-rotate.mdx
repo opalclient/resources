@@ -1,0 +1,81 @@
+---
+title: Cosa significa "No Rotate" in Minecraft? Spiegazione del Modulo
+description: No Rotate è un modulo di utilità per Minecraft che impedisce al server di forzare la direzione dello sguardo del client, creando una discrepanza che gli anticheat possono segnalare e punire.
+excerpt: Il server pensa di poterti stordire quando vuole. No Rotate è il cliente che gli dice sottovoce di no.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa fa la funzione "No Rotate" in Minecraft?
+    a: Impedisce al server di forzare la direzione dello sguardo del tuo client. La tua telecamera continua a puntare nella direzione in cui la orienti effettivamente, invece di orientarsi automaticamente alla rotazione che il server tenta di impostare, che derivi da un teletrasporto, un cambio spettatore o un evento scriptato.
+  - q: No Rotate cambia il punto in cui sto guardando?
+    a: No. La tua reale direzione della telecamera non cambia mai. Ciò che cambia è ciò che il server crede sia la tua direzione, e quel divario tra le due cose è esattamente il motivo per cui si verifica una discrepanza.
+  - q: No Rotate è la stessa cosa di un rotation spoofer come Anti-Aim?
+    a: Non esattamente. No Rotate rifiuta una rotazione che il server tenta di imporre, invece di inviarne una fabbricata. Anti-Aim e moduli simili mentono attivamente sulla tua direzione ad ogni tick; No Rotate semplicemente non permette al server di sovrascriverla.
+  - q: Può anticheat rilevare No Rotate?
+    a: Sì, in linea di principio. Qualsiasi controllo che confronti la rotazione assegnata dal server con quanto riporta il client in seguito può intercettare la discrepanza, motivo per cui è considerato un modulo utilizzabile a proprio rischio e pericolo piuttosto che sicuro.
+---
+
+<KeyTakeaways>
+
+- No Rotate è un modulo utility che impedisce al server di forzare la direzione dello sguardo del tuo client.
+- Scarta i pacchetti di rotazione del server invece di inviare un valore fittizio proprio.
+- Il risultato è una disincronizzazione: la copia del server della tua direzione dello sguardo smette di corrispondere a dove stai effettivamente guardando.
+- È rilevabile e utilizzabile a proprio rischio, come qualsiasi modulo che mette i dati del server e del client in conflitto.
+
+</KeyTakeaways>
+
+No Rotate è un modulo di utilità per Minecraft che impedisce al server di forzare la direzione dello sguardo del tuo client. Alcune azioni del server, come un teletrasporto, un cambio di spettatore o una cutscene scriptata, normalmente hanno l'autorità di fissare la tua telecamera a una rotazione scelta dal server. No Rotate fa sì che il client ignori tale istruzione e continui a guardare nella direzione in cui stai effettivamente guardando. Nulla cambia della tua visuale locale. Ciò che cambia è la registrazione della rotazione del server stesso, che non deve più corrispondere alla realtà. Questo scostamento è l'intero punto del modulo, e anche l'intero rischio.
+
+## Come funziona
+
+No Rotate intercetta i pacchetti che il server utilizza per impostare la direzione dello sguardo e impedisce loro di avere effetto sul tuo lato. La tua telecamera continua a puntare nella direzione in cui stai effettivamente mirando; l'istruzione che normalmente la farebbe ruotare viene scartata prima che possa agire.
+
+Il server, nel frattempo, non lo scopre. Per quanto riguarda la sua contabilità interna, ha inviato l'aggiornamento della rotazione e il client lo ha applicato, come fa per ogni altro pacchetto che invia. Ora esistono due numeri diversi per lo stesso giocatore: quello reale che la tua telecamera sta utilizzando e quello obsoleto che il server ritiene attuale. Non sono più allineati, e nulla li forza a sincronizzarsi nuovamente.
+
+Questo è un modulo di exploit-categoria documentato, ed è stato riscontrato in client come Tenacity. È un trucco sottile, ma persistente: qualsiasi meccanismo del server che si basa sulla conoscenza della direzione in cui ti trovi effettivamente ora legge un valore non corretto.
+
+## Nessuna rotazione rispetto alla falsificazione della rotazione
+
+No Rotate viene raggruppato con moduli come [Anti-Aim](/it/learn/what-is-anti-aim), ed è facile capire perché. Entrambi finiscono con il server che detiene una rotazione che non corrisponde alla realtà. Il meccanismo sottostante è diverso, però. Anti-Aim invia attivamente un yaw e un pitch fabbricati al server ad ogni tick, mentendo intenzionalmente sulla tua direzione. No Rotate non invia nulla di falso affatto. Si limita a rifiutare una rotazione che il server ha cercato di imporre e lascia il valore reale intatto ovunque altro.
+
+Questa distinzione è importante per capire come viene rilevato ciascuno. Anti-Aim deve mantenere i suoi numeri falsi internamente coerenti con il tuo movimento, altrimenti la menzogna crolla sotto esame. No Rotate produce un tipo di discrepanza più piatta: una rotazione che il server ha assegnato esplicitamente e che semplicemente non compare dall'altra parte. Rifiutare un'istruzione in modo diretto tende a lasciare un divario più grande e più ovvio rispetto a una leggera modifica di un numero, che è parte del motivo per cui questo è considerato facile da rilevare una volta che un server si preoccupa di cercarlo.
+
+<Callout variant="tip" title="Dove si trova No Rotate in Opal">
+Opal spedisce No Rotate all'interno della sua categoria Utility, descritto nello stesso modo in cui funziona qui: impedisce al server di forzare la tua rotazione. È classificato come utilizzo a proprio rischio nel catalogo di Opal, non come un'opzione cosmetica sicura, perché la discrepanza che crea è esattamente il tipo di cosa che un controllo lato server può segnalare.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina spiega cos'è No Rotate e come si comporta genericamente. Non sono istruzioni per eseguirne uno, né è una dichiarazione che sia sicuro. Se un server confronta la rotazione che ha assegnato con quella che il client riporta in seguito, è questo tipo di discrepanza che viene rilevata, e l'essere scoperti comporta lo stesso rischio di ban di qualsiasi altro cheat rilevato.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa fa No Rotate in Minecraft?">
+Impedisce al server di forzare la direzione dello sguardo del tuo client. La tua telecamera continua a puntare nella direzione in cui la punti effettivamente, invece di orientarsi verso la rotazione che il server tenta di impostare, che sia dovuta a un teletrasporto, a un cambio di visuale in modalità spettatore o a un evento scriptato.
+</FAQItem>
+
+<FAQItem question="No Rotate modifica la mia direzione di sguardo?">
+No. La direzione reale della tua telecamera non cambia mai. Ciò che cambia è ciò che il server crede sia la tua direzione, e quel divario tra le due è esattamente il motivo per cui compare una discrepanza.
+</FAQItem>
+
+<FAQItem question="No Rotate è la stessa cosa di un rotation spoofer come Anti-Aim?">
+Non esattamente. No Rotate rifiuta una rotazione che il server cerca di imporre, piuttosto che inviarne una fabbricata. Anti-Aim e moduli simili mentono attivamente sulla tua direzione ad ogni tick; No Rotate semplicemente non permette al server di sovrascriverla.
+</FAQItem>
+
+<FAQItem question="L'anticheat può rilevare il No Rotate?">
+Sì, in linea di principio. Qualsiasi controllo che confronti la rotazione assegnata dal server con quella riportata dal client in seguito può intercettare la discrepanza, motivo per cui è considerato un modulo utilizzabile a proprio rischio e pericolo piuttosto che sicuro.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "La categoria incentrata sulla furtività, dove tendono a proliferare exploit come questo." },
+  { href: "/it/learn/what-is-velocity-anti-knockback", label: "Cos'è Velocity (Anti-Knockback)?", description: "Un altro modulo costruito per sovrascrivere silenziosamente un valore assegnato dal server." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia No Rotate e moduli simili vi appartengono." },
+]} />
+
+<CTA href="/it/purchase">La scheda Utilità di Opal viene spedita senza rotazione, classificata come utilizzo a proprio rischio anziché presentata come sicura.</CTA>

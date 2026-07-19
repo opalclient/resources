@@ -1,0 +1,87 @@
+---
+title: Minecraft'ta Hedef HUD Nedir? (Modül Açıklaması)
+description: Hedef HUD, adını, canını ve mesafesini, nişanınızı, girdiğinizi veya ağ trafiğinizi hiç etkilemeden gösteren bir Minecraft savaş üst bilgisidir.
+excerpt: Ad, sağlık, mesafe, hepsi tek bir bakışta. Hedef HUD, bir beslenme etiketinin kadar baharatlı, bu yüzden tam da bu yüzden güvenle koşulabilir.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Hedef HUD hile mi?
+    a: Hayır, sadece mevcut hedefinizle ilgili zaten bildiğiniz bilgileri gösterir; isim, sağlık ve mesafe gibi. Sizin için nişan almaz, saldırmaz veya hareket etmez, bu yüzden otomatik savaş modüllerinin taşıdığı riski taşımaz.
+  - q: Hedef HUD ne gösteriyor?
+    a: Genellikle, savaşta kilitlendiğiniz varlığın adı, mevcut sağlığı ve mesafesi. Bazı versiyonlarda sayı, bir sağlık barı grafiği veya simgesiyle değiştirilir ve kesin düzenleme, istemciye ve seçtiğiniz görsel stile göre değişir.
+  - q: Hedef HUD kullanmak yasaklanmanıza neden olabilir mi?
+    a: Tek başına değil. Sunucuya gönderilen hiçbir paket veya hareket kalıbını değiştirmez, bu yüzden bir antichi̇at tarafından işaretlenecek hiçbir şey yoktur. Sadece ekranda görünenleri değiştirir.
+  - q: Hedef Bilgisi, Hedef HUD ile aynı şey mi?
+    a: "Evet. TargetInfo, bazı müşterilerin aynı fikir için kullandığı alternatif bir isimdir: mevcut savaş hedefinizin ekrandaki göstergesi."
+  - q: Hedef HUD'yi hangi müşteriler gönderdi?
+    a: Yıllar içinde Fan, Tenacity ve Opal v1 gibi çeşitli müşterilerde ortaya çıktı; genellikle oyuncuların seçebileceği birkaç HUD tarzı görsel modülün arasında yer alıyor.
+---
+
+<KeyTakeaways>
+
+- Hedef HUD, mevcut hedefinizin adını, canını ve ekran üzerindeki mesafesini gösteren bir savaş üst bilgisidir.
+- Yalnızca istemcinin zaten sahip olduğu verileri okur: ek paket yok, değiştirilmiş girdi yok, otomasyon yok.
+- Ne yaptığınızı değil, gördüğünüzü değiştirdiği için hile önleme sistemleri işaretleyemez.
+- TargetInfo olarak da bilinir ve Fan, Tenacity ve Opal v1 ile birlikte gelir.
+
+</KeyTakeaways>
+
+Hedef Gösterge HUD, savaş sırasında ekranda görünen ve kavga ettiğiniz varlığa kilitlendiğinizde ilgili bilgileri gösteren bir göstergedir; genellikle adını, mevcut canını ve sizden olan mesafesini içerir. Vanilla Minecraft'taki saldırı göstergesi, nişanda yaklaşık bir can değerini ve başka bir şey vermez: ad yok, mesafe yok, üç oyuncu aynı anda saldırdığında kiminle savaştığınızı anlamanın bir yolu yok. Hedef Gösterge HUD, bunların hepsini tek bir panelde toplar. Bazen TargetInfo olarak da adlandırılan, yalnızca bir bilgi modülüdür; zaten sahip olduğunuz verileri okur ve savaşın ortasında kullanabileceğiniz bir yere yerleştirir.
+
+## Nasıl Çalışır
+
+Hedef Gösterge HUD, genellikle baktığınız veya en son vurduğunuz varlık gibi, şu anda savaş hedefi olarak sayılan varlığı izler ve ilgili ayrıntıları içeren küçük bir panel çizer.
+
+| Ne Gösterir | Ayrıntı |
+|---|---|
+| Ad | Hedefin oyun içi kullanıcı adı |
+| Can | Mevcut HP, savaş devam ederken canlı olarak güncellenir |
+| Mesafe | Hedefin şu anda sizden ne kadar uzakta olduğu |
+
+Bazı uygulamalar, düz can sayısını bir çubuk grafik veya bir simgeyle değiştirir. Modülün birkaç görsel varyantını gönderen istemciler, alttaki veriler ne olursa olsun, kompakt bir çubuk veya daha dolu kart tarzı panel arasında seçim yapmanıza olanak tanır.
+
+Sunların hiçbirisi sunucudan yeni bir şey çekmiyor. Gösterdiği isim, sağlık ve konum zaten normal oyun akışı parçası olarak istemci üzerinde duruyor; vanilla Minecraft'ın nametağları ve saldırı göstergesini oluşturmak için kullandığı aynı veri. Target HUD, sizi bir isim etiketini, sonra nişan barını okumaya ve mesafeyi kendiniz tahmin etmeye zorlamak yerine, bunları tek bir bakışta yeniden paketliyor. Hedefinize, saldırılarınıza veya hareketlerinize dokunmuyor ve kablo üzerinden hiçbir ek veri göndermiyor. Zaten yaptığınız savaşın üzerine katmanlı bir pasif gösterge.
+
+## Kullanımı Güvenli mi?
+
+Target HUD, bir Minecraft modülünün olabileceği kadar güvenli. Sadece istemci tarafından zaten yerel olarak tutulan bilgileri oluşturur ve oyun durumuna, girişlere veya ağ trafiğine dokunmaz, bu nedenle sunucu tarafındaki bir antichiğin tetikleyebileceği bir şey yoktur. Diğer sadece okuma yapabilen HUD üst katmanları gibi aynı kategoridedir: sizin gördüğünüzü değiştiren, sizin veya istemcinizin ne yaptığını değiştirmeyen modüller.
+
+Bu, teknik bir ayrıntı değil, gerçek bir farktır. Bunu [killaura](/tr/learn/what-is-killaura) veya [aimbot](/tr/learn/what-is-an-aimbot) gibi bir şeyle karşılaştırın; her ikisi de sizin adınıza hareket eder ve bir antichiitin ölçebileceği hareket veya zamanlama verilerinde bir iz bırakır. Target HUD asla bir saldırı göndermez, asla kameranızı döndürmez, asla hiçbir şeye tıklamaz. Sadece zaten doğru olanı, kendiniz fark edeceğinizden daha hızlı bir şekilde size söyler.
+
+<Callout variant="tip" title="Burada Opal'da nerede duruyor">Hedef HUD burada yabancı bir alan değil. Opal v1'in daha önceki bir sürümü, savaş HUD modüllerinden biri olarak bir Hedef HUD tarzı panel gönderilmişti. Aynı salt okunur ruh, mevcut görsel kategoriye de yansıyor: nişanınızı, tıklamalarınızı veya gönderdiğiniz tek bir paketi etkilemeden bir dövüş hakkında size daha fazla bilgi veren üstbilişler</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Hedef HUD hile mi?">
+Hayır. Sadece mevcut hedefinizle ilgili zaten sahip olduğunuz bilgileri görüntüler; ad, sağlık ve mesafe gibi. Sizin için nişan almaz, saldırmaz veya hareket etmez, bu nedenle otomatik savaş modüllerinde olduğu gibi risk taşımaz.
+</FAQItem>
+
+<FAQItem question="Hedef HUD ne gösterir?">
+Genellikle, kilitlendiğiniz varlığın adı, mevcut canı ve mesafesi. Bazı versiyonlarda sayı, can barı grafiği veya simgesiyle değiştirilir ve kesin düzenleme istemciye ve seçtiğiniz görsel stile göre değişir.
+</FAQItem>
+
+<FAQItem question="Hedef HUD sizi banlanmaya yol açar mı?">
+Tek başına değil. Sunucuya gönderilen herhangi bir paketi veya hareket kalıbını değiştirmez, bu yüzden antichiplerde işaretlenecek bir şey yoktur. Sadece ekranda görünen şeyleri değiştirir.
+</FAQItem>
+
+<FAQItem question="TargetInfo, Target HUD ile aynı şey mi?">
+Evet. TargetInfo, bazı müşterilerin aynı fikir için kullandığı alternatif bir isimdir: mevcut savaş hedefinizin ekrandaki göstergesi.
+</FAQItem>
+
+<FAQItem question="Hangi müşteriler Target HUD gönderimi yaptı?">
+Yıllar içinde Fan, Tenacity ve Opal v1 gibi çeşitli müşterilerde ortaya çıktı; genellikle oyuncunun seçebileceği birkaç HUD tarzı görsel modülün bir parçası olarak.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Hedef HUD'unun ve benzeri modüllerin ait olduğu daha geniş kategori." },
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "Okuma-sadece HUD'in otomatik tersi: sadece sizi bilgilendirmek yerine sizin için hareket eder." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Başka bir savaş modülü, ancak sadece savaşın görüntülenmesi yerine sizin adınıza nişan almayı amaçlayan bir modül." }
+]} />
+
+<CTA href="/tr/satin-al">Otomasyonla entegre edilmemiş, yalnızca net savaş bilgilerini elde etme; Opal'ın arkasındaki bütün fikir bu.</CTA>

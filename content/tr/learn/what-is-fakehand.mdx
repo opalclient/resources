@@ -1,0 +1,81 @@
+---
+title: Minecraft'ta FakeHand Nedir? Mod Açıklaması
+description: FakeHand, Minecraft'ta bir açığa yarayan modüldür ve görünen eldeki eşyanız ile sunucunun kaydettiği eşya arasındaki senkronizasyonu bozarak, ekranınızı izleyenlerden eşya değişimlerini gizler.
+excerpt: Eliniz bir öğe gösteriyor. Sunucu başka bir öğe kaydediyor. FakeHand, o boşluğun etrafında inşa edilmiş bütün modüldür.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: FakeHand, oyun avantajı sağlıyor mu?
+    a: Hayır, FakeHand hem mesafeyi, hem zamanlamayı, hem de hareketi etkilemez. Sadece oyuncunun elindeki eşyanın görünümünü, sunucunun gerçekte kaydettiğiyle kıyasla değiştirir; bu nedenle bir gizleme aracıdır, savaş modülü değil.
+  - q: FakeHand kozmetik bir modül olarak kabul ediliyor mu?
+    a: Alışılmış anlamda değil. Kozmetik modüller, sadece görünümü değiştirmek için kullanılır. FakeHand, desenkronizasyonun bir eylemi izleyiciden gizlemek için var olmasından, istemci görünümünü değiştirmek için değil, istismar kategorisi olarak kaydedilmiştir.
+  - q: Sunucu taraflı antichi̇t, FakeHand'i algılayabilir mi?
+    a: Doğrudan paketler üzerinden değil. FakeHand, sunucunun kendi durumu için güvendiği veriye göre değil, istemcinin görsel çıktısı üzerinde çalışır, bu nedenle paket düzeyinde bir kontrol pek bir şey yakalamaz. Uyuşmazlık, çekilen görüntüleri gözden geçiren bir insan veya canlı ekran paylaşımı tarafından fark edilme olasılığı çok daha yüksektir.
+  - q: Opal hiç bir FakeHand modülü gönderdi mi?
+    a: Evet, tarihsel olarak. Opal v1'in modül geçmişinde belgelenmiş. Mevcut Opal, o isimle özel bir modül taşımıyor.
+---
+
+<KeyTakeaways>
+
+- FakeHand, bir oyuncunun görünen eşyası ile sunucudaki gerçek kaydı arasındaki senkronizasyonu bozar.
+- Sadece render katmanında çalışır; gerçek etkileşim sunucuya olduğu gibi ulaşmaya devam eder.
+- Tek başına herhangi bir savaş veya hareket avantajı sağlamaz, sadece bir izleyiciye eşya değişimini gizler.
+- Paket kontrolleri pek bir şey yakalamaz; bir insanın görüntüleri incelemesi, uyumsuzluğu çok daha kolay fark etmesini sağlar.
+
+</KeyTakeaways>
+
+FakeHand, Minecraft'ta bir exploit kategorisi modülüdür ve oyuncunun ekranında gösterilen el ile sunucunun aslında kaydettiği öğe etkileşimi arasındaki bağlantıyı koparır. Normalde bu ikisi birbirine yapışık kalır: öğe değiştirildiğinde, istemcinin render'ı ve sunucunun donatılmış öğe durumu senkronize bir şekilde güncellenir. FakeHand, görüntülenen eli sabit tutar veya tamamen farklı bir öğe gösterirken, modül çalışmasa da olduğu gibi gerçekleşecek olan gerçek etkileşim altında sorunsuz bir şekilde devam eder. Sunucu hiçbir farklılık fark etmez. Sadece ekranı izleyen kişi fark eder.
+
+## Nasıl Çalışır
+
+FakeHand yalnızca görsel katmana müdahale eder. Paketleri yeniden yazmaz veya girişleri geciktirmez, sunucunun aslında takip ettiği donatılmış öğe durumundan render edilen el modelini ayırır.
+
+Örneğin, bir oyuncu savaşın ortasında bir kılıçtan bir toteme geçiş yapsın. Sunucu tarafında, bu geçiş ve arkasından gelen her şey, hiçbir modül çalışmayan temiz bir istemcide olduğu gibi tam olarak gerçekleşir. FakeHand'ın tek görevi, render edilen elin kılıcı göstermesini veya hiçbir değişiklik göstermemesini sağlarken, sunucu tarafından kaydedilen totem-dışarı etkileşimi altında tamamlanmasına izin vermektir.
+
+İşte tüm mekanizma. Hiçbir hitbox matematiği, zamanlama hilesi, sunucu senkronizasyonu bozulması yok. Sadece, gerçekleşen şey ile ekranda görünen şey arasındaki bir boşluk.
+
+## FakeHand tespit edilebilir mi
+
+Paket düzeyindeki antilerin buradaki verilere neredeyse hiç dayanacak bir şeyi yok. FakeHand, isabet mesafesini etkilemez, tick'ları eklemez veya düşürmez, etkileşimlerin ne kadar hızlı çözümlendiğini değiştirmez. Sunucu tarafındaki veri, temiz bir istemcinin göndereceğiyle aynıdır. İstemci tarafından bildirilen durum ile sunucu durumu arasındaki tutarlılık üzerine kurulu bir kontrol, denklemin o tarafında bir uyumsuzluk olmadığından hiçbir tutarsızlık bulamaz.
+
+Tuzak, çoğu istismar modülünün ters yönde çalışır. FakeHand, özellikle görünür elin gerçekte olanla uyuşmamasını sağlamak için vardır, böylece onu ele veren uyumsuzluk paketlerde değil, görüntüde ortaya çıkar. Bir ekran paylaşımı inceleyicisi, bir izleyici veya normal bir eşya takası nasıl göründüğünü bilen bir klip tekrar izleyen herkes, onu yakalamak için gereken gözlere sahiptir. Sunucu tarafındaki riski görsel riskle takas eder. Riski tamamen ortadan kaldırmaz.
+
+<Callout variant="info" title="FakeHand ile Opal'in geçmişi">
+Bir kez, Opal v1'de gönderilmişti, ancak istemci tamamen yeniden inşa edilmeden önceydi. Mevcut Opal, bu isim altında özel bir modül taşımıyor, bu yüzden tam olarak bu etiketle arıyorsanız, şu anda kataloğunda bulunmuyor.
+</Callout>
+
+<Callout variant="uyarı" başlık="Hala bir açık, görülsün ya da görülmesin">
+FakeHand, ne mesafeye ne de zamana dair bir kontrolü tetiklemez, çünkü hiçbiriyle temas etmez. Bu, onu izinli yapmaz. Modifiye edilmiş istemcileri yasaklayan herhangi bir sunucu, bir açık kategorisi modülünü, personel canlı olarak yakalayıp yakalamadığına bakılmaksızın aynı şekilde ele alır.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="FakeHand oyun avantajı sağlıyor mu?">
+Hayır. FakeHand, isabet mesafesini, zamanlamayı veya hareketi etkilemez. Sadece oyuncunun elindeki eşyanın görünümünü, sunucunun kaydettiği gerçek eşyaya göre değiştirir; bu nedenle bir savaş modülü değil, bir gizleme aracıdır.
+</FAQItem>
+
+<FAQItem question="FakeHand kozmetik bir modül olarak kabul ediliyor mu?">
+Genellikle değil. Kozmetik modüller kendi başlarına görünümü değiştirir. FakeHand, desenkronizasyonun bir eylemi izleyiciden gizlemek için var olması, istemciye farklı bir görünüm kazandırmak için değil, bir sömürü kategorisi olarak sınıflandırılmıştır.
+</FAQItem>
+
+<FAQItem question="Sunucu tarafı anticheat, FakeHand'ı tespit edebilir mi?">
+Doğrudan paketler üzerinden değil. FakeHand, sunucunun kendi durumu için güvendiği veriler yerine istemcinin görsel çıktısı üzerinde çalışır, bu nedenle paket düzeyinde bir kontrol pek bir şey yakalayamaz. Uyumsuzluk, çekilen görüntüleri inceleyen bir insan veya canlı ekran paylaşımı tarafından fark edilme olasılığı çok daha yüksektir.
+</FAQItem>
+
+<FAQItem question="Opal daha önce bir FakeHand modülü gönderdi mi?">
+Evet, tarihsel olarak. Bu, Opal v1'in modül geçmişinde belgelenmiştir. Mevcut Opal, o isim altında özel bir modül taşımamaktadır.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "FakeHand, gizlemeyi önceliklendiren müşteri kategorisine aittir." },
+  { href: "/tr/learn/what-is-reach", label: "Reach nedir?", description: "SahteEl'in aksine, isabet mesafesini gerçekten değiştiren bir savaş modülü." },
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "Otomatik savaş modülü FakeHand üzerinde hiçbir avantaj sağlamaz." },
+]} />
+
+<CTA href="/tr/satin-al">$8.99'dan Opal bugün neler gönderiyor, görün</CTA>

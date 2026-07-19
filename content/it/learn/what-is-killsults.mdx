@@ -1,0 +1,81 @@
+---
+title: Cosa sono i Killsults in Minecraft? Spiegazione del Modulo
+description: Killsults è un modulo client per Minecraft che invia automaticamente un messaggio provocatorio nella chat non appena ottieni una kill. Ecco come funziona il trigger e se ne vale la pena.
+excerpt: "Un'uccisione, un'auto-provocazione. Killsults lancia un insulto predefinito in chat non appena avviene l'uccisione: niente digitazione, nessun vantaggio in combattimento, solo un colpo in più."
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Influiscono i Killsults in qualche modo sul combattimento?
+    a: No. Killsults invia un messaggio in chat solo dopo che un'uccisione è già avvenuta. Non modifica la registrazione dei colpi, la portata o i tempi di reazione.
+  - q: Possono i sistemi antichet rilevare i Killsult?
+    a: Non direttamente. Il messaggio che invia è un pacchetto chat ordinario, indistinguibile a livello di protocollo da uno digitato a mano, quindi non c'è nulla che un controllo a livello di pacchetto possa intercettare.
+  - q: Come appare il messaggio provocatorio di Killsults?
+    a: Proviene da un elenco predefinito integrato nel modulo, piuttosto che da qualcosa di digitato in tempo reale. La formulazione esatta dipende dall'implementazione del cliente.
+  - q: Sono Killsults la stessa cosa di un annunciatore di serie di uccisioni?
+    a: Sono parenti stretti. Entrambi sono moduli di chat automatizzati collegati a un evento di eliminazione, ma Killsults è presentato come un insulto rivolto al giocatore che è morto, piuttosto che come un semplice contatore di serie.
+  - q: Quali documenti dei clienti elimina Killsults?
+    a: Tenacia, un cliente fantasma costruito attorno a un ampio roster di moduli incentrati sul combattimento, documenta i Killsult come parte di questa formazione.
+---
+
+<KeyTakeaways>
+
+- Killsults è un modulo client che invia un messaggio di scherno preimpostato non appena ottieni un'uccisione, senza bisogno di digitare nulla.
+- Intercetta lo stesso evento di uccisione che il client già traccia, e invia lo scherno come un normale pacchetto di chat.
+- È puramente sociale: non modifica nulla in termini di portata, rotazione o tempismo, quindi non offre alcun vantaggio in combattimento.
+- Gli anticheat non possono segnalarlo a livello di pacchetto. Il vero rischio è che un essere umano, o un filtro di chat, noti lo schema.
+
+</KeyTakeaways>
+
+Killsults è un modulo client per Minecraft che invia automaticamente un messaggio di scherno nella chat non appena ottieni un'uccisione. Il nome è esattamente quello che suggerisce: "kill" più "insulto". Niente da digitare, niente da cliccare. Il client sceglie una frase predefinita e la invia nella chat nel momento in cui l'uccisione viene registrata, prima ancora di aver rilasciato il mouse.
+
+## Come funziona il trigger
+
+Killsults ascolta lo stesso evento di uccisione che il client già traccia internamente: il momento in cui il tuo danno pone fine alla vita di un altro giocatore. Quando questo evento si verifica, il modulo preleva un messaggio da un elenco predefinito di scherni e lo invia direttamente nella chat. Non devi digitarlo né cliccare su nulla per inviarlo. Ciò che raggiunge il server è un pacchetto chat ordinario, lo stesso tipo che qualsiasi giocatore produce manualmente, perché strutturalmente è esattamente quello.
+
+Killsults è documentato come uno dei moduli di Tenacity, un ghost client costruito attorno a un roster profondo e incentrato sul combattimento piuttosto che a una singola funzionalità di punta. Si posiziona lì come un'aggiunta piccola e monolitica accanto a moduli che modificano effettivamente l'andamento di una lotta. L'appeal è interamente sociale: una frecciatina che colpisce nel momento in cui avviene l'uccisione ha un impatto diverso rispetto a una digitata qualche secondo dopo, quando il momento è già passato. Di per sé, Killsults non offre alcun vantaggio nella lotta stessa. Un'uccisione deve ancora avvenire prima che abbia qualcosa da dire.
+
+## È sicuro utilizzarlo
+
+Killsults non comporta alcun rischio di rilevamento che invece presentano un modulo di combattimento o di movimento. Non influisce sulla gittata, sulle rotazioni, sui tempi o sulla pianificazione del percorso, ovvero su ciò che un anticheat lato server è effettivamente progettato per ispezionare, quindi non c'è nulla a livello di pacchetto da segnalare. Il messaggio che invia è indistinguibile da uno che hai digitato tu stesso, perché è costruito utilizzando la stessa pipeline di chat.
+
+L'unico rischio che esiste è sociale, non tecnico. Un'offesa che si attiva istantaneamente dopo ogni eliminazione, formulata nello stesso modo ogni volta, inizia a sembrare automatizzata a chiunque presti attenzione. Su un server che vieta esplicitamente i client modificati, quel tipo di attenzione può indurre a esaminare più da vicino tutto ciò che stai facendo. Alcuni server eseguono anche i propri filtri contro lo spam o la tossicità nelle chat per messaggi di eliminazione ripetuti, indipendentemente da come tali messaggi siano stati inviati. Né l'uno né l'altro sono un anticheat che rileva Killsults; entrambi sono una persona o un filtro che nota uno schema.
+
+<Callout variant="tip" title="Non incluso nell'elenco di Opal, intenzionalmente">
+Opal non spedisce un modulo di scherno in stile Killsults, e non è una lacuna che tiene qualcuno sveglio la notte. Il modulo non offre alcun vantaggio in combattimento o in movimento; l'unico scopo è infastidire chiunque tu abbia appena ucciso. La lista dei moduli di Opal si orienta verso elementi che cambiano l'esito di uno scontro, non verso quelli che ne cambiano l'atmosfera.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Killsults influisce in qualche modo sul combattimento?">
+No. Invia solamente un messaggio in chat dopo che un'uccisione è già avvenuta. Non modifica in alcun modo la registrazione dei colpi, la portata o i tempi.
+</FAQItem>
+
+<FAQItem question="Un anticheat può rilevare i Killsult?">
+Non direttamente. Il messaggio che invia è un pacchetto chat ordinario, indistinguibile a livello di protocollo da uno che hai digitato tu stesso, quindi non c'è nulla di automatizzato per un controllo a livello di pacchetto che possa intercettarlo.
+</FAQItem>
+
+<FAQItem question="Come appare il messaggio di scherno Killsults?">
+È estratto da un elenco predefinito integrato nel modulo, piuttosto che digitato in tempo reale. La formulazione esatta dipende dall'implementazione del cliente.
+</FAQItem>
+
+<FAQItem question="Killsults è la stessa cosa di un annunciatore di kill-streak?">
+Sono cugini stretti. Entrambi sono moduli di chat automatizzati collegati a un evento di uccisione, ma Killsults è presentato come un insulto rivolto a chi è morto, non un semplice contatore di serie.
+</FAQItem>
+
+<FAQItem question="Quali documenti del cliente Killsults?">
+Tenacity, un cliente fantasma costruito attorno a un ampio roster di moduli incentrati sul combattimento, documenta Killsults come parte di questa lineup.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "La categoria clienti Killsults arriva." },
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "Il modulo di combattimento che in realtà decide la battaglia è commentato da Killsults." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia a cui appartengono questi moduli." },
+]} />
+
+<CTA href="/it/purchase">Evita le provocazioni, prendi i moduli che vincono davvero.</CTA>

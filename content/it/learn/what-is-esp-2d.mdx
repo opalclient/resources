@@ -1,0 +1,84 @@
+---
+title: Cos'è ESP 2D in Minecraft? Spiegazione del modulo
+description: ESP 2D è un modulo di Minecraft che contrassegna giocatori ed entità con una scatola piatta sullo schermo invece di un contorno del mondo in 3D. Come viene renderizzato e il rischio di ban.
+excerpt: Evidenzia l'area. I pin ESP 2D posizionano un marcatore piatto sopra ogni entità sullo schermo, invece di avvolgerle con un contorno 3D, così non si perderanno mai dietro un muro.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Qual è la differenza tra ESP 2D e Glow ESP?
+    a: ESP 2D disegna una scatola o un marcatore piatti nello spazio dello schermo che non segue la forma dell'entità. Glow ESP delinea l'entità stessa nel mondo di gioco, quindi si muove e scala come un effetto reale nel mondo, mentre la telecamera ruota.
+  - q: L'ESP 2D riesce a vedere attraverso i muri?
+    a: Sì. Disegna un segnale per ogni entità tracciata, indipendentemente dal fatto che ci sia un muro o un terreno tra te e loro, ed è proprio questo che lo rende una funzionalità di livello wallhack.
+  - q: Possono gli anticheat rilevare specificamente l'ESP 2D?
+    a: Non esiste un metodo di rilevamento progettato specificamente per la forma a scatola. Gli anticheat in grado di intercettare l'ESP generalmente non si preoccupano se viene renderizzato come una scatola 2D o un contorno 3D. Il rischio deriva dall'avere e agire su informazioni a cui non si dovrebbe avere accesso, non dalla geometria del marcatore.
+  - q: Quali clienti includono ESP 2D?
+    a: È apparso in clienti come Fan e Tenacity, di solito posizionato accanto a Glow ESP come seconda opzione di rendering per gli stessi dati di entità. Opal adotta un approccio diverso e spedisce un unico modulo Entity ESP unificato invece di dividerli in due stili.
+---
+
+<KeyTakeaways>
+
+- ESP 2D è un modulo visivo che contrassegna giocatori ed entità con una scatola piatta o un marcatore disegnato nello spazio dello schermo, non un contorno 3D avvolto attorno all'entità nel mondo.
+- È uno dei due stili di rendering ESP più comuni, l'altro è Glow ESP; i client che ne includono entrambi permettono di scegliere.
+- Il disegno nello spazio dello schermo significa che il marcatore non è oscurato dal terreno e mantiene una dimensione costante indipendentemente dalla distanza.
+- Rivelare le posizioni delle entità attraverso i muri fa sì che gli anticheat lo considerino una funzionalità di tipo wallhack, indipendentemente dallo stile di rendering utilizzato per disegnare la scatola.
+
+</KeyTakeaways>
+
+ESP 2D è un modulo visivo che contrassegna altri giocatori ed entità con una scatola piatta, un punto o un'etichetta disegnati direttamente sullo schermo, anziché un contorno 3D avvolto attorno all'entità nel mondo. È uno dei due modi comuni in cui i client rendono l'ESP delle entità, l'altro è Glow ESP, e qualsiasi client che ne includa entrambi ti permette di scegliere quello che preferisci visualizzare. In ogni caso, lo scopo è lo stesso: sapere dove si trova tutti senza dover girare la telecamera per controllare.
+
+## Come ESP 2D rende
+
+ESP 2D proietta la posizione reale di ogni entità tracciata sullo spazio dello schermo ad ogni fotogramma e disegna un marcatore in quel punto, un contorno a scatola, un punto o una piccola etichetta. Questo è diverso da un ESP 3D o "mondo", che disegna il suo contorno direttamente sull'entità stessa, quindi si muove e scala con il modello in tre dimensioni mentre la tua telecamera ruota. Un marcatore 2D si comporta più come un'etichetta appuntata sopra la testa di qualcuno: piatto, bloccato sullo schermo e indifferente a come il modello effettivo è angolato o animato sottostante.
+
+Poiché la chiamata di disegno avviene nello spazio dello schermo anziché nello spazio di gioco, una scatola 2D non viene occlusa da un muro o da un pendio come a volte accade per un contorno nello spazio di gioco, e può mantenere una dimensione costante sullo schermo indipendentemente dalla distanza dell'entità. Alcune implementazioni scalano comunque la scatola in base alla distanza, quindi un bersaglio vicino a te appare più grande di uno dall'altra parte della mappa. In ogni caso, la posizione dell'entità sottostante guida il marcatore, quindi la lettura persiste anche quando si nascondono dietro una roccia o quando la tua telecamera si posiziona in un angolo scomodo.
+
+## ESP 2D vs Glow ESP
+
+| Aspetto | ESP 2D | Glow ESP |
+|---|---|---|
+| Dove disegna | Scatola, punto o etichetta piatta nello spazio dello schermo | Contorno avvolto sull'entità nello spazio di gioco |
+| Occlusione da terreno | Rimane visibile attraverso muri e blocchi | Vede anche attraverso il terreno, ma appare come una luminescenza in-world |
+| Dimensione a distanza | Spesso costante; alcune build la scalano in base alla distanza | Scala naturalmente come un effetto in-game reale |
+| Lettura visiva | Uniforme e facile da scansionare su tutta la mappa | Più simile a come appare una pozione di luminescenza o un effetto spettrale normale |
+
+Entrambi gli stili attingono allo stesso tracciamento dell'entità sottostante. La scelta è puramente una questione di leggibilità rispetto all'immersione: 2D per una lettura pulita e coerente in stile HUD a qualsiasi distanza, Glow quando si desidera l'informazione senza che sembri troppo simile a un HUD.
+
+<Callout variant="tip" title="Dove Opal si posiziona a questo riguardo">
+Opal non divide l'ESP dell'entità in un interruttore 2D e un interruttore Glow. Il suo catalogo elenca un singolo modulo della categoria Visuale, Entity ESP, descritto semplicemente come l'evidenziazione di giocatori ed entità nel mondo. Un solo interruttore, nessuna decisione sullo stile di rendering da prendere prima di poter vedere qualcuno.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Nessuna forma di ESP per entità è sicura da presumere non rilevabile, né una scatola né un bagliore. Ti fornisce informazioni a cui non dovresti avere accesso senza un effettivo contatto visivo, e un anticheat progettato per intercettare l'ESP generalmente non si preoccupa della forma che ha tracciato il segnale. Le regole per wallhack e raggio X si applicano all'ESP 2D come a qualsiasi outline 3D. Consideralo come utilizzo a proprio rischio su server protetti da anticheat.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Qual è la differenza tra ESP 2D e Glow ESP?">
+ESP 2D disegna una scatola o un marcatore piatto nello spazio dello schermo che non segue la forma dell'entità. Glow ESP delinea l'entità stessa nel mondo di gioco, quindi si muove e scala come un effetto reale nel mondo, mentre la telecamera ruota.
+</FAQItem>
+
+<FAQItem question="L'ESP 2D 'vede' attraverso i muri?">
+Sì. Disegna un segnalino per ogni entità tracciata, indipendentemente dal fatto che ci sia un muro o un terreno tra te e loro, ed è proprio questo che lo rende una funzionalità di tipo wallhack.
+</FAQItem>
+
+<FAQItem question="Gli anticheat riescono a rilevare specificamente l'ESP 2D?">
+Non esiste un metodo di rilevamento dedicato esclusivamente alla forma della scatola. Gli anticheat in grado di intercettare l'ESP generalmente non si preoccupano se venga renderizzato come una scatola 2D o un contorno 3D. Il rischio deriva dall'avere e agire in base a informazioni a cui non si dovrebbe avere accesso, non dalla geometria del marcatore.
+</FAQItem>
+
+<FAQItem question="Quali client includono ESP 2D?">
+È apparso in client come Fan e Tenacity, di solito posizionato accanto a Glow ESP come seconda opzione di rendering per gli stessi dati dell'entità. Opal adotta un approccio diverso e fornisce un unico modulo ESP per le entità invece di dividerli in due stili.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia ESP e altri moduli di sensibilizzazione risiedono all'interno." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Perché informazioni silenziose, vantaggi come l'ESP, vengono costruiti per rimanere discreti." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Il modulo ESP di solito si attiva non appena si sa dove cercare." },
+]} />
+
+<CTA href="/it/purchase">Scopri dove si trova tutti prima di svoltare l'angolo. Opal è $8.99.</CTA>

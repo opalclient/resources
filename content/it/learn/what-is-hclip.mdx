@@ -1,0 +1,86 @@
+---
+title: Cos'è HClip in Minecraft? Spiegato il Clip Orizzontale
+description: HClip (Clip Orizzontale) sposta un giocatore lateralmente attraverso un blocco solido per saltare una parete sottile. Ecco come funziona il modulo del mondo e perché viene contrassegnato.
+excerpt: Nessun buco nel muro, nessuna serratura rotta, solo tu dall'altra parte. Questo è il discorso, ed è anche la trappola.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa fa effettivamente HClip?
+    a: Sposta il giocatore di una breve distanza lateralmente attraverso un blocco solido, facendolo finire dall'altra parte senza rompere o posizionare nulla per arrivarci.
+  - q: HClip è la stessa cosa che sfondare un muro?
+    a: No. Abbattere un muro rimuove i blocchi e lascia un buco visibile. HClip lascia il muro in piedi; il giocatore lo attraversa invece di rimuoverlo.
+  - q: Funziona HClip a lunga distanza?
+    a: No. È progettato per spostare il giocatore per una breve distanza, sufficiente per superare qualcosa come lo spessore di un muro o un piccolo spazio, non per percorrere distanze significative attraverso il terreno.
+  - q: HClip è rilevabile?
+    a: Sì, in linea di principio. Richiede che la posizione del giocatore si sovrapponga brevemente a un blocco solido, cosa che il movimento normale non può mai produrre e che i controlli di collisione lato server sono progettati per intercettare.
+  - q: Quale cliente ha HClip?
+    a: HClip è documentato come da Juul, insieme al suo equivalente verticale, VClip.
+---
+
+<KeyTakeaways>
+
+- HClip (Clip Orizzontale) è un modulo di categoria mondiale che sposta un giocatore lateralmente attraverso un blocco solido per superare un muro sottile o entrare in uno spazio sigillato.
+- Lo spostamento è breve e puramente orizzontale, progettato per attraversare lo spessore di un muro o un piccolo spazio, non per coprire distanze significative.
+- Nessun blocco viene rotto o posizionato. Il giocatore si trova semplicemente dall'altra parte.
+- È documentato come visto in Juul, insieme al suo equivalente verticale VClip.
+- Il rapporto di posizione si sovrappone brevemente al terreno solido, il che è esattamente ciò che gli anticheat basati sulla collisione monitorano.
+
+</KeyTakeaways>
+
+HClip, abbreviazione di Horizontal Clip, è un modulo di mondo di Minecraft che spinge un giocatore lateralmente attraverso un blocco solido invece di farlo aggirarlo. Invece di scavare, saltare o trovare una porta, la posizione del giocatore si sposta semplicemente da un lato dell'ostacolo all'altro in un singolo passo. È progettato per brevi attraversamenti, un muro, un varco stretto, e non tocca un singolo blocco per arrivarci.
+
+## Come funziona HClip
+
+Normalmente il gioco ti muove di un piccolo passo alla volta e verifica ogni passo rispetto ai dati di collisione del mondo, così non puoi occupare lo stesso spazio di un blocco solido. HClip salta quella sequenza. Sposta la posizione del giocatore lateralmente oltre la collisione di un blocco in un unico movimento, quindi invece del client che aggira un ostacolo in diversi tick, il giocatore si ritrova semplicemente sul lato opposto.
+
+Poiché lo spostamento è breve e puramente orizzontale, non si tratta di un teletrasporto generale. È dimensionato per attraversare qualcosa come lo spessore di un singolo muro o un varco stretto, il tipo di ostacolo che altrimenti significherebbe scavare o aggirare per lungo tempo. HClip è documentato come modulo di categoria mondo ed è stato visto in Juul, lo stesso client che trasporta VClip, il suo equivalente in direzione verticale, per aggirare su o giù attraverso pavimenti e soffitti invece che muri.
+
+## È sicuro usare HClip
+
+L'attrattiva è evidente: accesso senza lasciare traccia. Scavare in una base richiede tempo, lascia blocchi distrutti alle spalle e può attivare una trappola o avvertire chi ha costruito il posto. HClip evita tutto questo. Non viene posizionato nulla, non viene distrutto nulla e il muro appare intatto in seguito, il che lo rende attraente per superare una barriera sottile o entrare silenziosamente in una cassaforte sigillata.
+
+Questo silenzio ha un costo. Attraversare un blocco che il server considera solido non è qualcosa che la normale fisica di movimento può produrre, e un rapporto di posizione che colloca un giocatore all'interno di un muro, anche solo per un tick, è illegale per definizione. Essere piccolo e solo orizzontale restringe la finestra temporale in cui un anticheat può intercettarlo, ma non la chiude. Qualsiasi server che convalida la posizione segnalata rispetto ai dati di collisione del mondo sta controllando esattamente questo tipo di comportamento. Si tratta di un'esplorazione del movimento, non di un semplice sfoggio estetico, e comporta un reale rischio di ban su qualsiasi sistema che lo verifichi.
+
+<Callout variant="tip" title="Dove Opal pone il limite">
+La categoria di mondo di Opal copre un terreno reale, ma non include alcun modulo per attraversare i muri, con qualsiasi nome. Una funzionalità il cui unico scopo è posizionare il giocatore all'interno di un blocco che il server considera solido è difficile da vendere per qualcosa progettato per superare il primo controllo anticheat rigoroso.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida pratica">
+Questa pagina spiega cosa significa HClip e come funziona genericamente l'effetto. Il comportamento esatto varia a seconda del client, e attraversare terreni solidi non autorizzati dal server viola le regole su praticamente ogni server che verifica i movimenti contro le collisioni.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa fa effettivamente HClip?">
+Sposta il giocatore di una breve distanza lateralmente attraverso un blocco solido, facendolo finire dall'altra parte senza rompere o posizionare nulla per arrivarci.
+</FAQItem>
+
+<FAQItem question="HClip è come sfondare un muro?">
+No. Sfondare un muro rimuove i blocchi e lascia un buco visibile. HClip lascia il muro in piedi; il giocatore lo attraversa invece di rimuoverlo.
+</FAQItem>
+
+<FAQItem question="Funziona HClip su lunghe distanze?">
+No. È progettato per spostare il giocatore per una breve distanza, sufficiente per attraversare qualcosa come lo spessore di un muro o un piccolo spazio, non per percorrere distanze significative attraverso il terreno.
+</FAQItem>
+
+<FAQItem question="HClip è rilevabile?">
+Sì, in linea di principio. Richiede che la posizione del giocatore si sovrapponga brevemente a un blocco solido, cosa che un movimento normale non può mai produrre e che i controlli di collisione lato server sono progettati per intercettare.
+</FAQItem>
+
+<FAQItem question="Quale cliente ha HClip?">
+HClip è documentato come da Juul, insieme alla sua versione verticale, VClip.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "La categoria dello stealth, basata sull'idea di non lasciare tracce, è lo stesso istinto che HClip sta cercando di emulare." },
+  { href: "/it/learn/what-is-scaffold", label: "Cos'è Scaffold?", description: "Un altro modulo confinante con un altro mondo, che viene scoperto da un segnale specifico e verificabile." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia a cui appartengono questi moduli." },
+]} />
+
+<CTA href="/it/purchase">Scopri gli strumenti Opal che spediamo senza bloccare la tua posizione.</CTA>

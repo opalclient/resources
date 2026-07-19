@@ -1,0 +1,73 @@
+---
+title: Co to jest Boat Fly? Wykorzystanie błędów w locie pojazdów w Minecraft
+description: Boat Fly to moduł ruchu w Minecraft, który przechwytuje pakiety pojazdu łodzi, aby umożliwić jej wspinaczkę i unoszenie się, zamieniając powolny dryf w nieograniczone latanie.
+excerpt: Łódź, która wjeżdża prosto do góry, to nie lag. To Boat Fly, a vanilla physics na to nie dała zgody.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Latający Łódź działa poza łodzią?
+    a: Nie. Działa tylko wtedy, gdy siedzisz w łodzi, ponieważ cały trik polega na manipulowaniu pakietami ruchu pojazdu łodzi. Podczas chodzenia pieszo nie ma kanału pojazdu do wykorzystania, więc moduł nic nie robi.
+  - q: Czy Boat Fly to to samo co zwykły hak na muchę?
+    a: Efekt wygląda podobnie – swobodne latanie, ale mechanizm jest inny. Standardowy fly hack przepisuje pakiety ruchu gracza. Boat Fly natomiast przepisuje pakiety ruchu pojazdu łodzi, gdy na niej się znajdujesz.
+  - q: Czy Can Boat Fly może być używany na lądzie?
+    a: Tak. Łódki waniliowe już potrafią przemieszczać się na krótkie odległości po lądzie w pobliżu wody, ale Boat Fly rozszerza to do pełnego lotu, pozwalając łódce podróżować znacznie dalej, niż pozwala na to normalna fizyka łodzi, włącznie z lądem.
+  - q: Czy Bot Fly jest wykrywalny na jakimkolwiek serwerze?
+    a: Tylko na serwerach, które sprawdzają ruch pojazdu względem oczekiwanej fizyki łodzi. Anticheaty, które obserwują jedynie encję gracza i ignorują pojazd, na którym się ona przemieszcza, mogą to całkowicie pominąć.
+---
+
+<KeyTakeaways>
+- Boat Fly to moduł ruchu, który przepisuje pakiety łodzi, aby wspinała się i latała zamiast pływać.
+- Wykorzystuje oddzielny kanał pakietów ruchu pojazdu dla łodzi, ponieważ standardowa fizyka nigdy nie zakłada, że łódź sama wytworzy siłę nośną.
+- Jest to wykrywalny exploit umożliwiający lot, śledzony przez klientów takich jak Wurst, a sprawdzanie fizyki pojazdów szybko go wykrywa.
+</KeyTakeaways>
+
+Boat Fly to moduł ruchu skonstruowany wokół jednego, wąskiego celu: oryginalnej łodzi z Minecrafta. Całość projektu łodzi ogranicza się do pływania po wodzie i delikatnego przesuwania się po lądzie blisko brzegu – nic więcej. Boat Fly łamie tę zasadę, przepisyując pakiety ruchu pojazdu, które łódź wysyła, gdy gracz na niej siedzi, dzięki czemu łódź wznosi się, utrzymuje wysokość i może podróżować wszędzie, gdzie może lecieć latająca istota. Gracz nigdy nie opuszcza siedzenia. Z zewnątrz wygląda to po prostu jak łódź, która zapomniała, że nie jest samolotem.
+
+## Jak przejęto pakiety łodzi
+
+Oryginalne łodzie nie są niezależnymi aktorami. Pozycja łodzi aktualizowana jest na podstawie pakietów ruchu pojazdu powiązanych z pływalnością wody i grawitacją, oddzielnego kanału od pakietów, które przesuwają gracza stojącego na stałym gruncie. Pozostawione same sobie, ten kanał nie może wytworzyć unoszenia: brak wody pod kadłubem, brak siły skierowanej ku górze, brak powodu, by łódź opuściła powierzchnię.
+
+Boat Fly celuje bezpośrednio w ten kanał. Przepisuje lub wstrzykuje wartości ruchu pojazdu, które łódź zgłasza, dzięki czemu serwer widzi łódź wznoszącą się, utrzymującą wysokość lub dryfującą na boki w sposób, jakiego nigdy nie wygenerowałyby prawdziwa woda i fizyka grawitacji. Serwer ufa temu, co wysyła klient, i aktualizuje pozycję gracza na podstawie tych danych.
+
+Gracz, który siedzi nieruchomo przez cały czas, sprawia, że to wygląda dziwnie, a nie na oczywiste zhakowanie. Nikt nie widzi osoby unoszącej się w powietrzu. Widzą łódź tam, gdzie łódź nie powinna się znajdować – to cichszy rodzaj błędu, dopóki nie wiesz, na co patrzeć.
+
+## Dlaczego to jest oznaczane, na serwerach, które się tym bawi
+
+Boat Fly to nie kosmetyczna zmiana ani skrót ułatwiający rozgrywkę. Rozdaje ruch, którego żaden legalny gracz nie jest w stanie dorównać: wspinaczka ponad teren, pomijanie normalnych zasad poruszania się po mapie lub ucieczka z walki poprzez dotarcie w miejsce, gdzie nikt nie może podążyć. To stawia go w tym samym gronie co inne exploity związane z lataniem i przechodzeniem przez obiekty, daleko od elementu interfejsu użytkownika, który został tylko przemodelowany.
+
+Serwerowe antywiry, które modelują oczekiwane zachowanie łodzi – jak szybko powinna się poruszać, jak powinna leżeć na wodzie, jak grawitacja powinna ją ciągnąć z powrotem – szybko to wykrywają, gdy tylko zaczną to sprawdzać. Łódź wspinająca się lub unosząca zakłóca ten wzorzec w momencie, gdy się to dzieje. Różnica polega na tym, że wiele serwerów weryfikuje tylko ruch postaci, a nigdy nie tworzy oddzielnej weryfikacji pojazdów – i to jest dokładnie miejsce, w którym Boat Fly przetrwał.
+
+<Callout variant="warning" title="To jest wykorzystywana metoda oszukiwania, a nie ukryta funkcja">
+Boat Fly jednoznacznie mieści się w kategorii oszukiwania związanych z ruchem. Każdy serwer, który wykryje łódź utrzymującą wysokość lub ignorującą grawitację, ma podstawę do działania, a klienci, którzy ją udostępniają, są śledzeni i identyfikowani z tego powodu (najczęściej wymienia się Wurst). Traktuj to jako informacje na temat działania tej metody oszukiwania, a nie sugestię, aby jej używać.
+</Callout>
+
+<Callout variant="tip" title="Gdzie Opal wyznacza granicę">
+Składka pojazdów w Opalu opiera się na realistycznej fizyce, a nie na stanach pojazdów tworzonych przez pakiety. Jeśli sztuczka działa tylko dlatego, że serwer nigdy nie zająknął się, aby sprawdzić ruch pojazdu oddzielnie od ruchu gracza, to nie umieszczamy tego w kliencie. Ta sama kategoria co Boat Fly w duchu, zupełnie inna stawka: przesuwamy granice tego, co pozwala fizyka, zamiast fałszować pakiety, które to zgłaszają.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Czy Boat Fly działa poza łodzią?">
+Nie. Działa tylko wtedy, gdy siedzisz w łodzi, ponieważ cały trik zależy od manipulowania pakietami ruchu pojazdu łodzi. Wysiądź na lądzie i nie ma już kanału pojazdu do wykorzystania, więc moduł po prostu nic nie robi.
+</FAQItem>
+<FAQItem question="Czy Boat Fly jest tym samym co zwykły hack lotu?">
+Efekt jest podobny – nieograniczony lot w każdym przypadku, ale mechanizm jest inny. Standardowy hack lotu bezpośrednio przepisuje własne pakiety ruchu gracza. Boat Fly natomiast przepisuje pakiety ruchu pojazdu łodzi, gdy w niej pływasz.
+</FAQItem>
+<FAQItem question="Czy Boat Fly można używać nad lądem?">
+Tak. Zwykłe łodzie mogą już pokonywać krótki dystans nad lądem blisko brzegu, ale Boat Fly rozszerza to do pełnego, ciągłego lotu, pozwalając łodzi podróżować znacznie dalej niż pozwala na to normalna fizyka łodzi, włącznie z lądem.
+</FAQItem>
+<FAQItem question="Czy Boat Fly jest wykrywalny na jakimkolwiek serwerze?">
+Tylko na serwerach, które sprawdzają ruch pojazdu w odniesieniu do oczekiwanej fizyki łodzi. Anticheaty, które obserwują postać gracza, ale ignorują pojazd pod nią, mogą go całkowicie pominąć.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-scaffold", label: "Co to jest Scaffold?", description: "Kolejny moduł ruchu, który przekształca zwykłą mechanikę Minecrafta w nieograniczone przemieszczanie się." },
+  { href: "/pl/learn/what-is-velocity-anti-knockback", label: "Czym jest Prędkość (ochrona przed odrzutem)?", description: "Moduł ruchu, który zmienia sposób reagowania klienta gracza na pakiety odrzucania." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Kategoria Boat Fly i moduły tego typu należą do obszaru, gdzie wyznacza się granicę dla oszustw klientów." }
+]} />
+
+<CTA href="/pl/purchase">Zobacz moduły ruchu, które faktycznie wysyła Opal, z zachowaną fizyką.</CTA>

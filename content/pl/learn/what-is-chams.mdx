@@ -1,0 +1,88 @@
+---
+title: Czym jest Chams w Minecraft? (Wyjaśnienie modułu)
+description: Chams to moduł Minecrafta, który renderuje graczy i moby przez ściany, wyświetlając ich rzeczywisty model zamiast ukrywać go za terenem, jak robi to wersja podstawowa.
+excerpt: Ściana ma oznaczać, że nie można cię zobaczyć. Chams pilnuje, by ta obietnica nigdy się nie ziściła.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Chams działa przez jakiekolwiek ściany, czy tylko przez niektóre bloki?
+    a: Celuje w sam krok renderowania, a nie w sprawdzanie typu bloku, więc ogólnie renderuje encje przez ściany i pełne bloki. Konkretne implementacje mogą się nieznacznie różnić zakresem.
+  - q: Czy Chams wysyła do serwera inne dane niż zwykły klient?
+    a: Nie. Dane pozycji i rotacji encji zostały już wysłane do każdego klienta w celu normalnej rozgrywki, ponieważ serwer i tak potrzebuje ich do fizyki i wykrywania kolizji. Chamsy zmieniają jedynie sposób, w jaki te dane są rysowane.
+  - q: Czy Chams to to samo co ESP?
+    a: Nakładają się, ale nie są identyczne. Chams odwzorowuje rzeczywisty model obiektu za pomocą terenu, podczas gdy typowe nakładki ESP w formie prostokątów rysują oddzielny obrys lub znacznik zamiast samego modelu.
+  - q: Którzy klienci obejmują Chamsów?
+    a: Zostało to udokumentowane jako cecha w Fan i Tenacity.
+  - q: Czy serwer może automatycznie wykrywać Chams?
+    a: Nie jest to niezawodne. Zmienia jedynie lokalny rendering i nie wysyła nietypowych pakietów, więc anticheat oparty na sieci ma niewielkie pole do działania. Serwery nadal traktują to jako naruszenie zasad, gdy zostaje wykryte innymi metodami, takimi jak nagrania lub zgłoszenia.
+---
+
+<KeyTakeaways>
+- Chams to moduł wizualny dla Minecrafta, który renderuje graczy i moby przez solidne ściany.
+- Pomija sprawdzanie głębokości renderowania na modelach encji, wykorzystując dane o pozycji, które klient już otrzymuje.
+- W przeciwieństwie do znacznika obrysu w ESP typu box, rysuje rzeczywisty model encji przez teren.
+- Jest trudno wykrywalny przez antywiry działające na zasadzie pakietów, ponieważ zmienia tylko renderowanie lokalne, choć serwery nadal go blokują, gdy zostanie wykryty.
+</KeyTakeaways>
+
+Chams to moduł klienta Minecraft, który renderuje graczy i moby przez ściany i inne solidne bloki, dzięki czemu ich model pozostaje widoczny, niezależnie od tego, co znajduje się między nimi a kamerą. Nazwa pochodzi od "kameleon", czyli tej samej sztuczki renderowania, która pojawia się w strzelankach od lat. Zamiast ukrywać encję za terenem, jak robi to standardowy Minecraft, chams po prostu rysuje ją na wierzchu. To czysta zmiana renderowania, a nie nowe źródło informacji: klient już posiada pozycję encji, po prostu decyduje się rysować ją inaczej.
+
+## Jak to działa
+
+Silnik renderowania Minecrafta wykonuje test głębi dla każdego rysowanego modelu. Jeśli blok znajduje się między kamerą a encją, encja nie zdaje testu głębi i nic nie jest widoczne. Chams poprawia ten krok specjalnie dla modeli encji, albo pomija sprawdzanie w ogóle, albo nadpisuje go, dzięki czemu model zawsze zdaje. Encja rysowana jest w pełnej szczegółowości, włącznie z kończynami, zbroją i przedmiotem, niezależnie od geometrii, która znajduje się przed nią. Wizualnie wygląda to tak, jakby cel był świecący przez mapę, a nie stał za nią.
+
+Żadna z tych informacji nie wymaga nowych danych z serwera. Pozycja, rotacja i postawa pobliskich obiektów są już przesyłane do klienta w celu fizyki i wykrywania kolizji, niezależnie od tego, czy dany klient je aktualnie widzi. Chams dotyka tylko wywołania rysowania na końcu tego procesu, więc nie ma dodatkowego żądania ani nowego typu pakietu, nic nie dociera, czego wcześniej nie docierało, zanim włączyłeś moduł.
+
+## Chams vs box ESP
+
+Oba moduły udostępniają ten sam rodzaj ukrytych informacji – dokładną pozycję przeciwnika – ale docierają do niej w różny sposób.
+
+| | Chams | Box ESP |
+|---|---|---|
+| Co renderuje | Rzeczywisty model obiektu | Oddzielny zarys lub pole otaczające |
+| Wyświetlane na ekranie jako | Prawdziwa postać, widoczna przez ścianę | Abstrakcyjny znacznik w pobliżu pozycji obiektu |
+| Dodatkowy ruch sieciowy | Brak | Brak |
+| Kategoria modułu | Wizualny | Wizualny |
+
+Chams to bardziej immersyjna wersja tego samego oszustwa: zamiast wskaźnika informującego cię, że „ktoś tam jest”, widzisz tę osobę. Ułatwia to odczytanie postawy, kierunku i wyposażenia na pierwszy rzut oka, kosztem nieco większego obciążenia renderera niż proste pudełko.
+
+## Dlaczego to się liczy jako przewaga
+
+Widzenie dokładnej pozycji przeciwnika przez ścianę to informacja, którą vanilla Minecraft celowo ukrywa. Zwykle zajrzeć trzeba za rogi, nasłuchiwać kroków albo zgadywać. Chams eliminuje to zgadywanie całkowicie, co daje przewagę taktyczną, a nie kosmetyczną, choć znajduje się w kategorii modułów wizualnych i nigdy nie wpływa bezpośrednio na celowanie ani ruch. Często jest łączony z innymi modułami wizualnymi z tego samego powodu, z jakiego gracze używają pełnych zestawów ESP: lepsze informacje oznaczają lepsze decyzje, od wczesnego pozycjonowania po dobór momentu do zaangażowania.
+
+<Callout variant="tip" title="Gdzie to się znajduje w Opalu">
+Kategoria wizualna Opalu to Entity ESP, która podkreśla graczy i obiekty na świecie i jest oznaczona jako użycie na własną odpowiedzialność. To umieszcza ją w kategorii zarysów, a nie w kategorii chamsów: Opal wskazuje, gdzie ktoś jest, nie zastępuje pełnego modelu postaci i renderuje go przez ścianę w Twoim salonie. Jeśli konkretnie chodzi Ci o renderowanie modeli przez teren, to jest to inna ścieżka niż ta, którą zajmuje zestaw narzędzi wizualnych Opalu.
+</Callout>
+
+<Callout variant="warning" title="Informacja, nie instrukcja">
+Ta strona wyjaśnia, czym jest Chams i dlaczego serwery traktują to jako naruszenie, a nie zgodę na jego używanie. Widok dokładnej pozycji ukrytego przeciwnika to informacja, którą gra w wersji podstawowej celowo ukrywa, a większość serwerów zabrania tego na mocy ogólnych zasad fair play, niezależnie od tego, czy system anticheat kiedykolwiek wykryje zmianę renderowania.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Czy Chams działa przez ściany, czy tylko przez niektóre bloki?">
+Celuje w sam krok renderowania, a nie w sprawdzanie typu bloku, więc ogólnie renderuje obiekty przez ściany i stałe bloki. Konkretne implementacje mogą się nieznacznie różnić zakresem.
+</FAQItem>
+<FAQItem question="Czy Chams wysyła inne dane do serwera niż normalny klient?">
+Nie. Dane pozycji i rotacji obiektów są już wysyłane do każdego klienta w normalnej rozgrywce, ponieważ serwer potrzebuje ich do fizyki i wykrywania trafień. Chams zmienia tylko sposób, w jaki te dane są rysowane.
+</FAQItem>
+<FAQItem question="Czy Chams to to samo co ESP?">
+Nakładają się, ale nie są identyczne. Chams renderuje rzeczywisty model obiektu przez teren, podczas gdy typowe ESP nakłada oddzielny obrys lub znacznik zamiast samego modelu.
+</FAQItem>
+<FAQItem question="W których klientach znajduje się Chams?">
+Jest udokumentowany jako funkcja w Fan i Tenacity.
+</FAQItem>
+<FAQItem question="Czy serwer może automatycznie wykryć Chams?">
+Nie niezawodnie. Zmienia tylko lokalne renderowanie i nie wysyła nietypowych pakietów, więc anticheat oparty na sieci ma niewiele punktów zaczepienia. Serwery nadal traktują to jako naruszenie zasad, gdy zostanie wykryte innymi metodami, takimi jak nagrania lub raporty.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Szeroką kategorię, do której należą Chamsy i moduły tego typu." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Moduł działający na informacjach; ujawnia je tylko Chams." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Zbudowane wokół zasady niezauważalności, lustrzane odbicie tego, co Chams robi innym." }
+]} />
+
+<CTA href="/pl/purchase">Zestaw narzędzi wizualnych Opal podpowiada, w którym kierunku zmierza konflikt, bez konieczności renderowania czegokolwiek przez Twoją tapetę.</CTA>

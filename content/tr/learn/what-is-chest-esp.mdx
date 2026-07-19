@@ -1,0 +1,97 @@
+---
+title: Minecraft'ta Göğüs ESP Nedir? (Modül Açıklaması)
+description: Chest ESP, Minecraft'taki sandık, varil ve diğer kapları duvarların içinden işaretler. Modülün ganimati nasıl işlediği, insanların neden kullandığı ve ban riskine ilişkin bilgiler aşağıdadır.
+excerpt: Göğüs ESP, render aralığındaki her sandığı aydınlatır, duvar olsun olmasın. Eşya toplama turları için harika, ancak sunucu sizi görmemeniz gereken sandıklara doğru düz hatla ilerlerken fark ederse o kadar da iyi değil.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Göğüs ESP aslında neyi işaret ediyor?
+    a: Sandıklar, fıçılar ve diğer kap konstrüksiyonları, bazen müşterinin isteğine bağlı olarak sıkışıp kalmış sandıklar ve şulker kutularını da içerebilir. Size kapların nerede olduğunu gösterir, içindekileri değil.
+  - q: Göğüs ESP, varlık ESP'si ile aynı mı?
+    a: Hayır. Entity ESP oyuncuları ve yaratıkları duvarların içinden işaretler. Sandık ESP de aynı işi sandık blokları için yapar, bu yüzden ikisi de tek bir modül yerine tamamlayıcı özellikler olarak gönderilir.
+  - q: Chest ESP sizi banlanmaya neden olabilir mi?
+    a: Evet, bir savaş hilesinden daha az risk taşısa da, istemcinizin sunucuya gönderdiği şeyi değiştirmez. Ancak, gizli sandıklara tekrar tekrar yol bulan oyuncuları izleyen bir sunucu, bunun için yine de işaretleme veya yasaklama yapabilir. Bunu güvenli değil, tespit edilebilir olarak değerlendirin.
+  - q: Duvarın içinden Chest ESP çalışır mı?
+    a: Müşterinin blok verisi yüklü olduğu her yerde, pratikte render mesafesi içinde olduğu her yerde. Sizinle ve konteyner arasında kalan taş, arazi ve tam yapılar önemli değildir, çünkü render aşaması genellikle yolundaki nesneleri kontrol etme işlemini atlar.
+---
+
+<KeyTakeaways>
+
+- Chest ESP, duvarların içinden sandıklar, fıçılar ve diğer kapları işaretleyen görsel bir modüldür.
+- Zaten istemci tarafından sahip olunan blok verilerini kullandığı için görüş hattı gerekli değildir.
+- Oyuncular için aynı şeyi yapan varlık ESP'sinin kap eşdeğeridir.
+- Olağandışı paketler göndermez, ancak gizli ganimetlere giden yol sizi yine de yasaklayabilir
+
+</KeyTakeaways>
+
+Göğüs ESP, duvarların ve arazinin içinden sandıklar, fıçılar ve diğer depolama kaplarını işaretleyen görsel bir modüldür; her birinin üzerine bir ana hat veya dolu bir kutu çizerek, yolunda ne olursa olsun görünür kalmasını sağlar. Ganimet için, oyuncular için yaptığı gibi, normalde yürüyerek yapacağınız aramayı, dünya yüklendiği anda görebileceğiniz bir şeye dönüştürür. Modül, onu bulmak için bir konteynerin görüş alanında olmasını gerektirmez. Sadece her yüklenmiş koordinatta blok tipini kontrol eder ve orada bir işaret çizer, duvar olsun olmasın.
+
+## Nasıl Çalışır
+
+Göğüs ESP, sandıklar, tuzaklı sandıklar, fıçılar ve shulker kutuları gibi konteyner blokları için yüklenmiş dünyayı tarar ve ardından oyuncu ile blok arasında ne olursa olsun her birinin üzerine işleme yapar. Bu, duvar hilesi büyüsü değil, sadece bir kayıt tutmadır. İstem, araziyi çizmek ve çarpışmayı yönetmek için bu veriye ihtiyaç duyduğu için zaten render mesafesi içindeki her bloğun konumunu saklamaktadır. Göğüs ESP sadece bu verileri konteyner türleri için filtreler ve aranızdaki geometri tarafından normalde gizlenmesini engelleyen adımı atlar.
+
+İşlem şekli, çoğu ESP'nin yaptığı gibi çalışır: dünyanın derinlik tamponunun arkasında değil, onun içinden çizilen bir ana hat, katı bir kutu veya bir metin etiketi. Konteyner hareket etmez ve içeriği değişmez. Sadece bir duvarın onu sizden gizlemesine izin verilip verilmediği farklıdır.
+
+## Neden İnsanlar Tarafından Kullanılır
+
+Açık neden hız. Sandıklar ve variller, Minecraft dünyasında değerli olan her şeyi saklar ve bir üssü veya yapı odasını oda oda temizlemek yavaştır. Chest ESP, bu aramayı tek bir bakışta ortadan kaldırır: render aralığındaki her kap, sahte bir duvarın arkasına gizlenmiş veya merdivenlerin altına gömülmüş olanlar dahil olmak üzere anında görünür.
+
+Daha masum olmayan neden ise yağmalamacılık. Oyuncuların ganimeti bir üssün içinde sakladığı sunucularda, duvarların içinden her kap konumunu görmek, üs güvenliğinin üzerine inşa edildiği tek engeli ortadan kaldırır; aslında eşyaları bulmak zorunda kalmamayı. Bu nedenle birçok sunucu, kap görünürlüğü özelliklerini yağmalamacılık aracı olarak önce ve kolaylık olarak ikinci olarak değerlendirir.
+
+## Kullanmak güvenli mi?
+
+Chest ESP, bir savaş modülünden daha sessizdir. Rotasyonlarınıza, saldırı zamanlamanıza veya ağ üzerinden gönderilen hiçbir şeye dokunmaz, bu nedenle sunucu tarafındaki bir antichiatin doğrudan yakalayabileceği bir paket anomalisine neden olmaz. Bu dar anlamda, bir aimbot veya KillAura gibi bir şeye kıyasla gerçekten daha düşük risklidir.
+
+Yakalanması gereken şey, tespitin bir paket gerektirmemesi. Hiç görüş hattı olmayan bir sandığa düz bir çizgi üzerinde yürüyen veya mühürlü duvarların arkasındaki bir dizi kutuyu varlıklarını bilme gereği olmadan açan bir oyuncu, bir desen personeli ve davranışa dayalı tespitin fark edebileceği bir şeydir. Bu, çıkarım, sert bir kontrol değil ve tam olarak bu, Sandık ESP'yi gri alana yerleştiren şey: savaş hilelerinden mekanik olarak daha bariz olmasa da, yine de kendi riskiniz altında kullanabileceğiniz bir özellik. Görünmeyen ganimetlere doğru izlenen bir sunucu, tek bir paketi bile işaretlemese bile bunu yakalayabilir.
+
+<Callout variant="tip" title="Burada Opal'da nerede duruyor">
+
+Opal bunu farklı bir isim altında gönderiyor. Görsel kategorisinde dosyalı Block ESP, Opal'ın kendi modül listesinde doğrudan kullanma riskini üstlenme ibaresiyle işaretlenmiş ve sandık odaklı olana kıyasla, cevher gibi kaynak blokları da içeren daha geniş bir modülü kapsıyor. Aynı davranış, aynı dürüst risk etiketi. Opal, loot için bir duvar hilesini, paketinize dokunmadığı için "güvenli" olarak adlandırmayacak
+
+</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapıldığı değil">
+
+Bu sayfa, Chest ESP'nin ne yaptığını ve neden gri bir alanda yer aldığını, onu çalıştırmanın bir onayını oluşturmadığını açıklar. Göremediğiniz ganimete doğrudan yol açan davranışlar tam olarak, personel ve antichiplerin dikkatini çektiği ve birçok sunucunun, sert bir paket bayrağı olmasa bile genel adil oyun kuralları kapsamında yasakladığı türden davranışlardır
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Göğüs ESP aslında neyi işaret ediyor?">
+
+Sandıklar, fıçılar ve diğer kap konstrüksiyonları, bazen müşterinin isteğine bağlı olarak sıkışıp kalmış sandıklar ve şulker kutularını da içerebilir. Size kapların nerede olduğunu gösterir, içindekileri değil
+
+</FAQItem>
+
+<FAQItem question="Göğüs ESP, varlık ESP'si ile aynı mı?">
+
+Hayır. Entity ESP oyuncuları ve yaratıkları duvarların içinden işaretler. Sandık ESP de aynı işi sandık blokları için yapar, bu yüzden ikisi tek bir modül yerine tamamlayıcı özellikler olarak gönderilir
+
+</FAQItem>
+
+<FAQItem question="Chest ESP sizi banlanmaya neden olabilir mi?">
+
+Evet, bir savaş hilesinden daha az risk taşısa da, istemcinizin sunucuya gönderdiği şeyi değiştirmez. Ancak, gizli sandıklara tekrar tekrar yol bulan oyuncuları tespit eden bir sunucu, bunun için yine de işaretleme veya yasaklama yapabilir. Bunu güvenli değil, tespit edilebilir olarak değerlendirin
+
+</FAQItem>
+
+<FAQItem question="Duvarın içinden Chest ESP çalışır mı?">
+
+Müşterinin blok verisi yüklü olduğu her yerde, pratikte render mesafesi içinde olduğu her yerde. Sizinle ve konteyner arasında kalan taş, arazi ve tam yapılar önemli değildir, çünkü render aşaması genellikle yolunda olup olmadığını kontrol etme işlemini atlar
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Şemsiye kategori Göğüs ESP ve diğer görsel ve yaşam kalitesi modüllerinin ait olduğu." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Tespit edilmemeyi amaçlayan müşteri kategorisi, Chest ESP'nin de içinde bulunduğu o gri alan." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Dövüş hilesi spektrumunun ucundaki Chest ESP, diğerlerine kıyasla nispeten sessiz." }
+]} />
+
+<CTA href="/tr/satin-alin">Block ESP'ye ve Opal'in görsel kategorisinin geri kalanına göz atın.</CTA>

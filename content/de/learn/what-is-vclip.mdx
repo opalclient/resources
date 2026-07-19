@@ -1,0 +1,82 @@
+---
+title: Was ist VClip (Vertical Clip) in Minecraft?
+description: VClip ist ein Bewegungsmodul, das einem Spieler ermöglicht, sich vertikal durch feste Blöcke zu bewegen und dabei Böden oder Decken zu durchdringen, bevor die Kollision wie gewohnt fortgesetzt wird.
+excerpt: VClip schießt einen Spieler für eine Sekunde direkt durch einen Boden oder eine Decke, lässt dann die Kollision wieder normalisieren, als ob nichts geschehen wäre.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Ist VClip dasselbe wie noclip?
+    a: Nicht ganz. Volle Noclip-Funktion deaktiviert Kollisionen in jede Richtung, sodass der Spieler durch alles hindurchgehen kann. VClip funktioniert nur auf der vertikalen Achse und nur so lange, bis der Spieler eine Wand, Decke oder einen dünnen Mauerabschnitt vor sich überquert, bevor die Kollision wieder aufgenommen wird.
+  - q: Funktioniert VClip auch quer?
+    a: Nein. Der Name ist wörtlich. VClip schneidet nur vertikal, aufwärts oder abwärts durch das Gelände. Es wird einen Spieler nicht durch eine Wand tragen, die neben ihm steht.
+  - q: Können Anticheats VClip tatsächlich erkennen?
+    a: Ja. Der Spieler landet auf der weit entfernten Seite festen Geländes, ohne jemals einen legalen, offenen Raum dazwischen zu belegen, was eine kontinuierliche, kollisionsgeprüfte Bewegung nicht erzeugen würde. Serverseitige Anti-Cheat-Systeme, die die Position gegen die Weltkarte validieren, sind darauf ausgelegt, genau diesen Sprung abzufangen.
+  - q: Welche Mandanten dokumentiert VClip als Modul?
+    a: Juul dokumentiert VClip als Modul, abgelegt zusammen mit seinen anderen Werkzeugen für Bewegung und Welt, anstatt etwas, das mit Kampf in Verbindung steht.
+---
+
+<KeyTakeaways>
+
+- VClip (Vertical Clip) ist ein Bewegungsmodul, das einem Spieler erlaubt, kurzzeitig durch feste Blöcke zu gehen, und zwar geradewegs aufwärts oder abwärts durch einen Boden, eine Decke oder eine dünne Wand.
+- Es funktioniert nur auf der vertikalen Achse. Es gibt kein seitliches Clippen, im Gegensatz zum vollständigen Noclip.
+- Die Kollision kehrt sofort zurück, sobald der Spieler hindurch ist, sodass nichts an der Welt beschädigt bleibt.
+- Es wird verwendet, um Etagen zu überspringen oder in Räume ohne Türen zu gelangen, nicht um einen Kampfvorteil zu erlangen.
+- Anticheats erkennen es, da die resultierende Position eine kontinuierliche, kollisionsgeprüfte Bewegung niemals erzeugen könnte.
+
+</KeyTakeaways>
+
+VClip, kurz für Vertical Clip, ist ein Bewegungsmodul, das einem Spieler erlaubt, für einen Moment geradewegs durch feste Blöcke zu passieren und so eine Wand, Decke oder dünne Mauer zu durchqueren, die ihn sonst aufhalten würde. Stellen Sie sich noclip mit einer einzigen Achse vor: die Kollision fällt für einen Moment aus, gerade so lange, um das zu überwinden, was im Weg steht, und schaltet sich dann wieder ein, als wäre nichts geschehen. Es beeinflusst weder den Kampf noch die Zielerfassung. Es verlegt den Spieler lediglich durch das Gelände, für das die Engine ihn eigentlich ausschließen sollte.
+
+## Wie VClip Sie tatsächlich bewegt
+
+Jeden Tick überprüft der Client die Trefferzone eines Spielers anhand der Blöcke um ihn herum und stoppt die Bewegung sofort, wenn diese mit etwas Festem überlappen würde. Diese Überprüfung verhindert, dass ein Spieler in eine Wand läuft oder durch seinen eigenen Boden fällt. VClip funktioniert, indem es diese kurzzeitig außer Kraft setzt, aber nicht überall, nur auf der vertikalen Achse und nur so lange, wie es dauert, das zu überwinden, was sich direkt über oder unter ihm befindet.
+
+Der Spieler bewegt sich durch den Block, als wäre er Luft. Sobald er auf der anderen Seite frei ist, wird die Kollision wieder aufgenommen und das Spiel behandelt ihn so, als wäre er nie woanders gewesen. Kein Block wird zerstört, keine Leiter oder Elytra ist beteiligt, nichts an der Umgebung selbst ändert sich. Die Position wird lediglich auf einen Punkt aktualisiert, der von dort aus, wo der Spieler gestartet ist, physikalisch unerreichbar sein sollte.
+
+Das wird hauptsächlich genutzt, um eine Etage zwischen den Ebenen zu überspringen oder direkt in einen Raum zu gelangen, ohne Türen und Korridore zu benutzen – ein Abkürzung durch die Karte, eher als ein Werkzeug, das Kämpfe gewinnt. Es verrät sich aber auch genau dadurch.
+
+## Ist VClip erkennbar?
+
+Ja, und problemlos. Das Durchqueren von festen Blöcken hinterlässt eine Spur, die der Server überprüfen kann: die Spieler-Hitbox landet auf einer Seite eines Bodens oder einer Wand, ohne jemals einen legalen, offenen Raum dazwischen eingenommen zu haben. Vanilla-Bewegung ist kontinuierlich, daher ist eine Positionsaktualisierung, die einen Spieler innerhalb fester Blöcke platziert oder ihn über eine Barriere springen lässt, ohne einen gültigen Weg darum herum zu haben, etwas, was normales Spiel nicht erzeugt.
+
+Das macht VClip zu einer echten Bewegungsanomalie und nicht zu einer rein kosmetischen Bequemlichkeit. Anders als eine HUD-Anpassung oder eine Farbänderung verändert es, wo der Spieler tatsächlich erlaubt ist, zu sein, und serverseitige Anti-Cheat-Systeme, die Position und Kollisionen jede Zeiteinheit validieren, sind speziell darauf ausgelegt, diese Art von Sprung abzufangen.
+
+<Callout variant="tip" title="Wo Opal die Grenze zieht">
+Opal versendet keine VClip-Funktionen oder irgendetwas, was eine Position erzeugen würde, die eine normale Kollision niemals produzieren könnte. Ein Modul, das es Ihnen ermöglicht, schneller zu bewegen oder einen engeren Winkel einzuhalten, stellt dennoch einen Vorteil innerhalb der Physik dar, die der Server überprüft. Ein Modul, das Ihre Trefferzone durch einen Boden teleportiert, fällt in eine andere Risikokategorie, und Opals Modul-Set bleibt auf der ersten Seite dieser Grenze.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+VClip bewegt die Trefferbox eines Spielers durch Positionen, die die native Kollisionsphysik eigentlich verhindern würde. Genau diese Art der Bewegung wird von Anticheats zuerst als verdächtig markiert. Diese Seite erklärt die Mechanik, nicht die Implementierung. Das Ausführen auf einem Server mit einem kompetenten Anticheat ist ein schneller Weg, um den Account zu verlieren.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Ist VClip dasselbe wie noclip?">
+Nicht genau. Vollständiger noclip deaktiviert Kollisionen in jede Richtung, sodass der Spieler durch alles hindurchgehen kann. VClip funktioniert nur auf der vertikalen Achse und nur so lange, bis der Spieler den Boden, die Decke oder eine dünne Wand vor sich überqueren kann, bevor die Kollision wieder aufgenommen wird.
+</FAQItem>
+
+<FAQItem question="Funktioniert VClip auch quer?">
+Nein. Der Name ist wörtlich gemeint. VClip klippt nur vertikal, aufwärts oder abwärts durch das Gelände. Es wird einen Spieler nicht durch eine Wand tragen, wenn er danebensteht.
+</FAQItem>
+
+<FAQItem question="Können Anticheats VClip tatsächlich erkennen?">
+Ja. Der Spieler landet auf der gegenüberliegenden Seite von festem Terrain, ohne jemals einen legalen, offenen Raum dazwischen zu belegen, was kontinuierliche, kollisionsüberprüfte Bewegung nicht erzeugt. Serverseitige Anticheats, die Positionen anhand der Weltkarte validieren, sind darauf ausgelegt, genau diesen Sprung abzufangen.
+</FAQItem>
+
+<FAQItem question="Welche Client-Dokumente werden von VClip als Modul erfasst?">
+Juul erfasst VClip als Modul und speichert es zusammen mit seinen anderen Werkzeugen für Bewegung und Weltgestaltung, anstatt mit kampfbezogenen Inhalten.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die breitere Kategorie, zu der VClip und ähnliche Module gehören." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die kundenorientierte Kategorie, die auf unauffälliges Verhalten ausgelegt ist, um Exploits wie diesen zu verbergen." },
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Ein weiteres Bewegungssystem, das rechtliche Positionierung zugunsten eines Abkürzung opfert und dafür in erhöhter Auffindbarkeit bezahlt." },
+]} />
+
+<CTA href="/de/purchase">Bewegungsmodule, die der Prüfung standhalten, nicht unter ihr zusammenbrechen.</CTA>

@@ -1,0 +1,86 @@
+---
+title: Cos'è la velocità in Minecraft? Spiegato il modulo di movimento
+description: La velocità è un modulo di movimento che aumenta la velocità di camminata e di scatto al di sopra del limite vanilla di Minecraft. Ecco come funziona e perché i server la rilevano così facilmente.
+excerpt: La velocità trasforma le tue gambe nella cosa più veloce sul server, senza bisogno di pozioni. Ecco come il modulo ci arriva e perché il server lo nota sempre.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: La velocità è la stessa di un effetto di una pozione?
+    a: No. Una pozione di rapidità alla vaniglia è un effetto temporaneo riconosciuto dal server. Un modulo Velocità modifica il movimento a livello del client, quindi il server vede la velocità senza la pozione o un'altra fonte vanilla.
+  - q: La velocità influisce sulla camminata, sulla corsa o su entrambe?
+    a: Entrambi. Il modulo aumenta la velocità sia per camminare che per scattare, poiché entrambi derivano dallo stesso calcolo di movimento, che viene sovrascritto.
+  - q: Perché è più facile intercettare Speed rispetto ad altri moduli?
+    a: Il movimento è qualcosa che il server traccia già per ogni giocatore ad ogni tick, indipendentemente da ciò che il client dichiara. Questo rende una velocità eccessiva prolungata un segnale più affidabile rispetto a quelli di cheat che si basano su tempistiche o rotazioni più sottili.
+  - q: È sicuro usare Speed su un server protetto da anti-cheat?
+    a: No. I dati di movimento sono tra i segnali più affidabili che un server abbia, quindi un account che utilizza Speed su un server con un controllo di movimento funzionante rischia di essere segnalato o bannato.
+---
+
+<KeyTakeaways>
+
+- La velocità è un modulo di movimento che aumenta la velocità di camminata e scatto al di sopra del valore fisso di Minecraft vanilla.
+- Sovrascrive direttamente i calcoli di movimento del client, senza pozioni o blocchi alla base dell'aumento di velocità.
+- L'incremento interessa sia la camminata che lo scatto per tutta la durata dell'attivazione del modulo.
+- I controlli di movimento sono tra gli strumenti anticheat più datati, ed è proprio per questo che Speed viene rilevato.
+
+</KeyTakeaways>
+
+La velocità è un modulo di movimento che spinge la velocità di camminata e scatto di un giocatore oltre i limiti di Minecraft nella sua versione originale. Attivalo e attraverserai il terreno più velocemente di quanto un client non modificato possa fare, senza che nel mondo di gioco ci sia alcuna spiegazione per questa maggiore velocità. Si presenta in client come Fan e Tenacity, e i server lo trattano come qualsiasi altro cheat di movimento: un vantaggio sleale, non un'impostazione.
+
+## Come funziona
+
+Minecraft nella sua versione originale calcola una velocità di camminata fissa e una velocità di scatto separata e più veloce per ogni giocatore. Normalmente, niente tocca quei valori se non effetti come una pozione di rapidità o il posizionamento su un blocco che ne influenza la velocità. Un modulo Speed salta tutto questo e sovrascrive direttamente il calcolo, aumentandolo in modo che il giocatore copra più terreno per tick sia mentre cammina che mentre scatta, senza alcuna pozione, blocco o altra spiegazione vanilla.
+
+Poiché la modifica avviene interamente sul client, lo schermo del giocatore mostra un movimento fluido e più veloce, senza glitch o scatti che lo tradiscano visivamente. Ciò che il server riceve è un'altra storia: un flusso di aggiornamenti di posizione che coprono una distanza maggiore per tick rispetto a quanto dovrebbe consentire lo stato noto del giocatore. Quel divario tra ciò che è plausibile e ciò che sta arrivando è esattamente ciò che un controllo di movimento è progettato per rilevare.
+
+## Perché viene rilevato
+
+La velocità è uno dei trucchi più facili da individuare per un server, perché il server sa già qual è la velocità massima consentita a un giocatore, indipendentemente da ciò che dichiara il client.
+
+| Fattore considerato dall'anticheat | Perché è importante |
+|---|---|
+| Distanza percorsa per tick rispetto alla velocità di base nota del giocatore | Prova diretta di movimento più veloce di quanto il gioco permetta |
+| Effetti delle pozioni attive e blocchi che influenzano la velocità | Ragioni legittime per cui un giocatore può muoversi velocemente, che il server deve escludere per primo |
+| Stato di scatto e cambiamenti di direzione | Sia lo scatto che le virate influenzano la velocità che il server dovrebbe aspettarsi |
+| Coerenza nel tempo | Un singolo tick veloce può essere causato da lag; una velocità sostenuta al di sopra del limite massimo senza spiegazioni è un segnale più forte |
+
+I controlli del movimento lato server sono tra le parti più vecchie e mature della progettazione degli anticheat. Usare la velocità per un periodo prolungato su un server con un controllo competente è improbabile che passi inosservato.
+
+<Callout variant="tip" title="Opal lo spedisce">
+La versione di Opal non pretende di essere altro: "Diventi un ghepardo nella vita reale". È classificata nella categoria 'uso a proprio rischio' di Opal, come sarebbe per qualsiasi cliente, perché la velocità di movimento grezza è proprio il tipo di segnale che un controllo lato server è progettato per intercettare.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina descrive il modulo in termini generali, per far capire cosa significa il termine. La denominazione e il comportamento esatto variano a seconda del client, e muoversi più velocemente di quanto consentano le leggi della fisica vanilla viola le regole su praticamente ogni server competitivo o di sopravvivenza.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="La Velocità è la stessa di un effetto di pozione?">
+No. Una pozione di velocità base è un effetto temporaneo riconosciuto dal server. Un modulo di Velocità modifica il movimento a livello client, quindi il server vede la velocità senza una pozione o un'altra fonte base.
+</FAQItem>
+
+<FAQItem question="La Velocità influisce sulla camminata, sulla corsa o su entrambe?">
+Entrambe. Il modulo aumenta la velocità sia per la camminata che per la corsa, poiché entrambe derivano dallo stesso calcolo di movimento che viene sovrascritto.
+</FAQItem>
+
+<FAQItem question="Perché è più facile individuare Speed rispetto ad altri moduli?">
+Il movimento è qualcosa che il server traccia per ogni giocatore ad ogni tick, indipendentemente da ciò che il client dichiara. Questo rende l'eccesso di velocità sostenuto un segnale più affidabile rispetto a imbrogli che si basano su tempistiche o indicazioni di rotazione più sottili.
+</FAQItem>
+
+<FAQItem question="Speed è sicuro da usare su un server protetto da anti-cheat?">
+No. I dati di movimento sono uno dei segnali più affidabili che un server possiede, quindi un account che utilizza Speed su un server con un controllo dei movimenti funzionante rischia di essere segnalato o bannato.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-scaffold", label: "Cos'è Scaffold?", description: "Un altro modulo di movimento progettato per farti attraversare terreni a cui non dovresti." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "L'approccio basato sulla furtività, in contrasto con un modulo così diretto." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia a cui appartengono Velocità e moduli simili." },
+]} />
+
+<CTA href="/it/purchase">Percorri distanze maggiori più velocemente di quanto il server possa immaginare. Opal spedisce Velocità, consapevole del rischio.</CTA>

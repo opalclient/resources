@@ -1,0 +1,99 @@
+---
+title: Czym jest AntiServer w Minecraft? Jak to działa
+description: AntiServer to moduł Minecrafta, który ignoruje lub łagodzi korekty serwera, takie jak wymuszone resetowanie pozycji i prędkości, a także ryzyko wykrycia.
+excerpt: Serwer mówi, żeby wrócić. AntiServer odpowiada nie. Oto moduł, który cicho nadpisuje poprawki serwera i dlaczego warto mu zaufać.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy AntiServer to moduł oszukiwania?
+    a: Zależy od tego, które poprawki ustawiono jako ignorowane. Łagodzenie sporadycznych poprawek rozgrywki to obszar szary, ale moduł stworzony w celu ignorowania poprawek, które istnieją specjalnie w celu egzekwowania decyzji anticheat, jest omijaniem anticheat, a większość serwerów traktuje to jako naruszenie zasad.
+  - q: Jakie poprawki serwerów atakuje AntiServer?
+    a: Zarejestrowane zachowania obejmują wymuszone resetowanie pozycji i prędkości, co oznacza aktualizacje, w których serwer nakazuje klientowi natychmiastowe przejście do określonej lokalizacji lub zastosowanie wektora cofnięcia, z którym klient wcześniej się nie zgodził.
+  - q: Jak AntiServer różni się od AntiDesync?
+    a: "AntiDesync zmniejsza rozbieżność między stanem klienta a stanem serwera, dzięki czemu oba pozostają zgodne. AntiServer robi prawie odwrotnie: celowo uniemożliwia dopasowanie stanu klienta do korekty właśnie wysłanej przez serwer."
+  - q: Czy AntiServer daje przewagę w rozgrywce?
+    a: Może, w zależności od tego, które poprawki blokuje. Ignorowanie resetu prędkości po trafieniu działa na podobną zasadę jak anty-knockback, utrzymując gracza bliżej celu niż zamierzał serwer, więc nie jest to wyłącznie kwestia wyglądu.
+  - q: Które dokumenty klienta obsługuje AntiServer?
+    a: Wentylator jest klientem udokumentowanym jako wysyłający AntiServer, wymienionym wśród modułów kategorii graczy.
+---
+
+<KeyTakeaways>
+
+- AntiServer to moduł, który ignoruje lub łagodzi niechciane korekty serwera, takie jak wymuszone resetowanie pozycji czy prędkości.
+- Przechwytuje korektę zanim zostanie zastosowana, a następnie ją upuszcza, opóźnia lub częściowo stosuje zamiast wykonywać bez zastrzeżeń.
+- To powoduje rozbieżność stanu klienta i serwera, a lukę w ruchu mogą bezpośrednio wykryć anticheaty.
+- Dokumentacja od producenta określa go jako moduł kategorii graczy.
+
+</KeyTakeaways>
+
+AntiServer to moduł klienta Minecraft, który sprzeciwia się korektom serwera, których klient nie akceptuje, najczęściej wymuszonemu przesunięciu pozycji lub zresetowaniu prędkości po uderzeniu. Netkod Minecrafta daje serwerowi decydujący głos w kwestii twojej lokalizacji i prędkości, a standardowy klient po prostu akceptuje wszystko, co mu się narzuca. AntiServer tego nie robi. Monitoruje konkretny typ aktualizacji i decyduje, przypadek po przypadku, czy ją zaakceptować, złagodzić, czy całkowicie pominąć. W efekcie klient cicho uruchamia własną wersję wydarzeń obok wersji serwera.
+
+## Jak to działa
+
+Ruch w Minecraftcie jest autorytatywny dla serwera. Twój klient przewiduje, gdzie się udasz lokalnie i renderuje to natychmiast, ale serwer ma ostatnie słowo i może w dowolnym momencie nadpisać przewidywanie: przywracając twoją pozycję do miejsca, które uważa za prawidłowe, lub resetując twoją prędkość po uderzeniu. Standardowy klient po prostu robi, co mu każą.
+
+AntiServer znajduje się pomiędzy nadchodzącą korektą a momentem, w którym normalnie zostałaby zastosowana, i decyduje, co z nią zrobić. Może odrzucić korektę, ją opóźnić lub przepuścić tylko jej część, w zależności od tego, czy moduł oznaczy aktualizację jako pożądaną, czy nie. Ponieważ nie ma możliwości wiedzy, dlaczego serwer wysłał daną korektę – czy jest to rutynowe czyszczenie desynchronizacji, czy też anticheat reagujący na twoje ruchy – traktuje je wszystkie jednakowo: jako nadpis, który ma obejść.
+
+Motywacja jest prosta z perspektywy gracza. Skok pozycji może unieważnić skok lub zniszczyć umieszczenie mostu w połowie ruchu. Reset prędkości może wymazać pęd, na którym polegałeś, aby zamknąć lukę lub uciec. AntiServer utrzymuje twoją lokalną wersję wydarzeń bliżej tego, co faktycznie zrobiłeś, niezależnie od tego, dlaczego serwer się z tobą nie zgadzał.
+
+Wentylator to klient udokumentowany jako wysyłający moduł o tej nazwie, zgłoszony wśród narzędzi kategorii graczy wraz z innymi narzędziami do ruchu i obrony.
+
+## AntiServer w porównaniu z Velocity i AntiDesync
+
+AntiServer należy do tej samej rodziny co moduły anty-knockback, takie jak [Velocity](/pl/learn/what-is-velocity-anti-knockback), które również nadpisują konkretną instrukcję serwera dotyczącą Twojego ruchu. AntiServer jest jednak szerszy. Nie tylko anuluje knockback, ale może odrzucać wszelkie korekty, które uzna za niepożądane, co oznacza, że może zakłócać resetowania wysyłane przez anticheat celowo, a nie tylko zwykłe korekty rozgrywki.
+
+To plasuje go po przeciwnej stronie spektrum w stosunku do AntiDesync, modułu, który zawęża niewielkie rozbieżności między klientem a serwerem, aby te dwa elementy pozostawały zgodne. AntiServer robi niemal odwrotnie: celowo uniemożliwia klientowi dopasowanie się do korekty właśnie wysłanej przez serwer.
+
+| Moduł | Co targetuje | Kierunek |
+|---|---|---|
+| AntiServer | Wszelkie korekty oznaczone jako niepożądane (resetowanie pozycji, resetowanie prędkości) | Opiera się korekcie serwera |
+| Velocity (anty-knockback) | Konkretnie knockback | Opiera się jednemu typowi korekty |
+| AntiDesync | Zwykłe dryfowanie stanu klienta-serwera | Zgadza się z serwerem |
+
+## Dlaczego jest wykrywany
+
+Rdzeniem problemu AntiServer jest to, że powoduje rozbieżność między stanem zgłaszanym przez klienta a tym, co serwer już wie, że wysłał. To czystszy sygnał niż generują większość cheatów związanych z ruchem. Eksploit subtelnej synchronizacji lub rotacji musi być wywnioskowany z hałaśliwych danych w czasie. AntiServer nie wymaga wnioskowania: serwer wydaje wyraźną korektę, a następnie porównuje to, co polecił klientowi, z tym, co pokazują kolejne raporty klienta dotyczące jego pozycji lub prędkości. Jeśli korekta nigdy w pełni nie zostanie zastosowana, to nie jest to flaga probabilistyczna, to jest bezpośrednia sprzeczność.
+
+<Callout variant="tip" title="Gdzie Opal wyznacza granicę">
+Opal nie udostępnia modułu, który miałby nadpisywać autorytet serwera nad Twoją pozycją, kropka. Funkcje ruchu i walki są bardzo dokładnie sprawdzane, zanim zostaną udostępnione, dokładnie dlatego, że zachowania odporne na korekcję to kategoria, którą serwerowe antycheaty obserwują najpilniej. Jeśli nie można w uczciwy sposób wyjaśnić działania jakiejś funkcji, ta nie trafi do wersji produkcyjnej.
+</Callout>
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona opisuje moduł w sposób ogólny, abyś wiedział, co ten termin oznacza. Ignorowanie poprawek, które serwer wysyła celowo, w tym resetów wywołanych przez system anticheat, jest funkcjonalnie unikaniem anticheat, a większość serwerów karze za to tak samo, jak za używanie anty-knockbacku.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy AntiServer to moduł oszukiwania?">
+Zależy od tego, jakie poprawki ma ignorować. Łagodzenie sporadycznych poprawek rozgrywki jest szarą strefą, ale moduł stworzony w celu ignorowania poprawek, które istnieją specjalnie w celu egzekwowania decyzji anticheat, jest unikaniem anticheat, a większość serwerów traktuje to jako naruszenie zasad.
+</FAQItem>
+
+<FAQItem question="Jakie poprawki serwera adresuje AntiServer?">
+Zdokumentowane zachowanie obejmuje wymuszone resetowanie pozycji i prędkości: aktualizacje, w których serwer nakazuje klientowi natychmiastowe przejście do określonej lokalizacji lub zastosowanie wektora odbicia, z którym klient wcześniej się nie zgodził.
+</FAQItem>
+
+<FAQItem question="W czym różni się AntiServer od AntiDesync?">
+AntiDesync zmniejsza rozbieżność między stanem klienta a stanem serwera, aby te dwa elementy były zgodne. AntiServer robi prawie odwrotnie: celowo uniemożliwia dopasowanie stanu klienta do korekty właśnie wysłanej przez serwer.
+</FAQItem>
+
+<FAQItem question="Czy AntiServer daje przewagę w rozgrywce?">
+Może, w zależności od tego, które korekty blokuje. Ignorowanie zresetowania prędkości po trafieniu działa podobnie jak anty-odrzut, utrzymując gracza bliżej celu niż zamierzał serwer, więc nie jest to wyłącznie kwestia wyglądu.
+</FAQItem>
+
+<FAQItem question="Które dokumenty klienta dokumentują AntiServer?">
+Fan jest klientem udokumentowanym jako wysyłający AntiServer, wymienionym wśród jego modułów kategorii graczy.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-velocity-anti-knockback", label: "Czym jest Prędkość (ochrona przed odrzutem)?", description: "Węższy moduł, który nadpisuje jedną konkretną korektę: odrzut." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szersza kategoria, do której te moduły należą." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Jak ogólnie podchodzą klienci skupieni na skrytości do ryzyka wykrycia." },
+]} />
+
+<CTA href="/pl/zakup">Zobacz narzędzia bojowe i poruszania się, którymi Opal jest gotów się podzielić</CTA>

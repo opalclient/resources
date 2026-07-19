@@ -1,0 +1,103 @@
+---
+title: Cos'è un aimbot in Minecraft? Spiegazione del modulo
+description: Un aimbot è un modulo di cheat che allinea automaticamente il mirino su un bersaglio. Ecco come funziona, in cosa differisce dall'assistenza alla mira e perché viene rilevato.
+excerpt: Un aimbot fissa automaticamente il mirino sul nemico, garantendo che ogni colpo vada a segno, mentre tu continui a cliccare. Ecco come modifica i tuoi angoli di visuale e perché si colloca su un continuum con l'assistenza alla mira.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Modules
+author: trq
+faqs:
+  - q: È un aimbot un cheat o una mod?
+    a: Un aimbot è un modulo di cheat. Mira automaticamente al giocatore, violando le regole di praticamente ogni server multiplayer, quindi è considerato imbroglio piuttosto che una mod di fair play.
+  - q: Qual è la differenza tra un aimbot e un KillAura?
+    a: Un aimbot allinea soltanto il mirino, lasciando il clic al giocatore. KillAura mira e lancia gli attacchi autonomamente. Un aimbot è la variante mirino-solo.
+  - q: Qual è la differenza tra un aimbot e l'assistenza alla mira?
+    a: Sono punti sullo stesso spettro. L'assistenza alla mira sposta leggermente la visuale e lascia che la maggior parte del puntamento sia a cura del giocatore; un aimbot tira con forza e ne fa quasi tutto.
+  - q: Può un aimbot essere non rilevabile?
+    a: No. La levigatura e la casualità rendono il puntamento più umano, ma i dati di rotazione inviati da un cliente contengono ancora schemi che gli anticheat rilevano. Un puntamento preciso rimane rilevabile.
+---
+
+<KeyTakeaways>
+
+- Un aimbot è un modulo di combattimento che muove il mirino verso un bersaglio per il giocatore.
+- Un aimbot puro mira soltanto; il giocatore deve comunque cliccare per attaccare, il che lo distingue da KillAura.
+- L'assistenza alla mira e l'aimbot si collocano su un unico spettro, spesso controllati da un'unica barra di intensità.
+- Viene rilevato attraverso i dati dell'angolo di visuale: rotazioni troppo precise o troppo veloci per essere umane.
+
+</KeyTakeaways>
+
+Un aimbot è un modulo di cheat che mira per il giocatore. Seleziona un bersaglio, quindi muove il mirino su quel bersaglio senza che il giocatore regoli il mouse. Il termine è un'abbreviazione di "mirare automatico". In Minecraft, il termine di solito si riferisce a un modulo che blocca la visuale su un nemico in modo che ogni colpo vada a segno.
+
+## Come funziona un aimbot
+
+Un aimbot esegue un piccolo ciclo mentre il giocatore è in combattimento. Innanzitutto, scansiona alla ricerca di bersagli validi entro gittata. Quindi ne seleziona uno, di solito il nemico più vicino o quello più vicino al mirino corrente. Infine, ruota la visuale del giocatore in modo che il mirino si posizioni su quel bersaglio.
+
+La differenza fondamentale rispetto ai moduli di attacco automatico è ciò che controlla l'aimbot. Un aimbot puro gestisce solo la mira. Il giocatore deve ancora cliccare per attaccare. Questo lo fa sentire meno ovviamente automatizzato rispetto a un modulo che spara anche i colpi, perché l'essere umano preme ancora il pulsante.
+
+La maggior parte delle implementazioni funzionano modificando i valori di yaw e pitch del giocatore, i due angoli che descrivono la direzione della visuale. Il modulo calcola l'angolo dagli occhi del giocatore al bersaglio, quindi scrive quegli angoli nel gioco in modo che il prossimo pacchetto di attacco li trasporti.
+
+## Aimbot vs. assistenza alla mira
+
+Questi due termini descrivono uno spettro, non due cose non correlate. La differenza sta in quanto fa il software e quanto è forte la forza di attrazione.
+
+| Termine | Cosa fa | Input del giocatore | Sensazione |
+|---|---|---|---|
+| Assistenza alla mira | Sposta leggermente la visuale verso un bersaglio | Il giocatore mira comunque per la maggior parte del tempo | Sottile, "aderente" |
+| Mira automatica | Blocca la visuale direttamente su un bersaglio | Il giocatore mira appena | Blocco rigido |
+
+L'assistenza alla mira applica una correzione delicata. Il giocatore esegue la maggior parte della mira e il modulo piega gli ultimi gradi in modo che il mirino si avvicini al nemico. La mira automatica rimuove quasi tutto il lavoro di mira del giocatore e si fissa direttamente sul bersaglio. Molti moduli si collocano tra i due e consentono a un cursore di controllare l'intensità, in modo che lo stesso codice possa comportarsi come uno o l'altro.
+
+## Impostazioni comuni
+
+I moduli di mira automatica e assistenza alla mira espongono controlli che modificano l'intensità e l'evidenza della mira.
+
+| Impostazione | Cosa controlla |
+|---|---|
+| Raggio | Quanto lontano può trovarsi un bersaglio e comunque essere mirato |
+| Campo visivo | Quanto ampio deve essere un angolo per essere considerato "davanti" al giocatore |
+| Intensità | Quanto forte viene trascinata la visuale verso il bersaglio |
+| Smorzamento | Quanto gradualmente il mirino si posiziona sul bersaglio |
+| Bersagli | Quali tipi di entità vengono considerati validi (giocatori, mob) |
+| Priorità del bersaglio | Se bloccare il bersaglio più vicino, con la minore salute o più rivolto |
+
+La forza e la levigatura sono le cose più importanti. Una forza del 100 percento senza levigatura è un blocco rigido che si spezza all'istante. Una forza inferiore con una levigatura intensa assomiglia di più a un abile umano, che è l'obiettivo dell'assistenza mirata.
+
+## Perché viene rilevato
+
+Un aimbot viene rilevato perché produce schemi di mira che un umano non può riprodurre. Gli anticheat lato server monitorano il flusso di angoli di visuale che un client invia. La mira automatica lascia tracce: rotazioni troppo precise, giri più veloci di quanto una mano possa muovere un mouse e un mirino che traccia un bersaglio in movimento senza errori.
+
+La parte difficile della scrittura di questo tipo di modulo non è la matematica. È far sembrare le rotazioni umane. Ecco perché così tante versioni aggiungono casualità, curve di accelerazione e un piccolo offset costante in modo che il mirino atterri vicino al bersaglio invece che esattamente al centro. Un anticheat moderno misura ancora il segnale sottostante, quindi una correzione eccessiva rimane rischiosa, a prescindere da quanto venga levigata.
+
+## Aimbot rispetto ad altri moduli di combattimento
+
+Un aimbot scrive solamente gli angoli di visuale e lascia l'attacco al giocatore. [KillAura](/it/learn/what-is-killaura) fa un passo avanti, inviando anche i colpi, quindi mira e attacca in mischia. [Reach](/it/learn/what-is-reach) segue un'altra direzione, estendendo la distanza a cui arriva un attacco, piuttosto che dove si trova il mirino. L'aimbot è il membro di quella famiglia dedicato esclusivamente alla mira, motivo per cui una singola barra di forza può farlo scivolare verso un comportamento di assistenza alla mira più delicato o verso un blocco rigido.
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina descrive il modulo in termini generali, così da far capire il significato del termine. La denominazione e il comportamento esatto variano a seconda del client, e la mira automatica viola le regole su praticamente ogni server.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Un aimbot è un hack o una mod?">
+Un aimbot è un modulo di cheat. Mira automaticamente per il giocatore, violando le regole di praticamente ogni server multiplayer, quindi rientra nella categoria di cheat piuttosto che di una mod per il fair play.
+</FAQItem>
+
+<FAQItem question="Qual è la differenza tra un aimbot e un KillAura?">
+Un aimbot allinea solamente il mirino, lasciando il clic al giocatore. Un KillAura mira e invia gli attacchi autonomamente. Un aimbot è la variante solo mirino; un KillAura è quello con l'attacco automatico completo.
+</FAQItem>
+
+<FAQItem question="Qual è la differenza tra un aimbot e l'assistenza alla mira?">
+Si tratta di punti sullo stesso spettro. L'assistenza alla mira sposta leggermente la visuale e lascia che il giocatore faccia quasi tutti i mirini. Un aimbot sposta la visuale con forza e fa quasi tutto il mirino. Una singola barra di regolazione della forza spesso le trasforma l'una nell'altra.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "Il cugino dell'aimbot che attacca automaticamente." },
+  { href: "/it/learn/what-is-reach", label: "Cos'è Reach?", description: "Il modulo di combattimento a distanza." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia a cui appartengono questi moduli." },
+]} />
+
+<CTA href="/it/purchase">Guarda cosa spedisce Opal per $8.99</CTA>

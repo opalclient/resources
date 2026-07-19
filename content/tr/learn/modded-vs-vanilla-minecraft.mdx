@@ -1,0 +1,118 @@
+---
+title: "Modlanmış ve Orijinal Minecraft: Arada Ne Fark Var?"
+description: "Modifiye edilmiş ve orijinal Minecraft arasındaki fark: mod eklediğinizde neler değişir, bir mod yükleyicisi nasıl devreye girer ve performans, içerik veya çok oyunculu deneyim için hangisini seçmelisiniz."
+excerpt: Oyuna Mojang gönderdiği haliyle Vanilla var; modlanmış olan ise üzerine ek kod eklenmiş aynı oyun. İşte neyin değiştiği ve hangisinin size uygun olduğu.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: Modlanmış Minecraft, orjinalinden daha mı iyi?
+    a: İkisi de kesinlikle daha iyi değildir. Vanilla daha basittir ve her yerde çalışır. Modlanmış daha esnektir ve daha hızlı çalışabilir veya içerik ekleyebilir, ancak kurulum ve güncelleme gecikmesi pahasına. Ne istediğinize bağlıdır.
+  - q: Modlu oynamak için mod yükleyiciye ihtiyacım var mı?
+    a: Evet. Modlar kendi başlarına yüklenmiyor. Minecraft sürümünüz için Fabric gibi bir mod yükleyici kuruyorsunuz, ardından mod jar dosyalarını mods klasörüne ekliyorsunuz.
+  - q: Modlu Minecraft'ı vanilla sunucularda oynayabilir miyim?
+    a: Bazen. Sadece kendi görünümünüzü değiştiren, performans veya HUD modları gibi istemci tarafı modları genellikle vanilla bir sunucuda çalışır. Dünyayı değiştiren içerik modları ise genellikle eşleşen modlu bir sunucuya ihtiyaç duyar. Her zaman sunucunun kurallarını kontrol edin.
+  - q: Modlar oyunumu yavaşlatır mı?
+    a: Bazı yoğun içerikli modlar yük bindirse de, Fabric üzerinde özel performans modları genellikle vanilla'dan daha yüksek bir kare hızına ulaştırır. Sonuç, hangi modları kullandığınıza ve donanımınıza bağlıdır.
+  - q: Modlama, orijinal oyun dosyalarını değiştirir mi?
+    a: Hayır. Bir mod yükleyici, oyunu başlatıldığında bellekte yamalar ve kurulu dosyalarınızı olduğu gibi bırakır. Yükleyiciyi kaldırmak sizi sade, orijinal haline geri döndürür.
+---
+
+<KeyTakeaways>
+
+- Vanilla Minecraft, Mojang tarafından gönderildiği haliyle, tam olarak değiştirilmemiş oyundur.
+- Modlu Minecraft ise, bir mod yükleyici aracılığıyla üzerine ek kod yüklenmiş aynı oyundur.
+- Vanilla kurulum gerektirmez ve her yerde çalışır; modlu daha esnektir ancak bir yükleyiciye ihtiyaç duyar.
+- Modlama, oyunu başlatıldığında bellekte yamalar ve orijinal dosyalarınızı olduğu gibi bırakır.
+
+</KeyTakeaways>
+
+Vanilla Minecraft, Mojang tarafından dağıtıldığı haliyle, hiçbir değişiklik yapılmamış olan oyundur. Modlu Minecraft ise, üzerine bir [mod yükleyici](/tr/learn/what-is-a-minecraft-mod-loader) aracılığıyla ek kod eklenmiş aynı oyundur, örneğin [Fabric](https://fabricmc.net/). Modlar içerik ekleyebilir, performansı artırabilir veya arayüzü düzenleyebilir. Vanilla daha basittir ve her yerde çalışır; modlu ise daha esnektir ancak kurulum gerektirir.
+
+<Callout variant="info" title="Opal Nerede Kullanılır">
+Opal, yaşam kalitesini artıran araçların yanı sıra kendi düzenlemeleriniz için bir JavaScript betik motoru ekleyen bir [Fabric](https://fabricmc.net/) modudur. [Kurulum rehberi](/tr/docs/setup) sizi saf oyundan modlu hale getirir ve [betik tanıtımı](/tr/docs/scripting) nasıl genişletileceğini gösterir.
+</Callout>
+
+## Vanilla Minecraft Nedir
+
+Vanilla Minecraft, Mojang'dan çıktığı haliyle, değiştirilmemiş oyundur. Çalıştırırsanız, size stok deneyimi sunar: hiçbir şey eklenmemiş resmi bloklar, yaratıklar, dünya üretimi ve kurallar.
+
+Vanilla, her şeyin üzerine inşa edildiği temeldir. Sunucular varsayılan olarak onu bekler, çok oyunculu oyunlar ona uyum sağlar ve her güncelleme öncelikle buraya gelir. Hiç bir mod klasörüne dokunmadıysanız, vanilla oynuyorsunuz demektir.
+
+## Modlanmış Minecraft Nedir
+
+Modlanmış Minecraft, üzerine bir veya daha fazla mod yüklenmiş oyundur. Bir mod, davranışları değiştiren veya ekleyen ek kod paketidir ve Minecraft ile modlarınız arasına konumlanan bir [mod yükleyicisi](/tr/learn/what-is-a-minecraft-mod-loader) aracılığıyla çalışır.
+
+Modlar geniş bir yelpazeyi kapsar. Bazıları bloklar, öğeler ve boyutlar gibi yeni içerikler ekler. Bazıları performansa odaklanır ve kare hızını artırır. Diğerleri ise oyunun kurallarını değiştirmeden HUD'u iyileştiren veya kısayol tuşları ekleyen yaşam kalitesi araçlarıdır. İstediğiniz modları seçip birlikte yükleyebilirsiniz.
+
+## Modlama Nasıl Çalışır
+
+Oyunu modlamak için Minecraft'ın kendi dosyalarını düzenlemezsiniz. Bunun yerine bir [mod yükleyicisi](/tr/learn/what-is-a-minecraft-mod-loader) kurarsınız ve yükleyici, başlatmada oyunu bellekte yamalar.
+
+[Fabric](https://fabricmc.net/) tarafında akış kısadır:
+
+<Steps>
+
+<Step number={1} title="Yükleyiciyi kurun">[Fabric](https://fabricmc.net/) yükleyicisini, tam olarak Minecraft sürümünüz için kurun</Step>
+
+<Step number={2} title="Modlarınızı ekleyin">Mod jar dosyalarını `mods` klasörüne atın</Step>
+
+<Step number={3} title="Başlat">Oyunu başlatın ve yükleyici her modu içine entegre etsin</Step>
+
+</Steps>
+
+Fabric, hafif bir yükleyici olduğundan, temel oyun vanilla’ya yakın kalır ve sadece eklediğiniz modlar değişiklikler yapar. Birçok mod ayrıca, onlara oyunla temiz entegrasyon sağlayan paylaşılan kütüphane olan [Fabric API](https://fabricmc.net/wiki/tutorial:fabric-api) bağımlıdır.
+
+## Modlu ve Vanilla Karşılaştırması
+
+| | Vanilla | Modlu |
+| :--- | :--- | :--- |
+| Kurulum | Yok, yüklendiği gibi oynayın | Öncelikle bir mod yükleyici kurun |
+| İçerik | Stock Mojang oyunu | Bloklar, eşyalar, aletler, ince ayarlar ekleyin |
+| Performans | Sabit | Performans modları FPS'yi artırabilir |
+| Çok Oyunculu | Herhangi bir sunucuda çalışır | Sunucunun izin verdiği şeye bağlıdır |
+| Güncellemeler | İlk günden mevcuttur | Modların güncellenmesini bekleyin |
+| Risk | Yok | Yanlış sürüm veya kötü modlar çökebilir |
+
+## Hangisini Oynamalısınız?
+
+Sıfır kurulum, yeni sürümü çıktığı gün ve herhangi bir sunucuyla garantili eşleşme istiyorsanız vanilla oynayın. Güvenli varsayılan ve paylaşılan temeldir.
+
+Daha iyi performans, ek içerik veya vanilla'nın dışladığı yaşam kalitesi araçları istiyorsanız modlu oynayın. Maliyeti, küçük bir kurulum ve Minecraft güncellemesinden sonra modların yetişmesini bekleme sürecidir. Birçok oyuncu ayrı profiller tutar: biri temiz vanilla kurulumu ve biri veya daha fazla modlu kurulum.
+
+Çok oyunculu modda belirleyici olan sunucu. İçerik modları genellikle eşleşen modlanmış bir sunucu gerektirirken, istem tarafı performansı ve HUD modları genellikle vanilla sunucularda sorunsuz çalışır. Katılmadan önce eklenen her şeyle ilgili kuralları kontrol edin.
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="Modifiye edilmiş Minecraft, vanilla'dan daha mı iyi?">
+İkisi de kesinlikle daha iyi değildir. Vanilla daha basittir ve her yerde çalışır. Modifiye edilmiş olan daha esnektir, daha hızlı çalışabilir veya içerik ekleyebilir, ancak kurulum ve güncelleme gecikmelerinin de maliyetini taşır. İstediğiniz oturuma bağlıdır.
+</FAQItem>
+
+<FAQItem question="Modlu oynamak için mod yükleyiciye ihtiyacım var mı?">
+Evet. Modlar kendi başlarına yüklenmez. Minecraft sürümünüz için [Fabric](https://fabricmc.net/) gibi bir mod yükleyici kurduktan sonra, mod jar dosyalarını `mods` klasörüne ekleyin.
+</FAQItem>
+
+<FAQItem question="Modlu Minecraft'ı vanilla sunucularda oynayabilir miyim?">
+Bazen. Sadece kendi görünümünüzü değiştiren, performans veya HUD modları gibi istem tarafı modları genellikle vanilla bir sunucuda çalışır. Dünyayı değiştiren içerik modları ise genellikle eşleşen modlu bir sunucuya ihtiyaç duyar. Her zaman sunucunun kurallarını kontrol edin.
+</FAQItem>
+
+<FAQItem question="Modlar oyunumu yavaşlatır mı?">
+Yoğun içerikli bazı modlar yük bindirse de, [Fabric](https://fabricmc.net/) üzerinde çalışan performans odaklı modlar genellikle vanilla'dan daha yüksek bir kare hızına ulaşır. Sonuç, hangi modları çalıştırdığınıza ve donanımınıza bağlıdır.
+</FAQItem>
+
+<FAQItem question="Modlama orijinal oyun dosyalarını değiştirir mi?">
+Hayır. Bir mod yükleyici, oyunu başlatıldığında bellekte yamalar ve kurulu dosyalarınızı olduğu gibi bırakır. Yükleyiciyi kaldırmak sizi orijinal haline döndürür.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-mod-loader", label: "Minecraft mod yükleyici nedir?", description: "Katmanı, vanilla'ya mod yüklemesini sağlar." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Yaşam kalitesini artıran araçların tek bir mod içinde paketlenmiş hali." },
+  { href: "/tr/blog/essential-fabric-mods-every-player-should-have", label: "Zorunlu Fabric modlar", description: "Modifiye etmeye başladıktan sonra kurabileceğiniz sağlam bir temel." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

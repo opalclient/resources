@@ -1,0 +1,81 @@
+---
+title: Czym jest spoofer w Minecraft?
+description: Spoofer to moduł klienta Minecraft, który zamienia rzeczywistą wartość, taką jak ping lub licznik FPS, na fałszywą, zanim zostanie ona wyświetlona lub wysłana do serwera.
+excerpt: "Jedna nazwa modułu, dwa zupełnie różne profile ryzyka: jedni fałszerze nigdy nie opuszczają Twojego ekranu, inni prosto wpadają do pakietu."
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie robi moduł spoofera?
+    a: Przechwytuje rzeczywistą wartość gdzieś po stronie klienta i zastępuje ją fałszywą, którą wybrał użytkownik, więc cokolwiek odczytuje tę wartość dalej – wyświetlacz, pakiet, czy oba – widzi fałszywą liczbę zamiast prawdziwej.
+  - q: Czy Spoofer to ten sam moduł, co Ping Spoof czy FPS Spoofer?
+    a: Nie. Ping Spoof i FPS Spoofer to konkretne moduły, które celują w pojedynczą, określoną wartość. Spoofer to oddzielny, bardziej ogólny wpis, którego dokładna wartość docelowa nie jest udokumentowana.
+  - q: Który klient ma moduł Spoofera?
+    a: Spoofer widoczny jest w Rose. Nie zarejestrowano dalszych szczegółów dotyczących wartości, którą nadpisuje.
+  - q: Czy program do oszukiwania jest wykrywany przez systemy antycheat?
+    a: Zależy to całkowicie od tego, jaką wartość nadpisuje. Spoofer ograniczony do lokalnego wyświetlacza nie może być wykryty, ponieważ nic nie opuszcza klienta. Ten, który zmienia wartość wysyłaną do serwera, może zostać wykryty, jeśli ten serwer ją sprawdza.
+---
+
+<KeyTakeaways>
+
+- Spoofer to ogólne określenie na moduł, który zastępuje rzeczywistą wartość fałszywą, wybraną przez użytkownika, zanim zostanie wyświetlona lub wysłana.
+- Ryzyko zależy od celu: wartość używana tylko lokalnie (FPS) jest niewykrywalna; natomiast wartość wysyłana do serwera (ping, wersja) nie jest.
+- Różni się od modułów o nazwie własnej, takich jak Ping Spoof lub FPS Spoofer, które celują w pojedynczą wartość.
+
+</KeyTakeaways>
+
+Fałszownik, w terminologii klienta Minecraft, to dowolny moduł, który przechwytuje wartość zanim dotrze do celu i zastępuje ją czymś, co wybrał użytkownik. To cała definicja: brak stałego celu, brak stałego efektu, tylko wzorzec zastosowany do dowolnej wartości, którą dany moduł zdecyduje się zmodyfikować. Niektóre fałszowniki to czysta próżność, fałszywy licznik FPS, który nikogo nie imponuje poza Tobą. Inne modyfikują dane, które faktycznie odczytuje serwer, takie jak zgłaszany ping, i to właśnie wtedy to samo słowo zaczyna obejmować dwie bardzo różne rzeczy: kosmetyczną zabawkę z jednej strony i coś, co może mieć znaczenie dla uczciwości z drugiej.
+
+## Jak to działa
+
+„Fałszownik” określa wzorzec, a nie jedno konkretne zachowanie. Moduł umieszczony jest pomiędzy rzeczywistą wartością a tym, co ją odczytuje, czy to element HUD na ekranie, pakiet wysyłany do serwera, czy oba, i zastępuje rzeczywistą wartość inną zanim do niej dotrze. Nazwane implementacje tego wzorca, takie jak Fałszowanie Pingu i Fałszowanie FPS, każda blokuje się na jednej konkretnej wartości i jest dokumentowana oddzielnie, ponieważ ich mechanizm i ich wpływ na innych graczy (lub jego brak) się różnią.
+
+Spoofer, zgodnie z danymi z bieżących rejestrów, to wpis ogólny: samodzielny moduł widoczny w Rose, bez dalszej informacji o tym, jaką konkretnie wartość nadpisuje. Ta luka nie jest drobnym detalem. To jedyny element informacji, który byłby potrzebny do oceny modułu, ponieważ profil ryzyka spoofera zależy od tego, co on fałszuje.
+
+## Dlaczego ryzyko zależy od fałszowanej wartości
+
+| Rodzaj fałszowanej wartości | Gdzie jest widoczna | Typowe ryzyko |
+|---|---|---|
+| Tylko lokalny wyświetlacz (przykład: fałszywy licznik FPS) | Tylko na Twoim ekranie | Żadnego. Wyłącznie kosmetyczne |
+| Wartość zgłaszana do serwera (przykład: ping, wersja) | Serwer i potencjalnie inni gracze | Zależy od tego, czy serwer sprawdza tę wartość |
+
+Ponieważ wpis Spoofer w Rose nie określa, do którego wiersza się zalicza, uczciwym podejściem jest traktowanie go jako nieznanego, a nie zakładanie żadnego skrajnego przypadku. „Czy spoofer jest bezpieczny” to nie pytanie z jedną odpowiedzią. To pytanie o to, która konkretnie wartość jest nadpisywana.
+
+<Callout variant="tip" title="Gdzie Opal wyznacza granicę">
+Opal nie udostępnia modułu o nazwie Spoofer. Katalog jego narzędzi dokumentuje każdą modyfikację wartości dokładnie tym, co ona dotyczy – czy jest to element kosmetyczny, czy wpływający na serwer – zamiast umieszczać ją pod jedną ogólną nazwą, która mogłaby oznaczać coś innego. Jeśli spoofer klienta nie wskazuje, którą wartość zmienia, warto o to zapytać, zanim założysz, że jest nieszkodliwy.
+</Callout>
+
+<Callout variant="warning" title="Referencja, a nie instrukcja">
+Ta strona opisuje wzorzec ogólnie, a nie konkretną implementację. Jeśli oszust zmienia wartość, którą odczytuje serwer, na przykład ping lub ciąg wersji, ta liczba istnieje gdzieś w pakiecie, z którym serwer może porównać rzeczywistość, a przeprowadzenie tego porównania jest dokładnie tym, do czego służą systemy anticheat.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co właściwie robi moduł spoofera?">
+Przechwytuje rzeczywistą wartość wどこかクライアントで、i zastępuje ją fałszywą, którą użytkownik wybrał, więc cokolwiek odczytuje tę wartość dalej – wyświetlacz, pakiet, czy oba – widzi fałszywą liczbę zamiast prawdziwej.
+</FAQItem>
+
+<FAQItem question="Czy Spoofer to ten sam moduł co Ping Spoof czy FPS Spoofer?">
+Nie. Ping Spoof i FPS Spoofer to konkretne moduły, które celują w pojedyncze, nazwane wartości. Spoofer to oddzielna, bardziej ogólna pozycja, której dokładna celowana wartość nie jest udokumentowana.
+</FAQItem>
+
+<FAQItem question="Który klient posiada moduł Spoofera?">
+Spoofer widoczny jest w Rose. Nie zarejestrowano dalszych szczegółów dotyczących wartości, którą on nadpisuje.
+</FAQItem>
+
+<FAQItem question="Czy spoofer jest wykrywany przez antywiry?">
+Zależy to całkowicie od wartości, którą nadpisuje. Spoofer ograniczony do lokalnego wyświetlacza nie może być wykryty, ponieważ nic nie opuszcza klienta. Ten, który zmienia wartość wysyłaną do serwera, może zostać wykryty, jeśli ten serwer ją sprawdza.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Do której szerszej kategorii moduły takie jak ten należą." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Subtelność jako cel projektowy, a nie tylko pojedynczy moduł." },
+  { href: "/pl/learn/what-is-velocity-anti-knockback", label: "Czym jest Prędkość (ochrona przed odrzutem)?", description: "Kolejny moduł, który nadpisuje wartość, którą serwer ma kontrolować." },
+]} />
+
+<CTA href="/pl/purchase">Opal nadaje nazwom swoich nadpisywanych elementów nazwy wskazujące, co dokładnie obejmują. Zobacz listę.</CTA>

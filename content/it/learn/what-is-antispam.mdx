@@ -1,0 +1,70 @@
+---
+title: Cos'è l'AntiSpam in Minecraft? (Spiegazione del filtro chat)
+description: I filtri AntiSpam ripetono e inondano automaticamente la finestra di chat di Minecraft con messaggi spammosi, mantenendo la conversazione reale leggibile durante i picchi di spam.
+excerpt: I bot spam non hanno diritto di voto nella tua finestra di chat. L'AntiSpam filtra silenziosamente l'ondata di messaggi, così puoi effettivamente leggere quello che le persone stanno scrivendo.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Ti sanziona AntiSpam?
+    a: No. AntiSpam modifica solo il modo in cui i messaggi della chat che hai già ricevuto vengono visualizzati sul tuo schermo. Niente viene inviato al server in modo diverso, quindi non c'è alcun pacchetto o azione che un anticheat possa segnalare.
+  - q: Cosa AntiSpam considera spam?
+    a: Le righe ripetute in rapida successione o lanciate come parte di un flusso, il tipo di chiacchiere utilizzate da spam bot e macro per seppellire la vera conversazione, sono ciò che il modulo filtra dall'aspetto.
+  - q: AntiSpam blocca i messaggi impedendone l'arrivo?
+    a: No. I messaggi della chat continuano ad arrivare dal server esattamente come al solito. AntiSpam decide semplicemente quali renderizzare nella tua finestra di chat visibile.
+  - q: Si trova AntiSpam solo in Wurst?
+    a: È documentato come una funzionalità specifica di Wurst. La filtratura della chat è abbastanza semplice da poter essere replicata da altri client, ma questa è quella in cui possiamo confermarla.
+---
+
+<KeyTakeaways>
+- AntiSpam è un modulo di chat che filtra messaggi ripetuti o di flooding dalla finestra di chat di Minecraft, per evitare che la vera conversazione venga sepolta.
+- Funziona esclusivamente sul client, decidendo cosa visualizzare dopo che il server ha inviato il messaggio.
+- Non invia nulla al server e non interferisce mai con il movimento o il combattimento, quindi non c'è rischio di rilevamento.
+- Documentato come funzionalità di Wurst.
+</KeyTakeaways>
+
+AntiSpam è un modulo di chat che filtra messaggi ripetuti o di flooding dalla finestra di chat di un giocatore, in modo che lo spam non sommerga i messaggi a cui ti interessa davvero. È un filtro di visualizzazione, non una funzionalità di rete: decide cosa ti viene mostrato localmente, non cosa viene inviato al server o visto da altri. Wurst è il client dove questo è documentato come modulo denominato.
+
+Se hai mai visto la chat di un server affollato inondata da un bot che ripete la stessa riga venti volte al secondo, già conosci il problema che AntiSpam esiste per risolvere.
+
+## Come funziona
+
+AntiSpam si interpone nel flusso dei messaggi di chat che arrivano al client e trattiene quelli che sembrano spam: righe ripetute in rapida successione o un diluvio di messaggi inviati troppo vicini tra loro per essere ovviamente automatizzati. Il filtraggio avviene dopo che il server ha già inviato il messaggio e prima che venga visualizzato nella finestra di chat. Nulla cambia nei dati sottostanti, solo ciò che viene disegnato sullo schermo.
+
+Essendo puramente una decisione di rendering, AntiSpam non invia mai nulla al server. Non c'è pacchetto da ispezionare, nessun timing da analizzare e nessuna interazione con il mondo di gioco. È la stessa categoria di funzionalità di un pulsante di disattivazione dell'audio, solo più intelligente nel decidere cosa disattivare.
+
+## È sicuro da usare
+
+AntiSpam non comporta alcun rischio di rilevamento significativo. Non altera mai ciò che il client invia, non programma mai un'azione e non interferisce mai con il movimento o il combattimento, quindi un anticheat lato server non ha nulla a cui paragonarlo perché non ha fatto nulla che il server possa nemmeno osservare. Appartiene alle altre funzionalità di convenienza silenziose e solo visuali, non a quelle progettate per manipolare ciò che accade effettivamente nel mondo di gioco.
+
+Questa è una categoria di rischio genuinamente diversa rispetto ai moduli che modificano i tuoi input o output. Se una funzionalità modifica solo ciò che viene renderizzato localmente, non esiste alcuna azione visibile al server a cui un screenshare o un log anticheat possa fare riferimento.
+
+<Callout variant="tip" title="Dove si colloca in Opal">
+Opal non include attualmente un modulo AntiSpam dedicato, questa è una funzionalità specificamente poco documentata. La lista dei moduli di Opal si concentra principalmente su combattimento, movimento e utilità visiva, le categorie in cui un millisecondo fa davvero la differenza. Una finestra di chat più pulita sarebbe un'aggiunta gradita; semplicemente non è la battaglia che Opal sta scegliendo.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+<FAQItem question="AntiSpam può causare un ban?">
+No. AntiSpam modifica solo il modo in cui i messaggi della chat già ricevuti vengono visualizzati sul tuo schermo. Nulla viene inviato al server in modo diverso, quindi non ci sono pacchetti o azioni che un anticheat possa segnalare.
+</FAQItem>
+<FAQItem question="Cosa conta come spam per AntiSpam?">
+Il modulo filtra dalla visualizzazione le righe ripetute in rapida successione o inviate come parte di un'inondazione, il tipo di spam della chat utilizzato da bot e macro per seppellire le vere conversazioni.
+</FAQItem>
+<FAQItem question="AntiSpam blocca l'arrivo dei messaggi?">
+No. I messaggi della chat arrivano comunque dal server esattamente come al solito. AntiSpam decide semplicemente quali renderizzare nella tua finestra di chat visibile.
+</FAQItem>
+<FAQItem question="AntiSpam si trova solo in Wurst?">
+È documentato come una funzionalità specifica di Wurst. La filtrazione della chat di questo tipo è abbastanza semplice che altri client potrebbero costruirla, ma questo è quello in cui possiamo confermarla.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria Antispam e funzionalità simili vi risiedono." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Un tipo diverso di client utility, costruito attorno all'idea di rimanere invisibili." },
+  { href: "/it/learn/what-is-scaffold", label: "Cos'è Scaffold?", description: "Un modulo all'estremità opposta dello spettro del rischio: visibile e rilevabile sul server." }
+]} />
+
+<CTA href="/it/purchase">Scopri cosa viene effettivamente spedito nella lista dei moduli di Opal.</CTA>

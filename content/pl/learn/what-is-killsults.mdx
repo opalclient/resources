@@ -1,0 +1,81 @@
+---
+title: Czym są zabójstwa w Minecraft? Wyjaśnienie modułu
+description: Killsults to moduł klienta Minecraft, który automatycznie wysyła złośliwą wiadomość na czacie w momencie zabójstwa. Oto jak działa mechanizm wyzwalania i czy warto go używać.
+excerpt: "Jedno zabójstwo, jedno automatyczne obelżywe hasło. Killsults wysyła zdefiniowane obelżenie do czatu w momencie trafienia: bez pisania, bez przewagi w walce, tylko dodatkowy cios."
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Killsulty wpływają w jakikolwiek sposób na walkę?
+    a: Nie. Killsults wysyła wiadomość czatu dopiero po fakcie zabójstwa. Nie wpływa na rejestrację trafień, zasięg ani czas reakcji.
+  - q: Czy system antycheat może wykryć Killsulty?
+    a: Nie bezpośrednio. Wiadomość, którą wysyła, to zwykły pakiet czatu, nie do odróżnienia na poziomie protokołu od wiadomości wpisanej ręcznie, więc nie ma nic, co kontrola na poziomie pakietu mogłaby wychwycić.
+  - q: Jak wygląda tekst złośliwej wiadomości Killsults?
+    a: Pochodzi z predefiniowanej listy wbudowanej w moduł, a nie z tekstu wpisywanego na bieżąco. Dokładne sformułowanie zależy od implementacji klienta.
+  - q: Czy Killsults to to samo co głosiciel serii zabójstw?
+    a: Są bliskimi kuzynami. Oba to zautomatyzowane moduły czatu powiązane z wydarzeniem kończącym grę, ale Killsults przedstawiany jest jako obelga skierowana do gracza, który zginął, a nie neutralny licznik serii.
+  - q: Które dokumenty klientów likwiduje Killsults?
+    a: Wytrwałość, klient-widmo oparty na obszernej bazie modułów skupionych na walce, rejestruje Killsulty jako element tej oferty.
+---
+
+<KeyTakeaways>
+
+- Killsults to moduł klienta, który wysyła zdefiniowany wcześniej tekst z szyderczym komunikatem natychmiast po zabiciu przeciwnika, bez potrzeby pisania.
+- Podłącza się do tego samego zdarzenia zabicia, które klient już śledzi, a następnie wysyła szyderkę jako zwykły pakiet czatu.
+- Jest to czysto społecznościowe: nie wpływa na zasięg, rotację ani czas, więc nie daje żadnej przewagi w walce.
+- Anticheaty nie mogą go oznaczyć na poziomie pakietu. Prawdziwe ryzyko to człowiek lub filtr czatu, który zauważy wzorzec.
+
+</KeyTakeaways>
+
+Killsults to moduł klienta Minecraft, który automatycznie wysyła złośliwą wiadomość do czatu w momencie zabójstwa. Nazwa mówi sama za siebie: "kill" plus "insult". Nic do wpisania, nic do kliknięcia. Klient wybiera gotowy tekst i wysyła go do czatu natychmiast po zarejestrowaniu zabójstwa, zanim zdążysz puścić myszkę.
+
+## Jak działa wyzwalacz
+
+Killsults nasłuchuje tego samego zdarzenia zabójstwa, które klient śledzi wewnętrznie: momentu, w którym twoje obrażenia kończą życie innego gracza. Gdy to zdarzenie wystąpi, moduł pobiera wiadomość z gotowej listy złośliwości i wysyła ją bezpośrednio do czatu. Nie musisz jej wpisywać ani niczego klikać, żeby ją wysłać. To, co dociera do serwera, to zwykły pakiet czatu, taki sam jak ten, który generuje każdy gracz ręcznie, ponieważ strukturalnie jest dokładnie taki.
+
+Killsults jest udokumentowany jako jeden z modułów w Tenacity, ghost client opartym na głębokiej, skoncentrowanej na walce obsadzie, a nie na jednej flagowej funkcji. Znajduje się tam jako mały, jednopurpose'owy dodatek obok modułów, które faktycznie zmieniają przebieg walki. Atrakcyjność jest całkowicie społeczna: złośliwość, która trafia w momencie zabójstwa, uderza inaczej niż ta wpisana kilka sekund później, po tym, jak moment już minął. Samodzielnie Killsults nie daje żadnej przewagi w walce. Zabójstwo musi się najpierw wydarzyć, zanim moduł będzie miał coś do powiedzenia.
+
+## Czy jest bezpieczne do użycia
+
+Killsults nie niesie ze sobą żadnego ryzyka wykrycia, które wiąże się z modułami walki lub ruchu. Nie wpływa na zasięg, rotacje, czasowanie ani ścieżki – elementy, które serwerowy anticheat ma za zadanie sprawdzać, więc na poziomie pakietów nie ma nic, co mogłoby zostać oznaczane jako podejrzane. Wiadomość, którą wysyła, jest nierozpoznawalna od wiadomości, którą sam wpiszesz, ponieważ jest zbudowana z tego samego systemu komunikacji.
+
+Jedynym istniejącym ryzykiem jest ryzyko społeczne, a nie techniczne. Obraza, która wystrzeliwuje natychmiast po każdej eliminacji, sformułowana w ten sam sposób za każdym razem, zaczyna wyglądać na zautomatyzowaną dla każdego, kto zwraca uwagę. Na serwerach, które od razu blokują zmodyfikowane klienty, taki rodzaj uwagi może skłonić do bliższego przyjrzenia się wszystkim innym Twoim działaniom. Niektóre serwery również uruchamiają własne filtry antyspamowe lub filtry toksyczności, które sprawdzają powtarzające się wiadomości o eliminacjach, niezależnie od tego, jak te wiadomości zostały wysłane. Żaden z tych filtrów nie wykrywa Killsults jako takiego. Oba to osoba lub filtr zauważają wzorzec.
+
+<Callout variant="tip" title="Nie na liście Opal, celowo">
+Opal nie dostarcza modułu przechwałek w stylu Killsults, a to nie jest luka, która kogoś trzyma w napięciu. Moduł nie daje żadnej przewagi w walce ani w ruchu; cały sens polega na dokuczeniu temu, kogo właśnie zabito. Lista modułów Opal skłania się ku rzeczom, które zmieniają wynik walki, a nie ku rzeczom, które zmieniają jej atmosferę.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Killsults wpływa w jakikolwiek sposób na walkę?">
+Nie. Wysyła jedynie wiadomość na czacie po tym, jak już doszło do zabójstwa. Nie zmienia rejestracji trafień, zasięgu ani czasu reakcji w żaden sposób.
+</FAQItem>
+
+<FAQItem question="Czy antywirus może wykryć Killsulty?">
+Bezpośrednio nie. Wiadomość, którą wysyła, jest zwykłym pakietem czatu, nie do odróżnienia na poziomie protokołu od wiadomości, którą sam wpiszesz, więc nie ma niczego zautomatyzowanego, co mogłoby wychwycić taki pakiet.
+</FAQItem>
+
+<FAQItem question="Jak wygląda komunikat obraźliwy Killsults?">
+Pochodzi z predefiniowanej listy wbudowanej w moduł, a nie jest wpisywany na bieżąco. Dokładne sformułowanie zależy od implementacji klienta.
+</FAQItem>
+
+<FAQItem question="Czy Killsults to to samo co ogłaszać kill-streak?">
+Są bliskimi kuzynami. Oba to zautomatyzowane moduły czatu powiązane z wydarzeniem zabójstwa, ale Killsults przedstawiany jest jako obelga skierowana do osoby, która zginęła, a nie neutralny licznik serii.
+</FAQItem>
+
+<FAQItem question="Które dokumenty Killsults?">
+Tenacity, fikcyjny klient oparty na obszernej bazie modułów skupionych na walce, wymienia Killsults jako część tej oferty.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kategoria klientów Killsults nadchodzi." },
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Moduł bojowy, który w rzeczywistości decyduje o walce, jest komentowany przez Killsults." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szersza kategoria, do której te moduły należą." },
+]} />
+
+<CTA href="/pl/purchase">Pominij złośliwości, wybierz moduły, które naprawdę wygrywają bitwę.</CTA>

@@ -1,0 +1,70 @@
+---
+title: Czym jest AntiSpam w Minecraft? (Wyjaśnienie filtra czatu)
+description: Filtry antyspamowe automatycznie usuwają powtarzające się i zalewające czat wiadomości z okna czatu Minecraft, zachowując czytelność prawdziwych rozmów podczas ataków spamu.
+excerpt: Spamboty nie mają głosu w Twoim oknie czatu. AntiSpam cicho filtruje zalew, dzięki czemu możesz faktycznie przeczytać, co piszą ludzie.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy AntiSpam skutkuje banem?
+    a: Nie. AntiSpam zmienia jedynie sposób wyświetlania już odebranych wiadomości czatu na Twoim ekranie. Nic nie jest wysyłane do serwera inaczej, więc nie ma żadnego pakietu ani działania, które system anty-cheat mógłby oznaczyć.
+  - q: Czym jest spam dla AntiSpam?
+    a: Powtarzające się ciągi zdań, wystrzeliwane jak fala, rodzaj spamu, z którego korzystują boty i makra, aby zagłuszyć prawdziwą rozmowę – to właśnie filtruje moduł, ukrywając je z widoku.
+  - q: Czy AntiSpam uniemożliwia dotarcie wiadomości?
+    a: Nie. Wiadomości z czatu nadal docierają z serwera dokładnie tak, jak zwykle. AntiSpam po prostu decyduje, które z nich warto wyświetlić w Twoim widocznym oknie czatu.
+  - q: Czy AntiSpam występuje tylko w Wurst?
+    a: Zostało to udokumentowane jako specyficzna funkcja Wurst. Filtrowanie czatu w ten sposób jest na tyle proste, że inni klienci mogliby zbudować coś podobnego, ale to jest ten przypadek, w którym możemy to potwierdzić.
+---
+
+<KeyTakeaways>
+- AntiSpam to moduł czatu, który filtruje powtarzające się lub zalewowe wiadomości z okna czatu Minecraft, aby prawdziwa rozmowa nie była zasłonięta.
+- Działa tylko po stronie klienta, decydując, co renderować po tym, jak serwer dostarczy wiadomość.
+- Nie wysyła niczego z powrotem do serwera i nigdy nie ingeruje w ruch ani walkę, więc nie ma ryzyka wykrycia.
+- Udokumentowany jako funkcja Wurst.
+</KeyTakeaways>
+
+AntiSpam to moduł czatu, który filtruje powtarzające się lub zalewowe wiadomości z okna czatu gracza, aby spam nie zasłaniał wiadomości, które naprawdę Cię interesują. Jest to filtr wyświetlania, a nie funkcja sieciowa: decyduje, co jest wyświetlane lokalnie, a nie co jest wysyłane do serwera lub widziane przez kogoś innego. Wurst to klient, w którym jest udokumentowany jako nazwany moduł.
+
+Jeśli kiedykolwiek obserwowałeś zalew chatu na zatłoczonym serwerze przez bota spamującego tę samą linię dwadzieścia razy na sekundę, już wiesz, jaki problem ma rozwiązać AntiSpam.
+
+## Jak to działa
+
+AntiSpam osiada na strumieniu wiadomości czatu docierających do klienta i zatrzymuje te, które wyglądają jak spam: linie powtarzane w szybkim tempie lub zalew wiadomości wysłanych blisko siebie, aby było oczywiste, że są zautomatyzowane. Filtrowanie odbywa się po tym, jak serwer już dostarczył wiadomość i przed jej wyrenderowaniem w oknie czatu. Nic nie zmienia się w danych bazowych, tylko to, co jest rysowane na Twoim ekranie.
+
+Ponieważ jest to czysta decyzja dotycząca renderowania, AntiSpam nigdy nic nie wysyła z powrotem do serwera. Nie ma pakietu do sprawdzenia, nie ma czasu do odcisku palca i nie ma żadnej interakcji z światem gry. Jest to funkcja tej samej kategorii co przycisk wyciszenia, tylko mądrzejszy w decydowaniu, co wyciszyć.
+
+## Czy jest bezpieczne do użycia
+
+AntiSpam nie niesie ze sobą żadnego istotnego ryzyka wykrycia. Nigdy nie modyfikuje tego, co wysyła klient, nigdy nie ustala harmonogramu działania i nigdy nie ingeruje w ruch ani walkę, więc antywirus serwerowy nie ma nic, z czym mógłby je porównać, ponieważ nie zrobił niczego, co serwer mógłby zaobserwować. Należy go traktować jak pozostałe ciche, wyłącznie wyświetlające informacje funkcje, a nie jak coś, co ma na celu manipulowanie tym, co faktycznie dzieje się w świecie gry.
+
+To zupełnie inna kategoria ryzyka niż moduły, które zmieniają Twoje dane wejściowe lub wyjściowe. Jeśli funkcja edytuje tylko to, co jest renderowane lokalnie, nie ma żadnej akcji widocznej dla serwera, na którą mogłaby wskazać przechwytywanie ekranu lub log antywirusowy.
+
+<Callout variant="tip" title="Gdzie to się znajduje w Opalu">
+Opal na razie nie dostarcza dedykowanego modułu Antispam, ta funkcja jest szczególnie słabo udokumentowana. Lista modułów Opla mocno skupia się na walce, ruchu i użyteczności wizualnej – kategoriach, w których milisekunda naprawdę ma znaczenie. Czystsze okno czatu to miły dodatek; to po prostu nie jest walka, którą Opal wybiera.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Czy AntiSpam skutkuje zbanowaniem?">
+Nie. AntiSpam jedynie zmienia sposób wyświetlania już odebranych wiadomości czatu na Twoim ekranie. Nic nie jest wysyłane do serwera inaczej, więc nie ma żadnego pakietu ani działania, które system antycheat mógłby wychwycić.
+</FAQItem>
+<FAQItem question="Co AntiSpam uznaje za spam?">
+Linie powtarzane w szybkim tempie lub wysyłane jako część zalewu, czyli taki spam czatu, którego używają boty i makra, aby zagłuszyć prawdziwą rozmowę – to jest to, co moduł filtruje z widoku.
+</FAQItem>
+<FAQItem question="Czy AntiSpam blokuje przybycie wiadomości?">
+Nie. Wiadomości czatu nadal docierają z serwera dokładnie tak, jak zwykle. AntiSpam po prostu decyduje, które z nich warto wyświetlić w Twoim widocznym oknie czatu.
+</FAQItem>
+<FAQItem question="Czy AntiSpam występuje tylko w Wurst?">
+Jest udokumentowany jako funkcja Wurst. Filtrowanie czatu w ten sposób jest na tyle proste, że inni klienci mogliby zbudować coś podobnego, ale to jest ten, w którym możemy to potwierdzić.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Kategoria AntySpam i podobne funkcje w niej funkcjonują." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Inna odmiana klienta narzędziowego, zaprojektowana z myślą o niezauważalności." },
+  { href: "/pl/learn/what-is-scaffold", label: "Co to jest Scaffold?", description: "Moduł znajdujący się na przeciwnym końcu spektrum ryzyka: widoczny i wykrywalny dla serwera." }
+]} />
+
+<CTA href="/pl/purchase">Zobacz, co faktycznie znajduje się na liście modułów Opal.</CTA>

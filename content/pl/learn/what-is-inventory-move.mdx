@@ -1,0 +1,85 @@
+---
+title: Co to jest przenoszenie zapasów w Minecraft? Wyjaśnienie modułu
+description: Przesuwanie ekwipunku pozwala na dalsze poruszanie się, podczas gdy skrzynia, piec lub ekran rzemiosła pozostają otwarte, zamiast zamrozić grę. Oto jak to działa i dlaczego jest ryzykowne.
+excerpt: Wanilia zamraża cię w momencie otwarcia ekranu ekwipunku. Przesuwanie ekwipunku odmawia, a to odrzucenie zdradza wszystko.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie zmienia ruch zapasów?
+    a: Zapobiega zamrożeniu ruchu klienta w momencie otwarcia ekranu typu inwentarza, takiego jak skrzynia lub stół rzemieślniczy. Wejście ruchu nadal jest przetwarzane, zamiast być ignorowane.
+  - q: Czy Praca z Zapasem działa na każdym serwerze?
+    a: Niekoniecznie. Czy wynikowy ruch zostanie zaakceptowany, zależy od tego, jak serwer, oraz wszelkie systemy anticheat, które on uruchamia, weryfikują pozycję gracza, gdy otwarty jest ekran ekwipunku.
+  - q: Czy ruch zapasów jest wykrywalny?
+    a: Możliwe, że anticheaty to zasygnalizują, ponieważ poruszanie się podczas otwartego pojemnika to coś, czego nie może zrobić niezmodyfikowany klient. Wykrywanie zależy od konkretnego serwera i używanego anticheatu.
+  - q: Klienci, którzy wysłali Zlecenie Przesunięcia Stanu?
+    a: Udokumentowano to w „Fan”, „Tenacity” i „Rose”, między innymi.
+  - q: Czy Przesunięcie Zapasu to moduł bojowy?
+    a: Nie, jest to sklasyfikowane jako ruch. Ma znaczenie w walce, ponieważ eliminuje wymuszone unieruchomienie podczas otwierania pojemnika, ale to, co się zmienia, to twój ruch, a nie twoje ataki.
+---
+
+<KeyTakeaways>
+
+- Przesunięcie Inwentarza to moduł ruchu, który pozwala Ci nadal poruszać się, biegać lub zmieniać pozycję, gdy otwarte jest skrzynię, piec lub ekran rzemiosła, zamiast zamarzać, jak to wymuszają ustawienia domyślne.
+- Nadpisuje blokadę ruchu na ekranie inwentarza klienta, dzięki czemu Twoja pozycja jest stale aktualizowana, gdy ekran pozostaje otwarty.
+- Czy ten ruch zostanie zaakceptowany, zignorowany, czy oznaczony, zależy całkowicie od tego, jak serwer i wszelkie systemy anticheat sprawdzają pozycję podczas otwartego ekranu.
+- Opal udostępnia go jako Przesunięcie Inwentarza, z zastrzeżeniem używania na własne ryzyko, ponieważ jest wykrywalny.
+
+</KeyTakeaways>
+
+Inventory Move to moduł ruchu, który pozwala Ci poruszać się, gdy otwarte są ekrany związane z ekwipunkiem, skrzynia, piec lub stół rzemieślniczy. Standardowy Minecraft blokuje Cię w miejscu natychmiast po otwarciu jednego z tych ekranów; możesz ponownie ruszyć dopiero po jego zamknięciu. Inventory Move usuwa ten blok, działając po stronie klienta, dzięki czemu polecenia ruchu są stale przetwarzane, niezależnie od tego, co jest otwarte przed Tobą. Sortuj skrzynię bez stania w miejscu i narażania się. Uzupełniaj zapasy ze stołu rzemieślniczego w trakcie walki. Kontynuuj uniki podczas sprawdzania, co nosisz. Czy ten ruch przetrwa kontakt z serwerem, to już zupełnie inne pytanie.
+
+## Jak działa Inventory Move
+
+Inventory Move nadpisuje blokadę ruchu klienta dla ekranów związanych z ekwipunkiem. W standardowej rozgrywce otwarcie skrzyni, pieca lub stołu rzemieślniczego powoduje, że gra przechodzi w stan, w którym ignorowane są polecenia ruchu, aż do zamknięcia ekranu. Moduł przechwytuje ten stan i nadal przetwarza polecenia ruchu, dzięki czemu Twoja pozycja jest stale aktualizowana po stronie klienta, dopóki ekran jest otwarty.
+
+Żadna z tych rzeczy nie gwarantuje nic poza Twoim własnym komputerem. Ruch podczas otwartego kontenera to stan, którego serwery vanilla nie oczekują, ponieważ gra bazowa zakłada, że to w ogóle nie może się zdarzyć. Co serwer robi z wynikającymi z tego aktualizacjami pozycji – akceptuje je, ignoruje je, czy oznaczają je jako podejrzane – zależy całkowicie od tego, jak on, i jakikolwiek anticheat, który działa, weryfikuje ruch w stosunku do stanu otwartego ekranu. To zależy od serwera z założenia, a nie od przełącznika ustawień wewnątrz modułu. Zachowanie to wystąpiło w klientach takich jak Fan, Tenacity i Rose.
+
+Odwołanie jest proste: vanilla wymusza moment całkowitego bezruchu za każdym razem, gdy otwierasz kontener, a w PvP lub podczas pościgu, stójka to dokładnie moment, w którym zostajesz trafiony. Inventory Move po prostu odmawia oddania tej okazji.
+
+## Czy jest to bezpieczne w użyciu?
+
+Inventory Move znajduje się bliżej ryzykownego końca spektrum niż kosmetyczna, wyłącznie po stronie klienta modyfikacja. Zmienia zachowanie, które vanilla traktuje jako stałe: brak ruchu podczas otwartego ekranu kontenera. Dowolny serwer lub anticheat, który sprawdza, czy pozycja gracza uległa zmianie w tym oknie, może rozsądnie uznać tę zmianę za podejrzaną, ponieważ legalny klient vanilla nie powinien być w stanie jej wygenerować.
+
+Czy dany system antycheat faktycznie coś wykrywa i jak rygorystycznie, zależy od jego implementacji. Nie ma tutaj uniwersalnej odpowiedzi. Gracze, którzy go używają, powinni zakładać, że mogą zostać oznaczonymi, zamiast zakładać, że przejdą niezauważeni.
+
+<Callout variant="tip" title="Przeniesienie zapasów w Opalu">
+Opal również dostarcza ten moduł, skategoryzowany pod tą samą nazwą: Przeniesienie zapasów. Opis katalogowy jest równie prosty, co sam moduł: „Pozwala poruszać się podczas otwartego ekwipunku”. Taka sama funkcja omijająca zamrożenie, takie samo ryzyko związane z użytkowaniem, jak wszędzie indziej, gdzie jest dostarczany.
+</Callout>
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona opisuje moduł w sposób ogólny, abyś wiedział, co ten termin oznacza. Nazewnictwo i dokładne zachowanie różnią się w zależności od klienta, a przesuwanie się podczas ekranu inwentarza to wzorzec, którego żaden niezmieniony klient nie jest w stanie wygenerować – dokładnie tego szukają serwery. Opal klasyfikuje użycie funkcji Przesuń Inwentarz na własne ryzyko z tego powodu: jest ono wykrywalne i może skutkować zablokowaniem konta, tak jak na każdym kliencie, który to udostępnia.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co właściwie zmienia funkcja Przesunięcie Zapasu?">
+Zapobiega zawieszaniu się klienta w momencie otwarcia ekranu związanego z zapasem, takiego jak skrzynia lub stół rzemieślniczy. Wejście ruchu nadal jest przetwarzane, zamiast być ignorowane.
+</FAQItem>
+
+<FAQItem question="Czy funkcja Przesuń Inwentarz działa na każdym serwerze?">
+Niekoniecznie. Czy wynikowe przesunięcie zostanie zaakceptowane, zależy od tego, jak serwer, oraz oprogramowanie anticheat, które on uruchamia, weryfikuje pozycję gracza, gdy otwarty jest ekran inwentarza.
+</FAQItem>
+
+<FAQItem question="Czy wykrywalne jest przenoszenie zapasów?">
+Możliwe, że anticheaty to zasygnalizują, ponieważ przemieszczanie się podczas otwartego kontenera to coś, czego nie może zrobić niezmodyfikowany klient. Wykrywanie zależy od konkretnego serwera i używanego anticheatu.
+</FAQItem>
+
+<FAQItem question="Klienci, którzy wysłali Zlecenie Przesunięcia Stanu?">Udokumentowano to m.in. w pracach Fan, Tenacity i Rose</FAQItem>
+
+<FAQItem question="Czy Przesunięcie Zapasu to moduł bojowy?">
+Nie, jest sklasyfikowane jako ruch. Ma znaczenie w walce, ponieważ eliminuje przymusowe unieruchomienie podczas otwierania skrzyni, ale zmienia ono twój ruch, a nie twoje ataki.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-scaffold", label: "Co to jest Scaffold?", description: "Kolejny moduł ruchu oparty na omijaniu tego, co normalnie zabronione w wersji podstawowej." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kategoria skrytobójstwa oparta na pozostawaniu niezauważonym podczas uruchamiania modułów takich jak ten." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szersza kategoria, do której te moduły należą." },
+]} />
+
+<CTA href="/pl/purchase">Przesunięcie Inwentarza Opal robi dokładnie to, co sugeruje nazwa: umożliwia przesuwanie się, gdy inwentarz jest otwarty. Zobacz pozostałe elementy zestawu.</CTA>

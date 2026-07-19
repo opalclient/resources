@@ -1,0 +1,74 @@
+---
+title: FabricAPIとは？（Minecraft、2026年）
+description: FabricAPIは、ほとんどのFabricMODが依存する共有ライブラリです。それが何をするのか、ローダーからなぜ独立しているのか、そしてほとんど全てのMODがなぜ必要とするのかを以下に説明します.
+excerpt: FabricAPIは、ほとんどすべてのFabricMODが依存する共有ライブラリです。MODが起動時にクラッシュする場合、通常はFabricAPIが不足しているか、バージョンが古いことが原因です.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Frameworks
+author: trq
+faqs:
+  - q: Fabric API は必要ですか？?
+    a: 多くのMODでは、そうです。それに依存するMODは、それがなければロードされません。いくつかのスタンドアロンMODは不要ですが、インストールするのが安全なデフォルトです.
+  - q: どこで手に入りますか？?
+    a: 公式Fabricチャンネルと、いつものModホストからのアナウンスです。Minecraftのバージョンに合ったビルドを選んでください.
+  - q: ローダーに組み込まれていないのはなぜですか？?
+    a: ローダーは小さく保ち、高速にアップデートできるように設計されています。APIは別々に進化させることができます。これはFabricにおける意図的な設計上の選択です.
+---
+
+<KeyTakeaways>
+
+- Fabric APIは、ほとんどのFabric製MODが依存するフックとヘルパーの共有ライブラリです。
+- それは意図的にローダーとは別に設計されています。小さなローダーは迅速にアップデートできますが、APIは独自に進化します。
+- イベント、ネットワーク、レジストリ、レンダリングヘルパーなど、多くのMODが依存する機能を提供します。
+- MODが起動時にクラッシュする原因として、Fabric APIの欠落やバージョンが古いことが最も一般的な理由です.
+
+</KeyTakeaways>
+
+ファブリックAPIは、ほとんどの[Fabric](https://fabricmc.net/)製MODが依存する、フックやヘルパーの共有ライブラリです。Fabricのコアローダーは意図的に小さく設計されているため、APIがその不足を補っています。イベント、ネットワーク、レジストリヘルパー、レンダリングユーティリティなどです。Fabric製MODが起動時にクラスが見つからないエラーでクラッシュした場合、通常はFabric APIが欠落しているか、バージョンが古いことが原因です.
+
+<Callout variant="info" title="どこ Opal 合う">OpalはFabricModなので、FabricAPIも必要です。セットアップガイド ([/en/docs/setup](https://example.com/en/docs/setup)) に両方のインストール方法が記載されています</Callout>
+
+## なぜローダーから分離されているのか
+
+Fabric は意図的にシステムを2つに分割します。ローダーは小さく安定したまま、Fabric API がより大きく、変化の速い共有インターフェースのセットを同梱します。この分割により、ローダーは Minecraft の新しいバージョンに迅速にアップデートでき、API は独自のペースで進化できます。
+
+## 何を提供しているのか
+
+API は、多くの MOD が必要とすることを、共通でバージョン安定した方法で行うための手段を MOD に提供します。
+
+- ライフサイクルとゲームプレイイベントへのフック
+- カスタムパケットのためのネットワークヘルパー
+- アイテム、ブロック、エンティティの追加のためのレジストリとコンテンツヘルパー
+- MOD 間で共有されるレンダリングとリソースヘルパー
+
+これがないと、すべての MOD がこれらの機能を再発明し、互いに競合してしまいます。
+
+## 必要なものはありますか？
+
+ほとんどの場合、そうです。ほとんどの Fabric MOD は Fabric API を依存関係としてリストしているため、他の MOD とともに一度インストールするだけです。Minecraft のバージョンに合わせてバージョンを一致させてください。
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Fabric API は必要ですか？">
+ほとんどのMODでは、必要です。Fabric API に依存するMODは、それがなければロードされません。ごく一部の独立したMODは不要ですが、インストールしておく方が安全です。
+</FAQItem>
+
+<FAQItem question="どこで入手できますか？">
+公式のFabricチャンネルと、いつものMOD配信サイトから入手できます。必ずMinecraftのバージョンに合ったものを選択してください。
+</FAQItem>
+
+<FAQItem question="なぜローダーに組み込まれていないのですか？">
+ローダーを小さく保ち、高速にアップデートできるようにするためです。また、共有APIは別々に進化させます。Fabricにおける意図的な設計上の選択です。
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/ja/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "2つのMODローダーの比較." },
+  { href: "/ja/learn/how-to-install-a-fabric-mod", label: "Fabric Mod のインストール方法", description: "インストール手順の中で、Fabric APIがどのように組み込まれるか." },
+  { href: "/ja/learn/what-is-a-minecraft-mod-loader", label: "何ですか Minecraft mODローダー?", description: "APIが依存するローダー." },
+]} />
+
+<CTA href="/ja/purchase">OpalFabricクライアントを8.99ドルで手に入れよう</CTA>

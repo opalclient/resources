@@ -1,0 +1,73 @@
+---
+title: Minecraft'ta Özel Model Nedir? Modül Açıklaması
+description: Özel Model, cildinizi veya oyuncu modelinizi yalnızca kendi ekranınızda değiştiren görsel bir Minecraft modülüdür; çarpışma kutuları, menzil veya tespit üzerinde hiçbir etkisi yoktur.
+excerpt: Özel Model, karakterinizin kendi ekranınızdaki görünümünü değiştirir, başka bir şey değil. Hitbox değişikliği yok, ekstra paket yok, sadece Mojang size verdiği deriden farklı bir görünüm.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Özel Model, oyun avantajı sağlıyor mu?
+    a: Hayır, sadece oyuncu modelinizin veya görünümünüzün yerel olarak nasıl görüntülendiğini değiştirir. Vuruş kutularını, menzili, hareketliliği veya sunucu tarafından takip edilen hiçbir şeyi etkilemez, bu nedenle herhangi bir savaş veya hareket avantajı sağlamaz.
+  - q: Özel modelimi diğer oyuncular görebilir mi?
+    a: Genellikle hayır. Minecraft, derileri her istemci için ayrı ayrı oluşturur, bu yüzden kendi oluşturmanızı değiştirmek başkalarının ekranına bu değişikliği yansıtmaz. Etki genellikle yalnızca size görünür.
+  - q: Özel model antitricks sistemleri tarafından tespit edilebilir mi?
+    a: Neredeyse hiç. Hareketi, dövüşü veya sunucuya gönderilen paketleri etkilemediği için, sunucu tarafı bir antichi̇at'ın işaretleyebileceği neredeyse hiçbir şey yoktur. Tespit riski, dövüş veya hareket modüllerine göre çok daha düşüktür.
+  - q: Özel Model, kaynak paketiyle aynı şey mi?
+    a: Tam olarak değil. Bir kaynak paketi sunucudan gelir ve her bağlı oyuncunun gördüğünü değiştirir. Özel Model, yerel olarak oluşturmayı değiştiren istemci tarafı bir modüldür, kaynak paketi gerektirmez.
+---
+
+<KeyTakeaways>
+
+- Özel Model, bir oyuncunun oyun içindeki modelini veya görünümünü özel bir modelle değiştiren görsel bir modüldür.
+- Sadece yerel olarak çizilen şeyleri değiştirir, hitbox'ları, hareketleri veya sunucuya gönderilen verileri etkilemez.
+- Diğer oyuncular değişimi göremez çünkü Minecraft, görünümü sunucu genelinde değil, her istemci için ayrı ayrı oluşturur.
+- Algılanma riski minimumdur: oyun içi değerler değişmez, ek paketler gönderilmez.
+
+</KeyTakeaways>
+
+Özel Model, oyuncunun oyun içindeki modelini veya görünümünü, sunucu tarafından görülebilen hiçbir şeyi etkilemeden, kendi istemcisi üzerinde tamamen farklı bir şeyle değiştirmesini sağlayan görsel bir modüldür. Diğer kozmetik ve render seçenekleriyle aynı kategoridedir: herhangi bir savaş matematiği, hareket matematiği yok, sadece karakterinizin olduğu yerde farklı bir resim çizilir. Bir kaynak paketi masadaki herkesin gördüğünü değiştirirken, Özel Model yalnızca kendi görünümünüzü değiştirir. Kamerada nasıl göründüğine önem veren ve sunucunun kendisine yeni bir görünüm vermesini beklemek istemeyen oyuncular için idealdir.
+
+## Özel Model nasıl çalışır
+
+Minecraft'ın cilt sistemi normalde hesap bazlıdır. İstemciniz, Mojang'dan hesabınızla ilişkilendirilmiş olan cildi alır veya yerel önbellekten çeker ve her oyuncu çiziminde, sizi de dahil ederek, bu dokuyu render motoruna iletir. Özel Model, bu render çağrısına müdahale eder ve başka bir şeyle değiştirir: farklı bir doku, farklı bir model şekli, bazen de vanilla oyuncu modelinin hiç tasarlanmamış olan oranları.
+
+Değişim tamamen yerel işleme hattı içinde gerçekleşir. Gönderdiğiniz paketlerle ilgili hiçbir şey değişmez. Hareket paketleri, saldırı paketleri ve envanter durumu, modül olmadan da olduğu gibi tam olarak gönderilir. Sunucu, hesabınıza bağlı aynı hit box'a ve aynı gerçek cilt verisine sahip aynı oyuncu varlığını hâlâ görür. Sadece kendi istemcinizin yerel olarak çizdiği resim farklıdır.
+
+## Kullanımı Güvenli mi?
+
+Custom Model, sunucu tarafı anticheat'lerin yakalamak için tasarlandığı hiçbir şeye dokunmaz. Menzili, hareket hızını, hit box boyutunu veya zamanlamayı değiştirmez ve istemci ile sunucu arasındaki akışa yeni paketler eklemez. Bir anticheat'ın ölçebileceği işlevsel olarak hiçbir şey yoktur, çünkü ölçtüğü sayılar asla hareket etmez.
+
+Bu, ESP veya X-ray gibi, vanilla istemcinin gizlemesi tasarlanmış bilgileri ortaya çıkaran ve özellikle bir bilgi avantajı sağladıkları için yasaklanan şeylerden farklı bir kategoriye yerleştirir. Custom Model, bilgiyi değil, yalnızca görünümü etkiler, bu nedenle bir oyun mekaniği özelliğinden çok bir kozmetik özellik gibi algılanır. Bazı sunucular, ne yaptığına bakılmaksızın herhangi bir değiştirilmiş istemciye karşı genel bir politika uygulayabilir, bu nedenle kurallar yine oynadığınız yere bağlıdır. Mekanizma kendisi, bir savaş veya hareket modülünde olduğu gibi bir tespit riski taşımaz.
+
+<Callout variant="tip" title="Opal gibi bir müşteride kozmetik ürünlerine nerede yer verilir">Opal'ın görsel kategorisi tam olarak bu tür bir ödünleşmeye dayanıyor: gördüğünüz şeyleri etkileyen ancak sunucu tarafından hiçbir şey yapılmayan değişiklikler. Özel Model adıyla özel bir mod gönderiminde bulunmuyor, ancak aynı ilke tüm bu kategori boyunca geçerli. Sunucunun aslında takip ettiği dövüş veya hareket sayılarını değiştirmeden istediğiniz gibi inceleyin</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Özel Model oyun avantajı sağlar mı?">
+Hayır. Yalnızca oyuncu modelinizin veya görünümünüzün yerel olarak nasıl görüntülendiğini değiştirir. İsabet kutularını, menzili, hareketliliği veya sunucunun takip ettiği hiçbir şeyi etkilemez, bu nedenle herhangi bir savaş veya hareket avantajı sağlamaz.
+</FAQItem>
+
+<FAQItem question="Diğer oyuncular özel modelimi görebilir mi?">
+Genellikle hayır. Minecraft, derileri her istemci için oluşturur, bu nedenle kendi oluşturmanızı değiştirmek başkalarının ekranına bu değişikliği iletmez. Etki genellikle yalnızca size görünür, belirli bir uygulama başka bir şekilde paylaşmadığı sürece.
+</FAQItem>
+
+<FAQItem question="Özel Model, antichipler tarafından tespit edilebilir mi?">
+Neredeyse hiç, hatta hiç değil. Hareket, savaş veya sunucuya gönderilen paketleri değiştirmemesi nedeniyle, sunucu tarafındaki bir antichiplerin işaretleyebileceği neredeyse hiçbir şey yoktur. Tespit riski, savaş veya hareket modüllerine göre çok daha düşüktür.
+</FAQItem>
+
+<FAQItem question="Özel Model, kaynak paketiyle aynı mı?">
+Tam olarak değil. Bir kaynak paketi sunucudan gelir ve bağlı olan her oyuncu tarafından görünen şeyleri değiştirir. Özel Model ise, kaynak paketi gerektirmeden yerel olarak oluşturmayı değiştiren istemci tarafı bir modüldür.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Özel Model ve diğer tüm modüllerin ait olduğu daha geniş kategori." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Anlaşılmaya değer başka bir istemci tarafı ayrımı." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Spektrumun diğer ucu: sunucunun kesinlikle ölçebildiği bir modül." },
+]} />
+
+<CTA href="/tr/satin-al">Görün Opal'in görsel sekmeli özelliği, $8.99 görünümünüzün geri kalanını nasıl tamamlıyor</CTA>

@@ -1,0 +1,71 @@
+---
+title: Cosa sono le funzionalità di scripting JavaScript di GraalVM? (2026)
+description: GraalVM JavaScript è un motore JS veloce che funziona sulla JVM. Le applicazioni lo integrano per consentire agli utenti di scrivere script in JavaScript ed eseguirne il ricaricamento a caldo senza ricompilare Java.
+excerpt: GraalVM JavaScript permette a un'app Java di eseguire script utente in JavaScript e ricaricarli al volo. È il modo in cui un client aggiunge funzionalità senza compilare una mod.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: GraalVM JavaScript è la stessa cosa di Node.js?
+    a: No. Entrambi eseguono JavaScript, ma il motore di GraalVM è progettato per essere incorporato all'interno di un'applicazione JVM, mentre Node.js è un runtime autonomo basato su V8.
+  - q: Devo conoscere Java per scrivere uno script?
+    a: Non di solito. Si scrive JavaScript contro gli oggetti esposti dall'app host. Conoscere a cosa corrispondono quegli oggetti aiuta per un uso avanzato.
+  - q: Perché usare script invece di una mod completa?
+    a: Velocità di iterazione. Uno script si ricarica istantaneamente, mentre una mod compilata deve essere ricostruita e rilanciata.
+---
+
+<KeyTakeaways>
+
+- GraalVM JavaScript è un motore JS veloce e conforme agli standard che funziona sulla JVM.
+- Le app Java lo integrano, consentendo agli utenti di scrivere JavaScript che richiama il programma host.
+- Gli script vengono ricaricati a caldo, quindi è possibile modificare il comportamento senza ricompilare il codice Java.
+- L'host decide esattamente quali oggetti e classi uno script può raggiungere.
+
+</KeyTakeaways>
+
+GraalVM JavaScript è un motore JavaScript veloce e conforme agli standard che funziona sulla JVM, parte del progetto [GraalVM](https://www.graalvm.org/). Le applicazioni Java lo integrano, consentendo agli utenti di scrivere JavaScript che richiama il programma host e si ricarica dinamicamente. In un'applicazione Java, ciò significa aggiungere o modificare il comportamento in JavaScript senza ricompilare il codice Java.
+
+<Callout variant="info" title="Dove si integra Opal">
+Il motore di scripting di Opal si basa su GraalVM JavaScript. Per iniziare a scrivere script, consulta la [guida allo scripting](/it/docs/scripting).
+</Callout>
+
+## GraalVM e GraalVM JavaScript
+
+GraalVM è un runtime ad alte prestazioni in grado di eseguire diversi linguaggi sulla JVM. Il suo motore JavaScript è sufficientemente moderno da supportare le funzionalità ECMAScript più recenti. Un'applicazione include il motore, fornisce agli script un insieme di oggetti con cui lavorare ed esegue gli script.
+
+## Perché le applicazioni lo integrano
+
+- **Hot reload**: modifica uno script e osserva l'effetto senza riavviare o ricostruire.
+- **Superficie sicura**: l'host decide esattamente quali oggetti e classi Java uno script può toccare.
+- **Interoperabilità Java**: gli script possono chiamare il codice dell'applicazione stessa tramite gli oggetti che espone.
+
+## Come si presenta in un client
+
+Un programma che integra il motore di solito fornisce agli script un punto di ingresso per registrarsi, quindi un piccolo insieme di "proxy" oggetti che collegano JavaScript agli interni del programma. Gli utenti scrivono uno script, lo inseriscono in una cartella degli script e il motore lo carica. Questo è il modo in cui un client può consentire agli utenti di aggiungere funzionalità in JavaScript invece di compilare una mod.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="GraalVM JavaScript è la stessa cosa di Node.js?">
+No. Entrambi eseguono JavaScript, ma il motore di GraalVM è progettato per essere incorporato all'interno di un'applicazione JVM, mentre Node.js è un runtime autonomo basato su V8.
+</FAQItem>
+
+<FAQItem question="È necessario conoscere Java per scrivere uno script?">
+Di solito no. Si scrive JavaScript interagendo con gli oggetti esposti dall'applicazione host. Conoscere a cosa corrispondono questi oggetti aiuta nell'uso avanzato.
+</FAQItem>
+
+<FAQItem question="Perché usare gli script invece di una mod completa?">
+Velocità di iterazione. Uno script si ricarica istantaneamente, mentre una mod compilata deve essere ricostruita e rilanciata.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-the-jvm", label: "Cos'è la JVM?", description: "Il runtime GraalVM JavaScript su cui si basa." },
+  { href: "/it/learn/what-is-jni", label: "Cos'è JNI?", description: "Un modo di estendere un programma Java di livello inferiore." },
+  { href: "/it/blog/introducing-opal-scripting-engine", label: "Il motore di scripting di Opal", description: "Come GraalVM scripting si presenta in pratica." },
+]} />
+
+<CTA href="/it/purchase">Ottieni Opal, un client Fabric, per $8.99</CTA>

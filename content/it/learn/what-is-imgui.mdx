@@ -1,0 +1,93 @@
+---
+title: Cos'è ImGui? ImGui Spiegato (2026)
+description: ImGui (Dear ImGui) è una libreria GUI a modalità immediata per C++. Disegna i menu ogni frame senza un albero di widget persistente, cosa comune negli strumenti di gioco e nei client nativi.
+excerpt: Caro ImGui disegna un menu nuovo ogni frame da semplici chiamate di funzione. Ecco cosa significa immediate-mode e perché i client nativi lo utilizzano.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Libraries
+author: trq
+faqs:
+  - q: ImGui è solo per C++?
+    a: La libreria principale è scritta in C++ e la maggior parte dei progetti la utilizza proprio per questo; esistono binding per altre lingue, ma l'uso originale e più comune è in C++ per strumenti di gioco e applicazioni native.
+  - q: ImGui fa sì che l'interfaccia utente assomigli a un menu di gioco?
+    a: All'uscita, presenta un aspetto semplice da strumento di sviluppo, quindi i progetti che desiderano un tema di stile personalizzato lo modificano pesantemente o disegnano i propri widget sopra di esso, fino a far sì che il menu non assomigli più a quello predefinito.
+  - q: Può un mod di Fabric utilizzare ImGui?
+    a: Non nel modo solito. Un mod Fabric gira in Java e utilizza il sistema GUI del gioco, mentre un client nativo in C++ è la sede tipica per ImGui.
+  - q: ImGui è lento perché ridisegna ogni frame?
+    a: No. Ricostruire l'interfaccia utente è economico, e il programma già rende ogni fotogramma, quindi il menu si integra nel lavoro che viene comunque svolto.
+---
+
+<KeyTakeaways>
+
+- ImGui (Dear ImGui) è una piccola libreria GUI immediate-mode per C++.
+- Disegna il menu da zero ogni frame tramite chiamate di funzione, senza dover mantenere un albero di widget.
+- Client e strumenti nativi la scelgono per overlay a bassa latenza su una scena 3D.
+- È un pattern C++; un mod Java Fabric utilizza invece i propri hook GUI del gioco.
+
+</KeyTakeaways>
+
+ImGui, abbreviazione di Dear ImGui, è una piccola libreria GUI immediate-mode per C++. Disegna un menu nuovo ad ogni frame direttamente da chiamate di funzione, invece di mantenere un albero di oggetti widget. Questo la rende facile da integrare e da sovrapporre al ciclo di rendering esistente di un gioco, motivo per cui gli strumenti e le applicazioni native la utilizzano per overlay a bassa latenza.
+
+<Callout variant="info" title="Dove si integra Opal">
+Opal è un mod [Fabric](https://fabricmc.net/), quindi costruisce la sua interfaccia attraverso i propri hook GUI del gioco piuttosto che ImGui. Se desideri aggiungere funzionalità senza modificare il codice nativo, il motore di scripting JavaScript GraalVM è il punto di partenza ideale. Consulta la [guida all'installazione](/it/docs/setup) e la [guida alla programmazione](/it/docs/scripting).
+</Callout>
+
+## Cosa significa immediate-mode
+
+ImGui ricostruisce l'interfaccia ad ogni frame. Non crei un oggetto pulsante e lo memorizzi. Chiami una funzione che dice "disegna un pulsante qui" e questa chiamata sia disegna il pulsante che ti dice se è stato cliccato in questo frame.
+
+Un toolkit a retained-mode funziona all'opposto. Mantiene un albero di widget a lunga durata in memoria e aggiorni quell'albero quando lo stato cambia. Immediate-mode sacrifica quella struttura persistente per un codice che legge dall'alto verso il basso e vive accanto al tuo stato.
+
+## Perché strumenti e client lo scelgono
+
+ImGui è popolare per i menu che si sovrappongono a una scena 3D. I motivi sono pratici.
+
+- **Bassa latenza**: si integra in un frame che il programma sta già renderizzando, quindi il menu reagisce immediatamente.
+- **Pochi collegamenti**: una finestra e pochi controlli sono un numero limitato di chiamate di funzione. Non c'è file di layout e nessun thread UI separato da gestire.
+- **Autonomo**: la libreria ha poche dipendenze e si integra con i backend grafici comuni, quindi non include un framework pesante.
+- **Facile da debuggare**: le stesse chiamate che costruiscono un menu di rilascio costruiscono anche i pannelli di debug usa e getta che gli sviluppatori utilizzano durante la creazione di una funzionalità.
+
+## Immediate-mode vs retained-mode
+
+| Aspetto | Modalità immediata (ImGui) | Toolkit a ritenzione |
+| :--- | :--- | :--- |
+| Proprietà dello stato | Il tuo codice detiene i dati | Il toolkit detiene un albero di widget |
+| Lavoro per frame | Ricostruisci l'interfaccia utente ogni frame | Aggiorna l'albero in caso di modifica |
+| Costo di configurazione | Alcune chiamate di funzione | Più struttura iniziale |
+| Adatto a | Overlay, strumenti, menu di gioco | App di tipo documento di grandi dimensioni |
+
+## Come si adatta a un client nativo
+
+Un client utility nativo costruito in C++ spesso disegna il suo menu con ImGui sopra il frame del gioco. Il codice del menu viene eseguito all'interno del ciclo di rendering, legge le impostazioni del client e scrive le modifiche direttamente. Non esiste un processo UI separato, quindi l'attivazione di una funzionalità è una singola chiamata di funzione su un valore che il client già possiede.
+
+Questo è un pattern C++. Un mod [Fabric](https://fabricmc.net/) scritto in Java raggiunge la sua interfaccia tramite gli hook GUI del gioco stesso, quindi ImGui compare principalmente nei client che vengono forniti come codice nativo piuttosto che come mod Java.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="ImGui è solo per C++?">
+La libreria principale è scritta in C++ ed è in questo linguaggio che la maggior parte dei progetti la utilizza. Esistono binding della comunità per altri linguaggi, ma l'uso originale e più comune è in strumenti di gioco e applicazioni native C++.
+</FAQItem>
+
+<FAQItem question="ImGui fa sì che l'interfaccia utente assomigli a un menu di gioco?">
+Di default, ha un aspetto semplice da strumento di sviluppo. I progetti che desiderano un tema di stile personalizzato lo utilizzano ampiamente o disegnano i propri widget sopra di esso, quindi un menu distribuito può non assomigliare affatto all'aspetto predefinito.
+</FAQItem>
+
+<FAQItem question="Un mod di Fabric può usare ImGui?">
+Non nel modo consueto. Un mod di Fabric funziona in Java e utilizza il sistema GUI del gioco. Un client nativo in C++ è l'ambiente tipico per ImGui.
+</FAQItem>
+
+<FAQItem question="ImGui è lento perché ridisegna ogni frame?">
+No. Ricostruire l'interfaccia utente è un'operazione economica, e il programma già esegue il rendering di ogni frame, quindi il menu sfrutta il lavoro che viene già svolto.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-nanovg", label: "Cos'è NanoVG?", description: "La libreria vettoriale con cui i client Java disegnano la loro interfaccia utente." },
+  { href: "/it/learn/what-is-graalvm-javascript-scripting", label: "Cos'è la scripting JavaScript di GraalVM?", description: "Come Opal ti permette di estenderlo senza codice nativo." },
+  { href: "/it/learn/what-is-the-fabric-api", label: "Cos'è l'API Fabric?", description: "Lo strato comune su cui si basano la maggior parte delle mod di Fabric." },
+]} />
+
+<CTA href="/it/purchase">Ottieni Opal, un client Fabric, per $8.99</CTA>

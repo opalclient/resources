@@ -1,0 +1,81 @@
+---
+title: Minecraft'ta AntiDesync Nedir? (Modül Açıklaması)
+description: AntiDesync, istemci-sunucu konum uyumsuzluklarını, görünür hatalara yol açmadan veya yanlış bir anticheat hareket bayrağı tetiklemeden önce düzelten bir modüldür.
+excerpt: AntiDesync seni daha güçlü vurmanı veya daha hızlı hareket etmeni sağlamaz. Sadece istemcinin hikayesini sunucuyla senkronize tutar, böylece sıradan gecikmeler itiraf gibi görünmeyi bırakır.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Minecraft'ta "desync" ne anlama geliyor?
+    a: Senkronizasyon hatası, istemcinizin gösterdiği ile sunucunun doğru olduğunu düşündüğü şey arasındaki uyumsuzluktur. Genellikle gecikme, paket kaybı veya istemci tarafındaki hareket tahmini, sunucunun olaylara bakış açısından uzaklaşması nedeniyle oluşur.
+  - q: AntiDesync, bir oyun avantajı sağlıyor mu?
+    a: Hayır. Bunun yerine uyumsuzlukları düzeltir, bunları yaratmaz veya bunlardan faydalanmaz; bu yüzden daha hızlı hareket etmenize, daha uzaktan vurmanıza veya sunucunun zaten izin verdiği şeylerin dışında bir şey yapmanıza izin vermez.
+  - q: Hangi müşteri AntiDesync modülünü belgeliyor?
+    a: Azim, AntiDesync modülünü gönderdiği belgelenen müşteridir.
+  - q: AntiDesync, Backtrack'ten nasıl farklıdır?
+    a: "Backtrack, hedefteki geçmiş konumuna isabetleri yerleştirmek için kasıtlı olarak istemci-sunucu gecikme penceresini kullanır. AntiDesync ise tam tersi bir işlevi yerine getirir: aynı boşluğu daraltarak, durumunuzun sunucuyla daha yakından eşleşmesini sağlar ve farkı sömürmekten kaçınır."
+  - q: AntiDesync tek başına bir anticheat yasağını engelleyebilir mi?
+    a: Tek bir modül bunu vaat edemez. AntiDesync, sıradan gecikmelerden kaynaklanan yanlış eşleşmeleri azaltabilir, ancak sunucunun diğer modülleri veya kurallarını gerçekten ihlal eden davranışları nasıl ele aldığı üzerinde bir etkisi yoktur.
+---
+
+<KeyTakeaways>
+
+- AntiDesync, istemcinizin yerel oyun durumunu sunucuyla eşleşmesini sağlayan bir modüldür; görünür bir hata veya geçersiz bir hareket bayrağı haline gelmeden önce küçük kaymaları düzeltir.
+- Minecraft yerel olarak hareketinizi tahmin eder ve ardından sunucu güncellemelerine göre uzlaştırır; AntiDesync, bunu bir "rubber-band snap" haline gelmesine izin vermek yerine sürekli olarak daraltır.
+- Gecikme kaynaklı takılmaları ve gecikmeli vuruşları düzeltir, hız, menzil veya konum avantajı değil, bu nedenle Reach veya Backtrack gibi istismar modüllerine göre çok daha az tespit riski taşır.
+- Tenacity, bir AntiDesync modülüyle birlikte gönderildiği belgelenen istemcidir.
+
+</KeyTakeaways>
+
+AntiDesync, istemcinizin oyun dünyasının bir kopyasını sunucunun gerçekte tuttuğuyla hizalı tutan bir modüldür; normal gecikmelerden kaynaklanan küçük konum ve durum eşleşmezliklerini, görünür bir hataya veya bir antichiatin geçersiz hareket olarak okuyabileceği bir şeye dönüşmeden önce düzeltir. Minecraft, sunucuyu son yetkili olarak güvenir, ancak istemciniz yine de oyunun anında oynanabilir hissetmesi için hareketinizi yerel olarak tahmin eder. Çoğu zaman, bu iki sürüm o kadar yakın bir şekilde hemfikir olur ki farkı asla fark etmezsiniz. AntiDesync, uyumsuzlukların olmadığı anlar için vardır: düzensiz bir bağlantı, paket kaybında bir artış veya başka bir modülün konumunuzu sunucunun beklemediği bir yere itmesi.
+
+## Nasıl Çalışır
+
+Minecraft'ın ağ kodu sunucu tarafından yetkilidir ancak istemci tarafından tahmin edilir. İstemciniz karakterinizi bir tuşa bastığınız anda hareket ettirir ve ardından sunucudan bir an sonra gelen güncellemelerle karşılaştırır. İki kopyadaki küçük farklılıklar normaldir ve genellikle görünmezdir, ancak gecikme, paket kaybı veya başka bir modül hareketinizi sunucunun beklediği şeyin dışına ittiğinde genişleyebilir. AntiDesync, bu karşılaştırmayı doğrudan izler: istemcinizin izlediği konumu ve durumu sunucunun bildirdiklerine karşı kontrol eder ve aralık yeterince büyüyerek yanlış görünmeden önce yerel kopyayı tekrar hizalar.
+
+Önemli olan, ne yapmadığıdır. Büyük bir uyumsuzluğu bekleyip ardından sizi yerinize "rubber-band" gibi ani bir şekilde geri çekmeyen türden bir düzeltme yapmaz. Bunun yerine, küçük, sürekli kaymaya odaklanır, böylece düzeltme normal oyun sırasında fark edilmez. Bir sarsıntı görmezsiniz. Müşteriniz sadece sunucunun sizi zaten nerede olmanız gerektiği düşüncesiyle yakınında kalır.
+
+Tenacity, bir AntiDesync modülü gönderdiği belgelenmiş bir müşteridir.
+
+## Kullanımı Güvenli mi?
+
+AntiDesync, bir savaş veya hareket avantajı değil, bir istikrar özelliğidir, bu nedenle Reach veya Backtrack gibi, istemci ve sunucu arasındaki boşluğu kasıtlı olarak sömüren modüllerle aynı şekilde tespit edilme riski taşımaz. Reach, fiziğin izin verdiğinden daha uzaktan vuruşlar iddia eder. Backtrack, gecikme penceresini kullanarak bir hedefinin geçmiş konumuna vuruş yapar. AntiDesync ise ikisinin aksini yapar: istemcinizin iddialarını sunucunun gerçeğine yaklaştırır, ondan uzaklaştırmaz, böylece bir mesafe kontrolü veya hareket geçerliliği kontrolü tarafından yakalanacak bir şey yoktur.
+
+Bununla birlikte, "güvenli" olması yine de gönderildiği istemcinin geri kalanına bağlıdır. Tek başına AntiDesync, bir hile olmaktan ziyade yaşam kalitesini iyileştiren bir düzeltme gibi görünür. Ancak genellikle, diğer modüllerle birlikte daha geniş bir yardımcı istemci içinde gelir ve sunucunun tüm istemciyle ilgili kuralları, hangi bireysel modüllerin etkinleştirilip etkinleştirilmediğine bakılmaksızın yine de geçerlidir.
+
+<Callout variant="tip" title="Opal'da bunun yeri neresi">Opal, AntiDesync adlı bir modül göndermiyor. Ancak, bunun ardındaki dürtü – istemcinin hikayesini dürüst tutmak, zemini sunucuyla savaşmak yerine – Opal'ın gerçekte nasıl inşa edildiğine, herhangi bir istismar modülünden daha yakın. Sunum her zaman yaşam kalitesi ve performans önceliğiydi: temiz bir HUD, istikrarlı bir kare hızı, bir betik motoru, bir anticheat'in fark etmeye cesaret edeceği bir dizi savaş hilesi değil</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Minecraft'ta 'desync' ne anlama gelir?">
+Bir desync, istemcinizin gösterdiği şey ile sunucunun doğru bildiği şey arasındaki uyumsuzluktur. Genellikle gecikme, paket kaybı veya istemci tarafındaki hareket tahmini sunucunun olaylara bakış açısından uzaklaşması nedeniyle oluşur.
+</FAQItem>
+
+<FAQItem question="AntiDesync oyun avantajı sağlar mı?">
+Hayır. Eşitsizlikleri düzeltir, bunları oluşturmaz veya bunlardan yararlanmaz, bu yüzden ne server'ın zaten izin verdiği şeylerin dışına çıkmanıza ne de daha hızlı hareket etmenize veya daha uzaktan vurmanıza olanak tanır.
+</FAQItem>
+
+<FAQItem question="Hangi istemci bir AntiDesync modülü belgeliyor?">
+Tenacity, bir AntiDesync modülü belgelenen istemcidir.
+</FAQItem>
+
+<FAQItem question="AntiDesync, Backtrack'ten nasıl farklıdır?">
+Backtrack, istemci-sunucu gecikme penceresini, bir hedefteki geçmiş konumuna isabet kaydetmek için kasıtlı olarak kullanır. AntiDesync ise tam tersi bir işlevi yerine getirir: aynı boşluğu daraltarak, farkı kullanmak yerine sunucuyla durumunuzu daha yakından eşleştirmenizi sağlar.
+</FAQItem>
+
+<FAQItem question="AntiDesync tek başına bir anticheat yasağını engelleyebilir mi?">
+Hiçbir modül bunun garantisini veremez. AntiDesync, sıradan gecikmelerden kaynaklanan yanlış eşleşmeleri azaltabilir, ancak bir sunucunun diğer modülleri veya kurallarını ihlal eden davranışları nasıl ele aldığıyla ilgili bir yetkisi yoktur.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Bunun gibi daha geniş kategorilere ait modüller." },
+  { href: "/tr/learn/what-is-reach", label: "Reach nedir?", description: "AntiDesync'in kapattığı boşluğu genişleten bir savaş modülü." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Müşteri yelpazesinin gizliliğe öncelik veren ucu." },
+]} />
+
+<CTA href="/tr/satin-al">Opal, ihtiyacınız olana kadar görünmezmiş gibi tasarlanmıştır. $8.99 için görün.</CTA>

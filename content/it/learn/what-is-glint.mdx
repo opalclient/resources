@@ -1,0 +1,67 @@
+---
+title: Cos'è Glint? Il Modulo Scintillio di Incanto Falso
+description: Glint è un modulo client di Minecraft che aggiunge o modifica la lucentezza degli incantesimi su qualsiasi oggetto, puramente cosmetico e invisibile agli anticheat e agli altri giocatori.
+excerpt: Fai brillare un semplice bastone come una spada incantata, perfetta. Nessun altro lo vedrà, e nulla dell'oggetto cambierà realmente.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Glint cambia se un oggetto è effettivamente incantato?
+    a: No. Glint modifica solo la lucentezza applicata all'oggetto per il tuo cliente. Gli incantesimi reali, le statistiche e i dati lato server dell'oggetto rimangono esattamente come erano.
+  - q: Possono altri giocatori vedere il mio effetto scintillio personalizzato?
+    a: No. Il rendering dell'elemento, inclusa la lucentezza, avviene indipendentemente su ogni client. Tutti gli altri vedono l'elemento esattamente come lo descrivono i dati reali del server, con o senza scintillio.
+  - q: L'utilizzo di Glint viene rilevato dagli anticheat?
+    a: No. Glint modifica solo ciò che viene disegnato localmente e non invia mai dati diversi al server, quindi non c'è nulla lato server che un anticheat possa intercettare.
+  - q: Glint è la stessa cosa di un resource pack che cambia il colore dell'effetto incantesimo?
+    a: Quasi. Un pacchetto risorse restilizza la texture del bagliore per tutti gli oggetti incantati contemporaneamente. Un modulo client può forzare lo scintillio su oggetti specifici non incantati o attivarlo/disattivarlo per ogni oggetto.
+---
+
+<KeyTakeaways>
+- Glint è un modulo client cosmetico per Minecraft che simula o rimuove la lucentezza degli incantesimi su qualsiasi oggetto, indipendentemente dal fatto che sia effettivamente incantato.
+- Funziona interamente nella pipeline di rendering, quindi i dati degli oggetti, le statistiche e gli incantesimi lato server non vengono mai modificati.
+- Altri giocatori e gli anticheat non rilevano l'effetto, poiché ogni client rende gli oggetti in modo indipendente dai dati reali del server.
+</KeyTakeaways>
+
+Glint è il modulo che ti permette di applicare l'effetto scintillante degli incantesimi di Minecraft a un oggetto privo di incantesimi, oppure di rimuoverlo da un oggetto già dotato di numerosi incantesimi. Si tratta di un'impostazione puramente estetica, una di quelle cose che cambia l'aspetto delle tue armature senza influire sul loro funzionamento. Se hai mai desiderato che una spada di legno spoglia brillasse come se fosse appena uscita da una mola con tre incantesimi al livello massimo, è questo modulo che lo fa.
+
+## Come viene simulato lo scintillio
+
+Minecraft nella sua versione originale (vanilla) rende l'effetto scintillio come un overlay shader disegnato sopra la texture di un oggetto, e lo disegna solo quando i dati dell'oggetto contengono effettivamente un incantesimo. Nessun incantesimo, nessun scintillio. Questo controllo avviene durante il rendering, ed è proprio qui che Glint interviene: intercetta la chiamata di rendering e applica, rimuove o restilizza lo scintillio indipendentemente da ciò che i dati dell'oggetto indicano.
+
+Niente a monte della fase di rendering cambia. L'NBT dell'oggetto, le sue statistiche, il danno che infligge, ciò che il server ha registrato, nulla di tutto ciò si muove. Una spada non incantata può scintillare come una spada al massimo livello, oppure un oggetto realmente incantato può diventare completamente opaco, e in entrambi i casi l'oggetto funziona esattamente come i suoi dati reali indicano. È lo stesso tipo di modifica che si ottiene scegliendo un resource pack o una skin: locale, visiva e invisibile a chiunque non sia tu.
+
+## È sicuro da usare
+
+Sì, ed è circa il più sicuro che si possa essere con le modifiche lato client. Glint non tocca mai i dati reali degli incantesimi dell'oggetto, non invia mai al server nulla che un client non modificato non invierebbe e non mostra mai a un altro giocatore una visione diversa del tuo inventario rispetto allo stato reale fornito dal server. Il rendering è locale e specifico per ogni client, quindi non c'è pacchetto che un anticheat possa ispezionare per rivelare un falso scintillio, perché il scintillio non ha mai lasciato il tuo computer.
+
+L'unica avvertenza che si applica a ogni modifica lato client si applica anche qui: alcuni server vietano completamente i client modificati come politica generale, indipendentemente da ciò che fa un modulo specifico. Vale la pena controllare le regole prima di eseguire qualsiasi modifica, Glint compreso.
+
+<Callout variant="tip" title="Dove si inserisce in Opal">
+Opal non include un modulo chiamato Glint specificamente, ma si tratta esattamente del tipo di modifica visiva lato client per cui le impostazioni di personalizzazione estetica e di rendering sono state progettate: elementi che modificano ciò che vedi sul tuo schermo senza toccare neanche un singolo byte di ciò che il server tiene traccia.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+<FAQItem question="Glint modifica se un oggetto è effettivamente incantato?">
+No. Glint modifica solo la lucentezza resa sull'oggetto nel tuo client. Gli incantesimi reali, le statistiche e i dati lato server dell'oggetto rimangono esattamente come erano.
+</FAQItem>
+<FAQItem question="Gli altri giocatori possono vedere il mio effetto Glint personalizzato?">
+No. Il rendering degli oggetti, Glint incluso, avviene indipendentemente su ciascun client. Tutti gli altri vedono l'oggetto esattamente come descritto dai dati reali del server, con o senza lucentezza.
+</FAQItem>
+<FAQItem question="L'utilizzo di Glint viene segnalato dagli anticheat?">
+No. Glint modifica solo ciò che viene disegnato localmente e non invia mai dati diversi al server, quindi non c'è nulla lato server che un anticheat possa rilevare.
+</FAQItem>
+<FAQItem question="Glint è la stessa cosa di un resource pack che cambia il colore dell'effetto incantesimo?">
+Non esattamente. Un resource pack restila la texture della lucentezza per tutti gli oggetti incantati contemporaneamente. Un modulo client può forzare la lucentezza su oggetti specifici non incantati o attivarla/disattivarla per ogni oggetto.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria Glint e moduli simili vi appartengono, e cosa distingue un client utility da un client manomesso." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Un altro stile di progetto cliente basato su ciò che viene renderizzato localmente rispetto a ciò che il server arriva a sapere." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Un modulo all'estremità opposta dello spettro del rischio, che effettivamente modifica ciò che vede il server." }
+]} />
+
+<CTA href="/it/purchase">Le impostazioni visive di Opal sono interamente client-side per progettazione. Scopri cosa c'è nel pannello per $8.99.</CTA>

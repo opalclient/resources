@@ -1,0 +1,103 @@
+---
+title: Minecraft'ta Glow ESP Nedir? (Modül Açıklaması)
+description: Glow ESP, oyuncuları ve yaratıkları duvarların içinden katı bir renkle tasvir eden bir Minecraft modülüdür; bu, vanilla'nın parıldayan efekti için kullandığı aynı render yoludur.
+excerpt: Bir duvarın görevi konumunuzu gizlemektir. Glow ESP yine de sizi duvarın içinden tasvir eder, herhangi bir sunucuya ihtiyaç duymaz.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Glow ESP aslında ne gösteriyor?
+    a: Duvarların içinden görünen her varlığın etrafında, o varlığın modeline uygun şekillendirilmiş renkli bir hat. Eşyaları, envanteri veya konum ve hat dışındaki hiçbir şeyi göstermez.
+  - q: Glow ESP, vanilla'daki Parlaklık efektiyle aynı mı?
+    a: Render yolu, parıldayan durum efekti için vanilla'nın kullandığı aynı yoldur; örneğin, hayalet bir okun zamanlayıcıda uyguladığı parıltı. Glow ESP ise, oyun içi herhangi bir etkinliğin dışında, doğrudan varlıklara o konturu uygular.
+  - q: Glow ESP, Killaura veya Reach'ten daha mı güvenli?
+    a: Hareketleri, dönüşleri veya saldırı paketlerini etkilemez, bu nedenle bu tür savaş hilelerini yakalayan paket düzeyindeki kontrollerden kaçınır. Ancak, eylemleriniz sahip olmamanız gereken bilgilere dayanırsa davranış analizi yoluyla yine de işaretlenebilir.
+  - q: Glow ESP sizi oyun dışı bırakabilir mi?
+    a: Evet, mümkün. Dövüş modüllerine göre daha az risk taşır çünkü istemcinizin gönderdiği şeyi hiçbir zaman değiştirmez, ancak sürekli olarak görünmeyen hedeflere tepki veren oyuncuları yakalamak için izleyen bir sunucu veya personel ekibi bunu tespit edebilir.
+---
+
+<KeyTakeaways>
+
+- Glow ESP, oyuncuları ve yaratıkları katı bir renkle ana hatlarıyla belirten bir Minecraft görsel modülüdür; bu ana hatlar duvarlardan, zeminlerden ve araya giren her şeyden görülebilir.
+- Bu ana hatları, derinlik testini atlayarak oluşturur; bu, vanilla Minecraft'ın Parıldayan durum efekti için kullandığı yöntemle aynıdır, ancak her ilgili varlık için talep üzerine uygulanır.
+- Ana hat, her varlığın gerçek modelini takip eder ve düz bir kutu çizmek yerine, rengi genellikle varlık türüne veya takıma göre değişir.
+- Ek paketler göndermez ve asla hareket veya dövüşü etkilemez, bu nedenle temiz bir paket imzası yoktur; ancak tutarlı duvar takibi davranışı yine de onu işaretli sayılabilir hale getirebilir
+
+</KeyTakeaways>
+
+Glow ESP, oyuncuları ve yaratıkları katı bir renkle ana hatlarıyla belirten ve bu ana hatları duvarlar, zeminler ve araya giren her şeyin içinden görünür tutan bir Minecraft görsel modülüdür. Vanilla'daki Glowing durum etkisinin aynı renderlama yolunu kullanır; hayalet okun belirli aralıklarla uyguladığı parıltı, sadece birkaç saniye için tek bir hedef yerine sizin etrafınızdaki her ilgili varlık için açılmıştır. İstemciler genellikle bunu, düz bir 2D kutu üst üste gelmesiyle birlikte gönderir ve savaş sırasında hangisinin daha hızlı algılandığını seçmenize olanak tanır. Her neyse sonuç aynıdır: onları normalde görene kadar çok önce tam olarak nerede olduklarını bilirsiniz.
+
+## Nasıl Çalışır
+
+Glow ESP, her hedef varlığı, derinlik testini atlayan renkli bir ana hatla renderlar, böylece aranızda bir duvar, zemin veya başka bir yaratık olsa bile çizmeye devam eder. Vanilla Minecraft zaten Glowing efekti için bu tam renderlama yolunu yerleşik olarak bulundurmaktadır, bu nedenle görünüm bu kadar tanıdık: modül, sadece oyunda normal yollarla verilmesini beklemek yerine, varlıklara gerektiğinde bu ana hattı uygular.
+
+Çoğu uygulama, ana hat renginin varlık türüne veya takıma göre değişmesine izin verir, böylece bir oyuncu ve düşmanca bir yaratık ilk bakışta aynı tehdit olarak algılanmaz. Ve ana hat, varlığın gerçek modelini izlediğinden, düz bir kutunun aksine hedefle birlikte hareket eder ve döner.
+
+## Glow ESP vs ESP 2D
+
+Glow ESP ve ESP 2D, farklı renderlama seçenekleriyle, bir varlığı arazi engellerinden görme gibi aynı sorunu çözüyor.
+
+| | Glow ESP | ESP 2D |
+|---|---|---|
+| Ne renderlar | Varlığın 3D modelini takip eden bir ana hat | Varlığın ekran konumunda çizilen düz bir dikdörtgen |
+| Nasıl davranır | Hedefin şekline yapıştırılmış, oyunda bir vurgulama | Oyunun üstünde duran bir UI işaretçisi |
+| Birlikte gönderilir | Tenacity (istediğiniz stili seçin) | Tenacity (istediğiniz stili seçin) |
+
+İkisi de ek olarak ağ üzerinden hiçbir şey göndermez, bu yüzden seçim kişisel tercihe bağlıdır. Silüet ve rotasyonu istiyorsanız ana hat, hızlıca ekrana bakınca fark edebileceğiniz bir şey istiyorsanız kutu seçin.
+
+## Neden işaretleniyor
+
+Glow ESP yalnızca yerel olarak renderlanan şeyi değiştirir. Ek paketler göndermez, hareketi değiştirmez veya savaş zamanlamasına dokunmaz, bu nedenle [Reach](/tr/learn/what-is-reach) gibi, istemcinin sunucuya bildirdiği şeyi değiştiren bir modül için olduğu gibi paket düzeyinde bir imza yoktur.
+
+Tespit, davranışlara dayanıyor. Bir duvarın arkasından bir hedefi takip eden, bir köşeyi kimse dönmeden önce önceden nişan alan veya bir düşmana meşru bir görüş hattı olmadan tepki veren oyuncu, hem staff'a hem de bazı anticheat sistemlerine dikkat çekici bir örüntü sunar. Bu tür tespit, paket yakalamak yerine yaptıklarınızı izlemeye bağlıdır; bu da Glow ESP'nin neden kullanımı riskin kendi sorumluluğunda bir özellik olarak kalmasının tam nedeni budur: bir savaş hilesinden daha sessiz olmasına rağmen, kaydı inceleyen bir insan tarafından görünmez değildir.
+
+<Callout variant="tip" title="Burada Opal'da nerede duruyor">
+
+Opal'ın görsel kategorisi Entity ESP, her şey gibi kullanma riskini üstlenerek etiketlenmiş durumda. Bu, Glow ESP'nin temsil ettiği aynı fikir: bir varlığın konumunu, sunucuya istemcinizden gönderdiğiniz hiçbir şeyi değiştirmeden arazi yoluyla ortaya çıkarmak. Kesin işleme stili istemciye özel bir detay olsa da, bu tür bilgilerin kurulumunuza dahil olup olmadığına karar verirken Entity ESP, Opal'ın bu çizgiyi çizdiği yerdir
+
+</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapıldığı değil">
+
+Bu sayfa, Glow ESP'nin ne yaptığını ve neden kullanımının riskli olduğunu, onu çalıştırmanın bir onaylanması anlamına gelmediğini açıklar. Paketlere asla dokunmaz, bu nedenle hile önleme yazılımının yakalayabileceği hiçbir temiz veri kablo üzerinde bulunmaz, ancak personel incelemesi ve davranış örüntüsü tespiti, görmemeleri gereken hedeflere karşı tutarlı tepki veren oyuncuları yine de yakalar
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Glow ESP aslında ne gösteriyor?">
+
+Duvarların içinden görünen her varlığın etrafında, o varlığın modeline uygun şekillendirilmiş renkli bir hat. Eşyaları, envanteri veya konum ve hat dışındaki hiçbir şeyi göstermez
+
+</FAQItem>
+
+<FAQItem question="Glow ESP, vanilla'daki Parlaklık efektiyle aynı mı?">
+
+Render yolu, parıldayan durum efekti için vanilla'nın kullandığı aynı yoldur; örneğin, hayalet bir okun zamanlayıcıda uyguladığı parıltı. Glow ESP ise, herhangi bir oyun içi etkinliğin dışında, doğrudan varlıklara o konturu uygular
+
+</FAQItem>
+
+<FAQItem question="Glow ESP, Killaura veya Reach'ten daha mı güvenli?">
+
+Hareketleri, dönüşleri veya saldırı paketlerini etkilemez, bu nedenle bu tür savaş hilelerini yakalayan paket düzeyindeki kontrollerden kaçınır. Ancak, eylemleriniz sahip olmamanız gereken bilgilere dayanırsa davranış analizi yoluyla yine de işaretlenebilir
+
+</FAQItem>
+
+<FAQItem question="Glow ESP sizi oyun dışı bırakabilir mi?">
+
+Evet, mümkün. Dövüş modüllerine göre daha az risk taşır çünkü istemcinizin gönderdiği şeyi hiçbir zaman değiştirmez, ancak sürekli olarak görünmeyen hedeflere tepki veren oyuncuları yakalamak için izleyen bir sunucu veya personel ekibi yine de bunu tespit edebilir
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Glow ESP ve benzeri modüllerin ait olduğu daha geniş kategoridir." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Glow ESP'nin açığa çıkardığı bilgilere etki eden bir modül." },
+  { href: "/tr/learn/what-is-reach", label: "Reach nedir?", description: "Paket düzeyindeki hile Glow ESP, tamamen görsel kalarak kaçınır." }
+]} />
+
+<CTA href="/tr/satin-al">Opal'ın görsel dizilimi, Glow ESP ile aynı değiş tokuşu kullanır: daha fazla bilgi, riski siz değerlendirirsiniz.</CTA>

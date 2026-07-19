@@ -1,0 +1,94 @@
+---
+title: Cosa sono le etichette nome in Minecraft? Spiegazione del modulo
+description: Nametags è un modulo visuale per Minecraft che restilizza le etichette dei giocatori aggiungendo la salute, la distanza o il ping, senza modificare nulla di ciò che il server traccia o che un ESP rivelerebbe.
+excerpt: Nametags modifica l'aspetto del nome che fluttua sopra la testa di qualcuno. Non ti mostra nulla che tu non potresti già ottenere da F3, ti fa solo risparmiare il viaggio.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Nametags è la stessa cosa di un ESP o di un wallhack?
+    a: No. I tag identificativi modificano solo l'aspetto del tag per i giocatori già visibili sullo schermo. Un ESP o un wallhack fornisce informazioni su entità nascoste dietro muri o terreno, cosa che i tag identificativi non fanno mai.
+  - q: Possono i Nametags vedere attraverso i muri?
+    a: No. Si sovrappone all'etichetta di nome normale del gioco, che si attiva solo per le entità per le quali il client mostrerebbe già un'etichetta.
+  - q: Che tipo di informazioni può mostrare un modulo Nametags?
+    a: Aggiunte comuni sono salute, distanza, armatura e ping, oltre a modifiche di stile come uno sfondo o un font diverso. I campi esatti variano a seconda del cliente.
+  - q: Nametags vengono segnalati dagli anticheat?
+    a: Improbabile. È una modifica di rendering locale che non invia dati aggiuntivi al server e non tocca nulla che il server controlla effettivamente, a differenza dei moduli di combattimento o di movimento.
+  - q: Quali clienti hanno il modulo Nametags?
+    a: Fan è documentato con uno. Funzionalità simili di targhette personalizzabili compaiono in altri client di utilità con nomi diversi.
+---
+
+<KeyTakeaways>
+
+- Nametags è un modulo visivo che restila la targhetta del giocatore, aggiungendo campi come salute, distanza o ping.
+- Influenza solo i giocatori già visibili sullo schermo, non quelli nascosti dietro un muro.
+- Non invia pacchetti aggiuntivi, quindi il rischio di rilevamento è prossimo allo zero.
+- Documentato in Fan; i numeri che mostra sono già presenti in F3 o nella lista dei giocatori.
+
+</KeyTakeaways>
+
+Nametags è un modulo client visuale per Minecraft che modifica il modo in cui il nome sopra la testa di un giocatore viene renderizzato, aggiungendo campi come salute, distanza, armatura o ping, oppure semplicemente restilando lo sfondo e il font del tag. Funziona solo con i giocatori per i quali il tuo client sta già disegnando un tag. Fai passare qualcuno dietro un muro e il suo tag scomparirà insieme a lui, come nella versione originale. Questa è la linea di demarcazione tra Nametags e un ESP o wallhack: questi moduli si attivano per disegnare informazioni per entità che non dovresti essere in grado di vedere affatto. Nametags fa semplicemente apparire meglio il tag che vedresti già, oppure dice di più.
+
+## Come funziona
+
+Minecraft nella sua versione originale disegna già un nome fluttuante sopra ogni giocatore nelle vicinanze, e quella chiamata di disegno è esattamente ciò a cui Nametags si aggancia. Invece di lasciare che il renderer originale completi il lavoro intatto, il modulo intercetta la chiamata e sostituisce la propria versione: campi aggiuntivi cuciti alla stringa, una nuova texture di sfondo, un font più grande o più piccolo, qualunque cosa richiedano le impostazioni.
+
+Poiché il gancio agisce esclusivamente nel rendering, nulla a monte dello schermo cambia. Nessun pacchetto viene inviato a richiedere dati aggiuntivi al server, e il modulo non interviene affatto su quali entità contano come visibili. Un giocatore dietro un muro riceve ancora zero tag, perché il client non ha mai avuto motivo di metterne in coda uno. Il gancio del nametag si attiva solo per le entità che già stavano ricevendo un tag vanilla; i nametag riscrivono semplicemente ciò che appare una volta presa quella decisione.
+
+## Impostazioni comuni
+
+I moduli Nametags espongono solitamente un numero limitato di interruttori per ciò che viene visualizzato sul tag e come appare.
+
+| Impostazione | Cosa controlla |
+|---|---|
+| Info extra | Aggiunge campi come salute, armatura, ping o distanza al tag |
+| Stile | Sostituisce lo sfondo, il bordo o il font del tag |
+| Scala | Rende il tag più grande o più piccolo |
+| Distanza di dissolvenza | Quanto lontano un tag rimane completamente visibile prima di iniziare a dissolversi |
+
+La maggior parte di ciò che viene aggiunto, salute, distanza, ping, è un numero che potevi già ottenere dallo schermo di debug F3 o dalla lista dei giocatori. Nametags non ti fornisce nuove informazioni, sposta semplicemente numeri a cui avevi già accesso più vicino a dove stai già guardando.
+
+## Nametags è sicuro da usare
+
+Le etichette con il nome appaiono come un mero accessorio estetico, piuttosto che un trucco che offre un vantaggio nel gioco. Non influiscono sul rilevamento dei colpi, sul movimento o su alcun valore verificato dal server, e poiché la modifica risiede interamente nel rendering locale, non esiste alcun schema di pacchetti o controllo lato server a cui un anticheat possa fare riferimento. Si colloca nella stessa categoria di modifiche all'HUD e di altre mod cosmetiche, lontano dai moduli di combattimento o di movimento.
+
+L'unica eccezione: alcuni server vietano qualsiasi modifica lato client per principio, indipendentemente da ciò che tale modifica effettivamente fa. Se le etichette con il nome sono consentite su un determinato server dipende dalle regole di quel server, e non da un reale rischio di rilevamento, dato che di solito non ce n'è uno significativo.
+
+<Callout variant="tip" title="Dove si inserisce in Opal">
+Opal non distribuisce un modulo specificamente chiamato Nametags, ma il territorio in cui risiede, le modifiche che esistono interamente in ciò che viene disegnato e che non toccano nulla controllato dal server, è esattamente ciò attorno a cui è costruita la categoria visiva di Opal. La stessa filosofia, che si tratti di un tag, di un elemento HUD o di come appare illuminata una caverna.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Nametags è la stessa cosa di un ESP o di un wallhack?">
+No. Nametags modifica solo l'aspetto del tag per i giocatori già visibili sullo schermo. Un ESP o un wallhack mostra informazioni per entità nascoste dietro muri o terreno, cosa che Nametags non fa mai.
+</FAQItem>
+
+<FAQItem question="Nametags riescono a vedere attraverso i muri?">
+No. Viene renderizzato sopra il disegno normale del nametag del gioco, che si attiva solo per le entità per le quali il client mostrerebbe già un'etichetta.
+</FAQItem>
+
+<FAQItem question="Che tipo di informazioni può mostrare un modulo Nametags?">
+Aggiunte comuni sono salute, distanza, armatura e ping, oltre a modifiche di stile come uno sfondo o un font diverso. I campi esatti variano a seconda del cliente.
+</FAQItem>
+
+<FAQItem question="Nametags vengono segnalati dagli anticheat?">
+Improbabile. Si tratta di una modifica di rendering locale che non invia dati aggiuntivi al server e non tocca nulla che il server controlla effettivamente, a differenza dei moduli di combattimento o di movimento.
+</FAQItem>
+
+<FAQItem question="Quali clienti hanno il modulo Nametags?">
+La funzione Fan è documentata con uno. Funzionalità simili e personalizzabili per targhette identificative si trovano in altri client di utilità con nomi diversi.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "Le categorie più ampie di Etichette e ogni altro modulo qui presente." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Costruito attorno all'idea di rimanere invisibili, l'istinto opposto a quello di un modulo che si limita a etichettare ciò che è già visibile." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Un modulo che agisce automaticamente sulle informazioni; Nametags le mostra soltanto." },
+]} />
+
+<CTA href="/it/purchase">La categoria visiva di Opal è progettata per modifiche proprio come questa, scopri cosa contiene effettivamente.</CTA>

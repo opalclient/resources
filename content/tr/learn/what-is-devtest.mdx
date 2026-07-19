@@ -1,0 +1,81 @@
+---
+title: Minecraft istemcisinde DevTest nedir?
+description: DevTest, bazı Minecraft istemcilerinde bulunan, tamamlanmamış kodları test etmek amacıyla oluşturulmuş, oyunculara gerçek bir özellik veya sabit bir ayar sunmak için tasarlanmamış, geliştirme modülünün bir kalıntısıdır.
+excerpt: DevTest, geliştiricilerin istemci içinde hata ayıklaması yerine, hatanın yanında olmadığında kalan şeydir. Bu bir çözüm değil, sevkiyat öncesinde silinmeyen ödevdir.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: DevTest aslında ne iş yapar?
+    a: Sabit bir işlevi yok. Geliştiriciler, şu anda test ettikleri veya hata ayıkladıkları şey için yeniden kullandıkları bir alan, bu yüzden davranışı derlemeden derlemeye değişir ve nadiren belgelenir.
+  - q: DevTest oyuncular tarafından kullanılmak üzere mi tasarlandı?
+    a: Hayır, oyuncuya yönelik bir araç olarak tasarlanmamıştır, geliştirme artığıdır. Çoğu derleme de gerçek ayarlar veya açıklama olmadan gönderilir.
+  - q: DevTest seni banlanmana sebep olabilir mi?
+    a: Tamamen, geliştiricilerin derleme zamanında ona bağladıklarına bağlıdır. Pasif bir DevTest hiçbir şey yapmaz. Hala tamamlanmamış bir istismar veya paket koduna bağlı olanı, bir sunucunun antichiati karşısında öngörülemez davranabilir.
+  - q: Geliştiriciler neden yayınlamadan önce DevTest'i kaldırmıyorlar?
+    a: Çünkü çıkarmak ek temizlik demektir ve birçok geliştirici, aynı slotu bir sonraki güncelleme döngüsünde tekrar test etmek için yeniden kullanmayı bekliyor.
+---
+
+<KeyTakeaways>
+
+- DevTest, bazı Minecraft istemcilerinde dahili testler için oluşturulmuş, oyuncu kullanımı için tasarlanmamış, kalan bir geliştirici modülüdür.
+- Sabit bir davranışı yoktur, geliştiriciler hata ayıklarken bu alanı yeniden kullanır, bu nedenle davranış derlemeler arasında değişir.
+- Çoğu sürüm, gerçek ayarları veya açıklaması olmadan gönderilir.
+- Açık olarak bir güvenlik açığı kategorisi olarak sınıflandırılmıştır; güvenlik, o derlemeye bağlanan koda bağlıdır.
+
+</KeyTakeaways>
+
+DevTest, bazen bir istemcinin modül listesinde, belli bir işlevi olmayan bir modül olarak karşınıza çıkabilir. Ne bir KillAura varyantı ne de gizlenmiş bir nişan alma botudur: istemciyi oluştururken geliştiricilerin devam eden kodu denemek için kullandığı bir artıklık kodudur. Yazılımı gönderenler için yazıldığı için oyuncular için değil, DevTest tutarlı bir davranışa sahip değildir. Belirli bir derlemede ne yaptığı, son düzenlediği zaman yazarlarının hata ayıklarken üzerinde çalıştığı şeye tamamen bağlıdır ve bu, sürümler arasında veya aynı sürümün iki derlemesi arasında değişebilir.
+
+## Nasıl Çalışır
+
+DevTest, bunun asla amacı olmadığı için sabit bir oyuncuya yönelik işlevselliğe sahip değildir. Geliştiriciler, modülü üzerinde çalıştıkları şeye bağlarlar: yeni bir render yolu, bir paket işleyici, bir istismar mantığı veya sadece bir şeyin çökmeden çalıştığını doğrulamak için bir çalışma alanı. DevTest'in bir derlemede ne yaptığı, bir sonraki derlemede ne yaptığıyla pek ilgisi yoktur, çünkü yazarları genellikle her seferinde farklı bir soruna işaret etmektedir.
+
+İşte bu yüzden genellikle eksik olarak gönderilir. Ayar yok, boş bir açıklama veya gerçek bir modül kendisini açıklarken kullanacağı yer tutucu metin. Sürüm derlemesinde etkinleştirmek hiçbir şey yapmayabilir. Ayrıca, geliştiricilerin göndermeden önce kaldırmayı unuttuğu test kodunu da çalıştırabilir.
+
+Müşteri geliştiricileri, bu tür bir modül slotuna yönelirler çünkü test ettikleri birçok şey – hareket, işleme, istismar zamanlaması – yalnızca gerçek bir sunucuya karşı doğru şekilde çalışır, bir sandbox'a karşı değil. Çalışan istemci içindeki hızlı bir açma/kapama anahtarı, her deney için ayrı bir derleme oluşturmaktan daha iyidir. İstemci yayınlandığında, slot bazen listede kalır, çünkü onu kaldırmak ek iş demektir veya ekip yine de bir sonraki geliştirme döngüsünde yeniden kullanmayı planlıyor.
+
+## Kullanımı Güvenli mi?
+
+Burada tek bir cevap yok, çünkü DevTest tek bir özellik ve tek bir davranış değildir, bir yer tutucudur. Eğer derlemenizde inert ise, onu etkinleştirmek hiçbir şey yapmaz ve diğer kullanılmayan ayarlardan daha fazla risk taşımaz. Eğer bir paket manipülasyonu veya yarım kalmış bir istismar gibi bir şey için kod testine bağlıysa, onu açmak, gerçek bir sunucunun anticheat'ına karşı test edilmediği için çalıştırılmaması gereken davranışları tetikleyebilir.
+
+Etiketlenmemiş bir geliştirici modülünü öngörülemez olarak ele alın. Zararsız, ölü bir anahtar olduğunu varsaymayın ve gizli bir özellik olduğunu da varsaymayın. Ne deyin ki, derlemenin onu neye yönelttiğini bilene kadar ikisi de değildir.
+
+<Callout variant="tip" title="Opal Oyunculara Ne Gönderiyor">
+Opal oyunculara doğrudan kod göndermez. Listedeki her modülün bir anlamı olan bir adı, yaptığı şeye uygun bir açıklaması ve etiketlendiği gibi davranan ayarları vardır. Bir özellik tamamlanmamışsa, bir derlemede yayınlanmaz.
+</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını anlatmıyor">
+Bu sayfa, terimin genel anlamını açıklamaktadır. DevTest, tek bir bilinen iması olan tasarlanmış bir hile değildir, ancak belirli bir derlemede bunu istismar veya paket manipülasyonu koduna bağlarsa, çalıştırılması, hiçbir antichiatin beklemediği davranışlara yol açabilir ve bu tam olarak hesapların işaretlendiği örüntüdür.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="DevTest ne işe yarıyor?">
+Sabit bir işlevi yok. Geliştiricilerin yeniden kullandığı, şu anda test ettikleri veya hata ayıkladıkları şey için bir alan, bu nedenle davranışı derlemeden derlemeye değişir ve nadiren belgelenir.
+</FAQItem>
+
+<FAQItem question="DevTest oyuncular tarafından kullanılmak üzere mi tasarlandı?">
+Hayır. Oyunculara yönelik bir araç olarak tasarlanmamış, geliştirme aşmasından kalma bir şeydir ve çoğu sürümde gerçek ayarları veya açıklaması yoktur.
+</FAQItem>
+
+<FAQItem question="DevTest sizi banlanmaya yol açabilir mi?">
+Tamamen, geliştiricilerin derleme zamanında ona nasıl bir özellik eklediğine bağlıdır. Pasif bir DevTest hiçbir şey yapmaz. Hala tamamlanmamış bir exploit veya paket koduna bağlı olan bir DevTest, bir sunucunun hile önleme sistemleri karşısında beklenmedik davranışlar sergileyebilir.
+</FAQItem>
+
+<FAQItem question="Geliştiriciler neden yayınlamadan önce DevTest'i kaldırmıyorlar?">
+Çünkü bunu çıkarmak ek temizlik gerektirir ve birçok geliştirici aynı slotu bir sonraki güncelleme döngüsünde tekrar test etmek için kullanmayı bekliyor.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Bunun gibi daha geniş kategorilere ait modüller." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Müşteriler, gizli kalmaya yönelik yaklaşımları tespit edilmelerini farklı şekillerde etkiliyor." },
+  { href: "/tr/learn/what-is-reach", label: "Ulaşmak nedir?", description: "Tek bir işi olan ve bilinen bir imzası bulunan, DevTest'in zıttı bir modül." },
+]} />
+
+<CTA href="/tr/satın-al">Opal, sıfırdan kod değil, tamamlanmış modüller gönderir. $8.99 için listeye bakın.</CTA>

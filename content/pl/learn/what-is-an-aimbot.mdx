@@ -1,0 +1,103 @@
+---
+title: Czym jest aimbot w Minecraft? Moduł wyjaśniający
+description: Aimbot to moduł oszukiwania, który automatycznie wycelowuje krzyż celowniczy na cel. Oto jak on działa, czym różni się od pomocy przy celowaniu i dlaczego jest wykrywany.
+excerpt: Aimbot natychmiastowo celuje krzyżem na przeciwnika, dzięki czemu każdy strzał trafia, mimo że nadal klikasz. Oto jak modyfikuje kąty widzenia i dlaczego plasuje się na spektrum z pomocą celowania.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Modules
+author: trq
+faqs:
+  - q: Czy aimbot to oszustwo, czy modyfikacja?
+    a: Aimbot to moduł oszukiwania. Celuje za gracza, co narusza zasady praktycznie każdego serwera wieloosobowego, dlatego uznawane jest za oszustwo, a nie modyfikację zapewniającą uczciwą grę.
+  - q: Jaka jest różnica między aimbotem a KillAura?
+    a: Aimbot wyrównuje tylko celownik, pozostawiając klikanie graczowi. KillAura celuje i samodzielnie wysyła ataki. Aimbot to wariant tylko z celowaniem.
+  - q: Jaka jest różnica między aimbotem a pomocą przy celowaniu?
+    a: Są to punkty na tej samej osi. Pomoc celowania delikatnie przesuwa widok i pozostawia większość celowania graczowi; celownik automatyczny ciągnie mocno i wykonuje prawie wszystko.
+  - q: Czy aimbot może być niewykrywalny?
+    a: Nie. Wygładzanie i losowość sprawiają, że celowanie wygląda bardziej ludzko, ale dane rotacji, które klient wysyła, wciąż zawierają wzorce, które systemy anticheat wykrywają. Mocne celowanie pozostaje wykrywalne.
+---
+
+<KeyTakeaways>
+
+- Aimbot to moduł bojowy, który automatycznie nakierowuje celownik gracza na cel.
+- Czysty aimbot jedynie celuje; gracz nadal musi klikać, aby zaatakować, co odróżnia go od KillAury.
+- Asysta celowania i aimbot znajdują się na jednym spektrum, często kontrolowane pojedynczym suwakiem siły.
+- Wykrywany jest na podstawie danych kąta widzenia: rotacji zbyt precyzyjnych lub zbyt szybkich, by mogły być wykonane przez człowieka.
+
+</KeyTakeaways>
+
+Aimbot to moduł oszukiwania, który celuje za gracza. Wybiera cel, a następnie przesuwa celownik na ten cel, bez potrzeby regulacji myszy przez gracza. Słowo to jest skrótem od "automatycznego celowania". W Minecraft termin ten zwykle oznacza moduł, który blokuje widok na przeciwnika, dzięki czemu każdy strzał trafia.
+
+## Jak działa aimbot
+
+Aimbot uruchamia małą pętlę podczas walki gracza. Najpierw skanuje obszar w poszukiwaniu prawidłowych celów w zasięgu. Następnie wybiera jeden, zwykle najbliższego przeciwnika lub tego, który znajduje się najbliżej aktualnego celownika. Na koniec obraca widok gracza, aby celownik znajdował się na tym celu.
+
+Kluczowa różnica w stosunku do modułów auto-atakowania polega na tym, co kontroluje aimbot. Czysty aimbot zajmuje się tylko celowaniem. Gracz nadal klika, aby zaatakować. To sprawia, że wydaje się on mniej oczywiście zautomatyzowany niż moduł, który również strzela, ponieważ człowiek nadal naciska przycisk.
+
+Większość implementacji działa poprzez edycję wartości yaw i pitch gracza, czyli dwóch kątów opisujących kierunek widoku. Moduł oblicza kąt od oczu gracza do celu, a następnie zapisuje te kąty w grze, aby następny pakiet atakujący je zawierał.
+
+## Aimbot vs. pomoc celowania
+
+Te dwa terminy opisują spektrum, a nie dwie od siebie niezależne rzeczy. Podział dotyczy tego, ile robi oprogramowanie i jak silne jest przyciąganie.
+
+| Termin | Co robi | Wejście gracza | Odczucie |
+|---|---|---|---|
+| Pomoc w celowaniu | Delikatnie przesuwa widok w stronę celu | Gracz celuje w większości sam | Subtelne, "lepkie" |
+| Celownik automatyczny | Bezpośrednio blokuje widok na cel | Gracz prawie w ogóle nie celuje | Twarde zablokowanie |
+
+Pomoc w celowaniu stosuje łagodne korekty. Gracz wykonuje większość pracy związanej z celowaniem, a moduł koryguje ostatnie kilka stopni, dzięki czemu krzyż celowniczy przylega do wroga. Celownik automatyczny eliminuje niemal całą pracę gracza związaną z celowaniem i natychmiastowo celuje w cel. Wiele modułów znajduje się pomiędzy tymi dwoma opcjami i pozwala na regulację siły za pomocą suwaka, dzięki czemu ten sam kod może zachowywać się jak każda z nich.
+
+## Typowe ustawienia
+
+Moduły celownika automatycznego i pomocy w celowaniu udostępniają pokrętła, które zmieniają siłę i widoczność celowania.
+
+| Ustawienie | Co kontroluje |
+|---|---|
+| Zasięg | Jak daleko może być cel, aby nadal mógł zostać wycelowany |
+| Pole widzenia | Jak szeroki kąt liczy się jako "przed" graczem |
+| Siła | Jak mocno widok jest ciągnięty w stronę celu |
+| Wygładzanie | Jak stopniowo krzyż celowniczy przesuwa się na cel |
+| Cele | Jakie typy obiektów są brane pod uwagę jako prawidłowe (gracze, moby) |
+| Priorytet celu | Czy blokować najbliższy, o najniższym zdrowiu, czy najbardziej zwrócony cel |
+
+Siła i wygładzanie mają największe znaczenie. Siła 100 procent bez wygładzania to twardy zamek, który natychmiast pęka. Niższa siła z dużym wygładzaniem wygląda bardziej jak praca wykwalifikowanego człowieka, co jest celem funkcji wspomagania celowania.
+
+## Dlaczego to jest wykrywane
+
+Aimbot jest wykrywany, ponieważ generuje wzorce celowania, których człowiek nie jest w stanie odtworzyć. Anticheaty po stronie serwera monitorują strumień kątów widzenia wysyłanych przez klienta. Automatyczne celowanie pozostawia ślady: rotacje zbyt precyzyjne, obroty szybsze niż ręka może przesunąć myszą i krzyż celowniczy, który śledzi ruchomy cel bez błędu.
+
+Najtrudniejszą częścią pisania tego typu modułu nie jest matematyka. Chodzi o to, aby rotacje wyglądały jak ludzkie. Dlatego tak wiele wersji dodaje losowość, krzywe przyspieszenia i niewielkie stałe przesunięcie, aby krzyż celowniczy lądował blisko celu, a nie dokładnie na nim. Nowoczesny anticheat nadal mierzy podstawowy sygnał, więc duże korekty pozostają ryzykowne, niezależnie od tego, jak bardzo są wygładzane.
+
+## Aimbot w porównaniu z innymi modułami bojowymi
+
+Aimbot zapisuje jedynie kąty widzenia i pozostawia atakowanie graczowi. [KillAura](/pl/learn/what-is-killaura) idzie o krok dalej i wysyła również trafienia, celując i atakując w walce wręcz. [Reach](/pl/learn/what-is-reach) działa w zupełnie innym obszarze, zwiększając zasięg ataku, a nie to, gdzie wskazuje krzyż. Aimbot jest członkiem tej rodziny, który zajmuje się wyłącznie celowaniem, dlatego pojedynczy suwak siły może przesunąć go w stronę łagodniejszego wspomagania celowania lub w stronę twardego zablokowania.
+
+<Callout variant="warning" title="Informacja, nie instrukcja">
+Ta strona opisuje moduł w sposób ogólny, abyś wiedział, co ten termin oznacza. Nazewnictwo i dokładne zachowanie różnią się w zależności od klienta, a automatyczne celowanie łamie zasady praktycznie na każdym serwerze.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy aimbot to hack czy mod?">
+Aimbot to moduł oszukiwania. Celuje za gracza, co narusza zasady praktycznie każdego serwera wieloosobowego, dlatego zalicza się do oszustw, a nie do modów fair play.
+</FAQItem>
+
+<FAQItem question="Jaka jest różnica między aimbotem a KillAura?">
+Aimbot jedynie wyrównuje celownik, pozostawiając klikanie graczowi. KillAura celuje i wysyła ataki samodzielnie. Aimbot to wariant tylko z celowaniem; KillAura to pełnoautomatyczny atakujący.
+</FAQItem>
+
+<FAQItem question="Jaka jest różnica między aimbotem a asystą celowania?">
+Są to punkty na tej samej osi. Asysta celowania delikatnie przesuwa widok i pozostawia większość celowania graczowi. Aimbot mocno przesuwa widok i wykonuje prawie całe celowanie. Pojedynczy suwak siły często przekształca jedno w drugie.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Autouzdrawiający się kuzyn aimbota." },
+  { href: "/pl/learn/what-is-reach", label: "Co to jest Reach?", description: "Moduł walki na dystans." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szersza kategoria, do której te moduły należą." },
+]} />
+
+<CTA href="/pl/purchase">Zobacz, co Opal wysyła dla $8.99</CTA>

@@ -1,0 +1,96 @@
+---
+title: Co to jest rusztowanie w Minecraft? (Wyjaśnienie modułu)
+description: Scaffold to moduł ruchu, który automatycznie umieszcza bloki pod tobą podczas chodzenia, pozwalając na budowanie mostów bez celowania. Oto jak to działa i dlaczego systemy antycheat to wykrywają.
+excerpt: Ruszt podłogę układa pod stopami, gdy idziesz, pozwalając Ci bez użycia rąk pokonywać przerwy. Oto jak moduł układa bloki i dlaczego rotacja go zdradza.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Modules
+author: trq
+faqs:
+  - q: Jaka jest różnica między Scaffoldem a makrem mostu?
+    a: Makro mostu powtarza ustalone wciśnięcia klawiszy w określonych odstępach czasu. Scaffold reaguje na Twoją bieżącą pozycję i rotację co cykl, dzięki czemu dostosowuje się do skrętów i zmian prędkości, zamiast powtarzać jedną, zaprogramowaną sekwencję.
+  - q: Dlaczego Scaffold tak łatwo wpada?
+    a: "Zazwyczaj zdradza to rotacja: moduł umieszcza bloki pod kątem, na który kamera nie patrzy, a anticheaty po stronie serwera porównują te dwie wartości. Idealne trafienie w czas to druga wskazówka."
+  - q: Czy Scaffold to ruch, czy moduł globalny?
+    a: Klasyfikuje się je jako moduł ruchu, ponieważ jego celem jest utrzymanie ruchu gracza nad przepaściami. Umieszczanie bloków jest środkiem, a nie celem.
+  - q: Czy można uczynić Scaffold niewykrywalnym?
+    a: Nie. Dodawanie opóźnień i fałszywych rotacji utrudnia wykrywanie, ale nowoczesny anticheat ma wciąż wiele sygnałów do porównania, a każda konsekwentna automatyzacja ostatecznie pozostawia ślad.
+---
+
+<KeyTakeaways>
+
+- Scaffold to moduł ruchu, który automatycznie umieszcza bloki pod twoimi stopami podczas chodzenia.
+- Wybiera blok z paska szybkiego dostępu, obraca się w stronę otwartej przestrzeni za tobą i umieszcza go przed tobą, zanim spadniesz.
+- Najtrudniejsza część to rotacja, na którą anticheaty zwracają największą uwagę.
+- Pozwala ci bezproblemowo budować mosty, zamiast spoglądać w dół i ręcznie wyznaczać czas umieszczania każdego bloku.
+
+</KeyTakeaways>
+
+Ruszt to moduł ruchu, który automatycznie umieszcza bloki pod stopami podczas chodzenia, dzięki czemu możesz przechodzić nad szczelinami bez konieczności celowania kamerą w dół. Wybiera blok z twojego paska szybkiego dostępu, obraca się w stronę otwartej przestrzeni za tobą i umieszcza go w momencie, gdybyś miał spaść z krawędzi. Efektem jest budowanie mostów bez użycia rąk.
+
+## Co robi Ruszt
+
+Rusz sprawia, że budowanie mostów staje się automatyczną akcją. Normalne budowanie mostów wymaga patrzenia w dół, przytrzymywania klawisza umieszczania i cofania się w stałym tempie. Ruszt zajmuje się czasem i umieszczaniem bloków za ciebie. Trzymasz klawisz ruchu, a moduł utrzymuje podłogę pod tobą.
+
+Większość implementacji udostępnia kilka opcji:
+
+| Opcja | Co kontroluje |
+|--------|------------------|
+| Tryb wieży | Czy również umieszcza bloki prosto w dół podczas skakania w miejscu |
+| Obsługa obrotu | Czy zatrzymuje twój widok, czy udaje kąt umieszczania bez dźwięku |
+| Opóźnienie umieszczania | Jak długo czeka między blokami, aby wyglądać mniej mechanicznie |
+| Dopuszczenie sprintu | Czy możesz utrzymać prędkość sprintu podczas umieszczania |
+| Wybór bloku | Z którego slotu paska szybkiego dostępu pobiera blok |
+
+Ponieważ jest to zachowanie z kategorii ruchu, Ruszt funkcjonuje obok innych modułów, które zmieniają sposób, w jaki gracz porusza się po świecie, a nie sposób walki.
+
+## Jak to działa w środku
+
+Scaffold monitoruje Twoją pozycję i prędkość z każdym tickiem. Gdy przewiduje, że Twój następny krok wyląduje w powietrzu, wysyła polecenie umieszczenia bloku do serwera zanim spadniesz. Najtrudniejsza część to rotacja. Gra normalnie umieszcza blok na powierzchni, na którą patrzysz, więc moduł musi skierować widok gracza w puste miejsce za nimi i pod nimi, umieścić blok i często przywrócić oryginalny widok.
+
+Istnieją dwa główne style. Jeden natychmiastowo ustawia kamerę na kąt umieszczenia bloku na jeden tick, co jest szybkie, ale widoczne. Drugi wysyła pakiety umieszczenia bloku z sfałszowaną rotacją, pozostawiając kamerę na ekranie bez zmian, co wygląda czystszo dla innych graczy, ale jest to dokładnie wzorzec, który wykrywacze anticheatów śledzą.
+
+## Dlaczego anticheaty to oznaczają
+
+Scaffold generuje wzorce ruchu i rotacji, które ludzie rzadko stosują. Serwerowe anticheaty szukają kilku oznak:
+
+- Umieszczania bloków, których rotacja nie odpowiada kątowi widoku kamery.
+- Idealnie wyważonych umieszczania, które nigdy nie chybiają i nigdy się nie nakładają.
+- Chodzenia do tyłu ze stałą prędkością podczas umieszczania na każdym brzegu bloku.
+- Umieszczania bloku na powierzchni, której gracz realistycznie nie mógłby zobaczyć.
+
+Nowoczesny system antycheat nie musi "widzieć" modułu. Potrzebuje jedynie zauważyć rozbieżność kątów umieszczenia i kątów patrzenia, albo że rytm budowania mostów jest zbyt regularny, by mógł być dziełem człowieka. Dlatego ustawienia Scaffold często poświęcają szybkość na rzecz wiarygodnej losowości.
+
+## Legalny vs. oszustwo – kontekst
+
+Automatyczne budowanie mostów występuje również w wersjach zbliżonych do oryginalnej gry. Niektóre serwery treningowe i mapy treningowe zawierają trener budowania mostów, a niektóre narzędzia kreatywne umieszczają rzędy bloków dla budowniczych. Moduł Scaffold różni się tym, że działa podczas normalnej rozgrywki przetrwania lub rywalizacji, aby uzyskać nieuczciwą przewagę, dlatego pojawia się w materiałach dotyczących wykrywania oszustw, a nie w narzędziach do budowania.
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona opisuje moduł w sposób ogólny, abyś wiedział, co ten termin oznacza. Nazewnictwo i dokładne zachowanie różnią się w zależności od klienta, a automatyczne umieszczanie bloków w celu połączenia przerywa zasady na praktycznie każdej serwerze konkurencyjnej.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Jaka jest różnica między Scaffoldem a makrem mostu?">
+Makro mostu powtarza ustalone naciśnięcia klawiszy w określonych odstępach czasu. Scaffold reaguje na Twoją bieżącą pozycję i rotację co cykl, dzięki czemu dostosowuje się do skrętów i zmian prędkości, zamiast powtarzać jedną, zdefiniowaną sekwencję ruchów.
+</FAQItem>
+
+<FAQItem question="Dlaczego Scaffold tak łatwo wykrywają?">
+Zazwyczaj zdradza go obrót. Moduł umieszcza bloki pod kątem, na który kamera nie patrzy, a anticheaty po stronie serwera porównują te wartości. Idealne, niezawodne wyczucie czasu umieszczania to kolejna wskazówka.
+</FAQItem>
+
+<FAQItem question="Czy Scaffold to ruch czy moduł świata?">
+Klasyfikuje się go jako moduł ruchu, ponieważ jego celem jest utrzymanie gracza w ruchu nad przepaściami. Umieszczanie bloków jest środkiem, a nie celem.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-velocity-anti-knockback", label: "Czym jest Prędkość (ochrona przed odrzutem)?", description: "Kolejny moduł bojowy powiązany z ruchem." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kategoria skryta, w której ukryte są moduły takie jak ten." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szersza kategoria, do której te moduły należą." },
+]} />
+
+<CTA href="/pl/purchase">Zobacz, co Opal wysyła dla $8.99</CTA>

@@ -1,0 +1,85 @@
+---
+title: Minecraft'ta Hacker Dedektörü Nedir? Modül Açıklaması
+description: Hacker Dedektörü, Minecraft modülü olup, rakiplerin erişimini, KillAura tarzı saldırılarını ve nişan botu dönüşlerini değerlendirir ve ardından savaşın ortasında olası hilekarları işaretler.
+excerpt: Her dövüşü, telsleri, menzili, KillAura'yı, nişan alma yumuşaklığını izler ve puan tutar, böylece kimin hile yaptığını tahmin etmenize gerek kalmaz. Kanıt değil. Sadece çok bilgili bir tahmin.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Hacker Dedektörü bir hile mi?
+    a: Hayır, sadece oyuncuya zaten görünür olan bilgileri okur, örneğin rakip pozisyonu ve isabet zamanlaması gibi; kullanıcının kendi karakterinin hareketlerini veya saldırılarını hiçbir zaman değiştirmez. Diğer oyuncuları işaretler, onların adına hareket etmez veya kullanıcı için herhangi bir eylemde bulunmaz.
+  - q: Hacker Dedektörü'nü hangi müşteriler içeriyor?
+    a: Tenacity, bir HackerDetector modülü gönderir ve aynı kalıp, rekabetçi 1.8 dönemine ait birkaç ücretli müşteride farklı isimler altında da kendini gösterir. Opal da kendi versiyonunu gönderir; bu modül Güvenli olarak kataloglanır.
+  - q: Hacker Dedektörü kullanmak beni yasaklanmama neden olabilir mi?
+    a: Hayır. Çünkü yalnızca istemcinin zaten aldığı durumu gözlemler ve sunucuya gönderilen hareketleri, dövüşleri veya paketleri hiçbir zaman değiştirmez; onu çalıştırmak, aradığı hilelerin taşıdığı riskin hiçbirini taşımaz.
+  - q: Hacker Dedektörü'nün işaretleri güvenilir mi?
+    a: Bu bir tahmindir, kesin bir hüküm değil. Yetkili sunucu verilerinin aksine, istemci tarafından görülebilir duruma göre akıl yürütür, bu nedenle hem yanlış pozitifler (gerçek bir oyuncunun bir denetimi tetiklemesi) hem de yanlış negatifler (eşiğin altında oturan ayarlanmış bir atlatma) meydana gelir.
+  - q: Hile gönderen bazı müşterilerin aynı zamanda Hacker Dedektörü de göndermesine ne sebep oluyor?
+    a: Dedektör, aynı zamanda müşterinin kendi baypasları için bir test tezgahı görevi gördüğü için. Geliştiriciler, kendi saldırı modüllerine karşı yerel olarak çalıştırır ve dedektör işaretlemeyi durdurana kadar bunları ayarlarlar; bu, sunucu tarafı bir antichi̇at'ın kullandığı döngüye oldukça yakındır.
+---
+
+<KeyTakeaways>
+
+- Hacker Dedektörü, oyuncuların hileye benzer davranışlarını değerlendiren istemci tarafı bir modüldür: vanilla sınırını aşma, KillAura tarzı otomatik saldırılar, nişan botu dönüş eğrileri ve anti-knockback bastırma.
+- Şüpheliyi tek bir vuruş yerine, tick'ler aralığında değerlendirir, böylece bir gecikme veya şanslı bir tıklama tek başına bir bayrak tetiklemez.
+- Yalnızca istemcinin zaten aldığı verileri okur. Kullanıcının nişanını, hareketini veya saldırılarını asla değiştirmez.
+- Opal, kendi sürümünü gönderir ve diğer oyuncuları işaretlememesi nedeniyle Güvenli olarak kataloglanır, bu da girdiğiniz verilere dokunmaz.
+
+</KeyTakeaways>
+
+Hacker Dedektörü, bir Minecraft modülüdür; savaşta diğer oyuncuları izler ve kimin hile yapma olasılığı olduğunu gösteren bir şüphe puanı tutar. Her tick'ta, yereldeki rakipleri, vanilla sınırının ötesine geçen menzil, KillAura tarzı otomatik saldırı, aimbot benzeri pürüzsüz dönüş eğrileri, anti-knockback bastırma ve bir elin yapabileceği kadar temiz olmayan tıklama kalıpları gibi bilinen imzalar kümesine karşı kontrol eder. Eşiği aştığında, modül bir işaret yükseltir. Tecrübeli bir PvPer'in bir savaşın garip hissettiğinde zaten yaptığı okuma ile aynıdır, ancak sadece bir içgüdü yerine bir sayıya dönüştürülmüştür.
+
+## Nasıl Çalışır
+
+Her tick'ta, Hacker Dedektörü yakındaki rakip oyuncuların hareketlerini, dönüşlerini ve savaş davranışlarını bilinen hile imzalarına karşı örnek alır: vanilla sınırının ötesine geçen menzil, KillAura tarzı otomatik saldırı, aimbot dönüş eğrileri, hız veya anti-knockback bastırma ve bir insanın tıkladığı gibi görünmeyen tıklama aralıkları. Herhangi bir imzaya karşı bir eşleşme, oyuncunun devam eden şüphe puanına eklenir. Eşiği aştığında, modül onları işaretler.
+
+Puanlama, tek bir anıya tepki vermek yerine, bir zaman aralığı üzerinden gerçekleşir. Rastgele bir gecikme artışı, şanslı bir tıklama veya denk gelen bir hareket çerçevesi tek başına yeterli değildir; gerçek hile davranışları bir savaşta tutarlı bir şekilde tekrarlanır ve bir şans eseri böyle bir durum yaşanmaz. Bu zaman aralığı, gerçekten faydalı olan bir modül ile ilk garip paket karşısında yanlış alarm veren bir modül arasındaki farkı oluşturur.
+
+## Yerleşik bir atlatma test ortamı
+
+Ofansif modüller gönderen istemciler, KillAura, bir nişan alma botu, uzatılmış menzil gibi, Hacker Detector'ı da gönderme eğilimindedir ve bu tesadüf değildir. Kendi istemcinize karşı kendi dedektörünüzü, atlatma aktifken çalıştırmak, bir geliştiriciye hangi kontrollerin tetiklendiğini ve hangilerinin tetiklenmediğini tam olarak gösterir. Yerel dedektör sessizleşene kadar atlatmayı ayarlayın ve sunucu tarafındaki bir antichiatin sizin üzerinde çalıştırdığı döngüye yakın bir döngü çalıştırmış olursunuz. Hem dedektörü hem de istemciyi yan yana oluşturan istemciler, bunun için daha temiz ofansif modüllerle sonuçlanır; dedektör aynı zamanda QA olarak da görev yapar.
+
+## Kullanımı güvenli mi
+
+Evet, çalıştırdığınızda aradığı hilelerin riskini taşımaz. Hacker Dedektörü yalnızca istemcinin zaten sahip olduğu bilgileri okur; konumları, dönüşleri, isabet zamanlamalarını, tıklama aralıklarını, asla yetkili sunucu verilerini ve kullanıcının kendi hesabının gönderdiği şeyleri asla değiştirmez. Ne değiştirilmiş isabetler, ne değiştirilmiş hareketler, ne farklı paketler vardır. Sunucu tarafındaki bir antichiattın yakalayabileceği hiçbir şey yoktur, çünkü o hiçbir şey yapmamıştır.
+
+Diğer kişi hakkında haklı olup olmadığı ayrı bir sorudur. Sunucunun gerçek gerçeği yerine istemci tarafından görülebilir duruma göre akıl yürüttüğünden, puanlaması bir tahmindir, bir hüküm değildir. Yüksek pingli bir rakip, alışılmadık bir fare kurulumu veya tesadüfi zamanlamaların bir dizisi hala bir bayrağı tetikleyebilir ve iyi ayarlanmış bir atlatma, hiçbirini yakmadan her eşiğin altında kalabilir. Bir bayrağı, bir hesaba güvendiğiniz bir rapor olarak değil, daha yakından izlemek için bir neden olarak ele alın.
+
+<Callout variant="tip" title="Opal tarafından gönderiliyor">
+Opal'ın kendi Hacker Dedektörü de aynı işi yapıyor: hile yaptıklarına benzeyen oyuncuları işaretliyor. Puanlama, Opal'ın yaşam kalitesini artıran diğer okumalarla aynı kategoriye dahil edildi, çünkü bir rakibi puanlamak kendi girdilerinizi etkilemez ve bir anticheat'ın yakalayabileceği hiçbir şey bırakmaz.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Hacker Detector hile mi peki?">
+Hayır. Sadece istemciye zaten görünür olan bilgileri okur, örneğin rakip pozisyonu ve isabet zamanlaması gibi, ve kullanıcının kendi karakterinin hareketlerini veya saldırılarını hiçbir şekilde değiştirmez. Diğer oyuncuları işaretler, onların adına hareket etmez veya kullanıcı için herhangi bir işlem yapmaz.
+</FAQItem>
+
+<FAQItem question="Hacker Detector hangi istemcileri içerir?">
+Tenacity, bir HackerDetector modülü gönderir ve aynı örüntü, rekabetçi 1.8 dönemine ait çeşitli ücretli istemcilerde farklı isimler altında görülür. Opal da kendi versiyonunu gönderir; bu, Güvenli bir modül olarak kataloglanır.
+</FAQItem>
+
+<FAQItem question="Hacker Dedektörü kullanmak beni yasaklatır mı?">
+Hayır. Çünkü yalnızca istemci tarafından zaten alınan durumları gözlemler ve hareketleri, dövüşleri veya sunucuya gönderilen paketleri hiçbir şekilde değiştirmez. Bu nedenle, aradığı hilelerin taşıdığı riski barındırmaz.
+</FAQItem>
+
+<FAQItem question="Hacker Detector'ın işaretlemesi güvenilir mi?">
+Bir tahmindir, kesin bir hüküm değil. Yetkili sunucu verileri yerine istemci tarafından görülebilen duruma göre çıkarım yapar, bu nedenle hem yanlış pozitifler (gerçek bir oyuncunun bir denetimi tetiklemesi) hem de yanlış negatifler (eşiği aşmayan ayarlanmış bir atlatma) meydana gelir.
+</FAQItem>
+
+<FAQItem question="Neden bazı müşteriler hile gönderirken aynı zamanda Hacker Dedektörü de gönderiyorlar?">
+Çünkü dedektör, müşterinin kendi atlatma yöntemleri için bir test tezgahı görevi görüyor. Geliştiriciler, kendi saldırı modüllerine karşı yerel olarak çalıştırıyor ve dedektör bayrak atmayı durana kadar ayarlıyorlar; bu da sunucu tarafındaki bir antichiit sisteminin kullandığı döngüye oldukça yakın.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "Hacker Dedektörü'nün şüphe puanının oluşturulmasında yakalamayı hedeflediği imzaların bir tanesi." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "Düzgün dönüş eğrileri, modül puanlarına karşı bir başka göstergedir." },
+  { href: "/tr/learn/what-is-reach", label: "Reach nedir?", description: "Vanilya sınırının ötesindeki mesafe, işaretlenmesi en kolay olanı." },
+]} />
+
+<CTA href="/tr/satin-al">Üçüncü darbe gelmeden kiminle savaştığını bil. Opal $8.99'dan başlıyor.</CTA>

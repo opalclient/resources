@@ -1,0 +1,77 @@
+---
+title: Czym jest krok w Minecraft? Wyjaśnienie modułu ruchu
+description: Krok to moduł ruchu, który umożliwia wspinaczkę na bloki wyższe niż domyślna wysokość automatycznego kroku w Minecrafcie, bez konieczności skakania. Oto jak to działa i ryzyko wykrycia.
+excerpt: Podwyższa wysokość bloku, na który można wejść bez skakania, dzięki czemu krawędzie i nierówne powierzchnie nie przerywają kroku. Oto, co się zmienia i jaki to koszt.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co zalicza się do wysokości automatycznego kroku?
+    a: Wanilia pozwala graczowi poruszającemu się automatycznie pokonywać niskie przeszkody, takie jak płyta czy schodki, bez skakania, ale zatrzymuje się przy wyższych przeszkodach i zmusza do skoku. Stopnie podnoszą ten pułap, dzięki czemu większe bloki można pokonywać w ten sam automatyczny sposób.
+  - q: Czy stepping zastępuje całkowicie skakanie?
+    a: Nie. Zmiana wysokości bloku wpływa jedynie na to, które bloki nadal są uznawane za automatycznie pokonujące. Skakanie działa normalnie dla wszystkiego powyżej podniesionego limitu i dla szczelin wymagających rzeczywistej pionowej przestrzeni.
+  - q: Czy Step jest wykrywany przez antycheaty?
+    a: Może tak być. Step zmienia pionowy ruch wysyłany przez klienta w porównaniu z tym, co normalnie dopuszczają bloki przed graczem, a serwer sprawdzający wysokość kroku względem geometrii bloków ma konkretny sygnał ostrzegawczy.
+  - q: Którzy klienci posiadają moduł Step?
+    a: Krok jest udokumentowany jako działający w Fan i Tenacity, a Opal posiada własny moduł Step, który robi to samo. Inni klienci implementują to samo zachowanie pod różnymi nazwami.
+---
+
+<KeyTakeaways>
+
+- Krok to moduł ruchu, który umożliwia wchodzenie na bloki wyższe niż domyślna wysokość automatycznego kroku w Minecrafcie, bez konieczności skakania.
+- Przesłania sprawdzanie automatycznego wspinania się przez klienta co tick, dzięki czemu większe występy są traktowane jako przechodnie, a nie zablokowane.
+- Nie wysyłany jest żaden sygnał skoku, co utrzymuje celownik i pozycję hitboxa bardziej stabilnymi podczas przejścia.
+- Zmienia zgłaszany ruch pionowy, co niektóre programy anticheat mogą wykryć, porównując go z geometrią bloków.
+
+</KeyTakeaways>
+
+Krok to moduł ruchu, który pozwala graczowi chodzić po blokach wyższych niż wysokość automatycznego kroku w standardowej wersji, bez konieczności skakania. Zazwyczaj w Minecraft można wspinać się tylko na krótkie przeszkody automatycznie, a gra zatrzymuje się na wyższych, zmuszając do skoku. Krok podnosi lub usuwa ten limit, dzięki czemu większe bloki i półki pokonuje się w tempie chodzenia.
+
+## Jak działa Krok
+
+Co cykl, standardowa wersja sprawdza krawędź bloku przed chodzącym graczem i decyduje, czy jest wystarczająco niska, aby na nią wejść automatycznie. Jeśli nie, gra blokuje ruch i zmusza do skoku. Krok zastępuje to sprawdzenie, podnosząc wysokość, do której blok może być, zanim klient nadal potraktuje go jako coś, po czym można przejść bez skoku. Klient następnie unosi gracza na wyższy blok, bez wysyłania pakietu skoku.
+
+Ten ostatni element jest sednem atrakcyjności. Skok przerywa prostą ścieżkę chodzenia i na krótko zmienia twoją pionową pozycję i hitbox, co jest widoczne dla przeciwnika szukającego okazji. Pozostanie na ziemi podczas wchodzenia na blok utrzymuje celność i pęd stabilne podczas przejścia. Sprawia to również, że schody, płoty, ułożone na sobie półbloki i nierówny teren ogólnie są gładsze, dzięki czemu pokonujesz je bez utraty sprintu lub rytmu.
+
+## Czy Krok jest bezpieczny w użyciu
+
+Krok to funkcja używana na własną odpowiedzialność, a nie gwarantująca bezpieczeństwo. Modyfikuje pionowy ruch zgłaszany przez klienta do serwera, a system anticheat po stronie serwera, który ponownie oblicza oczekiwaną wysokość kroku w oparciu o bloki przed graczem, ma konkretny punkt odniesienia do weryfikacji. Czy dany serwer faktycznie monitoruje to, zależy, ale samo zachowanie jest prawdopodobnym punktem ostrzegawczym, a wykrycie wiąże się z tymi samymi konsekwencjami co każde inne oszustwo związane z ruchem: zablokowaniem, tak jak w przypadku lotu lub przyspieszacza, tylko mniej głośno o tym, jak to się dzieje.
+
+<Callout variant="tip" title="Opal nazywa ten krok">
+Opal udostępnia ten sam moduł pod tą samą nazwą: pozwala na tworzenie bloków wyższych niż to, na co pozwala wersja bazowa. Opal klasyfikuje jego użycie jako odbywające się na własną odpowiedzialność, tak jak tutaj. Jest wykrywalny, a jego uruchamianie wiąże się z takim samym ryzykiem bana, jak uruchamianie dowolnej wersji modułu przez klienta.
+</Callout>
+
+<Callout variant="warning" title="Informacja, nie instrukcja">
+Ta strona wyjaśnia, czym jest Krok i jak się zachowuje, a nie jest przewodnikiem po jego uruchamianiu niezauważonego. Zmiana wysokości pionowego ruchu, którą widzi serwer, nie jest standardowym zachowaniem, a każdy serwer sprawdzający wysokość kroku w odniesieniu do geometrii bloków może oznaczyć ten wzorzec.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co zalicza się do wysokości automatycznego pokonywania przeszkód w wersji vanilla?">
+W wersji vanilla gracz pieszo może automatycznie pokonywać krótkie przeszkody, takie jak płyta czy schodki, bez skakania, ale zatrzymuje się przy wyższych przeszkodach i zmusza do skoku. Step podnosi ten pułap, dzięki czemu większe bloki można pokonywać w ten sam automatyczny sposób.
+</FAQItem>
+
+<FAQItem question="Czy Step zastępuje skakanie całkowicie?">
+Nie. Step jedynie zmienia wysokość bloku, która nadal jest uznawana za automatycznie pokonującą. Skakanie działa normalnie dla wszystkiego powyżej tego podniesionego limitu oraz dla szczelin wymagających rzeczywistej pionowej przestrzeni.
+</FAQItem>
+
+<FAQItem question="Czy Step jest wykrywany przez antywiry?">
+Może tak. Step zmienia pionowy ruch wysyłany przez klienta w porównaniu z tym, co normalnie pozwoliłyby bloki przed graczem, a serwer sprawdzający wysokość kroku względem geometrii bloków ma konkretny sygnał do oznaczenia.
+</FAQItem>
+
+<FAQItem question="Klienci, którzy zawierają moduł Step, to jacy?">
+Moduł Step jest udokumentowany jako działający w Fan i Tenacity, a Opal dostarcza własny moduł Step, który robi to samo. Inni klienci implementują tę samą funkcjonalność pod innymi nazwami.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-scaffold", label: "Co to jest Scaffold?", description: "Blokowanie, w odniesieniu do wspinaczki po blokach Step'a." },
+  { href: "/pl/learn/what-is-velocity-anti-knockback", label: "Czym jest Prędkość (ochrona przed odrzutem)?", description: "Kolejny moduł ruchu, który zmienia to, co widzi serwer." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szersza kategoria, do której należą te moduły ruchu." },
+]} />
+
+<CTA href="/pl/purchase">Przestań zwalniać na każdym progu. Zobacz, co oferuje Opal dla $8.99.</CTA>

@@ -1,0 +1,81 @@
+---
+title: Czym jest zła rusztowanie w Minecraft? (Wyjaśnienie modułu)
+description: Zła Szczerka to bardziej surowa wersja modułu automatycznego mostu Scaffold, pomijająca sprawdzanie rotacji i wariancję czasową, co utrudnia wykrywanie przez programy anticheat.
+excerpt: Ta sama koncepcja mostu automatycznego, co w Scaffold, zbudowana na szybko. Luźniejsze terminy i mniej kontroli pozwalają szybciej pokonać przepaść i trafić na listę zbanowanych.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Bad Scaffold to to samo co Scaffold?
+    a: Nie. Scaffold to ogólny moduł samouzdrawiania, a Bad Scaffold to bardziej surowa wersja tej samej koncepcji, z luźniejszym czasem umieszczania i mniejszą ilością sprawdzeń ważności.
+  - q: Dlaczego klient zdecydowałby się na bardziej surową wersję Scaffold?
+    a: Budowanie jest szybsze. Pomijanie dopasowywania rotacji i wariancji czasowej oznacza mniej kodu do napisania i dostrajania, więc niektórzy klienci udostępniają to jako szybką opcję, mimo że bardziej dopracowana wersja byłaby trudniejsza do wykrycia.
+  - q: Czy używanie rusztowania Bad Scaffold jest bezpieczne?
+    a: Nie. Automatyzuje ono umieszczanie bloków w celu wypełniania luk, co łamie zasady na każdym serwerze, który to sprawdza, a luźniejsze czasy i brak kontroli ułatwiają jego wykrycie niż w przypadku dopracowanej implementacji Scaffold.
+  - q: Które dokumenty klienta dokumentuje Bad Scaffold?
+    a: Fani umieszczają Bad Scaffold w kategorii narzędzi do poruszania się, obok jego innych narzędzi do budowania mostów i pokonywania przeszkód.
+---
+
+<KeyTakeaways>
+
+- Bad Scaffold to bardziej surowa wersja Scaffold, modułu automatycznego mostu, który upuszcza bloki pod stopami z luźniejszym czasem i mniejszą ilością sprawdzeń poprawności.
+- Pomija dopasowywanie rotacji i wariancję czasową, które Scaffold wykorzystuje, aby wyglądać jak człowiek, poświęcając wiarygodność na rzecz szybkości.
+- Fani umieszczają go w kategorii ruchu; jak każdy automatyczny umieszczacz, jest do zbanowania tam, gdzie anticheat sprawdza takie moduły.
+
+</KeyTakeaways>
+
+Zła Szachownica to bardziej surowa wersja modułu automatycznego mostu Szachownica. Umieszcza bloki pod stopami podczas chodzenia w stronę szczeliny, tak jak każda Szachownica, ale z luźniejszym czasem i mniejszą ilością sprawdzeń, czy umieszczenie wyglądałoby wiarygodnie. Nie jest zepsuta, nadal buduje mosty. "Zła" odnosi się do tego, jak niedokładnie ukrywa, co robi. Dopracowana implementacja Szachownicy wkłada dużo pracy w to, by wyglądać jak robota ludzka. Zła Szachownica pomija większość tej pracy, co sprawia, że budowa i używanie jej jest szybsze, a dla serwera znacznie łatwiej ją wykryć
+## Jak to się różni od standardowego Scaffold
+Dopracowany moduł Scaffold wykonuje trzy sprawdzenia przed upuszczeniem bloku: czy rotacja umiejscowienia odpowiada kierunkowi, w którym skierowana jest kamera, czy opóźnienie między blokami jest wystarczająco zróżnicowane, by uniknąć mechanicznego rytmu, oraz czy celem jest powierzchnia, którą gracz mógłby rozsądnie zobaczyć. Słaby Scaffold oszczędza na jednym lub wszystkich trzech. Nadal śledzi twoją pozycję co tick i umieszcza blok pod stopami, zanim spadniesz. Po prostu nie ma ochoty ukrywać tego procesu.
+
+To mniejsza praca dla osoby, która go pisze: mniej sprawdzeń, mniej strojenia, brak potrzeby modelowania wiarygodnego opóźnienia między umieszczaniami. Lista fanów umieszcza Słaby Scaffold w swojej kategorii ruchu, obok innych narzędzi do budowania mostów i pokonywania przeszkód, jako szybką opcję, a nie staranną
+## Standardowa rusztowanie vs. zła rusztowanie
+
+| Sprawdź | Standardowy Szkielet | Zły Szkielet |
+|---|---|---|
+| Dopasowanie rotacji do kamery | Tak | Rzadkie lub pomijane |
+| Czas umieszczania | Zmienny, dostosowany, aby uniknąć wzorców | Stały lub minimalne opóźnienie |
+| Filtrowanie widoczności twarzy | Filtruje nienaturalne umiejscowienia | Pomijane |
+| Nakład pracy przy budowie i dostrajaniu | Większy | Mniejszy |
+| Jak łatwo jest oznaczyć | Mniejsza, ale nadal realna | Większa |
+
+Kompromis to cała historia. Mniej kodu i mniej dostrajania po jednej stronie, więcej dowodów po drugiej. Czas umieszczania, który nigdy się nie zmienia i rotacja, która ignoruje to, gdzie faktycznie patrzysz, to dokładnie wzorce, z którymi systemy antycheat porównują normalną rozgrywkę, a Zły Szkielet oddaje je obydwa za darmo.
+
+<Callout variant="tip" title="Opal wysyła również Scaffold">
+Katalog Opal'a wymienia Scaffold w jednej linii: automatycznie umieszcza bloki pod Tobą. Moduł tej samej kategorii co ten opisany tutaj. Opal oznaczony jest tak, jak powinien każdy klient – ostrzeżeniem o użyciu na własną odpowiedzialność, ponieważ automatyczne umieszczanie to automatyczne umieszczanie. Niezależnie od wersji, jest to wykrywalny wzorzec w momencie, gdy serwer go szuka.
+</Callout>
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona wyjaśnia termin, abyś wiedział, co on znaczy, gdy zobaczysz go na liście modułów, a nie jak go zbudować lub skonfigurować. Automatyczne umieszczanie bloków w celu wypełnienia luk narusza zasady na każdym serwerze, który to sprawdza, a luźniejsze wyzwalanie i brak kontroli w Bad Scaffold sprawiają, że łatwiej go wykryć niż w przypadku bardziej dopracowanego wdrożenia.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Bad Scaffold to to samo co Scaffold?">
+Nie. Scaffold to ogólny moduł automatycznego budowania mostów. Bad Scaffold to bardziej surowa wersja tego samego pomysłu, z luźniejszym czasem umieszczania elementów i mniejszą ilością sprawdzeń poprawności.
+</FAQItem>
+
+<FAQItem question="Dlaczego klient mógłby wybrać bardziej uproszczoną wersję Scaffold?">
+Ponieważ budowa jest szybsza. Pomijanie dopasowywania rotacji i wariancji czasowej oznacza mniej kodu do napisania i dostrojenia, więc niektórzy klienci udostępniają ją jako szybką opcję, nawet jeśli bardziej dopracowana wersja byłaby trudniejsza do wykrycia.
+</FAQItem>
+
+<FAQItem question="Czy używanie Bad Scaffold jest bezpieczne?">
+Nie. Automatyzuje ono umieszczanie bloków w celu przeskakiwania luk, co narusza zasady na każdym serwerze, który to sprawdza. Luźniejsze opóźnienia i brak kontroli sprawiają, że łatwiej go wychwycić niż w przypadku dopracowanej wersji Scaffold.
+</FAQItem>
+
+<FAQItem question="Jakie dokumenty klienta obsługuje Bad Scaffold?">
+Fan umieszcza go na liście w kategorii narzędzi do przemieszczania, obok jego pozostałych narzędzi do budowania mostów i pokonywania przeszkód.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-scaffold", label: "Co to jest Scaffold?", description: "Ten moduł standardowy to jego bardziej surowa wersja." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kategoria skrytobójcza oparta na modułach kamuflażu, takich jak ten." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szersza kategoria, do której należą Scaffold i jego odmiany." },
+]} />
+
+<CTA href="/pl/purchase">Pomiń wersję roboczą, zobacz, co Opal wysyła za $8.99</CTA>

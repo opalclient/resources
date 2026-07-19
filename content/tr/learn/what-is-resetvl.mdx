@@ -1,0 +1,87 @@
+---
+title: Minecraft'ta ResetVL Nedir? Modül Açıklaması
+description: ResetVL, bir sunucu hile önleme sisteminin ihlal seviyesi sayacını, bir işaret tetiklemesini veya yasaklamayı önceden sıfırlamayı veya düşürmeyi amaçlayan bir istismar modülüdür. İşte nasıl çalıştığı.
+excerpt: ResetVL oyununuzu temizlemez, anti-hırsızlığın oyunla ilgili hafızasını temizler ve yalnızca altındaki istismar yamalanmadığı sürece.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: ResetVL bir hile modülüdür mü?
+    a: Evet. Bir açık değerlendirme modülü olarak belgelenmiş ve tek amacı, sunucu tarafındaki bir hile önleme sisteminin bir oyuncuyu işaretlemesini veya cezalandırmasını engellemektir.
+  - q: Bir anti-hile sisteminde ihlal seviyesi nedir?
+    a: Oyuncular için, genellikle her kontrol için ayrı ayrı tutulan, sunucu tarafında bir hile önleme sistemi tarafından takip edilen bir puan bu. Şüpheli davranış tespit ettiğinde yükselir ve oyuncu iyi davranış gösterdiğinde genellikle azalır. Bir eşiği aşması bir bayrağı tetikler, bir personel uyarısını veya oyuncunun oyundan atılmasını.
+  - q: ResetVL doğrudan bir oyun avantajı sağlıyor mu?
+    a: Hayır, tek başına hareket ya da dövüşü etkilemez. Dolaylı olarak çalışır; hile önleme sisteminin içindeki şüphe puanının, avantaj sağlayan modüllere karşı harekete geçmesine neden olacak seviyeye ulaşmasını engeller.
+  - q: ResetVL bir devre dışı bırakıcıdan nasıl farklıdır?
+    a: Bir devre kesici, şüpheli davranışın ilk etapta kaydedilmesini engellemeye çalışır. ResetVL ise, davranışın görüldükten sonra devre kesicinin zaten biriktirdiği puanı hedef alır.
+  - q: ResetVL sunucular arasında güvenilir mi?
+    a: Hayır, bunun belirli bir zayıflığı var; bir hile önleme sisteminin kendi karşı önlemlerini nasıl izlediğiyle ilgili. Bu nedenle, hile önleme sistemi güncellendiği veya yama uygulandığı an çalışmayı durdurabilir.
+---
+
+<KeyTakeaways>
+
+- ResetVL, oyuncu tarafından çalıştırılan sunucu tarafındaki bir anti-hile sisteminin dahili ihlal seviyesi (VL) sayacını sıfırlamaya veya düşürmeye çalışan bir istismar modülüdür.
+- VL, her oyuncu için, her kontrol için yükselen, şüpheli davranışlarda artan ve genellikle oyuncu temiz görünüyorsa azalan bir puandır; bir eşiği aşması bir bayrağı, bir uyarıyı veya oyuncunun oyundan atılmasını tetikler.
+- ResetVL tek başına herhangi bir dövüş veya hareket avantajı sağlamaz. Sadece diğer modüllerin biriktirdiği şüphelerin o eşiğe ulaşmasını engeller.
+- Tenacity ile birlikte gönderildiği gibi belgelenmiştir; belirli bir anti-hile uygulaması boşluğuna bağlıdır, bu nedenle bu boşluk düzeltildiğinde genellikle bozulur.
+
+</KeyTakeaways>
+
+ResetVL, Minecraft hile istemcilerindeki bir exploit kategorisi modülüdür ve genellikle VL olarak kısaltılan, sunucu tarafındaki bir anti-hile programının dahili ihlal seviyesi sayacını sıfırlamayı veya düşürmeyi amaçlar; bu, onu çalıştıran oyuncu için. Çoğu anti-hile programı tek bir şüpheli paket üzerinde işlem yapmaz. Bunun yerine sürekli bir puan tutar, oyuncunun hareketleri veya dövüşleri yanlış göründüğünde buna ekler ve oyuncu temiz göründüğünde puanın düşmesine izin verir. Belirli bir eşiği aşmak, tepkiyi tetikleyen şeydir. ResetVL, oyuncunun nasıl hareket ettiğini veya savaştığını etkilemez. Doğrudan bu puana yönelir ve anti-hile programının tepki vermeden önce puanı aşağıya doğru itmeye çalışır.
+
+## Nasıl Çalışır
+
+Sunucu tarafındaki anti-hile programları genellikle tek bir şüpheli paket nedeniyle oyuncuyu suçlamaz. Her kontrol, oyuncu başına kendi sürekli puanını tutar, davranış yanlış göründüğünde buna ekler ve genellikle oyuncu temiz görünüyorsa puanın azalmasına izin verir. Puan belirli bir eşiği aştığında, anti-hile programı tırmanır: yetkilileri uyarır, hesabı inceleme için işaretler veya oyuncuyu doğrudan oyundan atar. ResetVL, bunu üreten davranıştan ziyade doğrudan bu puana yönelir ve anti-hile programının tepki vereceği noktaya ulaşmadan önce sayacı aşağıya doğru itmeye çalışır.
+
+Bilgi tabanında Tenacity ile birlikte gönderildiği ve bu istemcinin exploit kategorisi modülleri altında diğer anti-hile ile yüzleşen araçlarla birlikte listelendiği belgelenmiştir.
+
+## Neden İnsanlar Bunu Kullanıyor
+
+Çekiciliği, diğer yükleme öğeleri için zaman kazanmakta yatıyor. Savaş veya hareket hileleri kullanan bir oyuncu, bir oturum boyunca birkaç kontrolü tetikleyecek ve her tetikleme o kontrolün ihlal seviyesini artıracaktır. Seviye, bir atılma veya yasak eşiğine doğru yükselirse, ResetVL biriktirilmiş şüphelere yer bırakmaz, böylece gerçek hileyi yapan modüller çalışmaya devam edebilirken, anti-hile'ın iç sayacı harekete geçecek noktaya ulaşmaz. ResetVL, mücadeleyi kazanan veya farkı kapatan şey değildir. Anti-hile'ın önemsemeyi unutmasını sağlayan şeydir.
+
+<Callout variant="tip" title="Opal kataloğunun bir parçası değil">
+Opal, ResetVL adıyla bir modül göndermiyor. Bir hile engelleyicinin kendi iç sayımlarını değiştirmek, bir istismarın sahip olabileceği en kısa kullanım ömrüdür: değer yalnızca bir satıcı, sayımların dışarıdan değiştirilebileceğini fark edene kadar var olur ve bu boşluğu kapatmak, genellikle bulunduğunda bir öncelik olarak ele alınır, çünkü anti-hilein ceza verme mekanizmasının temelini zayıflatır.
+</Callout>
+
+## Kullanımı güvenli mi?
+
+Hayır, güvenilir değil ve bu, kaza sonucu değil, tasarıma göre. ResetVL, hile önleme sisteminin kendi karar verme durumunu doğrudan hedef alır; bu, bir dönüşü yumuşatmaktan veya bir zamanlayıcıyı uzatmaktan daha doğrudan bir kaçınma biçimidir. İhlal sayacı sunucuda bulunduğundan, onu hareket ettirebilen bir modül, bir hile önleme sisteminin uygulamasındaki belirli bir boşluğu veya hatayı sömürmek zorundadır; tıpkı bir devre kesicinin, sunucu tarafındaki bir kontrolde görülen bir tuhaflığa bağlı olması gibi. Bu tür bir istismar genellikle kısa ömürlüdür. Bir satıcı kendi sayaçlarının dışarıdan manipüle edilebileceğini fark ettiğinde, düzeltmesi genellikle listenin en üstüne atılır.
+
+<Callout variant="uyarı" başlık="Referans, nasıl yapılacağını değil">
+ResetVL, sunucu tarafındaki hile önleme sisteminin bir oyuncuyu işaretleme veya cezalandırma yeteneğini bozmak için tasarlanmış bir istismar kategorisi modülü olarak belgelenmiştir; bu, diğer hile önleme istismarlarıyla aynı yasağı risk kategorisidir. Bu sayfa modülün ne olduğunu ve nasıl davrandığını açıklar, nasıl çalıştırılacağını değil.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="ResetVL bir hile modülüdür mü?">
+Evet. Bir sömürü kategorisi modülü olarak belgelenmiştir ve amacı tamamen sunucu tarafındaki bir anti-hile sisteminin bir oyuncuyu işaretlemesini veya cezalandırmasını engellemektir.
+</FAQItem>
+
+<FAQItem question="Hile önleme sistemlerinde ihlal seviyesi nedir?">
+Bu, sunucu tarafındaki bir hile önleme sisteminin oyuncu başına ve genellikle her kontrol başına tuttuğu sürekli bir puan olup, şüpheli davranışlar tespit ettiğinde yükselir ve oyuncu iyi davranış sergilediğinde genellikle azalır. Bir eşiği aşması, bir bayrak, bir personel uyarısı veya oyuncunun oyundan atılmasına yol açar.
+</FAQItem>
+
+<FAQItem question="ResetVL doğrudan bir oyun avantajı sağlıyor mu?">
+Hayır. Tek başına hareket veya dövüş mekaniklerini değiştirmez. Dolaylı olarak çalışır; hile önleme sisteminin içindeki şüphe puanının, avantaj sağlayan modüllere karşı tepki verecek seviyeye ulaşmasını engeller.
+</FAQItem>
+
+<FAQItem question="ResetVL bir devre dışı bırakıcıdan nasıl farklıdır?">
+Bir devre dışı bırakıcı, şüpheli davranışın ilk etapta kaydedilmesini engellemeye çalışır. ResetVL ise davranışın görüldükten sonra zaten birikmiş olan puanı hedefler.
+</FAQItem>
+
+<FAQItem question="ResetVL sunucular arasında güvenilir mi?">
+Hayır. Belirli bir anti-hile yapısının kendi sayaçlarını izleme şeklindeki bir zayıflığa bağlıdır, bu nedenle anti-hile güncellenir veya yamalanırsa çalışmayı bırakabilir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Aynı istismar ailesinin tespit-kaçınma ucunu ResetVL oluşturuyor." },
+  { href: "/tr/learn/what-is-killaura", label: "Killaura nedir?", description: "Hızlıca tuzakları tetikleyen bir savaş modülü, tam olarak ResetVL'nin üstesinden gelmek için tasarlandığı türden bir yükleme." },
+  { href: "/tr/learn/what-is-velocity-anti-knockback", label: "Hız / Çarpma Geri Tepmesi Nedir?", description: "Oyunun kendisi yerine hile önleme katmanına dayanan bir başka modül." },
+]} />
+
+<CTA href="/tr/satin-al">Opal, hile önleme sisteminin hatırladığını silmesine gerek yok. Gerçekten ne gönderildiğine bakın.</CTA>

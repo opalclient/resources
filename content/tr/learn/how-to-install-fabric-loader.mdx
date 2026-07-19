@@ -1,0 +1,115 @@
+---
+title: Fabric Yükleyici Nasıl Kurulur (Adım Adım, 2026)
+description: "Fabric yükleyiciyi dakikalar içinde kurun: resmi yükleyiciyi çalıştırın, Minecraft sürümünüzü seçin, ardından yeni Fabric profilini başlatın. Tam rehber ve düzeltmeler."
+excerpt: Fabric Yükleyici, her Fabric modunun üzerine kurulduğu tek eklentidir. İşte resmi yükleyici ile nasıl kurulacağı ve istediğiniz zaman vanilla'ya geri dönmenin yolu.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: Forge'a ihtiyaç var mı, Fabric'i kurabilmek için?
+    a: Hayır. Fabric ayrı bir mod yükleyicisidir. Her profil için bunlardan birini, ikisini birden değil kurarsınız.
+  - q: Yükleyiciyi yüklemek, orijinal Minecraft'ı değiştirir mi?
+    a: Hayır. Kurulum aracı yeni bir profil ekler ve orijinal oyununuzu olduğu gibi bırakır. Geri dönmek için profilleri değiştirin.
+  - q: Yükleyiciyi kurduktan sonra modlar nereye gider?
+    a: Minecraft dizininizdeki "mods" klasörü içinde. Fabric profilini ilk kez başlattığınızda oluşturulur.
+  - q: Resmi kurulum aracı olmadan yükleyiciyi kurabilir miyim?
+    a: Evet. Bazı başlatıcılar sizin için Fabric desteği ekler ve tamamen bağımsız kurulumu atlar.
+---
+
+<KeyTakeaways>
+
+- Fabric yükleyici, tek bir araçla kurulur: resmi Fabric yükleyici.
+- Yeni bir başlatma profili ekler ve asla orijinal oyununuza müdahale etmez.
+- `mods` klasörü, Fabric profilini bir kez başlattıktan sonra görünür.
+- Yükleyiciyi, oynamayı planladığınız tam Minecraft sürümüne uygun olarak ayarlayın.
+
+</KeyTakeaways>
+
+[Fabric](https://fabricmc.net/) yükleyicisini kurmak için tek bir araç ve birkaç tıklama yeterli. Resmi Fabric yükleyicisini indirin, çalıştırın, istediğiniz Minecraft sürümünü seçin ve yeni bir başlatma profilini yazmasına izin verin. Başlatıcınızı açın, bu Fabric profilini seçin ve oyunu bir kez başlatın. Yükleyici artık etkin ve modlara hazır.
+
+<Callout variant="info" title="Opal'ın Nerede Çalıştığı">
+Opal bir Fabric modudur, bu nedenle burada kurduğunuz aynı yükleyiciyi kullanır. Yükleyici hazır olduktan sonra, tam sürüm ve önerilen JVM argümanları için [kurulum kılavuzunu](/tr/docs/setup) takip edin.
+</Callout>
+
+## Adımlar
+
+<Steps>
+
+<Step number={1} title="Kurulum dosyasını indirin">Fabric projesinin web sitesinden resmi [Fabric](https://fabricmc.net/) yükleyicisini edinin. Küçük bir Java programıdır</Step>
+
+<Step number={2} title="Çalıştır">Dosyaya çift tıklayın veya çift tıklama bir şey yapmazsa terminalden çalıştırın</Step>
+
+<Step number={3} title="Minecraft sürümünüzü seçin">Oynamayı planladığınız tam sürümü seçin, örneğin yeni çıkan bir sürüm veya hala kullandığınız eski bir sürüm</Step>
+
+<Step number={4} title="Kurulum yap">Kurulum programı, başlatıcınıza yeni bir profil yazar ve eşleşen yükleyici dosyalarını indirir</Step>
+
+<Step number={5} title="Seç Fabric profil">Minecraft başlatıcınızı açın ve yükleyicinin oluşturduğu profile geçin</Step>
+
+<Step number={6} title="Başlat bir kez">O profili kullanarak oyunu başlat ki yükleyici dosyalarını ayarlayıp bir `mods` klasörü oluşturabilsin</Step>
+
+</Steps>
+
+## Kurulumcunun Aslında Yaptığı Şey
+
+Kurulumcu, oyun jar dosyasını yama yapmaz. Bunun yerine, Minecraft başlamadan önce [Fabric](https://fabricmc.net/) yükleyicisini çalıştıran bir başlatma profili ekler. Bu yükleyici, başlatıldığında `mods` klasörünüzü okur ve her bir modu yükler. Profil, orijinal olanın yanında bulunduğundan, modlanmamış oyununuz bozulmadan kalır ve istediğiniz zaman geri dönebilirsiniz.
+
+## Kurulumcu ve Başlatıcı Desteği
+
+Yükleyiciyi yerleştirmek için iki seçeneğiniz var. Kurulumunuza uygun olanı seçin.
+
+| Yöntem | Ne zaman Kullanılır | Notlar |
+|--------|----------------|-------|
+| Resmi Fabric kurulumcu | Standart başlatıcı için varsayılan | Bir profil yazar, yükleyiciyi indirir, birkaç dakika içinde tamamlanır |
+| Dahili Fabric desteği olan başlatıcı | Zaten üçüncü taraf bir başlatıcı kullanıyorsanız | Başlatıcı, sürüm eşleştirmesini sizin için halleder |
+
+Her iki yöntem de aynı şekilde sonuçlanır: Başlatmadan önce seçtiğiniz bir Fabric profili.
+
+## Dosyaların Nereye Düştüğü
+
+| İşletim Sistemi | Yol |
+| :--- | :--- |
+| Windows | `%appdata%\.minecraft` |
+| macOS | `~/Library/Application Support/minecraft` |
+| Linux | `~/.minecraft` |
+
+`mods` klasörü, ilk Fabric başlatmasından sonra bu dizin içinde görünür. Klasör mevcut olduktan sonra mod jar dosyalarını buraya bırakın.
+
+## Yükleyicinin Kurulum Yapmayacağı Durumlar
+
+<Checklist>
+<ChecklistItem>Kurulum çalışmıyor: Java eksik olabilir veya jar dosyası yanlış programla açılıyor. Güncel bir Java çalışma zamanı yükleyin ve tekrar deneyin.</ChecklistItem>
+<ChecklistItem>Oyuncuda Fabric profili yok: Oyuncuyu yenileyin veya yeniden başlatın, ardından sürüm açılır menüsünde yeni profili arayın.</ChecklistItem>
+<ChecklistItem>Modlar eklendikten sonra oyun çöküyor: Yükleyici sorunsuz, ancak bir mod farklı bir Minecraft sürümünü hedefliyor. Yüklediğiniz sürüme uygun her modu eşleştirin.</ChecklistItem>
+<ChecklistItem>Yanlış Minecraft sürümü: Kurulumu yeniden çalıştırın ve doğru sürümü seçin. Birden fazla profil yazabilir.</ChecklistItem>
+</Checklist>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Forge'u yüklemek için Fabric'e ihtiyacım var mı?">
+Hayır. Fabric ayrı bir mod yükleyicisidir. Bir profil için ya Forge'u ya da Fabric'i yükleyebilirsiniz, ikisini birden aynı anda değil.
+</FAQItem>
+
+<FAQItem question="Yükleyiciyi kurmak vanilla Minecraft'ı değiştirir mi?">
+Hayır. Yükleyici yeni bir profil ekler ve vanilla oyununuzu olduğu gibi bırakır. Geri dönmek için profilleri değiştirin.
+</FAQItem>
+
+<FAQItem question="Modlar yükleyiciyi kurduktan sonra nereye gider?">
+Minecraft dizininizdeki `mods` klasörünün içine kurulur. Fabric profilini ilk kez başlattığınızda oluşturulur.
+</FAQItem>
+
+<FAQItem question="Resmi kurulum aracı olmadan yükleyiciyi kurabilir miyim?">
+Evet. Bazı başlatıcılar Fabric desteğini sizin için ekler ve bağımsız kurulum aracını tamamen atlar.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/how-to-install-a-fabric-mod", label: "Bir Fabric modunun nasıl kurulacağı", description: "Yükleyici yerleştirildikten sonraki adım." },
+  { href: "/tr/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "İki mod yükleyicisinin farkları nasıl olur." },
+  { href: "/tr/learn/what-is-a-minecraft-mod-loader", label: "Mod yükleyici nedir?", description: "Yükleyicinin başlatmada yaptığı şey." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

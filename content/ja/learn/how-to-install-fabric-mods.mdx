@@ -1,0 +1,201 @@
+---
+title: MinecraftにFabricMODを導入する方法
+description: MinecraftのFabric LoaderとMod、そしてOpal Clientの導入手順.
+excerpt: Minecraft 1.21.10でFabricローダーをセットアップし、MODを導入するための初心者向けガイド.
+date: 2026-04-06
+lastUpdated: 2026-06-04
+category: Setup
+author: trq
+faqs:
+  - q: Opal Client を使うには、Fabric は必要ですか？?
+    a: はい、OpalはFabricのModです。OpalランチャーはFabricのインストールを自動的に処理しますが、手動でインストールする場合は、まずFabric Loaderが必要です.
+  - q: ForgeでFabricのMODを使えますか？?
+    a: いいえ。FabricとForgeは互換性のない形式を持つ、別のMODローダーです。OpalはFabricのみが必要です.
+  - q: Javaのどのバージョンが必要ですか？ Minecraft 1.21?
+    a: Java 21 以降が必要です。古いバージョン（Java 8、17）では、最新のMinecraftが動作しません。AdoptiumまたはOracleからJava 21をダウンロードしてください.
+  - q: MinecraftのインストールがFabricのMODで壊れるでしょうか？?
+    a: いいえ。FabricのMODはMODフォルダに隔離されています。何か問題が発生した場合は、MODのJARファイルを削除して、バニラ版を起動してください。ワールドやセーブデータは影響を受けません.
+  - q: Opalを他のFabric製MODと一緒に動作させられますか？?
+    a: 通常は可能です。他のMODが競合しない限りです。Opalは、Fabric 1.21.10のスタンドアロンクライアントMODとして動作するように設計されています.
+---
+
+<KeyTakeaways>
+
+- Fabricは軽量なModローダーです。まずFabric Loaderをインストールし、ModのJARファイルをmodsフォルダにドロップしてください。
+- Minecraft 1.21ではJava 21以降が必要です。インストール前にMinecraftを少なくとも一度起動させてください。
+- ModのJARファイルはWindowsでは%appdata%\.minecraft\modsに、macOSとLinuxではそれぞれの同等な場所に配置してください。
+- Opalはローダーシステムを使用します。OpalランチャーがFabric、認証、インストール、アップデートをあなたのために処理します.
+
+</KeyTakeaways>
+
+ファブリックは、Minecraft向けの軽量[Mod Loader](/ja/learn/what-is-a-minecraft-mod-loader)です。高速で、活発にメンテナンスされており、最新のMinecraftバージョンに対応しています。Opalを含む多くのユーティリティクライアントが、ファブリック上で動作しています。このガイドでは、Fabric Loaderのインストール、Modの追加、Opalの設定方法を説明します
+## 前提条件
+始める前に、以下のものがあることを確認してください。
+
+- **Minecraft Java Edition** がインストールされ、少なくとも一度起動されていること
+- **Java 21** 以降がインストールされていること（MC 1.21+ で必要）
+- 正常に動作するインターネット接続
+## Fabricローダーをインストールする
+
+<Steps>
+
+<Step title="Fabricインストーラーをダウンロードしてください">
+
+公式Fabricウェブサイト fabricmc.net にアクセスし、**Download** をクリックして、**Installer** オプションを選択し、Universal JARインストーラーをダウンロードしてください
+
+</Step>
+
+<Step title="インストーラーを実行し、設定を確認してください">
+
+ダウンロードしたFabricインストーラーJARを実行し、以下の設定が正しいことを確認してください。
+
+- **Client** タブが選択されている
+- **Minecraft Version:** 1.21.10 (または目標バージョン)
+- **Loader Version:** 最新の安定版 (0.17.x 推奨)
+- **Install Location:** デフォルトの `.minecraft` ディレクトリ
+
+**Install** をクリックします。成功メッセージが表示されるはずです
+
+</Step>
+
+<Step title="インストールを確認してください">
+
+Minecraftランチャーを開き、「インストール」タブをクリックして、**fabric-loader-1.21.10**（または類似の名前）という新しいプロファイルを探します。それを選択し、「プレイ」をクリックしてください。タイトル画面にFabricのロゴが表示されれば、問題ありません
+
+</Step>
+
+</Steps>
+
+## MODのインストール
+
+FabricのMODは、`mods` フォルダに入れてください。
+
+- **Windows:** `%appdata%\.minecraft\mods`
+- **macOS:** `~/Library/Application Support/minecraft/mods`
+- **Linux:** `~/.minecraft/mods`
+
+`mods` フォルダが存在しない場合は、作成してください。MODをインストールするには、上記フォルダにMODファイルを入れます
+
+<Steps>
+
+<Step title="MOD JARファイルをダウンロードしてください">
+
+そのMODの`.jar`ファイルを、ソースからダウンロードしてください
+
+</Step>
+
+<Step title="モッドフォルダに入れてください">
+
+`.jar`ファイルを、お使いのプラットフォームの`mods`フォルダに移動させてください
+
+</Step>
+
+<Step title="Fabricプロファイルで起動">
+
+MinecraftをFabricプロファイルで起動してください。バニラ版ではなく
+
+</Step>
+
+</Steps>
+
+## Opal Client のインストール
+
+Opal は **ローダーシステム** を使用します。モッドフォルダにクライアント全体を入れる必要はありません。代わりに：
+
+<Steps>
+
+<Step title="購入 Opal">
+
+ダッシュボードからOpalを購入してください（生涯利用料8.99ドル）
+
+</Step>
+
+<Step title="Opalランチャーをダウンロードしてください">
+
+掴んで **Opal ダウンロードページからのランチャーです。認証、インストール、アップデートを自動的に処理します.
+
+</Step>
+
+<Step title="ローダーJARを使用してください">
+
+あるいは、Opal Loader JARをダウンロードして、`mods` フォルダに配置してください。実行時に認証を行い、クライアントをダウンロードします
+
+</Step>
+
+</Steps>
+
+ランチャーが推奨される方法です。すべてをあなたのために管理します。
+
+## トラブルシューティング
+
+### 「Fabricがランチャーに表示されない」
+Minecraftの正しいバージョンに対応したFabricがインストールされていることを確認してください。必要に応じてインストーラーを再実行してください。
+
+### 「ゲームが起動時にクラッシュする」
+- **Java 21**がインストールされていることを確認してください（Java 8または17ではありません）。
+- 互換性のないMODを`mods`フォルダから削除してください。
+- Fabric Loaderが最新であることを確認してください。
+
+### 「MODがロードされない」
+- `.jar`ファイルが正しい`mods`フォルダにあることを確認してください。
+- バニラではなく、**Fabricプロファイル**で起動していることを確認してください。
+- MODのバージョンがMinecraftのバージョンと一致していることを確認してください。
+
+### 「Opalが認証されない」
+- アクティブなインターネット接続があることを確認してください。
+- ダッシュボードでライセンスキーが有効になっていることを確認してください。
+- HWIDが変更されていないことを確認してください（ダッシュボードで30日ごとにリセット可能）。
+- インターネット制限のある地域にお住まいのユーザーは、プロキシが必要になる場合があります。詳細については購入ページをご確認ください。
+
+## 次のステップ
+
+FabricとOpalをインストールしたら：
+
+- **設定を閲覧:** ダッシュボードでコミュニティが共有するモジュールプリセットを発見します。
+- **モジュールを探索:** 完全な機能リストについてはドキュメントを確認してください。
+- **Discordに参加:** サポートを受けたり、設定を共有したり、コミュニティとつながったりできます。
+- **スクリプティングを試す:** GraalVMエンジンを使用してカスタム自動化を作成します。
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Opalを使うのにFabricは必要ですか？?">
+
+はい、OpalはFabricのModです。OpalランチャーはFabricのインストールを自動的に処理しますが、手動でインストールする場合は、まずFabric Loaderをインストールする必要があります
+
+</FAQItem>
+
+<FAQItem question="ForgeでFabricのMODを使えますか？?">
+
+いいえ。FabricとForgeは、互換性のないmodフォーマットを持つ、別のmodローダーです。OpalはFabricのみが必要です
+
+</FAQItem>
+
+<FAQItem question="Javaのどのバージョンが必要ですか？ Minecraft 1.21?">
+
+Java 21 以降が必要です。古いバージョンの Java (8, 17) では、最新の Minecraft が動作しません。Adoptium または Oracle から Java 21 をダウンロードしてください
+
+</FAQItem>
+
+<FAQItem question="MinecraftのインストールがFabricのMODで壊れるでしょうか？?">
+
+いいえ。FabricのMODは`mods`フォルダに限定されます。何か問題が発生した場合は、MODのJARファイルを削除して、バニラ版を起動してください。ワールドやセーブデータは影響を受けません
+
+</FAQItem>
+
+<FAQItem question="Opalを他のFabric製MODと一緒に動作させられますか？?">
+
+通常は可能です。ただし、他のMODと競合しないことが前提です。Opalは、Fabric 1.21.10のスタンドアロンクライアントMODとして動作するように設計されています
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/ja/learn/what-is-a-minecraft-mod-loader", label: "Modローダーとは何ですか？?", description: "ローンチ時にFabricが実際に何をするか." },
+  { href: "/ja/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "なぜ Opal ターゲット Fabric 特に." },
+  { href: "/ja/blog/essential-fabric-mods-every-player-should-have", label: "必須のFabricMOD", description: "次に、modフォルダに何を入れればいいか." },
+]} />
+
+<CTA href="/ja/purchase">Opal Fabric 1.21.10 を $8.99 用に取得してください</CTA>

@@ -1,0 +1,201 @@
+---
+title: 如何在 Minecraft 中安装 Fabric 模组
+description: 逐步指南：安装Fabric加载器和Minecraft模组，包括Opal Client.
+excerpt: Minecraft 1.21.10 中设置 Fabric Loader 并安装模组的入门指南.
+date: 2026-04-06
+lastUpdated: 2026-06-04
+category: Setup
+author: trq
+faqs:
+  - q: 使用 Opal Client 需要 Fabric 吗？?
+    a: 是的，Opal 是一个 Fabric 模组。Opal 启动器会自动处理 Fabric 的安装，但如果手动安装，您需要先安装 Fabric Loader.
+  - q: 我可以使用 Fabric 模组搭配 Forge 吗？?
+    a: 不。Fabric 和 Forge 是独立的模组加载器，格式不兼容。Opal 仅需 Fabric.
+  - q: Minecraft 1.21 需要哪个版本的 Java？?
+    a: Java 21 或更高版本。旧版本（Java 8、17）将无法与现代 Minecraft 配合使用。请从 Adoptium 或 Oracle 下载 Java 21.
+  - q: Fabric 模组会破坏我的 Minecraft 安装吗？?
+    a: No. Fabric 模组文件都保存在模组文件夹内。如果出现问题，请移除模组的 JAR 文件并启动原版游戏。您的世界和存档不受影响.
+  - q: 我可以使用其他 Fabric 模组一起运行 Opal 吗？?
+    a: 通常是这样，只要其他模组之间没有冲突即可。Opal 旨在作为 Fabric 1.21.10 的独立客户端模组运行.
+---
+
+<KeyTakeaways>
+
+- Fabric 是一个轻量级的模组加载器；首先安装 Fabric Loader，然后将模组 JAR 文件放入 mods 文件夹。
+- 对于 Minecraft 1.21，您需要 Java 21 或更高版本，并且在安装之前至少启动过 Minecraft 一次。
+- 模组 JAR 文件放在 Windows 上的 %appdata%\.minecraft\mods 目录下（macOS 和 Linux 平台有相应的目录）。
+- Opal 使用加载器系统：Opal 启动器为您处理 Fabric、身份验证、安装和更新.
+
+</KeyTakeaways>
+
+Fabric 是一个轻量级的 [模组加载器](/zh/learn/what-is-a-minecraft-mod-loader) 用于Minecraft。它运行速度快，维护活跃，并支持现代Minecraft版本。许多实用客户端，包括Opal，都运行在Fabric之上。本指南将引导您完成安装Fabric加载器、添加模组以及设置Opal
+## 先决条件
+在开始之前，请确保您已具备：
+
+- **Minecraft Java 版** 已安装并至少启动过一次
+- 已安装 **Java 21** 或更高版本（MC 1.21+ 需要）
+- 稳定的互联网连接
+## 安装Fabric加载器
+
+<Steps>
+
+<Step title="下载Fabric安装程序">
+
+前往 Fabric 官方网站 **fabricmc.net**，点击 **下载**，选择 **安装程序** 选项，然后下载通用的 JAR 安装程序
+
+</Step>
+
+<Step title="运行安装程序并确认设置">
+
+运行您下载的 Fabric 安装程序 JAR 文件，然后确保以下设置正确：
+
+- **客户端** 选项卡已选中
+- **Minecraft 版本：** 1.21.10 (或您的目标版本)
+- **加载器版本：** 最新稳定版 (推荐使用 0.17.x)
+- **安装位置：** 您的默认 `.minecraft` 目录
+
+点击 **安装**。 您应该看到一个成功消息
+
+</Step>
+
+<Step title="验证安装">
+
+打开 Minecraft 启动器，点击 **安装** 选项卡，然后找到一个名为 **fabric-loader-1.21.10**（或类似名称）的新配置文件。选择它并点击 **游玩**。如果 Minecraft 启动时标题界面显示 Fabric 标志，那么一切正常
+
+</Step>
+
+</Steps>
+
+## 安装模组
+
+Fabric 模组应放置在你的 `mods` 文件夹中：
+
+- **Windows:** `%appdata%\.minecraft\mods`
+- **macOS:** `~/Library/Application Support/minecraft/mods`
+- **Linux:** `~/.minecraft/mods`
+
+如果 `mods` 文件夹不存在，请创建它。要安装一个模组：
+
+<Steps>
+
+<Step title="下载模组 JAR 文件">
+
+从其来源下载模组的 `.jar` 文件
+
+</Step>
+
+<Step title="把它放在mods文件夹里">
+
+将 `.jar` 文件移动到适用于您平台的 `mods` 文件夹中
+
+</Step>
+
+<Step title="启动Fabric配置">
+
+使用 Fabric 配置文件启动 Minecraft，而不是原版配置文件
+
+</Step>
+
+</Steps>
+
+## 安装 Opal Client
+
+Opal 使用**加载器系统**：您不会将完整的客户端直接放入模组文件夹中。而是:
+
+<Steps>
+
+<Step title="购买Opal">
+
+从仪表盘上购买 Opal ($8.99 终身)
+
+</Step>
+
+<Step title="下载 Opal 启动器">
+
+从下载页面获取 **Opal Launcher**。它能自动处理身份验证、安装和更新
+
+</Step>
+
+<Step title="或者使用加载器 JAR">
+
+或者，下载 Opal Loader JAR 文件并将其放置在 `mods` 文件夹中。它将在运行时进行身份验证并下载客户端
+
+</Step>
+
+</Steps>
+
+启动器是推荐的方法：它会为您管理所有内容。
+
+## 故障排除
+
+### “Fabric 未在启动器中显示”
+请确保您已为正确的 Minecraft 版本安装了 Fabric。如果需要，请重新运行安装程序。
+
+### “游戏启动时崩溃”
+- 检查您是否已安装 **Java 21**（而不是 Java 8 或 17）
+- 从 `mods` 文件夹中删除任何不兼容的模组
+- 确保 Fabric Loader 是最新版本
+
+### “模组未加载”
+- 验证 `.jar` 文件是否位于正确的 `mods` 文件夹中
+- 确保您使用的是 **Fabric 配置文件**，而不是原版
+- 检查模组版本是否与您的 Minecraft 版本匹配
+
+### “Opal 无法验证”
+- 确保您已连接到活动互联网
+- 验证您的许可证密钥是否已在仪表板上激活
+- 检查您的 HWID 是否已更改（可在仪表板上每 30 天重置一次）
+- 互联网受限地区的用户可能需要代理：请查看购买页面了解详情
+
+## 下一步
+
+安装 Fabric 和 Opal 后：
+
+- **浏览配置：** 在仪表板上发现社区共享的模块预设
+- **探索模块：** 查阅文档以获取完整的特性列表
+- **加入 Discord：** 获取支持、分享配置并与社区联系
+- **尝试脚本编写：** 使用 GraalVM 引擎创建自定义自动化
+
+## 常见问题解答
+
+<FAQList>
+
+<FAQItem question="我需要Fabric才能使用Opal吗？?">
+
+是的，Opal 是一个 Fabric 模组。Opal 启动器会自动处理 Fabric 的安装，但如果您是手动安装，您需要先安装 Fabric Loader
+
+</FAQItem>
+
+<FAQItem question="我可以使用 Fabric 模组搭配 Forge 吗？?">
+
+不。Fabric 和 Forge 是独立的模组加载器，模组格式不兼容。Opal 仅需 Fabric
+
+</FAQItem>
+
+<FAQItem question="Minecraft 1.21 需要哪个版本的 Java？?">
+
+Java 21 或更高版本。旧版 Java (8, 17) 不适用于现代 Minecraft。请从 Adoptium 或 Oracle 下载 Java 21
+
+</FAQItem>
+
+<FAQItem question="Fabric 模组会破坏我的 Minecraft 安装吗？?">
+
+No. Fabric 模组文件都隔离在 `mods` 文件夹中。如果出现问题，只需移除模组的 JAR 文件，然后启动原版游戏即可。你的世界和存档不会受到影响.
+
+</FAQItem>
+
+<FAQItem question="我可以使用其他 Fabric 模组一起运行 Opal 吗？?">
+
+通常是这样，只要其他模组之间没有冲突即可。Opal 旨在作为 Fabric 1.21.10 的独立客户端模组运行
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/zh/learn/what-is-a-minecraft-mod-loader", label: "什么是模组加载器？?", description: "Fabric 实际上在发布时所做的事情." },
+  { href: "/zh/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "为什么 Opal 专门针对 Fabric？." },
+  { href: "/zh/blog/essential-fabric-mods-every-player-should-have", label: "必需的 Fabric 模式", description: "接下来应该把什么放在你的mods文件夹里." },
+]} />
+
+<CTA href="/zh/purchase">获取 Fabric 1.21.10 的 Opal 插件，适用于 $8.99</CTA>

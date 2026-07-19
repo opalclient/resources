@@ -1,0 +1,79 @@
+---
+title: Co to są ślady w Minecraft? Moduł wyjaśniający
+description: Tracery rysuje linię od twojego celownika do każdej widocznej istoty, ale nie przez ściany. Oto jak działa ten moduł i czy jest bezpiecznie go uruchomić w "Minecraftcie".
+excerpt: Linia do gracza, którą już widzisz, nic, co pokazałby wallhack. Oto mechanizm i dlaczego wciąż jest łączony z podejrzanymi rzeczami.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy Tracer to to samo co ESP?
+    a: Nie. ESP renderuje encje przez ściany i teren, pomijając testowanie głębokości, co pozwala zobaczyć rzeczy, których normalny widok kamery nigdy nie ujawni. Tracery rysują linię tylko do encji, które klient już renderuje na ekranie, więc nigdy nie dodaje ukrytych informacji.
+  - q: Czy Tracer pokazuje graczom przez ściany?
+    a: Nie. Ślady oznaczają obiekty, które klient już rysuje na ekranie. Jeśli ściana zasłania widoczność obiektu, nie ma nic do narysowania przez moduł, więc on nic nie rysuje.
+  - q: Czy Tracerzy mogą spowodować zbanowanie gracza?
+    a: Może to się zdarzyć, głównie ze względu na towarzystwo, w jakim się porusza. Trackery zazwyczaj wysyłane są wewnątrz tego samego klienta co ESP i aimboty, a serwer skanujący kod renderowania z modyfikacjami wykrywa hak niezależnie od tego, który moduł został włączony. Sam w sobie mechanizm zdradza bardzo niewiele.
+  - q: Dlaczego klienci firm użyteczności publicznej łączą Trackery z modułami ESP?
+    a: "Czytają z tej samej potoku renderowania i służą temu samemu celowi: ułatwianiu zauważania obiektów. Grupowanie ich pod jedną kategorię wizualną to głównie decyzja dotycząca kompilacji, a nie dowód na to, że działają identycznie wewnątrz."
+---
+
+<KeyTakeaways>
+
+- Tracer rysuje linię od celownika do każdej jednostki, którą klient już renderuje na ekranie.
+- Nie widzi przez ściany: gdy jednostka znika z pola widzenia lub zostaje zablokowana, jej linia również znika.
+- Różni się od ESP, które renderuje przez teren, całkowicie pomijając testowanie głębokości.
+- Samo w sobie daje niewielką przewagę funkcjonalną, ale zazwyczaj jest dołączane do modułów, które wyraźnie naruszają zasady.
+
+</KeyTakeaways>
+
+Tracery to moduł wizualny, który rysuje linię od środka ekranu do każdego widocznego w nim obiektu, dzięki czemu gracze lub moby przestają zlewać się z tłumem i zaczynają się wyróżniać. Oznacza tylko to, co klient już rysuje. Żadna postać ukryta za ścianą nie otrzymuje linii, ponieważ w ogóle nie jest renderowana.
+
+## Jak działają Tracery
+
+Tracery działa w każdej klatce i sprawdza, które obiekty klient aktualnie renderuje: graczy, moby lub oba, w zależności od ustawień. Dla każdego z nich na ekranie rysuje prostą linię od przycelownika do pozycji tego obiektu, a następnie usuwa linię natychmiast, gdy obiekt znika z pola widzenia lub zostaje zasłonięty. Moduł odczytuje te same dane renderowania, których gra już używa do rysowania samego obiektu. Nie pobiera niczego dodatkowego z serwera i nie prosi serwera o nic, czego nie zażądałby standardowy klient.
+
+To właśnie ta ostatnia cecha odróżnia Tracery od prawdziwego wallhacka. ESP renderuje obiekty przez stałe bloki, pomijając testowanie głębi, co pozwala graczowi widzieć rzeczy, których normalny widok kamery nigdy nie mógłby pokazać. Tracery niczego takiego nie robi. Po prostu nakłada linię na informacje, które i tak miały trafić na monitor, dzięki czemu zauważasz je o pół sekundy szybciej niż robiąc to samodzielnie, skanując ekran.
+
+Chodzi o szybkość rozpoznawania, a nie o nowe informacje. W zatłoczonej walce lub lesie pełnym tłumu, wyodrębnienie poruszającego się gracza z chaosu zajmuje chwilę świadskiego skanowania. Linia skierowana bezpośrednio do każdej istoty pomija tę chwilę. Fan to jeden z klientów, który udostępnia Tracery, zwykle grupowane z tagami imiennymi i obszarami kolizyjnymi pod tą samą kategorią wizualną, ponieważ wszystkie trzy istnieją po to, by uczynić świat gry łatwiejszym do odczytania, a nie do przejrzenia.
+
+## Czy Tracery są bezpieczne w użyciu
+
+Ze względu na mechanizm, Tracery bardziej przypominają wygodną funkcję niż oszustwo dające przewagę w rozgrywce. Nie rozszerzają pola widzenia przez ściany, nie wpływają na zasięg ani celność i nie wysyłają ani nie odbierają niczego, czym klient już się nie zajmował. Serwer oceniający czysto na podstawie informacji, do których ma dostęp gracz, ma niewiele do zgłoszenia: uważny człowiek mógłby teoretycznie zauważyć tę samą istiotę, patrząc na tę samą część ekranu.
+
+Ryzyko leży w kontekście, a nie w mechanizmie. Tracery prawie zawsze są dostarczane w pakietach z klientami, które również zawierają ESP, aimboty i inne moduły, które są jednoznaczonymi oszustwami, więc serwer uruchamiający skanowanie po stronie klienta dla zmodyfikowanego kodu renderowania wychwytuje samą wstrzyknięcie, a nie konkretną linię, którą rysuje. Serwery z polityką zerowej tolerancji traktują każdy zmodyfikowany klient tak samo, niezależnie od zaznaczonego pole wyboru. Na serwerach, które oceniają zachowanie, a nie instalację, sam Tracers zdradza prawie nic, ponieważ nigdy nie zmienia tego, co gracz jest faktycznie w stanie zobaczyć.
+
+<Callout variant="warning" title="Kontekst, a nie mechanizm, stanowi zagrożenie">
+Sam ślad nie ujawnia niczego, czego człowiek nie zauważyłby sam. Ale rzadko wysyłany jest samodzielnie. Jeśli jest dołączony do ESP lub aimbota w tym samym kliencie, a serwer skanuje modyfikację, a nie zachowanie, moduł, którego nie włączyłeś, zostanie wykryty równie szybko, co ten, który włączyłeś.
+</Callout>
+
+Kategoria wizualna Opal opiera się na tej samej zasadzie: wyraźniej prezentuje informacje, do których gracz ma już legalny dostęp, zamiast pokazywać coś, co normalny widok z kamery nie mógłby ujawnić. To ta sama zasada projektowania, która uniemożliwia przekształcenie linii w widok przez ścianę.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy Tracery to to samo co ESP?">
+Nie. ESP renderuje encje przez ściany i teren, pomijając testowanie głębi, co pozwala zobaczyć rzeczy, których normalny widok kamery nigdy nie ujawni. Tracery rysują jedynie linię do encji, które klient już renderuje na ekranie, więc nigdy nie dodają ukrytych informacji.
+</FAQItem>
+
+<FAQItem question="Czy Tracery pokazują graczom przez ściany?">
+Nie. Tracery oznaczają obiekty, które klient już rysuje na ekranie. Jeśli ściana zasłania widoczność obiektu, nie ma nic do narysowania dla modułu, więc nic nie rysuje.
+</FAQItem>
+
+<FAQItem question="Czy Tracery mogą spowodować zbanowanie gracza?">
+Tak, głównie ze względu na towarzystwo, w którym się poruszają. Tracery zazwyczaj dostarczane są w tym samym kliencie co ESP i aimboty, a serwer skanujący kod renderowania o zmienionej strukturze wykrywa hak niezależnie od tego, który moduł został włączony. Sam w sobie mechanizm zdradza bardzo niewiele.
+</FAQItem>
+
+<FAQItem question="Dlaczego klienci usług telekomunikacyjnych łączą Trackery z modułami ESP?">
+Czytają z tej samej ścieżki renderowania i służą temu samemu celowi: ułatwianiu zauważania obiektów. Grupowanie ich pod jedną kategorię wizualną to głównie decyzja dotycząca kompilacji, a nie dowód na to, że działają tak samo wewnątrz.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Do szerszej kategorii, do której należą Trasery." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Moduł bojowy Tracers, który często jest wysyłany razem z nim." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Gdzie leży granica między subtelnością a oczywistością." },
+]} />
+
+<CTA href="/pl/purchase">Zobacz, co obejmuje wizualny zestaw narzędzi Opal, od $8.99</CTA>

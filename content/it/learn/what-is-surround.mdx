@@ -1,0 +1,79 @@
+---
+title: Cosa significa "Surround" in Minecraft? Spiegazione del modulo di combattimento
+description: Surround è un modulo di combattimento di Minecraft che posiziona automaticamente blocchi attorno a te per bloccare le esplosioni di cristalli e ancoraggi in PvP. Come funziona e il rischio di rilevamento.
+excerpt: Circonda le tue scatole con blocchi più velocemente di quanto potresti fare a mano, così un'esplosione di cristallo o di ancora non avrà più nulla contro cui detonare.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa fa il comando /fill in Minecraft?
+    a: Si posiziona automaticamente attorno al giocatore per bloccare gli attacchi in arrivo. È più comune in PvP con i cristalli, dove impedisce le esplosioni dei cristalli di respawn o degli ancoraggi di respawn, permettendo al giocatore di continuare a combattere invece di posizionare manualmente dei blocchi.
+  - q: È Surround la stessa cosa del boxing in PvP di cristallo?
+    a: Automatizza la stessa idea. Bloccare manualmente, posizionando blocchi attorno a sé durante il combattimento, è una tecnica manuale normale. Surround lo fa automaticamente e su tutti i lati aperti contemporaneamente, più velocemente di quanto una persona possa fare fisicamente.
+  - q: Perché Surround viene segnalato dagli anticheat?
+    a: Poiché pone ostacoli su diversi lati del giocatore quasi simultaneamente, il che richiederebbe di fronteggiare più direzioni contemporaneamente. Gli anticheat confrontano l'angolo di posizionamento con la rotazione del giocatore e i tempi di posizionamento con un ciclo di sguardo e clic umano, e questo schema fallisce entrambi i test.
+  - q: Quali clienti hanno un modulo Surround?
+    a: È presente in Meteor Client e SalHack, tra gli altri client basati sull'automazione del combattimento PvP in stile Crystal.
+---
+
+<KeyTakeaways>
+
+- Surround è un modulo di combattimento che posiziona automaticamente blocchi attorno al giocatore per bloccare gli attacchi in arrivo, principalmente le esplosioni di cristalli di fine partita e gli ancoraggi di respawn nel PvP di cristalli.
+- Scansiona continuamente ogni lato aperto del giocatore e riempie istantaneamente le lacune, comprese quelle che si riaprono durante il combattimento.
+- Automatizza una tecnica manuale legittima (l'incasellamento) e l'automazione stessa è ciò che lo fa segnalare.
+- Trovato in client come Meteor Client e SalHack.
+
+</KeyTakeaways>
+
+Surround è un modulo di combattimento che posiziona automaticamente dei blocchi attorno al giocatore per bloccare gli attacchi in arrivo. Appare quasi esclusivamente in PvP con i cristalli, dove crea una barriera attorno al giocatore in modo che un'esplosione del cristallo finale o di un ancora di respawn non abbia nulla di solido su cui detonare vicino alla sua hitbox. Invece di interrompere il combattimento per posizionare i blocchi manualmente, il giocatore continua a colpire.
+
+## Come funziona
+
+Surround controlla lo spazio immediatamente attorno al giocatore in un ciclo continuo. Ogni volta che un lato è scoperto, posiziona un blocco da lì direttamente dall'inventario del giocatore. La parte importante è che agisce su tutti i lati aperti contemporaneamente, piuttosto che nella direzione in cui un giocatore può effettivamente guardare e posizionare, quindi crea una barriera molto più velocemente rispetto al gioco manuale. Continua a ricontrollare, quindi se un blocco viene distrutto durante il combattimento e si apre di nuovo uno spazio, Surround lo riempie di nuovo al passaggio successivo.
+
+## Boxing manuale rispetto al modulo automatizzato
+
+Circondarsi durante un combattimento non è di per sé vietato da nessuna regola. È una tecnica di PvP con i cristalli ben nota che i giocatori eseguono costantemente a mano: guardare uno spazio, posizionare un blocco, guardare il successivo, posizionare di nuovo. Surround fa esattamente la stessa cosa, semplicemente senza la parte della visualizzazione.
+
+Quello è il divario totale tra "tecnica legittima" e "modulo truccato". Un essere umano può affrontare e posizionare contro una sola faccia di blocco alla volta. Occupare posizioni su ogni faccia aperta nello stesso istante non è tanto un miglioramento della velocità quanto una categoria di azione completamente diversa. È l'automazione, non il boxing, a trasformare un'abitudine di combattimento normale in una rilevabile.
+
+## Surround è sicuro da usare?
+
+Non proprio, e le ragioni sono meccaniche, non solo di politica. Quando un giocatore posiziona blocchi su più lati di sé all'interno dello stesso breve intervallo di tempo, un anticheat che controlla la rotazione del posizionamento rispetto alla faccia del blocco su cui viene posizionato, troverà una discrepanza che nessun giocatore legittimo potrebbe produrre. La tempistica del posizionamento più veloce del ciclo di sguardo e clic umano è l'altro segnale rivelatore. E poiché Surround continua a sparare per tutta la durata del combattimento anziché come un'unica azione, questo schema si ripete abbastanza spesso da far sì che i controlli lato server lo rilevino in più di un colpo.
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Surround è una funzionalità nascosta presente su ogni server che utilizza un anticheat, punto e basta. Questa pagina spiega cosa significa questo termine e perché il rilevamento funziona in questo modo, non come configurarne uno.
+</Callout>
+
+Opal non spedisce un modulo con questo nome. Ciò che Opal costruisce sono strumenti per gli stessi combattimenti a cui è destinato Surround, il che significa che le domande di progettazione (tempistiche, rotazione, quanto vale la pena rischiare con l'automazione) sono quelle a cui pensiamo costantemente, anche quando la risposta per una determinata funzionalità è "no".
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Cosa fa Surround in Minecraft?">
+Posiziona automaticamente dei blocchi attorno al giocatore per bloccare gli attacchi in arrivo. È particolarmente utile nei combattimenti PvP con i cristalli, dove impedisce le esplosioni dei cristalli di respawn o degli anchor di respawn, permettendo al giocatore di continuare a combattere invece di posizionare manualmente i blocchi.
+</FAQItem>
+
+<FAQItem question="Surround è la stessa cosa del boxing in PvP di cristallo?">
+Automatizza la stessa idea. Il boxing manuale, ovvero posizionare blocchi attorno a sé durante un combattimento, è una tecnica manuale normale. Surround lo fa automaticamente e su tutti i lati aperti contemporaneamente, più velocemente di quanto una persona possa fare fisicamente.
+</FAQItem>
+
+<FAQItem question="Perché Surround viene segnalato dagli anticheat?">
+Poiché posiziona blocchi su diversi lati del giocatore quasi simultaneamente, il che richiederebbe di fronteggiare più direzioni contemporaneamente. Gli anticheat confrontano l'angolo di posizionamento con la rotazione del giocatore e i tempi di posizionamento con un ciclo di sguardo e clic umano, e questo schema fallisce entrambi i test.
+</FAQItem>
+
+<FAQItem question="Quali client hanno un modulo Surround?">
+È presente in Meteor Client e SalHack, tra altri client basati sull'automazione del combattimento PvP in stile crystal.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-crystal-aura", label: "Cos'è un'Aura Cristallina?", description: "Il modulo Surround viene solitamente abbinato in scontri PvP all'interno dello stesso cristallo." },
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "L'attaccante melee nella stessa categoria di combattimento." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia a cui appartengono questi moduli." },
+]} />
+
+<CTA href="/it/purchase">Scopri come la tuta da combattimento di Opal gestisce gli scontri per cui Surround è progettata</CTA>

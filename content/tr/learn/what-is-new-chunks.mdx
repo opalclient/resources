@@ -1,0 +1,77 @@
+---
+title: Minecraft'ta Yeni Bloklar Nelerdir? (Modül Açıklaması)
+description: Yeni Chunks, paket ve aydınlatma verilerini okuyarak taze oluşturulmuş araziyi ve 2b2t gibi sunuculardaki gizli üsleri ortaya çıkaran bir Minecraft istismar modülüdür.
+excerpt: Kazmıyor, keşfetmiyor. Sadece ışığı okuyor ve haritanın nerede güncelliğini yitirdiğini tam olarak söylüyor.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Yeni Parçalar aslında ne algılıyor?
+    a: Oyuncunun etrafındaki şu anda yüklenmekte olan parça, sunucu tarafından ilk kez oluşturulmuş olabilir veya zaten var olan ve basitçe istemciye tekrar gönderilen bir parça olabilir.
+  - q: Yeni Parçalar, X-ışınları ile aynı mı?
+    a: Hayır, X-ışını zaten yüklenmiş arazideki, genellikle cevherleri, içeride olanı ortaya çıkarıyor. Yeni Parçalar, arazinin yeni olup olmadığını veya daha önce keşfedilip keşfedilmediğini size söylüyor; bu, tamamen farklı bir bilgi türü.
+  - q: Yeni Parçalar sunucuya olağandışı bir şey gönderiyor mu?
+    a: Hayır, yalnızca paketleri okur ve istemci tarafından normal parçalama yüklemesi sırasında zaten alınan ışık sinyallerini tetikler, hiçbir zaman değiştirilmiş veri geri göndermez; bu da tam olarak neden sunucu tarafı bir kontrolün bunu doğrudan yakalayamayacağını açıklıyor.
+  - q: Neden özellikle anarşi sunucularında bunun bir önemi var?
+    a: 2b2t gibi anarşi sunucularında korunan hak iddiaları yoktur ve yıllarca süren keşif, başlangıç noktasının etrafında birikmiştir. Keşfedilmiş ve keşfedilmemiş araziler arasındaki sınırı bulmak, iddia edilmemiş toprak veya birinin saklamaya çalıştığı bir üssü bulmanın tek yollarından biridir.
+---
+
+<KeyTakeaways>
+
+- New Chunks, sunucu tarafından önceden oluşturulup gönderilen arazilerden tamamen yeni arazileri ayırt edebilen bir exploit modülüdür.
+- Normal parça yüklemesinden paket ve aydınlatma ipuçlarını okur, keşfetme, kazma veya harita kontrolü gerektirmez.
+- 2b2t gibi anarşi sunucularında, bu sınır keşfedilen arazinin kenarını işaret eder ve üslerin nerede saklandığını gösterir.
+- Sunucuya hiçbir zaman anormal bir şey göndermez, bu nedenle adil oyun kuralları onu anticheat sistemlerinden daha sık yakalar.
+
+</KeyTakeaways>
+
+Yeni Parçalar, sunucu tarafından ilk kez oluşturulan ve yalnızca yeniden yüklenen zaten var olan arazi arasındaki farkı ayırt eden bir istismar modülüdür. Bunu, sıradan parça yüklemesi sırasında gönderilen paket ve aydınlatma ipuçlarını okuyarak yapar; modül çalışır veya çalışmaz, her istemci zaten aldığı aynı veri. Herhangi bir oyuncu eylemi gerekli değildir. Doğum yeri etrafında yıllardır didik didik edilmiş bir dünyada, bu tek ayrım gerçek sınırı ve oranın ötesine gömülmeye çalışılan her şeyi bulmanın en hızlı yoludur.
+
+## New Chunks dünyayı nasıl okur
+
+Modül, parçalar render mesafesine girdiğinde akan verileri izler. Yeni oluşturulmuş arazi ve zaten var olan arazi, yüklendiklerinde hafifçe farklı paket ve aydınlatma imzaları gönderir ve işte tüm hile bu: New Chunks, zaten var olan bir farkı okur, sadece üzerine bir etiket koyar. Oyuncunun gözle yorumlaması için hiçbir şey yoktur. Modül arka planda pasif olarak çalışır ve yakındaki bir parça yüklendiği anda ayrımı işaretler, böylece yeni dünya ile eski dünya arasında görünür bir çizgi seyahat ederken sizi takip eder.
+
+O çizgi, iki nedenle peşinden gitmeye değer. 2b2t gibi bir sunucuda üreme noktası etrafında yıllarca keşfedilen topraklar zaten tarandı, bu yüzden hangi parçaların yeni olduğunu bilmek, sınırın gerçekte nereden başladığını gösterir. Aynı zamanda tersi de geçerlidir: üreme noktasından uzak bir üs, çok uzun zaman önce oluşturulmuş parçaların içinde yer alır, bu nedenle alışılmadık arazideki eski ve yeni arasındaki sınırı taramak, gizli bir yapının muhtemelen nerede bulunduğunu daraltır.
+
+## Neden anticheat'ler sadece bunu işaretleyemez
+
+Yeni Parçalar, sunucuya hiçbir şey hakkında yalan söylemez. Sunucu, normal parça yüklemesi sırasında her bağlı istemciye zaten gönderdiği paket ve aydınlatma verilerini okur ve ardından yalnızca istemci tarafında bunlardan bir sonuç çıkarır. Sahte bir paket, değiştirilmiş bir hareket veya bir anticheat'ın savaş hilesinde ulaşım veya saldırı zamanlamasını karşılaştırması gibi bir temel karşılaştırması yoktur.
+
+Bu, onu bir nişan alma botu veya bir iskele gibi bir şeyden farklı bir kategoriye sokar. Bu bir bilgi istismarıdır: avantaj, her zaman alacağınız verileri okumaktan, sunucunun niyetinden farklı bir şekilde yorumlamaktan gelir, yanlış bir şey göndermekten değil. Bu gibi araçları yasaklayan çoğu sunucu, genellikle işaretlenecek özel bir anormallik olmadığından, paket anomali bayrağı yerine genel adil oyun kurallarına başvurur.
+
+<Callout variant="tip" title="Gerçekten Opal'ın sokağı değil">Opal, PvP için tasarlandı: savaş, hareket, hayalet-açık geçiş ayarı. Kaos sunucularında keşif gibi New Chunks, modüller listesinin tamamen farklı bir köşesinde yer alıyor ve Opal bu özelliği sunmuyor. Eğer asıl aradığınız şey çökü sınırlarını okuma özelliği ise, satın almadan önce bir istemcinin modüller listesinde adıyla arayın. "Yardımcı istemci" çok farklı işleri kapsayan geniş bir yelpazeyi ifade eder</Callout>
+
+<Callout variant="warning" title="Referans, rehber değil">
+Bu sayfa, terimin genel anlamını açıklamaktadır. Kesin davranış ve adlandırma, istemciye göre değişiklik gösterir ve çoğu sunucu, yasaklama kuralları altında bu tür anarşi-keşif araçlarını, hatta yasaklamanın arkasında özel bir antichi̇at bayrağı olmasa bile genel adil oyun kuralları kapsamında yasaklamaktadır.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="New Chunks aslında ne algılıyor?">
+Oyuncunun etrafındaki şu anda yüklenmekte olan bloğun, sunucu tarafından ilk kez mi oluşturuldu, yoksa zaten var olan ve istemciye tekrar mı gönderiliyor?
+</FAQItem>
+
+<FAQItem question="Yeni Parçalar, X-ışını ile aynı mı?">
+Hayır. X-ışını, zaten yüklenmiş ve genellikle cevherler içeren arazinin içindekileri ortaya çıkarır. Yeni Parçalar ise arazinin kendisinin yeni olup olmadığını veya daha önce keşfedilip keşfedilmediğini söyler; bu tamamen farklı bir bilgi türüdür.
+</FAQItem>
+
+<FAQItem question="New Chunks sunucuya olağandışı bir şey gönderiyor mu?">
+Hayır. Sadece istemci tarafından normal yükleme sırasında zaten alınan paketleri ve ışıklandırma sinyallerini okur ve hiçbir zaman değiştirilmiş veri geri göndermez; bu da tam olarak neden sunucu tarafındaki bir kontrolün bunu doğrudan yakalayamayacağını açıklıyor.
+</FAQItem>
+
+<FAQItem question="Peki ya bu durum özellikle anarşi sunucularında neden önemli?">
+2b2t gibi anarşi sunucularında korunan iddialar bulunmaz ve spawn etrafında yıllarca keşif yığılmıştır. Keşfedilmiş ve keşfedilmemiş arazi arasındaki sınırı bulmak, iddia edilmemiş araziyi veya birinin saklamaya çalıştığı bir üssü bulmanın tek yollarından biridir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Bu tür modüllerin ait olduğu daha geniş kategori." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Gözden kaçmamayı esas alan, incelik öncelikli kategori." },
+  { href: "/tr/learn/what-is-reach", label: "Ulaşmak nedir?", description: "Farklı bir keskinlik, arazi yerine çatışmaya dokunan bir keskinlik." },
+]} />
+
+<CTA href="/tr/satın-al">Opal, harita değil, PvP oyununu oynar. $8.99 için modül listesine bakın.</CTA>

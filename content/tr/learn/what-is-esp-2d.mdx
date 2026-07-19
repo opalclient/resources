@@ -1,0 +1,84 @@
+---
+title: Minecraft'ta ESP 2D Nedir? Modül Açıklaması
+description: ESP 2D, oyuncuları ve varlıkları 3 boyutlu dünya hatlarının yerine, ekranda düz bir kutu ile işaretleyen bir Minecraft modülüdür. Nasıl görüntülendiği ve ban riskidir.
+excerpt: Kutu, parıltının üzerine yerleşir. ESP 2D, ekrandaki her varlığın üzerine düz bir işaretçi yerleştirir, onların etrafına 3D bir hat çekmek yerine, böylece bir duvarın arkasına kaybolmaz.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: ESP 2D ile Glow ESP arasındaki fark nedir?
+    a: ESP 2D, varlığın şeklini takip etmeyen, ekran uzayında düz bir kutu veya işaretleyici çizer. Glow ESP ise, varlığın oyun dünyasındaki kendisini ana hatlarıyla belirtir, böylece kamera döndükçe gerçek dünyadaki bir etki gibi hareket eder ve ölçeklenir.
+  - q: ESP 2D duvarların içinden görebiliyor mu?
+    a: Evet. Takip edilen varlık için her birine bir işaret çizer, aranızda bir duvar veya arazi olmasına bakılmaksızın, bu da onu tam anlamıyla bir duvarhack sınıfı özelliği yapıyor.
+  - q: Anticheat yazılımları özellikle 2D ESP'yi tespit edebiliyor mu?
+    a: Kutu şekli için özel olarak tasarlanmış bir tespit yöntemi yok. ESP'yi yakalamaya yetenekli anticheat sistemleri, bunun 2B bir kutu olarak mı yoksa 3B bir hat olarak mı render edildiğiyle ilgilenmez. Risk, sahip olmamanız gereken bilgilere sahip olmak ve bunları kullanmaktan kaynaklanır, işaretçinin geometrisinden değil.
+  - q: Hangi müşteriler ESP 2D'yi içeriyor?
+    a: Fan ve Tenacity gibi müşterilerde ortaya çıkıyor; genellikle aynı varlık verileri için ikinci bir işleme seçeneği olarak Glow ESP'nin yanında yer alıyor. Opal farklı bir yaklaşım sergiliyor ve iki stili ayırmanın yerine tek birleşik Varlık ESP modülü gönderiyor.
+---
+
+<KeyTakeaways>
+
+- ESP 2D, oyuncuları ve varlıkları, dünyadaki varlığın etrafını saran 3D bir hat yerine, ekran uzayında çizilen düz bir kutu veya işaretleyici ile işaretleyen görsel bir modüldür.
+- İki yaygın ESP işleme stilinden biridir; diğer Glow ESP'dir; her ikisini de gönderen istemciler size seçim imkanı sunar.
+- Ekran uzayında çizim, işaretleyicinin arazi tarafından engellenmemesi ve mesafeden bağımsız olarak tutarlı bir boyutta görünmesini sağlar.
+- Varlıkların konumlarını duvarların içinden ortaya çıkarır, bu nedenle hile önleme sistemleri, hangi işleme stilini kullandıysa kutu çizilmiş olsun, bunu duvar hilesi sınıfı bir özellik olarak değerlendirir.
+
+</KeyTakeaways>
+
+ESP 2D, diğer oyuncuları ve varlıkları, dünyanın içindeki varlığın etrafını saran 3 boyutlu bir kontur yerine, doğrudan ekranınızda çizilmiş düz bir kutu, nokta veya etiket ile işaretleyen görsel bir modüldür. İki yaygın varlık ESP işleme yönteminden biridir; diğeri Glow ESP'dir ve her ikisini de gönderen istemciler, hangisini daha çok görmek istediğinizi seçmenize olanak tanır. Her ne kadar olursa olsun amaç aynıdır: kameranızı kontrol etmek için çevirmeden herkesin nerede olduğunu bilin.
+
+## ESP 2D nasıl işlenir
+
+ESP 2D, izlenen her varlığın gerçek konumunu her karede ekran alanınıza yansıtır ve o noktada bir işaret, bir kutu konturu, bir nokta veya küçük bir etiket çizer. Bu, varlığın kendisi üzerinde doğrudan bir kontur çizen 3D veya "dünya" ESP'den farklıdır, böylece kameranız hareket ettikçe modelle birlikte hareket eder ve ölçeklenir. 2D işaret, birinin başının üzerinde sabitlenmiş bir isim etiketine daha çok benzer: düz, ekrana sabitlenmiş ve alttaki modelin açısı veya animasyonuyla ilgisizdir.
+
+Çizim çağrısı dünya uzamının aksine ekran uzayında gerçekleştiği için, 2B bir kutu, dünya uzamındaki bir ana hat bazen olduğu gibi bir duvar veya yamaç tarafından engellenmez ve varlık ne kadar uzakta olursa olsun ekranda sabit bir boyutta kalabilir. Bazı uygulamalar kutuyu yine de mesafeye göre ölçeklendirir, böylece yanınızdaki bir hedef, haritanın karşısındaki birinden daha büyük görünür. Her neyse, temel varlık konumu işaretçiyi yönlendirir, böylece ok, onların bir kayanın arkasına saklanması veya kameranızın garip bir açıyla yerleşmesi durumunda bile hayatta kalır.
+
+## ESP 2D vs Glow ESP
+
+| Özellik | ESP 2D | Glow ESP |
+|---|---|---|
+| Nerede çiziyor | Düz kutu, nokta veya ekran uzayındaki etiket | Varlık üzerinde dünya uzayında sarılı ana hat |
+| Arazinin engellemesi | Duvarlardan ve engellerden görünür kalır | Arazinin içinden de görünür, ancak oyundaki bir parıltı gibi okunur |
+| Uzaktaki boyut | Genellikle sabittir; bazı yapılar menzille ölçeklendirir | Gerçek bir oyun içi efekt gibi doğal olarak ölçeklenir |
+| Görsel okuma | Haritanın tamamında taraması kolay, tutarlı | Normal bir parıltı iksiri veya hayalet etkisi gibi görünmeye daha yakın |
+
+Her iki stil de aynı temel varlık takibinden beslenir. Seçim tamamen okunabilirlik ve sürükleyicilik arasındaki tercihtir: her mesafede temiz, tutarlı bir HUD tarzı okuma için 2B, bilgiyi çok fazla HUD gibi görünmeden elde etmek istediğinizde Glow.
+
+<Callout variant="tip" title="Opal burada nereye denk geliyor?">
+Opal, varlık ESP'sini 2D bir açma/kapama düğmesi ve Glow düğmesine ayırmaz. Kataloğu, dünyadaki oyuncuları ve varlıkları vurgulayan olarak açıkça tanımlanan tek bir Görsel-kategori modülü, Varlık ESP'sini listeler. Bir anahtar, herkesi görmeden önce bir render-style kararı vermeniz gerekmiyor.
+</Callout>
+
+<Callout variant="warning" title="Referans, rehber değil">
+Varlık ESP'sinin hiçbir biçimi, tespit edilemez, kutu veya parıltı olarak varsayılmaya güvenli değildir. Size gerçek görsel temas olmadan sahip olmamanız gereken bilgileri verir ve ESP'yi yakalamaya yönelik bir antichi̇t genellikle işaretleyiciyi çizen şeklin önemi olmadığını önemsemez. Duvar hilesi ve X-ışını kuralları, ESP 2D'ye herhangi bir 3D kontur kadar uygulanır. Antichi̇t korumalı sunucularda kendi sorumluluğunuzda kullanın olarak kabul edin.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="ESP 2D ve Glow ESP arasındaki fark nedir?">
+ESP 2D, varlığın şeklini takip etmeyen, ekran uzayında düz bir kutu veya işaretleyici çizer. Glow ESP ise oyun dünyasındaki varlığın etrafını ana hatlarıyla belirtir, böylece kamera döndükçe gerçek dünyadaki bir etki gibi hareket eder ve ölçeklenir.
+</FAQItem>
+
+<FAQItem question="ESP 2D duvarlardan görebiliyor mu?">
+Evet. Takip ettiğiniz her varlık için, aranızda duvar veya arazi bulunsa bile bir işaret çizer, bu da onu tam anlamıyla bir duvar hack'leme sınıfı özelliği yapar.
+</FAQItem>
+
+<FAQItem question="Anticheatler özellikle 2D ESP'yi tespit edebilir mi?">
+Sadece kutu şekli için özel bir tespit yöntemi bulunmuyor. ESP yakalayan anticheat'ler, bunun 2D bir kutu olarak mı yoksa 3D bir hat olarak mı render edildiğiyle ilgilenmezler. Risk, sahip olmamanız gereken bilgilere sahip olmak ve bunları kullanmaktan kaynaklanır, işaretçinin geometrisinden değil.
+</FAQItem>
+
+<FAQItem question="Hangi istemciler ESP 2D içeriyor?">
+Fan ve Tenacity gibi istemcilerde görülüyor; genellikle aynı varlık verileri için ikinci bir işleme seçeneği olarak Glow ESP'nin yanında yer alıyor. Opal farklı bir yaklaşım benimseyerek iki stili ayırmak yerine tek birleşik Varlık ESP modülü gönderiyor.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "ESP ve diğer farkındalık modülleri gibi daha geniş bir kategori içinde yer alıyor." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Neden ESP gibi sessiz bilgi avantajları, fark edilmemek için inşa ediliyor." },
+  { href: "/tr/learn/what-is-an-aimbot", label: "Aimbot nedir?", description: "ESP modülü genellikle nereye bakmanız gerektiğini bilirseniz devreye girer." },
+]} />
+
+<CTA href="/tr/purchase">Köşe dönmeden herkesin nerede olduğunu bilin. Opal $8.99.</CTA>

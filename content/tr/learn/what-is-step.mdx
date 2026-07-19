@@ -1,0 +1,77 @@
+---
+title: Minecraft'ta Adım Nedir? Hareket Modülü Açıklandı
+description: Adım, vanilla'nın otomatik adım yüksekliğinden daha yüksek bloklara zıplama olmadan tırmanmanızı sağlayan bir hareket modülüdür. İşte nasıl çalıştığı ve tespit edilme riski.
+excerpt: Adım yükseltmesi, zıplamadan yürünebilen blok yüksekliğini artırır, böylece kenarlıklar ve düzensiz zeminlerde adımınızı bozmaz. İşte değiştirdiği şeyler ve bunun maliyeti.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Vanilya otomatik adım yüksekliği ne olarak kabul edilir?
+    a: Vanilya, oyuncunun otomatik olarak kısa engelleri, örneğin bir levha veya merdiveni zıplamadan tırmanmasını sağlar, ancak daha yüksek olanlarda durur ve zıplamayı zorunlu kılar. Adım, daha büyük blokların da aynı otomatik şekilde geçebileceği sınırı yükseltir.
+  - q: Adım atma, zıplamayı tamamen mi ortadan kaldırır?
+    a: Hayır. Adım yalnızca hangi blok yüksekliğinin hâlâ otomatik tırmanılabilir sayıldığı kısmını değiştirir. Zıplama, o yükseltilmiş sınırdan daha yüksekteki her şey için ve gerçek dikey mesafeye ihtiyaç duyan boşluklar için normal şekilde çalışmaya devam eder.
+  - q: Adım hileleri anticheat sistemleri tarafından tespit edilebilir mi?
+    a: Böyle olabilir. Adım hareketi, oyuncunun önündeki blokların normalde izin verdiği dikey harekete kıyasla, istemcinin gönderdiği hareketi değiştirir ve adım yüksekliğini blok geometrisine karşı kontrol eden bir sunucunun işaretlemesi için somut bir sinyali vardır.
+  - q: Hangi müşterilerde Adım modülü bulunmaktadır?
+    a: Adım, Fan ve Tenacity'de çalışan şekilde belgelenmiştir ve Opal kendi Adım modülünü kullanarak aynı işi yapmaktadır. Diğer istemciler de aynı davranışı farklı isimler altında uygular.
+---
+
+<KeyTakeaways>
+
+- Step, vanilla'nın otomatik adım yüksekliğinden daha yüksek bloklara zıplama olmadan çıkmanızı sağlayan bir hareket modülüdür.
+- Müşterinin her bir tike göre otomatik tırmanma kontrolünü geçersiz kılar, böylece daha büyük çıkıntılar engelli olarak değil, yürünebilir olarak değerlendirilir.
+- Zıplama girişi gönderilmez, bu da nişan alma ve hitbox konumunun geçiş sırasında daha dengeli kalmasını sağlar.
+- Bildirilen dikey hareketi değiştirir, bu da bazı hile önleme sistemlerinin bunu blok geometrisiyle karşılaştırarak tespit edebileceği anlamına gelir.
+
+</KeyTakeaways>
+
+Adım, oyuncunun vanilla'nın otomatik adım yüksekliğinden daha uzun bloklara zıplama olmadan tırmanmasına olanak tanıyan bir hareket modülüdür. Normalde Minecraft, yalnızca kısa engellere otomatik olarak tırmanmanıza izin verir ve daha uzun olanlarda sizi durdurur, bir zıplama zorlar. Adım, bu sınırı yükseltir veya kaldırır, böylece daha büyük bloklar ve çıkıntılar yürüyüş hızında geçilebilir.
+
+## Adım nasıl çalışır
+
+Her tick'te, vanilla yürüyen bir oyuncunun önündeki blok kenarını kontrol eder ve otomatik olarak tırmanmak için yeterince kısa olup olmadığına karar verir. Eğer değilse, oyun hareketi engeller ve bunun yerine bir zıplama zorlar. Adım, bu kontrolü devre dışı bırakır, istemcinin hala yürüyebileceği bir blok yüksekliğini bir blok kadar yükseltir. İstemci daha sonra oyuncuyu daha uzun bloğa, herhangi bir zıplama paketi olmadan kaldırır.
+
+İşte tam da bu noktada çekicilik yatıyor. Bir zıplama, düz bir yürüyüş yolunu bozar ve kısa bir süre için dikey konumunuzu ve hitbox'unuzu kaydırır; bu da bir rakibin bir boşluk için ararken görebileceği şeylerdir. Bir bloğa adım atarken yere basılı kalmak, nişan almayı ve momentumu geçiş boyunca sabit tutar. Ayrıca merdivenleri, çitleri, üst üste dizilmiş yarım blokları ve genel olarak düz olmayan arazileri de düzleştirir, böylece sprintinizi kaybetmeden veya adımı bozmadan bunları geçebilirsiniz.
+
+## Adım kullanmak güvenli mi
+
+Adım, garantili güvenli bir özellik değil, kendi riskinle kullanabileceğin bir özelliktir. İstemci tarafından sunucuya bildirilen dikey hareketi değiştirir ve oyuncunun önündeki bloklara karşı beklenen adım yüksekliğini yeniden hesaplayan sunucu tarafı antichiati, bunu kontrol etmek için somut bir veri noktasına sahiptir. Belirli bir sunucunun bunu izleyip izlemediği değişmekle birlikte, davranışın kendisi olası bir işaret noktasıdır ve yakalanmak, uçuş veya hız hilesi gibi diğer hareket hileleri gibi aynı sonuçları taşır: bir yasak, sadece nasıl yapıldığı konusunda daha sessizdir.
+
+<Callout variant="tip" title="Opal bunu Adım olarak adlandırıyor">
+Opal aynı modülü aynı isim altında gönderiyor: vanilla'nın izin verdiğinden daha yüksek blokları destekliyor. Opal, kullanımını kullanıcının kendi sorumluluğunda olarak sınıflandırıyor, tıpkı burada olduğu gibi. Algılanabilir ve çalıştırılması, herhangi bir istemcinin modül sürümüyle aynı yasak riskini taşır.
+</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını değil">
+Bu sayfa, Adım'ın ne olduğunu ve nasıl davrandığını açıklar, onu fark edilmeden çalıştırma kılavuzu değildir. Sunucunun gördüğü dikey hareketi değiştirmek, varsayılan davranış değildir ve adım yüksekliğini blok geometrisine karşı kontrol eden herhangi bir sunucu bu kalıbı işaretleyebilir.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Vanilla otomatik adım yüksekliği nedir?">
+Vanilla, yürüme yeteneğine sahip bir oyuncunun, zıplamadan kısa engelleri, örneğin bir levha veya merdiveni otomatik olarak tırmanmasına olanak tanır, ancak daha yüksek olanlarda durur ve zıplamayı zorunlu kılar. Adım yükseltmesi, bu sınırı yükselterek daha büyük blokların da aynı otomatik şekilde geçilmesini sağlar.
+</FAQItem>
+
+<FAQItem question="Step zıplamayı tamamen değiştirir mi?">
+Hayır. Step yalnızca hangi blok yüksekliğinin hâlâ otomatik tırmanılabilir sayılacağını değiştirir. Zıplama, o yükseltilmiş sınırdaki her şey için ve gerçek dikey boşluk gerektiren boşluklar için normal şekilde çalışmaya devam eder.
+</FAQItem>
+
+<FAQItem question="Adım atma anticheat sistemleri tarafından tespit edilebilir mi?">
+Evet, tespit edilebilir. Adım atma, istemcinin gönderdiği dikey hareketi, oyuncunun önündeki blokların normalde izin vereceğinden farklı şekilde değiştirir ve blok geometrisine göre adım yüksekliğini kontrol eden bir sunucu, bunu işaretlemek için somut bir sinyal alır.
+</FAQItem>
+
+<FAQItem question="Hangi istemciler Step modülünü içeriyor?">
+Step, Fan ve Tenacity'de çalıştığı belgelenmiştir ve Opal, aynı işi yapan kendi Step modülünü birlikte gönderir. Diğer istemciler, aynı davranışı farklı adlar altında uygular.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-scaffold", label: "Scaffold nedir?", description: "Blok tırmanışının aksine, blok yerleştirme." },
+  { href: "/tr/learn/what-is-velocity-anti-knockback", label: "Hız (çarpma geri tepmesi önleme) nedir?", description: "Sunuzun gördüğünüz şeyleri değiştiren başka bir hareket modülü." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Bu hareket modüllerinin ait olduğu daha geniş kategori." },
+]} />
+
+<CTA href="/tr/satin-al">Her çıkıntıda adımlarını kesmeyi bırak. $8.99 için Opal neler gönderiyor, bak.</CTA>

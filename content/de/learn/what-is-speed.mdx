@@ -1,0 +1,86 @@
+---
+title: Was ist Geschwindigkeit in Minecraft? Bewegungsmodul erklärt
+description: Geschwindigkeit ist ein Bewegungsmodul, das die Geh- und Sprintgeschwindigkeit über das Vanilla-Limit von Minecraft hinaus erhöht. So funktioniert es und warum Server es so leicht erkennen.
+excerpt: Geschwindigkeit verwandelt deine Beine in das schnellste Element auf dem Server, ohne Trank erforderlich. Hier erfährst du, wie das Modul dorthin gelangt und warum der Server es immer bemerkt.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Ist Geschwindigkeit dasselbe wie ein Trankeffekt?
+    a: Nein. Ein Trank der schnellen Hast ist ein temporärer, server-erkannter Effekt. Ein Geschwindigkeitsmodul verändert die Bewegung hingegen auf Client-Ebene, sodass der Server die Geschwindigkeit ohne Trank oder andere Vanilla-Quelle wahrnimmt.
+  - q: Beeinflusst die Geschwindigkeit das Gehen, das Sprinten oder beides?
+    a: Beides. Das Modul erhöht die Geschwindigkeit sowohl beim Gehen als auch beim Sprinten, da beide aus derselben Bewegungsberechnung resultieren und diese überschreibt.
+  - q: Warum ist Speed einfacher zu fangen als einige andere Module?
+    a: Bewegung wird vom Server bereits für jeden Spieler in jedem Takt erfasst, unabhängig von allem, was der Client behauptet. Das macht anhaltende überhöhte Geschwindigkeiten zu einem zuverlässigeren Signal als Betrug, der sich auf subtilere Timing- oder Rotationsangaben verlässt.
+  - q: Ist Speed sicher auf einem Server mit Anticheat-Schutz zu verwenden?
+    a: Nein. Bewegungsdaten sind eines der zuverlässigsten Signale, die ein Server hat, daher riskiert ein Konto, das Speed auf einem Server mit einer funktionierenden Bewegungsprüfung ausführt, eine Markierung oder Sperrung.
+---
+
+<KeyTakeaways>
+
+- Geschwindigkeit ist ein Bewegungsmodul, das die Geh- und Sprintgeschwindigkeit über den festen Wert in Minecraft Vanilla hinaus erhöht.
+- Es überschreibt direkt die Bewegungsberechnungen des Clients, ohne dass ein Trank oder ein Block für die zusätzliche Geschwindigkeit verantwortlich ist.
+- Der Boost wirkt sowohl beim Gehen als auch beim Sprinten, solange das Modul aktiviert ist.
+- Bewegungsprüfungen gehören zu den ältesten Werkzeugen der Anti-Cheat-Software, weshalb das Speed-Modul so oft aufgespürt wird.
+
+</KeyTakeaways>
+
+Geschwindigkeit ist ein Bewegungsmodul, das die Geh- und Laufgeschwindigkeit eines Spielers über das hinaus erhöht, was Vanilla Minecraft erlaubt. Aktiviere es, und du überquerst das Terrain schneller als ein unveränderter Client es je könnte, ohne dass im Spielverlauf eine Erklärung für das zusätzliche Tempo vorhanden ist. Es erscheint in Clients wie Fan und Tenacity, und Server behandeln es wie jede andere Bewegungs-Cheaterie: als einen unfairen Vorteil, nicht als eine Einstellung.
+
+## Funktionsweise
+
+Vanilla Minecraft berechnet für jeden Spieler eine feste Gehgeschwindigkeit und eine separate, schnellere Laufgeschwindigkeit. Normalerweise greifen nur Dinge wie eine Trank der Schnelligkeit oder das Stehen auf einem geschwindigkeitsbeeinflussenden Block in diese Werte ein. Ein Speed-Modul überspringt all das und überschreibt die Berechnung direkt, indem es sie erhöht, sodass der Spieler pro Tick mehr Fläche zurücklegt, sowohl beim Gehen als auch beim Laufen, ohne Trank, Block oder andere Vanilla-Erklärung.
+
+Da sich die Änderung vollständig auf dem Client-Rechner vollzieht, zeigt der Bildschirm des Spielers eine flüssige, schnellere Bewegung, ohne Ruckler oder Stottern, die es visuell verraten würden. Was der Server empfängt, ist eine andere Geschichte: ein Strom von Positionsaktualisierungen, die pro Tick mehr Strecke zurücklegen, als es der bekannte Zustand des Spielers zulassen würde. Diese Lücke zwischen dem, was plausibel ist, und dem, was ankommt, ist genau das, worauf eine Bewegungsprüfung ausgelegt ist, um es zu bemerken.
+
+## Warum es entdeckt wird
+
+Geschwindigkeit ist einer der einfacheren Tricks, den ein Server aufdecken kann, da der Server bereits weiß, wie schnell ein Spieler sich bewegen darf, unabhängig davon, was der Client behauptet.
+
+| Faktor, den die Anticheat-Software berücksichtigt | Warum das wichtig ist |
+|---|---|
+| Distanz, die pro Tick relativ zur bekannten Basisgeschwindigkeit des Spielers zurückgelegt wird | Direkter Beweis für eine Bewegung, die schneller ist, als das Spiel zulässt |
+| Aktive Trankeffekte und geschwindigkeitsbeeinflussende Blöcke | Legitimitätsgründe, warum ein Spieler schnell sein kann, die der Server zuerst ausschließen muss |
+| Sprintstatus und Richtungsänderungen | Sowohl Sprinten als auch Drehen beeinflussen, welche Geschwindigkeit der Server erwartet |
+| Konsistenz über die Zeit | Ein einzelner schneller Tick kann Lag sein; anhaltend hohe Geschwindigkeit über die Grenze ohne Erklärung ist ein stärkeres Signal |
+
+Server-seitige Bewegungsprüfungen gehören zu den ältesten und ausgereiftesten Teilen des Anticheat-Designs. Das Ausnutzen der Geschwindigkeit über einen längeren Zeitraum auf einem Server mit einer kompetenten Prüfung wird kaum unbemerkt bleiben.
+
+<Callout variant="tip" title="Opal versendet dies">
+Opal's eigene Interpretation macht keinen Hehl daraus: "Du wirst im echten Leben zu einem Geparden." Es wird unter Opals Kategorie "mit Risiken verbunden" eingeordnet, genau wie es bei jedem Kunden der Fall wäre, denn reine Bewegungsgeschwindigkeit ist genau die Art von Signal, die eine serverseitige Prüfung erkennen soll.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite beschreibt das Modul allgemein, damit Sie wissen, was der Begriff bedeutet. Die Benennung und das genaue Verhalten können je nach Client variieren, und schnelleres Bewegen als die Vanilla-Physik zulässt, bricht die Regeln auf praktisch jedem kompetitiven oder Survival-Server.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Ist Geschwindigkeit dasselbe wie ein Trankeffekt?">
+Nein. Ein regulärer Trank der Schnelligkeit ist ein temporärer, serverseitiger Effekt. Ein Geschwindigkeitsmodul verändert die Bewegung hingegen auf Klientebene, sodass der Server Geschwindigkeit ohne Trank oder andere reguläre Quelle wahrnimmt.
+</FAQItem>
+
+<FAQItem question="Beeinflusst Geschwindigkeit Gehen, Sprinten oder beides?">
+Beides. Das Modul erhöht die Rate sowohl beim Gehen als auch beim Sprinten, da beide aus derselben Bewegungsberechnung resultieren, die sie überschreibt.
+</FAQItem>
+
+<FAQItem question="Warum ist Speed einfacher zu fangen als andere Module?">
+Bewegung wird vom Server bereits für jeden Spieler in jedem Takt erfasst, unabhängig davon, was der Client behauptet. Überhöhte Geschwindigkeit ist daher ein zuverlässigeres Signal als bei Betrugsversuchen, die auf subtile Timing- oder Rotationsinformationen angewiesen sind.
+</FAQItem>
+
+<FAQItem question="Ist Speed auf einem Server mit Anticheat-Schutz sicher nutzbar?">
+Nein. Bewegungsdaten sind eines der zuverlässigsten Signale, die ein Server hat, daher riskiert ein Account, der Speed auf einem Server mit einer funktionierenden Bewegungsprüfung verwendet, eine Sperrung oder einen Bann.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Ein weiteres Bewegungsmodul, das dich dazu bringt, Gelände zu überqueren, das du eigentlich nicht betreten solltest." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Der unauffällige Ansatz, im Gegensatz zu einem so plumpen Modul." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Kategorie, zu der auch Module wie dieses gehören." },
+]} />
+
+<CTA href="/de/kaufen">Decken Sie schneller eine Fläche ab, als der Server vermuten würde. Opal versendet Speed, die Augen offen für das Risiko.</CTA>

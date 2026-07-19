@@ -1,0 +1,87 @@
+---
+title: Minecraft'ta AntiAura Nedir? Modül Açıklaması
+description: AntiAura, rakibin kristal, çapa veya totem zamanlamasını tahmin eder ve seni patlamadan uzak bir konuma konumlandırır. İşte nasıl çalıştığı ve bunun hile sayılıp sayılmadığı.
+excerpt: AntiAura, rakibinizin kristal veya sabit nokta düzenini okur ve patlamadan önce sizi patlama yarıçapından uzaklaştırır, reflekslere gerek yoktur. Kaçırılmaz bir savuşturmadır, bu da tam da sorunun ta kendisidir.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: AntiAura rakibin istemcisi üzerinde etkili olur mu?
+    a: Hayır. AntiAura yalnızca onu çalıştıran oyuncunun hareketini değiştirir. Rakibin kristal, çapa veya totem zamanlamasını okur ve patlamadan kaçar, asla diğer oyuncunun tarafındaki hiçbir şeye dokunmaz veya müdahale etmez.
+  - q: AntiAura bir engelleyici ile aynı mı?
+    a: Hayır. Bir engelleme, hedefteki kişinin istemcisini veya bağlantısını doğrudan etkiler. AntiAura asla rakibe dokunmaz, sadece kullanıcının kendi hareketini gerçekleşecek bir saldırının etrafında zamanlar.
+  - q: Hangi müşterilerimizin AntiAura'sı var?
+    a: Tenacity'de görüldüğü gibi belgelenmiştir; burada, rakibin durumunu okuyan ve tepki veren diğer modüllerle birlikte istismar kategorisinde yer almaktadır.
+  - q: AntiAura, CrystalAura gibi aynı şekilde tespit edilebilir mi?
+    a: Aslında değil. CrystalAura ve Anchor Aura, sunucunun loglarında doğrudan kontrol edebileceği blok yerleşimleri ve etkileşimleri bırakır. AntiAura yalnızca hareket üretir, bu yüzden onu yakalamak, herhangi bir insanın kaçışından daha tutarlı olan kaçınma zamanlamasını tespit etmek anlamına gelir; bu, izole edilmesi çok daha zor bir sinyaldir.
+  - q: AntiAura hile olarak mı değerlendiriliyor?
+    a: Çoğu sunucuda kristal veya demir ankora yönelik PvP otomasyonunu yasaklayanlarda, evet. Zamanlanmış bir patlamadan kaçınmak için, manuel oyuncuların kendileri için eğitilmesi gereken reaktif bir beceriyi otomatikleştirir ve bu, savunmacı nitelikte çalışmasına rağmen bir oyun avantajı olarak sayılır.
+---
+
+<KeyTakeaways>
+
+- AntiAura, bir savunma modülüdür; rakibin kristal, çapa veya totem zamanlamasını tahmin eder ve oyuncuyu patlamadan uzak bir konuma yeniden konumlandırır.
+- Patlama zamanlamasını, orijinal Minecraft'ın çözdüğü şekilde hesaplar.
+- Yalnızca oyuncunun kendi hareketini değiştirir, asla rakibin istemcisini etkilemez.
+- Tenacity'de belgelenmiştir ve çoğu kristal-PvP yasağı da bunu kapsar.
+
+</KeyTakeaways>
+
+AntiAura, bir savunma amaçlı Minecraft modülüdür; rakibin end kristalinin, yeniden doğuş demirlemesinin veya totem saldırısının patlamaya hazır olduğunu tahmin eder ve oyuncuyu patlama yarıçapından etkilenmeden önce uzaklaştırır. Düşmanın istemcisine müdahale etmez, blok yerleştirmez veya yumruk atmaz. Yaptığı tek değişiklik, kendi hareketini, tek başına hiçbir insanın ulaşamayacağı bir hassasiyetle zamanlamaktır. Crystal Aura gibi bir modül saldırıyı otomatikleştirirken, AntiAura okumayı otomatikleştirir: kurulumu fark et, patlamayı hesapla, kenara çekil.
+
+## AntiAura nasıl çalışır
+
+AntiAura, her saldırgan Aura modülünün güvendiği kesin kurulumu izler: vurulmaya hazır bir end kristali, vurulmaya hazır şarj edilmiş bir yeniden doğuş demirlemesi veya ateşlenmeye hazır bir totem tetiklemeli saldırı. Bu kurulumu tespit ettiğinde, patlamanın ne zaman gerçekleşeceğini aynı anda vanilla Minecraft'ın da patlamayı çözmek için kullandığı zamanlama matematiğiyle hesaplar. Alışılmadık bir şey yok, sadece istemci insanların yapabileceğinden daha hızlı hesaplamalar yapar.
+
+Oradan oyuncuyu yeniden konumlandırır, basarak, yana kaydırarak veya zıplayarak, patlama yarıçapının dışında durmasını sağlar, patlama tam olarak gerçekleştiği an. İşte temel ayrım: bu, isabetten önce yürütülen bir tahmindir, zaten alınan hasara bir tepki değil. Tenacity'de görüldüğü gibi belgelenmiştir; burada, oyuncunun kendi girdileri yerine rakibin durumunu okuyan ve harekete geçen diğer modüllerin yanında istismar kategorisinde yer alır.
+
+## AntiAura vs. Karşıladığı Modüller
+
+AntiAura, [Kristal Aura](/tr/learn/what-is-a-crystal-aura) ve Demir Aura gibi modüller nedeniyle vardır; bunlar bir hedefin yanına otomatik olarak bir patlayıcı yerleştirir ve patlatır. Yardımsız bir oyuncunun kristali veya demiri fark etmesi, zamanlamayı değerlendirmesi ve patlamadan önce saniyenin bir kısmında gerçekleşmesi gerekir. AntiAura, saldırgan modüllerin yerleştirme ve patlatma dizisini otomatikleştirmenin aynı yoluyla, okuma ve kaçınma dizisini otomatikleştirir.
+
+Ancak, ikisi de aynı şeylere dokunmaz. Bir saldırgan Aura modülü, bir sunucunun blok blok inceleyebileceği yerleştirme ve etkileşim paketleri gönderir. AntiAura yalnızca hareketi değiştirir; bu da istemcinin zaten her tik'te gönderdiği girdi kategorisidir ve tam olarak bu, çıktısının ilk bakışta sıradan oyunla bütünleşmesini sağlar.
+
+## Kullanımı Güvenli mi
+
+Çoğunlukla hayır, çünkü risk profili saldırgan bir Aura modülünden farklı görünüyor. AntiAura blok koymaz, saldırmaz ve kendi başına vanilla hareket sınırlarını aşmaz, bu yüzden sunucu günlüklerinden tek başına kolayca işaretlenebilecek, imkansız menzillere, oyuncunun hiç karşılaşmadığı bir blokla etkileşimlere veya Crystal Aura gibi bir şeyin belirgin işaretlerini taşımaz.
+
+Hala otomatikleştirdiği şey, hiçbir insanın gözle eşleyemeyeceği bir tutarlılık ve tepki hızıyla gerçekleşen bir savuşturmadır. Kristal veya demirbaş PvP etrafında inşa edilmiş hile önleme sistemleri çalışan sunucular, bu tür kusursuz kaçış hareketlerini şanslı bir rastlantıdan ziyade bir oyun avantajı olarak değerlendirme eğilimindedir, özellikle de bir maç boyunca yaşanan patlamalar arasında tekrarladığında. Yakalamak, basit bir paket kontrolü yerine hareket analizini gerektirir, ancak genel olarak otomatik savaş yardımı yasağını olan sunucularda, savurduğu modüllerle aynı kural kapsamına girer.
+
+<Callout variant="warning" title="Referans, rehber değil">
+Bu sayfa AntiAura'nın ne olduğunu ve nasıl davrandığını açıklar, nasıl çalıştırılacağını değil. İsimlendirme ve kesin uygulama istemciye göre değişir ve bu tarz bir kristal veya demirci kaçışını otomatikleştirmek, bu tarz PvP'ye izin veren neredeyse her sunucunun kurallarını ihlal eder.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="AntiAura rakibin istemcisi etkiler mi?">
+Hayır. AntiAura yalnızca onu çalıştıran oyuncunun hareketini değiştirir. Rakibin kristal, çapa veya totem zamanlamasını okur ve patlamadan kaçar, diğer oyuncunun tarafındaki hiçbir şeye dokunmaz veya müdahale etmez.
+</FAQItem>
+
+<FAQItem question="AntiAura bir engelleyici ile aynı mı?">
+Hayır. Bir engelleyici, hedefteki istemci veya bağlantıyı doğrudan etkiler. AntiAura, rakibe hiç dokunmaz, sadece kullanıcının hareketini zaten gerçekleşecek bir saldırının etrafında zamanlar.
+</FAQItem>
+
+<FAQItem question="Hangi müşterilerde AntiAura var?">
+Tenacity'de görüldüğü gibi belgelenmiştir; burada, rakip durumunu okuyan ve tepki veren diğer modüllerle birlikte istismar kategorisinde yer almaktadır.
+</FAQItem>
+
+<FAQItem question="AntiAura, CrystalAura gibi aynı şekilde tespit edilebilir mi?">
+Aslında hayır. CrystalAura ve Anchor Aura, sunucunun loglarında doğrudan kontrol edilebilecek blok yerleşimleri ve etkileşimleri bırakır. AntiAura yalnızca hareket üretir, bu nedenle onu yakalamak, herhangi bir insanın gerçekleştirebileceğinden daha tutarlı bir şekilde kaçmayı gerektiren kaçınma zamanlamasını tespit etmek anlamına gelir; bu çok daha zor bir sinyali izole etmek.
+</FAQItem>
+
+<FAQItem question="AntiAura hile olarak kabul ediliyor mu?">
+Kristal veya demir ankraj PvP otomasyonunu yasaklayan çoğu sunucuda evet. Manuel oyuncuların kendileri eğitmek zorunda oldukları, zamanlanmış bir patlamadan kaçınan reaktif bir beceriyi otomatikleştirir ve bu, savunmacı nitelikte olsa bile, bir oyun avantajı olarak sayılır.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-crystal-aura", label: "Kristal Aura Nedir?", description: "AntiAura, otomatik yerleştir ve patlatma modülü, kaçınmak üzere tasarlandı." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Aynı istismar ailesinin tespit-kaçınma ucu." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Bunun gibi daha geniş kategorilere ait modüller." },
+]} />
+
+<CTA href="/tr/purchase">Yasaklardan kaçmakla meşgul olmadığında Opal neler inşa ediyor, bak</CTA>

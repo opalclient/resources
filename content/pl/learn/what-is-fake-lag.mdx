@@ -1,0 +1,100 @@
+---
+title: Czym jest fałszywy lag w Minecraft? Wyjaśnienie opóźnień pakietów
+description: Fałszywy lag opóźnia pakiety ruchu gracza, a następnie uwalnia je gwałtownie, powodując rozsynchronizowanie jego pozycji z serwerem. Oto jak to działa i dlaczego jest to powód do zbanowania.
+excerpt: Fałszywe opóźnienia nie sprawiają, że jesteś opóźniony. One sprawiają, że serwer myśli, iż jesteś, podczas gdy jesteś już gdzieś indziej.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie zmienia Fake Lag?
+    a: Zmienia się, gdy wysyłane są pakiety ruchu, a nie w zależności od tego, jak gracz porusza się na własnym ekranie. Pakiety są zatrzymywane i uwalniane razem w serii, przez co zapis pozycji na serwerze jest opóźniony w stosunku do rzeczywistej.
+  - q: Czy sztuczne opóźnienia to to samo co wysoki ping?
+    a: Nie. Wysoki ping to rzeczywisty opóźnienie sieciowe poza kontrolą gracza. Fałszywe opóźnienia to celowy, po stronie klienta, schemat zatrzymywania i strzelania, który normalne połączenie nigdy nie wygenerowałoby samo.
+  - q: Czy fałszywe opóźnienia uniemożliwiają trafienie gracza?
+    a: Nie. Otwiera to tymczasową lukę między rzeczywistą pozycją a tym, co zarejestrował serwer, co może utrudnić trafienie gracza podczas trzymania, ale nie blokuje obrażeń bezpośrednio, a sam wybuch jest łatwym sygnałem wykrywalnym.
+  - q: Jak różni się Fake Lag od Blinka?
+    a: Fałszywy lag stale wysyła pakiety z opóźnieniem i przesyła je później. Blink całkowicie przerywa połączenie i wznawia je po chwili. Oba powodują rozsynchronizację pozycji, choć za pomocą różnych mechanizmów na poziomie pakietów.
+---
+
+# Co to jest fałszywe opóźnienie w Minecraft?
+
+<KeyTakeaways>
+
+- Fałszywy lag opóźnia pakiety ruchu wychodzące gracza i uwalnia je w jednej serii zamiast co ticka.
+- Serwer nadal rejestruje starą pozycję, podczas gdy gracz już się przesunął, a następnie widzi zacięcie lub szarpnięcie, gdy seria dotrze.
+- To wykorzystywana luka w synchronizacji pozycji, która jest karalna, a nie kosmetyczna, odróżniona od Blink, który zawiesza połączenie zamiast opóźniać pakiety
+
+</KeyTakeaways>
+
+Fałszywe Opóźnienie to moduł bojowy spotykany w niektórych klientach cheatów do Minecrafta, który zatrzymuje pakiety ruchu gracza zamiast wysyłać je przy każdym ticku, a następnie uwalnia całą kolejkę naraz. Normalne połączenie raportuje pozycję stale, więc kopia serwera, gdzie stoi gracz, śledzi jego rzeczywistą pozycję z dużą dokładnością. Fałszywe Opóźnienie celowo przerywa to połączenie: gracz normalnie chodzi i walczy na własnym ekranie, podczas gdy serwer pozostaje zablokowany na starszej pozycji, a gdy kolejka w końcu się zwolni, inni widzą zacięcie lub krótką teleportację zamiast płynnego ruchu.
+
+## Jak to działa
+
+Standardowy klient wysyła pakiet ruchu mniej więcej raz na tick, więc zapis serwera pozycji gracza rzadko odbiega od rzeczywistości o więcej niż ułamek sekundy. Fałszywe Opóźnienie przechwytuje te wychodzące pakiety, umieszcza je w kolejce i utrzymuje kolejkę zamkniętą przez krótki czas zamiast wypuszczać je natychmiast. Technika ta pojawia się w klientach takich jak Raven B++, zwykle pakowana wraz z innymi modułami manipulującymi pakietami, a nie wysyłana samodzielnie.
+
+Dopóki trwała blokada, nic się nie zmienia w doświadczeniu gracza. Nadal normalnie chodzą, skaczą i bujają się na własnym ekranie. Zamrożony jest widok wszystkich innych: serwera i każdego gracza, który ogląda, utknął na ostatniej pozycji, która faktycznie wyszła przed rozpoczęciem blokady. Kiedy blokada się kończy, zakwicowane pakiety zostają uwolnione razem, a gracz wydaje się podskakiwać lub szarpać się w swoje rzeczywiste miejsce zamiast tam iść.
+
+Większość implementacji ogranicza czas trwania blokady. Pozwól, aby różnica między rzeczywistą a zgłaszaną pozycją urosła zbyt mocno, a serwer albo przyciągnie gracza z powrotem do sensownej pozycji, albo wprost odrzuci ruch, więc moduł tak naprawdę wymienia ilość rozsynchronizowania, którą zyskuje, na to, jak oczywisty jest ten nagły skok.
+
+## Fałszywe opóźnienie w porównaniu z migotaniem
+
+Fałszywe opóźnienie jest łączone z migotaniem, ponieważ oba są modułami manipulacji pakietami, które tworzą lukę między rzeczywistą pozycją gracza a tym, co serwer został o tym poinformowany. Mechanizm pod spodem jest inny, a także to, jak to wygląda na ekranie kogoś innego.
+
+| | Fałszywe Opóźnienie | Blink |
+|---|---|---|
+| Zachowanie pakietów | Opóźnia pakiety ruchu, a następnie uwalnia je gwałtownie | Zawiesza połączenie, a następnie je wznawia |
+| Efekt wizualny | Zacinanie się lub krótkie teleportowanie | Zamrożenie, a następnie skok do nowej pozycji |
+| Wykorzystuje | Serwer utrzymuje przestarzałą pozycję, podczas gdy klient nadal się porusza | Serwer nie otrzymuje aktualizacji podczas zawieszenia |
+
+To samo rodzaje problemu, inny poziom działania. Fałszywe Opóźnienie nigdy nie przestaje rozmawiać z serwerem, po prostu rozmawia z opóźnieniem i wszystko naraz. Blink całkowicie przerywa rozmowę i wznawia ją, kiedy tylko zdecyduje.
+
+<Callout variant="tip" title="Gdzie Opal wyznacza granicę">
+
+Opal wysyła moduły bojowe, ale nie oferuje dedykowanej funkcji desynchronizacji typu hold-and-burst, takiej jak Fake Lag. Wymiana setek milisekund kłamstwa o pozycji na szeroko otwarty sygnał wykrywania to transakcja, do której klient nie jest zbudowany
+
+</Callout>
+
+<Callout variant="warning" title="To jest oszustwo, które może skutkować zablokowaniem konta, a nie poprawką sieci">
+
+Fałszywy lag ma na celu oddalenie rzeczywistej pozycji gracza od pozycji zarejestrowanej przez serwer, a seria ruchów tuż po zatrzymaniu to dokładnie wzorzec, który serwerowe antycheaty są zaprojektowane do wykrywania. Należy traktować to jako wykrywalny cheat dający przewagę w rozgrywce, wiążący się z takim samym ryzykiem bana jak każdy inny exploit związany z rozsynchronizacją pozycji, a nie jako coś, co naprawia lub ukrywa słabe połączenie
+
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co właściwie zmienia Fake Lag?">
+
+Zmienia się, gdy wysyłane są pakiety ruchu, a nie w zależności od tego, jak gracz porusza się na własnym ekranie. Pakiety są zatrzymywane i uwalniane razem w serii, przez co zapis pozycji serwera jest opóźniony w stosunku do rzeczywistej
+
+</FAQItem>
+
+<FAQItem question="Czy sztuczne opóźnienia to to samo co wysoki ping?">
+
+Nie. Wysoki ping to rzeczywisty opóźnienie sieciowe poza kontrolą gracza. Fałszywe opóźnienia to celowy, po stronie klienta, wzorzec zatrzymywania i strzelania, który normalne połączenie nigdy nie wygenerowałoby samo
+
+</FAQItem>
+
+<FAQItem question="Czy fałszywe opóźnienia uniemożliwiają trafienie gracza?">
+
+Nie. Otwiera to tymczasową lukę między rzeczywistą pozycją a tym, co zarejestrował serwer, co może utrudnić trafienie gracza podczas trzymania, ale nie blokuje obrażeń bezpośrednio, a sam wybuch jest łatwym sygnałem wykrywania
+
+</FAQItem>
+
+<FAQItem question="Jak różni się Fake Lag od Blinka?">
+
+Fałszywy lag stale wysyła pakiety z opóźnieniem i przesyła je później. Blink całkowicie przerywa połączenie i wznowi je po chwili. Oba powodują rozsynchronizację pozycji, lecz w różny sposób, poprzez różne mechanizmy na poziomie pakietów
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Gdzie moduły takie jak Fake Lag wpisują się w szerszą kategorię klientów narzędziowych." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kategoria klientów oparta na pozostawaniu niezauważonym dla innych graczy i personelu." },
+  { href: "/pl/learn/what-is-killaura", label: "Co to jest Killaura?", description: "Moduł walki Fake Lag zazwyczaj występuje w pakietach oszustw." }
+]} />
+
+<CTA href="/pl/purchase">Walka, która nie musi zgłaszać się do serwera. Wypróbuj Opal.</CTA>

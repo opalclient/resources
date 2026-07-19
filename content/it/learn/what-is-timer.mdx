@@ -1,0 +1,79 @@
+---
+title: Cos'è il Timer in Minecraft? Spiegato il Modulo di Velocità dei Tick
+description: Il timer è un modulo che accelera o rallenta la velocità con cui il client elabora i tick di gioco, dagli attacchi al posizionamento dei blocchi, ed è facile da rilevare per i server.
+excerpt: Il timer non ti rende più veloce, ti fa mentire l'orologio. Ecco come funziona la manipolazione della velocità del tick e perché il server se ne accorge sempre.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa cambia effettivamente il modulo Timer?
+    a: Modifica la velocità con cui il client progredisce attraverso i tick di gioco, accelerando o rallentando qualsiasi cosa legata alla tempistica dei tick, come i tempi di ricarica degli attacchi, l'uso degli oggetti e il posizionamento dei blocchi.
+  - q: Il timer influisce sulla frequenza di tick del server?
+    a: No. Cambia soltanto la velocità con cui il client elabora e invia le proprie azioni basate sui tick. Il server mantiene il proprio tick rate e può comunque misurare il ritmo di ciò che riceve.
+  - q: È sicuro usare Timer?
+    a: Comporta un reale rischio di rilevamento. Poiché il server può misurare direttamente il tasso di azione rispetto al ritmo di tick previsto, un valore di Timer che spinge le azioni a un ritmo sensibilmente più veloce del normale rappresenta un plausibile segnale di allarme per gli anticheat, e l'utilizzo è a rischio e pericolo del giocatore.
+  - q: Perché qualcuno rallenterebbe Timer invece di accelerarlo?
+    a: Un'impostazione più bassa viene talvolta utilizzata per un controllo più preciso sulla tempistica di una singola azione, piuttosto che per la velocità pura, sacrificando la produttività a favore della precisione.
+---
+
+<KeyTakeaways>
+
+- Il timer è un modulo che accelera o rallenta la velocità con cui il client progredisce attraverso i tick di gioco.
+- Ciò modifica qualsiasi aspetto legato alla tempistica dei tick: i tempi di ricarica degli attacchi, l'uso degli oggetti, il posizionamento dei blocchi e la carica dell'arco.
+- Il tick rate del server non cambia mai, solo il ritmo di ciò che il client invia.
+- È facile da rilevare, poiché i server possono misurare direttamente il tasso di azione rispetto al normale ritmo di 20 tick.
+
+</KeyTakeaways>
+
+Timer è un modulo che modifica la velocità con cui il tuo client elabora i tick di gioco di Minecraft, l'orologio fisso di venti tick al secondo su cui si basa il gioco. Portarlo sopra la normalità fa sì che tutto ciò che è legato alla tempistica dei tick, come gli attacchi, l'uso degli oggetti, il posizionamento dei blocchi e la carica dell'arco, avvenga più frequentemente al secondo di quanto consentirebbe un client non modificato. Abbassarlo al di sotto della normalità, invece, rallenta le stesse azioni. A volte viene chiamato TimerMod, e si trova in client come Fan e Tenacity. Il server non diventa più veloce o più lento: è il client a decidere il proprio ritmo, e il server si limita a osservare ciò che arriva.
+
+## Come funziona
+
+Minecraft si basa su tick fissi, venti al secondo per impostazione predefinita. La maggior parte delle azioni temporizzate, i tempi di ricarica degli attacchi, il mangiare, la rottura dei blocchi, la carica dell'arco, avanzano di un passo per tick anziché in base a un orologio. Timer si interfaccia con la velocità con cui il client attraversa questi tick e li scala tramite un moltiplicatore. Impostarlo sopra la normalità fa sì che il client attraversi più tick per secondo nel mondo reale di quanto il server si aspetti. Impostarlo al di sotto della normalità fa sì che proceda a rilento, attraversando meno tick.
+
+Il problema è capire a chi appartengono effettivamente questi tick. Il client che elabora i tick più velocemente non rende il server più veloce, cambia semplicemente ciò che il client invia. Un Timer impostato ben al di sopra della normalità può tentare di attaccare, posizionare blocchi o utilizzare oggetti più spesso di quanto il tick rate dovrebbe permettere. Impostarlo al di sotto della normalità fa l'opposto, e alcuni giocatori lo utilizzano appositamente in questo modo, non per maggiore velocità, ma per un controllo più preciso sul tick esatto in cui un'azione si verifica.
+
+## Perché i server lo intercettano così facilmente
+
+Il Timer lascia una firma difficile da nascondere: un flusso di azioni guidate dai tick che arrivano più velocemente o più lentamente di quanto farebbe il client di un giocatore reale. Il server è autorevole sul tempo di gioco. Non deve accettare il ritmo del client per fede, può contare quanti tick di azioni sono arrivati in un determinato intervallo di tempo reale e confrontarlo con ciò che dovrebbero essere venti tick al secondo.
+
+Questo rende Timer una delle categorie più chiare di modifiche al client da segnalare, almeno in linea di principio. La deviazione si manifesta come un tasso grezzo, non come un sottile errore posizionale sepolto nel rumore. Gli anticheat comunemente registrano o segnalano i giocatori il cui tasso di azione supera costantemente il ritmo previsto degli "tick". Se un valore specifico venga rilevato su un server specifico dipende da quanto attentamente quel server controlla, ma il meccanismo stesso non è nascosto. Un flusso di azioni basate su "tick" più veloce del normale è l'intero segnale, intenzionalmente, non un'incongruenza nell'implementazione.
+
+<Callout variant="tip" title="Spedito da Opal">
+L'inserzione nel catalogo di Opal è esplicita: "Modifica la velocità di tick del gioco". È classificato nella categoria di Opal "utilizzo a proprio rischio", come accadrebbe su qualsiasi client, perché un client che decide il proprio ritmo è esattamente il tipo di segnale che un controllo lato server è progettato per misurare.
+</Callout>
+
+<Callout variant="warning" title="Riferimento, non una guida pratica">
+Questa pagina descrive il modulo in termini generali, in modo da capire cosa significa il termine. La denominazione e il comportamento esatto variano a seconda del client e superare la velocità di azione prevista dal server viola le regole su praticamente ogni server che la verifica.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa cambia effettivamente il modulo Timer?">
+Modifica la velocità con cui il client avanza attraverso i tick di gioco, accelerando o rallentando qualsiasi cosa legata alla tempistica dei tick: tempi di ricarica degli attacchi, utilizzo degli oggetti, carica dell'arco, posizionamento dei blocchi.
+</FAQItem>
+
+<FAQItem question="Il Timer influisce sulla frequenza di tick del server?">
+No. Modifica solo la velocità con cui il client elabora e invia le proprie azioni basate sul tick. Il server mantiene la propria frequenza di tick in ogni momento e può comunque misurare il ritmo di ciò che riceve.
+</FAQItem>
+
+<FAQItem question="Timer è sicuro da usare?">
+Comporta un reale rischio di rilevamento. Il server può misurare direttamente il tasso di azione rispetto al ritmo di tick previsto, quindi un valore di Timer che spinge le azioni a un ritmo notevolmente più veloce del normale rappresenta un punto di segnalazione plausibile per gli anticheat. L'uso è a rischio e pericolo del giocatore.
+</FAQItem>
+
+<FAQItem question="Perché qualcuno rallenterebbe il Timer invece di accelerarlo?">
+Un'impostazione più bassa viene talvolta utilizzata per un controllo più preciso sul momento esatto in cui un'azione viene eseguita, sacrificando la velocità grezza in favore della precisione.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "Un modulo di auto-attacco il cui Timer può essere moltiplicato." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "L'approccio basato sulla discrezione, in netto contrasto con un segnale così eclatante." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "L'ampia categoria a cui appartengono Timer e moduli simili." },
+]} />
+
+<CTA href="/it/purchase">Supera il tick rate previsto dal server. Opal spedisce Timer, gli occhi aperti sul rischio.</CTA>

@@ -1,0 +1,85 @@
+---
+title: Co to są krytyczne trafienia w Minecraft? Wyjaśnienie modułu
+description: Krytyczne Uderzenie to moduł bojowy, który zmusza każde trafienie do rejestrowania się jako krytyczne, bez konieczności precyzyjnego wyczucia momentu skoku. Oto jak działa i dlaczego jest łatwe do złapania.
+excerpt: Każde trafienie wygląda jak idealnie wyczuwalny skokowy atak, tylko bez skoku. Oto, co faktycznie zmienia moduł Criticals i efekt cząsteczkowy, który to zdradza.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Jakie normalnie wymagania musi spełnić trafienie krytyczne w oryginalnym Minecraft?
+    a: Atakujący musi znajdować się w trakcie opadania w momencie trafienia, co zazwyczaj oznacza skakanie tuż przed uderzeniem. Stanie w miejscu lub uderzanie podczas ruchu na tej samej wysokości nigdy nie powoduje krytycznego trafienia w niezmodyfikowanym "Minecraftcie".
+  - q: Czy Krytyczne trafienie zmienia ilość zadawanych obrażeń?
+    a: Tak. Zmusza to do nałożenia bonusu za krytyczne obrażenia na każdy atak, dzięki czemu trafienia zadają więcej obrażeń, niż gdyby gra faktycznie sprawdzała stan ruchu gracza.
+  - q: Czy Criticals to to samo co moduł zasięgu lub celowania?
+    a: Nie. Zasięg zwiększa dystans ataku, a moduły celownicze odpowiadają za celowanie; Krytyczne uderzenia zmieniają jedynie to, czy trafienie liczy się jako krytyczne pod względem obrażeń. Zostały zaprojektowane do nakładania się na siebie, a nie do zastępowania się nawzajem.
+  - q: Czy serwer może wykryć użycie Krytyków?
+    a: Tak. Serwer może porównać śledzoną pozycję i prędkość gracza z wymaganiami krytycznego trafienia. Anticheaty szczególnie obserwują graczy, którzy nie spadają, ale nadal zadają krytyczne trafienia.
+---
+
+<KeyTakeaways>
+
+- Criticals to moduł walki, który zmusza każdy traf do bycia krytycznym uderzeniem, bonus obrażeń, który w standardowym Minecraftcie otrzymuje się jedynie podczas upadku.
+- Pomija wymóg odpowiedniego momentu skoku, więc trafienia krytyczne następują nawet podczas stania w miejscu.
+- To oszustwo związane z obrażeniami, spotykane w liniach klienta takich jak Fan i Tenacity.
+- Serwery wykrywają to sprawdzając, czy ruch atakującego wspiera krytyczne uderzenie.
+
+</KeyTakeaways>
+
+Criticals to moduł walki, który zmusza każdy atak gracza do rejestrowania się jako trafienie krytyczne – dodatkowe obrażenia, które w standardowym Minecrafcie są zarezerwowane dla ataków trafiających podczas upadku. Prawdziwe trafienie krytyczne wymaga wyskokiem w odpowiednim momencie tuż przed atakiem. Criticals całkowicie eliminuje to okienko czasowe: każdy trafienie liczy się jako krytyczne, niezależnie od tego, czy gracz jest w powietrzu, idzie po płaskiej powierzchni, czy stoi w miejscu. To niewielka zmiana mechaniczna z wyraźnym wizualnym sygnałem, i plasuje się na bardziej prymitywnej, starszej stronie spektrum oszustw, a nie na czymś stworzonym, by przetrwać wnikliwą analizę.
+
+## Jak działa Criticals
+
+Standardowy Minecraft sprawdza tylko jedną rzecz przed przyznaniem trafienia krytycznego: czy atakujący porusza się w dół w momencie uderzenia. W praktyce oznacza to skakanie i atakowanie w trakcie opadania – wąskie okno czasowe, którego większość graczy uczy się wyczuwać. Traf w nie, a gra dodaje obrażenia bonusowe wraz z wybuchem cząsteczek gwiazd i dźwiękiem trafienia krytycznego. Przeocz go, a trafienie jest zwyczajne.
+
+Krytyczne usuwa sprawdzanie. Zamiast odczytywać rzeczywistą pionową prędkość gracza, oznacza każdy wychodzący atak jako krytyczny zanim klient go wyśle, dzięki czemu bonus obrażeń jest stosowany niezależnie od tego, jak wygląda faktyczny ruch gracza. Zjawisko to zostało udokumentowane w liniach klientów, takich jak Fan i Tenacity, oba z epoki i stylu klientów, w których ukrywanie tak oczywistej niezgodności nigdy nie było celem.
+
+## Dlaczego ludzie z niego korzystają
+
+Atrakcyjność tkwi w obrażeniach bez kompromisów. Prawdziwy krytyczny wymaga skoku do walki, co krótko unosi gracza w powietrze, ograniczając jego możliwości ruchu i ułatwiając trafienie hitboxu. Krytyczne rozdaje ten sam bonus, nie opuszczając ziemi, więc gracz walczący na nogach zadaje tyle samo obrażeń na atak, co ktoś, kto idealnie trafił w czas każdego uderzenia. Zamienia umiejętność w stałą.
+
+## Dlaczego to jest wykrywane
+
+Krytyczne trafienia zmieniają wynik walki, a nie wygląd gry, dlatego wiążą się z realnym ryzykiem na każdym serwerze, który wykonuje weryfikacje po stronie serwera. Sygnatura jest podwójna. Jest sygnatura wizualna: krytyczne trafienia generują wyraźny wybuch cząstek i dźwięk, a klient zgłaszający je przy niemal każdym uderzeniu wygląda podejrzanie. Następnie jest sygnatura, którą serwer faktycznie weryfikuje: może śledzić pozycję i prędkość atakującego w momencie zarejestrowania trafienia, a gracz stojący na ziemi, a nie spadający, który ląduje z krytycznym trafieniem, o którym klient twierdzi, że jest to trafienie krytyczne, stoi w sprzeczności z działaniem standardowego systemu walki. To właśnie ta sprzeczność jest oznaczana przez antywiry po stronie serwera.
+
+<Callout variant="tip" title="Gdzie Opal wyznacza granicę">
+Opal dostarcza własne moduły po stronie walki, które mieszczą się w tej samej ogólnej kategorii co Criticals, ale nie ma w nich opcji wymuszonego krytycznego trafienia. Niezgodność, którą serwer może łatwo wykryć (trafienie krytyczne, podczas gdy własny śledzony parametr prędkości wskazuje, że nigdy nie oderwałeś się od ziemi), to dokładnie taki rodzaj krawędzi, która w ciągu tygodnia doprowadza klienta do czarnej listy serwerów i wykluczenia z list dopuszczalnych.
+</Callout>
+
+## Krytyczne trafienia a moduły zasięgu i celowania
+
+Krytyczne trafienia nie wpływają na odległość ani celowanie, więc nie zastąpią [zasięgu](/pl/learn/what-is-reach) ani [celownika](/pl/learn/what-is-an-aimbot). Zasięg decyduje, czy trafienie może zostać zarejestrowane z większej odległości, niż to, na jaką pozwala wersja podstawowa. Celownik decyduje, czy krzyż celowniczy w ogóle trafi w cel. Krytyczne trafienia decydują jedynie o tym, co się stanie z obrażeniami, gdy trafienie już nastąpiło – czy zostanie zaliczone jako krytyczne. Wszystkie trzy są powszechnie łączone, a nie używane jako alternatywy, ponieważ każdy z nich rozwiązuje inną część zamachu.
+
+<Callout variant="warning" title="Informacja, nie instrukcja">
+Ta strona opisuje moduł w sposób ogólny, abyś wiedział, co ten termin oznacza. Nazewnictwo i dokładne zachowanie różnią się w zależności od klienta, a wymuszanie krytycznych trafień poza zasadami vanilla łamie warunki użytkowania na praktycznie każdej platformie.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Jakie warunki muszą być spełnione, aby doszło do krytycznego trafienia w standardowym Minecraft?">
+Atakujący musi spadać w momencie uderzenia, co zazwyczaj oznacza skakanie tuż przed trafieniem. Stanie w miejscu lub atakowanie podczas ruchu w poziomie nie powoduje krytycznego trafienia w niezmienionym Minecraft.
+</FAQItem>
+
+<FAQItem question="Czy Criticals zmienia sposób zadawania obrażeń?">
+Tak. Zmusza bonus obrażeń krytycznych do działania przy każdym trafieniu, dzięki czemu ataki zadają więcej obrażeń, niż gdyby sprawdzano rzeczywisty stan ruchu gracza.
+</FAQItem>
+
+<FAQItem question="Czy Criticals to to samo co moduł zasięgu lub celowania?">
+Nie. Zasięg zwiększa odległość ataku, a moduły celowania zajmują się namierzaniem. Criticals zmienia jedynie to, czy trafienie liczy się jako krytyczne pod względem obrażeń, a te trzy elementy zwykle są łączone, a nie zamieniane na siebie nawzajem.
+</FAQItem>
+
+<FAQItem question="Czy serwer może wykryć użycie Criticals?">
+Tak. Serwer może porównać, czy pozycję i prędkość gracza śledzoną przez system faktycznie potwierdzają krytyczne trafienie w momencie zgłoszenia uderzenia. Anticheaty bezpośrednio szukają wzorca, w którym gracz nie spada, ale nadal zadaje krytyczne trafienia.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-reach", label: "Co to jest Reach?", description: "Moduł Criticals często jest układany w stos." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Moduł celowniczy obsługujący inną część zamachu." },
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Atakujący auto-Critical pojawia się obok w starszych klientach." },
+]} />
+
+<CTA href="/pl/purchase">Walcz uczciwie i uderzaj z precyzją. Zobacz zestaw bojowy Opal dla $8.99.</CTA>

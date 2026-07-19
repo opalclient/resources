@@ -1,0 +1,85 @@
+---
+title: Co to jest Brak Upadku Minecraft? Moduł Wyjaśniony
+description: Żaden Fall nie uniemożliwia serwerowi rejestrowania obrażeń od upadku w Minecraft. Oto jak anulowanie pakietów, fałszowanie podłoża i wykrywanie działają w praktyce.
+excerpt: Moduł, który zamienia upadek z dwunastu serc w ziewę. Oto mechanika i ryzyko, o którym nikt nie wspomina na pudełku.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie robi No Fall?
+    a: Zapobiega rejestrowaniu obrażeń od upadku przez serwer dla twojej postaci, więc upadek, który normalnie by cię skrzywdził lub zabił, nic nie robi.
+  - q: Jak No Fall zapobiega zadaniu obrażeń od upadku?
+    a: 'Trzy udokumentowane metody: anulowanie pakietu ruchu, który serwer wykorzystuje do obliczania spadku, fałszowanie stanu "na ziemi", dzięki czemu spadek nigdy nie zostanie zarejestrowany, lub manipulowanie danymi o przewidywanej pozycji, aby śledzenie spadku przez serwer nigdy nie zgromadziło wystarczającej ilości danych do zadania obrażeń.'
+  - q: Czy wykrywalny jest jakiś upadek?
+    a: Tak. Serwer oczekuje, że obrażenia od upadku będą wynikać ze śledzenia pionowego ruchu, a niezgodność między Twoim zgłaszanym stanem a uszkodzeniem, które powinno się wydarzyć, jest sygnałem, który anticheaty mogą rozsądnie sprawdzić.
+  - q: Czy No Fall wygląda tak samo u każdego klienta?
+    a: Nie. To ogólna koncepcja modułu, która pojawia się u wielu klientów, ale konkretna metoda (anulowanie pakietów, fałszowanie lokalizacji lub manipulacja przewidywanym stanem) różni się w zależności od implementacji.
+  - q: Czy efekt No Fall wpływa na coś poza obrażeniami od upadku?
+    a: Nie było to zaplanowane. Celuje konkretnie w sprawdzanie obrażeń od upadku, choć oszukiwanie podłoża w szczególności może wpływać na inne mechanizmy związane z ruchem, w zależności od implementacji.
+---
+
+<KeyTakeaways>
+- No Fall uniemożliwia rejestrowanie obrażeń od upadku przez serwer, co oznacza, że upadki z dowolnej wysokości nie kosztują nic.
+- Działa poprzez omijanie sprawdzenia upadku: anulowanie pakietów, fałszowanie stanu podłoża lub udawanie przewidywanej pozycji.
+- Niezgodność między zgłaszanym ruchem a oczekiwanymi obrażeniami to dokładnie to, czego szukają anticheaty.
+- Opal udostępnia to jako No Fall, z zastrzeżeniem używania na własną odpowiedzialność, jak każdy wykrywalny moduł.
+</KeyTakeaways>
+
+No Fall to moduł Minecraft, który uniemożliwia serwerowi rejestrowanie obrażeń od upadku dla twojej postaci. Zamiast pozwalać, by normalne obliczenia obrażeń w grze przebiegły zgodnie z planem, ingeruje w serwerową kontrolę, która w przeciwnym razie zdecydowałaby, że właśnie straciłeś dwanaście serc spadając z klifu. Skacz z wieży, wycofuj się z walki w powietrzu, spadaj prosto w kopalnię: żadne z tych działań nie kosztuje cię zdrowia. To mały fragment kodu, który wykonuje dużą pracę, a także jeden z bardziej przypadkowo wykrywalnych trików w zestawie narzędzi klienta użytkowego, co warto wiedzieć, zanim zaczniesz się na nim polegać.
+
+## Jak to działa
+
+Serwer stale śledzi twoją pionową pozycję. Gdy wykryje lądowanie po upadku z pewnej wysokości, nakłada obrażenia zależne od odległości, z której spadłeś. Całym zadaniem No Fall jest zakłócanie tego procesu zanim obrażenia zostaną nałożone.
+
+Istnieją trzy popularne sposoby, w jakie to się dzieje:
+
+**Anulowanie pakietów.** Klient po prostu wstrzymuje pakiet ruchu, którego serwer użyłby do obliczenia upadku, więc serwer nigdy nie otrzymuje danych, których potrzebuje, aby cię obarczyć za to.
+
+**Fałszowanie podłoża.** Klient informuje serwer, że stoi na solidnym gruncie, gdy tak nie jest. Brak lądowania oznacza brak upadku do zarejestrowania w pierwszej kolejności.
+
+**Manipulacja przewidywanym stanem.** Klient cicho modyfikuje dane o pozycji, które raportuje, dzięki czemu własny tracker odległości upadku serwera nigdy nie zgromadzi wystarczającej ilości, aby przekroczyć próg uszkodzeń.
+
+Ten sam cel, trzy różne kłamstwa przekazane serwerowi. To, której metody użyje klient, wpływa na to, jak bardzo to jest oczywiste.
+
+## Czy to jest bezpieczne?
+
+Nie, w żadnym bezwzględnym sensie. No Fall to obejście po stronie klienta dla sprawdzenia po stronie serwera, a to niezgodność jest dokładnie tym, czego anticheaty mają szukać. Serwer oczekuje, że obrażenia od upadku będą wynikać z monitorowanego ruchu. Kiedy zgłaszana pozycja lub stan przestają odpowiadać obrażeniom, które powinny się wydarzyć, ta luka jest prawdopodobnym sygnałem wykrywania, a rozsądny anticheat to zauważy.
+
+Czy to się naprawdę zdarzy, zależy od serwera i metody. Anulowanie pakietów i fałszowanie pozycji na ziemi pozostawiają bardziej oczywiste ślady w logach ruchu niż bardziej subtelne podejście oparte na przewidywaniu stanu, ale żadna z tych trzech metod nie jest domyślnie niewidoczna. Traktuj No Fall jako używanie na własną odpowiedzialność i spodziewaj się, że ścisły anticheat go wykryje częściej niż łagodny.
+
+<Callout variant="tip" title="Opal to wysyła">
+Katalog modułów Opala wskazuje to wprost: **Brak Upadku**, „usuwa obrażenia od upadku”. Bez ozdobników, bez oddzielnej nazwy marketingowej. Plik jest umieszczony w kategorii używania na własną odpowiedzialność w kliencie, w tym samym miejscu co wszystko inne, co serwer może wykryć.
+</Callout>
+
+<Callout variant="warning" title="Może to skutkować zbanowaniem">
+Upadek pozostawia mechaniczny odcisk: uszkodzenie, które miało się wydarzyć, ale nie miało. Anticheaty szukają właśnie tej luki. Używanie tego wiąże się z realnym ryzykiem bana na każdym serwerze, który to sprawdza, tak samo jak w przypadku każdego innego klienta.
+</Callout>
+
+## FAQ
+
+<FAQList>
+<FAQItem question="Co właściwie robi No Fall?">
+Zapobiega rejestrowaniu obrażeń od upadku przez serwer dla Twojej postaci, dzięki czemu upadek, który normalnie spowodowałby obrażenia lub śmierć, nie ma żadnych skutków.
+</FAQItem>
+<FAQItem question="Jak No Fall unika wyzwalania obrażeń od upadku?">
+Trzy udokumentowane podejścia: anulowanie pakietu ruchu, którego serwer użyłby do obliczenia upadku, fałszowanie stanu „na ziemi”, dzięki czemu No Fall nigdy nie jest rejestrowany, lub manipulowanie danymi przewidywanej pozycji, aby śledzenie upadku przez serwer nigdy nie zgromadziło wystarczającej ilości danych, aby zastosować obrażenia.
+</FAQItem>
+<FAQItem question="Czy No Fall jest wykrywalny?">
+Tak. Serwer oczekuje, że obrażenia od upadku będą wynikać ze śledzonego ruchu pionowego, a niezgodność między Twoim raportowanym stanem a obrażeniami, które powinny się wydarzyć, jest sygnałem, który anticheaty mogą rozsądnie sprawdzić.
+</FAQItem>
+<FAQItem question="Czy No Fall działa tak samo na każdym kliencie?">
+Nie. Jest to ogólna koncepcja modułu, która pojawia się w wielu klientach, ale dokładna metoda (anulowanie pakietów, fałszowanie stanu na ziemi lub manipulacja przewidywanym stanem) różni się w zależności od implementacji.
+</FAQItem>
+<FAQItem question="Czy No Fall wpływa na coś poza obrażeniami od upadku?">
+Nie, zgodnie z przeznaczeniem. Celuje konkretnie w sprawdzenie obrażeń od upadku, choć fałszowanie stanu na ziemi może w szczególności wpływać na inne sprawdzenia związane z ruchem, w zależności od tego, jak jest zbudowane.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Kategoria No Fall, w której ona żyje, oraz to, co odróżnia klienta narzędziowego od pełnoprawnego klienta cheatującego." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Gdzie budowane są moduły, takie jak No Fall, żeby ukryć się przed czymś więcej niż tylko serwerem." },
+  { href: "/pl/learn/what-is-velocity-anti-knockback", label: "Czym jest prędkość/odporność na odrzut?", description: "Kolejny moduł, który anuluje koszt, który normalnie musisz zapłacić w grze." }
+]} />
+
+<CTA href="/pl/purchase">No Fall to jedna pozycja na liście modułów Opal. Sprawdź, co jeszcze się załapało.</CTA>

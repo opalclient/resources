@@ -1,0 +1,95 @@
+---
+title: Jakie są mapy w Minecraft? Wyjaśnione nazwy
+description: "Minecraft: wyjaśnienie mapowań: jak MCP, Yarn i Mojmap przekształcają zaciemnione nazwy klas w czytelny kod, aby mody i klienty mogły podłączać się do gry."
+excerpt: Mojang udostępnia Minecrafta z pomieszanymi nazwami, takimi jak a.a.a. Mapowania to słownik, który przywraca je do czytelnego kodu, do którego mogą podpiąć się mody.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Mappings
+author: trq
+faqs:
+  - q: Czy zmiany w mapowaniu wpływają na działanie gry?
+    a: Nie. Mapowanie jedynie zmienia nazwy rzeczy dla programisty, a skompilowany mod jest remapowany, aby pasował do zaszyfrowanej gry, więc nazwy kodów nigdy nie trafiają do graczy.
+  - q: Dlaczego istnieje kilka systemów mapowania?
+    a: Historia. MCP pojawił się najpierw dla Minecrafta sprzed wersji 1.14, Yarn rozwijał się wraz z Fabric jako otwarta alternatywa, a mapowania od Mojang pojawiły się, gdy Mojang zaczął publikować oficjalne nazwy w wersji 1.14.4.
+  - q: Jakie mapowanie powinno użyć nowy projekt?
+    a: Dla współczesnego Minecrafta, standardowymi wyborami są mapowania Mojang lub Yarn. MCP ma znaczenie głównie w przypadku starszych projektów z ery 1.8.9, gdzie wciąż wykorzystuje się stary łańcuch narzędzi.
+  - q: Czy mapy to to samo co modloader?
+    a: Nie. Mapowanie to tabela nazw; mod loader, taki jak Fabric, to środowisko uruchomieniowe, które ładuje mody do gry. Współpracują ze sobą, ale rozwiązują różne problemy.
+---
+
+<KeyTakeaways>
+
+- Mapowania to tabele nazw, które tłumaczą zaciemniony kod Minecrafta na czytelne nazwy.
+- Mojang zaciemnia nazwy klas, pól i metod, a te zmieniają się z każdą wersją.
+- Trzy, o których usłyszysz, to MCP, Yarn i mapowania Mojang (Mojmap).
+- Mapowanie jest stosowane w czasie kompilacji, a nie w czasie działania, więc nigdy nie trafia do graczy.
+
+</KeyTakeaways>
+
+Mapowania Minecrafta to tabele nazw, które tłumaczą zaszyfrowany kod gry na czytelne nazwy. Mojang dostarcza Minecrafta z pomieszanymi nazwami klas i pól, takimi jak `a.a.a`, dlatego twórcy modów i klientów stosują zestaw mapowań, taki jak MCP, Yarn lub mapowania Mojang, aby uzyskać nazwy, które mogą faktycznie czytać i do których mogą się podłączać.
+
+<Callout variant="info" title="Gdzie mieści się Opal">
+Opal to mod [Fabric](https://fabricmc.net/), więc pod spodem korzysta z nowoczesnych mapowań i udostępnia czysty interfejs skryptowy GraalVM JavaScript. Piszesz skrypty, używając czytelnych nazw, nie ingerując bezpośrednio w mapowania. Zobacz [przewodnik po skryptach](/pl/docs/scripting).
+</Callout>
+
+## Dlaczego istnieją mapowania
+
+Mojang zaciemnia Minecrafta przed wydaniem. Dostarczany plik jar zmienia nazwy klas, metod i pól na krótkie, pozbawione znaczenia ciągi znaków, aby zmniejszyć rozmiar pliku i utrudnić czytanie kodu. To zaciemnianie uniemożliwia po prostu otwarcie gry i rozpoczęcie jej edycji.
+
+Mapowanie to słownik, który odwraca ten proces. Łączy każdą zaciemnioną nazwę z czytelną dla człowieka, dzięki czemu pole o nazwie `field_70181_x` staje się `motionY`. Dzięki zastosowanemu mapowaniu programista widzi kod o normalnym wyglądzie i może tworzyć mody.
+
+Istnieje jednak pewien haczyk. Zaciemnione nazwy zmieniają się w każdej wersji Minecrafta, więc to samo pole może być `a` w jednej wersji, a `bk` w następnej. Mapowania absorbują te zmiany, dlatego są podstawą każdego łańcucha narzędzi modowania.
+
+## Trzy, o których będziesz słyszał
+
+MCP (Mod Coder Pack) to mapowanie tworzone przez społeczność, które umożliwiło modowanie przed wersją 1.14. Używał dwuwarstwowego schematu: projekt Searge generował stabilne, ale brzydkie nazwy pośrednie, takie jak `field_70181_x`, a MCP otaczał je przyjaznymi nazwami, takimi jak `motionY`. Większość starszych, samodzielnych klientów 1.8.9 kompiluje się z drzewa źródłowego zmapowanego przez MCP i opiera swoje odbicie na nazwach MCP i Searge.
+
+Praca z Yarn to otwarte, rozwijane przez FabricMC mapowanie, utrzymywane dla ekosystemu [Fabric](https://fabricmc.net/). Jest to projekt napędzany przez społeczność, objęty swobodną licencją i szybko aktualizowany po każdej nowej wersji Minecrafta, co jest jedną z przyczyn, dla której mody Fabric szybko docierają do nowych wersji.
+
+Mapowania Mojang, często nazywane Mojmap, to własne mapowania firmy Mojang, publikowane wraz z każdą oficjalną wersją od 1.14.4. Ponieważ pochodzą bezpośrednio od Mojang, nazwy odpowiadają temu, jak rzeczy nazywają twórcy. Skutecznie zastąpiły MCP i Searge jako domyślne mapowanie dla każdego nowego klienta celującego w 1.21 lub nowszą.
+
+## Jak się porównują
+
+| | MCP | Yarn | Mapowania Mojang |
+| :--- | :--- | :--- | :--- |
+| Utrzymywane przez | Społeczność (Searge + MCP) | FabricMC | Mojang |
+| Era | Przed 1.14 (1.7-1.12) | 1.14+ | 1.14.4+ |
+| Źródło | Pochodzące ze społeczności | Pochodzące ze społeczności | Oficjalne |
+| Używane z | Starsze klienty, stare modowanie | Fabric | Fabric, Forge |
+| Status | Wycofane na rzecz mapowań Mojang | Aktywne | Aktywne domyślnie |
+
+## Jak mapowania wpisują się w łańcuch narzędzi modowania
+
+Mapowanie jest stosowane w czasie kompilacji, a nie w czasie działania. Narzędzie budowania pobiera zamazaną wersję gry, uruchamia na niej mapowanie i przekazuje Ci czytelną wersję do pisania kodu. Twój gotowy mod jest następnie ponownie mapowany, aby odpowiadał zamazanym nazwom, których faktycznie używa gra gracza.
+
+Różne loadery radzą sobie z tym na różne sposoby. [Fabric](https://fabricmc.net/) kompiluje się z Yarn lub bazą mapowania Mojang, w zależności od projektu. Forge historycznie dzielił to zadanie, używając jednej mapy do kodu źródłowego, a innej do tego, co jest uruchamiane. Licencja na mapowania Mojang jest na tyle liberalna, że można z nich korzystać w czasie kompilacji, dlatego nowoczesne łańcuchy narzędzi sięgają po nie.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy mapowania wpływają na działanie gry?">
+Nie. Mapowanie jedynie zmienia nazwy dla programisty. Skompilowany mod jest remapowany, aby pasował do zaszyfrowanej gry, więc nazwy, które widzisz podczas kodowania, nigdy nie trafiają do graczy.
+</FAQItem>
+
+<FAQItem question="Dlaczego istnieje kilka systemów mapowania?">
+Historia. Najpierw pojawił się MCP i poprowadził społeczność przez Minecrafta sprzed wersji 1.14. Yarn rozwijał się wraz z Fabric jako otwarta alternatywa, a mapowania od Mojang pojawiły się, gdy Mojang zaczął publikować oficjalne nazwy w wersji 1.14.4.
+</FAQItem>
+
+<FAQItem question="Które mapowania powinno używać nowy projekt?">
+Dla nowoczesnego Minecrafta, mapowania od Mojang lub Yarn są standardowymi wyborami. MCP jest istotne głównie dla starszych projektów z epoki 1.8.9, gdzie wciąż używany jest stary łańcuch narzędzi.
+</FAQItem>
+
+<FAQItem question="Czy mapowania są tym samym co ładowacz modów?">
+Nie. Mapowanie to tabela nazw; ładowacz modów, taki jak Fabric, to środowisko uruchomieniowe, które ładuje mody do gry. Współpracują ze sobą, ale rozwiązują różne problemy.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-intermediary", label: "Co to jest pośrednik?", description: "Warstwa nazwy stabilnej, przeciw której kompilowane są mody." },
+  { href: "/pl/learn/yarn-vs-mojmap", label: "Włókno kontra Mojmap", description: "Którą czytelną mapę wybrać dla moda Fabric." },
+  { href: "/pl/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "Ładowarki, dla których te mapowania służą." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź Opala, klienta Fabric, za $8.99</CTA>

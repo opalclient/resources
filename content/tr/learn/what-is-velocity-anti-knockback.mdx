@@ -1,0 +1,94 @@
+---
+title: Minecraft'ta Hız (Anti-Geri Tepme) Nedir?
+description: Hız veya geri tepme engelleme, aldığınız savurmayı azaltan veya ortadan kaldıran bir savaş modülüdür. İşte nasıl çalıştığı ve neden tespit edildiği.
+excerpt: Hız, bir darbeden sonra aldığınız savrulmayı azaltır, böylece yerinizde durur ve salmaya devam edersiniz. İşte modülün o itiş gücünü nasıl yeniden yazdığının ve sunucuların bunun neden fark ettiğinin açıklaması.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Modules
+author: trq
+faqs:
+  - q: Minecraft istemcisinde Velocity ne anlama geliyor?
+    a: Müşteri menüsünde Velocity, geri tepme önleme modülüdür. Oyuncunun aldığı itme miktarını azaltarak, bir savaş sırasında hedefi yakınında kalmasını sağlar.
+  - q: Anti-knockback, Velocity ile aynı şey mi?
+    a: "Evet. Anti-knockback, düz dildeki adıyken, Velocity ise aynı davranış için kullanılan yaygın modül adıdır: saldırılardan kaynaklanan geri tepmeyi azaltmak."
+  - q: Neden geri tepmeyi sıfır yüzde olarak ayarlayamıyorum?
+    a: Bunu yapabilirsin, ama tam iptal en kolay tespit edilecek versiyon. Sunucu, geri dönmen gereken mesafeyi biliyor, bu yüzden hiç geri püskürtme almamak bariz bir uyumsuzluk.
+  - q: Hız PvP'de yardımcı olur mu?
+    a: Oyuncuyu yakın mesafede tutarak, her darbede itilmekten kurtararak sağlanabilir. Bu avantaj aynı zamanda anticheat sistemlerinin geri tepme uygulamasını bu kadar yakından ölçmesinin de nedenidir.
+---
+
+<KeyTakeaways>
+
+- Hız, aynı zamanda anti-knockback olarak da bilinir, aldığınız savrulmayı azaltır veya iptal eder.
+- Sunucu, bir darbeden sonra bir savrulma vektörü gönderir; Velocity, oyuncu hareket etmeden önce bunu ölçeklendirir.
+- Tam bir iptal kolayca tespit edilebilir; kısmi değerler gecikme ve normal takaslarla daha iyi bütünleşir.
+- Algılama sunucu tarafında yapılır çünkü sunucu oyuncunun ne kadar hareket etmesi gerektiğini zaten bilir.
+
+</KeyTakeaways>
+
+Hız, bir oyuncuya yapılan saldırıdan aldığı geri tepmeyi azaltan veya ortadan kaldıran bir savaş modülüdür. Sunucu, bir isabetten sonra oyuncunun ne kadar geriye savrulacağını istemciye bildirir. Hız, bu talimatı kesintiye uğratır ve küçültür, böylece oyuncu neredeyse hiç hareket etmez. Aynı zamanda geri tepme önleyici olarak da adlandırılır.
+
+## Hız nasıl çalışır
+
+Hız, bir isabetten sonra sunucunun gönderdiği itme gücünü düzenler. Bir varlık Minecraft'ta vurulduğunda, sunucu istemciye bir hız güncellemesi gönderir: hangi yöne ve ne kadar hızlı hareket etmesi gerektiğini söyleyen bir vektör. Varsayılan istemci, bu vektörü tam olarak uygular. Hız, oyuncu hareket etmeden önce güncellemeyi yakalar ve ölçeklendirir.
+
+Ölçekleme genellikle her eksende bir yüzde olarak yapılır. Yatay geri tepme kesilir, böylece oyuncu geriye kaymazken, dikey geri tepme genellikle normal değerlere yakın kalır, böylece zıplama ve düşmeler hala doğru görünür. Sıfır yüzde olduğunda oyuncu hiç geri tepme almaz. Kısmi bir değerde ise bazı geri tepme alır, ancak bu fark edilmesi daha zordur.
+
+Aynı etki iki şekilde elde edilebilir. Bazı uygulamalar, paket geldiği anda hız paketini değiştirir. Diğerleri ise varsayılan hareketi çalıştırır ve ardından bir sonraki tik'te konumu düzeltir. Her iki durumda da oyuncu kaybetmesi gereken zemini korur.
+
+## Yaygın ayarlar
+
+Hız modülleri, güvenlik ile etki arasında bir denge kuran birkaç değer sunar.
+
+| Ayar | Kontrol Ettiği Şey |
+|---|---|
+| Yatay | Oyuncunun hala aldığı yanlara doğru itme yüzdesi |
+| Dikey | Oyuncunun hala aldığı yukarı doğru itme yüzdesi |
+| Mod | Paket düzenleme vs konum düzeltme |
+| Şans | Belirli bir isabetin ne sıklıkla azaltıldığı, her isabet yerine |
+
+Tam iptal en güçlü ve en bariz olanıdır. Kısmi değerler veya bazı isabetleri atlayan bir şans, daha çok gecikme veya normal bir takas gibi görünür ve daha az dikkat çeker.
+
+## Oyuncuların Neden Kullandığı
+
+Hız, oyuncuyu menzilde tutarak yakın dövüş avantajı sağlar. Geri tepme normalde bir dövüşü böler: her isabet her iki oyuncuyu da birbirinden iter, böylece boşluğu tekrar kapatmaları gerekir. Daha az geri tepme alan oyuncu hedefinin üzerinde kalır ve diğer oyuncu uzaklaşırken salmaya devam eder. Düz bir yakın dövüş düellosunda bu büyük bir avantajdır.
+
+## Neden Tespit Ediliyor
+
+Hız, sunucu zaten oyuncunun ne kadar hareket etmesi gerektiğini bildiği için tespit edilir. Sunucu geri tepme vektörünü gönderir, böylece beklediği konumu, istemcinin bildirdiği konumla karşılaştırabilir. Bir oyuncu, beklenen mesafeyi hareket etmeden isabet almaya devam ettiğinde, boşluk belirginleşir.
+
+Sunucu tarafı anticheat'ler bunu doğrudan takip eder. Oyuncunun birçok darbede uyguladığı her bir geri tepme miktarını izlerler. Fiziksel olarak izin verilen yerden sürekli olarak daha fazla yer kaplayan oyuncular işaretlenir. Tam iptal kolayca tespit edilebilir. Kısmi azaltma daha zordur, bu nedenle birçok uygulama asla sıfıra düşmez.
+
+## Hız vs diğer savaş modülleri
+
+Hız, diğer savaş modülleri arasında oyuncuya ne olduğu konusunda bir değişiklik yarattığı için sıra dışıdır, oyuncunun bir hedefe ne yaptığı konusunda değil. [KillAura](/tr/learn/what-is-killaura) ve bir [aimbot](/tr/learn/what-is-an-aimbot) düşmana etki eder, hedeflemeyi ve saldırıları otomatikleştirir. Hız, oyuncunun kendi konumunu etkileyerek, bir darbeden sonra oyuncunun hareket etmesi gerektiği konusunda sunucu talimatını geçersiz kılar. Her iki modül de sunucunun kontrol etmesini beklediği bir şeyi geçersiz kıldığı ortak özelliktir.
+
+<Callout variant="warning" title="Referans, nasıl yapılacağını anlatmıyor">
+Bu sayfa, terimin ne anlama geldiğini bilmeniz için modülü genel olarak tanımlar. İsimlendirme ve kesin davranışlar müşteriye göre değişir ve sunucu geri tepmesini geçersiz kılmak, esasen her sunucudaki kuralları ihlal eder.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Minecraft istemcisi bağlamında Velocity ne anlama gelir?">
+İstemci menüsünde, Velocity, geri tepme önleme modülüdür. Oyuncunun aldığı itme gücünü azaltır, böylece bir savaş sırasında hedefi yakınında kalır. Aynı adlı proxy yazılımıyla hiçbir ilgisi yoktur.
+</FAQItem>
+
+<FAQItem question="Anti-knockback, Hız ile aynı mı?">
+Evet. Anti-knockback, düz dildeki adıyken, Hız ise aynı davranışı tanımlayan yaygın modül adıdır: saldırılardan kaynaklanan geri tepmeyi azaltmak.
+</FAQItem>
+
+<FAQItem question="Neden knockback'i sıfır yüzde olarak ayarlayamıyorum?">
+Ayarlayabilirsiniz, ancak tam bir iptal, tespit etmenin en kolay yoludur. Sunucu, ne kadar geriye doğru uçmanız gerektiğini bilir, bu nedenle hiç knockback olmaması bariz bir uyumsuzluktur. Kısmi değerler daha iyi karışır olduğundan mevcuttur.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "Otomatik saldırı savaş modülü." },
+  { href: "/tr/learn/what-is-reach", label: "Reach nedir?", description: "Vuruş mesafesi modülü anticheatları yakından izler." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "Bu modüllerin ait olduğu daha geniş kategori." },
+]} />
+
+<CTA href="/tr/purchase">Opal $8.99 için ne gönderiyor, bak</CTA>

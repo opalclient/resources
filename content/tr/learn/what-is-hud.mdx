@@ -1,0 +1,88 @@
+---
+title: Minecraft'ta HUD Modülü Nedir? Üst Bilgi Katmanı Açıklaması
+description: Minecraft ekranınızda bir menü açmadan, koordinatlar, FPS ve savaş bilgileri gibi canlı istatistikleri üzerine yerleştiren bir HUD modülü; işte nasıl çalıştığı.
+excerpt: Koordinatlar, FPS ve savaş bilgileri doğrudan ekrana basılır, menüye gerek yok. Herhangi bir istemci yazılımındaki en gösterişsiz modüldür ve en çok kullanılanlardan biridir.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Minecraft'ta bir HUD modülü kullanmak hile sayılır mı?
+    a: Hayır. Bir HUD modülü yalnızca bilgileri, koordinatları, FPS'yi, savaş istatistiklerini ve benzerlerini görüntüler. Herhangi bir şeyi otomatikleştirmez veya oyunun davranışını değiştirmez, bu nedenle Minecraft'ın kendi F3 hata ayıklama ekranından daha fazla risk taşımaz.
+  - q: HUD modülü ile Click GUI arasında ne gibi bir fark var?
+    a: "Bir Click GUI, bir istemcinin modüllerini gözden geçirmek ve yapılandırmak için açtığınız menüdür. Bir HUD ise, o menü kapandıktan sonra ekranda kalan şeydir: hiçbir girdi almayan ve sadece size sayılar gösteren pasif bir göstergedir."
+  - q: Bir HUD modülü genellikle hangi bilgileri gösterir?
+    a: Koordinatlar, FPS sayacı ve savaşla ilgili bilgiler en yaygın olanlarıdır. Tam liste ve ne kadar özelleştirebileceğiniz, müşteriye göre değişir.
+  - q: Hangi Minecraft istemcileri HUD tarzı bir modüle sahiptir?
+    a: Juul kendi versiyonunu HUD olarak adlandırıyor. Fan ve Tenacity ise aynı fikri HUDMod adıyla piyasaya sürüyor. Farklı isim, aynı iş.
+  - q: HUD modülünü kullanmak FPS'inizi düşürür mü?
+    a: Zorlukla. Zaten çizim yapan bir çerçeve üzerine birkaç ek metin ve şekil çiziyor, ayrı bir sistem çalıştırmıyor. Herhangi bir maliyet, normal oyun çizimine kıyasla çok küçük.
+---
+
+<KeyTakeaways>
+
+- Bir HUD modülü, oyundaki görününtünün üzerine, menü gerektirmeden canlı bilgileri, koordinatları, FPS'yi ve savaş istatistiklerini doğrudan çizer.
+- Sadece okunabilir: bir HUD hiçbir zaman eylemleri otomatikleştirmez veya oyun mekaniklerini değiştirmez, yalnızca oyuncuya zaten sunulan bilgilerin nasıl görüntülendiğini değiştirir.
+- Farklı istemciler buna farklı isimler verir. Juul buna HUD diyor, Fan ve Tenacity ise aynı kavramı HUDMod olarak adlandırıyor.
+- Oyun mantığına dokunmadığı için, bir HUD'un Minecraft'ın kendi F3 hata ekranıyla yaklaşık aynı risk profiline sahip olması: hiç.
+
+</KeyTakeaways>
+
+Bir HUD modülü, oynarken oyun görünümünün üzerine canlı istatistikler, örneğin koordinatlar, FPS veya savaş bilgileri gibi şeyleri gösteren ekrandaki bir örtüdür. Açılacak bir menü veya tıklayacak bir şey yoktur. Sayılar sadece oradadır, gerçek zamanlı olarak güncellenir; tıpkı orijinal Minecraft'ın kendi arayüz öğelerinin, herhangi bir girdi istemeden ekranda yer alması gibi. Bu bir görüntüleme özelliğidir ve bir istemcinin etkileşimli tıklanabilir GUI ayarları menüsünden temel olarak farklı bir modül türüdür.
+
+## Nasıl Çalışır
+
+Bir HUD, her karede öğelerini oluşturur ve orijinal oyun görünümünün üzerine, orijinal Minecraft'ın durum çubuğunun veya açlık çubuğunun olduğu gibi yerleştirilir. Açık bir menüye bağlı bir şey yoktur. Bilgiler hareket ederken, savaşırken veya inşa ederken görünür kalır ve oyunun geri kalanının oluşturma hızında yenilenir.
+
+Ekranlarda ne görüneceği istemciye göre değişir, ancak tekrar eden setler koordinatlar, bir FPS sayacı ve oyuncunun aksi takdirde F3'ü açarak duraklatarak kontrol etmek zorunda kalacağı savaşla ilgili bilgilerdir. Bunların hiçbiri yeni veriler değildir. Bir HUD, oyunun zaten sağladığı sayıları alır ve bunları oynamayı bırakmadan görebileceğiniz bir yere yerleştirir.
+
+Ayrıca onu bir Click GUI'den ayıran da budur. Bir Click GUI, bir istemcinin modüllerini gözden geçirmek ve yapılandırmak için açtığınız etkileşimli menüdür; girdi alır ve açılmasını gerektirir. Bir HUD ise hiç girdi almaz. Bilgi çizdirir ve ortadan kaybolur, sıradan oyunun arka planında sürekli çalışır, gezinmeniz gereken bir ekran gibi değil.
+
+## HUD vs Click GUI
+
+| | HUD | Click GUI |
+|---|---|---|
+| Girdi alır mı? | Hayır | Evet |
+| Oyun sırasında görünür mü? | Varsayılan olarak her zaman | Sadece açıldığında |
+| Amacı | Canlı istatistikleri görüntülemek | Modülleri ve ayarları yapılandırmak |
+| Vanilla'daki en yakın karşılığı | F3 hata ayıklama ekranı | Seçenekler / duraklatma menüsü |
+
+Kolaylık durumu açıktır. Koordinatları, FPS'yi veya savaş bilgilerini her zaman görüş alanında tutmak, aynı sayıları kontrol etmek için tekrar tekrar bir menü veya hata ayıklama ekranını açmaktan sizi kurtarır ve özellikle bir savaş sırasında, o bilginin zaten ekranda olması, sizi öldürmeye çalışan şeyden gözünüzü ayırmanız gereken süreyi azaltır.
+
+<Callout variant="tip" title="Opal'da Nerede Yer Alır">
+Opal şu anda HUD adıyla bir modül göndermiyor. Katman üstü bilgi gösterimi, genel olarak yardımcı program istemcilerinde görsel kategorinin temel bir parçasıdır, bu nedenle kalıcı istatistik göstergesi sizin için belirleyiciyse, herhangi bir istemcinin mevcut modül listesini doğrudan kontrol etmeye değer, adlandırmanın eşleştiğini varsaymak yerine.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Minecraft'ta bir HUD modülü hile sayılır mı?">
+Hayır. Bir HUD modülü yalnızca bilgi, koordinatlar, FPS, savaş istatistikleri gibi şeyleri görüntüler. Oyunu otomatikleştirmeden veya oyunun davranışını değiştirmeden, dolayısıyla Minecraft'ın kendi F3 hata ekranından daha fazla risk taşımamaktadır.
+</FAQItem>
+
+<FAQItem question="Bir HUD modülü ile bir Click GUI arasındaki fark nedir?">
+Bir Click GUI, bir istemcinin modüllerini gözden geçirmek ve yapılandırmak için açtığınız menüdür. Bir HUD ise, o menü kapandıktan sonra ekranda kalan şeydir: hiçbir girdi almayan ve sadece size sayılar gösteren pasif bir göstergedir.
+</FAQItem>
+
+<FAQItem question="Bir HUD modülü genellikle hangi bilgileri gösterir?">
+Koordinatlar, FPS sayacı ve savaşla ilgili bilgiler en sık görülenlerdir. Tam liste ve ne kadar özelleştirebileceğiniz, istemciye göre değişir.
+</FAQItem>
+
+<FAQItem question="Hangi Minecraft istemcileri HUD tarzı bir modüle sahiptir?">
+Juul, kendi versiyonuna HUD adını veriyor. Fan ve Tenacity ise aynı fikri HUDMod adı altında piyasaya sürüyor. Farklı isim, aynı işlev.
+</FAQItem>
+
+<FAQItem question="HUD modülü çalıştırmak FPS'inizi etkiler mi?">
+Hafifçe. Zaten çizim yapan bir çerçeve üzerine birkaç ek yazı ve şekil çiziyor, ayrı bir sistem çalıştırmıyor. Maliyeti, normal oyun renderlamasına kıyasla çok küçük.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "HUD modülünün içinde bulunduğu daha geniş kategori, küçük bir parçadır." },
+  { href: "/tr/learn/what-is-killaura", label: "Killaura nedir?", description: "Bir HUD'un savaş göstergesinin sıklıkla takip ettiği bir muharebe modülü." },
+  { href: "/tr/learn/what-is-reach", label: "Ulaşmak nedir?", description: "Başka bir muharebe odaklı modül, pasif bir örtüye kıyasla risk spektrumunun tam tersi uçta." },
+]} />
+
+<CTA href="/tr/satin-al">Ekranınızda Opal'in neler gösterdiğini ve neyi kendiniz yapılandırmanız gerektiğini görün.</CTA>

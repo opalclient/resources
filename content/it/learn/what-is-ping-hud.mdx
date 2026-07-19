@@ -1,0 +1,89 @@
+---
+title: Cos'è un HUD Ping in Minecraft?
+description: Un HUD ping mostra la tua latenza di rete in tempo reale durante il gioco, lo stesso numero di andata e ritorno che Minecraft già tiene traccia per l'elenco delle schede, solo più facile da vedere.
+excerpt: Il tuo ping è già presente nel codice di rete di Minecraft. Un HUD per il ping lo sposta semplicemente in un punto in cui puoi vederlo.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Un HUD ping fornisce qualche vantaggio in gioco?
+    a: No. Mostra soltanto un numero che riflette il tempo di andata e ritorno della tua connessione. Non influisce sul combattimento, sullo spostamento o su qualsiasi altra cosa elaborata dal server.
+  - q: Ping è la stessa cosa di PingSpoof?
+    a: No, fanno cose opposte. Un HUD ping mostra la tua latenza di connessione reale. PingSpoof è un modulo separato che falsifica il numero mostrato agli altri giocatori invece di mostrare la verità.
+  - q: Può un server rilevare o bannare un HUD di ping?
+    a: No. Il modulo non invia nulla di extra al server, legge soltanto i dati che il client riceve già e li visualizza, quindi non c'è nulla che il server possa segnalare.
+  - q: Non è già integrato il ping in Minecraft vanilla?
+    a: Sì, come le icone a forma di barra accanto a ciascun nome nella lista delle schede. Un HUD di ping, invece, mostra il numero esatto come elemento sempre visibile sullo schermo, anziché barre che devi aprire la lista delle schede per vedere.
+  - q: Perché il ping aumenta durante una normale partita?
+    a: Di solito, congestione della rete locale, un server distante o sovraccarico, oppure un'altra applicazione che consuma la tua larghezza di banda. Una visualizzazione chiara rileva il picco nel momento stesso in cui si verifica, invece di accorgersene solo quando il movimento inizia a sfarfallare.
+---
+
+<KeyTakeaways>
+
+- Un HUD ping è un modulo a schermo che mostra la latenza di rete in tempo reale, aggiornandosi al variare della connessione.
+- Legge lo stesso valore che Minecraft già tiene traccia per la lista delle schede, semplicemente lo visualizza in un punto più visibile.
+- Puramente cosmetico e di sola lettura, quindi non c'è nulla che gli anticheat possa segnalare.
+- Diverso da PingSpoof, che falsifica il numero mostrato agli altri invece di visualizzare la verità.
+
+</KeyTakeaways>
+
+Un HUD Ping è un modulo di visualizzazione di Minecraft che mostra la latenza di rete in tempo reale in una posizione dello schermo mentre giochi: un numero in continuo aggiornamento che traccia il tempo di andata e ritorno tra il tuo client e il server. Non inventa nuovi dati. Il gioco calcola già questo valore per l'elenco dei giocatori, il modulo lo recupera semplicemente e lo posiziona in un punto in cui non devi cercare. Non cambia nulla su come i pacchetti vengono inviati, né cambia nulla su come il server elabora i tuoi movimenti o i combattimenti. È informazione, non vantaggio.
+
+## Come funziona la visualizzazione
+
+Minecraft tiene già un valore di ping per ogni giocatore connesso, il numero dietro le barre verdi-rosse accanto a un nome nell'elenco dei giocatori. Un HUD Ping non aggiunge nuovo codice di misurazione. Recupera la stessa cifra di andata e ritorno, il tempo tra l'invio di un pacchetto dal tuo client e la conferma da parte del server, e lo visualizza come un numero fisso invece di un'icona a barre che devi premere Tab per vedere.
+
+La visualizzazione si aggiorna continuamente, quindi si muove in sincronia con la tua connessione effettiva. Un picco dovuto a una rete domestica congestionata, a un server che ha qualche difficoltà o a una perdita di pacchetti dovuta a un percorso instabile, compare all'istante, invece di essere avvertito solo in seguito come un effetto di rubberbanding o un colpo che non si registra. Poiché il modulo legge solo un valore che il client riceve già, non tocca mai i pacchetti in uscita, i movimenti o qualsiasi altra cosa che il server valuta.
+
+## Ping HUD vs. la lista dei giocatori vanilla
+
+| | Lista dei giocatori vanilla | Modulo Ping HUD | PingSpoof |
+|---|---|---|---|
+| Mostra | Icona a barre per giocatore | Un numero esatto e in tempo reale | Un numero, ma falsificato |
+| Dove lo vedi | Solo nella lista dei giocatori (tenendo premuto il tasto Tab) | Ovunque nel tuo HUD | Laddove il ping viene normalmente mostrato |
+| Reale o falso | Reale, ma approssimativo | Reale, valore esatto | Falso, intenzionalmente |
+
+Le barre sono una scorciatoia di Mojang: sufficientemente buone per capire chi sta risentendo di lag, ma non abbastanza precise da distinguere una connessione da 40ms da una da 90ms a colpo d'occhio. Una lettura dedicata sostituisce quell'icona facile da interpretare con un numero esatto che non devi aprire un menu per controllare.
+
+## È sicuro da usare?
+
+Sì, e la motivazione è breve. Un HUD ping legge solo un numero che il server invia già al client attraverso canali ufficiali. Non modifica nulla riguardo ai pacchetti in uscita, al movimento o al combattimento, quindi non c'è alcun comportamento che un anticheat lato server possa intercettare, perché non c'è alcun comportamento da intercettare. La cosa peggiore che può fare è ingombrare lo schermo se hai già sovrapposto cinque altri HUD in un angolo, il che è un problema di gusto, non di sicurezza.
+
+<Callout variant="info" title="Dove si colloca questo in Opal">
+Opal non spedisce un modulo Ping autonomo con quel nome. Ma l'istinto alla base di uno, quello di mettere le informazioni che il gioco già possiede dove è effettivamente possibile vederle, permea l'HUD più ampio e gli strumenti di utilità di Opal. Se ti piace una schermata piena di numeri in tempo reale, è in quella zona generale che dovresti cercare.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Un HUD ping fornisce un vantaggio in gioco?">
+No. Mostra soltanto un numero che riflette il tempo di andata e ritorno della tua connessione. Non modifica il combattimento, il movimento o qualsiasi cosa venga elaborata dal server.
+</FAQItem>
+
+<FAQItem question="Ping è la stessa cosa di PingSpoof?">
+No, fanno cose opposte. Un HUD del ping mostra la latenza della tua connessione reale. PingSpoof è un modulo separato che falsifica il numero mostrato agli altri giocatori invece di mostrare la verità.
+</FAQItem>
+
+<FAQItem question="Un server può rilevare o bannare un HUD di ping?">
+No. Il modulo non invia nulla di aggiuntivo al server, legge solamente dati che il client riceve già e li visualizza, quindi non c'è nulla che il server possa segnalare.
+</FAQItem>
+
+<FAQItem question="Il ping non è già integrato in Minecraft vanilla?">
+Sì, sotto forma di barre accanto a ciascun nome nella lista dei tab. Un HUD per il ping mostra invece il numero esatto come elemento sullo schermo sempre visibile, anziché barre che devi aprire la lista dei tab per vedere.
+</FAQItem>
+
+<FAQItem question="Perché il ping aumenta durante una partita normale?">
+Di solito è dovuto a congestione della rete locale, a un server distante o sovraccarico, oppure a un'altra applicazione che consuma la tua larghezza di banda. Una visualizzazione immediata rileva l'aumento nel momento in cui si verifica, invece di accorgersene solo quando i movimenti iniziano a saltare.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria più ampia a cui appartiene un HUD ping." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Dove il confine tra sottile e rilevabile si trovi effettivamente." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Un modulo situato all'estremità opposta dello spettro del rischio." },
+]} />
+
+<CTA href="/it/purchase">Vuoi più di un semplice numero nell'angolo? Scopri cosa traccia l'HUD di Opal per $8.99.</CTA>

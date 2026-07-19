@@ -1,0 +1,93 @@
+---
+title: Czym jest ImGui? Wyjaśnienie Dear ImGui (2026)
+description: ImGui (Dear ImGui) to biblioteka GUI działająca w trybie natychmiastowym dla C++. Rysuje menu w każdej klatce bez przechowywanej struktury widżetów, co jest powszechne w narzędziach do gier i natywnych klientach.
+excerpt: Dear ImGui rysuje menu od nowa w każdej klatce, bezpośrednio z wywołań funkcji. Oto co oznacza programowanie w trybie natychmiastowym i dlaczego natywne klienty sięgają po nie.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Libraries
+author: trq
+faqs:
+  - q: Czy ImGui jest tylko dla C++?
+    a: Rdzeniem biblioteki jest C++, i to w niej większość projektów z niej korzysta; istnieją biblioteki dla innych języków, ale oryginalne i najczęstsze zastosowanie to narzędzia do gier i natywne aplikacje w C++.
+  - q: Czy ImGui sprawia, że interfejs użytkownika przypomina menu gry?
+    a: Z pudełka ma wygląd typowego narzędzia dla programistów, więc projekty, które chcą własnego motywu wizualnego, muszą go mocno modyfikować lub rysować własne widżety na jego podstawie, aż menu przestanie przypominać domyślne.
+  - q: Czy mod Fabric może używać ImGui?
+    a: Nie w zwykły sposób. Mod Fabric działa w Javie i wykorzystuje system GUI gry, podczas gdy typowym miejscem dla ImGui jest natywny klient C++.
+  - q: Czy ImGui jest wolne, ponieważ rysuje się na nowo w każdej klatce?
+    a: Nie. Rekonstrukcja interfejsu użytkownika jest tania, a program i tak renderuje każdą klatkę, więc menu jest przetwarzane wraz z pracą, która i tak jest wykonywana.
+---
+
+<KeyTakeaways>
+
+- ImGui (Dear ImGui) to mała biblioteka GUI opartej na trybie natychmiastowym dla C++.
+- Rysuje menu od nowa w każdej klatce na podstawie wywołań funkcji, bez potrzeby utrzymywania drzewa widżetów.
+- Natywne klienty i narzędzia wybierają ją ze względu na niskie opóźnienia nakładek na scenę 3D.
+- Jest to wzorzec C++; mod Java Fabric wykorzystuje własne mechanizmy GUI gry.
+
+</KeyTakeaways>
+
+ImGui, czyli Dear ImGui, to mała biblioteka GUI opartej na trybie natychmiastowym dla C++. Rysuje menu od nowa w każdej klatce bezpośrednio z wywołań funkcji, zamiast utrzymywać drzewo obiektów widgetów. Dzięki temu jest łatwa do podłączenia i można ją bez problemu nałożyć na istniejącą pętlę renderowania gry, co jest powodem, dla którego narzędzia i natywne aplikacje używają jej do nakładek o niskiej latencji.
+
+<Callout variant="info" title="Gdzie pasuje Opal">
+Opal jest modem [Fabric](https://fabricmc.net/), więc buduje swój interfejs za pomocą własnych mechanizmów GUI gry, a nie ImGui. Jeśli chcesz dodać funkcje bez ingerencji w kod natywny, GraalVM JavaScript scripting engine to miejsce, od którego warto zacząć. Zobacz [przewodnik konfiguracji](/pl/docs/setup) i [przewodnik po skryptach](/pl/docs/scripting).
+</Callout>
+
+## Co oznacza tryb natychmiastowy
+
+ImGui przebudowuje interfejs w każdym kadrze. Nie tworzysz obiektu przycisku i go przechowujesz. Wywołujesz funkcję, która mówi „narysuj przycisk tutaj”, a to wywołanie zarówno rysuje przycisk, jak i informuje cię, czy został kliknięty w bieżącym kadrze.
+
+Zestaw narzędzi trybu zatrzymanego działa w przeciwnym kierunku. Przechowuje w pamięci długotrwałe drzewo widżetów i aktualizujesz je, gdy zmienia się stan. Tryb natychmiastowy rezygnuje z tej trwałej struktury na rzecz kodu, który czytany jest od góry do dołu i znajduje się obok twojego własnego stanu.
+
+## Dlaczego narzędzia i klienci go wybierają
+
+ImGui jest popularne w przypadku menu, które nakładają się na scenę 3D. Powody są praktyczne.
+
+- **Niskie opóźnienie**: podłącza się do kadru, który program już renderuje, więc menu reaguje natychmiast.
+- **Mało kleju**: okno i kilka kontroli to garść wywołań funkcji. Nie ma pliku układu ani oddzielnego wątku interfejsu użytkownika do zarządzania.
+- **Samodzielne**: biblioteka ma niewiele zależności i pasuje do popularnych backendów graficznych, więc nie wciąga ciężkiego frameworka.
+- **Przyjazne dla debugowania**: te same wywołania, które budują menu w wersji produkcyjnej, budują również tymczasowe panele debugowania, których programiści używają podczas tworzenia funkcji.
+
+## Tryb natychmiastowy vs tryb zatrzymany
+
+| Aspekt | Tryb natychmiastowy (ImGui) | Narzędzia trybu zatrzymanego |
+| :--- | :--- | :--- |
+| Własność stanu | Twój kod przechowuje dane | Narzędzia przechowują drzewo widżetów |
+| Praca w każdej klatce | Przebuduj interfejs użytkownika w każdej klatce | Aktualizuj drzewo w przypadku zmian |
+| Koszt konfiguracji | Kilka wywołań funkcji | Więcej struktury na początku |
+| Najlepsze dopasowanie | Nakładki, narzędzia, menu gier | Duże aplikacje w stylu dokumentów |
+
+## Jak to pasuje do klienta natywnego
+
+Natywny klient narzędziowy napisany w C++ często rysuje swoje menu za pomocą ImGui na wierzchu klatki gry. Kod menu działa w pętli renderowania, odczytuje własne ustawienia klienta i zapisuje zmiany bezpośrednio z powrotem. Nie ma oddzielnego procesu interfejsu użytkownika, więc przełączanie funkcji to jedno wywołanie funkcji względem wartości, którą klient już posiada.
+
+Jest to wzorzec C++. Mod [Fabric](https://fabricmc.net/) napisany w Javie dociera do swojego interfejsu za pośrednictwem własnych haków GUI gry, więc ImGui pojawia się głównie w klientach, które są dostarczane jako kod natywny, a nie jako mody Java.
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy ImGui działa tylko z C++?">
+Rdzeniem biblioteki jest C++, i w tym języku wykorzystuje się ją najczęściej. Istnieją biblioteki dla innych języków, tworzone przez społeczność, ale oryginalnym i najpopularniejszym zastosowaniem jest C++ w narzędziach do gier i natywnych aplikacjach.
+</FAQItem>
+
+<FAQItem question="Czy ImGui sprawia, że interfejs użytkownika wygląda jak menu gry?">
+Domyślnie ma wygląd narzędzia dla programistów. Projekty, które chcą własnego motywu stylu, intensywnie go wykorzystują lub rysują własne widgety na jego podstawie, więc dostarczone menu może w ogóle nie przypominać domyślnego.
+</FAQItem>
+
+<FAQItem question="Czy mod Fabric może używać ImGui?">
+Nie w zwykły sposób. Mod Fabric działa w Javie i wykorzystuje system GUI gry. Natywny klient C++ to typowe środowisko dla ImGui.
+</FAQItem>
+
+<FAQItem question="Czy ImGui jest wolne, ponieważ rysuje się na nowo w każdej klatce?">
+Nie. Ponowne budowanie interfejsu jest niedrogie, a program i tak renderuje każdą klatkę, więc menu korzysta z pracy, która i tak jest wykonywana.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-nanovg", label: "Co to jest NanoVG?", description: "Biblioteka wektorowa, której klienci Java używają do rysowania interfejsu użytkownika." },
+  { href: "/pl/learn/what-is-graalvm-javascript-scripting", label: "Jakie jest skryptowanie JavaScript w GraalVM?", description: "Jak Opal pozwala na jego rozszerzanie bez kodu natywnego." },
+  { href: "/pl/learn/what-is-the-fabric-api", label: "Czym jest Fabric API?", description: "Wspólna warstwa, na której budowane są większość modyfikacji Fabric." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź Opala, klienta Fabric, za $8.99</CTA>

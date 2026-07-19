@@ -1,0 +1,93 @@
+---
+title: Jak zainstalować mod Fabric (przewodnik 2026)
+description: "Instalacja moda Fabric składa się z trzech kroków: zainstaluj Fabric Loader dla swojej wersji Minecrafta, dodaj Fabric API, a następnie umieść plik JAR moda w folderze mods."
+excerpt: "Trzy kroki do zainstalowania dowolnego moda Fabric: loader, Fabric API, a następnie plik JAR moda. Oto pełny przewodnik i rozwiązania problemów, gdy mod się nie ładuje."
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Guides
+author: trq
+faqs:
+  - q: Czy do każdego moda potrzebna jest Fabric API?
+    a: Większość modyfikacji dla Fabric na niej polega, więc zainstaluj ją domyślnie. Kilka modułów niezależnych nie potrzebuje jej, ale dodanie jej nigdy nie zaszkodzi.
+  - q: Dlaczego moja modzik się zawiesza przy starcie?
+    a: Zazwyczaj problemem jest niezgodność wersji lub brak Fabric API. Upewnij się, że loader, Fabric API i mod są skierowane do tej samej wersji Minecrafta.
+  - q: Gdzie trafiają mody Fabric?
+    a: W folderze "mods" wewnątrz katalogu Minecraft. W systemie Windows jest to %appdata%\.minecraft\mods. Uruchom profil Fabric raz, jeśli folder jeszcze nie istnieje.
+  - q: Czy mogę uruchamiać kilka modów Fabric jednocześnie?
+    a: Tak. Umieść każdą paczkę w tej samej folderze "mods". O ile są przeznaczone dla Twojej wersji Minecrafta i nie są ze sobą konfliktowe, ładowacz uruchomi je razem.
+---
+
+<KeyTakeaways>
+
+- Instalacja moda Fabric składa się z trzech kroków: loadera, Fabric API, a następnie pliku JAR moda.
+- Każdy element (loader, API, mod) musi być skierowany do tej samej wersji Minecrafta.
+- Modami umieszczasz w folderze "mods" wewnątrz Twojego katalogu Minecrafta.
+- Większość nieudanych instalacji wynika z niezgodności wersji lub braku Fabric API.
+
+</KeyTakeaways>
+
+Instalacja moda [Fabric](https://fabricmc.net/) wymaga trzech kroków: zainstalowania ładowarki Fabric dla dokładnie Twojej wersji Minecrafta, umieszczenia Fabric API w folderze z modami, a następnie wrzucenia pliku .jar moda obok niego. Uruchom profil Fabric, a mod zostanie załadowany. Większość problemów z instalacją wynika z niezgodności wersji, dlatego dopasuj wszystkie elementy do tej samej wersji Minecrafta.
+
+<Callout variant="info" title="Instalacja Opal">
+Opal postępuje zgodnie z tymi samymi krokami: jest to modyfikacja dla Fabric. Dokładną wersję oraz zalecane argumenty JVM znajdziesz w [poradniku instalacyjnym](/pl/docs/setup).
+</Callout>
+
+## Trzy kroki
+
+<Steps>
+
+<Step number={1} title="Zainstaluj Fabric Loader">
+Zainstaluj program Fabric Loader dla swojej wersji Minecrafta, używając oficjalnego instalatora Fabric lub uruchomiacza, który go obsługuje. Zobacz [instrukcję instalacji Fabric Loadera](/pl/learn/how-to-install-fabric-loader) dla pełnego przewodnika.
+</Step>
+
+<Step number={2} title="Dodaj Fabric API">Umieść plik JAR [Fabric API](/pl/learn/what-is-the-fabric-api) w folderze z modami. Większość modów od niego zależy</Step>
+
+<Step number={3} title="Dodaj moda">Umieść plik jar moda w tej samej folderze z modami, obok Fabric API</Step>
+
+</Steps>
+
+Następnie uruchom profil Fabric, a mod zostanie załadowany przy starcie. Jeśli nie pojawia się, sprawdź listę rozwiązań problemów poniżej.
+
+## Gdzie znajduje się folder z modami
+
+| System operacyjny | Ścieżka |
+| :--- | :--- |
+| Windows | `%appdata%\.minecraft\mods` |
+| macOS | `~/Library/Application Support/minecraft/mods` |
+| Linux | `~/.minecraft/mods` |
+
+Jeśli folder `mods` jeszcze nie istnieje, uruchom profil Fabric raz, a zostanie on utworzony automatycznie.
+
+## Kiedy mod się nie ładuje
+
+<Checklist>
+<ChecklistItem>Mod nie pojawia się: plik jar znajduje się w niewłaściwym folderze lub uruchomiono profil nieprzeznaczony dla Fabric.</ChecklistItem>
+<ChecklistItem>Wypadek podczas uruchamiania z błędem braku klasy: brakuje Fabric API lub jest nieprawidłowa wersja.</ChecklistItem>
+<ChecklistItem>Niezgodność wersji: ładowacz, API Fabric oraz mod muszą być skierowane do tej samej wersji Minecrafta.</ChecklistItem>
+</Checklist>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy potrzebuję Fabric API do każdego moda?">
+Większość modów Fabric od niego zależy, więc zainstaluj go domyślnie. Kilka modułów, które są samowystarczalne, go nie potrzebuje, ale dodanie go nigdy nie zaszkodzi.
+</FAQItem>
+
+<FAQItem question="Dlaczego mój mod się zawiesza podczas uruchamiania?">
+Zazwyczaj jest to niezgodność wersji lub brakujący Fabric API. Upewnij się, że ładowacz, Fabric API i mod są skierowane do tej samej wersji Minecrafta.
+</FAQItem>
+
+<FAQItem question="Gdzie umieszczać mody Fabric?">
+W folderze `mods` wewnątrz katalogu Minecraft (ścieżki powyżej). Uruchom profil Fabric raz, jeśli folder jeszcze nie istnieje.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/how-to-install-fabric-loader", label: "Jak zainstalować loader Fabric", description: "Pierwszy krok, ze szczegółami." },
+  { href: "/pl/learn/what-is-the-fabric-api", label: "Czym jest Fabric API?", description: "Dlaczego niemal każdy mod go potrzebuje." },
+  { href: "/pl/blog/essential-fabric-mods-every-player-should-have", label: "Kluczowe modyfikacje Fabric", description: "Solidna podstawa do zainstalowania, gdy już wszystko skonfigurujesz." },
+]} />
+
+<CTA href="/pl/purchase">Zdobądź Opala, klienta Fabric, za $8.99</CTA>

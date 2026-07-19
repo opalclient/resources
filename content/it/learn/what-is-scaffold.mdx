@@ -1,0 +1,96 @@
+---
+title: Cos'è l'impalcatura in Minecraft? (Modulo Spiegato)
+description: Lo Scaffold è un modulo di movimento che posiziona automaticamente dei blocchi sotto di te mentre cammini, permettendoti di creare ponti senza mirare. Ecco come funziona e perché viene segnalato dagli anticheat.
+excerpt: La impalcatura stende un pavimento sotto i tuoi piedi mentre cammini, permettendoti di superare gli spazi senza usare le mani. Ecco come il modulo posiziona i blocchi e perché la rotazione lo rivela.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Modules
+author: trq
+faqs:
+  - q: Qual è la differenza tra un macro Scaffold e un macro ponte?
+    a: Un macro ponte riproduce pressioni di tasti fisse a intervalli regolari. Scaffold reagisce alla tua posizione e rotazione in tempo reale ad ogni tick, adattandosi così a curve e variazioni di velocità invece di ripetere un movimento prestabilito.
+  - q: Perché Scaffolder viene preso così facilmente?
+    a: "Il solito segnale rivelatore è la rotazione: il modulo posiziona i blocchi con un'angolazione diversa da quella verso cui è orientata la telecamera visibile, e gli anticheat lato server confrontano quei due valori. Una tempistica perfetta è un secondo indizio."
+  - q: È Scaffold un movimento o un modulo globale?
+    a: È classificato come modulo di movimento perché il suo scopo è mantenere il giocatore in movimento attraverso i vuoti. Il posizionamento dei blocchi è il mezzo, non l'obiettivo.
+  - q: Si può rendere Scaffold non rilevabile?
+    a: No. Aggiungere ritardi e rotazioni fasulle rende più difficile l'individuazione, ma un anticheat moderno ha ancora molti segnali da confrontare e qualsiasi automazione coerente lascia inevitabilmente un modello.
+---
+
+<KeyTakeaways>
+
+- Scaffold è un modulo di movimento che posiziona automaticamente i blocchi sotto i tuoi piedi mentre cammini.
+- Seleziona un blocco dalla barra degli strumenti, ruota verso lo spazio aperto dietro di te e lo posiziona davanti a te prima di cadere.
+- La parte difficile è la rotazione, che è anche il principale elemento che gli anticheat cercano.
+- Ti permette di creare ponti senza dover guardare in basso e cronometrare ogni blocco manualmente.
+
+</KeyTakeaways>
+
+Scaffold è un modulo di movimento che posiziona automaticamente dei blocchi sotto i tuoi piedi mentre cammini, permettendoti di superare i vuoti senza dover puntare la telecamera verso il basso. Seleziona un blocco dalla tua barra degli strumenti, si orienta verso lo spazio aperto dietro di te e lo posiziona nel momento in cui saresti caduto da un bordo. Il risultato è un attraversamento di ponti a mani libere.
+
+## Cosa fa Scaffold
+
+Scaffold trasforma il ponteggio manuale in un'azione automatica. Il ponteggio normale richiede di guardare in basso, tenere premuto il tasto di posizionamento e camminare all'indietro a un ritmo costante. Scaffold gestisce i tempi e il posizionamento per te. Tieni premuto un tasto di movimento e il modulo mantiene un pavimento sotto di te.
+
+La maggior parte delle implementazioni espone alcune opzioni:
+
+| Opzione | Cosa controlla |
+|--------|------------------|
+| Modalità torre | Se posiziona anche dei blocchi direttamente verso il basso mentre salti sul posto |
+| Gestione della rotazione | Se blocca la tua visuale o simula l'angolo di posizionamento in modo silenzioso |
+| Ritardo di posizionamento | Quanto tempo aspetta tra un blocco e l'altro, per sembrare meno meccanico |
+| Permesso di scatto | Se puoi mantenere la velocità di scatto mentre posiziona |
+| Selezione del blocco | Quale slot della barra degli strumenti utilizza |
+
+Essendo un comportamento della categoria movimento, Scaffold si affianca ad altri moduli che modificano il modo in cui il giocatore attraversa il mondo piuttosto che il modo in cui combatte.
+
+## Come funziona internamente
+
+Scaffold monitora la tua posizione e velocità ad ogni tick. Quando prevede che il tuo prossimo passo atterri nell'aria, invia un comando di posizionamento di un blocco al server prima che tu cada. La parte difficile è la rotazione. Normalmente, il gioco posiziona un blocco contro la faccia che stai guardando, quindi il modulo deve puntare la direzione in cui è rivolto il giocatore sullo spazio vuoto dietro e sotto di lui, posizionare e, spesso, ripristinare la visuale originale.
+
+Esistono due stili principali. Uno sposta istantaneamente la telecamera reale all'angolo di posizionamento per un frame, il che è veloce ma visibile. L'altro invia pacchetti di posizionamento con una rotazione fabbricata, lasciando la telecamera sullo schermo invariata, il che appare più pulito agli altri giocatori ma è esattamente il modello che i sistemi anti-cheat cercano.
+
+## Perché gli anticheat lo segnalano
+
+Scaffold produce schemi di movimento e rotazione che gli umani raramente realizzano. I sistemi anti-cheat lato server cercano diversi indizi:
+
+- Posizionamenti di blocchi la cui rotazione non corrisponde all'angolo della telecamera visibile.
+- Posizionamenti perfettamente sincronizzati che non mancano mai e non si sovrappongono mai.
+- Camminare all'indietro a velocità costante mentre si posiziona su ogni confine di blocco.
+- Posizionare contro una faccia di un blocco che il giocatore non potrebbe realisticamente vedere.
+
+Un anticheat moderno non ha bisogno di "vedere" il modulo. Deve solo rilevare che gli angoli di posizionamento e gli angoli di visualizzazione non coincidono, oppure che la cadenza di bridging è troppo costante per essere umana. Ecco perché le impostazioni di Scaffold spesso sacrificano velocità per una casualità credibile.
+
+## Contesto legittimo vs cheat
+
+L'auto-bridging esiste anche in forme simili a vanilla. Alcuni server di allenamento e mappe di addestramento includono un trainer per il bridging, e alcuni strumenti creativi posizionano file di blocchi per i costruttori. Il modulo Scaffold differisce perché viene eseguito durante il normale gioco di sopravvivenza o competitivo per ottenere un vantaggio sleale, motivo per cui compare nei materiali di rilevamento di cheat piuttosto che negli strumenti di costruzione.
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina descrive il modulo in termini generali, per far capire il significato del termine. La denominazione e il comportamento esatto variano a seconda del client, e l'inserimento automatico di blocchi per colmare le lacune viola le regole su praticamente ogni server competitivo.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Qual è la differenza tra uno Scaffold e un macro ponte?">
+Un macro ponte ripete sequenze di tasti preimpostate a intervalli regolari. Scaffold reagisce alla tua posizione e rotazione in tempo reale ad ogni tick, adattandosi quindi a curve e variazioni di velocità invece di ripetere un movimento prestabilito.
+</FAQItem>
+
+<FAQItem question="Perché Scaffold viene individuato così facilmente?">
+Il solito indizio è la rotazione. Il modulo posiziona i blocchi con un angolo non visibile alla telecamera, e l'anticheat lato server confronta quei due valori. Una tempistica di posizionamento perfetta e ineccepibile è un altro segnale.
+</FAQItem>
+
+<FAQItem question="Scaffold è un modulo di movimento o un modulo mondiale?">
+È classificato come modulo di movimento perché il suo scopo è mantenere il giocatore in movimento attraverso i vuoti. Il posizionamento dei blocchi è il mezzo, non l'obiettivo.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-velocity-anti-knockback", label: "Cos'è la Velocità (anti-knockback)?", description: "Un altro modulo di combattimento affine al movimento." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "La categoria stealth che nasconde moduli come questo." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "La categoria più ampia a cui appartengono questi moduli." },
+]} />
+
+<CTA href="/it/purchase">Guarda cosa spedisce Opal per $8.99</CTA>

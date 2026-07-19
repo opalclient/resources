@@ -1,0 +1,75 @@
+---
+title: Was ist ein Wasserzeichenmodul in Minecraft?
+description: "Ein Wasserzeichenmodul prägt den Namen oder das Logo eines Kunden auf den Bildschirm, um Ihre Clips zu kennzeichnen. Es ist rein kosmetischer Natur: es werden keine Daten übertragen und kann nicht von Anti-Cheat-Systemen erfasst werden."
+excerpt: Es ist ein Logo in der Ecke deines Bildschirms, und es macht nie etwas anderes. Reine Signatur, null Gameplay.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Gibt ein Wasserzeichenmodul einen Vorteil im Spiel?
+    a: Nein. Es zeichnet lediglich Text oder ein Logo auf dem Bildschirm und hat keinerlei Verbindung zu Bewegung, Kampf oder irgendetwas, was der Server verarbeitet.
+  - q: Kann Anticheat ein Watermark-Modul erkennen?
+    a: Nein. Es sendet niemals etwas an den Server, daher gibt es für einen serverseitigen Anti-Cheat nichts zu beobachten an einer rein lokalen Overlay-Darstellung.
+  - q: Warum fügen Kunden ein Wassersiegelmodul hinzu?
+    a: "Vor allem Branding und Identifikation: Es macht Clips und Screenshots wiedererkennbar und ermöglicht es Ihnen, auf einen Blick zu erkennen, welcher Mandant oder welche Build-Version gerade läuft."
+  - q: Kann ich eine Wasserzeichenüberlagerung verschieben oder deaktivieren?
+    a: Normalerweise ja. Die meisten Implementierungen erlauben es Ihnen, es zu verschieben, zu ändern oder es komplett zu deaktivieren, wobei die genauen Steuerelemente vom Client abhängen.
+---
+
+<KeyTakeaways>
+
+- Ein Wasserzeichenmodul trägt den Namen oder das Logo eines Kunden über den Spielbildschirm für Branding auf.
+- Es ist ein lokaler Zeichenbefehl nach dem Aufbau des Frames: keine Pakete, kein Spielzustand.
+- Spieler nutzen es, um Clips zu kennzeichnen und zu bestätigen, welche Client-Version sie verwenden.
+- Kein Einfluss auf das Gameplay bedeutet kein Anticheat-Risiko, weder serverseitig noch clientseitig.
+
+</KeyTakeaways>
+
+Ein Wasserzeichen, in einem Minecraft Utility-Client, ist ein kleines Branding-Element, meist ein Name oder Logo, das an einer festen Stelle auf dem Bildschirm gezeichnet wird, während man spielt. Es funktioniert wie ein Wasserzeichen auf einem Foto oder Video: es stempelt die Quelle auf alles, was aufgezeichnet wird, ohne den eigentlichen Inhalt darunter zu berühren. Als Modul ist das Wasserzeichen ein HUD-Element und nichts weiter. Es bewegt deinen Charakter nicht, liest den Weltzustand nicht und sendet keine zusätzlichen Daten an den Server. Es existiert dafür, dass ein Clip, der online zirkuliert, oder ein Screenshot, der in Discord geteilt wird, unverkennbar mit dem Client verbunden ist, der ihn erzeugt hat.
+
+## Funktionsweise
+
+Das Wasserzeichen gehört zur selben Familie wie jede andere HUD-Überlagerung: eine Koordinatenanzeige, ein Trank-Timer, eine Tastenanschlag-Anzeige. Der Client rendert ein Textfeld oder ein kleines Logo-Bild über das fertige Spielbild, meist verankert in einer Ecke (die rechte untere Ecke ist der übliche Standard), nachdem alles andere auf dem Bildschirm bereits gezeichnet wurde.
+
+Da es sich lediglich um einen Zeichenbefehl handelt, hat es keinen Lesezugriff auf etwas, das für das Gameplay relevant ist: keine Spielerposition, keine Blockdaten, keine Entitätsliste. Es malt einfach jeden Frame an derselben Stelle Pixel. Die meisten Implementierungen bieten eine Handvoll Steuerelemente an: Position oder Versatz, Größe und einen Ein-/Ausschalter, von denen keiner einen einzigen ausgehenden Datenpaket berührt. Dieses letzte Detail macht den nächsten Abschnitt kurz.
+
+## Ist es sicher zu verwenden
+
+Watermark ist ungefähr so risikoarm, wie ein Modul nur sein kann. Anticheat-Systeme, sei es die serverseitige Erkennung auf einem kompetitiven Server oder die clientseitige Integritätsprüfung, funktionieren, indem sie untersuchen, was der Client sendet oder wie sein Verhalten mit dem Spielzustand übereinstimmt: Bewegungsänderungen, Angriffszeitpunkte, Paketsequenzierung. Watermark greift in keines davon ein. Es handelt sich um eine lokale Zeichenoperation ohne Netzwerk-Footprint und ohne Interaktion mit der Spiel-Logik, sodass es nichts gibt, mit dem ein Erkennungssystem vergleichen könnte.
+
+Das setzt es in dieselbe Kategorie wie andere rein visuelle Module, HUD-Anpassungen, einen FPS-Zähler, eine Tastenanschlag-Anzeige, anstatt etwas zu sein, das einem Aimbot oder einer Reichweitenerweiterung ähnelt. Wenn ein Server jemals jemanden wegen eines Logos in der Ecke des Bildschirms gebannt hätte, wäre das eine politische Entscheidung, nicht eine Erkennungsentscheidung.
+
+<Callout variant="tip" title="Wo dies in Opal passt">
+Opal liefert kein Modul mit diesem Namen aus. Wenn es darum geht, Ihr Filmmaterial zu markieren, ist dies eine Aufgabe der Aufnahmesoftware und nicht des Clients. Was Opals Kategorie „Visuell“ stattdessen abdeckt, ist der breitere Bereich von HUDs und Overlays: Elemente auf dem Bildschirm, die über Ihr Spiel berichten und nicht über den Client, der sie erstellt hat.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Verleiht ein Wasserzeichen-Modul einen Vorteil im Spielverlauf?">
+Nein. Es zeichnet lediglich Text oder ein Logo auf dem Bildschirm ab und hat keinerlei Verbindung zu Bewegung, Kampf oder irgendetwas, was der Server verarbeitet.
+</FAQItem>
+
+<FAQItem question="Kann Anticheat ein Watermark-Modul erkennen?">
+Nein. Es sendet niemals etwas an den Server, sodass ein serverseitiges Anticheat nichts überlagern kann, das rein lokal ist.
+</FAQItem>
+
+<FAQItem question="Warum fügen Kunden ein Wasserzeichenmodul hinzu?">
+Meistens zur Markenbildung und Identifizierung: Es macht Clips und Screenshots erkennbar und ermöglicht es Ihnen, auf einen Blick zu erkennen, welcher Kunde oder welche Version Sie verwenden.
+</FAQItem>
+
+<FAQItem question="Kann ich eine Wasserzeichenüberlagerung verschieben oder deaktivieren?">
+In der Regel ja. Die meisten Implementierungen erlauben es, sie zu verschieben, zu ändern oder vollständig zu deaktivieren, wobei die genauen Steuerelemente vom Client abhängen.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Dienstklient?", description: "Die breitere Kategorie Wasserzeichen und jedes andere clientseitige Modul gehören zu." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Der gegenteilige Instinkt: Unsichtbar zu bleiben, anstatt bei jedem Clip den eigenen Namen zu verewigen." },
+  { href: "/de/learn/what-is-an-aimbot", label: "Was ist ein Aim-Bot?", description: "Ein Modul, das dazu bestimmt ist, erfasst zu werden. Das Wasserzeichen ist so gestaltet, dass es sichtbar ist, jedoch nicht vom Server." },
+]} />
+
+<CTA href="/de/purchase">Entdecken Sie weitere Produkte in Opals Visual Kategorie</CTA>

@@ -1,0 +1,79 @@
+---
+title: Czym jest wyskok w Minecraft? Wyjaśnienie modułu
+description: Skok w Wysokość to moduł ruchu, który zwiększa wysokość skoku powyżej limitu w standardowym Minecraft, poprzez edycję pakietów ruchu, a nie samego wejścia do skoku. Oto jak to działa.
+excerpt: Skok Wstecz zamienia jedno zwykłe naciśnięcie klawisza w skok, jakiego nigdy nie wygeneruje standardowa fizyka. Oto jak działa ten pakietowy trik i dlaczego jest łatwy do wykrycia przez serwer.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie zmienia Skok Wzwyż?
+    a: Zwiększa maksymalną wysokość, jaką może osiągnąć gracz podczas skoku, przekraczając stałe ograniczenie narzucane przez standardową fizykę Minecrafta.
+  - q: Jak technicznie działa skok o tyczce?
+    a: Manipuluje pakietami ruchu wysyłanymi do serwera, dzięki czemu zgłaszana pozycja jest wyższa niż ta, którą uzyskałby zwykły skok, zamiast modyfikować sam input skoku.
+  - q: Czy skok o tyczce to to samo co lot?
+    a: Nie. Skok w wysokość wpływa tylko na wysokość pojedynczego skoku. Nie pozwala graczowi utrzymać wysokości ani swobodnie poruszać się w powietrzu, jak moduł lotu.
+  - q: Czy wysoki skok może spowodować, że zawodnik zostanie oznaczony lub zbanowany?
+    a: Może. Wysokość skoku to wartość, którą serwer może zmierzyć i porównać z fizyką gry vanilla, więc wyjątkowo wysokie skoki stanowią wiarygodną podstawę do wykrywania, a używanie modułu zazwyczaj narusza zasady serwera dotyczące oszustw związanych z ruchem.
+---
+
+<KeyTakeaways>
+
+- Skok w górę to moduł ruchu, który podnosi wysokość skoku gracza powyżej limitu wysokości w standardowym Minecraft.
+- Edytuje pakiety ruchu wysyłane do serwera, zamiast wpływać na samą akcję skoku, dzięki czemu serwer widzi skok, którego normalnie nie da się osiągnąć.
+- Służy do pokonywania przeszkód lub omijania terenu bez umieszczania żadnego bloku.
+- Ponieważ wysokość skoku jest łatwa do zmierzenia, jest to częsty cel wykrywania przez programy anticheat.
+
+</KeyTakeaways>
+
+Skok Wzwyż to moduł ruchu, który pozwala graczowi skakać wyżej niż to umożliwiają fizyka w standardowym "Minecraftcie". Nie zmienia tego, co się dzieje po naciśnięciu klawisza skoku. Zmienia to, co widzi serwer: klient edytuje wychodzące pakiety ruchu, dzięki czemu zgłaszana pozycja sięga wyżej niż gdziekolwiek, gdzie mogłaby wylądować normalna skok. To jeden ze starszych trików w podręczniku manipulacji pakietami, tani do zbudowania i równie tani do wykrycia przez serwer, jeśli ten jest uważny.
+
+## Jak działa Skok Wzwyż
+
+Wysokość skoku w standardowej wersji jest stała. Gra nakłada stałą prędkość w górę w momencie oderwania się od ziemi, grawitacja ciągnie cię w dół zgodnie z harmonogramem i to jest cały budżet. Skok Wzwyż nie ingeruje w ten wzór i nie ingeruje w twoje polecenia. Naciskasz spację dokładnie tak, jak zawsze.
+
+Zmienia się pozycja, którą klient przekazuje serwerowi później. Moduł przepisuje pakiety ruchu, dzięki czemu współrzędne zgłaszane w trakcie skoku są wyższe niż te, które wygenerowałby silnik fizyki. Z perspektywy serwera nic w twoim naciśnięciu klawisza nie wyglądało nietypowo. Twoja postać po prostu poszła tam, gdzie nie może dotrzeć legalny skok.
+
+## Czy Skok Wzwyż jest bezpieczny w użyciu
+
+Odwołanie staje się jasne, gdy sobie to wyobrazisz. Kilka dodatkowych bloków wysokości pozwala pokonać krawędzie i przepaście, których zwykły skok nie dosięgnie, omija teren, który w innym przypadku kosztowałby czas i zasoby, a w walce daje chwilę dystansu, wystarczającą, by zerwać linię wzroku przeciwnika lub wyjść poza zasięg jego ataku, zanim ten będzie mógł zareagować.
+
+Żadna z tych rzeczy nie czyni tego cichym. Wysoki Skok to korzyść w rozgrywce, a nie kosmetyczna, a wysokość skoku jest jedną z łatwiejszych rzeczy, które serwer może sprawdzić. Każdy legalny skok ma ustaloną górną granicę przez fizykę gry, więc serwer rejestrujący pozycję pionową musi jedynie porównać to, co widzi, z tą granicą. Wysoki Skok mieści się w tej samej kategorii ruchu co inne sztuczki oparte na pakietach, takie jak [Bhop](/pl/learn/what-is-bhop) i [Velocity](/pl/learn/what-is-velocity-anti-knockback), i powinien być traktowany w ten sam sposób: wykrywalny, a nie bezpieczne ułatwienie.
+
+<Callout variant="tip" title="Gdzie Opal wyznacza granicę">
+Kategoria ruchu w Opalu obejmuje szeroki zakres, ale nie zawiera modułu Skoku w Wysokość pod tą nazwą. Funkcja, której jedynym zadaniem jest zawyżanie liczby, którą serwer może trywialnie sprawdzić w odniesieniu do fizyki, to nie jest taki rodzaj skrótu, który pasuje do sposobu, w jaki Opal tworzy narzędzia do ruchu.
+</Callout>
+
+<Callout variant="warning" title="Informacja, a nie instrukcja">
+Ta strona wyjaśnia, czym jest High Jump i jak ogólnie działa ten efekt. Dokładna implementacja różni się w zależności od klienta, a przeskakiwanie ograniczenia wysokości w vanilla łamie zasady na praktycznie każdej serwerze, która traktuje ruch poważnie.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co tak naprawdę zmienia High Jump?">
+Zwiększa maksymalną wysokość, jaką może osiągnąć gracz podczas skoku, przekraczając stały limit narzucany przez fizykę Minecrafta w wersji podstawowej.
+</FAQItem>
+
+<FAQItem question="Jak technicznie działa Skok Wzwyż?">
+Modyfikuje pakiety ruchowe wysyłane do serwera, dzięki czemu zgłaszana pozycja jest wyższa niż ta, którą dałby standardowy skok, zamiast zmieniać sam input skoku.
+</FAQItem>
+
+<FAQItem question="Czy Skok Wzwyż to to samo co lot?">
+Nie. Skok Wzwyż wpływa jedynie na wysokość pojedynczego skoku. Nie pozwala on graczowi utrzymać wysokości ani swobodnie poruszać się w powietrzu, tak jak moduł lotu.
+</FAQItem>
+
+<FAQItem question="Czy High Jump może spowodować oznaczenie lub zbanowanie gracza?">
+Może. Wysokość skoku to wartość, którą serwer może zmierzyć i porównać z fizyką gry, więc wyjątkowo wysokie skoki stanowią prawdopodobną podstawę do wykrywania, a używanie modułu zazwyczaj narusza zasady serwera dotyczące oszustw związanych z ruchem.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-scaffold", label: "Co to jest Scaffold?", description: "Moduł ruchu, który automatycznie umieszcza bloki podczas chodzenia." },
+  { href: "/pl/learn/what-is-velocity-anti-knockback", label: "Czym jest Prędkość (ochrona przed odrzutem)?", description: "Moduł pokrewny ruchowi, który zwalcza opór, a nie grawitację." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Kategoria zbudowana wokół omijania takich kontroli." },
+]} />
+
+<CTA href="/pl/purchase">Zobacz, jak Opal radzi sobie z ruchem bez polegania na liczbie, którą serwer może zmierzyć.</CTA>

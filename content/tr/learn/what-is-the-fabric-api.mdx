@@ -1,0 +1,76 @@
+---
+title: Fabric API Nedir? (Minecraft, 2026)
+description: Fabric API, Fabric modlarının çoğunun ihtiyaç duyduğu ortak kütüphanedir. İşte ne işe yaradığı, yükleyici'den neden ayrı olduğu ve neredeyse her modun neden ona ihtiyaç duyduğu.
+excerpt: Fabric API, neredeyse her Fabric modunun üzerine inşa edildiği ortak kütüphanedir. Bir mod başlatılırken çöküyorsa, eksik veya güncel olmayan bir Fabric API genellikle nedenidir.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Frameworks
+author: trq
+faqs:
+  - q: Fabric API gerekli mi?
+    a: Çoğu mod için evet. Ona bağımlı bir mod olmadan yüklenemez. Birkaç bağımsız mod buna ihtiyaç duymasa da, onu yüklemek güvenli varsayılandır.
+  - q: Onu nereden alabilirim?
+    a: Resmi Fabric kanallarından ve her zamanki mod yapımcılarından. Minecraft sürümünüzle eşleşen yapıyı her zaman seçin.
+  - q: Neden yükleyiciye entegre edilmedi?
+    a: Böylece yükleyici küçük kalabilir ve paylaşılan API ayrı ayrı gelişirken hızlı bir şekilde güncellenebilir. Bu, Fabric'te bilinçli bir tasarım seçimidir.
+---
+
+<KeyTakeaways>
+
+- Fabric API, çoğu Fabric modunun üzerine inşa edildiği ortak bir kütüphanedir.
+- Yükleyici'den ayrı olarak tasarlanmıştır: küçük bir yükleyici hızlıca güncellenir, API kendi başına gelişir.
+- Birçok modun güvendiği olaylar, ağ, kayıt ve oluşturma yardımcıları sağlar.
+- Eksik veya güncel olmayan bir Fabric API, bir modun başlatmada çökmesinin en yaygın nedenidir.
+
+</KeyTakeaways>
+
+Fabric API, çoğu [Fabric](https://fabricmc.net/) modunun üzerine inşa edildiği ortak bir kütüphanedir. Fabric'in çekirdek yükleyicisi kasıtlı olarak küçüktür, bu nedenle API eksikleri doldurur: olaylar, ağ, kayıt yardımcıları, işleme araçları. Bir Fabric modu başlatmada eksik sınıf hatasıyla çökerse, eksik veya güncel olmayan Fabric API genellikle nedenidir.
+
+<Callout variant="info" title="Opal Nerede Çalışır">
+Opal bir Fabric modudur, bu yüzden Fabric API'ye de ihtiyaç duyar. Hem ikisini de kurmayı kapsayan [kurulum rehberi](/tr/docs/setup) bulunmaktadır.
+</Callout>
+
+## Neden Yükleyiciden Ayrıdır?
+
+Fabric, sistemi kasıtlı olarak ikiye böler. Yükleyici küçük ve kararlı kalır, Fabric API ise daha büyük, daha hızlı değişen paylaşılan arayüzler kümesini içerir. Bu ayrım, yükleyicinin Minecraft'ın yeni bir sürümüne hızla güncellenmesini sağlarken, API kendi hızında gelişmeye devam eder.
+
+## Ne Sağlar?
+
+API, birçok modun ihtiyaç duyduğu şeyleri yapmak için modlara ortak, sürüm açısından kararlı bir yol sunar:
+
+- Modüllerin takılıp oyun olaylarına müdahale edebileceği yaşam döngüsü ve oyun olayları.
+- Özel paketler için ağ yardımcı programları.
+- Öğeler, bloklar ve varlıklar eklemek için kayıt ve içerik yardımcı programları.
+- Modler arasında paylaşılan işleme ve kaynak yardımcı programları.
+
+Yoksa, her mod bu parçaları yeniden icat eder ve birbirini bozardı.
+
+## Ona İhtiyacınız Var mı?
+
+Neredeyse her zaman, evet. Çoğu Fabric modü, Fabric API'yi bir bağımlılık olarak listeler, böylece onu diğerleriyle birlikte bir mod olarak yalnızca bir kez yükleyebilirsiniz. Sürümünü Minecraft sürümünüze uyumlu hale getirin.
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="Fabric API gerekli mi?">
+Çoğu mod için evet. Onu gerektiren bir mod, olmazsa yüklenemez. Kendinden bağımsız birkaç mod buna ihtiyaç duymasa da, onu yüklemek güvenli varsayılan seçenektir.
+</FAQItem>
+
+<FAQItem question="Nereden bulabilirim?">
+Resmi Fabric kanallarından ve bilinen mod dağıtımcılarından. Her zaman Minecraft sürümünüzle eşleşen sürümü seçin.
+</FAQItem>
+
+<FAQItem question="Neden yükleyiciye dahil edilmedi?">
+Yükleyicinin küçük kalmasını ve ortak API gelişirken hızlı bir şekilde güncellenmesini sağlamak için böyle tasarlandı. Fabric'te bilinçli bir tasarım seçimidir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/fabric-vs-forge", label: "Fabric vs Forge", description: "İki mod yükleyicisinin karşılaştırması." },
+  { href: "/tr/learn/how-to-install-a-fabric-mod", label: "Bir Fabric modunun nasıl kurulacağı", description: "Kurulum adımlarında Fabric API'nin nereye yerleştirileceği." },
+  { href: "/tr/learn/what-is-a-minecraft-mod-loader", label: "Minecraft mod yükleyici nedir?", description: "API'nin üzerine oturan yükleyici." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

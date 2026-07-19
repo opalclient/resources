@@ -1,0 +1,107 @@
+---
+title: Minecraft'ta No Fall Nedir? Mod Açıklaması
+description: No Fall, Minecraft'ta hasar kaydetmesini engelleyen bir eklentidir. Paket iptali, zemin taklidi ve algılama mekanizmalarının pratikte nasıl çalıştığına dair bilgiler aşağıdadır.
+excerpt: On iki kalpli bir düşüşü omuz silkintisine dönüştüren modül. İşte mekanizması ve kimsenin kutuya yazmadığı risk.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: No Fall aslında ne işe yarıyor?
+    a: Sunucunun karakterinize düşme hasarı kaydetmesini engeller, böylece normalde sizi incitmesi veya öldürmesi gereken bir düşüş artık hiçbir şey yapmaz.
+  - q: No Fall nasıl yere düşme hasarını tetiklemiyor?
+    a: "Üç belgelenmiş yaklaşım: sunucunun düşüşü hesaplamak için kullanacağı hareket paketini iptal etmek, yerdeymiş gibi bir durum sahteciliği yaparak hiçbir düşüşün kaydedilmesini engellemek veya sunucunun düşüş takibinin hasar uygulayacak kadar birikmasını önlemek için tahmin edilen konum verilerini değiştirmek."
+  - q: Düşüş tespit edilebilir mi?
+    a: Evet. Sunucu, takip edilen dikey harekete bağlı olarak düşme hasarının gerçekleşmesini bekliyor ve rapor ettiğiniz durum ile olması gereken hasar arasında bir uyumsuzluk, antichiplerin makul bir şekilde kontrol edebileceği bir sinyaldir.
+  - q: No Fall her müşteride aynı mı?
+    a: Hayır. Bu, birden fazla müşteride görünen genel bir modül kavramıdır, ancak kesin yöntem (paket iptali, zemin yanıltması veya öngörülen durum manipülasyonu) uygulamaya göre değişir.
+  - q: No Fall dışında bir şeyleri etkiliyor mu?
+    a: Tasarım hatası değil. Özellikle düşme hasarı kontrolünü hedefliyor, ancak özellikle zemin taklidi, nasıl uygulandığına bağlı olarak diğer hareketle ilgili kontrollere de etki edebilir.
+---
+
+<KeyTakeaways>
+
+- No Fall, sunucunun düşme hasarını kaydetmesini engellemez, bu nedenle her yükseklikten yapılan düşüşler hiçbir şey kaydetmez.
+- Düşüş kontrolünü bozarak çalışır: paket iptali, zemin durumu taklidi veya sahte tahmin edilen konum.
+- Bildirilen hareket ile beklenen hasar arasındaki uyumsuzluk tam olarak antichiplerin aradığı şeydir.
+- Opal, bunu No Fall olarak gönderir, tespit edilebilir her modül gibi kendi sorumluluğunuzda kullanmanız önerilir
+
+</KeyTakeaways>
+
+No Fall, karakterinize düşme hasarını hiçbir zaman kaydetmesini engelleyerek sunucuyu durdurabilen bir Minecraft modülüdür. Oyunun normal hasar hesaplamalarının ilerlemesine izin vermek yerine, aksi takdirde sizi bir uçurundan on iki kalbinizi yediğinizi belirleyecek sunucu tarafı kontrolüyle müdahale eder. Bir kule den düşün, havada bir savaştan kaçın veya doğrudan bir maden şaftından aşağı düşün: bunların hiçbiri size sağlık maliyeti olmaz. Büyük bir işi küçük bir kod parçasıyla yapıyor ve aynı zamanda araç-istemci araç kutusundaki daha gündelik olarak tespit edilebilen hilelerden biridir, bu nedenle ona güvenmeden önce bilmeniz gereken bir şeydir.
+
+## Nasıl Çalışır
+
+Sunucu, dikey konumunuzu sürekli olarak izler. Belirli bir mesafeden sonra bir düşüşten sonra bir iniş tespit ettiğinde, düştüğünüz mesafeye göre ölçeklenmiş hasar uygular. No Fall'un tek görevi, hasar gelmeden önce bu sürece müdahale etmektir.
+
+Bunu yapmanın üç yaygın yolu vardır:
+
+**Paket iptali.** İstemci, sunucunun düşüşü hesaplamak için kullanacağı hareket paketini basitçe geri tutar, böylece sunucu bunu sizin için ücretlendirmek için ihtiyaç duyduğu verileri asla alamaz.
+
+**Zemin sahtekarlığı.** İstemci, aslında olmadığı halde sunucuya zeminde durduğunu söyler. İniş olmadığı için ilk etapta bir düşüş kaydedilmez.
+
+**Tahmin edilen durum manipülasyonu.** İstemci, sunucunun kendi düşüş mesafesi izleyicisinin hasar eşiğini aşacak kadar birikmemesi için bildirdiği konum verilerini sessizce ayarlar.
+
+Aynı hedef, sunucuya anlatılan üç farklı yalan. Bir müşterinin hangisini kullandığı, bunun ne kadar bariz olduğunu belirler.
+
+## Kullanmak güvenli mi?
+
+Hayır, hiçbir mutlak anlamda değil. No Fall, sunucu tarafı bir denetimin istemci tarafı bir çözümü olup, bu uyumsuzluk tam olarak anticheatların aradığı şeydir. Sunucu, düşme hasarının izlenen hareketinizden kaynaklanmasını bekler. Rapor edilen konumunuz veya durumunuz, meydana gelmesi gereken hasarla uyumsuz hale geldiğinde, bu boşluk olası bir tespit sinyali olur ve makul bir anticheat bunu işaretleyecektir.
+
+Aslında yakalanıp yakalanmayacağı sunucuya ve yönteme bağlıdır. Paket iptali ve zemin sahtekarlığı, daha ince tahmin edilen durum yaklaşımına göre hareket günlüklerinde daha bariz izler bırakır, ancak üçünün de hiçbiri varsayılan olarak görünmez. No Fall'ı kendi riskiniz altında kullanın ve katı bir anticheatın, hoşgörülü birinden daha sık yakaladığına hazırlıklı olun.
+
+<Callout variant="tip" title="Opal bunları gönderiyor">
+
+Opal'ın modül kataloğu bunu açıkça belirtiyor: **Düşme Yok**, "Düşme hasarını engeller." Abartılmamış, ayrı bir pazarlama ismi yok. İstemci tarafında, sunucu makul bir şekilde tespit edebileceği diğer her şeyle aynı kategoride, kendi sorumluluğunuzda kullanıma ayrılmış
+
+</Callout>
+
+<Callout variant="warning" title="Bu seni yasaklanmana neden olabilir">
+
+Düşürme, mekanik bir iz bırakır: olması gereken ancak gerçekleşmemiş hasar. Antichipler, tam olarak bu boşluğu arar. Bunu kullanmak, denetim yapan herhangi bir sunucuda gerçek bir yasak riskini beraberinde getirir, tıpkı diğer istemcilerde olduğu gibi
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="No Fall aslında ne işe yarıyor?">
+
+Sunucunun karakterinize düşme hasarı kaydetmesini engeller, böylece normalde sizi incitmesi veya öldürmesi gereken bir düşüş hiçbir şey yapmaz
+
+</FAQItem>
+
+<FAQItem question="No Fall nasıl yere düşme hasarını tetiklemiyor?">
+
+Üç belgelenmiş yaklaşım: sunucunun düşüşü hesaplamak için kullanacağı hareket paketini iptal etmek, yere temas halinde olduğunu taklit ederek hiçbir düşüşün kaydedilmemesini sağlamak veya sunucunun düşüş takibinin hasar uygulayacak kadar birikmasını engelleyecek şekilde tahmin edilen konum verilerini değiştirmek
+
+</FAQItem>
+
+<FAQItem question="Düşüş tespit edilebilir mi?">
+
+Evet. Sunucu, takip edilen dikey harekete bağlı olarak düşme hasarının gerçekleşmesini bekliyor ve rapor ettiğiniz durum ile olması gereken hasar arasında bir uyumsuzluk, antichiplerin makul bir şekilde kontrol edebileceği bir işaret
+
+</FAQItem>
+
+<FAQItem question="No Fall her müşteride aynı mı?">
+
+Hayır, bu genel bir modül kavramı ve çeşitli müşterilerde karşımıza çıkıyor; ancak kesin yöntem (paket iptali, zemin yanıltması veya öngörülen durum manipülasyonu) uygulamaya göre değişiklik gösteriyor
+
+</FAQItem>
+
+<FAQItem question="No Fall dışında bir şeyleri etkiliyor mu?">
+
+Tasarım hatası değil. Özellikle düşme hasarı kontrolünü hedefliyor, ancak özellikle zemin taklidi, nasıl inşa edildiğine bağlı olarak hareketle ilgili diğer kontrolleri de etkileyebilir
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "No Fall kategorisinin içinde bulunduğu şey ve bir yardımcı istemciyi tam teşekküllü bir hile istemcisinden ayıran şey." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Sunucu dışından daha fazlasını saklamak için No Fall gibi modüllerin nerede inşa edildiği." },
+  { href: "/tr/learn/what-is-velocity-anti-knockback", label: "Hızlanma/geri tepme engelleme nedir?", description: "Oyunun normalde ödemenizi istediği bir maliyeti silen başka bir modül." }
+]} />
+
+<CTA href="/tr/satin-al">Düşüş Yok, Opal'ın modül listesindeki bir satırdır. Diğer hangi ürünlerin seçildiğine bir göz atın.</CTA>

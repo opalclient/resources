@@ -1,0 +1,81 @@
+---
+title: Czym jest Self-Teaming (zespoły) w Minecraft?
+description: Samouzdrawianie (moduł Zespołów) sprawia, że każdy gracz na tablicy wyników pojawia się jako twój sojusznik, ukrywając ostrzeżenia o obrażeniach od sojuszników i oznaczenia graczy z innych drużyn na serwerach FFA.
+excerpt: Samoistne łączenie oszukuje własny ranking, dając do zrozumienia, że wszyscy są twoimi przyjaciółmi. Żadnych exploitów, żadnych obejść, tylko klient kłamie sam do siebie.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy samoorganizacja wpływa na to, jak serwer postrzega mój zespół?
+    a: Nie. Przejęcie ma miejsce tylko w Twoim kliencie. Serwer zachowuje swoje rzeczywiste zapisy przydziałów zespołów i nigdy nie otrzymuje z tego powodu nic innego.
+  - q: Czy inni gracze mogą zauważyć, że używam samodoskonalenia?
+    a: Nie z ich ekranu. Kolory identyfikatorów i ostrzeżenia o przyjacielskim ogniu, które je ukrywa, są renderowane lokalnie przy użyciu danych, które już posiada twój klient, więc klienci innych osób nie są dotknięci.
+  - q: Czy samodoskonalenie jest tym samym co wykorzystywanie błędu przyjaznego ognia?
+    a: Nie samodzielnie. Ukrywa jedynie ostrzeżenie przed przyjacielskim ogniem Twojego klienta. Czy atak faktycznie zadaje obrażenia, zależy od tego, jak serwer i wszelkie wtyczki egzekwują zasady drużynowe.
+  - q: Dlaczego niektórzy klienci nazywają to modułem Teams, a nie modułem samorządności zespołowej?
+    a: To są te same funkcje pod dwoma nazwami. Zespołowe wskazuje na manipulację systemem tablicy wyników, natomiast samodoskonalenie opisuje, co moduł z nim robi.
+---
+
+<KeyTakeaways>
+
+- Samozespołowanie (moduł Zespołów) traktuje każdego innego gracza jako Twojego sojusznika na tablicy wyników.
+- Nadpisuje dane drużynowe, które Twój klient już otrzymał; rzeczywiste przydziały serwera nigdy się nie zmieniają.
+- Dzięki temu jest niewidoczne dla innych graczy i trudne do wykrycia przez systemy antycheat.
+- Używane głównie do ukrywania tagów nazw graczy spoza drużyny i ostrzeżeń o przyjacielskim ogniu na serwerach FFA.
+
+</KeyTakeaways>
+
+Samozespoły, czasem oznaczane jako Teams na liście modułów klienta, to funkcja Minecrafta, która nadpisuje tablicę wyników klienta, powodując, że każdy inny gracz wyświetla się tak, jakby należał do Twojego zespołu. Znikają kolorowe oznaczenia nazw graczy niebędących w zespole oraz ostrzeżenia o przyjacielskim ogniu, które normalnie oznaczałoby kogoś jako przeciwnika. To trik wizualny, a nie hack związany z ruchem lub walką, i znajduje się po cichych stronach tego, co oferują klienty narzędziowe.
+
+## Jak działają samozespoły
+
+System drużynowy tablicy wyników Minecrafta opiera się na pakietach. Serwer przypisuje graczy do drużyn i przesyła to przypisanie do każdego połączonego klienta. Domyślny klient wykorzystuje go do kilku celów: kolorowania oznaczeń nazw graczy według drużyny, stosowania zasad kolizji i przyjacielskiego ognia powiązanych z przynależnością do drużyny oraz sterowania wszystkimi innymi wskaźnikami opartymi na drużynie, które dodaje serwer lub wtyczka.
+
+Samozespoły przechwytują to w drodze. Zamiast renderować dane drużyny, które faktycznie otrzymał, klient zastępuje je własną wartością i traktuje każdego innego gracza tak, jakby należał do Twojego zespołu. Ponieważ zamiana zachodzi całkowicie po stronie klienta, serwer niczego się nie dowiaduje. Kontynuuje wydawanie rzeczywistych przypisań; Twój ekran po prostu decyduje się je ignorować.
+
+Dlatego moduł sprawia wrażenie tak wątłego triku. Nie dotyka ruchu, celowania ani czasu reakcji. Dotyka dokładnie jednej rzeczy: sposobu, w jaki Twój klient wyświetla informacje o drużynie na Twoim ekranie. Na serwerze FFA, gdzie każdy jest technicznie przeciwnikiem, to wystarczy, by pozbawić Cię wizualnego sygnału, który stale Ci o tym przypomina.
+
+## Czy bezpieczne jest używanie samo-drużynowania?
+
+Anticheaty po stronie serwera są zbudowane, by monitorować dane wychodzące: ruch, który nie powinien być możliwy, rotacje, które są zbyt idealne, trafienia, które lądują z ponadludzką precyzją. Samo-drużynowanie nie generuje żadnego z tego. Nigdy nie wysyła niczego nietypowego do serwera, nigdy nie ingeruje w pakiety walki i nie ma żadnego sygnatur zachowań, które automatyczny system mógłby wychwycić, tak jak w przypadku [KillAura](/pl/learn/what-is-killaura) lub [Reach](/pl/learn/what-is-reach).
+
+To nie oznacza, że jest to bez ryzyka. Nadal zmienia zamierzone zachowanie gry w kwestii informacji o drużynie, a większość serwerów zakazuje wszelkich modyfikacji klienta z zasady, niezależnie od tego, czy bot je zauważa, czy nie.
+
+<Callout variant="warning" title="Niska wykrywalność nie oznacza dopuszczalności">
+Samozespołowe granie jest trudne do wykrycia przez automatyczne systemy, ponieważ nigdy nie opuszcza Twojego komputera, ale to nie oznacza, że jest dozwolone. Zazwyczaj przepisy serwera obejmują wszelkie modyfikacje po stronie klienta, a pracownik sprawdzający nagrania nadal może zauważyć znacznik nazwy, który nigdy nie zmienia koloru na czerwony.
+</Callout>
+
+<Callout variant="tip" title="Jak to się wpisuje w szerszy zestaw narzędzi">
+Opal nie dostarczana jest dedykowanego modułu do automatycznego dołączania do drużyn ani modułu Teams. To naprawdę niszowy wybór, stworzony dla konkretnego mety serwera, a nie coś, po co większość graczy sięga podczas każdej sesji. Leży poza modułami walki i ruchu, które zwykle oferuje klient użytkowy.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy samokonfigurowanie zmienia to, co serwer myśli o moim zespole?">
+Nie. Przejęcie kontroli ma miejsce tylko na Twoim kliencie. Serwer zachowuje swoje rzeczywiste informacje o przypisaniach do zespołów i nigdy nie otrzymuje żadnych innych danych z tego powodu.
+</FAQItem>
+
+<FAQItem question="Czy inni gracze mogą zauważyć, że używam samodoskonalenia?">
+Nie, nie z ich ekranu. Kolory znaczników nazw i ostrzeżenia przed przyjacielskim ogniem, które ukrywa, są renderowane lokalnie przy użyciu danych, które Twój klient już posiadał, więc klient nikogo innego nie jest na to wpływany.
+</FAQItem>
+
+<FAQItem question="Czy samo-zespół jest tym samym co wykorzystanie przyjaznego ognia?">
+Nie, samodzielnie. Ukrywa jedynie ostrzeżenie o przyjaznym ogniu po stronie klienta. Czy atak faktycznie zadaje obrażenia, zależy od tego, jak serwer i wtyczki egzekwują zasady drużynowe.
+</FAQItem>
+
+<FAQItem question="Dlaczego niektórzy klienci nazywają to modułem Teams, a nie samoorganizacją?">
+To ta sama funkcja pod dwoma nazwami. Teams odnosi się do systemu wyników, który jest modyfikowany, natomiast samoorganizacja opisuje, co moduł z nim robi.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Szersza kategoria modułów budowanych tak, by pozostać niezauważonymi." },
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Moduły anticheatów wykrywają oszustwa z powodu, dla którego gracze tworzą własne zespoły, aby uniknąć ich." },
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy?", description: "Szersza kategoria klientów, do której należy ten moduł." },
+]} />
+
+<CTA href="/pl/purchase">Obejść się bez sztuczek z wynikami. Zobacz, co Opal faktycznie wysyła za $8.99.</CTA>

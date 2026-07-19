@@ -1,0 +1,83 @@
+---
+title: Cos'è l'AntiDesync in Minecraft? (Modulo Spiegato)
+description: AntiDesync è un modulo che corregge piccole discrepanze nella posizione tra client e server prima che causino glitch visibili o attivino una falsa segnalazione di movimento da parte dell'anticheat.
+excerpt: AntiDesync non ti fa colpire più forte né muoverti più velocemente. Semplicemente, mantiene la narrazione del tuo cliente allineata con quella del server, così il normale lag smette di sembrare una confessione.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa significa "desync" in Minecraft?
+    a: Uno sfasamento è una discrepanza tra ciò che il client sta mostrando e ciò che il server considera vero. È solitamente causato da latenza, perdita di pacchetti o dalla previsione del movimento lato client che si discosta dalla versione degli eventi del server.
+  - q: AntiDesync offre un vantaggio di gioco?
+    a: No. Corregge le discrepanze invece di crearle o sfruttarle, quindi non ti permette di muoverti più velocemente, colpire da più lontano o agire al di fuori di ciò che il server già consente.
+  - q: Quale cliente documenta un modulo AntiDesync?
+    a: La tenacia è il cliente documentato come spedizionere di un modulo AntiDesync.
+  - q: Come si differenzia AntiDesync da Backtrack?
+    a: "Backtrack sfrutta deliberatamente la finestra di latenza client-server per colpire un bersaglio nella sua posizione precedente. AntiDesync svolge l'operazione opposta: restringe tale intervallo, in modo che il tuo stato corrisponda più da vicino a quello del server, anziché sfruttarne la differenza."
+  - q: AntiDesync può evitare autonomamente un ban da sistema anti-cheat?
+    a: Nessun modulo singolo può prometterlo. AntiDesync può ridurre i falsi abbinamenti causati dal normale lag, ma non ha voce in capitolo su come un server gestisce altri moduli o comportamenti che effettivamente violano le sue regole.
+---
+
+<KeyTakeaways>
+
+- AntiDesync è un modulo che mantiene lo stato di gioco locale del tuo client sincronizzato con quello del server, correggendo piccole discrepanze prima che diventino un glitch visibile o un flag di movimento non valido.
+- Minecraft prevede i tuoi movimenti localmente, quindi li riconcilia con gli aggiornamenti del server; AntiDesync restringe continuamente questo divario di riconciliazione invece di permettergli di accumularsi in un effetto di "rubber-band".
+- Risolve lo stutter e i colpi ritardati causati dal lag, non un vantaggio di velocità, portata o posizione, quindi comporta un rischio di rilevamento molto inferiore rispetto ai moduli di exploit come Reach o Backtrack.
+- Tenacity è il client documentato come dotato di un modulo AntiDesync.
+
+</KeyTakeaways>
+
+AntiDesync è un modulo che mantiene la copia del mondo di gioco del tuo client allineata con ciò che il server detiene effettivamente, correggendo le piccole discrepanze di posizione e stato che si accumulano a causa del normale lag prima che si trasformino in un glitch visibile o qualcosa che un anticheat interpreta come movimento non valido. Minecraft si fida del server come autorità finale, ma il tuo client prevede comunque i tuoi movimenti localmente in modo che il gioco risulti istantaneo. La maggior parte delle volte, le due versioni concordano a sufficienza da non farti nemmeno accorgere delle imperfezioni. AntiDesync esiste per quei momenti in cui non concordano: una connessione instabile, un picco di perdita di pacchetti o un altro modulo che sposta la tua posizione in un punto in cui il server non se lo aspetta.
+
+## Come funziona
+
+Il netcode di Minecraft è server-autoritativo ma client-predittivo. Il tuo client muove il tuo personaggio nel momento in cui premi un tasto, quindi riconcilia quella stima con gli aggiornamenti che il server invia indietro un attimo dopo. Piccole differenze tra le due copie sono normali e di solito invisibili, ma possono allargarsi a causa del lag, della perdita di pacchetti o quando un altro modulo sposta il tuo movimento al di fuori di ciò che il server si aspetta. AntiDesync osserva quel confronto direttamente: controlla la posizione e lo stato tracciati dal tuo client rispetto a ciò che il server segnala e riporta la copia locale in linea prima che lo scarto diventi abbastanza grande da sembrare errato.
+
+La parte importante è ciò che non fa. Non aspetta una grande discrepanza per poi fissarti in posizione, quel tipo di correzione che produce un ovvio effetto elastico. Invece, mira alla piccola deriva continua, in modo che la correzione rimanga impercettibile durante il normale gioco. Non percepisci un sussulto. Il tuo client rimane semplicemente più vicino a dove il server pensa che dovresti essere.
+
+Tenacity è un client documentato come spedisce un modulo AntiDesync.
+
+## È sicuro da usare?
+
+AntiDesync è una funzionalità di stabilità, non un vantaggio in combattimento o di movimento, quindi non comporta lo stesso rischio di rilevamento di moduli come Reach o Backtrack che sfruttano intenzionalmente il divario tra client e server. Reach afferma colpi da distanze maggiori di quanto permetta la fisica. Backtrack utilizza la finestra di latenza per colpire la posizione passata di un bersaglio. AntiDesync fa l'opposto di entrambi: avvicina le affermazioni del client alla verità del server invece di allontanarsi da essa, quindi non c'è nulla che possa essere intercettato da un controllo della distanza o da un controllo della validità del movimento.
+
+Detto questo, "sicuro" dipende comunque dal resto del client in cui viene distribuito. Da solo, AntiDesync sembra una correzione di qualità della vita piuttosto che un cheat. Ma di solito arriva confezionato all'interno di un client di utilità più ampio, insieme ad altri moduli, e le regole del server relative a quel client nel suo complesso si applicano comunque, indipendentemente dai singoli moduli che sono attivati.
+
+<Callout variant="tip" title="Dove si inserisce questo in Opal">
+Opal non spedisce un modulo chiamato AntiDesync. Ma l'istinto alla base di esso, mantenere la storia del client onesta invece di combattere il server per il terreno, è più vicino a come Opal è effettivamente costruito rispetto a qualsiasi modulo exploit. La proposta è sempre stata incentrata su qualità della vita e prestazioni: un HUD pulito, un frame rate stabile, un motore di scripting, non una pila di trucchi di combattimento che osano essere notati da un anticheat.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa significa 'desync' in Minecraft?">
+Un desync è una discrepanza tra ciò che il tuo client mostra e ciò che il server considera vero. È solitamente causato da lag, perdita di pacchetti o dalla previsione del movimento lato client che si discosta dalla versione degli eventi del server.
+</FAQItem>
+
+<FAQItem question="AntiDesync offre un vantaggio di gioco?">
+No. Corregge le discrepanze invece di crearle o sfruttarle, quindi non permette di muoversi più velocemente, colpire da più lontano o agire al di fuori di ciò che il server già consente.
+</FAQItem>
+
+<FAQItem question="Quale client documenta un modulo AntiDesync?">
+Tenacity è il client documentato come spedisce un modulo AntiDesync.
+</FAQItem>
+
+<FAQItem question="In che modo AntiDesync si differenzia da Backtrack?">
+Backtrack sfrutta deliberatamente la finestra di latenza client-server per colpire un bersaglio nella sua posizione passata. AntiDesync svolge un'operazione opposta: restringe tale intervallo in modo che il tuo stato corrisponda più da vicino a quello del server, anziché sfruttarne la differenza.
+</FAQItem>
+
+<FAQItem question="AntiDesync può evitare una ban da anticheat da solo?">
+Nessun modulo singolo può prometterlo. AntiDesync può ridurre i falsi disallineamenti causati da un normale lag, ma non ha voce in capitolo su come un server gestisce altri moduli o comportamenti che effettivamente violano le sue regole.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client di utilità?", description: "A cui categoria più ampia appartengono moduli come questo." },
+  { href: "/it/learn/what-is-reach", label: "Cos'è Reach?", description: "Un modulo di combattimento che allunga il divario che AntiDesync colma." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "L'estremità del ventaglio clienti orientata alla discrezione." },
+]} />
+
+<CTA href="/it/purchase">Opal è progettata per essere invisibile finché non ti serve. Scoprila per $8.99.</CTA>

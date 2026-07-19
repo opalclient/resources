@@ -1,0 +1,83 @@
+---
+title: Was ist Speedrunning in Minecraft? Modul erklärt
+description: Speed Mine ist ein Minecraft-Modul, das Blöcke schneller abbricht, als es die Standardformel für Werkzeug, Härte und Effekte zulässt. Hier erfahren Sie, wie Server dies erkennen können.
+excerpt: Speed Mine nimmt dir mit jedem zerstörten Block Zeit ab, mit jedem Schwung. Der Server, der die Berechnungen hinter deinem Pickaxe durchführt, bemerkt das tendenziell.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Funktionieren Speed-Mines im Überlebensmodus?
+    a: Ja, genau das ist das Ziel. Überlebensmodus begrenzt die Bewegungsgeschwindigkeit normalerweise durch die Härte von Werkzeug und Block. Im Kreativmodus werden Blöcke sofort zerstört, sodass das Modul nichts mehr zu beschleunigen hat.
+  - q: Was ist der Unterschied zwischen Speed Mine und Fast Break?
+    a: Speed Mine ist eng auf die Abbau-Aktion beschränkt. Fast Break ist eine allgemeinere Überschreibung der Blockabbaugeschwindigkeit, die nicht auf diesen einen Kontext beschränkt ist. Unterschiedlicher Umfang, dasselbe zugrunde liegende Ziel.
+  - q: Können Server Speed Mine erkennen?
+    a: Ja. Ein Server kann die erwartete Pausenzeit aus dem Block, dem Werkzeug und allen aktiven Effekten neu berechnen und diese mit dem Wert vergleichen, den der Client meldet. Eine Diskrepanz ist eine meldbare Anomalie, wobei der Grad der Überprüfung durch einen Server variiert.
+  - q: Ist Speed Mine dasselbe wie ein Nuker?
+    a: Nein. Ein Nuker zerstört mehrere Blöcke auf einmal, oft über eine Fläche. Speed Mine verändert lediglich, wie lange ein einzelner Block zum Zerstören benötigt, nicht wie viele Blöcke gleichzeitig zerstört werden.
+---
+
+<KeyTakeaways>
+
+- Speed Mine ist ein Modul, das Blöcke schneller abbricht, als es die eigene Formel von Minecraft für Werkzeug, Härte und aktive Effekte zulässt.
+- Es ist speziell auf das Abbauen von Blöcken ausgerichtet, was es von einer breiteren Überschreibung wie Fast Break unterscheidet.
+- Es wird als Spieler-Kategorie-Funktion dokumentiert und wurde in Tenacity beobachtet.
+- Server können es erkennen, indem sie die erwartete Abbruchzeit neu berechnen und mit dem Wert vergleichen, den der Client meldet.
+
+</KeyTakeaways>
+
+Speed Mine ist ein Minecraft-Modul, das die Zeit verkürzt, die ein Block benötigt, um beim Abbauen zerstört zu werden, schneller als die eigene Formel des Spiels für Werkzeug, Blockhärte und aktive Effekte normalerweise erzeugen würde. Es ist speziell auf die Abbau-Aktion beschränkt, was es von einer breiteren Überschreibung wie Fast Break unterscheidet. Entweder so oder so, Blöcke lösen sich schneller von als die Vanilla-Timing vorgibt.
+
+## Wie es funktioniert
+
+Vanilla Minecraft berechnet die Abbauzeit eines Blocks anhand einer Formel: Die Härte des Blocks, das Werkzeug, das du hältst, Verzauberungen wie Effizienz und Zustandsänderungen wie Eile fließen alle in diese Formel ein. Speed Mine verkürzt diesen Timer direkt, sodass der Abbau vor dem Zeitpunkt abgeschlossen wird, der die Formel normalerweise erlauben würde.
+
+Da die Änderung auf das Abbauen und nicht auf die allgemeine Blockinteraktion beschränkt ist, verhält sie sich anders als ein Modul wie Fast Break, das eine breitere Überschreibung der Abbaugeschwindigkeit unabhängig vom Kontext anwendet. Speed Mine ist als Spieler-Kategorie-Feature dokumentiert und wurde in Tenacity beobachtet.
+
+## Warum Leute es verwenden
+
+Schnelleres Abbauen von Blöcken bedeutet schnelleres Sammeln von Ressourcen, ganz einfach. Ein Spieler, der Erze abbaut, sich durch das Gelände gräbt oder einen Weg freimacht, verbringt weniger Zeit mit dem Betrachten der Rissanimation und mehr Zeit mit dem nächsten Block. Auf Servern, auf denen es wichtig ist, Materialien schnell zu sammeln – sei es zum Bauen, zum Handeln oder einfach nur, um keine Spielzeit zu verschwenden – summieren sich die Sekunden, die man beim Abbruch jedes Blocks abzieht, über eine ganze Sitzung hinweg.
+
+## Ist es sicher, es zu verwenden?
+
+Speed Mine ist nicht rein kosmetisch. Es verändert, wie schnell Blöcke im Überlebensmodus abgebaut werden, was einen echten spielerischen Vorteil gegenüber einem Spieler bietet, der in normaler Geschwindigkeit abbaut. Es wird daher in die Kategorie der geschwindigkeitsbezogenen Exploits eingeordnet und nicht als visuelle Anpassung oder Komfortfunktion betrachtet.
+
+Ein Server, der sich darum kümmert, kann die erwartete Abbruchzeit selbst anhand des Blocks, des Werkzeugs und der aktiven Effekte des Spielers neu berechnen und diese dann mit dem vergleichen, was der Client meldet. Ein Block, der schneller abbricht als die eigene Berechnung des Servers, ist eine Anomalie, die es wert ist, markiert zu werden. Wie aggressiv ein bestimmter Server dies prüft, variiert stark, und der kreative Modus umgeht die Frage vollständig, da Blöcke dort bereits unabhängig vom Werkzeug sofort abbrechen.
+
+<Callout variant="tip" title="Wo dies im Opal-Katalog zu finden ist">
+Opal versendet FastBreak, die umfassendere Block-Zerstörungs-Override, mit der auf dieser Seite Speed Mine verglichen wird, unter der Kategorie Welt zusammen mit Scaffold, Timer und Breaker. Ein schmaler, ausschließlich zum Abbauen dienender Timer unter dem Namen Speed Mine wird von Opal nicht separat aufgeführt. Wenn Sie schnellere Zerstörung wünschen, ist FastBreak bereits im Client vorhanden.
+</Callout>
+
+<Callout variant="warning" title="Referenz, keine Anleitung">
+Diese Seite erklärt den Begriff, damit Sie wissen, was er bedeutet, wenn er in einer Modulliste erscheint, und nicht, wie man ihn konfiguriert. Blöcke schneller zu brechen, als es die eigene Timing-Formel des Servers zulässt, ist ein echter Vorteil, und Server, die dies prüfen, behandeln es als Betrug.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Funktioniert Speed Mine auch im Überlebensmodus?">
+Ja, genau das ist das Ziel. Im Überlebensmodus wird die Abbruchgeschwindigkeit normalerweise durch die Härte von Werkzeug und Block begrenzt. Im Kreativmodus werden Blöcke bereits sofort zerstört, sodass es für das Modul nichts mehr zu beschleunigen gibt.
+</FAQItem>
+
+<FAQItem question="Was ist der Unterschied zwischen Speed Mine und Fast Break?">
+Speed Mine ist eng auf die Abbau-Aktion beschränkt. Fast Break ist eine allgemeinere Überschreibung der Blockabbaugeschwindigkeit, die nicht auf diesen einen Kontext beschränkt ist. Unterschiedlicher Umfang, dasselbe zugrunde liegende Ziel.
+</FAQItem>
+
+<FAQItem question="Kann Speed Mine von Servern erkannt werden?">
+Ja. Ein Server kann die erwartete Abbruchzeit anhand des Blocks, des Werkzeugs und aller aktiven Effekte neu berechnen und diese dann mit dem Wert vergleichen, den der Client meldet. Eine Diskrepanz ist eine meldungsfähige Anomalie, wobei der Grad der Überprüfung auf Speed Mine von Server zu Server variiert.
+</FAQItem>
+
+<FAQItem question="Ist Speed Mine dasselbe wie ein Nuker?">
+Nein. Ein Nuker zerstört mehrere Blöcke auf einmal, oft über eine Fläche. Speed Mine verändert lediglich, wie lange ein einzelner Block zum Zerstören benötigt, nicht wie viele Blöcke gleichzeitig zerstört werden.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-scaffold", label: "Was ist Gerüst?", description: "Ein weiteres World-Kategorie-Modul, das eine normale Minecraft-Aktion über das physikalische Machbare hinaus automatisiert." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die Kategorie der unauffälligen Ausrüstung, basierend auf Modulen, die leise genug sind, um unbemerkte zu bleiben." },
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die breitere Kategorie, zu der Speed Mine und ähnliche Module gehören." },
+]} />
+
+<CTA href="/de/kaufen">Opal versendet FastBreak statt eines schmalen Miners. Erhältlich für $8.99.</CTA>

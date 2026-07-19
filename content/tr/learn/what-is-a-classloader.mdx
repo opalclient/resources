@@ -1,0 +1,93 @@
+---
+title: Java Sınıf Yükleyicisi Nedir? (2026 Açıklayıcı)
+description: Bir Java sınıf yükleyicisi, sınıf dosyalarını bulur ve çalışma zamanında JVM'ye yükler. İşte yaptığı şey, yükleyici hiyerarşisinin nasıl çalıştığı ve modların buna neden güvendiği.
+excerpt: Bir sınıf yükleyicisi, JVM'nin sınıfı gerektiğinde bulan ve belleğe yükleyen kısmıdır. Aynı zamanda Minecraft modlarının oyunu yamalamasına olanak tanıyan tam bağlantı noktasıdır.
+date: 2026-06-04
+lastUpdated: 2026-06-04
+category: Concepts
+author: trq
+faqs:
+  - q: JVM bir sınıfı ne zaman yükler?
+    a: İlk kullanımda, başlangıçta değil. Kodunuz bir türle ilk kez etkileşime girdiğinde, JVM bir sınıf yükleyicisinden onu bulmasını ve tanımlamasını ister. Buna tembel yükleme denir.
+  - q: Delegasyon modeli nedir?
+    a: Bir yükleyici, denemeden önce sınıfını yüklemesi için üst yükleyicisine başvurur. Üst yükleyici zinciri, aynı ad altında aynı Java türlerinin iki kez yüklenmesini engelleyen önyükleyiciye kadar uzanır.
+  - q: İki sınıfın aynı adı olabilir mi?
+    a: Evet, eğer farklı sınıf yükleyicileri bunları tanımlıyorsa. JVM, bir sınıfı adının yanı sıra onu tanımlayan yükleyici ile belirler, bu nedenle farklı yükleyicilerden gelen aynı adlı sınıflar farklı türlerdir.
+  - q: Mod yükleyicileri neden özel bir sınıf yükleyicisine ihtiyaç duyuyor?
+    a: Oyun sınıflarını bellekte yüklendiklerini ve yamalandıklarını görmek. Özel bir yükleyici, JVM sınıfı tanımlamadan önce bytecode'u dönüştürebilir; bu da modların oyunu disk üzerinde düzenlemeden değiştirmesini sağlar.
+---
+
+<KeyTakeaways>
+
+- Bir sınıf yükleyicisi bir sınıf dosyasını bulur ve programın kullanabilmesi için onu JVM'ye yükler.
+- Sınıflar, başlangıçta değil, ilk kullanıldığında yüklenir ve yükleyici her seferinde bytecode'u bulur.
+- Yerleşik yükleyiciler, yukarıya doğru devredilen (bootstrap, platform, uygulama) bir üst dizi oluşturur.
+- Özel sınıf yükleyicileri, Minecraft modlarının sınıf yüklenirken oyun sınıflarını yamamasına olanak tanır.
+
+</KeyTakeaways>
+
+Bir sınıf yükleyicisi, Java çalışma zamanının bir parçasıdır ve bir sınıf dosyasını bulup JVM'ye yükleyerek programın kullanabilmesini sağlar. Sınıflar başlangıçta tamamen yüklenmez. JVM, her birini ihtiyaç duyulduğunda ilk kez yükler ve bir sınıf yükleyicisi, bytecode'u bulan, okuyan ve JVM'ye teslim eden şeydir. Minecraft Java Edition, tam olarak bu mekanizma üzerine kuruludur.
+
+<Callout variant="info" title="Opal Nerede Çalışır">
+Opal, bir [Fabric](https://fabricmc.net/) modudur ve Fabric, oyunun kendi sınıf yükleyicisi aracılığıyla yüklendiğinden, modlar sınıf dosyalarını yüklenme sırasında değiştirebilir. [Kurulum rehberi](/tr/docs/setup), kurulumunu adım adım anlatır.
+</Callout>
+
+## Bir sınıf yükleyicisi aslında ne yapar
+
+Bir sınıf yükleyicisi, bir sınıf adını çalışan JVM içinde kullanılabilir bir sınıfa dönüştürür. Bir tür için talepte bulunursunuz, yükleyici eşleşen `.class` baytlarını bulur ve JVM bu türü bellekte tanımlar.
+
+İşlem üç adımda gerçekleşir. Yükleyici, adlandırılmış bir sınıf için bayt kodunu bulur. JVM bunu doğrular ve bağlar. Ardından sınıf kullanıma hazırdır. Bir Java programının derleme zamanında bahsetmediği kodu içe aktarabilmesinin nedeni budur: yükleyicinin bulması için ad yeterlidir.
+
+## Yükleyici hiyerarşisi
+
+Sınıf yükleyicileri bir üst zincir şeklinde düzenlenmiştir ve bunların çoğu önce üst öğesine başvurur. Standart bir uygulamada, üst üste yığılmış üç yerleşik yükleyici bulunur.
+
+| Yükleyici | Yükler |
+| :--- | :--- |
+| Başlatıcı | Çekirdek Java çalışma zamanı sınıfları |
+| Platform | Çekirdek dışında standart kütüphane modülleri |
+| Uygulama | Sınıf yolundan programınızın kendi sınıfları |
+
+Uygulama yükleyicisi bir sınıf için istendiğinde, normalde önce yukarıya devretmeye başlar. Üst öğe yükleme şansına sahip olur ve ancak hiçbir üst öğe yükleyemezse çocuk denemeye başlar. Buna devretme modeli denir ve çekirdek türlerinin tüm program genelinde tutarlı kalmasını sağlar.
+
+## Sınıf kimliği ve özel yükleyiciler
+
+Bir sınıf hem adı hem de onu tanımlayan yükleyici tarafından belirlenir. İki yükleyici aynı ada sahip bir sınıfı yükleyebilir ve JVM bunları iki farklı tür olarak ele alır. Bu bir detay gibi gelebilir, ancak sınıf yükleyicilerinin güçlü olmasının tam nedeni budur.
+
+Programlar kendi sınıf yükleyicilerini tanımlayabilir. Özel bir yükleyici, bytecode'u herhangi bir yerden okuyabilir: bir jar dosyasından, ağdan, oluşturulmuş bir byte dizisinden, hatta yol boyunca dönüştürdüğü bytecode'dan. Bu, eklenti sistemlerinin, uygulama sunucularının ve mod çerçevelerinin, ana programın derleme zamanında bilmediği kodu yüklemesinin yoludur.
+
+## Bunun Minecraft modları için neden önemli olduğu
+
+Modlar özel sınıf yüklemesi sayesinde var olur. Minecraft için bir mod yükleyici, oyunun kendi sınıf yükleyicisi aracılığıyla başlamasını sağlar, böylece oyun sınıflarını yüklenirken görebilir ve değiştirebilir. Bytecode yamalamasının gerçekleştiği yer tam da bu bağlantı noktasıdır.
+
+Bir yükleyici disk ile JVM arasına oturduğunda, JVM onu tanımlamadan hemen önce bir sınıfı dönüştürebilir. Bir mod, oyun yöntemini yeniden yazabilir, yeni davranışlar ekleyebilir veya alanlar ekleyebilir; oyunun diskteki değiştirilmiş bir kopyası olmadan. JVM'nin sonunda çalıştırdığı sınıf, yamalanmış olanıdır. Bunun daha geniş resimdeki yeri hakkında bilgi için [Minecraft mod yükleyici nedir?](/tr/learn/what-is-a-minecraft-mod-loader) bölümüne bakın.
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="JVM bir sınıfı ne zaman yükler?">
+İlk kullanımda, başlangıçta değil. Kodunuz bir türle ilk kez etkileşime girdiğinde, JVM bir sınıf yükleyicisine onu bulup tanımlamasını ister. Buna tembel yükleme denir.
+</FAQItem>
+
+<FAQItem question="Delege modeli nedir?">
+Bir yükleyici, bir sınıfı yüklemeye çalışmadan önce üst yükleyicisine yüklemesini ister. Üst yükleyici zinciri, aynı ad altında aynı Java türlerinin iki kez yüklenmesini engelleyen önyükleme yükleyicisine kadar uzanır.
+</FAQItem>
+
+<FAQItem question="İki sınıfın aynı ada sahip olabilir mi?">
+Evet, eğer farklı sınıf yükleyicileri bunları tanımlıyorsa. JVM, bir sınıfı adının yanı sıra onu tanımlayan yükleyici ile birlikte tanımlar, bu nedenle ayrı yükleyicilerden gelen aynı adlı sınıflar farklı türlerdir.
+</FAQItem>
+
+<FAQItem question="Neden mod yükleyicileri özel bir sınıf yükleyicisine ihtiyaç duyuyor?">
+Oyun sınıflarını yüklenirken ve bellekte yamalanırken görmek için. Özel bir yükleyici, JVM sınıfı tanımlamadan önce bytecode'u dönüştürebilir; bu da modların oyunu diskte düzenlemeden değiştirmesini sağlar.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-the-jvm", label: "JVM nedir?", description: "Sınıf yükleyicinin bayt kodunu beslediği çalışma zamanı." },
+  { href: "/tr/learn/what-is-a-minecraft-mod-loader", label: "Minecraft mod yükleyici nedir?", description: "Özel sınıf yüklemesi nasıl mod yüklemeye dönüşür." },
+  { href: "/tr/learn/what-is-graalvm-javascript-scripting", label: "GraalVM JavaScript betiği nedir?", description: "Müşterilerin kodu çalışma zamanında yükleyebilecekleri başka bir yol." },
+]} />
+
+<CTA href="/tr/satin-al">Opal'ı, bir Fabric istemcisini, $8.99 için edinin</CTA>

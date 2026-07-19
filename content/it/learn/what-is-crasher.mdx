@@ -1,0 +1,84 @@
+---
+title: Cosa sono i crasher in Minecraft? Spiegato il modulo griefing
+description: Crasher è un modulo exploit di Minecraft che invia pacchetti malformati per far crashare il client di un giocatore bersaglio, senza alcun vantaggio in combattimento o di movimento per chi lo utilizza.
+excerpt: Crasher non ti rende un giocatore migliore. Cerca solo di interrompere la sessione di qualcun altro.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Crasher offre all'utente qualche vantaggio di gioco?
+    a: No. Crasher non mira, non si muove e non combatte per il giocatore che lo utilizza. Qualsiasi vantaggio deriva dall'eliminazione di un avversario dal gioco, non dall'averlo superato in abilità.
+  - q: Può Can Crasher influenzare giocatori diversi dal bersaglio previsto?
+    a: No. È progettato per colpire il client di un singolo giocatore alla volta. È costruito per interrompere la sessione di un avversario specifico, non per disturbare l'intero server.
+  - q: Crasher è un trucco o uno strumento per il griefing?
+    a: Viene trattato come uno strumento per arrecare danno. Non influisce sulle statistiche, sulla mira o sui movimenti, quindi non rientra nella definizione abituale di cheat competitivo, ma l'invio di pacchetti progettati per mandare in crash il client di un altro giocatore è una violazione delle regole sulla maggior parte dei server.
+  - q: Perché Crasher prende di mira il client anziché il server?
+    a: Poiché l'obiettivo è interrompere il gioco di un singolo giocatore, non la partita di tutti, inviare dati errati a un client specifico rimuove quel giocatore in modo molto più diretto rispetto al tentativo di interferire con il server condiviso.
+  - q: Quali client di Minecraft hanno distribuito Crasher?
+    a: La tenacia è il client dove Crasher è stato documentato come modulo.
+---
+
+<KeyTakeaways>
+- Crasher è un modulo exploit che invia pacchetti malformati per mandare in crash il client di un giocatore bersaglio.
+- Non offre vantaggi in combattimento o di movimento, rimuovendo solamente un avversario.
+- È documentato in Tenacity, archiviato nella sezione exploit, non in quella dei cheat di combattimento o di movimento.
+- I server lo bannano per griefing indipendentemente dagli anticheat, dato che l'intento è ovvio.
+</KeyTakeaways>
+
+Crasher è un modulo di exploit di Minecraft che invia pacchetti malformati o di dimensioni eccessive al client di un altro giocatore, con l'obiettivo di farlo crashare. Non migliora la mira di nessuno né velocizza i movimenti. Cerca semplicemente di terminare la sessione di una persona specifica. È una cosa diversa dalla maggior parte di quelle che le persone intendono quando dicono "cheat", ed è utile capire perché.
+
+## Come funziona
+
+Crasher non tocca il server. Costruisce un pacchetto progettato per rompere il client del bersaglio, di solito dati malformati o un payload che il parser del client non riesce a gestire in modo sicuro, e lo invia direttamente a quel giocatore. Se il client non riesce a elaborarlo correttamente, può bloccarsi, generare un errore o crashare, portando giù l'intera sessione di gioco.
+
+Poiché l'attacco sfrutta il modo in cui il client del bersaglio legge i dati in entrata piuttosto che qualcosa imposto dal server, i risultati sono inconsistenti. Un client con una rigorosa validazione dei pacchetti rifiuta i dati errati e non succede nulla. Un client senza tale protezione può andare in crash all'istante. Lo stesso modulo, risultati completamente diversi, a seconda di cosa sta eseguendo la persona all'altra estremità.
+
+## Crasher rispetto a un cheat di combattimento o di movimento
+
+La maggior parte dei moduli che vengono chiamati "cheat" esistono per migliorare la persona che li esegue: mira più precisa, movimenti più veloci, più informazioni di quelle che normalmente avrebbe. Crasher non fa nessuno di questi per il suo utente. Punta all'esterno, non all'interno.
+
+| | Trucco/movimento (KillAura, Reach) | Crasher |
+|---|---|---|
+| Chi ne beneficia | L'utente | Nessuno |
+| Cosa modifica | La mira, la portata o la velocità dell'utente | La stabilità del client del bersaglio |
+| Effetto sul bersaglio | Nessuno diretto | Blocco, errore o crash |
+| Categoria | Combattimento / Movimento | Sfruttamento (griefing) |
+
+Ecco perché è classificato come sfruttamento piuttosto che affiancato a un modulo come [KillAura](/it/learn/what-is-killaura) o [Reach](/it/learn/what-is-reach). È più simile a un attacco denial-of-service mirato a un singolo client che a qualcosa che assomigli a un gioco corretto (o persino scorretto).
+
+<Callout variant="tip" title="Non è questo lo scopo di Opal">
+L'intera lista di moduli di Opal, relativi a combattimento, movimento, visuale e strumenti di mondo, è costruita per migliorare la tua esperienza di gioco. Un modulo il cui unico scopo è interrompere la sessione di qualcun altro non rientra in questo ambito e non lo troverai nel catalogo. Se una "funzionalità" funziona solo interrompendo il client di qualcun altro, non è una funzionalità, è un attacco.
+</Callout>
+
+<Callout variant="warning" title="Considerato griefing, bannato immediatamente">
+Crasher non è un sottile vantaggio statistico che un anticheat deve dedurre dal comportamento. Un server può registrare direttamente i pacchetti malformati, e qualsiasi membro dello staff che esamina un report vede il gioco di un giocatore bloccarsi o chiudersi nel momento in cui viene attivato. Poiché l'intento di interrompere una sessione è inequivocabile, i server lo bannano se segnalato, indipendentemente dal fatto che un anticheat abbia mai segnalato qualcosa.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+<FAQItem question="Crasher offre all'utente qualche vantaggio di gioco?">
+No. Crasher non mira, non si muove e non combatte per il giocatore che lo utilizza. Qualsiasi beneficio deriva dalla rimozione di un avversario dal gioco, non dal superarli in abilità.
+</FAQItem>
+<FAQItem question="Crasher può influenzare giocatori diversi dal bersaglio previsto?">
+No. Per sua progettazione, mira al client di un solo giocatore alla volta. È stato costruito per interrompere la sessione di un avversario specifico, non per disturbare l'intero server.
+</FAQItem>
+<FAQItem question="Crasher è un cheat o uno strumento di griefing?">
+È considerato uno strumento di griefing. Non influisce su statistiche, mira o movimento, quindi non rientra nella definizione abituale di cheat competitivo, ma l'invio di pacchetti destinati a interrompere il client di un altro giocatore è una violazione delle regole sulla maggior parte dei server.
+</FAQItem>
+<FAQItem question="Perché Crasher mira al client invece che al server?">
+Perché l'obiettivo è interrompere il gioco di un singolo giocatore, non la partita condivisa da tutti. L'invio di dati malformati a un client specifico rimuove quel giocatore in modo molto più diretto rispetto al tentativo di interferire con il server condiviso.
+</FAQItem>
+<FAQItem question="Quali client di Minecraft hanno incluso Crasher?">
+Tenacity è il client in cui Crasher è stato documentato come modulo.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "Il modulo di combattimento Crasher viene messo a confronto e spiegato il perché dei due non siano nella stessa categoria." },
+  { href: "/it/learn/what-is-reach", label: "Cos'è la portata?", description: "Un trucco di combattimento a vantaggio personale, l'opposto di un modulo che influisce solo sul bersaglio." },
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria Crasher si colloca al limite dello sfruttamento, ed è il punto oltre il quale un cliente come Opal non va." }
+]} />
+
+<CTA href="/it/purchase">Opal crea moduli che ti rendono più bravo a Minecraft, non quelli che interrompono la sessione di qualcun altro. Scopri cosa c'è dentro.</CTA>

@@ -1,0 +1,122 @@
+---
+title: HWID Nedir ve Nasıl Çalışır?
+description: Donanım Kimliği (HWID) lisanslaması hakkında bilgi edinin, müşterilerin neden bunu kullandığını ve HWID sıfırlamalarının nasıl çalıştığını öğrenin.
+excerpt: HWID, lisansınızı cihazınıza bağlar. Bu ne anlama geliyor ve nasıl yönetilir.
+date: 2026-04-06
+lastUpdated: 2026-06-04
+category: Basics
+author: trq
+faqs:
+  - q: Minecraft istemcilerinde HWID nedir?
+    a: HWID (Donanım Kimliği), bilgisayarınızın donanım bileşenlerinden oluşturulan benzersiz bir tanımlayıcıdır. Opal gibi bir istemciyi etkinleştirdiğinizde, HWID'niz kaydedilir ve yalnızca o cihaz lisansınızı kullanabilir.
+  - q: Opal'ı iki bilgisayarda kullanabilir miyim?
+    a: Hayır, bir lisans, bir cihaz aynı anda. Cihazlar arasında geçiş yapmak için kontrol panelinizdeki HWID sıfırlama özelliğini kullanın (30 günlük bekleme süresi).
+  - q: Windows güncellemesi HWID'mi değiştirebilir mi?
+    a: Standart Windows güncellemeleri HWID'yi değiştirmez. Tam bir yeniden kurulum, donanım yapılandırmanıza bağlı olarak değiştirebilir.
+  - q: HWID'm beklenmedik bir şekilde değişirse ne olur?
+    a: Destek için Discord'dan iletişime geçin. Haklı bir nedeniniz varsa, ekip erken bir sıfırlama konusunda yardımcı olabilir.
+---
+
+<KeyTakeaways>
+
+- HWID (Donanım Kimliği), bilgisayarınızın donanımından oluşturulan bir parmak izidir ve bir lisansı bir cihazla bağlamak için kullanılır.
+- Müşteriler, lisans paylaşımını engellemek için bunu kullanır: bir lisans bir cihaz demektir.
+- Büyük donanım değişiklikleri veya işletim sistemi yeniden yüklemeleri HWID'nizi değiştirebilir; RAM veya bir USB cihazı eklemek genellikle değiştirmez.
+- Opal, her 30 günde bir kontrol panelinizden HWID'nizi sıfırlamanıza olanak tanır; acil durumlar için Discord desteği de mevcuttur.
+
+</KeyTakeaways>
+
+HWID, **Donanım Kimliği** anlamına gelir; bilgisayarınızın donanım bileşenlerinden oluşturulan benzersiz bir tanımlayıcıdır. Bunu cihazınızın bir parmak izi gibi düşünün. Opal gibi bir [istemci](/tr/learn/what-is-a-minecraft-utility-client) etkinleştirdiğinizde, HWID'niz kaydedilir. O andan itibaren, yalnızca o belirli cihaz lisansınızı kullanabilir.
+
+## İstemciler Neden HWID Kullanır
+
+HWID lisanslama basit bir sorunu çözer: **lisans paylaşımını önlemek**.
+
+HWID olmasaydı, bir kişi bir lisans satın alabilir ve bunu onlarca arkadaşıyla paylaşabilirdi. Bu, istemciyi korumak ve güncellemek için gelire ihtiyaç duyan geliştiriciler için kötü bir durumdur. HWID, bir lisansın bir cihazla eşit olmasını sağlar.
+
+### Nasıl Oluşturulur
+
+HWID'niz genellikle şunların bir kombinasyonundan türetilir:
+- CPU tanımlayıcısı
+- Anakart seri numarası
+- Disk sürücü seri numaraları
+- MAC adresi
+- Diğer donanım tanımlayıcıları
+
+Tam kombinasyon istemciye göre değişir. Amaç, önemli ölçüde donanımınızı değiştelmediğiniz sürece değişmeyen kararlı bir tanımlayıcıdır.
+
+## HWID'niz Ne Zaman Değişir
+
+HWID'niz aşağıdakileri yaptığınızda değişebilir:
+- **Büyük donanımları değiştirin:** yeni anakart, CPU veya depolama sürücüsü
+- **İşletim sisteminizi yeniden yükleyin:** bazı tanımlayıcılar sıfırlanır
+- **Bilgisayarı değiştirin:** açıkça tamamen farklı bir HWID
+- **Belirli sistem araçlarını çalıştırın:** disk klonlama veya donanım taklit etme
+
+Küçük değişiklikler (RAM ekleme, bir USB cihazı takma) genellikle HWID'nizi etkilemez.
+
+## HWID Sıfırlamaları
+
+Donanım değişiklikleri yaşandığı için (bilgisayarınızı yükseltir, bir dizüstü bilgisayara geçer veya Windows'u yeniden yükler misiniz), çoğu istemci **HWID sıfırlaması** sunar.
+
+<Callout variant="info" title="Opal'ın HWID sıfırlama politikası">
+HWID'nizi, hesap ayarlarında web paneli üzerinden sıfırlayabilirsiniz. Sıfırlamalar 30 günde bir kez mevcuttur. Sıfırlamadan sonra, Opal'ı yeni cihazınızda başlatarak yeni HWID'nizi bağlayın. Soğuma süresi dolmadan acil bir sıfırlamaya ihtiyacınız varsa, Discord üzerinden destek ile iletişime geçin.
+</Callout>
+
+### Yaygın Sıfırlama Senaryoları
+
+| Senaryo | Sıfırlamaya mı ihtiyacınız var? |
+|----------|---------------|
+| Yeni bilgisayar | Evet |
+| Windows yeniden kuruldu | Belki (ne değiştiğine bağlı) |
+| Yeni anakart/CPU | Evet |
+| RAM eklendi | Hayır |
+| Yeni GPU | Genellikle hayır |
+| Çift önyükleme | Belki (işletim sistemine bağlı) |
+
+## HWID Yönetimi İçin İpuçları
+
+- **Sıfırmaları boşa harcamayın:** Bir donanım yükseltmesi yapacaksanız, tüm değişiklikler tamamlandıktan sonra sıfırlamayı planlayın
+- **Gösterge paneli erişiminizi koruyun:** HWID sıfırmaları web gösterge paneli üzerinden yapıldığı için, hesap kimlik bilgilerinizin kaydedildiğinden emin olun
+- **Kenar durumlar için destek ile iletişime geçin:** 30 günlük bekleme süresine ulaştıysanız ancak meşru bir ihtiyacınız varsa, Discord desteği size yardımcı olabilir
+
+## HWID ve Diğer Lisanslama Modelleri
+
+| Model | Nasıl çalışır | Artıları | Eksileri |
+|-------|-------------|------|------|
+| **HWID** | Donanıma bağlı | Basit, oyunda oturum açmaya gerek yok | Donanım değişiklikleri sıfırlama gerektirir |
+| **Hesap tabanlı** | Girişe bağlı | Herhangi bir cihazda çalışır | Kimlik bilgileri paylaşılabilir veya çalınabilir |
+| **IP tabanlı** | IP adresine bağlı | Kurulum gerektirmez | VPN'ler ve dinamik IP'ler bozabilir |
+| **Abonelik** | Zamanla sınırlı | Geliştiriciler için gelir | Kullanıcılar için devam eden maliyet |
+
+Opal, hesap kimlik doğrulamasıyla birlikte HWID kullanır: Hem geçerli bir lisansa hem de eşleşen donanıma ihtiyacınız vardır. Bu, güçlü bir güvenlik sağlarken kullanıcı deneyimini basit tutar.
+
+## SSS
+
+<FAQList>
+
+<FAQItem question="Minecraft istemcilerinde HWID nedir?">
+HWID (Donanım Kimliği), bilgisayarınızın donanım bileşenlerinden oluşturulan benzersiz bir tanımlayıcıdır. Opal gibi bir istemciyi etkinleştirdiğinizde, HWID'niz kaydedilir ve yalnızca o cihaz lisansınızı kullanabilir.
+</FAQItem>
+
+<FAQItem question="Opal'ı iki bilgisayarda kullanabilir miyim?">
+Hayır, bir lisans, aynı anda yalnızca bir cihazda kullanılabilir. Cihazlar arasında geçiş yapmak için HWID sıfırlama özelliğini kullanın (30 günlük bekleme süresi).
+</FAQItem>
+
+<FAQItem question="Windows güncellemesi HWID'mi değiştirecek mi?">
+Standart Windows güncellemeleri HWID'yi değiştirmez. Tam bir yeniden kurulum, donanım yapılandırmanıza bağlı olarak değiştirebilir.
+</FAQItem>
+
+<FAQItem question="HWID'm beklenmedik bir şekilde değişirse ne olur?">
+Discord'da destek ekibiyle iletişime geçin. Haklı bir durumunuz varsa, ekip erken bir sıfırlama konusunda yardımcı olabilir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Bir hizmet istemcisi nedir?", description: "HWID lisanslı istemcilerin, örneğin Opal'ın aslında ne olduğu." },
+  { href: "/tr/learn/how-to-install-fabric-mods", label: "Fabric modlarını nasıl kurarım", description: "Opal'ı kurun ve HWID'nizi bağlayın." },
+  { href: "/tr/blog/why-opal-is-the-best-value-minecraft-client", label: "Neden Opal En İyi Fiyat-Kalite Dengesi", description: "$8.99 için ömür boyu lisanslama." },
+]} />
+
+<CTA href="/tr/satin-al">$8.99 için ömür boyu Opal lisansı edinin</CTA>

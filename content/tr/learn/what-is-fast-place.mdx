@@ -1,0 +1,91 @@
+---
+title: Minecraft'ta hızlı yerler neresidir?
+description: Fast Place, blok yerleştirmeleri arasındaki varsayılan gecikmeyi ortadan kaldırır, böylece bir istemci, tıklamayı mümkün kilden daha hızlı blok yerleştirebilir. İşte nasıl çalıştığı ve ne zaman takıldığı.
+excerpt: Vanilla Minecraft, tıkladığınız kadar hızlı blok yerleştirmenize izin vermez. Fast Place, o sınırlamaya dair server'a yalan söyler.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Hızlı Yer aslında ne değiştiriyor?
+    a: Vanilla istemcisinin bir blok yerleştikten sonraki bir sonraki bloğa geçiş arasındaki gecikmeyi ortadan kaldırır veya kısaltır, böylece bloklar, meşru bir istemcinin gönderebileceğinden daha hızlı bir hızda yerleşir.
+  - q: Fast Place aynı Scaffold mı?
+    a: Hayır. İskele, oyuncu açık alandan geçerken otomatik olarak blokları yerleştirir. Hızlı Yerleştirme yalnızca yerleştirmeler arasındaki zamanlamayı değiştirir, bloğun nerede veya ne zaman yerleştirileceğine kendi başına karar vermez.
+  - q: Hızlı Yer avantaj sağlıyor mu gerçekten?
+    a: Evet, yerleştirme hızının önemli olduğu her durumda, örneğin bir çatışma sırasında köprü kurarken veya bir alanı kapatırken. O ölçülebilir avantaj aynı zamanda onu tespit edilebilir kılan şeydir.
+  - q: Fast Place bir oyuncunun ceza almasını sağlayabilir mi?
+    a: Bunu kullanmak, istemci değişikliklerini yasaklayan çoğu sunucunun kurallarını ihlal eder ve zaman farkının kolayca ölçülebilmesi nedeniyle, dikkatsiz kullanıldığında sıkça tespitlere yol açar.
+---
+
+<KeyTakeaways>
+
+- Fast Place, blok yerleştirmeleri arasında Minecraft'ın uyguladığı gecikmeyi ortadan kaldırır, böylece bloklar normal tıklama hızından daha hızlı bir şekilde yere iner.
+- Bu bir hedefleme değişikliği değil, zamanlama değişikliğidir: blokların nereye gideceğine karar vermez, yalnızca yerleştirme paketlerinin ne kadar hızlı gönderilebileceğini belirler.
+- Daha hızlı inşa etme, köprü kurma ve duvar örme veya savaşın ortasında obsidyen yerleştirme gibi savunma amaçlı kullanımlarda faydalıdır.
+- Antichipler, yerleştirme paketleri arasındaki boşluğu, normal bir istemcinin fiziksel olarak üretebileceği sabit bir değerle karşılaştırarak tespit eder
+
+</KeyTakeaways>
+
+Hızlı Yerleştirme, Minecraft'ın normalde bir bloğu yerleştirdikten sonra bir sonraki bloğu yerleştirmesi arasındaki küçük gecikmeyi ortadan kaldıran veya kısaltan bir modülüdür; böylece oyuncu, normal giriş zamanlamasının izin verdiği hızdan daha hızlı blok yerleştirebilir. Özellikle her bloğun yerleştirilmesinin gerçek zaman aldığı inşa etme ve köprü kurma işlemlerinde belirginleşir. Sunucunun paket bazında ölçebildiği bir şeyi değiştirdiği için, zararsız bir kolaylık ayarı olmaktan ziyade, anticheat yazılımları özellikle bu kalıbı izler.
+
+## Nasıl Çalışır
+
+Normal Minecraft, istemcinin girişleri nasıl işlediğini ve yerleştirme paketlerini nasıl gönderdiğini belirleyen küçük bir marjla ardışık blok yerleştirmelerini aralıklarla ayırır. Fiziksel olarak olabildiğince hızlı tıklayın, fark etmez: istemci kendisi, bağlantınız veya fareniz devreye girmeden önce bir yerleştirme isteğini ne sıklıkta işleyeceğine bir sınır koyar.
+
+Hızlı Yerleştirme, istemci tarafındaki bu sınırları ortadan kaldırır. Yerleştirme istekleri, normalde dayatılan aralığı beklemeden ard arda gönderilir; bu da etkili blok yerleştirme hızını, ne kadar iyi reflekslere sahip olursa olsun, meşru, değiştirilmemiş bir istemcinin üretebileceğinden daha yükseğe çıkarır. Bu bir işleme hilesi veya kullanıcı arayüzü kısayolu değildir. Sunucunun aslında aldığı şeyi değiştirir: normalde izin verilen aralıktan daha az zaman aralığıyla ard arda yerleştirme paketleri.
+
+İşte bunun da oyuncu kategorisi modülü olarak gruplandırılmasının ve Juul, Fan, Tenacity ve Rose gibi istemcilerde karşımıza çıkmasının bir nedeni daha.
+
+## Kullanımı Güvenli mi?
+
+Kısa cevap: pek değil, ve mekanizma nedenini açıklıyor. Sunucu tarafı antichipler, bir oyuncunun blok yerleştirme paketleri arasındaki aralığı zamanlar ve bunun, standart bir istemcinin üretebileceği değere kıyasla karşılaştırır. Bu değer sabittir ve iyi bilinir, bu nedenle sürekli olarak bunu aşan bir yerleştirme oranı belirsiz değildir. Hızlı bir fare veya şanslı bir bağlantı olarak geçiştirilemez, tıpkı autoclicker tarzı zamanlama kalıplarının da "sadece çok hızlı tıklıyorum" ile açıklanamaması gibi. Antichipler niyeti tahmin etmiyor. Minecraft'ın stok sürümünde fiziksel olarak mümkün olmayan sayıları kontrol ediyor.
+
+<Callout variant="warning" title="Kural ihlali olarak değerlendirildi, gri alan olarak değil">
+
+Hızlı Yer, oyun akışını etkileyen, ölçülebilir bir iz bırakan bir değişikliktir, sadece bir görünüm değişikliği değildir. Çoğu sunucu, istemci modifikasyonlarını yasakladığında, anticheat sistemleri tarafından işaretlendiğinde bunu basit bir ihlal olarak değerlendirir ve tespit, bir karar verme süreci olmaktan ziyade basit bir zamanlama kontrolüdür
+
+</Callout>
+
+<Callout variant="tip" title="Opal nereye uyum sağlar">
+
+Opal, bu tam adla bir modül göndermiyor. Bir yardımcı istemci olarak, oyuncu ve bina yanındaki modülleri, Fast Place'in takip ettiği aynı fikir üzerine inşa edilmiştir (yapıları daha hızlı kurmak), ancak bir anticheat'e işaret vermesi için bir zaman sömürüsüne dayanmaz
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Hızlı Yer aslında ne değiştiriyor?">
+
+Vanilla istemcisinin bir blok yerleştikten sonraki bir sonraki bloğa yerleştirmedeki gecikmesini ortadan kaldırır veya kısaltır, böylece bloklar, meşru bir istemcinin gönderebileceğinden daha hızlı bir hızda yere düşer
+
+</FAQItem>
+
+<FAQItem question="Fast Place aynı Scaffold mı?">
+
+Hayır. Kazık otomatik olarak oyuncuların açık alandan geçerken blokları yerleştirir. Hızlı Yerleştirme yalnızca yerleştirmeler arasındaki zamanlamayı değiştirir, bloğun nerede veya ne zaman yerleştirileceğine kendi başına karar vermez
+
+</FAQItem>
+
+<FAQItem question="Hızlı Yer avantaj sağlıyor mu gerçekten?">
+
+Evet, yerleştirme hızının önemli olduğu her durumda, örneğin bir çatışma sırasında köprü kurarken veya bir alanı kapatırken. Bu ölçülebilir avantaj aynı zamanda onu tespit edilebilir kılan şeydir
+
+</FAQItem>
+
+<FAQItem question="Fast Place bir oyuncunun ceza almasını sağlayabilir mi?">
+
+Bunu kullanmak, istemci değişikliklerini yasaklayan çoğu sunucunun kurallarını ihlal eder ve zaman farkının ölçülmesi kolay olduğundan, dikkatsiz kullanıldığında sıkça tespitlere yol açar
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-scaffold", label: "Scaffold nedir?", description: "Otomatik köprüleme modülü Fast Place ile en çok karıştırılan." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Bu tür modüllerin daha geniş kapsamlı yardımcı program istemci kategorisine nasıl uyum sağladığı." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Bu kategori, bu tür zamanlama istismarlarını anticheat sisteminin radarından uzak tutmak için oluşturulmuştur." }
+]} />
+
+<CTA href="/tr/purchase">İhmal varmış gibi inşa etme. $8.99 için Opal neler gönderiyor, bak.</CTA>

@@ -1,0 +1,85 @@
+---
+title: Czym jest Keep Sprint w Minecraft? Wyjaśnienie modułu
+description: Utrzymany Sprint to moduł ruchu, który zapobiega przerwaniu sprintu podczas ataku lub ostrego skrętu. Oto jak on działa i czy warto podjąć to ryzyko.
+excerpt: Sprint Chroni Twoją prędkość podczas trafienia lub obrotu, które miały Cię zabić. To nie jest oszustwo związane z prędkością, ale serwer nadal może rozpoznać różnicę.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Co właściwie zmienia funkcja Keep Sprint?
+    a: Zapobiega anulowaniu sprintu podczas akcji, które normalnie by go zakończyły, takich jak atakowanie czy gwałtowne skręcanie, dzięki czemu zachowujesz prędkość sprintu zamiast przechodzić na chodzenie.
+  - q: Czy Keep Sprint to to samo co oszustwo podnoszące prędkość?
+    a: Nie. Nie zwiększa prędkości poruszania się powyżej normalnego bonusu do sprintu. Utrzymuje jedynie aktywny ten istniejący bonus w momentach, w których standardowy Minecraft go normalnie wyłączałby.
+  - q: Dlaczego atakowanie lub gwałtowne skręcanie w ogóle przerywa sprint?
+    a: Vanilla Minecraft traktuje te działania jako niespójne z pędem do przodu, więc resetuje flagę sprintu i redukuje prędkość do chodzenia, dopóki sprint nie zostanie ponownie uruchomiony.
+  - q: Czy Keep Sprint może zostać wykryty przez system anticheat?
+    a: Może to się zdarzyć na serwerach, które sprawdzają, czy zgłoszona prędkość odpowiada ruchowi wynikającemu z twoich działań. Utrzymywanie sprintu przez moment, w którym powinien zostać zresetowany, to przykład niezgodności, której te mechanizmy szukają.
+  - q: Którzy klienci mają moduł Keep Sprint?
+    a: Śledzone jest to, co widać u klientów takich jak Tenacity i Rose. Inni klienci mogą wysyłać tę samą ideę pod inną nazwą, a Opal dostarcza własną wersję pod nazwą Sprint.
+---
+
+<KeyTakeaways>
+
+- Keep Sprint to moduł ruchu, który zapobiega anulowaniu sprintu podczas ataku lub ostrego skrętu.
+- Zwykły Minecraft domyślnie resetuje sprint w przypadku tych czynników, a także cofania się lub uderzenia w przeszkodę.
+- Efekt utrzymuje się nieprzerwanie w trakcie walki, a nie tylko raz.
+- Nigdy nie zwiększa prędkości powyżej normalnego bonusu sprintu, po prostu utrzymuje ten bonus aktywnym dłużej.
+
+</KeyTakeaways>
+
+Keep Sprint to moduł ruchu, który zapobiega anulowaniu sprintu w momentach, w których normalnie zostałby przerwany: podczas atakowania, gwałtownego skręcania, cofania się lub uderzania w przeszkodę. Standardowy Minecraft interpretuje te akcje jako dowód, że przestałeś biec i obniża twoją prędkość do normalnego chodu, dopóki nie uruchomisz sprintu ponownie, naciskając do przodu. Keep Sprint przechwytuje ten reset zanim się wydarzy i utrzymuje flagę sprintu w miejscu, dzięki czemu bonus prędkości utrzymuje się pomimo przerwania. Jest sklasyfikowany jako moduł ruchu, ale prawie nikt nie zauważa go podczas chodzenia prosto. Jego prawdziwym miejscem jest walka, gdzie te przerwania występują stale.
+
+## Jak działa Keep Sprint
+
+Keep Sprint wykonuje sprawdzenie dokładnie w momentach, w których standardowy Minecraft normalnie zresetowałby flagę sprintu. Standardowy klient anuluje sprint w oparciu o krótką listę warunków: atakujesz, skręcasz pod pewnym kątem względem kierunku ruchu, cofasz się lub uderzasz w coś stałego. Każdy z tych warunków to sposób, w jaki standardowy Minecraft decyduje, że twój ruch nie wygląda już jak sprint, więc przestaje nagradzać cię prędkością sprintu.
+
+Moduł stoi przed tą decyzją. Kiedy jeden z tych wyzwalaczy się aktywuje, Keep Sprint go przechwytuje i pozostawia flagę ustawioną, zamiast pozwolić klientowi powrócić do chodzenia. Ponieważ sprint kontroluje rzeczywisty, ciągły bonus prędkości, a nie jednorazową animację, efekt nie jest pojedynczą klatką oszustwa, lecz utrzymuje się tak długo, jak wyzwalacz normalnie spowolniłby Cię. Gracz może obrócić się, aby stanąć naprzeciwko przeciwnika, zadać cios i kontynuować sprint z pełną prędkością, bez zwykłej pauzy potrzebnej do ponownego aktywacji sprintu poprzez ponowne naciśnięcie strzałki do przodu. Jest to śledzone, jak widać u klientów takich jak Tenacity i Rose, a chociaż jest skatalogowane jako ruch, praktyczne zastosowanie jest niemal zawsze walka.
+
+## Czy Keep Sprint jest bezpieczny w użyciu?
+
+Keep Sprint nadpisuje mechanikę, którą vanilla Minecraft egzekwuje celowo. Sprint ma się resetować w momencie, gdy Twój ruch przestaje przypominać sprint, a serwer, który ponownie oblicza Twoją oczekiwaną prędkość na podstawie zgłaszanych działań, może zauważyć, że utrzymujesz sprint w momencie, w którym powinien się zresetować. Jest to ta sama kategoria sprawdzeń, która jest używana przeciwko innym modułom sprintu i prędkości: nie "czy Twoja prędkość jest zbyt wysoka", ale "czy Twoja prędkość odpowiada temu, co Twoje działania sugerują, że powinna być"
+
+To subtelniejs sygnał niż zwykły wzrost prędkości, ponieważ Keep Sprint nigdy nie deklaruje większej prędkości, niż sprint pozwala osiągnąć samodzielnie. Nic w nim nie przypomina autopilota ani spamu bloków. Ale to też nie jest kwestia czysto estetyczna. Zmienia to, czego serwer powinien oczekiwać po Twoim ruchu w konkretnym momencie, a to niezgodność jest dokładnie tym, co ma na celu wykrywanie ruchu. Traktuj to jako funkcję używaną na własną odpowiedzialność na każdym serwerze, który działa z rozszerzeniem poza absolutne minimum.
+
+<Callout variant="tip" title="Opal dostarcza to jako Sprint">
+Katalog Opalu wskazuje to wprost: Sprint, „Zmienia logikę sprintu”. Ta sama klasyfikacja, co wszędzie indziej na tej stronie: używaj na własną odpowiedzialność.
+</Callout>
+
+<Callout variant="warning" title="Informacja, nie instrukcja">
+Ta strona opisuje moduł w sposób ogólny, abyś wiedział, co ten termin oznacza. Nazewnictwo i dokładne zachowanie różnią się w zależności od klienta, a zatrzymanie sprintu w momencie, w którym powinno nastąpić zresetowanie, narusza zasady na serwerach z rzeczywistymi kontrolami ruchu.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Co właściwie zmienia Keep Sprint?">
+Zapobiega przerwaniu sprintu podczas akcji, które normalnie by go zakończyły, takich jak atakowanie czy gwałtowne skręcanie – dzięki temu zachowujesz prędkość sprintu, zamiast zwalniać do kroku.
+</FAQItem>
+
+<FAQItem question="Czy Keep Sprint to to samo co skrypt podnoszący prędkość?">
+Nie. Nigdy nie zwiększa prędkości poruszania się powyżej normalnego bonusu sprintu. Utrzymuje jedynie aktywny ten istniejący bonus w momentach, w których standardowy Minecraft go wyłączałby.
+</FAQItem>
+
+<FAQItem question="Dlaczego atakowanie lub gwałtowne skręcanie przerywa sprint?">
+W standardowej wersji Minecrafta te akcje są traktowane jako sprzeczne z biegiem do przodu, więc resetują flagę sprintu i zmuszają do chodzenia do momentu ponownego uruchomienia sprintu.
+</FAQItem>
+
+<FAQItem question="Czy Keep Sprint może zostać wykryty przez antywirusa?">
+Tak, może to się zdarzyć na serwerach, które sprawdzają, czy zgłaszana prędkość odpowiada ruchowi wynikającemu z Twoich akcji. Utrzymywanie sprintu w momencie, w którym powinien się zresetować, jest dokładnie takim rozbieżnym wynikiem, jakiego szukają te mechanizmy.
+</FAQItem>
+
+<FAQItem question="Jakie firmy mają moduł Keep Sprint?">
+Jest to śledzone, jak widać na przykładach firm takich jak Tenacity i Rose. Inne firmy mogą udostępniać podobną funkcjonalność pod inną nazwą, a Opal oferuje własną wersję o nazwie Sprint.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-velocity-anti-knockback", label: "Czym jest Prędkość (ochrona przed odrzutem)?", description: "Kolejny moduł, który nadpisuje spodziewaną przez serwer reakcję fizyczną." },
+  { href: "/pl/learn/what-is-scaffold", label: "Co to jest Scaffold?", description: "Moduł ruchu, zaprojektowany dla zupełnie innego problemu." },
+  { href: "/pl/learn/what-is-a-ghost-client", label: "Czym jest klient fikcyjny?", description: "Gdzie takie subtelne, ledwo zauważalne moduły, jak ten, wpisują się w projekt klienta." },
+]} />
+
+<CTA href="/pl/purchase">Nigdy nie przerywaj biegu w trakcie walki. Opal Ships Sprint jako część zestawu ruchów $8.99.</CTA>

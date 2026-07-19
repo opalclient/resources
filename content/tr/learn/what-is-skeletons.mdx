@@ -1,0 +1,79 @@
+---
+title: Minecraft'ta İskeletler Nelerdir? Modül Açıklaması
+description: "Skeletons, Minecraft için bir moddur ve her oyuncuyu ve yaratığı yalın bir modele dönüştürür: çarpışma kutularını veya tespit riskini etkilemeyen sadece bir görünüm değişikliği."
+excerpt: İskeletler, her oyuncuyu ve yaratığı tamamen sizin ekranınızda yürüyen kemik torbasına dönüştürür. Vuruş kutuları, menzil ve sunucunun sizi nasıl gördüğü bir inç bile kıpırdamaz.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: İskeletler varlıkların davranışlarını değiştirir mi?
+    a: Hayır, sadece kendi ekranınızda görüntülenen modeli değiştirir. Hareket, çarpışma kutuları ve savaş davranışları hepsi sunucudan gelir ve değişmez.
+  - q: Kaynak paketiyle aynı mı?
+    a: Tam olarak değil. Bir kaynak paketi, kullanan herkes için dokuları genel olarak değiştirir. İskeletler, belirli varlık modellerini değiştiren bir istemci modülüdür ve istemciyi çalıştıran oyuncu tarafından etkinleştirilir, paket yükleme gerektirmez.
+  - q: İskeletler birini engelledirebilir mi?
+    a: Modülün kendisi herhangi bir oyun avantajı sağlamıyor ve tek başına bir antichiati tetiklemesi pek olası değil. Yasaklama olasılığı daha çok, değiştirilmiş istemcilerle ilgili sunucunun genel politikalarından kaynaklanır, bu özellikten değil.
+  - q: Hangi müşterilerde İskeletler var?
+    a: Fan adlı, üçüncü taraf bir yardımcı istemci uygulamasında görülebilir.
+---
+
+<KeyTakeaways>
+
+- Skeletons, oyuncuları ve yaratıkları çıplak iskeletlere dönüştüren, yalnızca yerel olarak görüntülenen bir kozmetik modülüdür.
+- Ekranda çizilen modeli değiştirir, ancak çarpışma kutularını, hareketini veya sunucunun takip ettiği savaş verilerini değiştirmez.
+- Ekstra ağ trafiği oluşmaz; geçersiz kılma, bir kaynak paketi gibi çalışır ancak istemci içinde yer alır.
+- Ölçülebilir bir değişiklik olmadığından tespit riski düşüktür, ancak değiştirilmiş istemci Fan'ında görülmüştür.
+
+</KeyTakeaways>
+
+Skeletons, Minecraft için bir modül olup, gördüğünüz her oyuncu ve yaratığın basit bir iskelet olarak yeniden çizilmesini sağlar; sadece kemiklere indirgenmiş haldedir. Bu, tamamen görsel bir geçersiz kılmadır: oyun, her zaman olduğu gibi aynı konum, duruş ve çarpışma kutusu verilerini istemcinize göndermeye devam eder, bu modül sadece bu verilerin üzerine hangi modelin boyandığını değiştirir. Bir varlığın nasıl hareket ettiği, savaştığı veya sunucu tarafından nasıl takip edildiğiyle ilgili hiçbir şey değişmez. Yanınızda taşıdığınız özel bir yeniden düzenlemedir; aslında orada kimin durduğuna bakılmaksızın her maçın aynı görünmesini isteyen birinin özelliği olması nedeniyle var olan bir özelliktir.
+
+## İskelet yeniden düzenlemesi nasıl çalışır
+
+Minecraft'ın render motorunun zaten bir varlığı çizmek için ihtiyacı olan her şey mevcuttur: konum, dönüş, duruş, animasyon durumu; bunların hepsi oyun çalışamazsa istemci üzerinden gönderilir. Skeletons, bu verilerin hiçbirine dokunmaz. Çizim çağrısına müdahale eder ve normalde varlık tarafından gösterilen şeyin yerine bir iskelet modeli ve doku yerleştirir; bir kaynak paketinin uyguladığı gibi aynı türde bir geçersiz kılma, ancak bu, ayrı bir paket dosyasını yükleyip değiştirdiğiniz bir dosya yerine istemci içinde yaşar.
+
+Alttaki varlık verisi hiçbir zaman değişmediği için, mod ek yükte ağ trafiği oluşturmaz ve sunucu tarafındaki hiçbir durumu etkilemez. Konum, çarpışma kutusu ve animasyon hala sunucu tarafından yerleştirildikleri yerden alınır. Farklı olan tek şey, her varlık çizildiğinde yerel olarak üzerine çizilen şeydir.
+
+## Kullanımı Güvenli mi?
+
+Skeletons tek başına çok az rekabetçi risk taşır. Duvarların içinden kimseyi göstermez, taslaklar veya işaretçiler eklemez ve anticheat sistemleri tarafından ölçülen herhangi bir şekilde nişan alma, hareket veya savaş matematiğini etkilemez. Varlığın gerçek konumu ve çarpışma kutusu, sunucu tarafından gönderilenle aynıdır; yalnızca kendi ekranınızdaki resim farklıdır, bu nedenle sunucu tarafı bir kontrolün işaretleyebileceği hiçbir ölçülebilir şey yoktur.
+
+İçeri giren şey, mod değil, birlikte gönderilen istemcidir. Skeletons, Fan adlı üçüncü taraf bir yardımcı istemcide görünür ve birçok sunucu, hangi modüllerin açık olduğuna bakılmaksızın, değiştirilmiş herhangi bir istemciyi doğrudan yasaklamaktadır. Bu tür tamamen kozmetik bir özellik tek başına bir risk oluşturmaz, ancak aynı zamanda savaş veya hareket modüllerini de içeren bir istemcinin parçası olarak çalıştırılması, istemci olarak tümüyle bir yasağa yol açabilir.
+
+<Callout variant="warning" title="Yasak riski modül değil, istemci.">
+Skeletons tek başına hiçbir şey yakalamayan sunucu tarafı bir anticheat sunmaz. Ancak bağımsız olarak çalışmaz, değiştirilmiş bir istemci içinde çalışır ve birçok sunucu, hangi modüller etkin olursa olsun, değiştirilmiş istemcileri derhal yasaklar. Bu tek kozmetik ayarı değil, istemcinin genel itibarını değerlendirin.
+</Callout>
+
+<Callout variant="tip" title="Sayılara dokunmadan kozmetik">
+Opal, Skeletons adıyla özel bir modül göndermez, ancak görsel kategorisi aynı prensiple çalışır: gördüklerinizi değiştirin, sunucunun ölçtüklerini asla değiştirmeyin. Bu, bir kozmetik değişim ile gerçek bir oyun modülü arasındaki çizgidir ve Skeletons da tam olarak bu çizgi üzerindedir.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="İskeletler varlıkların davranışlarını değiştirir mi?">
+Hayır. Sadece kendi ekranınızda oluşturulan modeli değiştirir. Hareket, çarpışma kutuları ve savaş davranışları sunucudan gelir ve hiç etkilenmez.
+</FAQItem>
+
+<FAQItem question="Skeletons bir kaynak paketiyle aynı mı?">
+Tam olarak değil. Bir kaynak paketi, onu kullanan herkes için dokuları genel olarak değiştirir. Skeletons ise, istemci tarafında çalışan oyuncu tarafından etkinleştirilen, belirli varlık modellerini değiştiren bir istemci modülüdür; herhangi bir paket kurulumu gerektirmez.
+</FAQItem>
+
+<FAQItem question="İskeletler birini yasaklayabilir mi?">
+Modülün kendisi herhangi bir oyun avantajı sağlamıyor ve tek başına bir antichi̇at sistemi tarafından işaretlenmesi pek i̇htimal değil. Yasaklamalar daha çok, değiştirilmiş istemcilerle i̇lgili sunucuların genel politikalarından kaynaklanır, bu özellikten değil.
+</FAQItem>
+
+<FAQItem question="Skeletons hangi istemcilerde bulunur?">
+Fan adlı üçüncü taraf bir yardımcı istemcide görülebilir.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Skeletons ve diğer tüm modüllerin ait olduğu daha geniş kategori." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Anlaşılmaya değer başka bir istemci tarafı ayrımı." },
+  { href: "/tr/learn/what-is-killaura", label: "Killaura nedir?", description: "Spektrumün tam tersi uç: bir sunucunun kesinlikle ölçebildiği bir modül." },
+]} />
+
+<CTA href="/tr/purchase">Opal'ın görsel sekmesi de aynı fikir üzerine kuruldu: oyunun görünümünü değiştirin, asla nasıl oynandığını.</CTA>

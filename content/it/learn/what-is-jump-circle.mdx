@@ -1,0 +1,83 @@
+---
+title: Cos'è il Jump Circle in Minecraft? Spiegazione dell'effetto ad anello
+description: "Jump Circle è un modulo client cosmetico per Minecraft che disegna un anello sotto i tuoi piedi ad ogni salto: puramente visivo, senza alcun effetto sul gameplay o rilevamento."
+excerpt: Un anello appare sotto i tuoi piedi ogni volta che salti. Sta benissimo in video e non significa assolutamente nulla per un anticheat lato server.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Jump Circle modifica l'altezza o la frequenza con cui posso saltare?
+    a: No. Aggiunge soltanto un anello visivo nel punto in cui atterri quando salti. L'altezza del salto, il tempismo e il tempo di ricarica rimangono esattamente tali come li calcola Minecraft nella versione originale.
+  - q: Possono gli altri giocatori vedere l'effetto del mio Cerchio di Salto?
+    a: No. L'anello si visualizza solo localmente, sul client che esegue il modulo. Tutti gli altri ti vedono saltare normalmente, senza l'anello, a meno che non stiano eseguendo lo stesso o un modulo simile.
+  - q: Viene rilevato Jump Circle da anticheat?
+    a: No. Non invia nulla al server e non modifica alcun valore che il server tiene traccia, quindi non c'è nulla che un controllo lato server possa mai rilevare.
+  - q: Jump Circle è la stessa cosa di una scia di particelle?
+    a: Idea simile, trigger diverso. Entrambe sono estetiche e legate al movimento, ma una scia di particelle si propaga continuamente mentre ti muovi, e Jump Circle si attiva specificamente durante il salto.
+---
+
+<KeyTakeaways>
+- Jump Circle è un modulo cosmetico che disegna un anello a terra sotto un giocatore ad ogni salto.
+- Modifica solo il rendering locale, quindi l'altezza del salto, i tempi e la fisica rimangono completamente vanilla.
+- Il server non vede l'effetto, il che significa zero rischio di rilevamento.
+- Gli altri giocatori non lo vedono a meno che non eseguano lo stesso modulo.
+</KeyTakeaways>
+
+Jump Circle è un modulo client cosmetico per Minecraft che disegna un anello o un cerchio a terra sotto il giocatore ogni volta che salta. Modifica solo ciò che appare sullo schermo locale: nessun effetto su movimento, rilevamento dei colpi o qualsiasi cosa elabori il server. Consideralo nella stessa categoria di una scia di particelle o di un mantello personalizzato, un tocco visivo, non una funzionalità di gioco.
+
+## Come funziona
+
+Jump Circle ascolta il salto del giocatore e, nel momento in cui viene attivato, rende un anello o un cerchio ai piedi del giocatore. L'effetto viene disegnato solo sul client, sopra la geometria del mondo normale, e svanisce poco dopo. Nulla del salto stesso cambia: altezza, tempismo e fisica rimangono esattamente come li calcola la versione vanilla, e il server vede lo stesso pacchetto di salto che vedrebbe con il modulo disattivato.
+
+Poiché l'anello è un'aggiunta di rendering piuttosto che una modifica a qualsiasi valore su cui la logica di gioco effettivamente dipende, non interagisce con le collisioni, le caselle di collisione o qualsiasi cosa stia calcolando il client di un altro giocatore. Esiste per essere visto, non per essere elaborato.
+
+L'attrattiva è semplice: un cerchio su ogni salto dona un tocco di stile a un movimento altrimenti standard, per lo stesso motivo per cui si sceglie un set di animazioni personalizzate o una scia di particelle. È il tipo di dettaglio che rende bene nei video, dove un segnale visivo su ogni salto aggiunge un po' di rifinitura che la versione base non ha. I clienti che lo includono, come Tenacity, lo raggruppano con altre opzioni di visualizzazione estetiche piuttosto che con moduli di movimento o di combattimento.
+
+## Cerchio di salto rispetto alle scie di particelle
+
+Entrambi sono decorativi, entrambi sono legati al movimento e entrambi vengono spesso inseriti nella stessa scheda delle impostazioni visive. La differenza sta nel momento in cui si attivano.
+
+| | Cerchio di salto | Scia di particelle |
+|---|---|---|
+| Attivazione | Si attiva all'azione di salto | Funziona continuamente durante il movimento |
+| Durata | Breve, svanisce dopo l'atterraggio | Persistente, segue ogni passo |
+| Categoria | Visivo / estetico | Visivo / estetico |
+| Visibile agli altri | No, solo rendering locale | No, solo rendering locale |
+| Influenza sul gameplay | Nessuna | Nessuna |
+
+Nessuno dei due influisce su nulla tracciato da un server. La scelta tra i due è puramente estetica: stile costante o un segno di punteggiatura su ogni salto.
+
+<Callout variant="tip" title="Dove Opal traccia il confine">
+Opal non spedisce un modulo Jump Circle con quel nome. Ma la divisione che rappresenta, gli effetti decorativi mantenuti nella propria categoria, separati da qualsiasi cosa influenzi movimento o combattimento, è esattamente come Opal organizza la propria categoria visiva: personalizza l'aspetto come preferisci senza modificare silenziosamente il modo in cui giochi.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Jump Circle modifica l'altezza o la frequenza con cui posso saltare?">
+No. Aggiunge solamente un anello visivo nel punto in cui atterrano i tuoi piedi quando salti. L'altezza del salto, il tempismo e il cooldown rimangono esattamente tali come li calcola Minecraft nella versione originale.
+</FAQItem>
+
+<FAQItem question="Gli altri giocatori possono vedere l'effetto del mio Jump Circle?">
+No. L'anello viene renderizzato localmente, solo sul client che esegue il modulo. Tutti gli altri vedono il tuo salto normalmente, senza l'anello, a meno che non stiano eseguendo lo stesso o un modulo simile.
+</FAQItem>
+
+<FAQItem question="Jump Circle viene segnalato dagli anticheat?">
+No. Non invia nulla al server e non altera alcun valore che il server tiene traccia, quindi non c'è nulla che un controllo lato server possa rilevare.
+</FAQItem>
+
+<FAQItem question="Jump Circle è la stessa cosa di una scia di particelle?">
+Idea simile, trigger diverso. Entrambe sono puramente estetiche e legate al movimento, ma una scia di particelle è continua mentre ti muovi, e Jump Circle si attiva specificamente durante il salto.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "L'ampia categoria a cui appartengono Jump Circle e centinaia di altri moduli." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Come il comportamento basato esclusivamente sul client può variare dalla semplice decorazione all'elusione del rilevamento." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "L'estremità opposta dello spettro: un modulo che modifica effettivamente il modo in cui il gioco si svolge." },
+]} />
+
+<CTA href="/it/purchase">La cosmesi è la parte più semplice. Scopri cosa spedisce Opal ovunque altro.</CTA>

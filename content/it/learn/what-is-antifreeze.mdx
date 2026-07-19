@@ -1,0 +1,68 @@
+---
+title: Cos'è l'Antigelo in Minecraft?
+description: AntiFreeze impedisce a un client di Minecraft di bloccarsi durante carichi di chunk intensi o picchi di lag del server, senza alterare i pacchetti, la registrazione dei colpi o il movimento.
+excerpt: Congelarsi nel bel mezzo di una partita costa più sconfitte che il lag. AntiFreeze mantiene il client reattivo quando il mondo intorno non lo è.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Dà un vantaggio di gioco l'Antigelo?
+    a: No, non nel modo in cui lo fa un modulo di combattimento o di movimento. Impedisce al client di avere scatti durante il caricamento dei chunk o i picchi di latenza, il che è una correzione di stabilità, non qualcosa che modifica la registrazione dei colpi, il movimento o ciò che riceve il server.
+  - q: Può AntiFreeze far squalificare un giocatore?
+    a: Nessun meccanismo noto lo segnalerebbe. Funziona interamente sul rendering locale e sulla gestione degli input del client, e i server non hanno modo di osservare quanto fluidamente un client stia girando, quindi non c'è nulla che un anticheat possa rilevare.
+  - q: Cosa causa il blocco di Minecraft durante il caricamento dei chunk?
+    a: Caricare un grosso blocco di dati contemporaneamente, oppure un ritardo improvviso nei dati provenienti dal server durante un picco di latenza, può bloccare il thread principale del client per un tempo sufficiente a far smettere di rispondere la finestra fino al completamento del processo.
+  - q: AntiFreeze è la stessa cosa di una mod per le prestazioni come Sodium?
+    a: "Non esattamente. Le modifiche generali alle prestazioni aumentano il frame rate e riducono i tempi di caricamento in generale. AntiFreeze è più specifico: mira ai momenti in cui un client si bloccherebbe altrimenti, come i caricamenti di chunk e i picchi di lag."
+---
+
+<KeyTakeaways>
+- AntiFreeze è un modulo lato client che impedisce ai client di Minecraft di bloccarsi durante carichi eccessivi di chunk o picchi di lag.
+- Interviene solo sulla resa e sull'input locali, mai sui pacchetti, sulla registrazione dei colpi o sul movimento.
+- I server non possono osservare la fluidità lato client, quindi non c'è segnale per un anticheat da intercettare.
+- È una correzione di stabilità, più vicina a un miglioramento della qualità della vita che a combattimenti o movimento.
+</KeyTakeaways>
+
+AntiFreeze è un modulo client di Minecraft progettato per impedire al gioco di bloccarsi durante i momenti che normalmente sovraccaricherebbero il thread di rendering: un grande flusso di nuovi chunk, o un picco di lag che lascia il client in attesa dei dati del server. Invece di far diventare la finestra non reattiva per un secondo (o cinque), il modulo mantiene attivo il rendering e l'input durante il blocco. Non è uno strumento di combattimento né uno strumento di movimento. È ciò che mantiene il gioco giocabile mentre un'altra parte del processo sta avendo problemi.
+
+## Come funziona
+
+AntiFreeze monitora i momenti specifici in cui il client tende a bloccarsi: un grande numero di chunk caricati contemporaneamente, o il server che rimane indietro e ritarda i dati che il client sta aspettando. Normalmente, questo tipo di carico blocca il thread principale del gioco, e un thread principale bloccato significa una finestra congelata, nessun rendering, nessun input, fino a quando il lavoro non è completato.
+
+Invece di permettere che questo blocco si verifichi, AntiFreeze mantiene attivo il ciclo di rendering e input del client durante il blocco. Il blocco che risolve è un sintomo locale di un'elaborazione pesante, non una meccanica di rete o di gioco, quindi risolverlo non richiede di toccare nulla che il server possa vedere. Lo stato del mondo, la registrazione dei colpi e i pacchetti che lasciano il client rimangono inalterati. Si tratta puramente di mantenere la finestra reattiva mentre il motore si rimette in pari.
+
+Questo spiega anche perché i giocatori tendono a lasciarlo attivo in modo permanente invece di attivarlo solo per situazioni specifiche. Un salto mancato a causa di un rallentamento del gioco di un secondo, una riga persa nella chat, un inceppamento nel momento sbagliato durante un combattimento: nessuna di queste cose è qualcosa su cui si può improvvisare. È più simile a una patch di stabilità che a una funzionalità che si cerca di utilizzare intenzionalmente.
+
+## È sicuro da usare
+
+AntiFreeze modifica solo il modo in cui il client locale gestisce il rendering e l'input sotto carico. Non invia pacchetti diversi, non interferisce con la registrazione dei colpi e non altera nulla che il server o un altro giocatore possano osservare. Un server non ha un canale per segnalare al proprio sistema "il mio client è fluido", il che significa che non c'è alcun segnale per un anticheat da controllare. Funzionalmente, si colloca nella stessa categoria di altri strumenti di ottimizzazione delle prestazioni e di miglioramento della qualità della vita lato client, lontano dai moduli di combattimento o di movimento che modificano effettivamente ciò che il server riceve.
+
+<Callout variant="tip" title="Come si colloca rispetto a Opal">
+Opal non contrassegna questo comportamento come un'opzione indipendente nell'elenco dei moduli, ed è importante essere precisi su questo piuttosto che affermare il contrario. Ma un cliente pagante che vive o muore in base alle sensazioni significa che il lavoro del motore sottostante, rimanendo reattivo attraverso carichi di dati e picchi di latenza, è esattamente il tipo di lavoro preparatorio che una build seria dovrebbe svolgere correttamente senza che tu te ne accorga.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+<FAQItem question="AntiFreeze offre un vantaggio nel gameplay?">
+No, non nel modo in cui lo farebbe un modulo di combattimento o di movimento. Impedisce al client di rallentare durante il caricamento dei chunk o i picchi di lag, il che è una correzione di stabilità, non qualcosa che modifica la registrazione dei colpi, il movimento o ciò che riceve il server.
+</FAQItem>
+<FAQItem question="AntiFreeze può far bannare un giocatore?">
+Non esiste un meccanismo noto che possa segnalarlo. Funziona interamente sul rendering e sulla gestione degli input del client, e i server non hanno modo di osservare quanto fluidamente un client stia funzionando, quindi non c'è nulla che un anticheat possa rilevare.
+</FAQItem>
+<FAQItem question="Cosa causa il blocco di Minecraft durante il caricamento dei chunk?">
+Il caricamento di un gran numero di chunk contemporaneamente, oppure un improvviso ritardo nei dati provenienti dal server durante un picco di lag, può bloccare il thread principale del client per un tempo sufficiente a far sì che la finestra smetta di rispondere finché il lavoro non è completato.
+</FAQItem>
+<FAQItem question="AntiFreeze è lo stesso di una mod per le prestazioni come Sodium?">
+Non esattamente. Le mod per le prestazioni generali aumentano il frame rate e riducono i tempi di caricamento in generale. AntiFreeze è più specifico: mira ai momenti in cui il client si bloccherebbe altrimenti, come il caricamento dei chunk e i picchi di lag.
+</FAQItem>
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria AntiFreeze, e ciò che distingue i cheat di utilità da quelli di combattimento." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "Come i clienti focalizzati sulla furtività si distinguono dai moduli di stabilità e di qualità della vita come questo." },
+  { href: "/it/learn/what-is-killaura", label: "Cos'è Killaura?", description: "Il tipo di modulo a cui AntiFreeze viene paragonato, e perché non lo è." }
+]} />
+
+<CTA href="/it/purchase">La scorrevolezza non è un'impostazione che devi cercare. Scopri Opal per $8.99.</CTA>

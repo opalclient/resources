@@ -1,0 +1,85 @@
+---
+title: Cosa sono i Criticals in Minecraft? Spiegazione del Modulo
+description: Criticals è un modulo di combattimento che forza ogni colpo a registrare come un colpo critico, senza richiedere tempismo nei salti. Ecco come funziona e perché è facile da intercettare.
+excerpt: Ogni colpo è come un attacco a salto perfettamente sincronizzato, senza il salto. Ecco cosa cambia effettivamente il modulo Criticals e l'esplosione di particelle che lo rivela.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Cosa richiede normalmente un colpo critico nella versione originale di Minecraft?
+    a: L'attaccante deve essere in caduta nel momento in cui il colpo lo colpisce, il che di solito significa saltare appena prima che il colpo vada a segno. Stare fermi o colpire mentre ci si muove in piano non produce mai un colpo critico in Minecraft non modificato.
+  - q: I colpi critici modificano la quantità di danni inflitti?
+    a: Sì. Forza il bonus di danno critico su ogni attacco, quindi i colpi infliggono più danni di quanto farebbero se il gioco verificasse effettivamente lo stato di movimento del giocatore.
+  - q: Sono i Criticals la stessa cosa di un modulo di portata o di mira?
+    a: No. La portata aumenta la distanza d'attacco e i moduli di mira gestiscono l'individuazione del bersaglio; Critici cambia solo se un colpo andato a segno conta come critico per i danni. Sono progettati per sovrapporsi, non per sostituirsi a vicenda.
+  - q: Può un server capire se Criticals è in uso?
+    a: Sì. Un server può confrontare la posizione e la velocità tracciate del giocatore con i requisiti di un colpo critico reale. Un giocatore che non sta cadendo ma continua a infliggere colpi critici è un modello che gli anticheat monitorano specificamente.
+---
+
+<KeyTakeaways>
+
+- Criticals è un modulo di combattimento che forza ogni colpo a risultare un colpo critico, un bonus di danno che in Minecraft vanilla si ottiene solo cadendo.
+- Salta il requisito del tempismo del salto, quindi i colpi risultano critici anche da fermo.
+- È una forma di imbroglio sui danni, riscontrabile in versioni client come Fan e Tenacity.
+- I server lo rilevano verificando se il movimento dell'attaccante supporta un colpo critico.
+
+</KeyTakeaways>
+
+Criticals è un modulo di combattimento che forza ogni attacco di un giocatore a essere registrato come colpo critico, il danno extra che Minecraft nella versione originale riserva normalmente agli attacchi che colpiscono mentre l'attaccante sta cadendo. Realizzare un vero colpo critico richiede un salto temporizzato proprio prima del colpo. Criticals elimina completamente quella tempistica: ogni colpo conta come critico, che il giocatore sia in aria, cammini in piano o sia fermo. È una piccola modifica meccanica con un segnale visivo evidente, e appartiene alla parte più rozza e datata dello spettro dei cheat, piuttosto che a qualcosa progettato per resistere a un esame approfondito.
+
+## Come funziona Criticals
+
+Minecraft nella versione originale verifica una sola cosa prima di assegnare un colpo critico: l'attaccante si sta muovendo verso il basso nel momento in cui l'attacco colpisce. In pratica, questo significa saltare e colpire mentre si scende, una finestra ristretta che la maggior parte dei giocatori impara a tempificare per sensazione. Entrare in questa finestra e il gioco aggiunge danni bonus insieme all'esplosione di particelle a forma di stella e al suono del colpo critico. Se la si manca, il colpo è ordinario.
+
+Criticals rimuove il controllo. Invece di leggere la velocità verticale effettiva del giocatore, contrassegna ogni attacco in uscita come critico prima che il client lo invii, in modo che il bonus di danno si applichi indipendentemente dall'aspetto reale del movimento del giocatore. È stato documentato in diverse versioni del client, tra cui Fan e Tenacity, entrambe provenienti da un'epoca e uno stile di client in cui mascherare una discrepanza così evidente non era mai stato l'obiettivo.
+
+## Perché le persone lo usano
+
+L'attrattiva è il danno senza compromessi. Un vero critico richiede di lanciarsi in una mischia, il che ti mette brevemente in aria con opzioni di movimento limitate e una hitbox più facile da leggere. Criticals concede lo stesso bonus senza mai staccarsi da terra, quindi un giocatore che combatte con i piedi ben saldi fa tanto danno per colpo quanto qualcuno che ha centrato perfettamente i tempi di ogni singolo colpo. Trasforma un'abilità in una costante.
+
+## Perché viene rilevato
+
+Le modifiche critiche cambiano l'esito di un combattimento, non l'aspetto del gioco, quindi comportano un reale rischio su qualsiasi server che esegue controlli lato server. La firma è duplice: c'è quella visiva, con i colpi critici che generano un'esplosione di particelle e un suono distintivo, e un client che ne segnala uno quasi ad ogni colpo appare sospetto di per sé. Poi c'è quella che il server verifica effettivamente: può tracciare la posizione e la velocità dell'attaccante nel momento in cui il colpo viene registrato, e un giocatore che si trova a terra, non in caduta, che sferra un colpo critico come segnalato dal client contraddice il funzionamento standard del combattimento. È questa contraddizione che i sistemi anticheat lato server segnalano.
+
+<Callout variant="tip" title="Dove Opal traccia il limite">
+Opal fornisce i propri moduli lato combattimento, la stessa categoria generale in cui si trovano i Criticals, ma un interruttore forzato per i critici non fa parte di essi. Una discrepanza così facile da individuare per un server (danni critici che si verificano mentre la tua velocità tracciata indica che non sei mai partito da terra) è esattamente il tipo di vantaggio che porterebbe un client a essere inserito in una lista nera dai server allowlist entro una settimana.
+</Callout>
+
+## Critici vs Moduli di portata e mira
+
+I critici non influenzano la distanza o il targeting, quindi non sostituiscono la [portata](/it/learn/what-is-reach) o un [aimbot](/it/learn/what-is-an-aimbot). La portata determina se un colpo può essere registrato da una distanza maggiore rispetto a quella base. Un aimbot determina se il mirino si posiziona affatto sul bersaglio. I critici decidono solo cosa succede al danno una volta che un colpo è già andato a segno, stabilendo se conta come colpo critico. I tre sono comunemente impilati piuttosto che utilizzati come alternative, poiché ognuno risolve una parte diversa di un colpo.
+
+<Callout variant="warning" title="Riferimento, non una guida">
+Questa pagina descrive il modulo in termini generali, per farvi sapere cosa significa il termine. La denominazione e il comportamento esatto variano a seconda del client, e forzare i colpi critici al di fuori delle regole di vanilla viola i termini di servizio su praticamente ogni server.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Cosa richiede normalmente un colpo critico in Minecraft vanilla?">
+L'attaccante deve essere in caduta al momento dell'impatto, il che di solito significa saltare appena prima che il colpo colpisca. Stare fermi o attaccare mentre ci si muove in orizzontale non produce un colpo critico in Minecraft non modificato.
+</FAQItem>
+
+<FAQItem question="Criticals modifica la quantità di danno di un colpo?">
+Sì. Forza il bonus di danno critico su ogni colpo, quindi gli attacchi infliggono più danni di quanto farebbero se si tenesse conto dello stato di movimento effettivo del giocatore.
+</FAQItem>
+
+<FAQItem question="Criticals è la stessa cosa di un modulo di portata o di mira?">
+No. La portata estende la distanza d'attacco e i moduli di mira gestiscono l'individuazione del bersaglio. Criticals modifica solo se un colpo andato a segno conta come critico ai fini del danno, e i tre sono solitamente impilati piuttosto che sostituiti l'uno all'altro.
+</FAQItem>
+
+<FAQItem question="Un server può rilevare l'uso di Criticals?">
+Sì. Un server può confrontare se la posizione e la velocità tracciate del giocatore supportano effettivamente un colpo critico nel momento in cui viene segnalato un impatto. Un giocatore che non sta cadendo ma continua a infliggere colpi critici è un modello che gli anticheat cercano direttamente.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-reach", label: "Cos'è Reach?", description: "Il modulo Distanze è spesso impilato con Criticals." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Il modulo di targeting che gestisce una parte diversa del movimento." },
+  { href: "/it/learn/what-is-killaura", label: "Cos'è KillAura?", description: "L'auto-attacco Critico compare insieme nelle versioni precedenti." },
+]} />
+
+<CTA href="/it/purchase">Combatti lealmente e colpisci con precisione millimetrica. Scopri l'arsenale di Opal per $8.99.</CTA>

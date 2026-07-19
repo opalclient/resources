@@ -1,0 +1,78 @@
+---
+title: Cos'è la luminosità in Minecraft? Spiegazione del modulo visivo
+description: La luminosità aumenta il limite di rendering, quindi caverne, il Nether e il cielo notturno vengono renderizzati completamente illuminati, senza bisogno di torce. Come funziona questo modulo e se potrebbe farti bannare.
+excerpt: La vaniglia mantiene oscure le caverne, il Nether e la notte di proposito. La luminosità semplicemente disattiva questa regola, niente torce, niente pozioni, e nessun server lo scoprirà mai.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: La luminosità offre un reale vantaggio nel gameplay?
+    a: Sì. Elimina l'oscurità dalle caverne, dal Nether e dalla notte, permettendoti di individuare mob, minerali e altri giocatori in luoghi che vanilla era progettata per nasconderli. Non influisce su movimento o combattimento, solo su ciò che puoi vedere.
+  - q: Possono gli anticheat rilevare la luminosità?
+    a: Non tramite controlli lato server standard. La luminosità modifica solo il modo in cui il tuo client disegna la luce sullo schermo. Nulla di ciò influisce sulla rete, quindi non ci sono pacchetti o schemi temporali da segnalare al server.
+  - q: È la luminosità la stessa cosa di un hack della gamma delle texture pack?
+    a: Stessa idea, diversa implementazione. Un texture pack gamma-hack sovrascrive lo stesso limite di rendering, ma la luminosità è un'opzione integrata nel client, solitamente con un intervallo più ampio e senza necessità di installazioni aggiuntive.
+  - q: L'utilizzo di Brightness mi farà bannare?
+    a: La rilevazione automatica raramente lo coglie, dato che non interagisce mai con il server. Alcuni server elencano ancora le modifiche all'illuminazione come non conformi al regolamento, quindi un moderatore che guarda uno stream o una registrazione può ancora intervenire.
+---
+
+<KeyTakeaways>
+
+- La luminosità è un modulo visivo che alza il limite dello slider gamma predefinito, facendo sì che grotte, il Nether e la notte vengano renderizzati come se fossero completamente illuminati.
+- Modifica solo ciò che il client disegna sullo schermo, non i valori di luce che il server tiene effettivamente traccia.
+- Ciò significa nessun traffico di rete per gli anticheat da segnalare, anche se alcuni server lo vietano comunque tramite regole.
+
+</KeyTakeaways>
+
+La luminosità è un modulo visivo che spinge l'illuminazione resa da un client di Minecraft oltre il limite massimo consentito dallo slider gamma vanilla. Trascina lo slider gamma nel gioco fino in cima e caverne, il Nether e i cieli notturni diventano comunque scuri oltre un certo punto: questo è un limite deliberato integrato nel renderer vanilla. Un modulo Brightness lo elimina. Attiva l'interruttore e il mondo viene renderizzato come se ogni blocco fosse illuminato da una torcia, indipendentemente dal livello di luce effettivo. Di solito è un singolo slider nascosto nelle impostazioni visive del client e non modifica nulla del mondo stesso, solo come quel mondo appare sullo schermo.
+
+## Come funziona la luminosità
+
+Minecraft vanilla calcola un valore di luce per ogni blocco a partire da due input: la quantità di cielo a cui è esposto e la sua vicinanza a una fonte di luce come una torcia o glowstone. Lo slider gamma nel menu delle opzioni allunga quel valore in ciò che effettivamente appare sullo schermo, ma solo fino a un limite fisso. Oltre quel punto, un blocco scarsamente illuminato rimane scuro, indipendentemente da quanto trascini lo slider.
+
+La luminosità alza o rimuove quel limite. Il renderer utilizza lo stesso valore di luce che il gioco ha già calcolato e lo mappa in un output più luminoso di quanto mai consentirebbe la versione originale, fino alla piena illuminazione indipendentemente dal livello di luce reale del blocco. La simulazione sottostante non cambia. Il server continua a tracciare il vero livello di luce di ogni blocco, perché le regole di generazione e altre meccaniche basate sulla luce ne dipendono. Solo l'immagine che la tua GPU disegna è diversa, ed è esattamente per questo che la modifica rimane invisibile a chiunque tranne te.
+
+## La luminosità è contro le regole?
+
+La luminosità si trova in una posizione ambigua: tecnicamente legale da attivare, ma non universalmente gradita una volta attivata. Poiché la modifica avviene interamente nel renderer, non produce mai un pacchetto, uno schema temporale o un valore lato server che un anticheat possa controllare. Non c'è nulla da scansionare. Un anticheat lato server osserva ciò che un client invia, e un interruttore di luminosità invia esattamente ciò che invierebbe un client vanilla.
+
+Questo non rende l'vantaggio immaginario. Vedere chiaramente in una grotta che un giocatore con una torcia riesce a malapena a distinguere è un vero vantaggio, che tu stia individuando minerali, una creatura ostile o qualcuno in agguato. Alcuni server scrivono comunque modifiche all'illuminazione nei loro regolamenti, trattandola come farebbero con un pacchetto di risorse non autorizzato: in contrasto con la lettera delle regole senza un modo tecnico per rilevarlo. Un membro dello staff che rivede un filmato non ha bisogno di una segnalazione anticheat per agire su ciò che vede.
+
+<Callout variant="tip" title="Non presente nell'elenco dei moduli Opal, e lo scopo è questo">
+La luminosità non è un modulo che Opal spedisce con quel nome. Non ne ha bisogno: è un cursore che sovrascrive un limite di rendering e non tocca mai la rete in nessun modo. La categoria visiva di Opal risiede proprio in quello spazio, modifiche che esistono interamente in ciò che viene disegnato, non in ciò che viene inviato, mirate a problemi con una superficie maggiore rispetto a un limite di luminosità.
+</Callout>
+
+<Callout variant="warning" title="Indetectabile non significa consentito">
+Nessun sistema anti-cheat può intercettare l'attivazione di Brightness, poiché modifica solo ciò che il tuo client visualizza, mai ciò che invia sulla rete. Questo non ha nulla a che fare con le regole effettive del server. Alcuni considerano la modifica dell'illuminazione una violazione in ogni caso, e un moderatore che guarda una registrazione o gestisce una segnalazione non ha bisogno di un flag automatico per agire su ciò che vede.
+</Callout>
+
+## DOMANDE FREQUENTI
+
+<FAQList>
+
+<FAQItem question="Il Livello di Luminosità offre un reale vantaggio nel gioco?">
+Sì. Elimina l'oscurità nelle caverne, nel Nether e di notte, permettendoti di individuare mob, minerali e altri giocatori in luoghi in cui la versione originale era progettata per nasconderli. Non influisce sui movimenti o sul combattimento, solo su ciò che puoi vedere.
+</FAQItem>
+
+<FAQItem question="Gli anticheat possono rilevare la luminosità?">
+Non tramite controlli lato server standard. La luminosità modifica solo il modo in cui il tuo client visualizza la luce sullo schermo. Non ne influenza la rete, quindi non ci sono pacchetti o schemi temporali che un server possa segnalare.
+</FAQItem>
+
+<FAQItem question="La luminosità è la stessa cosa di un hack gamma per resource pack?">
+La stessa idea, ma con un metodo diverso. Un texture pack per hack gamma sovrascrive lo stesso limite di rendering, mentre la luminosità è un'opzione integrata nel client, solitamente con un intervallo più ampio e senza bisogno di installazioni aggiuntive.
+</FAQItem>
+
+<FAQItem question="L'utilizzo della luminosità mi farà bannare?">
+La rilevazione automatica quasi mai lo segnala, dato che non interagisce mai con il server. Alcuni server comunque includono la modifica della luminosità tra le regole, quindi un moderatore che guarda uno stream o una registrazione può comunque intervenire.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/it/learn/what-is-a-minecraft-utility-client", label: "Cos'è un client utility di Minecraft?", description: "La categoria più ampia Luminosità e ogni altro modulo qui presente vi appartiene." },
+  { href: "/it/learn/what-is-a-ghost-client", label: "Cos'è un cliente fantasma?", description: "L'estremità opposta dello spettro visivo: nascondere ciò che c'è invece di illuminarlo." },
+  { href: "/it/learn/what-is-an-aimbot", label: "Cos'è un aimbot?", description: "Un modulo di combattimento che automatizza la mira invece di limitarsi a oscurare la visuale." },
+]} />
+
+<CTA href="/it/purchase">Scopri cosa c'è effettivamente nella categoria visiva di Opal per $8.99.</CTA>

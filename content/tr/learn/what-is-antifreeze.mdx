@@ -1,0 +1,85 @@
+---
+title: Minecraft'ta Antifriz Nedir?
+description: AntiFreeze, ağır blok yüklemeleri veya sunucu gecikme artışları sırasında Minecraft istemcisinin donmasını engeller, paketlere, isabet tespitte veya harekete dokunmadan.
+excerpt: Dövüşün ortasında donmak, gecikmeden çok daha fazla maçı kaybettirir. AntiFreeze, etrafındaki dünya donduğunda bile istemciyi tepkili tutar.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: AntiFreeze oyun avantajı sağlıyor mu?
+    a: Hayır, bir savaş veya hareket modülü gibi değil. Müşterinin parça yüklemeleri veya gecikme anları sırasında takılmasını engeller; bu bir kararlılık düzeltmesidir, isabet kaydı, hareket veya sunucunun aldığı şeyleri değiştiren bir şey değil.
+  - q: AntiFreeze bir oyuncunun yasaklanmasına neden olabilir mi?
+    a: Bilinir hiçbir mekanizma bunu işaretleyemez. Tamamen istemcinin yerel işleme ve giriş yönetimine dayanır ve sunucuların istemcinin ne kadar sorunsuz çalıştığını gözlemleyebilecek bir yolu yoktur, bu yüzden bir antichiatin tespit edebileceği hiçbir şey yoktur.
+  - q: Minecraft'ın ilk etapta yükleme sırasında donmasına ne sebep oluyor?
+    a: Büyük bir parçacık yığınını aynı anda yüklemek veya bir gecikme anında sunucudan gelen veri akışında ani bir kesinti, istemcinin ana iş parçacığını o kadar uzun süre bloke edebilir ki pencere, iş tamamlanana kadar yanıt vermeyi durdurur.
+  - q: AntiFreeze, Sodium gibi bir performans moduna benzer mi?
+    a: "Tam olarak değil. Genel performans modları, çerçeve hızını artırır ve tüm oyunlarda yükleme sürelerini kısaltır. AntiFreeze ise daha sınırlı bir alana odaklanır: istemcinin donma olasılığı olan anları hedef alır, örneğin parça yüklemeleri ve gecikme artışları."
+---
+
+<KeyTakeaways>
+
+- AntiFreeze, yoğun blok yüklemeleri veya gecikme anlarında Minecraft istemcilerinin donmasını engelleyen istemci tarafında bir modüldür.
+- Yalnızca yerel işleme ve girişle etkileşime girer, paketleri, isabet kaydını veya hareketi asla etkilemez.
+- Sunucular istemci tarafındaki akıcılığı gözlemleyemez, bu nedenle bir antichiatin yakalaması için bir sinyal yoktur.
+- Sadece bir kararlılık düzeltmesidir, savaş veya hareketten ziyade yaşam kalitesine daha yakındır
+
+</KeyTakeaways>
+
+AntiFreeze, oyunun normalde render işleyicisini tıkayan anlarda donmasını engelleyen bir Minecraft istemci modülüdür: aynı anda yüklenen çok sayıda yeni blok parçası veya istemci sunucuyu beklerken oluşan bir gecikme. Pencere bir saniye (veya beş saniye) boyunca yanıt vermez hale gelmek yerine, modül işleyicinin tıkanmasına rağmen çizim ve girdi işlemlerini sürdürür. Savaş aracı veya hareket aracı değildir. Borunun başka bir bölümünün kötü bir dönem yaşadığı sırada oyunu oynanabilir tutan şeydir.
+
+## Nasıl Çalışır
+
+AntiFreeze, istemcinin genellikle donmaya başladığı belirli anları izler: aynı anda yüklenecek çok sayıda blok parçası veya sunucunun geride kalıp istemcinin beklediği veriyi geciktirmesi. Normalde bu tür bir yük ana oyun işleyicisini bloke eder ve bloke edilen ana işleyici, işler tamamlanana kadar donmuş bir pencere, çizim yok, girdi yok anlamına gelir.
+
+Bu bloğun gerçekleşmesine izin vermek yerine, AntiFreeze istemcinin çizim ve girdi döngüsünü tıkanıklık boyunca canlı tutar. Çözmeye çalıştığı donma, ağır işlemlemenin yerel bir belirtisidir, ağ veya oyun mekaniği değil, bu nedenle düzeltmek sunucu tarafından görülen hiçbir şeyi etkilemez. Dünya durumu, isabet kaydı ve istemciden ayrılan paketler tamamen etkilenmez. Bu, motor yakalamaya çalışırken pencerenin yanıt vermeye devam etmesiyle ilgilidir.
+
+Bu aynı zamanda oyuncuların onu belirli durumlar için açıp kapatmak yerine sürekli açık bırakma eğilimini de açıklar. Bir saniye takılma yüzünden kaçırılan bir zıplama, sohbetten düşen bir mesaj, bir savaşın tam yanlış anında oluşan bir takılma: bunların hiçbirini telafi edemezsiniz. Amacıyla ulaşılacak bir özellikten ziyade bir denge iyileştirmesine daha yakındır.
+
+## Kullanımı Güvenli mi?
+
+AntiFreeze yalnızca yerel istemcinin yük altında işleme ve girişleri nasıl işlediğini değiştirir. Farklı paketler göndermez, isabet kaydını etkilemez ve sunucu veya başka bir oyuncu tarafından gözlemlenebilecek hiçbir şeyi değiştirmez. Bir sunucunun "istemcim akıcı hissetti" geri bildirimini kendisine bildirebileceği bir kanalı yoktur, bu da anticheat'in kontrol edebileceği bir sinyal olmadığı anlamına gelir. Fonksiyonel olarak, aslında sunucuya ulaşan savaş veya hareket modüllerinden uzakta, diğer istemci tarafı performans ve yaşam kalitesi araçları kategorisine girer.
+
+<Callout variant="tip" title="Bunun Opal ile yan yana nereye sığacağı">
+
+Opal, bu davranışı modül listesinde bağımsız bir anahtar olarak belirtmiyor ve bununla ilgili kesin olmak, aksi iddia etmektense daha değerli. Ancak, hislerine göre yaşayan veya kaybeden ücretli bir müşteri, altta yatan motorun çalışması, parça yüklemeleri ve gecikme artışları arasında duyarlı kalması, ciddi bir yapının beklendiği gibi doğru bir şekilde yapılmasını gerektiren tam da bu tür bir temel çalışmadır; siz bunun gerçekleştiğini fark etmeden bile
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="AntiFreeze oyun avantajı sağlıyor mu?">
+
+Savaş veya hareket modüllerinin yaptığı gibi değil. İstemci, parça yüklemeleri veya gecikme anlarında takılmasını engeller; bu bir kararlılık düzeltmesidir, isabet kaydı, hareket veya sunucunun aldığı şeyleri değiştiren bir şey değildir
+
+</FAQItem>
+
+<FAQItem question="AntiFreeze bir oyuncunun yasaklanmasına neden olabilir mi?">
+
+Bildiğimiz hiçbir mekanizma bunu işaretleyemez. Tamamen istemcinin yerel oluşturma ve giriş işleme süreçlerine bağlı çalışır ve sunucuların istemcinin ne kadar sorunsuz çalıştığını gözlemleyebilecek bir yolu yoktur, bu yüzden bir antichiatin tespit edebileceği hiçbir şey yoktur
+
+</FAQItem>
+
+<FAQItem question="Minecraft'ın ilk etapta yükleme sırasında donmasına ne sebep oluyor?">
+
+Büyük bir parçacık yığınını aynı anda yüklemek veya bir gecikme artışı sırasında sunucudan gelen veri akışında ani bir aksama, istemcinin ana iş parçacığını, pencerenin iş tamamlanana kadar yanıt vermeyi durdurmasına yetecek kadar uzun süre bloke edebilir
+
+</FAQItem>
+
+<FAQItem question="AntiFreeze, Sodium gibi bir performans moduna benzer mi?">
+
+Tam olarak değil. Genel performans modları, çerçeve hızını artırır ve yükleme sürelerini genel olarak kısaltır. AntiFreeze ise daha sınırlı bir alana odaklanır: istemci normalde donacağındaki anları hedefler, örneğin parça yüklemeleri ve gecikme artışları gibi
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "AntiFreeze kategorisinin bulunduğu yer ve faydalıdan savaş hilelerini ayıran şey." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Gizliliğe odaklı müşterilerin, bu gibi istikrar ve yaşam kalitesi modüllerinden farkları." },
+  { href: "/tr/learn/what-is-killaura", label: "Killaura nedir?", description: "AntiFreeze'ün karşılaştırıldığı modül türü ve neden bunun olmadığı." }
+]} />
+
+<CTA href="/tr/satin-al">Pürüzsüz olana ulaşmak için çabalamak zorunda olmamalısınız. $8.99 için Opal'e bakın.</CTA>

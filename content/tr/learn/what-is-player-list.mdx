@@ -1,0 +1,85 @@
+---
+title: Minecraft'ta Oyuncu Listesi Nedir? Tab Listesi Açıklaması
+description: Oyuncu Listesi, çevrimiçi oyuncuların tab tuşu üzerlemesini ek bilgilerle yeniden biçimlendiren bir Minecraft istemci modülüdür. İşte nasıl çalıştığı ve güvenli olup olmadığı.
+excerpt: Herkesin zaten kontrol ettiği sekme üstü, yeniden biçimlendirilmiş ve orijinalinden çok daha fazlasını gösteriyor. Eşleşme ile ilgili hiçbir şey değişmiyor, sadece ekrandan gördüğünüz şey.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Oyuncu listesi oyun akışını etkiler mi?
+    a: Hayır, sadece sekme listesinin kendi ekranınızdaki görünümünü değiştirir ve savaş, hareket veya sunucunun takip ettiği hiçbir şeyle etkileşimi yoktur.
+  - q: Anticheat sistemleri Oyuncu Listesini tespit edebilir mi?
+    a: Hayır. Sekme listesi tamamen istemci tarafında bir görüntüleme olup, özelleştirme ile ilgili hiçbir şey sunucuya gönderilmediğinden, sunucu tarafındaki bir hile önleme sisteminin işaretleyeceği bir şey yoktur.
+  - q: Minecraft'ta tab listesi nedir?
+    a: Oyunda bulunduğunuz sunucuya bağlı olan tüm oyuncuları listeyen, Tab tuşuna basılı tutulduğunda beliren, sade bir arayüzdür.
+  - q: Oyuncu Listesi, Dizi Listesi ile aynı mı?
+    a: Hayır. Dizi Listesi, hangi istemci modüllerinin şu anda etkin olduğunu gösterirken, Oyuncu Listesi çevrimiçi oyuncuların sekme tuşu üst bilgisini yeniden biçimlendirir. Her ikisi de kozmetik HUD'a yakın modüllerdir, sadece farklı varsayılan ekranları kapsar.
+---
+
+<KeyTakeaways>
+
+- Oyuncu Listesi, Minecraft'ın sekme tuşu üzerine bindirmesini yeniden biçimlendiren görsel bir modüldür; oyuncu adlarını yeniden şekillendirir veya her girişe ek bilgiler ekler.
+- Yalnızca istemci üzerinde bindirmenin nasıl görüntülendiğini değiştirir, sunucunun aslında gönderdiği veriyi değil.
+- Tamamen kozmetik: hiçbir şey istemciden ayrılmaz, bu nedenle yakalanacak bir antichi̇at sinyali yoktur.
+- Array List'ten farklıdır; Array List aktif modülleri gösterirken, Oyuncu Listesi çevrimiçi oyuncuları gösterir.
+- Tenacity gibi istemcilerde görülebilir.
+
+</KeyTakeaways>
+
+Oyuncu Listesi, Minecraft yardımcı istemcilerinde yer alan bir modül olup, basılı tutulduğunuzda gördüğünüz bağlı oyuncuların listesini (tab list) yeniden biçimlendirir. Vanilla'nın sade isim sütununu olduğu gibi bırakmak yerine, her girişi yeniden stillendirir veya yanına ek bilgiler ekler. Bu sadece bir görüntü değişikliğidir; gördüğünüz şey farklı olsa da, eşleşmenin altında yatan oynanışta hiçbir şey değişmez. Bu, oyunun zaten sizin için çizdiği bir ekranı yeniden düzenleyen diğer modüllerle aynı kategoridedir, ancak burada tab listesine, örneğin sohbet penceresine veya hızlı çubuklara değil, uygulanmıştır.
+
+## Nasıl Çalışır
+
+Vanilla Minecraft zaten tab listesini oluşturur: basılı tutun ve sunucu tarafından çevrimiçi olanlar hakkında gönderilen verilerden oluşturulan bağlı oyuncuların bir sütunu belirir. Oyuncu Listesi, bu mevcut üst üste binen katmana müdahale eder ve nasıl işlendiğini değiştirir, alttaki veriye dokunmaz. İsimler yeniden renklendirilebilir veya yeniden düzenlenebilir veya girişlere ek alanlar eklenebilir, ping zaten vanilla'dır, ancak bir istemci istediği gibi sıralama etiketleri, grup işaretleri veya başka herhangi bir şeyi ekleyebilir.
+
+Değişiklik yalnızca render zamanında gerçekleştiği, sunucu zaten göndereceği her şeyi gönderdikten sonra meydana geldiği için, diğer oyuncuların gördüğünü veya kimin takip edildiğini etkilemez. Modül, istemcinin zaten sahip olduğu bilgileri okur ve bunları farklı şekilde sunmayı seçer. Bu, mevcut bir vanilla ekranını yeniden tasarlayan herhangi bir HUD modülünün yaptığı değişiklik türüyle aynıdır, ancak özellikle sekme tuşu üst bilgisi için hedeflenmiştir.
+
+Çekiciliği basittir. Sekme listesi, kimin çevrimiçi olduğunu görmek, bir takımı saymak veya bir savaşın ortasında bir isme bakmak için sürekli olarak kontrol ettiğiniz bir şeydir. Zaten bir oturumda onlarca kez açtığınız bir ekranın daha temiz veya daha bilgilendirici bir versiyonu, bir maçın sonucunu değiştiren bir şey değil, okunabilirlik açısından bir yükseltmedir.
+
+## Oyuncu Listesi vs. Dizi Listesi
+
+Her ikisi de sürekli olarak kafa karıştırılıyor çünkü her ikisi de aynı görsel kategori içinde yaşayan, HUD'a yakın, kozmetik modüllerdir. Ancak bunlar aynı ekran değildir.
+
+| | Oyuncu Listesi | Dizi Listesi |
+|---|---|---|
+| Dokunduğu ekran | Sekme tuşu çevrimiçi oyuncular üst bilgisi | Ekranın bir köşesinde özel bir gösterge |
+| Ne gösterir | Yeniden biçimlendirilmiş veya genişletilmiş oyuncu girişleri | Şu anda aktif olan istemci modülleri |
+| Vanilla eşdeğeri | Evet, mevcut bir menüyü genişletir | Hayır, bu üst bilgi vanilla'da mevcut değildir |
+| Sunucu tarafı tespit riski | Yok, tamamen istemci tarafı render | Yok, tamamen istemci tarafı render |
+
+Farklı iş, aynı temel fikir: müşterinin zaten sahip olduğu bilgileri, varsayılanın sunduğundan daha kullanışlı bir şekilde sunmak.
+
+<Callout variant="tip" title="Opal'da Nerede Yer Alır">
+Opal, Player List adında bir modül göndermez. Mevcut bir vanilla ekranını, örneğin sekme listesini yeniden biçimlendirmek, her araç istemcisinin kapsadığı görsel kategoriye tam olarak girer. Bu nedenle, daha temiz bir sekme üst katmanı arıyorsanız, bir istemcinin gerçek modül listesini kontrol etmek, adlandırmanın uyumlu olduğunu varsaymak yerine daha değerlidir.
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="Oyuncu Listesi oyun akışını etkiler mi?">
+Hayır. Sadece sekme listesinin kendi ekranınızdaki görünümünü değiştirir. Savaş, hareket, sunucu tarafından takip edilen herhangi bir şey... bunların hiçbiri etkilenmez.
+</FAQItem>
+
+<FAQItem question="Anticheat, Oyuncu Listesini Algılayabilir mi?">
+Hayır. Sekme listesi tamamen istemci tarafında görüntülenen bir şeydir ve hiçbir özelleştirme sunucuya gönderilmediğinden, sunucu tarafındaki bir anticheat'in görmesi, hele ki işaretlemesi için hiçbir şey yoktur.
+</FAQItem>
+
+<FAQItem question="Minecraft'ta tab listesi nedir?">
+Oyunda tab tuşuna basılıyken çıkan, bulunduğunuz sunucuya bağlı olan herkesi listeleyen yerleşik ekran üstü katmanıdır.
+</FAQItem>
+
+<FAQItem question="Oyuncu Listesi, Dizi Listesi ile aynı mı?">
+Hayır. Dizi Listesi, bir müşterinin hangi modüllerinin şu anda açık olduğunu gösterir. Oyuncu Listesi ise çevrimiçi oyuncuların sekme tuşu üst üste bindirmesini yeniden biçimlendirir. Farklı ekranlar, kozmetik HUD'e yakın bir modülün aynı genel fikri.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "Sekme listesi örtüsü modülü, daha geniş bir kategorinin küçük bir parçasıdır." },
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Ekranı yeniden tasarlamaktan ziyade, ondan tamamen kaybolmaya doğru bir hedef kayması." },
+  { href: "/tr/learn/what-is-killaura", label: "Killaura nedir?", description: "Risk spektrumunun tam tersi uçtaki bir modül, sadece yüzeysel bir değişiklikten çok daha fazlası." },
+]} />
+
+<CTA href="/tr/satin-al">Yeniden düzenlenmiş bir sekme listesi hoş bir dokunuş. Opal'ın görsel dizilimi bundan çok daha ileri gidiyor.</CTA>

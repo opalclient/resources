@@ -1,0 +1,80 @@
+---
+title: Co to jest CPS w Minecraft? Wyjaśnienie kliknięć na sekundę
+description: CPS to moduł HUD, który liczy kliknięcia myszy na sekundę i wyświetla aktualną liczbę podczas gry, bez wpływu na serwer i bez ryzyka bana.
+excerpt: Zastanawialiście się kiedyś, z jaką dokładnością klikacie? To moduł, który to mierzy, bez potrzeby korzystania z zewnętrznych stron.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Czy CPS daje jakąś przewagę w rozgrywce?
+    a: Nie. Wyświetla tylko liczbę na HUDzie, opartą na kliknięciach, które już wykonałeś. Nie zmienia czasu kliknięć, obrażeń ani niczego, co przetwarza serwer.
+  - q: Czy licznik CPS to to samo co autoclicker?
+    a: Nie, to są przeciwieństwa. Licznik CPS mierzy dane wejściowe, które już wygenerowałeś. Autoclicker generuje dane wejściowe samodzielnie. Autoclikowanie to oszustwo, a wyświetlacz CPS po prostu wykonuje obliczenia na kliknięciach, które sam wykonałeś.
+  - q: Czy moduł CPS może spowodować, że zostanę zbanowany?
+    a: Nie. Odczytuje tylko lokalne dane wejściowe i wyświetla je na Twoim ekranie, więc nie ma nic, co serwer lub system anty-cheat mógłby wykryć lub oznaczyć.
+  - q: Gdzie zazwyczaj pojawia się numer CPS na ekranie?
+    a: Najczęściej wyświetlane jako mały wskaźnik w pobliżu celownika lub ukryte w rogu HUD-u, aktualizowane ciągle podczas klikania. Dokładne umiejscowienie zależy od układu HUD-u klienta.
+  - q: Dlaczego gracze PvP zależy na ich CPS?
+    a: Wyższa, legalna szybkość klikania ma znaczenie w walce opartej na klikaniu, dlatego gracze używają licznika do śledzenia techniki, takiej jak klikanie motylkowe lub drżące, i mierzą postępy w czasie rzeczywistym, zamiast przełączać się na inną stronę internetową.
+---
+
+<KeyTakeaways>
+
+- CPS (kliknięcia na sekundę) to moduł HUD, który liczy kliknięcia myszy w czasie rzeczywistym i wyświetla liczbę na ekranie podczas gry.
+- Odczytuje tylko lokalne dane wejściowe i rysuje tekst, więc nie ma nic, co mogłoby zostać wychwycone przez anticheat.
+- Jest przeciwieństwem autoclickera: mierzy kliknięcia, które już wykonałeś, a nie te, które on tworzy.
+
+</KeyTakeaways>
+
+CPS oznacza kliknięcia na sekundę i jako moduł Minecraft jest to mały wskaźnik HUD, który liczy, jak szybko klikasz i wyświetla liczbę na ekranie w czasie rzeczywistym. Zamiast przełączać się do zewnętrznej strony internetowej liczącej kliknięcia w trakcie gry, otrzymujesz na bieżąco liczbę umieszczoną w pobliżu celownika lub w rogu HUD, odświeżaną co sekundę, w której klikasz. Jest to narzędzie pomiarowe, a nie mechanika. Moduł obserwuje dane wejściowe, które już generujesz i raportuje je z powrotem. Nie ingeruje w samo wejście.
+
+## Jak to działa
+
+CPS liczy naciśnięcia przycisku myszy w ruchomym oknie trwającym jedną sekundę i zapisuje bieżący wynik na HUD. Każde kliknięcie zwiększa licznik dla aktualnie otwartego okna. Po upływie sekundy wyświetlacz przełącza się na nowy wynik i zaczyna liczyć od nowa. Ponieważ okno jest resetowane zamiast uśredniać dane z dłuższego okresu, liczba śledzi Twoje rzeczywiste tempo klikania, a nie wygładnioną wartość z dziesięciu sekund temu.
+
+Moduł nigdy nie stoi między Twoją myszą a serwerem. Odczytuje zdarzenie wejściowe, zwiększa licznik, rysuje ciąg znaków – to cała procedura. Kliknięcie, które się pojawia, nadal dociera do serwera jako dokładnie jedno kliknięcie: ten sam czas, ten sam pakiet, wszystko jest takie samo. Rose to jeden z klientów, którzy udostępniają odczyt CPS, i znajduje się w kategorii wizualnej obok innych wyświetlaczy na ekranie, a nie w pobliżu walki lub ruchu, ponieważ nie wpływa na walkę ani ruch.
+
+## Czy jest bezpieczne do użycia?
+
+Tak, całkowicie bezpiecznie. Licznik CPS odczytuje lokalne dane wejściowe z myszy i wyświetla liczbę na Twoim HUD-zie, kropka. Nigdy nie wysyła dodatkowego pakietu, nigdy nie zmienia tego, co otrzymuje serwer, nigdy nie modyfikuje wartości, z których serwer korzysta do rozwiązania akcji. Po prostu nie ma tutaj nic, co serwerowy anticheat mógłby ocenić, ponieważ funkcja nigdy nie opuszcza Twojego komputera.
+
+Zdezorientowanie związane z autoclickerami jest zrozumiałe, ponieważ oba terminy dotyczą szybkości klikania, ale znajdują się po przeciwnych stronach tej samej koncepcji. Autoclicker generuje kliknięcia samodzielnie i jest prawdziwym, karalnym oszustwem. Licznik CPS robi odwrotnie: mierzy kliknięcia, które człowiek już wykonał. Jeden generuje dane wejściowe, a drugi po prostu je raportuje.
+
+<Callout variant="tip" title="Gdzie Opal wydaje budżet modułów">
+Opal nie dostarcza dedykowanego licznika CPS. To nie jest przejaw nieuwagi, a raczej decyzja budżetowa: moduł raportuje liczbę i niczego nie zmienia w samej walce, nie zadaje dodatkowego ciosu ani nie skróci o milisekundę żadnych pomiarów serwera. Moduły Opal do walki i ruchu istnieją po to, by realnie wpłynąć na przebieg walki. Licznik kliknięć to bardziej element dla transmisji niż przewaga, a Opal zużywa swoje zasoby modułów na to drugie.
+</Callout>
+
+## FAQ
+
+<FAQList>
+
+<FAQItem question="Czy CPS daje jakąkolwiek przewagę w rozgrywce?">
+Nie. Wyświetla jedynie liczbę na HUD-zie, opartą na kliknięciach, które już wykonałeś. Nie zmienia czasu kliknięć, obrażeń ani niczego, co przetwarza serwer.
+</FAQItem>
+
+<FAQItem question="Czy licznik CPS to to samo co autoclicker?">
+Nie, to są przeciwieństwa. Licznik CPS mierzy dane, które już wygenerowałeś, podczas gdy autoclicker generuje dane samodzielnie. Autocliker to oszustwo. Wyświetlacz CPS wykonuje jedynie obliczenia na kliknięciach, które wykonałeś sam.
+</FAQItem>
+
+<FAQItem question="Czy moduł CPS może spowodować zbanowanie mnie?">
+Nie. Czyta on tylko lokalne dane wejściowe i wyświetla je na Twoim ekranie, więc serwer ani anticheat nie mają czego wykryć ani oznaczyć.
+</FAQItem>
+
+<FAQItem question="Gdzie zazwyczaj pojawia się numer CPS na ekranie?">
+Najczęściej jako mały wskaźnik w pobliżu celownika lub ukryty w rogu HUD-u, aktualizowany ciągle podczas klikania. Dokładne umiejscowienie zależy od układu HUD-u klienta.
+</FAQItem>
+
+<FAQItem question="Dlaczego gracze PvP zależy na ich CPS?">
+Wyższa, legalna prędkość klikania ma znaczenie w walce opartej na klikaniu, dlatego gracze używają licznika, aby śledzić technikę, taką jak klikanie motylkowe lub drżące, i mierzyć postępy w czasie rzeczywistym, zamiast przełączać się na inną kartę, aby sprawdzić stronę internetową.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/pl/learn/what-is-a-minecraft-utility-client", label: "Czym jest klient użytkowy Minecraft?", description: "Szeroką kategorią, do której należy odczyt CPS, jest niewielki element." },
+  { href: "/pl/learn/what-is-an-aimbot", label: "Co to jest aimbot?", description: "Moduł znajdujący się po przeciwnej stronie spektrum ryzyka w stosunku do kosmetycznego licznika HUD." },
+  { href: "/pl/learn/what-is-killaura", label: "Czym jest KillAura?", description: "Automatyzacja szybkiego klikania i dlaczego to przekracza granice oszustwa." },
+]} />
+
+<CTA href="/pl/purchase">Licznik CPS pokazuje, jak szybko klikałeś. Moduły Opal są przeznaczone do tego, co nastąpi, do $8.99.</CTA>

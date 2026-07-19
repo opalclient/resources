@@ -1,0 +1,114 @@
+---
+title: Minecraft'ta AntiInvis Nedir? (Mod Açıklaması)
+description: AntiInvis, görünmezlik iksirleri veya istemci tarafı render hileleriyle gizlenmiş oyuncuları ortaya çıkarır, onların gerçek konumlarının üzerine kısmi bir hat çekerek hiçbir şey göstermek yerine.
+excerpt: Görünmezlik iksirleri sana kaybolacağının vaadini verir. AntiGörünmez ise bu vaadi sessizce bozar ve hedef bile farkına varmayacaktır.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: AntiInvis görünmezlik iksirlerini mi görüyor, yoksa sadece istemci tarafı hilelerini mi?
+    a: Her iki durumda da. Hem gerçek görünmezlik durum etkisine sahip oyuncular için hem de modelini gizleyen ancak bu etkiyi hiç uygulamayan istemci tarafı bir hile kullanan oyuncular için kısmi bir taslak oluşturur.
+  - q: AntiInvis sunucuya ek veri gönderiyor mu?
+    a: Hayır. Sunucu zaten istemciye görünmeyen bir varlığın konumunu ve rotasyonunu fizik ve çarpışma algılama için gönderiyor. AntiInvis yalnızca o verinin çizilip çizilmediğini değiştirir, giden paketlerle ilgili hiçbir şey değişmez.
+  - q: AntiInvis, ESP ile aynı şey mi?
+    a: İkisi de ilişkili ama aynı değiller. ESP genellikle duvarları ve araziyi aşarak varlıkları gösterir. AntiInvis özellikle görünmezlik durum etkisini hedef alır ve onu taklit edenleri istismar eder, görüş hattıyla ilgili hiçbir şey yapmaz.
+  - q: Hangi müşteriler AntiInvis'i içeriyor?
+    a: Tenacity'de bir özellik olarak belgelenmiş.
+  - q: AntiInvis kullanmak yasaklanmaya yol açar mı?
+    a: Evet, hatta otomatik antichi̇at sistemleri tarafından işaretlenmese bile. Size, orijinal oyunun kasıtlı olarak sakladığı bilgileri veriyor ve çoğu sunucu, tespit yönteminden bağımsız olarak genel adil oyun veya istismar kuralları kapsamında bunu yasaklıyor.
+---
+
+<KeyTakeaways>
+
+- AntiInvis, görünmeyen oyuncuları ortaya çıkaran bir modüldür; onların gerçek konumlarının üzerine kısmi bir hat çizerek hiçbir şey göstermek yerine.
+- Görünmez varlıklar için vanilla'nın render adımına müdahale eder, istemci tarafından zaten sahip olunan konum verilerini yeniden kullanır.
+- Bu, bir görsel düzenleme değil, bir suiistimaldir: oyuncunun zaten yaptığı takası iptal eder.
+- Hile önleme sistemlerine trafik normal görünür, ancak çoğu sunucu hala adil oyun kuralları kapsamında yasaklamaktadır
+
+</KeyTakeaways>
+
+AntiInvis, görünmezlik iksiri veya istemci tarafı görünmezlik hilesi altında saklanan oyuncuları ortaya çıkaran bir modülüdür. Hiçbir şey göstermek yerine, gizlenmiş oyuncunun gerçek konumunun üzerine kısmi bir hat çizerek, kullanıcının ayak sesleri veya sallanan bir eşya gibi bir işaret beklemeden kabaca nerede olduklarını bilmesini sağlar. Oyunun özel olarak gizlemek için tasarlandığı bir mekaniği ortadan kaldırdığı için, görsel veya yaşam kalitesi (QoL) yerine istismar kategorisine girer.
+
+## Nasıl Çalışır
+
+Orijinal Minecraft, görünmezlik durum etkisini taşıyan herhangi bir varlık için render adımını atlar. İstemci, sunucu bunun için çarpışma algılama ve fiziksel etkileşimleri takip etmesi gerektiğinden, yine de varlığın konumunu, dönüşünü ve diğer durum bilgilerini ağ üzerinden alır. Oyun sadece modeli çizmemeyi seçer. AntiInvis, bu render adımına müdahale eder ve zorla çizmesini sağlar; genellikle tam dokulu model yerine düzleştirilmiş veya kısmen şeffaf bir hat olarak. Konum verisi zaten istemcide bulunduğundan, bunun çalışması için ekstra bir istekte bulunulmasına veya gönderilmesine gerek yoktur.
+
+Aynı müdahale, aynı gerçek durum etkisini kendisine uygulamadan kendi modelini yerel olarak gizleyen istemci tarafı görünmezlik hilelerini de yakalar. AntiInvis, gizlenmiş modelin hangi yöntemle üretildiğini ayırt etmez; her iki durumda da hat çizimini zorlar.
+
+| Ne gösterir Vanilla | Ne gösterir AntiInvis |
+|---|---|
+| Parçacıklar, zırh veya tutulan bir eşya dışında hiçbir şey | Varlıkların gerçek konumlarının kısmi bir taslağı |
+| Konum yalnızca dolaylı ipuçlarından çıkarılabiliyor | Konum doğrudan görülebilir, ipucu gerekmiyor |
+
+## AntiInvis vs ESP
+
+Birlikte ele alınırlar çünkü her ikisi de oyunun sizin bilmenizi istemediği bilgileri gösterir, ancak aynı sorunu çözmüyorlar. ESP, basitçe görüş alanınızın dışında olan varlıkları göstermek için duvarlardan ve araziden geçiyor. AntiInvis görüş alanıyla hiç ilgilenmiyor: oyunun, görünmezlik durum etkisinden (veya onu taklit eden bir şeyden) dolayı çizmemeyi özellikle seçtiği bir varlığa yöneliktir. Bir duvarın arkasında duran tamamen görünür bir oyuncu bir ESP sorunudur. İlaveten görünmezlik iksiri aktif olan, açıkta duran tamamen görünür bir oyuncu ise bir AntiInvis sorunudur.
+
+## Neden bir istismar olarak sayılıyor
+
+Görünmezlik iksiri, bir oyuncuyu görüş alanından kaldırmak için vardır. Birini içmek bilinçli bir takas demektir: bir envanter yuvası ve bir durum efekti süresi, gizlenmek için harcanır. AntiGörünmezlik, hedef üzerinde hiçbir değişiklik yapmadan bu takası kullanıcı için iptal eder. Görünmez oyuncu hala gizlendiğine inanır, hala kaynakları harcamıştır ve modülü çalıştıran birine karşı hiçbir fayda elde etmez. Bu, bir işlevsel ve taktiksel avantajdır, bir işleme güzelliği değil; bu yüzden bir hata olarak sınıflandırılmıştır, kozmetik veya yaşam kalitesi özelliği olarak değil.
+
+Savaş veya hareketleri KillAura gibi bir modülün yaptığı gibi otomatikleştirmez. AntiGörünmez yalnızca kullanıcının görebildiklerini değiştirir; hala nişan alır, hareket eder ve elle savaşır. Tüm avantaj, ortaya çıkardığı bilgide yatar.
+
+## Kullanımı Güvenli mi?
+
+Yakalaması zor olmak güvenli olmakla aynı şey değildir. AntiGörünmez, bir istemcinin gönderdiği paketlerde hiçbir şey değiştirmez: yeni saldırı zamanlaması, imkansız dönüşler veya değiştirilmiş hareket yoktur. Ağ davranışına dayalı tespit sistemleri, bakacak olağandışı bir şey yoktur, bu nedenle bu tür bir istemci tarafı işleme değişikliği genellikle kontrol ettikleri şeylerin dışında kalır.
+
+Bu, onu izinli yapmaz. Çoğu sunucu, görünmezlik açığa çıkarma modüllerini, otomatik bir sistem onları işaretlese bile genel adil oyun veya istismar kuralları kapsamında yasaklamaktadır; yaptırım, bir algılama algoritması yerine gözlemleme, tekrar izleme veya raporlardan gelebilir. "Zor tespit edilebilir" ve "izinli" ifadelerini, sunucuların da yaptığı gibi iki ayrı soru olarak ele alın, çünkü bunlar farklı konulardır.
+
+<Callout variant="tip" title="Burada Opal'da nerede duruyor">
+
+Opal, özel bir AntiInvis modülü göndermiyor. Görsel kategori özellikleri, adil oyunun bilgi tarafında kalıyor; bu sayede bir kavgayı okumanıza yardımcı olan bir işlev sunuyor, başkası bir iksir ve bir durum efekti süresi için ödediği bir efekti ortadan kaldırmaya özel olarak oluşturulmuş modüller değil. Bu tür istismar seviyesindeki modüller arıyorsanız, başka yerlere bakın; eğer başka bir oyuncunun ödediği şeyi sessizce tersine çevirmeyen, temiz bir görsel araç seti istiyorsanız, Opal bu alanda kalıyor
+
+</Callout>
+
+<Callout variant="warning" title="Referans, nasıl yapıldığı değil">
+
+Bu sayfa AntiInvis'in ne yaptığını ve neden bir sömürü olarak sınıflandırıldığını, onu çalıştırmanın bir onaylaması olarak değil, açıklar. Çoğu sunucu, hile önleme sistemleri render değişikliğini otomatik olarak yakalasa bile, genel adil oyun kuralları kapsamında görünmezlik ortaya çıkaran modülleri yasaklamaktadır
+
+</Callout>
+
+## Sıkça Sorulan Sorular
+
+<FAQList>
+
+<FAQItem question="AntiInvis görünmezlik iksirlerini mi görüyor, yoksa sadece istemci tarafı hilelerini mi?">
+
+Her ikisi de. Hem gerçek görünmezlik durum etkisine sahip oyuncular için hem de modelini gizleyen ancak bu etkiyi hiç uygulamayan bir istemci tarafı hilesi kullanan oyuncular için kısmi bir taslak oluşturur
+
+</FAQItem>
+
+<FAQItem question="AntiInvis sunucuya ek veri gönderiyor mu?">
+
+Hayır. Sunucu zaten istemciye görünmeyen bir varlığın pozisyonunu ve rotasyonunu fizik ve çarpışma algılama için gönderiyor. AntiInvis yalnızca o verinin çizilip çizilmediğini değiştirir, giden paketlerle ilgili hiçbir şey değişmez
+
+</FAQItem>
+
+<FAQItem question="AntiInvis, ESP ile aynı şey mi?">
+
+İkisi de ilişkili, ancak aynı değiller. ESP genellikle duvarları ve araziyi aşarak varlıkları gösterir. AntiInvis özellikle görünmezlik durum etkisini hedef alır ve onu taklit edenleri istismar eder, görüş hattıyla ilgili bir şey yapmaz
+
+</FAQItem>
+
+<FAQItem question="Hangi müşteriler AntiInvis'i içeriyor?">
+
+Tenacity'de bir özellik olarak belgelenmiştir
+
+</FAQItem>
+
+<FAQItem question="AntiInvis kullanmak yasaklanmaya yol açar mı?">
+
+Evet, hatta otomatik antichi̇at sistemleri tarafından işaretlenmese bile. Size, orijinal oyunda kasıtlı olarak saklanan bilgileri veriyor ve çoğu sunucu, tespit yönteminden bağımsız olarak genel adil oyun veya istismar kuralları kapsamında bunu yasaklıyor
+
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/tr/learn/what-is-a-ghost-client", label: "Hayalet müşteri nedir?", description: "Görünmez kalmaya odaklanan, AntiInvis'in çözmeye çalıştığı sorunun tam tersi bir müşteri." },
+  { href: "/tr/learn/what-is-killaura", label: "KillAura nedir?", description: "AntiGörünmezlik modülü otomatik savaş modülü değildir; yalnızca gördüklerinizi değiştirir." },
+  { href: "/tr/learn/what-is-a-minecraft-utility-client", label: "Minecraft yardımcı istemcisi nedir?", description: "AntiInvis ve benzeri modüllerin ait olduğu daha geniş kategori." }
+]} />
+
+<CTA href="/tr/satin-alin">Sızma etiketine ihtiyaç duymadan haklı çıkaracak görsel bir araç seti edinin.</CTA>

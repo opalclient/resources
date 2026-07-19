@@ -1,0 +1,79 @@
+---
+title: Was ist die Suche (Ressourcenfinder) in Minecraft?
+description: Die Suche ist ein Minecraft-Modul, das bereits geladene Chunk-Bereiche nach einem bestimmten Block absucht und jede Übereinstimmung markiert – ein Erzfinder, der nie durch Wände hindurch rendert.
+excerpt: Die Suche blickt nicht durch Wände, sie erinnert sich nur an das, was der Klient bereits weiß. Zeige sie auf einen Blocktyp und erhalte Koordinaten statt Spitzhacke und Bauchgefühl.
+date: 2026-07-13
+lastUpdated: 2026-07-13
+category: Modules
+author: trq
+faqs:
+  - q: Was sucht die Suche eigentlich?
+    a: Die Blöcke, die der Klient bereits geladen hat, und nichts weiter. Es durchsucht diese Daten nach einem von Ihnen angegebenen Blocktyp und markiert oder listet jeden Treffer auf, sodass die Ergebnisse auf das beschränkt sind, was sich aktuell um den Spieler herum befindet.
+  - q: Kann Suchen dir helfen, Wände zu durchschauen?
+    a: Nein. Die Suche rendert Blöcke nicht durch das Terrain, wie es ein Röntgen-Texturpaket oder ein Shader tut. Sie meldet Koordinaten oder setzt einen Marker, sie verändert nie, was tatsächlich auf dem Bildschirm dargestellt wird.
+  - q: Können Server Suchanfragen automatisch erkennen?
+    a: Selten durch Paketinspektion, da das Modul nie etwas sendet, was ein normaler Client nicht senden würde. Wo es erwischt wird, ist es meistens ein Mitarbeiter, der Spielmuster überprüft, und nicht eine automatische Markierung.
+  - q: Ist Suchen dasselbe wie Röntgen?
+    a: Sie lösen dasselbe Problem, indem sie Ressourcen finden, ohne danach suchen zu müssen, aber mit unterschiedlichen Methoden. Röntgen verändert typischerweise das Rendering, um Blöcke durchzusehen. Suchscans analysieren Daten, die der Client bereits besitzt, und melden Übereinstimmungen, ohne das Gezeichnete zu verändern.
+---
+
+<KeyTakeaways>
+
+- Die Suche ist ein Modul (das in Clients wie Wurst zu finden ist), das geladene Chunks nach einem bestimmten Blocktyp durchsucht und jede Übereinstimmung markiert.
+- Es liest Daten, die der Client bereits besitzt, sodass keine zusätzlichen Pakete gesendet werden.
+- Die Reichweite ist durch die Renderdistanz begrenzt; es kann ungeladene Chunks nicht sehen.
+- Im Gegensatz zu X-Ray durchdringt es nie Wände, sondern meldet lediglich Koordinaten.
+
+</KeyTakeaways>
+
+Suche ist ein Minecraft-Modul, das jeden Chunk, den der Client bereits geladen hat, nach einem von Ihnen ausgewählten Blocktyp durchsucht und überall markiert oder auflistet, wo er auftaucht. Anstatt herumzugraben oder ziellos auf der Karte herumzuwandern in der Hoffnung, auf eine Ader zu stoßen, nennen Sie den Block und erhalten eine sofortige Antwort. Es wird unter der Kategorie Welt geführt, demselben Bereich wie andere Werkzeuge, die mit der Umgebung interagieren oder sie lesen, anstatt sich mit Kampf oder Bewegung zu befassen.
+
+## Wie es funktioniert
+
+Suche liest Chunk-Daten, die Ihr Client bereits im Speicher hält. Sobald ein Chunk geladen ist, erhält das Spiel das vollständige Blocklayout dafür – so funktioniert das Rendern einfach, der Client muss wissen, was da ist, um es zu zeichnen. Suche durchläuft diese Daten und sucht nach Übereinstimmungen mit dem von Ihnen gewählten Block, und platziert dann für jede gefundene Übereinstimmung einen Marker, einen Wegpunkt oder einen Listeneintrag.
+
+Dafür ist kein erneuter Kontakt mit dem Server erforderlich. Der Scan läuft vollständig mit Informationen, die der Client bereits hat, sodass keine neuen Pakete gesendet und keine bestehenden Pakete geändert werden. Die einzige Einschränkung ist die Renderdistanz: Suche kann nur Blöcke in Chunks aufdecken, die Sie tatsächlich geladen haben, nicht die ganze Welt. Gehen Sie weiter, laden Sie mehr Chunks, finden Sie mehr Übereinstimmungen. Das ist der ganze Ablauf.
+
+## Ist es sicher zu verwenden
+
+Die Suche ist keine rein kosmetische Funktion. Ressourcen zu finden, ohne sie suchen zu müssen, ist ein echter spielerischer Vorteil, derselben Kategorie wie ein Röntgenwerkzeug, obwohl die Suche nie durch Wände hindurchschaut oder auch nur ein einzelnes Pixel auf dem Bildschirm verändert. Was sie von einem Combat-Cheat wie Reichweite oder einem Aim-Bot unterscheidet, ist die Erkennungsgeschichte. Diese senden Pakete, die ein Server abfangen kann: eine unmögliche Rotation, ein Treffer aus einer Entfernung, die nicht möglich sein sollte. Die Suche sendet nichts Ungewöhnliches. Sie liest lediglich Daten erneut, die der Server dem Client bereits auf legitime Weise zur Verfügung gestellt hat, sodass es keine Paket-basierte Signatur für einen Anti-Cheat-Mechanismus gibt, die einen Alarm auslösen könnte.
+
+Das macht sie jedoch nicht überall zu einem fairen Spiel. Die meisten Server, die die Suche nach Ressourcen im Stil von Röntgenbildern verbieten, erzwingen dies durch Richtlinien, nicht durch automatisierte Erkennung, und fangen Verstöße durch Verhalten ab: ein Spieler, der ohne vorherige Erkundung direkt zu einer Erzadern fliegt, oder Mitarbeiter, die eine verdächtige Sitzung manuell überprüfen. Das Risiko liegt hier im sozialen und regelbasierten Bereich und nicht in einer serverseitigen Prüfung, die den Client direkt markiert, und genau deshalb überlebt sie auf Servern, auf denen Combat-Cheats innerhalb von Minuten aufgedeckt werden.
+
+<Callout variant="tip" title="Wo dies angesiedelt ist in Opal">
+Opal versendet kein dediziertes Such- oder Ressourcenfinder-Modul. Dieses ist als Wurst-Weltkategorie-Funktion dokumentiert. Opals eigener Katalog konzentriert sich auf Kampf-, Bewegungs- und visuelle Module, die Kategorien, in denen ein einziger Tick oder ein einziger Frame über den Ausgang eines Kampfes entscheidet. Das Lesen von Chunk-Daten für Erzadern ist nicht dieser Kampf.
+</Callout>
+
+<Callout variant="warning" title="Regeln können dies verbieten, selbst wenn eine Erkennung nicht möglich ist">
+Diese Seite beschreibt Suche allgemein, nicht als etwas, das Opal liefert. Selbst auf einem Server, der dies auf Paketebene niemals erfassen kann, verbieten viele Regelwerke die Ressourcensuche im Stil der Röntgenuntersuchung unabhängig von der Methode. Ein sauberer Erkennungsbericht hilft nicht, wenn die Regel selbst ein Verbot ausspricht, also prüfen Sie das, bevor Sie sie auf eine Diamantader richten.
+</Callout>
+
+## Häufig gestellte Fragen
+
+<FAQList>
+
+<FAQItem question="Wonach sucht die Suche eigentlich?">
+Die bereits vom Client geladenen Daten, und nichts anderes. Sie durchsucht diese Daten nach einem von Ihnen angegebenen Blocktyp und markiert oder listet jede Übereinstimmung auf, sodass die Ergebnisse auf das beschränkt sind, was sich aktuell in der Spielumgebung befindet.
+</FAQItem>
+
+<FAQItem question="Kann die Suche durch Wände sehen?">
+Nein. Die Suche rendert Blöcke nicht durch das Gelände, wie es ein Röntgen-Texturpaket oder ein Shader tut. Sie meldet Koordinaten oder setzt einen Marker ab, sie verändert nie, was tatsächlich auf dem Bildschirm dargestellt wird.
+</FAQItem>
+
+<FAQItem question="Können Server die Suche automatisch erkennen?">
+Selten durch Paketanalyse, da das Modul nichts sendet, was ein normaler Client nicht senden würde. Wo es auffliegt, ist es meistens ein Mitarbeiter, der Spielmuster überprüft, und nicht eine automatische Markierung.
+</FAQItem>
+
+<FAQItem question="Ist die Suche dasselbe wie Röntgen?">
+Sie lösen dasselbe Problem, nämlich Ressourcen zu finden, ohne sie suchen zu müssen, aber auf unterschiedliche Weise. Röntgen verändert typischerweise das Rendern, um Blöcke durchzusehen. Die Suche scannt die Datenblöcke, die der Client bereits besitzt, und meldet Übereinstimmungen, ohne das Gezeichnete zu verändern.
+</FAQItem>
+
+</FAQList>
+
+<Related links={[
+  { href: "/de/learn/what-is-a-minecraft-utility-client", label: "Was ist ein Minecraft-Utility-Client?", description: "Die breitere Kategorie Suche und andere weltweite Module befinden sich darin." },
+  { href: "/de/learn/what-is-a-ghost-client", label: "Was ist ein Ghost-Kunde?", description: "Die Stealth-Kategorie, aufgebaut auf Modulen, die niemals eine Paket-Level-Prüfung auslösen." },
+  { href: "/de/learn/what-is-reach", label: "Was ist Reichweite?", description: "Ein Modul am anderen Ende des Risikospektrums: gefangen von den Paketen, die es versendet, nicht von den Regeln, die es bricht." },
+]} />
+
+<CTA href="/de/kaufen">Opal setzt sein Entwicklungsgeld in den Kampf, nicht in die Erzader. Sehen Sie sich den Katalog für $8.99 an.</CTA>
