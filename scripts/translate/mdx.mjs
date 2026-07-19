@@ -137,8 +137,39 @@ async function translateString(s, target) {
  * chunk the model starts "improving" components into markdown, but it
  * translates an isolated component block faithfully.
  */
+const TAG_ONLY_LINE = /^\s*<\/?[A-Z][A-Za-z]*(?:\s[^>]*)?>\s*$/;
+
+/**
+ * A paragraph containing bare open/close tag LINES (KeyTakeaways blocks are
+ * often written without blank lines around the tags) is split at those lines
+ * so the tags become passthrough chunks and only the text between them goes
+ * to MT — tr reliably eats a closing tag that rides inside a prose chunk.
+ */
+function splitAtTagLines(paragraph) {
+  const lines = paragraph.split('\n');
+  if (!lines.some((l) => TAG_ONLY_LINE.test(l))) return [paragraph];
+  const parts = [];
+  let buffer = [];
+  const flushBuffer = () => {
+    if (buffer.length > 0) {
+      parts.push(buffer.join('\n'));
+      buffer = [];
+    }
+  };
+  for (const line of lines) {
+    if (TAG_ONLY_LINE.test(line)) {
+      flushBuffer();
+      parts.push(line);
+    } else {
+      buffer.push(line);
+    }
+  }
+  flushBuffer();
+  return parts;
+}
+
 export function chunkBody(body) {
-  const paragraphs = body.split(/\r?\n\r?\n/);
+  const paragraphs = body.split(/\r?\n\r?\n/).flatMap(splitAtTagLines);
   const chunks = [];
   let current = [];
   let currentLen = 0;
