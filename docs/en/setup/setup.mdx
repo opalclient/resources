@@ -31,13 +31,20 @@ Hit **Launch**. The launcher handles auth, updates, and loading for you. It'll a
 </Steps>
 </SetupCard>
 
-<SetupCard icon="settings" title="Installing by platform" description="Grab the launcher for your OS, then follow the notes for that platform.">
+<SetupCard icon="settings" title="Installing by platform" description="Grab the launcher for your OS — we show the one you're on, switch tabs for the rest.">
+<PlatformTabs>
+
+<PlatformTab os="windows">
 
 ### Windows (x64)
 
 1. Download the launcher for Windows from the [Downloads](/dash) page and run it.
 2. If Windows SmartScreen warns you, click **More info → Run anyway** — fresh builds aren't reputation-flagged yet.
 3. The WebView2 runtime ships with Windows 10 and 11. If the window opens blank, install the [WebView2 runtime](https://developer.microsoft.com/microsoft-edge/webview2/) and relaunch.
+
+</PlatformTab>
+
+<PlatformTab os="macos">
 
 ### macOS (Apple Silicon or Intel)
 
@@ -56,6 +63,10 @@ Hit **Launch**. The launcher handles auth, updates, and loading for you. It'll a
 macOS builds aren't Apple Developer-ID signed yet, so the quarantine step above is required for now. Once the builds are notarized this step goes away.
 </Note>
 
+</PlatformTab>
+
+<PlatformTab os="linux">
+
 ### Linux (x64)
 
 1. Download and unpack the Linux build, then make it executable: `chmod +x launcher-linux-x64`.
@@ -65,6 +76,9 @@ macOS builds aren't Apple Developer-ID signed yet, so the quarantine step above 
    - **A dialog service** — `zenity` or `kdialog`
 3. Run `./launcher-linux-x64`. If it crashes referencing `wtf.opal` or spams the log, you're missing the keyring or dialog service above — see **Linux-Specific Issues** below.
 
+</PlatformTab>
+
+</PlatformTabs>
 </SetupCard>
 
 <SetupCard icon="help" title="Troubleshooting" description="Check these before opening a support ticket." contentClassName="grid gap-6 md:grid-cols-2">
