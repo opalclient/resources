@@ -31,6 +31,42 @@ Hit **Launch**. The launcher handles auth, updates, and loading for you. It'll a
 </Steps>
 </SetupCard>
 
+<SetupCard icon="settings" title="Installing by platform" description="Grab the launcher for your OS, then follow the notes for that platform.">
+
+### Windows (x64)
+
+1. Download the launcher for Windows from the [Downloads](/dash) page and run it.
+2. If Windows SmartScreen warns you, click **More info → Run anyway** — fresh builds aren't reputation-flagged yet.
+3. The WebView2 runtime ships with Windows 10 and 11. If the window opens blank, install the [WebView2 runtime](https://developer.microsoft.com/microsoft-edge/webview2/) and relaunch.
+
+### macOS (Apple Silicon or Intel)
+
+1. Download the build for your chip — **arm64** for Apple Silicon (M-series), **x64** for Intel. Check under Apple menu → About This Mac.
+2. macOS quarantines apps that don't come from the App Store, so clear the quarantine flag and mark the file executable before the first launch:
+
+   ```bash
+   xattr -dr com.apple.quarantine ~/Downloads/launcher-macos-arm64
+   chmod +x ~/Downloads/launcher-macos-arm64
+   ```
+
+   Swap `arm64` for `x64` on an Intel Mac. You can also right-click the file → **Open** → **Open** to clear Gatekeeper for that file once.
+3. If it's still blocked, allow it under **System Settings → Privacy & Security → Open Anyway**, then launch again.
+
+<Note>
+macOS builds aren't Apple Developer-ID signed yet, so the quarantine step above is required for now. Once the builds are notarized this step goes away.
+</Note>
+
+### Linux (x64)
+
+1. Download and unpack the Linux build, then make it executable: `chmod +x launcher-linux-x64`.
+2. Install the runtime pieces the launcher needs — package names vary by distro:
+   - **WebKitGTK** — `libwebkit2gtk-4.1-0` (Debian/Ubuntu), `webkit2gtk4.1` (Fedora), `webkit2gtk-4.1` (Arch)
+   - **A keyring** — `gnome-keyring` or your desktop's equivalent, running before you launch
+   - **A dialog service** — `zenity` or `kdialog`
+3. Run `./launcher-linux-x64`. If it crashes referencing `wtf.opal` or spams the log, you're missing the keyring or dialog service above — see **Linux-Specific Issues** below.
+
+</SetupCard>
+
 <SetupCard icon="help" title="Troubleshooting" description="Check these before opening a support ticket." contentClassName="grid gap-6 md:grid-cols-2">
 <ChecklistSection title="Before asking for help">
 <Checklist>
