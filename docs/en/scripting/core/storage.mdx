@@ -1,0 +1,143 @@
+# Storage Proxy
+
+**Global Binding:** `storage`
+
+Persistent key-value storage, scoped to your script. Values are strings you
+write and read back with `set`/`get`; writes land on disk atomically, and
+data survives `.script reload` and full client restarts.
+
+<Callout type="info">
+    Storage is **per-script**. Each script gets its own store, so
+    `storage.get("highscores")` in one script can never read what another
+    script wrote under the same key. There is no shared namespace to collide
+    with, and nothing another script can do will let it see your data.
+</Callout>
+
+---
+
+## Methods
+
+<Method
+    name="set"
+    signature="void set(String key, String value)"
+    description="Writes a key to the store. The write is atomic: it either lands completely or not at all, so a crash or a forced quit mid-write can't leave a half-written value behind."
+    params={[
+        { name: "key", type: "String", desc: "Key name, up to 64 characters." },
+        { name: "value", type: "String", desc: "Value to store, up to 8 KB as UTF-8." }
+    ]}
+/>
+
+<Method
+    name="get"
+    signature="String get(String key)"
+    description="Reads a value back by key."
+    params={[
+        { name: "key", type: "String", desc: "Key name." }
+    ]}
+    returns={{ type: "String | null", desc: "The stored value, or null if the key was never set, was removed, or belongs to a different script." }}
+/>
+
+<Method
+    name="remove"
+    signature="boolean remove(String key)"
+    description="Deletes a key from the store."
+    params={[
+        { name: "key", type: "String", desc: "Key name." }
+    ]}
+    returns={{ type: "boolean", desc: "True if the key existed and was removed; false if there was nothing to remove." }}
+/>
+
+<Method
+    name="keys"
+    signature="List&lt;String&gt; keys()"
+    description="Lists every key this script currently has set."
+    returns={{ type: "List<String>", desc: "Key names. A read-only ScriptList: for..of, indexing, or size()/get(i) all work." }}
+/>
+
+<Callout type="info">
+    `keys()` returns a read-only [`ScriptList`](../world/types#list), the same collection type every other proxy hands back. Spread it into a real array (`[...storage.keys()]`) if you need `.map`/`.filter`.
+</Callout>
+
+---
+
+## Limits
+
+| Limit | Value |
+| :--- | :--- |
+| Keys per script | 32 |
+| Value size | 8 KB (UTF-8 bytes), per value |
+| Total store size | 64 KB, across every key combined |
+| Key length | 64 characters |
+
+<Callout type="warning">
+    Going over any of these throws a **catchable error**, not a silent no-op. That's different from most proxy methods, which return a safe default on bad input (see the [Modules Proxy](modules)). Wrap `storage.set()` in `try`/`catch` if the value you're writing isn't already bounded by your own logic.
+</Callout>
+
+---
+
+## Feature Detection
+
+`storage` is a newer global. On a client build old enough not to have it,
+referencing `storage` throws instead of reading as `undefined`. Guard with
+`typeof` before you touch it if your script still needs to run on older
+builds:
+
+```javascript
+const hasStorage = typeof storage !== "undefined";
+```
+
+---
+
+## Example
+
+A high-score list that round-trips through JSON, treats a missing key as "no
+scores yet" rather than an error, and does nothing on a client old enough not
+to have `storage` at all.
+
+```javascript
+script.registerModule({
+    name: "HighScores",
+    description: "Tracks the top 10 scores across restarts"
+}, (module) => {
+    const KEY = "highscores";
+    const hasStorage = typeof storage !== "undefined";
+
+    function loadScores() {
+        if (!hasStorage) return [];
+
+        const raw = storage.get(KEY);
+        if (raw === null) return []; // never written yet
+
+        try {
+            return JSON.parse(raw);
+        } catch (e) {
+            // Hand-edited or corrupt value: don't let a bad string crash the module.
+            return [];
+        }
+    }
+
+    function submitScore(score) {
+        if (!hasStorage) return;
+
+        const scores = loadScores();
+        scores.push(score);
+        scores.sort((a, b) => b - a);
+        const top10 = scores.slice(0, 10);
+
+        try {
+            storage.set(KEY, JSON.stringify(top10));
+        } catch (e) {
+            client.error("Couldn't save score: " + e.message);
+        }
+    }
+
+    module.on("enable", () => {
+        const best = loadScores();
+        client.print("Best score: " + (best.length > 0 ? best[0] : "none yet"));
+    });
+});
+```
+
+<Callout type="info">
+    Chomp, the flagship example in the public [scripts repository](https://github.com/opalclient/scripts), uses exactly this pattern in production: `chomp.highscores` holds its leaderboard, and `chomp.meta` holds meta-progression (unlocks, currency) that carries across runs and restarts. See [Publishing](../publishing) for how a script gets from a local folder to that repository.
+</Callout>
