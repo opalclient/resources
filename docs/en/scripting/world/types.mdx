@@ -321,22 +321,6 @@ A loaded GPU image, returned by `renderer.loadImage(path)`. Backed by the
 
 ---
 
-## MathHelper
-
-`MathHelper` is bound as a global, but **nothing on it is callable from a
-script**: it is a raw Minecraft type with no exported members, so every call
-against it is denied by the sandbox.
-
-<Callout type="warning">
-    Treat `MathHelper` as unavailable. Use JavaScript's built-in `Math` instead,
-    which covers `abs`, `floor`, `ceil`, `round`, `min`, `max`, `pow`, `sqrt`,
-    `hypot`, `random`, and the trigonometric functions. For interpolation use
-    `esp.lerp(start, end, tickDelta)`. The Minecraft-specific helpers scripts
-    need are exposed on the proxy globals themselves.
-</Callout>
-
----
-
 ## Color
 
 The standard `java.awt.Color`, bound as `Color`. Its two constructors and

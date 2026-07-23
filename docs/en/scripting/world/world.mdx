@@ -12,11 +12,16 @@ Block queries, entity queries, and world info.
 <Method name="isAir" signature="boolean isAir(BlockPos pos)" description="Whether the block at the given position is air." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "boolean", desc: "True if air." }} />
 <Method name="isReplaceable" signature="boolean isReplaceable(BlockPos pos)" description="Whether the block can be replaced (air, fluid, grass, etc.)." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "boolean", desc: "True if replaceable." }} />
 <Method name="isSolid" signature="boolean isSolid(BlockPos pos)" description="Whether the block is solid." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "boolean", desc: "True if solid." }} />
-<Method name="getBlockName" signature="String getBlockName(BlockPos pos)" description="Returns the localized display name of the block." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "String", desc: "Block name." }} />
+<Method name="getBlockName" signature="String getBlockName(BlockPos pos)" description="Returns the localized display name of the block. Changes with the client's language; for matching a specific block use getBlockId instead." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "String", desc: "Block name." }} />
+<Method name="getBlockId" signature="String getBlockId(BlockPos pos)" description="Returns the block's registry id, independent of the client's language. The locale-safe way to match a specific block." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "String", desc: "Registry id, e.g. 'minecraft:stone'. Never null." }} />
 <Method name="getBlockHardness" signature="float getBlockHardness(BlockPos pos)" description="Returns the breaking hardness. -1 means unbreakable (bedrock)." params={[{ name: "pos", type: "BlockPos", desc: "Block position." }]} returns={{ type: "float", desc: "Hardness." }} />
 
 <Callout type="info">
-    There is no `getBlockState` or `getBlock`. A raw block state carries nothing a script could read, so the queries above are flattened onto `world` directly: `isAir`, `isSolid`, `isReplaceable`, `getBlockName`, and `getBlockHardness` cover what those methods were used for.
+    There is no `getBlockState` or `getBlock`. A raw block state carries nothing a script could read, so the queries above are flattened onto `world` directly: `isAir`, `isSolid`, `isReplaceable`, `getBlockName`, `getBlockId`, and `getBlockHardness` cover what those methods were used for.
+</Callout>
+
+<Callout type="info">
+    Prefer `getBlockId` for matching (`if (world.getBlockId(pos) === "minecraft:stone")`) and `getBlockName` for text shown to the player. An unloaded position resolves both to air, mirroring each other rather than throwing or returning null: `getBlockId` returns `"minecraft:air"`, and `getBlockName` returns air's localized name.
 </Callout>
 
 ### Block Helpers
