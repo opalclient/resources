@@ -1,121 +1,121 @@
 # Publishing Scripts
 
-Share your scripts with the Opal community. Scripts go through a review process before becoming publicly available.
+The public script gallery is a single GitHub repository:
+[`opalclient/scripts`](https://github.com/opalclient/scripts). Every script in
+it went through a normal pull request, got built and checked by CI before a
+maintainer ever read it, and shipped as a tagged release with the bundled
+`.js` attached. There's no separate upload form to publish through: the repo
+is the submission pipeline.
 
 ## How It Works
 
 ```
-Local script → Upload to cloud → Submit for review → Developer approves → Public on dashboard
+Fork & copy template/ → Write manifest + src → Build & test locally → Open a PR
+→ CI checks the submission → Maintainer review → Merge = approved, release tagged
 ```
 
-1. **Write locally**: create your `.js` file in `scripts/`
-2. **Upload to private cloud**: syncs your script to your account
-3. **Submit for review**: a developer reviews your code
-4. **Approved**: your script appears on the public Scripts page
-5. **Other users download**: they save it to their private collection and sync to their client
+1. **Fork the repo and copy the template.** `template/` is a working
+   TypeScript scaffold. Copy it into a new folder named for your script's id.
+2. **Write your script.** Fill in `manifest.json` and the source under `src/`.
+   An existing, released script folder is the best reference for the shape
+   maintainers expect.
+3. **Build and test locally.** The template bundles your TypeScript down to a
+   single `.js` with esbuild. Drop that built file into your own
+   `opal/scripts/` folder and run `.script reload` to confirm it actually
+   works before you open a PR.
+4. **Open a pull request** against `opalclient/scripts`.
+5. **CI runs automatically.** See [CI Gates](#ci-gates) below. A failing check
+   blocks review.
+6. **A maintainer reviews the code** once CI is green.
+7. **Merge is the approval.** There's no separate sign-off step after that. A
+   release tagged `<id>@<version>` is cut with your bundled `.js` attached,
+   and that release is what the public gallery serves to users.
 
-## Step 1: Upload Your Script
+## The Template
 
-Once your script is working locally, upload it to your private cloud storage:
-
-```
-.script upload MyScript
-```
-
-This uploads `scripts/MyScript.js` to your account. The script is now accessible from the web dashboard under **Scripts → Private**.
+`template/` is a TypeScript project, not a bare `.js` file. You write your
+module in TypeScript against the same proxy API these docs describe, and the
+template's esbuild config bundles it into the single `.js` file Opal actually
+loads.
 
 <Callout type="info">
-    Script names must be 1-32 characters. Max file size is 100KB.
+    Bundling to one file matters because the sandbox has no `require` or
+    dynamic `import`: anything your script depends on has to be inlined at
+    build time. If your local build produces more than one output file,
+    something is wrong with the bundler config, not the sandbox.
 </Callout>
 
-## Step 2: Submit for Review
+## manifest.json
 
-1. Go to your **dashboard → Scripts → Private**
-2. Find your uploaded script
-3. Click **Submit for Review**
+Every script folder needs a `manifest.json` alongside its `src/`. At minimum
+it carries the script's id (the same id that shows up in the release tag) and
+a version. Start from the template's `manifest.json`; CI's manifest-validation
+gate tells you immediately if a required field is missing or malformed.
 
-Your script enters the review queue with status **Pending**.
+## CI Gates
 
-## Step 3: Review Process
+Every pull request runs the same automated checks before a maintainer looks
+at it:
 
-A developer will review your script for functionality (does it work as described?), safety (no malicious behavior, credential stealing, or excessive resource use), and quality (reasonable code, clear purpose).
-
-### Outcomes
-
-**Approved**: your script is copied to the public Scripts page. Other users can browse, search, and save it.
-
-**Rejected**: you'll see the rejection reason on your private scripts page. Fix the issues and resubmit.
+| Gate | What it checks |
+| :--- | :--- |
+| Manifest validation | `manifest.json` is well-formed and has the required fields. |
+| Lint | Code style matches the repo's lint config. |
+| Typecheck | The TypeScript compiles clean. |
+| Build size | The bundled `.js` comes in under 1 MB. |
+| Tests | The script's own tests pass. |
 
 <Callout type="warning">
-    You can only have one pending review per script at a time. Wait for the current review to complete before resubmitting.
+    A failing CI check blocks review outright. Fix it and push again; there's
+    no manual override.
 </Callout>
 
-## Step 4: Users Download Your Script
+## Review
 
-Once public, your script appears on **Scripts** in the dashboard. Other users can:
+Once CI is green, a maintainer reads the actual code for three things:
+**functionality** (does it do what the description says), **safety** (no
+credential theft, no malicious behavior, no excessive resource use), and
+**quality** (readable, focused code with a clear purpose). Merging the PR
+*is* the approval — there's no separate sign-off afterward.
 
-- **Browse and search**: find scripts by name or description
-- **Save to private**: clones the script to their private collection
-- **Sync to client**: download to their local `scripts/` folder via:
-
-```
-.script download ScriptName
-```
-
-The download counter on your script increments each time someone saves it. Users can also like/dislike scripts.
-
-## Updating Published Scripts
-
-To update a script that's already public:
-
-1. **Edit locally**: make your changes in `scripts/MyScript.js`
-2. **Re-upload**: `.script upload MyScript` (overwrites the cloud version)
-3. **Update metadata**: on the dashboard, click **Edit** to update the name, description, or version number
-4. **No re-review needed for the private version**: your cloud copy updates immediately
-
-<Callout type="warning">
-    Currently, updating a public script requires re-uploading to private and editing the public version through the dashboard. The public copy is a separate entity from your private one. We're working on making updates flow through more smoothly.
+<Callout type="info">
+    Keep obfuscation out of your submission. A reviewer who can't read your
+    code can't approve it, sandboxed or not.
 </Callout>
 
-### Version Numbering
+## Releases
 
-Use semantic versioning (e.g., `1.0.0`, `1.1.0`, `2.0.0`). Update the version field when you make changes so users know there's a new release. The version field is metadata only; there's no automatic enforcement.
+A merged PR is cut as a release named `<id>@<version>`, with the bundled
+`.js` attached as the release asset. That tag and that file are what actually
+ship to users, so treat `manifest.json`'s version field as real metadata, not
+decoration.
 
-## Managing Cloud Scripts
+### Updating a Published Script
 
-### Dashboard
+Bump the version in `manifest.json`, rebuild, and open a new PR against your
+existing script folder. There's no fast path around review for an update: it
+runs through the same CI gates and the same maintainer review as a first
+submission, and a merge cuts a new release tagged with the new version.
 
-- **Scripts → Private**: view, edit, delete, and submit your private scripts
-- **Scripts**: browse all public scripts, save to your collection
+## Tips for Getting Merged
 
-### In-Game Commands
+1. **Test locally first.** Load the built `.js` from your own
+   `opal/scripts/` folder and run it before opening a PR — CI catches build
+   failures and lint issues, not whether the module actually behaves.
+2. **Keep it focused.** One script, one purpose.
+3. **No obfuscation.** Reviewers need to be able to read your source.
+4. **Document your settings.** Clear names for `addBool`, `addNumber`, and
+   `addMode` settings save the reviewer, and every future user, a guess.
+5. **Version meaningfully.** Start at `1.0.0` and bump it for every change
+   you ship.
+6. **Look at a real example.** Chomp is the repo's flagship script and a
+   working, `storage`-using reference for exactly this pipeline. See
+   [Storage](core/storage) for the persistence side of it.
 
-| Command | Description |
-|---------|-------------|
-| `.script upload <name>` | Upload local script to private cloud |
-| `.script download <name>` | Download private script from cloud |
-| `.script cloud list` | List your cloud scripts |
-| `.script cloud delete <name>` | Delete a cloud script |
+---
 
-## Limits
-
-| Limit | Value |
-|-------|-------|
-| Max file size | 100KB |
-| Name length | 1-32 characters |
-| Description | Max 256 characters |
-| Version string | Max 16 characters |
-| Pending reviews | 1 per script at a time |
-
-## Tips for Getting Approved
-
-1. **Clear metadata**: give your script a descriptive name and description in `registerScript()`
-2. **Test thoroughly**: make sure it works before submitting
-3. **Keep it focused**: one script, one purpose
-4. **No obfuscation**: reviewers need to read your code
-5. **Document settings**: use clear names for your `addBool`, `addNumber`, `addMode` settings
-6. **Version it**: start at `1.0.0` and increment meaningfully
-
-## Roadmap: Rewards for Popular Scripts
-
-Downloads, likes, and dislikes are already tracked per public script. The plan is to turn that into a reward: scripts that reach a meaningful audience will earn their author coins, on top of the visibility a popular script already gets on the public Scripts page. Nothing here is live yet; this section will be updated with real mechanics and thresholds once it ships.
+None of this changes how a downloaded script runs on someone else's client.
+Community scripts still land in `opal/scripts/pending/` and need an explicit
+**Trust & run** before they execute, whether they came from this repo or
+anywhere else. See [The Sandbox](sandbox) and [Scripting Introduction](intro)
+for that side of things.
