@@ -19,7 +19,7 @@ and filesystem access both switched off. That buys you these guarantees:
 
 | Denied | What it means |
 | :--- | :--- |
-| **Filesystem** | No reading or writing files. There is no `require`, no `fs`, no path a script can open. |
+| **Filesystem** | No reading or writing files. There is no `require`, no `fs`, no path a script can open. The one sanctioned exception is the `storage` global: a capped, per-script key-value store, not file access. See [Storage](core/storage). |
 | **Network** | No sockets, no HTTP. A script has no class that opens a connection, and no way to import one. |
 | **Threads and processes** | A script cannot start a thread, spawn a process, or call native code. |
 | **`Java.type` / host classes** | `Java.type(...)` is denied outright, so a script cannot pull in an arbitrary Java class. The only classes it gets are the curated globals: `BlockPos`, `Vec2f`, `Vec3d`, `Color`. |

@@ -12,7 +12,7 @@ The proxy API below is the *complete* surface a script can reach. Anything not e
 
 ### Community scripts are quarantined
 
-Scripts imported from the public gallery never auto-run. They are written to a **quarantine directory** (`opal/scripts/pending/`), which the loader skips entirely: a pending script does not execute on reload or restart. It runs only after you explicitly **Trust & run** it, at which point it is moved into `opal/scripts/` and loaded. Your explicit trust is the gate that first executes community code; review it first.
+Scripts imported from the public gallery ([`opalclient/scripts`](https://github.com/opalclient/scripts)) never auto-run. They are written to a **quarantine directory** (`opal/scripts/pending/`), which the loader skips entirely: a pending script does not execute on reload or restart. It runs only after you explicitly **Trust & run** it, at which point it is moved into `opal/scripts/` and loaded. Your explicit trust is the gate that first executes community code; review it first.
 
 ## What a Script Can Do
 
@@ -159,6 +159,7 @@ Specific Java classes and constants are exposed globally. You do not need to imp
 | `notification` | Toast notifications (success, error, warn, info) |
 | `palette` | Custom command-palette views (mini-apps, games) |
 | `timer` | Millisecond timers for rate-limiting and delays |
+| `storage` | Persistent per-script key-value storage, survives restarts |
 | `mc` | Null guards for player/world, plus `interactionManager` |
 
 See the **API Reference** pages for full method documentation.
