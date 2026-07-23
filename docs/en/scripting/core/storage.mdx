@@ -3,8 +3,8 @@
 **Global Binding:** `storage`
 
 Persistent key-value storage, scoped to your script. Values are strings you
-write and read back with `set`/`get`; writes land on disk atomically, and
-data survives `.script reload` and full client restarts.
+write and read back with `set`/`get`; writes are atomic on typical desktop
+filesystems, and data survives `.script reload` and full client restarts.
 
 <Callout type="info">
     Storage is **per-script**. Each script gets its own store, so
@@ -20,7 +20,7 @@ data survives `.script reload` and full client restarts.
 <Method
     name="set"
     signature="void set(String key, String value)"
-    description="Writes a key to the store. The write is atomic: it either lands completely or not at all, so a crash or a forced quit mid-write can't leave a half-written value behind."
+    description="Writes a key to the store. Writes are atomic on typical desktop filesystems (falling back to a plain replace where atomic rename isn't supported), so a crash or a forced quit mid-write is very unlikely to leave a half-written value behind."
     params={[
         { name: "key", type: "String", desc: "Key name, up to 64 characters." },
         { name: "value", type: "String", desc: "Value to store, up to 8 KB as UTF-8." }

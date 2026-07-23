@@ -1,13 +1,80 @@
 # Publishing Scripts
 
-The public script gallery is a single GitHub repository:
-[`opalclient/scripts`](https://github.com/opalclient/scripts). Every script in
-it went through a normal pull request, got built and checked by CI before a
-maintainer ever read it, and shipped as a tagged release with the bundled
-`.js` attached. There's no separate upload form to publish through: the repo
-is the submission pipeline.
+A script can reach other people three different ways. These are independent
+channels, not stages of one pipeline: pick the one that matches how public,
+permanent, and vetted you want the script to be.
 
-## How It Works
+- **Private cloud sync** — your own scripts, following you between your own
+  devices. Nobody else sees them.
+- **In-client community gallery** — a lightweight, community-submitted
+  browser inside the client itself.
+- **The official gallery (GitHub)** — a single reviewed repository with CI
+  and tagged releases. The recommended path for a script you want polished
+  and broadly discoverable.
+
+## Private Cloud Sync
+
+Once a script is working locally, upload it to your account so it's there
+when you switch devices:
+
+```
+.script upload MyScript
+```
+
+This uploads `scripts/MyScript.js` to your account. Nothing here is public;
+it's a personal backup and sync mechanism, not a way to share a script with
+anyone else.
+
+<Callout type="info">
+    Script names must be 1-32 characters. Max file size is 100KB.
+</Callout>
+
+### In-Game Commands
+
+| Command | Description |
+|---------|-------------|
+| `.script upload <name>` | Upload local script to private cloud |
+| `.script download <name>` | Download private script from cloud |
+| `.script cloud list` | List your cloud scripts |
+| `.script cloud delete <name>` | Delete a cloud script |
+
+### Limits
+
+| Limit | Value |
+|-------|-------|
+| Max file size | 100KB |
+| Name length | 1-32 characters |
+| Description | Max 256 characters |
+| Version string | Max 16 characters |
+
+---
+
+## In-Client Community Gallery
+
+A separate, lighter-weight surface lives inside the client itself: open it
+from the command palette to browse scripts other users have submitted, vote
+on them, and clone one straight into your own collection. There's no
+maintainer review gate here beyond the submission itself, so quality and
+safety vary from script to script — it's the fast path, not the vetted one.
+
+<Callout type="warning">
+    A script you clone from the community gallery is still a downloaded
+    script from someone else. It lands in `opal/scripts/pending/` and needs
+    an explicit **Trust & run** before it executes, the same as anything
+    pulled from the GitHub gallery below. See [The Sandbox](sandbox).
+</Callout>
+
+## The Official Gallery (GitHub)
+
+The curated, reviewed channel is a single GitHub repository:
+[`opalclient/scripts`](https://github.com/opalclient/scripts). Every script
+in it went through a normal pull request, got built and checked by CI before
+a maintainer ever read it, and shipped as a tagged release with the bundled
+`.js` attached. This is the channel to use when you want a script actually
+reviewed and easy for anyone to find, rather than just floating in the
+in-client community list.
+
+### How It Works
 
 ```
 Fork & copy template/ → Write manifest + src → Build & test locally → Open a PR
@@ -29,9 +96,9 @@ Fork & copy template/ → Write manifest + src → Build & test locally → Open
 6. **A maintainer reviews the code** once CI is green.
 7. **Merge is the approval.** There's no separate sign-off step after that. A
    release tagged `<id>@<version>` is cut with your bundled `.js` attached,
-   and that release is what the public gallery serves to users.
+   and that release is what the gallery serves to users.
 
-## The Template
+### The Template
 
 `template/` is a TypeScript project, not a bare `.js` file. You write your
 module in TypeScript against the same proxy API these docs describe, and the
@@ -45,14 +112,24 @@ loads.
     something is wrong with the bundler config, not the sandbox.
 </Callout>
 
-## manifest.json
+### manifest.json
 
 Every script folder needs a `manifest.json` alongside its `src/`. At minimum
 it carries the script's id (the same id that shows up in the release tag) and
 a version. Start from the template's `manifest.json`; CI's manifest-validation
 gate tells you immediately if a required field is missing or malformed.
 
-## CI Gates
+<Callout type="warning">
+    This repo `manifest.json` is a different file from the `// ==OpalScript==`
+    header you can put at the top of the script's own source. `manifest.json`
+    is submission metadata that CI and maintainers read before your code ever
+    ships anywhere; the `// ==OpalScript==` block is metadata the running
+    client parses out of the file itself, at load time. Keep both, and keep
+    them saying the same thing. See [Script Manifest](manifest) for the
+    in-script header.
+</Callout>
+
+### CI Gates
 
 Every pull request runs the same automated checks before a maintainer looks
 at it:
@@ -70,7 +147,7 @@ at it:
     no manual override.
 </Callout>
 
-## Review
+### Review
 
 Once CI is green, a maintainer reads the actual code for three things:
 **functionality** (does it do what the description says), **safety** (no
@@ -83,21 +160,21 @@ credential theft, no malicious behavior, no excessive resource use), and
     code can't approve it, sandboxed or not.
 </Callout>
 
-## Releases
+### Releases
 
 A merged PR is cut as a release named `<id>@<version>`, with the bundled
 `.js` attached as the release asset. That tag and that file are what actually
 ship to users, so treat `manifest.json`'s version field as real metadata, not
 decoration.
 
-### Updating a Published Script
+#### Updating a Published Script
 
 Bump the version in `manifest.json`, rebuild, and open a new PR against your
 existing script folder. There's no fast path around review for an update: it
 runs through the same CI gates and the same maintainer review as a first
 submission, and a merge cuts a new release tagged with the new version.
 
-## Tips for Getting Merged
+### Tips for Getting Merged
 
 1. **Test locally first.** Load the built `.js` from your own
    `opal/scripts/` folder and run it before opening a PR — CI catches build
@@ -114,8 +191,8 @@ submission, and a merge cuts a new release tagged with the new version.
 
 ---
 
-None of this changes how a downloaded script runs on someone else's client.
-Community scripts still land in `opal/scripts/pending/` and need an explicit
-**Trust & run** before they execute, whether they came from this repo or
-anywhere else. See [The Sandbox](sandbox) and [Scripting Introduction](intro)
-for that side of things.
+Whichever channel a script came from, downloading it doesn't skip the
+sandbox: a script from the community gallery or the GitHub gallery alike
+lands in `opal/scripts/pending/` and needs an explicit **Trust & run** before
+it runs on your client. See [The Sandbox](sandbox) and
+[Scripting Introduction](intro) for that side of things.
