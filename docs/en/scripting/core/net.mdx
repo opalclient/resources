@@ -1,0 +1,165 @@
+# Net Proxy
+
+**Global Binding:** `net`
+
+Curated serverbound packet sends. Rather than going through a higher-level proxy method, a script builds and sends a handful of real vanilla packets directly.
+
+<Callout type="info">
+    Every send here is a genuine packet over the network connection (a no-op with no connection), subject to the same [`sendPacket` / `instantaneousSendPacket`](../events#packet-events) events as any other outbound packet.
+</Callout>
+
+<Callout type="warning">
+    **Invalid input throws.** An unrecognized action/mode string, or an out-of-range numeric parameter, throws a catchable error whose message lists the valid values — wrap the call in `try`/`catch` if the input isn't already validated by your own logic.
+</Callout>
+
+---
+
+## Methods
+
+<Method
+    name="swing"
+    signature="void swing(InteractionHand hand)"
+    description="Sends a server-only 'ghost' swing packet for the given hand. Unlike player.swingHand(), no local swing animation plays — the server sees the swing, but nothing changes on screen."
+    params={[
+        { name: "hand", type: "InteractionHand", desc: "MAIN_HAND or OFF_HAND." }
+    ]}
+/>
+
+<Method
+    name="heldSlot"
+    signature="void heldSlot(int slot)"
+    description="Sends a raw carried-item packet for the given hotbar slot."
+    params={[
+        { name: "slot", type: "int", desc: "Hotbar slot, 0-8. Out of range throws." }
+    ]}
+/>
+
+<Method
+    name="playerCommand"
+    signature="void playerCommand(String action)"
+    description="Sends a player-command packet for the given action. See the Player Command Actions table below for the valid set; an unrecognized action throws."
+    params={[
+        { name: "action", type: "String", desc: "One of the player-command actions." }
+    ]}
+/>
+
+<Method
+    name="playerAction"
+    signature="void playerAction(String action)"
+    description="Sends a player-action packet for a position-free action (see the Player Action Actions table below). blockPos/face are not needed and default to BlockPos.ZERO / DOWN. Passing a dig action here throws — use the 3-argument overload instead."
+    params={[
+        { name: "action", type: "String", desc: "One of the position-free player actions." }
+    ]}
+/>
+
+<Method
+    name="playerAction"
+    signature="void playerAction(String action, BlockPos blockPos, Direction face)"
+    description="Sends a player-action packet with an explicit block position and face. Required for a dig action; a position-free action accepts but ignores both. A dig action with a null blockPos or face throws."
+    params={[
+        { name: "action", type: "String", desc: "Any player-action action, dig or position-free." },
+        { name: "blockPos", type: "BlockPos", desc: "Target block position. Required for dig actions." },
+        { name: "face", type: "Direction", desc: "Target block face. Required for dig actions." }
+    ]}
+/>
+
+<Method
+    name="slotClick"
+    signature="void slotClick(int slot, int button, String mode)"
+    description="Routes a container click through the currently open container menu — a no-op if none is open. slot is validated against the open menu's slot count; button must be non-negative. Gated by the cancellable preSlotClick event, since it goes through the same vanilla path as a real inventory click."
+    params={[
+        { name: "slot", type: "int", desc: "Slot index in the currently open container menu." },
+        { name: "button", type: "int", desc: "Click button. Must be non-negative." },
+        { name: "mode", type: "String", desc: "One of the slot-click modes." }
+    ]}
+/>
+
+---
+
+## Player Command Actions
+
+Valid `action` strings for `playerCommand`:
+
+| Action |
+| :--- |
+| `stopSleeping` |
+| `startSprinting` |
+| `stopSprinting` |
+| `startRidingJump` |
+| `stopRidingJump` |
+| `openInventory` |
+| `startFallFlying` |
+
+## Player Action Actions
+
+Valid `action` strings for `playerAction`. **Dig actions require the 3-argument overload** (`blockPos` + `face`); position-free actions work with either overload.
+
+| Action | Kind |
+| :--- | :--- |
+| `startDestroyBlock` | Dig — requires `blockPos` + `face` |
+| `stopDestroyBlock` | Dig — requires `blockPos` + `face` |
+| `abortDestroyBlock` | Dig — requires `blockPos` + `face` |
+| `dropAllItems` | Position-free |
+| `dropItem` | Position-free |
+| `releaseUseItem` | Position-free |
+| `swapItemWithOffhand` | Position-free |
+
+## Slot Click Modes
+
+Valid `mode` strings for `slotClick`. This is the **same camelCase token set** [`preSlotClick`'s `getMode()`](../events#player-interaction-events) reports back, symmetrically.
+
+| Mode |
+| :--- |
+| `pickup` |
+| `quickMove` |
+| `swap` |
+| `clone` |
+| `throw` |
+| `quickCraft` |
+| `pickupAll` |
+
+---
+
+## Example
+
+```javascript
+script.registerModule({
+    name: "NetDemo",
+    description: "Exercises the net proxy"
+}, (module) => {
+    module.on("preGameTick", () => {
+        if (mc.getPlayer() === null || mc.getWorld() === null) return;
+
+        // Ghost-swing the off hand — the server sees it, nothing plays locally.
+        net.swing(OFF_HAND);
+    });
+
+    module.on("keyPress", (event) => {
+        if (event.getCode() !== keys.F6) return;
+
+        // Flick to hotbar slot 3 with a raw packet.
+        net.heldSlot(3);
+
+        // Position-free player action.
+        net.playerAction("swapItemWithOffhand");
+
+        // Dig action requires blockPos + face.
+        const pos = player.getBlockPosition();
+        const dirs = world.getAdjacentDirections(pos);
+        if (!dirs.isEmpty()) {
+            net.playerAction("startDestroyBlock", pos, dirs.get(0));
+        }
+
+        // Quick-move whatever is in container slot 0 (no-op if nothing is open).
+        try {
+            net.slotClick(0, 0, "quickMove");
+        } catch (e) {
+            client.error("slotClick failed: " + e.message);
+        }
+    });
+});
+```
+
+<Callout type="info">
+    `net.slotClick` is gated by the cancellable [`preSlotClick`](../events#player-interaction-events) event — a script (or another module) that cancels it blocks the click, the same as it would for a real inventory click. See [Events](../events#cancelling-events) for the full cancellation model.
+</Callout>

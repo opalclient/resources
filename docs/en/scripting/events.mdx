@@ -223,7 +223,7 @@ module.on("receivePacket", (event) => {
 
 ## Player Interaction Events
 
-Fired around the player's combat and item interactions. Only `jump` is cancellable.
+Fired around the player's combat and item interactions. `jump` and the five `pre`-prefixed events below are cancellable; `attack`, `swing`, and `itemUse` are not.
 
 | Event | Payload | Cancellable | Fires when |
 | :--- | :--- | :--- | :--- |
@@ -231,6 +231,11 @@ Fired around the player's combat and item interactions. Only `jump` is cancellab
 | `swing` | `SwingEvent` | No | The player swings an arm, before the swing is sent. |
 | `itemUse` | _(no readable data)_ | No | The player uses (right-clicks) the held item. |
 | `jump` | `JumpEvent` | Yes | Before the jump impulse is applied. |
+| `preBlockPlace` | `PreBlockPlaceEvent` | Yes | Before a block-placement / right-click-on-block interaction (`mc.interactionManager.interactBlock()`) is processed. |
+| `preUseItem` | `PreUseItemEvent` | Yes | Before the held item is used (right-click use) — fires ahead of `itemUse`. |
+| `preAttack` | `PreAttackEvent` | Yes | Before the player's attack on an entity is processed. Also gates `mc.interactionManager.attackEntity()`. |
+| `preInteractEntity` | `PreInteractEntityEvent` | Yes | Before a right-click interaction on an entity is processed. Also gates `mc.interactionManager.interactEntity()`. |
+| `preSlotClick` | `PreSlotClickEvent` | Yes | Before a container slot click is processed. Also gates [`net.slotClick()`](core/net) — same vanilla path. |
 
 <Method name="getTarget" signature="Entity getTarget()" description="attack: the entity being attacked, as an Entity wrapper." returns={{ type: "Entity", desc: "The targeted entity." }} />
 
@@ -249,6 +254,57 @@ Fired around the player's combat and item interactions. Only `jump` is cancellab
 <Method name="isSprinting" signature="boolean isSprinting()" description="jump: whether the player is sprinting while jumping." returns={{ type: "boolean", desc: "Sprint state." }} />
 
 <Method name="setSprinting" signature="void setSprinting(boolean sprinting)" description="jump: override whether the jump is treated as a sprint jump, changing the forward boost applied." params={[{ name: "sprinting", type: "boolean", desc: "True to apply the sprint-jump boost." }]} />
+
+### Pre-Action Payloads
+
+<Method name="getHand" signature="String getHand()" description="preBlockPlace / preUseItem / preInteractEntity: the hand performing the action, as 'main' or 'off'. preUseItem reports 'main' by convention — the vanilla method it fires from evaluates both hands internally and does not report which one triggered the use." returns={{ type: "String", desc: "'main' or 'off'." }} />
+
+<Method name="getX" signature="int getX()" description="preBlockPlace: the X coordinate of the target block." returns={{ type: "int", desc: "Block X." }} />
+
+<Method name="getY" signature="int getY()" description="preBlockPlace: the Y coordinate of the target block." returns={{ type: "int", desc: "Block Y." }} />
+
+<Method name="getZ" signature="int getZ()" description="preBlockPlace: the Z coordinate of the target block." returns={{ type: "int", desc: "Block Z." }} />
+
+<Method name="getFace" signature="String getFace()" description="preBlockPlace: the face being placed against, lowercase (e.g. 'up', 'north')." returns={{ type: "String", desc: "Lowercase direction name." }} />
+
+<Method name="isInside" signature="boolean isInside()" description="preBlockPlace: whether the player's eye position is inside the target block (placing while intersecting it)." returns={{ type: "boolean", desc: "True if placing from inside the target block." }} />
+
+<Method name="getTargetType" signature="String getTargetType()" description="preAttack / preInteractEntity: the target's namespaced entity-type id, e.g. 'minecraft:zombie'." returns={{ type: "String", desc: "Namespaced entity-type id." }} />
+
+<Method name="getContainerId" signature="int getContainerId()" description="preSlotClick: the id of the open container menu being clicked." returns={{ type: "int", desc: "Container menu id." }} />
+
+<Method name="getSlot" signature="int getSlot()" description="preSlotClick: the slot index being clicked." returns={{ type: "int", desc: "Slot index." }} />
+
+<Method name="getButton" signature="int getButton()" description="preSlotClick: the click button." returns={{ type: "int", desc: "Click button." }} />
+
+<Method name="getMode" signature="String getMode()" description="preSlotClick: the click mode — the same camelCase token set net.slotClick's mode parameter takes (pickup, quickMove, swap, clone, throw, quickCraft, pickupAll)." returns={{ type: "String", desc: "Click mode." }} />
+
+<Callout type="info">
+    `preAttack` and `preInteractEntity` also expose `getTargetId()` and `getTargetName()` — the same getters `attack` uses above. All five pre-action events extend the cancellable base: `isCancelled()` / `cancel()` (see [Cancelling Events](#cancelling-events)).
+</Callout>
+
+```javascript
+// Block placement into a specific region.
+module.on("preBlockPlace", (event) => {
+    if (event.getY() > 200) {
+        event.cancel(); // no building above Y=200
+    }
+});
+
+// Only allow attacking hostile mobs, not players or passive mobs.
+module.on("preAttack", (event) => {
+    if (event.getTargetType() === "minecraft:player") {
+        event.cancel();
+    }
+});
+
+// Block a specific inventory click mode.
+module.on("preSlotClick", (event) => {
+    if (event.getMode() === "quickCraft") {
+        event.cancel();
+    }
+});
+```
 
 ```javascript
 module.on("attack", (event) => {
@@ -390,6 +446,11 @@ Cancellable events extend the client's cancellable base, letting a handler suppr
 | `receivePacket` | Drops the inbound packet before vanilla handles it. |
 | `instantaneousSendPacket` | Prevents the outbound packet from being sent. |
 | `instantaneousReceivePacket` | Drops the inbound packet. |
+| `preBlockPlace` | Suppresses the block placement / right-click-on-block interaction. |
+| `preUseItem` | Suppresses the item use. |
+| `preAttack` | Suppresses the attack. Also blocks `mc.interactionManager.attackEntity()`. |
+| `preInteractEntity` | Suppresses the interaction. Also blocks `mc.interactionManager.interactEntity()`. |
+| `preSlotClick` | Suppresses the slot click. Also blocks `net.slotClick()`. |
 
 <Method name="cancel" signature="void cancel()" description="Marks the event cancelled. Takes no argument, and the flag cannot be cleared once set." />
 

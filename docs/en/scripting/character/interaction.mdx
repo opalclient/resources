@@ -1,6 +1,6 @@
 # Interaction Manager
 
-Block interaction, entity attacks, and block breaking, accessed through `mc.interactionManager`.
+Block interaction, entity attacks and right-clicks, and block breaking, accessed through `mc.interactionManager`.
 
 ---
 
@@ -21,11 +21,17 @@ Wraps `ClientPlayerInteractionManager`. The local player is injected automatical
 
 ### Entity & Item Interaction
 
-<Method name="attackEntity" signature="void attackEntity(Entity entity)" description="Attacks an entity with the local player's main hand." params={[{ name: "entity", type: "Entity", desc: "Entity to attack, e.g. from world.getLivingEntitiesInRange()." }]} />
+<Method name="attackEntity" signature="void attackEntity(Entity entity)" description="Attacks an entity with the local player's main hand. Gated by the cancellable preAttack event — a handler that cancels it blocks this call too." params={[{ name: "entity", type: "Entity", desc: "Entity to attack, e.g. from world.getLivingEntitiesInRange()." }]} />
+
+<Method name="interactEntity" signature="void interactEntity(Entity entity, InteractionHand hand)" description="Right-clicks (interacts with) an entity with the given hand — the right-click equivalent of attackEntity. Gated by the cancellable preInteractEntity event." params={[{ name: "entity", type: "Entity", desc: "Entity to interact with, e.g. from world.getLivingEntitiesInRange()." }, { name: "hand", type: "InteractionHand", desc: "MAIN_HAND or OFF_HAND." }]} />
 
 <Method name="interactItem" signature="void interactItem(InteractionHand hand)" description="Uses the item in the given hand (right-click use, not on a block)." params={[{ name: "hand", type: "InteractionHand", desc: "Hand to use." }]} />
 
 <Method name="stopUsingItem" signature="void stopUsingItem()" description="Stops using an item (e.g. releasing a bow or stopping eating)." />
+
+<Callout type="info">
+    `attackEntity` and `interactEntity` are gated by the cancellable [`preAttack` / `preInteractEntity`](../events#player-interaction-events) events respectively — a script (or another module) that cancels one blocks the matching call. `interactBlock` is likewise gated by `preBlockPlace`. See [Events](../events#cancelling-events) for the full cancellation model.
+</Callout>
 
 ### Example: Scaffold Pattern
 
@@ -55,4 +61,16 @@ if (raytrace === null) return;
 rotation.set(raytrace.getYaw(), raytrace.getPitch());
 mc.interactionManager.interactBlock(MAIN_HAND, raytrace.getHitResult());
 player.swingHand(MAIN_HAND);
+```
+
+### Example: Right-Click Entity
+
+```javascript
+// Right-click the closest living entity instead of attacking it
+// (trade with a villager, mount a boat, etc.).
+const targets = world.getLivingEntitiesInRange(player.getEntityInteractionRange());
+if (!targets.isEmpty()) {
+    mc.interactionManager.interactEntity(targets.get(0), MAIN_HAND);
+    player.swingHand(MAIN_HAND);
+}
 ```
