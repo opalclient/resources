@@ -101,6 +101,7 @@ function walkLangDirs(dir) {
 }
 
 compareJsonDir(join(ROOT, 'web'));
+compareJsonDir(join(ROOT, 'launcher'));
 walkLangDirs(join(ROOT, 'lang'));
 for (const category of readdirSync(join(ROOT, 'compliance'))) {
   const dir = join(ROOT, 'compliance', category);
