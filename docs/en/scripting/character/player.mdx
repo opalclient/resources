@@ -256,6 +256,13 @@ module.on("preGameTick", () => {
 />
 
 <Method
+    name="getAttackCooldown"
+    signature="double getAttackCooldown()"
+    description="Returns the attack strength scale: 0.0 right after an attack, rising to 1.0 once fully recharged. Returns 1.0 (fully charged) when there is no local player."
+    returns={{ type: "double", desc: "Attack strength scale, 0.0-1.0." }}
+/>
+
+<Method
     name="getEntityInteractionRange"
     signature="double getEntityInteractionRange()"
     description="Returns the maximum distance, in blocks, at which the player can attack or interact with entities."
@@ -273,7 +280,7 @@ module.on("preGameTick", () => {
 module.on("preGameTick", (event) => {
     if (mc.getPlayer() === null) return;
 
-    if (player.canCrit() && player.isHoldingWeapon()) {
+    if (player.getAttackCooldown() >= 1.0 && player.canCrit() && player.isHoldingWeapon()) {
         client.print("Crit window open (" + player.getAttackDamage() + " dmg)");
     }
 });

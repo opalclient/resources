@@ -143,6 +143,14 @@ hand back. Backed by the `ScriptEntity` wrapper. Scripts do not construct one.
     `getDistance()`). Check `isLiving()`, or test for `-1`, before trusting them.
 </Callout>
 
+<Callout type="warning">
+    `getHurtTime()` and `getPing()` do **not** use that same `-1` sentinel.
+    `getHurtTime()` answers `0` (not `-1`) on a non-living entity. `getPing()`
+    keys off `isPlayer()` rather than `isLiving()`, and answers `-1` for a
+    non-player entity, when there's no active connection, or when the player
+    is absent from the connection's player list (latency unknown).
+</Callout>
+
 ```javascript
 const targets = world.getLivingEntitiesInRange(16);
 for (const entity of targets) {
@@ -169,6 +177,19 @@ for (const entity of targets) {
 <Method name="hasEffect" signature="boolean hasEffect(String name)" description="Whether the entity currently has the named status effect. Accepts 'speed' or 'minecraft:speed'." params={[{ name: "name", type: "String", desc: "Effect name, with or without the minecraft: namespace." }]} returns={{ type: "boolean", desc: "True if the effect is active." }} />
 <Method name="getEffect" signature="Effect getEffect(String name)" description="Returns the named active status effect, or null if the entity does not have it." params={[{ name: "name", type: "String", desc: "Effect name, with or without the minecraft: namespace." }]} returns={{ type: "Effect | null", desc: "The active effect, or null." }} />
 <Method name="getEffects" signature="List<Effect> getEffects()" description="Returns every status effect currently active on the entity. A read-only ScriptList: iterate it with for..of or index it, and size()/get(i) also work." returns={{ type: "List<Effect>", desc: "Active effects." }} />
+<Method name="getHurtTime" signature="int getHurtTime()" description="Returns the ticks remaining in the entity's red hurt-flash animation. 0 if not currently flashing, and 0 (not -1) if this is not a living entity." returns={{ type: "int", desc: "Hurt-flash ticks remaining, or 0." }} />
+<Method name="getPing" signature="int getPing()" description="Returns the entity's network latency in milliseconds, as shown in the player list. -1 if this is not a player entity, there is no active connection, or the player is absent from the connection's player list." returns={{ type: "int", desc: "Latency in milliseconds, or -1." }} />
+<Method name="getMainHandItem" signature="ItemStack getMainHandItem()" description="Returns the item stack held in the entity's main hand, or null if this is not a living entity. A living entity with an empty hand returns the wrapped empty stack, never null." returns={{ type: "ItemStack | null", desc: "Main-hand item stack, or null." }} />
+<Method name="getOffHandItem" signature="ItemStack getOffHandItem()" description="Returns the item stack held in the entity's off hand, or null if this is not a living entity. A living entity with an empty hand returns the wrapped empty stack, never null." returns={{ type: "ItemStack | null", desc: "Off-hand item stack, or null." }} />
+<Method name="getArmorItems" signature="List<ItemStack> getArmorItems()" description="Returns the entity's worn armor, ordered feet, legs, chest, head. A living entity always returns exactly 4 entries (humanoid armor slots only; empty slots are wrapped empty stacks, not skipped). Empty list if this is not a living entity." returns={{ type: "List<ItemStack>", desc: "Armor stacks, feet to head." }} />
+
+<Callout type="info">
+    `getArmorItems()` always yields **4 entries** for a living entity — feet,
+    legs, chest, head — never more. The armor slot group it walks technically
+    also includes a fifth "body" slot used by animal armor (llamas, horses,
+    wolves); that entry is deliberately excluded so the index always maps to
+    a humanoid slot the same way across every living entity.
+</Callout>
 
 ---
 

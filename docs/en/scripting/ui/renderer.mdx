@@ -403,6 +403,35 @@ module.on("disable", () => {
 
 ---
 
+## Player Heads
+
+<Method
+    name="drawPlayerHead"
+    signature="void drawPlayerHead(Entity entity, double x, double y, double size)"
+    description="Draws a player's skin face, with the hat overlay layered on top, into the square (x, y, size, size)."
+    params={[
+        { name: "entity", type: "Entity", desc: "Target entity (from world.getEntities(), world.getLivingEntitiesInRange(), or mc.getPlayer())." },
+        { name: "x", type: "double", desc: "Left edge in scaled pixels." },
+        { name: "y", type: "double", desc: "Top edge in scaled pixels." },
+        { name: "size", type: "double", desc: "Width and height of the square the head is drawn into." }
+    ]}
+/>
+
+<Callout type="warning">
+    **Silent no-op.** `drawPlayerHead` draws nothing — no error, no thrown exception — when `entity` is `null`, the entity is not a player, or its skin can't be resolved. Check `entity.isPlayer()` first if you need to tell "drew successfully" apart from "silently skipped".
+</Callout>
+
+```javascript
+module.on("renderScreen", (event) => {
+    const target = mc.getPlayer();
+    if (target === null) return;
+
+    renderer.drawPlayerHead(target, 10, 10, 32);
+});
+```
+
+---
+
 ## Path API
 
 For custom vector shapes: begin a path, add segments, set the stroke style, then stroke it.
