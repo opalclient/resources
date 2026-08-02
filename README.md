@@ -36,6 +36,6 @@ display-name key is `theme → language → key`; other keys resolve `language �
 
 The Opal scripting docs under `docs/en/scripting/` describe the API these projects build on:
 
-- [opal-scripts](https://github.com/opalclient/opal-scripts) — example and demo scripts
+- [scripts](https://github.com/opalclient/scripts) — example and demo scripts
 - [opal-scripting-ide](https://github.com/opalclient/opal-scripting-ide) — VS Code and JetBrains extensions
 - [opal-script-skills](https://github.com/opalclient/opal-script-skills) — an AI assistant skill package
