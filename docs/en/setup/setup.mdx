@@ -49,18 +49,12 @@ Hit **Launch**. The launcher handles auth, updates, and loading for you. It'll a
 ### macOS (Apple Silicon or Intel)
 
 1. Download the build for your chip — **arm64** for Apple Silicon (M-series), **x64** for Intel. Check under Apple menu → About This Mac.
-2. macOS quarantines apps that don't come from the App Store, so clear the quarantine flag and mark the file executable before the first launch:
-
-   ```bash
-   xattr -dr com.apple.quarantine ~/Downloads/launcher-macos-arm64
-   chmod +x ~/Downloads/launcher-macos-arm64
-   ```
-
-   Swap `arm64` for `x64` on an Intel Mac. You can also right-click the file → **Open** → **Open** to clear Gatekeeper for that file once.
-3. If it's still blocked, allow it under **System Settings → Privacy & Security → Open Anyway**, then launch again.
+2. Double-click the download to unpack it, then drag **Opal Launcher** into **Applications**.
+3. The first time, right-click **Opal Launcher** → **Open** → **Open**. After that it opens normally.
+4. If it's still blocked, allow it under **System Settings → Privacy & Security → Open Anyway**, then launch again.
 
 <Note>
-macOS builds aren't Apple Developer-ID signed yet, so the quarantine step above is required for now. Once the builds are notarized this step goes away.
+macOS builds aren't Apple Developer-ID notarized yet, so the right-click → Open step is needed once. Still stuck? Run `xattr -dr com.apple.quarantine "/Applications/Opal Launcher.app"` in Terminal.
 </Note>
 
 </PlatformTab>
@@ -72,9 +66,7 @@ macOS builds aren't Apple Developer-ID signed yet, so the quarantine step above 
 1. Download and unpack the Linux build, then make it executable: `chmod +x launcher-linux-x64`.
 2. Install the runtime pieces the launcher needs — package names vary by distro:
    - **WebKitGTK** — `libwebkit2gtk-4.1-0` (Debian/Ubuntu), `webkit2gtk4.1` (Fedora), `webkit2gtk-4.1` (Arch)
-   - **A keyring** — `gnome-keyring` or your desktop's equivalent, running before you launch
-   - **A dialog service** — `zenity` or `kdialog`
-3. Run `./launcher-linux-x64`. If it crashes referencing `wtf.opal` or spams the log, you're missing the keyring or dialog service above — see **Linux-Specific Issues** below.
+3. Run `./launcher-linux-x64`. If `zenity`/`kdialog` or `xdg-open` is missing, the launcher tells you on startup and can install it for you (it asks for your password).
 
 </PlatformTab>
 
@@ -108,11 +100,11 @@ A traffic inspection tool such as HTTP Debugger is running. Close or uninstall i
 <SetupCard icon="alert" title="Linux-Specific Issues" description="A couple of extra things for Linux users.">
 <ErrorList>
 <ErrorItem code="Chat Spam" title="No Dialog Service">
-Repeated spam in the logs, or nothing after Minecraft-style log output, usually means you're missing a dialog popup service. Install your distro's equivalent, such as zenity or kdialog.
+Repeated spam in the logs, or nothing after Minecraft-style log output, usually means you're missing a dialog popup service. Restart the launcher and accept its install prompt, or install `zenity` (or `kdialog`) yourself.
 </ErrorItem>
 
-<ErrorItem code="Crash (wtf.opal.*)" title="Missing Keyring">
-A crash referencing `wtf.opal` means no keyring service is running. Install `gnome-keyring` (or your desktop's equivalent) and make sure it's started before you launch.
+<ErrorItem code="Blank window" title="Launcher Opens Empty">
+The launcher already works around the common NVIDIA/Wayland blank-window bug. If the window is still empty, start it with `WEBKIT_DISABLE_COMPOSITING_MODE=1 ./launcher-linux-x64`.
 </ErrorItem>
 </ErrorList>
 </SetupCard>
