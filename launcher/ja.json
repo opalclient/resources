@@ -23,9 +23,7 @@
     "empty": "このチャンネルには、まだ何もありません。"
   },
   "comingSoon": {
-    "eyebrow": "近日公開",
-    "body": "リリースまで間もなくです。Opal Launcherは自動でアップデートを実行します。自分で更新する必要はありません。",
-    "factsLabel": "ランダムな事実の表示"
+    "bannerBody": "まだビルドライブは公開されていませんが、どうぞご自由に見て回ってください。リリースされれば、こちらに自動的に表示されます."
   },
   "common": {
     "cancel": "キャンセル",
@@ -44,7 +42,23 @@
     "confirm": "確認してください",
     "iconAlt": "{brand} アイコン",
     "logoAlt": "{brand} ロゴ",
-    "avatarAlt": "{name} のアバター"
+    "avatarAlt": "{name} のアバター",
+    "search": "検索",
+    "clearSearch": "検索をクリア",
+    "loadFailed": "読み込めませんでした。接続を確認して、もう一度お試しください."
+  },
+  "errors": {
+    "linkLost": {
+      "title": "ゲームとの接続が失われました",
+      "description": "ゲームはランチャーとの接続が失われたため、終了しました。こちらから再度起動してください."
+    }
+  },
+  "gate": {
+    "outdated": {
+      "title": "ランチャーが最新版ではありません",
+      "body": "V{current} は利用中ですが、再生を続けるには v{latest} が必要です。最新バージョンをダウンロードして、続行してください.",
+      "download": "最新版をダウンロードしてください"
+    }
   },
   "header": {
     "defaultName": "プレイヤー",
@@ -56,7 +70,7 @@
   "home": {
     "welcome": "ようこそ",
     "welcomeBack": "おかえりなさい! {name}",
-    "subtitle": "プロフィール、Mod、および起動設定の管理ができます。準備ができたら、ゲームを開始しましょう!",
+    "subtitle": "プロフィール、MOD、スクリプト — すべてまとめて、ここに。準備ができたら、再生ボタンを押してください.",
     "stats": {
       "userId": "ユーザーID",
       "launch": "起動",
@@ -78,7 +92,6 @@
     "shareAria": "Mclo.gs にログを共有してください",
     "searchPlaceholder": "アクセスログ…",
     "searchAria": "検索ログ",
-    "clearSearch": "明確な検索",
     "empty": {
       "title": "ログはまだありません",
       "hint": "ゲームを開始すると、ログがここに出力されます."
@@ -86,6 +99,12 @@
     "noMatches": {
       "title": "該当なし",
       "hint": "「{query}」に一致するものはありません."
+    },
+    "countFiltered": "{total} 件中 {shown} 件",
+    "problemsOnly": {
+      "on": "問題のみ表示 — すべてを表示するにはクリック",
+      "off": "問題のみ表示",
+      "aria": "問題のみ表示を切り替えます"
     }
   },
   "mods": {
@@ -94,7 +113,8 @@
       "descriptionFor": "{name}のModを管理する",
       "descriptionForStream": "{name} ({stream}) のModを管理する",
       "refresh": "同期",
-      "openFolder": "Modsフォルダを開く"
+      "openFolder": "Modsフォルダを開く",
+      "openFolderFailed": "MODフォルダが開けませんでした"
     },
     "vanilla": {
       "title": "バニラ版はModが無効化されています。",
@@ -112,7 +132,10 @@
       "placeholder": "検索…."
     },
     "ruleCard": {
-      "viewOnModrinth": "Modrinth での表示"
+      "viewOnModrinth": "Modrinth での表示",
+      "download": "Modsフォルダにダウンロード",
+      "downloaded": "{name} をダウンロード",
+      "downloadFailed": "{name} のダウンロードに失敗しました"
     },
     "required": {
       "present": "必要なModが揃っています ({count})",
@@ -125,17 +148,46 @@
     },
     "recommended": {
       "title": "推奨Mod ({count})"
+    },
+    "marketplace": {
+      "title": "Mod マーケット",
+      "subtitle": "Modrinth の Fabric 向け Mod.",
+      "subtitleForVersion": "Minecraft {version} 用 Modrinth のFabricmod.",
+      "searchPlaceholder": "MODを検索….",
+      "search": "検索",
+      "searchFailed": "検索に失敗しました。接続を確認してください.",
+      "noResults": "変更点が見つかりませんでした",
+      "noResultsHint": "別の検索語句をお試しください.",
+      "noActiveProfile": "まず、プロファイルを選択してください",
+      "noGameVersion": "ゲームのバージョンはまだ解決できませんでした",
+      "byAuthor": "by {author}",
+      "install": "インストール",
+      "installing": "インストール中...",
+      "installed": "{name} をインストールしました",
+      "installedBadge": "インストール済み",
+      "incompatible": "非互換",
+      "incompatibleToast": "{name} は Opal ({rule}) と互換性がありません",
+      "noCompatibleVersion": "{name} には Minecraft {version} 用のビルドがありません",
+      "installFailed": "インストールできませんでした：{name}、{error}",
+      "unknownError": "不明なエラー",
+      "back": "インストール済みMODに戻る"
+    },
+    "delete": {
+      "title": "{count, plural, one {Delete # mod?} other {Delete # mods?}}",
+      "description": "{count, plural, one {The selected mod file will be removed from this profile's mods folder.} other {The # selected mod files will be removed from this profile's mods folder.}}",
+      "success": "{count, plural, one {Deleted # mod} other {Deleted # mods}}",
+      "failed": "{count, plural, one {Couldn't delete # mod} other {Couldn't delete # mods}}"
     }
   },
   "nav": {
     "home": "ホーム",
     "mods": "MOD",
     "packs": "パック",
+    "scripts": "スクリプト",
     "profiles": "起動構成",
     "changelog": "更新履歴",
     "logs": "ログ",
-    "settings": "設定",
-    "scripts": "スクリプト"
+    "settings": "設定"
   },
   "packs": {
     "browser": {
@@ -156,7 +208,8 @@
     "card": {
       "enable": "可能にする",
       "disable": "停止する",
-      "download": "ダウンロード"
+      "download": "ダウンロード",
+      "remove": "削除 {name}"
     },
     "marketplace": {
       "title": "{type, select, shader {Shaders} other {Resource Packs}}を探す",
@@ -193,6 +246,7 @@
     "descriptionOptionalPlaceholder": "説明（任意）",
     "selectProfile": "プロフィールを選択してください{name}",
     "defaultCannotDelete": "デフォルトのプロフィールは削除できません",
+    "openFolder": "フォルダを開く",
     "create": {
       "title": "新しく起動構成を作成する",
       "submit": "作成"
@@ -233,8 +287,18 @@
       "deleted": "削除済み",
       "deleteFailed": "削除できませんでした",
       "openFolderFailed": "プロフィールフォルダを開けませんでした"
-    },
-    "openFolder": "フォルダを開く"
+    }
+  },
+  "scripts": {
+    "searchPlaceholder": "スクリプトを検索…",
+    "searchAria": "スクリプトを検索",
+    "emptyTitle": "スクリプトはまだありません",
+    "emptyHint": "クライアント用のスクリプトはこちらに表示されます",
+    "noMatches": "該当なし",
+    "noMatchesHint": "「{query}」に一致するものはありません",
+    "pinned": "ピン止め",
+    "installs": "{count, plural, one {install} other {installs}}",
+    "countFiltered": "{total} 件中 {shown} 件"
   },
   "settings": {
     "title": "設定",
@@ -253,6 +317,25 @@
     "resolution": {
       "label": "起動時の解像度",
       "hint": "(幅 × 高さ)"
+    },
+    "windowMode": {
+      "label": "ウィンドウモード",
+      "hint": "ゲームの開始方法",
+      "windowed": "窓のある",
+      "fullscreen": "全画面"
+    },
+    "onLaunch": {
+      "label": "ゲームが始まると",
+      "hint": "(ランチャーウィンドウ)",
+      "minimize": "ランチャーを最小化",
+      "hide": "ランチャーを隠す",
+      "keep": "ランチャーを開いたままにする"
+    },
+    "jvmArgs": {
+      "label": "カスタムJVM引数",
+      "hint": "(Please provide the English text you would like me to translate.)",
+      "placeholder": "-XX:+UseG1GC",
+      "note": "メモリ、エージェント、デバッガー、およびクラスパスフラグは無視されます."
     },
     "language": {
       "label": "言語",
@@ -276,8 +359,8 @@
       "confirm": {
         "title": "{category}を消去しますか？",
         "titleAll": "すべてのストレージを消去しますか？",
-        "body": "これにより{size}のファイルが削除されます。必要になった際に再度ダウンロードされます。",
-        "bodyAll": "これによりすべてのカテゴリの{size}が削除されます。必要になった際にすべて再度ダウンロードされます。"
+        "body": "この操作で{size}のファイルが削除されます。必要なものは自動的に再ダウンロードされます.",
+        "bodyAll": "{size} はすべてのカテゴリから削除されます。必要なものはすべて自動的に再ダウンロードされます."
       },
       "toast": {
         "cleared": "{category}を消去しました",
@@ -303,40 +386,65 @@
         "body": "これらのファイルはこの起動構成にすでに存在し、上書きされます：{files}",
         "action": "上書きしてインポート"
       }
+    },
+    "sections": {
+      "game": "ゲーム",
+      "launcher": "ランチャー",
+      "data": "データとストレージ",
+      "about": "について"
+    },
+    "about": {
+      "launcherVersion": "ランチャーバージョン",
+      "hostVersion": "ホスト (Tauri) バージョン"
+    }
+  },
+  "setup": {
+    "checking": {
+      "title": "準備をする",
+      "subtitle": "少々お待ちください…"
+    },
+    "title": "ゲームフォルダを選択してください",
+    "description": "Minecraftとクライアントファイルの保存場所を選択してください。設定で後から変更できます.",
+    "label": "ゲームディレクトリ",
+    "placeholder": ".minecraft フォルダへのパス",
+    "browse": "閲覧",
+    "hint": "推奨されるデフォルト設定は、ほとんどの人にとって問題なく動作します。ユーザーフォルダ内に設置する必要があります.",
+    "confirm": "続ける",
+    "errors": {
+      "empty": "続行するには、フォルダを選択してください.",
+      "relative": "フォルダへのフルパスを入力してください.",
+      "out-of-scope": "ユーザーフォルダ内のフォルダを選択してください。（例：AppData フォルダ内、またはホームディレクトリ内）."
+    },
+    "importVanilla": {
+      "label": "自分のMinecraft設定をインポートする",
+      "success": "Minecraft設定をインポートしました",
+      "failed": "Minecraft設定をインポートできませんでした"
     }
   },
   "sidebar": {
     "selectProfile": "起動構成を選択してください",
     "release": "リリース:",
     "version": "バージョン:",
-    "hostVersion": "ホスト v{version}",
-    "launcherVersion": "ランチャー v{version}",
     "status": {
       "play": "起動",
       "preparing": "準備中",
+      "verifying": "確認中",
       "downloading": "ダウンロード中…",
       "extracting": "抽出中…",
       "launching": "起動中…",
-      "stop": "停止",
-      "verifying": "確認中"
-    }
+      "stop": "停止"
+    },
+    "brandVersion": "{brand} ({version})"
   },
-  "scripts": {
-    "searchPlaceholder": "スクリプトを検索…",
-    "searchAria": "スクリプトを検索",
-    "clearSearch": "明確な検索",
-    "emptyTitle": "スクリプトはまだありません",
-    "emptyHint": "クライアント用のスクリプトはこちらに表示されます",
-    "noMatches": "該当なし",
-    "noMatchesHint": "「{query}」に一致するものはありません",
-    "pinned": "ピン止め",
-    "installs": "{count, plural, one {install} other {installs}}"
-  },
-  "setup": {
-    "importVanilla": {
-      "label": "自分のMinecraft設定をインポートする",
-      "success": "Minecraft設定をインポートしました",
-      "failed": "Minecraft設定をインポートできませんでした"
-    }
+  "linuxDeps": {
+    "title": "システムツールが見つかりません",
+    "body": "Opal 必要です {missing} ポップアップを表示し、リンクを開きます。今すぐインストールしてください?",
+    "install": "インストール",
+    "installing": "インストール中…",
+    "copy": "コピー",
+    "copied": "コマンドをコピーしました",
+    "installed": "インストール完了しました。準備万端です.",
+    "stillMissing": "いくつかのツールがまだ見つかっていません。コマンドを手動で試してみてください.",
+    "installFailed": "インストールに失敗したか、キャンセルされました。コマンドを手動で実行してください."
   }
 }

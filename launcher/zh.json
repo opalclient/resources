@@ -23,9 +23,7 @@
     "empty": "这个频道还没有更新日志。"
   },
   "comingSoon": {
-    "eyebrow": "即将推出",
-    "body": "目前尚未发布，但已经快完成了。Opal 发布后，此页面会自动消失，无需手动刷新。",
-    "factsLabel": "随机小知识"
+    "bannerBody": "这个频道目前还没有正式上线 — 您仍然可以浏览一下。它会在正式发布后自动显示在这里."
   },
   "common": {
     "cancel": "取消",
@@ -44,7 +42,23 @@
     "confirm": "确认",
     "iconAlt": "{brand} 图标",
     "logoAlt": "{brand} 标志",
-    "avatarAlt": "{name} 的头像"
+    "avatarAlt": "{name} 的头像",
+    "search": "搜索",
+    "clearSearch": "清晰搜索",
+    "loadFailed": "无法加载。请检查您的连接并重试."
+  },
+  "errors": {
+    "linkLost": {
+      "title": "游戏连接已断开",
+      "description": "游戏已关闭，因为它与启动器失去了连接。请从这里重新启动它."
+    }
+  },
+  "gate": {
+    "outdated": {
+      "title": "启动器已过时",
+      "body": "你正在使用 v{current}，但需要 v{latest} 才能继续游戏。请下载最新版本以继续.",
+      "download": "下载最新版本"
+    }
   },
   "header": {
     "defaultName": "玩家",
@@ -56,7 +70,7 @@
   "home": {
     "welcome": "欢迎",
     "welcomeBack": "欢迎回来，{name}",
-    "subtitle": "管理你的配置文件、模组和启动设置。准备就绪后，选择一个配置文件即可开始游戏。",
+    "subtitle": "您的个人资料、模组和脚本——尽在一个地方。准备就绪时，点击播放.",
     "stats": {
       "userId": "用户 ID",
       "launch": "启动",
@@ -78,7 +92,6 @@
     "shareAria": "上传日志到 mclo.gs",
     "searchPlaceholder": "搜索日志……",
     "searchAria": "搜索日志",
-    "clearSearch": "清除搜索",
     "empty": {
       "title": "还没有日志",
       "hint": "启动游戏后，输出内容会显示在这里。"
@@ -86,6 +99,12 @@
     "noMatches": {
       "title": "没有找到结果",
       "hint": "没有找到匹配“{query}”的内容。"
+    },
+    "countFiltered": "{shown} / {total}",
+    "problemsOnly": {
+      "on": "仅显示问题 — 点击显示全部",
+      "off": "只显示问题",
+      "aria": "只显示问题"
     }
   },
   "mods": {
@@ -94,7 +113,8 @@
       "descriptionFor": "管理 {name} 的模组",
       "descriptionForStream": "管理 {name}（{stream}）的模组",
       "refresh": "刷新",
-      "openFolder": "打开模组文件夹"
+      "openFolder": "打开模组文件夹",
+      "openFolderFailed": "无法打开模组文件夹"
     },
     "vanilla": {
       "title": "原版模式无法修改模组",
@@ -112,7 +132,10 @@
       "placeholder": "搜索模组……"
     },
     "ruleCard": {
-      "viewOnModrinth": "在 Modrinth 查看"
+      "viewOnModrinth": "在 Modrinth 查看",
+      "download": "下载到mods文件夹",
+      "downloaded": "已下载 {name}",
+      "downloadFailed": "无法下载{name}"
     },
     "required": {
       "present": "必需模组已安装（{count}）",
@@ -125,17 +148,46 @@
     },
     "recommended": {
       "title": "推荐模组（{count}）"
+    },
+    "marketplace": {
+      "title": "模组市场",
+      "subtitle": "Modrinth 的 Fabric 模组.",
+      "subtitleForVersion": "Fabric modrinth 上的模组 Minecraft {version}.",
+      "searchPlaceholder": "搜索模组...",
+      "search": "搜索",
+      "searchFailed": "搜索失败。请检查您的连接.",
+      "noResults": "未找到任何修改",
+      "noResultsHint": "试试不同的搜索词.",
+      "noActiveProfile": "请先选择一个资料",
+      "noGameVersion": "尚未确定游戏版本",
+      "byAuthor": "由{author}",
+      "install": "安装",
+      "installing": "正在安装...",
+      "installed": "已安装 {name}",
+      "installedBadge": "已安装",
+      "incompatible": "不相容的",
+      "incompatibleToast": "{name} 与 Opal ({rule}) 不兼容",
+      "noCompatibleVersion": "{name} 没有适用于 Minecraft {version} 的构建",
+      "installFailed": "无法安装{name}：{error}",
+      "unknownError": "未知错误",
+      "back": "已安装的模组返回"
+    },
+    "delete": {
+      "title": "{count, plural, one {Delete # mod?} other {Delete # mods?}}",
+      "description": "{count, plural, one {The selected mod file will be removed from this profile's mods folder.} other {The # selected mod files will be removed from this profile's mods folder.}}",
+      "success": "{count, plural, one {Deleted # mod} other {Deleted # mods}}",
+      "failed": "{count, plural, one {Couldn't delete # mod} other {Couldn't delete # mods}}"
     }
   },
   "nav": {
     "home": "主页",
     "mods": "模组",
     "packs": "资源包",
+    "scripts": "脚本",
     "profiles": "配置文件",
     "changelog": "更新日志",
     "logs": "日志",
-    "settings": "设置",
-    "scripts": "脚本"
+    "settings": "设置"
   },
   "packs": {
     "browser": {
@@ -156,7 +208,8 @@
     "card": {
       "enable": "启用",
       "disable": "禁用",
-      "download": "下载"
+      "download": "下载",
+      "remove": "删除{name}"
     },
     "marketplace": {
       "title": "浏览 {type, select, shader {光影} other {资源包}}",
@@ -193,6 +246,7 @@
     "descriptionOptionalPlaceholder": "输入描述（可选）",
     "selectProfile": "选择 {name} 配置文件",
     "defaultCannotDelete": "默认配置文件无法删除",
+    "openFolder": "打开文件夹",
     "create": {
       "title": "创建新配置文件",
       "submit": "创建"
@@ -233,8 +287,18 @@
       "deleted": "配置文件已删除",
       "deleteFailed": "删除配置文件失败",
       "openFolderFailed": "无法打开配置文件文件夹"
-    },
-    "openFolder": "打开文件夹"
+    }
+  },
+  "scripts": {
+    "searchPlaceholder": "搜索脚本……",
+    "searchAria": "搜索脚本",
+    "emptyTitle": "还没有脚本",
+    "emptyHint": "社区提供的客户端脚本会显示在这里。",
+    "noMatches": "没有找到匹配项",
+    "noMatchesHint": "没有找到匹配“{query}”的内容。",
+    "pinned": "已置顶",
+    "installs": "{count, plural, one {# 次安装} other {# 次安装}}",
+    "countFiltered": "{shown} / {total}"
   },
   "settings": {
     "title": "设置",
@@ -253,6 +317,25 @@
     "resolution": {
       "label": "分辨率",
       "hint": "宽度 × 高度"
+    },
+    "windowMode": {
+      "label": "全屏模式",
+      "hint": "游戏如何开始",
+      "windowed": "窗户",
+      "fullscreen": "全屏"
+    },
+    "onLaunch": {
+      "label": "游戏开始时",
+      "hint": "启动窗口",
+      "minimize": "最小化启动器",
+      "hide": "隐藏启动器",
+      "keep": "保持启动器打开"
+    },
+    "jvmArgs": {
+      "label": "自定义 JVM 参数",
+      "hint": "請提供您要翻譯的英文文本",
+      "placeholder": "-XX:+UseG1GC",
+      "note": "内存、代理、调试器和类路径标志将被忽略."
     },
     "language": {
       "label": "语言",
@@ -276,8 +359,8 @@
       "confirm": {
         "title": "确定要清除「{category}」吗？",
         "titleAll": "确定要清除全部存储吗？",
-        "body": "这将删除 {size} 的文件，下次需要时会重新下载。",
-        "bodyAll": "这将删除所有类别共 {size} 的内容，下次需要时会全部重新下载。"
+        "body": "这会删除{size}个文件。您仍然需要的任何文件都将自动重新下载.",
+        "bodyAll": "此操作将删除{size}，适用于所有类别。您仍然需要的任何内容都将自动重新下载."
       },
       "toast": {
         "cleared": "已清除「{category}」",
@@ -303,40 +386,65 @@
         "body": "以下文件已存在于该配置文件中，将被覆盖：{files}",
         "action": "覆盖并导入"
       }
+    },
+    "sections": {
+      "game": "游戏",
+      "launcher": "发射器",
+      "data": "数据与存储",
+      "about": "关于"
+    },
+    "about": {
+      "launcherVersion": "启动版本",
+      "hostVersion": "主机 (Tauri) 版本"
+    }
+  },
+  "setup": {
+    "checking": {
+      "title": "准备就绪",
+      "subtitle": "请稍等…"
+    },
+    "title": "选择您的游戏文件夹",
+    "description": "选择你的 Minecraft 和客户端文件存储的位置。你可以在设置中稍后更改此位置.",
+    "label": "游戏目录",
+    "placeholder": "你的 .minecraft 文件夹路径",
+    "browse": "浏览",
+    "hint": "推荐的默认设置适用于大多数人。它必须位于您的用户文件夹内.",
+    "confirm": "继续",
+    "errors": {
+      "empty": "请选择一个文件夹继续.",
+      "relative": "请输入一个文件夹的完整路径.",
+      "out-of-scope": "选择你的用户文件夹内的任意一个文件夹（例如，在 AppData 或你的主目录中）."
+    },
+    "importVanilla": {
+      "label": "导入我的 Minecraft 设置",
+      "success": "已导入你的 Minecraft 设置",
+      "failed": "无法导入你的 Minecraft 设置"
     }
   },
   "sidebar": {
     "selectProfile": "选择配置文件",
     "release": "正式版",
     "version": "版本：",
-    "hostVersion": "核心版本 v{version}",
-    "launcherVersion": "启动器版本 v{version}",
     "status": {
       "play": "启动游戏",
       "preparing": "正在准备……",
+      "verifying": "正在验证",
       "downloading": "正在下载……",
       "extracting": "正在解压……",
       "launching": "正在启动……",
-      "stop": "停止",
-      "verifying": "正在验证"
-    }
+      "stop": "停止"
+    },
+    "brandVersion": "{brand} ({version})"
   },
-  "scripts": {
-    "searchPlaceholder": "搜索脚本……",
-    "searchAria": "搜索脚本",
-    "clearSearch": "清除搜索",
-    "emptyTitle": "还没有脚本",
-    "emptyHint": "社区提供的客户端脚本会显示在这里。",
-    "noMatches": "没有找到匹配项",
-    "noMatchesHint": "没有找到匹配“{query}”的内容。",
-    "pinned": "已置顶",
-    "installs": "{count, plural, one {# 次安装} other {# 次安装}}"
-  },
-  "setup": {
-    "importVanilla": {
-      "label": "导入我的 Minecraft 设置",
-      "success": "已导入你的 Minecraft 设置",
-      "failed": "无法导入你的 Minecraft 设置"
-    }
+  "linuxDeps": {
+    "title": "缺失系统工具",
+    "body": "Opal 需要 {missing} 显示弹出窗口并打开链接。立即安装?",
+    "install": "安装",
+    "installing": "正在安装…",
+    "copy": "复制",
+    "copied": "指令已复制",
+    "installed": "已安装。您可以开始使用.",
+    "stillMissing": "有些工具仍然缺失。请手动尝试该命令.",
+    "installFailed": "安装失败或已取消。请手动运行命令."
   }
 }

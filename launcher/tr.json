@@ -23,9 +23,7 @@
     "empty": "Bu kanalda henüz bir değişiklik geçmişi yok."
   },
   "comingSoon": {
-    "eyebrow": "Yakında",
-    "body": "Henüz çıkmadı ama yakında çıkacak. Opal yola çıktığında, bu ekran kendi başına yerinden kalkar. Her zaman yenileme yapman gerekmez.",
-    "factsLabel": "Rastgele bilgiler akışı"
+    "bannerBody": "Bu kanal henüz canlı bir sürümde değil — yine de etrafına bakabilirsin. Yayınlandığında otomatik olarak burada görünecek."
   },
   "common": {
     "cancel": "İptal et",
@@ -44,7 +42,23 @@
     "confirm": "Doğrula",
     "iconAlt": "{brand} simgesi",
     "logoAlt": "Logoyu {brand}",
-    "avatarAlt": "{name}'ın Avatarı"
+    "avatarAlt": "{name}'ın Avatarı",
+    "search": "Ara",
+    "clearSearch": "Açık arama",
+    "loadFailed": "Bu yüklenemedi. Bağlantınızı kontrol edin ve tekrar deneyin."
+  },
+  "errors": {
+    "linkLost": {
+      "title": "Oyuna bağlantı kesildi",
+      "description": "Oyun, başlatıcıyla bağlantısını kaybettiği için kapatıldı. Buradan tekrar başlatın."
+    }
+  },
+  "gate": {
+    "outdated": {
+      "title": "Başlatıcı güncel değil",
+      "body": "Oyun v{current} sürümündesin, ancak oynamaya devam etmek için v{latest} sürümü gerekiyor. Devam etmek için en son sürümü indir.",
+      "download": "En son sürümü indirin"
+    }
   },
   "header": {
     "defaultName": "Oyuncu",
@@ -56,7 +70,7 @@
   "home": {
     "welcome": "Hoş geldiniz",
     "welcomeBack": "Hoş geldin geri {name}",
-    "subtitle": "Profilinizi, modlarınızı ve başlatma ayarlarınızı yönetin. Hazır olduğunuzda, seçilen profille oyunu başlatın.",
+    "subtitle": "Profilleriniz, modlarınız ve betikleriniz — hepsi bir arada. Hazır olduğunuzda oynatın.",
     "stats": {
       "userId": "Kullanıcı Kimliği",
       "launch": "Başlangıç",
@@ -78,7 +92,6 @@
     "shareAria": "Mclo.gs'ye günlükleri paylaşın",
     "searchPlaceholder": "Arama günlükleri…",
     "searchAria": "Arama günlükleri",
-    "clearSearch": "Açık arama",
     "empty": {
       "title": "Henüz herhangi bir günlük kaydı yok",
       "hint": "Sesi başlatın ve çıktısı burada yayınlanacak."
@@ -86,6 +99,12 @@
     "noMatches": {
       "title": "Eşleşme bulunamadı",
       "hint": "“{query}” eşleşen bir şey bulunmamaktadır."
+    },
+    "countFiltered": "{total} içinden {shown}",
+    "problemsOnly": {
+      "on": "Sadece sorunları göster — tümünü görmek için tıklayın",
+      "off": "Yalnızca sorunları göster",
+      "aria": "Sadece sorunları görüntüle seçeneğini etkinleştir"
     }
   },
   "mods": {
@@ -94,7 +113,8 @@
       "descriptionFor": "{name} modlarını yönet",
       "descriptionForStream": "{name} ({stream}) modlarını yönet",
       "refresh": "Tazeleştir",
-      "openFolder": "Açık modlar klasörünü açın"
+      "openFolder": "Açık modlar klasörünü açın",
+      "openFolderFailed": "Mod klasörünü açamadım"
     },
     "vanilla": {
       "title": "Vanilla için modlar devre dışıdır.",
@@ -112,7 +132,10 @@
       "placeholder": "Arama..."
     },
     "ruleCard": {
-      "viewOnModrinth": "Modrinth'ta Görüntüle"
+      "viewOnModrinth": "Modrinth'ta Görüntüle",
+      "download": "Mod klasörüne indir",
+      "downloaded": "İndirildi {name}",
+      "downloadFailed": "İndirilemedi {name}"
     },
     "required": {
       "present": "Gerekli modlar mevcut ({count})",
@@ -125,17 +148,46 @@
     },
     "recommended": {
       "title": "Önerilen modlar ({count})"
+    },
+    "marketplace": {
+      "title": "Mod Pazarı",
+      "subtitle": "Modrinth'ten Fabric modları.",
+      "subtitleForVersion": "Fabric modrinth için Modrinth'ten modlar Minecraft {version}.",
+      "searchPlaceholder": "Modları ara...",
+      "search": "Ara",
+      "searchFailed": "Arama başarısız oldu. Bağlantınızı kontrol edin.",
+      "noResults": "Mod bulunamadı",
+      "noResultsHint": "Farklı bir arama terimi deneyin.",
+      "noActiveProfile": "Önce bir profil seçin",
+      "noGameVersion": "Oyun sürümünü henüz çözemedik",
+      "byAuthor": "tarafından {author}",
+      "install": "Kurulum yap",
+      "installing": "Yükleniyor...",
+      "installed": "Kurulum tamamlandı {name}",
+      "installedBadge": "Kurulumu yapılmış",
+      "incompatible": "Uyumsuz",
+      "incompatibleToast": "{name}, Opal ({rule}) ile uyumlu değil",
+      "noCompatibleVersion": "{name} için Minecraft {version} için henüz bir derleme bulunmuyor",
+      "installFailed": "Kurulum başarısız: {name}: {error}",
+      "unknownError": "Bilinmeyen hata",
+      "back": "Yüklenen modlara geri dön"
+    },
+    "delete": {
+      "title": "{count, plural, one {Delete # mod?} other {Delete # mods?}}",
+      "description": "{count, plural, one {The selected mod file will be removed from this profile's mods folder.} other {The # selected mod files will be removed from this profile's mods folder.}}",
+      "success": "{count, plural, one {Deleted # mod} other {Deleted # mods}}",
+      "failed": "{count, plural, one {Couldn't delete # mod} other {Couldn't delete # mods}}"
     }
   },
   "nav": {
     "home": "Ev",
     "mods": "Modlar",
     "packs": "Paketler",
+    "scripts": "Senaryolar",
     "profiles": "Profil",
     "changelog": "Değişiklik Günlüğü",
     "logs": "Günlükler",
-    "settings": "Ayarlar",
-    "scripts": "Senaryolar"
+    "settings": "Ayarlar"
   },
   "packs": {
     "browser": {
@@ -156,7 +208,8 @@
     "card": {
       "enable": "Etkinleştir",
       "disable": "Kapatın",
-      "download": "İndir"
+      "download": "İndir",
+      "remove": "Sil {name}"
     },
     "marketplace": {
       "title": "Browse {type, select, shader {Shaders} other {Resource Packs}}",
@@ -193,6 +246,7 @@
     "descriptionOptionalPlaceholder": "Açıklama (isteğe bağlı)",
     "selectProfile": "Profilinizi seçin {name}",
     "defaultCannotDelete": "Varsayılan profil silinemez",
+    "openFolder": "Klasörü aç",
     "create": {
       "title": "Yeni Profil",
       "submit": "Yaratın"
@@ -233,8 +287,18 @@
       "deleted": "Profil silindi",
       "deleteFailed": "Profil silinemedi",
       "openFolderFailed": "Profil klasörü açılamadı"
-    },
-    "openFolder": "Klasörü aç"
+    }
+  },
+  "scripts": {
+    "searchPlaceholder": "Arama betikleri…",
+    "searchAria": "Arama betikleri",
+    "emptyTitle": "Henüz herhangi bir senaryo yok",
+    "emptyHint": "Müşterileriniz için oluşturulacak betikler burada görüntülenecektir.",
+    "noMatches": "Eşleşme bulunamadı",
+    "noMatchesHint": "“{query}” eşleşen bir şey bulunmamaktadır.",
+    "pinned": "Sabitlemiş",
+    "installs": "{count, plural, one {install} other {installs}}",
+    "countFiltered": "{total} içinden {shown}"
   },
   "settings": {
     "title": "Ayarlar",
@@ -253,6 +317,25 @@
     "resolution": {
       "label": "Çözüm",
       "hint": "(genişlik × yükseklik)"
+    },
+    "windowMode": {
+      "label": "Pencere modu",
+      "hint": "oyun nasıl açılıyor",
+      "windowed": "Pencereli",
+      "fullscreen": "Tam ekran"
+    },
+    "onLaunch": {
+      "label": "Oyun başladığında",
+      "hint": "(başlatıcı penceresi)",
+      "minimize": "Başlatıcıyı küçült",
+      "hide": "Başlatıcıyı gizle",
+      "keep": "Başlatıcıyı açık tut"
+    },
+    "jvmArgs": {
+      "label": "Özel JVM argümanları",
+      "hint": "(gelişmiş)",
+      "placeholder": "-XX:+UseG1GC",
+      "note": "Bellek, ajanlar, hata ayıklayıcılar ve sınıf yolu bayrakları yoksayılır."
     },
     "language": {
       "label": "Dil",
@@ -276,8 +359,8 @@
       "confirm": {
         "title": "{category} temizlensin mi?",
         "titleAll": "Tüm depolama temizlensin mi?",
-        "body": "Bu işlem {size} dosyayı siler. Gerektiğinde yeniden indirilirler.",
-        "bodyAll": "Bu işlem tüm kategorilerdeki {size} veriyi siler. Gerektiğinde her şey yeniden indirilir."
+        "body": "Bu işlem {size} dosyasını siler. Hala ihtiyacınız olan her şey otomatik olarak yeniden indirilecektir.",
+        "bodyAll": "Bu işlem, {size}'ı tüm kategorilerde siler. Hala ihtiyacınız olan her şey otomatik olarak yeniden indirilecektir."
       },
       "toast": {
         "cleared": "{category} temizlendi",
@@ -303,40 +386,65 @@
         "body": "Bu dosyalar bu profilde zaten var ve üzerlerine yazılacak: {files}",
         "action": "Üzerine yaz ve içe aktar"
       }
+    },
+    "sections": {
+      "game": "Oyun",
+      "launcher": "Fırlatıcı",
+      "data": "Veri ve depolama",
+      "about": "Hakkında"
+    },
+    "about": {
+      "launcherVersion": "Başlatıcı sürümü",
+      "hostVersion": "Ev sahibi (Tauri) sürümü"
+    }
+  },
+  "setup": {
+    "checking": {
+      "title": "Hazırlıklar yapılıyor",
+      "subtitle": "Bir dakika…"
+    },
+    "title": "Oyun klasörünü seçin",
+    "description": "Minecraft ve istemci dosyalarınızın nerede saklandığını seçin. Bunu daha sonra Ayarlar'da değiştirebilirsiniz.",
+    "label": "Oyun dizini",
+    "placeholder": ".minecraft klasörüne giden yol",
+    "browse": "Göz at",
+    "hint": "Önerilen varsayılan ayar çoğu kişi için uygundur. Kullanıcı klasörünüzün içinde bulunmalıdır.",
+    "confirm": "Devam et",
+    "errors": {
+      "empty": "Devam etmek için bir klasör seçin.",
+      "relative": "Bir klasörün tam yolunu girin.",
+      "out-of-scope": "Kullanıcı klasörünüzün içindeki bir klasör seçin (örneğin, AppData veya ana dizininiz altında)."
+    },
+    "importVanilla": {
+      "label": "Minecraft ayarlarımı içe aktar",
+      "success": "Minecraft ayarlarınız içe aktarıldı",
+      "failed": "Minecraft ayarlarınız içe aktarılamadı"
     }
   },
   "sidebar": {
     "selectProfile": "Profil Seçimi",
     "release": "Yayınlama:",
     "version": "Sürüm:",
-    "hostVersion": "Sunucu v{version}",
-    "launcherVersion": "Başlatıcı v{version}",
     "status": {
       "play": "Oyun",
       "preparing": "Hazırlanılıyor...",
+      "verifying": "Doğrulanıyor",
       "downloading": "İndiriliyor...",
       "extracting": "Çekiliyor...",
       "launching": "Başlangıç...",
-      "stop": "Durun",
-      "verifying": "Doğrulanıyor"
-    }
+      "stop": "Durun"
+    },
+    "brandVersion": "{brand} ({version})"
   },
-  "scripts": {
-    "searchPlaceholder": "Arama betikleri…",
-    "searchAria": "Arama betikleri",
-    "clearSearch": "Açık arama",
-    "emptyTitle": "Henüz herhangi bir senaryo yok",
-    "emptyHint": "Müşterileriniz için oluşturulacak betikler burada görüntülenecektir.",
-    "noMatches": "Eşleşme bulunamadı",
-    "noMatchesHint": "“{query}” eşleşen bir şey bulunmamaktadır.",
-    "pinned": "Sabitlemiş",
-    "installs": "{count, plural, one {install} other {installs}}"
-  },
-  "setup": {
-    "importVanilla": {
-      "label": "Minecraft ayarlarımı içe aktar",
-      "success": "Minecraft ayarlarınız içe aktarıldı",
-      "failed": "Minecraft ayarlarınız içe aktarılamadı"
-    }
+  "linuxDeps": {
+    "title": "Eksik sistem araçları",
+    "body": "Opal, popupları göstermek ve bağlantıları açmak için {missing}'a ihtiyaç duyuyor. Şimdi yüklemek ister misin?",
+    "install": "Kurulum yap",
+    "installing": "Yükleniyor…",
+    "copy": "Kopyala",
+    "copied": "Komut kopyalandı",
+    "installed": "Kurulum tamamlandı. Başlayabilirsiniz.",
+    "stillMissing": "Bazı araçlar hala eksik. Komutu manuel olarak deneyin.",
+    "installFailed": "Kurulum başarısız oldu veya iptal edildi. Komutu manuel olarak çalıştırın."
   }
 }
