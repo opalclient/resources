@@ -23,9 +23,7 @@
     "empty": "Brak wpisów do dziennika zmian dla tego kanału."
   },
   "comingSoon": {
-    "eyebrow": "Wkrótce",
-    "body": "Nie jest jeszcze dostępny, ale jesteśmy już blisko. Kiedy Opal się wypuści, ten ekran sam się odsunie. Nie musisz go odświeżać.",
-    "factsLabel": "Przepływające ciekawostki"
+    "bannerBody": "Ten kanał jeszcze nie ma wersji demonstracyjnej — możesz jeszcze rozejrzeć się. Pojawi się tutaj automatycznie po wydaniu."
   },
   "common": {
     "cancel": "Anuluj",
@@ -44,7 +42,23 @@
     "confirm": "Potwierdź",
     "iconAlt": "Ikona {brand}",
     "logoAlt": "Logotyp {brand}",
-    "avatarAlt": "Avatar {name}"
+    "avatarAlt": "Avatar {name}",
+    "search": "Szukaj",
+    "clearSearch": "Wyczyść wyszukiwanie",
+    "loadFailed": "Nie udało się załadować. Sprawdź połączenie i spróbuj ponownie."
+  },
+  "errors": {
+    "linkLost": {
+      "title": "Utracono połączenie z grą",
+      "description": "Gra została zamknięta, ponieważ utraciła połączenie z uruchomieniem. Uruchom ją ponownie stąd."
+    }
+  },
+  "gate": {
+    "outdated": {
+      "title": "Uruchomienie przestarzałe",
+      "body": "Jesteś na wersji v{current}, ale do dalszej gry wymagana jest v{latest}. Pobierz najnowszą wersję, aby kontynuować.",
+      "download": "Pobierz najnowszą wersję"
+    }
   },
   "header": {
     "defaultName": "Gracz",
@@ -56,7 +70,7 @@
   "home": {
     "welcome": "Witamy",
     "welcomeBack": "Witaj z powrotem, {name}",
-    "subtitle": "Zarządzaj swoimi profilami, modami i ustawieniami uruchamiania. Kiedy będziesz gotowy, rozpocznij grę z wybranym profilem.",
+    "subtitle": "Twoje profile, mody i skrypty — wszystko w jednym miejscu. Kiedy będziesz gotowy, naciśnij play.",
     "stats": {
       "userId": "ID użytkownika",
       "launch": "Wypuść",
@@ -78,7 +92,6 @@
     "shareAria": "Udostępnij dzienniki na mclo.gs",
     "searchPlaceholder": "Logi wyszukiwania…",
     "searchAria": "Logi wyszukiwania",
-    "clearSearch": "Jasne wyszukiwanie",
     "empty": {
       "title": "Nie ma jeszcze żadnych logów",
       "hint": "Uruchom sesję i jej wyjście będzie strumieniowane tutaj."
@@ -86,6 +99,12 @@
     "noMatches": {
       "title": "Brak pasm",
       "hint": "Nic nie pasuje do „{query}”."
+    },
+    "countFiltered": "{shown} z {total}",
+    "problemsOnly": {
+      "on": "Pokaż tylko problemy — kliknij, aby zobaczyć wszystkie",
+      "off": "Pokaż tylko problemy",
+      "aria": "Wyświetl tylko problemy"
     }
   },
   "mods": {
@@ -94,7 +113,8 @@
       "descriptionFor": "Zarządzaj modami dla {name}",
       "descriptionForStream": "Zarządzaj modami dla {name} ({stream})",
       "refresh": "Ośwież",
-      "openFolder": "Otwórz folder modyfikacji"
+      "openFolder": "Otwórz folder modyfikacji",
+      "openFolderFailed": "Nie udało się otworzyć folderu z modami"
     },
     "vanilla": {
       "title": "Modu wyłączono dla Vanilla.",
@@ -112,7 +132,10 @@
       "placeholder": "Szukaj..."
     },
     "ruleCard": {
-      "viewOnModrinth": "Widok na Modrinth"
+      "viewOnModrinth": "Widok na Modrinth",
+      "download": "Pobierz do folderu z modami",
+      "downloaded": "Pobieranie {name}",
+      "downloadFailed": "Nie udało się pobrać {name}"
     },
     "required": {
       "present": "Wymagane modyfikacje są obecne ({count})",
@@ -125,17 +148,46 @@
     },
     "recommended": {
       "title": "Zalecane modyfikacje ({count})"
+    },
+    "marketplace": {
+      "title": "Rynek Modów",
+      "subtitle": "Mody Fabric z Modrinth.",
+      "subtitleForVersion": "Mody Fabric z Modrinth dla Minecraft {version}.",
+      "searchPlaceholder": "Szukaj modów...",
+      "search": "Szukaj",
+      "searchFailed": "Wyszukiwanie nie powiodło się. Sprawdź połączenie.",
+      "noResults": "Nie znaleziono modów",
+      "noResultsHint": "Spróbuj innej frazy wyszukiwania.",
+      "noActiveProfile": "Wybierz profil najpierw",
+      "noGameVersion": "Nie udało się jeszcze ustalić wersji gry",
+      "byAuthor": "przez {author}",
+      "install": "Zainstaluj",
+      "installing": "Instalowanie...",
+      "installed": "Zainstalowano {name}",
+      "installedBadge": "Zainstalowany",
+      "incompatible": "Niezgodny",
+      "incompatibleToast": "{name} jest niekompatybilny z Opalem ({rule})",
+      "noCompatibleVersion": "{name} nie posiada kompilacji dla Minecrafta {version}",
+      "installFailed": "Nie można zainstalować {name}: {error}",
+      "unknownError": "Nieznany błąd",
+      "back": "Powrót do zainstalowanych modów"
+    },
+    "delete": {
+      "title": "{count, plural, one {Delete # mod?} other {Delete # mods?}}",
+      "description": "{count, plural, one {The selected mod file will be removed from this profile's mods folder.} other {The # selected mod files will be removed from this profile's mods folder.}}",
+      "success": "{count, plural, one {Deleted # mod} other {Deleted # mods}}",
+      "failed": "{count, plural, one {Couldn't delete # mod} other {Couldn't delete # mods}}"
     }
   },
   "nav": {
     "home": "Dom",
     "mods": "Modu",
     "packs": "Pakiety",
+    "scripts": "Sceny",
     "profiles": "Profile’s",
     "changelog": "Zmiany w wersji",
     "logs": "Logi",
-    "settings": "Ustawienia",
-    "scripts": "Sceny"
+    "settings": "Ustawienia"
   },
   "packs": {
     "browser": {
@@ -156,7 +208,8 @@
     "card": {
       "enable": "Włącz",
       "disable": "Wyłączono",
-      "download": "Pobierz"
+      "download": "Pobierz",
+      "remove": "Usuń {name}"
     },
     "marketplace": {
       "title": "Browse {type, select, shader {Shaders} other {Resource Packs}}",
@@ -193,6 +246,7 @@
     "descriptionOptionalPlaceholder": "Opis (opcjonalnie)",
     "selectProfile": "Wybierz profil {name}",
     "defaultCannotDelete": "Domyślny profil nie można usunąć",
+    "openFolder": "Otwórz folder",
     "create": {
       "title": "Nowy profil",
       "submit": "Stwórz"
@@ -233,8 +287,18 @@
       "deleted": "Profil usunięto",
       "deleteFailed": "Nie udało się usunąć profilu",
       "openFolderFailed": "Nie udało się otworzyć folderu profilu"
-    },
-    "openFolder": "Otwórz folder"
+    }
+  },
+  "scripts": {
+    "searchPlaceholder": "Skrypty wyszukiwania…",
+    "searchAria": "Skrypty wyszukiwania",
+    "emptyTitle": "Brak scenariuszy",
+    "emptyHint": "Skrypty społecznościowe dla Twojego klienta będą tu wyświetlane.",
+    "noMatches": "Brak pasm",
+    "noMatchesHint": "Nic nie pasuje do „{query}”.",
+    "pinned": "Przyklejone",
+    "installs": "{count, plural, one {install} other {installs}}",
+    "countFiltered": "{shown} z {total}"
   },
   "settings": {
     "title": "Ustawienia",
@@ -253,6 +317,25 @@
     "resolution": {
       "label": "Rozwiązanie",
       "hint": "(szerokość × wysokość)"
+    },
+    "windowMode": {
+      "label": "Tryb okienkowy",
+      "hint": "(jak rozpoczyna się gra)",
+      "windowed": "Okienny",
+      "fullscreen": "Pełny ekran"
+    },
+    "onLaunch": {
+      "label": "Kiedy rozpoczyna się gra",
+      "hint": "(okno uruchomienia)",
+      "minimize": "Zminimalizuj uruchamiacz",
+      "hide": "Ukryj uruchamiacz",
+      "keep": "Trzymaj uruchamiacz otwarty"
+    },
+    "jvmArgs": {
+      "label": "Argumenty JVM niestandardowe",
+      "hint": "(zaawansowane)",
+      "placeholder": "-XX:+UżyjG1GC",
+      "note": "Pamięć, agenci, debuggery i flagi classpath są ignorowane."
     },
     "language": {
       "label": "Język",
@@ -276,8 +359,8 @@
       "confirm": {
         "title": "Wyczyścić {category}?",
         "titleAll": "Wyczyścić cały magazyn?",
-        "body": "Spowoduje to usunięcie {size} plików. Zostaną pobrane ponownie, gdy będą potrzebne.",
-        "bodyAll": "Spowoduje to usunięcie {size} we wszystkich kategoriach. Wszystko zostanie pobrane ponownie, gdy będzie potrzebne."
+        "body": "To usuwa {size} plików. Wszystko, czego jeszcze potrzebujesz, zostanie automatycznie ponownie pobrane.",
+        "bodyAll": "To usuwa {size} we wszystkich kategoriach. Wszystko, czego jeszcze potrzebujesz, zostanie automatycznie ponownie pobrane."
       },
       "toast": {
         "cleared": "Wyczyszczono {category}",
@@ -303,40 +386,65 @@
         "body": "Te pliki już istnieją w tym profilu i zostaną nadpisane: {files}",
         "action": "Nadpisz i importuj"
       }
+    },
+    "sections": {
+      "game": "Gra",
+      "launcher": "Uruchomiacz",
+      "data": "Dane i pamięć masowa",
+      "about": "O"
+    },
+    "about": {
+      "launcherVersion": "Wersja uruchomienia",
+      "hostVersion": "Host (Tauri)"
+    }
+  },
+  "setup": {
+    "checking": {
+      "title": "Przygotowania",
+      "subtitle": "Poczekaj chwilę…"
+    },
+    "title": "Wybierz folder gry",
+    "description": "Wybierz miejsce, w którym przechowywane są pliki Minecrafta i pliki klienta. Możesz zmienić to później w Ustawieniach.",
+    "label": "Katalog gier",
+    "placeholder": "Ścieżka do folderu .minecraft",
+    "browse": "Przeglądaj",
+    "hint": "Domyślna konfiguracja jest zalecana i działa dla większości użytkowników. Musi znajdować się w folderze użytkownika.",
+    "confirm": "Kontynuuj",
+    "errors": {
+      "empty": "Wybierz folder, aby kontynuować.",
+      "relative": "Wprowadź pełną ścieżkę do folderu.",
+      "out-of-scope": "Wybierz folder wewnątrz folderu użytkownika (np. pod AppData lub w katalogu domowym)."
+    },
+    "importVanilla": {
+      "label": "Zaimportuj moje ustawienia Minecrafta",
+      "success": "Zaimportowano Twoje ustawienia Minecrafta",
+      "failed": "Nie udało się zaimportować Twoich ustawień Minecrafta"
     }
   },
   "sidebar": {
     "selectProfile": "Wybierz profil",
     "release": "Uwolnienie:",
     "version": "Wersja:",
-    "hostVersion": "Gość v{version}",
-    "launcherVersion": "Launcher v{version}",
     "status": {
       "play": "Grać",
       "preparing": "Przygotowanie...",
+      "verifying": "Weryfikacja",
       "downloading": "Pobieranie...",
       "extracting": "Wyciągamy...",
       "launching": "Wymykamy...",
-      "stop": "Przestań",
-      "verifying": "Weryfikacja"
-    }
+      "stop": "Przestań"
+    },
+    "brandVersion": "{brand} ({version})"
   },
-  "scripts": {
-    "searchPlaceholder": "Skrypty wyszukiwania…",
-    "searchAria": "Skrypty wyszukiwania",
-    "clearSearch": "Jasne wyszukiwanie",
-    "emptyTitle": "Brak scenariuszy",
-    "emptyHint": "Skrypty społecznościowe dla Twojego klienta będą tu wyświetlane.",
-    "noMatches": "Brak pasm",
-    "noMatchesHint": "Nic nie pasuje do „{query}”.",
-    "pinned": "Przyklejone",
-    "installs": "{count, plural, one {install} other {installs}}"
-  },
-  "setup": {
-    "importVanilla": {
-      "label": "Zaimportuj moje ustawienia Minecrafta",
-      "success": "Zaimportowano Twoje ustawienia Minecrafta",
-      "failed": "Nie udało się zaimportować Twoich ustawień Minecrafta"
-    }
+  "linuxDeps": {
+    "title": "Brakujące narzędzia systemowe",
+    "body": "Opal potrzebuje {missing}, aby wyświetlać okienka i otwierać linki. Czy zainstalować teraz?",
+    "install": "Zainstaluj",
+    "installing": "Instalowanie…",
+    "copy": "Kopia",
+    "copied": "Polecenie skopiowano",
+    "installed": "Zainstalowane. Możesz śmiało zaczynać.",
+    "stillMissing": "Brakuje jeszcze kilku narzędzi. Spróbuj wykonać polecenie ręcznie.",
+    "installFailed": "Instalacja nie powiodła się lub została przerwana. Uruchom polecenie ręcznie."
   }
 }

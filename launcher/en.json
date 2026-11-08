@@ -23,9 +23,7 @@
     "empty": "No changelog entries for this channel yet."
   },
   "comingSoon": {
-    "eyebrow": "Coming soon",
-    "body": "Not out yet, but we're close. When Opal ships, this screen gets out of the way on its own. You never have to refresh.",
-    "factsLabel": "Random facts ticker"
+    "bannerBody": "This channel doesn't have a build live yet — you can still look around. It'll show up here automatically once it ships."
   },
   "common": {
     "cancel": "Cancel",
@@ -44,7 +42,23 @@
     "confirm": "Confirm",
     "iconAlt": "{brand} icon",
     "logoAlt": "{brand} logo",
-    "avatarAlt": "Avatar of {name}"
+    "avatarAlt": "Avatar of {name}",
+    "search": "Search",
+    "clearSearch": "Clear search",
+    "loadFailed": "Couldn't load this. Check your connection and try again."
+  },
+  "errors": {
+    "linkLost": {
+      "title": "Connection to the game was lost",
+      "description": "The game was closed because it lost its link to the launcher. Launch it again from here."
+    }
+  },
+  "gate": {
+    "outdated": {
+      "title": "Launcher out of date",
+      "body": "You're on v{current}, but v{latest} is required to keep playing. Download the latest version to continue.",
+      "download": "Download the latest version"
+    }
   },
   "header": {
     "defaultName": "Player",
@@ -56,7 +70,7 @@
   "home": {
     "welcome": "Welcome",
     "welcomeBack": "Welcome back, {name}",
-    "subtitle": "Manage your profiles, mods, and launch settings. When you are ready, start the game with the selected profile.",
+    "subtitle": "Your profiles, mods, and scripts — all in one place. When you're ready, hit play.",
     "stats": {
       "userId": "User ID",
       "launch": "Launch",
@@ -78,7 +92,6 @@
     "shareAria": "Share logs to mclo.gs",
     "searchPlaceholder": "Search logs…",
     "searchAria": "Search logs",
-    "clearSearch": "Clear search",
     "empty": {
       "title": "No logs yet",
       "hint": "Launch a session and its output will stream here."
@@ -86,6 +99,12 @@
     "noMatches": {
       "title": "No matches",
       "hint": "Nothing matches “{query}”."
+    },
+    "countFiltered": "{shown} of {total}",
+    "problemsOnly": {
+      "on": "Showing problems only — click to show all",
+      "off": "Show problems only",
+      "aria": "Toggle problems-only view"
     }
   },
   "mods": {
@@ -94,7 +113,8 @@
       "descriptionFor": "Manage mods for {name}",
       "descriptionForStream": "Manage mods for {name} ({stream})",
       "refresh": "Refresh",
-      "openFolder": "Open mods folder"
+      "openFolder": "Open mods folder",
+      "openFolderFailed": "Couldn't open the mods folder"
     },
     "vanilla": {
       "title": "Mods are disabled for Vanilla.",
@@ -112,7 +132,10 @@
       "placeholder": "Search..."
     },
     "ruleCard": {
-      "viewOnModrinth": "View on Modrinth"
+      "viewOnModrinth": "View on Modrinth",
+      "download": "Download into mods folder",
+      "downloaded": "Downloaded {name}",
+      "downloadFailed": "Couldn't download {name}"
     },
     "required": {
       "present": "Required mods are present ({count})",
@@ -125,17 +148,46 @@
     },
     "recommended": {
       "title": "Recommended mods ({count})"
+    },
+    "marketplace": {
+      "title": "Mod Marketplace",
+      "subtitle": "Fabric mods from Modrinth.",
+      "subtitleForVersion": "Fabric mods from Modrinth for Minecraft {version}.",
+      "searchPlaceholder": "Search mods...",
+      "search": "Search",
+      "searchFailed": "Search failed. Check your connection.",
+      "noResults": "No mods found",
+      "noResultsHint": "Try a different search term.",
+      "noActiveProfile": "Select a profile first",
+      "noGameVersion": "Couldn't resolve the game version yet",
+      "byAuthor": "by {author}",
+      "install": "Install",
+      "installing": "Installing...",
+      "installed": "Installed {name}",
+      "installedBadge": "Installed",
+      "incompatible": "Incompatible",
+      "incompatibleToast": "{name} is incompatible with Opal ({rule})",
+      "noCompatibleVersion": "{name} has no build for Minecraft {version}",
+      "installFailed": "Couldn't install {name}: {error}",
+      "unknownError": "Unknown error",
+      "back": "Back to installed mods"
+    },
+    "delete": {
+      "title": "{count, plural, one {Delete # mod?} other {Delete # mods?}}",
+      "description": "{count, plural, one {The selected mod file will be removed from this profile's mods folder.} other {The # selected mod files will be removed from this profile's mods folder.}}",
+      "success": "{count, plural, one {Deleted # mod} other {Deleted # mods}}",
+      "failed": "{count, plural, one {Couldn't delete # mod} other {Couldn't delete # mods}}"
     }
   },
   "nav": {
     "home": "Home",
     "mods": "Mods",
     "packs": "Packs",
+    "scripts": "Scripts",
     "profiles": "Profiles",
     "changelog": "Changelog",
     "logs": "Logs",
-    "settings": "Settings",
-    "scripts": "Scripts"
+    "settings": "Settings"
   },
   "packs": {
     "browser": {
@@ -156,7 +208,8 @@
     "card": {
       "enable": "Enable",
       "disable": "Disable",
-      "download": "Download"
+      "download": "Download",
+      "remove": "Delete {name}"
     },
     "marketplace": {
       "title": "Browse {type, select, shader {Shaders} other {Resource Packs}}",
@@ -193,6 +246,7 @@
     "descriptionOptionalPlaceholder": "Description (optional)",
     "selectProfile": "Select profile {name}",
     "defaultCannotDelete": "Default profile cannot be deleted",
+    "openFolder": "Open folder",
     "create": {
       "title": "New Profile",
       "submit": "Create"
@@ -233,8 +287,18 @@
       "deleted": "Profile deleted",
       "deleteFailed": "Failed to delete profile",
       "openFolderFailed": "Failed to open profile folder"
-    },
-    "openFolder": "Open folder"
+    }
+  },
+  "scripts": {
+    "searchPlaceholder": "Search scripts…",
+    "searchAria": "Search scripts",
+    "emptyTitle": "No scripts yet",
+    "emptyHint": "Community scripts for your client will appear here.",
+    "noMatches": "No matches",
+    "noMatchesHint": "Nothing matches “{query}”.",
+    "pinned": "Pinned",
+    "installs": "{count, plural, one {install} other {installs}}",
+    "countFiltered": "{shown} of {total}"
   },
   "settings": {
     "title": "Settings",
@@ -253,6 +317,25 @@
     "resolution": {
       "label": "Resolution",
       "hint": "(width × height)"
+    },
+    "windowMode": {
+      "label": "Window mode",
+      "hint": "(how the game opens)",
+      "windowed": "Windowed",
+      "fullscreen": "Fullscreen"
+    },
+    "onLaunch": {
+      "label": "When the game starts",
+      "hint": "(launcher window)",
+      "minimize": "Minimize launcher",
+      "hide": "Hide launcher",
+      "keep": "Keep launcher open"
+    },
+    "jvmArgs": {
+      "label": "Custom JVM arguments",
+      "hint": "(advanced)",
+      "placeholder": "-XX:+UseG1GC",
+      "note": "Memory, agents, debuggers and classpath flags are ignored."
     },
     "language": {
       "label": "Language",
@@ -276,8 +359,8 @@
       "confirm": {
         "title": "Clear {category}?",
         "titleAll": "Clear all storage?",
-        "body": "This deletes {size} of files. They'll be re-downloaded next time they're needed.",
-        "bodyAll": "This deletes {size} across every category. Everything will be re-downloaded next time it's needed."
+        "body": "This deletes {size} of files. Anything you still need will be re-downloaded automatically.",
+        "bodyAll": "This deletes {size} across every category. Anything you still need will be re-downloaded automatically."
       },
       "toast": {
         "cleared": "Cleared {category}",
@@ -303,40 +386,65 @@
         "body": "These files already exist in this profile and will be overwritten: {files}",
         "action": "Overwrite and import"
       }
+    },
+    "sections": {
+      "game": "Game",
+      "launcher": "Launcher",
+      "data": "Data & storage",
+      "about": "About"
+    },
+    "about": {
+      "launcherVersion": "Launcher version",
+      "hostVersion": "Host (Tauri) version"
+    }
+  },
+  "setup": {
+    "checking": {
+      "title": "Getting things ready",
+      "subtitle": "One moment…"
+    },
+    "title": "Choose your game folder",
+    "description": "Pick where Minecraft and your client files are stored. You can change this later in Settings.",
+    "label": "Game directory",
+    "placeholder": "Path to your .minecraft folder",
+    "browse": "Browse",
+    "hint": "The recommended default works for most people. It must be inside your user folder.",
+    "confirm": "Continue",
+    "errors": {
+      "empty": "Choose a folder to continue.",
+      "relative": "Enter a full path to a folder.",
+      "out-of-scope": "Pick a folder inside your user folder (e.g. under AppData or your home directory)."
+    },
+    "importVanilla": {
+      "label": "Import my Minecraft settings",
+      "success": "Imported your Minecraft settings",
+      "failed": "Couldn't import your Minecraft settings"
     }
   },
   "sidebar": {
     "selectProfile": "Select Profile",
     "release": "Release:",
     "version": "Version:",
-    "hostVersion": "Host v{version}",
-    "launcherVersion": "Launcher v{version}",
     "status": {
       "play": "Play",
       "preparing": "Preparing...",
+      "verifying": "Verifying",
       "downloading": "Downloading...",
       "extracting": "Extracting...",
       "launching": "Launching...",
-      "stop": "Stop",
-      "verifying": "Verifying"
-    }
+      "stop": "Stop"
+    },
+    "brandVersion": "{brand} ({version})"
   },
-  "scripts": {
-    "searchPlaceholder": "Search scripts…",
-    "searchAria": "Search scripts",
-    "clearSearch": "Clear search",
-    "emptyTitle": "No scripts yet",
-    "emptyHint": "Community scripts for your client will appear here.",
-    "noMatches": "No matches",
-    "noMatchesHint": "Nothing matches “{query}”.",
-    "pinned": "Pinned",
-    "installs": "{count, plural, one {install} other {installs}}"
-  },
-  "setup": {
-    "importVanilla": {
-      "label": "Import my Minecraft settings",
-      "success": "Imported your Minecraft settings",
-      "failed": "Couldn't import your Minecraft settings"
-    }
+  "linuxDeps": {
+    "title": "Missing system tools",
+    "body": "Opal needs {missing} to show popups and open links. Install it now?",
+    "install": "Install",
+    "installing": "Installing…",
+    "copy": "Copy",
+    "copied": "Command copied",
+    "installed": "Installed. You're good to go.",
+    "stillMissing": "Some tools are still missing. Try the command manually.",
+    "installFailed": "Install failed or was cancelled. Run the command manually."
   }
 }

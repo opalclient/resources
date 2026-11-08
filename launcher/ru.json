@@ -23,9 +23,7 @@
     "empty": "В этом канале пока нет записей о изменениях."
   },
   "comingSoon": {
-    "eyebrow": "Скоро",
-    "body": "Еще не выпущено, но мы близки. Когда Opal поступит в продажу, этот экран сам собой уберётся. Вам никогда не нужно обновлять.",
-    "factsLabel": "Случайные факты: лента"
+    "bannerBody": "Этот канал ещё не имеет живой версии — вы всё ещё можете осмотреться. Он появится здесь автоматически, как только будет выпущен."
   },
   "common": {
     "cancel": "Отменить",
@@ -44,7 +42,23 @@
     "confirm": "Подтвердите",
     "iconAlt": "{brand} икон",
     "logoAlt": "Логотип {brand}",
-    "avatarAlt": "Аватар {name}"
+    "avatarAlt": "Аватар {name}",
+    "search": "Поиск",
+    "clearSearch": "Очистить поиск",
+    "loadFailed": "Не удалось загрузить. Проверьте подключение и попробуйте ещё раз."
+  },
+  "errors": {
+    "linkLost": {
+      "title": "Потеряно соединение с игрой",
+      "description": "Игра была закрыта, так как потеряла связь с лаунчером. Запустите её снова отсюда."
+    }
+  },
+  "gate": {
+    "outdated": {
+      "title": "Запускатель устарел",
+      "body": "Вы на версии v{current}, но для продолжения игры требуется v{latest}. Загрузите последнюю версию, чтобы продолжить.",
+      "download": "Скачайте последнюю версию"
+    }
   },
   "header": {
     "defaultName": "Игрок",
@@ -56,7 +70,7 @@
   "home": {
     "welcome": "Добро пожаловать",
     "welcomeBack": "Добро пожаловать обратно, {name}",
-    "subtitle": "Управляйте своими профилями, модами и настройками запуска. Когда вы готовы, начните игру с выбранного профиля.",
+    "subtitle": "Ваши профили, моды и скрипты — всё в одном месте. Когда будете готовы, нажмите воспроизведение.",
     "stats": {
       "userId": "Идентификатор пользователя",
       "launch": "Запуск",
@@ -78,7 +92,6 @@
     "shareAria": "Поделитесь логами на mclo.gs",
     "searchPlaceholder": "Журналы поиска…",
     "searchAria": "Журналы поиска",
-    "clearSearch": "Четкий поиск",
     "empty": {
       "title": "Логов пока нет",
       "hint": "Запустите сессию и ее вывод будет транслироваться здесь."
@@ -86,6 +99,12 @@
     "noMatches": {
       "title": "Нет совпадений",
       "hint": "Ничего не соответствует “{query}”."
+    },
+    "countFiltered": "{shown} из {total}",
+    "problemsOnly": {
+      "on": "Показывать только проблемы — нажмите, чтобы увидеть все",
+      "off": "Показывать только проблемы",
+      "aria": "Показать только задачи"
     }
   },
   "mods": {
@@ -94,7 +113,8 @@
       "descriptionFor": "Управлять модами {name}",
       "descriptionForStream": "Управляйте модами для {name} ({stream})",
       "refresh": "Освежить",
-      "openFolder": "Откройте папку модов"
+      "openFolder": "Откройте папку модов",
+      "openFolderFailed": "Не удалось открыть папку с модами"
     },
     "vanilla": {
       "title": "Моды отключены для Оригинальной версии.",
@@ -112,7 +132,10 @@
       "placeholder": "Поиск..."
     },
     "ruleCard": {
-      "viewOnModrinth": "Просмотр в Modrinth"
+      "viewOnModrinth": "Просмотр в Modrinth",
+      "download": "Скачать в папку с модами",
+      "downloaded": "Загружено {name}",
+      "downloadFailed": "Не удалось загрузить {name}"
     },
     "required": {
       "present": "Необходимые моды установлены ({count})",
@@ -125,17 +148,46 @@
     },
     "recommended": {
       "title": "Рекомендуемые моды ({count})"
+    },
+    "marketplace": {
+      "title": "Магазин модов",
+      "subtitle": "Моды Fabric с Modrinth.",
+      "subtitleForVersion": "Fabric моды с Modrinth для Minecraft {version}.",
+      "searchPlaceholder": "Искать моды...",
+      "search": "Поиск",
+      "searchFailed": "Поиск не удался. Проверьте подключение.",
+      "noResults": "Модификации не найдены",
+      "noResultsHint": "Попробуйте другой поисковый запрос.",
+      "noActiveProfile": "Выберите профиль сначала",
+      "noGameVersion": "Пока не удалось определить версию игры",
+      "byAuthor": "автором {author}",
+      "install": "Установить",
+      "installing": "Установка...",
+      "installed": "Установлено {name}",
+      "installedBadge": "Установлено",
+      "incompatible": "Несовместимый",
+      "incompatibleToast": "{name} несовместим с Opal ({rule})",
+      "noCompatibleVersion": "{name} не имеет сборки для Minecraft {version}",
+      "installFailed": "Не удалось установить {name}: {error}",
+      "unknownError": "Неизвестная ошибка",
+      "back": "Установленные моды"
+    },
+    "delete": {
+      "title": "{count, plural, one {Delete # mod?} other {Delete # mods?}}",
+      "description": "{count, plural, one {The selected mod file will be removed from this profile's mods folder.} other {The # selected mod files will be removed from this profile's mods folder.}}",
+      "success": "{count, plural, one {Deleted # mod} other {Deleted # mods}}",
+      "failed": "{count, plural, one {Couldn't delete # mod} other {Couldn't delete # mods}}"
     }
   },
   "nav": {
     "home": "Дом",
     "mods": "Моды",
     "packs": "Наборы",
+    "scripts": "Скрипты",
     "profiles": "Профили",
     "changelog": "Изменения",
     "logs": "Журналы",
-    "settings": "Настройки",
-    "scripts": "Скрипты"
+    "settings": "Настройки"
   },
   "packs": {
     "browser": {
@@ -156,7 +208,8 @@
     "card": {
       "enable": "Включить",
       "disable": "Отключить",
-      "download": "Скачать"
+      "download": "Скачать",
+      "remove": "Удалить {name}"
     },
     "marketplace": {
       "title": "Browse {type, select, shader {Shaders} other {Resource Packs}}",
@@ -193,6 +246,7 @@
     "descriptionOptionalPlaceholder": "Описание (необязательно)",
     "selectProfile": "Выбрать профиль {name}",
     "defaultCannotDelete": "Невозможно удалить профиль по умолчанию",
+    "openFolder": "Открыть папку",
     "create": {
       "title": "Новый профиль",
       "submit": "Создавать"
@@ -233,8 +287,18 @@
       "deleted": "Профиль удален",
       "deleteFailed": "Не удалось удалить профиль",
       "openFolderFailed": "Не удалось открыть папку профиля"
-    },
-    "openFolder": "Открыть папку"
+    }
+  },
+  "scripts": {
+    "searchPlaceholder": "Поисковые скрипты…",
+    "searchAria": "Поисковые скрипты",
+    "emptyTitle": "Сценариев пока нет",
+    "emptyHint": "Здесь будут отображаться скрипты для вашего клиента.",
+    "noMatches": "Нет совпадений",
+    "noMatchesHint": "Ничего не соответствует “{query}”.",
+    "pinned": "Приколото",
+    "installs": "{count, plural, one {install} other {installs}}",
+    "countFiltered": "{shown} из {total}"
   },
   "settings": {
     "title": "Настройки",
@@ -253,6 +317,25 @@
     "resolution": {
       "label": "Разрешение",
       "hint": "(ширина × высота)"
+    },
+    "windowMode": {
+      "label": "Режим окна",
+      "hint": "(как начинается игра)",
+      "windowed": "Оконный",
+      "fullscreen": "Полноэкранный"
+    },
+    "onLaunch": {
+      "label": "Когда начинается игра",
+      "hint": "(окно запуска)",
+      "minimize": "Минимизировать лаунчер",
+      "hide": "Скрыть лаунчер",
+      "keep": "Оставляйте лаунчер открытым"
+    },
+    "jvmArgs": {
+      "label": "Пользовательские аргументы JVM",
+      "hint": "(для опытных)",
+      "placeholder": "-XX:+UseG1GC",
+      "note": "Память, агенты, отладчики и флаги classpath игнорируются."
     },
     "language": {
       "label": "Язык",
@@ -276,8 +359,8 @@
       "confirm": {
         "title": "Очистить «{category}»?",
         "titleAll": "Очистить всё хранилище?",
-        "body": "Это удалит {size} файлов. Они будут загружены заново, когда понадобятся.",
-        "bodyAll": "Это удалит {size} по всем категориям. Всё будет загружено заново, когда понадобится."
+        "body": "Это удалит {size} файлов. Всё, что вам ещё понадобится, будет автоматически перекачано.",
+        "bodyAll": "Это удалит {size} во всех категориях. Всё, что вам ещё потребуется, будет автоматически перекачано."
       },
       "toast": {
         "cleared": "«{category}» очищено",
@@ -303,40 +386,65 @@
         "body": "Эти файлы уже существуют в этом профиле и будут перезаписаны: {files}",
         "action": "Перезаписать и импортировать"
       }
+    },
+    "sections": {
+      "game": "Игра",
+      "launcher": "Запускатель",
+      "data": "Данные и хранилище",
+      "about": "О"
+    },
+    "about": {
+      "launcherVersion": "Версия лаунчера",
+      "hostVersion": "Хост (Tauri) версии"
+    }
+  },
+  "setup": {
+    "checking": {
+      "title": "Подготовка",
+      "subtitle": "Минуточку…"
+    },
+    "title": "Выберите папку с игрой",
+    "description": "Выберите, где хранятся файлы Minecraft и файлы вашего клиента. Вы сможете изменить это позже в настройках.",
+    "label": "Игровой каталог",
+    "placeholder": "Путь к вашей папке .minecraft",
+    "browse": "Просматривать",
+    "hint": "Рекомендуемые настройки по умолчанию подходят большинству пользователей. Они должны находиться в вашей папке пользователя.",
+    "confirm": "Продолжайте",
+    "errors": {
+      "empty": "Выберите папку для продолжения.",
+      "relative": "Введите полный путь к папке.",
+      "out-of-scope": "Выберите папку внутри вашей пользовательской папки (например, в папке AppData или в вашей домашней директории)."
+    },
+    "importVanilla": {
+      "label": "Импортировать мои настройки Minecraft",
+      "success": "Ваши настройки Minecraft импортированы",
+      "failed": "Не удалось импортировать ваши настройки Minecraft"
     }
   },
   "sidebar": {
     "selectProfile": "Выбрать профиль",
     "release": "Выпуск",
     "version": "Версия:",
-    "hostVersion": "Хост v{version}",
-    "launcherVersion": "Запуск v{version}",
     "status": {
       "play": "Играть",
       "preparing": "Загрузка...",
+      "verifying": "Проверка",
       "downloading": "Загрузка...",
       "extracting": "Извлечение...",
       "launching": "Запуск...",
-      "stop": "Прекратите",
-      "verifying": "Проверка"
-    }
+      "stop": "Прекратите"
+    },
+    "brandVersion": "{brand} ({version})"
   },
-  "scripts": {
-    "searchPlaceholder": "Поисковые скрипты…",
-    "searchAria": "Поисковые скрипты",
-    "clearSearch": "Четкий поиск",
-    "emptyTitle": "Сценариев пока нет",
-    "emptyHint": "Здесь будут отображаться скрипты для вашего клиента.",
-    "noMatches": "Нет совпадений",
-    "noMatchesHint": "Ничего не соответствует “{query}”.",
-    "pinned": "Приколото",
-    "installs": "{count, plural, one {install} other {installs}}"
-  },
-  "setup": {
-    "importVanilla": {
-      "label": "Импортировать мои настройки Minecraft",
-      "success": "Ваши настройки Minecraft импортированы",
-      "failed": "Не удалось импортировать ваши настройки Minecraft"
-    }
+  "linuxDeps": {
+    "title": "Отсутствующие системные инструменты",
+    "body": "Opal нуждается в {missing}, чтобы отображать всплывающие окна и открывать ссылки. Установить сейчас?",
+    "install": "Установить",
+    "installing": "Установка…",
+    "copy": "Копия",
+    "copied": "Команда скопирована",
+    "installed": "Установлено. Можете начинать.",
+    "stillMissing": "Некоторые инструменты все еще отсутствуют. Попробуйте команду вручную.",
+    "installFailed": "Установка не удалась или была отменена. Запустите команду вручную."
   }
 }

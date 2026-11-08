@@ -23,9 +23,7 @@
     "empty": "لا توجد إدخالات سجل التغييرات لهذا القناة حتى الآن."
   },
   "comingSoon": {
-    "eyebrow": "قريبًا",
-    "body": "لم يخرج بعد، لكننا قريبون. متى Opal تتراجع هذه الشاشة تلقائيًا، ولست بحاجة أبدًا لتحديثها.",
-    "factsLabel": "شريط حقائق عشوائية"
+    "bannerBody": "لم يتم إنشاء نسخة تجريبية للقناة بعد — يمكنك التصفح مؤقتًا. ستظهر هنا تلقائيًا عند إطلاقها."
   },
   "common": {
     "cancel": "إلغاء",
@@ -44,7 +42,23 @@
     "confirm": "أكد",
     "iconAlt": "{brand} رمز",
     "logoAlt": "شعار {brand}",
-    "avatarAlt": "صورة رمزية لـ {name}"
+    "avatarAlt": "صورة رمزية لـ {name}",
+    "search": "بحث",
+    "clearSearch": "بحث واضح",
+    "loadFailed": "لم يتم التحميل. تحقق من اتصالك وحاول مرة أخرى."
+  },
+  "errors": {
+    "linkLost": {
+      "title": "فُقِدَ الاتصال باللعبة",
+      "description": "تم إغلاق اللعبة لأنها فقدت الاتصال بالبرنامج التشغيل. أعد تشغيلها من هنا."
+    }
+  },
+  "gate": {
+    "outdated": {
+      "title": "المُشغِّل قديم",
+      "body": "أنت على إصدار v{current}، ولكن إصدار v{latest} مطلوب لمواصلة اللعب. قم بتنزيل أحدث إصدار للمتابعة.",
+      "download": "حمل أحدث إصدار"
+    }
   },
   "header": {
     "defaultName": "لاعب",
@@ -56,7 +70,7 @@
   "home": {
     "welcome": "أهلاً وسهلاً",
     "welcomeBack": "أهلاً بعودتك، {name}",
-    "subtitle": "إدارة ملفات التعريف والتعديلات وإعدادات التشغيل. عندما تكون مستعدًا، ابدأ اللعبة بالملف المحدد.",
+    "subtitle": "ملفات التعريف الخاصة بك، والتعديلات، والبرامج النصية — كل ذلك في مكان واحد. عندما تكون مستعدًا، اضغط على التشغيل.",
     "stats": {
       "userId": "معرّف المستخدم",
       "launch": "إطلاق",
@@ -78,7 +92,6 @@
     "shareAria": "شارك السجلات مع mclo.gs",
     "searchPlaceholder": "سجلات البحث…",
     "searchAria": "سجلات البحث",
-    "clearSearch": "بحث واضح",
     "empty": {
       "title": "لا يوجد سجلات حتى الآن",
       "hint": "ابدأ جلسة وسيكون مخرَجها مُتاحًا هنا."
@@ -86,6 +99,12 @@
     "noMatches": {
       "title": "لا توجد نتائج مطابقة",
       "hint": "لا يوجد تطابق لـ “{query}”."
+    },
+    "countFiltered": "{shown} من {total}",
+    "problemsOnly": {
+      "on": "عرض المشاكل فقط — انقر لإظهار الكل",
+      "off": "عرض المشاكل فقط",
+      "aria": "عرض المشكلات فقط"
     }
   },
   "mods": {
@@ -94,7 +113,8 @@
       "descriptionFor": "إدارة التعديلات لـ {name}",
       "descriptionForStream": "إدارة التعديلات لـ {name} ({stream})",
       "refresh": "انعش",
-      "openFolder": "افتح مجلد التعديلات"
+      "openFolder": "افتح مجلد التعديلات",
+      "openFolderFailed": "لم أتمكن من فتح مجلد التعديلات"
     },
     "vanilla": {
       "title": "تم تعطيل التعديلات لنسخة Vanilla.",
@@ -112,7 +132,10 @@
       "placeholder": "ابحث..."
     },
     "ruleCard": {
-      "viewOnModrinth": "عرض على Modrinth"
+      "viewOnModrinth": "عرض على Modrinth",
+      "download": "حمل إلى مجلد التعديلات",
+      "downloaded": "تمّ التنزيل {name}",
+      "downloadFailed": "لم يتم التنزيل {name}"
     },
     "required": {
       "present": "المعدّلات المطلوبة موجودة ({count})",
@@ -125,17 +148,46 @@
     },
     "recommended": {
       "title": "الخلفات الموصى بها ({count})"
+    },
+    "marketplace": {
+      "title": "سوق التعديلات",
+      "subtitle": "تعديلات Fabric من Modrinth.",
+      "subtitleForVersion": "Fabric تعديلات من مودرينث لـ Minecraft {version}.",
+      "searchPlaceholder": "ابحث عن التعديلات...",
+      "search": "بحث",
+      "searchFailed": "فشل البحث. تحقق من اتصالك.",
+      "noResults": "لم يتم العثور على تعديلات",
+      "noResultsHint": "جرّب مصطلح بحث آخر.",
+      "noActiveProfile": "اختر ملفًا أولاً",
+      "noGameVersion": "لم نتمكن من تحديد إصدار اللعبة حتى الآن",
+      "byAuthor": "بواسطة {author}",
+      "install": "ثبّت",
+      "installing": "تثبيت...",
+      "installed": "تم تثبيت {name}",
+      "installedBadge": "مُثَبَّت",
+      "incompatible": "غير متوافق",
+      "incompatibleToast": "{name} غير متوافق مع Opal ({rule})",
+      "noCompatibleVersion": "{name} ليس لديه بناء لـ Minecraft {version}",
+      "installFailed": "لم يتم التثبيت: {name}: {error}",
+      "unknownError": "خطأ غير معروف",
+      "back": "إرجاع إلى التعديلات المثبتة"
+    },
+    "delete": {
+      "title": "{count, plural, one {Delete # mod?} other {Delete # mods?}}",
+      "description": "{count, plural, one {The selected mod file will be removed from this profile's mods folder.} other {The # selected mod files will be removed from this profile's mods folder.}}",
+      "success": "{count, plural, one {Deleted # mod} other {Deleted # mods}}",
+      "failed": "{count, plural, one {Couldn't delete # mod} other {Couldn't delete # mods}}"
     }
   },
   "nav": {
     "home": "بيت",
     "mods": "تعديلات",
     "packs": "حزم",
+    "scripts": "نصوص",
     "profiles": "ملفات تعريف",
     "changelog": "سجل التغييرات",
     "logs": "سجلات",
-    "settings": "الإعدادات",
-    "scripts": "نصوص"
+    "settings": "الإعدادات"
   },
   "packs": {
     "browser": {
@@ -156,7 +208,8 @@
     "card": {
       "enable": "فَعِّل",
       "disable": "عطّل",
-      "download": "تنزيل"
+      "download": "تنزيل",
+      "remove": "حذف {name}"
     },
     "marketplace": {
       "title": "تصفح {type, select, shader {الشيدرات} other {حزم الموارد}}",
@@ -193,6 +246,7 @@
     "descriptionOptionalPlaceholder": "وصف (اختياري)",
     "selectProfile": "اختر الملف الشخصي {name}",
     "defaultCannotDelete": "لا يمكن حذف الملف الشخصي الافتراضي",
+    "openFolder": "افتح المجلد",
     "create": {
       "title": "ملف جديد",
       "submit": "خلق"
@@ -233,8 +287,18 @@
       "deleted": "تم حذف الملف الشخصي",
       "deleteFailed": "فشل حذف الملف الشخصي",
       "openFolderFailed": "فشل فتح مجلد الملف الشخصي"
-    },
-    "openFolder": "افتح المجلد"
+    }
+  },
+  "scripts": {
+    "searchPlaceholder": "ابحث عن النصوص…",
+    "searchAria": "بحث النصوص",
+    "emptyTitle": "لا توجد نصوص بعد",
+    "emptyHint": "ستظهر نصوص المجتمع المخصصة لعميلك هنا.",
+    "noMatches": "لا توجد نتائج مطابقة",
+    "noMatchesHint": "لا يوجد تطابق لـ “{query}”.",
+    "pinned": "ثَبَتَ",
+    "installs": "{count, plural, one {تثبيت} other {تثبيتات}}",
+    "countFiltered": "{shown} من {total}"
   },
   "settings": {
     "title": "الإعدادات",
@@ -253,6 +317,25 @@
     "resolution": {
       "label": "قرار",
       "hint": "(عرض × ارتفاع)"
+    },
+    "windowMode": {
+      "label": "وضع النافذة",
+      "hint": "كيف تبدأ اللعبة",
+      "windowed": "مُوَشَّح",
+      "fullscreen": "شاشة ملء"
+    },
+    "onLaunch": {
+      "label": "عندما تبدأ اللعبة",
+      "hint": "نافذة المشغّل",
+      "minimize": "تصغير المشغل",
+      "hide": "إخفاء المشغل",
+      "keep": "حافظ على فتح المشغل"
+    },
+    "jvmArgs": {
+      "label": "وسائط JVM المخصصة",
+      "hint": "(متقدم)",
+      "placeholder": "-XX:+استخدامG1GC",
+      "note": "يتم تجاهل الذاكرة والوكلاء والمصححين وعلامات مسار الفئة."
     },
     "language": {
       "label": "لغة",
@@ -276,8 +359,8 @@
       "confirm": {
         "title": "واضح {category}?",
         "titleAll": "مسح كل التخزين؟?",
-        "body": "سيؤدي هذا إلى حذف {size} من الملفات. سيتم إعادة تنزيلها في المرة القادمة عند الحاجة إليها.",
-        "bodyAll": "سيؤدي هذا إلى حذف {size} من جميع الفئات. سيتم إعادة تنزيل كل شيء في المرة القادمة عند الحاجة إليه."
+        "body": "سيؤدي هذا إلى حذف {size} من الملفات. سيتم إعادة تنزيل أي شيء لا تزال بحاجة إليه تلقائيًا.",
+        "bodyAll": "سيؤدي هذا إلى حذف {size} من جميع الفئات. سيتم إعادة تنزيل أي شيء لا تزال تحتاجه تلقائيًا."
       },
       "toast": {
         "cleared": "تمت الموافقة على {category}",
@@ -303,40 +386,65 @@
         "body": "هذه الملفات موجودة بالفعل في هذا الملف الشخصي وسيتم استبدالها: {files}",
         "action": "تجاوز واستيراد"
       }
+    },
+    "sections": {
+      "game": "لعبة",
+      "launcher": "قاذف",
+      "data": "بيانات وتخزين",
+      "about": "عن"
+    },
+    "about": {
+      "launcherVersion": "إصدار المشغل",
+      "hostVersion": "مضيف (تاوري)"
+    }
+  },
+  "setup": {
+    "checking": {
+      "title": "الاستعدادات",
+      "subtitle": "لحظة من فضلك…"
+    },
+    "title": "اختر مجلد اللعبة الخاص بك",
+    "description": "اختر مكان تخزين Minecraft وملفات العميل الخاصة بك. يمكنك تغيير ذلك لاحقًا في الإعدادات.",
+    "label": "دليل الألعاب",
+    "placeholder": "مسار مجلد .minecraft الخاص بك",
+    "browse": "تصفّح",
+    "hint": "الإعدادات الافتراضية الموصى بها تعمل لمعظم المستخدمين. يجب أن تكون موجودة داخل مجلد المستخدم الخاص بك.",
+    "confirm": "استمر",
+    "errors": {
+      "empty": "اختر مجلداً للمتابعة.",
+      "relative": "أدخل مسارًا كاملاً إلى مجلد.",
+      "out-of-scope": "اختر مجلدًا داخل مجلد المستخدم الخاص بك (مثلًا، ضمن AppData أو المجلد الرئيسي)."
+    },
+    "importVanilla": {
+      "label": "استورد إعدادات Minecraft الخاصة بي",
+      "success": "استوردت إعدادات Minecraft الخاصة بك",
+      "failed": "لم نتمكن من استيراد إعدادات Minecraft الخاصة بك"
     }
   },
   "sidebar": {
     "selectProfile": "اختر الملف الشخصي",
     "release": "إصدار",
     "version": "لا توجد نسخة",
-    "hostVersion": "مضيف الإصدار {version}",
-    "launcherVersion": "مشغّل v{version}",
     "status": {
       "play": "لعب",
       "preparing": "يُستَعَدُّ...",
+      "verifying": "التحقق",
       "downloading": "جارٍ التحميل...",
       "extracting": "جاري الاستخراج...",
       "launching": "إطلاق...",
-      "stop": "توقف",
-      "verifying": "التحقق"
-    }
+      "stop": "توقف"
+    },
+    "brandVersion": "{brand} ({version})"
   },
-  "scripts": {
-    "searchPlaceholder": "ابحث عن النصوص…",
-    "searchAria": "بحث النصوص",
-    "clearSearch": "بحث واضح",
-    "emptyTitle": "لا توجد نصوص بعد",
-    "emptyHint": "ستظهر نصوص المجتمع المخصصة لعميلك هنا.",
-    "noMatches": "لا توجد نتائج مطابقة",
-    "noMatchesHint": "لا يوجد تطابق لـ “{query}”.",
-    "pinned": "ثَبَتَ",
-    "installs": "{count, plural, one {تثبيت} other {تثبيتات}}"
-  },
-  "setup": {
-    "importVanilla": {
-      "label": "استورد إعدادات Minecraft الخاصة بي",
-      "success": "استوردت إعدادات Minecraft الخاصة بك",
-      "failed": "لم نتمكن من استيراد إعدادات Minecraft الخاصة بك"
-    }
+  "linuxDeps": {
+    "title": "أدوات النظام المفقودة",
+    "body": "Opal احتياجات {missing} لعرض النوافذ المنبثقة وفتح الروابط. ثبّته الآن?",
+    "install": "ثبّت",
+    "installing": "تثبيت..",
+    "copy": "نسخة",
+    "copied": "تم النسخ",
+    "installed": "تم التثبيت. يمكنك المضي قدمًا.",
+    "stillMissing": "بعض الأدوات لا تزال مفقودة. حاول الأمر يدويًا.",
+    "installFailed": "فشل التثبيت أو تم إلغاؤه. قم بتشغيل الأمر يدويًا."
   }
 }
